@@ -85,7 +85,15 @@ function meaningfulKeys(item) {
 // radius, e.g. a bubble-chart dot sized by volume) was missing here — a {hue, r, cx, cy} bubble
 // point failed this check, fell through to the table check instead, and rendered as a raw R/CX/CY
 // data table (214 rows) instead of a scatter/bubble chart. See extraction/audit.js's A.2 check.
+// This check is scatterChart-only — a bar-shaped row that also happens to carry a `label` is
+// caught by isBarChartShaped (below) *before* this one ever runs, so this set staying broad
+// (h/value included, not just x/y/cx/cy/r) is safe: it only ever fires on label-less rows.
 const CHART_COORD_KEYS = new Set(['h', 'value', 'x', 'y', 'cx', 'cy', 'r'])
+
+// A row's magnitude can live under any of these names — the same alias list
+// LabelValueListBlock.jsx already picks its displayed value from (`value ?? note ?? detail ??
+// amount ?? pct`), narrowed to the ones that are actually numeric magnitudes rather than free text.
+const CHART_MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount']
 
 function isNumericLike(v) {
   if (typeof v === 'number') return Number.isFinite(v)
@@ -93,11 +101,79 @@ function isNumericLike(v) {
   return false
 }
 
+// A coordinate/pixel-position value (x/y/cx/cy/top/height) is always a plain float in this
+// dataset, so isNumericLike's strict `Number(v)` is the right test for those. A *magnitude*
+// (a bar's value, a heatmap cell's count/LTV) is usually pre-formatted for display instead
+// ("$26.3K", "1,940", "74px", "5.9%") — isNumericLike rejects every one of those (Number("$26.3K")
+// is NaN), which is what originally hid S9.2/decide.weeks and S9.13/analyze.rfmGrid from their
+// real chart classification. This tolerates that formatting; used only where a value's job is
+// "is this a plottable magnitude", never for coordinates.
+const FORMATTED_MAGNITUDE_RE = /^[+\-−]?[$€£]?[\d,]+(?:\.\d+)?\s*(?:px|%|[KkMm])?$/
+function looksLikeMagnitude(v) {
+  if (typeof v === 'number') return Number.isFinite(v)
+  if (typeof v !== 'string' || v.trim() === '') return false
+  return FORMATTED_MAGNITUDE_RE.test(v.trim())
+}
+
+/**
+ * Bar-shaped: every row has a string `label` *and* a numeric-looking magnitude — the exact shape
+ * that used to hide inside `labelValueList` (S9.2/decide.weeks, S9.9/decide.cash,
+ * S9.10/reason.stack: `{label, value, h}`), because the plain "every item has a label" check ran
+ * first and never looked any further. Checked before that plain check for exactly this reason.
+ */
+function isBarChartShaped(value) {
+  return value.every(
+    (item) => typeof item.label === 'string' && CHART_MAGNITUDE_KEYS.some((k) => looksLikeMagnitude(item[k])),
+  )
+}
+
+/**
+ * Waterfall/bridge-shaped: every row has a numeric `top` (its running cumulative position) *and*
+ * `height` (its own segment size) *and* a `value` (the signed delta/total to display), with at
+ * least one row marked `anchor: true` (a baseline/total bar, as opposed to a floating delta) — the
+ * shape found in S10.1/analyze.bars (the "Variance bridge" workflow). Deliberately narrow: `top` +
+ * `height` together are a specific enough combination that nothing else in these fixtures carries
+ * both under those exact names.
+ */
+function isWaterfallShaped(value) {
+  let hasAnchor = false
+  const allMatch = value.every((item) => {
+    if (item.anchor === true) hasAnchor = true
+    return isNumericLike(item.top) && isNumericLike(item.height) && item.value !== undefined
+  })
+  return allMatch && hasAnchor
+}
+
+/**
+ * Heatmap/matrix-grid-shaped: every row has a string `label` (the row identity) *and* a `cells` (or
+ * `grid`) array of ≥1 plain objects, where every cell carries at least one numeric-looking field
+ * and — unlike a real itemQueue sub-list — no `label`/`title`/`name` of its own (a cell is a
+ * positionally-indexed matrix entry, not a "thing"). The shape found in S9.13/analyze.rfmGrid.
+ */
+function isHeatmapGridShaped(value) {
+  return value.every((row) => {
+    const cells = row.cells ?? row.grid
+    if (typeof row.label !== 'string' || !Array.isArray(cells) || cells.length === 0) return false
+    return cells.every((cell) => {
+      if (!isPlainObject(cell)) return false
+      if ('label' in cell || 'title' in cell || 'name' in cell) return false
+      return Object.values(cell).some((v) => looksLikeMagnitude(v))
+    })
+  })
+}
+
 function isSliderShaped(value) {
   const { min, max, value: current } = value
   if (![min, max, current].every((v) => typeof v === 'number' && Number.isFinite(v))) return false
   return min < max && current >= min && current <= max
 }
+
+// A raw SVG line path ("M44.0 230.0 L74.1 228.4 L104.3 226.6 ..."), same as SeriesBlock/
+// LineChartBlock parses — classifyBlockType's plain top-level string branch always returned
+// 'text' unconditionally, so every one of these (47 across 15 workflows: `data.p50`, `data.actual`,
+// `data.priorPath`, `data.cvrPath`, ...) rendered as raw, unreadable path-string text instead of a
+// chart. Checked before the plain-string 'text' fallback for exactly that reason.
+const SVG_LINE_PATH_RE = /^M\s*-?[\d.]+\s+-?[\d.]+(?:\s+L\s*-?[\d.]+\s+-?[\d.]+)+$/i
 
 /**
  * @param {*} value
@@ -107,25 +183,47 @@ function isSliderShaped(value) {
  */
 export function classifyBlockType(value, rawKey) {
   if (value === undefined || value === null) return null
-  if (typeof value === 'string') return value.length > 0 ? 'text' : null
+  if (typeof value === 'string') {
+    if (value.length === 0) return null
+    return SVG_LINE_PATH_RE.test(value.trim()) ? 'lineChart' : 'text'
+  }
   if (typeof value === 'number') return 'number'
   if (typeof value === 'boolean') return 'flag'
   if (Array.isArray(value)) {
     if (value.length === 0) return null
     if (value.every((item) => isPlainObject(item))) {
+      // These three chart signatures all overlap with "every item has a label" (waterfall and bar
+      // rows carry a label too; a heatmap's outer rows do as well) — checked in most-specific-first
+      // order, and all three *before* the plain "every item has a label" catch-all below, or that
+      // catch-all would win first and hide every one of them inside labelValueList (exactly what
+      // happened to S9.2/decide.weeks and friends before this was added).
+      if (isWaterfallShaped(value)) return 'waterfallChart'
+      if (isHeatmapGridShaped(value)) return 'heatmapGrid'
+      if (isBarChartShaped(value)) return 'barChart'
+
       // An array of plain objects that all have a string "label" reads as a checklist/metric/chip
       // row list.
       if (value.every((item) => typeof item.label === 'string')) return 'labelValueList'
 
+      // Bar-shaped but unlabeled: every item carries a numeric magnitude, even if it also carries
+      // raw x/y pixel-position fields left over from the mockup's own hand-drawn layout (e.g.
+      // S9.15/analyze.bars: {x, y, h, op} — no label, but a real height). Checked before the
+      // scatter check below for exactly that reason: a magnitude reading wins over treating the
+      // same row as a bare coordinate, matching how the old single SeriesBlock's own runtime
+      // dispatch always preferred 'h'/'value' over x/y when both were present.
+      if (value.every((item) => CHART_MAGNITUDE_KEYS.some((k) => looksLikeMagnitude(item[k])))) return 'barChart'
+
       const perItemKeys = value.map((item) => meaningfulKeys(item))
 
-      // Chart-shaped: every item is nothing but numeric coordinate fields once decoration is
-      // stripped (e.g. a bar's {h, fill} or a scatter dot's {cx, cy}) — plot data, not a list.
-      const isChartShaped = value.every((item, i) => {
+      // Scatter-shaped: every item is nothing but numeric coordinate fields once decoration is
+      // stripped (e.g. a scatter dot's {cx, cy} or a bubble's {cx, cy, r}) — plot data, not a list.
+      // Every row reaching this point has already failed the label-shaped checks above, so this
+      // only ever matches label-less rows — unaffected by the new bar/waterfall/heatmap checks.
+      const isScatterShaped = value.every((item, i) => {
         const keys = perItemKeys[i]
         return keys.length > 0 && keys.every((k) => CHART_COORD_KEYS.has(k) && isNumericLike(item[k]))
       })
-      if (isChartShaped) return 'series'
+      if (isScatterShaped) return 'scatterChart'
 
       // Table-shaped: every row shares the exact same set of >=3 meaningful, scalar-valued
       // fields — real columns, not just a headline-and-detail card. Skip anything where a
@@ -150,12 +248,13 @@ export function classifyBlockType(value, rawKey) {
     // classified as `'itemQueue'` — the same concept, classified inconsistently purely because of
     // whether its labels happened to parse as numbers. See extraction/audit.js's A.4 check.
     if (typeof rawKey === 'string' && /(Ticks|Cols)$/.test(rawKey)) return 'itemQueue'
-    // An array of genuinely numeric bare values (numbers, or numeric strings) is chart/sparkline
-    // data. Anything else non-object — plain labels, mixed types (e.g. `["M1","M3","Yr 1"]`,
-    // month-column headers, not values) — isn't plottable; ItemQueueBlock already renders a bare
-    // non-object item as its own simple row, so that's a far better fit than forcing it through a
-    // chart renderer that has no numbers to draw.
-    return value.every(isNumericLike) ? 'series' : 'itemQueue'
+    // An array of genuinely numeric bare values (numbers, or numeric strings) is a bar chart's
+    // magnitudes (unlabeled — BarChartBlock falls back to a bare index per bar). Anything else
+    // non-object — plain labels, mixed types (e.g. `["M1","M3","Yr 1"]`, month-column headers, not
+    // values) — isn't plottable; ItemQueueBlock already renders a bare non-object item as its own
+    // simple row, so that's a far better fit than forcing it through a chart renderer that has no
+    // numbers to draw.
+    return value.every(looksLikeMagnitude) ? 'barChart' : 'itemQueue'
   }
   if (isPlainObject(value)) {
     if (Object.keys(value).length === 0) return null

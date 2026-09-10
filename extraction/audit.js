@@ -7,7 +7,7 @@
 //
 //   AUDIT A — DATA FIDELITY: is every real field actually reaching the screen?
 //     A.1 non-scalar (serialized DOM/JSX node) leakage into raw data
-//     A.2 coordinate/geometry key completeness (under- and over-classification of `series`)
+//     A.2 coordinate/geometry key completeness (chart-shape under-match backstop)
 //     A.3 field-coverage: orphaned raw keys, and "classified correctly but incomplete" blocks
 //     A.4 cross-story consistency: same data shape classified differently in different workflows
 //
@@ -111,7 +111,10 @@ function obIsReactDescriptor(v) {
 function objectRenderText(v) {
   if (obIsRenderablePrimitive(v)) return String(v)
   if (obIsReactDescriptor(v)) return flattenJsxPreview(v)
-  if (Array.isArray(v)) return v.map(objectRenderText).filter(Boolean).join(', ')
+  // Compact per-item summary (flattenNestedEntry), not a full field-by-field dump — mirrors
+  // ObjectBlock.jsx's own fix for this (a 9-item chart-bar array would otherwise turn into an
+  // unreadable wall of pixel-position numbers instead of "PRICE $24.00, COGS −$10.56, …").
+  if (Array.isArray(v)) return v.map(flattenNestedEntryPreview).filter(Boolean).join(', ')
   if (isPlainObject(v)) {
     return Object.entries(v)
       .map(([k, sub]) => {
@@ -124,11 +127,11 @@ function objectRenderText(v) {
   return ''
 }
 
-// --- SeriesBlock's recognized coordinate keys (mirrors blocks/SeriesBlock.jsx) ---
-const SERIES_COORD_KEYS = new Set(['h', 'value', 'x', 'y', 'cx', 'cy'])
+// The 5 chart blockTypes classifyBlocks.js can produce for an array-of-objects value.
+const CHART_BLOCK_TYPES = new Set(['lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid'])
 
 // --- A.2's broader geometry candidate vocabulary (deliberately wider than classifyBlocks.js's
-// CHART_COORD_KEYS = {h, value, x, y, cx, cy}) ---
+// own CHART_COORD_KEYS/CHART_MAGNITUDE_KEYS) ---
 const GEOMETRY_CANDIDATE_KEYS = new Set([
   'x', 'y', 'cx', 'cy', 'r', 'h', 'value', 'size', 'weight', 'radius', 'width', 'height', 'angle',
 ])
@@ -278,57 +281,45 @@ function runAuditA1(stages) {
 }
 
 // ============================================================================================
-// AUDIT A.2 — coordinate/geometry key completeness (under- and over-classification of `series`)
+// AUDIT A.2 — coordinate/geometry key completeness (chart-shape under-match backstop)
 // ============================================================================================
+//
+// This used to have an "over-match" half too (a 'series' block whose rows don't cleanly fit its
+// own coordinate shape) — that's now redundant: classifyBlocks.js produces 5 precise, narrow chart
+// signatures instead of one broad heuristic, and extraction/generateManifests.js's self-check
+// already re-validates every block's binding against its own blockType's real validator on every
+// run (see its "self-check problems" count) — which catches classifier/validator drift for any
+// block type, generically, not just charts. Only the under-match half still adds anything: a
+// backstop for a genuinely chart-shaped block that none of the 5 narrow signatures happened to
+// catch.
 
 function runAuditA2(stages) {
-  const underMatches = [] // array-of-object blocks that look geometric but weren't classified 'series'
-  const overMatches = [] // 'series' blocks whose object rows don't cleanly fit a coordinate shape
+  const underMatches = []
 
   for (const s of stages) {
     for (const block of s.manifest?.blocks ?? []) {
+      if (CHART_BLOCK_TYPES.has(block.blockType)) continue
       const rawKey = rawKeyFromBinding(block.binding)
       const value = s.fixture.data?.[rawKey]
       if (!Array.isArray(value) || value.length === 0) continue
-      const firstIsObject = isPlainObject(value[0])
+      if (!isPlainObject(value[0])) continue
 
-      if (block.blockType !== 'series' && firstIsObject) {
-        const objectRows = value.filter(isPlainObject)
-        if (objectRows.length === 0) continue
-        const keys = meaningfulKeys(objectRows[0])
-        if (keys.length === 0) continue
-        const geoMatches = keys.filter((k) => GEOMETRY_CANDIDATE_KEYS.has(k) || looksLikeShortNumericKey(k, objectRows[0][k]))
-        const ratio = geoMatches.length / keys.length
-        if (ratio > 0.5) {
-          underMatches.push({
-            code: s.code, stageKey: s.stageKey, slotName: block.slotName, binding: block.binding,
-            blockType: block.blockType, keys, geoMatches, ratio, rowCount: objectRows.length,
-            sample: flattenPreview(objectRows[0]),
-          })
-        }
-      }
-
-      if (block.blockType === 'series' && firstIsObject) {
-        const objectRows = value.filter(isPlainObject)
-        const badRows = objectRows.filter((row) => {
-          const hasMagnitude = ('h' in row && isNumericLike(row.h)) || ('value' in row && isNumericLike(row.value))
-          const hasXY =
-            (('x' in row && isNumericLike(row.x)) || ('cx' in row && isNumericLike(row.cx))) &&
-            (('y' in row && isNumericLike(row.y)) || ('cy' in row && isNumericLike(row.cy)))
-          return !hasMagnitude && !hasXY
+      const objectRows = value.filter(isPlainObject)
+      if (objectRows.length === 0) continue
+      const keys = meaningfulKeys(objectRows[0])
+      if (keys.length === 0) continue
+      const geoMatches = keys.filter((k) => GEOMETRY_CANDIDATE_KEYS.has(k) || looksLikeShortNumericKey(k, objectRows[0][k]))
+      const ratio = geoMatches.length / keys.length
+      if (ratio > 0.5) {
+        underMatches.push({
+          code: s.code, stageKey: s.stageKey, slotName: block.slotName, binding: block.binding,
+          blockType: block.blockType, keys, geoMatches, ratio, rowCount: objectRows.length,
+          sample: flattenPreview(objectRows[0]),
         })
-        if (badRows.length > 0) {
-          overMatches.push({
-            code: s.code, stageKey: s.stageKey, slotName: block.slotName, binding: block.binding,
-            rowCount: objectRows.length, badRowCount: badRows.length,
-            recognizedKeys: [...SERIES_COORD_KEYS],
-            sample: flattenPreview(badRows[0]),
-          })
-        }
       }
     }
   }
-  return { underMatches, overMatches }
+  return { underMatches }
 }
 
 // ============================================================================================
@@ -378,7 +369,7 @@ function runAuditA3(stages) {
           const used = new Set([headlineKey, detailKey, idKey, stateKey, sevKey].filter(Boolean))
           for (const [k, v] of Object.entries(item)) {
             if (used.has(k) || isDecorativeKey(k)) continue // extra-fields pass excludes these too
-            if (v === null || v === undefined || Array.isArray(v)) continue // empty: nothing to show; non-empty: rendered as a nested sub-list
+            if (v === null || v === undefined || v === '' || Array.isArray(v)) continue // nothing to show either way (empty string: correctly invisible, same as EmptyState; non-empty array: rendered as a nested sub-list)
             if (flattenJsxPreview(v)) continue // extra-fields pass DOES render this — not dropped
             droppedKeys.add(k) // only a value that still flattens to '' (e.g. a nested plain object) is genuinely still dropped
           }
@@ -399,9 +390,12 @@ function runAuditA3(stages) {
           if (!isPlainObject(item)) continue
           for (const [k, v] of Object.entries(item)) {
             if (KNOWN.has(k) || isDecorativeKey(k)) continue
-            if (v === null || v === undefined) continue
-            if (flattenJsxPreview(v)) continue // extra-entries pass renders anything flattenable (incl. arrays) — not dropped
-            dropped.add(k) // only a value that still flattens to '' is genuinely still dropped
+            if (v === null || v === undefined || v === '') continue // nothing to show — correctly invisible, same as EmptyState
+            // extra-entries pass (LabelValueListBlock.jsx's entryText) renders anything flattenable
+            // — including an array, via a per-item summary rather than flattenDisplayValue alone.
+            const text = Array.isArray(v) ? v.map(flattenNestedEntryPreview).filter(Boolean).join(', ') : flattenJsxPreview(v)
+            if (text) continue // renders fine — not dropped
+            dropped.add(k) // only a value that still produces no text is genuinely still dropped
           }
         }
         if (dropped.size > 0) {
@@ -417,8 +411,15 @@ function runAuditA3(stages) {
         // Mirrors ObjectBlock's renderEntryValue: primitives, JSX descriptors, arrays (joined),
         // and one level of nested plain object (joined) all now render — only something that
         // still reduces to '' after that (a 2+-level-deep nested object, mainly) is truly dropped.
+        // A decorative-named key, a bare style-string value, or an empty string are excluded here
+        // deliberately — ObjectBlock is *correct* to show nothing for those (same as
+        // TextBlock/NumberBlock treat an empty value as EmptyState); they aren't a bug, so they
+        // don't belong in this report.
         const dropped = Object.entries(value)
-          .filter(([, v]) => v !== null && v !== undefined && objectRenderText(v) === '')
+          .filter(
+            ([k, v]) =>
+              v !== null && v !== undefined && v !== '' && !isDecorativeKey(k) && !obIsStyleString(v) && objectRenderText(v) === '',
+          )
           .map(([k]) => k)
         if (dropped.length > 0) {
           incomplete.push({
@@ -439,7 +440,9 @@ function runAuditA3(stages) {
 // AUDIT A.4 — cross-story consistency check
 // ============================================================================================
 
-const SHAPE_ELIGIBLE_TYPES = new Set(['table', 'itemQueue', 'series', 'labelValueList'])
+const SHAPE_ELIGIBLE_TYPES = new Set([
+  'table', 'itemQueue', 'labelValueList', 'lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid',
+])
 
 function shapeSignature(value) {
   if (!Array.isArray(value) || value.length === 0) return null
@@ -579,8 +582,7 @@ function writeReport(stages, results) {
   const totalBlocks = stages.reduce((sum, s) => sum + (s.manifest?.blocks?.length ?? 0), 0)
 
   const a1Count = a1.reduce((sum, g) => sum + g.occurrences.length, 0)
-  const a2Count = a2.underMatches.length + a2.overMatches.length
-  const a3Count = a3.orphaned.length + a3.incomplete.length
+  const a2Count = a2.underMatches.length
   const a4Count = a4.strictInconsistent.length + a4.looseInconsistent.length
   const bCount = b.densityFlags.length + b.widthFlags.length
 
@@ -609,8 +611,7 @@ function writeReport(stages, results) {
   lines.push('| Check | Occurrences | Groups |')
   lines.push('|---|---|---|')
   lines.push(`| A.1 non-scalar (JSX node) leakage | ${a1Count} | ${a1.length} |`)
-  lines.push(`| A.2 geometry under-match (should probably be \`series\`) | ${a2.underMatches.length} | — |`)
-  lines.push(`| A.2 geometry over-match (\`series\` that doesn't cleanly fit) | ${a2.overMatches.length} | — |`)
+  lines.push(`| A.2 geometry under-match (looks chart-shaped, not classified as one) | ${a2.underMatches.length} | — |`)
   lines.push(`| A.3 orphaned raw keys | ${a3.orphaned.length} | — |`)
   lines.push(`| A.3 classified-but-incomplete blocks | ${a3.incomplete.length} | — |`)
   lines.push(`| A.4 strict shape-signature inconsistencies (exact row count) | ${a4.strictInconsistent.length} | — |`)
@@ -700,16 +701,19 @@ function writeReport(stages, results) {
   lines.push('')
   lines.push('Data that reaches a block, but the wrong kind of block, or a block that drops some of its own fields by design.')
   lines.push('')
-  lines.push(`### A.2a — Geometry under-match: looks like plot data but wasn't classified \`'series'\` (${a2.underMatches.length})`)
+  lines.push(`### A.2 — Geometry under-match: looks chart-shaped, but wasn't classified as one of the 5 chart types (${a2.underMatches.length})`)
   lines.push('')
   lines.push(
-    "`extraction/classifyBlocks.js`'s `CHART_COORD_KEYS` (line ~85) only recognizes `h`, `value`, `x`, `y`, `cx`, `cy` " +
-      "as coordinate keys — a row that's otherwise clearly geometric (e.g. carries a radius `r`, a `size`, a `weight`) " +
-      "fails `isChartShaped` and falls through to the table/itemQueue checks instead.",
+    "`extraction/classifyBlocks.js` now has 5 narrow, precise chart signatures (line/bar/scatter/waterfall/heatmap) " +
+      'instead of one broad heuristic — this check is a backstop for a row that still looks geometric by a *broader* ' +
+      'candidate vocabulary than any of those 5 signatures use, in case a real chart shape slips through all of them. ' +
+      "(The old \"over-match\" half of this check — a chart-classified block whose data doesn't cleanly fit its own " +
+      'shape — is retired: `extraction/generateManifests.js`\'s self-check already re-validates every block against ' +
+      "its own blockType's real validator on every run, which catches that generically for every block type, not just charts.)",
   )
   lines.push('')
   if (a2.underMatches.length === 0) {
-    lines.push('None found.')
+    lines.push('None found — every array-of-objects block that looks geometric is already one of the 5 chart types.')
   } else {
     for (const m of a2.underMatches) {
       lines.push(
@@ -717,31 +721,8 @@ function writeReport(stages, results) {
           `meaningful keys \`[${m.keys.join(', ')}]\`, ${m.geoMatches.length}/${m.keys.length} (${fmtPct(m.ratio)}) match the broader ` +
           `geometry vocabulary (\`${[...GEOMETRY_CANDIDATE_KEYS].join(', ')}\` + short 1-2 letter numeric keys). Sample row: ` +
           `\`${m.sample}\`. **Why wrong:** this is very likely chart/plot data being rendered as a flat table or item list. ` +
-          `**Proposed fix:** widen \`CHART_COORD_KEYS\` (or add a dedicated check) to include the matched key(s), and teach ` +
-          `\`SeriesBlock.jsx\` to use them (e.g. \`r\` as a bubble radius) if not already handled.`,
-      )
-    }
-  }
-  lines.push('')
-
-  lines.push(`### A.2b — Geometry over-match: classified \`'series'\` but rows don't cleanly fit a coordinate shape (${a2.overMatches.length})`)
-  lines.push('')
-  lines.push(
-    "For rows classified `'series'`, `SeriesBlock.jsx` only draws a point from `h`/`value` (bar) or `x`/`cx` + " +
-      "`y`/`cy` (scatter). A row with none of those present numerically renders as `NaN` (dropped point) or the " +
-      'block\'s `ErrorState` ("no usable coordinates").',
-  )
-  lines.push('')
-  if (a2.overMatches.length === 0) {
-    lines.push('None found — every `series`-classified array-of-objects block has usable coordinate/magnitude data on every row.')
-  } else {
-    for (const m of a2.overMatches) {
-      lines.push(
-        `- \`${m.code}/${m.stageKey}\` \`${m.slotName}\` (\`${m.binding}\`): ${m.badRowCount}/${m.rowCount} rows have none of ` +
-          `\`${m.recognizedKeys.join(', ')}\` as a usable number. Sample bad row: \`${m.sample}\`. **Why wrong:** those rows ` +
-          `silently vanish from the rendered chart (or the whole block shows an error) with no indication anything was dropped. ` +
-          `**Proposed fix:** either the classifier over-matched this block (reclassify), or the raw field uses a coordinate name ` +
-          `\`SeriesBlock.jsx\` doesn't yet parse (extend it).`,
+          `**Proposed fix:** check whether it fits one of the 5 existing chart signatures with a small tweak, or is a genuinely ` +
+          `new shape needing its own.`,
       )
     }
   }

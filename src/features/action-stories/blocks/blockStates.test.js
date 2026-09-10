@@ -9,7 +9,11 @@ import FlagBlock from './FlagBlock';
 import LabelValueListBlock from './LabelValueListBlock';
 import TableBlock from './TableBlock';
 import ItemQueueBlock from './ItemQueueBlock';
-import SeriesBlock from './SeriesBlock';
+import LineChartBlock from './LineChartBlock';
+import BarChartBlock from './BarChartBlock';
+import ScatterChartBlock from './ScatterChartBlock';
+import WaterfallChartBlock from './WaterfallChartBlock';
+import HeatmapGridBlock from './HeatmapGridBlock';
 import ObjectBlock from './ObjectBlock';
 import SliderBlock from './SliderBlock';
 import { findNearestStep } from './sliderSteps';
@@ -22,7 +26,16 @@ const CASES = [
   { Component: LabelValueListBlock, empty: [], wrongType: 'nope', valid: [{ label: 'a', value: 1 }] },
   { Component: TableBlock, empty: [], wrongType: 'nope', valid: [{ name: 'A', sku: 'X-1', qty: 3 }] },
   { Component: ItemQueueBlock, empty: [], wrongType: 'nope', valid: [{ title: 'a' }] },
-  { Component: SeriesBlock, empty: [], wrongType: 42, valid: [1, 2, 3] },
+  { Component: LineChartBlock, empty: [], wrongType: 42, valid: 'M0 0 L10 10' },
+  { Component: BarChartBlock, empty: [], wrongType: 'nope', valid: [1, 2, 3] },
+  { Component: ScatterChartBlock, empty: [], wrongType: 'nope', valid: [{ x: 1, y: 2 }] },
+  {
+    Component: WaterfallChartBlock,
+    empty: [],
+    wrongType: 'nope',
+    valid: [{ label: 'a', value: '+$1', top: 0, height: 10, anchor: true }],
+  },
+  { Component: HeatmapGridBlock, empty: [], wrongType: 'nope', valid: [{ label: 'Row 1', cells: [{ count: 5 }] }] },
   { Component: ObjectBlock, empty: {}, wrongType: [1, 2], valid: { title: 'a' } },
 ];
 

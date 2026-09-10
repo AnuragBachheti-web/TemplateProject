@@ -30,7 +30,9 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
-    include: ['src/**/*.test.{js,jsx}'],
+    // extraction/**/*.test.js covers generation-only tooling (extraction/classifyBlocks.js etc.),
+    // which has no JSX and isn't shipped with the app — still worth running under the same runner.
+    include: ['src/**/*.test.{js,jsx}', 'extraction/**/*.test.js'],
     passWithNoTests: true,
   },
 

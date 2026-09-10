@@ -338,11 +338,14 @@ function writeReportMarkdown(perCode, totals) {
   lines.push('')
   lines.push(
     '`text`, `number`, `flag`, `labelValueList` (array of `{label, …}` rows), `table` (array of objects that all ' +
-      'share the same >=3 scalar columns), `itemQueue` (array of richer, variable-shape per-item objects), ' +
-      '`series` (chart data — an SVG path string, an array of bare numbers, or an array of coordinate-only ' +
-      'objects like `{h}`/`{cx,cy}`), `object` (a lone nested descriptor). Pure-styling fields (bare CSS values, ' +
-      'decorative-suffix keys like `*Tone`/`*Icon`, `inline-flex`/`none` visibility toggles, and arrays of ' +
-      'nothing but colors) are filtered out before classification — see `extraction/classifyBlocks.js`.',
+      'share the same >=3 scalar columns), `itemQueue` (array of richer, variable-shape per-item objects), five ' +
+      'chart types — `lineChart` (an SVG path string, or an array of `{path}` for multiple series), `barChart` ' +
+      '(an array of bare numbers, or `{label, value|h|height|pct|amount}` rows), `scatterChart` (coordinate-only ' +
+      '`{x|cx, y|cy, r?}` points), `waterfallChart` (`{label, value, top, height, anchor?}` bridge rows), and ' +
+      '`heatmapGrid` (`{label, cells: [...]}` matrix rows) — plus `object` (a lone nested descriptor). ' +
+      'Pure-styling fields (bare CSS values, decorative-suffix keys like `*Tone`/`*Icon`, `inline-flex`/`none` ' +
+      'visibility toggles, and arrays of nothing but colors) are filtered out before classification — see ' +
+      '`extraction/classifyBlocks.js`.',
   )
   lines.push('')
   lines.push('## Confidence by workflow')

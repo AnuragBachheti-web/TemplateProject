@@ -4,7 +4,11 @@ import FlagBlock from './FlagBlock';
 import LabelValueListBlock from './LabelValueListBlock';
 import TableBlock from './TableBlock';
 import ItemQueueBlock from './ItemQueueBlock';
-import SeriesBlock from './SeriesBlock';
+import LineChartBlock from './LineChartBlock';
+import BarChartBlock from './BarChartBlock';
+import ScatterChartBlock from './ScatterChartBlock';
+import WaterfallChartBlock from './WaterfallChartBlock';
+import HeatmapGridBlock from './HeatmapGridBlock';
 import ObjectBlock from './ObjectBlock';
 import SliderBlock from './SliderBlock';
 
@@ -19,7 +23,11 @@ export const BLOCK_REGISTRY = {
   labelValueList: LabelValueListBlock,
   table: TableBlock,
   itemQueue: ItemQueueBlock,
-  series: SeriesBlock,
+  lineChart: LineChartBlock,
+  barChart: BarChartBlock,
+  scatterChart: ScatterChartBlock,
+  waterfallChart: WaterfallChartBlock,
+  heatmapGrid: HeatmapGridBlock,
   object: ObjectBlock,
   slider: SliderBlock,
 };

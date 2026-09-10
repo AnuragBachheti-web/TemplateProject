@@ -1,0 +1,64 @@
+/* Chart color tokens — hand-authored (unlike tokens.css, which is auto-generated; never merge
+ * this file's values into that one, and never regenerate this one from a design-token export).
+ *
+ * Source of truth: the `dataviz` skill's reference palette (references/palette.md), run through
+ * its validate_palette.js — see the commit that introduced this file for the exact commands. Slot
+ * 1 of the categorical palette is Realify's own brand blue (--rf-brand-blue-500 / -400), swapped in
+ * and re-validated alongside the reference palette's other 7 hues (all 6 checks still pass, both
+ * modes) — every other slot is the *unmodified* reference hex, since Realify has no brand hues of
+ * its own for orange/aqua/yellow/magenta/green/violet/red. If Realify's design system ever defines
+ * its own multi-hue categorical system, re-run validate_palette.js against those hues and replace
+ * only the --rf-chart-cat-* values below — nothing else in the chart components should need to
+ * change.
+ *
+ * Only --rf-chart-cat-1 (bar/line single-series) and --rf-chart-seq-* (heatmap) are exercised by
+ * the current 5 chart blocks. --rf-chart-cat-2..8 exist for the day a chart needs 2+ series —
+ * see chartPalette.js's own doc comment for the CVD caps that apply before using them.
+ */
+
+:root {
+  /* Categorical (identity) — fixed order, never cycled. Slot 1 = Realify's own brand blue. */
+  --rf-chart-cat-1: #2E6BFF; /* = --rf-brand-blue-500 */
+  --rf-chart-cat-2: #eb6834; /* orange */
+  --rf-chart-cat-3: #1baf7a; /* aqua */
+  --rf-chart-cat-4: #eda100; /* yellow */
+  --rf-chart-cat-5: #e87ba4; /* magenta */
+  --rf-chart-cat-6: #008300; /* green */
+  --rf-chart-cat-7: #4a3aa7; /* violet */
+  --rf-chart-cat-8: #e34948; /* red */
+
+  /* Sequential (magnitude) — one hue, light -> dark. Used by HeatmapGridBlock. A deliberately
+   * narrowed 5-step subset of the reference palette's 100->700 blue ramp (steps 150/300/450/550/650)
+   * — the full range's lightest/darkest ends are close enough to white/black to risk receding into
+   * either theme's chart surface; this subset stays legible on both. */
+  --rf-chart-seq-1: #b7d3f6; /* step 150 */
+  --rf-chart-seq-2: #6da7ec; /* step 300 */
+  --rf-chart-seq-3: #2a78d6; /* step 450 */
+  --rf-chart-seq-4: #1c5cab; /* step 550 */
+  --rf-chart-seq-5: #104281; /* step 650 */
+
+  /* Neutral — waterfall's anchor/total bars (not a positive or negative delta). */
+  --rf-chart-neutral: #86929E; /* = --rf-text-tertiary (light) */
+}
+
+[data-theme="dark"] {
+  --rf-chart-cat-1: #5C8DFF; /* = --rf-brand-blue-400 */
+  --rf-chart-cat-2: #d95926;
+  --rf-chart-cat-3: #199e70;
+  --rf-chart-cat-4: #c98500;
+  --rf-chart-cat-5: #d55181;
+  --rf-chart-cat-6: #008300;
+  --rf-chart-cat-7: #9085e9;
+  --rf-chart-cat-8: #e66767;
+
+  /* Same 5-step subset — kept mode-invariant deliberately (no documented dark-specific sequential
+   * table exists in the skill's reference; these steps already sit far enough from both the
+   * light and dark chart surfaces to stay legible in either). */
+  --rf-chart-seq-1: #b7d3f6;
+  --rf-chart-seq-2: #6da7ec;
+  --rf-chart-seq-3: #2a78d6;
+  --rf-chart-seq-4: #1c5cab;
+  --rf-chart-seq-5: #104281;
+
+  --rf-chart-neutral: #75809A; /* = --rf-text-tertiary (dark) */
+}
