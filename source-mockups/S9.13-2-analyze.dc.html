@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.13-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-hubs);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-hubs) 12%, white);color:var(--mod-hubs);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Lifecycle · S9.13</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Replenishment flow missing — 12 consumable SKUs, 42-day cycle</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">38,410 consented profiles</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">6 live journeys · 2 without a valid holdout</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-hubs)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-hubs)"></span>Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-hubs);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Promoter + Keeper
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Segment Value Model (pLTV)
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Incrementality Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.13-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.13-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-hubs) 10%, white);border:1px solid color-mix(in oklab, var(--mod-hubs) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-hubs);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.13-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.13-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0"><x-import component-from-global-scope="RealifyDesignSystem_002c39.IntelCard" tag="Realify signal · lifecycle" title="Replenishment flow absent for 12 consumables with a 42-day median repurchase cycle" hint-size="100%,180px">4,180 profiles have bought at least one of the twelve and receive nothing between day 14 and day 90. Modelled against the cart-abandon flow's measured conversion on the same cohort, a replenishment journey projects <strong>$6.1K a month incremental</strong> at a 10% holdout. Median cycle 42 days, interquartile range 31–58 days across the twelve SKUs.</x-import></div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Lifecycle migration · last 90 days</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">38,410 consented profiles</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:12px">
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-600)"><span style="width:8px;height:8px;border-radius:2px;background:var(--rose-500)"></span>churn path</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-600)"><span style="width:8px;height:8px;border-radius:2px;background:var(--green-500)"></span>win-back</span>
+            </span>
+          </div>
+
+          <div style="margin-top:12px;position:relative;height:300px">
+            <svg viewBox="0 0 1000 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;display:block">
+              <path d="M150 154 C 420 154, 590 194, 860 194 L 860 233 C 590 233, 420 193, 150 193 Z" style="fill:var(--rose-500);fill-opacity:0.2"></path>
+              <path d="M430 194 C 600 194, 700 144, 860 144 L 860 187 C 700 187, 600 237, 430 237 Z" style="fill:var(--rose-500);fill-opacity:0.28"></path>
+              <path d="M150 126 C 240 126, 240 74, 300 74 L 300 97 C 240 97, 240 149, 150 149 Z" style="fill:var(--mod-hubs);fill-opacity:0.3"></path>
+              <path d="M430 104 C 500 104, 520 140, 580 140 L 580 148 C 520 148, 500 112, 430 112 Z" style="fill:var(--mod-hubs);fill-opacity:0.4"></path>
+              <path d="M710 164 C 780 164, 800 134, 860 134 L 860 138 C 800 138, 780 168, 710 168 Z" style="fill:var(--rose-500);fill-opacity:0.3"></path>
+              <path d="M860 246 C 700 288, 600 288, 445 252 L 445 263 C 600 297, 700 297, 860 257 Z" style="fill:var(--green-500);fill-opacity:0.28"></path>
+              <path d="M446 246 L 428 257.5 L 446 269 Z" style="fill:var(--green-700)"></path>
+              <rect x="20" y="121" width="130" height="84" rx="4" style="fill:var(--mod-hubs);fill-opacity:0.16;stroke:var(--mod-hubs);stroke-width:1.2"></rect>
+              <rect x="300" y="68" width="130" height="190" rx="4" style="fill:var(--mod-hubs);fill-opacity:0.16;stroke:var(--mod-hubs);stroke-width:1.2"></rect>
+              <rect x="580" y="137" width="130" height="52" rx="4" style="fill:var(--violet-500);fill-opacity:0.18;stroke:var(--violet-500);stroke-width:1.2"></rect>
+              <rect x="860" y="68" width="130" height="189" rx="4" style="fill:var(--ink-300);fill-opacity:0.24;stroke:var(--ink-400);stroke-width:1.2"></rect>
+            </svg>
+            <div style="position:absolute;left:2%;top:0;width:15%;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:12.5px;font-weight:700;color:var(--ink-900)">New</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">6,240</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">1 order · ≤90 days</span>
+            </div>
+            <div style="position:absolute;left:30%;top:0;width:15%;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:12.5px;font-weight:700;color:var(--ink-900)">Repeat</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">14,180</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">2–4 orders</span>
+            </div>
+            <div style="position:absolute;left:58%;top:0;width:15%;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:12.5px;font-weight:700;color:var(--ink-900)">VIP</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">3,860</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">top pLTV decile</span>
+            </div>
+            <div style="position:absolute;left:86%;top:0;width:14%;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:12.5px;font-weight:700;color:var(--ink-900)">Lapsed</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">14,130</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">no order 90+ days</span>
+            </div>
+            <span style="position:absolute;left:17.5%;top:96px;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--mod-hubs);font-variant-numeric:tabular-nums">1,720 →</span>
+            <span style="position:absolute;left:47%;top:118px;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--mod-hubs);font-variant-numeric:tabular-nums">610 →</span>
+            <span style="position:absolute;left:20%;top:174px;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--rose-700);font-variant-numeric:tabular-nums">2,940 →</span>
+            <span style="position:absolute;left:50%;top:222px;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--rose-700);font-variant-numeric:tabular-nums">3,180 →</span>
+            <span style="position:absolute;left:74%;top:152px;font-family:var(--font-mono);font-size:10px;color:var(--rose-700);font-variant-numeric:tabular-nums">190</span>
+            <span style="position:absolute;left:52%;top:274px;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--green-700);font-variant-numeric:tabular-nums">840 won back</span>
+          </div>
+
+          <p style="margin:8px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">Nearly half of new buyers lapse before a second order, and the 42-day consumable window sits inside that gap with no message in it. The win-back ribbon is the only flow running against the churn path, and it is the weakest measured journey in the audit below.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">RFM × pLTV</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">click a cell to profile the segment</span>
+          </div>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:132px repeat(4, 1fr);gap:6px">
+            <span></span>
+            <sc-for list="{{ rfmCols }}" as="c" hint-placeholder-count="4">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:center">{{ c.label }}</span>
+            </sc-for>
+            <sc-for list="{{ rfmGrid }}" as="row" hint-placeholder-count="4">
+              <span style="display:contents">
+                <span style="display:flex;flex-direction:column;justify-content:center;gap:1px">
+                  <span style="font-size:11.5px;font-weight:600;color:var(--ink-800)">{{ row.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ row.note }}</span>
+                </span>
+                <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="4">
+                  <button type="button" onClick="{{ cell.pick }}" style="cursor:pointer;font-family:var(--font-sans);height:52px;border-radius:var(--r-sm);border:1.5px solid {{ cell.border }};background:{{ cell.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-500)">
+                    <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ cell.fg }};font-variant-numeric:tabular-nums">{{ cell.count }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;color:{{ cell.subFg }};font-variant-numeric:tabular-nums">{{ cell.ltv }}</span>
+                  </button>
+                </sc-for>
+              </span>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:13px;display:flex;align-items:center;gap:16px;padding:12px 14px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink-900)">{{ segTitle }}</span>
+              <span style="font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ segNote }}</span>
+            </span>
+            <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:20px">
+              <sc-for list="{{ segStats }}" as="s" hint-placeholder-count="4">
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                </span>
+              </sc-for>
+            </span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Flow audit · 6 live journeys</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">click a journey for its holdout design</span>
+          </div>
+
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 84px 62px 84px 116px 104px;gap:0 10px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Journey</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Reach / mo</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">CVR</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Rev / recip</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Lift vs holdout</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Verdict</span>
+          </div>
+          <sc-for list="{{ flows }}" as="f" hint-placeholder-count="6">
+            <button type="button" onClick="{{ f.pick }}" style="width:100%;text-align:left;cursor:pointer;font-family:var(--font-sans);display:grid;grid-template-columns:1fr 84px 62px 84px 116px 104px;gap:0 10px;align-items:center;padding:10px 0;border:none;border-bottom:1px solid var(--ink-50);border-left:2px solid {{ f.mark }};padding-left:8px;background:{{ f.bg }};transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-25)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ f.name }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ f.meta }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ f.reach }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ f.cvr }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ f.rpr }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ f.liftTone }};text-align:right;font-variant-numeric:tabular-nums">{{ f.lift }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--r-full);background:{{ f.verdictTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ f.verdictTone }}">{{ f.verdict }}</span>
+            </button>
+          </sc-for>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:1fr 300px;gap:16px;padding:13px 15px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <div style="min-width:0;display:flex;flex-direction:column;gap:7px">
+              <span style="display:flex;align-items:center;gap:9px">
+                <span style="font-size:13px;font-weight:700;color:var(--ink-900)">{{ detail.title }}</span>
+                <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ detail.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ detail.tone }}">{{ detail.badge }}</span>
+              </span>
+              <span style="font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ detail.body }}</span>
+              <span style="display:flex;align-items:center;gap:18px;margin-top:2px;flex-wrap:wrap">
+                <sc-for list="{{ detail.stats }}" as="s" hint-placeholder-count="4">
+                  <span style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                    <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                  </span>
+                </sc-for>
+              </span>
+            </div>
+            <div style="min-width:0;display:flex;flex-direction:column;gap:8px;justify-content:center">
+              <sc-for list="{{ detail.bars }}" as="b" hint-placeholder-count="2">
+                <span style="display:flex;flex-direction:column;gap:4px">
+                  <span style="display:flex;align-items:baseline;gap:8px">
+                    <span style="flex:1;min-width:0;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-500)">{{ b.label }}</span>
+                    <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ b.value }}</span>
+                  </span>
+                  <span style="height:8px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                    <span style="display:block;height:100%;width:{{ b.pct }}%;background:{{ b.hue }};border-radius:var(--r-full)"></span>
+                  </span>
+                </span>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Opportunity sizing · uncovered moments</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">projected incremental, net of a 10% holdout</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <sc-for list="{{ moments }}" as="m" hint-placeholder-count="4">
+              <div style="background:var(--ink-0);border:1px solid {{ m.border }};border-radius:var(--r-md);padding:13px 15px;display:flex;flex-direction:column;gap:7px">
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span style="font-size:13px;font-weight:600;color:var(--ink-900)">{{ m.name }}</span>
+                  <span style="margin-left:auto;font-family:var(--font-mono);font-size:13.5px;font-weight:600;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                </span>
+                <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ m.detail }}</span>
+                <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--r-full);background:var(--ink-100);font-family:var(--font-mono);font-size:9.5px;color:var(--ink-600)">{{ m.reach }}</span>
+                  <span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--r-full);background:var(--ink-100);font-family:var(--font-mono);font-size:9.5px;color:var(--ink-600)">{{ m.window }}</span>
+                </span>
+                <sc-if value="{{ m.skus }}" hint-placeholder-val="{{ false }}">
+                  <span style="margin-top:2px;display:flex;flex-direction:column;gap:5px;padding-top:9px;border-top:1px dashed var(--ink-200)">
+                    <sc-for list="{{ m.skus }}" as="s" hint-placeholder-count="4">
+                      <span style="display:flex;align-items:baseline;gap:9px">
+                        <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ s.name }}</span>
+                        <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ s.cycle }}</span>
+                        <span style="flex-shrink:0;width:56px;text-align:right;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ s.buyers }}</span>
+                      </span>
+                    </sc-for>
+                  </span>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Measurement debt</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--rose-700)"></span>2 of 6 flows
+            </span>
+          </div>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">Post-purchase thank-you and VIP early access run without a holdout, so their revenue cannot be claimed. Both need one attached before the next read.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Suppression health</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ suppression }}" as="s" hint-placeholder-count="5">
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ s.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                </div>
+                <span style="height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                  <span style="display:block;height:100%;width:{{ s.pct }}%;background:{{ s.tone }};border-radius:var(--r-full)"></span>
+                </span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ s.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">List health</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ listHealth }}" as="l" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ l.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ l.tone }};font-variant-numeric:tabular-nums">{{ l.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Consent decay is the constraint on frequency, not deliverability — the domain is clean enough to carry another weekly touch.</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Analyze · 6 journeys audited, 4 uncovered moments sized at $11.2K / mo</span>
+      <a href="S9.13-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Decide<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { cell: '1-1', flow: 'replen-gap' };
+
+  grid() {
+    return [
+      {
+        key: 'top', label: 'Top pLTV decile', note: '$310 median',
+        cells: [
+          { c: '1,940', l: '$318', heat: 3 },
+          { c: '1,120', l: '$304', heat: 3 },
+          { c: '520', l: '$288', heat: 2 },
+          { c: '280', l: '$262', heat: 1 },
+        ],
+      },
+      {
+        key: 'next', label: 'Next 20%', note: '$186 median',
+        cells: [
+          { c: '2,410', l: '$204', heat: 3 },
+          { c: '2,960', l: '$191', heat: 2 },
+          { c: '1,780', l: '$174', heat: 2 },
+          { c: '2,180', l: '$151', heat: 1 },
+        ],
+      },
+      {
+        key: 'mid', label: 'Middle 40%', note: '$104 median',
+        cells: [
+          { c: '3,120', l: '$118', heat: 2 },
+          { c: '4,060', l: '$109', heat: 2 },
+          { c: '3,440', l: '$96', heat: 1 },
+          { c: '5,740', l: '$78', heat: 0 },
+        ],
+      },
+      {
+        key: 'low', label: 'Bottom 30%', note: '$41 median',
+        cells: [
+          { c: '1,180', l: '$52', heat: 1 },
+          { c: '1,640', l: '$46', heat: 1 },
+          { c: '1,690', l: '$38', heat: 0 },
+          { c: '3,340', l: '$27', heat: 0 },
+        ],
+      },
+    ];
+  }
+
+  segProfiles() {
+    return {
+      '0-0': { title: 'Top decile · ordered in the last 30 days', note: 'Your best cohort and the one most at risk of being over-messaged. Sits inside the frequency cap on three journeys at once.', stats: [['1,940', 'profiles'], ['$318', 'pLTV'], ['71%', '90d repeat'], ['content', 'offer'] ] },
+      '0-1': { title: 'Top decile · 31–60 days since order', note: 'The natural home for consumable replenishment: high value, still engaged, and 42 days is the median cycle for the twelve SKUs.', stats: [['1,120', 'profiles'], ['$304', 'pLTV'], ['58%', '90d repeat'], ['free ship', 'offer']] },
+      '0-2': { title: 'Top decile · 61–120 days', note: 'Early drift on high-value buyers. Worth a check-in before it turns into a win-back problem, but no discount inside 90 days.', stats: [['520', 'profiles'], ['$288', 'pLTV'], ['34%', '90d repeat'], ['content', 'offer']] },
+      '0-3': { title: 'Top decile · 120+ days', note: 'Small but expensive to lose. Every one of these is worth roughly six middle-tier profiles.', stats: [['280', 'profiles'], ['$262', 'pLTV'], ['19%', '90d repeat'], ['15% off', 'offer']] },
+      '1-0': { title: 'Next 20% · last 30 days', note: 'The largest pool of near-VIP buyers. Two more orders moves a meaningful share into the top decile.', stats: [['2,410', 'profiles'], ['$204', 'pLTV'], ['52%', '90d repeat'], ['content', 'offer']] },
+      '1-1': { title: 'Next 20% · 31–60 days since order', note: 'The replenishment gap in one cell: 2,960 profiles, most of them consumable buyers, and nothing scheduled between day 14 and day 90.', stats: [['2,960', 'profiles'], ['$191', 'pLTV'], ['41%', '90d repeat'], ['free ship', 'offer']] },
+      '1-2': { title: 'Next 20% · 61–120 days', note: 'Drifting. Responds to product content more than discount at this depth of history.', stats: [['1,780', 'profiles'], ['$174', 'pLTV'], ['26%', '90d repeat'], ['10% off', 'offer']] },
+      '1-3': { title: 'Next 20% · 120+ days', note: 'Win-back territory with enough value behind it to justify the current 15% ceiling.', stats: [['2,180', 'profiles'], ['$151', 'pLTV'], ['14%', '90d repeat'], ['15% off', 'offer']] },
+      '2-0': { title: 'Middle 40% · last 30 days', note: 'Volume cohort. Small per-profile upside, but the numbers make it the biggest single revenue block.', stats: [['3,120', 'profiles'], ['$118', 'pLTV'], ['38%', '90d repeat'], ['content', 'offer']] },
+      '2-1': { title: 'Middle 40% · 31–60 days', note: 'Second-largest replenishment pool. Free shipping beats a percentage here on contribution margin.', stats: [['4,060', 'profiles'], ['$109', 'pLTV'], ['29%', '90d repeat'], ['free ship', 'offer']] },
+      '2-2': { title: 'Middle 40% · 61–120 days', note: 'Marginal on offer economics. A content-only touch is the only treatment that clears the margin floor.', stats: [['3,440', 'profiles'], ['$96', 'pLTV'], ['18%', '90d repeat'], ['content', 'offer']] },
+      '2-3': { title: 'Middle 40% · 120+ days', note: 'The biggest cell on the board and the least valuable. Suppress from paid retargeting, keep one email a month.', stats: [['5,740', 'profiles'], ['$78', 'pLTV'], ['9%', '90d repeat'], ['content', 'offer']] },
+      '3-0': { title: 'Bottom 30% · last 30 days', note: 'One-and-done discount buyers. Do not spend offer budget here — measure whether any message pays at all.', stats: [['1,180', 'profiles'], ['$52', 'pLTV'], ['21%', '90d repeat'], ['none', 'offer']] },
+      '3-1': { title: 'Bottom 30% · 31–60 days', note: 'Below the offer floor. Content only, and the first candidate for a reduced send frequency.', stats: [['1,640', 'profiles'], ['$46', 'pLTV'], ['15%', '90d repeat'], ['none', 'offer']] },
+      '3-2': { title: 'Bottom 30% · 61–120 days', note: 'Consent decay risk outweighs the revenue. Cut to monthly.', stats: [['1,690', 'profiles'], ['$38', 'pLTV'], ['8%', '90d repeat'], ['none', 'offer']] },
+      '3-3': { title: 'Bottom 30% · 120+ days', note: 'Effectively churned. Keeping them in the send pool costs deliverability, not revenue.', stats: [['3,340', 'profiles'], ['$27', 'pLTV'], ['4%', '90d repeat'], ['sunset', 'offer']] },
+    };
+  }
+
+  flowData() {
+    return [
+      {
+        id: 'welcome', name: 'Welcome · 3 emails', meta: 'email · trigger: first order', reach: '4,820', cvr: '3.1%', rpr: '$0.94',
+        lift: '+$0.41', liftTone: 'var(--green-700)', verdict: 'working', verdictTint: 'var(--green-50)', verdictTone: 'var(--green-700)',
+        badge: 'holdout 10% · significant', tint: 'var(--green-50)', tone: 'var(--green-700)',
+        body: 'Cleanest measurement in the set. Read over 14 weeks with a stable 10% holdout, and the lift concentrates in email two rather than the discount in email three.',
+        stats: [['10%', 'holdout'], ['482', 'held back'], ['+77%', 'vs holdout'], ['p<0.01', 'significance']],
+        bars: [['Treated', '$0.94', 100, 'var(--mod-hubs)'], ['Holdout', '$0.53', 56, 'var(--ink-300)']],
+      },
+      {
+        id: 'browse', name: 'Browse abandon', meta: 'email · trigger: 2+ product views', reach: '9,140', cvr: '1.8%', rpr: '$0.62',
+        lift: '+$0.11', liftTone: 'var(--amber-700)', verdict: 'thin', verdictTint: 'var(--amber-50)', verdictTone: 'var(--amber-700)',
+        badge: 'holdout 10% · marginal', tint: 'var(--amber-50)', tone: 'var(--amber-700)',
+        body: 'Highest reach and the smallest lift. Most of the measured revenue would have arrived anyway — the flow is mostly taking credit for organic return visits.',
+        stats: [['10%', 'holdout'], ['914', 'held back'], ['+22%', 'vs holdout'], ['p=0.09', 'significance']],
+        bars: [['Treated', '$0.62', 100, 'var(--mod-hubs)'], ['Holdout', '$0.51', 82, 'var(--ink-300)']],
+      },
+      {
+        id: 'cart', name: 'Cart abandon', meta: 'email + SMS · trigger: cart idle 4h', reach: '6,310', cvr: '8.4%', rpr: '$2.84',
+        lift: '+$0.38', liftTone: 'var(--green-700)', verdict: 'working', verdictTint: 'var(--green-50)', verdictTone: 'var(--green-700)',
+        badge: 'holdout 10% · significant', tint: 'var(--green-50)', tone: 'var(--green-700)',
+        body: 'Best revenue per recipient by a distance, but the holdout shows 62% of those orders would have landed without the message. The claim is the $0.38, not the $2.84.',
+        stats: [['10%', 'holdout'], ['631', 'held back'], ['+15%', 'vs holdout'], ['p<0.01', 'significance']],
+        bars: [['Treated', '$2.84', 100, 'var(--mod-hubs)'], ['Holdout', '$2.46', 87, 'var(--ink-300)']],
+      },
+      {
+        id: 'thanks', name: 'Post-purchase thank-you', meta: 'email · trigger: order shipped', reach: '7,540', cvr: '0.9%', rpr: '$0.18',
+        lift: 'no holdout', liftTone: 'var(--rose-700)', verdict: 'unmeasured', verdictTint: 'var(--rose-50)', verdictTone: 'var(--rose-700)',
+        badge: 'no holdout · claim unusable', tint: 'var(--rose-50)', tone: 'var(--rose-700)',
+        body: 'Runs to everyone, so there is nothing to compare against. It also occupies the day 3–5 slot the post-first-delivery moment needs, which is why it appears in the modification list rather than the kill list.',
+        stats: [['0%', 'holdout'], ['0', 'held back'], ['n/a', 'vs holdout'], ['none', 'significance']],
+        bars: [['Treated', '$0.18', 100, 'var(--ink-400)'], ['Holdout', 'not run', 0, 'var(--ink-300)']],
+      },
+      {
+        id: 'winback', name: 'Win-back · 180 day', meta: 'email · trigger: 180 days idle', reach: '3,220', cvr: '1.1%', rpr: '$0.31',
+        lift: '+$0.04', liftTone: 'var(--rose-700)', verdict: 'not proven', verdictTint: 'var(--rose-50)', verdictTone: 'var(--rose-700)',
+        badge: 'holdout 5% · not significant', tint: 'var(--rose-50)', tone: 'var(--rose-700)',
+        body: 'Fires 90 days after the window where win-back actually works, and the 15% offer is spent on profiles that were already gone. The 5% holdout is too small to read at this reach.',
+        stats: [['5%', 'holdout'], ['161', 'held back'], ['+15%', 'vs holdout'], ['p=0.41', 'significance']],
+        bars: [['Treated', '$0.31', 100, 'var(--mod-hubs)'], ['Holdout', '$0.27', 87, 'var(--ink-300)']],
+      },
+      {
+        id: 'vip', name: 'VIP early access', meta: 'email · trigger: top decile + launch', reach: '1,180', cvr: '6.2%', rpr: '$3.10',
+        lift: 'no holdout', liftTone: 'var(--rose-700)', verdict: 'unmeasured', verdictTint: 'var(--rose-50)', verdictTone: 'var(--rose-700)',
+        badge: 'no holdout · claim unusable', tint: 'var(--rose-50)', tone: 'var(--rose-700)',
+        body: 'Marketing reports this as the highest-performing flow in the account. It is also the one with no control group — the audience is the top pLTV decile, who buy at this rate regardless.',
+        stats: [['0%', 'holdout'], ['0', 'held back'], ['n/a', 'vs holdout'], ['none', 'significance']],
+        bars: [['Treated', '$3.10', 100, 'var(--ink-400)'], ['Holdout', 'not run', 0, 'var(--ink-300)']],
+      },
+      {
+        id: 'replen-gap', name: 'Consumable replenishment', meta: 'not built · the gap on this card', reach: '4,180', cvr: '—', rpr: '—',
+        lift: 'projected +$1.46', liftTone: 'var(--mod-hubs)', verdict: 'missing', verdictTint: 'color-mix(in oklab, var(--mod-hubs) 12%, white)', verdictTone: 'var(--mod-hubs)',
+        badge: 'proposed · holdout 10% at creation', tint: 'color-mix(in oklab, var(--mod-hubs) 12%, white)', tone: 'var(--mod-hubs)',
+        body: 'No journey covers the 42-day repurchase window. Projection uses the welcome flow\u2019s measured lift on the same cohort, discounted 30% for the weaker trigger, and the holdout is designed in before launch rather than added after.',
+        stats: [['10%', 'holdout'], ['418', 'to hold'], ['$6.1K', 'per month'], ['6 wks', 'to read']],
+        bars: [['Projected treated', '$1.46', 100, 'var(--mod-hubs)'], ['Projected holdout', '$0.00', 0, 'var(--ink-300)']],
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const heatBg = ['var(--ink-25)', 'color-mix(in oklab, var(--mod-hubs) 6%, white)', 'color-mix(in oklab, var(--mod-hubs) 14%, white)', 'color-mix(in oklab, var(--mod-hubs) 24%, white)'];
+    const grid = this.grid();
+    const profiles = this.segProfiles();
+    const sel = profiles[this.state.cell] ? this.state.cell : '1-1';
+    const seg = profiles[sel];
+
+    const flows = this.flowData();
+    const flow = flows.find((f) => f.id === this.state.flow) || flows[flows.length - 1];
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      rfmCols: [
+        { label: '0–30 days' }, { label: '31–60 days' }, { label: '61–120 days' }, { label: '120+ days' },
+      ],
+      rfmGrid: grid.map((row, ri) => ({
+        label: row.label, note: row.note,
+        cells: row.cells.map((c, ci) => {
+          const key = ri + '-' + ci;
+          const active = key === sel;
+          return {
+            count: c.c, ltv: c.l,
+            bg: active ? 'color-mix(in oklab, var(--mod-hubs) 20%, white)' : heatBg[c.heat],
+            border: active ? 'var(--mod-hubs)' : 'var(--ink-100)',
+            fg: active ? 'var(--ink-900)' : 'var(--ink-800)',
+            subFg: active ? 'var(--mod-hubs)' : 'var(--ink-400)',
+            pick: () => this.setState({ cell: key }),
+          };
+        }),
+      })),
+      segTitle: seg.title,
+      segNote: seg.note,
+      segStats: seg.stats.map((s, i) => ({ value: s[0], label: s[1], tone: i === 3 ? 'var(--mod-hubs)' : 'var(--ink-900)' })),
+
+      flows: flows.map((f) => {
+        const active = f.id === flow.id;
+        return {
+          name: f.name, meta: f.meta, reach: f.reach, cvr: f.cvr, rpr: f.rpr,
+          lift: f.lift, liftTone: f.liftTone,
+          verdict: f.verdict, verdictTint: f.verdictTint, verdictTone: f.verdictTone,
+          mark: active ? 'var(--mod-hubs)' : 'transparent',
+          bg: active ? 'color-mix(in oklab, var(--mod-hubs) 6%, white)' : 'transparent',
+          pick: () => this.setState({ flow: f.id }),
+        };
+      }),
+
+      detail: {
+        title: flow.name, badge: flow.badge, tint: flow.tint, tone: flow.tone, body: flow.body,
+        stats: flow.stats.map((s) => ({ value: s[0], label: s[1] })),
+        bars: flow.bars.map((b) => ({ label: b[0], value: b[1], pct: b[2], hue: b[3] })),
+      },
+
+      moments: [
+        {
+          name: 'Per-SKU replenishment intervals', value: '$6.1K / mo', tone: 'var(--mod-hubs)',
+          border: 'color-mix(in oklab, var(--mod-hubs) 34%, white)',
+          detail: 'A send timed to each SKU\u2019s own median cycle rather than one blanket 30-day reminder. Free shipping, no percentage off.',
+          reach: '4,180 profiles', window: 'day 31–58 by SKU',
+          skus: [
+            { name: 'Carbon steel pan seasoning wax', cycle: '38 days', buyers: '640' },
+            { name: 'Water filter cartridge 2-pk', cycle: '42 days', buyers: '1,120' },
+            { name: 'Knife sharpening kit refill', cycle: '51 days', buyers: '380' },
+            { name: 'Stone cleaning block', cycle: '58 days', buyers: '290' },
+          ],
+        },
+        {
+          name: 'Post-first-delivery, day 3–5', value: '$2.4K / mo', tone: 'var(--ink-900)',
+          border: 'var(--ink-100)',
+          detail: 'Care and use content on the item just delivered. Currently occupied by the unmeasured thank-you email, which sends before delivery lands.',
+          reach: '7,540 profiles', window: 'day 3–5 post-delivery', skus: null,
+        },
+        {
+          name: 'Win-back at 90–120 days', value: '$1.8K / mo', tone: 'var(--ink-900)',
+          border: 'var(--ink-100)',
+          detail: 'The live win-back fires at 180 days, well past the point where return rates collapse. Moving the trigger forward is worth more than deepening the offer.',
+          reach: '3,860 profiles', window: 'day 90–120 idle', skus: null,
+        },
+        {
+          name: 'Refill reminder over SMS', value: '$0.9K / mo', tone: 'var(--ink-900)',
+          border: 'var(--ink-100)',
+          detail: 'Only for the 6,240 profiles with express SMS opt-in. One message, no offer, inside quiet hours — additive to the email flow, not a replacement.',
+          reach: '6,240 opted in', window: 'day 40–45', skus: null,
+        },
+      ],
+
+      suppression: [
+        { label: 'Suppressed profiles', value: '4,120', pct: 62, tone: 'var(--ink-700)', note: '10.7% of the consented list — normal for a 26-month history.' },
+        { label: 'Hard bounces, 30 days', value: '0.31%', pct: 26, tone: 'var(--green-700)', note: 'Well inside the 2% deliverability threshold.' },
+        { label: 'Complaint rate', value: '0.04%', pct: 40, tone: 'var(--green-700)', note: 'Ceiling is 0.10%. Room for one more weekly touch.' },
+        { label: 'Consent decay, 90 days', value: '−1,240', pct: 71, tone: 'var(--amber-500)', note: 'Unsubs outpacing new opt-ins by 310 a month.' },
+        { label: 'SMS express opt-in', value: '6,240', pct: 16, tone: 'var(--ink-700)', note: '16% of the list. Every SMS journey is capped by this.' },
+      ],
+
+      listHealth: [
+        { label: 'Deliverability score', value: '97.2', tone: 'var(--green-700)' },
+        { label: 'Open rate, 30 days', value: '41.8%', tone: 'var(--ink-800)' },
+        { label: 'Click rate, 30 days', value: '3.4%', tone: 'var(--ink-800)' },
+        { label: 'Unsub rate, 30 days', value: '0.19%', tone: 'var(--green-700)' },
+        { label: 'Revenue per recipient', value: '$0.51', tone: 'var(--ink-800)' },
+        { label: 'New opt-ins per month', value: '+930', tone: 'var(--ink-800)' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

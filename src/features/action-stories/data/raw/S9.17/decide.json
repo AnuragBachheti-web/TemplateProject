@@ -1,0 +1,666 @@
+{
+  "code": "S9.17",
+  "stageKey": "decide",
+  "name": "Supplier performance",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "choice": {
+      "K": "negotiate",
+      "M": "dual",
+      "V": "exit",
+      "T": "negotiate"
+    },
+    "cand": {
+      "K": "nanjing",
+      "M": "aquatek",
+      "V": "alder"
+    },
+    "plannerAck": false,
+    "execSign": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "2 negotiate · 1 dual-source · 1 exit · 0 accept",
+    "pinnedSub": "annual cost +$20.9K · safety stock +$18K · cash +$50K",
+    "impact": [
+      {
+        "label": "Annual cost",
+        "value": "+$20.9K",
+        "tone": "var(--amber-700)",
+        "note": "across all four decisions, at current volume"
+      },
+      {
+        "label": "Gross margin",
+        "value": "−0.26pp",
+        "tone": "var(--rose-700)",
+        "note": "blended effect once changes land"
+      },
+      {
+        "label": "Lead time",
+        "value": "+2 days",
+        "tone": "var(--rose-700)",
+        "note": "worst affected category"
+      },
+      {
+        "label": "Safety stock",
+        "value": "+$18K",
+        "tone": "var(--amber-700)",
+        "note": "goes to Planner before approval"
+      },
+      {
+        "label": "Cash released",
+        "value": "+$50K",
+        "tone": "var(--green-700)",
+        "note": "one-time, from terms extensions"
+      }
+    ],
+    "impactNote": "blocked · see policy check",
+    "impactTone": "var(--rose-700)",
+    "plannerNeeded": true,
+    "ackOpacity": 0,
+    "ackBoxBorder": "var(--ink-300)",
+    "ackBoxBg": "var(--ink-0)",
+    "ackBorder": "var(--rose-200, color-mix(in oklab, var(--rose-500) 30%, white))",
+    "ackBg": "var(--rose-50)",
+    "ackBody": "Lead-time changes add $18K of safety stock across the affected categories. The buy plan cannot absorb that silently — Planner sees it here, before anything is agreed with a supplier.",
+    "suppliers": [
+      {
+        "name": "Kessler Metalworks",
+        "tier": "Tier 1",
+        "spend": "$880K",
+        "share": "31% of spend",
+        "strategic": true,
+        "issue": "+8% notice · OTD 94.1%",
+        "issueTint": "var(--rose-50)",
+        "issueTone": "var(--rose-700)",
+        "context": "Asked for 8% against a 2.9% should-cost move, while sitting two quarters below the Tier 1 OTD floor. Four SKUs are single-source and $374K of their POs are in flight.",
+        "border": "var(--ink-100)",
+        "mark": "var(--mod-inventory)",
+        "options": [
+          {
+            "label": "Negotiate",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "Dual-source",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Exit",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Accept",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "planTitle": "Counter at +3.0% with an 18-month volume commitment",
+        "planTone": "var(--ink-900)",
+        "planBody": "Open with the should-cost build-up, not with a number. Anchor at +2.9% index-linked, settle at +3.0% in exchange for volume they have not had committed before, and put the OTD recovery plan in the same letter so the two conversations cannot be separated.",
+        "planBadge": "recommended",
+        "planBadgeTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "planBadgeTone": "var(--mod-inventory)",
+        "paramTitle": "Targets",
+        "params": [
+          {
+            "label": "Opening anchor",
+            "value": "+2.9%",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          },
+          {
+            "label": "Target",
+            "value": "+3.0%",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Walk-away",
+            "value": "+5.0%",
+            "tone": "var(--rose-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Terms value if won",
+            "value": "$31K cash",
+            "tone": "var(--green-700)",
+            "weight": "500"
+          },
+          {
+            "label": "Response due",
+            "value": "Oct 4",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          }
+        ],
+        "hasTrade": true,
+        "trade": [
+          {
+            "label": "18-month volume commitment",
+            "icon": "fa-solid fa-box"
+          },
+          {
+            "label": "Net 45 → Net 60 terms",
+            "icon": "fa-solid fa-clock"
+          },
+          {
+            "label": "Rolling 12-week forecast",
+            "icon": "fa-solid fa-chart-line"
+          },
+          {
+            "label": "Index-linked clause at renewal",
+            "icon": "fa-solid fa-link"
+          }
+        ],
+        "hasCandidates": false,
+        "candidates": [
+          {
+            "name": "Nanjing Ironworks",
+            "note": "same lane, 4 SKUs matched",
+            "price": "−1.8%",
+            "priceTone": "var(--green-700)",
+            "lead": "38 days",
+            "qual": "14 wks",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 6%, white)",
+            "border": "color-mix(in oklab, var(--mod-inventory) 34%, white)",
+            "radioBorder": "var(--mod-inventory)",
+            "radioBg": "var(--mod-inventory)",
+            "dotOpacity": 1
+          },
+          {
+            "name": "Hoyt Forge (US)",
+            "note": "domestic, 2 SKUs matched",
+            "price": "+4.2%",
+            "priceTone": "var(--amber-700)",
+            "lead": "21 days",
+            "qual": "8 wks",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "radioBorder": "var(--ink-300)",
+            "radioBg": "var(--ink-0)",
+            "dotOpacity": 0
+          },
+          {
+            "name": "Brantome SA",
+            "note": "EU, premium finish",
+            "price": "+11.0%",
+            "priceTone": "var(--rose-700)",
+            "lead": "30 days",
+            "qual": "10 wks",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "radioBorder": "var(--ink-300)",
+            "radioBg": "var(--ink-0)",
+            "dotOpacity": 0
+          }
+        ]
+      },
+      {
+        "name": "Meridian Filtration",
+        "tier": "Tier 2",
+        "spend": "$511K",
+        "share": "18% of spend",
+        "strategic": false,
+        "issue": "OTD 89.2% · 4 quarters down",
+        "issueTint": "var(--rose-50)",
+        "issueTone": "var(--rose-700)",
+        "context": "No price issue — they run below should-cost. Delivery is the problem: 89.2% OTD against a 93% floor, a 61-hour response time, and two stockouts on the filter 3-pack traced to late inbound.",
+        "border": "var(--ink-100)",
+        "mark": "var(--mod-inventory)",
+        "options": [
+          {
+            "label": "Negotiate",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Dual-source",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "Exit",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Accept",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "planTitle": "Dual-source 50% to Aquatek",
+        "planTone": "var(--ink-900)",
+        "planBody": "Split the volume rather than replace it. Aquatek quotes +0.9% at a shorter lead time and holds the same certifications, so 50% of the cartridge volume stops depending on a supplier that has missed four quarters running. Meridian keeps the rest and a reason to fix it.",
+        "planBadge": "recommended",
+        "planBadgeTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "planBadgeTone": "var(--mod-inventory)",
+        "paramTitle": "Qualification plan",
+        "params": [
+          {
+            "label": "Volume shifted",
+            "value": "50%",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          },
+          {
+            "label": "Qualification",
+            "value": "11 wks",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          },
+          {
+            "label": "Certification transfer",
+            "value": "$16K",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          },
+          {
+            "label": "Blended price",
+            "value": "+0.5%",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Lead time",
+            "value": "−4 days",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          }
+        ],
+        "hasTrade": false,
+        "trade": [],
+        "hasCandidates": true,
+        "candidates": [
+          {
+            "name": "Aquatek OEM",
+            "note": "same certifications",
+            "price": "+0.9%",
+            "priceTone": "var(--green-700)",
+            "lead": "24 days",
+            "qual": "11 wks",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 6%, white)",
+            "border": "color-mix(in oklab, var(--mod-inventory) 34%, white)",
+            "radioBorder": "var(--mod-inventory)",
+            "radioBg": "var(--mod-inventory)",
+            "dotOpacity": 1
+          },
+          {
+            "name": "Clearspring Filtration",
+            "note": "certified, 3 SKUs matched",
+            "price": "+2.4%",
+            "priceTone": "var(--amber-700)",
+            "lead": "18 days",
+            "qual": "9 wks",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "radioBorder": "var(--ink-300)",
+            "radioBg": "var(--ink-0)",
+            "dotOpacity": 0
+          }
+        ]
+      },
+      {
+        "name": "Verdant Woodcraft",
+        "tier": "Tier 3",
+        "spend": "$227K",
+        "share": "8% of spend",
+        "strategic": false,
+        "issue": "3,140 PPM · returns 9.2%",
+        "issueTint": "var(--rose-50)",
+        "issueTone": "var(--rose-700)",
+        "context": "Defect rate 640 PPM above the Tier 3 ceiling and rising for six quarters. Returns on the affected SKUs run 9.2% against a 4% norm — the unit-price discount is smaller than what the defects cost us.",
+        "border": "var(--ink-100)",
+        "mark": "var(--mod-inventory)",
+        "options": [
+          {
+            "label": "Negotiate",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Dual-source",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Exit",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "Accept",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "planTitle": "Replace with Alder & Co in 6 weeks",
+        "planTone": "var(--ink-900)",
+        "planBody": "No tooling, no certification, six weeks to qualify. Unit price rises 5.8% and the returns saving is $21K a year, so the switch pays for itself twice over. This is the cheapest supplier in the base to replace and the one with the clearest reason to.",
+        "planBadge": "recommended",
+        "planBadgeTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "planBadgeTone": "var(--mod-inventory)",
+        "paramTitle": "Transition",
+        "params": [
+          {
+            "label": "Open POs honoured",
+            "value": "$14K",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          },
+          {
+            "label": "Transition window",
+            "value": "6 wks",
+            "tone": "var(--green-700)",
+            "weight": "500"
+          },
+          {
+            "label": "Unit price change",
+            "value": "+5.8%",
+            "tone": "var(--amber-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Returns saving",
+            "value": "−$21K / yr",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Net effect",
+            "value": "−$7.8K / yr",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          }
+        ],
+        "hasTrade": false,
+        "trade": [],
+        "hasCandidates": true,
+        "candidates": [
+          {
+            "name": "Alder & Co",
+            "note": "FSC certified, better finish",
+            "price": "+5.8%",
+            "priceTone": "var(--amber-700)",
+            "lead": "26 days",
+            "qual": "6 wks",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 6%, white)",
+            "border": "color-mix(in oklab, var(--mod-inventory) 34%, white)",
+            "radioBorder": "var(--mod-inventory)",
+            "radioBg": "var(--mod-inventory)",
+            "dotOpacity": 1
+          },
+          {
+            "name": "Lindmark Woodworks",
+            "note": "higher grade, EU",
+            "price": "+9.2%",
+            "priceTone": "var(--rose-700)",
+            "lead": "32 days",
+            "qual": "7 wks",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "radioBorder": "var(--ink-300)",
+            "radioBg": "var(--ink-0)",
+            "dotOpacity": 0
+          }
+        ]
+      },
+      {
+        "name": "Tsuyo Blades",
+        "tier": "Tier 2",
+        "spend": "$398K",
+        "share": "14% of spend",
+        "strategic": false,
+        "issue": "Net 30 vs Net 45 target",
+        "issueTint": "var(--amber-50)",
+        "issueTone": "var(--amber-700)",
+        "context": "Performance is fine and pricing tracks should-cost almost exactly. The only thing on the table is terms — Net 30 against a Net 45 target, worth $19K of working capital a year at current spend.",
+        "border": "var(--ink-100)",
+        "mark": "var(--mod-inventory)",
+        "options": [
+          {
+            "label": "Negotiate",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "Dual-source",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Exit",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "Accept",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "planTitle": "Terms-only ask: Net 30 → Net 45",
+        "planTone": "var(--ink-900)",
+        "planBody": "No price conversation at all. Ask for 15 days of terms in exchange for a two-year renewal and consolidated monthly ordering, which reduces their admin as much as it helps our cash. Walk-away is simply staying where we are.",
+        "planBadge": "recommended",
+        "planBadgeTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "planBadgeTone": "var(--mod-inventory)",
+        "paramTitle": "Targets",
+        "params": [
+          {
+            "label": "Target terms",
+            "value": "Net 45",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Cash released",
+            "value": "$19K",
+            "tone": "var(--green-700)",
+            "weight": "600"
+          },
+          {
+            "label": "Price change",
+            "value": "none",
+            "tone": "var(--ink-800)",
+            "weight": "500"
+          },
+          {
+            "label": "Walk-away",
+            "value": "stay Net 30",
+            "tone": "var(--ink-500)",
+            "weight": "500"
+          }
+        ],
+        "hasTrade": true,
+        "trade": [
+          {
+            "label": "Two-year renewal",
+            "icon": "fa-solid fa-file-signature"
+          },
+          {
+            "label": "Consolidated monthly POs",
+            "icon": "fa-solid fa-layer-group"
+          },
+          {
+            "label": "Volume +16% forecast shared",
+            "icon": "fa-solid fa-chart-line"
+          }
+        ],
+        "hasCandidates": false,
+        "candidates": [
+          {
+            "name": "Seki Cutlery Co",
+            "note": "comparable steel grade",
+            "price": "+3.1%",
+            "priceTone": "var(--amber-700)",
+            "lead": "34 days",
+            "qual": "12 wks",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "radioBorder": "var(--ink-300)",
+            "radioBg": "var(--ink-0)",
+            "dotOpacity": 0
+          }
+        ]
+      }
+    ],
+    "summary": [
+      {
+        "label": "Negotiate",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Dual-source",
+        "value": "1",
+        "tone": "var(--mod-inventory)"
+      },
+      {
+        "label": "Exit",
+        "value": "1",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Accept with rationale",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Qualification programmes",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "policyStatus": "blocked",
+    "policyTone": "var(--rose-700)",
+    "checks": [
+      {
+        "label": "Open POs honoured",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Every transition honours the $412K in flight. No cancellation is used as leverage."
+      },
+      {
+        "label": "Strategic-supplier exit",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "No strategic supplier is being exited."
+      },
+      {
+        "label": "Safety-stock impact accepted",
+        "icon": "fa-solid fa-circle-xmark",
+        "tone": "var(--rose-700)",
+        "noteTone": "var(--rose-700)",
+        "note": "$18K of safety stock has to reach Planner before approval."
+      },
+      {
+        "label": "Nothing sent automatically",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "note": "Briefs and messages are drafted in Execute. A person sends them, at every dial setting."
+      },
+      {
+        "label": "Rationale logged",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Every decision files to LEDGER-SUP-0184 with its should-cost basis."
+      }
+    ],
+    "execNeeded": false,
+    "execLabelBtn": "Record exec sign-off",
+    "execIcon": "fa-solid fa-signature",
+    "execBg": "var(--ink-0)",
+    "execFg": "var(--ink-700)",
+    "execBorder": "var(--ink-200)",
+    "routes": [
+      {
+        "label": "Negotiation briefs",
+        "note": "2 drafted for Sourcer, with anchors and trade currency",
+        "icon": "fa-solid fa-file-lines",
+        "hue": "var(--mod-inventory)"
+      },
+      {
+        "label": "Supplier messages",
+        "note": "drafted, held for human review — never auto-sent",
+        "icon": "fa-solid fa-envelope",
+        "hue": "var(--ink-600)"
+      },
+      {
+        "label": "Buy-plan changes",
+        "note": "safety stock and lead times to Planner via S9.3",
+        "icon": "fa-solid fa-boxes-stacked",
+        "hue": "var(--mod-inventory)"
+      },
+      {
+        "label": "Qualification tasks",
+        "note": "2 programmes with sample runs and sign-off gates",
+        "icon": "fa-solid fa-clipboard-check",
+        "hue": "var(--ink-600)"
+      }
+    ],
+    "blocked": true,
+    "canApprove": false,
+    "blockReason": "Planner has to accept the $18K safety-stock impact first",
+    "ctaLabel": "Approve 4 decisions & continue",
+    "footStatus": "Decide · 2 negotiate, 1 dual-source, 1 exit, 0 accept · +$20.9K / yr",
+    "footTone": "var(--rose-700)"
+  }
+}

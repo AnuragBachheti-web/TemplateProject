@@ -1,0 +1,482 @@
+{
+  "code": "S9.14",
+  "stageKey": "execute",
+  "name": "Agentic commerce",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "reverted": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "planLine": "Writes land in the PIM first, then feeds regenerate from the corrected record, then the policy schema deploys. Scout’s battery is rescheduled last so the first re-score reads a settled catalogue.",
+    "pushedCount": "0 / 4",
+    "pushAllLabel": "Push all in order",
+    "pushAllIcon": "fa-solid fa-paper-plane",
+    "pushAllBg": "var(--ink-900)",
+    "pushAllFg": "var(--ink-0)",
+    "pushAllCursor": "pointer",
+    "dests": [
+      {
+        "name": "PIM · canonical catalogue writes",
+        "meta": "3 batches · 341 field writes · version v41",
+        "icon": "fa-solid fa-database",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Walmart attribute mapping repair",
+            "detail": "Capacity, dimensions and heat rating remap to the correct Walmart field IDs. Fixed at the source, so every channel regenerates from one corrected record.",
+            "value": "3 fields",
+            "tag": "root cause",
+            "tagIcon": "fa-solid fa-wrench",
+            "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "tagTone": "var(--mod-discover)",
+            "hasDiff": true,
+            "before": "capacity → wm_size (wrong field)",
+            "after": "capacity → wm_capacity_qt",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Attribute enrichment · 12 hero SKUs",
+            "detail": "26 category-required fields per SKU from supplier spec sheets. Induction compatibility, oven-safe temperature, handle material, weight, dishwasher safety.",
+            "value": "312 writes",
+            "tag": null,
+            "hasDiff": true,
+            "before": "12 attributes per PDP",
+            "after": "38 attributes per PDP",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "GTIN backfill · 43 variants",
+            "detail": "Codes taken from supplier records and validated against the GS1 check digit before write. Two surfaces cannot see a variant without one.",
+            "value": "43 codes",
+            "tag": null,
+            "hasDiff": true,
+            "before": "GTIN coverage 94%",
+            "after": "GTIN coverage 100%",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Heat-rating copy conflict",
+            "detail": "The PDP paragraph claiming 500°F is rewritten to cite the 450°F spec field. Copy now generates from the record rather than sitting beside it.",
+            "value": "1 template",
+            "tag": "brand rule",
+            "tagIcon": "fa-solid fa-file-lines",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "hasDiff": true,
+            "before": "\"up to 500 degrees\" in prose",
+            "after": "generated from max_temp = 450°F",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Feed platform · regeneration",
+        "meta": "4 channels · cadence 12h → 2h · stale-price pull armed",
+        "icon": "fa-solid fa-arrows-rotate",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Walmart feed rebuild",
+            "detail": "Full rebuild rather than a delta, because nine days of attribute drift cannot be reconciled incrementally.",
+            "value": "1,240 SKUs",
+            "tag": null,
+            "hasDiff": true,
+            "before": "last pickup 9 days ago",
+            "after": "rebuilt · 2h schedule",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Regeneration cadence · all channels",
+            "detail": "Shopify stays live, the three marketplace feeds move to a two-hour schedule. Brings freshness inside the 6-hour floor from Reason.",
+            "value": "4 channels",
+            "tag": null,
+            "hasDiff": true,
+            "before": "12h p50 · 14h p90",
+            "after": "2h p50 · 3h p90",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Stale-price pull rule",
+            "detail": "A price older than its validity window is withdrawn instead of published. An absent price costs a citation; a wrong one costs trust.",
+            "value": "all channels",
+            "tag": "accuracy floor",
+            "tagIcon": "fa-solid fa-shield-halved",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "hasDiff": true,
+            "before": "stale price published",
+            "after": "stale price withdrawn",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Web · policy schema deploy",
+        "meta": "3 policy types · 1,240 PDPs · one source record",
+        "icon": "fa-solid fa-code",
+        "hue": "var(--violet-500)",
+        "tint": "color-mix(in oklab, var(--violet-500) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "MerchantReturnPolicy · 45-day window",
+            "detail": "Publishes the real return window as structured policy, which is what removes the third-party 14-day answer from the surfaces.",
+            "value": "1,240 PDPs",
+            "tag": "satisfies lock",
+            "tagIcon": "fa-solid fa-lock-open",
+            "tagTint": "var(--green-50)",
+            "tagTone": "var(--green-700)",
+            "hasDiff": true,
+            "before": "help-centre prose only",
+            "after": "structured on every PDP",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "ShippingDeliveryTime · per region",
+            "detail": "Handling time, transit time and cutoff published per region rather than described in a paragraph.",
+            "value": "9 regions",
+            "tag": null,
+            "hasDiff": true,
+            "before": "partial, 3 regions",
+            "after": "complete, 9 regions",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Warranty terms",
+            "detail": "Absent entirely before this deploy — the field the comparison queries look for when they rank durability.",
+            "value": "2 tiers",
+            "tag": null,
+            "hasDiff": true,
+            "before": "not published",
+            "after": "structured · 2 tiers",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Scout · query battery reschedule",
+        "meta": "weekly → twice weekly · 46 → 120 queries",
+        "icon": "fa-solid fa-binoculars",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Battery expansion · 120 queries",
+            "detail": "The 46 existing queries plus 74 drawn from the constraints shoppers actually used in the mismatch and missing-attribute rows.",
+            "value": "240 / wk",
+            "tag": null,
+            "hasDiff": true,
+            "before": "46 queries weekly",
+            "after": "120 queries twice weekly",
+            "afterTone": "var(--mod-ads)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Competitor set · 2 → 3",
+            "detail": "Adds the third competitor that appeared in 18 of the 46 answers and was not being tracked.",
+            "value": "3 tracked",
+            "tag": null,
+            "hasDiff": true,
+            "before": "competitors A and B",
+            "after": "competitors A, B and C",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Answer diffing against the canonical record",
+            "detail": "Every sampled answer is diffed against the PIM automatically, so a mismatch surfaces the same day rather than at the weekly review.",
+            "value": "240 diffs / wk",
+            "tag": null,
+            "hasDiff": true,
+            "before": "manual spot checks",
+            "after": "automatic per sample",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Destinations pushed",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items written",
+        "value": "0 of 13",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Readiness score",
+        "value": "61 · unchanged",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Feed freshness",
+        "value": "11h p50",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Mismatch rate",
+        "value": "2.2% current",
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, a detected staleness raises a flag on this card and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "monitors": [
+      {
+        "name": "ChatGPT shopping",
+        "meta": "citation share on 120 queries",
+        "baseline": "19%",
+        "target": "35%",
+        "rev": "$2.1K / mo",
+        "revTone": "var(--green-700)",
+        "status": "not started",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Google AI Mode",
+        "meta": "schema item deferred to Q1",
+        "baseline": "12%",
+        "target": "28%",
+        "rev": "$1.4K / mo",
+        "revTone": "var(--green-700)",
+        "status": "not started",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Perplexity",
+        "meta": "policy schema lands this wave",
+        "baseline": "24%",
+        "target": "35%",
+        "rev": "$0.9K / mo",
+        "revTone": "var(--green-700)",
+        "status": "not started",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Amazon Rufus",
+        "meta": "add-to-cart share proxy",
+        "baseline": "8%",
+        "target": "25%",
+        "rev": "not attributable",
+        "revTone": "var(--ink-400)",
+        "status": "not started",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "watchStatus": "arms on push",
+    "watchTone": "var(--ink-400)",
+    "flags": [
+      {
+        "when": "Per sample",
+        "rule": "An answer contradicts the canonical record",
+        "action": "Raises a mismatch flag here with the full trace."
+      },
+      {
+        "when": "Twice weekly",
+        "rule": "Citation share falls more than 3pp on any surface",
+        "action": "Re-runs the battery on that surface and notifies Scout."
+      },
+      {
+        "when": "Every 14 days",
+        "rule": "Readiness score below 75 after wave 1",
+        "action": "Sends the deferred items back to Decide with the re-score attached."
+      }
+    ],
+    "rollback": [
+      {
+        "name": "PIM attribute writes",
+        "version": "v41 · restore v40",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not pushed",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Feed cadence + rebuild",
+        "version": "2h schedule · restore 12h",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not pushed",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Policy schema deploy",
+        "version": "3 types · restore prior template",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not pushed",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Battery schedule",
+        "version": "120 queries · restore 46",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not pushed",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      }
+    ],
+    "deferred": [
+      {
+        "label": "Schema coverage · Product, Offer, rating on all PDPs",
+        "weeks": "3 wks"
+      },
+      {
+        "label": "Factual Q&A restructuring · 40 PDPs",
+        "weeks": "3 wks"
+      },
+      {
+        "label": "Attribute enrichment · 180 long-tail SKUs",
+        "weeks": "4 wks"
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 pushed · 13 line items staged",
+    "footTone": "var(--ink-500)"
+  }
+}

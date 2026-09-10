@@ -1,0 +1,325 @@
+[
+  {
+    "code": "S9.2",
+    "name": "Replenishment",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.dialNote"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "policy",
+        "blockType": "labelValueList",
+        "binding": "data.policy"
+      },
+      {
+        "slotName": "roles",
+        "blockType": "table",
+        "binding": "data.roles"
+      },
+      {
+        "slotName": "inputs",
+        "blockType": "labelValueList",
+        "binding": "data.inputs"
+      }
+    ]
+  },
+  {
+    "code": "S9.2",
+    "name": "Replenishment",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "roles",
+        "blockType": "itemQueue",
+        "binding": "data.roles"
+      },
+      {
+        "slotName": "fanOuter",
+        "blockType": "text",
+        "binding": "data.fanOuter"
+      },
+      {
+        "slotName": "fanInner",
+        "blockType": "text",
+        "binding": "data.fanInner"
+      },
+      {
+        "slotName": "p50",
+        "blockType": "text",
+        "binding": "data.p50"
+      },
+      {
+        "slotName": "actual",
+        "blockType": "text",
+        "binding": "data.actual"
+      },
+      {
+        "slotName": "horizons",
+        "blockType": "labelValueList",
+        "binding": "data.horizons"
+      },
+      {
+        "slotName": "coverY",
+        "blockType": "text",
+        "binding": "data.coverY"
+      },
+      {
+        "slotName": "coverLabelY",
+        "blockType": "text",
+        "binding": "data.coverLabelY"
+      },
+      {
+        "slotName": "cols",
+        "blockType": "labelValueList",
+        "binding": "data.cols"
+      },
+      {
+        "slotName": "rows",
+        "blockType": "table",
+        "binding": "data.rows"
+      },
+      {
+        "slotName": "gaps",
+        "blockType": "table",
+        "binding": "data.gaps"
+      },
+      {
+        "slotName": "movement",
+        "blockType": "labelValueList",
+        "binding": "data.movement"
+      }
+    ]
+  },
+  {
+    "code": "S9.2",
+    "name": "Replenishment",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel"
+      },
+      {
+        "slotName": "pinnedOutlay",
+        "blockType": "text",
+        "binding": "data.pinnedOutlay"
+      },
+      {
+        "slotName": "pinnedService",
+        "blockType": "text",
+        "binding": "data.pinnedService"
+      },
+      {
+        "slotName": "svcStr",
+        "blockType": "text",
+        "binding": "data.svcStr"
+      },
+      {
+        "slotName": "svcNote",
+        "blockType": "text",
+        "binding": "data.svcNote"
+      },
+      {
+        "slotName": "outlayStr",
+        "blockType": "text",
+        "binding": "data.outlayStr"
+      },
+      {
+        "slotName": "outlayNote",
+        "blockType": "text",
+        "binding": "data.outlayNote"
+      },
+      {
+        "slotName": "lostStr",
+        "blockType": "text",
+        "binding": "data.lostStr"
+      },
+      {
+        "slotName": "headStr",
+        "blockType": "text",
+        "binding": "data.headStr"
+      },
+      {
+        "slotName": "headNote",
+        "blockType": "text",
+        "binding": "data.headNote"
+      },
+      {
+        "slotName": "guardIcon",
+        "blockType": "text",
+        "binding": "data.guardIcon"
+      },
+      {
+        "slotName": "guardText",
+        "blockType": "text",
+        "binding": "data.guardText"
+      },
+      {
+        "slotName": "notchVal",
+        "blockType": "number",
+        "binding": "data.notchVal"
+      },
+      {
+        "slotName": "ticks",
+        "blockType": "labelValueList",
+        "binding": "data.ticks"
+      },
+      {
+        "slotName": "notchNarr",
+        "blockType": "text",
+        "binding": "data.notchNarr"
+      },
+      {
+        "slotName": "bookMeta",
+        "blockType": "text",
+        "binding": "data.bookMeta"
+      },
+      {
+        "slotName": "totalStr",
+        "blockType": "text",
+        "binding": "data.totalStr"
+      },
+      {
+        "slotName": "suppliers",
+        "blockType": "itemQueue",
+        "binding": "data.suppliers"
+      },
+      {
+        "slotName": "deferSummary",
+        "blockType": "text",
+        "binding": "data.deferSummary"
+      },
+      {
+        "slotName": "ladder",
+        "blockType": "labelValueList",
+        "binding": "data.ladder"
+      },
+      {
+        "slotName": "weeks",
+        "blockType": "labelValueList",
+        "binding": "data.weeks"
+      },
+      {
+        "slotName": "effects",
+        "blockType": "labelValueList",
+        "binding": "data.effects"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.2",
+    "name": "Replenishment",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "pinnedStatus",
+        "blockType": "text",
+        "binding": "data.pinnedStatus"
+      },
+      {
+        "slotName": "poMeta",
+        "blockType": "text",
+        "binding": "data.poMeta"
+      },
+      {
+        "slotName": "orders",
+        "blockType": "itemQueue",
+        "binding": "data.orders"
+      },
+      {
+        "slotName": "channels",
+        "blockType": "labelValueList",
+        "binding": "data.channels"
+      },
+      {
+        "slotName": "allLabel",
+        "blockType": "text",
+        "binding": "data.allLabel"
+      },
+      {
+        "slotName": "allNote",
+        "blockType": "text",
+        "binding": "data.allNote"
+      },
+      {
+        "slotName": "wmsState",
+        "blockType": "text",
+        "binding": "data.wmsState"
+      },
+      {
+        "slotName": "receipts",
+        "blockType": "labelValueList",
+        "binding": "data.receipts"
+      },
+      {
+        "slotName": "cashState",
+        "blockType": "text",
+        "binding": "data.cashState"
+      },
+      {
+        "slotName": "outflow",
+        "blockType": "labelValueList",
+        "binding": "data.outflow"
+      },
+      {
+        "slotName": "monState",
+        "blockType": "text",
+        "binding": "data.monState"
+      },
+      {
+        "slotName": "monitors",
+        "blockType": "labelValueList",
+        "binding": "data.monitors"
+      },
+      {
+        "slotName": "rollState",
+        "blockType": "text",
+        "binding": "data.rollState"
+      },
+      {
+        "slotName": "rollCopy",
+        "blockType": "text",
+        "binding": "data.rollCopy"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      },
+      {
+        "slotName": "footerSendLabel",
+        "blockType": "text",
+        "binding": "data.footerSendLabel"
+      }
+    ]
+  }
+]

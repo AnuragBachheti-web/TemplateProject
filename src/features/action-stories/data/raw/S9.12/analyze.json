@@ -1,0 +1,332 @@
+{
+  "code": "S9.12",
+  "stageKey": "analyze",
+  "name": "Returns",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "cluster": "fit"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "clusters": [
+      {
+        "theme": "Runs small · fit",
+        "share": "34%",
+        "skus": "18 of 62",
+        "cost": "$3.8K",
+        "quote": "Concentrated in M and L on six styles — the size chart was built from the sample, not the production run.",
+        "trend": "+6pp vs Q2",
+        "trendIcon": "fa-solid fa-arrow-trend-up",
+        "trendTone": "var(--rose-700)",
+        "edge": "var(--rose-500)",
+        "bg": "color-mix(in oklab, var(--rose-500) 5%, white)",
+        "border": "color-mix(in oklab, var(--rose-500) 34%, white)"
+      },
+      {
+        "theme": "Arrived damaged",
+        "share": "22%",
+        "skus": "11 of 62",
+        "cost": "$2.4K",
+        "quote": "Ceramic and glass in the same carton as apparel. The mixed-category pack is the pattern, not the carrier.",
+        "trend": "+3pp vs Q2",
+        "trendIcon": "fa-solid fa-arrow-trend-up",
+        "trendTone": "var(--rose-700)",
+        "edge": "var(--amber-500)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)"
+      },
+      {
+        "theme": "Not as described",
+        "share": "19%",
+        "skus": "14 of 62",
+        "cost": "$2.1K",
+        "quote": "Colour on the hero image reads warmer than the garment. Every complaint names the same two colourways.",
+        "trend": "−2pp vs Q2",
+        "trendIcon": "fa-solid fa-arrow-trend-down",
+        "trendTone": "var(--green-700)",
+        "edge": "var(--mod-margin)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)"
+      },
+      {
+        "theme": "Defect · seam and zip",
+        "share": "14%",
+        "skus": "5 of 62",
+        "cost": "$1.6K",
+        "quote": "All five SKUs come from one supplier and one production window. This is a CAPA, not a content fix.",
+        "trend": "+4pp vs Q2",
+        "trendIcon": "fa-solid fa-arrow-trend-up",
+        "trendTone": "var(--rose-700)",
+        "edge": "var(--ink-700)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)"
+      }
+    ],
+    "sel": {
+      "theme": "Runs small · fit",
+      "hue": "var(--rose-500)",
+      "meta": "2,840 comments · 1,190 reviews read",
+      "owner": "Merchandiser owns",
+      "ownerTone": "var(--mod-margin)",
+      "ownerTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+      "evidence": "The phrase cluster is unusually tight: nine variants of the same complaint, all naming a size rather than a defect, and 71% of them also mention ordering a size up. Reviews say the same thing and rate the product well otherwise — which is why this reads as a page problem rather than a product problem.",
+      "phrases": [
+        {
+          "text": "runs small",
+          "count": "412"
+        },
+        {
+          "text": "size up",
+          "count": "288"
+        },
+        {
+          "text": "tight in the chest",
+          "count": "164"
+        },
+        {
+          "text": "ordered M got S",
+          "count": "96"
+        },
+        {
+          "text": "not true to size",
+          "count": "81"
+        }
+      ],
+      "chain": [
+        {
+          "kind": "Symptom",
+          "label": "18.4% return rate on 18 SKUs",
+          "note": "Against a 12% target and an 11.5% category benchmark.",
+          "value": "+6.4pp",
+          "width": "210px",
+          "tone": "var(--rose-700)",
+          "bg": "var(--rose-50)",
+          "border": "color-mix(in oklab, var(--rose-500) 28%, white)",
+          "arrowShow": "inline-flex"
+        },
+        {
+          "kind": "Reason code",
+          "label": "Size / fit, plus 41% in “other”",
+          "note": "The structured code understates it — NLP recovers the rest from free text.",
+          "value": "34%",
+          "width": "210px",
+          "tone": "var(--amber-700)",
+          "bg": "var(--amber-50)",
+          "border": "color-mix(in oklab, var(--amber-500) 28%, white)",
+          "arrowShow": "inline-flex"
+        },
+        {
+          "kind": "Root cause",
+          "label": "Size chart built from the sample run",
+          "note": "Production came in 3/4in narrower through the chest on six styles.",
+          "value": "6 styles",
+          "width": "220px",
+          "tone": "var(--ink-900)",
+          "bg": "var(--ink-25)",
+          "border": "var(--ink-200)",
+          "arrowShow": "inline-flex"
+        },
+        {
+          "kind": "Owner",
+          "label": "Merchandiser · size chart and fit copy",
+          "note": "Republish the chart, add a fit note, surface the fit reviews above the fold.",
+          "value": "content",
+          "width": "210px",
+          "tone": "var(--mod-margin)",
+          "bg": "color-mix(in oklab, var(--mod-margin) 7%, white)",
+          "border": "color-mix(in oklab, var(--mod-margin) 28%, white)",
+          "arrowShow": "none"
+        }
+      ]
+    },
+    "disposition": [
+      {
+        "path": "Restock as new",
+        "grade": "grade A",
+        "gradeTint": "var(--green-50)",
+        "gradeTone": "var(--green-700)",
+        "note": "Tags on, unworn, original packaging. Straight back to sellable inventory.",
+        "gross": "$38.00",
+        "handling": "−$3.40",
+        "net": "$34.60",
+        "recovery": "91%",
+        "units": "1,840 units · 48%",
+        "pct": "91%",
+        "netTone": "var(--green-700)",
+        "recTone": "var(--green-700)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "path": "Refurbish and relist",
+        "grade": "grade B",
+        "gradeTint": "var(--amber-50)",
+        "gradeTone": "var(--amber-700)",
+        "note": "Steam, re-tag, photograph as open-box. Relists at 78% of full price.",
+        "gross": "$29.60",
+        "handling": "−$8.90",
+        "net": "$20.70",
+        "recovery": "54%",
+        "units": "980 units · 26%",
+        "pct": "54%",
+        "netTone": "var(--amber-700)",
+        "recTone": "var(--amber-700)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "path": "Liquidate by pallet",
+        "grade": "grade B/C",
+        "gradeTint": "var(--ink-100)",
+        "gradeTone": "var(--ink-600)",
+        "note": "Two standing quotes. No inspection cost, no photography, no storage.",
+        "gross": "$9.10",
+        "handling": "−$1.20",
+        "net": "$7.90",
+        "recovery": "21%",
+        "units": "620 units · 16%",
+        "pct": "21%",
+        "netTone": "var(--ink-800)",
+        "recTone": "var(--ink-600)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "path": "Destroy with record",
+        "grade": "hygiene",
+        "gradeTint": "var(--rose-50)",
+        "gradeTone": "var(--rose-700)",
+        "note": "Required for opened hygiene categories. Disposal fee and a retained record.",
+        "gross": "$0.00",
+        "handling": "−$1.10",
+        "net": "−$1.10",
+        "recovery": "0%",
+        "units": "412 units · 11%",
+        "pct": "4%",
+        "netTone": "var(--rose-700)",
+        "recTone": "var(--rose-700)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "path": "Return-less refund",
+        "grade": "no inbound",
+        "gradeTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "gradeTone": "var(--mod-margin)",
+        "note": "Refund without asking for the unit back. Saves freight that exceeds recovery.",
+        "gross": "$0.00",
+        "handling": "+$6.20",
+        "net": "+$6.20",
+        "recovery": "saves",
+        "units": "0 units · not yet used",
+        "pct": "16%",
+        "netTone": "var(--mod-margin)",
+        "recTone": "var(--mod-margin)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)"
+      }
+    ],
+    "sizes": [
+      {
+        "size": "XS",
+        "rate": "9.1%",
+        "pct": "30%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "size": "S",
+        "rate": "14.8%",
+        "pct": "52%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "size": "M",
+        "rate": "28.4%",
+        "pct": "100%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "size": "L",
+        "rate": "24.1%",
+        "pct": "85%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "size": "XL",
+        "rate": "12.2%",
+        "pct": "43%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "size": "2XL",
+        "rate": "8.4%",
+        "pct": "28%",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "method": [
+      {
+        "label": "Return comments read",
+        "value": "2,840",
+        "icon": "fa-solid fa-comment-dots",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "Reviews cross-read",
+        "value": "1,190",
+        "icon": "fa-solid fa-star-half-stroke",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "Recovered from “other”",
+        "value": "41%",
+        "icon": "fa-solid fa-wand-magic-sparkles",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Clusters above threshold",
+        "value": "4 of 11",
+        "icon": "fa-solid fa-layer-group",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "owners": [
+      {
+        "label": "Merchandiser · content",
+        "value": "53% · $5.9K",
+        "pct": "100%",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "Shipper · packaging",
+        "value": "22% · $2.4K",
+        "pct": "42%",
+        "tone": "var(--mod-cash)"
+      },
+      {
+        "label": "Sourcer · supplier CAPA",
+        "value": "14% · $1.6K",
+        "pct": "27%",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Unattributed",
+        "value": "11% · $1.2K",
+        "pct": "20%",
+        "tone": "var(--ink-400)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.15-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-discover);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-discover) 12%, white);color:var(--mod-discover);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Search visibility · S9.15</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Citation share dropping — 14 comparison queries cite competitors only</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">$11.4K / mo of traffic value uncovered</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">14 competitor-only queries · 3 cannibalisation pairs</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-discover)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-discover)"></span>Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-discover);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Merchandiser + Scout
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Visibility Gap Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Citation Tracker
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.15-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.15-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-discover) 10%, white);border:1px solid color-mix(in oklab, var(--mod-discover) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-discover);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.15-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.15-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0"><x-import component-from-global-scope="RealifyDesignSystem_002c39.IntelCard" tag="Realify signal · search visibility" title="One definitive comparison page with structured data projects entry into 9 of the 14 competitor-only citations" hint-size="100%,180px">The fourteen queries share a shape: a direct comparison, a table of numbers, and a sourced claim per row. Competitor A holds nine of them from a single guide. Our coverage is split across four thin pages that cannibalise each other and none of which carries a comparison table — <strong>$7.4K of the $11.4K</strong> uncovered value sits behind one page.</x-import></div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Rank vs citation · 8 weeks</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ trendMeta }}</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:0;padding:2px;border-radius:var(--r-full);background:var(--ink-100)">
+              <sc-for list="{{ clusterTabs }}" as="t" hint-placeholder-count="4">
+                <button type="button" onClick="{{ t.pick }}" style="height:26px;padding:0 11px;border-radius:var(--r-full);border:none;background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11.5px;font-weight:{{ t.weight }};transition:background var(--dur-fast) var(--ease-standard)">{{ t.label }}</button>
+              </sc-for>
+            </span>
+          </div>
+
+          <div style="margin-top:12px;display:flex;align-items:center;gap:16px">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:10px;height:10px;border-radius:2px;background:color-mix(in oklab, var(--mod-discover) 45%, white)"></span>citation share</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:2px;background:var(--ink-800);display:block"></span>average rank</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:0;border-top:1.5px dashed var(--ink-400);display:block"></span>citation target</span>
+            <span style="margin-left:auto;display:flex;align-items:baseline;gap:14px">
+              <span style="display:flex;flex-direction:column;align-items:flex-end;gap:1px">
+                <span style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:{{ citeTone }};font-variant-numeric:tabular-nums">{{ citeNow }}</span>
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">cite now</span>
+              </span>
+              <span style="display:flex;flex-direction:column;align-items:flex-end;gap:1px">
+                <span style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ rankNow }}</span>
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">avg rank</span>
+              </span>
+              <span style="display:flex;flex-direction:column;align-items:flex-end;gap:1px">
+                <span style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--rose-700);font-variant-numeric:tabular-nums">{{ citeDelta }}</span>
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">8-week</span>
+              </span>
+            </span>
+          </div>
+
+          <div style="margin-top:12px;height:200px">
+            <svg viewBox="0 0 800 200" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+              <line x1="0" y1="170" x2="800" y2="170" style="stroke:var(--ink-200);stroke-width:1"></line>
+              <line x1="0" y1="{{ targetY }}" x2="800" y2="{{ targetY }}" style="stroke:var(--ink-400);stroke-width:1.2;stroke-dasharray:6 5"></line>
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="8">
+                <rect x="{{ b.x }}" y="{{ b.y }}" width="44" height="{{ b.h }}" rx="3" style="fill:var(--mod-discover);fill-opacity:{{ b.op }}"></rect>
+              </sc-for>
+              <path d="{{ rankPath }}" style="fill:none;stroke:var(--ink-800);stroke-width:2;stroke-linejoin:round"></path>
+              <sc-for list="{{ rankDots }}" as="d" hint-placeholder-count="8">
+                <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="3.5" style="fill:var(--ink-0);stroke:var(--ink-800);stroke-width:2"></circle>
+              </sc-for>
+            </svg>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:0;margin-top:4px">
+            <sc-for list="{{ weekLabels }}" as="w" hint-placeholder-count="8">
+              <span style="text-align:center;font-family:var(--font-mono);font-size:9.5px;color:{{ w.tone }};font-variant-numeric:tabular-nums">{{ w.label }}</span>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ trendNote }}</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Content-gap matrix</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">competitors cited, we are absent · sized by monthly traffic value</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">click a query for the gap detail</span>
+          </div>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:1fr 96px 96px 130px 128px;gap:0 10px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Query</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Volume</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Value / mo</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Cited instead</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Our coverage</span>
+          </div>
+          <sc-for list="{{ gaps }}" as="g" hint-placeholder-count="8">
+            <button type="button" onClick="{{ g.pick }}" style="width:100%;text-align:left;cursor:pointer;font-family:var(--font-sans);display:grid;grid-template-columns:1fr 96px 96px 130px 128px;gap:0 10px;align-items:center;padding:10px 8px 10px 8px;border:none;border-bottom:1px solid var(--ink-50);border-left:2px solid {{ g.mark }};background:{{ g.bg }};transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-25)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:12.5px;font-weight:500;color:var(--ink-800);text-wrap:pretty">{{ g.query }}</span>
+                <span style="height:4px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block;max-width:220px">
+                  <span style="display:block;height:100%;width:{{ g.pct }}%;background:var(--mod-discover);border-radius:var(--r-full)"></span>
+                </span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ g.volume }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ g.value }}</span>
+              <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500)">{{ g.cited }}</span>
+              <span style="justify-self:start;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ g.covTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:{{ g.covTone }}">{{ g.coverage }}</span>
+            </button>
+          </sc-for>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:1fr 300px;gap:16px;padding:13px 15px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <div style="min-width:0;display:flex;flex-direction:column;gap:7px">
+              <span style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                <span style="font-size:13px;font-weight:700;color:var(--ink-900)">{{ detail.query }}</span>
+                <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ detail.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ detail.tone }}">{{ detail.badge }}</span>
+              </span>
+              <span style="font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ detail.body }}</span>
+              <span style="display:flex;align-items:center;gap:18px;margin-top:2px;flex-wrap:wrap">
+                <sc-for list="{{ detail.stats }}" as="s" hint-placeholder-count="4">
+                  <span style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                    <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                  </span>
+                </sc-for>
+              </span>
+            </div>
+            <div style="min-width:0;display:flex;flex-direction:column;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">What the cited page has that ours does not</span>
+              <sc-for list="{{ detail.reasons }}" as="r" hint-placeholder-count="3">
+                <span style="display:flex;align-items:flex-start;gap:8px">
+                  <i class="{{ r.icon }}" style="font-size:9.5px;color:{{ r.tone }};margin-top:3px;flex-shrink:0;width:11px;text-align:center"></i>
+                  <span style="min-width:0;font-size:11.5px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ r.label }}</span>
+                </span>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Citability audit · {{ auditScope }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">what makes a page quotable, scored per page</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 88px 88px 88px 78px;gap:0 12px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Page</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Factual</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Structure</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Sourced</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Score</span>
+          </div>
+          <sc-for list="{{ audit }}" as="a" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1fr 88px 88px 88px 78px;gap:0 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ a.title }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ a.url }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ a.f1Tone }};text-align:right;font-variant-numeric:tabular-nums">{{ a.f1 }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ a.f2Tone }};text-align:right;font-variant-numeric:tabular-nums">{{ a.f2 }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ a.f3Tone }};text-align:right;font-variant-numeric:tabular-nums">{{ a.f3 }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:24px;padding:0 8px;border-radius:var(--r-full);background:{{ a.scoreTint }};font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ a.scoreTone }};font-variant-numeric:tabular-nums">{{ a.score }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ auditNote }}</p>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Technical health</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--amber-500)"></span>3 issues
+            </span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ technical }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ t.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.value }}</span>
+                </div>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ t.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Cannibalisation</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--rose-500)"></span>3 pairs
+            </span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ cannibal }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:4px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm)">
+                <span style="font-size:11.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ c.query }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500);text-wrap:pretty">{{ c.a }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500);text-wrap:pretty">{{ c.b }}</span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--rose-700);text-wrap:pretty">{{ c.effect }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Where the value sits</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ valueSplit }}" as="v" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ v.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ v.value }}</span>
+                </div>
+                <span style="height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                  <span style="display:block;height:100%;width:{{ v.pct }}%;background:{{ v.hue }};border-radius:var(--r-full)"></span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Two thirds of the uncovered value is comparative intent, which is exactly the tier the standards from Reason are written for.</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Analyze · 14 competitor-only queries · $11.4K / mo uncovered · 3 technical issues, 3 cannibalisation pairs</span>
+      <a href="S9.15-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Decide<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { cluster: 'cookware', gap: 'carbon-vs-cast' };
+
+  clusterData() {
+    return {
+      cookware: {
+        label: 'Cookware', meta: '96 queries · comparative tier',
+        cite: [11, 10, 10, 9, 8, 7, 6, 6], rank: [3.6, 3.7, 3.8, 3.9, 4.0, 4.0, 4.1, 4.1], target: 30,
+        note: 'Rank is flat and citation share has halved in eight weeks. The pages still place; the answers above them are being written from competitor A\u2019s comparison guide.',
+        audit: 'cookware comparison pages',
+        auditNote: 'Four pages, none with a comparison table and none scoring above 54. Consolidating them into one definitive page is worth more than editing all four.',
+      },
+      water: {
+        label: 'Water filtration', meta: '68 queries · comparative tier',
+        cite: [14, 13, 13, 12, 11, 10, 9, 9], rank: [3.4, 3.5, 3.5, 3.6, 3.7, 3.8, 3.8, 3.8], target: 30,
+        note: 'Same pattern, one tier down in value. The lead-removal query alone carries $2.1K a month and cites two competitors and a review site.',
+        audit: 'filtration pages',
+        auditNote: 'The filter-life page scores well on facts and badly on structure — its numbers sit in prose paragraphs rather than a table.',
+      },
+      cooktop: {
+        label: 'Cooktop compatibility', meta: '52 queries · comparative tier',
+        cite: [7, 7, 6, 6, 5, 5, 4, 4], rank: [5.1, 5.2, 5.2, 5.3, 5.3, 5.4, 5.4, 5.4], target: 25,
+        note: 'The weakest cluster on both axes. Compatibility is a table question and we answer it in sentences, on a page that also tries to sell three product lines.',
+        audit: 'compatibility pages',
+        auditNote: 'One page, 38 on citability. It is the cheapest structural rewrite in the set and it feeds the induction query that lost the most citations.',
+      },
+      knife: {
+        label: 'Knife care', meta: '74 queries · informational tier',
+        cite: [31, 32, 33, 33, 34, 34, 34, 34], rank: [3.0, 2.9, 2.9, 2.9, 2.9, 2.9, 2.9, 2.9], target: 40,
+        note: 'What good looks like: answer-first headings, a sharpening-angle table and sourced figures. This cluster holds its citations without any work this quarter.',
+        audit: 'knife care pages',
+        auditNote: 'The sharpening guide scores 81 — the highest in the catalogue. Its structure is the template the comparison brief should copy.',
+      },
+    };
+  }
+
+  gapData() {
+    return [
+      { id: 'carbon-vs-cast', cluster: 'cookware', query: 'carbon steel vs cast iron pan', volume: '14,800', value: 2.9, cited: 'Comp A, review site', coverage: 'thin page', badge: 'highest value in the set',
+        body: 'Competitor A answers this with a nine-row comparison table and a seasoning-durability figure they published themselves. Our page is 620 words of prose across two paragraphs and one product block, and it ranks fourth without ever being quoted.',
+        stats: [['14,800', 'monthly volume'], ['$2.9K', 'value / mo'], ['4.1', 'our rank'], ['0', 'citations']],
+        reasons: [
+          { label: 'A nine-row comparison table with units on every row', icon: 'fa-solid fa-table-cells', tone: 'var(--rose-700)' },
+          { label: 'Weight, heat retention and seasoning figures with a published source', icon: 'fa-solid fa-quote-right', tone: 'var(--rose-700)' },
+          { label: 'Answer-first heading that restates the question in the first sentence', icon: 'fa-solid fa-heading', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'induction-safe', cluster: 'cooktop', query: 'which pans work on induction cooktops', volume: '9,200', value: 1.8, cited: 'Comp A, Comp C', coverage: 'wrong page', badge: 'wrong page ranking',
+        body: 'The query resolves to a category listing rather than an explainer, so there is nothing to quote. Both competitors answer with a material-by-material table; ours is a product grid with a paragraph above it.',
+        stats: [['9,200', 'monthly volume'], ['$1.8K', 'value / mo'], ['5.4', 'our rank'], ['0', 'citations']],
+        reasons: [
+          { label: 'Material-by-material compatibility table', icon: 'fa-solid fa-table-cells', tone: 'var(--rose-700)' },
+          { label: 'An explainer URL rather than a category listing', icon: 'fa-solid fa-link', tone: 'var(--rose-700)' },
+          { label: 'A stated test method for the compatibility claim', icon: 'fa-solid fa-flask', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'lead-removal', cluster: 'water', query: 'water filter that removes lead', volume: '11,400', value: 2.1, cited: 'Comp B, review site', coverage: 'thin page', badge: 'certification claim missing',
+        body: 'The answer everyone quotes names an NSF certification number. Ours says "reduces heavy metals", which is true, unsourced and unquotable. The certification exists — it is in a PDF nobody links to.',
+        stats: [['11,400', 'monthly volume'], ['$2.1K', 'value / mo'], ['3.8', 'our rank'], ['1', 'citation']],
+        reasons: [
+          { label: 'The certification number stated in text, not in a PDF', icon: 'fa-solid fa-certificate', tone: 'var(--rose-700)' },
+          { label: 'A reduction percentage per contaminant', icon: 'fa-solid fa-percent', tone: 'var(--rose-700)' },
+          { label: 'FAQ schema on the page', icon: 'fa-solid fa-code', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'best-pan-120', cluster: 'cookware', query: 'best carbon steel pan under $120', volume: '6,100', value: 1.6, cited: 'Comp A, two blogs', coverage: 'no page', badge: 'no page at all',
+        body: 'A price-bounded recommendation query with no page behind it on our side. The cited pages are a guide and two affiliate blogs, all three of which name a specific model and price in the first paragraph.',
+        stats: [['6,100', 'monthly volume'], ['$1.6K', 'value / mo'], ['—', 'our rank'], ['0', 'citations']],
+        reasons: [
+          { label: 'A named recommendation with a price in the opening', icon: 'fa-solid fa-tag', tone: 'var(--rose-700)' },
+          { label: 'Any page targeting the price-bounded query', icon: 'fa-solid fa-file-circle-plus', tone: 'var(--rose-700)' },
+          { label: 'Product schema linking the recommendation to a SKU', icon: 'fa-solid fa-code', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'pitcher-vs-faucet', cluster: 'water', query: 'pitcher vs faucet filter', volume: '5,400', value: 1.1, cited: 'Comp B, Comp C', coverage: 'thin page', badge: 'cost-per-gallon absent',
+        body: 'Both cited pages lead with cost per gallon over three years. Ours compares convenience in adjectives. The numbers to build the table already exist in the product data.',
+        stats: [['5,400', 'monthly volume'], ['$1.1K', 'value / mo'], ['4.4', 'our rank'], ['0', 'citations']],
+        reasons: [
+          { label: 'Cost per gallon over a stated period', icon: 'fa-solid fa-calculator', tone: 'var(--rose-700)' },
+          { label: 'Filter-life figures per model in a table', icon: 'fa-solid fa-table-cells', tone: 'var(--rose-700)' },
+          { label: 'Comparison of the two formats in one page rather than two', icon: 'fa-solid fa-object-group', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'glass-cooktop', cluster: 'cooktop', query: 'cookware safe for glass cooktops', volume: '4,700', value: 0.9, cited: 'Comp A, forum', coverage: 'thin page', badge: 'forum outranks us',
+        body: 'A forum thread is cited above us because it contains a direct list. Our paragraph hedges with "most of our pans are suitable", which no surface will quote.',
+        stats: [['4,700', 'monthly volume'], ['$0.9K', 'value / mo'], ['6.1', 'our rank'], ['0', 'citations']],
+        reasons: [
+          { label: 'A definite list rather than a hedged sentence', icon: 'fa-solid fa-list-check', tone: 'var(--rose-700)' },
+          { label: 'Base material and finish stated per product', icon: 'fa-solid fa-layer-group', tone: 'var(--amber-700)' },
+          { label: 'Internal link from the compatibility explainer', icon: 'fa-solid fa-link', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'season-frequency', cluster: 'cookware', query: 'how often to season carbon steel', volume: '8,300', value: 1.0, cited: 'Comp A, Comp C', coverage: 'thin page', badge: 'cannibalised',
+        body: 'Two of our pages target this and split the signal between them. Neither carries the frequency answer in a heading, so the surfaces take a competitor\u2019s number instead.',
+        stats: [['8,300', 'monthly volume'], ['$1.0K', 'value / mo'], ['5.2', 'our rank'], ['0', 'citations']],
+        reasons: [
+          { label: 'One page rather than two competing for the query', icon: 'fa-solid fa-object-group', tone: 'var(--rose-700)' },
+          { label: 'The frequency stated in a heading', icon: 'fa-solid fa-heading', tone: 'var(--rose-700)' },
+          { label: 'A maintenance interval table by use pattern', icon: 'fa-solid fa-table-cells', tone: 'var(--amber-700)' },
+        ] },
+    ];
+  }
+
+  auditData() {
+    return {
+      cookware: [
+        { title: 'Carbon steel pan guide', url: '/guides/carbon-steel-pans', f1: 3, f2: 34, f3: '41%', score: 48 },
+        { title: 'Cast iron care and comparison', url: '/guides/cast-iron-care', f1: 4, f2: 41, f3: '52%', score: 54 },
+        { title: 'Pan material overview', url: '/guides/pan-materials', f1: 2, f2: 28, f3: '33%', score: 39 },
+        { title: 'Seasoning explained', url: '/guides/seasoning-basics', f1: 5, f2: 46, f3: '61%', score: 58 },
+      ],
+      water: [
+        { title: 'Filter life and replacement', url: '/guides/filter-life', f1: 7, f2: 32, f3: '74%', score: 61 },
+        { title: 'What our filters remove', url: '/guides/filtration', f1: 4, f2: 38, f3: '44%', score: 51 },
+        { title: 'Pitcher and faucet range', url: '/guides/filter-formats', f1: 2, f2: 24, f3: '29%', score: 36 },
+      ],
+      cooktop: [
+        { title: 'Cooktop compatibility', url: '/guides/cooktop-compatibility', f1: 2, f2: 22, f3: '31%', score: 38 },
+        { title: 'Induction range listing', url: '/collections/induction', f1: 1, f2: 18, f3: '12%', score: 24 },
+      ],
+      knife: [
+        { title: 'Sharpening angles and method', url: '/guides/sharpening-angles', f1: 9, f2: 72, f3: '88%', score: 81 },
+        { title: 'Knife care schedule', url: '/guides/knife-care', f1: 7, f2: 64, f3: '79%', score: 74 },
+        { title: 'Honing vs sharpening', url: '/guides/honing-vs-sharpening', f1: 6, f2: 58, f3: '71%', score: 68 },
+      ],
+    };
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const clusters = this.clusterData();
+    const key = clusters[this.state.cluster] ? this.state.cluster : 'cookware';
+    const cur = clusters[key];
+
+    const maxShare = 40;
+    const bars = cur.cite.map((v, i) => {
+      const h = (v / maxShare) * 150;
+      return { x: i * 100 + 28, y: (170 - h).toFixed(1), h: h.toFixed(1), op: i === cur.cite.length - 1 ? 0.55 : 0.3 };
+    });
+    const rankY = (r) => 20 + ((r - 1) / 7) * 150;
+    const rankDots = cur.rank.map((r, i) => ({ cx: i * 100 + 50, cy: rankY(r).toFixed(1) }));
+    const rankPath = cur.rank.map((r, i) => (i === 0 ? 'M' : 'L') + (i * 100 + 50) + ' ' + rankY(r).toFixed(1)).join(' ');
+    const targetY = (170 - (cur.target / maxShare) * 150).toFixed(1);
+
+    const allGaps = this.gapData();
+    const gaps = allGaps.filter((g) => g.cluster === key);
+    const list = gaps.length ? gaps : allGaps;
+    const maxVal = Math.max.apply(null, list.map((g) => g.value));
+    const selected = list.find((g) => g.id === this.state.gap) || list[0];
+
+    const covStyle = {
+      'thin page': { tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+      'wrong page': { tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+      'no page': { tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+    };
+
+    const audit = this.auditData()[key];
+    const scoreTone = (s) => (s >= 70 ? 'var(--green-700)' : s >= 50 ? 'var(--amber-700)' : 'var(--rose-700)');
+    const scoreTint = (s) => (s >= 70 ? 'var(--green-50)' : s >= 50 ? 'var(--amber-50)' : 'var(--rose-50)');
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      clusterTabs: ['cookware', 'water', 'cooktop', 'knife'].map((k) => ({
+        label: clusters[k].label,
+        pick: () => this.setState({ cluster: k }),
+        bg: key === k ? 'var(--ink-0)' : 'transparent',
+        fg: key === k ? 'var(--ink-900)' : 'var(--ink-500)',
+        weight: key === k ? '600' : '500',
+      })),
+      trendMeta: cur.meta,
+      trendNote: cur.note,
+      citeNow: cur.cite[cur.cite.length - 1] + '%',
+      citeTone: cur.cite[cur.cite.length - 1] >= cur.target * 0.8 ? 'var(--green-700)' : 'var(--rose-700)',
+      rankNow: cur.rank[cur.rank.length - 1].toFixed(1),
+      citeDelta: (cur.cite[cur.cite.length - 1] - cur.cite[0] >= 0 ? '+' : '−') + Math.abs(cur.cite[cur.cite.length - 1] - cur.cite[0]) + 'pp',
+      bars, rankDots, rankPath, targetY,
+      weekLabels: ['w−7', 'w−6', 'w−5', 'w−4', 'w−3', 'w−2', 'w−1', 'this wk'].map((l, i) => ({
+        label: l, tone: i === 7 ? 'var(--ink-700)' : 'var(--ink-400)',
+      })),
+
+      gaps: list.map((g) => {
+        const active = g.id === selected.id;
+        const cov = covStyle[g.coverage] || { tint: 'var(--ink-100)', tone: 'var(--ink-600)' };
+        return {
+          query: g.query, volume: g.volume, value: '$' + g.value.toFixed(1) + 'K', cited: g.cited,
+          coverage: g.coverage, covTint: cov.tint, covTone: cov.tone,
+          pct: Math.round((g.value / maxVal) * 100),
+          pick: () => this.setState({ gap: g.id }),
+          mark: active ? 'var(--mod-discover)' : 'transparent',
+          bg: active ? 'color-mix(in oklab, var(--mod-discover) 6%, white)' : 'transparent',
+        };
+      }),
+      detail: {
+        query: selected.query, badge: selected.badge,
+        tint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', tone: 'var(--mod-discover)',
+        body: selected.body,
+        stats: selected.stats.map((s) => ({ value: s[0], label: s[1] })),
+        reasons: selected.reasons,
+      },
+
+      auditScope: cur.audit,
+      auditNote: cur.auditNote,
+      audit: audit.map((a) => ({
+        title: a.title, url: a.url,
+        f1: a.f1 + ' / 500w', f1Tone: a.f1 >= 6 ? 'var(--green-700)' : a.f1 >= 4 ? 'var(--amber-700)' : 'var(--rose-700)',
+        f2: a.f2 + '%', f2Tone: a.f2 >= 60 ? 'var(--green-700)' : a.f2 >= 35 ? 'var(--amber-700)' : 'var(--rose-700)',
+        f3: a.f3, f3Tone: parseInt(a.f3, 10) >= 70 ? 'var(--green-700)' : parseInt(a.f3, 10) >= 45 ? 'var(--amber-700)' : 'var(--rose-700)',
+        score: a.score, scoreTone: scoreTone(a.score), scoreTint: scoreTint(a.score),
+      })),
+
+      technical: [
+        { label: 'LCP · p75 content pages', value: '2.9s', tone: 'var(--rose-700)', note: 'Fails the 2.5s threshold. Hero images on guide templates are unsized.' },
+        { label: 'INP · p75', value: '164ms', tone: 'var(--green-700)', note: 'Comfortably inside 200ms.' },
+        { label: 'CLS · p75', value: '0.06', tone: 'var(--green-700)', note: 'Stable since the template change in August.' },
+        { label: 'Indexed pages', value: '174 / 186', tone: 'var(--amber-700)', note: '12 not indexed: 8 discovered-not-crawled, 4 duplicate canonical.' },
+        { label: 'Redirect chains', value: '9', tone: 'var(--amber-700)', note: 'Three are three hops deep and sit on guide URLs.' },
+        { label: 'Crawl requests / day', value: '1,240', tone: 'var(--ink-700)', note: 'No budget pressure at this catalogue size.' },
+      ],
+
+      cannibal: [
+        { query: 'how often to season carbon steel', a: '/guides/carbon-steel-pans', b: '/guides/seasoning-basics', effect: 'Both rank 5–7; neither is cited. Consolidate and redirect.' },
+        { query: 'carbon steel vs cast iron', a: '/guides/carbon-steel-pans', b: '/guides/pan-materials', effect: 'Signal split across two thin pages. One definitive page is the fix.' },
+        { query: 'induction compatible cookware', a: '/collections/induction', b: '/guides/cooktop-compatibility', effect: 'Listing outranks the explainer, so there is nothing quotable.' },
+      ],
+
+      valueSplit: [
+        { label: 'Comparative intent', value: '$7.4K', pct: 65, hue: 'var(--mod-discover)' },
+        { label: 'Informational intent', value: '$2.3K', pct: 20, hue: 'var(--r-blue-500)' },
+        { label: 'Transactional intent', value: '$1.7K', pct: 15, hue: 'var(--green-500)' },
+        { label: 'Recoverable in one page', value: '$7.4K', pct: 65, hue: 'var(--mod-discover)' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

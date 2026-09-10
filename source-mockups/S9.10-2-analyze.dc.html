@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.10-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-margin);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-margin) 12%, white);color:var(--mod-margin);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Exit · S9.10</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">9 SKUs negative true contribution — 3 consecutive months</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">−$4.9K/mo true CM · $41K capital</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">3 fixable · 6 structural</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Co" size="sm" color="var(--mod-margin)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:inline-flex;align-items:center;gap:3px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-cash)"></span>
+          </span>
+          Lens: Margin · Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-margin);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Controller + Merchandiser, Planner
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>True Contribution Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.10-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.10-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-margin) 10%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-margin);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.10-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.10-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink-100);flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Candidates</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">9 SKUs · pick one to see its waterfall</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="9">
+                <button type="button" onClick="{{ t.onPick }}" style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:var(--r-full);border:1px solid {{ t.border }};background:{{ t.bg }};font-family:var(--font-sans);font-size:11.5px;font-weight:{{ t.weight }};color:{{ t.tone }};cursor:pointer">
+                  {{ t.label }}<span style="font-family:var(--font-mono);font-size:9px;color:{{ t.badgeTone }}">{{ t.badge }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 16px">
+            <div style="min-width:0">
+              <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                <span style="font-size:15px;font-weight:700;color:var(--ink-900)">{{ sel.name }}</span>
+                <span style="display:inline-flex;padding:2px 8px;border-radius:var(--r-xs);background:{{ sel.roleTint }};color:{{ sel.roleHue }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase">{{ sel.role }}</span>
+                <span style="display:{{ sel.excShow }};align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:var(--r-full);background:var(--amber-50);font-family:var(--font-mono);font-size:9.5px;color:var(--amber-700)">
+                  <i class="fa-solid fa-user-shield" style="font-size:9px"></i>{{ sel.exception }}
+                </span>
+              </div>
+              <div style="margin-top:5px;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500)">{{ sel.meta }}</div>
+            </div>
+            <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:18px">
+              <div style="text-align:right">
+                <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">True CM / unit</div>
+                <div style="margin-top:4px;font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:26px;letter-spacing:-0.02em;color:var(--rose-700);font-variant-numeric:tabular-nums">{{ sel.cm }}</div>
+              </div>
+              <div style="width:1px;height:38px;background:var(--ink-100)"></div>
+              <div style="text-align:right">
+                <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Monthly bleed</div>
+                <div style="margin-top:4px;font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--rose-700);font-variant-numeric:tabular-nums">{{ sel.bleed }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:0 16px 16px">
+            <div style="height:196px">
+              <svg viewBox="0 0 940 196" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <line x1="0" y1="{{ zeroY }}" x2="940" y2="{{ zeroY }}" style="stroke:var(--ink-300);stroke-width:1"></line>
+                <sc-for list="{{ sel.bars }}" as="b" hint-placeholder-count="9">
+                  <rect x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="2" style="fill:{{ b.fill }}"></rect>
+                  <line x1="{{ b.cx }}" y1="{{ b.linkY }}" x2="{{ b.nx }}" y2="{{ b.linkY }}" style="stroke:var(--ink-300);stroke-width:1;stroke-dasharray:2 2"></line>
+                </sc-for>
+              </svg>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;padding:0 16px 14px">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="9">
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:{{ b.valTone }};font-variant-numeric:tabular-nums">{{ b.value }}</span>
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.4px;color:var(--ink-500);text-align:center">{{ b.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink-100);border-top:1px solid var(--ink-100)">
+            <div style="background:var(--ink-0);padding:14px 16px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Driver decomposition</span>
+              <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Which cost line is responsible for the item being under water. This is what decides fixable from structural.</p>
+              <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ sel.drivers }}" as="d" hint-placeholder-count="4">
+                  <div>
+                    <div style="display:flex;align-items:baseline;gap:9px">
+                      <span style="flex:1;min-width:0;font-size:12.5px;font-weight:{{ d.weight }};color:var(--ink-800)">{{ d.label }}</span>
+                      <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ d.tone }};font-variant-numeric:tabular-nums">{{ d.share }}</span>
+                    </div>
+                    <div style="margin-top:5px;height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                      <div style="width:{{ d.share }};height:100%;border-radius:var(--r-full);background:{{ d.tone }}"></div>
+                    </div>
+                    <div style="margin-top:4px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ d.meta }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="background:{{ sel.classBg }};padding:14px 16px">
+              <div style="display:flex;align-items:center;gap:9px">
+                <i class="{{ sel.classIcon }}" style="font-size:12px;color:{{ sel.classTone }}"></i>
+                <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:{{ sel.classTone }}">{{ sel.classLabel }}</span>
+                <span style="margin-left:auto;display:{{ sel.routeShow }};align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-full);background:var(--ink-0);border:1px solid {{ sel.routeBorder }};font-family:var(--font-mono);font-size:9.5px;color:{{ sel.routeTone }}">{{ sel.routeLabel }}</span>
+              </div>
+              <p style="margin:9px 0 0;font-size:12.5px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{{ sel.classCopy }}</p>
+              <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ sel.tests }}" as="t" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:minmax(0,1fr) 108px 96px;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--r-sm);background:var(--ink-0);border:1px solid {{ t.border }}">
+                    <div style="min-width:0">
+                      <div style="font-size:12px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ t.lever }}</div>
+                      <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ t.headroom }}</div>
+                    </div>
+                    <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ t.tone }};text-align:right;font-variant-numeric:tabular-nums">{{ t.result }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9.5px;color:{{ t.tone }};text-align:right">{{ t.verdict }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <a href="{{ sel.routeHref }}" style="margin-top:12px;display:{{ sel.routeShow }};align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:var(--r-sm);border:1px solid {{ sel.routeBorder }};background:var(--ink-0);font-size:12.5px;font-weight:500;color:{{ sel.routeTone }}" style-hover="background:var(--ink-50);color:{{ sel.routeTone }}">
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i>{{ sel.routeCta }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:1.2fr 1fr;gap:14px">
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 16px">
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Basket analysis</span>
+              <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">attached revenue on the same order</span>
+            </div>
+            <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">What leaves with the item. A SKU that loses $4 a unit but pulls $28 of attached CM is not a loser — it is a doorway.</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ basket }}" as="b" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) 92px 96px 104px;align-items:center;gap:10px;padding-bottom:9px;border-bottom:1px dashed var(--ink-200)">
+                  <div style="min-width:0">
+                    <div style="font-size:12.5px;font-weight:{{ b.weight }};color:var(--ink-900);text-wrap:pretty">{{ b.name }}</div>
+                    <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ b.meta }}</div>
+                  </div>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--rose-700);text-align:right;font-variant-numeric:tabular-nums">{{ b.own }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--green-700);text-align:right;font-variant-numeric:tabular-nums">{{ b.attached }}</span>
+                  <div style="display:flex;justify-content:flex-end">
+                    <span style="display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--r-full);background:{{ b.tint }};font-family:var(--font-mono);font-size:9.5px;color:{{ b.tone }};font-variant-numeric:tabular-nums">{{ b.net }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">
+              <span>own CM</span><span style="margin-left:auto">attached CM</span><span style="width:104px;text-align:right">net verdict</span>
+            </div>
+          </div>
+
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 16px">
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Classification</span>
+              <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">9 candidates</span>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ classes }}" as="c" hint-placeholder-count="3">
+                <div style="padding:11px 12px;border-radius:var(--r-md);border:1px solid {{ c.border }};background:{{ c.bg }}">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <i class="{{ c.icon }}" style="font-size:11px;color:{{ c.tone }}"></i>
+                    <span style="font-size:12.5px;font-weight:700;color:var(--ink-900)">{{ c.label }}</span>
+                    <span style="margin-left:auto;font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ c.tone }};font-variant-numeric:tabular-nums">{{ c.count }}</span>
+                  </div>
+                  <div style="margin-top:6px;font-size:11.5px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ c.note }}</div>
+                  <div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:5px">
+                    <sc-for list="{{ c.skus }}" as="s" hint-placeholder-count="3">
+                      <span style="display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:var(--r-xs);background:var(--ink-0);border:1px solid var(--ink-200);font-family:var(--font-mono);font-size:9px;color:var(--ink-600)">{{ s.label }}</span>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">All nine candidates</span>
+        <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ list }}" as="l" hint-placeholder-count="9">
+            <button type="button" onClick="{{ l.onPick }}" style="display:block;width:100%;text-align:left;padding:10px 11px;border-radius:var(--r-md);border:1px solid {{ l.border }};background:{{ l.bg }};cursor:pointer;font-family:var(--font-sans)">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="flex:1;min-width:0;font-size:12.5px;font-weight:{{ l.weight }};color:var(--ink-900);text-wrap:pretty">{{ l.name }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--rose-700);font-variant-numeric:tabular-nums">{{ l.cm }}</span>
+              </div>
+              <div style="margin-top:5px;display:flex;align-items:center;gap:7px">
+                <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-xs);background:{{ l.classTint }};font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.06em;text-transform:uppercase;color:{{ l.classTone }}">{{ l.class }}</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ l.driver }}</span>
+                <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ l.bleed }}</span>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">If all six structural exit</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ upside }}" as="u" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:10px">
+                <span style="flex:1;min-width:0;font-size:12.5px;color:var(--ink-700)">{{ u.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ u.tone }};font-variant-numeric:tabular-nums">{{ u.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Attached CM is subtracted, not ignored — $1.4K a month leaves with the six.</p>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Confidence</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">Every candidate has three full months of data at normal volume. Allocated ads use the campaign-to-SKU mapping from story 9.7, and storage is actual FBA and DC charges rather than an average.</p>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">The three fixable</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">Two are ad-driven and one is fee-driven — a dimensional reclassification that has been costing $2.90 a unit since March. All three turn positive on one lever, so they route out of this story rather than into the exit slate.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Analyze · 3 fixable · 4 structural · 2 registry exceptions</span>
+      <a href="S9.10-1-reason.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Reason
+      </a>
+      <a href="S9.10-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Build the exit slate<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { sel: 'a1' };
+
+  SKUS() {
+    return [
+      { id: 'a1', name: 'Bamboo utensil crock', sku: 'NW-STO-4480 · Amazon + DTC', role: 'Supporting', cls: 'structural', driver: 'structural', cm: -4.10, bleed: -1.2, units: 620, price: 24.00,
+        lines: [['Price', 24.00], ['COGS', -10.56], ['Freight', -1.49], ['Fees', -3.60], ['Fulfilment', -2.74], ['Returns', -2.35], ['Ads', -3.50], ['Storage', -0.74]],
+        drivers: [
+          { label: 'Structural · COGS and freight', share: '46%', tone: 'var(--rose-700)', weight: 700, meta: 'landed cost is 50% of price before a single fee' },
+          { label: 'Returns-driven', share: '24%', tone: 'var(--amber-700)', weight: 500, meta: '9.8% return rate · lid warping complaints' },
+          { label: 'Ad-driven', share: '19%', tone: 'var(--amber-700)', weight: 500, meta: '$3.50/unit allocated · 0.6× mROAS' },
+          { label: 'Fee-driven', share: '11%', tone: 'var(--ink-500)', weight: 500, meta: 'standard referral, correctly classified' },
+        ],
+        cls_label: 'Structural — no single lever fixes it', cls_copy: 'Landed cost alone eats half the price. Cutting ads entirely still leaves the item at −$0.60 a unit, and price headroom is 4% before it prices above the category leader. Realify classifies this as structural.',
+        tests: [
+          { lever: 'Price up within headroom', headroom: '+4% before category leader', result: '−$3.14', verdict: 'still negative', ok: false },
+          { lever: 'Cut all allocated ads', headroom: '$3.50/unit', result: '−$0.60', verdict: 'still negative', ok: false },
+          { lever: 'Fee reclassification', headroom: 'no error found', result: '−$4.10', verdict: 'no change', ok: false },
+        ] },
+      { id: 'a2', name: 'Silicone spatula trio', sku: 'NW-UTL-4210 · Amazon', role: 'Traffic Driver', cls: 'fixable', driver: 'ad-driven', cm: -2.40, bleed: -0.9, units: 880, price: 18.50, route: 'ads',
+        lines: [['Price', 18.50], ['COGS', -6.30], ['Freight', -0.92], ['Fees', -2.78], ['Fulfilment', -3.10], ['Returns', -0.74], ['Ads', -6.40], ['Storage', -0.66]],
+        drivers: [
+          { label: 'Ad-driven', share: '71%', tone: 'var(--rose-700)', weight: 700, meta: '$6.40/unit allocated · broad match on a $18 item' },
+          { label: 'Fulfilment', share: '16%', tone: 'var(--amber-700)', weight: 500, meta: 'oversize-light band · correct' },
+          { label: 'Structural', share: '9%', tone: 'var(--ink-500)', weight: 500, meta: 'COGS is 34% of price · healthy' },
+          { label: 'Returns-driven', share: '4%', tone: 'var(--ink-500)', weight: 500, meta: '2.1% return rate' },
+        ],
+        cls_label: 'Fixable — one lever turns it positive', cls_copy: 'This item is not a bad product, it is a bad campaign. Allocated ads run $6.40 on an $18.50 item because it sits in a broad-match ad group flagged in story 9.7. Cutting the broad match leaves $2.10 of true CM per unit.',
+        tests: [
+          { lever: 'Cut broad-match ads', headroom: '$6.40/unit allocated', result: '+$2.10', verdict: 'turns positive', ok: true },
+          { lever: 'Price up within headroom', headroom: '+9% before rival parity', result: '−$0.74', verdict: 'not enough alone', ok: false },
+          { lever: 'Fee reclassification', headroom: 'no error found', result: '−$2.40', verdict: 'no change', ok: false },
+        ] },
+      { id: 'a3', name: 'Enamel camp plate 10in', sku: 'NW-CAM-2260 · Walmart', role: 'Supporting', cls: 'fixable', driver: 'fee-driven', cm: -1.80, bleed: -0.5, units: 410, price: 21.00, route: 'fees',
+        lines: [['Price', 21.00], ['COGS', -7.14], ['Freight', -1.05], ['Fees', -3.15], ['Fulfilment', -6.20], ['Returns', -0.84], ['Ads', -3.02], ['Storage', -0.60]],
+        drivers: [
+          { label: 'Fee-driven · misclassified size', share: '62%', tone: 'var(--rose-700)', weight: 700, meta: 'billed as standard-large since March · $2.90/unit error' },
+          { label: 'Ad-driven', share: '21%', tone: 'var(--amber-700)', weight: 500, meta: '$3.02/unit · defensible at correct fees' },
+          { label: 'Structural', share: '12%', tone: 'var(--ink-500)', weight: 500, meta: 'COGS 34% of price' },
+          { label: 'Returns-driven', share: '5%', tone: 'var(--ink-500)', weight: 500, meta: '4.0% return rate' },
+        ],
+        cls_label: 'Fixable — a fee error, not a product problem', cls_copy: 'The dimensional record has this plate in the standard-large band. Measured, it is standard-small. The reclassification is worth $2.90 a unit and is recoverable for 90 days of past charges.',
+        tests: [
+          { lever: 'Fee reclassification', headroom: '$2.90/unit + 90 d recovery', result: '+$1.10', verdict: 'turns positive', ok: true },
+          { lever: 'Cut all allocated ads', headroom: '$3.02/unit', result: '+$1.22', verdict: 'turns positive', ok: true },
+          { lever: 'Price up within headroom', headroom: '+6% before rival parity', result: '−$0.54', verdict: 'not enough alone', ok: false },
+        ] },
+      { id: 'a4', name: 'Glass storage lid · 4in', sku: 'NW-GLS-3480 · Amazon', role: 'Supporting', cls: 'structural', driver: 'returns-driven', cm: -6.20, bleed: -0.8, units: 340, price: 12.00,
+        lines: [['Price', 12.00], ['COGS', -4.32], ['Freight', -0.72], ['Fees', -1.80], ['Fulfilment', -3.40], ['Returns', -5.28], ['Ads', -2.30], ['Storage', -0.38]],
+        drivers: [
+          { label: 'Returns-driven', share: '58%', tone: 'var(--rose-700)', weight: 700, meta: '31% return rate · fit complaints on 3 base sizes' },
+          { label: 'Fulfilment', share: '22%', tone: 'var(--amber-700)', weight: 500, meta: 'fragile handling surcharge' },
+          { label: 'Ad-driven', share: '13%', tone: 'var(--ink-500)', weight: 500, meta: '$2.30/unit allocated' },
+          { label: 'Structural', share: '7%', tone: 'var(--ink-500)', weight: 500, meta: 'COGS 36% of price' },
+        ],
+        cls_label: 'Structural — the return rate is the product', cls_copy: 'A 31% return rate on a $12 item cannot be fixed with price or ads. The complaints are about fit across three base sizes, which is a design problem. Story 9.12 has the quality case open.',
+        tests: [
+          { lever: 'Cut all allocated ads', headroom: '$2.30/unit', result: '−$3.90', verdict: 'still negative', ok: false },
+          { lever: 'Price up within headroom', headroom: '+11% before rival parity', result: '−$4.88', verdict: 'still negative', ok: false },
+          { lever: 'Fee reclassification', headroom: 'no error found', result: '−$6.20', verdict: 'no change', ok: false },
+        ] },
+      { id: 'a5', name: 'Wire fruit basket', sku: 'NW-STO-4520 · DTC', role: 'Supporting', cls: 'structural', driver: 'structural', cm: -3.40, bleed: -0.6, units: 280, price: 32.00,
+        lines: [['Price', 32.00], ['COGS', -15.36], ['Freight', -3.84], ['Fees', -0.96], ['Fulfilment', -8.60], ['Returns', -1.28], ['Ads', -4.40], ['Storage', -0.96]],
+        drivers: [
+          { label: 'Structural · freight and fulfilment', share: '54%', tone: 'var(--rose-700)', weight: 700, meta: 'bulky and light · worst possible shipping profile' },
+          { label: 'Ad-driven', share: '26%', tone: 'var(--amber-700)', weight: 500, meta: '$4.40/unit allocated' },
+          { label: 'Returns-driven', share: '12%', tone: 'var(--ink-500)', weight: 500, meta: '4.0% return rate' },
+          { label: 'Fee-driven', share: '8%', tone: 'var(--ink-500)', weight: 500, meta: 'DTC only · no marketplace fees' },
+        ],
+        cls_label: 'Structural — dimensional weight kills it', cls_copy: 'Bulky and light is the worst shipping profile there is, and no lever changes the box. Cutting ads gets it to $1.00 a unit, but at 280 units a month that is $280 of CM for the shelf space and the storage.',
+        tests: [
+          { lever: 'Cut all allocated ads', headroom: '$4.40/unit', result: '+$1.00', verdict: 'barely positive', ok: false },
+          { lever: 'Price up within headroom', headroom: '+3% before rival parity', result: '−$2.44', verdict: 'still negative', ok: false },
+          { lever: 'Fee reclassification', headroom: 'no error found', result: '−$3.40', verdict: 'no change', ok: false },
+        ] },
+      { id: 'a6', name: 'Linen napkin 6-pk · sage', sku: 'NW-TEX-5240 · Amazon', role: 'Core', cls: 'exception', driver: 'structural', cm: -1.40, bleed: -0.4, units: 290, price: 34.00, exception: 'Contractual · Priya Malhotra',
+        lines: [['Price', 34.00], ['COGS', -17.68], ['Freight', -2.04], ['Fees', -5.10], ['Fulfilment', -4.40], ['Returns', -1.70], ['Ads', -3.60], ['Storage', -0.88]],
+        drivers: [
+          { label: 'Structural · COGS', share: '61%', tone: 'var(--rose-700)', weight: 700, meta: 'supplier agreement fixes the cost through Q1' },
+          { label: 'Ad-driven', share: '19%', tone: 'var(--amber-700)', weight: 500, meta: '$3.60/unit allocated' },
+          { label: 'Fee-driven', share: '13%', tone: 'var(--ink-500)', weight: 500, meta: 'correct classification' },
+          { label: 'Returns-driven', share: '7%', tone: 'var(--ink-500)', weight: 500, meta: '5.0% return rate' },
+        ],
+        cls_label: 'Structural — but held by a registry exception', cls_copy: 'The supplier agreement requires this colourway through Q1 next year, and Priya Malhotra sponsors the exception. Realify still shows the number every month: it is costing $0.4K a month to honour the contract.',
+        tests: [
+          { lever: 'Cut all allocated ads', headroom: '$3.60/unit', result: '+$2.20', verdict: 'turns positive', ok: true },
+          { lever: 'Price up within headroom', headroom: '+2% before rival parity', result: '−$0.72', verdict: 'not enough alone', ok: false },
+          { lever: 'Exit before Q1', headroom: 'blocked by contract', result: 'blocked', verdict: 'sponsor required', ok: false },
+        ] },
+      { id: 'a7', name: 'Ridgeline bowl 12in · sand', sku: 'NW-CER-1196 · Amazon + DTC', role: 'Core', cls: 'exception', driver: 'structural', cm: -2.10, bleed: -0.5, units: 240, price: 58.00, exception: 'Range completer · Alex Carter',
+        lines: [['Price', 58.00], ['COGS', -27.84], ['Freight', -4.06], ['Fees', -8.70], ['Fulfilment', -9.20], ['Returns', -4.06], ['Ads', -5.40], ['Storage', -0.84]],
+        drivers: [
+          { label: 'Structural · COGS and fulfilment', share: '52%', tone: 'var(--rose-700)', weight: 700, meta: 'large ceramic · heavy and fragile' },
+          { label: 'Returns-driven', share: '23%', tone: 'var(--amber-700)', weight: 500, meta: '7.0% return rate · breakage in transit' },
+          { label: 'Ad-driven', share: '16%', tone: 'var(--ink-500)', weight: 500, meta: '$5.40/unit allocated' },
+          { label: 'Fee-driven', share: '9%', tone: 'var(--ink-500)', weight: 500, meta: 'correct classification' },
+        ],
+        cls_label: 'Structural — but it completes the size ladder', cls_copy: 'The 12in loses $2.10 a unit and the review date on its exception passed on Aug 01. Basket analysis says it pulls $19 of attached CM: buyers who see three sizes buy the 10in. That is the case the sponsor has to re-make.',
+        tests: [
+          { lever: 'Cut all allocated ads', headroom: '$5.40/unit', result: '+$3.30', verdict: 'turns positive', ok: true },
+          { lever: 'Price up within headroom', headroom: '+7% before rival parity', result: '+$1.96', verdict: 'turns positive', ok: true },
+          { lever: 'Exit and keep 8in + 10in', headroom: 'costs $19/order attached CM', result: 'net −$0.9K/mo', verdict: 'worse than holding', ok: false },
+        ] },
+      { id: 'a8', name: 'Copper measuring set', sku: 'NW-UTL-4610 · Amazon', role: 'Margin Driver', cls: 'structural', driver: 'ad-driven', cm: -0.90, bleed: -0.3, units: 320, price: 28.00,
+        lines: [['Price', 28.00], ['COGS', -12.60], ['Freight', -1.68], ['Fees', -4.20], ['Fulfilment', -3.90], ['Returns', -1.40], ['Ads', -4.60], ['Storage', -0.52]],
+        drivers: [
+          { label: 'Ad-driven', share: '44%', tone: 'var(--rose-700)', weight: 700, meta: '$4.60/unit · 0.8× mROAS at current bid' },
+          { label: 'Structural · COGS', share: '31%', tone: 'var(--amber-700)', weight: 500, meta: '45% of price · copper input cost up 14%' },
+          { label: 'Fee-driven', share: '15%', tone: 'var(--ink-500)', weight: 500, meta: 'correct classification' },
+          { label: 'Returns-driven', share: '10%', tone: 'var(--ink-500)', weight: 500, meta: '5.0% return rate' },
+        ],
+        cls_label: 'Structural — the input cost moved, not the campaign', cls_copy: 'Cutting ads turns it positive at $3.70, but volume falls to about 90 units a month without paid support. Copper is up 14% since the last cost review, and there is no headroom on price against a rival at $26.',
+        tests: [
+          { lever: 'Cut all allocated ads', headroom: '$4.60/unit', result: '+$3.70', verdict: 'positive but 90 u/mo', ok: false },
+          { lever: 'Price up within headroom', headroom: 'none · rival at $26', result: '−$0.90', verdict: 'no headroom', ok: false },
+          { lever: 'Renegotiate COGS', headroom: 'reviewed Jun · no movement', result: '−$0.90', verdict: 'no change', ok: false },
+        ] },
+      { id: 'a9', name: 'Acacia serving board · small', sku: 'NW-BRD-1910 · Walmart', role: 'Supporting', cls: 'structural', driver: 'fee-driven', cm: -2.60, bleed: -0.3, units: 190, price: 26.00,
+        lines: [['Price', 26.00], ['COGS', -11.44], ['Freight', -2.34], ['Fees', -4.16], ['Fulfilment', -5.20], ['Returns', -1.04], ['Ads', -3.90], ['Storage', -0.52]],
+        drivers: [
+          { label: 'Fee-driven · Walmart referral', share: '38%', tone: 'var(--rose-700)', weight: 700, meta: '16% referral on a low-price wood item' },
+          { label: 'Structural · freight', share: '29%', tone: 'var(--amber-700)', weight: 500, meta: 'heavy for its price point' },
+          { label: 'Ad-driven', share: '24%', tone: 'var(--amber-700)', weight: 500, meta: '$3.90/unit allocated' },
+          { label: 'Returns-driven', share: '9%', tone: 'var(--ink-500)', weight: 500, meta: '4.0% return rate' },
+        ],
+        cls_label: 'Structural on this channel — Walmart economics do not work', cls_copy: 'The same board is positive on DTC at $3.10 a unit. On Walmart the referral and freight combination puts it under water and there is no fee error to fix. This is a channel exit, not a product exit.',
+        tests: [
+          { lever: 'Cut all allocated ads', headroom: '$3.90/unit', result: '+$1.30', verdict: 'positive at 60 u/mo', ok: false },
+          { lever: 'Price up within headroom', headroom: '+5% before rival parity', result: '−$1.30', verdict: 'still negative', ok: false },
+          { lever: 'Exit Walmart, keep DTC', headroom: 'DTC CM +$3.10/unit', result: '+$0.6K/mo', verdict: 'channel exit works', ok: true },
+        ] },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const skus = this.SKUS();
+    const sel = skus.find((s) => s.id === this.state.sel) || skus[0];
+    const roleColor = { Hero: 'var(--mod-discover)', Core: 'var(--r-blue-500)', 'Margin Driver': 'var(--mod-margin)', 'Traffic Driver': 'var(--mod-hubs)', Supporting: 'var(--ink-500)' };
+    const clsTint = { fixable: 'var(--green-50)', structural: 'var(--rose-50)', exception: 'var(--amber-50)' };
+    const clsTone = { fixable: 'var(--green-700)', structural: 'var(--rose-700)', exception: 'var(--amber-700)' };
+
+    // waterfall geometry
+    const H0 = 160, TOP = 14;
+    const max = sel.price;
+    const Y = (v) => TOP + (1 - v / max) * (H0 - TOP);
+    const n = sel.lines.length + 1;
+    const slot = 940 / n;
+    const bw = slot * 0.52;
+    let run = 0;
+    const bars = [];
+    sel.lines.forEach((l, i) => {
+      const val = l[1];
+      const from = i === 0 ? 0 : run;
+      const to = i === 0 ? val : run + val;
+      const y1 = Y(Math.max(from, to)), y2 = Y(Math.min(from, to));
+      const cx = slot * (i + 0.5);
+      bars.push({
+        x: (cx - bw / 2).toFixed(1), w: bw.toFixed(1), y: y1.toFixed(1), h: Math.max(2, y2 - y1).toFixed(1),
+        fill: i === 0 ? 'var(--ink-700)' : 'var(--rose-500)',
+        cx: (cx + bw / 2).toFixed(1), nx: (slot * (i + 1.5) - bw / 2).toFixed(1), linkY: Y(to).toFixed(1),
+        tx: cx.toFixed(1), vy: (y1 - 6).toFixed(1),
+        value: (val >= 0 ? '' : '−') + '$' + Math.abs(val).toFixed(2),
+        valTone: i === 0 ? 'var(--ink-700)' : 'var(--rose-700)',
+        label: l[0].toUpperCase(),
+      });
+      run = to;
+    });
+    const cxLast = slot * (n - 0.5);
+    const yTrue = Y(Math.max(0, run)), yZero = Y(0);
+    bars.push({
+      x: (cxLast - bw / 2).toFixed(1), w: bw.toFixed(1),
+      y: Math.min(yTrue, yZero).toFixed(1), h: Math.max(2, Math.abs(yZero - yTrue)).toFixed(1),
+      fill: 'var(--rose-700)', cx: (cxLast + bw / 2).toFixed(1), nx: (cxLast + bw / 2).toFixed(1), linkY: yZero.toFixed(1),
+      tx: cxLast.toFixed(1), vy: (Math.min(yTrue, yZero) + Math.abs(yZero - yTrue) + 14).toFixed(1),
+      value: '−$' + Math.abs(run).toFixed(2), valTone: 'var(--rose-700)', label: 'TRUE CM',
+    });
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      zeroY: Y(0).toFixed(1),
+      bars: bars,
+      tabs: skus.map((s) => ({
+        label: s.name.split(' · ')[0].split(' ').slice(0, 2).join(' '),
+        badge: '$' + s.cm.toFixed(2),
+        bg: s.id === sel.id ? 'color-mix(in oklab, var(--mod-margin) 12%, white)' : 'var(--ink-0)',
+        border: s.id === sel.id ? 'color-mix(in oklab, var(--mod-margin) 34%, white)' : 'var(--ink-200)',
+        tone: s.id === sel.id ? 'var(--mod-margin)' : 'var(--ink-600)',
+        weight: s.id === sel.id ? 600 : 500,
+        badgeTone: clsTone[s.cls],
+        onPick: () => this.setState({ sel: s.id }),
+      })),
+      sel: {
+        name: sel.name, meta: sel.sku + ' · ' + sel.units + ' u/mo · 3 months negative',
+        role: sel.role, roleHue: roleColor[sel.role], roleTint: 'color-mix(in oklab, ' + roleColor[sel.role] + ' 12%, white)',
+        exception: sel.exception || '', excShow: sel.exception ? 'inline-flex' : 'none',
+        cm: '−$' + Math.abs(sel.cm).toFixed(2),
+        bleed: '−$' + Math.abs(sel.bleed).toFixed(1) + 'K',
+        bars, drivers: sel.drivers,
+        classLabel: sel.cls_label, classCopy: sel.cls_copy,
+        classIcon: sel.cls === 'fixable' ? 'fa-solid fa-screwdriver-wrench' : sel.cls === 'exception' ? 'fa-solid fa-user-shield' : 'fa-solid fa-circle-minus',
+        classTone: clsTone[sel.cls], classBg: clsTint[sel.cls],
+        tests: sel.tests.map((t) => ({
+          lever: t.lever, headroom: t.headroom, result: t.result, verdict: t.verdict,
+          tone: t.ok ? 'var(--green-700)' : 'var(--ink-500)',
+          border: t.ok ? 'color-mix(in oklab, var(--green-500) 40%, white)' : 'var(--ink-100)',
+        })),
+        routeShow: sel.route ? 'inline-flex' : 'none',
+        routeLabel: sel.route === 'ads' ? 'route · story 9.7' : sel.route === 'fees' ? 'route · story 9.11' : '',
+        routeCta: sel.route === 'ads' ? 'Open the ads sweep' : 'Open the fee recovery case',
+        routeHref: sel.route === 'ads' ? 'S9.7-3-decide.dc.html' : 'S9.11-1-reason.dc.html',
+        routeTone: 'var(--green-700)', routeBorder: 'color-mix(in oklab, var(--green-500) 40%, white)',
+      },
+      list: skus.map((s) => ({
+        name: s.name, cm: '−$' + Math.abs(s.cm).toFixed(2), bleed: '−$' + Math.abs(s.bleed).toFixed(1) + 'K/mo',
+        class: s.cls, classTint: clsTint[s.cls], classTone: clsTone[s.cls], driver: s.driver,
+        bg: s.id === sel.id ? 'color-mix(in oklab, var(--mod-margin) 5%, white)' : 'var(--ink-0)',
+        border: s.id === sel.id ? 'color-mix(in oklab, var(--mod-margin) 30%, white)' : 'var(--ink-100)',
+        weight: s.id === sel.id ? 700 : 500,
+        onPick: () => this.setState({ sel: s.id }),
+      })),
+      basket: [
+        { name: 'Silicone spatula trio', meta: 'attaches to 41% of orders it appears in', own: '−$2.40', attached: '+$11.80', net: '+$9.40', tint: 'var(--green-50)', tone: 'var(--green-700)', weight: 600 },
+        { name: 'Ridgeline bowl 12in', meta: 'buyers who see 3 sizes convert on the 10in', own: '−$2.10', attached: '+$19.00', net: '+$16.90', tint: 'var(--green-50)', tone: 'var(--green-700)', weight: 600 },
+        { name: 'Glass storage lid 4in', meta: 'sold alone 88% of the time', own: '−$6.20', attached: '+$0.90', net: '−$5.30', tint: 'var(--rose-50)', tone: 'var(--rose-700)', weight: 500 },
+        { name: 'Bamboo utensil crock', meta: 'sold alone 74% of the time', own: '−$4.10', attached: '+$1.60', net: '−$2.50', tint: 'var(--rose-50)', tone: 'var(--rose-700)', weight: 500 },
+        { name: 'Wire fruit basket', meta: 'sold alone 91% of the time', own: '−$3.40', attached: '+$0.40', net: '−$3.00', tint: 'var(--rose-50)', tone: 'var(--rose-700)', weight: 500 },
+      ],
+      classes: [
+        { label: 'Fixable', count: '3', icon: 'fa-solid fa-screwdriver-wrench', tone: 'var(--green-700)', bg: 'var(--green-50)', border: 'color-mix(in oklab, var(--green-500) 30%, white)',
+          note: 'One lever turns each positive. These route out of this story rather than onto the exit slate.',
+          skus: [{ label: 'Spatula trio → 9.7' }, { label: 'Camp plate → 9.11' }, { label: 'Acacia board → channel exit' }] },
+        { label: 'Structural', count: '4', icon: 'fa-solid fa-circle-minus', tone: 'var(--rose-700)', bg: 'var(--rose-50)', border: 'color-mix(in oklab, var(--rose-500) 30%, white)',
+          note: 'No single lever clears the floor at a volume worth keeping. These form the exit slate.',
+          skus: [{ label: 'Utensil crock' }, { label: 'Glass lid 4in' }, { label: 'Wire basket' }, { label: 'Copper measures' }] },
+        { label: 'Registry exception', count: '2', icon: 'fa-solid fa-user-shield', tone: 'var(--amber-700)', bg: 'var(--amber-50)', border: 'color-mix(in oklab, var(--amber-500) 34%, white)',
+          note: 'Held for reasons the numbers cannot see. Both appear on the slate marked, and one review date has passed.',
+          skus: [{ label: 'Linen napkin · contract' }, { label: 'Bowl 12in · review overdue' }] },
+      ],
+      upside: [
+        { label: 'CM run-rate improvement', value: '+$3.1K/mo', tone: 'var(--green-700)' },
+        { label: 'Attached CM lost', value: '−$1.4K/mo', tone: 'var(--rose-700)' },
+        { label: 'Net improvement', value: '+$1.7K/mo', tone: 'var(--green-700)' },
+        { label: 'Capital freed', value: '$26K', tone: 'var(--green-700)' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

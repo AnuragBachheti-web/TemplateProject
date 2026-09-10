@@ -1,0 +1,195 @@
+{
+  "code": "S9.4",
+  "stageKey": "reason",
+  "name": "Allocation",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will pair the budget shift with its inventory move and wait. Nothing reaches an ad platform without your approval.",
+    "envelope": [
+      {
+        "label": "Monthly envelope",
+        "value": "$130K",
+        "meta": "Finance · fixed for Q3",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Committed",
+        "value": "$127K",
+        "meta": "across 5 channels",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "In play this cycle",
+        "value": "$18K",
+        "meta": "14% of committed spend",
+        "tone": "var(--mod-ads)"
+      },
+      {
+        "label": "Net change",
+        "value": "$0",
+        "meta": "reallocation, not a raise",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "channels": [
+      {
+        "name": "Amazon Ads · SP + SB",
+        "note": "Floor holds organic rank on four head terms.",
+        "hue": "var(--mod-ads)",
+        "floor": "$46K",
+        "cap": "$62K",
+        "current": "$52K",
+        "barLeft": "0%",
+        "barWidth": "37.5%",
+        "room": "$10K to cap · $6K to floor",
+        "roomTone": "var(--ink-500)"
+      },
+      {
+        "name": "Google · PMax + Search",
+        "note": "Brand-term coverage is inside the floor.",
+        "hue": "var(--r-blue-500)",
+        "floor": "$18K",
+        "cap": "$34K",
+        "current": "$26K",
+        "barLeft": "0%",
+        "barWidth": "50%",
+        "room": "$8K to cap · $8K to floor",
+        "roomTone": "var(--ink-500)"
+      },
+      {
+        "name": "Meta · Advantage+",
+        "note": "Prospecting only. Retargeting sits in Amazon.",
+        "hue": "var(--mod-discover)",
+        "floor": "$12K",
+        "cap": "$28K",
+        "current": "$22K",
+        "barLeft": "0%",
+        "barWidth": "62.5%",
+        "room": "$6K to cap · $10K to floor",
+        "roomTone": "var(--ink-500)"
+      },
+      {
+        "name": "TikTok · Spark Ads",
+        "note": "Launch support for two Ridgeline SKUs.",
+        "hue": "var(--mod-margin)",
+        "floor": "$4K",
+        "cap": "$24K",
+        "current": "$9K",
+        "barLeft": "0%",
+        "barWidth": "25%",
+        "room": "$15K to cap · $5K to floor",
+        "roomTone": "var(--ink-500)"
+      },
+      {
+        "name": "Walmart DSP",
+        "note": "Co-op match expires Sep 30 if spend drops below $6K.",
+        "hue": "var(--mod-hubs)",
+        "floor": "$6K",
+        "cap": "$20K",
+        "current": "$18K",
+        "barLeft": "0%",
+        "barWidth": "85.71428571428571%",
+        "room": "$2K to cap · $12K to floor",
+        "roomTone": "var(--amber-700)"
+      }
+    ],
+    "overlays": [
+      {
+        "label": "Organic-rank defense · Amazon",
+        "price": "$8.4K/mo",
+        "icon": "fa-solid fa-shield-halved",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 8%, white)",
+        "border": "color-mix(in oklab, var(--mod-ads) 28%, white)"
+      },
+      {
+        "label": "Brand-term coverage · Google",
+        "price": "$6.0K/mo",
+        "icon": "fa-solid fa-tag",
+        "hue": "var(--r-blue-600)",
+        "tint": "var(--r-blue-50)",
+        "border": "color-mix(in oklab, var(--r-blue-500) 24%, white)"
+      },
+      {
+        "label": "Launch support · TikTok · 2 SKUs",
+        "price": "$2.0K/mo",
+        "icon": "fa-solid fa-rocket",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 30%, white)"
+      },
+      {
+        "label": "Retail co-op match · Walmart",
+        "price": "expires Sep 30",
+        "icon": "fa-solid fa-handshake",
+        "hue": "var(--amber-700)",
+        "tint": "var(--amber-50)",
+        "border": "color-mix(in oklab, var(--amber-500) 34%, white)"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Spend + revenue · 90 days",
+        "meta": "5 platforms"
+      },
+      {
+        "label": "CM after fees and returns",
+        "meta": "11,806 orders"
+      },
+      {
+        "label": "Marginal curves per campaign",
+        "meta": "23 campaigns"
+      },
+      {
+        "label": "Cover by SKU and channel",
+        "meta": "synced 06:15"
+      },
+      {
+        "label": "Open transfers + POs",
+        "meta": "9 in flight"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "stance": "Wants +$25K into TikTok Spark. Reads marginal CM only.",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+      },
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "stance": "Caps the shift at +$18K until transfer T-142 lands. Reads cover.",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "initials": "Ar",
+        "name": "Arbiter",
+        "stance": "Holds the guardrail, prices the disagreement, and writes the paired slate.",
+        "hue": "var(--ink-700)",
+        "tint": "var(--ink-100)"
+      }
+    ]
+  }
+}

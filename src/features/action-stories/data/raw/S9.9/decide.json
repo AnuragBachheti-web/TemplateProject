@@ -1,0 +1,752 @@
+{
+  "code": "S9.9",
+  "stageKey": "decide",
+  "name": "Markdown",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "route": {},
+    "approved": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "totals": [
+      {
+        "label": "Recovery",
+        "value": "$70.1K",
+        "meta": "of $118K locked · 59% of cost",
+        "tone": "var(--green-700)",
+        "metaTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "label": "Sell-through",
+        "value": "100%",
+        "meta": "clears the 80% target",
+        "tone": "var(--green-700)",
+        "metaTone": "var(--green-700)",
+        "border": "color-mix(in oklab, var(--green-500) 34%, white)",
+        "bg": "var(--green-50)"
+      },
+      {
+        "label": "Margin dilution",
+        "value": "2.1 pp",
+        "meta": "0.3 pp over the cap",
+        "tone": "var(--rose-700)",
+        "metaTone": "var(--rose-700)",
+        "border": "var(--rose-500)",
+        "bg": "var(--rose-50)"
+      },
+      {
+        "label": "Cohorts approved",
+        "value": "0 of 4",
+        "meta": "nothing held",
+        "tone": "var(--ink-900)",
+        "metaTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-25)"
+      }
+    ],
+    "cohorts": [
+      {
+        "name": "Hero lines · Ridgeline, Alder",
+        "hue": "var(--mod-discover)",
+        "meta": "820 u · $31K",
+        "cap": "max 40% · no outlet",
+        "capTint": "color-mix(in oklab, var(--mod-discover) 10%, white)",
+        "capTone": "var(--mod-discover)",
+        "cliffNote": "Cliff Sep 20-Oct 04 · elasticity 0.7-0.9 · least responsive cohort",
+        "recovery": "$19.4K",
+        "recovTone": "var(--ink-900)",
+        "appLabel": "Approve cohort",
+        "appBg": "var(--ink-0)",
+        "appTone": "var(--ink-800)",
+        "appBorder": "var(--ink-200)",
+        "options": [
+          {
+            "name": "Three-step ladder",
+            "note": "Depth capped at 40% by brand rule. Slow but keeps the lines credible at full price next season.",
+            "noteTone": "var(--ink-600)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$19.4K",
+                "tone": "var(--green-700)"
+              },
+              {
+                "label": "of cost",
+                "value": "63%",
+                "tone": "var(--ink-800)"
+              },
+              {
+                "label": "weeks",
+                "value": "7.1",
+                "tone": "var(--amber-700)"
+              }
+            ],
+            "bg": "color-mix(in oklab, var(--mod-discover) 5%, white)",
+            "dot": "var(--mod-discover)",
+            "fill": "var(--mod-discover)",
+            "weight": 700,
+            "recShow": "inline-flex"
+          },
+          {
+            "name": "Liquidate now",
+            "note": "Quote covers the lot at 38%. Resale channel is uncontrolled — these lines could surface on a discount marketplace next month.",
+            "noteTone": "var(--rose-700)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$11.8K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "of cost",
+                "value": "38%",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          },
+          {
+            "name": "Hold to next season",
+            "note": "These are evergreen lines, so holding is defensible — but storage accrues $302 a month per SKU and the surcharge starts Sep 20.",
+            "noteTone": "var(--amber-700)",
+            "stats": [
+              {
+                "label": "storage cost",
+                "value": "−$3.6K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "fee at cliff",
+                "value": "−$1.2K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "capital held",
+                "value": "$31K",
+                "tone": "var(--ink-800)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          }
+        ],
+        "ladderShow": "flex",
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 22",
+            "channels": "DTC + Amazon promo",
+            "depth": "20%",
+            "price": "$34.40 avg",
+            "units": "260 u",
+            "band": "Sep 02 ± 4 d",
+            "dotBg": "var(--mod-discover)",
+            "dotTone": "var(--ink-0)",
+            "depthTone": "var(--ink-900)",
+            "bandTone": "var(--ink-600)"
+          },
+          {
+            "n": "2",
+            "day": "Sep 05",
+            "channels": "DTC + Amazon promo",
+            "depth": "35%",
+            "price": "$27.95 avg",
+            "units": "340 u",
+            "band": "Sep 24 ± 6 d",
+            "dotBg": "var(--ink-100)",
+            "dotTone": "var(--ink-600)",
+            "depthTone": "var(--amber-700)",
+            "bandTone": "var(--ink-600)"
+          },
+          {
+            "n": "3",
+            "day": "Sep 26",
+            "channels": "DTC only · email",
+            "depth": "40%",
+            "price": "$25.80 avg",
+            "units": "150 u",
+            "band": "Oct 10 ± 8 d",
+            "dotBg": "var(--ink-100)",
+            "dotTone": "var(--ink-600)",
+            "depthTone": "var(--amber-700)",
+            "bandTone": "var(--amber-700)"
+          }
+        ],
+        "footLeft": "Ladder scheduled as future-dated pushes · each step advances only if sell-through lags plan",
+        "footRight": "first step Aug 20-22",
+        "footTone": "var(--ink-500)"
+      },
+      {
+        "name": "Core · kitchen textiles",
+        "hue": "var(--r-blue-500)",
+        "meta": "1,640 u · $38K",
+        "cap": "max 55% · outlet ok",
+        "capTint": "var(--ink-50)",
+        "capTone": "var(--ink-600)",
+        "cliffNote": "Cliff Sep 13-19 · elasticity 1.9-2.1 · moves easily on depth",
+        "recovery": "$24.6K",
+        "recovTone": "var(--ink-900)",
+        "appLabel": "Approve cohort",
+        "appBg": "var(--ink-0)",
+        "appTone": "var(--ink-800)",
+        "appBorder": "var(--ink-200)",
+        "options": [
+          {
+            "name": "Two-step ladder",
+            "note": "The whole cohort clears before the cliff at 25% then 45%. This is the shape the frontier picked.",
+            "noteTone": "var(--ink-600)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$24.6K",
+                "tone": "var(--green-700)"
+              },
+              {
+                "label": "of cost",
+                "value": "65%",
+                "tone": "var(--green-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "4.2",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "color-mix(in oklab, var(--r-blue-500) 5%, white)",
+            "dot": "var(--r-blue-500)",
+            "fill": "var(--r-blue-500)",
+            "weight": 700,
+            "recShow": "inline-flex"
+          },
+          {
+            "name": "Liquidate now",
+            "note": "Fast and clean, but textiles are the most elastic cohort — markdown recovers 27 points more than the quote.",
+            "noteTone": "var(--rose-700)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$14.4K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "of cost",
+                "value": "38%",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          },
+          {
+            "name": "Donate",
+            "note": "Deduction at cost basis plus fee avoidance. Reasonable for the 240 units with print defects, wasteful for the rest.",
+            "noteTone": "var(--amber-700)",
+            "stats": [
+              {
+                "label": "tax value",
+                "value": "$11.8K",
+                "tone": "var(--ink-800)"
+              },
+              {
+                "label": "of cost",
+                "value": "31%",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "1.4",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          }
+        ],
+        "ladderShow": "flex",
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 22",
+            "channels": "DTC + Amazon + email",
+            "depth": "25%",
+            "price": "$14.20 avg",
+            "units": "680 u",
+            "band": "Sep 01 ± 3 d",
+            "dotBg": "var(--r-blue-500)",
+            "dotTone": "var(--ink-0)",
+            "depthTone": "var(--ink-900)",
+            "bandTone": "var(--ink-600)"
+          },
+          {
+            "n": "2",
+            "day": "Sep 03",
+            "channels": "all + outlet",
+            "depth": "45%",
+            "price": "$10.40 avg",
+            "units": "740 u",
+            "band": "Sep 18 ± 4 d",
+            "dotBg": "var(--ink-100)",
+            "dotTone": "var(--ink-600)",
+            "depthTone": "var(--amber-700)",
+            "bandTone": "var(--ink-600)"
+          }
+        ],
+        "footLeft": "Ladder scheduled as future-dated pushes · each step advances only if sell-through lags plan",
+        "footRight": "first step Aug 20-22",
+        "footTone": "var(--ink-500)"
+      },
+      {
+        "name": "Seasonal · summer serveware",
+        "hue": "var(--mod-margin)",
+        "meta": "1,180 u · $34K",
+        "cap": "max 65% · outlet ok",
+        "capTint": "var(--ink-50)",
+        "capTone": "var(--ink-600)",
+        "cliffNote": "Cliff Sep 13-16 · elasticity 2.4-2.8 · season ends in 3 weeks",
+        "recovery": "$20.4K",
+        "recovTone": "var(--ink-900)",
+        "appLabel": "Approve cohort",
+        "appBg": "var(--ink-0)",
+        "appTone": "var(--ink-800)",
+        "appBorder": "var(--ink-200)",
+        "options": [
+          {
+            "name": "Three-step ladder",
+            "note": "Front-loaded because the season is the real deadline, not the fee. Step three catches the tail in outlet.",
+            "noteTone": "var(--ink-600)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$20.4K",
+                "tone": "var(--green-700)"
+              },
+              {
+                "label": "of cost",
+                "value": "60%",
+                "tone": "var(--green-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "5.4",
+                "tone": "var(--ink-800)"
+              }
+            ],
+            "bg": "color-mix(in oklab, var(--mod-margin) 5%, white)",
+            "dot": "var(--mod-margin)",
+            "fill": "var(--mod-margin)",
+            "weight": 700,
+            "recShow": "inline-flex"
+          },
+          {
+            "name": "Liquidate now",
+            "note": "A defensible call if capacity is the binding constraint — outlet can only take 240 units a week.",
+            "noteTone": "var(--amber-700)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$12.9K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "of cost",
+                "value": "38%",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          },
+          {
+            "name": "Hold to next summer",
+            "note": "Eleven months of storage, two more fee cliffs, and a design refresh due in spring. Realify does not recommend it.",
+            "noteTone": "var(--rose-700)",
+            "stats": [
+              {
+                "label": "storage cost",
+                "value": "−$11.4K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "fee at cliffs",
+                "value": "−$4.1K",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "capital held",
+                "value": "$34K",
+                "tone": "var(--rose-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          }
+        ],
+        "ladderShow": "flex",
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 20",
+            "channels": "DTC + Amazon + email",
+            "depth": "30%",
+            "price": "$20.30 avg",
+            "units": "520 u",
+            "band": "Aug 30 ± 3 d",
+            "dotBg": "var(--mod-margin)",
+            "dotTone": "var(--ink-0)",
+            "depthTone": "var(--ink-900)",
+            "bandTone": "var(--ink-600)"
+          },
+          {
+            "n": "2",
+            "day": "Sep 01",
+            "channels": "all + outlet",
+            "depth": "50%",
+            "price": "$14.50 avg",
+            "units": "480 u",
+            "band": "Sep 12 ± 3 d",
+            "dotBg": "var(--ink-100)",
+            "dotTone": "var(--ink-600)",
+            "depthTone": "var(--rose-700)",
+            "bandTone": "var(--ink-600)"
+          },
+          {
+            "n": "3",
+            "day": "Sep 14",
+            "channels": "outlet only",
+            "depth": "65%",
+            "price": "$10.15 avg",
+            "units": "180 u",
+            "band": "Sep 28 ± 6 d",
+            "dotBg": "var(--ink-100)",
+            "dotTone": "var(--ink-600)",
+            "depthTone": "var(--rose-700)",
+            "bandTone": "var(--ink-600)"
+          }
+        ],
+        "footLeft": "Ladder scheduled as future-dated pushes · each step advances only if sell-through lags plan",
+        "footRight": "first step Aug 20-22",
+        "footTone": "var(--ink-500)"
+      },
+      {
+        "name": "Discontinued · glass carafes",
+        "hue": "var(--ink-500)",
+        "meta": "540 u · $15K",
+        "cap": "no depth cap",
+        "capTint": "var(--rose-50)",
+        "capTone": "var(--rose-700)",
+        "cliffNote": "Already past 271 days · surcharge accruing now",
+        "recovery": "$5.7K",
+        "recovTone": "var(--ink-900)",
+        "appLabel": "Approve cohort",
+        "appBg": "var(--ink-0)",
+        "appTone": "var(--ink-800)",
+        "appBorder": "var(--ink-200)",
+        "options": [
+          {
+            "name": "Liquidate now",
+            "note": "No future assortment role and the surcharge is already running. Speed beats recovery here, and brand exposure is limited — the line is discontinued.",
+            "noteTone": "var(--ink-600)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$5.7K",
+                "tone": "var(--ink-900)"
+              },
+              {
+                "label": "of cost",
+                "value": "38%",
+                "tone": "var(--ink-800)"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "color-mix(in oklab, var(--ink-500) 5%, white)",
+            "dot": "var(--ink-500)",
+            "fill": "var(--ink-500)",
+            "weight": 700,
+            "recShow": "inline-flex"
+          },
+          {
+            "name": "Two-step ladder",
+            "note": "Recovers a little more but takes six weeks of surcharge on units that are already over the cliff.",
+            "noteTone": "var(--amber-700)",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$6.4K",
+                "tone": "var(--ink-900)"
+              },
+              {
+                "label": "of cost",
+                "value": "43%",
+                "tone": "var(--ink-800)"
+              },
+              {
+                "label": "weeks",
+                "value": "5.6",
+                "tone": "var(--rose-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          },
+          {
+            "name": "Donate",
+            "note": "Clears in ten days and takes the write-off. Worth it if the liquidation quote lapses before you sign it.",
+            "noteTone": "var(--ink-600)",
+            "stats": [
+              {
+                "label": "tax value",
+                "value": "$4.7K",
+                "tone": "var(--ink-800)"
+              },
+              {
+                "label": "of cost",
+                "value": "31%",
+                "tone": "var(--rose-700)"
+              },
+              {
+                "label": "weeks",
+                "value": "1.4",
+                "tone": "var(--green-700)"
+              }
+            ],
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500,
+            "recShow": "none"
+          }
+        ],
+        "ladderShow": "none",
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 20",
+            "channels": "outlet only",
+            "depth": "55%",
+            "price": "$12.60 avg",
+            "units": "260 u",
+            "band": "Sep 06 ± 5 d",
+            "dotBg": "var(--ink-500)",
+            "dotTone": "var(--ink-0)",
+            "depthTone": "var(--rose-700)",
+            "bandTone": "var(--ink-600)"
+          },
+          {
+            "n": "2",
+            "day": "Sep 08",
+            "channels": "outlet + liquidation",
+            "depth": "70%",
+            "price": "$8.40 avg",
+            "units": "280 u",
+            "band": "Sep 26 ± 9 d",
+            "dotBg": "var(--ink-100)",
+            "dotTone": "var(--ink-600)",
+            "depthTone": "var(--rose-700)",
+            "bandTone": "var(--ink-600)"
+          }
+        ],
+        "footLeft": "Whole-lot quote · valid 14 days · signed on Execute",
+        "footRight": "pickup within 5 days",
+        "footTone": "var(--ink-500)"
+      }
+    ],
+    "summary": [
+      {
+        "label": "Hero lines",
+        "icon": "fa-solid fa-stairs",
+        "tone": "var(--mod-margin)",
+        "value": "$19.4K",
+        "meta": "ladder · 820 u · $31K"
+      },
+      {
+        "label": "Core",
+        "icon": "fa-solid fa-stairs",
+        "tone": "var(--mod-margin)",
+        "value": "$24.6K",
+        "meta": "ladder · 1,640 u · $38K"
+      },
+      {
+        "label": "Seasonal",
+        "icon": "fa-solid fa-stairs",
+        "tone": "var(--mod-margin)",
+        "value": "$20.4K",
+        "meta": "ladder · 1,180 u · $34K"
+      },
+      {
+        "label": "Discontinued",
+        "icon": "fa-solid fa-truck-ramp-box",
+        "tone": "var(--ink-600)",
+        "value": "$5.7K",
+        "meta": "liquidate · 540 u · $15K"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Sell-through 100% clears the 80% target.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Margin dilution 2.1 pp exceeds the 1.8 pp cap.",
+        "icon": "fa-solid fa-triangle-exclamation",
+        "tone": "var(--rose-700)",
+        "bg": "var(--rose-50)",
+        "border": "color-mix(in oklab, var(--rose-500) 40%, white)"
+      },
+      {
+        "text": "No step exceeds its cohort depth cap. Hero lines stay at 40% and off outlet.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Every step above MAP or routed to outlet where MAP does not apply.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      }
+    ],
+    "cash": [
+      {
+        "label": "W1",
+        "value": "$14K",
+        "h": "38px",
+        "bar": "var(--mod-margin)"
+      },
+      {
+        "label": "W2",
+        "value": "$18K",
+        "h": "49px",
+        "bar": "var(--mod-margin)"
+      },
+      {
+        "label": "W3",
+        "value": "$22K",
+        "h": "60px",
+        "bar": "var(--mod-margin)"
+      },
+      {
+        "label": "W4",
+        "value": "$16K",
+        "h": "44px",
+        "bar": "var(--mod-margin)"
+      },
+      {
+        "label": "W5",
+        "value": "$9K",
+        "h": "25px",
+        "bar": "color-mix(in oklab, var(--mod-margin) 60%, white)"
+      },
+      {
+        "label": "W6",
+        "value": "$5K",
+        "h": "14px",
+        "bar": "color-mix(in oklab, var(--mod-margin) 60%, white)"
+      },
+      {
+        "label": "W7",
+        "value": "$3K",
+        "h": "9px",
+        "bar": "var(--ink-200)"
+      },
+      {
+        "label": "W8",
+        "value": "$2K",
+        "h": "6px",
+        "bar": "var(--ink-200)"
+      }
+    ],
+    "onApprove": [
+      {
+        "label": "Price steps schedule as future-dated pushes per channel",
+        "icon": "fa-solid fa-calendar-check"
+      },
+      {
+        "label": "Promo codes and outlet listings create for the deep steps",
+        "icon": "fa-solid fa-ticket"
+      },
+      {
+        "label": "Stop-buy flag goes to Planner on all 38 SKUs",
+        "icon": "fa-solid fa-ban"
+      },
+      {
+        "label": "Bidder shifts spend into clearance campaigns",
+        "icon": "fa-solid fa-bullseye"
+      },
+      {
+        "label": "Recovery posts to the Cash lens ladder week by week",
+        "icon": "fa-solid fa-money-bill-trend-up"
+      }
+    ],
+    "footerStatus": "Decide · 0 of 4 cohorts · recovery $70.1K · dilution 2.1 pp",
+    "approveShow": "none",
+    "blockShow": "inline-flex",
+    "approveLabel": "Approve all four cohorts"
+  }
+}

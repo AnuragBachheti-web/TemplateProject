@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+  @keyframes rfPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(245,158,11,0.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(245,158,11,0); }
+    100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); }
+  }
+</style>
+</helmet>
+
+<div data-screen-label="S00 Workspace" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+  <sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;top:70px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:12px;max-width:720px;padding:12px 14px 12px 16px;border-radius:var(--r-md);background:var(--ink-900);box-shadow:0 16px 40px rgba(10,15,26,0.22)">
+      <span style="width:22px;height:22px;border-radius:50%;background:var(--green-500);color:var(--ink-0);display:grid;place-items:center;flex-shrink:0"><i class="fa-solid fa-check" style="font-size:10px"></i></span>
+      <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:13px;font-weight:600;color:var(--ink-0);text-wrap:pretty">{{ toastText }}</span>
+        <span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.62)">{{ toastMeta }}</span>
+      </span>
+      <button type="button" onClick="{{ toastDismiss }}" style="flex-shrink:0;width:26px;height:26px;border-radius:50%;border:none;background:rgba(255,255,255,0.14);color:var(--ink-0);cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center">×</button>
+    </div>
+  </sc-if>
+
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;position:relative;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <section style="flex:0 0 auto;padding:16px 24px 0">
+      <div style="height:118px;display:grid;grid-template-columns:repeat(5,1fr);background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+
+        <div style="position:relative;overflow:hidden;padding:14px 16px 0;display:flex;flex-direction:column;align-items:flex-start">
+          <div style="display:flex;align-items:center;gap:7px;position:relative;z-index:2">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-hubs)"></span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Sales</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:9px;margin-top:10px;position:relative;z-index:2">
+            <span style="font-family:var(--font-mono);font-size:26px;font-weight:500;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);font-variant-numeric:tabular-nums">$48.2K</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:var(--r-xs);background:var(--green-50);color:var(--green-700);font-family:var(--font-mono);font-size:11px;font-weight:500">+3.1%<i class="fa-solid fa-arrow-trend-up" style="font-size:9px"></i></span>
+          </div>
+          <span style="margin-top:8px;font-size:11px;color:var(--ink-400);position:relative;z-index:2">vs prior period</span>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:38px;z-index:1">
+            <sc-if value="{{ showSparklines }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 100 30" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <path d="M0 22 L14 20 L28 23 L42 17 L56 18 L70 12 L84 13 L100 7 L100 30 L0 30 Z" style="fill:var(--mod-hubs);opacity:0.11"></path>
+                <path d="M0 22 L14 20 L28 23 L42 17 L56 18 L70 12 L84 13 L100 7" style="fill:none;stroke:var(--mod-hubs);stroke-width:1.3;opacity:0.75"></path>
+              </svg>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="position:relative;overflow:hidden;padding:14px 16px 0;display:flex;flex-direction:column;align-items:flex-start;border-left:1px solid var(--ink-100)">
+          <div style="display:flex;align-items:center;gap:7px;position:relative;z-index:2">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Margin</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:9px;margin-top:10px;position:relative;z-index:2">
+            <span style="font-family:var(--font-mono);font-size:26px;font-weight:500;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);font-variant-numeric:tabular-nums">$10.6K</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:var(--r-xs);background:var(--rose-50);color:var(--rose-700);font-family:var(--font-mono);font-size:11px;font-weight:500">&#8722;$1,840<i class="fa-solid fa-arrow-trend-down" style="font-size:9px"></i></span>
+          </div>
+          <sc-if value="{{ marginOutOfBand }}" hint-placeholder-val="{{ true }}">
+            <a href="S10.1-2-analyze.dc.html" style="margin-top:8px;display:inline-flex;align-items:center;gap:7px;padding:3px 9px 3px 7px;border-radius:var(--r-full);background:var(--amber-50);border:1px solid rgba(245,158,11,0.28);color:var(--amber-700);font-size:11px;font-weight:500;position:relative;z-index:2;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:#ffefd0;color:var(--amber-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--amber-500);animation:rfPulse 1.9s var(--ease-standard) infinite"></span>
+              Outside band · bridge ready → 10.1
+              <i class="fa-solid fa-chevron-right" style="font-size:8px;opacity:0.7"></i>
+            </a>
+          </sc-if>
+          <sc-if value="{{ marginInBand }}" hint-placeholder-val="{{ false }}">
+            <span style="margin-top:8px;display:inline-flex;align-items:center;gap:7px;padding:3px 9px 3px 7px;border-radius:var(--r-full);background:var(--green-50);color:var(--green-700);font-size:11px;font-weight:500;position:relative;z-index:2">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500)"></span>
+              Inside band · no bridge queued
+            </span>
+          </sc-if>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:38px;z-index:1">
+            <sc-if value="{{ showSparklines }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 100 30" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <path d="M0 10 L14 12 L28 9 L42 14 L56 13 L70 18 L84 21 L100 24 L100 30 L0 30 Z" style="fill:var(--rose-500);opacity:0.09"></path>
+                <path d="M0 10 L14 12 L28 9 L42 14 L56 13 L70 18 L84 21 L100 24" style="fill:none;stroke:var(--rose-500);stroke-width:1.3;opacity:0.7"></path>
+              </svg>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="position:relative;overflow:hidden;padding:14px 16px 0;display:flex;flex-direction:column;align-items:flex-start;border-left:1px solid var(--ink-100)">
+          <div style="display:flex;align-items:center;gap:7px;position:relative;z-index:2">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-inventory)"></span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Inventory</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:9px;margin-top:10px;position:relative;z-index:2">
+            <span style="font-family:var(--font-mono);font-size:26px;font-weight:500;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);font-variant-numeric:tabular-nums">9.4 wk</span>
+            <span style="display:inline-flex;align-items:center;padding:3px 7px;border-radius:var(--r-xs);background:var(--ink-100);color:var(--ink-700);font-family:var(--font-mono);font-size:11px;font-weight:500">98.2% in-stock</span>
+          </div>
+          <span style="margin-top:8px;font-size:11px;color:var(--ink-400);position:relative;z-index:2">Weeks of cover</span>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:38px;z-index:1">
+            <sc-if value="{{ showSparklines }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 100 30" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <path d="M0 15 L14 13 L28 16 L42 14 L56 17 L70 15 L84 18 L100 16 L100 30 L0 30 Z" style="fill:var(--mod-inventory);opacity:0.1"></path>
+                <path d="M0 15 L14 13 L28 16 L42 14 L56 17 L70 15 L84 18 L100 16" style="fill:none;stroke:var(--mod-inventory);stroke-width:1.3;opacity:0.7"></path>
+              </svg>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="position:relative;overflow:hidden;padding:14px 16px 0;display:flex;flex-direction:column;align-items:flex-start;border-left:1px solid var(--ink-100)">
+          <div style="display:flex;align-items:center;gap:7px;position:relative;z-index:2">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-ads)"></span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Ads</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:9px;margin-top:10px;position:relative;z-index:2">
+            <span style="font-family:var(--font-mono);font-size:26px;font-weight:500;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);font-variant-numeric:tabular-nums">4.2×</span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">ROAS</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:var(--r-xs);background:var(--green-50);color:var(--green-700);font-family:var(--font-mono);font-size:11px;font-weight:500">+0.3<i class="fa-solid fa-arrow-trend-up" style="font-size:9px"></i></span>
+          </div>
+          <span style="margin-top:8px;font-size:11px;color:var(--ink-400);position:relative;z-index:2">vs prior period</span>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:38px;z-index:1">
+            <sc-if value="{{ showSparklines }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 100 30" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <path d="M0 21 L14 19 L28 20 L42 16 L56 17 L70 13 L84 11 L100 9 L100 30 L0 30 Z" style="fill:var(--mod-ads);opacity:0.1"></path>
+                <path d="M0 21 L14 19 L28 20 L42 16 L56 17 L70 13 L84 11 L100 9" style="fill:none;stroke:var(--mod-ads);stroke-width:1.3;opacity:0.7"></path>
+              </svg>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="position:relative;overflow:hidden;padding:14px 16px 0;display:flex;flex-direction:column;align-items:flex-start;border-left:1px solid var(--ink-100)">
+          <div style="display:flex;align-items:center;gap:7px;position:relative;z-index:2">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-cash)"></span>
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Cash</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:9px;margin-top:10px;position:relative;z-index:2">
+            <span style="font-family:var(--font-mono);font-size:26px;font-weight:500;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);font-variant-numeric:tabular-nums">$212K</span>
+          </div>
+          <span style="margin-top:8px;font-size:11px;color:var(--ink-500);position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:9px;color:var(--amber-500)"></i>
+            13-wk trough <span style="font-family:var(--font-mono);font-weight:600;color:var(--rose-700)">$31K</span> under buffer
+          </span>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:38px;z-index:1">
+            <sc-if value="{{ showSparklines }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 100 30" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <path d="M0 12 L14 14 L28 13 L42 17 L56 22 L70 20 L84 16 L100 14 L100 30 L0 30 Z" style="fill:var(--mod-cash);opacity:0.09"></path>
+                <path d="M0 12 L14 14 L28 13 L42 17 L56 22 L70 20 L84 16 L100 14" style="fill:none;stroke:var(--mod-cash);stroke-width:1.3;opacity:0.7"></path>
+              </svg>
+            </sc-if>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:28% 1fr 300px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 20px">
+
+      <div style="min-width:0;min-height:0;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:baseline;gap:8px;flex-shrink:0">
+          <h2 style="margin:0;font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:19px;letter-spacing:-0.02em;color:var(--ink-900)">Actions Queue</h2>
+          <span style="color:var(--ink-300)">·</span>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">23 open</span>
+          <button type="button" style="margin-left:auto;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:var(--r-xs);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-sans);font-size:11px;font-weight:500;color:var(--ink-600);cursor:pointer;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+            Impact <i class="fa-solid fa-arrow-down" style="font-size:8px"></i>
+          </button>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;flex-shrink:0">
+          <button type="button" style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r-full);border:1px solid var(--r-blue-500);background:var(--r-blue-500);color:var(--ink-0);font-family:var(--font-sans);font-size:11.5px;font-weight:600;cursor:pointer">All <span style="font-family:var(--font-mono);font-size:10px;opacity:0.7">23</span></button>
+          <button type="button" style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-600);font-family:var(--font-sans);font-size:11.5px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-800)">Margin <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">8</span></button>
+          <button type="button" style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-600);font-family:var(--font-sans);font-size:11.5px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-800)">Cash <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">4</span></button>
+          <button type="button" style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-600);font-family:var(--font-sans);font-size:11.5px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-800)">Expiring <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">3</span></button>
+          <button type="button" style="display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-600);font-family:var(--font-mono);font-size:11px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-800)">≥$1K</button>
+        </div>
+
+        <div style="flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px;padding-right:4px">
+
+          <a href="S9.11-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-margin);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-margin) 12%, white);color:var(--mod-margin);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Pricing &amp; Margin</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-check" hint-size="auto,22px">Ready to review</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">Margin-protective repricing — 41 SKUs with tested headroom</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">+$9.7K/mo CM</span>
+              <span style="color:var(--ink-300);font-size:10px">·</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-500);font-variant-numeric:tabular-nums">82% ± 7</span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Pricer</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pr" size="sm" color="var(--mod-margin)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <a href="S10.1-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-intel);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-intel) 10%, white);color:var(--mod-intel);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Variance Bridge</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="blue" icon="fa-solid fa-circle-dot" hint-size="auto,22px">New 06:12</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">Yesterday's margin decomposed — unhandled FBA fee change found</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--rose-700);font-variant-numeric:tabular-nums">&#8722;$1,840</span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Analyst</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="An" size="sm" color="var(--mod-intel)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <a href="S10.4-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-cash);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 10%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Fee Recovery</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="amber" icon="fa-solid fa-clock" hint-size="auto,22px">$890 expires 21d</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">Recoverable fees identified</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">$4,120</span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Controller</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Co" size="sm" color="var(--mod-cash)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <a href="S10.5-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-hubs);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-hubs) 10%, white);color:var(--mod-hubs);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Account Health</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="rose" icon="fa-solid fa-triangle-exclamation" hint-size="auto,22px">0.6pp from threshold</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">Late-shipment rate rising — 78% traces to East 3PL</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">3.4% ↑</span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Advocate</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Ad" size="sm" color="var(--mod-hubs)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <a href="S10.3-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-ads);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-ads) 10%, white);color:var(--mod-ads);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Markdown</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-hourglass-half" hint-size="auto,22px">Fee cliff in 26d</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">38 SKUs cross the 271-day FBA surcharge</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">$6.2K fees saved</span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Pricer</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pr" size="sm" color="var(--mod-ads)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <a href="S10.6-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-inventory);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-inventory) 10%, white);color:var(--mod-inventory);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Replenishment</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="green" icon="fa-solid fa-check" hint-size="auto,22px">Cash check</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">Weekly PO cycle — 12 POs, 4 suppliers</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">$88K outlay</span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Planner</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pl" size="sm" color="var(--mod-inventory)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <a href="S9.19-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-discover);border-radius:var(--r-md);padding:12px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-discover) 12%, white);color:var(--mod-discover);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Promo Calendar</span>
+              <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-calendar-day" hint-size="auto,22px">Deadline Aug 21</x-import>
+            </div>
+            <div style="margin-top:9px;font-size:13.5px;font-weight:700;line-height:1.35;color:var(--ink-900);text-wrap:pretty">Prime Fall deal submissions — stacking risk on 14 SKUs</div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:7px">
+              <span style="margin-left:auto;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Promoter</span>
+                <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pm" size="sm" color="var(--mod-discover)" hint-size="28px,28px"></x-import>
+              </span>
+            </div>
+          </a>
+
+          <sc-if value="{{ hasMonitoring }}" hint-placeholder-val="{{ false }}">
+            <div style="flex-shrink:0;display:flex;align-items:center;gap:9px;margin-top:6px;padding-top:12px;border-top:1px dashed var(--ink-200)">
+              <span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">
+                <i class="fa-solid fa-chart-line" style="font-size:9px;color:var(--green-700)"></i>Monitoring
+              </span>
+              <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ monitoringMeta }}</span>
+              <button type="button" onClick="{{ clearMonitoring }}" style="margin-left:auto;padding:3px 8px;border-radius:var(--r-xs);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-sans);font-size:10.5px;font-weight:500;color:var(--ink-500);cursor:pointer">Reset</button>
+            </div>
+          </sc-if>
+          <sc-for list="{{ monitoring }}" as="m" hint-placeholder-count="0">
+            <a href="{{ m.href }}" style="display:block;background:var(--ink-25);border:1px solid var(--ink-100);border-left:3px solid {{ m.hue }};border-radius:var(--r-md);padding:11px 14px;flex-shrink:0;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, {{ m.hue }} 10%, white);color:{{ m.hue }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">{{ m.kicker }}</span>
+                <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:var(--green-50);font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--green-700)">
+                  <i class="fa-solid fa-satellite-dish" style="font-size:8px"></i>{{ m.state }}
+                </span>
+              </div>
+              <div style="margin-top:8px;font-size:13px;font-weight:600;line-height:1.35;color:var(--ink-700);text-wrap:pretty">{{ m.title }}</div>
+              <div style="margin-top:9px;display:flex;align-items:center;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600);font-variant-numeric:tabular-nums">{{ m.watch }}</span>
+                <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ m.rollback }}</span>
+              </div>
+            </a>
+          </sc-for>
+
+        </div>
+      </div>
+
+      <div style="min-width:0;display:flex;align-items:center;justify-content:center;padding-bottom:76px">
+        <div style="width:100%;max-width:520px;border:1.5px dashed var(--ink-200);border-radius:var(--r-lg);background:rgba(255,255,255,0.5);padding:30px 32px 26px;display:flex;flex-direction:column;align-items:center;gap:20px">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:11px">
+            <span style="color:var(--ink-700)">
+              <svg viewBox="0 0 24 24" style="width:52px;height:52px;fill:none;stroke:currentColor;stroke-width:0.9;stroke-linejoin:round;stroke-linecap:round">
+                <path d="M12 4 L20 8.5 L12 13 L4 8.5 Z" style="fill:var(--r-blue-500);fill-opacity:0.16"></path>
+                <path d="M4 11.5 L12 16 L20 11.5"></path>
+                <path d="M4 14.8 L12 19.3 L20 14.8"></path>
+              </svg>
+            </span>
+            <h3 style="margin:0;font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:22px;letter-spacing:-0.015em;color:var(--ink-900)">Pick an action to open its workflow</h3>
+            <p style="margin:0;max-width:380px;font-size:14px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">Every action opens the same four steps, and Realify shows its reasoning before anything executes.</p>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;justify-content:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:76px">
+              <img src="icons/catalog.png" alt="" style="width:44px;height:44px;object-fit:contain;mix-blend-mode:multiply">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)"><span style="color:var(--ink-300)">1</span> Reason</span>
+            </div>
+            <span style="width:22px;height:1px;background:var(--ink-200);margin-top:17px"></span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:76px">
+              <img src="icons/analyze.png" alt="" style="width:44px;height:44px;object-fit:contain;mix-blend-mode:multiply">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)"><span style="color:var(--ink-300)">2</span> Analyze</span>
+            </div>
+            <span style="width:22px;height:1px;background:var(--ink-200);margin-top:17px"></span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:76px">
+              <img src="icons/accuracy.png" alt="" style="width:44px;height:44px;object-fit:contain;mix-blend-mode:multiply">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)"><span style="color:var(--ink-300)">3</span> Decide</span>
+            </div>
+            <span style="width:22px;height:1px;background:var(--ink-200);margin-top:17px"></span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:76px">
+              <img src="icons/automation.png" alt="" style="width:44px;height:44px;object-fit:contain;mix-blend-mode:multiply">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)"><span style="color:var(--ink-400)">4</span> Execute</span>
+            </div>
+          </div>
+
+          <div style="font-size:12px;color:var(--ink-400)">Or ask Director</div>
+        </div>
+      </div>
+
+      <aside style="min-width:0;display:flex;flex-direction:column;gap:9px">
+        <div style="display:flex;align-items:center;gap:7px;padding:0 2px 2px">
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Running workflows</span>
+          <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">3</span>
+        </div>
+
+        <span data-nav="unbuilt" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-md);padding:12px 13px;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-actions)"></span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Prime Fall readiness</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--ink-600)">T-4</span>
+          </div>
+          <div style="margin-top:11px;height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+            <div style="width:81%;height:100%;border-radius:var(--r-full);background:var(--mod-actions)"></div>
+          </div>
+          <div style="margin-top:7px;display:flex;align-items:center;gap:6px">
+            <span style="font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--ink-700);font-variant-numeric:tabular-nums">81%</span>
+            <span style="font-size:10.5px;color:var(--ink-400)">ready · 7 of 9 checks clear</span>
+          </div>
+        </span>
+
+        <a href="S9.17-1-reason.dc.html" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-md);padding:12px 13px;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-inventory)"></span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Supplier K negotiation</span>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:baseline;gap:6px">
+            <span style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--mod-inventory);font-variant-numeric:tabular-nums">+3%</span>
+            <span style="font-size:10.5px;color:var(--ink-500)">counter</span>
+            <span style="font-size:10px;color:var(--ink-300)">vs</span>
+            <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--ink-500);font-variant-numeric:tabular-nums">+8%</span>
+            <span style="font-size:10.5px;color:var(--ink-400)">notice</span>
+          </div>
+          <div style="margin-top:7px;font-size:10.5px;color:var(--ink-400)">Draft sent · awaiting reply</div>
+        </a>
+
+        <span data-nav="unbuilt" style="display:block;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-md);padding:12px 13px;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-intel)"></span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Hypothesis Register</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--ink-600)">2</span>
+          </div>
+          <div style="margin-top:10px;font-family:var(--font-mono);font-size:11px;color:var(--ink-700)">2 price tests running</div>
+          <div style="margin-top:7px;font-size:10.5px;color:var(--ink-400)">Verdict in ~6d · power 0.8</div>
+        </span>
+
+        <a href="S10.4-2-analyze.dc.html" style="display:block;margin-top:5px;background:var(--green-50);border:1px solid rgba(16,163,109,0.22);border-radius:var(--r-md);padding:13px;transition:transform var(--dur-base) var(--ease-standard),box-shadow var(--dur-base) var(--ease-standard)" style-hover="transform:translateY(-2px);box-shadow:var(--shadow-md)">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-700)">This period</span>
+            <i class="fa-solid fa-rotate-left" style="margin-left:auto;font-size:10px;color:var(--green-700);opacity:0.6"></i>
+          </div>
+          <div style="margin-top:9px;display:flex;align-items:baseline;gap:7px">
+            <span style="font-size:12.5px;color:var(--green-700)">Realify recovered</span>
+            <span style="font-family:var(--font-mono);font-size:19px;font-weight:600;letter-spacing:-0.01em;color:var(--green-700);font-variant-numeric:tabular-nums">$3,240</span>
+          </div>
+          <div style="margin-top:5px;font-size:10.5px;color:var(--green-700);opacity:0.7">fees + reimbursements · 30 days</div>
+        </a>
+      </aside>
+
+    </div>
+
+    <a href="S00-chat.dc.html" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:500px;height:50px;border-radius:var(--r-full);background:var(--r-blue-700);box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:11px;padding:0 8px 0 16px;z-index:7;transition:background var(--dur-base) var(--ease-standard)" style-hover="background:var(--r-blue-600)">
+      <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex-shrink:0;fill:none;stroke:rgba(255,255,255,0.9);stroke-width:1.3;stroke-linejoin:round">
+        <path d="M12 4.5 L20.5 9 L12 13.5 L3.5 9 Z" style="fill:var(--violet-500);fill-opacity:0.55"></path>
+        <path d="M3.5 9 L12 13.5 L12 16 L3.5 11.5 Z"></path>
+        <path d="M20.5 9 L12 13.5 L12 16 L20.5 11.5 Z"></path>
+      </svg>
+      <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45)">Director</span>
+      <span style="width:1px;height:18px;background:rgba(255,255,255,0.14)"></span>
+      <span style="flex:1;font-size:13.5px;color:rgba(255,255,255,0.6)">Ask Director…</span>
+      <span style="width:34px;height:34px;border-radius:50%;background:var(--ink-0);color:var(--ink-900);display:grid;place-items:center;flex-shrink:0"><i class="fa-solid fa-arrow-up" style="font-size:12px"></i></span>
+    </a>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;},&quot;marginOutOfBand&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Workspace&quot;},&quot;showSparklines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Workspace&quot;}}">
+class Component extends DCLogic {
+  state = { cleared: false, dismissed: false };
+
+  stories() {
+    return {
+      '9.1':  { kicker: 'Assortment', hue: 'var(--mod-discover)',  title: 'Quarterly assortment move set applied', toast: 'Portfolio approved · 22 reduced, 12 exiting, 4 gap fills queued', watch: 'Role-migration watch · 90 days', rollback: 'ranging restores from Ledger' },
+      '9.2':  { kicker: 'Replenishment', hue: 'var(--mod-inventory)', title: 'Weekly PO cycle transmitted — 12 POs, $88K', toast: 'Order book approved · 12 POs transmitted · cash check passed', watch: 'PO confirmation SLA · ETA drift', rollback: 'amend until supplier confirms' },
+      '9.3':  { kicker: 'Allocation', hue: 'var(--mod-inventory)', title: 'Channel rebalance transfers created', toast: 'Rebalance approved · 6 transfers created · in-stock uplift tracking', watch: 'Transfer ETAs · cover per channel', rollback: 'recall until pick' },
+      '9.4':  { kicker: 'Budget + Stock', hue: 'var(--mod-ads)', title: 'Paired budget shift and transfer T-142 live', toast: 'Paired slate approved · $18K shifted · transfer T-142 created', watch: 'Realised mROAS vs projection', rollback: 'budget restore, one click' },
+      '9.5':  { kicker: 'Competitive', hue: 'var(--mod-intel)', title: 'Defensive response pushed — hero SKU', toast: 'Response approved · price matched within guardrail · watch at 4h', watch: 'Buy Box recovery · counter-move watch', rollback: 'price restore from Ledger' },
+      '9.6':  { kicker: 'Listings', hue: 'var(--mod-intel)', title: 'Listing fixes published — 18 listings', toast: 'Fix list approved · content published · snapshots saved', watch: '14-day pre/post CVR and Buy Box', rollback: 'restore snapshot' },
+      '9.7':  { kicker: 'Advertising', hue: 'var(--mod-ads)', title: 'Ads change slate applied — 61 pauses', toast: 'Slate approved · $4.3K/mo waste paused · staged rollout armed', watch: 'Realised vs projected mROAS', rollback: 'bid restore from Ledger' },
+      '9.8':  { kicker: 'Launch', hue: 'var(--mod-hubs)', title: 'Enamel Dutch Oven 5qt launch sequenced', toast: 'Launch approved · 7 systems sequenced · kill checks embedded', watch: 'Launch curve vs prior · day 7/14/30 gates', rollback: 'kill path is one click' },
+      '9.9':  { kicker: 'Markdown', hue: 'var(--mod-margin)', title: 'Markdown ladders scheduled — 38 SKUs', toast: 'Ladders approved · price steps scheduled ahead of the cliff', watch: 'Sell-through vs ladder at each step', rollback: 'cancel scheduled steps' },
+      '9.10': { kicker: 'Discontinuation', hue: 'var(--mod-margin)', title: 'Exit slate executing — 9 SKUs', toast: 'Exit slate approved · stop-buy flagged · clearance spawned', watch: 'Clearance pace · reorder guard', rollback: 'reinstate until clearance' },
+      '9.11': { kicker: 'Pricing & Margin', hue: 'var(--mod-margin)', title: 'Margin-protective repricing — 41 SKUs staged', toast: 'Slate approved · 41 prices staged · auto-revert armed', watch: 'Realised vs predicted elasticity', rollback: 'one click, or automatic' },
+      '9.12': { kicker: 'Returns', hue: 'var(--mod-margin)', title: 'Returns prevention slate live', toast: 'Prevention approved · size chart fixed · CAPA notice sent', watch: 'Cohort return rate · 2–4 week lag', rollback: 'listing snapshot restore' },
+      '9.13': { kicker: 'Lifecycle', hue: 'var(--mod-hubs)', title: 'Replenishment flow deployed — 12 consumables', toast: 'Journeys approved · holdouts armed at creation', watch: 'Incrementality vs holdout', rollback: 'pause and revert per flow' },
+      '9.14': { kicker: 'Agentic Readiness', hue: 'var(--mod-discover)', title: 'Attribute and feed upgrades pushed', toast: 'Roadmap approved · attributes enriched · feeds regenerated', watch: 'Agentic share of voice · mismatch rate', rollback: 'attribute snapshot restore' },
+      '9.15': { kicker: 'Search Visibility', hue: 'var(--mod-discover)', title: 'Technical fixes and schema deployed', toast: 'Roadmap approved · schema live · briefs in editorial', watch: 'Weekly rank and citation per cluster', rollback: 'on-page revert from Ledger' },
+      '9.16': { kicker: 'New Channel', hue: 'var(--mod-hubs)', title: 'TikTok Shop pilot — 90-day gate set', toast: 'Pilot approved · integration checklist live · gate scheduled', watch: 'Business case actuals vs plan', rollback: 'wind-down path defined' },
+      '9.17': { kicker: 'Suppliers', hue: 'var(--mod-inventory)', title: 'Supplier K negotiation brief issued', toast: 'Negotiation approved · brief generated · counter at +3%', watch: 'Outcome vs targets · scorecard', rollback: 'accept current terms' },
+      '9.18': { kicker: 'Fulfilment', hue: 'var(--mod-inventory)', title: 'Routing and carrier rules updated', toast: 'Rule slate approved · routing live in OMS and 3PL', watch: 'Weekly realised CPO · promise adherence', rollback: 'rule versions revert' },
+      '9.19': { kicker: 'Promo Calendar', hue: 'var(--mod-ads)', title: 'Q4 calendar approved — 6 events', toast: 'Calendar approved · deals submitted · media plan to Bidder', watch: 'Live pacing · +14d incrementality readout', rollback: 'cancel scheduled events' },
+      '9.20': { kicker: 'Discovery', hue: 'var(--mod-discover)', title: 'Sampling slate issued — RFQs out', toast: 'Sampling approved · RFQs drafted · evaluation cards created', watch: 'Sample pipeline · trend decay', rollback: 'cancel per supplier terms' },
+      '10.1': { kicker: 'Variance Bridge', hue: 'var(--mod-intel)', title: 'Fee variance annotated and remediated', toast: 'Bridge annotated · 2 remediation cards spawned', watch: 'Unexplained residual · target under 5%', rollback: 'annotation is reversible' },
+      '10.2': { kicker: 'Cash', hue: 'var(--mod-cash)', title: 'Week-7 trough closed — levers applied', toast: 'Levers approved · trough closed · settlement watches armed', watch: 'Weekly actual vs plan · trough re-projection', rollback: 'undraw before value date' },
+      '10.3': { kicker: 'Account Health', hue: 'var(--mod-actions)', title: 'Response plan filed — late shipment', toast: 'Plan approved · cases filed · preventive rules armed', watch: 'Case status · metric recovery curves', rollback: 'operational rules revert' },
+      '10.4': { kicker: 'Fee Recovery', hue: 'var(--mod-cash)', title: 'Claim batch filed — 9 claims, $4,120', toast: 'Batch approved · 9 claims filed · $3,080 expected', watch: 'Case outcomes · recovery rate by type', rollback: 'withdraw before decision' },
+      '10.5': { kicker: 'Catalog Integrity', hue: 'var(--mod-actions)', title: 'Canonical re-pushes live — 8 fields', toast: 'Repairs approved · $640/day recovered · 3 disputes filed', watch: 'Drift recurrence · time to detect', rollback: 'restore version snapshot' },
+      '10.6': { kicker: 'Peak Event', hue: 'var(--mod-actions)', title: 'Prime Fall — Moment Contract live', toast: 'Contract signed · 5 overrides armed · expiry Aug 27 · 06:00', watch: 'Pacing per lens · contract clock', rollback: 'revoke contract' },
+    };
+  }
+
+  readApprovals() {
+    let list = [];
+    try { list = JSON.parse(window.localStorage.getItem('realify_approvals') || '[]'); } catch (e) { list = []; }
+    if (!Array.isArray(list)) list = [];
+    if (!this._ingested) {
+      this._ingested = true;
+      try {
+        const p = new URLSearchParams(window.location.search).get('approved');
+        if (p && this.stories()[p]) {
+          this._fresh = p;
+          list = [p].concat(list.filter((x) => x !== p));
+          window.localStorage.setItem('realify_approvals', JSON.stringify(list));
+        }
+      } catch (e) {}
+    }
+    if (this.state.cleared) return [];
+    return list;
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const tone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const oob = this.props.marginOutOfBand ?? true;
+
+    const map = this.stories();
+    const live = this.readApprovals().filter((s) => map[s]);
+    const freshId = this.state.dismissed || this.state.cleared ? null : this._fresh;
+    const fresh = freshId && map[freshId] ? map[freshId] : null;
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? tone : 'var(--ink-200)' })),
+      marginOutOfBand: oob,
+      marginInBand: !oob,
+      showSparklines: this.props.showSparklines ?? true,
+
+      toastShow: !!fresh,
+      toastText: fresh ? fresh.toast : '',
+      toastMeta: fresh ? 'Written to the Autonomy Ledger · card moved to Monitoring' : '',
+      toastDismiss: () => this.setState({ dismissed: true }),
+
+      hasMonitoring: live.length > 0,
+      monitoringMeta: live.length + (live.length === 1 ? ' story executing · watches armed' : ' stories executing · watches armed'),
+      clearMonitoring: () => {
+        try { window.localStorage.removeItem('realify_approvals'); } catch (e) {}
+        this.setState({ cleared: true, dismissed: true });
+      },
+      monitoring: live.map((s) => {
+        const m = map[s];
+        const step = s === '10.6' ? '5-live' : '4-execute';
+        return {
+          href: 'S' + s + '-' + step + '.dc.html',
+          kicker: m.kicker, hue: m.hue, title: m.title,
+          state: 'monitoring', watch: m.watch, rollback: m.rollback,
+        };
+      }),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

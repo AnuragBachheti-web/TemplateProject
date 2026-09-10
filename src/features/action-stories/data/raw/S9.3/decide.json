@@ -1,0 +1,540 @@
+{
+  "code": "S9.3",
+  "stageKey": "decide",
+  "name": "Allocation",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "dropped": {},
+    "qty": {},
+    "route": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "totals": [
+      {
+        "label": "Units moving",
+        "value": "2,260",
+        "meta": "5 of 6 lanes",
+        "tone": "var(--ink-900)",
+        "metaTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "label": "Transfer cost",
+        "value": "$4.2K",
+        "meta": "$1.86 per unit",
+        "tone": "var(--ink-900)",
+        "metaTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "label": "CM served",
+        "value": "$25.2K",
+        "meta": "over 4 weeks",
+        "tone": "var(--green-700)",
+        "metaTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "label": "Return",
+        "value": "6.0×",
+        "meta": "clears the 1.5× floor",
+        "tone": "var(--green-700)",
+        "metaTone": "var(--green-700)",
+        "border": "color-mix(in oklab, var(--green-500) 34%, white)",
+        "bg": "var(--green-50)"
+      }
+    ],
+    "lanes": [
+      {
+        "id": "T-142",
+        "name": "Ridgeline mug + bowl → FBA-West",
+        "lane": "DC-East → FBA-West · LTL + FBA inbound",
+        "dim": 1,
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-inventory)",
+        "boxBg": "var(--mod-inventory)",
+        "boxBorder": "var(--mod-inventory)",
+        "checkOpacity": 1,
+        "flag": "buy box lost",
+        "flagShow": "inline-flex",
+        "flagTint": "var(--rose-50)",
+        "flagTone": "var(--rose-700)",
+        "qty": "1,400 u",
+        "qtyNote": "carton 100 · base 1400",
+        "cost": "$2,870",
+        "perUnit": "$2.05/u",
+        "cm": "$15,904",
+        "cmTone": "var(--green-700)",
+        "ratio": "5.5× return",
+        "ratioTone": "var(--green-700)",
+        "eta": "Sep 02",
+        "etaNote": "6 d receipt",
+        "etaTone": "var(--ink-900)",
+        "options": [
+          {
+            "name": "Transfer",
+            "note": "Restores Buy Box on both SKUs and serves the demand DC-East cannot reach.",
+            "value": "5.5×",
+            "tone": "var(--green-700)",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 5%, white)",
+            "dot": "var(--mod-inventory)",
+            "fill": "var(--mod-inventory)",
+            "weight": 700
+          },
+          {
+            "name": "Expedite",
+            "note": "Air freight lands Aug 27 instead of Sep 02. Costs $1.9K more for five days.",
+            "value": "3.1×",
+            "tone": "var(--amber-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          },
+          {
+            "name": "Hold",
+            "note": "Wait for the supplier K PO on Sep 23. Three more weeks at zero on FBA-West.",
+            "value": "0×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          }
+        ],
+        "foot": "Gates a budget shift in story 9.4",
+        "footTone": "var(--mod-ads)",
+        "footRight": "pick wave Aug 27"
+      },
+      {
+        "id": "T-149",
+        "name": "Quilted oven mitt → DTC",
+        "lane": "DC-West → DC-East · ground parcel",
+        "dim": 1,
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-inventory)",
+        "boxBg": "var(--mod-inventory)",
+        "boxBorder": "var(--mod-inventory)",
+        "checkOpacity": 1,
+        "flag": "best ratio",
+        "flagShow": "inline-flex",
+        "flagTint": "var(--green-50)",
+        "flagTone": "var(--green-700)",
+        "qty": "320 u",
+        "qtyNote": "carton 40 · base 320",
+        "cost": "$301",
+        "perUnit": "$0.94/u",
+        "cm": "$3,392",
+        "cmTone": "var(--green-700)",
+        "ratio": "11.3× return",
+        "ratioTone": "var(--green-700)",
+        "eta": "Aug 29",
+        "etaNote": "3 d ground",
+        "etaTone": "var(--ink-900)",
+        "options": [
+          {
+            "name": "Transfer",
+            "note": "Moves units from $6.80 wholesale to $18.40 DTC. Cheapest lane on the board.",
+            "value": "11.3×",
+            "tone": "var(--green-700)",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 5%, white)",
+            "dot": "var(--mod-inventory)",
+            "fill": "var(--mod-inventory)",
+            "weight": 700
+          },
+          {
+            "name": "Expedite",
+            "note": "Next-day air lands Aug 27. Rarely worth it on a lane this short.",
+            "value": "7.2×",
+            "tone": "var(--ink-600)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          },
+          {
+            "name": "Hold",
+            "note": "DTC runs out in nine days and the mitt is in the Meta campaign from Sep 01.",
+            "value": "0×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          }
+        ],
+        "foot": "Gates a budget shift in story 9.4",
+        "footTone": "var(--mod-ads)",
+        "footRight": "pick wave Aug 26"
+      },
+      {
+        "id": "T-151",
+        "name": "Alder chef knife → FBA-East",
+        "lane": "FBA-West → FBA-East · removal + re-inbound",
+        "dim": 1,
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-hubs)",
+        "boxBg": "var(--mod-inventory)",
+        "boxBorder": "var(--mod-inventory)",
+        "checkOpacity": 1,
+        "flag": "arrives 1 d late",
+        "flagShow": "inline-flex",
+        "flagTint": "var(--amber-50)",
+        "flagTone": "var(--amber-700)",
+        "qty": "180 u",
+        "qtyNote": "carton 20 · base 180",
+        "cost": "$403",
+        "perUnit": "$2.24/u",
+        "cm": "$2,016",
+        "cmTone": "var(--green-700)",
+        "ratio": "5.0× return",
+        "ratioTone": "var(--green-700)",
+        "eta": "Sep 04",
+        "etaNote": "9 d · removal adds 3",
+        "etaTone": "var(--amber-700)",
+        "options": [
+          {
+            "name": "Transfer",
+            "note": "Lands one day after FBA-East runs dry. Better than a two-week gap.",
+            "value": "5.0×",
+            "tone": "var(--green-700)",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 5%, white)",
+            "dot": "var(--mod-inventory)",
+            "fill": "var(--mod-inventory)",
+            "weight": 700
+          },
+          {
+            "name": "Expedite",
+            "note": "Cannot beat the removal window — FBA controls the first three days.",
+            "value": "2.8×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          },
+          {
+            "name": "Hold",
+            "note": "Eight days of cover left, then two weeks out until the next PO.",
+            "value": "0×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          }
+        ],
+        "foot": "Pick wave and inbound plan create on approval",
+        "footTone": "var(--ink-500)",
+        "footRight": "pick wave Aug 27"
+      },
+      {
+        "id": "T-152",
+        "name": "Carbon steel pan → WFS",
+        "lane": "DC-West → WFS · LTL + WFS inbound",
+        "dim": 1,
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-hubs)",
+        "boxBg": "var(--mod-inventory)",
+        "boxBorder": "var(--mod-inventory)",
+        "checkOpacity": 1,
+        "flag": "",
+        "flagShow": "none",
+        "flagTint": "var(--ink-50)",
+        "flagTone": "var(--ink-500)",
+        "qty": "120 u",
+        "qtyNote": "carton 20 · base 120",
+        "cost": "$192",
+        "perUnit": "$1.60/u",
+        "cm": "$1,200",
+        "cmTone": "var(--green-700)",
+        "ratio": "6.3× return",
+        "ratioTone": "var(--green-700)",
+        "eta": "Aug 30",
+        "etaNote": "4 d receipt",
+        "etaTone": "var(--ink-900)",
+        "options": [
+          {
+            "name": "Transfer",
+            "note": "Minimum move that clears the WFS floor. Realify does not fill this channel.",
+            "value": "6.3×",
+            "tone": "var(--green-700)",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 5%, white)",
+            "dot": "var(--mod-inventory)",
+            "fill": "var(--mod-inventory)",
+            "weight": 700
+          },
+          {
+            "name": "Expedite",
+            "note": "WFS inbound appointments are the constraint, not the freight.",
+            "value": "4.1×",
+            "tone": "var(--ink-600)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          },
+          {
+            "name": "Hold",
+            "note": "Four days of cover. WFS is the lowest-CM channel, so the loss is small.",
+            "value": "0×",
+            "tone": "var(--amber-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          }
+        ],
+        "foot": "Pick wave and inbound plan create on approval",
+        "footTone": "var(--ink-500)",
+        "footRight": "pick wave Aug 27"
+      },
+      {
+        "id": "T-153",
+        "name": "Ridgeline mug top-up → FBA-East",
+        "lane": "DC-East → FBA-East · LTL + FBA inbound",
+        "dim": 1,
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-hubs)",
+        "boxBg": "var(--mod-inventory)",
+        "boxBorder": "var(--mod-inventory)",
+        "checkOpacity": 1,
+        "flag": "",
+        "flagShow": "none",
+        "flagTint": "var(--ink-50)",
+        "flagTone": "var(--ink-500)",
+        "qty": "240 u",
+        "qtyNote": "carton 60 · base 240",
+        "cost": "$446",
+        "perUnit": "$1.86/u",
+        "cm": "$2,726",
+        "cmTone": "var(--green-700)",
+        "ratio": "6.1× return",
+        "ratioTone": "var(--green-700)",
+        "eta": "Sep 01",
+        "etaNote": "5 d receipt",
+        "etaTone": "var(--ink-900)",
+        "options": [
+          {
+            "name": "Transfer",
+            "note": "FBA-East is at 1.6 weeks. This holds it above floor until the PO lands.",
+            "value": "6.1×",
+            "tone": "var(--green-700)",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 5%, white)",
+            "dot": "var(--mod-inventory)",
+            "fill": "var(--mod-inventory)",
+            "weight": 700
+          },
+          {
+            "name": "Expedite",
+            "note": "Not needed — the clock is ten days and the lane is five.",
+            "value": "3.4×",
+            "tone": "var(--ink-600)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          },
+          {
+            "name": "Hold",
+            "note": "Would drop under floor next week and risk Buy Box on a second node.",
+            "value": "0×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          }
+        ],
+        "foot": "Pick wave and inbound plan create on approval",
+        "footTone": "var(--ink-500)",
+        "footRight": "pick wave Aug 27"
+      },
+      {
+        "id": "T-154",
+        "name": "Cut-glass tumbler → WFS",
+        "lane": "DC-East → WFS · LTL + WFS inbound",
+        "dim": 0.5,
+        "border": "var(--ink-100)",
+        "edge": "var(--ink-200)",
+        "boxBg": "var(--ink-0)",
+        "boxBorder": "var(--ink-300)",
+        "checkOpacity": 0,
+        "flag": "under the bar",
+        "flagShow": "inline-flex",
+        "flagTint": "var(--rose-50)",
+        "flagTone": "var(--rose-700)",
+        "qty": "0 u",
+        "qtyNote": "carton 50 · base 250",
+        "cost": "—",
+        "perUnit": "no move",
+        "cm": "—",
+        "cmTone": "var(--ink-400)",
+        "ratio": "held",
+        "ratioTone": "var(--ink-400)",
+        "eta": "—",
+        "etaNote": "waiting on a PO",
+        "etaTone": "var(--ink-400)",
+        "options": [
+          {
+            "name": "Hold",
+            "note": "The Verrier PO lands Sep 18 with 900 units. Realify recommends waiting.",
+            "value": "—",
+            "tone": "var(--green-700)",
+            "bg": "color-mix(in oklab, var(--mod-inventory) 5%, white)",
+            "dot": "var(--mod-inventory)",
+            "fill": "var(--mod-inventory)",
+            "weight": 700
+          },
+          {
+            "name": "Transfer",
+            "note": "Under the 1.5× economics floor. The unit sells either way, just later.",
+            "value": "1.3×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          },
+          {
+            "name": "Expedite",
+            "note": "Loses money outright once air freight is counted.",
+            "value": "0.9×",
+            "tone": "var(--rose-700)",
+            "bg": "var(--ink-0)",
+            "dot": "var(--ink-300)",
+            "fill": "transparent",
+            "weight": 500
+          }
+        ],
+        "foot": "Held · no pick wave, no inbound plan",
+        "footTone": "var(--ink-500)",
+        "footRight": "revisit next cycle"
+      }
+    ],
+    "after": [
+      {
+        "label": "FBA-West · mug",
+        "from": "0.0 wk",
+        "to": "4.1 wk",
+        "fromPct": "0%",
+        "toPct": "82%",
+        "tone": "var(--green-700)",
+        "meta": "Buy Box eligible again on Sep 02"
+      },
+      {
+        "label": "FBA-West · bowl",
+        "from": "0.0 wk",
+        "to": "3.6 wk",
+        "fromPct": "0%",
+        "toPct": "72%",
+        "tone": "var(--green-700)",
+        "meta": "same wave as the mug"
+      },
+      {
+        "label": "DTC · oven mitt",
+        "from": "1.2 wk",
+        "to": "4.6 wk",
+        "fromPct": "24%",
+        "toPct": "92%",
+        "tone": "var(--green-700)",
+        "meta": "lands before the Meta campaign opens"
+      },
+      {
+        "label": "FBA-East · chef knife",
+        "from": "1.1 wk",
+        "to": "3.2 wk",
+        "fromPct": "22%",
+        "toPct": "64%",
+        "tone": "var(--amber-700)",
+        "meta": "one day of gap before it lands"
+      },
+      {
+        "label": "WFS · tumbler set",
+        "from": "0.0 wk",
+        "to": "0.0 wk",
+        "fromPct": "0%",
+        "toPct": "0%",
+        "tone": "var(--rose-700)",
+        "meta": "held · Verrier PO lands Sep 18"
+      }
+    ],
+    "checks": [
+      {
+        "text": "No source node drops under its own floor — DC-East keeps 2.4 weeks after T-142.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Every scheduled lane clears the 1.5× economics floor.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "2,260 units fits pick capacity across two waves.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "One lane per SKU per cycle · no SKU appears twice on the slate.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      }
+    ],
+    "onApprove": [
+      {
+        "label": "Transfer orders create with their lane and carton counts",
+        "icon": "fa-solid fa-file-lines"
+      },
+      {
+        "label": "Pick waves post to the WMS at each origin node",
+        "icon": "fa-solid fa-warehouse"
+      },
+      {
+        "label": "FBA and WFS inbound plans and labels generate",
+        "icon": "fa-solid fa-tags"
+      },
+      {
+        "label": "Channel listing quantities update as units land",
+        "icon": "fa-solid fa-store"
+      },
+      {
+        "label": "T-142 and T-149 unblock the paired slate in story 9.4",
+        "icon": "fa-solid fa-link"
+      }
+    ],
+    "footerStatus": "Decide · 5 lanes · 2,260 u · $4.2K cost · 6.0× return",
+    "approveShow": "inline-flex",
+    "blockShow": "none",
+    "approveLabel": "Approve all 5 lanes"
+  }
+}

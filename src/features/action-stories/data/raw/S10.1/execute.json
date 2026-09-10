@@ -1,0 +1,280 @@
+{
+  "code": "S10.1",
+  "stageKey": "execute",
+  "name": "Variance bridge",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "committed": false,
+    "busy": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "confTitle": "Confirm the annotation",
+    "confMeta": "read it once, then it becomes the permanent record of this day",
+    "confIcon": "fa-solid fa-pen-to-square",
+    "confIconBg": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+    "confIconFg": "var(--mod-intel)",
+    "confBorder": "color-mix(in oklab, var(--mod-intel) 26%, white)",
+    "confState": "draft",
+    "confTint": "var(--ink-100)",
+    "confTone": "var(--ink-500)",
+    "commitLabel": "Write to history",
+    "commitIcon": "fa-solid fa-floppy-disk",
+    "commitBg": "var(--ink-900)",
+    "commitFg": "var(--ink-0)",
+    "commitCursor": "pointer",
+    "entryRef": "reference assigned on write",
+    "entryText": "Aug 18 CM fell $1,840 (14.7%) against the trailing 7-day mean of $12,480. Amazon revised dimensional-weight tiers effective that day, reclassifying 31 SKUs upward at −$2,210 — the products did not change, the tiers did. The 9.11 price slate contributed +$610 on its first full day with realised volume loss of 2.9% against a 4% prediction. Returns (−$240), mix (+$185) and staged ad bids (−$315) all sit inside normal variation. Residual +$130 · 1.0%. Two remediation cards spawned: packaging right-size and pass-through check. This is a recurring daily cost until one of them lands.",
+    "entryChips": [
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "CM v3"
+      },
+      {
+        "icon": "fa-solid fa-chart-column",
+        "label": "bridge attached"
+      },
+      {
+        "icon": "fa-solid fa-tags",
+        "label": "6 drivers classified"
+      },
+      {
+        "icon": "fa-solid fa-table-list",
+        "label": "31-SKU drill"
+      },
+      {
+        "icon": "fa-solid fa-percent",
+        "label": "residual 1.0%"
+      }
+    ],
+    "neverTwice": "Once written, a matching variance shape opens with this entry attached rather than as a fresh investigation. That is the whole point of annotating a day that is already understood.",
+    "spawnStatus": "links complete on write",
+    "spawnTone": "var(--ink-400)",
+    "spawned": [
+      {
+        "ref": "FUL-0148",
+        "title": "Right-size packaging for 31 reclassified SKUs",
+        "flow": "S9.18 fulfilment",
+        "href": "S9.18-3-decide.dc.html",
+        "icon": "fa-solid fa-box",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "detail": "Four of the 31 already sit on the dim-weight candidate list from the last fulfilment sweep. Right-sizing drops them back under the tier boundary instead of paying the new tier daily.",
+        "value": "−$1,480",
+        "owner": "Shipper · due Aug 26",
+        "state": "staged",
+        "stateTint": "var(--ink-100)",
+        "stateTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "lineage": [
+          {
+            "icon": "fa-solid fa-bridge",
+            "label": "S10.1 · Aug 18"
+          },
+          {
+            "icon": "fa-solid fa-building",
+            "label": "fee schedule 2026-08"
+          },
+          {
+            "icon": "fa-solid fa-table-list",
+            "label": "31 SKUs"
+          }
+        ]
+      },
+      {
+        "ref": "PRC-0231",
+        "title": "Pass-through check on the 27 non-resizable SKUs",
+        "flow": "S9.11 repricing",
+        "href": "S9.11-2-analyze.dc.html",
+        "icon": "fa-solid fa-percent",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "detail": "These cannot be re-boxed, so the fee is either absorbed or passed through. Elasticity and competitive headroom decide which — that question belongs to the repricing flow, not to a variance bridge.",
+        "value": "−$730",
+        "owner": "Pricer · due Aug 29",
+        "state": "staged",
+        "stateTint": "var(--ink-100)",
+        "stateTone": "var(--ink-500)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "lineage": [
+          {
+            "icon": "fa-solid fa-bridge",
+            "label": "S10.1 · Aug 18"
+          },
+          {
+            "icon": "fa-solid fa-building",
+            "label": "fee schedule 2026-08"
+          },
+          {
+            "icon": "fa-solid fa-table-list",
+            "label": "27 SKUs"
+          }
+        ]
+      }
+    ],
+    "tomorrow": [
+      {
+        "label": "The fee change becomes expected",
+        "value": "−$2,210",
+        "detail": "Once annotated, the classifier stops flagging it as unexpected and points at this entry instead.",
+        "icon": "fa-solid fa-tag",
+        "tone": "var(--ink-700)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "The band still catches the day",
+        "value": "±$1,200",
+        "detail": "A −$2,210 driver keeps the daily move outside the band, so a card still opens tomorrow — correctly. It closes when the remediation lands, not when we get used to it.",
+        "icon": "fa-solid fa-arrows-left-right-to-line",
+        "tone": "var(--amber-700)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Both cards report back here",
+        "value": "2 links",
+        "detail": "On write, each card carries a link back so its effect lands on this bridge rather than appearing as unexplained lift.",
+        "icon": "fa-solid fa-arrow-right-arrow-left",
+        "tone": "var(--mod-intel)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "recorded": [
+      {
+        "label": "Annotation",
+        "value": "draft",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Cards spawned",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Drivers classified",
+        "value": "6",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Residual logged",
+        "value": "1.0%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Contract version",
+        "value": "CM v3",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "historyCount": "3 entries",
+    "history": [
+      {
+        "date": "Aug 18 · pending",
+        "value": "−$1,840",
+        "tone": "var(--ink-400)",
+        "note": "Not yet written. Annotate to add it to the history.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-25)",
+        "dateTone": "var(--ink-400)"
+      },
+      {
+        "date": "Jul 22",
+        "value": "−$1,610",
+        "tone": "var(--rose-700)",
+        "note": "Carrier GRI, first full day. Routed to fulfilment; became rule set v14.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "dateTone": "var(--ink-500)"
+      },
+      {
+        "date": "Jun 30",
+        "value": "+$2,240",
+        "tone": "var(--green-700)",
+        "note": "Prime Fall halo on cookware. Annotated as expected, no action taken.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "dateTone": "var(--ink-500)"
+      },
+      {
+        "date": "Jun 14",
+        "value": "−$1,290",
+        "tone": "var(--rose-700)",
+        "note": "Returns cluster on the apparel-adjacent cohort. Became the \"runs small\" work.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "dateTone": "var(--ink-500)"
+      }
+    ],
+    "contract": [
+      {
+        "label": "CM v3 unchanged",
+        "note": "No term added, no re-basing. The fee change is a cost, not a definitional gap.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Band unchanged at ±$1,200",
+        "note": "Left where it was. A wider band would have hidden this day entirely.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Version history intact",
+        "note": "v1 Jan · v2 Mar · v3 Jun. Every comparison in this flow uses v3.",
+        "icon": "fa-solid fa-code-branch",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Controller owns changes",
+        "note": "A v4 would need a logged decision and would re-base every historical bridge.",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "govBg": "color-mix(in oklab, var(--mod-intel) 5%, white)",
+    "govStats": [
+      {
+        "label": "days bridged",
+        "value": "30 / 30",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "cards raised",
+        "value": "6",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "unexplained drivers",
+        "value": "2",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "worst day",
+        "value": "4.2%",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · annotation drafted · 2 cards staged · write to history to close the day",
+    "footTone": "var(--ink-500)"
+  }
+}

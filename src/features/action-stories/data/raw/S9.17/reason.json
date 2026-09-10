@@ -1,0 +1,292 @@
+{
+  "code": "S9.17",
+  "stageKey": "reason",
+  "name": "Supplier performance",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "standards": [
+      {
+        "label": "On-time delivery",
+        "note": "against confirmed date, not requested date",
+        "t1": "≥ 96%",
+        "t2": "≥ 93%",
+        "t3": "≥ 90%"
+      },
+      {
+        "label": "Defect rate",
+        "note": "parts per million at receiving inspection",
+        "t1": "≤ 800",
+        "t2": "≤ 1,500",
+        "t3": "≤ 2,500"
+      },
+      {
+        "label": "Responsiveness SLA",
+        "note": "first substantive reply to a sourcing request",
+        "t1": "24 hrs",
+        "t2": "48 hrs",
+        "t3": "72 hrs"
+      },
+      {
+        "label": "Payment terms",
+        "note": "target we hold in every renewal",
+        "t1": "Net 60",
+        "t2": "Net 45",
+        "t3": "Net 30"
+      },
+      {
+        "label": "Price-change notice",
+        "note": "contractual minimum before a new price applies",
+        "t1": "90 days",
+        "t2": "60 days",
+        "t3": "30 days"
+      },
+      {
+        "label": "Cost transparency",
+        "note": "material, labour and freight broken out on request",
+        "t1": "required",
+        "t2": "requested",
+        "t3": "not required"
+      }
+    ],
+    "suppliers": [
+      {
+        "name": "Kessler Metalworks (K)",
+        "scope": "carbon steel pans, griddles · 4 single-source SKUs",
+        "tier": "Tier 1",
+        "spend": "$880K",
+        "share": "31%",
+        "terms": "Net 45",
+        "strategic": true,
+        "standing": "+8% notice · OTD 94.1%",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "name": "Arcadia Enamelworks (A)",
+        "scope": "enamel cast iron · 2 single-source SKUs",
+        "tier": "Tier 1",
+        "spend": "$682K",
+        "share": "24%",
+        "terms": "Net 60",
+        "strategic": true,
+        "standing": "all standards met",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "name": "Meridian Filtration (M)",
+        "scope": "filter cartridges, pitchers",
+        "tier": "Tier 2",
+        "spend": "$511K",
+        "share": "18%",
+        "terms": "Net 45",
+        "strategic": false,
+        "standing": "OTD 89.2% · below floor",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "name": "Tsuyo Blades (T)",
+        "scope": "knives, whetstones",
+        "tier": "Tier 2",
+        "spend": "$398K",
+        "share": "14%",
+        "terms": "Net 30",
+        "strategic": false,
+        "standing": "terms below target",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Verdant Woodcraft (V)",
+        "scope": "utensils, boards",
+        "tier": "Tier 3",
+        "spend": "$227K",
+        "share": "8%",
+        "terms": "Net 30",
+        "strategic": false,
+        "standing": "3,140 PPM · above ceiling",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "name": "Pallas Packaging (P)",
+        "scope": "cartons, inserts",
+        "tier": "Tier 3",
+        "spend": "$142K",
+        "share": "5%",
+        "terms": "Net 30",
+        "strategic": false,
+        "standing": "all standards met",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Current contract terms",
+        "detail": "Supplier K runs to Mar 31 with a 90-day price-change notice and a 500-unit MOQ. Nothing decided here overrides a signed term before it expires."
+      },
+      {
+        "label": "Strategic-supplier flags",
+        "detail": "K and A are flagged strategic: exit requires exec sign-off, and no exit is executed inside a quarter without a qualified alternate already producing."
+      },
+      {
+        "label": "Open POs",
+        "detail": "$412K across 9 POs is committed. Any transition honours them in full — no cancellation to gain negotiating position."
+      },
+      {
+        "label": "One conversation per supplier",
+        "detail": "Realify drafts the counter and the message. A person sends it. No supplier ever receives anything Realify generated without a human reading it first."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-file-contract",
+        "label": "K: Net 45 · MOQ 500 · to Mar 31"
+      },
+      {
+        "icon": "fa-solid fa-star",
+        "label": "K and A flagged strategic"
+      },
+      {
+        "icon": "fa-solid fa-clipboard-check",
+        "label": "9 open POs · $412K honoured"
+      },
+      {
+        "icon": "fa-solid fa-clock",
+        "label": "90-day notice clause on K"
+      },
+      {
+        "icon": "fa-solid fa-user-pen",
+        "label": "No message sent without review"
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "label": "No exit without qualified alternate"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Sep 22 · 09:14",
+        "what": "Supplier K submitted a formal price notice of +8.0% across 14 SKUs, effective Jan 1 under the 90-day clause."
+      },
+      {
+        "when": "Sep 22 · 09:40",
+        "what": "Should-Cost Model reran the build-up from steel, freight and labour indices and returned +2.9% for the same basket."
+      },
+      {
+        "when": "Sep 22 · 11:02",
+        "what": "Scorecard Engine flagged two other suppliers outside tier floors and pinned all three to one card rather than three."
+      }
+    ],
+    "contract": [
+      {
+        "label": "Expires",
+        "value": "Mar 31",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Payment terms",
+        "value": "Net 45",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Terms target (Tier 1)",
+        "value": "Net 60",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Price-change notice",
+        "value": "90 days",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "MOQ",
+        "value": "500 units",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Volume commitment",
+        "value": "none",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Exclusivity",
+        "value": "none",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "pos": [
+      {
+        "label": "PO-4417 · skillets",
+        "note": "in production · lands Oct 18",
+        "value": "$164K"
+      },
+      {
+        "label": "PO-4429 · griddles",
+        "note": "confirmed · lands Nov 6",
+        "value": "$118K"
+      },
+      {
+        "label": "PO-4436 · skillet 12\"",
+        "note": "confirmed · lands Nov 22",
+        "value": "$92K"
+      },
+      {
+        "label": "6 smaller POs",
+        "note": "across A, M, T and V",
+        "value": "$38K"
+      }
+    ],
+    "agents": [
+      {
+        "name": "Sourcer",
+        "role": "Owns supplier relationships, scorecards and qualification.",
+        "icon": "fa-solid fa-handshake",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "name": "Navigator",
+        "role": "Prices the cash value of payment terms and volume commitments.",
+        "icon": "fa-solid fa-compass",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)"
+      },
+      {
+        "name": "Supplier Scorecard Engine",
+        "role": "OTD, defect PPM and responsiveness per supplier, per quarter.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      },
+      {
+        "name": "Should-Cost Model",
+        "role": "Rebuilds each basket from material indices, freight lanes and labour.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      }
+    ]
+  }
+}

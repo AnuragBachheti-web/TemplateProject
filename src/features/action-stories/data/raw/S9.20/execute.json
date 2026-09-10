@@ -1,0 +1,555 @@
+{
+  "code": "S9.20",
+  "stageKey": "execute",
+  "name": "Item research",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "reverted": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "planLine": "Requests draft here and a person sends them. The Arcadia mould deposit waits behind its RFQ — no non-recoverable money moves before the quote comes back.",
+    "pushedCount": "0 / 4",
+    "runAllLabel": "Run the cycle",
+    "runAllIcon": "fa-solid fa-play",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "stages": [
+      {
+        "name": "RFQ and sample requests",
+        "meta": "3 sample requests · 1 RFQ · drafted, held for review",
+        "icon": "fa-solid fa-file-invoice-dollar",
+        "hue": "var(--mod-discover)",
+        "doorHref": null,
+        "human": "Sourcer sends",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "C-31 · carbon steel wok — sample request",
+            "detail": "Three units, existing tooling, hammered finish specified with a tolerance note on consistency. Asks them to quote at MOQ 500 in the same reply so the economics land with the sample.",
+            "value": "$2.4K · 18 days",
+            "valueTone": "var(--ink-800)",
+            "tag": "Kessler (K)",
+            "tagIcon": "fa-solid fa-industry",
+            "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "tagTone": "var(--mod-inventory)",
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "C-34 · angle guide — sample request",
+            "detail": "Five units at 15° and 20°, with the tolerance requirement written into the request rather than checked afterwards. Fits the existing stone without a shim.",
+            "value": "$0.9K · 11 days",
+            "valueTone": "var(--ink-800)",
+            "tag": "Tsuyo (T)",
+            "tagIcon": "fa-solid fa-industry",
+            "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "tagTone": "var(--mod-inventory)",
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "C-27 · roasting set — RFQ before tooling",
+            "detail": "Quote request first, deposit second. Confirms the $4.2K mould cost and the $26.80 unit price at MOQ 300 before any non-recoverable money moves.",
+            "value": "RFQ · 6 days",
+            "valueTone": "var(--amber-700)",
+            "tag": "mould quote",
+            "tagIcon": "fa-solid fa-hammer",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Evaluation cards",
+        "meta": "3 cards · criteria fixed at creation, not after the sample arrives",
+        "icon": "fa-solid fa-clipboard-check",
+        "hue": "var(--mod-discover)",
+        "doorHref": null,
+        "human": null,
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "One card per sampled concept",
+            "detail": "Each card opens with its pass criteria already written from Decide, the supplier quote attached, and a named owner. The card closes as pass or fail with the evidence, never as \"promising\".",
+            "value": "3 cards",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Criteria locked at creation",
+            "detail": "Twelve criteria across the three concepts. Changing one after a sample has arrived requires a logged reason — that is the difference between evaluating and rationalising.",
+            "value": "12 criteria",
+            "valueTone": "var(--ink-800)",
+            "tag": "no drift",
+            "tagIcon": "fa-solid fa-lock",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Photography scheduled per concept",
+            "detail": "Concept shots for evaluation only, booked to land two days after each sample. Not listing photography — that belongs to launch.",
+            "value": "$0.9K",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Parked watchlist",
+        "meta": "3 concepts · triggers armed with check cadence",
+        "icon": "fa-solid fa-bell",
+        "hue": "var(--ink-600)",
+        "doorHref": null,
+        "human": null,
+        "tint": "color-mix(in oklab, var(--ink-600) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Triggers armed",
+            "detail": "C-40 checked monthly against two scheduled metro mandates, C-42 quarterly against incumbent delistings, C-38 closed with its decay evidence and no scheduled check.",
+            "value": "3 armed",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Evidence attached to each park",
+            "detail": "Every parked concept keeps the curve, the classifier output and the reason it was parked. When a trigger fires the card re-opens with its original analysis rather than starting again.",
+            "value": "3 records",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Trend-decay auto-park armed",
+            "detail": "A sampled concept whose durability falls below 55% mid-cycle parks itself with the decay evidence, rather than spending the second sample round on a category that is closing.",
+            "value": "watch on 3",
+            "valueTone": "var(--mod-discover)",
+            "tag": "dial-gated",
+            "tagIcon": "fa-solid fa-gauge-simple-high",
+            "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "tagTone": "var(--mod-discover)",
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Launch handoff · lineage",
+        "meta": "passes flow to the launch flow with full provenance",
+        "icon": "fa-solid fa-rocket",
+        "hue": "var(--mod-discover)",
+        "doorHref": "S9.8-1-reason.dc.html",
+        "doorLabel": "S9.8 Launch",
+        "human": null,
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Lineage chips travel with the concept",
+            "detail": "The launch decision in S9.8 opens with the signal that found the concept, the affinity read, the supplier quote and the sample results — so nobody has to reconstruct why it is on the list.",
+            "value": "5 chips",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": true,
+            "lineageChips": [
+              {
+                "icon": "fa-solid fa-stream",
+                "label": "DISC-2026-34"
+              },
+              {
+                "icon": "fa-solid fa-magnifying-glass-chart",
+                "label": "affinity 87"
+              },
+              {
+                "icon": "fa-solid fa-chart-line",
+                "label": "durability 74% ± 11"
+              },
+              {
+                "icon": "fa-solid fa-industry",
+                "label": "Kessler quote $19.40"
+              },
+              {
+                "icon": "fa-solid fa-flask",
+                "label": "sample R1 + R2"
+              }
+            ],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Research pack filed to Ledger",
+            "detail": "Full pack per concept including the parked ones: signals, affinity working, economics model, risk flags and the decision. LEDGER-DISC-0341.",
+            "value": "6 concepts",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Cycle summary posted",
+            "detail": "One line back to the innovation goal: what this cycle spent, what it sampled, and what it parked. The 11%-of-revenue gap gets a running record rather than a quarterly surprise.",
+            "value": "$9.4K spent",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "lineage": false,
+            "lineageChips": [],
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "pipeCols": [
+      "Requested",
+      "In production",
+      "Received",
+      "Evaluated"
+    ],
+    "pipeStatus": "arms on stage 1",
+    "pipeTone": "var(--ink-400)",
+    "pipeline": [
+      {
+        "name": "C-34 · angle guide",
+        "supplier": "Tsuyo (T) · 5 units",
+        "steps": [
+          {
+            "label": "sent",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "day 4 / 11",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "—",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "—",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          }
+        ],
+        "due": "not sent",
+        "dueTone": "var(--ink-400)"
+      },
+      {
+        "name": "C-31 · carbon steel wok",
+        "supplier": "Kessler (K) · 3 units",
+        "steps": [
+          {
+            "label": "sent",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "day 2 / 18",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "—",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "—",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          }
+        ],
+        "due": "not sent",
+        "dueTone": "var(--ink-400)"
+      },
+      {
+        "name": "C-27 · enamel roasting set",
+        "supplier": "Arcadia (A) · RFQ first",
+        "steps": [
+          {
+            "label": "RFQ out",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "awaiting quote",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "—",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "—",
+            "bar": "var(--ink-100)",
+            "tone": "var(--ink-400)"
+          }
+        ],
+        "due": "not sent",
+        "dueTone": "var(--ink-400)"
+      }
+    ],
+    "watchStatus": "arms on stage 3",
+    "watchTone": "var(--ink-400)",
+    "watchlist": [
+      {
+        "id": "C-40",
+        "name": "Compost caddy",
+        "durability": "42% ± 16",
+        "durTone": "var(--amber-700)",
+        "trigger": "Either scheduled metro mandate takes effect and search volume in those markets rises 25% over baseline.",
+        "check": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "id": "C-42",
+        "name": "Magnetic knife rail",
+        "durability": "38% ± 12",
+        "durTone": "var(--rose-700)",
+        "trigger": "An incumbent delists, category search returns to its peak quarter, or we add a knife SKU needing storage.",
+        "check": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "id": "C-38",
+        "name": "Silicone lid-strainer",
+        "durability": "31% ± 14",
+        "durTone": "var(--rose-700)",
+        "trigger": "Closed with evidence. Only re-opens if we onboard a silicone supplier for another reason.",
+        "check": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Stages run",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Sample requests",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Evaluation cards",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Capital committed",
+        "value": "$0",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "drafts": [
+      {
+        "name": "C-31 sample request",
+        "detail": "Kessler · 3 units + MOQ 500 quote",
+        "state": "not drafted",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "C-34 sample request",
+        "detail": "Tsuyo · 5 units, tolerance spec attached",
+        "state": "not drafted",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "C-27 mould RFQ",
+        "detail": "Arcadia · quote before any deposit",
+        "state": "not drafted",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, a decaying trend re-opens this card and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "rollback": [
+      {
+        "name": "C-31 and C-34 samples",
+        "note": "cancellable free before production starts",
+        "nameTone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "C-27 mould deposit",
+        "note": "not recoverable once cutting starts",
+        "nameTone": "var(--ink-400)",
+        "noteTone": "var(--amber-700)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Evaluation cards",
+        "note": "close with reason, criteria retained",
+        "nameTone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 stages · 12 items staged",
+    "footTone": "var(--ink-500)"
+  }
+}

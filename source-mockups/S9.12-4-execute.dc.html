@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.12-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-margin);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-margin) 12%, white);color:var(--mod-margin);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Returns · S9.12</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Apparel returns 1.6× category benchmark — 'runs small' cluster</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">18.4% return rate · $11.4K/quarter</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Category benchmark 11.5% · 62 SKUs affected</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pr" size="sm" color="var(--mod-margin)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:inline-flex;align-items:center;gap:3px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-inventory)"></span>
+          </span>
+          Lens: Margin · Inventory
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-margin);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Keeper + Sourcer, Shipper, Merchandiser
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Return Reason Clusterer (NLP)
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Disposition Optimizer
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.12-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.12-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.12-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.12-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-margin) 10%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-margin);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;display:flex;align-items:center;gap:14px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ headEdge }};border-radius:var(--r-lg);padding:14px 18px">
+          <div style="min-width:0">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Prevention work and rule changes</span>
+            <div style="margin-top:5px;font-size:15px;font-weight:700;color:var(--ink-900)">{{ headline }}</div>
+            <div style="margin-top:4px;font-family:var(--font-mono);font-size:10.5px;color:{{ headTone }}">{{ headMeta }}</div>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:18px">
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Applied</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ appliedCount }}</div>
+            </div>
+            <div style="width:1px;height:34px;background:var(--ink-100)"></div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">45-day recheck</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:15px;font-weight:600;color:{{ recheckTone }}">{{ recheckState }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Work items</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">listing diffs, supplier notices, RMA rules, packaging tasks</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:8px">
+              <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+                <button type="button" onClick="{{ f.onPick }}" style="height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid {{ f.border }};background:{{ f.bg }};font-family:var(--font-mono);font-size:9.5px;color:{{ f.tone }};cursor:pointer">{{ f.label }}</button>
+              </sc-for>
+            </span>
+          </div>
+          <sc-for list="{{ items }}" as="w" hint-placeholder-count="6">
+            <div style="border-bottom:1px solid var(--ink-100)">
+              <div style="display:grid;grid-template-columns:28px minmax(0,1fr) 128px 118px 122px 152px;align-items:center;gap:11px;padding:12px 16px;background:{{ w.rowBg }}">
+                <span style="width:24px;height:24px;border-radius:var(--r-xs);background:{{ w.iconBg }};color:{{ w.iconTone }};display:grid;place-items:center"><i class="{{ w.icon }}" style="font-size:10px"></i></span>
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <span style="font-size:13px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ w.title }}</span>
+                    <span style="display:{{ w.tagShow }};align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:{{ w.tagTint }};font-family:var(--font-mono);font-size:9px;color:{{ w.tagTone }}">{{ w.tag }}</span>
+                  </div>
+                  <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ w.note }}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:7px;min-width:0">
+                  <span style="flex-shrink:0;width:22px;height:22px;border-radius:var(--r-xs);background:{{ w.ownerTint }};color:{{ w.ownerTone }};display:grid;place-items:center;font-family:var(--font-mono);font-size:8.5px;font-weight:600">{{ w.initials }}</span>
+                  <span style="font-size:11.5px;color:var(--ink-600)">{{ w.owner }}</span>
+                </div>
+                <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500)">{{ w.scope }}</span>
+                <div style="display:flex;justify-content:flex-end">
+                  <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ w.statusTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ w.statusTone }}">
+                    <span style="width:6px;height:6px;border-radius:50%;background:{{ w.statusTone }}"></span>{{ w.status }}
+                  </span>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:7px">
+                  <button type="button" onClick="{{ w.onApply }}" style="display:{{ w.btnShow }};height:28px;padding:0 12px;border-radius:var(--r-sm);border:1px solid {{ w.btnBorder }};background:{{ w.btnBg }};font-family:var(--font-sans);font-size:11.5px;font-weight:500;color:{{ w.btnTone }};cursor:pointer">{{ w.btnLabel }}</button>
+                  <button type="button" onClick="{{ w.onOpen }}" style="height:28px;padding:0 10px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-mono);font-size:10px;color:var(--ink-600);cursor:pointer">{{ w.openLabel }}</button>
+                </div>
+              </div>
+              <div style="display:{{ w.detailShow }};flex-direction:column;background:var(--ink-25);border-top:1px solid var(--ink-100);padding:12px 16px 12px 44px">
+                <sc-for list="{{ w.diff }}" as="d" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:130px minmax(0,1fr) minmax(0,1fr);align-items:start;gap:12px;padding:8px 0;border-bottom:1px solid var(--ink-100)">
+                    <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);padding-top:2px">{{ d.field }}</span>
+                    <div style="min-width:0;padding:8px 10px;border-radius:var(--r-sm);background:var(--rose-50);border:1px solid color-mix(in oklab, var(--rose-500) 22%, white)">
+                      <div style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose-700)">before</div>
+                      <div style="margin-top:4px;font-size:12px;line-height:1.5;color:var(--ink-700);text-wrap:pretty">{{ d.before }}</div>
+                    </div>
+                    <div style="min-width:0;padding:8px 10px;border-radius:var(--r-sm);background:var(--green-50);border:1px solid color-mix(in oklab, var(--green-500) 26%, white)">
+                      <div style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-700)">after</div>
+                      <div style="margin-top:4px;font-size:12px;line-height:1.5;color:var(--ink-800);text-wrap:pretty">{{ d.after }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+                <div style="margin-top:9px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ w.detailFoot }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--ink-25)">
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ itemsFoot }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Every change writes to the Ledger with its before state</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <i class="fa-solid fa-hourglass-half" style="font-size:13px;color:{{ monEdge }}"></i>
+            <span style="font-size:14px;font-weight:700;color:var(--ink-900)">Cohort return rate · pre and post</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:var(--r-full);background:{{ monTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ monTone }}">{{ monState }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--amber-700)">reads on a 2–4 week lag · not before day 21</span>
+          </div>
+          <div style="margin-top:14px;display:flex;align-items:flex-end;gap:0;height:132px;padding:0 2px">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="10">
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%">
+                <div style="flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;padding:0 3px">
+                  <div style="width:100%;max-width:34px;height:{{ b.h }};border-radius:3px 3px 0 0;background:{{ b.tone }};opacity:{{ b.opacity }}"></div>
+                </div>
+                <span style="font-family:var(--font-mono);font-size:9px;color:{{ b.labelTone }}">{{ b.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:10px;padding-top:11px;border-top:1px dashed var(--ink-200);display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+            <sc-for list="{{ monStats }}" as="s" hint-placeholder-count="4">
+              <div>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                <div style="margin-top:5px;font-family:var(--font-mono);font-size:14px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</div>
+                <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ s.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Apply everything</span>
+        <p style="margin:8px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">{{ applyCopy }}</p>
+        <button type="button" onClick="{{ onApplyAll }}" style="margin-top:12px;width:100%;height:40px;border-radius:var(--r-sm);border:none;background:{{ allBg }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:{{ allTone }};cursor:{{ allCursor }}">{{ allLabel }}</button>
+        <p style="margin:9px 0 0;font-family:var(--font-mono);font-size:10px;line-height:1.5;color:var(--ink-400)">{{ allNote }}</p>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Return to queue</span>
+          <div style="margin-top:11px;padding:12px 13px;border-radius:var(--r-md);background:{{ rqBg }};border:1px solid {{ rqBorder }}">
+            <div style="display:flex;align-items:center;gap:8px">
+              <i class="fa-solid fa-arrow-rotate-left" style="font-size:11px;color:{{ rqTone }}"></i>
+              <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ rqTitle }}</span>
+            </div>
+            <p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ rqCopy }}</p>
+            <div style="margin-top:9px;display:flex;align-items:baseline;gap:8px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">recheck date</span>
+              <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ rqTone }}">{{ rqDate }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Suppressed while fixing</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ suppressed }}" as="s" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--r-sm);background:{{ s.bg }};border:1px solid {{ s.border }}">
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-800)">{{ s.size }}</span>
+                <span style="flex:1;min-width:0;font-size:11.5px;line-height:1.4;color:var(--ink-600);text-wrap:pretty">{{ s.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10px;color:{{ s.tone }}">{{ s.state }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">{{ suppressNote }}</p>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Ledger</span>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+            <sc-for list="{{ ledger }}" as="l" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:6px;height:6px;border-radius:50%;background:{{ l.tone }};flex-shrink:0"></span>
+                <span style="flex:1;min-width:0;font-family:var(--font-mono);font-size:10px;color:var(--ink-600)">{{ l.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;color:{{ l.tone }}">{{ l.hash }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <a href="S00-workspace.dc.html" style="margin-top:10px;display:inline-flex;font-size:11.5px;font-weight:500;color:var(--ink-500)" style-hover="color:var(--ink-900)">Open the returns entry →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ footerStatus }}</span>
+      <a href="S9.12-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Decide
+      </a>
+      <button type="button" onClick="{{ onApplyAll }}" style="display:{{ footerPushShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);border:none;background:var(--ink-900);color:var(--ink-0);font-family:var(--font-sans);font-size:14px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);transform:translateY(-1px)">
+        {{ footerPushLabel }}<i class="fa-solid fa-bolt" style="font-size:11px"></i>
+      </button>
+      <a href="S00-workspace.dc.html?approved=9.12" style="display:{{ footerDoneShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Back to Workspace<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { applied: {}, open: {}, filter: 'all', stamp: {} };
+
+  ITEMS() {
+    return [
+      { id: 'chart', kind: 'listing', title: 'Size charts republished from production measurements', owner: 'Merchandiser', initials: 'Me', scope: '6 styles · 18 SKUs', note: 'New chest, waist and length figures plus a per-style fit note. Amazon, Walmart and DTC.', tag: 'listing diff', tagTint: 'color-mix(in oklab, var(--mod-margin) 12%, white)', tagTone: 'var(--mod-margin)', icon: 'fa-solid fa-ruler',
+        diff: [
+          { field: 'Size chart · M', before: 'Chest 40in · Waist 34in · Length 27in', after: 'Chest 38.75in · Waist 33in · Length 27in · measured from production lot 4420' },
+          { field: 'Fit note', before: 'No fit guidance on the page.', after: 'Runs slightly small through the chest — if you are between sizes, size up.' },
+          { field: 'Bullet 3', before: 'Relaxed, true-to-size fit for everyday wear.', after: 'Tailored fit through the chest — see the updated size chart before ordering.' },
+        ], foot: 'Diff shown for one style · the other five follow the same three fields' },
+      { id: 'reviews', kind: 'listing', title: 'Fit reviews surfaced above the fold', owner: 'Merchandiser', initials: 'Me', scope: '18 SKUs', note: 'Pins the three most-helpful fit reviews and adds a “runs small” badge under the title.', tag: 'PDP fit tool', tagTint: 'var(--r-blue-50)', tagTone: 'var(--r-blue-600)', icon: 'fa-solid fa-star-half-stroke',
+        diff: [
+          { field: 'Review module', before: 'Reviews load below the description, sorted by recency.', after: 'Fit-tagged reviews pinned above the fold, sorted by helpfulness.' },
+          { field: 'Title badge', before: 'No badge.', after: 'Badge: “Runs small — most customers size up”, shown when fit mentions exceed 15%.' },
+        ], foot: 'Badge text is generated from the cluster and refreshes weekly' },
+      { id: 'capa', kind: 'supplier', title: 'Supplier CAPA notice · lots 4412–4419', owner: 'Sourcer', initials: 'So', scope: '1 supplier · 1,240 units', note: 'Failure mode, lot codes, unit counts and photographs attached. 30-day corrective deadline.', tag: 'deadline Oct 4', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-700)', icon: 'fa-solid fa-file-signature',
+        diff: [
+          { field: 'Notice', before: 'No formal notice — defects logged internally only.', after: 'CAPA-2419 issued: seam separation and zip failure, 1,240 units in lots 4412–4419, corrective plan due Oct 4.' },
+          { field: 'Chargeback', before: 'None held.', after: '$2,800 held against the next invoice, released if the corrective plan is accepted.' },
+          { field: 'Receiving', before: 'Standard AQL sampling.', after: 'Tightened inspection on the next two inbound lots from this supplier.' },
+        ], foot: 'Requires a human signature even at the Auto dial · Realify never signs a supplier notice' },
+      { id: 'rma', kind: 'rules', title: 'RMA routing rules configured by condition grade', owner: 'Keeper', initials: 'Ke', scope: '4 grades · all categories', note: 'Grade A restocks, B refurbishes, C liquidates, hygiene destroys with a record.', tag: 'disposition', tagTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', tagTone: 'var(--mod-inventory)', icon: 'fa-solid fa-diagram-project',
+        diff: [
+          { field: 'Grade B', before: 'Routed to liquidation by default — $7.90 net.', after: 'Routed to refurbish and relist — $20.70 net. 980 units a quarter.' },
+          { field: 'Grade C', before: 'Manual review queue, average 9 days idle.', after: 'Straight to pallet liquidation at the standing quote. No idle time.' },
+          { field: 'Hygiene', before: 'Manual review, occasional restock error.', after: 'Hard-locked to destroy with a retained disposal record.' },
+        ], foot: 'Rules apply at grading time in the returns dock, before anything is put away' },
+      { id: 'rl', kind: 'rules', title: 'Return-less refund rule enabled at $14', owner: 'Keeper', initials: 'Ke', scope: '380 units / quarter', note: 'Where recoverable value is under the threshold, refund without requesting the unit back.', tag: 'abuse-capped', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)', icon: 'fa-solid fa-truck-fast',
+        diff: [
+          { field: 'Rule', before: 'Every return requires an inbound shipment and inspection.', after: 'Units with recoverable value under $14 are refunded in place — no label issued.' },
+          { field: 'Abuse guard', before: 'Not applicable.', after: 'Maximum two per customer per 90 days; never on a fraud-flagged account.' },
+        ], foot: 'Saves $6.20 per unit in freight and inspection' },
+      { id: 'pack', kind: 'task', title: 'Packaging spec task · divider and 32ECT carton', owner: 'Shipper', initials: 'Sh', scope: '3,400 mixed orders / qtr', note: 'New spec issued to the 3PL, effective on the next carton order. $0.34 per order.', tag: 'spec change', tagTint: 'color-mix(in oklab, var(--mod-cash) 12%, white)', tagTone: 'var(--mod-cash)', icon: 'fa-solid fa-box-open',
+        diff: [
+          { field: 'Carton', before: '26ECT single-wall, no divider, mixed categories packed together.', after: '32ECT with a corrugated divider whenever apparel and ceramics ship together.' },
+          { field: 'Pack rule', before: 'Pack by pick path.', after: 'Pack ceramics separately when the order also contains apparel.' },
+        ], foot: 'Effective on the next carton order · 3PL confirmation expected in 5 days' },
+      { id: 'suppress', kind: 'listing', title: 'M and L suppressed on two worst styles', owner: 'Merchandiser', initials: 'Me', scope: '2 styles · 4 size pairs', note: 'Temporary. Lifts automatically when the new size chart has been live for 14 days.', tag: 'temporary', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)', icon: 'fa-solid fa-eye-slash',
+        diff: [
+          { field: 'Availability', before: 'M and L purchasable on both styles at 28% and 24% return rates.', after: 'M and L hidden on both styles; XS, S, XL and 2XL remain purchasable.' },
+          { field: 'Auto-lift', before: 'Not applicable.', after: 'Suppression lifts 14 days after the size chart publishes, or on manual release.' },
+        ], foot: 'Costs roughly $1.2K of revenue over two weeks against $2.9K of avoided returns' },
+    ];
+  }
+
+  clock() { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+  hash(k) { const s = k.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 16777216, 11); return '0x' + s.toString(16).padStart(6, '0'); }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const all = this.ITEMS();
+    const filter = this.state.filter;
+    const items = filter === 'all' ? all : all.filter((i) => i.kind === filter);
+    const appliedAll = all.filter((i) => this.state.applied[i.id]);
+    const n = appliedAll.length;
+    const complete = n === all.length;
+    const kindTint = { listing: 'color-mix(in oklab, var(--mod-margin) 12%, white)', supplier: 'var(--ink-100)', rules: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', task: 'color-mix(in oklab, var(--mod-cash) 12%, white)' };
+    const kindTone = { listing: 'var(--mod-margin)', supplier: 'var(--ink-700)', rules: 'var(--mod-inventory)', task: 'var(--mod-cash)' };
+    const post = complete ? [17.9, 16.4, 14.8, 13.1, 11.9, 11.4] : [];
+    const pre = [18.1, 18.6, 18.4, 19.0, 18.4];
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      headEdge: complete ? 'var(--green-500)' : n ? 'var(--mod-margin)' : 'var(--ink-300)',
+      headline: complete ? 'All 7 changes applied · cohort read starts day 21' : n ? n + ' of 7 applied' : 'Nothing applied yet · 7 changes staged',
+      headMeta: complete
+        ? 'Listings live on all channels, CAPA-2419 sent, RMA rules active, packaging spec with the 3PL'
+        : n
+          ? 'Realify applies each change independently — nothing here depends on anything else finishing first.'
+          : 'Approved on Decide. Each item can go out on its own; the supplier notice needs a signature either way.',
+      headTone: complete ? 'var(--green-700)' : 'var(--ink-500)',
+      appliedCount: n + ' of 7',
+      recheckState: complete ? 'armed · Oct 4' : 'arms on apply',
+      recheckTone: complete ? 'var(--green-700)' : 'var(--ink-400)',
+
+      filters: [
+        { key: 'all', label: 'all 7' },
+        { key: 'listing', label: 'listings' },
+        { key: 'rules', label: 'rules' },
+        { key: 'supplier', label: 'supplier' },
+        { key: 'task', label: 'tasks' },
+      ].map((f) => ({
+        label: f.label,
+        onPick: () => this.setState({ filter: f.key }),
+        bg: filter === f.key ? 'color-mix(in oklab, var(--mod-margin) 12%, white)' : 'var(--ink-0)',
+        border: filter === f.key ? 'color-mix(in oklab, var(--mod-margin) 34%, white)' : 'var(--ink-200)',
+        tone: filter === f.key ? 'var(--mod-margin)' : 'var(--ink-500)',
+      })),
+
+      items: items.map((w) => {
+        const on = !!this.state.applied[w.id];
+        const open = !!this.state.open[w.id];
+        const needsSig = w.id === 'capa';
+        return {
+          title: w.title, note: w.note, owner: w.owner, initials: w.initials, scope: w.scope, icon: w.icon,
+          tag: w.tag, tagShow: w.tag ? 'inline-flex' : 'none', tagTint: w.tagTint, tagTone: w.tagTone,
+          iconBg: kindTint[w.kind], iconTone: kindTone[w.kind],
+          ownerTint: kindTint[w.kind], ownerTone: kindTone[w.kind],
+          rowBg: on ? 'color-mix(in oklab, var(--mod-margin) 4%, white)' : 'var(--ink-0)',
+          status: on ? (needsSig ? 'sent ' + this.state.stamp[w.id] : 'applied ' + this.state.stamp[w.id]) : needsSig ? 'needs signature' : 'staged',
+          statusTone: on ? 'var(--green-700)' : needsSig ? 'var(--amber-700)' : 'var(--ink-400)',
+          statusTint: on ? 'var(--green-50)' : needsSig ? 'var(--amber-50)' : 'var(--ink-50)',
+          btnShow: on ? 'none' : 'inline-flex',
+          btnLabel: needsSig ? 'Sign and send' : w.kind === 'rules' ? 'Activate rule' : w.kind === 'task' ? 'Issue task' : 'Publish',
+          btnBg: 'var(--ink-900)', btnBorder: 'var(--ink-900)', btnTone: 'var(--ink-0)', 
+          onApply: () => { const t = this.clock(); this.setState((st) => ({ applied: Object.assign({}, st.applied, { [w.id]: true }), stamp: Object.assign({}, st.stamp, { [w.id]: t }) })); },
+          openLabel: open ? 'hide diff' : 'view diff',
+          detailShow: open ? 'flex' : 'none',
+          onOpen: () => this.setState((st) => ({ open: Object.assign({}, st.open, { [w.id]: !st.open[w.id] }) })),
+          diff: w.diff, detailFoot: w.foot,
+        };
+      }),
+      itemsFoot: filter === 'all' ? n + ' of 7 applied' : items.length + ' shown · ' + n + ' of 7 applied overall',
+
+      monEdge: complete ? 'var(--green-500)' : 'var(--ink-300)',
+      monState: complete ? 'day 6 of 45 · lag window' : 'starts on first apply',
+      monTint: complete ? 'var(--amber-50)' : 'var(--ink-50)',
+      monTone: complete ? 'var(--amber-700)' : 'var(--ink-500)',
+      bars: pre.map((v, i) => ({
+        h: Math.round((v / 20) * 100) + '%',
+        tone: 'var(--ink-300)',
+        opacity: 1,
+        label: 'w−' + (5 - i),
+        labelTone: 'var(--ink-400)',
+      })).concat(post.length
+        ? post.map((v, i) => ({ h: Math.round((v / 20) * 100) + '%', tone: i < 2 ? 'var(--amber-500)' : 'var(--green-500)', opacity: i < 2 ? 0.55 : 1, label: 'w+' + (i + 1), labelTone: i < 2 ? 'var(--amber-700)' : 'var(--green-700)' }))
+        : [1, 2, 3, 4, 5, 6].map((i) => ({ h: '6%', tone: 'var(--ink-200)', opacity: 1, label: 'w+' + i, labelTone: 'var(--ink-300)' }))),
+      monStats: [
+        { label: 'Pre-change baseline', value: '18.4%', note: 'Five-week mean on the fit cohort.', tone: 'var(--ink-900)' },
+        { label: 'Latest read', value: complete ? '11.4%' : '—', note: complete ? 'Week 6. The first two weeks are inside the lag and greyed.' : 'No post-change data until day 21.', tone: complete ? 'var(--green-700)' : 'var(--ink-400)' },
+        { label: 'Delta on cohort', value: complete ? '−7.0pp' : 'pending', note: complete ? 'Inside the projected −9 to −14pp range at this point in the curve.' : 'Projected −9 to −14pp by day 45.', tone: complete ? 'var(--green-700)' : 'var(--ink-400)' },
+        { label: 'CM realized', value: complete ? '+$4.9K' : '$0', note: complete ? 'Quarter to date, against +$6.4K projected for the full quarter.' : 'Accrues as returns fail to arrive.', tone: complete ? 'var(--green-700)' : 'var(--ink-400)' },
+      ],
+
+      applyCopy: complete ? 'Everything is out. The cohort read runs on its own from here.' : 'Applies the ' + (all.length - n) + ' remaining changes, including sending the supplier notice for signature.',
+      allLabel: complete ? 'All changes applied' : 'Apply all ' + (all.length - n) + ' remaining',
+      allBg: complete ? 'var(--ink-100)' : 'var(--mod-margin)',
+      allTone: complete ? 'var(--ink-500)' : 'var(--ink-0)',
+      allCursor: complete ? 'default' : 'pointer',
+      allNote: complete ? 'Recheck armed for Oct 4. If the cohort rate has not moved, this story returns to your queue with the reads attached.' : 'Listing changes take up to 20 minutes to appear on Amazon. Everything else is immediate.',
+      onApplyAll: () => { if (!complete) { const t = this.clock(); this.setState((st) => { const a = Object.assign({}, st.applied), s = Object.assign({}, st.stamp); all.forEach((i) => { if (!a[i.id]) { a[i.id] = true; s[i.id] = t; } }); return { applied: a, stamp: s }; }); } },
+
+      rqTitle: complete ? 'Recheck armed · day 45' : 'Arms when the first change applies',
+      rqCopy: complete
+        ? 'If the fit cohort has not improved by at least 4pp by Oct 4, Realify reopens this story with the reads, the applied diffs and the next candidate fixes attached — rather than quietly leaving it done.'
+        : 'On apply, Realify schedules a 45-day check on the fit cohort. No improvement means the story comes back to your queue instead of being closed.',
+      rqDate: complete ? 'Oct 4 · 39 days' : 'not scheduled',
+      rqTone: complete ? 'var(--mod-margin)' : 'var(--ink-400)',
+      rqBg: complete ? 'color-mix(in oklab, var(--mod-margin) 6%, white)' : 'var(--ink-25)',
+      rqBorder: complete ? 'color-mix(in oklab, var(--mod-margin) 24%, white)' : 'var(--ink-100)',
+
+      suppressed: [
+        { size: 'M', label: 'Alder tunic · 28.4% return rate', state: this.state.applied.suppress ? 'hidden' : 'live', tone: this.state.applied.suppress ? 'var(--amber-700)' : 'var(--ink-400)', bg: this.state.applied.suppress ? 'var(--amber-50)' : 'var(--ink-25)', border: this.state.applied.suppress ? 'color-mix(in oklab, var(--amber-500) 30%, white)' : 'var(--ink-100)' },
+        { size: 'L', label: 'Alder tunic · 24.1% return rate', state: this.state.applied.suppress ? 'hidden' : 'live', tone: this.state.applied.suppress ? 'var(--amber-700)' : 'var(--ink-400)', bg: this.state.applied.suppress ? 'var(--amber-50)' : 'var(--ink-25)', border: this.state.applied.suppress ? 'color-mix(in oklab, var(--amber-500) 30%, white)' : 'var(--ink-100)' },
+        { size: 'M', label: 'Ridgeline shirt dress · 26.8%', state: this.state.applied.suppress ? 'hidden' : 'live', tone: this.state.applied.suppress ? 'var(--amber-700)' : 'var(--ink-400)', bg: this.state.applied.suppress ? 'var(--amber-50)' : 'var(--ink-25)', border: this.state.applied.suppress ? 'color-mix(in oklab, var(--amber-500) 30%, white)' : 'var(--ink-100)' },
+        { size: 'L', label: 'Ridgeline shirt dress · 22.4%', state: this.state.applied.suppress ? 'hidden' : 'live', tone: this.state.applied.suppress ? 'var(--amber-700)' : 'var(--ink-400)', bg: this.state.applied.suppress ? 'var(--amber-50)' : 'var(--ink-25)', border: this.state.applied.suppress ? 'color-mix(in oklab, var(--amber-500) 30%, white)' : 'var(--ink-100)' },
+      ],
+      suppressNote: this.state.applied.suppress ? 'Lifts automatically 14 days after the size chart publishes — Sep 12.' : 'Nothing is suppressed until that item is published.',
+
+      ledger: [
+        { label: 'Approval · 6 fixes, 4 grade rules', hash: '0x2b71e4', tone: 'var(--mod-margin)' },
+        { label: n ? 'Listing publishes · ' + all.filter((i) => i.kind === 'listing' && this.state.applied[i.id]).length + ' of 3' : 'Listing publishes · pending', hash: this.state.applied.chart ? this.hash('chart') : '—', tone: this.state.applied.chart ? 'var(--mod-margin)' : 'var(--ink-300)' },
+        { label: this.state.applied.capa ? 'CAPA-2419 sent · signed' : 'CAPA notice · unsigned', hash: this.state.applied.capa ? this.hash('capa') : '—', tone: this.state.applied.capa ? 'var(--mod-margin)' : 'var(--ink-300)' },
+        { label: this.state.applied.rma ? 'RMA rules active · 4 grades' : 'RMA rules · staged', hash: this.state.applied.rma ? this.hash('rma') : '—', tone: this.state.applied.rma ? 'var(--mod-margin)' : 'var(--ink-300)' },
+      ],
+      footerStatus: complete ? 'Execute · 7 of 7 applied · recheck armed Oct 4' : 'Execute · ' + n + ' of 7 applied',
+      footerPushShow: complete ? 'none' : 'inline-flex',
+      footerDoneShow: complete ? 'inline-flex' : 'none',
+      footerPushLabel: n ? 'Apply remaining ' + (all.length - n) : 'Apply all 7 changes',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

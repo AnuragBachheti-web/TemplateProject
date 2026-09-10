@@ -1,0 +1,270 @@
+[
+  {
+    "code": "S9.3",
+    "name": "Allocation",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.dialNote"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "rules",
+        "blockType": "labelValueList",
+        "binding": "data.rules"
+      },
+      {
+        "slotName": "channels",
+        "blockType": "table",
+        "binding": "data.channels"
+      },
+      {
+        "slotName": "economics",
+        "blockType": "labelValueList",
+        "binding": "data.economics"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "mismatch",
+        "blockType": "labelValueList",
+        "binding": "data.mismatch"
+      },
+      {
+        "slotName": "inputs",
+        "blockType": "labelValueList",
+        "binding": "data.inputs"
+      },
+      {
+        "slotName": "agents",
+        "blockType": "table",
+        "binding": "data.agents"
+      }
+    ]
+  },
+  {
+    "code": "S9.3",
+    "name": "Allocation",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "legend",
+        "blockType": "labelValueList",
+        "binding": "data.legend"
+      },
+      {
+        "slotName": "cols",
+        "blockType": "labelValueList",
+        "binding": "data.cols"
+      },
+      {
+        "slotName": "matrix",
+        "blockType": "itemQueue",
+        "binding": "data.matrix"
+      },
+      {
+        "slotName": "curves",
+        "blockType": "labelValueList",
+        "binding": "data.curves"
+      },
+      {
+        "slotName": "lanes",
+        "blockType": "table",
+        "binding": "data.lanes"
+      },
+      {
+        "slotName": "sel",
+        "blockType": "object",
+        "binding": "data.sel"
+      },
+      {
+        "slotName": "pools",
+        "blockType": "table",
+        "binding": "data.pools"
+      },
+      {
+        "slotName": "clocks",
+        "blockType": "labelValueList",
+        "binding": "data.clocks"
+      },
+      {
+        "slotName": "capacity",
+        "blockType": "labelValueList",
+        "binding": "data.capacity"
+      }
+    ]
+  },
+  {
+    "code": "S9.3",
+    "name": "Allocation",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "itemQueue",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel"
+      },
+      {
+        "slotName": "totals",
+        "blockType": "labelValueList",
+        "binding": "data.totals"
+      },
+      {
+        "slotName": "lanes",
+        "blockType": "itemQueue",
+        "binding": "data.lanes"
+      },
+      {
+        "slotName": "after",
+        "blockType": "labelValueList",
+        "binding": "data.after"
+      },
+      {
+        "slotName": "onApprove",
+        "blockType": "labelValueList",
+        "binding": "data.onApprove"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.3",
+    "name": "Allocation",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.headline"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "headMeta",
+        "blockType": "text",
+        "binding": "data.headMeta"
+      },
+      {
+        "slotName": "createdCount",
+        "blockType": "text",
+        "binding": "data.createdCount"
+      },
+      {
+        "slotName": "cancelState",
+        "blockType": "text",
+        "binding": "data.cancelState"
+      },
+      {
+        "slotName": "orderMeta",
+        "blockType": "text",
+        "binding": "data.orderMeta"
+      },
+      {
+        "slotName": "orders",
+        "blockType": "table",
+        "binding": "data.orders"
+      },
+      {
+        "slotName": "systems",
+        "blockType": "itemQueue",
+        "binding": "data.systems"
+      },
+      {
+        "slotName": "rbState",
+        "blockType": "text",
+        "binding": "data.rbState"
+      },
+      {
+        "slotName": "rbCopy",
+        "blockType": "text",
+        "binding": "data.rbCopy"
+      },
+      {
+        "slotName": "rbLabel",
+        "blockType": "text",
+        "binding": "data.rbLabel"
+      },
+      {
+        "slotName": "rbHint",
+        "blockType": "text",
+        "binding": "data.rbHint"
+      },
+      {
+        "slotName": "tray",
+        "blockType": "labelValueList",
+        "binding": "data.tray"
+      },
+      {
+        "slotName": "allLabel",
+        "blockType": "text",
+        "binding": "data.allLabel"
+      },
+      {
+        "slotName": "allNote",
+        "blockType": "text",
+        "binding": "data.allNote"
+      },
+      {
+        "slotName": "monState",
+        "blockType": "text",
+        "binding": "data.monState"
+      },
+      {
+        "slotName": "monitors",
+        "blockType": "labelValueList",
+        "binding": "data.monitors"
+      },
+      {
+        "slotName": "watchCopy",
+        "blockType": "text",
+        "binding": "data.watchCopy"
+      },
+      {
+        "slotName": "ledgerCopy",
+        "blockType": "text",
+        "binding": "data.ledgerCopy"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      },
+      {
+        "slotName": "footerCreateLabel",
+        "blockType": "text",
+        "binding": "data.footerCreateLabel"
+      }
+    ]
+  }
+]

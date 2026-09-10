@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.19-1 Reason" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-ads);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-ads) 12%, white);color:var(--mod-ads);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Promo calendar · S9.19</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Q4 calendar build — Prime Fall deadline Aug 21</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--rose-700);font-variant-numeric:tabular-nums">2 days to the Prime Fall deadline</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">6 events · 4 channels · $240K promo budget</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-ads)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-ads)"></span>Lens: Ads · Margin · Inventory
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-ads);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Promoter + Pricer
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <i class="fa-solid fa-boxes-stacked" style="font-size:10px;color:var(--ink-400)"></i>Planner, Bidder
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Incrementality Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Promo Conflict Detector
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.19-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-ads) 10%, white);border:1px solid color-mix(in oklab, var(--mod-ads) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-ads);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">1</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 1 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What we are deciding</span>
+          <p style="margin:9px 0 0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">Six events, four channels, one quarter, and a marketplace deadline in two days. Before any of that is scheduled, each event needs one job — because an event optimised for volume and an event optimised for margin are measured differently, and a calendar where everything is trying to do everything is how a quarter of margin disappears.</p>
+          <div style="margin-top:13px;display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:var(--r-md);background:color-mix(in oklab, var(--mod-ads) 8%, white);border:1px solid color-mix(in oklab, var(--mod-ads) 26%, white)">
+            <i class="fa-solid fa-file-signature" style="font-size:12px;color:var(--mod-ads)"></i>
+            <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Pick the objective and the Metric Contract follows — including what we agree to lose</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-500);flex-shrink:0">{{ contractCount }}</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Event objectives</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">one job per event · the contract below changes with the choice</span>
+          </div>
+
+          <div style="margin-top:13px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ events }}" as="e" hint-placeholder-count="6">
+              <div style="border:1px solid {{ e.border }};border-left:3px solid {{ e.mark }};border-radius:var(--r-md);padding:11px 13px;background:{{ e.bg }};display:flex;align-items:center;gap:14px">
+                <span style="min-width:0;flex:1;display:flex;flex-direction:column;gap:3px">
+                  <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <span style="font-size:13px;font-weight:600;color:var(--ink-900)">{{ e.name }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ e.dates }}</span>
+                    <sc-if value="{{ e.deadline }}" hint-placeholder-val="{{ false }}">
+                      <span style="display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 8px;border-radius:var(--r-full);background:var(--rose-50);font-family:var(--font-mono);font-size:8.5px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--rose-700)">
+                        <i class="fa-solid fa-hourglass-half" style="font-size:7.5px"></i>{{ e.deadline }}
+                      </span>
+                    </sc-if>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500)">{{ e.channels }}</span>
+                </span>
+                <span style="flex-shrink:0;display:flex;gap:5px">
+                  <sc-for list="{{ e.options }}" as="o" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ o.pick }}" style="height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:{{ o.weight }};transition:background var(--dur-fast) var(--ease-standard)">{{ o.label }}</button>
+                  </sc-for>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:14px;padding:14px 16px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mod-ads)">Metric contract</span>
+              <span style="font-size:13px;font-weight:700;color:var(--ink-900)">{{ contract.event }}</span>
+              <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ contract.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ contract.tone }}">{{ contract.objective }}</span>
+              <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">select an objective above to rewrite this</span>
+            </div>
+            <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-sm);overflow:hidden">
+              <sc-for list="{{ contract.metrics }}" as="m" hint-placeholder-count="4">
+                <div style="background:var(--ink-0);padding:11px 12px;display:flex;flex-direction:column;gap:3px">
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ m.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                  <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ m.note }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div style="display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:var(--r-sm);background:var(--green-50)">
+                <i class="fa-solid fa-bullseye" style="font-size:11px;color:var(--green-700);margin-top:2px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-700)">Counts as success</span>
+                  <span style="font-size:11.5px;line-height:1.45;color:var(--green-700);text-wrap:pretty">{{ contract.success }}</span>
+                </span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:var(--r-sm);background:var(--amber-50)">
+                <i class="fa-solid fa-hand-holding-dollar" style="font-size:11px;color:var(--amber-700);margin-top:2px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber-700)">What we accept losing</span>
+                  <span style="font-size:11.5px;line-height:1.45;color:var(--amber-700);text-wrap:pretty">{{ contract.tradeoff }}</span>
+                </span>
+              </div>
+            </div>
+            <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ contract.note }}</p>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Promo budget</span>
+              <span style="margin-left:auto;display:flex;align-items:baseline;gap:6px">
+                <span style="font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">$240K</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">Q4 ceiling</span>
+              </span>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-direction:column">
+              <sc-for list="{{ budget }}" as="b" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:1fr 92px 92px;gap:0 10px;align-items:center;padding:9px 0;border-bottom:1px solid {{ b.rule }};background:{{ b.bg }}">
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:{{ b.weight }};color:var(--ink-900)">{{ b.label }}</span>
+                    <sc-if value="{{ b.note }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ b.note }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:{{ b.size }};font-weight:{{ b.weight }};color:var(--ink-800);text-align:right;font-variant-numeric:tabular-nums">{{ b.value }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-500);text-align:right;font-variant-numeric:tabular-nums">{{ b.share }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Margin guardrails</span>
+            <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">These bind every event whatever its objective. Clearance is the one exception and it is written into its own contract.</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column">
+              <sc-for list="{{ guardrails }}" as="g" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:1fr 88px 74px;gap:0 10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ g.label }}</span>
+                    <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ g.note }}</span>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-800);text-align:right;font-variant-numeric:tabular-nums">{{ g.limit }}</span>
+                  <span style="justify-self:end;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ g.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ g.tone }}">{{ g.state }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-200);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-lock" style="font-size:11px;color:var(--ink-500)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Locked</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">not negotiable in Decide</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px">
+            <sc-for list="{{ locked }}" as="l" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="fa-solid fa-lock" style="font-size:9px;color:var(--ink-300);margin-top:4px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ l.label }}</span>
+                  <span style="font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ l.detail }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:13px;display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--ink-100)">
+            <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+              <span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-25);font-size:12px;color:var(--ink-700)">
+                <i class="{{ c.icon }}" style="font-size:10px;color:var(--ink-400)"></i>{{ c.label }}
+              </span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--rose-500) 26%, white);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-hourglass-half" style="font-size:11px;color:var(--rose-700)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Deal deadlines</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ deadlines }}" as="d" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:3px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ d.bg }}">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-900)">{{ d.name }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ d.tone }};font-variant-numeric:tabular-nums">{{ d.left }}</span>
+                </div>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ d.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What raised this</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ trigger }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ t.when }}</span>
+                <span style="font-size:12px;line-height:1.5;color:var(--ink-700);text-wrap:pretty">{{ t.what }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Last Q4 for reference</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ lastYear }}" as="l" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;color:var(--ink-700)">{{ l.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ l.note }}</span>
+                </span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ l.tone }};font-variant-numeric:tabular-nums">{{ l.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Gross lift was strong and incrementality was not. That gap is what the objectives above are meant to stop repeating.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Next step does</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">Lays the quarter out as a calendar canvas — one lane per channel — flags SKU overlaps, deal-stacking and parity conflicts, counts down the marketplace windows, and opens the history library so each proposed repeat can be checked against what it truly delivered.</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">{{ footStatus }}</span>
+      <a href="S9.19-2-analyze.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Analyze<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = {
+    objective: { prime: 'share', earlybf: 'volume', bfcm: 'volume', walmart: 'share', gift: 'margin', clear: 'clearance' },
+    sel: 'prime',
+  };
+
+  eventData() {
+    return [
+      { id: 'prime', name: 'Prime Fall Deal Event', dates: 'Oct 8–9 · Amazon', channels: 'Amazon only · 22 SKUs · submission closes Aug 21', deadline: '2 days' },
+      { id: 'earlybf', name: 'Early Black Friday', dates: 'Nov 7–14 · DTC', channels: 'Shopify DTC + email · 34 SKUs' },
+      { id: 'walmart', name: 'Walmart Deal Days', dates: 'Nov 12–18 · Walmart', channels: 'Walmart Marketplace · 18 SKUs · submission closes Sep 30', deadline: '42 days' },
+      { id: 'bfcm', name: 'Black Friday / Cyber Monday', dates: 'Nov 28 – Dec 1 · all channels', channels: 'All four channels + paid media · 48 SKUs' },
+      { id: 'gift', name: 'Gift guide push', dates: 'Dec 5–12 · DTC', channels: 'Shopify DTC + email/SMS · 26 SKUs' },
+      { id: 'clear', name: 'Year-end clearance', dates: 'Dec 26–31 · all channels', channels: 'All channels · aged and discontinued lines' },
+    ];
+  }
+
+  contracts() {
+    return {
+      volume: {
+        label: 'Volume', tint: 'color-mix(in oklab, var(--mod-ads) 12%, white)', tone: 'var(--mod-ads)',
+        metrics: [
+          { label: 'Primary metric', value: 'Units', tone: 'var(--ink-900)', note: 'incremental units after trough accounting' },
+          { label: 'Guardrail', value: 'CM ≥ 18%', tone: 'var(--amber-700)', note: 'per-unit contribution after promo cost' },
+          { label: 'Depth ceiling', value: '25%', tone: 'var(--ink-900)', note: 'off list, MAP-compliant' },
+          { label: 'Confidence needed', value: '≥ 70%', tone: 'var(--ink-900)', note: 'from the incrementality model' },
+        ],
+        success: 'Incremental units up 35% or more against the matched baseline, with the post-promo trough netted out.',
+        tradeoff: 'Up to 3pp of blended margin dilution during the event window, and a measurable trough in the two weeks after.',
+        note: 'Volume events are judged on units that would not otherwise have sold. Gross lift is not the metric — a 60% gross lift that borrows 40 points from next month scores as 20%.',
+      },
+      margin: {
+        label: 'Margin', tint: 'var(--green-50)', tone: 'var(--green-700)',
+        metrics: [
+          { label: 'Primary metric', value: 'CM dollars', tone: 'var(--ink-900)', note: 'total contribution during the window' },
+          { label: 'Guardrail', value: 'Depth ≤ 15%', tone: 'var(--green-700)', note: 'shallow by design' },
+          { label: 'Mix requirement', value: '≥ 40% full price', tone: 'var(--ink-900)', note: 'share of window revenue undiscounted' },
+          { label: 'Confidence needed', value: '≥ 75%', tone: 'var(--ink-900)', note: 'higher bar — margin events are easier to model' },
+        ],
+        success: 'Contribution dollars up 12% against the same window last year, with average selling price holding within 4% of list.',
+        tradeoff: 'A smaller unit lift than a deep discount would produce, and some share ceded to competitors running deeper.',
+        note: 'Margin events use urgency and bundling rather than depth. The point is to sell the same things at nearly the same price to more people, not the same people at less.',
+      },
+      share: {
+        label: 'Share', tint: 'var(--r-blue-50)', tone: 'var(--r-blue-700)',
+        metrics: [
+          { label: 'Primary metric', value: 'Category share', tone: 'var(--ink-900)', note: 'plus Buy Box share on marketplaces' },
+          { label: 'Guardrail', value: 'CM ≥ 15%', tone: 'var(--amber-700)', note: 'the floor we will not cross to win rank' },
+          { label: 'Depth ceiling', value: '25%', tone: 'var(--ink-900)', note: 'platform deal minimums often set this' },
+          { label: 'Confidence needed', value: '≥ 65%', tone: 'var(--ink-900)', note: 'share effects are noisier to attribute' },
+        ],
+        success: 'Category share up 2.5pp during the window and holding at least 1pp of that four weeks after it ends.',
+        tradeoff: 'Contribution close to zero for the event itself. We are buying rank and reviews, and saying so out loud.',
+        note: 'Share events only make sense if the gain persists. The four-week hold-back test is part of the contract, not an afterthought — an event that wins rank and loses it again in a fortnight failed.',
+      },
+      clearance: {
+        label: 'Clearance', tint: 'var(--amber-50)', tone: 'var(--amber-700)',
+        metrics: [
+          { label: 'Primary metric', value: 'Sell-through', tone: 'var(--ink-900)', note: 'of the aged units in scope' },
+          { label: 'Guardrail', value: 'Recovery ≥ 62%', tone: 'var(--amber-700)', note: 'of landed cost, per cohort' },
+          { label: 'Depth ceiling', value: '45%', tone: 'var(--rose-700)', note: 'the one objective allowed past 25%' },
+          { label: 'Confidence needed', value: '≥ 60%', tone: 'var(--ink-900)', note: 'the alternative is storage cost either way' },
+        ],
+        success: '80% of the cohort cleared inside the window at or above the recovery floor, with no MAP breach.',
+        tradeoff: 'Negative contribution on the tail of the cohort, and some cannibalisation of full-price equivalents.',
+        note: 'Clearance is the only objective where losing money on a unit is the right answer — but it is measured against holding cost and liquidation value, not against zero.',
+      },
+    };
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const events = this.eventData();
+    const contracts = this.contracts();
+    const objDefs = [
+      { key: 'volume', label: 'Volume' },
+      { key: 'margin', label: 'Margin' },
+      { key: 'share', label: 'Share' },
+      { key: 'clearance', label: 'Clearance' },
+    ];
+    const selId = events.some((e) => e.id === this.state.sel) ? this.state.sel : 'prime';
+    const selEvent = events.find((e) => e.id === selId);
+    const selObj = this.state.objective[selId];
+    const c = contracts[selObj];
+
+    const counts = {};
+    Object.keys(this.state.objective).forEach((k) => {
+      const o = this.state.objective[k];
+      counts[o] = (counts[o] || 0) + 1;
+    });
+    const summary = objDefs.filter((o) => counts[o.key]).map((o) => counts[o.key] + ' ' + o.label.toLowerCase()).join(' · ');
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      contractCount: summary,
+
+      events: events.map((e) => {
+        const active = e.id === selId;
+        const obj = this.state.objective[e.id];
+        return {
+          name: e.name, dates: e.dates, channels: e.channels, deadline: e.deadline || null,
+          bg: active ? 'var(--ink-0)' : 'var(--ink-25)',
+          border: active ? 'color-mix(in oklab, var(--mod-ads) 34%, white)' : 'var(--ink-100)',
+          mark: active ? 'var(--mod-ads)' : 'var(--ink-200)',
+          options: objDefs.map((o) => ({
+            label: o.label,
+            pick: () => this.setState((s) => {
+              const objective = Object.assign({}, s.objective);
+              objective[e.id] = o.key;
+              return { objective, sel: e.id };
+            }),
+            bg: obj === o.key ? 'var(--ink-900)' : 'var(--ink-0)',
+            fg: obj === o.key ? 'var(--ink-0)' : 'var(--ink-600)',
+            border: obj === o.key ? 'var(--ink-900)' : 'var(--ink-200)',
+            weight: obj === o.key ? '600' : '500',
+          })),
+        };
+      }),
+
+      contract: {
+        event: selEvent.name, objective: c.label, tint: c.tint, tone: c.tone,
+        metrics: c.metrics, success: c.success, tradeoff: c.tradeoff, note: c.note,
+      },
+
+      budget: [
+        { label: 'Discount cost', note: 'margin given up on promoted units', value: '$148K', share: '62%', weight: '400', size: '12px', rule: 'var(--ink-50)', bg: 'var(--ink-0)' },
+        { label: 'Supporting media', note: 'Bidder budget for event windows', value: '$54K', share: '22%', weight: '400', size: '12px', rule: 'var(--ink-50)', bg: 'var(--ink-0)' },
+        { label: 'Marketplace deal fees', note: 'Prime Fall and Walmart Deal Days', value: '$18K', share: '8%', weight: '400', size: '12px', rule: 'var(--ink-50)', bg: 'var(--ink-0)' },
+        { label: 'Email, SMS and creative', note: 'production and send costs', value: '$12K', share: '5%', weight: '400', size: '12px', rule: 'var(--ink-100)', bg: 'var(--ink-0)' },
+        { label: 'Committed so far', note: null, value: '$232K', share: '97%', weight: '600', size: '13px', rule: 'transparent', bg: 'var(--ink-25)' },
+      ],
+
+      guardrails: [
+        { label: 'Blended dilution cap', note: 'Q4 gross margin vs unpromoted plan', limit: '2.4pp', state: 'binding', tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+        { label: 'Per-event CM floor', note: 'except clearance, which has its own', limit: '≥ 15%', state: 'binding', tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+        { label: 'Depth ceiling', note: 'non-clearance events, off list price', limit: '25%', state: 'binding', tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+        { label: 'Full-price protection', note: 'days between events on the same SKU', limit: '≥ 14 days', state: 'binding', tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+        { label: 'Promo revenue share', note: 'share of Q4 revenue sold on promotion', limit: '≤ 38%', state: '34% planned', tint: 'var(--green-50)', tone: 'var(--green-700)' },
+      ],
+
+      locked: [
+        { label: 'MAP', detail: 'No price below MAP on any channel, in any event, including clearance. Platform-funded discounts are fine; ours stop at the floor.' },
+        { label: 'Marketplace deal requirements', detail: 'Prime Fall needs a 20% minimum discount off the 30-day median and 500 units committed per SKU. Walmart Deal Days needs 15% and a clean 30-day price history.' },
+        { label: 'Inventory commitments', detail: 'Units pledged to a marketplace deal are reserved and cannot be sold through another channel during the window. Planner holds the reservation.' },
+        { label: 'Price-history integrity', detail: 'No pre-event price raise to manufacture a deeper discount. The 30-day median is the reference and it is audited by both platforms.' },
+      ],
+
+      chips: [
+        { icon: 'fa-solid fa-tag', label: 'MAP floor holds everywhere' },
+        { icon: 'fa-solid fa-percent', label: 'Prime Fall ≥ 20% off 30-day median' },
+        { icon: 'fa-solid fa-boxes-stacked', label: '500 units committed per Prime SKU' },
+        { icon: 'fa-solid fa-percent', label: 'Walmart ≥ 15% + clean history' },
+        { icon: 'fa-solid fa-calendar-xmark', label: 'No pre-event price raises' },
+        { icon: 'fa-solid fa-clock', label: '14 days between events per SKU' },
+      ],
+
+      deadlines: [
+        { name: 'Prime Fall submission', left: '2 days', detail: 'Aug 21 · 22 SKUs, depths, unit commitments', tone: 'var(--rose-700)', bg: 'var(--rose-50)' },
+        { name: 'Walmart Deal Days', left: '42 days', detail: 'Sep 30 · 18 SKUs, 30-day history check', tone: 'var(--amber-700)', bg: 'var(--ink-0)' },
+        { name: 'BFCM media booking', left: '58 days', detail: 'Oct 16 · Bidder budget lock for the window', tone: 'var(--ink-700)', bg: 'var(--ink-0)' },
+        { name: 'Email calendar freeze', left: '71 days', detail: 'Oct 29 · sends and segments to S9.13', tone: 'var(--ink-700)', bg: 'var(--ink-0)' },
+      ],
+
+      trigger: [
+        { when: 'Aug 15', what: 'Amazon opened Prime Fall submissions with a 20% minimum discount and a hard Aug 21 close.' },
+        { when: 'Aug 17', what: 'Incrementality Engine finished re-scoring last Q4: the headline 20%-off event measured 31% incremental after trough accounting, not the 58% gross lift reported at the time.' },
+        { when: 'Aug 18', what: 'Conflict Detector found 14 SKUs proposed in both the DTC early-BF window and the Walmart deal window, and pinned the card.' },
+      ],
+
+      lastYear: [
+        { label: 'Promo revenue share', note: 'of Q4 revenue', value: '41%', tone: 'var(--rose-700)' },
+        { label: 'Gross lift, headline event', note: 'as reported last year', value: '+58%', tone: 'var(--ink-700)' },
+        { label: 'True incrementality', note: 'after the post-promo trough', value: '31%', tone: 'var(--rose-700)' },
+        { label: 'Margin dilution', note: 'against the unpromoted plan', value: '3.1pp', tone: 'var(--rose-700)' },
+      ],
+
+      footStatus: 'Reason · 6 events · ' + summary + ' · $240K budget · 2.4pp dilution cap',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

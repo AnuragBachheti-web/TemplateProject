@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.16-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--mod-hubs)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-hubs) 12%, white);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ channelCount }}</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-hubs);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-hubs) 12%, white);color:var(--mod-hubs);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Channel launch · S9.16</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">TikTok Shop category opened — fit evaluation</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">Pilot approved · 15 SKUs, $30K</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">breakeven M10 · gate Dec 22 · wind-down defined</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-hubs)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-hubs)"></span>Lens: Sales · Inventory
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-hubs);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Prospector + Navigator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <i class="fa-solid fa-tags" style="font-size:10px;color:var(--ink-400)"></i>Merchandiser, Planner
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Channel Fit Score
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Business Case Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.16-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.16-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.16-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.16-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-hubs) 10%, white);border:1px solid color-mix(in oklab, var(--mod-hubs) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-hubs);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:16px">
+          <div style="min-width:0;display:flex;flex-direction:column;gap:5px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Launch sequence · CH-PILOT-0031</span>
+            <span style="font-size:13px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ planLine }}</span>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:14px">
+            <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+              <span style="font-family:var(--font-mono);font-size:18px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ pushedCount }}</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">stages done</span>
+            </span>
+            <button type="button" onClick="{{ runAll }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:var(--r-sm);border:none;background:{{ runAllBg }};color:{{ runAllFg }};cursor:{{ runAllCursor }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">
+              <i class="{{ runAllIcon }}" style="font-size:11px"></i>{{ runAllLabel }}
+            </button>
+          </div>
+        </div>
+
+        <sc-for list="{{ stages }}" as="d" hint-placeholder-count="4">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+            <div style="padding:13px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--ink-100);background:var(--ink-25)">
+              <span style="width:28px;height:28px;border-radius:var(--r-xs);background:{{ d.tint }};color:{{ d.hue }};display:grid;place-items:center;flex-shrink:0">
+                <i class="{{ d.icon }}" style="font-size:12px"></i>
+              </span>
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ d.name }}</span>
+                  <sc-if value="{{ d.doorHref }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ d.doorHref }}" style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-hubs) 10%, white);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--mod-hubs)">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8px"></i>{{ d.doorLabel }}
+                    </a>
+                  </sc-if>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ d.meta }}</span>
+              </span>
+              <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:9px">
+                <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ d.statusTint }};font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ d.statusTone }}">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{ d.statusTone }}"></span>{{ d.statusLabel }}
+                </span>
+                <button type="button" onClick="{{ d.push }}" style="height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ d.btnBorder }};background:{{ d.btnBg }};color:{{ d.btnFg }};cursor:{{ d.btnCursor }};font-family:var(--font-sans);font-size:11.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">{{ d.btnLabel }}</button>
+              </span>
+            </div>
+
+            <div style="padding:4px 16px 12px">
+              <sc-for list="{{ d.items }}" as="it" hint-placeholder-count="4">
+                <div style="padding:10px 0;border-bottom:1px solid var(--ink-50);display:flex;align-items:flex-start;gap:12px">
+                  <span style="flex-shrink:0;margin-top:2px;width:18px;height:18px;border-radius:50%;background:{{ it.dotBg }};color:{{ it.dotFg }};display:grid;place-items:center">
+                    <i class="{{ it.dotIcon }}" style="font-size:8.5px"></i>
+                  </span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+                    <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                      <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ it.name }}</span>
+                      <sc-if value="{{ it.tag }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ it.tagTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ it.tagTone }}">
+                          <i class="{{ it.tagIcon }}" style="font-size:8px"></i>{{ it.tag }}
+                        </span>
+                      </sc-if>
+                    </span>
+                    <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ it.detail }}</span>
+                  </span>
+                  <span style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;width:112px">
+                    <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ it.value }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:{{ it.stateTone }}">{{ it.stateLabel }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Scoped launch checklist</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">9 items · owner and date on each · Oct 6 listing live</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:{{ checklistTone }}">{{ checklistStatus }}</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 118px 92px 104px;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Item</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Owner</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Due</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">State</span>
+          </div>
+          <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="9">
+            <div style="display:grid;grid-template-columns:1fr 118px 92px 104px;gap:0 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;align-items:center;gap:9px">
+                <span style="width:16px;height:16px;border-radius:50%;background:{{ c.dotBg }};color:{{ c.dotFg }};display:grid;place-items:center;flex-shrink:0">
+                  <i class="{{ c.dotIcon }}" style="font-size:7.5px"></i>
+                </span>
+                <span style="min-width:0;font-size:12.5px;color:{{ c.nameTone }};text-wrap:pretty">{{ c.name }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500)">{{ c.owner }}</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ c.due }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ c.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ c.tone }}">{{ c.state }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-hubs) 26%, white);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <i class="fa-solid fa-chart-column" style="font-size:11px;color:var(--mod-hubs)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Business-case tracking card</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ trackTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ trackTone }}"></span>{{ trackStatus }}
+            </span>
+          </div>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ trackCopy }}</p>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 96px 96px 96px 92px;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Metric</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Modelled</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Floor</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Actual</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Read</span>
+          </div>
+          <sc-for list="{{ tracking }}" as="t" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:1fr 96px 96px 96px 92px;gap:0 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ t.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ t.source }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ t.model }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-500);text-align:right;font-variant-numeric:tabular-nums">{{ t.floor }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-300);text-align:right">{{ t.actual }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ t.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ t.tone }}">{{ t.read }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Launch progress</span>
+          <div style="margin-top:11px;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+            <span style="display:block;height:100%;width:{{ progressPct }}%;background:var(--mod-hubs);border-radius:var(--r-full);transition:width var(--dur-slow) var(--ease-standard)"></span>
+          </div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ progressRows }}" as="p" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ p.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-calendar-check" style="font-size:11px;color:var(--mod-hubs)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">90-day gate</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;font-weight:600;color:{{ gateTone }}">{{ gateState }}</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ gateRows }}" as="g" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ g.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;color:{{ g.tone }};font-variant-numeric:tabular-nums">{{ g.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">The gate is a scheduled decision with the scale and kill rules already written. It opens whether or not anyone remembers it.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ armBorder }};border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-bolt" style="font-size:11px;color:{{ armIconTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Auto-kill on breach</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ armCopy }}</p>
+          <button type="button" onClick="{{ armToggle }}" style="margin-top:11px;width:100%;height:34px;border-radius:var(--r-sm);border:1px solid {{ armBtnBorder }};background:{{ armBtnBg }};color:{{ armBtnFg }};cursor:{{ armCursor }};font-family:var(--font-sans);font-size:12.5px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px">
+            <i class="{{ armBtnIcon }}" style="font-size:10px"></i>{{ armBtnLabel }}
+          </button>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-rotate-left" style="font-size:10px;color:var(--ink-400)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Wind-down path</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Defined at approval. Runs in order — each step waits for the one above it.</p>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ winddown }}" as="w" hint-placeholder-count="5">
+              <div style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ w.bg }}">
+                <span style="flex-shrink:0;width:16px;height:16px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center;font-family:var(--font-mono);font-size:8.5px;font-weight:600;margin-top:1px">{{ w.n }}</span>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;font-weight:600;color:{{ w.nameTone }}">{{ w.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ w.detail }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <button type="button" onClick="{{ windToggle }}" style="margin-top:11px;width:100%;height:32px;border-radius:var(--r-sm);border:1px solid {{ windBorder }};background:{{ windBg }};color:{{ windFg }};cursor:{{ windCursor }};font-family:var(--font-sans);font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:7px">
+            <i class="{{ windIcon }}" style="font-size:10px"></i>{{ windLabel }}
+          </button>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--green-50);font-size:11.5px;font-weight:500;color:var(--green-700)">
+          <i class="fa-solid fa-check" style="font-size:10px"></i>Channel 5 live · tracking card open · gate scheduled Dec 22
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S9.16-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-arrow-left" style="font-size:11px"></i>Back to Decide
+        </a>
+        <a href="S00-workspace.dc.html?approved=9.16" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+          {{ closeLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { pushed: {}, busy: null, armed: false, wind: false };
+
+  stageData() {
+    return [
+      {
+        id: 'integration', name: 'Integration setup', icon: 'fa-solid fa-plug', hue: 'var(--mod-hubs)',
+        doorHref: 'S00-integrations.dc.html', doorLabel: 'Integrations',
+        meta: 'existing connector · $14K cap · no custom middleware',
+        items: [
+          { name: 'Seller app + API credentials', tag: 'human step', tagIcon: 'fa-solid fa-user', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)',
+            detail: 'Seller account verification and OAuth grant happen in the platform console. Realify stores the token and the refresh schedule.', value: 'OAuth · 2 scopes' },
+          { name: 'Catalogue mapping', tag: null,
+            detail: '15 SKUs mapped to platform category attributes. Three attributes have no equivalent in our data and default to the category norm.', value: '15 SKUs · 3 defaults' },
+          { name: 'Inventory sync', tag: null,
+            detail: 'Two-way, 15-minute interval, with a reserved pool so the pilot cannot oversell the Shopify buffer.', value: '15 min · reserved pool' },
+          { name: 'Order + fulfilment webhook', tag: null,
+            detail: 'Orders land in the same queue as Walmart. The 3-day handling SLA is tighter than our current 4-day norm, so the queue flags them first.', value: 'SLA 3 days' },
+          { name: 'Tax and shipping profile', tag: null,
+            detail: 'Existing nexus configuration reused. Free shipping over $35 matches the site to avoid a MAP-adjacent price difference.', value: '11 states' },
+        ],
+      },
+      {
+        id: 'listings', name: 'Listing batches', icon: 'fa-solid fa-tags', hue: 'var(--mod-discover)', dependsOn: 'integration',
+        meta: '15 listings in 3 batches · brand voice checked · MAP enforced',
+        items: [
+          { name: 'Batch A · 7 hero SKUs', tag: '3 videos each', tagIcon: 'fa-solid fa-video', tagTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', tagTone: 'var(--mod-discover)',
+            detail: 'Skillets, dutch oven, braiser, filter pitcher, chef knife, griddle, kettle. Copy adapted for platform length limits, claims unchanged.', value: '7 listings' },
+          { name: 'Batch B · 6 traffic drivers', tag: '1 video each', tagIcon: 'fa-solid fa-video', tagTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', tagTone: 'var(--mod-discover)',
+            detail: 'Care kit, filter 3-pack, whetstone, paring knife, spoon set, shears. Priced at MAP with no channel-specific discount.', value: '6 listings' },
+          { name: 'Batch C · 2 bundle listings', tag: 'channel-only', tagIcon: 'fa-solid fa-box', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)',
+            detail: 'Two bundles that raise AOV above the $34 channel average without discounting a component below MAP.', value: '2 listings' },
+          { name: 'MAP and claim check', tag: null,
+            detail: 'Every listing price checked against MAP and every product claim against the approved claim set before submission.', value: '15 of 15 pass' },
+        ],
+      },
+      {
+        id: 'inventory', name: 'Inventory positioning + agent handoffs', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)', dependsOn: 'listings',
+        meta: '2,860 units reserved · Planner and Merchandiser briefed',
+        items: [
+          { name: 'Reserve pilot units', tag: 'via S9.3', tagIcon: 'fa-solid fa-arrow-right', tagTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', tagTone: 'var(--mod-inventory)',
+            detail: 'Positioning runs through the demand-forecast flow so the reservation is netted out of the Shopify and Amazon plans rather than double-counted.', value: '2,860 units' },
+          { name: 'Replenishment trigger', tag: null,
+            detail: 'Pilot SKUs enter the normal reorder logic at a 21-day cover target, lower than the 35-day site norm because the pilot may end.', value: '21-day cover' },
+          { name: 'Creative production brief', tag: 'Merchandiser', tagIcon: 'fa-solid fa-tags', tagTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', tagTone: 'var(--mod-discover)',
+            detail: '12 assets a month from the in-house studio, first shoot day Oct 2. Four creators contracted with a flat fee plus 6% affiliate.', value: '12 / mo · 4 creators' },
+          { name: 'Service and returns routing', tag: null,
+            detail: 'Platform returns route to the same RMA queue with a separate reason code set, so the pilot\u2019s return rate can be read on its own.', value: 'separate codes' },
+        ],
+      },
+      {
+        id: 'tracking', name: 'Tracking card + gate scheduling', icon: 'fa-solid fa-chart-column', hue: 'var(--mod-hubs)', dependsOn: 'inventory',
+        meta: 'monthly actual-vs-model · gate Dec 22 · wind-down armed',
+        items: [
+          { name: 'Business-case tracking card', tag: 'auto-created', tagIcon: 'fa-solid fa-wand-magic-sparkles', tagTint: 'color-mix(in oklab, var(--mod-hubs) 12%, white)', tagTone: 'var(--mod-hubs)',
+            detail: 'Opens in the workspace with the approved model attached. Each month it posts actuals against the P50 line and names the variance driver.', value: 'monthly' },
+          { name: '90-day gate scheduled', tag: null,
+            detail: 'Dec 22, with the scale, continue and kill rules from Decide already written into the card. It arrives as a decision, not a report.', value: 'Dec 22' },
+          { name: 'Cannibalisation cohort', tag: null,
+            detail: 'A matched control cohort on Shopify DTC starts at listing live, so the 6% ceiling can be measured rather than argued about.', value: 'control set' },
+          { name: 'Wind-down path stored', tag: null,
+            detail: 'The five-step delist and recall sequence is attached to the pilot, executable in one action if the gate says kill.', value: '5 steps' },
+        ],
+      },
+    ];
+  }
+
+  pushOne(id) {
+    const stages = this.stageData();
+    const s = stages.find((x) => x.id === id);
+    if (!s || this.state.pushed[id] || this.state.busy) return;
+    if (s.dependsOn && !this.state.pushed[s.dependsOn]) return;
+    this.setState({ busy: id });
+    setTimeout(() => {
+      this.setState((st) => {
+        const pushed = Object.assign({}, st.pushed);
+        pushed[id] = true;
+        return { pushed, busy: null };
+      });
+    }, 950);
+  }
+
+  runSeq(ids) {
+    const next = ids.find((i) => !this.state.pushed[i]);
+    if (!next || this.state.busy) return;
+    this.setState({ busy: next });
+    setTimeout(() => {
+      this.setState((st) => {
+        const pushed = Object.assign({}, st.pushed);
+        pushed[next] = true;
+        return { pushed, busy: null };
+      }, () => setTimeout(() => this.runSeq(ids), 240));
+    }, 950);
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const autoAllowed = mode === 'Approve' || mode === 'Auto';
+
+    const stages = this.stageData();
+    const ids = stages.map((s) => s.id);
+    const done = ids.filter((i) => this.state.pushed[i]);
+    const n = done.length;
+    const allDone = n === ids.length;
+    const busy = this.state.busy;
+    const perStage = 4;
+    const totalItems = stages.reduce((a, s) => a + s.items.length, 0);
+    const doneItems = done.reduce((a, i) => a + stages.find((s) => s.id === i).items.length, 0);
+
+    const checklistRows = [
+      { name: 'Seller account verified and API credentials issued', owner: 'Ops · L. Duarte', due: 'Sep 24', stage: 'integration' },
+      { name: 'Catalogue mapping reviewed for attribute defaults', owner: 'Merchandiser', due: 'Sep 26', stage: 'integration' },
+      { name: 'Inventory reserved pool configured and tested', owner: 'Planner', due: 'Sep 29', stage: 'integration' },
+      { name: 'Listing copy and imagery approved to brand voice', owner: 'Merchandiser', due: 'Oct 1', stage: 'listings' },
+      { name: 'MAP compliance check across all 15 listings', owner: 'Navigator', due: 'Oct 2', stage: 'listings' },
+      { name: 'First 12 creative assets delivered', owner: 'Studio', due: 'Oct 3', stage: 'inventory' },
+      { name: 'Creator contracts signed with claim addendum', owner: 'Legal · R. Vance', due: 'Oct 3', stage: 'inventory' },
+      { name: 'Fulfilment team briefed on the 3-day SLA', owner: 'Ops · L. Duarte', due: 'Oct 5', stage: 'inventory' },
+      { name: 'Listings live and tracking card opened', owner: 'Navigator', due: 'Oct 6', stage: 'tracking' },
+    ];
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      channelCount: allDone ? '5 channels' : '4 channels',
+
+      planLine: allDone
+        ? 'All four stages complete. Fifteen listings live on the fifth channel, 2,860 units reserved through the forecast plan, tracking card open and the gate booked for Dec 22.'
+        : 'Stages run in order — integration, then listings, then inventory and creative, then the tracking card. A listing cannot go live before the reserved inventory pool exists.',
+      pushedCount: n + ' / 4',
+      runAll: () => this.runSeq(ids),
+      runAllLabel: allDone ? 'Launch sequence complete' : busy ? 'Running…' : 'Run the sequence',
+      runAllIcon: allDone ? 'fa-solid fa-check' : busy ? 'fa-solid fa-spinner' : 'fa-solid fa-play',
+      runAllBg: allDone ? 'var(--green-50)' : 'var(--ink-900)',
+      runAllFg: allDone ? 'var(--green-700)' : 'var(--ink-0)',
+      runAllCursor: allDone || busy ? 'default' : 'pointer',
+
+      stages: stages.map((s) => {
+        const isDone = !!this.state.pushed[s.id];
+        const running = busy === s.id;
+        const blocked = !!s.dependsOn && !this.state.pushed[s.dependsOn];
+        return {
+          name: s.name, meta: s.meta, icon: s.icon, hue: s.hue,
+          doorHref: s.doorHref || null, doorLabel: s.doorLabel,
+          tint: 'color-mix(in oklab, ' + s.hue + ' 12%, white)',
+          statusLabel: isDone ? 'complete' : running ? 'running' : blocked ? 'waiting' : 'ready',
+          statusTint: isDone ? 'var(--green-50)' : running ? 'var(--amber-50)' : blocked ? 'var(--ink-100)' : 'color-mix(in oklab, var(--mod-hubs) 10%, white)',
+          statusTone: isDone ? 'var(--green-700)' : running ? 'var(--amber-700)' : blocked ? 'var(--ink-400)' : 'var(--mod-hubs)',
+          btnLabel: isDone ? 'Done' : running ? 'Running…' : blocked ? 'Waiting on ' + s.dependsOn : 'Run stage',
+          btnBg: isDone || blocked ? 'var(--ink-50)' : 'var(--ink-900)',
+          btnFg: isDone || blocked ? 'var(--ink-400)' : 'var(--ink-0)',
+          btnBorder: isDone || blocked ? 'var(--ink-200)' : 'var(--ink-900)',
+          btnCursor: isDone || blocked || busy ? 'default' : 'pointer',
+          push: () => this.pushOne(s.id),
+          items: s.items.map((it) => ({
+            name: it.name, detail: it.detail, value: it.value,
+            tag: it.tag || null, tagIcon: it.tagIcon, tagTint: it.tagTint, tagTone: it.tagTone,
+            dotIcon: isDone ? 'fa-solid fa-check' : running ? 'fa-solid fa-ellipsis' : 'fa-solid fa-minus',
+            dotBg: isDone ? 'var(--green-500)' : running ? 'var(--amber-500)' : 'var(--ink-100)',
+            dotFg: isDone || running ? 'var(--ink-0)' : 'var(--ink-400)',
+            stateLabel: isDone ? 'done' : running ? 'in flight' : blocked ? 'blocked' : 'ready',
+            stateTone: isDone ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-400)',
+          })),
+        };
+      }),
+
+      checklist: checklistRows.map((c) => {
+        const complete = !!this.state.pushed[c.stage];
+        return {
+          name: c.name, owner: c.owner, due: c.due,
+          state: complete ? 'done' : 'open',
+          tint: complete ? 'var(--green-50)' : 'var(--ink-100)',
+          tone: complete ? 'var(--green-700)' : 'var(--ink-500)',
+          dotIcon: complete ? 'fa-solid fa-check' : 'fa-solid fa-minus',
+          dotBg: complete ? 'var(--green-500)' : 'var(--ink-100)',
+          dotFg: complete ? 'var(--ink-0)' : 'var(--ink-400)',
+          nameTone: complete ? 'var(--ink-700)' : 'var(--ink-900)',
+        };
+      }),
+      checklistStatus: checklistRows.filter((c) => this.state.pushed[c.stage]).length + ' of 9 closed',
+      checklistTone: allDone ? 'var(--green-700)' : 'var(--ink-400)',
+
+      trackStatus: this.state.pushed.tracking ? 'open · monthly' : 'creates on stage 4',
+      trackTone: this.state.pushed.tracking ? 'var(--green-700)' : 'var(--ink-400)',
+      trackCopy: this.state.pushed.tracking
+        ? 'Card CH-TRACK-0031 is open in the workspace with the approved P50 model attached. It posts actuals monthly, names the largest variance driver, and re-opens this story if two consecutive months fall below the floor.'
+        : 'Created automatically when the tracking stage runs. It holds the approved model so every month\u2019s actuals are compared against what we said would happen, not against a number written afterwards.',
+      tracking: [
+        { label: 'Run-rate GMV', source: 'channel settlement, monthly', model: '$8K at M1', floor: '$25K at M6', actual: 'awaiting', read: 'M1', tint: 'var(--ink-100)', tone: 'var(--ink-500)' },
+        { label: 'Blended CAC', source: 'spend ÷ new buyers', model: '$19', floor: '≤ $24', actual: 'awaiting', read: 'M1', tint: 'var(--ink-100)', tone: 'var(--ink-500)' },
+        { label: 'New-buyer share', source: 'first-order email match', model: '57%', floor: '≥ 40%', actual: 'awaiting', read: 'M2', tint: 'var(--ink-100)', tone: 'var(--ink-500)' },
+        { label: 'Per-unit CM', source: 'settlement vs landed cost', model: '21%', floor: '≥ 12%', actual: 'awaiting', read: 'M1', tint: 'var(--ink-100)', tone: 'var(--ink-500)' },
+        { label: 'Shopify cannibalisation', source: 'matched control cohort', model: '3.4%', floor: '≤ 6%', actual: 'awaiting', read: 'M2', tint: 'var(--ink-100)', tone: 'var(--ink-500)' },
+      ],
+
+      progressPct: ((doneItems / totalItems) * 100).toFixed(0),
+      progressRows: [
+        { label: 'Stages complete', value: n + ' of 4', tone: allDone ? 'var(--green-700)' : 'var(--ink-900)' },
+        { label: 'Line items', value: doneItems + ' of ' + totalItems, tone: 'var(--ink-900)' },
+        { label: 'Listings live', value: this.state.pushed.listings ? '15' : '0', tone: this.state.pushed.listings ? 'var(--green-700)' : 'var(--ink-500)' },
+        { label: 'Units reserved', value: this.state.pushed.inventory ? '2,860' : '0', tone: this.state.pushed.inventory ? 'var(--mod-inventory)' : 'var(--ink-500)' },
+        { label: 'Spend committed', value: this.state.pushed.integration ? '$14.0K' : '$0', tone: 'var(--ink-900)' },
+      ],
+
+      gateState: this.state.pushed.tracking ? 'scheduled' : 'not yet scheduled',
+      gateTone: this.state.pushed.tracking ? 'var(--green-700)' : 'var(--ink-400)',
+      gateRows: [
+        { label: 'Gate date', value: 'Dec 22', tone: 'var(--ink-800)' },
+        { label: 'Scale if', value: '≥ $30K / mo', tone: 'var(--green-700)' },
+        { label: 'Continue if', value: '$18–30K / mo', tone: 'var(--amber-700)' },
+        { label: 'Kill if', value: '< $18K / mo', tone: 'var(--rose-700)' },
+      ],
+
+      armBorder: this.state.armed ? 'color-mix(in oklab, var(--mod-hubs) 40%, white)' : 'var(--ink-100)',
+      armIconTone: this.state.armed ? 'var(--mod-hubs)' : 'var(--ink-400)',
+      armCopy: autoAllowed
+        ? (this.state.armed
+          ? 'Armed. If cannibalisation crosses 6% of Shopify DTC or CAC holds above $24 for two months, the wind-down path runs without waiting for the gate.'
+          : 'Lets the wind-down path fire on a breach rather than waiting for Dec 22. The two triggers are the ones where waiting costs real margin.')
+        : 'Available from the Approve dial upward. At Suggest, a breach re-opens this card and waits for you.',
+      armToggle: () => { if (autoAllowed) this.setState((s) => ({ armed: !s.armed })); },
+      armBtnLabel: !autoAllowed ? 'Locked at Suggest' : this.state.armed ? 'Armed · 2 triggers' : 'Arm auto-kill',
+      armBtnIcon: !autoAllowed ? 'fa-solid fa-lock' : this.state.armed ? 'fa-solid fa-check' : 'fa-solid fa-bolt',
+      armBtnBg: !autoAllowed ? 'var(--ink-50)' : this.state.armed ? 'color-mix(in oklab, var(--mod-hubs) 10%, white)' : 'var(--ink-0)',
+      armBtnFg: !autoAllowed ? 'var(--ink-400)' : this.state.armed ? 'var(--mod-hubs)' : 'var(--ink-700)',
+      armBtnBorder: !autoAllowed ? 'var(--ink-200)' : this.state.armed ? 'color-mix(in oklab, var(--mod-hubs) 40%, white)' : 'var(--ink-200)',
+      armCursor: autoAllowed ? 'pointer' : 'not-allowed',
+
+      winddown: [
+        { n: '1', label: 'Pause creative and creator spend', detail: 'stops within 24 hours, contracts end at next break' },
+        { n: '2', label: 'Delist all 15 listings', detail: 'within 5 days · catalogue mapping retained' },
+        { n: '3', label: 'Release the reserved pool', detail: 'units return to Shopify and Amazon plans' },
+        { n: '4', label: 'Recall sellable inventory', detail: '2,860 units to the primary warehouse' },
+        { n: '5', label: 'Hold the service window open', detail: '30 days for returns and buyer questions' },
+      ].map((w) => ({
+        n: w.n, label: w.label, detail: w.detail,
+        nameTone: this.state.wind ? 'var(--amber-700)' : 'var(--ink-800)',
+        bg: this.state.wind ? 'var(--amber-50)' : 'var(--ink-0)',
+      })),
+      windToggle: () => { if (allDone) this.setState((s) => ({ wind: !s.wind })); },
+      windLabel: !allDone ? 'Available once live' : this.state.wind ? 'Wind-down staged · undo' : 'Stage the wind-down',
+      windIcon: !allDone ? 'fa-solid fa-lock' : this.state.wind ? 'fa-solid fa-rotate-right' : 'fa-solid fa-circle-stop',
+      windBg: this.state.wind ? 'var(--amber-500)' : 'var(--ink-0)',
+      windFg: !allDone ? 'var(--ink-400)' : this.state.wind ? 'var(--ink-0)' : 'var(--ink-700)',
+      windBorder: !allDone ? 'var(--ink-100)' : this.state.wind ? 'var(--amber-500)' : 'var(--ink-200)',
+      windCursor: allDone ? 'pointer' : 'not-allowed',
+
+      done: allDone,
+      closeLabel: allDone ? 'Close the review' : 'Back to workspace',
+      footStatus: this.state.wind
+        ? 'Execute · wind-down staged · 5 steps queued, nothing irreversible yet'
+        : allDone
+          ? 'Execute · 4 of 4 stages · 15 listings live · tracking card open · gate Dec 22'
+          : 'Execute · ' + n + ' of 4 stages · ' + (totalItems - doneItems) + ' items pending',
+      footTone: allDone ? 'var(--green-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

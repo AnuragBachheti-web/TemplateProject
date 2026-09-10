@@ -1,0 +1,504 @@
+{
+  "code": "S10.2",
+  "stageKey": "decide",
+  "name": "Working capital",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "on": {
+      "po": true,
+      "terms": true,
+      "clearance": false,
+      "credit": false
+    },
+    "poSize": 2,
+    "drawSize": 25,
+    "clearSize": 1,
+    "bufferOpen": false,
+    "buffer": 120
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "2 levers · $57K of relief",
+    "pinnedTone": "var(--green-700)",
+    "pinnedSub": "week-7 trough $146K vs $120K buffer · cost $0.9K",
+    "heroBorder": "color-mix(in oklab, var(--green-500) 30%, white)",
+    "heroTitle": "The plan clears the buffer in both the P50 and P10 cases",
+    "heroBody": "Four levers, ranked by cost per dollar of relief. The terms negotiation is free and permanent but uncertain; the PO delay is free and certain but borrows cover; clearance and credit both cost real money. Every number here is computed by the story that owns the consequence.",
+    "gapNote": "P10 case covered",
+    "gapNoteTone": "var(--green-700)",
+    "heroMetrics": [
+      {
+        "label": "Relief chosen",
+        "value": "$57K",
+        "tone": "var(--green-700)",
+        "note": "against a $31K P50 gap"
+      },
+      {
+        "label": "Total cost",
+        "value": "$0.9K",
+        "tone": "var(--ink-900)",
+        "note": "interest plus margin given up"
+      },
+      {
+        "label": "Week-7 trough",
+        "value": "$146K",
+        "tone": "var(--green-700)",
+        "note": "buffer is $120K"
+      },
+      {
+        "label": "P10 trough",
+        "value": "$123K",
+        "tone": "var(--green-700)",
+        "note": "the case that has to survive"
+      },
+      {
+        "label": "Levers",
+        "value": "2",
+        "tone": "var(--ink-900)",
+        "note": "4 available, 1 needs 12 days"
+      }
+    ],
+    "closedPct": "95",
+    "needPct": "52",
+    "closedBar": "var(--green-500)",
+    "closedValue": "$57K",
+    "closedTone": "var(--green-700)",
+    "totalCost": "$0.9K",
+    "levers": [
+      {
+        "rank": "1",
+        "rankTone": "var(--mod-cash)",
+        "title": "Delay two POs by one week",
+        "body": "Two of the six week-7 POs are for Core SKUs at 31 and 34 days of cover. Moving them into week 8 puts the outflow after the Amazon settlement lands.",
+        "chip": "S9.2 replenishment",
+        "href": "S9.2-3-decide.dc.html",
+        "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "chipTone": "var(--mod-inventory)",
+        "badge": "recommended",
+        "badgeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "badgeTone": "var(--mod-cash)",
+        "relief": "+$26K",
+        "cost": "$0.9K",
+        "costTone": "var(--amber-700)",
+        "lead": "0 days",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--mod-cash)",
+        "consequence": "Cover on four SKUs drops to 24 days at the point of the delay, which is inside the Core service-level floor of 95% but not comfortable. Priced through the replenishment engine: 96.1% projected service level, no Hero SKU affected, no stock-out risk inside the window.",
+        "consequenceTone": "var(--mod-inventory)",
+        "hasSize": true,
+        "sizeLabel": "POs delayed",
+        "sizes": [
+          {
+            "label": "1 PO",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "2 POs",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "3 POs",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "sizeNote": "Cover 24 days on four SKUs. Service level 96.1%, above the 95% floor.",
+        "sizeNoteTone": "var(--ink-500)",
+        "priced": [
+          {
+            "label": "Projected service level",
+            "value": "96.1%",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Hero SKUs affected",
+            "value": "0",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Cost of the delay",
+            "value": "$0.9K",
+            "tone": "var(--ink-800)"
+          }
+        ]
+      },
+      {
+        "rank": "2",
+        "rankTone": "var(--mod-cash)",
+        "title": "Negotiate Kessler to Net 60",
+        "body": "Kessler is mid-negotiation on their price notice and the terms ask is already on the brief. Net 45 to Net 60 moves the $88K PO out of week 7 entirely.",
+        "chip": "S9.17 supplier brief",
+        "href": "S9.17-4-execute.dc.html",
+        "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "chipTone": "var(--mod-inventory)",
+        "badge": "brief already drafted",
+        "badgeTint": "var(--green-50)",
+        "badgeTone": "var(--green-700)",
+        "relief": "+$31K",
+        "cost": "free",
+        "costTone": "var(--green-700)",
+        "lead": "12 days",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--mod-cash)",
+        "consequence": "This is the only lever that costs nothing and improves DPO permanently — 15 days of terms is worth $31K of working capital every cycle, not just this one. The risk is that it is a negotiation, not a decision: Kessler can say no, and the answer will not be known until Oct 4.",
+        "consequenceTone": "var(--green-700)",
+        "hasSize": false,
+        "sizes": [],
+        "sizeNote": "",
+        "sizeNoteTone": "var(--ink-500)",
+        "priced": [
+          {
+            "label": "Cash value of 15 days",
+            "value": "$31K",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Interest or margin cost",
+            "value": "$0",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Probability of success",
+            "value": "64%",
+            "tone": "var(--amber-700)"
+          }
+        ]
+      },
+      {
+        "rank": "3",
+        "rankTone": "var(--ink-300)",
+        "title": "Accelerate the clearance ladder",
+        "body": "Pull the first two ladder steps forward from week 9 to week 6, bringing recovery cash in ahead of the trough rather than after it.",
+        "chip": "S9.9 markdown",
+        "href": "S9.9-3-decide.dc.html",
+        "chipTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "chipTone": "var(--mod-margin)",
+        "badge": null,
+        "relief": "+$18K",
+        "cost": "$2.4K",
+        "costTone": "var(--amber-700)",
+        "lead": "5 days",
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "checkOpacity": 0,
+        "titleTone": "var(--ink-600)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "consequence": "Deeper discounts earlier means lower total recovery: the same units clear at 61% of landed cost instead of 68%. That is real margin given up to buy timing — and it is only worth it if the timing is what actually matters.",
+        "consequenceTone": "var(--mod-margin)",
+        "hasSize": true,
+        "sizeLabel": "Steps pulled forward",
+        "sizes": [
+          {
+            "label": "1 step",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "2 steps",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "sizeNote": "Recovery 65% instead of 68%. Modest, and the cohort still clears before the fee cliff.",
+        "sizeNoteTone": "var(--ink-500)",
+        "priced": [
+          {
+            "label": "Recovery rate",
+            "value": "65%",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "Margin given up",
+            "value": "$2.4K",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "label": "Cash arrives",
+            "value": "week 6",
+            "tone": "var(--green-700)"
+          }
+        ]
+      },
+      {
+        "rank": "4",
+        "rankTone": "var(--ink-300)",
+        "title": "Draw the revolving line",
+        "body": "The cheapest facility, three business days to draw, no covenant tested below 60% utilisation. Available at any size in $25K increments.",
+        "chip": "Meridian Bank · 9.4%",
+        "href": "S10.2-4-execute.dc.html",
+        "chipTint": "var(--ink-100)",
+        "chipTone": "var(--ink-600)",
+        "badge": null,
+        "relief": "+$25K",
+        "cost": "$0.4K",
+        "costTone": "var(--amber-700)",
+        "lead": "3 days",
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "checkOpacity": 0,
+        "titleTone": "var(--ink-600)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "consequence": "Straightforward and priced to the dollar — but it treats a timing problem as a funding problem. Drawn for 21 days it costs interest and nothing else; drawn as a habit it becomes the reason the conversion cycle never gets fixed.",
+        "consequenceTone": "var(--ink-600)",
+        "hasSize": true,
+        "sizeLabel": "Draw",
+        "sizes": [
+          {
+            "label": "$25K",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "$50K",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "$75K",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "sizeNote": "21 days outstanding at 9.4% — $410 of interest. Closes most of the P50 gap alone.",
+        "sizeNoteTone": "var(--ink-500)",
+        "priced": [
+          {
+            "label": "Interest for 21 days",
+            "value": "$410",
+            "tone": "var(--ink-800)"
+          },
+          {
+            "label": "Utilisation after draw",
+            "value": "17%",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Covenant tested",
+            "value": "no",
+            "tone": "var(--green-700)"
+          }
+        ]
+      }
+    ],
+    "bufferOpen": false,
+    "bufferOpacity": 0,
+    "bufferBoxBorder": "var(--ink-300)",
+    "bufferBoxBg": "var(--ink-0)",
+    "bufferTitleTone": "var(--ink-600)",
+    "bufferChanged": false,
+    "policyBorder": "var(--ink-100)",
+    "bufferOptions": [
+      {
+        "label": "$100K",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-600)",
+        "border": "var(--ink-200)",
+        "weight": "500"
+      },
+      {
+        "label": "$120K",
+        "bg": "var(--ink-900)",
+        "fg": "var(--ink-0)",
+        "border": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "$140K",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-600)",
+        "border": "var(--ink-200)",
+        "weight": "500"
+      }
+    ],
+    "bufferNote": "Unchanged — 5 weeks of fixed obligations, as set by the board in January.",
+    "bufferNoteTone": "var(--ink-500)",
+    "totals": [
+      {
+        "label": "Levers chosen",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Relief",
+        "value": "$57K",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Interest cost",
+        "value": "$0",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Margin given up",
+        "value": "$0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Service-level cost",
+        "value": "$0.9K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Permanent DPO gain",
+        "value": "+15 days",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "afterState": "both cases clear",
+    "afterTone": "var(--green-700)",
+    "afterRows": [
+      {
+        "label": "Before levers · P50",
+        "value": "$89K",
+        "pct": "45",
+        "markPct": "60",
+        "tone": "var(--rose-500)"
+      },
+      {
+        "label": "After levers · P50",
+        "value": "$146K",
+        "pct": "73",
+        "markPct": "60",
+        "tone": "var(--green-500)"
+      },
+      {
+        "label": "Before levers · P10",
+        "value": "$66K",
+        "pct": "33",
+        "markPct": "60",
+        "tone": "var(--rose-500)"
+      },
+      {
+        "label": "After levers · P10",
+        "value": "$123K",
+        "pct": "62",
+        "markPct": "60",
+        "tone": "var(--green-500)"
+      }
+    ],
+    "policyStatus": "in band",
+    "policyTone": "var(--green-700)",
+    "checks": [
+      {
+        "label": "Buffer cleared · P50",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Week 7 lands at $146K against a $120K floor."
+      },
+      {
+        "label": "Buffer cleared · P10",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "The downside case clears too — the plan does not depend on the quarter going well."
+      },
+      {
+        "label": "Service-level floor",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "No PO delay drops Core service level below the 95% floor, and no Hero SKU is touched."
+      },
+      {
+        "label": "Fixed obligations untouched",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "note": "Payroll, rent, loan servicing and the Oct 20 tax remittance are outside every lever. $186K across the 13 weeks."
+      },
+      {
+        "label": "Buffer policy",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Buffer unchanged at $120K. The gap is being closed with cash, not with arithmetic."
+      }
+    ],
+    "routes": [
+      {
+        "label": "PO timing to Planner",
+        "note": "2 POs moved to week 8, cover recalculated",
+        "icon": "fa-solid fa-boxes-stacked",
+        "hue": "var(--mod-inventory)",
+        "bg": "var(--ink-25)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "label": "Terms brief to Sourcer",
+        "note": "Net 60 ask added to the Kessler brief, answer by Oct 4",
+        "icon": "fa-solid fa-file-lines",
+        "hue": "var(--mod-inventory)",
+        "bg": "var(--ink-25)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "label": "Clearance acceleration",
+        "note": "not selected",
+        "icon": "fa-solid fa-tags",
+        "hue": "var(--mod-margin)",
+        "bg": "var(--ink-0)",
+        "nameTone": "var(--ink-400)"
+      },
+      {
+        "label": "Credit drawdown task",
+        "note": "not selected",
+        "icon": "fa-solid fa-landmark",
+        "hue": "var(--mod-cash)",
+        "bg": "var(--ink-0)",
+        "nameTone": "var(--ink-400)"
+      }
+    ],
+    "blocked": false,
+    "canApprove": true,
+    "blockReason": "The P50 trough still sits $-26K under the buffer",
+    "ctaLabel": "Approve plan & continue",
+    "footStatus": "Decide · 2 levers · $57K relief · cost $0.9K · trough $146K",
+    "footTone": "var(--ink-500)"
+  }
+}

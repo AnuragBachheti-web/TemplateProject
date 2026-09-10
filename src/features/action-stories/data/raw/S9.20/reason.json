@@ -1,0 +1,285 @@
+{
+  "code": "S9.20",
+  "stageKey": "reason",
+  "name": "Item research",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "goals": [
+      {
+        "label": "Revenue from new items",
+        "note": "items launched inside the last 12 months",
+        "target": "18%",
+        "floor": "12%",
+        "today": "11%",
+        "tone": "var(--rose-700)",
+        "measure": "trailing 12 months"
+      },
+      {
+        "label": "Contribution margin at launch",
+        "note": "after fees, fulfilment and returns",
+        "target": "≥ 42%",
+        "floor": "≥ 36%",
+        "today": "39%",
+        "tone": "var(--amber-700)",
+        "measure": "unit economics model"
+      },
+      {
+        "label": "Affinity with top sellers",
+        "note": "audience overlap and basket logic",
+        "target": "≥ 80",
+        "floor": "≥ 70",
+        "today": "—",
+        "tone": "var(--ink-400)",
+        "measure": "Trend Affinity Engine"
+      },
+      {
+        "label": "Trend durability",
+        "note": "probability the demand survives 18 months",
+        "target": "≥ 70%",
+        "floor": "≥ 55%",
+        "today": "—",
+        "tone": "var(--ink-400)",
+        "measure": "Fad-vs-Trend Classifier"
+      },
+      {
+        "label": "Concepts to launch",
+        "note": "per cycle, from sampled candidates",
+        "target": "2",
+        "floor": "1",
+        "today": "0.5",
+        "tone": "var(--amber-700)",
+        "measure": "four-cycle average"
+      }
+    ],
+    "capital": [
+      {
+        "label": "Samples and shipping",
+        "note": "typically 2–3 rounds per concept",
+        "value": "$14.0K",
+        "per": "~$2.8K ea",
+        "tone": "var(--ink-800)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Tooling deposits",
+        "note": "only where existing tooling does not fit",
+        "value": "$6.0K",
+        "per": "as needed",
+        "tone": "var(--ink-800)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Lab and safety testing",
+        "note": "category-dependent, non-refundable",
+        "value": "$2.5K",
+        "per": "~$600 ea",
+        "tone": "var(--ink-800)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Concept photography",
+        "note": "for evaluation only, not listings",
+        "value": "$1.5K",
+        "per": "~$300 ea",
+        "tone": "var(--ink-800)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Cycle ceiling",
+        "note": null,
+        "value": "$24.0K",
+        "per": "4–6 concepts",
+        "tone": "var(--ink-900)",
+        "weight": "600",
+        "size": "13px",
+        "rule": "transparent",
+        "bg": "var(--ink-25)"
+      }
+    ],
+    "boundaries": [
+      {
+        "label": "Cookware, bakeware and kitchen tools",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "tint": "var(--green-50)",
+        "state": "in range"
+      },
+      {
+        "label": "Water filtration and drinkware",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "tint": "var(--green-50)",
+        "state": "in range"
+      },
+      {
+        "label": "Kitchen textiles and storage",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "tint": "var(--green-50)",
+        "state": "in range"
+      },
+      {
+        "label": "Small electrics",
+        "icon": "fa-solid fa-circle-exclamation",
+        "tone": "var(--amber-700)",
+        "tint": "var(--amber-50)",
+        "state": "case by case"
+      },
+      {
+        "label": "Anything requiring food-contact certification we do not hold",
+        "icon": "fa-solid fa-circle-xmark",
+        "tone": "var(--rose-700)",
+        "tint": "var(--rose-50)",
+        "state": "out"
+      },
+      {
+        "label": "Furniture, apparel, consumables",
+        "icon": "fa-solid fa-circle-xmark",
+        "tone": "var(--rose-700)",
+        "tint": "var(--rose-50)",
+        "state": "out"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Preferred-supplier constraint",
+        "detail": "A candidate must be makeable by one of our four existing suppliers, or it needs a documented exception. New supplier onboarding is a separate decision with its own cost."
+      },
+      {
+        "label": "Brand fit",
+        "detail": "Durable, repairable, plainly built. Nothing single-use, nothing that reads as novelty, nothing whose main appeal is that it is currently on a feed."
+      },
+      {
+        "label": "Sampling capital",
+        "detail": "$24K this cycle. Sample spend on a parked concept is not recoverable, so parking early is cheaper than sampling hopefully."
+      },
+      {
+        "label": "No launch decision here",
+        "detail": "This flow ends at \"worth sampling\" or \"parked with a trigger\". The launch itself is a different decision with a different gate — S9.8."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-handshake",
+        "label": "Existing suppliers only"
+      },
+      {
+        "icon": "fa-solid fa-shapes",
+        "label": "Kitchen categories only"
+      },
+      {
+        "icon": "fa-solid fa-gem",
+        "label": "Durable, repairable, plain"
+      },
+      {
+        "icon": "fa-solid fa-flask",
+        "label": "$24K sampling ceiling"
+      },
+      {
+        "icon": "fa-solid fa-certificate",
+        "label": "No new certifications"
+      },
+      {
+        "icon": "fa-solid fa-arrow-right",
+        "label": "Launch decided in S9.8"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Aug 18",
+        "what": "Prospector’s weekly sweep found 41 candidates; 6 cleared the 70-point affinity threshold, the most in a single week this year."
+      },
+      {
+        "when": "Aug 18",
+        "what": "Fad-vs-Trend Classifier flagged three of the six as fads with 12–18 month evidence windows — worth showing rather than filtering out silently."
+      },
+      {
+        "when": "Aug 19",
+        "what": "Sourcer matched four candidates to existing supplier capability, two of them at tooling we already own."
+      }
+    ],
+    "suppliers": [
+      {
+        "name": "Kessler Metalworks (K)",
+        "state": "strong fit",
+        "tone": "var(--green-700)",
+        "detail": "carbon steel, cast iron · MOQ 500 · tooling shared across 6 SKUs"
+      },
+      {
+        "name": "Arcadia Enamelworks (A)",
+        "state": "strong fit",
+        "tone": "var(--green-700)",
+        "detail": "enamel cast iron · MOQ 300 · new colours need 12 wks"
+      },
+      {
+        "name": "Meridian Filtration (M)",
+        "state": "OTD watch",
+        "tone": "var(--amber-700)",
+        "detail": "filtration, plastics · MOQ 1,000 · under review in S9.17"
+      },
+      {
+        "name": "Tsuyo Blades (T)",
+        "state": "strong fit",
+        "tone": "var(--green-700)",
+        "detail": "blades, stone · MOQ 250 · fastest sampling turnaround"
+      }
+    ],
+    "track": [
+      {
+        "label": "Candidates surfaced",
+        "note": "across four cycles",
+        "value": "148",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Sampled",
+        "note": "after affinity and economics screens",
+        "value": "9",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Reached launch",
+        "note": "through the S9.8 gate",
+        "value": "2",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Parked and revisited",
+        "note": "trigger fired, concept re-opened",
+        "value": "3",
+        "tone": "var(--green-700)"
+      }
+    ]
+  }
+}

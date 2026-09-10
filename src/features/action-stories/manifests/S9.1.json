@@ -1,0 +1,290 @@
+[
+  {
+    "code": "S9.1",
+    "name": "Assortment",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.dialNote"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "policy",
+        "blockType": "labelValueList",
+        "binding": "data.policy"
+      },
+      {
+        "slotName": "roles",
+        "blockType": "table",
+        "binding": "data.roles"
+      },
+      {
+        "slotName": "inputs",
+        "blockType": "labelValueList",
+        "binding": "data.inputs"
+      }
+    ]
+  },
+  {
+    "code": "S9.1",
+    "name": "Assortment",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "roles",
+        "blockType": "itemQueue",
+        "binding": "data.roles"
+      },
+      {
+        "slotName": "points",
+        "blockType": "series",
+        "binding": "data.points"
+      },
+      {
+        "slotName": "cols",
+        "blockType": "labelValueList",
+        "binding": "data.cols"
+      },
+      {
+        "slotName": "rows",
+        "blockType": "table",
+        "binding": "data.rows"
+      },
+      {
+        "slotName": "gaps",
+        "blockType": "table",
+        "binding": "data.gaps"
+      },
+      {
+        "slotName": "movement",
+        "blockType": "labelValueList",
+        "binding": "data.movement"
+      }
+    ]
+  },
+  {
+    "code": "S9.1",
+    "name": "Assortment",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "labelValueList",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_blocked",
+        "blockType": "flag",
+        "binding": "data.blocked"
+      },
+      {
+        "slotName": "guardrail_can_approve",
+        "blockType": "flag",
+        "binding": "data.canApprove"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.ctaLabel"
+      },
+      {
+        "slotName": "slateName",
+        "blockType": "text",
+        "binding": "data.slateName"
+      },
+      {
+        "slotName": "confLabel",
+        "blockType": "text",
+        "binding": "data.confLabel"
+      },
+      {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle"
+      },
+      {
+        "slotName": "heroSub",
+        "blockType": "text",
+        "binding": "data.heroSub"
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics"
+      },
+      {
+        "slotName": "moveBar",
+        "blockType": "labelValueList",
+        "binding": "data.moveBar"
+      },
+      {
+        "slotName": "slates",
+        "blockType": "itemQueue",
+        "binding": "data.slates"
+      },
+      {
+        "slotName": "approvedCount",
+        "blockType": "text",
+        "binding": "data.approvedCount"
+      },
+      {
+        "slotName": "toggleAllLabel",
+        "blockType": "text",
+        "binding": "data.toggleAllLabel"
+      },
+      {
+        "slotName": "groups",
+        "blockType": "table",
+        "binding": "data.groups"
+      },
+      {
+        "slotName": "focusTitle",
+        "blockType": "text",
+        "binding": "data.focusTitle"
+      },
+      {
+        "slotName": "focusMeta",
+        "blockType": "text",
+        "binding": "data.focusMeta"
+      },
+      {
+        "slotName": "focusRows",
+        "blockType": "table",
+        "binding": "data.focusRows"
+      },
+      {
+        "slotName": "focusFooter",
+        "blockType": "text",
+        "binding": "data.focusFooter"
+      },
+      {
+        "slotName": "totals",
+        "blockType": "labelValueList",
+        "binding": "data.totals"
+      },
+      {
+        "slotName": "policyStatus",
+        "blockType": "text",
+        "binding": "data.policyStatus"
+      },
+      {
+        "slotName": "basis",
+        "blockType": "labelValueList",
+        "binding": "data.basis"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.1",
+    "name": "Assortment",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "planLine",
+        "blockType": "text",
+        "binding": "data.planLine"
+      },
+      {
+        "slotName": "pushedCount",
+        "blockType": "text",
+        "binding": "data.pushedCount"
+      },
+      {
+        "slotName": "pushAllLabel",
+        "blockType": "text",
+        "binding": "data.pushAllLabel"
+      },
+      {
+        "slotName": "pushAllIcon",
+        "blockType": "text",
+        "binding": "data.pushAllIcon"
+      },
+      {
+        "slotName": "dests",
+        "blockType": "itemQueue",
+        "binding": "data.dests"
+      },
+      {
+        "slotName": "progressPct",
+        "blockType": "text",
+        "binding": "data.progressPct"
+      },
+      {
+        "slotName": "progressRows",
+        "blockType": "labelValueList",
+        "binding": "data.progressRows"
+      },
+      {
+        "slotName": "armCopy",
+        "blockType": "text",
+        "binding": "data.armCopy"
+      },
+      {
+        "slotName": "armBtnLabel",
+        "blockType": "text",
+        "binding": "data.armBtnLabel"
+      },
+      {
+        "slotName": "armBtnIcon",
+        "blockType": "text",
+        "binding": "data.armBtnIcon"
+      },
+      {
+        "slotName": "restoreLabel",
+        "blockType": "text",
+        "binding": "data.restoreLabel"
+      },
+      {
+        "slotName": "watchStatus",
+        "blockType": "text",
+        "binding": "data.watchStatus"
+      },
+      {
+        "slotName": "watches",
+        "blockType": "table",
+        "binding": "data.watches"
+      },
+      {
+        "slotName": "done",
+        "blockType": "flag",
+        "binding": "data.done"
+      },
+      {
+        "slotName": "closeLabel",
+        "blockType": "text",
+        "binding": "data.closeLabel"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  }
+]

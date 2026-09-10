@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.17-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-inventory);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-inventory) 12%, white);color:var(--mod-inventory);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Supplier performance · S9.17</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Supplier K +8% cost notice — should-cost says +2.9%</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-inventory)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-inventory)"></span>Lens: Inventory · Margin · Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-inventory);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Sourcer + Navigator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Supplier Scorecard Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Should-Cost Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.17-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.17-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.17-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-inventory) 10%, white);border:1px solid color-mix(in oklab, var(--mod-inventory) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-inventory);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.17-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-inventory) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-inventory) 12%, white);color:var(--mod-inventory);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-diagram-project" style="font-size:9px"></i>Cross-impact
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">every choice below flows here before it is approved</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:{{ impactTone }}">{{ impactNote }}</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ impact }}" as="m" hint-placeholder-count="5">
+              <div style="background:var(--ink-0);padding:11px 13px;display:flex;flex-direction:column;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-400)">{{ m.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:19px;font-weight:600;letter-spacing:-0.02em;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ m.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ plannerNeeded }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:12px;display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border-radius:var(--r-md);border:1px solid {{ ackBorder }};background:{{ ackBg }}">
+              <button type="button" onClick="{{ ackToggle }}" style="flex-shrink:0;margin-top:1px;width:20px;height:20px;border-radius:var(--r-xs);border:1.5px solid {{ ackBoxBorder }};background:{{ ackBoxBg }};color:var(--ink-0);cursor:pointer;display:grid;place-items:center;padding:0">
+                <i class="fa-solid fa-check" style="font-size:10px;opacity:{{ ackOpacity }}"></i>
+              </button>
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Planner has accepted the safety-stock impact</span>
+                <span style="font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ ackBody }}</span>
+              </span>
+              <a href="S9.3-1-reason.dc.html" style="flex-shrink:0;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-inventory) 10%, white);font-family:var(--font-mono);font-size:9.5px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--mod-inventory)">
+                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8.5px"></i>S9.3 Planner
+              </a>
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="4">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ s.border }};border-left:3px solid {{ s.mark }};border-radius:var(--r-lg);padding:14px 16px">
+            <div style="display:flex;align-items:flex-start gap:12px;gap:12px">
+              <span style="min-width:0;flex:1;display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="font-size:14px;font-weight:700;color:var(--ink-900)">{{ s.name }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ s.tier }} · {{ s.spend }} · {{ s.share }}</span>
+                  <sc-if value="{{ s.strategic }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 8px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-inventory) 12%, white);font-family:var(--font-mono);font-size:8.5px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--mod-inventory)">
+                      <i class="fa-solid fa-star" style="font-size:7.5px"></i>strategic
+                    </span>
+                  </sc-if>
+                  <span style="display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:var(--r-full);background:{{ s.issueTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ s.issueTone }}">{{ s.issue }}</span>
+                </span>
+                <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ s.context }}</span>
+              </span>
+              <span style="flex-shrink:0;display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:404px">
+                <sc-for list="{{ s.options }}" as="o" hint-placeholder-count="4">
+                  <button type="button" onClick="{{ o.pick }}" style="height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11.5px;font-weight:{{ o.weight }};transition:background var(--dur-fast) var(--ease-standard)">{{ o.label }}</button>
+                </sc-for>
+              </span>
+            </div>
+
+            <div style="margin-top:12px;display:grid;grid-template-columns:1fr 268px;gap:16px;padding:12px 14px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+              <div style="min-width:0;display:flex;flex-direction:column;gap:8px">
+                <span style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                  <span style="font-size:12.5px;font-weight:700;color:{{ s.planTone }}">{{ s.planTitle }}</span>
+                  <sc-if value="{{ s.planBadge }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:var(--r-full);background:{{ s.planBadgeTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ s.planBadgeTone }}">{{ s.planBadge }}</span>
+                  </sc-if>
+                </span>
+                <span style="font-size:11.5px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ s.planBody }}</span>
+                <sc-if value="{{ s.hasCandidates }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+                    <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Ranked candidates · click to select</span>
+                    <sc-for list="{{ s.candidates }}" as="c" hint-placeholder-count="3">
+                      <button type="button" onClick="{{ c.pick }}" style="width:100%;text-align:left;cursor:pointer;font-family:var(--font-sans);display:grid;grid-template-columns:18px 1fr 66px 68px 72px;gap:0 9px;align-items:center;padding:7px 8px;border:1px solid {{ c.border }};border-radius:var(--r-sm);background:{{ c.bg }}">
+                        <span style="width:14px;height:14px;border-radius:50%;border:1.5px solid {{ c.radioBorder }};background:{{ c.radioBg }};display:grid;place-items:center">
+                          <span style="width:5px;height:5px;border-radius:50%;background:var(--ink-0);opacity:{{ c.dotOpacity }};display:block"></span>
+                        </span>
+                        <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                          <span style="font-size:11.5px;font-weight:600;color:var(--ink-800)">{{ c.name }}</span>
+                          <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ c.note }}</span>
+                        </span>
+                        <span style="font-family:var(--font-mono);font-size:10.5px;color:{{ c.priceTone }};text-align:right;font-variant-numeric:tabular-nums">{{ c.price }}</span>
+                        <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ c.lead }}</span>
+                        <span style="justify-self:end;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-500)">{{ c.qual }}</span>
+                      </button>
+                    </sc-for>
+                  </span>
+                </sc-if>
+                <sc-if value="{{ s.hasTrade }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:flex;flex-wrap:wrap;gap:6px;margin-top:2px">
+                    <sc-for list="{{ s.trade }}" as="t" hint-placeholder-count="3">
+                      <span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11px;color:var(--ink-700)">
+                        <i class="{{ t.icon }}" style="font-size:9px;color:var(--ink-400)"></i>{{ t.label }}
+                      </span>
+                    </sc-for>
+                  </span>
+                </sc-if>
+              </div>
+              <div style="min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ s.paramTitle }}</span>
+                <sc-for list="{{ s.params }}" as="p" hint-placeholder-count="4">
+                  <div style="display:flex;align-items:baseline;gap:8px">
+                    <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ p.label }}</span>
+                    <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:{{ p.weight }};color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Decisions</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ summary }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ s.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ s.tone }}">{{ s.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Policy check</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:{{ policyTone }}">
+              <span style="width:7px;height:7px;border-radius:50%;background:{{ policyTone }}"></span>{{ policyStatus }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="{{ c.icon }}" style="font-size:10px;color:{{ c.tone }};margin-top:3px;flex-shrink:0;width:12px;text-align:center"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ c.label }}</span>
+                  <span style="font-size:11px;line-height:1.45;color:{{ c.noteTone }};text-wrap:pretty">{{ c.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ execNeeded }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ execToggle }}" style="margin-top:12px;width:100%;height:32px;border-radius:var(--r-sm);border:1px solid {{ execBorder }};background:{{ execBg }};color:{{ execFg }};cursor:pointer;font-family:var(--font-sans);font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:7px">
+              <i class="{{ execIcon }}" style="font-size:10px"></i>{{ execLabelBtn }}
+            </button>
+          </sc-if>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Where it lands</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ routes }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm)">
+                <i class="{{ r.icon }}" style="font-size:10px;color:{{ r.hue }};margin-top:2px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;font-weight:600;color:var(--ink-900)">{{ r.label }}</span>
+                  <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ r.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Logged either way</span>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Accepting an increase is a decision like any other. Every choice here is filed with the should-cost figure it was judged against, so the next review starts from the record rather than from memory.</p>
+          <div style="margin-top:10px;display:flex;align-items:baseline;gap:9px">
+            <span style="flex:1;font-family:var(--font-mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-400)">Ledger ref</span>
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-800)">LEDGER-SUP-0184</span>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--rose-50);font-size:11.5px;font-weight:500;color:var(--rose-700)">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size:10px"></i>{{ blockReason }}
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button type="button" style="height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">Export should-cost pack</button>
+        <sc-if value="{{ canApprove }}" hint-placeholder-val="{{ true }}">
+          <a href="S9.17-4-execute.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+            {{ ctaLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+          </a>
+        </sc-if>
+        <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+          <span style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-100);color:var(--ink-400);font-size:14px;font-weight:500;cursor:not-allowed">
+            <i class="fa-solid fa-lock" style="font-size:11px"></i>{{ ctaLabel }}
+          </span>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = {
+    choice: { K: 'negotiate', M: 'dual', V: 'exit', T: 'negotiate' },
+    cand: { K: 'nanjing', M: 'aquatek', V: 'alder' },
+    plannerAck: false,
+    execSign: false,
+  };
+
+  supplierData() {
+    return [
+      {
+        id: 'K', name: 'Kessler Metalworks', tier: 'Tier 1', spend: '$880K', share: '31% of spend', strategic: true,
+        issue: '+8% notice · OTD 94.1%', issueTint: 'var(--rose-50)', issueTone: 'var(--rose-700)',
+        context: 'Asked for 8% against a 2.9% should-cost move, while sitting two quarters below the Tier 1 OTD floor. Four SKUs are single-source and $374K of their POs are in flight.',
+        candidates: [
+          { id: 'nanjing', name: 'Nanjing Ironworks', note: 'same lane, 4 SKUs matched', price: '−1.8%', priceTone: 'var(--green-700)', lead: '38 days', qual: '14 wks' },
+          { id: 'hoyt', name: 'Hoyt Forge (US)', note: 'domestic, 2 SKUs matched', price: '+4.2%', priceTone: 'var(--amber-700)', lead: '21 days', qual: '8 wks' },
+          { id: 'brantome', name: 'Brantome SA', note: 'EU, premium finish', price: '+11.0%', priceTone: 'var(--rose-700)', lead: '30 days', qual: '10 wks' },
+        ],
+        plans: {
+          negotiate: {
+            title: 'Counter at +3.0% with an 18-month volume commitment', tone: 'var(--ink-900)',
+            badge: 'recommended', badgeTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', badgeTone: 'var(--mod-inventory)',
+            body: 'Open with the should-cost build-up, not with a number. Anchor at +2.9% index-linked, settle at +3.0% in exchange for volume they have not had committed before, and put the OTD recovery plan in the same letter so the two conversations cannot be separated.',
+            trade: [
+              { label: '18-month volume commitment', icon: 'fa-solid fa-box' },
+              { label: 'Net 45 → Net 60 terms', icon: 'fa-solid fa-clock' },
+              { label: 'Rolling 12-week forecast', icon: 'fa-solid fa-chart-line' },
+              { label: 'Index-linked clause at renewal', icon: 'fa-solid fa-link' },
+            ],
+            paramTitle: 'Targets',
+            params: [
+              { label: 'Opening anchor', value: '+2.9%', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Target', value: '+3.0%', tone: 'var(--green-700)', weight: '600' },
+              { label: 'Walk-away', value: '+5.0%', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'Terms value if won', value: '$31K cash', tone: 'var(--green-700)', weight: '500' },
+              { label: 'Response due', value: 'Oct 4', tone: 'var(--ink-800)', weight: '500' },
+            ],
+            costYr: 26.4, leadDays: 0, safetyK: 0, cashK: 31, marginPp: -0.33,
+          },
+          dual: {
+            title: 'Dual-source 40% of volume, hold K at 60%', tone: 'var(--ink-900)',
+            badge: null,
+            body: 'Qualify a second source on the four single-source SKUs and shift 40% of volume. It removes the concentration that produced this notice, but it costs 14 weeks, a safety-stock build, and K will read it as a shot across the bow — which may be the point.',
+            paramTitle: 'Qualification plan',
+            params: [
+              { label: 'Volume shifted', value: '40%', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Qualification', value: '14 wks', tone: 'var(--amber-700)', weight: '500' },
+              { label: 'Tooling + samples', value: '$29K', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Blended price', value: '+4.1%', tone: 'var(--amber-700)', weight: '600' },
+              { label: 'Concentration after', value: '19% of spend', tone: 'var(--green-700)', weight: '600' },
+            ],
+            costYr: 40.6, leadDays: 7, safetyK: 34, cashK: 0, marginPp: -0.51,
+          },
+          exit: {
+            title: 'Exit Kessler over 14 weeks, honouring all open POs', tone: 'var(--rose-700)',
+            badge: 'exec sign-off required', badgeTint: 'var(--rose-50)', badgeTone: 'var(--rose-700)',
+            body: 'Move all four SKUs to Nanjing at −1.8%. The unit price is better and the concentration risk goes away, but we lose 187 days of contract, absorb a 7-day lead-time increase and a $58K safety-stock build, and give up a supplier whose defect rate is the second-best in the base.',
+            paramTitle: 'Transition',
+            params: [
+              { label: 'Open POs honoured', value: '$374K', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Transition window', value: '14 wks', tone: 'var(--amber-700)', weight: '500' },
+              { label: 'Unit price change', value: '−1.8%', tone: 'var(--green-700)', weight: '600' },
+              { label: 'Lead time', value: '+7 days', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'Safety stock', value: '+$58K', tone: 'var(--rose-700)', weight: '600' },
+            ],
+            costYr: -15.8, leadDays: 7, safetyK: 58, cashK: 0, marginPp: 0.2,
+          },
+          accept: {
+            title: 'Accept +8.0% and log why', tone: 'var(--amber-700)',
+            badge: 'rationale required', badgeTint: 'var(--amber-50)', badgeTone: 'var(--amber-700)',
+            body: 'Logged rationale: "Accepted above should-cost to preserve delivery reliability into Q4 peak with no qualified alternate in place. Revisit at the Mar 31 renewal with the index-linked clause as the primary ask." Costs $70.4K a year and concedes the pattern for the next notice.',
+            paramTitle: 'Consequence',
+            params: [
+              { label: 'Annual cost', value: '+$70.4K', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'Above should-cost', value: '$44.9K', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'Gross margin', value: '−0.9pp', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'Next review', value: 'Mar 31', tone: 'var(--ink-800)', weight: '500' },
+            ],
+            costYr: 70.4, leadDays: 0, safetyK: 0, cashK: 0, marginPp: -0.9,
+          },
+        },
+      },
+      {
+        id: 'M', name: 'Meridian Filtration', tier: 'Tier 2', spend: '$511K', share: '18% of spend', strategic: false,
+        issue: 'OTD 89.2% · 4 quarters down', issueTint: 'var(--rose-50)', issueTone: 'var(--rose-700)',
+        context: 'No price issue — they run below should-cost. Delivery is the problem: 89.2% OTD against a 93% floor, a 61-hour response time, and two stockouts on the filter 3-pack traced to late inbound.',
+        candidates: [
+          { id: 'aquatek', name: 'Aquatek OEM', note: 'same certifications', price: '+0.9%', priceTone: 'var(--green-700)', lead: '24 days', qual: '11 wks' },
+          { id: 'clearspring', name: 'Clearspring Filtration', note: 'certified, 3 SKUs matched', price: '+2.4%', priceTone: 'var(--amber-700)', lead: '18 days', qual: '9 wks' },
+        ],
+        plans: {
+          negotiate: {
+            title: 'OTD recovery plan with a 90-day review', tone: 'var(--ink-900)', badge: null,
+            body: 'Written recovery plan with weekly delivery reporting and a 93% OTD commitment inside 90 days. Cheapest option and it keeps a supplier whose price discipline is good, but we carry interim safety stock and we have run this play with them once already.',
+            paramTitle: 'Commitments',
+            params: [
+              { label: 'OTD target', value: '≥ 93% in 90d', tone: 'var(--ink-800)', weight: '600' },
+              { label: 'Response SLA', value: '≤ 48 hrs', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Interim safety stock', value: '+$8K', tone: 'var(--amber-700)', weight: '500' },
+              { label: 'Escalation if missed', value: 'dual-source', tone: 'var(--rose-700)', weight: '500' },
+            ],
+            costYr: 0, leadDays: 0, safetyK: 8, cashK: 0, marginPp: 0,
+          },
+          dual: {
+            title: 'Dual-source 50% to Aquatek', tone: 'var(--ink-900)',
+            badge: 'recommended', badgeTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', badgeTone: 'var(--mod-inventory)',
+            body: 'Split the volume rather than replace it. Aquatek quotes +0.9% at a shorter lead time and holds the same certifications, so 50% of the cartridge volume stops depending on a supplier that has missed four quarters running. Meridian keeps the rest and a reason to fix it.',
+            paramTitle: 'Qualification plan',
+            params: [
+              { label: 'Volume shifted', value: '50%', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Qualification', value: '11 wks', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Certification transfer', value: '$16K', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Blended price', value: '+0.5%', tone: 'var(--green-700)', weight: '600' },
+              { label: 'Lead time', value: '−4 days', tone: 'var(--green-700)', weight: '600' },
+            ],
+            costYr: 2.3, leadDays: -4, safetyK: 12, cashK: 0, marginPp: -0.03,
+          },
+          exit: {
+            title: 'Replace Meridian entirely', tone: 'var(--rose-700)', badge: null,
+            body: 'Move all cartridge and pitcher volume to Aquatek. Simplifies the supply base but concentrates a category on a supplier we have never run at full volume, and the stockout risk during transition sits on our highest-repeat SKU.',
+            paramTitle: 'Transition',
+            params: [
+              { label: 'Open POs honoured', value: '$24K', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Transition window', value: '11 wks', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Unit price change', value: '+0.9%', tone: 'var(--amber-700)', weight: '600' },
+              { label: 'Safety stock', value: '+$18K', tone: 'var(--rose-700)', weight: '600' },
+            ],
+            costYr: 4.6, leadDays: -6, safetyK: 18, cashK: 0, marginPp: -0.06,
+          },
+          accept: {
+            title: 'Accept current performance and log why', tone: 'var(--amber-700)',
+            badge: 'rationale required', badgeTint: 'var(--amber-50)', badgeTone: 'var(--amber-700)',
+            body: 'Logged rationale: "No action this quarter; qualification capacity committed to Kessler alternates. Accepting an estimated $14K of stockout cost and revisiting in January." Honest, and cheaper than pretending we have the bandwidth for both.',
+            paramTitle: 'Consequence',
+            params: [
+              { label: 'Stockout cost', value: '$14K / yr', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'OTD', value: 'stays 89.2%', tone: 'var(--rose-700)', weight: '500' },
+              { label: 'Next review', value: 'January', tone: 'var(--ink-800)', weight: '500' },
+            ],
+            costYr: 14, leadDays: 0, safetyK: 0, cashK: 0, marginPp: -0.18,
+          },
+        },
+      },
+      {
+        id: 'V', name: 'Verdant Woodcraft', tier: 'Tier 3', spend: '$227K', share: '8% of spend', strategic: false,
+        issue: '3,140 PPM · returns 9.2%', issueTint: 'var(--rose-50)', issueTone: 'var(--rose-700)',
+        context: 'Defect rate 640 PPM above the Tier 3 ceiling and rising for six quarters. Returns on the affected SKUs run 9.2% against a 4% norm — the unit-price discount is smaller than what the defects cost us.',
+        candidates: [
+          { id: 'alder', name: 'Alder & Co', note: 'FSC certified, better finish', price: '+5.8%', priceTone: 'var(--amber-700)', lead: '26 days', qual: '6 wks' },
+          { id: 'lindmark', name: 'Lindmark Woodworks', note: 'higher grade, EU', price: '+9.2%', priceTone: 'var(--rose-700)', lead: '32 days', qual: '7 wks' },
+        ],
+        plans: {
+          negotiate: {
+            title: 'CAPA on splitting and finish defects', tone: 'var(--ink-900)', badge: null,
+            body: 'Corrective action on the two defect modes with an 8-week verification window and a chargeback for the return cost on affected lots. Keeps the price, but six quarters of decline is a pattern rather than an incident.',
+            paramTitle: 'Commitments',
+            params: [
+              { label: 'PPM target', value: '≤ 2,500 in 8wk', tone: 'var(--ink-800)', weight: '600' },
+              { label: 'Chargeback', value: '$9K', tone: 'var(--green-700)', weight: '500' },
+              { label: 'Verification', value: '3 lots', tone: 'var(--ink-800)', weight: '500' },
+            ],
+            costYr: -9, leadDays: 0, safetyK: 0, cashK: 0, marginPp: 0.11,
+          },
+          dual: {
+            title: 'Split volume with Alder & Co', tone: 'var(--ink-900)', badge: null,
+            body: 'Half the volume to a better-finish supplier while Verdant works its CAPA. Costs more per unit and keeps two relationships alive for a Tier 3 category that does not really justify either.',
+            paramTitle: 'Qualification plan',
+            params: [
+              { label: 'Volume shifted', value: '50%', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Qualification', value: '6 wks', tone: 'var(--green-700)', weight: '500' },
+              { label: 'Blended price', value: '+2.9%', tone: 'var(--amber-700)', weight: '600' },
+              { label: 'Returns saving', value: '−$10K', tone: 'var(--green-700)', weight: '500' },
+            ],
+            costYr: -3.4, leadDays: 1, safetyK: 4, cashK: 0, marginPp: 0.04,
+          },
+          exit: {
+            title: 'Replace with Alder & Co in 6 weeks', tone: 'var(--ink-900)',
+            badge: 'recommended', badgeTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', badgeTone: 'var(--mod-inventory)',
+            body: 'No tooling, no certification, six weeks to qualify. Unit price rises 5.8% and the returns saving is $21K a year, so the switch pays for itself twice over. This is the cheapest supplier in the base to replace and the one with the clearest reason to.',
+            paramTitle: 'Transition',
+            params: [
+              { label: 'Open POs honoured', value: '$14K', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Transition window', value: '6 wks', tone: 'var(--green-700)', weight: '500' },
+              { label: 'Unit price change', value: '+5.8%', tone: 'var(--amber-700)', weight: '600' },
+              { label: 'Returns saving', value: '−$21K / yr', tone: 'var(--green-700)', weight: '600' },
+              { label: 'Net effect', value: '−$7.8K / yr', tone: 'var(--green-700)', weight: '600' },
+            ],
+            costYr: -7.8, leadDays: 2, safetyK: 6, cashK: 0, marginPp: 0.1,
+          },
+          accept: {
+            title: 'Accept the defect rate and log why', tone: 'var(--amber-700)',
+            badge: 'rationale required', badgeTint: 'var(--amber-50)', badgeTone: 'var(--amber-700)',
+            body: 'Logged rationale: "Tier 3 spend, no capacity to run a third transition this quarter." Defensible only if the returns cost is written down next to it: $21K a year, larger than the price advantage.',
+            paramTitle: 'Consequence',
+            params: [
+              { label: 'Returns cost', value: '$21K / yr', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'PPM', value: 'stays 3,140', tone: 'var(--rose-700)', weight: '500' },
+              { label: 'Next review', value: 'January', tone: 'var(--ink-800)', weight: '500' },
+            ],
+            costYr: 21, leadDays: 0, safetyK: 0, cashK: 0, marginPp: -0.26,
+          },
+        },
+      },
+      {
+        id: 'T', name: 'Tsuyo Blades', tier: 'Tier 2', spend: '$398K', share: '14% of spend', strategic: false,
+        issue: 'Net 30 vs Net 45 target', issueTint: 'var(--amber-50)', issueTone: 'var(--amber-700)',
+        context: 'Performance is fine and pricing tracks should-cost almost exactly. The only thing on the table is terms — Net 30 against a Net 45 target, worth $19K of working capital a year at current spend.',
+        candidates: [
+          { id: 'seki', name: 'Seki Cutlery Co', note: 'comparable steel grade', price: '+3.1%', priceTone: 'var(--amber-700)', lead: '34 days', qual: '12 wks' },
+        ],
+        plans: {
+          negotiate: {
+            title: 'Terms-only ask: Net 30 → Net 45', tone: 'var(--ink-900)',
+            badge: 'recommended', badgeTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', badgeTone: 'var(--mod-inventory)',
+            body: 'No price conversation at all. Ask for 15 days of terms in exchange for a two-year renewal and consolidated monthly ordering, which reduces their admin as much as it helps our cash. Walk-away is simply staying where we are.',
+            trade: [
+              { label: 'Two-year renewal', icon: 'fa-solid fa-file-signature' },
+              { label: 'Consolidated monthly POs', icon: 'fa-solid fa-layer-group' },
+              { label: 'Volume +16% forecast shared', icon: 'fa-solid fa-chart-line' },
+            ],
+            paramTitle: 'Targets',
+            params: [
+              { label: 'Target terms', value: 'Net 45', tone: 'var(--green-700)', weight: '600' },
+              { label: 'Cash released', value: '$19K', tone: 'var(--green-700)', weight: '600' },
+              { label: 'Price change', value: 'none', tone: 'var(--ink-800)', weight: '500' },
+              { label: 'Walk-away', value: 'stay Net 30', tone: 'var(--ink-500)', weight: '500' },
+            ],
+            costYr: 0, leadDays: 0, safetyK: 0, cashK: 19, marginPp: 0,
+          },
+          dual: {
+            title: 'Dual-source for leverage', tone: 'var(--ink-900)', badge: null,
+            body: 'Qualifying Seki would give us a second knife source, but it costs 12 weeks and $31K to gain leverage in a negotiation about 15 days of payment terms. The cost of the tool exceeds the value of the win.',
+            paramTitle: 'Qualification plan',
+            params: [
+              { label: 'Qualification', value: '12 wks', tone: 'var(--amber-700)', weight: '500' },
+              { label: 'Tooling', value: '$31K', tone: 'var(--rose-700)', weight: '500' },
+              { label: 'Price', value: '+3.1%', tone: 'var(--rose-700)', weight: '600' },
+            ],
+            costYr: 12.3, leadDays: 3, safetyK: 14, cashK: 0, marginPp: -0.15,
+          },
+          exit: {
+            title: 'Exit Tsuyo', tone: 'var(--rose-700)', badge: null,
+            body: 'No performance case for this and no price case either. Included for completeness; choosing it would cost $31K and a 12-week transition to replace a supplier meeting every standard except a terms target.',
+            paramTitle: 'Transition',
+            params: [
+              { label: 'Transition window', value: '12 wks', tone: 'var(--amber-700)', weight: '500' },
+              { label: 'Price change', value: '+3.1%', tone: 'var(--rose-700)', weight: '600' },
+              { label: 'Safety stock', value: '+$22K', tone: 'var(--rose-700)', weight: '600' },
+            ],
+            costYr: 12.3, leadDays: 3, safetyK: 22, cashK: 0, marginPp: -0.15,
+          },
+          accept: {
+            title: 'Leave terms as they are and log why', tone: 'var(--ink-700)', badge: null,
+            body: 'Logged rationale: "Terms ask deferred to the renewal in April to keep one clean conversation rather than two." Costs nothing today and keeps the $19K on the table for later.',
+            paramTitle: 'Consequence',
+            params: [
+              { label: 'Cash forgone', value: '$19K', tone: 'var(--amber-700)', weight: '600' },
+              { label: 'Next review', value: 'April renewal', tone: 'var(--ink-800)', weight: '500' },
+            ],
+            costYr: 0, leadDays: 0, safetyK: 0, cashK: 0, marginPp: 0,
+          },
+        },
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const list = this.supplierData();
+    const optDefs = [
+      { key: 'negotiate', label: 'Negotiate' },
+      { key: 'dual', label: 'Dual-source' },
+      { key: 'exit', label: 'Exit' },
+      { key: 'accept', label: 'Accept' },
+    ];
+
+    let costYr = 0, safetyK = 0, cashK = 0, marginPp = 0, maxLead = 0;
+    list.forEach((s) => {
+      const p = s.plans[this.state.choice[s.id]];
+      costYr += p.costYr; safetyK += p.safetyK; cashK += p.cashK; marginPp += p.marginPp;
+      if (p.leadDays > maxLead) maxLead = p.leadDays;
+    });
+
+    const strategicExit = list.filter((s) => s.strategic && this.state.choice[s.id] === 'exit');
+    const plannerNeeded = safetyK > 0;
+    const execNeeded = strategicExit.length > 0;
+    const blocked = (plannerNeeded && !this.state.plannerAck) || (execNeeded && !this.state.execSign);
+    const blockReason = execNeeded && !this.state.execSign
+      ? 'Exiting a strategic supplier needs exec sign-off'
+      : 'Planner has to accept the $' + safetyK + 'K safety-stock impact first';
+
+    const negotiations = list.filter((s) => this.state.choice[s.id] === 'negotiate').length;
+    const duals = list.filter((s) => this.state.choice[s.id] === 'dual').length;
+    const exits = list.filter((s) => this.state.choice[s.id] === 'exit').length;
+    const accepts = list.filter((s) => this.state.choice[s.id] === 'accept').length;
+    const fmt = (v) => (v < 0 ? '−$' : '+$') + Math.abs(v).toFixed(1) + 'K';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      pinnedTop: negotiations + ' negotiate · ' + duals + ' dual-source · ' + exits + ' exit · ' + accepts + ' accept',
+      pinnedSub: 'annual cost ' + fmt(costYr) + ' · safety stock +$' + safetyK + 'K · cash +$' + cashK + 'K',
+
+      impact: [
+        { label: 'Annual cost', value: fmt(costYr), tone: costYr <= 0 ? 'var(--green-700)' : costYr < 30 ? 'var(--amber-700)' : 'var(--rose-700)', note: 'across all four decisions, at current volume' },
+        { label: 'Gross margin', value: (marginPp >= 0 ? '+' : '−') + Math.abs(marginPp).toFixed(2) + 'pp', tone: marginPp >= 0 ? 'var(--green-700)' : 'var(--rose-700)', note: 'blended effect once changes land' },
+        { label: 'Lead time', value: maxLead > 0 ? '+' + maxLead + ' days' : maxLead + ' days', tone: maxLead > 0 ? 'var(--rose-700)' : 'var(--green-700)', note: 'worst affected category' },
+        { label: 'Safety stock', value: '+$' + safetyK + 'K', tone: safetyK > 40 ? 'var(--rose-700)' : safetyK > 0 ? 'var(--amber-700)' : 'var(--green-700)', note: 'goes to Planner before approval' },
+        { label: 'Cash released', value: '+$' + cashK + 'K', tone: cashK > 0 ? 'var(--green-700)' : 'var(--ink-500)', note: 'one-time, from terms extensions' },
+      ],
+      impactNote: blocked ? 'blocked · see policy check' : 'all impacts accepted',
+      impactTone: blocked ? 'var(--rose-700)' : 'var(--green-700)',
+
+      plannerNeeded,
+      ackToggle: () => this.setState((s) => ({ plannerAck: !s.plannerAck })),
+      ackOpacity: this.state.plannerAck ? 1 : 0,
+      ackBoxBorder: this.state.plannerAck ? 'var(--ink-900)' : 'var(--ink-300)',
+      ackBoxBg: this.state.plannerAck ? 'var(--ink-900)' : 'var(--ink-0)',
+      ackBorder: this.state.plannerAck ? 'color-mix(in oklab, var(--green-500) 30%, white)' : 'var(--rose-200, color-mix(in oklab, var(--rose-500) 30%, white))',
+      ackBg: this.state.plannerAck ? 'var(--green-50)' : 'var(--rose-50)',
+      ackBody: 'Lead-time changes add $' + safetyK + 'K of safety stock across ' + (maxLead > 0 ? 'the affected categories' : 'the interim period') + '. The buy plan cannot absorb that silently — Planner sees it here, before anything is agreed with a supplier.',
+
+      suppliers: list.map((s) => {
+        const choice = this.state.choice[s.id];
+        const plan = s.plans[choice];
+        const needsCand = choice === 'dual' || choice === 'exit';
+        const isBad = choice === 'accept' || (s.strategic && choice === 'exit');
+        return {
+          name: s.name, tier: s.tier, spend: s.spend, share: s.share, strategic: s.strategic,
+          issue: s.issue, issueTint: s.issueTint, issueTone: s.issueTone, context: s.context,
+          border: isBad ? 'color-mix(in oklab, var(--rose-500) 34%, white)' : 'var(--ink-100)',
+          mark: isBad ? 'var(--rose-500)' : 'var(--mod-inventory)',
+          options: optDefs.map((o) => ({
+            label: o.label,
+            pick: () => this.setState((st) => {
+              const c = Object.assign({}, st.choice);
+              c[s.id] = o.key;
+              return { choice: c };
+            }),
+            bg: choice === o.key ? (o.key === 'accept' || (s.strategic && o.key === 'exit') ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-0)',
+            fg: choice === o.key ? 'var(--ink-0)' : 'var(--ink-600)',
+            border: choice === o.key ? (o.key === 'accept' || (s.strategic && o.key === 'exit') ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-200)',
+            weight: choice === o.key ? '600' : '500',
+          })),
+          planTitle: plan.title, planTone: plan.tone, planBody: plan.body,
+          planBadge: plan.badge || null, planBadgeTint: plan.badgeTint, planBadgeTone: plan.badgeTone,
+          paramTitle: plan.paramTitle, params: plan.params,
+          hasTrade: !!plan.trade, trade: plan.trade || [],
+          hasCandidates: needsCand && s.candidates.length > 0,
+          candidates: s.candidates.map((c) => {
+            const active = this.state.cand[s.id] === c.id;
+            return {
+              name: c.name, note: c.note, price: c.price, priceTone: c.priceTone, lead: c.lead, qual: c.qual,
+              pick: () => this.setState((st) => {
+                const cc = Object.assign({}, st.cand);
+                cc[s.id] = c.id;
+                return { cand: cc };
+              }),
+              bg: active ? 'color-mix(in oklab, var(--mod-inventory) 6%, white)' : 'var(--ink-0)',
+              border: active ? 'color-mix(in oklab, var(--mod-inventory) 34%, white)' : 'var(--ink-100)',
+              radioBorder: active ? 'var(--mod-inventory)' : 'var(--ink-300)',
+              radioBg: active ? 'var(--mod-inventory)' : 'var(--ink-0)',
+              dotOpacity: active ? 1 : 0,
+            };
+          }),
+        };
+      }),
+
+      summary: [
+        { label: 'Negotiate', value: String(negotiations), tone: 'var(--ink-900)' },
+        { label: 'Dual-source', value: String(duals), tone: 'var(--mod-inventory)' },
+        { label: 'Exit', value: String(exits), tone: exits ? 'var(--amber-700)' : 'var(--ink-500)' },
+        { label: 'Accept with rationale', value: String(accepts), tone: accepts ? 'var(--rose-700)' : 'var(--ink-500)' },
+        { label: 'Qualification programmes', value: String(duals + exits), tone: 'var(--ink-900)' },
+      ],
+
+      policyStatus: blocked ? 'blocked' : 'in band',
+      policyTone: blocked ? 'var(--rose-700)' : 'var(--green-700)',
+      checks: [
+        {
+          label: 'Open POs honoured',
+          icon: 'fa-solid fa-circle-check', tone: 'var(--green-700)', noteTone: 'var(--ink-400)',
+          note: 'Every transition honours the $412K in flight. No cancellation is used as leverage.',
+        },
+        {
+          label: 'Strategic-supplier exit',
+          icon: execNeeded ? (this.state.execSign ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark') : 'fa-solid fa-circle-check',
+          tone: execNeeded && !this.state.execSign ? 'var(--rose-700)' : 'var(--green-700)',
+          noteTone: execNeeded && !this.state.execSign ? 'var(--rose-700)' : 'var(--ink-400)',
+          note: execNeeded
+            ? (this.state.execSign ? 'Exec sign-off recorded for the Kessler exit.' : 'Kessler is flagged strategic. Exit needs exec sign-off and a qualified alternate already producing.')
+            : 'No strategic supplier is being exited.',
+        },
+        {
+          label: 'Safety-stock impact accepted',
+          icon: plannerNeeded ? (this.state.plannerAck ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark') : 'fa-solid fa-circle-check',
+          tone: plannerNeeded && !this.state.plannerAck ? 'var(--rose-700)' : 'var(--green-700)',
+          noteTone: plannerNeeded && !this.state.plannerAck ? 'var(--rose-700)' : 'var(--ink-400)',
+          note: plannerNeeded
+            ? (this.state.plannerAck ? '$' + safetyK + 'K accepted into the buy plan.' : '$' + safetyK + 'K of safety stock has to reach Planner before approval.')
+            : 'No lead-time change, no safety-stock effect.',
+        },
+        {
+          label: 'Nothing sent automatically',
+          icon: 'fa-solid fa-lock', tone: 'var(--ink-400)', noteTone: 'var(--ink-400)',
+          note: 'Briefs and messages are drafted in Execute. A person sends them, at every dial setting.',
+        },
+        {
+          label: 'Rationale logged',
+          icon: accepts > 0 ? 'fa-solid fa-circle-exclamation' : 'fa-solid fa-circle-check',
+          tone: accepts > 0 ? 'var(--amber-700)' : 'var(--green-700)', noteTone: 'var(--ink-400)',
+          note: accepts > 0
+            ? accepts + ' acceptance filed with the should-cost figure it was judged against.'
+            : 'Every decision files to LEDGER-SUP-0184 with its should-cost basis.',
+        },
+      ],
+      execNeeded,
+      execToggle: () => this.setState((s) => ({ execSign: !s.execSign })),
+      execLabelBtn: this.state.execSign ? 'Exec sign-off recorded' : 'Record exec sign-off',
+      execIcon: this.state.execSign ? 'fa-solid fa-check' : 'fa-solid fa-signature',
+      execBg: this.state.execSign ? 'var(--green-50)' : 'var(--ink-0)',
+      execFg: this.state.execSign ? 'var(--green-700)' : 'var(--ink-700)',
+      execBorder: this.state.execSign ? 'color-mix(in oklab, var(--green-500) 30%, white)' : 'var(--ink-200)',
+
+      routes: [
+        { label: 'Negotiation briefs', note: negotiations + ' drafted for Sourcer, with anchors and trade currency', icon: 'fa-solid fa-file-lines', hue: 'var(--mod-inventory)' },
+        { label: 'Supplier messages', note: 'drafted, held for human review — never auto-sent', icon: 'fa-solid fa-envelope', hue: 'var(--ink-600)' },
+        { label: 'Buy-plan changes', note: 'safety stock and lead times to Planner via S9.3', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)' },
+        { label: 'Qualification tasks', note: (duals + exits) + ' programmes with sample runs and sign-off gates', icon: 'fa-solid fa-clipboard-check', hue: 'var(--ink-600)' },
+      ],
+
+      blocked,
+      canApprove: !blocked,
+      blockReason,
+      ctaLabel: 'Approve 4 decisions & continue',
+      footStatus: 'Decide · ' + negotiations + ' negotiate, ' + duals + ' dual-source, ' + exits + ' exit, ' + accepts + ' accept · ' + fmt(costYr) + ' / yr',
+      footTone: blocked ? 'var(--rose-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

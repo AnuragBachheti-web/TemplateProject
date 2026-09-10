@@ -1,0 +1,492 @@
+{
+  "code": "S10.6",
+  "stageKey": "execute",
+  "name": "Peak readiness",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "T-4\ndays",
+    "pinMark": "var(--mod-actions)",
+    "pinTone": "var(--mod-actions)",
+    "pinnedTop": "0 of 5 workstreams live",
+    "pinnedSub": "contract signed · overrides pending T-0",
+    "tChip": "T-4 days",
+    "tChipBg": "var(--amber-50)",
+    "tChipBorder": "color-mix(in oklab, var(--amber-500) 26%, white)",
+    "tChipTone": "var(--amber-700)",
+    "planLine": "Inventory goes first because the FBA cutoff does not move. Everything downstream of it can wait a few hours; freight cannot.",
+    "pushedCount": "0 / 5",
+    "runAllLabel": "Run the checklist",
+    "runAllIcon": "fa-solid fa-play",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "stages": [
+      {
+        "name": "Inventory · air freight and transfers",
+        "meta": "tendered before the FBA cutoff · 31 hours of margin, not 31 days",
+        "icon": "fa-solid fa-boxes-stacked",
+        "hue": "var(--mod-inventory)",
+        "doorHref": "S9.2-4-execute.dc.html",
+        "doorLabel": "S9.2 replenishment",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "cardBorder": "color-mix(in oklab, var(--rose-500) 26%, white)",
+        "headBg": "var(--rose-50)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Tender",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Air freight tendered · 2 lanes",
+            "detail": "360 units of Dutch Oven and 180 of Sauté Pan booked on Aug 20 departures, arriving Aug 22 — one day before the window opens.",
+            "value": "−$3,100",
+            "valueTone": "var(--rose-700)",
+            "tag": "before cutoff",
+            "tagIcon": "fa-solid fa-plane",
+            "tagTint": "var(--rose-50)",
+            "tagTone": "var(--rose-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "West-node transfer created",
+            "detail": "140 units moved to the East node for $340 of freight, covering the balance of the Sauté Pan gap without air.",
+            "value": "−$340",
+            "valueTone": "var(--ink-900)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Event cover recalculated",
+            "detail": "All 14 event SKUs now clear P50 cover for the full 96 hours. Two clear P90 as well; the rest are a P50 plan by design.",
+            "value": "14 of 14",
+            "valueTone": "var(--green-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Ads · budgets staged and armed",
+        "meta": "$52K across four channels · arms at T-0, not now",
+        "icon": "fa-solid fa-bullseye",
+        "hue": "var(--mod-ads)",
+        "doorHref": "S9.7-4-execute.dc.html",
+        "doorLabel": "S9.7 ads",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for freight",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Event budgets staged",
+            "detail": "Amazon $28K, Google $11K, Meta $8K, TikTok $5K — written to each platform as scheduled changes that take effect at 00:01 on Aug 23.",
+            "value": "$52,000",
+            "valueTone": "var(--mod-ads)",
+            "tag": "arms at t-0",
+            "tagIcon": "fa-solid fa-clock",
+            "tagTint": "color-mix(in oklab, var(--mod-ads) 12%, white)",
+            "tagTone": "var(--mod-ads)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Pacing authority armed at Assist",
+            "detail": "Budget may move between armed campaigns while mROAS holds above 1.4×, up to the +180% daily cap. New campaigns and new creative still ask.",
+            "value": "+180% cap",
+            "valueTone": "var(--mod-actions)",
+            "tag": "within bounds",
+            "tagIcon": "fa-solid fa-gauge-high",
+            "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "tagTone": "var(--mod-actions)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Creative fatigue watch to hourly",
+            "detail": "Frequency and CTR decay checked hourly rather than daily. In a 96-hour window, a daily check is two data points.",
+            "value": "hourly",
+            "valueTone": "var(--ink-900)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Creative and listings",
+        "meta": "reduced DTC lineup · canonical check re-run on all 14 event listings",
+        "icon": "fa-solid fa-images",
+        "hue": "var(--mod-intel)",
+        "doorHref": "S10.5-4-execute.dc.html",
+        "doorLabel": "S10.5 integrity",
+        "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for freight",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "DTC lineup reduced to what exists",
+            "detail": "Two email sends and five social variants instead of three and eight. Costs about $6K of the $48K DTC forecast, and the send calendar is rebuilt around what is real.",
+            "value": "−$6K rev",
+            "valueTone": "var(--amber-700)",
+            "tag": "stated cost",
+            "tagIcon": "fa-solid fa-scissors",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Event listings verified against canonical",
+            "detail": "All 14 passed the 10.5 field-level check this morning, and the fast-lane monitor cadence holds through the window — a hero image drifting during Prime Fall is a different kind of expensive.",
+            "value": "14 clean",
+            "valueTone": "var(--green-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Deal badges and A+ scheduled",
+            "detail": "Amazon and Walmart deal imagery scheduled to publish at 00:01 and revert at expiry, so nothing advertises a price that has ended.",
+            "value": "13 assets",
+            "valueTone": "var(--ink-900)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Fulfilment and account health",
+        "meta": "handling buffer armed for the window · hourly metric polling",
+        "icon": "fa-solid fa-heart-pulse",
+        "hue": "var(--mod-actions)",
+        "doorHref": "S10.3-4-execute.dc.html",
+        "doorLabel": "S10.3 health",
+        "tint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for freight",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Handling-time buffer armed",
+            "detail": "+1 day on East-node SKUs from Aug 23 to Aug 27. Costs roughly $4.2K of revenue in conversion and keeps late shipment under 4% through the Monday that broke last BFCM.",
+            "value": "−$4.2K rev",
+            "valueTone": "var(--amber-700)",
+            "tag": "window only",
+            "tagIcon": "fa-solid fa-shield-halved",
+            "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "tagTone": "var(--mod-actions)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Account metrics to hourly polling",
+            "detail": "Late shipment, ODR and cancellation checked hourly with a 0.3pp pre-alarm, which is tighter than the marketplace threshold on purpose.",
+            "value": "3 metrics",
+            "valueTone": "var(--ink-900)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "3PL notified with the volume forecast",
+            "detail": "P50 and P90 daily order counts sent to both nodes, with the Monday peak called out explicitly rather than left in a spreadsheet.",
+            "value": "both nodes",
+            "valueTone": "var(--ink-900)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Cash and monitoring",
+        "meta": "credit line pre-arranged · war room and post-event readout scheduled",
+        "icon": "fa-solid fa-coins",
+        "hue": "var(--mod-cash)",
+        "doorHref": "S10.2-4-execute.dc.html",
+        "doorLabel": "S10.2 cash",
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for freight",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Credit line pre-arranged",
+            "detail": "$60K available on demand at 9.4% for the sixteen days of settlement lag. About $470 of interest, drawn only if the trough needs it.",
+            "value": "−$470",
+            "valueTone": "var(--ink-900)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "War room opens at T-0",
+            "detail": "Pacing tiles per lens go live at 00:01 with in-flight adjustment cards labelled by authority level, so nobody has to guess whether Realify acted or asked.",
+            "value": "Aug 23 · 00:01",
+            "valueTone": "var(--mod-actions)",
+            "tag": "live screen",
+            "tagIcon": "fa-solid fa-tower-broadcast",
+            "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "tagTone": "var(--mod-actions)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Post-event readout scheduled",
+            "detail": "Incrementality measured at +14 days against the post-event trough, not against the week before. Learnings annotate to the Ledger for next year’s T-8 card.",
+            "value": "Sep 10",
+            "valueTone": "var(--mod-cash)",
+            "tag": "trough-adjusted",
+            "tagIcon": "fa-solid fa-chart-line",
+            "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+            "tagTone": "var(--mod-cash)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "pingState": "sends with creative",
+    "pingTone": "var(--ink-400)",
+    "pings": [
+      {
+        "owner": "Studio lead",
+        "role": "creative",
+        "what": "Three rush assets confirmed for tomorrow 18:00; the other three fall back to evergreen and the send calendar already assumes it.",
+        "due": "Aug 21 · 18:00",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "owner": "East 3PL",
+        "role": "fulfilment",
+        "what": "Monday staffing commitment requested with last year’s eleven suppressed days attached. The handling buffer is armed either way.",
+        "due": "Aug 21 · 12:00",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "owner": "Freight broker",
+        "role": "inbound",
+        "what": "Air waybills for both lanes, confirmation needed before the FBA cutoff at 23:59 tomorrow.",
+        "due": "Aug 20 · 23:59",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "bg": "var(--ink-25)"
+      }
+    ],
+    "contractBg": "var(--ink-0)",
+    "contractBorder": "var(--ink-100)",
+    "contractState": "Signed",
+    "contractSub": "arms at T-0 · Aug 23 · 00:01 PT",
+    "clauses": [
+      {
+        "label": "Spend caps +180%",
+        "state": "arms t-0",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Repricing every 15 min",
+        "state": "arms t-0",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Promo depth to 30%",
+        "state": "arms t-0",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Transfers to $4K freight",
+        "state": "arms t-0",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Pacing at Assist",
+        "state": "arms t-0",
+        "tone": "var(--mod-actions)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Workstreams live",
+        "value": "0 of 5",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Checklist items",
+        "value": "0 of 15",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Freight tendered",
+        "value": "pending",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Budgets staged",
+        "value": "$0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Event cover at P50",
+        "value": "12 of 14",
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "deadlines": [
+      {
+        "label": "FBA inbound cutoff",
+        "left": "31 hours",
+        "detail": "Aug 20 · 23:59 — freight must be tendered",
+        "pct": 82,
+        "tone": "var(--rose-700)",
+        "detailTone": "var(--ink-400)"
+      },
+      {
+        "label": "WFS inbound cutoff",
+        "left": "2 days",
+        "detail": "Aug 21 · 18:00 — covered by the West transfer",
+        "pct": 64,
+        "tone": "var(--amber-700)",
+        "detailTone": "var(--ink-400)"
+      },
+      {
+        "label": "Creative delivery",
+        "left": "2 days",
+        "detail": "6 of 15 DTC assets outstanding",
+        "pct": 60,
+        "tone": "var(--amber-700)",
+        "detailTone": "var(--ink-400)"
+      },
+      {
+        "label": "Event opens",
+        "left": "4 days",
+        "detail": "Aug 23 · 00:01 PT — contract and budgets arm together",
+        "pct": 40,
+        "tone": "var(--mod-actions)",
+        "detailTone": "var(--ink-400)"
+      }
+    ],
+    "warBg": "var(--ink-0)",
+    "warBorder": "var(--ink-100)",
+    "warTone": "var(--ink-400)",
+    "warState": "opens at T-0",
+    "warCopy": "The war-room screen goes live at 00:01 on Aug 23 with pacing per lens and adjustment cards labelled by authority level. Available to preview before then.",
+    "warBtnBg": "var(--ink-0)",
+    "warBtnFg": "var(--ink-800)",
+    "warBtnLabel": "Preview the war room",
+    "done": false,
+    "closeLabel": "Preview the war room",
+    "footStatus": "Execute · 0 of 5 · freight first, the cutoff does not move",
+    "footTone": "var(--ink-500)"
+  }
+}

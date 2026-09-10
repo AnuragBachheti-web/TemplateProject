@@ -1,0 +1,598 @@
+{
+  "code": "S9.16",
+  "stageKey": "execute",
+  "name": "Channel launch",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "wind": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "channelCount": "4 channels",
+    "planLine": "Stages run in order — integration, then listings, then inventory and creative, then the tracking card. A listing cannot go live before the reserved inventory pool exists.",
+    "pushedCount": "0 / 4",
+    "runAllLabel": "Run the sequence",
+    "runAllIcon": "fa-solid fa-play",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "stages": [
+      {
+        "name": "Integration setup",
+        "meta": "existing connector · $14K cap · no custom middleware",
+        "icon": "fa-solid fa-plug",
+        "hue": "var(--mod-hubs)",
+        "doorHref": "S00-integrations.dc.html",
+        "doorLabel": "Integrations",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "statusLabel": "ready",
+        "statusTint": "color-mix(in oklab, var(--mod-hubs) 10%, white)",
+        "statusTone": "var(--mod-hubs)",
+        "btnLabel": "Run stage",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Seller app + API credentials",
+            "detail": "Seller account verification and OAuth grant happen in the platform console. Realify stores the token and the refresh schedule.",
+            "value": "OAuth · 2 scopes",
+            "tag": "human step",
+            "tagIcon": "fa-solid fa-user",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "ready",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Catalogue mapping",
+            "detail": "15 SKUs mapped to platform category attributes. Three attributes have no equivalent in our data and default to the category norm.",
+            "value": "15 SKUs · 3 defaults",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "ready",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Inventory sync",
+            "detail": "Two-way, 15-minute interval, with a reserved pool so the pilot cannot oversell the Shopify buffer.",
+            "value": "15 min · reserved pool",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "ready",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Order + fulfilment webhook",
+            "detail": "Orders land in the same queue as Walmart. The 3-day handling SLA is tighter than our current 4-day norm, so the queue flags them first.",
+            "value": "SLA 3 days",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "ready",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Tax and shipping profile",
+            "detail": "Existing nexus configuration reused. Free shipping over $35 matches the site to avoid a MAP-adjacent price difference.",
+            "value": "11 states",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "ready",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Listing batches",
+        "meta": "15 listings in 3 batches · brand voice checked · MAP enforced",
+        "icon": "fa-solid fa-tags",
+        "hue": "var(--mod-discover)",
+        "doorHref": null,
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "statusLabel": "waiting",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Waiting on integration",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Batch A · 7 hero SKUs",
+            "detail": "Skillets, dutch oven, braiser, filter pitcher, chef knife, griddle, kettle. Copy adapted for platform length limits, claims unchanged.",
+            "value": "7 listings",
+            "tag": "3 videos each",
+            "tagIcon": "fa-solid fa-video",
+            "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "tagTone": "var(--mod-discover)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Batch B · 6 traffic drivers",
+            "detail": "Care kit, filter 3-pack, whetstone, paring knife, spoon set, shears. Priced at MAP with no channel-specific discount.",
+            "value": "6 listings",
+            "tag": "1 video each",
+            "tagIcon": "fa-solid fa-video",
+            "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "tagTone": "var(--mod-discover)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Batch C · 2 bundle listings",
+            "detail": "Two bundles that raise AOV above the $34 channel average without discounting a component below MAP.",
+            "value": "2 listings",
+            "tag": "channel-only",
+            "tagIcon": "fa-solid fa-box",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "MAP and claim check",
+            "detail": "Every listing price checked against MAP and every product claim against the approved claim set before submission.",
+            "value": "15 of 15 pass",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Inventory positioning + agent handoffs",
+        "meta": "2,860 units reserved · Planner and Merchandiser briefed",
+        "icon": "fa-solid fa-boxes-stacked",
+        "hue": "var(--mod-inventory)",
+        "doorHref": null,
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "statusLabel": "waiting",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Waiting on listings",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Reserve pilot units",
+            "detail": "Positioning runs through the demand-forecast flow so the reservation is netted out of the Shopify and Amazon plans rather than double-counted.",
+            "value": "2,860 units",
+            "tag": "via S9.3",
+            "tagIcon": "fa-solid fa-arrow-right",
+            "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "tagTone": "var(--mod-inventory)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Replenishment trigger",
+            "detail": "Pilot SKUs enter the normal reorder logic at a 21-day cover target, lower than the 35-day site norm because the pilot may end.",
+            "value": "21-day cover",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Creative production brief",
+            "detail": "12 assets a month from the in-house studio, first shoot day Oct 2. Four creators contracted with a flat fee plus 6% affiliate.",
+            "value": "12 / mo · 4 creators",
+            "tag": "Merchandiser",
+            "tagIcon": "fa-solid fa-tags",
+            "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "tagTone": "var(--mod-discover)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Service and returns routing",
+            "detail": "Platform returns route to the same RMA queue with a separate reason code set, so the pilot’s return rate can be read on its own.",
+            "value": "separate codes",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Tracking card + gate scheduling",
+        "meta": "monthly actual-vs-model · gate Dec 22 · wind-down armed",
+        "icon": "fa-solid fa-chart-column",
+        "hue": "var(--mod-hubs)",
+        "doorHref": null,
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "statusLabel": "waiting",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Waiting on inventory",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Business-case tracking card",
+            "detail": "Opens in the workspace with the approved model attached. Each month it posts actuals against the P50 line and names the variance driver.",
+            "value": "monthly",
+            "tag": "auto-created",
+            "tagIcon": "fa-solid fa-wand-magic-sparkles",
+            "tagTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+            "tagTone": "var(--mod-hubs)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "90-day gate scheduled",
+            "detail": "Dec 22, with the scale, continue and kill rules from Decide already written into the card. It arrives as a decision, not a report.",
+            "value": "Dec 22",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Cannibalisation cohort",
+            "detail": "A matched control cohort on Shopify DTC starts at listing live, so the 6% ceiling can be measured rather than argued about.",
+            "value": "control set",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Wind-down path stored",
+            "detail": "The five-step delist and recall sequence is attached to the pilot, executable in one action if the gate says kill.",
+            "value": "5 steps",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "checklist": [
+      {
+        "name": "Seller account verified and API credentials issued",
+        "owner": "Ops · L. Duarte",
+        "due": "Sep 24",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Catalogue mapping reviewed for attribute defaults",
+        "owner": "Merchandiser",
+        "due": "Sep 26",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Inventory reserved pool configured and tested",
+        "owner": "Planner",
+        "due": "Sep 29",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Listing copy and imagery approved to brand voice",
+        "owner": "Merchandiser",
+        "due": "Oct 1",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "MAP compliance check across all 15 listings",
+        "owner": "Navigator",
+        "due": "Oct 2",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "First 12 creative assets delivered",
+        "owner": "Studio",
+        "due": "Oct 3",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Creator contracts signed with claim addendum",
+        "owner": "Legal · R. Vance",
+        "due": "Oct 3",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Fulfilment team briefed on the 3-day SLA",
+        "owner": "Ops · L. Duarte",
+        "due": "Oct 5",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Listings live and tracking card opened",
+        "owner": "Navigator",
+        "due": "Oct 6",
+        "state": "open",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)",
+        "nameTone": "var(--ink-900)"
+      }
+    ],
+    "checklistStatus": "0 of 9 closed",
+    "checklistTone": "var(--ink-400)",
+    "trackStatus": "creates on stage 4",
+    "trackTone": "var(--ink-400)",
+    "trackCopy": "Created automatically when the tracking stage runs. It holds the approved model so every month’s actuals are compared against what we said would happen, not against a number written afterwards.",
+    "tracking": [
+      {
+        "label": "Run-rate GMV",
+        "source": "channel settlement, monthly",
+        "model": "$8K at M1",
+        "floor": "$25K at M6",
+        "actual": "awaiting",
+        "read": "M1",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Blended CAC",
+        "source": "spend ÷ new buyers",
+        "model": "$19",
+        "floor": "≤ $24",
+        "actual": "awaiting",
+        "read": "M1",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "New-buyer share",
+        "source": "first-order email match",
+        "model": "57%",
+        "floor": "≥ 40%",
+        "actual": "awaiting",
+        "read": "M2",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Per-unit CM",
+        "source": "settlement vs landed cost",
+        "model": "21%",
+        "floor": "≥ 12%",
+        "actual": "awaiting",
+        "read": "M1",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Shopify cannibalisation",
+        "source": "matched control cohort",
+        "model": "3.4%",
+        "floor": "≤ 6%",
+        "actual": "awaiting",
+        "read": "M2",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Stages complete",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 17",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Listings live",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Units reserved",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Spend committed",
+        "value": "$0",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "gateState": "not yet scheduled",
+    "gateTone": "var(--ink-400)",
+    "gateRows": [
+      {
+        "label": "Gate date",
+        "value": "Dec 22",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Scale if",
+        "value": "≥ $30K / mo",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Continue if",
+        "value": "$18–30K / mo",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Kill if",
+        "value": "< $18K / mo",
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, a breach re-opens this card and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "winddown": [
+      {
+        "n": "1",
+        "label": "Pause creative and creator spend",
+        "detail": "stops within 24 hours, contracts end at next break",
+        "nameTone": "var(--ink-800)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "n": "2",
+        "label": "Delist all 15 listings",
+        "detail": "within 5 days · catalogue mapping retained",
+        "nameTone": "var(--ink-800)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "n": "3",
+        "label": "Release the reserved pool",
+        "detail": "units return to Shopify and Amazon plans",
+        "nameTone": "var(--ink-800)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "n": "4",
+        "label": "Recall sellable inventory",
+        "detail": "2,860 units to the primary warehouse",
+        "nameTone": "var(--ink-800)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "n": "5",
+        "label": "Hold the service window open",
+        "detail": "30 days for returns and buyer questions",
+        "nameTone": "var(--ink-800)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "windLabel": "Available once live",
+    "windIcon": "fa-solid fa-lock",
+    "windBg": "var(--ink-0)",
+    "windFg": "var(--ink-400)",
+    "windBorder": "var(--ink-100)",
+    "windCursor": "not-allowed",
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 stages · 17 items pending",
+    "footTone": "var(--ink-500)"
+  }
+}

@@ -1,0 +1,722 @@
+[
+  {
+    "code": "S10.6",
+    "name": "Peak readiness",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "tChip",
+        "blockType": "text",
+        "binding": "data.tChip"
+      },
+      {
+        "slotName": "postures",
+        "blockType": "labelValueList",
+        "binding": "data.postures"
+      },
+      {
+        "slotName": "postureNote",
+        "blockType": "text",
+        "binding": "data.postureNote"
+      },
+      {
+        "slotName": "channelSummary",
+        "blockType": "text",
+        "binding": "data.channelSummary"
+      },
+      {
+        "slotName": "channels",
+        "blockType": "table",
+        "binding": "data.channels"
+      },
+      {
+        "slotName": "overrideSummary",
+        "blockType": "text",
+        "binding": "data.overrideSummary"
+      },
+      {
+        "slotName": "overrides",
+        "blockType": "table",
+        "binding": "data.overrides"
+      },
+      {
+        "slotName": "cutoffs",
+        "blockType": "labelValueList",
+        "binding": "data.cutoffs"
+      },
+      {
+        "slotName": "summary",
+        "blockType": "labelValueList",
+        "binding": "data.summary"
+      },
+      {
+        "slotName": "summaryNote",
+        "blockType": "text",
+        "binding": "data.summaryNote"
+      },
+      {
+        "slotName": "chips",
+        "blockType": "labelValueList",
+        "binding": "data.chips"
+      },
+      {
+        "slotName": "trigger",
+        "blockType": "itemQueue",
+        "binding": "data.trigger"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S10.6",
+    "name": "Peak readiness",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "tChip",
+        "blockType": "text",
+        "binding": "data.tChip"
+      },
+      {
+        "slotName": "overallScore",
+        "blockType": "text",
+        "binding": "data.overallScore"
+      },
+      {
+        "slotName": "desks",
+        "blockType": "table",
+        "binding": "data.desks"
+      },
+      {
+        "slotName": "deskFoot",
+        "blockType": "text",
+        "binding": "data.deskFoot"
+      },
+      {
+        "slotName": "selName",
+        "blockType": "text",
+        "binding": "data.selName"
+      },
+      {
+        "slotName": "selMeta",
+        "blockType": "text",
+        "binding": "data.selMeta"
+      },
+      {
+        "slotName": "selIcon",
+        "blockType": "text",
+        "binding": "data.selIcon"
+      },
+      {
+        "slotName": "selState",
+        "blockType": "text",
+        "binding": "data.selState"
+      },
+      {
+        "slotName": "selTableTitle",
+        "blockType": "text",
+        "binding": "data.selTableTitle"
+      },
+      {
+        "slotName": "selCol0",
+        "blockType": "text",
+        "binding": "data.selCol0"
+      },
+      {
+        "slotName": "selCol1",
+        "blockType": "text",
+        "binding": "data.selCol1"
+      },
+      {
+        "slotName": "selCol2",
+        "blockType": "text",
+        "binding": "data.selCol2"
+      },
+      {
+        "slotName": "selCol3",
+        "blockType": "text",
+        "binding": "data.selCol3"
+      },
+      {
+        "slotName": "selRows",
+        "blockType": "table",
+        "binding": "data.selRows"
+      },
+      {
+        "slotName": "selNote",
+        "blockType": "text",
+        "binding": "data.selNote"
+      },
+      {
+        "slotName": "selSideTitle",
+        "blockType": "text",
+        "binding": "data.selSideTitle"
+      },
+      {
+        "slotName": "selSide",
+        "blockType": "labelValueList",
+        "binding": "data.selSide"
+      },
+      {
+        "slotName": "selCallout",
+        "blockType": "text",
+        "binding": "data.selCallout"
+      },
+      {
+        "slotName": "selCalloutTitle",
+        "blockType": "text",
+        "binding": "data.selCalloutTitle"
+      },
+      {
+        "slotName": "nowPct",
+        "blockType": "number",
+        "binding": "data.nowPct"
+      },
+      {
+        "slotName": "timeline",
+        "blockType": "labelValueList",
+        "binding": "data.timeline"
+      },
+      {
+        "slotName": "learningSummary",
+        "blockType": "text",
+        "binding": "data.learningSummary"
+      },
+      {
+        "slotName": "learnings",
+        "blockType": "table",
+        "binding": "data.learnings"
+      },
+      {
+        "slotName": "forecast",
+        "blockType": "labelValueList",
+        "binding": "data.forecast"
+      },
+      {
+        "slotName": "headroom",
+        "blockType": "labelValueList",
+        "binding": "data.headroom"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S10.6",
+    "name": "Peak readiness",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "tChip",
+        "blockType": "text",
+        "binding": "data.tChip"
+      },
+      {
+        "slotName": "gateLabel",
+        "blockType": "text",
+        "binding": "data.gateLabel"
+      },
+      {
+        "slotName": "heroValue",
+        "blockType": "text",
+        "binding": "data.heroValue"
+      },
+      {
+        "slotName": "recoveredValue",
+        "blockType": "text",
+        "binding": "data.recoveredValue"
+      },
+      {
+        "slotName": "escalValue",
+        "blockType": "text",
+        "binding": "data.escalValue"
+      },
+      {
+        "slotName": "heroLine",
+        "blockType": "text",
+        "binding": "data.heroLine"
+      },
+      {
+        "slotName": "gateSummary",
+        "blockType": "text",
+        "binding": "data.gateSummary"
+      },
+      {
+        "slotName": "gates",
+        "blockType": "itemQueue",
+        "binding": "data.gates"
+      },
+      {
+        "slotName": "hasEscalations",
+        "blockType": "flag",
+        "binding": "data.hasEscalations"
+      },
+      {
+        "slotName": "escalTitle",
+        "blockType": "text",
+        "binding": "data.escalTitle"
+      },
+      {
+        "slotName": "signState",
+        "blockType": "text",
+        "binding": "data.signState"
+      },
+      {
+        "slotName": "signIcon",
+        "blockType": "text",
+        "binding": "data.signIcon"
+      },
+      {
+        "slotName": "signBtnLabel",
+        "blockType": "text",
+        "binding": "data.signBtnLabel"
+      },
+      {
+        "slotName": "signBtnIcon",
+        "blockType": "text",
+        "binding": "data.signBtnIcon"
+      },
+      {
+        "slotName": "grants",
+        "blockType": "labelValueList",
+        "binding": "data.grants"
+      },
+      {
+        "slotName": "limits",
+        "blockType": "labelValueList",
+        "binding": "data.limits"
+      },
+      {
+        "slotName": "outcome",
+        "blockType": "labelValueList",
+        "binding": "data.outcome"
+      },
+      {
+        "slotName": "netSpend",
+        "blockType": "text",
+        "binding": "data.netSpend"
+      },
+      {
+        "slotName": "approvers",
+        "blockType": "table",
+        "binding": "data.approvers"
+      },
+      {
+        "slotName": "approveSub",
+        "blockType": "text",
+        "binding": "data.approveSub"
+      },
+      {
+        "slotName": "holdLabel",
+        "blockType": "text",
+        "binding": "data.holdLabel"
+      },
+      {
+        "slotName": "holdSub",
+        "blockType": "text",
+        "binding": "data.holdSub"
+      },
+      {
+        "slotName": "approvalNote",
+        "blockType": "text",
+        "binding": "data.approvalNote"
+      },
+      {
+        "slotName": "signed",
+        "blockType": "flag",
+        "binding": "data.signed"
+      },
+      {
+        "slotName": "nextLabel",
+        "blockType": "text",
+        "binding": "data.nextLabel"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S10.6",
+    "name": "Peak readiness",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "tChip",
+        "blockType": "text",
+        "binding": "data.tChip"
+      },
+      {
+        "slotName": "planLine",
+        "blockType": "text",
+        "binding": "data.planLine"
+      },
+      {
+        "slotName": "pushedCount",
+        "blockType": "text",
+        "binding": "data.pushedCount"
+      },
+      {
+        "slotName": "runAllLabel",
+        "blockType": "text",
+        "binding": "data.runAllLabel"
+      },
+      {
+        "slotName": "runAllIcon",
+        "blockType": "text",
+        "binding": "data.runAllIcon"
+      },
+      {
+        "slotName": "stages",
+        "blockType": "itemQueue",
+        "binding": "data.stages"
+      },
+      {
+        "slotName": "pingState",
+        "blockType": "text",
+        "binding": "data.pingState"
+      },
+      {
+        "slotName": "pings",
+        "blockType": "table",
+        "binding": "data.pings"
+      },
+      {
+        "slotName": "contractState",
+        "blockType": "text",
+        "binding": "data.contractState"
+      },
+      {
+        "slotName": "contractSub",
+        "blockType": "text",
+        "binding": "data.contractSub"
+      },
+      {
+        "slotName": "clauses",
+        "blockType": "labelValueList",
+        "binding": "data.clauses"
+      },
+      {
+        "slotName": "progressPct",
+        "blockType": "text",
+        "binding": "data.progressPct"
+      },
+      {
+        "slotName": "progressRows",
+        "blockType": "labelValueList",
+        "binding": "data.progressRows"
+      },
+      {
+        "slotName": "deadlines",
+        "blockType": "labelValueList",
+        "binding": "data.deadlines"
+      },
+      {
+        "slotName": "warState",
+        "blockType": "text",
+        "binding": "data.warState"
+      },
+      {
+        "slotName": "warCopy",
+        "blockType": "text",
+        "binding": "data.warCopy"
+      },
+      {
+        "slotName": "warBtnLabel",
+        "blockType": "text",
+        "binding": "data.warBtnLabel"
+      },
+      {
+        "slotName": "done",
+        "blockType": "flag",
+        "binding": "data.done"
+      },
+      {
+        "slotName": "closeLabel",
+        "blockType": "text",
+        "binding": "data.closeLabel"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S10.6",
+    "name": "Peak readiness",
+    "stageKey": "live",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "pinnedHeadline",
+        "blockType": "text",
+        "binding": "data.pinnedHeadline"
+      },
+      {
+        "slotName": "liveLabel",
+        "blockType": "text",
+        "binding": "data.liveLabel"
+      },
+      {
+        "slotName": "contractChip",
+        "blockType": "text",
+        "binding": "data.contractChip"
+      },
+      {
+        "slotName": "phases",
+        "blockType": "labelValueList",
+        "binding": "data.phases"
+      },
+      {
+        "slotName": "clockLabel",
+        "blockType": "text",
+        "binding": "data.clockLabel"
+      },
+      {
+        "slotName": "expired",
+        "blockType": "flag",
+        "binding": "data.expired"
+      },
+      {
+        "slotName": "lensTiles",
+        "blockType": "table",
+        "binding": "data.lensTiles"
+      },
+      {
+        "slotName": "adjustMeta",
+        "blockType": "text",
+        "binding": "data.adjustMeta"
+      },
+      {
+        "slotName": "adjustSummary",
+        "blockType": "text",
+        "binding": "data.adjustSummary"
+      },
+      {
+        "slotName": "adjustments",
+        "blockType": "itemQueue",
+        "binding": "data.adjustments"
+      },
+      {
+        "slotName": "adjustFoot",
+        "blockType": "text",
+        "binding": "data.adjustFoot"
+      },
+      {
+        "slotName": "paceHour",
+        "blockType": "text",
+        "binding": "data.paceHour"
+      },
+      {
+        "slotName": "paceValue",
+        "blockType": "text",
+        "binding": "data.paceValue"
+      },
+      {
+        "slotName": "paceLabel",
+        "blockType": "text",
+        "binding": "data.paceLabel"
+      },
+      {
+        "slotName": "bandPath",
+        "blockType": "text",
+        "binding": "data.bandPath"
+      },
+      {
+        "slotName": "p50Path",
+        "blockType": "text",
+        "binding": "data.p50Path"
+      },
+      {
+        "slotName": "actualPath",
+        "blockType": "text",
+        "binding": "data.actualPath"
+      },
+      {
+        "slotName": "actualX",
+        "blockType": "text",
+        "binding": "data.actualX"
+      },
+      {
+        "slotName": "actualY",
+        "blockType": "text",
+        "binding": "data.actualY"
+      },
+      {
+        "slotName": "paceCopy",
+        "blockType": "text",
+        "binding": "data.paceCopy"
+      },
+      {
+        "slotName": "healthState",
+        "blockType": "text",
+        "binding": "data.healthState"
+      },
+      {
+        "slotName": "healthRows",
+        "blockType": "labelValueList",
+        "binding": "data.healthRows"
+      },
+      {
+        "slotName": "healthCopy",
+        "blockType": "text",
+        "binding": "data.healthCopy"
+      },
+      {
+        "slotName": "coverState",
+        "blockType": "text",
+        "binding": "data.coverState"
+      },
+      {
+        "slotName": "coverRows",
+        "blockType": "table",
+        "binding": "data.coverRows"
+      },
+      {
+        "slotName": "clauseRows",
+        "blockType": "labelValueList",
+        "binding": "data.clauseRows"
+      },
+      {
+        "slotName": "expiryCopy",
+        "blockType": "text",
+        "binding": "data.expiryCopy"
+      },
+      {
+        "slotName": "showReadout",
+        "blockType": "flag",
+        "binding": "data.showReadout"
+      },
+      {
+        "slotName": "readout",
+        "blockType": "labelValueList",
+        "binding": "data.readout"
+      },
+      {
+        "slotName": "annotations",
+        "blockType": "labelValueList",
+        "binding": "data.annotations"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  }
+]

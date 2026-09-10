@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.1-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-discover);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-discover) 12%, white);color:var(--mod-discover);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Assortment · S9.1</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Quarterly assortment review — 214 active SKUs</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">Approved · balanced slate</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">56 SKUs touched · $28K freed</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-discover)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:flex;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:var(--mod-hubs)"></span><span style="width:6px;height:6px;border-radius:50%;background:var(--mod-margin)"></span></span>
+          Lens: Sales · Margin
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-discover);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Merchandiser + Prospector
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-intel);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Forecaster
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Role Classifier
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>GMROI Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.1-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.1-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.1-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.1-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-discover) 10%, white);border:1px solid color-mix(in oklab, var(--mod-discover) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-discover);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:16px">
+          <div style="min-width:0;display:flex;flex-direction:column;gap:5px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Ranging plan · ASSORT-Q4-01</span>
+            <span style="font-size:13px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ planLine }}</span>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:14px">
+            <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+              <span style="font-family:var(--font-mono);font-size:18px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ pushedCount }}</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">pushed</span>
+            </span>
+            <button type="button" onClick="{{ pushAll }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:var(--r-sm);border:none;background:{{ pushAllBg }};color:{{ pushAllFg }};cursor:{{ pushAllCursor }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">
+              <i class="{{ pushAllIcon }}" style="font-size:11px"></i>{{ pushAllLabel }}
+            </button>
+          </div>
+        </div>
+
+        <sc-for list="{{ dests }}" as="d" hint-placeholder-count="4">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+            <div style="padding:13px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--ink-100);background:var(--ink-25)">
+              <span style="width:28px;height:28px;border-radius:var(--r-xs);background:{{ d.tint }};color:{{ d.hue }};display:grid;place-items:center;flex-shrink:0">
+                <i class="{{ d.icon }}" style="font-size:12px"></i>
+              </span>
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ d.name }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ d.meta }}</span>
+              </span>
+              <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:9px">
+                <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ d.statusTint }};font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ d.statusTone }}">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{ d.statusTone }}"></span>{{ d.statusLabel }}
+                </span>
+                <button type="button" onClick="{{ d.push }}" style="height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ d.btnBorder }};background:{{ d.btnBg }};color:{{ d.btnFg }};cursor:{{ d.btnCursor }};font-family:var(--font-sans);font-size:11.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">{{ d.btnLabel }}</button>
+              </span>
+            </div>
+
+            <div style="padding:4px 16px 12px">
+              <sc-for list="{{ d.items }}" as="it" hint-placeholder-count="3">
+                <div style="padding:11px 0;border-bottom:1px solid var(--ink-50);display:flex;align-items:flex-start;gap:12px">
+                  <span style="flex-shrink:0;margin-top:2px;width:18px;height:18px;border-radius:50%;background:{{ it.dotBg }};color:{{ it.dotFg }};display:grid;place-items:center">
+                    <i class="{{ it.dotIcon }}" style="font-size:8.5px"></i>
+                  </span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+                    <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                      <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ it.name }}</span>
+                      <sc-if value="{{ it.chip }}" hint-placeholder-val="{{ true }}">
+                        <a href="{{ it.chipHref }}" style="display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:var(--r-full);background:{{ it.chipTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:{{ it.chipTone }}">
+                          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8px"></i>{{ it.chip }}
+                        </a>
+                      </sc-if>
+                    </span>
+                    <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ it.detail }}</span>
+                    <sc-if value="{{ it.hasDiff }}" hint-placeholder-val="{{ true }}">
+                      <span style="margin-top:2px;display:grid;grid-template-columns:1fr 22px 1fr;align-items:center;gap:8px;padding:9px 11px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:var(--ink-25)">
+                        <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Current</span>
+                          <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-600);text-decoration:line-through;text-decoration-color:var(--ink-300)">{{ it.before }}</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right" style="font-size:9px;color:var(--ink-300);justify-self:center"></i>
+                        <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">After push</span>
+                          <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ it.afterTone }}">{{ it.after }}</span>
+                        </span>
+                      </span>
+                    </sc-if>
+                  </span>
+                  <span style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;width:96px">
+                    <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ it.value }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:{{ it.stateTone }}">{{ it.stateLabel }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px 16px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Role-migration watch</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">reads at day 30 · 60 · 90</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ watchTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ watchTone }}"></span>{{ watchStatus }}
+            </span>
+          </div>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">The Role Classifier re-scores the touched SKUs at each read. A migration in the wrong direction raises an exception on this card rather than acting on its own.</p>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ watches }}" as="w" hint-placeholder-count="3">
+              <div style="background:var(--ink-0);padding:11px 13px;display:flex;flex-direction:column;gap:5px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ w.when }}</span>
+                <span style="font-size:12px;font-weight:600;line-height:1.35;color:var(--ink-900);text-wrap:pretty">{{ w.rule }}</span>
+                <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ w.action }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Push progress</span>
+          <div style="margin-top:11px;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+            <span style="display:block;height:100%;width:{{ progressPct }}%;background:var(--mod-discover);border-radius:var(--r-full);transition:width var(--dur-slow) var(--ease-standard)"></span>
+          </div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ progressRows }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ p.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ armBorder }};border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-bolt" style="font-size:11px;color:{{ armIconTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Auto-range next quarter</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ armCopy }}</p>
+          <button type="button" onClick="{{ armToggle }}" style="margin-top:11px;width:100%;height:34px;border-radius:var(--r-sm);border:1px solid {{ armBtnBorder }};background:{{ armBtnBg }};color:{{ armBtnFg }};cursor:{{ armCursor }};font-family:var(--font-sans);font-size:12.5px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px">
+            <i class="{{ armBtnIcon }}" style="font-size:10px"></i>{{ armBtnLabel }}
+          </button>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-rotate-left" style="font-size:10px;color:var(--ink-400)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Rollback</span>
+          </div>
+          <div style="margin-top:11px;padding:10px 12px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:var(--ink-25);display:flex;flex-direction:column;gap:4px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-900)">Ledger · ASSORT-Q3-v7</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">214 SKUs · ranging, depth and channel flags · captured before the first push</span>
+          </div>
+          <button type="button" onClick="{{ restore }}" style="margin-top:10px;width:100%;height:34px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);cursor:{{ restoreCursor }};font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:{{ restoreFg }};display:inline-flex;align-items:center;justify-content:center;gap:8px" style-hover="background:var(--ink-50)">
+            <i class="fa-solid fa-rotate-left" style="font-size:10px"></i>{{ restoreLabel }}
+          </button>
+          <p style="margin:9px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Ranging, depth and channel flags restore in one step. Markdown prices already pushed on exit SKUs roll back through the markdown story, not from here.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Downstream stories</span>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <a href="S9.9-1-reason.dc.html" style="display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--ink-100);border-radius:var(--r-sm);color:var(--ink-700);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+              <span style="width:7px;height:7px;border-radius:2px;background:var(--mod-margin)"></span>
+              <span style="flex:1;min-width:0;font-size:12px;font-weight:500">Markdown &amp; recovery · S9.9</span>
+              <i class="fa-solid fa-arrow-right" style="font-size:9px;color:var(--ink-400)"></i>
+            </a>
+            <a href="S9.20-1-reason.dc.html" style="display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--ink-100);border-radius:var(--r-sm);color:var(--ink-700);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+              <span style="width:7px;height:7px;border-radius:2px;background:var(--mod-discover)"></span>
+              <span style="flex:1;min-width:0;font-size:12px;font-weight:500">New-product sourcing · S9.20</span>
+              <i class="fa-solid fa-arrow-right" style="font-size:9px;color:var(--ink-400)"></i>
+            </a>
+            <a href="S00-agents.dc.html" style="display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--ink-100);border-radius:var(--r-sm);color:var(--ink-700);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+              <span style="width:7px;height:7px;border-radius:2px;background:var(--mod-inventory)"></span>
+              <span style="flex:1;min-width:0;font-size:12px;font-weight:500">Planner · stop-buy queue</span>
+              <i class="fa-solid fa-arrow-right" style="font-size:9px;color:var(--ink-400)"></i>
+            </a>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--green-50);font-size:11.5px;font-weight:500;color:var(--green-700)">
+          <i class="fa-solid fa-check" style="font-size:10px"></i>Ledger entry ASSORT-Q4-01 written · watch armed for day 30
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S9.1-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-arrow-left" style="font-size:11px"></i>Back to Decide
+        </a>
+        <a href="S00-workspace.dc.html?approved=9.1" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+          {{ closeLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { pushed: {}, busy: null, armed: false, restored: false };
+
+  destData() {
+    return [
+      {
+        id: 'markdown', name: 'Markdown & recovery', icon: 'fa-solid fa-tags', hue: 'var(--mod-margin)',
+        meta: '12 exit SKUs · $27K at cost · 3 recovery cards',
+        items: [
+          { name: 'Markdown card MD-3312', value: '6 SKUs', detail: 'Ladder-eligible exits with more than 8 weeks of cover. Opens as a clearance cohort in the markdown story with the storage-cost clock already running.', chip: 'Open S9.9', chipHref: 'S9.9-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-margin) 12%, white)', chipTone: 'var(--mod-margin)' },
+          { name: 'Liquidation quote request', value: '4 SKUs', detail: 'Below the ladder recovery floor at current velocity. Two quotes already on file at 22% and 27% of cost.', chip: 'Open S9.9', chipHref: 'S9.9-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-margin) 12%, white)', chipTone: 'var(--mod-margin)' },
+          { name: 'Donation routing', value: '2 SKUs', detail: 'Novelty egg cups and chalkboard labels — recovery value under the $8.40 handling floor, tax value beats liquidation.', chip: 'Open S9.9', chipHref: 'S9.9-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-margin) 12%, white)', chipTone: 'var(--mod-margin)' },
+        ],
+      },
+      {
+        id: 'planner', name: 'Planner', icon: 'fa-solid fa-clipboard-list', hue: 'var(--mod-inventory)',
+        meta: '34 SKUs · stop-buy and depth flags · 3 open POs',
+        items: [
+          { name: 'Stop-buy flags', value: '12 SKUs', detail: 'No further replenishment on the exit set. Flags sit ahead of the next planning run so nothing re-enters the buy sheet.', before: 'replenish · auto', after: 'stop-buy · locked', afterTone: 'var(--rose-700)' },
+          { name: 'Depth reduction to 4 weeks cover', value: '22 SKUs', detail: 'Buy depth cut on the Supporting tail. Ranging is untouched, so no channel goes dark.', before: 'cover 10–14 wks', after: 'cover 4 wks', afterTone: 'var(--ink-900)' },
+          { name: 'Open PO cancellations', value: '3 POs', detail: 'PO-88412, PO-88437 and PO-88501 carry exit SKUs inside their cancel window (closes in 6, 9 and 11 days). Cancel requests go with the flags.', before: '$6.4K inbound', after: 'cancel requested', afterTone: 'var(--amber-700)' },
+        ],
+      },
+      {
+        id: 'ranging', name: 'Channel ranging updates', icon: 'fa-solid fa-diagram-project', hue: 'var(--mod-hubs)',
+        meta: '4 channels · every change diffed before push',
+        items: [
+          { name: 'Shopify · collections and nav', value: '30 edits', detail: 'Exit SKUs leave 4 collections, gap fills land as drafts in Cookware and Storage, two nav facets recount.', before: '4 collections · 214 live', after: '4 collections · 206 live, 4 drafts', afterTone: 'var(--ink-900)' },
+          { name: 'Amazon · listing status', value: '32 edits', detail: 'Exits move to Inactive with the ASIN kept so review history survives. Grow SKUs get max-order-quantity raised.', before: '214 active · 12 at MOQ 3', after: '202 active · 12 inactive', afterTone: 'var(--ink-900)' },
+          { name: 'Walmart · item flags', value: '34 edits', detail: 'Exits unpublish, reduce set flags to limited-depth, gap fills open as setup-pending until the sourcing brief lands.', before: '214 published', after: '202 published · 4 pending', afterTone: 'var(--ink-900)' },
+          { name: 'Faire · wholesale sheet', value: '18 edits', detail: 'Exit lines drop off the wholesale assortment sheet at the next catalogue refresh, 3 grow SKUs move to the front page.', before: 'sheet rev 14', after: 'sheet rev 15', afterTone: 'var(--ink-900)' },
+        ],
+      },
+      {
+        id: 'gapfill', name: 'Gap fills → sourcing', icon: 'fa-solid fa-lightbulb', hue: 'var(--mod-discover)',
+        meta: '4 new lines · $6K test buy · sourcing brief per line',
+        items: [
+          { name: 'Enamel Dutch oven 5.5qt', value: 'est. 42 u/mo', detail: 'Ranged by 4 of 5 rivals. Brief carries the demand estimate, target landed cost and the two suppliers Prospector already shortlisted.', chip: 'Hand to S9.20', chipHref: 'S9.20-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', chipTone: 'var(--mod-discover)' },
+          { name: 'Glass storage 12-pc set', value: 'est. 61 u/mo', detail: 'Ranged by all 5 rivals and the largest single gap in the set. Needs a packaging spec before the first buy.', chip: 'Hand to S9.20', chipHref: 'S9.20-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', chipTone: 'var(--mod-discover)' },
+          { name: 'Ceramic knife block', value: 'est. 28 u/mo', detail: 'Bundles with the existing Alder knife line. Test quantity only until the 60-day read.', chip: 'Hand to S9.20', chipHref: 'S9.20-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', chipTone: 'var(--mod-discover)' },
+          { name: 'Silicone bakeware set', value: 'est. 19 u/mo', detail: 'Thinnest margin of the four — the brief asks sourcing to hold unless landed cost comes in under $9.20.', chip: 'Hand to S9.20', chipHref: 'S9.20-1-reason.dc.html', chipTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', chipTone: 'var(--mod-discover)' },
+        ],
+      },
+    ];
+  }
+
+  pushOne(id) {
+    if (this.state.pushed[id] || this.state.busy) return;
+    this.setState({ busy: id });
+    setTimeout(() => {
+      this.setState((s) => {
+        const pushed = Object.assign({}, s.pushed);
+        pushed[id] = true;
+        return { pushed, busy: null, restored: false };
+      });
+    }, 900);
+  }
+
+  pushSeq(ids) {
+    const next = ids.find((i) => !this.state.pushed[i]);
+    if (!next || this.state.busy) return;
+    this.setState({ busy: next });
+    setTimeout(() => {
+      this.setState((s) => {
+        const pushed = Object.assign({}, s.pushed);
+        pushed[next] = true;
+        return { pushed, busy: null, restored: false };
+      }, () => setTimeout(() => this.pushSeq(ids), 220));
+    }, 900);
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const autoAllowed = mode === 'Approve' || mode === 'Auto';
+
+    const dests = this.destData();
+    const ids = dests.map((d) => d.id);
+    const pushedIds = ids.filter((i) => this.state.pushed[i]);
+    const n = pushedIds.length;
+    const busy = this.state.busy;
+    const allDone = n === ids.length;
+
+    const itemCounts = { markdown: 3, planner: 3, ranging: 4, gapfill: 4 };
+    const totalItems = 14;
+    const pushedItems = pushedIds.reduce((a, i) => a + itemCounts[i], 0);
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      planLine: allDone
+        ? 'All four destinations pushed. 56 SKUs moved, 114 channel edits written, 12 stop-buy flags live and 4 sourcing briefs handed off.'
+        : 'Grouped by destination so each system gets one write. Markdown and sourcing hand off as cards; Planner and the channels take direct pushes with a diff on every line.',
+      pushedCount: n + ' / 4',
+      pushAll: () => this.pushSeq(ids),
+      pushAllLabel: allDone ? 'All destinations pushed' : busy ? 'Pushing…' : 'Push all destinations',
+      pushAllIcon: allDone ? 'fa-solid fa-check' : busy ? 'fa-solid fa-spinner' : 'fa-solid fa-paper-plane',
+      pushAllBg: allDone ? 'var(--green-50)' : 'var(--ink-900)',
+      pushAllFg: allDone ? 'var(--green-700)' : 'var(--ink-0)',
+      pushAllCursor: allDone || busy ? 'default' : 'pointer',
+
+      dests: dests.map((d) => {
+        const done = !!this.state.pushed[d.id];
+        const running = busy === d.id;
+        return {
+          name: d.name, meta: d.meta, icon: d.icon, hue: d.hue,
+          tint: 'color-mix(in oklab, ' + d.hue + ' 12%, white)',
+          statusLabel: done ? 'pushed' : running ? 'pushing' : 'staged',
+          statusTint: done ? 'var(--green-50)' : running ? 'var(--amber-50)' : 'var(--ink-100)',
+          statusTone: done ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-500)',
+          btnLabel: done ? 'Pushed' : running ? 'Pushing…' : 'Push',
+          btnBg: done ? 'var(--ink-50)' : 'var(--ink-900)',
+          btnFg: done ? 'var(--ink-400)' : 'var(--ink-0)',
+          btnBorder: done ? 'var(--ink-200)' : 'var(--ink-900)',
+          btnCursor: done || busy ? 'default' : 'pointer',
+          push: () => this.pushOne(d.id),
+          items: d.items.map((it) => ({
+            name: it.name, detail: it.detail, value: it.value,
+            chip: it.chip || null, chipHref: it.chipHref, chipTint: it.chipTint, chipTone: it.chipTone,
+            hasDiff: !!it.before,
+            before: it.before, after: it.after, afterTone: it.afterTone,
+            dotIcon: done ? 'fa-solid fa-check' : running ? 'fa-solid fa-ellipsis' : 'fa-solid fa-minus',
+            dotBg: done ? 'var(--green-500)' : running ? 'var(--amber-500)' : 'var(--ink-100)',
+            dotFg: done || running ? 'var(--ink-0)' : 'var(--ink-400)',
+            stateLabel: done ? 'written' : running ? 'in flight' : 'staged',
+            stateTone: done ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-400)',
+          })),
+        };
+      }),
+
+      progressPct: ((pushedItems / totalItems) * 100).toFixed(0),
+      progressRows: [
+        { label: 'Destinations pushed', value: n + ' of 4', tone: allDone ? 'var(--green-700)' : 'var(--ink-900)' },
+        { label: 'Line items written', value: pushedItems + ' of ' + totalItems, tone: 'var(--ink-900)' },
+        { label: 'Channel edits', value: this.state.pushed.ranging ? '114 live' : '114 staged', tone: this.state.pushed.ranging ? 'var(--green-700)' : 'var(--ink-500)' },
+        { label: 'Capital release started', value: this.state.pushed.planner ? '$28K over 9 wks' : 'waiting on Planner', tone: this.state.pushed.planner ? 'var(--green-700)' : 'var(--ink-500)' },
+      ],
+
+      armBorder: this.state.armed ? 'color-mix(in oklab, var(--mod-discover) 40%, white)' : 'var(--ink-100)',
+      armIconTone: this.state.armed ? 'var(--mod-discover)' : 'var(--ink-400)',
+      armCopy: autoAllowed
+        ? (this.state.armed
+          ? 'Armed. Next quarter the Role Classifier will re-range moves inside this policy on its own and log them to the Ledger for review.'
+          : 'Lets Realify apply the same policy next quarter without a decision screen. Exits and gap fills still come back for approval.')
+        : 'Available from the Approve dial upward. At Suggest, every quarter comes back through this four-step flow.',
+      armToggle: () => { if (autoAllowed) this.setState((s) => ({ armed: !s.armed })); },
+      armBtnLabel: !autoAllowed ? 'Locked at Suggest' : this.state.armed ? 'Armed for Q1' : 'Arm auto-ranging',
+      armBtnIcon: !autoAllowed ? 'fa-solid fa-lock' : this.state.armed ? 'fa-solid fa-check' : 'fa-solid fa-bolt',
+      armBtnBg: !autoAllowed ? 'var(--ink-50)' : this.state.armed ? 'color-mix(in oklab, var(--mod-discover) 10%, white)' : 'var(--ink-0)',
+      armBtnFg: !autoAllowed ? 'var(--ink-400)' : this.state.armed ? 'var(--mod-discover)' : 'var(--ink-700)',
+      armBtnBorder: !autoAllowed ? 'var(--ink-200)' : this.state.armed ? 'color-mix(in oklab, var(--mod-discover) 40%, white)' : 'var(--ink-200)',
+      armCursor: autoAllowed ? 'pointer' : 'not-allowed',
+
+      restore: () => { if (n > 0) this.setState({ pushed: {}, busy: null, restored: true }); },
+      restoreLabel: this.state.restored ? 'Restored to v7' : n > 0 ? 'Restore ranging from Ledger' : 'Nothing pushed yet',
+      restoreFg: n > 0 || this.state.restored ? 'var(--ink-700)' : 'var(--ink-400)',
+      restoreCursor: n > 0 ? 'pointer' : 'default',
+
+      watchStatus: allDone ? 'armed' : 'arms on push',
+      watchTone: allDone ? 'var(--green-700)' : 'var(--ink-400)',
+      watches: [
+        { when: 'Day 30', rule: 'Any grow SKU falling out of Hero or Core', action: 'Raises an exception and pauses further depth increases on that SKU.' },
+        { when: 'Day 60', rule: 'Gap fills not yet reaching Supporting', action: 'Flags for a range-or-drop call before the second buy.' },
+        { when: 'Day 90', rule: 'Reduce set migrating up two bands', action: 'Proposes restoring depth — the cut was too deep.' },
+      ],
+
+      done: allDone,
+      closeLabel: allDone ? 'Close the review' : 'Back to workspace',
+      footStatus: this.state.restored
+        ? 'Execute · restored to ASSORT-Q3-v7 · nothing live'
+        : allDone
+          ? 'Execute · 4 of 4 destinations pushed · 56 SKUs moved'
+          : 'Execute · ' + n + ' of 4 destinations pushed · ' + (totalItems - pushedItems) + ' line items staged',
+      footTone: allDone ? 'var(--green-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,755 @@
+{
+  "code": "S9.13",
+  "stageKey": "decide",
+  "name": "Lifecycle",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "off": {},
+    "holdouts": {
+      "replen": 10,
+      "delivery": 10,
+      "winback": 10,
+      "sms": 5,
+      "thankyou": 10,
+      "vip": 10
+    },
+    "offerMode": "margin",
+    "cap": 4
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "9 of 9 decisions approved",
+    "pinnedSub": "margin-safe offers · cap 4 / week",
+    "slateMeta": "4 new · 3 modified · 2 retired",
+    "confLabel": "Med-high · 74%",
+    "heroTitle": "Cover the 42-day window, retire what the holdouts cannot justify",
+    "heroMetrics": [
+      {
+        "label": "Incremental revenue",
+        "value": "+$10.5K",
+        "tone": "var(--green-700)",
+        "note": "per month, measured against holdouts"
+      },
+      {
+        "label": "Net contribution",
+        "value": "+$4.1K",
+        "tone": "var(--ink-900)",
+        "note": "after offer and shipping cost"
+      },
+      {
+        "label": "Sends per month",
+        "value": "−10,550",
+        "tone": "var(--green-700)",
+        "note": "fewer sends, more revenue"
+      },
+      {
+        "label": "Held back",
+        "value": "$1.1K",
+        "tone": "var(--mod-hubs)",
+        "note": "revenue withheld to keep claims valid"
+      }
+    ],
+    "offerModes": [
+      {
+        "label": "Margin-safe",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Growth",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "offerRows": [
+      {
+        "segment": "New · first 30 days",
+        "size": "6,240 profiles",
+        "treatment": "Content only",
+        "icon": "fa-solid fa-book-open",
+        "tone": "var(--ink-700)",
+        "cm": "—",
+        "cmTone": "var(--ink-400)"
+      },
+      {
+        "segment": "Repeat · 2–4 orders",
+        "size": "14,180 profiles",
+        "treatment": "Free shipping",
+        "icon": "fa-solid fa-truck",
+        "tone": "var(--ink-700)",
+        "cm": "−1.8pp",
+        "cmTone": "var(--ink-700)"
+      },
+      {
+        "segment": "VIP · top pLTV decile",
+        "size": "3,860 profiles",
+        "treatment": "Early access, no discount",
+        "icon": "fa-solid fa-star",
+        "tone": "var(--ink-700)",
+        "cm": "0.0pp",
+        "cmTone": "var(--green-700)"
+      },
+      {
+        "segment": "Lapsed · 90–180 days",
+        "size": "3,860 profiles",
+        "treatment": "10% off",
+        "icon": "fa-solid fa-percent",
+        "tone": "var(--ink-700)",
+        "cm": "−3.9pp",
+        "cmTone": "var(--ink-700)"
+      },
+      {
+        "segment": "Bottom 30%",
+        "size": "7,850 profiles",
+        "treatment": "Suppressed from offers",
+        "icon": "fa-solid fa-ban",
+        "tone": "var(--ink-500)",
+        "cm": "0.0pp",
+        "cmTone": "var(--green-700)"
+      }
+    ],
+    "offerNote": "Every treatment sits inside the depth ceilings from Reason. Free shipping beats a percentage on the consumable cohort because the basket is small and the margin rate is high.",
+    "offerNoteTone": "var(--ink-400)",
+    "caps": [
+      {
+        "n": "3",
+        "tag": "tighter",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "fg": "var(--ink-500)"
+      },
+      {
+        "n": "4",
+        "tag": "current",
+        "bg": "color-mix(in oklab, var(--mod-hubs) 10%, white)",
+        "border": "var(--mod-hubs)",
+        "fg": "var(--ink-900)"
+      },
+      {
+        "n": "5",
+        "tag": "looser",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "fg": "var(--ink-500)"
+      }
+    ],
+    "capEffects": [
+      {
+        "label": "New-flow revenue",
+        "value": "baseline",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Projected complaint rate",
+        "value": "0.05%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Journey collision rule",
+        "value": "one at a time",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "capNote": "Four holds the current load. The two removals free enough room for all four new flows without raising anyone’s weekly count.",
+    "capNoteBg": "var(--ink-25)",
+    "capNoteTone": "var(--ink-500)",
+    "capNoteIcon": "fa-solid fa-circle-check",
+    "groups": [
+      {
+        "label": "New flows",
+        "hue": "var(--mod-hubs)",
+        "meta": "4 of 4 approved",
+        "items": [
+          {
+            "name": "Consumable replenishment · per-SKU interval",
+            "detail": "One send timed to each SKU’s own median cycle, between day 31 and day 58. Covers the twelve consumables and the 4,180 profiles who buy them.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "free shipping",
+            "offerTint": "var(--ink-100)",
+            "offerTone": "var(--ink-600)",
+            "rev": "+$6.1K",
+            "revTone": "var(--green-700)",
+            "reach": "4,180",
+            "border": "var(--ink-200)",
+            "mark": "var(--mod-hubs)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "418 held back · reads in 6 weeks",
+            "holdoutTone": "var(--ink-500)",
+            "test": "2 tests → S10.7"
+          },
+          {
+            "name": "Post-first-delivery care · day 3–5",
+            "detail": "Care and use content on the item just delivered. Takes the slot the unmeasured thank-you email currently occupies, which is why that flow is being modified below.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "content only",
+            "offerTint": "var(--ink-100)",
+            "offerTone": "var(--ink-600)",
+            "rev": "+$2.4K",
+            "revTone": "var(--green-700)",
+            "reach": "7,540",
+            "border": "var(--ink-200)",
+            "mark": "var(--mod-hubs)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "754 held back · reads in 8 weeks",
+            "holdoutTone": "var(--ink-500)",
+            "test": null
+          },
+          {
+            "name": "Win-back at 90–120 days idle",
+            "detail": "Fires while return rates are still readable rather than at 180 days. Replaces the existing win-back on the kill list below.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "up to 10% off",
+            "offerTint": "var(--amber-50)",
+            "offerTone": "var(--amber-700)",
+            "rev": "+$1.8K",
+            "revTone": "var(--green-700)",
+            "reach": "3,860",
+            "border": "var(--ink-200)",
+            "mark": "var(--mod-hubs)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "386 held back · reads in 10 weeks",
+            "holdoutTone": "var(--ink-500)",
+            "test": "1 test → S10.7"
+          },
+          {
+            "name": "Refill reminder over SMS · day 40–45",
+            "detail": "Only the 6,240 profiles with a recorded express opt-in, one message inside sending hours. Additive to the email flow, not a replacement — reach is 1,850 a month.",
+            "channel": "sms",
+            "channelIcon": "fa-solid fa-comment-sms",
+            "offer": "no offer",
+            "offerTint": "var(--amber-50)",
+            "offerTone": "var(--amber-700)",
+            "rev": "+$0.9K",
+            "revTone": "var(--green-700)",
+            "reach": "1,850",
+            "border": "var(--ink-200)",
+            "mark": "var(--mod-hubs)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "93 held back · reads in 16 weeks",
+            "holdoutTone": "var(--ink-500)",
+            "test": null
+          }
+        ]
+      },
+      {
+        "label": "Modifications",
+        "hue": "var(--ink-600)",
+        "meta": "3 of 3 approved",
+        "items": [
+          {
+            "name": "Post-purchase thank-you · attach holdout, move trigger",
+            "detail": "Trigger moves from order-shipped to order-confirmed so it stops colliding with the day 3–5 slot, and a holdout is attached so its revenue becomes claimable.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "content only",
+            "offerTint": "var(--ink-100)",
+            "offerTone": "var(--ink-600)",
+            "rev": "claim only",
+            "revTone": "var(--ink-500)",
+            "reach": "7,540",
+            "border": "var(--ink-200)",
+            "mark": "var(--ink-300)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "754 held back · reads in 8 weeks",
+            "holdoutTone": "var(--ink-500)",
+            "test": null
+          },
+          {
+            "name": "Browse abandon · one email, bottom decile suppressed",
+            "detail": "Cuts the second and third email, where the measured lift was indistinguishable from zero, and drops the bottom pLTV decile from the audience. 11,400 fewer sends a month.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "content only",
+            "offerTint": "var(--ink-100)",
+            "offerTone": "var(--ink-600)",
+            "rev": "−$0.3K",
+            "revTone": "var(--rose-700)",
+            "reach": "6,100",
+            "border": "var(--ink-200)",
+            "mark": "var(--ink-300)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": false,
+            "noHoldout": true,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--rose-500)",
+                "fg": "var(--ink-0)",
+                "border": "var(--rose-500)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "keeps its existing 10% holdout",
+            "holdoutTone": "var(--rose-700)",
+            "test": null
+          },
+          {
+            "name": "VIP early access · attach holdout at next launch",
+            "detail": "The flow marketing reports as best-performing has no control group. A holdout at the next launch turns the number into a claim — or shows the audience buys anyway.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "early access",
+            "offerTint": "var(--ink-100)",
+            "offerTone": "var(--ink-600)",
+            "rev": "claim only",
+            "revTone": "var(--ink-500)",
+            "reach": "1,180",
+            "border": "var(--ink-200)",
+            "mark": "var(--ink-300)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "118 held back · reads in 12 weeks",
+            "holdoutTone": "var(--ink-500)",
+            "test": null
+          }
+        ]
+      },
+      {
+        "label": "Kill list",
+        "hue": "var(--rose-700)",
+        "meta": "2 of 2 approved",
+        "items": [
+          {
+            "name": "Retire win-back · 180 day",
+            "detail": "Ten weeks of measurement put the lift at $0.04 per recipient, p=0.41. Removing it saves $1.1K a month of offer cost and 3,220 sends, with no significant revenue loss.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "was 15% off",
+            "offerTint": "var(--amber-50)",
+            "offerTone": "var(--amber-700)",
+            "rev": "−$0.2K",
+            "revTone": "var(--rose-700)",
+            "reach": "—",
+            "border": "var(--ink-200)",
+            "mark": "var(--rose-500)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": false,
+            "noHoldout": true,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--rose-500)",
+                "fg": "var(--ink-0)",
+                "border": "var(--rose-500)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "removal · nothing to measure",
+            "holdoutTone": "var(--rose-700)",
+            "test": null
+          },
+          {
+            "name": "Sunset the bottom-decile weekly promo",
+            "detail": "3,340 profiles at $27 pLTV and a 4% repeat rate. Cutting them to monthly slows consent decay by roughly 40% and protects deliverability for everything else.",
+            "channel": "email",
+            "channelIcon": "fa-solid fa-envelope",
+            "offer": "none",
+            "offerTint": "var(--ink-100)",
+            "offerTone": "var(--ink-600)",
+            "rev": "−$0.2K",
+            "revTone": "var(--rose-700)",
+            "reach": "—",
+            "border": "var(--ink-200)",
+            "mark": "var(--rose-500)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "needsHoldout": false,
+            "noHoldout": true,
+            "holdoutOptions": [
+              {
+                "label": "0%",
+                "bg": "var(--rose-500)",
+                "fg": "var(--ink-0)",
+                "border": "var(--rose-500)"
+              },
+              {
+                "label": "5%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "10%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "20%",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "holdoutNote": "removal · nothing to measure",
+            "holdoutTone": "var(--rose-700)",
+            "test": null
+          }
+        ]
+      }
+    ],
+    "tests": [
+      {
+        "name": "Replenishment subject line · product name vs cycle reminder",
+        "detail": "Two-arm split inside the treated group, running on top of the holdout rather than replacing it.",
+        "mde": "MDE 8%",
+        "weeks": "4 wks"
+      },
+      {
+        "name": "Replenishment offer · free shipping vs 10% off",
+        "detail": "Settles the margin question with evidence instead of a policy argument.",
+        "mde": "MDE 11%",
+        "weeks": "6 wks"
+      },
+      {
+        "name": "Win-back timing · day 90 vs day 120",
+        "detail": "Finds the real edge of the window before the offer depth is tuned.",
+        "mde": "MDE 14%",
+        "weeks": "10 wks"
+      }
+    ],
+    "totals": [
+      {
+        "label": "Incremental revenue / mo",
+        "value": "+$10.5K",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Offer + shipping cost / mo",
+        "value": "$0.3K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Net contribution / mo",
+        "value": "+$4.1K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Revenue held in holdouts",
+        "value": "$1.1K",
+        "tone": "var(--mod-hubs)"
+      },
+      {
+        "label": "Sends per month",
+        "value": "−10,550",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "policyStatus": "in band",
+    "policyTone": "var(--green-700)",
+    "checks": [
+      {
+        "label": "Holdout on every measurable flow",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "All measurable flows carry 10% or more."
+      },
+      {
+        "label": "Offer depth inside segment ceilings",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Deepest offer is 10% on lapsed, against a 15% ceiling."
+      },
+      {
+        "label": "Weekly frequency cap",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Cap 4 with the two removals nets 10,550 fewer sends a month."
+      },
+      {
+        "label": "Consent boundaries",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "note": "SMS flow enrols only express opt-ins. Suppression and unsubscribe rules are untouched by this slate."
+      }
+    ],
+    "ledger": [
+      {
+        "name": "Consumable replenishment",
+        "pct": "10%",
+        "tone": "var(--green-700)",
+        "detail": "418 held · reads in 6 wks"
+      },
+      {
+        "name": "Post-first-delivery care",
+        "pct": "10%",
+        "tone": "var(--green-700)",
+        "detail": "754 held · reads in 8 wks"
+      },
+      {
+        "name": "Win-back at 90–120 days idle",
+        "pct": "10%",
+        "tone": "var(--green-700)",
+        "detail": "386 held · reads in 10 wks"
+      },
+      {
+        "name": "Refill reminder over SMS",
+        "pct": "5%",
+        "tone": "var(--amber-700)",
+        "detail": "93 held · reads in 16 wks"
+      },
+      {
+        "name": "Post-purchase thank-you",
+        "pct": "10%",
+        "tone": "var(--green-700)",
+        "detail": "754 held · reads in 8 wks"
+      },
+      {
+        "name": "VIP early access",
+        "pct": "10%",
+        "tone": "var(--green-700)",
+        "detail": "118 held · reads in 12 wks"
+      }
+    ],
+    "ledgerEmpty": false,
+    "blocked": false,
+    "canApprove": true,
+    "ctaLabel": "Approve 9 decisions & continue",
+    "footStatus": "Decide · 9 of 9 approved · margin-safe offers · cap 4 / week",
+    "footTone": "var(--ink-500)"
+  }
+}

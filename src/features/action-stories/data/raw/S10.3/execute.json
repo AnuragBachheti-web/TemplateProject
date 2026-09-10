@@ -1,0 +1,550 @@
+{
+  "code": "S10.3",
+  "stageKey": "execute",
+  "name": "Account health",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "1 metric\nat risk",
+    "pinMark": "var(--rose-500)",
+    "pinTone": "var(--rose-700)",
+    "pinnedTop": "Revenue at risk $9.1K / day",
+    "pinnedSub": "0 of 4 stages dispatched",
+    "planLine": "Operational fixes run first — the recovery curve is the strongest evidence a submission can carry. Filings go out only after the fix is live, and only by a person.",
+    "pushedCount": "0 / 4",
+    "runAllLabel": "Run in order",
+    "runAllIcon": "fa-solid fa-play",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "stages": [
+      {
+        "name": "Operational fixes",
+        "meta": "handling-time buffer and Monday roster · nothing submitted to anyone",
+        "icon": "fa-solid fa-wrench",
+        "hue": "var(--green-700)",
+        "doorHref": "S9.18-4-execute.dc.html",
+        "doorLabel": "S9.18 fulfilment",
+        "human": null,
+        "tint": "color-mix(in oklab, var(--green-700) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "color-mix(in oklab, var(--green-500) 4%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Handling-time buffer on weekend orders",
+            "detail": "One extra day on Fri–Sun orders, applied in the OMS ahead of anything being filed. The recovery curve starts from the moment this lands, which is what the submissions cite.",
+            "value": "78% of cause",
+            "valueTone": "var(--green-700)",
+            "tag": "live first",
+            "tagIcon": "fa-solid fa-bolt",
+            "tagTint": "var(--green-50)",
+            "tagTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Two extra Monday pickers at the East node",
+            "detail": "Requested with the 3PL for the oversize queue. Addresses the 11% that waits on a second picker without touching the promise shown at checkout.",
+            "value": "11% of cause",
+            "valueTone": "var(--green-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Zone 7–8 routing already live",
+            "detail": "Rule set v14 moved Zone 7–8 orders to the West node last week. It is already contributing to the Walmart on-time recovery.",
+            "value": "contributing",
+            "valueTone": "var(--ink-800)",
+            "tag": "from S9.18",
+            "tagIcon": "fa-solid fa-route",
+            "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "tagTone": "var(--mod-inventory)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Submissions",
+        "meta": "2 filings · case IDs tracked from acknowledgement",
+        "icon": "fa-solid fa-paper-plane",
+        "hue": "var(--mod-actions)",
+        "doorHref": null,
+        "human": "sent by a person",
+        "tint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+        "cardBorder": "color-mix(in oklab, var(--mod-actions) 26%, white)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for the fix",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "IP counter-notice · case 8814-2291",
+            "detail": "R. Vance read the pack and filed at 09:20. Amazon acknowledged with a 5–9 business-day review window. The listing stays suppressed until it resolves.",
+            "value": "ack 09:24",
+            "valueTone": "var(--rose-700)",
+            "tag": "counsel filed",
+            "tagIcon": "fa-solid fa-scale-balanced",
+            "tagTint": "var(--rose-50)",
+            "tagTone": "var(--rose-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Walmart content reinstatement · WM-40118",
+            "detail": "All nine listings corrected including the seven not yet flagged, then the reinstatement request filed with the diff as evidence. A. Castellanos sent it.",
+            "value": "9 listings",
+            "valueTone": "var(--ink-800)",
+            "tag": "with diff",
+            "tagIcon": "fa-solid fa-code-compare",
+            "tagTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+            "tagTone": "var(--mod-intel)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Authenticity documents · case 8791-4402",
+            "detail": "Three invoices and three authorisation letters pulled with current expiry dates, read and submitted. Eleven days of window remained.",
+            "value": "6 documents",
+            "valueTone": "var(--green-700)",
+            "tag": "from vault",
+            "tagIcon": "fa-solid fa-folder-open",
+            "tagTint": "var(--green-50)",
+            "tagTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Vault and expiry tracking",
+        "meta": "documents indexed · 2 certifications expiring inside 60 days",
+        "icon": "fa-solid fa-folder-open",
+        "hue": "var(--mod-actions)",
+        "doorHref": null,
+        "human": null,
+        "tint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Submitted documents indexed",
+            "detail": "Everything sent today is filed against its case with the submission timestamp, so a follow-up request is answered from the record rather than reassembled.",
+            "value": "6 filed",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Two certifications expiring",
+            "detail": "A food-contact certificate and a lab report both lapse within 60 days. Nothing depends on them today, which is exactly when to renew them.",
+            "value": "46 and 58 days",
+            "valueTone": "var(--amber-700)",
+            "tag": "unrelated",
+            "tagIcon": "fa-solid fa-clock",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Renewal tasks created",
+            "detail": "Two tasks with owners and dates, timed to complete before expiry rather than after a marketplace asks.",
+            "value": "2 tasks",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Monitoring and prevention",
+        "meta": "recovery curves, case polling, recurrence watch, preventive rule",
+        "icon": "fa-solid fa-chart-line",
+        "hue": "var(--mod-actions)",
+        "doorHref": null,
+        "human": null,
+        "tint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Recovery curves armed",
+            "detail": "Late shipment and Walmart on-time both read daily against the projection. A miss of more than 0.3pp for two days re-opens this card.",
+            "value": "2 metrics",
+            "valueTone": "var(--mod-actions)",
+            "tag": "daily",
+            "tagIcon": "fa-solid fa-repeat",
+            "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "tagTone": "var(--mod-actions)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Case polling every 4 hours",
+            "detail": "Three open cases polled for status change. A response from either marketplace wakes the card with the clock recalculated.",
+            "value": "3 cases",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Event written to the pattern library",
+            "detail": "Cause, response, timings and outcome recorded. The next late-shipment drift opens with this event attached rather than as a new investigation.",
+            "value": "HLTH-0264",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "recoveryState": "not started",
+    "recoveryTone": "var(--ink-400)",
+    "recoveryMetrics": [
+      {
+        "label": "Late shipment now",
+        "value": "3.7%",
+        "tone": "var(--rose-700)",
+        "note": "still rising, no fix live"
+      },
+      {
+        "label": "Projected day 14",
+        "value": "4.6%",
+        "tone": "var(--rose-700)",
+        "note": "past their 4.0% limit by day 9"
+      },
+      {
+        "label": "Walmart on-time",
+        "value": "95.0%",
+        "tone": "var(--rose-700)",
+        "note": "at their floor exactly"
+      },
+      {
+        "label": "Revenue protected",
+        "value": "$0",
+        "tone": "var(--ink-400)",
+        "note": "nothing addressed yet"
+      }
+    ],
+    "yTicks": [
+      {
+        "label": "4.8%",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "4.0%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "1.5%",
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "xTicks": [
+      {
+        "label": "day 0",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "day 7",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "day 14",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "day 21",
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "limitY": "31.8",
+    "floorY": "61.5",
+    "projPath": "M0.0 49.6 L100.0 52.5 L200.0 61.5 L300.0 73.3 L400.0 82.2 L500.0 88.2 L600.0 94.1 L700.0 94.1",
+    "doNothingPath": "M0.0 49.6 L100.0 46.6 L200.0 40.7 L300.0 34.7 L400.0 28.8 L500.0 22.8 L600.0 19.9 L700.0 13.9",
+    "actualPath": "M0.0 49.6 L100.0 46.6 L200.0 43.6 L300.0 40.7",
+    "actualDots": [
+      {
+        "cx": "0.0",
+        "cy": "49.6"
+      },
+      {
+        "cx": "100.0",
+        "cy": "46.6"
+      },
+      {
+        "cx": "200.0",
+        "cy": "43.6"
+      },
+      {
+        "cx": "300.0",
+        "cy": "40.7"
+      }
+    ],
+    "recoveryFoot": "projection begins when the buffer goes live",
+    "pollStatus": "arms on stage 4",
+    "pollTone": "var(--ink-400)",
+    "cases": [
+      {
+        "name": "IP counter-notice",
+        "caseId": "case 8814-2291 · Amazon",
+        "filed": "not filed",
+        "poll": "—",
+        "risk": "$1.8K/day",
+        "riskTone": "var(--rose-700)",
+        "status": "draft",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Content reinstatement",
+        "caseId": "case WM-40118 · Walmart",
+        "filed": "not filed",
+        "poll": "—",
+        "risk": "$0.6K/day",
+        "riskTone": "var(--amber-700)",
+        "status": "draft",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Authenticity documents",
+        "caseId": "case 8791-4402 · Amazon",
+        "filed": "not filed",
+        "poll": "—",
+        "risk": "none",
+        "riskTone": "var(--green-700)",
+        "status": "draft",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Late-shipment metric",
+        "caseId": "internal · no case opened",
+        "filed": "no fix",
+        "poll": "—",
+        "risk": "$9.1K/day",
+        "riskTone": "var(--rose-700)",
+        "status": "at risk",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Stages complete",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Fixes live",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Cases filed",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Listings restored",
+        "value": "0 of 3",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "vaultStatus": "indexes on stage 3",
+    "vaultTone": "var(--ink-400)",
+    "vault": [
+      {
+        "label": "Kessler authorisation letters",
+        "detail": "3 SKUs · submitted today",
+        "expiry": "Mar 2027",
+        "icon": "fa-solid fa-file-shield",
+        "tone": "var(--green-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Supplier invoices",
+        "detail": "3 documents · inside 365-day window",
+        "expiry": "current",
+        "icon": "fa-solid fa-file-invoice",
+        "tone": "var(--green-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Food-contact certificate",
+        "detail": "enamel line · renewal task created",
+        "expiry": "46 days",
+        "icon": "fa-solid fa-triangle-exclamation",
+        "tone": "var(--amber-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Lab test report",
+        "detail": "filtration line · renewal task created",
+        "expiry": "58 days",
+        "icon": "fa-solid fa-triangle-exclamation",
+        "tone": "var(--amber-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, a stress window raises a card and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "rules": [
+      {
+        "label": "Peak-week handling buffer",
+        "detail": "BFCM and the two weeks either side get one extra handling day by default.",
+        "icon": "fa-solid fa-calendar-week",
+        "tone": "var(--ink-400)",
+        "nameTone": "var(--ink-500)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Monday inbound surge",
+        "detail": "Any Monday with more than two inbound consolidations extends weekend handling.",
+        "icon": "fa-solid fa-truck-ramp-box",
+        "tone": "var(--ink-400)",
+        "nameTone": "var(--ink-500)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "3PL backlog report",
+        "detail": "A reported backlog at either node extends handling until it clears.",
+        "icon": "fa-solid fa-layer-group",
+        "tone": "var(--ink-400)",
+        "nameTone": "var(--ink-500)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "recurrence": [
+      {
+        "label": "Late shipment past 3.0% again inside 90 days",
+        "detail": "Re-opens with this event attached and the preventive rule flagged as insufficient."
+      },
+      {
+        "label": "Another IP complaint from the same claimant",
+        "detail": "Opens with the filing history and this counter-notice already in the pack."
+      },
+      {
+        "label": "The condition phrase reappearing in any listing",
+        "detail": "Template-level watch, so a bulk import cannot reintroduce it quietly."
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 stages · submissions wait for the fix to go live",
+    "footTone": "var(--ink-500)"
+  }
+}

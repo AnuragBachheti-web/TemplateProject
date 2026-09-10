@@ -1,0 +1,621 @@
+{
+  "code": "S9.7",
+  "stageKey": "decide",
+  "name": "Advertising",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "dropped": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "totals": [
+      {
+        "label": "Changes in slate",
+        "value": "170",
+        "meta": "5 of 5 groups",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Waste removed",
+        "value": "$5.5K",
+        "meta": "per month, recurring",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Net spend change",
+        "value": "+$2.4K",
+        "meta": "inside the $52K envelope",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "CM after ads",
+        "value": "+$12.3K",
+        "meta": "per month at P50",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "bands": [
+      {
+        "label": "Spend · 30 days",
+        "mid": "$54.4K",
+        "tone": "var(--mod-ads)",
+        "lo": "22%",
+        "w": "38%",
+        "mark": "44%",
+        "loLabel": "$49.8K P10",
+        "hiLabel": "$54.6K P90"
+      },
+      {
+        "label": "CM after ads · 30 days",
+        "mid": "$30.7K",
+        "tone": "var(--green-500)",
+        "lo": "18%",
+        "w": "52%",
+        "mark": "46%",
+        "loLabel": "$20.1K P10",
+        "hiLabel": "$26.8K P90"
+      }
+    ],
+    "groups": [
+      {
+        "name": "Pauses",
+        "detail": "Every term that produced no contribution over 60 days with at least 40 clicks, plus the two ad groups where every target failed the floor.",
+        "count": "61 search terms · 2 ad groups",
+        "owner": "Bidder",
+        "effect": "+$4.3K",
+        "effectLabel": "Monthly saving",
+        "hue": "var(--rose-500)",
+        "rows": [
+          {
+            "label": "Glassware broad · tumbler set ad group",
+            "detail": "$4.3K/mo spend",
+            "value": "pause",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "label": "61 zero-CM search terms",
+            "detail": "median $41/mo bleed",
+            "value": "pause",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "label": "Rest of search after 22:00 · 6 campaigns",
+            "detail": "0.34× mROAS",
+            "value": "exclude",
+            "tone": "var(--rose-700)"
+          }
+        ],
+        "opacity": 1,
+        "border": "var(--ink-100)",
+        "boxBg": "var(--mod-ads)",
+        "boxBorder": "var(--mod-ads)",
+        "checkOpacity": 1,
+        "countTint": "var(--ink-50)",
+        "countTone": "var(--ink-600)",
+        "effectTone": "var(--green-700)",
+        "routeShow": "none",
+        "histShow": "none",
+        "rowsShow": "flex",
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px",
+            "bar": "color-mix(in oklab, var(--rose-500) 60%, white)"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--ink-200)"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px",
+            "bar": "color-mix(in oklab, var(--green-500) 60%, white)"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px",
+            "bar": "var(--green-500)"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "name": "Bid changes",
+        "detail": "Down on everything between 0.6× and 1.0× mROAS, up on the targets that are converting under their cap. Nothing moves more than 45%.",
+        "count": "61 changes",
+        "owner": "Bidder",
+        "effect": "+$1.8K",
+        "effectLabel": "CM effect",
+        "hue": "var(--mod-ads)",
+        "rows": [
+          {
+            "label": "38 bids down · 0.6× to 1.0× mROAS",
+            "detail": "median −18%",
+            "value": "−$1.1K spend",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "label": "19 bids up · above 1.3× mROAS",
+            "detail": "median +14%",
+            "value": "+$2.0K spend",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "4 changes over ±40%",
+            "detail": "flagged for review",
+            "value": "needs eyes",
+            "tone": "var(--amber-700)"
+          }
+        ],
+        "opacity": 1,
+        "border": "var(--ink-100)",
+        "boxBg": "var(--mod-ads)",
+        "boxBorder": "var(--mod-ads)",
+        "checkOpacity": 1,
+        "countTint": "var(--ink-50)",
+        "countTone": "var(--ink-600)",
+        "effectTone": "var(--green-700)",
+        "routeShow": "none",
+        "histShow": "flex",
+        "rowsShow": "flex",
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px",
+            "bar": "color-mix(in oklab, var(--rose-500) 60%, white)"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--ink-200)"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px",
+            "bar": "color-mix(in oklab, var(--green-500) 60%, white)"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px",
+            "bar": "var(--green-500)"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "name": "Negative keywords",
+        "detail": "Terms that will keep matching after the pause: bulk, commercial, kids and plastic modifiers that pull traffic with no intent to buy our range.",
+        "count": "28 negatives",
+        "owner": "Bidder",
+        "effect": "+$1.2K",
+        "effectLabel": "Monthly saving",
+        "hue": "var(--ink-700)",
+        "rows": [
+          {
+            "label": "18 exact negatives · zero orders",
+            "detail": "$0.7K/mo",
+            "value": "add",
+            "tone": "var(--ink-700)"
+          },
+          {
+            "label": "10 phrase negatives · bulk and commercial",
+            "detail": "$0.5K/mo",
+            "value": "add",
+            "tone": "var(--ink-700)"
+          }
+        ],
+        "opacity": 1,
+        "border": "var(--ink-100)",
+        "boxBg": "var(--mod-ads)",
+        "boxBorder": "var(--mod-ads)",
+        "checkOpacity": 1,
+        "countTint": "var(--ink-50)",
+        "countTone": "var(--ink-600)",
+        "effectTone": "var(--green-700)",
+        "routeShow": "none",
+        "histShow": "none",
+        "rowsShow": "flex",
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px",
+            "bar": "color-mix(in oklab, var(--rose-500) 60%, white)"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--ink-200)"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px",
+            "bar": "color-mix(in oklab, var(--green-500) 60%, white)"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px",
+            "bar": "var(--green-500)"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "name": "Budget shifts",
+        "detail": "Release the caps on 12 of the 14 winners, funded by the pauses. Two stay capped because their SKUs are under three weeks of cover.",
+        "count": "14 campaigns",
+        "owner": "Bidder",
+        "effect": "+$6.1K",
+        "effectLabel": "CM effect",
+        "hue": "var(--green-500)",
+        "rows": [
+          {
+            "label": "12 caps released",
+            "detail": "+$5.9K spend",
+            "value": "+$6.1K CM",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "2 held for inventory cover",
+            "detail": "$1.4K headroom parked",
+            "value": "blocked",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "Net spend change after pauses",
+            "detail": "inside the $52K envelope",
+            "value": "+$0.4K",
+            "tone": "var(--ink-700)"
+          }
+        ],
+        "opacity": 1,
+        "border": "var(--ink-100)",
+        "boxBg": "var(--mod-ads)",
+        "boxBorder": "var(--mod-ads)",
+        "checkOpacity": 1,
+        "countTint": "var(--ink-50)",
+        "countTone": "var(--ink-600)",
+        "effectTone": "var(--green-700)",
+        "routeShow": "none",
+        "histShow": "none",
+        "rowsShow": "flex",
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px",
+            "bar": "color-mix(in oklab, var(--rose-500) 60%, white)"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--ink-200)"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px",
+            "bar": "color-mix(in oklab, var(--green-500) 60%, white)"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px",
+            "bar": "var(--green-500)"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "name": "New tests",
+        "detail": "Two search terms promoted to their own exact-match ad groups, one creative refresh against the fatigued ceramics asset, one daypart test. Each registers as a hypothesis with a pre-declared read.",
+        "count": "4 tests",
+        "owner": "Bidder + Merchandiser",
+        "effect": "−$1.1K",
+        "effectLabel": "Cost to run",
+        "hue": "var(--violet-500)",
+        "rows": [
+          {
+            "label": "heavy base drinking glasses → exact",
+            "detail": "1.48× mROAS at broad",
+            "value": "$0.3K",
+            "tone": "var(--violet-700)"
+          },
+          {
+            "label": "drinking glasses dishwasher safe → exact",
+            "detail": "1.31× mROAS at broad",
+            "value": "$0.2K",
+            "tone": "var(--violet-700)"
+          },
+          {
+            "label": "Ceramics lifestyle v4 vs v3",
+            "detail": "CTR −38% on v3",
+            "value": "$0.4K",
+            "tone": "var(--violet-700)"
+          },
+          {
+            "label": "Daypart · reinstate 22:00-24:00 at −60% bid",
+            "detail": "was 0.34× mROAS",
+            "value": "$0.2K",
+            "tone": "var(--violet-700)"
+          }
+        ],
+        "opacity": 1,
+        "border": "var(--ink-100)",
+        "boxBg": "var(--mod-ads)",
+        "boxBorder": "var(--mod-ads)",
+        "checkOpacity": 1,
+        "countTint": "var(--ink-50)",
+        "countTone": "var(--ink-600)",
+        "effectTone": "var(--rose-700)",
+        "routeShow": "inline-flex",
+        "histShow": "none",
+        "rowsShow": "flex",
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px",
+            "bar": "var(--rose-500)"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px",
+            "bar": "color-mix(in oklab, var(--rose-500) 60%, white)"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--ink-200)"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px",
+            "bar": "color-mix(in oklab, var(--green-500) 60%, white)"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px",
+            "bar": "var(--green-500)"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px",
+            "bar": "var(--green-500)"
+          }
+        ]
+      }
+    ],
+    "summary": [
+      {
+        "label": "Pauses",
+        "labelTone": "var(--ink-700)",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "value": "+$4.3K"
+      },
+      {
+        "label": "Bid changes",
+        "labelTone": "var(--ink-700)",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "value": "+$1.8K"
+      },
+      {
+        "label": "Negative keywords",
+        "labelTone": "var(--ink-700)",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "value": "+$1.2K"
+      },
+      {
+        "label": "Budget shifts",
+        "labelTone": "var(--ink-700)",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "value": "+$6.1K"
+      },
+      {
+        "label": "New tests",
+        "labelTone": "var(--ink-700)",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--violet-700)",
+        "value": "−$1.1K"
+      }
+    ],
+    "net": [
+      {
+        "label": "Spend after the slate",
+        "value": "$54.4K/mo",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "CM after ads",
+        "value": "$30.7K/mo",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Blended ROAS",
+        "value": "4.3×",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Account mROAS",
+        "value": "1.45×",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "netNote": "The slate clears the 4.0× blended target without asking Finance for another dollar — the money comes from the bleed.",
+    "checks": [
+      {
+        "text": "No change touches a protected campaign. Brand defense stays funded at $8.4K.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Net spend change of +$2.4K needs an envelope check with story 9.4.",
+        "icon": "fa-solid fa-triangle-exclamation",
+        "tone": "var(--amber-700)",
+        "bg": "var(--amber-50)",
+        "border": "color-mix(in oklab, var(--amber-500) 40%, white)"
+      },
+      {
+        "text": "Two capped winners held back — their SKUs are under three weeks of cover.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "4 bid changes exceed ±40% and are flagged for your eyes on Execute.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      }
+    ],
+    "footerStatus": "Decide · 5 of 5 groups · 170 changes · CM +$12.3K/mo",
+    "approveLabel": "Approve the full slate"
+  }
+}

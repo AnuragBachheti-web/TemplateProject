@@ -1,0 +1,230 @@
+{
+  "code": "S9.5",
+  "stageKey": "reason",
+  "name": "Competitive",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will rank the responses and wait for you. No price reaches a channel without your approval, even inside the SLA.",
+    "posture": [
+      {
+        "label": "Match band",
+        "value": "to the lowest compliant seller, not below",
+        "icon": "fa-solid fa-arrows-left-right-to-line",
+        "hue": "var(--mod-intel)",
+        "tint": "color-mix(in oklab, var(--mod-intel) 8%, white)",
+        "border": "color-mix(in oklab, var(--mod-intel) 26%, white)"
+      },
+      {
+        "label": "Never below floor",
+        "value": "MAP or 28% CM, whichever binds first",
+        "icon": "fa-solid fa-shield-halved",
+        "hue": "var(--rose-700)",
+        "tint": "var(--rose-50)",
+        "border": "color-mix(in oklab, var(--rose-500) 34%, white)"
+      },
+      {
+        "label": "Heroes defended",
+        "value": "price answer allowed",
+        "icon": "fa-solid fa-crown",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 10%, white)",
+        "border": "color-mix(in oklab, var(--mod-discover) 30%, white)"
+      },
+      {
+        "label": "Supporting SKUs",
+        "value": "no price answer · content and ads only",
+        "icon": "fa-solid fa-layer-group",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-50)",
+        "border": "var(--ink-200)"
+      },
+      {
+        "label": "One answer per SKU",
+        "value": "per 72h · no price laddering",
+        "icon": "fa-solid fa-repeat",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-50)",
+        "border": "var(--ink-200)"
+      }
+    ],
+    "slas": [
+      {
+        "sev": "S1",
+        "sla": "4 h",
+        "def": "Hero undercut or Buy Box lost. Wakes the queue immediately.",
+        "bg": "var(--rose-50)",
+        "pillBg": "var(--rose-500)",
+        "pillTone": "var(--ink-0)"
+      },
+      {
+        "sev": "S2",
+        "sla": "24 h",
+        "def": "Core SKU undercut, or a new entrant on a Hero listing.",
+        "bg": "var(--amber-50)",
+        "pillBg": "var(--amber-500)",
+        "pillTone": "var(--ink-0)"
+      },
+      {
+        "sev": "S3",
+        "sla": "3 d",
+        "def": "Content or review-velocity moves, ad-position shifts.",
+        "bg": "var(--ink-25)",
+        "pillBg": "var(--ink-200)",
+        "pillTone": "var(--ink-700)"
+      },
+      {
+        "sev": "S4",
+        "sla": "next cycle",
+        "def": "Competitor stock-outs and other openings, not threats.",
+        "bg": "var(--ink-25)",
+        "pillBg": "var(--ink-200)",
+        "pillTone": "var(--ink-700)"
+      }
+    ],
+    "watch": [
+      {
+        "name": "CompetitorA",
+        "threat": "high",
+        "threatTone": "var(--rose-700)",
+        "dot": "var(--rose-500)",
+        "last": "Cut NW-CER-1120 to $23.20 · took the Buy Box",
+        "overlap": "2h ago · 61% catalogue overlap"
+      },
+      {
+        "name": "Hearthline",
+        "threat": "high",
+        "threatTone": "var(--rose-700)",
+        "dot": "var(--rose-500)",
+        "last": "Matched our platter price within 40 minutes last week",
+        "overlap": "3d ago · 48% overlap"
+      },
+      {
+        "name": "Kettle & Co",
+        "threat": "medium",
+        "threatTone": "var(--amber-700)",
+        "dot": "var(--amber-500)",
+        "last": "New A+ content on the mug listing, +12 content score",
+        "overlap": "1d ago · 37% overlap"
+      },
+      {
+        "name": "Verrand Home",
+        "threat": "medium",
+        "threatTone": "var(--amber-700)",
+        "dot": "var(--amber-500)",
+        "last": "Out of stock on two glassware SKUs",
+        "overlap": "6h ago · 29% overlap"
+      },
+      {
+        "name": "NorthPeak",
+        "threat": "medium",
+        "threatTone": "var(--amber-700)",
+        "dot": "var(--amber-500)",
+        "last": "Raised sponsored bids on our head terms",
+        "overlap": "2d ago · 33% overlap"
+      },
+      {
+        "name": "Orchard &amp; Oak",
+        "threat": "low",
+        "threatTone": "var(--ink-500)",
+        "dot": "var(--ink-300)",
+        "last": "New entrant on the roasting tin listing",
+        "overlap": "5d ago · 14% overlap"
+      },
+      {
+        "name": "Basin Goods",
+        "threat": "low",
+        "threatTone": "var(--ink-500)",
+        "dot": "var(--ink-300)",
+        "last": "Review velocity up 2.1× on towels",
+        "overlap": "4d ago · 22% overlap"
+      },
+      {
+        "name": "Larder Supply",
+        "threat": "low",
+        "threatTone": "var(--ink-500)",
+        "dot": "var(--ink-300)",
+        "last": "No move in 21 days",
+        "overlap": "quiet · 18% overlap"
+      },
+      {
+        "name": "Fold & Grain",
+        "threat": "low",
+        "threatTone": "var(--ink-500)",
+        "dot": "var(--ink-300)",
+        "last": "Exited the mug category",
+        "overlap": "9d ago · 11% overlap"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Competitor scrapes · 9 sellers",
+        "meta": "every 4h"
+      },
+      {
+        "label": "Buy Box win history",
+        "meta": "90 days"
+      },
+      {
+        "label": "Elasticity by SKU",
+        "meta": "14 price tests"
+      },
+      {
+        "label": "CM after fees and returns",
+        "meta": "per unit"
+      },
+      {
+        "label": "MAP contracts",
+        "meta": "3 brands"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Sc",
+        "name": "Scout",
+        "role": "Watches the 9 sellers, tags severity, opens the event.",
+        "hue": "var(--mod-intel)",
+        "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+      },
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "role": "Owns the price answer inside the band and the floors.",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)"
+      },
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns content, imagery and bundle counters.",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+      },
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "role": "Owns the ad answer when price is held.",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+      }
+    ]
+  }
+}

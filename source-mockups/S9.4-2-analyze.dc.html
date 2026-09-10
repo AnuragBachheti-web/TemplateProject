@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.4-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-ads);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-ads) 12%, white);color:var(--mod-ads);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Allocation · S9.4</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Budget + inventory pairing — $18K shift proposal</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">$127K committed · net change $0</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">5 channels · 1 paired transfer</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Ar" size="sm" color="var(--mod-ads)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:inline-flex;align-items:center;gap:3px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-ads)"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-inventory)"></span>
+          </span>
+          Lens: Ads · Inventory
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-ads);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Bidder + Planner, Arbiter mediates
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Marginal ROAS Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Contribution Allocator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.4-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.4-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-ads) 10%, white);border:1px solid color-mix(in oklab, var(--mod-ads) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-ads);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.4-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.4-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:16px">
+
+        <div style="flex-shrink:0"><x-import component-from-global-scope="RealifyDesignSystem_002c39.IntelCard" tag="Realify signal · allocation" title="Shifting $18K/month from Walmart DSP to TikTok Spark Ads projects +$11K CM, but breaches TikTok cover in 3 weeks" hint-size="100%,180px">Walmart DSP returns <strong>$0.88</strong> of CM on the next dollar; TikTok Spark returns <strong>$2.31</strong>. Moving $18K buys <strong>$29.7K</strong> of incremental CM, <strong>+$11.7K</strong> net of the spend. Two scaled SKUs sit at <strong>2.4 weeks</strong> of cover, under the three-week guardrail — pair the shift with <strong>transfer T-142</strong> and cover lands at 4.1 weeks. Based on 90 days of platform spend and 11,806 orders, CM measured after fees and returns.</x-import></div>
+
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 12px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Marginal return curves</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">CM per next $1 · after fees and returns</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <sc-for list="{{ legend }}" as="l" hint-placeholder-count="5">
+                <span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-600)">
+                  <span style="width:9px;height:9px;border-radius:2px;background:{{ l.hue }}"></span>{{ l.name }}
+                </span>
+              </sc-for>
+            </div>
+          </div>
+          <div style="margin-top:12px;height:300px">
+            <svg viewBox="0 0 988 300" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+              <rect x="44" y="22" width="904" height="244" style="fill:var(--ink-25);stroke:var(--ink-100);stroke-width:1"></rect>
+              <sc-for list="{{ gridX }}" as="g" hint-placeholder-count="6">
+                <line x1="{{ g.x }}" y1="22" x2="{{ g.x }}" y2="266" style="stroke:var(--ink-100);stroke-width:1"></line>
+              </sc-for>
+              <line x1="44" y1="{{ breakY }}" x2="948" y2="{{ breakY }}" style="stroke:var(--ink-300);stroke-width:1;stroke-dasharray:6 4"></line>
+              <text x="52" y="{{ breakLabelY }}" style="fill:var(--ink-500);font-family:var(--font-mono);font-size:10px;letter-spacing:1.2px">BREAK-EVEN · $1.00 CM PER $1</text>
+              <sc-for list="{{ curves }}" as="c" hint-placeholder-count="5">
+                <path d="{{ c.path }}" style="fill:none;stroke:{{ c.hue }};stroke-width:{{ c.width }};stroke-opacity:{{ c.opacity }}"></path>
+              </sc-for>
+              <sc-for list="{{ points }}" as="p" hint-placeholder-count="5">
+                <circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.r }}" style="fill:{{ p.fill }};stroke:{{ p.stroke }};stroke-width:2"></circle>
+              </sc-for>
+              <path d="{{ shiftPath }}" style="fill:none;stroke:var(--mod-margin);stroke-width:1.4;stroke-dasharray:5 4"></path>
+              <circle cx="{{ targetX }}" cy="{{ targetY }}" r="6" style="fill:var(--ink-0);stroke:var(--mod-margin);stroke-width:2"></circle>
+              <text x="{{ targetLx }}" y="{{ targetLy }}" style="fill:var(--mod-margin);font-family:var(--font-mono);font-size:10.5px">PROPOSED · $27K</text>
+              <text transform="rotate(-90 20 144)" x="20" y="144" style="fill:var(--ink-400);font-family:var(--font-mono);font-size:10px;letter-spacing:1.2px;text-anchor:middle">CM PER NEXT $1 →</text>
+            </svg>
+          </div>
+          <div style="display:flex;align-items:center;padding:0 2px 6px">
+            <sc-for list="{{ gridX }}" as="g" hint-placeholder-count="6">
+              <span style="flex:1;font-family:var(--font-mono);font-size:10px;letter-spacing:1.2px;color:var(--ink-400);text-align:center">{{ g.label }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px 14px;padding:0 2px 8px">
+            <sc-for list="{{ points }}" as="p" hint-placeholder-count="5">
+              <span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;color:{{ p.textFill }}">
+                <span style="width:9px;height:9px;border-radius:50%;background:{{ p.fill }};border:2px solid {{ p.stroke }}"></span>{{ p.label }}
+              </span>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:0 2px 4px">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;color:var(--amber-700)">
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--ink-0);border:2px solid var(--amber-500)"></span>amber ring · operating point sits on stock under 3 weeks of cover
+            </span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">x-axis: monthly spend per channel</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Campaign board</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">ranked by CM on the next dollar</span>
+            <a href="S9.4-3-decide.dc.html" style="margin-left:auto;font-size:11.5px;font-weight:500;color:var(--ink-500)" style-hover="color:var(--ink-900)">Build the paired slate →</a>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.DataTable" columns="{{ cols }}" rows="{{ rows }}" hint-size="100%,420px"></x-import>
+          <div style="margin-top:9px;display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">6 of 23 campaigns</span>
+            <span style="color:var(--ink-300);font-size:10px">·</span>
+            <span style="font-size:11.5px;color:var(--ink-500)">Amber cover means the scale-up needs a paired inventory move before it can run</span>
+          </div>
+        </div>
+
+        <div style="height:4px"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Coverage conflicts</span>
+          <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;color:var(--amber-700)">3 flagged</span>
+        </div>
+        <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">High marginal return sitting on thin stock. Each one needs a transfer or an accelerated PO before spend can scale.</p>
+        <div style="margin-top:13px;display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ conflicts }}" as="c" hint-placeholder-count="3">
+            <div style="border:1px solid color-mix(in oklab, var(--amber-500) 30%, white);background:color-mix(in oklab, var(--amber-500) 5%, white);border-radius:var(--r-md);padding:11px 12px">
+              <div style="font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink-900);text-wrap:pretty">{{ c.name }}</div>
+              <div style="margin-top:7px;display:flex;align-items:center;gap:8px">
+                <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-700);font-variant-numeric:tabular-nums">{{ c.mroas }}</span>
+                <span style="color:var(--ink-300);font-size:10px">·</span>
+                <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--amber-700);font-variant-numeric:tabular-nums">{{ c.cover }}</span>
+              </div>
+              <div style="margin-top:8px;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ c.fix }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What CM is net of</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ assumptions }}" as="a" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:10px">
+                <span style="flex:1;min-width:0;font-size:12.5px;color:var(--ink-700)">{{ a.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ a.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Pacing · month to date</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ pacing }}" as="p" hint-placeholder-count="5">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-700)">{{ p.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+                </div>
+                <div style="margin-top:6px;height:4px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <div style="width:{{ p.pct }};height:100%;border-radius:var(--r-full);background:{{ p.tone }}"></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Analyze · 3 coverage conflicts · $18K in play</span>
+      <a href="S9.4-1-reason.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Reason
+      </a>
+      <a href="S9.4-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Decide<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  CH = [
+    { key: 'amz', name: 'Amazon Ads', hue: 'var(--mod-ads)', a: 2.6, b: 30, spend: 52, thin: false },
+    { key: 'ggl', name: 'Google', hue: 'var(--r-blue-500)', a: 2.9, b: 20, spend: 26, thin: false },
+    { key: 'meta', name: 'Meta', hue: 'var(--mod-discover)', a: 3.1, b: 16, spend: 22, thin: true },
+    { key: 'tik', name: 'TikTok Spark', hue: 'var(--mod-margin)', a: 4.2, b: 11, spend: 9, thin: true },
+    { key: 'wmt', name: 'Walmart DSP', hue: 'var(--mod-hubs)', a: 1.35, b: 22, spend: 18, thin: false },
+  ];
+
+  X(s) { return 44 + (s / 60) * 904; }
+  Y(m) { return 266 - (m / 4.4) * 244; }
+
+  cell(text, color, weight) {
+    return React.createElement('span', { style: { color: color || 'var(--ink-700)', fontWeight: weight || 400 } }, text);
+  }
+
+  campaignCell(name, meta) {
+    return React.createElement('span', { style: { display: 'flex', flexDirection: 'column', gap: 2 } },
+      React.createElement('strong', { style: { fontSize: 13, fontWeight: 600, color: 'var(--ink-900)' } }, name),
+      React.createElement('span', { style: { fontFamily: 'var(--font-mono)', fontSize: 10.5, color: 'var(--ink-400)' } }, meta));
+  }
+
+  verdictCell(text, hue) {
+    return React.createElement('span', {
+      style: {
+        display: 'inline-flex', padding: '3px 9px', borderRadius: 999, fontFamily: 'var(--font-mono)', fontSize: 9.5,
+        letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500,
+        background: 'color-mix(in oklab, ' + hue + ' 12%, white)', color: hue,
+      },
+    }, text);
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const tone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-ads)' }[mode] ?? 'var(--ink-400)';
+    const m = (c, s) => c.a / (1 + s / c.b);
+    const raw = [
+      ['TikTok Spark · Ridgeline launch', 'CMP-8841 · 2 SKUs', '$9.0K', '2.31', '+$9.8K', '2.4 wk', 'Scale + transfer', 'var(--mod-margin)', true],
+      ['Meta Advantage+ · Kitchen core', 'CMP-7710 · 14 SKUs', '$22.0K', '1.31', '+$5.4K', '2.9 wk', 'Scale + transfer', 'var(--mod-margin)', true],
+      ['Google PMax · Long tail', 'CMP-6402 · 38 SKUs', '$26.0K', '1.26', '+$5.1K', '5.2 wk', 'Hold', 'var(--ink-600)', false],
+      ['TikTok Spark · Glassware test', 'CMP-8902 · 3 SKUs', '$0.0K', '2.05', '+$8.6K', '3.1 wk', 'Test next cycle', 'var(--r-blue-600)', false],
+      ['Amazon SP · Defensive brand', 'CMP-2214 · 4 head terms', '$52.0K', '0.95', '+$3.9K', '6.1 wk', 'Hold · floor', 'var(--ink-600)', false],
+      ['Walmart DSP · Prospecting', 'CMP-5150 · 22 SKUs', '$18.0K', '0.88', '+$3.4K', '7.4 wk', 'Cut to floor', 'var(--rose-700)', false],
+    ];
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? tone : 'var(--ink-200)' })),
+      legend: this.CH.map((c) => ({ name: c.name, hue: c.hue })),
+      gridX: [0, 12, 24, 36, 48, 60].map((s) => ({ x: this.X(s).toFixed(1), label: '$' + s + 'K' })),
+      breakY: this.Y(1).toFixed(1),
+      breakLabelY: (this.Y(1) - 7).toFixed(1),
+      curves: this.CH.map((c) => {
+        const pts = [];
+        for (let s = 0; s <= 60; s += 1.5) pts.push((s === 0 ? 'M' : 'L') + this.X(s).toFixed(1) + ' ' + this.Y(m(c, s)).toFixed(1));
+        return { path: pts.join(' '), hue: c.hue, width: c.key === 'tik' || c.key === 'wmt' ? 2.2 : 1.5, opacity: c.key === 'tik' || c.key === 'wmt' ? 1 : 0.55 };
+      }),
+      points: this.CH.map((c) => {
+        const x = this.X(c.spend), y = this.Y(m(c, c.spend));
+        const right = c.spend < 40;
+        return {
+          x: x.toFixed(1), y: y.toFixed(1), r: c.thin ? 6 : 4.5,
+          fill: c.thin ? 'var(--ink-0)' : c.hue,
+          stroke: c.thin ? 'var(--amber-500)' : c.hue,
+          lx: (right ? x + 11 : x - 11).toFixed(1), ly: (y - 9).toFixed(1),
+          anchor: right ? 'start' : 'end',
+          textFill: c.hue,
+          label: c.name + ' · $' + c.spend.toFixed(0) + 'K · ' + m(c, c.spend).toFixed(2),
+        };
+      }),
+      shiftPath: 'M' + this.X(9).toFixed(1) + ' ' + this.Y(m(this.CH[3], 9)).toFixed(1) + ' L' + this.X(27).toFixed(1) + ' ' + this.Y(m(this.CH[3], 27)).toFixed(1),
+      targetX: this.X(27).toFixed(1),
+      targetY: this.Y(m(this.CH[3], 27)).toFixed(1),
+      targetLx: (this.X(27) + 11).toFixed(1),
+      targetLy: (this.Y(m(this.CH[3], 27)) - 9).toFixed(1),
+      cols: [
+        { key: 'campaign', label: 'Channel · campaign' },
+        { key: 'spend', label: 'Spend / mo', numeric: true },
+        { key: 'mroas', label: 'CM per next $1', numeric: true },
+        { key: 'inc', label: 'Incremental CM at +$5K', numeric: true },
+        { key: 'cover', label: 'Cover on scaled SKUs', numeric: true },
+        { key: 'verdict', label: 'Verdict' },
+      ],
+      rows: raw.map((r) => ({
+        campaign: this.campaignCell(r[0], r[1]),
+        spend: r[2],
+        mroas: this.cell(r[3] + '×', 'var(--ink-900)', 600),
+        inc: r[4],
+        cover: this.cell(r[5], r[8] ? 'var(--amber-700)' : null, r[8] ? 600 : 400),
+        verdict: this.verdictCell(r[6], r[7]),
+      })),
+      conflicts: [
+        { name: 'TikTok Spark · Ridgeline mug + bowl', mroas: '2.31× CM', cover: '2.4 wk cover', fix: 'Transfer T-142 moves 1,400 u to FBA-West and lands Sep 02. Cover goes to 4.1 wk.' },
+        { name: 'Meta Advantage+ · Quilted oven mitt', mroas: '1.31× CM', cover: '2.9 wk cover', fix: 'Transfer T-149 moves 320 u to DC-East. Cover goes to 4.6 wk.' },
+        { name: 'TikTok Spark · Cut-glass tumbler set', mroas: '2.05× CM', cover: '3.1 wk cover', fix: 'Sits just above the guardrail. Verrier PO lands Sep 18 — test after receipt, not before.' },
+      ],
+      assumptions: [
+        { label: 'Platform fees and referral', value: '−8.4%' },
+        { label: 'Returns and refunds', value: '−4.1%' },
+        { label: 'Fulfilment per unit', value: '−$3.10' },
+        { label: 'Attribution window', value: '7-day click' },
+        { label: 'Incrementality holdout', value: '9% of traffic' },
+      ],
+      pacing: [
+        { label: 'Amazon Ads · $52K plan', value: '104%', pct: '100%', tone: 'var(--amber-700)' },
+        { label: 'Google · $26K plan', value: '97%', pct: '97%', tone: 'var(--mod-ads)' },
+        { label: 'Meta · $22K plan', value: '99%', pct: '99%', tone: 'var(--mod-ads)' },
+        { label: 'TikTok Spark · $9K plan', value: '100%', pct: '100%', tone: 'var(--mod-margin)' },
+        { label: 'Walmart DSP · $18K plan', value: '88%', pct: '88%', tone: 'var(--ink-400)' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

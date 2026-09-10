@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.2-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-cash);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Working capital · S10.2</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Week-7 trough projects $31K below buffer</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-cash)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-cash)"></span>Lens: Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-cash);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Navigator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Cash Ladder Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Settlement Calendar Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.2-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-cash) 10%, white);border:1px solid color-mix(in oklab, var(--mod-cash) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-cash);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:16px 24px 0;display:flex;flex-direction:column;gap:14px">
+
+      <div style="flex-shrink:0"><x-import component-from-global-scope="RealifyDesignSystem_002c39.IntelCard" tag="Navigator · cash ladder" title="Week-7 trough $31K below buffer — the Supplier K PO ($88K net-30) lands atop the Prime Fall ad invoice; three levers close the gap" hint-size="100%,176px">Nothing is wrong with the business. Two large outflows collide in the week Amazon's biweekly settlement misses, and the trough clears the buffer by $31K for four days. At P10 revenue it is <strong>$54K and lasts nine days</strong> — which is the case the levers have to survive.</x-import></div>
+
+      <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:16px 18px 14px">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+            <i class="fa-solid fa-water" style="font-size:9px"></i>13-week ladder
+          </span>
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">click a week to see its inflows and outflows</span>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:10px;height:10px;border-radius:2px;background:var(--green-500)"></span>inflow</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:10px;height:10px;border-radius:2px;background:var(--rose-500)"></span>outflow</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:3px;background:var(--ink-900);display:block"></span>net cash</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:0;border-top:2px dashed var(--mod-cash);display:block"></span>buffer</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:12px;height:10px;background:color-mix(in oklab, var(--ink-400) 18%, white);display:block"></span>P10 band</span>
+          </span>
+        </div>
+
+        <div style="margin-top:13px;display:grid;grid-template-columns:56px 1fr;gap:0 8px">
+          <div style="height:150px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;padding:2px 0">
+            <sc-for list="{{ flowTicks }}" as="t" hint-placeholder-count="3">
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400);font-variant-numeric:tabular-nums">{{ t }}</span>
+            </sc-for>
+          </div>
+          <div style="min-width:0;height:150px;display:flex;align-items:flex-end;gap:5px;border-bottom:1px solid var(--ink-200)">
+            <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="13">
+              <button type="button" onClick="{{ w.pick }}" style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px;border:none;background:{{ w.colBg }};padding:0 2px;cursor:pointer;border-radius:3px 3px 0 0">
+                <span style="width:44%;height:{{ w.inH }}%;background:var(--green-500);opacity:{{ w.opacity }};border-radius:2px 2px 0 0;display:block"></span>
+                <span style="width:44%;height:{{ w.outH }}%;background:var(--rose-500);opacity:{{ w.opacity }};border-radius:2px 2px 0 0;display:block"></span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;display:grid;grid-template-columns:56px 1fr;gap:0 8px">
+          <div style="height:170px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;padding:2px 0">
+            <sc-for list="{{ netTicks }}" as="t" hint-placeholder-count="4">
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.label }}</span>
+            </sc-for>
+          </div>
+          <div style="min-width:0;height:170px;position:relative">
+            <svg viewBox="0 0 900 170" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+              <path d="{{ p10Band }}" style="fill:var(--ink-400);fill-opacity:0.18"></path>
+              <rect x="{{ troughX }}" y="0" width="{{ troughW }}" height="170" style="fill:var(--rose-500);fill-opacity:0.07"></rect>
+              <path d="{{ gapArea }}" style="fill:var(--rose-500);fill-opacity:0.2"></path>
+              <line x1="0" y1="{{ bufferY }}" x2="900" y2="{{ bufferY }}" style="stroke:var(--mod-cash);stroke-width:2;stroke-dasharray:7 5"></line>
+              <path d="{{ p10Path }}" style="fill:none;stroke:var(--ink-400);stroke-width:1.6;stroke-dasharray:4 4;stroke-linejoin:round"></path>
+              <path d="{{ netPath }}" style="fill:none;stroke:var(--ink-900);stroke-width:2.6;stroke-linejoin:round"></path>
+              <sc-for list="{{ netDots }}" as="d" hint-placeholder-count="13">
+                <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="{{ d.r }}" style="fill:{{ d.fill }};stroke:{{ d.stroke }};stroke-width:2"></circle>
+              </sc-for>
+            </svg>
+          </div>
+          <div></div>
+          <div style="display:flex;gap:5px;margin-top:6px">
+            <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="13">
+              <span style="flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center">
+                <span style="font-family:var(--font-mono);font-size:9.5px;font-weight:{{ w.labelWeight }};color:{{ w.labelTone }}">{{ w.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:8.5px;color:{{ w.netTone }};font-variant-numeric:tabular-nums">{{ w.netLabel }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:13px 15px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+          <div style="min-width:0;display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mod-cash)">{{ sel.name }}</span>
+              <span style="display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:var(--r-full);background:{{ sel.tint }};font-family:var(--font-mono);font-size:8.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:{{ sel.tone }}">{{ sel.state }}</span>
+              <span style="margin-left:auto;font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ sel.tone }};font-variant-numeric:tabular-nums">{{ sel.net }}</span>
+            </div>
+            <span style="font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ sel.summary }}</span>
+            <div style="display:grid;grid-template-columns:1fr 92px;gap:0 10px;padding-bottom:5px;border-bottom:1px solid var(--ink-200)">
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-700)">Inflows</span>
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ sel.inTotal }}</span>
+            </div>
+            <sc-for list="{{ sel.inflows }}" as="r" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:1fr 92px;gap:0 10px;align-items:center">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;color:var(--ink-700)">{{ r.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ r.note }}</span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--green-700);text-align:right;font-variant-numeric:tabular-nums">{{ r.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="min-width:0;display:flex;flex-direction:column;gap:9px">
+            <div style="display:grid;grid-template-columns:1fr 92px;gap:0 10px;padding-bottom:5px;border-bottom:1px solid var(--ink-200)">
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose-700)">Outflows</span>
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ sel.outTotal }}</span>
+            </div>
+            <sc-for list="{{ sel.outflows }}" as="r" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:1fr 92px;gap:0 10px;align-items:center">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="display:flex;align-items:center;gap:6px">
+                    <span style="font-size:11.5px;color:var(--ink-700)">{{ r.label }}</span>
+                    <sc-if value="{{ r.locked }}" hint-placeholder-val="{{ false }}">
+                      <i class="fa-solid fa-lock" style="font-size:8px;color:var(--ink-300)"></i>
+                    </sc-if>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ r.note }}</span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--rose-700);text-align:right;font-variant-numeric:tabular-nums">{{ r.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Cash conversion cycle</span>
+            <span style="margin-left:auto;display:flex;align-items:baseline;gap:6px">
+              <span style="font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--amber-700);font-variant-numeric:tabular-nums">61</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">days</span>
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column">
+            <sc-for list="{{ ccc }}" as="c" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:1fr 62px 64px;gap:0 10px;align-items:center;padding:9px 0;border-bottom:1px solid {{ c.rule }};background:{{ c.bg }}">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:12px;font-weight:{{ c.weight }};color:var(--ink-900)">{{ c.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ c.note }}</span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:{{ c.size }};font-weight:{{ c.weight }};color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ c.days }}</span>
+                <span style="font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ c.deltaTone }};text-align:right;font-variant-numeric:tabular-nums">{{ c.delta }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:12px;display:flex;align-items:flex-end;gap:3px;height:44px">
+            <sc-for list="{{ cccTrend }}" as="t" hint-placeholder-count="12">
+              <span style="flex:1;height:{{ t.h }}%;background:{{ t.fill }};border-radius:1.5px;display:block"></span>
+            </sc-for>
+          </div>
+          <div style="margin-top:5px;display:flex;justify-content:space-between">
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">12 months ago · 54d</span>
+            <span style="font-family:var(--font-mono);font-size:9px;font-weight:600;color:var(--amber-700)">now · 61d</span>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Seven days longer than a year ago. Most of it is DIO — inventory sitting rather than customers paying late.</p>
+        </div>
+
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Capital locked by role</span>
+            <span style="margin-left:auto;display:flex;align-items:baseline;gap:6px">
+              <span style="font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">$418K</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">at cost</span>
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ roles }}" as="r" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-700)">{{ r.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ r.value }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;color:{{ r.turnTone }};font-variant-numeric:tabular-nums">{{ r.turns }}</span>
+                </div>
+                <span style="height:7px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                  <span style="display:block;height:100%;width:{{ r.pct }}%;background:{{ r.hue }};border-radius:var(--r-full)"></span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:11px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Exit candidates and Supporting SKUs hold $103K at under 1.4 turns. That capital is the cheapest source of cash in the building — and it is the clearance lever.</p>
+        </div>
+
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Trough anatomy</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--rose-500)"></span>−$31K
+            </span>
+          </div>
+          <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Four things line up in the same week. Move any one of them and the trough clears the buffer.</p>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ anatomy }}" as="a" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 11px;border:1px solid {{ a.border }};border-radius:var(--r-sm);background:{{ a.bg }}">
+                <i class="{{ a.icon }}" style="font-size:11px;color:{{ a.tone }};margin-top:2px;flex-shrink:0;width:13px;text-align:center"></i>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:11.5px;font-weight:600;color:var(--ink-900)">{{ a.label }}</span>
+                  <span style="font-size:10.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ a.detail }}</span>
+                </span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ a.tone }};font-variant-numeric:tabular-nums">{{ a.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-sm);overflow:hidden">
+            <sc-for list="{{ scenarios }}" as="s" hint-placeholder-count="2">
+              <div style="background:var(--ink-0);padding:10px 12px;display:flex;flex-direction:column;gap:2px">
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:16px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                <span style="font-size:10px;line-height:1.35;color:var(--ink-400);text-wrap:pretty">{{ s.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:6px;flex-shrink:0"></div>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">Analyze · 13 weeks · trough week 7 at $89K vs $120K buffer · P10 case $66K · CCC 61 days</span>
+      <a href="S10.2-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Decide<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { sel: 6 };
+
+  ladder() {
+    return [
+      {
+        label: 'W1', date: 'Aug 25', inflow: 118, outflow: 96, net: 236,
+        summary: 'An ordinary week. Shopify payouts land daily, Amazon settles mid-week, and the only unusual outflow is the second creative tranche for the channel pilot.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$46K'], ['Amazon settlement', 'biweekly · Aug 27', '$58K'], ['Walmart', 'net 14', '$9K'], ['Faire wholesale', 'net 30', '$5K']],
+        outflows: [['Payroll', 'Aug 26 run', '$19K', true], ['Supplier payments', '3 POs due', '$41K', false], ['Ad platforms', 'weekly invoice', '$14K', false], ['Rent and fixed', 'monthly', '$11K', true], ['Pilot creative', 'TikTok tranche 2', '$11K', false]],
+      },
+      {
+        label: 'W2', date: 'Sep 1', inflow: 104, outflow: 121, net: 219,
+        summary: 'Rent, insurance and the loan payment all fall on the 1st, and no Amazon settlement lands. Predictable and absorbed.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$44K'], ['Walmart', 'net 14', '$11K'], ['Faire wholesale', 'net 30', '$9K'], ['Pitcher promo lift', 'DTC', '$40K']],
+        outflows: [['Rent, insurance, software', 'Sep 1', '$16K', true], ['Loan servicing', 'Sep 1', '$8K', true], ['Supplier payments', '4 POs due', '$52K', false], ['Ad platforms', 'weekly invoice', '$15K', false], ['Pilot integration', 'connector work', '$30K', false]],
+      },
+      {
+        label: 'W3', date: 'Sep 8', inflow: 132, outflow: 98, net: 253,
+        summary: 'Amazon settles and the node repositioning transfer clears. A comfortable week — and the last one before the outflow schedule thickens.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$48K'], ['Amazon settlement', 'biweekly · Sep 10', '$64K'], ['Walmart', 'net 14', '$12K'], ['Faire wholesale', 'net 30', '$8K']],
+        outflows: [['Payroll', 'Sep 9 run', '$19K', true], ['Supplier payments', '2 POs due', '$38K', false], ['Ad platforms', 'weekly invoice', '$15K', false], ['Node transfer', 'fulfilment v14', '$6.2K', false], ['Packaging POs', 'B-04 and B-05', '$1.4K', false]],
+      },
+      {
+        label: 'W4', date: 'Sep 15', inflow: 109, outflow: 128, net: 234,
+        summary: 'Prime Fall inventory commitments are paid ahead of the event, and the Walmart deal submission fee falls due.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$47K'], ['Walmart', 'net 14', '$13K'], ['Faire wholesale', 'net 30', '$11K'], ['Knife line promo', 'DTC', '$38K']],
+        outflows: [['Supplier payments', '5 POs due', '$66K', false], ['Ad platforms', 'weekly invoice', '$17K', false], ['Rent and fixed', 'monthly', '$11K', true], ['Marketplace deal fees', 'Prime + Walmart', '$18K', false], ['Sampling', '3 concepts', '$5.2K', false]],
+      },
+      {
+        label: 'W5', date: 'Sep 22', inflow: 126, outflow: 141, net: 219,
+        summary: 'Amazon settles but the Supplier K PO is now 8 days from due, and ad spend steps up ahead of Prime Fall.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$45K'], ['Amazon settlement', 'biweekly · Sep 24', '$61K'], ['Walmart', 'net 14', '$12K'], ['Faire wholesale', 'net 30', '$8K']],
+        outflows: [['Payroll', 'Sep 23 run', '$19K', true], ['Supplier payments', '4 POs due', '$58K', false], ['Ad platforms', 'Prime ramp', '$26K', false], ['Loan servicing', 'monthly', '$8K', true], ['Pilot creative', 'TikTok tranche 3', '$8K', false]],
+      },
+      {
+        label: 'W6', date: 'Sep 29', inflow: 112, outflow: 168, net: 163,
+        summary: 'The week the trough is built. Prime Fall ad spend peaks, the pilot listing goes live, and no Amazon settlement lands until Oct 12.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$49K'], ['Walmart', 'net 14', '$14K'], ['Faire wholesale', 'net 30', '$9K'], ['Prime Fall early orders', 'Amazon · unsettled', '$40K']],
+        outflows: [['Payroll', 'Oct 1 run early', '$19K', true], ['Rent, insurance, software', 'Oct 1', '$16K', true], ['Supplier payments', '6 POs due', '$71K', false], ['Ad platforms', 'Prime Fall peak', '$34K', false], ['Pilot launch costs', 'listings live', '$28K', false]],
+      },
+      {
+        label: 'W7', date: 'Oct 5', inflow: 96, outflow: 170, net: 89,
+        summary: 'The trough. Supplier K\u2019s $88K net-30 PO comes due in the same week the Prime Fall ad invoice settles, and Amazon\u2019s biweekly payout does not arrive until Oct 12 — with 7% held as rolling reserve when it does.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$52K'], ['Walmart', 'net 14', '$16K'], ['Faire wholesale', 'net 30', '$11K'], ['Prime Fall halo', 'DTC spillover', '$17K']],
+        outflows: [['Supplier K PO', 'net 30 · $88K', '$88K', false], ['Prime Fall ad invoice', 'settles Oct 7', '$34K', false], ['Payroll', 'Oct 7 run', '$19K', true], ['Other suppliers', '3 POs due', '$21K', false], ['Ad platforms', 'weekly invoice', '$8K', false]],
+      },
+      {
+        label: 'W8', date: 'Oct 12', inflow: 178, outflow: 104, net: 163,
+        summary: 'Recovery. Amazon settles two weeks of Prime Fall volume net of reserve, and the two Faire invoices land together.',
+        inflows: [['Amazon settlement', 'net of 7% reserve', '$98K'], ['Shopify DTC payouts', '2-day rolling', '$48K'], ['Faire wholesale', '2 invoices', '$18K'], ['Walmart', 'net 14', '$14K']],
+        outflows: [['Supplier payments', '4 POs due', '$54K', false], ['Ad platforms', 'weekly invoice', '$18K', false], ['Rent and fixed', 'monthly', '$11K', true], ['Loan servicing', 'monthly', '$8K', true], ['Clearance setup', 'S9.9 ladder', '$13K', false]],
+      },
+      {
+        label: 'W9', date: 'Oct 19', inflow: 141, outflow: 132, net: 172,
+        summary: 'Sales tax remittance falls on Oct 20 and clearance recovery begins to arrive.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$51K'], ['Clearance recovery', 'first ladder step', '$32K'], ['Walmart', 'net 14', '$15K'], ['Faire wholesale', 'net 30', '$43K']],
+        outflows: [['Sales tax remittance', 'Oct 20 · statutory', '$34K', true], ['Payroll', 'Oct 21 run', '$19K', true], ['Supplier payments', '3 POs due', '$47K', false], ['Ad platforms', 'weekly invoice', '$19K', false], ['Packaging POs', 'second batch', '$13K', false]],
+      },
+      {
+        label: 'W10', date: 'Oct 26', inflow: 164, outflow: 118, net: 218,
+        summary: 'Amazon settles again and the clearance ladder is running. Cash rebuilds toward the pre-Q4 position.',
+        inflows: [['Amazon settlement', 'biweekly', '$81K'], ['Shopify DTC payouts', '2-day rolling', '$50K'], ['Clearance recovery', 'ladder step 2', '$18K'], ['Walmart', 'net 14', '$15K']],
+        outflows: [['Supplier payments', '5 POs due', '$62K', false], ['Ad platforms', 'BFCM ramp', '$24K', false], ['Rent and fixed', 'monthly', '$11K', true], ['Loan servicing', 'monthly', '$8K', true], ['Q4 promo deposits', 'BFCM media', '$13K', false]],
+      },
+      {
+        label: 'W11', date: 'Nov 2', inflow: 138, outflow: 149, net: 207,
+        summary: 'BFCM inventory and media commitments start to bite, but from a rebuilt position rather than a trough.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$54K'], ['Early BF orders', 'DTC event', '$48K'], ['Walmart', 'net 14', '$16K'], ['Clearance recovery', 'ladder step 3', '$20K']],
+        outflows: [['Payroll', 'Nov 4 run', '$19K', true], ['Rent, insurance, software', 'Nov 1', '$16K', true], ['Supplier payments', '6 POs due', '$68K', false], ['Ad platforms', 'BFCM build', '$32K', false], ['BFCM inventory', 'buffer stock', '$14K', false]],
+      },
+      {
+        label: 'W12', date: 'Nov 9', inflow: 186, outflow: 158, net: 235,
+        summary: 'Early Black Friday settles on DTC within days, so the event funds much of its own media.',
+        inflows: [['Shopify DTC payouts', 'Early BF event', '$92K'], ['Amazon settlement', 'biweekly', '$68K'], ['Walmart', 'net 14', '$18K'], ['Faire wholesale', 'net 30', '$8K']],
+        outflows: [['Supplier payments', '5 POs due', '$71K', false], ['Ad platforms', 'BFCM peak build', '$41K', false], ['Payroll', 'Nov 11 run', '$19K', true], ['Loan servicing', 'monthly', '$8K', true], ['Walmart deal fees', 'Deal Days', '$19K', false]],
+      },
+      {
+        label: 'W13', date: 'Nov 16', inflow: 174, outflow: 162, net: 247,
+        summary: 'Walmart Deal Days runs and BFCM inventory is fully committed. The ladder ends above where it started.',
+        inflows: [['Shopify DTC payouts', '2-day rolling', '$58K'], ['Walmart Deal Days', 'net 14 begins', '$62K'], ['Faire wholesale', 'net 30', '$22K'], ['Clearance recovery', 'ladder step 4', '$32K']],
+        outflows: [['Supplier payments', '7 POs due', '$84K', false], ['Ad platforms', 'BFCM live', '$38K', false], ['Rent and fixed', 'monthly', '$11K', true], ['BFCM inventory', 'final commitments', '$21K', false], ['Sampling', 'round 2', '$8K', false]],
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const L = this.ladder();
+    const selIdx = this.state.sel >= 0 && this.state.sel < L.length ? this.state.sel : 6;
+    const sel = L[selIdx];
+    const buffer = 120;
+
+    const maxFlow = 180;
+    const netLo = 40, netHi = 270;
+    const W = 900, top = 6, bot = 164;
+    const x = (i) => (i / (L.length - 1)) * W;
+    const y = (v) => bot - ((v - netLo) / (netHi - netLo)) * (bot - top);
+
+    const nets = L.map((w) => w.net);
+    const p10 = nets.map((v, i) => Math.round(v - 12 - i * 1.8 - (i === 6 ? 11 : 0)));
+
+    const line = (arr) => arr.map((v, i) => (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    const band = line(nets) + ' ' + p10.slice().reverse().map((v, i) => 'L' + x(L.length - 1 - i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ') + ' Z';
+
+    const gapArea = 'M' + x(5.55).toFixed(1) + ' ' + y(buffer).toFixed(1)
+      + ' L' + x(6).toFixed(1) + ' ' + y(nets[6]).toFixed(1)
+      + ' L' + x(6.45).toFixed(1) + ' ' + y(buffer).toFixed(1) + ' Z';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      pinnedTop: 'Week ' + (selIdx + 1) + ' · ' + sel.date + ' · net $' + sel.net + 'K',
+      pinnedSub: 'trough week 7 at $89K · buffer $120K · gap $31K',
+
+      flowTicks: ['$180K', '$90K', '$0'],
+      netTicks: [
+        { label: '$270K', tone: 'var(--ink-400)' },
+        { label: '$200K', tone: 'var(--ink-400)' },
+        { label: '$120K', tone: 'var(--mod-cash)' },
+        { label: '$40K', tone: 'var(--ink-400)' },
+      ],
+
+      weeks: L.map((w, i) => {
+        const active = i === selIdx;
+        const under = w.net < buffer;
+        return {
+          label: w.label, date: w.date,
+          inH: ((w.inflow / maxFlow) * 100).toFixed(1),
+          outH: ((w.outflow / maxFlow) * 100).toFixed(1),
+          opacity: active ? 1 : 0.55,
+          colBg: active ? 'var(--ink-50)' : 'transparent',
+          pick: () => this.setState({ sel: i }),
+          labelWeight: active ? '700' : '500',
+          labelTone: active ? 'var(--ink-900)' : under ? 'var(--rose-700)' : 'var(--ink-500)',
+          netLabel: '$' + w.net,
+          netTone: under ? 'var(--rose-700)' : active ? 'var(--ink-700)' : 'var(--ink-400)',
+        };
+      }),
+
+      p10Band: band,
+      p10Path: line(p10),
+      netPath: line(nets),
+      bufferY: y(buffer).toFixed(1),
+      troughX: x(5.5).toFixed(1),
+      troughW: (x(6.5) - x(5.5)).toFixed(1),
+      gapArea,
+      netDots: nets.map((v, i) => ({
+        cx: x(i).toFixed(1), cy: y(v).toFixed(1),
+        r: i === 6 ? '5.5' : i === selIdx ? '4' : '2.8',
+        fill: i === 6 ? 'var(--rose-500)' : 'var(--ink-0)',
+        stroke: i === 6 ? 'var(--ink-0)' : 'var(--ink-900)',
+      })),
+
+      sel: {
+        name: 'Week ' + (selIdx + 1) + ' · ' + sel.date,
+        state: sel.net < buffer ? 'below buffer' : sel.net < 180 ? 'tight' : 'comfortable',
+        tint: sel.net < buffer ? 'var(--rose-50)' : sel.net < 180 ? 'var(--amber-50)' : 'var(--green-50)',
+        tone: sel.net < buffer ? 'var(--rose-700)' : sel.net < 180 ? 'var(--amber-700)' : 'var(--green-700)',
+        net: 'net $' + sel.net + 'K',
+        summary: sel.summary,
+        inTotal: '$' + sel.inflow + 'K',
+        outTotal: '$' + sel.outflow + 'K',
+        inflows: sel.inflows.map((r) => ({ label: r[0], note: r[1], value: r[2] })),
+        outflows: sel.outflows.map((r) => ({ label: r[0], note: r[1], value: r[2], locked: r[3] })),
+      },
+
+      ccc: [
+        { label: 'Days inventory outstanding', note: 'DIO · stock held before sale', days: '74', delta: '+9', deltaTone: 'var(--rose-700)', weight: '400', size: '12px', rule: 'var(--ink-50)', bg: 'var(--ink-0)' },
+        { label: 'Days sales outstanding', note: 'DSO · settlement lag', days: '11', delta: '−1', deltaTone: 'var(--green-700)', weight: '400', size: '12px', rule: 'var(--ink-50)', bg: 'var(--ink-0)' },
+        { label: 'Days payable outstanding', note: 'DPO · what we take', days: '38', delta: '+1', deltaTone: 'var(--green-700)', weight: '400', size: '12px', rule: 'var(--ink-100)', bg: 'var(--ink-0)' },
+        { label: 'Conversion cycle', note: 'DIO + DSO − DPO', days: '61', delta: '+7', deltaTone: 'var(--rose-700)', weight: '600', size: '13px', rule: 'transparent', bg: 'var(--ink-25)' },
+      ],
+
+      cccTrend: [54, 55, 53, 56, 57, 56, 58, 59, 58, 60, 60, 61].map((v, i) => ({
+        h: Math.max(10, ((v - 45) / 20) * 100).toFixed(0),
+        fill: i === 11 ? 'var(--amber-500)' : 'color-mix(in oklab, var(--mod-cash) 30%, white)',
+      })),
+
+      roles: [
+        { label: 'Hero SKUs', value: '$168K', turns: '4.2 turns', pct: 100, hue: 'var(--green-500)', turnTone: 'var(--green-700)' },
+        { label: 'Core SKUs', value: '$92K', turns: '3.1 turns', pct: 55, hue: 'var(--green-500)', turnTone: 'var(--green-700)' },
+        { label: 'Margin drivers', value: '$34K', turns: '2.8 turns', pct: 20, hue: 'color-mix(in oklab, var(--mod-cash) 60%, white)', turnTone: 'var(--ink-700)' },
+        { label: 'Traffic drivers', value: '$21K', turns: '5.4 turns', pct: 13, hue: 'var(--green-500)', turnTone: 'var(--green-700)' },
+        { label: 'Supporting', value: '$62K', turns: '1.4 turns', pct: 37, hue: 'var(--amber-500)', turnTone: 'var(--amber-700)' },
+        { label: 'Exit candidates', value: '$41K', turns: '0.9 turns', pct: 24, hue: 'var(--rose-500)', turnTone: 'var(--rose-700)' },
+      ],
+
+      anatomy: [
+        { label: 'Supplier K PO', value: '−$88K', detail: 'Net 30 from the weekly PO cycle. Due Oct 6, four days before Amazon settles.', icon: 'fa-solid fa-file-invoice-dollar', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 26%, white)', bg: 'var(--rose-50)' },
+        { label: 'Prime Fall ad invoice', value: '−$34K', detail: 'Peak-window spend settles Oct 7. The revenue it produced settles Oct 12.', icon: 'fa-solid fa-bullhorn', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 26%, white)', bg: 'var(--rose-50)' },
+        { label: 'Amazon settlement gap', value: '11 days', detail: 'Biweekly cadence puts the payout on Oct 12, with 7% held as rolling reserve.', icon: 'fa-solid fa-hourglass-half', tone: 'var(--amber-700)', border: 'color-mix(in oklab, var(--amber-500) 26%, white)', bg: 'var(--amber-50)' },
+        { label: 'Payroll and fixed', value: '−$19K', detail: 'Oct 7 run. Locked — it is not a timing choice at any price.', icon: 'fa-solid fa-lock', tone: 'var(--ink-600)', border: 'var(--ink-100)', bg: 'var(--ink-0)' },
+      ],
+
+      scenarios: [
+        { label: 'P50 trough', value: '$89K', tone: 'var(--rose-700)', note: '$31K under buffer · 4 days' },
+        { label: 'P10 trough', value: '$66K', tone: 'var(--rose-700)', note: '$54K under buffer · 9 days' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

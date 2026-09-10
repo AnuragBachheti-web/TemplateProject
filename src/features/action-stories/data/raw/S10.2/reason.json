@@ -1,0 +1,288 @@
+{
+  "code": "S10.2",
+  "stageKey": "reason",
+  "name": "Working capital",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "headline": [
+      {
+        "label": "Minimum buffer",
+        "value": "$120K",
+        "tone": "var(--ink-900)",
+        "note": "about 5 weeks of fixed obligations"
+      },
+      {
+        "label": "Cash today",
+        "value": "$214K",
+        "tone": "var(--green-700)",
+        "note": "comfortable, which is the trap"
+      },
+      {
+        "label": "Week-7 trough",
+        "value": "$89K",
+        "tone": "var(--rose-700)",
+        "note": "$31K under the buffer, Oct 5"
+      },
+      {
+        "label": "Weeks of warning",
+        "value": "7",
+        "tone": "var(--green-700)",
+        "note": "enough for any of the four levers"
+      }
+    ],
+    "buffer": [
+      {
+        "label": "Payroll and fixed obligations",
+        "amount": "$74K",
+        "weeks": "3 weeks",
+        "note": "the non-negotiable core of the buffer",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Supplier obligations in flight",
+        "amount": "$28K",
+        "weeks": "1.2 weeks",
+        "note": "POs already confirmed and unavoidable",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Operating float",
+        "amount": "$18K",
+        "weeks": "0.8 weeks",
+        "note": "ads, fees and the ordinary week",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Minimum buffer",
+        "amount": "$120K",
+        "weeks": "5 weeks",
+        "note": "set by the board in January, reviewed annually",
+        "weight": "600",
+        "size": "13px",
+        "rule": "transparent",
+        "bg": "var(--ink-25)"
+      }
+    ],
+    "credit": [
+      {
+        "name": "Revolving line · Meridian Bank",
+        "limit": "$150K",
+        "rate": "9.4% APR",
+        "terms": "drawn in $25K increments",
+        "cost": "$580 per $25K / month",
+        "costTone": "var(--ink-700)",
+        "note": "Cheapest money available. Three business days to draw, no covenant tested below 60% utilisation."
+      },
+      {
+        "name": "Inventory facility",
+        "limit": "$60K",
+        "rate": "11.8% APR",
+        "terms": "secured against receipted stock",
+        "cost": "$590 per $20K / month",
+        "costTone": "var(--amber-700)",
+        "note": "Only usable against inventory already received, which excludes the Supplier K PO driving the trough."
+      },
+      {
+        "name": "Merchant advance",
+        "limit": "$40K",
+        "rate": "14.2% effective",
+        "terms": "repaid as a revenue share",
+        "cost": "$470 per $10K / month",
+        "costTone": "var(--rose-700)",
+        "note": "Fast and expensive. Repayment scales with revenue, so it deepens a bad month rather than smoothing it."
+      }
+    ],
+    "terms": [
+      {
+        "label": "Supplier terms · Tier 1",
+        "note": "Kessler Net 45, Arcadia Net 60",
+        "value": "Net 45–60",
+        "state": "target 60",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Supplier terms · Tier 2–3",
+        "note": "Meridian, Tsuyo, Verdant, Pallas",
+        "value": "Net 30–45",
+        "state": "target 45",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Days payable outstanding",
+        "note": "blended across all suppliers",
+        "value": "38 days",
+        "state": "target 48",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Days sales outstanding",
+        "note": "settlement lag across channels",
+        "value": "11 days",
+        "state": "good",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Wholesale receivables",
+        "note": "Faire, net 30 from ship date",
+        "value": "Net 30",
+        "state": "on time",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Early-pay discounts",
+        "note": "policy: never take below 2/10",
+        "value": "2/10 min",
+        "state": "policy",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Payroll",
+        "amount": "$118K",
+        "detail": "Biweekly, 26th and 12th. Six runs inside the 13 weeks. Not a lever at any price."
+      },
+      {
+        "label": "Rent, insurance and software",
+        "amount": "$44K",
+        "detail": "Fixed monthly on the 1st. Predictable to the dollar and unmovable."
+      },
+      {
+        "label": "Loan servicing",
+        "amount": "$24K",
+        "detail": "Existing facility amortisation. Missing one is a covenant event, not a timing choice."
+      },
+      {
+        "label": "Sales tax remittance",
+        "amount": "quarterly",
+        "detail": "Oct 20, inside the ladder. Statutory — the date is not ours to pick."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-users",
+        "label": "Payroll · 6 runs · $118K"
+      },
+      {
+        "icon": "fa-solid fa-building",
+        "label": "Rent + fixed · $44K"
+      },
+      {
+        "icon": "fa-solid fa-landmark",
+        "label": "Loan servicing · $24K"
+      },
+      {
+        "icon": "fa-solid fa-file-invoice-dollar",
+        "label": "Sales tax Oct 20"
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "label": "Buffer $120K · board-set"
+      },
+      {
+        "icon": "fa-solid fa-percent",
+        "label": "Never below 2/10 early pay"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Aug 19 · 06:10",
+        "what": "Cash Ladder Engine reprojected the 13 weeks after the weekly PO cycle was approved, adding Supplier K’s $88K net-30 to week 7."
+      },
+      {
+        "when": "Aug 19 · 06:11",
+        "what": "The Prime Fall ad invoice for $34K falls in the same week, and Amazon’s biweekly settlement lands the week after rather than during it."
+      },
+      {
+        "when": "Aug 19 · 06:12",
+        "what": "Net cash bottoms at $89K against a $120K buffer — a $31K gap, seven weeks out, with four levers still open."
+      }
+    ],
+    "capital": [
+      {
+        "label": "TikTok Shop pilot",
+        "when": "weeks 2–6 · integration and creative",
+        "value": "−$30K",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Node repositioning transfer",
+        "when": "week 3 · fulfilment rule set v14",
+        "value": "−$6.2K",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Q4 promo deposit · marketplace",
+        "when": "week 5 · deal fees",
+        "value": "−$18K",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Discontinuation clearance",
+        "when": "weeks 8–11 · recovery inflow",
+        "value": "+$41K",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "settlement": [
+      {
+        "name": "Amazon",
+        "cadence": "biweekly",
+        "tone": "var(--amber-700)",
+        "detail": "rolling reserve 7% modelled · next Oct 12, after the trough"
+      },
+      {
+        "name": "Shopify DTC",
+        "cadence": "2-day rolling",
+        "tone": "var(--green-700)",
+        "detail": "daily payouts, 2-day lag · the most reliable inflow"
+      },
+      {
+        "name": "Walmart",
+        "cadence": "net 14",
+        "tone": "var(--ink-700)",
+        "detail": "from order date · predictable, small"
+      },
+      {
+        "name": "Faire wholesale",
+        "cadence": "net 30",
+        "tone": "var(--ink-700)",
+        "detail": "from ship date · two invoices land week 8"
+      }
+    ]
+  }
+}

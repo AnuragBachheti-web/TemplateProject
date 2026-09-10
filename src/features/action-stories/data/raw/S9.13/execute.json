@@ -1,0 +1,490 @@
+{
+  "code": "S9.13",
+  "stageKey": "execute",
+  "name": "Lifecycle",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "paused": {},
+    "reverted": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "planLine": "Journeys deploy through the ESP and SMS APIs with their holdouts assigned before the first send — a flow cannot go live without one. Audiences and suppression sync last.",
+    "pushedCount": "0 / 4",
+    "pushAllLabel": "Deploy all",
+    "pushAllIcon": "fa-solid fa-paper-plane",
+    "pushAllBg": "var(--ink-900)",
+    "pushAllFg": "var(--ink-0)",
+    "pushAllCursor": "pointer",
+    "dests": [
+      {
+        "name": "Klaviyo · email journeys",
+        "meta": "3 created · 3 modified · 2 archived · holdouts armed at creation",
+        "icon": "fa-solid fa-envelope",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Deploy",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Consumable replenishment · per-SKU interval",
+            "detail": "Twelve entry conditions, one per SKU, each firing at that SKU’s median cycle. Free-shipping code, no percentage off, quiet hours honoured.",
+            "value": "4,180 / mo",
+            "holdout": "holdout 10% · 418 held",
+            "chip": null,
+            "hasDiff": true,
+            "before": "no flow in the 42-day window",
+            "after": "live · day 31–58 by SKU",
+            "afterTone": "var(--mod-hubs)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Post-first-delivery care · day 3–5",
+            "detail": "Triggers off the carrier delivery event rather than the ship event, so the content lands after the box does.",
+            "value": "7,540 / mo",
+            "holdout": "holdout 10% · 754 held",
+            "chip": null,
+            "hasDiff": true,
+            "before": "slot occupied by thank-you email",
+            "after": "live · day 3–5 post-delivery",
+            "afterTone": "var(--mod-hubs)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Win-back at 90–120 days",
+            "detail": "10% offer, capped at the segment ceiling. Enrolment excludes anyone already in the replenishment flow.",
+            "value": "3,860 / mo",
+            "holdout": "holdout 10% · 386 held",
+            "chip": null,
+            "hasDiff": true,
+            "before": "win-back at 180 days",
+            "after": "live · 90–120 day trigger",
+            "afterTone": "var(--mod-hubs)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Post-purchase thank-you · modified",
+            "detail": "Trigger moves to order-confirmed and a holdout is attached, which makes its revenue claimable for the first time.",
+            "value": "7,540 / mo",
+            "holdout": "holdout 10% attached",
+            "chip": null,
+            "hasDiff": true,
+            "before": "order shipped · no holdout",
+            "after": "order confirmed · 10% holdout",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Browse abandon · trimmed to one email",
+            "detail": "Emails two and three removed, bottom pLTV decile dropped from the audience. Existing 10% holdout carries over untouched.",
+            "value": "−11,400 / mo",
+            "holdout": null,
+            "chip": null,
+            "hasDiff": true,
+            "before": "3 emails · all deciles",
+            "after": "1 email · top 9 deciles",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Win-back 180-day · archived",
+            "detail": "Archived rather than deleted so the ten weeks of holdout data stay attached to the version history.",
+            "value": "−3,220 / mo",
+            "holdout": null,
+            "chip": null,
+            "hasDiff": true,
+            "before": "live · 15% offer",
+            "after": "archived · v6 retained",
+            "afterTone": "var(--rose-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Attentive · SMS",
+        "meta": "1 journey · express opt-ins only · 1,850 monthly reach",
+        "icon": "fa-solid fa-comment-sms",
+        "hue": "var(--violet-500)",
+        "tint": "color-mix(in oklab, var(--violet-500) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Deploy",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Refill reminder · day 40–45",
+            "detail": "Audience restricted to the 6,240 profiles with a recorded express opt-in and its timestamp. One message, no offer, inside sending hours.",
+            "value": "1,850 / mo",
+            "holdout": "holdout 5% · 93 held",
+            "chip": null,
+            "hasDiff": true,
+            "before": "no SMS lifecycle journey",
+            "after": "live · day 40–45",
+            "afterTone": "var(--violet-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Quiet-hours and cap enforcement",
+            "detail": "Sends are held to the recipient’s local 8am–9pm window and counted against the shared two-per-week SMS cap.",
+            "value": "2 / wk cap",
+            "holdout": null,
+            "chip": null,
+            "hasDiff": true,
+            "before": "cap enforced per journey",
+            "after": "cap enforced across journeys",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Suppression + segment sync",
+        "meta": "5 audiences written · consent state unchanged",
+        "icon": "fa-solid fa-filter",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Deploy",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Replenishment audiences · 12 SKU cohorts",
+            "detail": "One audience per consumable SKU, refreshed nightly from order history. Anyone who repurchases exits the flow the same night.",
+            "value": "4,180 profiles",
+            "holdout": null,
+            "chip": null,
+            "hasDiff": true,
+            "before": "no per-SKU audience",
+            "after": "12 audiences · nightly refresh",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Bottom-decile monthly cohort",
+            "detail": "Moved from the weekly promo pool to a monthly cadence. Consent and channel state untouched — this is a cadence change, not a suppression.",
+            "value": "3,340 profiles",
+            "holdout": null,
+            "chip": null,
+            "hasDiff": true,
+            "before": "weekly promo pool",
+            "after": "monthly cadence",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Suppression list refresh",
+            "detail": "Unsubscribes, hard bounces and complaint records re-synced across both platforms before the first send of any new journey.",
+            "value": "4,120 records",
+            "holdout": null,
+            "chip": null,
+            "hasDiff": true,
+            "before": "synced 11 min ago",
+            "after": "synced at deploy",
+            "afterTone": "var(--green-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Hypothesis Register",
+        "meta": "3 tests registered · run inside the treated groups",
+        "icon": "fa-solid fa-flask",
+        "hue": "var(--violet-500)",
+        "tint": "color-mix(in oklab, var(--violet-500) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Deploy",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Replenishment subject line · product vs cycle",
+            "detail": "Two-arm split within the treated group. Sits on top of the holdout rather than replacing it, so both readings stay valid.",
+            "value": "MDE 8% · 4 wks",
+            "holdout": null,
+            "chip": "S10.7",
+            "chipHref": null,
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Replenishment offer · free shipping vs 10% off",
+            "detail": "Settles the margin question with evidence. Discount arm is capped at the segment ceiling from Reason.",
+            "value": "MDE 11% · 6 wks",
+            "holdout": null,
+            "chip": "S10.7",
+            "chipHref": null,
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Win-back timing · day 90 vs day 120",
+            "detail": "Finds the real edge of the window before anyone tunes the offer depth.",
+            "value": "MDE 14% · 10 wks",
+            "holdout": null,
+            "chip": "S10.7",
+            "chipHref": null,
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Destinations deployed",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items written",
+        "value": "0 of 14",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Holdouts armed",
+        "value": "0 of 4",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Weekly send load",
+        "value": "unchanged",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, decay raises a flag on this card and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "reads": [
+      {
+        "name": "Consumable replenishment",
+        "meta": "418 held · 4,180 treated",
+        "holdout": "10%",
+        "read": "6 weeks",
+        "status": "not live",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Post-first-delivery care",
+        "meta": "754 held · 7,540 treated",
+        "holdout": "10%",
+        "read": "8 weeks",
+        "status": "not live",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Win-back 90–120 day",
+        "meta": "386 held · 3,860 treated",
+        "holdout": "10%",
+        "read": "10 weeks",
+        "status": "not live",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Post-purchase thank-you",
+        "meta": "holdout attached at deploy",
+        "holdout": "10%",
+        "read": "8 weeks",
+        "status": "not live",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Refill reminder SMS",
+        "meta": "93 held · 1,757 treated",
+        "holdout": "5%",
+        "read": "8 weeks",
+        "status": "not live",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "watchStatus": "arms on deploy",
+    "watchTone": "var(--ink-400)",
+    "flags": [
+      {
+        "when": "Weekly",
+        "rule": "Lift decays more than 30% over four weeks",
+        "action": "Raises a flag here for a decision."
+      },
+      {
+        "when": "Weekly",
+        "rule": "Complaint rate above 0.10% or unsub above 0.30%",
+        "action": "Holds the newest journey and notifies Keeper."
+      },
+      {
+        "when": "At first read",
+        "rule": "Measured lift below the projection’s P10",
+        "action": "Sends the flow back to Decide with the read attached."
+      }
+    ],
+    "rollback": [
+      {
+        "name": "Consumable replenishment",
+        "version": "v1 · created at deploy",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not live",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Post-first-delivery care",
+        "version": "v1 · created at deploy",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not live",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Win-back 90–120 day",
+        "version": "v1 · replaces v6",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not live",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Post-purchase thank-you",
+        "version": "v4 · was v3",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not live",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Refill reminder SMS",
+        "version": "v1 · created at deploy",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not live",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      }
+    ],
+    "revertLabel": "Nothing deployed yet",
+    "revertFg": "var(--ink-400)",
+    "revertCursor": "default",
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 deployed · 14 line items staged",
+    "footTone": "var(--ink-500)"
+  }
+}

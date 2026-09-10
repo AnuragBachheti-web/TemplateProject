@@ -1,0 +1,539 @@
+{
+  "code": "S10.5",
+  "stageKey": "analyze",
+  "name": "Catalog integrity",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "src": "all",
+    "sel": "D1"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--rose-500)",
+    "railGlow": "var(--rose-50)",
+    "railLabel": "14 drifts\nopen",
+    "pinMark": "var(--rose-500)",
+    "pinTone": "var(--rose-700)",
+    "pinnedTop": "$310 / day since 41h ago",
+    "pinnedSub": "14 open drifts · $18.4K stranded",
+    "tiles": [
+      {
+        "label": "Field drift",
+        "value": "$640/day",
+        "detail": "14 open · 3 critical, 3 high, 2 medium, 6 low",
+        "icon": "fa-solid fa-code-compare",
+        "tone": "var(--rose-700)",
+        "border": "color-mix(in oklab, var(--rose-500) 24%, white)"
+      },
+      {
+        "label": "Stranded",
+        "value": "$18.4K",
+        "detail": "590 units across 6 blocks, 11 days average age",
+        "icon": "fa-solid fa-box-open",
+        "tone": "var(--amber-700)",
+        "border": "var(--ink-100)"
+      },
+      {
+        "label": "Feed errors",
+        "value": "412 rows",
+        "detail": "three root causes, not 412 separate problems",
+        "icon": "fa-solid fa-diagram-project",
+        "tone": "var(--amber-700)",
+        "border": "var(--ink-100)"
+      },
+      {
+        "label": "Family breaks",
+        "value": "1 of 9",
+        "detail": "Enamel set: 2 children orphaned, reviews unpooled",
+        "icon": "fa-solid fa-sitemap",
+        "tone": "var(--rose-700)",
+        "border": "color-mix(in oklab, var(--rose-500) 24%, white)"
+      }
+    ],
+    "sourceFilters": [
+      {
+        "label": "All",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Contribution",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      },
+      {
+        "label": "Other seller",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      },
+      {
+        "label": "Our feeds",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "rows": [
+      {
+        "field": "Hero image",
+        "listing": "ASIN B0Y · Dutch Oven 5qt",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "srcIcon": "fa-solid fa-user-pen",
+        "srcTone": "var(--rose-700)",
+        "age": "41 hours",
+        "at": "Aug 17 · 13:10",
+        "ageTone": "var(--rose-700)",
+        "severity": "critical",
+        "sevTint": "var(--rose-50)",
+        "sevTone": "var(--rose-700)",
+        "cost": "$310",
+        "costTone": "var(--rose-700)",
+        "rowBg": "color-mix(in oklab, var(--mod-actions) 6%, white)",
+        "mark": "var(--mod-actions)"
+      },
+      {
+        "field": "Variation family break",
+        "listing": "Enamel set · 5 children",
+        "channel": "Amazon",
+        "source": "another seller’s edit",
+        "srcIcon": "fa-solid fa-user-group",
+        "srcTone": "var(--rose-700)",
+        "age": "3 days",
+        "at": "Aug 16 · 09:40",
+        "ageTone": "var(--rose-700)",
+        "severity": "critical",
+        "sevTint": "var(--rose-50)",
+        "sevTone": "var(--rose-700)",
+        "cost": "$150",
+        "costTone": "var(--rose-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "field": "Available quantity",
+        "listing": "Cast-iron Skillet 10in",
+        "channel": "Walmart",
+        "source": "our own failed feed",
+        "srcIcon": "fa-solid fa-diagram-project",
+        "srcTone": "var(--amber-700)",
+        "age": "9 hours",
+        "at": "Aug 19 · 21:20",
+        "ageTone": "var(--ink-700)",
+        "severity": "high",
+        "sevTint": "var(--amber-50)",
+        "sevTone": "var(--amber-700)",
+        "cost": "$60",
+        "costTone": "var(--ink-900)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "field": "Price",
+        "listing": "Filtration Pitcher",
+        "channel": "Shopify",
+        "source": "our own failed feed",
+        "srcIcon": "fa-solid fa-diagram-project",
+        "srcTone": "var(--amber-700)",
+        "age": "6 hours",
+        "at": "Aug 20 · 00:15",
+        "ageTone": "var(--rose-700)",
+        "severity": "critical",
+        "sevTint": "var(--rose-50)",
+        "sevTone": "var(--rose-700)",
+        "cost": "$40",
+        "costTone": "var(--ink-900)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "field": "Title",
+        "listing": "4 Walmart listings",
+        "channel": "Walmart",
+        "source": "our own failed feed",
+        "srcIcon": "fa-solid fa-diagram-project",
+        "srcTone": "var(--amber-700)",
+        "age": "2 days",
+        "at": "Aug 18 · 04:30",
+        "ageTone": "var(--ink-700)",
+        "severity": "high",
+        "sevTint": "var(--amber-50)",
+        "sevTone": "var(--amber-700)",
+        "cost": "$30",
+        "costTone": "var(--ink-900)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "field": "Bullet 3",
+        "listing": "Knife Block 6pc",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "srcIcon": "fa-solid fa-user-pen",
+        "srcTone": "var(--rose-700)",
+        "age": "18 hours",
+        "at": "Aug 19 · 12:00",
+        "ageTone": "var(--ink-700)",
+        "severity": "high",
+        "sevTint": "var(--amber-50)",
+        "sevTone": "var(--amber-700)",
+        "cost": "$20",
+        "costTone": "var(--ink-900)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "field": "A+ modules",
+        "listing": "Enamel Casserole 3qt",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "srcIcon": "fa-solid fa-user-pen",
+        "srcTone": "var(--rose-700)",
+        "age": "5 days",
+        "at": "Aug 14 · 10:20",
+        "ageTone": "var(--ink-700)",
+        "severity": "medium",
+        "sevTint": "var(--ink-100)",
+        "sevTone": "var(--ink-600)",
+        "cost": "$20",
+        "costTone": "var(--ink-900)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "field": "Secondary images",
+        "listing": "2 Amazon listings",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "srcIcon": "fa-solid fa-user-pen",
+        "srcTone": "var(--rose-700)",
+        "age": "6 days",
+        "at": "Aug 13 · 16:45",
+        "ageTone": "var(--ink-700)",
+        "severity": "medium",
+        "sevTint": "var(--ink-100)",
+        "sevTone": "var(--ink-600)",
+        "cost": "$10",
+        "costTone": "var(--ink-900)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      }
+    ],
+    "gridFoot": "8 measurable drifts · $640/day open",
+    "selName": "Hero image · ASIN B0Y · Dutch Oven 5qt",
+    "selMeta": "Amazon · marketplace contribution · live for 41 hours · detected Aug 20 · 06:12",
+    "selCost": "$310",
+    "selCostTone": "var(--rose-700)",
+    "selIcon": "fa-solid fa-triangle-exclamation",
+    "selTint": "var(--rose-50)",
+    "selTone": "var(--rose-700)",
+    "selRemedy": "dispute + re-push",
+    "canonRows": [
+      {
+        "label": "Asset",
+        "value": "hero-dutch-5qt-v4.jpg · PIM version 4, approved Jun 2"
+      },
+      {
+        "label": "Composition",
+        "value": "Product on white, 85% frame fill, lid ajar showing enamel interior"
+      },
+      {
+        "label": "Compliance",
+        "value": "Meets image standards: 2000px, no text overlay, no props"
+      },
+      {
+        "label": "Last pushed",
+        "value": "Jun 2 · accepted on all three channels"
+      }
+    ],
+    "liveRows": [
+      {
+        "label": "Asset",
+        "value": "Contributed image, unknown provenance",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Composition",
+        "value": "Product at 40% frame fill, shot at an angle, competitor lid style",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Compliance",
+        "value": "Text overlay in the corner — against category image policy",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Live since",
+        "value": "Aug 17 · 13:10, accepted by the catalogue without notice",
+        "tone": "var(--ink-700)"
+      }
+    ],
+    "attribution": [
+      {
+        "when": "Aug 17 · 13:10",
+        "what": "Catalogue accepted an image contribution against the ASIN. No notification was sent to the brand owner, which is normal for contributions."
+      },
+      {
+        "when": "Aug 17 · 18:00",
+        "what": "Conversion on the listing began separating from its 30-day trend. Sessions held; conversion fell."
+      },
+      {
+        "when": "Aug 19 · 06:12",
+        "what": "Sync Integrity Monitor compared the live asset hash against the PIM canonical and flagged the mismatch. Detection lag: 41 hours."
+      }
+    ],
+    "selNote": "Brand registry entitlement covers this ASIN, so the dispute has authority behind it — but the re-push happens first. Restoring the image does not need the dispute to resolve; the dispute stops it recurring.",
+    "chartLabel": "Conversion · 14 days",
+    "chartDelta": "−18%",
+    "chartDeltaTone": "var(--rose-700)",
+    "cvrPath": "M0.0 30.2 L23.1 25.0 L46.2 27.6 L69.2 22.3 L92.3 25.0 L115.4 19.7 L138.5 22.3 L161.5 25.0 L184.6 19.7 L207.7 22.3 L230.8 27.6 L253.8 56.4 L276.9 61.7 L300.0 64.3",
+    "driftX": "230.8",
+    "lastX": "300.0",
+    "lastY": "64.3",
+    "driftMarkLabel": "drift began",
+    "stranded": [
+      {
+        "name": "Dutch Oven 5qt",
+        "units": "210 units · East node",
+        "capital": "$8,200",
+        "cause": "Variation orphan — no sellable parent since the family broke. Clears with the rebuild.",
+        "age": "3 days",
+        "storage": "$41/mo",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "name": "Sauté Pan 12in",
+        "units": "96 units · West node",
+        "capital": "$3,400",
+        "cause": "Listing suppressed on a content policy flag; the flag is the truncated title.",
+        "age": "2 days",
+        "storage": "$28/mo",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Filtration Pitcher",
+        "units": "140 units · East node",
+        "capital": "$2,600",
+        "cause": "Offer closed by a bulk edit in June and never reopened. Nothing points at this stock.",
+        "age": "61 days",
+        "storage": "$52/mo",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "name": "Knife Block 6pc",
+        "units": "48 units · East node",
+        "capital": "$1,900",
+        "cause": "FBA stranded: missing dimension attribute after the packaging change.",
+        "age": "18 days",
+        "storage": "$22/mo",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Cast-iron Skillet 10in",
+        "units": "60 units · West node",
+        "capital": "$1,600",
+        "cause": "Feed rejected on a GTIN mismatch — the repack changed the barcode.",
+        "age": "9 days",
+        "storage": "$19/mo",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Enamel Casserole 3qt",
+        "units": "36 units · East node",
+        "capital": "$700",
+        "cause": "Removed by seller error during a bulk edit; the listing exists, the offer does not.",
+        "age": "14 days",
+        "storage": "$8/mo",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "clusters": [
+      {
+        "name": "Attribute validation",
+        "channel": "Walmart",
+        "rows": "218",
+        "cause": "Country-of-origin was added as a required field; our mapping never included it. Every new variant fails."
+      },
+      {
+        "name": "Image URL rejected",
+        "channel": "Amazon",
+        "rows": "126",
+        "cause": "CDN signed-URL expiry is shorter than the feed retry window, so retries fetch a dead link."
+      },
+      {
+        "name": "GTIN mismatch",
+        "channel": "Walmart",
+        "rows": "68",
+        "cause": "A supplier repack changed the barcode without a new SKU. The catalogue is right and we are wrong."
+      }
+    ],
+    "sourceMix": [
+      {
+        "label": "Our own feeds and pipelines",
+        "count": "8 of 14",
+        "pct": 57,
+        "tone": "var(--amber-700)",
+        "detail": "Timeouts, stale templates, unmapped fields. The uncomfortable majority."
+      },
+      {
+        "label": "Marketplace contributions",
+        "count": "5 of 14",
+        "pct": 36,
+        "tone": "var(--rose-700)",
+        "detail": "Accepted silently by the catalogue, no notification to the brand owner."
+      },
+      {
+        "label": "Another seller’s edit",
+        "count": "1 of 14",
+        "pct": 7,
+        "tone": "var(--rose-700)",
+        "detail": "The variation theme change — the most expensive single drift after the image."
+      }
+    ],
+    "families": [
+      {
+        "name": "Enamel set · colour",
+        "state": "2 orphaned",
+        "tone": "var(--rose-700)",
+        "border": "color-mix(in oklab, var(--rose-500) 26%, white)",
+        "bg": "var(--rose-50)",
+        "detail": "Reviews unpooled since Aug 16. Both orphans lost their organic positions.",
+        "children": [
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "var(--rose-50)",
+            "border": "var(--rose-500)"
+          },
+          {
+            "bg": "var(--rose-50)",
+            "border": "var(--rose-500)"
+          }
+        ]
+      },
+      {
+        "name": "Dutch Oven · size",
+        "state": "intact",
+        "tone": "var(--green-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "detail": "3 sizes, shared reviews, verified this morning.",
+        "children": [
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          }
+        ]
+      },
+      {
+        "name": "Skillet · size",
+        "state": "intact",
+        "tone": "var(--green-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "detail": "4 sizes pooled correctly.",
+        "children": [
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          }
+        ]
+      },
+      {
+        "name": "Knife Block · count",
+        "state": "intact",
+        "tone": "var(--green-700)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "detail": "2 variants, no drift in 30 days.",
+        "children": [
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          },
+          {
+            "bg": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 45%, white)"
+          }
+        ]
+      }
+    ],
+    "detectBars": [
+      {
+        "label": "under 4h",
+        "count": "4",
+        "pct": 29,
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "4–12h",
+        "count": "6",
+        "pct": 43,
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "12–48h",
+        "count": "2",
+        "pct": 14,
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "over 48h",
+        "count": "2",
+        "pct": 14,
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "footStatus": "Analyze · 8 drifts shown · $640/day open · $18.4K stranded · 412 feed rows rejected"
+  }
+}

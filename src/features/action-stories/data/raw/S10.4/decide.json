@@ -1,0 +1,465 @@
+{
+  "code": "S10.4",
+  "stageKey": "decide",
+  "name": "Fee integrity",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "floor": 25,
+    "off": {},
+    "armed": false,
+    "staged": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "$890\nexpiring",
+    "pinMark": "var(--mod-cash)",
+    "pinTone": "var(--mod-cash)",
+    "pinnedTop": "$3,480 selected",
+    "pinnedSub": "9 claims in the batch · 2 staged on evidence",
+    "heroValue": "$3,480",
+    "selectedCount": 9,
+    "expectedValue": "$3,080",
+    "expectedPct": "89%",
+    "writeOffValue": "$84",
+    "writeOffTone": "var(--ink-600)",
+    "heroLine": "Filing 9 claims worth $3,480 returns $3,080 at our own historic win rates. 2 more sit staged on missing documents and file themselves when the evidence lands. $84 is written off — recorded as leakage, which is the number that argues for fixing the cause.",
+    "floorLabel": "$25",
+    "floorPct": 0,
+    "notches": [
+      {
+        "left": 0,
+        "size": 15,
+        "bg": "var(--mod-cash)",
+        "border": "var(--mod-cash)",
+        "shadow": "0 0 0 4px color-mix(in oklab, var(--mod-cash) 18%, white)",
+        "title": "$25 floor"
+      },
+      {
+        "left": 25,
+        "size": 11,
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-300)",
+        "shadow": "none",
+        "title": "$50 floor"
+      },
+      {
+        "left": 50,
+        "size": 11,
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-300)",
+        "shadow": "none",
+        "title": "$100 floor"
+      },
+      {
+        "left": 75,
+        "size": 11,
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-300)",
+        "shadow": "none",
+        "title": "$250 floor"
+      },
+      {
+        "left": 100,
+        "size": 11,
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-300)",
+        "shadow": "none",
+        "title": "$500 floor"
+      }
+    ],
+    "notchLabels": [
+      {
+        "label": "$25",
+        "sub": "all clear",
+        "weight": "600",
+        "tone": "var(--mod-cash)"
+      },
+      {
+        "label": "$50",
+        "sub": "all clear",
+        "weight": "500",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "$100",
+        "sub": "all clear",
+        "weight": "500",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "$250",
+        "sub": "3 drop",
+        "weight": "500",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "$500",
+        "sub": "8 drop",
+        "weight": "500",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "floorNote": "At $25 every ledger claim clears the line. The floor exists because a $12 claim costs more in analyst time than it returns — not because small money does not matter.",
+    "groups": [
+      {
+        "label": "Auto-claimable",
+        "badge": "first to graduate to Act",
+        "icon": "fa-solid fa-bolt",
+        "tone": "var(--mod-cash)",
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "border": "color-mix(in oklab, var(--mod-cash) 26%, white)",
+        "headBg": "color-mix(in oklab, var(--mod-cash) 5%, white)",
+        "blurb": "Deterministic test, evidence complete, and the downside of being wrong is a polite denial. This is the batch path.",
+        "value": "$3,480",
+        "count": "9 of 9 selected",
+        "toggleLabel": "Clear all",
+        "rows": [
+          {
+            "name": "Refund without return · 2 orders",
+            "detail": "Return window closed Jul 26 with no inbound scan on either unit.",
+            "value": "$400",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "9 days",
+            "dueTint": "var(--rose-50)",
+            "dueTone": "var(--rose-700)",
+            "win": "88%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": "expiring",
+            "flagIcon": "fa-solid fa-hourglass-half",
+            "flagTint": "var(--rose-50)",
+            "flagTone": "var(--rose-700)"
+          },
+          {
+            "name": "Dimension tier · Knife Block 6pc",
+            "detail": "41 units billed Large Standard against a measured Standard envelope.",
+            "value": "$310",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "16 days",
+            "dueTint": "var(--rose-50)",
+            "dueTone": "var(--rose-700)",
+            "win": "91%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": "expiring",
+            "flagIcon": "fa-solid fa-hourglass-half",
+            "flagTint": "var(--rose-50)",
+            "flagTone": "var(--rose-700)"
+          },
+          {
+            "name": "Lost inventory · 2 units unmatched",
+            "detail": "Adjustment Jul 12, no reimbursement in 38 days.",
+            "value": "$180",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "21 days",
+            "dueTint": "var(--amber-50)",
+            "dueTone": "var(--amber-700)",
+            "win": "76%",
+            "winTone": "var(--ink-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": "expiring",
+            "flagIcon": "fa-solid fa-hourglass-half",
+            "flagTint": "var(--rose-50)",
+            "flagTone": "var(--rose-700)"
+          },
+          {
+            "name": "Lost inventory · 3 units at East node",
+            "detail": "Adjustment Jun 28, claimed at $173 landed cost per unit.",
+            "value": "$520",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "29 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "78%",
+            "winTone": "var(--ink-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": null,
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          },
+          {
+            "name": "Dimension tier · Dutch Oven 5qt",
+            "detail": "88 units at $7.27 over — carton shrank in May, the tier never followed.",
+            "value": "$640",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "34 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "94%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": null,
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          },
+          {
+            "name": "Dimension tier · Sauté Pan 12in",
+            "detail": "62 units at $8.39 over — billed length crosses a limit the measurement does not.",
+            "value": "$520",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "41 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "94%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": null,
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          },
+          {
+            "name": "Dimension tier · Enamel Casserole 3qt",
+            "detail": "54 units at $7.96 over — same packaging programme as the Dutch Oven.",
+            "value": "$430",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "47 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "91%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": null,
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          },
+          {
+            "name": "Dimension tier · Cast-iron Skillet 10in",
+            "detail": "39 units — a weight crossing rather than a dimension one, so a harder argument.",
+            "value": "$310",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "52 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "89%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": null,
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          },
+          {
+            "name": "Dimension tier · Filtration Pitcher",
+            "detail": "28 units at $6.07 over — rides the same batch at no extra assembly cost.",
+            "value": "$170",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "58 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "86%",
+            "winTone": "var(--green-700)",
+            "state": "in batch",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": null,
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          }
+        ],
+        "foot": "Every row here files against a published window with the documents policy names. Nothing in this group requires a human to form an opinion — which is precisely why it is the first flow that could run itself."
+      },
+      {
+        "label": "Evidence needed",
+        "badge": null,
+        "icon": "fa-solid fa-paperclip",
+        "tone": "var(--amber-700)",
+        "tint": "var(--amber-50)",
+        "border": "color-mix(in oklab, var(--amber-500) 26%, white)",
+        "headBg": "var(--amber-50)",
+        "blurb": "Sound claims with a document gap. Each files itself the moment the last item lands — never partially, never late.",
+        "value": "$640",
+        "count": "2 staged",
+        "toggleLabel": "Request documents",
+        "rows": [
+          {
+            "name": "Damaged in warehouse · 4 units",
+            "detail": "Attribution is in their record; condition photographs sit in the 3PL portal. Needs condition photographs · 4 units.",
+            "value": "$410",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "36 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "74%",
+            "winTone": "var(--ink-700)",
+            "state": "staged",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": "evidence needed",
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          },
+          {
+            "name": "Inbound shortage · Walmart WFS",
+            "detail": "6 units short on PO-4488; needs carrier proof of delivery and the bill of lading. Needs carrier POD + bill of lading.",
+            "value": "$230",
+            "nameTone": "var(--ink-900)",
+            "valueTone": "var(--ink-900)",
+            "due": "44 days",
+            "dueTint": "var(--ink-100)",
+            "dueTone": "var(--ink-500)",
+            "win": "61%",
+            "winTone": "var(--amber-700)",
+            "state": "staged",
+            "boxIcon": "fa-solid fa-check",
+            "boxBg": "var(--mod-cash)",
+            "boxBorder": "var(--mod-cash)",
+            "cursor": "pointer",
+            "flag": "evidence needed",
+            "flagIcon": "fa-solid fa-paperclip",
+            "flagTint": "var(--amber-50)",
+            "flagTone": "var(--amber-700)"
+          }
+        ],
+        "foot": "A claim filed without its named evidence spends the window and returns a denial, which then costs an appeal. Staging is not delay; it is the only path that pays."
+      }
+    ],
+    "writeOffs": [
+      {
+        "label": "Sub-floor discrepancies",
+        "detail": "6 items the reconciliation found and never promoted to claims — assembly costs more than recovery.",
+        "value": "$84",
+        "icon": "fa-solid fa-filter-circle-dollar"
+      },
+      {
+        "label": "Nothing below the current floor",
+        "detail": "Every ledger claim clears $25.",
+        "value": "$0",
+        "icon": "fa-solid fa-scale-unbalanced"
+      },
+      {
+        "label": "Nothing held back",
+        "detail": "Every eligible claim is in the batch.",
+        "value": "$0",
+        "icon": "fa-solid fa-hand"
+      }
+    ],
+    "economics": [
+      {
+        "label": "Claims filed",
+        "value": "9 + 2 staged",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Face value",
+        "value": "$3,480",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Expected at win rates",
+        "value": "$3,080",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Assembly cost",
+        "value": "−$88",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "netExpected": "$2,992",
+    "actBorder": "var(--ink-100)",
+    "actIconTone": "var(--ink-400)",
+    "actCopy": "Available at the Auto dial. Today at Suggest, the batch is assembled here and filed on your approval — the graduation case is made, not taken.",
+    "actBtnLabel": "Locked at Suggest",
+    "actBtnIcon": "fa-solid fa-lock",
+    "actBtnBg": "var(--ink-50)",
+    "actBtnFg": "var(--ink-400)",
+    "actBtnBorder": "var(--ink-200)",
+    "actCursor": "not-allowed",
+    "actRules": [
+      {
+        "label": "40 claims a week per account, hard cap — volume is a relationship cost even when every claim is right.",
+        "icon": "fa-solid fa-gauge-high",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "A denial rate above 25% in any type pauses the batch path and returns it to review.",
+        "icon": "fa-solid fa-circle-pause",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "Dimension claims only. Inventory and refund claims involve a cost basis, and a cost basis is a judgment.",
+        "icon": "fa-solid fa-filter",
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "approveLabel": "Approve the batch · 9 claims",
+    "approveSub": "$3,480 face · $3,080 expected",
+    "stageLabel": "Stage the 2 evidence requests",
+    "stageSub": "$640 held until documents land",
+    "stageBg": "var(--ink-0)",
+    "staged": false,
+    "approvalNote": "Approval files cases and nothing else. No price changes, no inventory moves, no customer contact — the whole downside of this decision is a marketplace saying no.",
+    "footStatus": "Decide · 9 in batch · $3,480 face value · $84 written off and logged · floor $25"
+  }
+}

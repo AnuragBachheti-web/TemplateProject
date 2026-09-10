@@ -1,0 +1,350 @@
+{
+  "code": "S9.6",
+  "stageKey": "decide",
+  "name": "Listings",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "mode": "all",
+    "dropped": {},
+    "focus": "title"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "modes": [
+      {
+        "label": "Approve all",
+        "divider": "none",
+        "bg": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "tone": "var(--mod-intel)",
+        "weight": 600
+      },
+      {
+        "label": "Quick wins only",
+        "divider": "1px solid var(--ink-200)",
+        "bg": "var(--ink-0)",
+        "tone": "var(--ink-600)",
+        "weight": 500
+      },
+      {
+        "label": "Launch as experiments",
+        "divider": "1px solid var(--ink-200)",
+        "bg": "var(--ink-0)",
+        "tone": "var(--ink-600)",
+        "weight": 500
+      }
+    ],
+    "totals": [
+      {
+        "label": "CVR after fixes",
+        "value": "11.1–12.7%",
+        "meta": "from 9.8% · target 13.0%",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Buy Box after",
+        "value": "91%",
+        "meta": "offer move included",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "CM recovered",
+        "value": "$6.1K",
+        "meta": "of $8.4K at stake · 30 d",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Effort",
+        "value": "19.0 h",
+        "meta": "7 fixes selected",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "modeNote": "All seven fixes, sequenced so the offer move lands today and the studio work follows the Aug 21 booking. Combined projection takes CVR from 9.8% to between 11.0% and 12.3% once Buy Box share recovers.",
+    "fixMeta": "7 of 7 selected · published on approval",
+    "fixes": [
+      {
+        "seq": "01",
+        "name": "Offer + delivery promise",
+        "owner": "Pricer",
+        "detail": "Move price $0.60 to $24.35 and switch this SKU to the 2-day promise. Recovers about 29 points of Buy Box share, which is where most of the CVR gap lives.",
+        "lift": "+2.4 pp",
+        "conf": "78% ± 8",
+        "confPct": "78%",
+        "confNote": "31 comparable moves",
+        "effort": "30 min",
+        "effortTag": "no studio time",
+        "ownerHue": "var(--mod-margin)",
+        "ownerTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-margin)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--mod-margin)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "ready today",
+        "stateTint": "var(--green-50)",
+        "stateTone": "var(--green-700)"
+      },
+      {
+        "seq": "02",
+        "name": "Title rewrite with ranked terms",
+        "owner": "Merchandiser",
+        "detail": "Rebuild the title to carry the two head terms we do not rank on, inside the 200-character limit and the brand voice guide.",
+        "lift": "+0.2 to +0.5 pp",
+        "conf": "64% ± 12",
+        "confPct": "64%",
+        "confNote": "22 comparable fixes",
+        "effort": "1 h",
+        "effortTag": "copy only",
+        "ownerHue": "var(--mod-discover)",
+        "ownerTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "bg": "color-mix(in oklab, var(--mod-intel) 4%, white)",
+        "border": "color-mix(in oklab, var(--mod-intel) 30%, white)",
+        "edge": "var(--mod-discover)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--ink-900)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "ready today",
+        "stateTint": "var(--green-50)",
+        "stateTone": "var(--green-700)"
+      },
+      {
+        "seq": "03",
+        "name": "Backend keyword fill · 14 terms",
+        "owner": "Keeper",
+        "detail": "Fill the backend fields with the 14 ranked terms missing today, including the two head terms the title picks up.",
+        "lift": "+0.2 to +0.4 pp",
+        "conf": "69% ± 9",
+        "confPct": "69%",
+        "confNote": "18 comparable fixes",
+        "effort": "45 min",
+        "effortTag": "no publish risk",
+        "ownerHue": "var(--mod-intel)",
+        "ownerTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-intel)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--ink-900)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "ready today",
+        "stateTint": "var(--green-50)",
+        "stateTone": "var(--green-700)"
+      },
+      {
+        "seq": "04",
+        "name": "Answer 7 open Q&amp;A",
+        "owner": "Keeper",
+        "detail": "Answer the seven open questions. Three ask about oven use, which we answer with the temperature limit we can document rather than a claim we cannot.",
+        "lift": "+0.1 to +0.2 pp",
+        "conf": "52% ± 15",
+        "confPct": "52%",
+        "confNote": "9 comparable fixes",
+        "effort": "45 min",
+        "effortTag": "copy only",
+        "ownerHue": "var(--mod-intel)",
+        "ownerTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-intel)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--ink-900)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "ready today",
+        "stateTint": "var(--green-50)",
+        "stateTone": "var(--green-700)"
+      },
+      {
+        "seq": "05",
+        "name": "Image set upgrade · 7 shots",
+        "owner": "Merchandiser",
+        "detail": "Reshoot to the seven-shot standard: hero on white at 2400px, scale shot with a hand, two lifestyle frames, stack shot, base detail, dimension card.",
+        "lift": "+0.4 to +0.8 pp",
+        "conf": "71% ± 10",
+        "confPct": "71%",
+        "confNote": "27 comparable fixes",
+        "effort": "6 h",
+        "effortTag": "studio booking",
+        "ownerHue": "var(--mod-discover)",
+        "ownerTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-discover)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--ink-900)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "needs booking",
+        "stateTint": "var(--amber-50)",
+        "stateTone": "var(--amber-700)"
+      },
+      {
+        "seq": "06",
+        "name": "A+ comparison module",
+        "owner": "Merchandiser",
+        "detail": "Add a comparison module against the other two Ridgeline sizes and a care-and-use module. Makes our 4.6 rating and the glaze difference visible.",
+        "lift": "+0.3 to +0.6 pp",
+        "conf": "66% ± 11",
+        "confPct": "66%",
+        "confNote": "19 comparable fixes",
+        "effort": "8 h",
+        "effortTag": "design + copy",
+        "ownerHue": "var(--mod-discover)",
+        "ownerTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-discover)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--ink-900)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "needs booking",
+        "stateTint": "var(--amber-50)",
+        "stateTone": "var(--amber-700)"
+      },
+      {
+        "seq": "07",
+        "name": "Bullets to benefit-first",
+        "owner": "Merchandiser",
+        "detail": "Rewrite three feature-led bullets into five benefit-led ones, each opening with the outcome and closing with the spec.",
+        "lift": "+0.1 to +0.4 pp",
+        "conf": "58% ± 14",
+        "confPct": "58%",
+        "confNote": "24 comparable fixes",
+        "effort": "2 h",
+        "effortTag": "copy only",
+        "ownerHue": "var(--mod-discover)",
+        "ownerTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "edge": "var(--mod-discover)",
+        "boxBg": "var(--mod-intel)",
+        "boxBorder": "var(--mod-intel)",
+        "checkOpacity": 1,
+        "liftTone": "var(--ink-900)",
+        "expShow": "none",
+        "expLabel": "experiment",
+        "state": "ready today",
+        "stateTint": "var(--green-50)",
+        "stateTone": "var(--green-700)"
+      }
+    ],
+    "focus": {
+      "id": "title",
+      "seq": "02",
+      "name": "Title rewrite with ranked terms",
+      "owner": "Merchandiser",
+      "ownerHue": "var(--mod-discover)",
+      "quick": true,
+      "effort": "1 h",
+      "effortTag": "copy only",
+      "lift": "+0.2 to +0.5 pp",
+      "liftKind": "cvr",
+      "conf": "64% ± 12",
+      "confPct": "64%",
+      "confNote": "22 comparable fixes",
+      "detail": "Rebuild the title to carry the two head terms we do not rank on, inside the 200-character limit and the brand voice guide.",
+      "beforeMeta": "48 characters",
+      "afterMeta": "96 characters · 2 head terms added",
+      "before": [
+        {
+          "text": "Ridgeline Stoneware Bowl, 8 inch, Speckled Grey"
+        }
+      ],
+      "after": [
+        {
+          "text": "Ridgeline Speckled Stoneware Serving Bowl, 8 inch, Dishwasher and Microwave Safe, Grey",
+          "weight": 600
+        },
+        {
+          "text": "Adds: serving bowl, dishwasher safe. Microwave-safe claim is covered by certificate CE-4471.",
+          "weight": 400
+        }
+      ],
+      "note": "Legal check passed: both claims have current test documents on file. No superlatives, sentence structure follows the voice guide."
+    },
+    "sequence": [
+      {
+        "n": "1",
+        "label": "Today · offer, title, keywords, Q&amp;A",
+        "note": "Everything that needs no studio slot goes out in one push so the 14-day read starts now.",
+        "dotBg": "var(--mod-intel)",
+        "dotTone": "var(--ink-0)"
+      },
+      {
+        "n": "2",
+        "label": "Aug 21 · image shoot",
+        "note": "Seven-shot set. Images publish the same day they clear studio review.",
+        "dotBg": "var(--ink-200)",
+        "dotTone": "var(--ink-700)"
+      },
+      {
+        "n": "3",
+        "label": "Aug 25 · A+ modules",
+        "note": "Comparison module reuses the new hero and scale shots, so it follows the shoot.",
+        "dotBg": "var(--ink-200)",
+        "dotTone": "var(--ink-700)"
+      }
+    ],
+    "checks": [
+      {
+        "text": "All copy passes the brand voice guide. No superlatives, no exclamation marks.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Microwave and dishwasher claims backed by certificate CE-4471 on file.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Offer move keeps CM at 36%, above the 28% Hero floor.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      }
+    ],
+    "expShow": "none",
+    "expCopy": "7 fixes register as hypotheses with a matched control listing, a 14-day window and a pre-declared read. Nothing publishes until the register accepts them.",
+    "footerStatus": "Decide · full fix list · 7 fixes · 19.0 h",
+    "approveLabel": "Approve all 7 fixes"
+  }
+}

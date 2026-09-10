@@ -1,0 +1,122 @@
+{
+  "code": "S9.2",
+  "stageKey": "reason",
+  "name": "Replenishment",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will size the book and wait for you. No PO leaves the building without your approval.",
+    "policy": [
+      {
+        "label": "Heroes",
+        "value": "98%",
+        "current": "98.4% attained",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)",
+        "why": "Never let a Hero go out of stock. Buffer sized to P90 demand across the supplier lead time."
+      },
+      {
+        "label": "Core",
+        "value": "95%",
+        "current": "94.1% attained",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "why": "The base of the range. Buffer sized to P75 demand, topped up on the weekly cycle."
+      },
+      {
+        "label": "Traffic Drivers",
+        "value": "92%",
+        "current": "93.0% attained",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "why": "Thin CM, so cover is deliberately shorter. Stock-outs here cost volume, not margin."
+      },
+      {
+        "label": "Supporting",
+        "value": "88%",
+        "current": "88.6% attained",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "why": "Lowest priority for capital. Realify will not chase cover on these."
+      },
+      {
+        "label": "Buffer policy",
+        "value": "P90 over lead time",
+        "current": "reviewed weekly",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "why": "Safety stock is derived from forecast spread, not a flat days-of-cover rule."
+      }
+    ],
+    "roles": [
+      {
+        "name": "Supplier K · stoneware",
+        "count": "32d lead",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 22%, white)",
+        "def": "MOQ 240 u · carton 12. Orders placed Thursday arrive in week 6."
+      },
+      {
+        "name": "Verrier Glass",
+        "count": "24d lead",
+        "hue": "var(--r-blue-500)",
+        "tint": "var(--r-blue-50)",
+        "def": "MOQ 180 u · carton 9. Net 45 terms."
+      },
+      {
+        "name": "Ashgrove Mills · textiles",
+        "count": "18d lead",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)",
+        "def": "MOQ 120 u · carton 6. Air option adds $0.40/u and saves 9 days."
+      },
+      {
+        "name": "Northline Metals",
+        "count": "12d lead",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 16%, white)",
+        "def": "MOQ 96 u · carton 8. Shortest lead time in the book."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Orders · 90 days",
+        "meta": "18,402 rows"
+      },
+      {
+        "label": "On-hand by channel",
+        "meta": "4 channels"
+      },
+      {
+        "label": "Open POs + in-transit",
+        "meta": "9 POs"
+      },
+      {
+        "label": "Supplier lead times",
+        "meta": "4 suppliers"
+      },
+      {
+        "label": "Cash lens · 13-wk ladder",
+        "meta": "synced 06:15"
+      }
+    ]
+  }
+}

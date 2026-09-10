@@ -1,0 +1,601 @@
+{
+  "code": "S9.18",
+  "stageKey": "analyze",
+  "name": "Fulfilment cost",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "zone": "z7",
+    "sim": "asis"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "yTicks": [
+      "$12",
+      "$9",
+      "$6",
+      "$3"
+    ],
+    "zoneBars": [
+      {
+        "label": "Z1–2",
+        "share": "8%",
+        "total": "$7.34",
+        "h1": "19.8",
+        "h2": "32.1",
+        "h3": "6.9",
+        "h4": "2.3",
+        "opacity": 0.5,
+        "labelTone": "var(--ink-400)",
+        "tickWeight": "500"
+      },
+      {
+        "label": "Z3",
+        "share": "12%",
+        "total": "$7.93",
+        "h1": "19.8",
+        "h2": "36.8",
+        "h3": "6.9",
+        "h4": "2.5",
+        "opacity": 0.5,
+        "labelTone": "var(--ink-400)",
+        "tickWeight": "500"
+      },
+      {
+        "label": "Z4",
+        "share": "16%",
+        "total": "$8.51",
+        "h1": "19.8",
+        "h2": "41.5",
+        "h3": "6.9",
+        "h4": "2.7",
+        "opacity": 0.5,
+        "labelTone": "var(--ink-400)",
+        "tickWeight": "500"
+      },
+      {
+        "label": "Z5",
+        "share": "18%",
+        "total": "$8.98",
+        "h1": "19.8",
+        "h2": "45.3",
+        "h3": "6.9",
+        "h4": "2.8",
+        "opacity": 0.5,
+        "labelTone": "var(--ink-400)",
+        "tickWeight": "500"
+      },
+      {
+        "label": "Z6",
+        "share": "14%",
+        "total": "$9.67",
+        "h1": "19.8",
+        "h2": "50.8",
+        "h3": "6.9",
+        "h4": "3.0",
+        "opacity": 0.5,
+        "labelTone": "var(--ink-400)",
+        "tickWeight": "500"
+      },
+      {
+        "label": "Z7",
+        "share": "19%",
+        "total": "$10.64",
+        "h1": "19.8",
+        "h2": "58.8",
+        "h3": "6.9",
+        "h4": "3.2",
+        "opacity": 1,
+        "labelTone": "var(--ink-900)",
+        "tickWeight": "700"
+      },
+      {
+        "label": "Z8",
+        "share": "13%",
+        "total": "$11.54",
+        "h1": "19.8",
+        "h2": "66.0",
+        "h3": "6.9",
+        "h4": "3.4",
+        "opacity": 0.5,
+        "labelTone": "var(--ink-400)",
+        "tickWeight": "500"
+      }
+    ],
+    "zone": {
+      "name": "Zone 7 · Pacific Northwest and Southwest",
+      "meta": "7,830 orders · West is 2 days, East is 5",
+      "tiers": [
+        {
+          "label": "Under 1 lb",
+          "share": "18%",
+          "postage": "$5.20",
+          "dim": "1.0×",
+          "flag": "clean",
+          "dimTone": "var(--green-700)",
+          "flagTone": "var(--ink-400)"
+        },
+        {
+          "label": "1–2 lb",
+          "share": "26%",
+          "postage": "$6.10",
+          "dim": "1.6×",
+          "flag": "right-size",
+          "dimTone": "var(--rose-700)",
+          "flagTone": "var(--rose-700)"
+        },
+        {
+          "label": "2–5 lb",
+          "share": "31%",
+          "postage": "$7.35",
+          "dim": "1.2×",
+          "flag": "review",
+          "dimTone": "var(--amber-700)",
+          "flagTone": "var(--amber-700)"
+        },
+        {
+          "label": "5–10 lb",
+          "share": "17%",
+          "postage": "$8.90",
+          "dim": "1.0×",
+          "flag": "clean",
+          "dimTone": "var(--green-700)",
+          "flagTone": "var(--ink-400)"
+        },
+        {
+          "label": "Over 10 lb",
+          "share": "8%",
+          "postage": "$11.40",
+          "dim": "1.0×",
+          "flag": "clean",
+          "dimTone": "var(--green-700)",
+          "flagTone": "var(--ink-400)"
+        }
+      ],
+      "nodes": [
+        {
+          "label": "East node · Allentown",
+          "share": "31%",
+          "pct": 31,
+          "hue": "var(--mod-inventory)",
+          "tone": "var(--ink-900)",
+          "note": "Five days in transit and two zones of postage more than it needs."
+        },
+        {
+          "label": "West node · Reno",
+          "share": "69%",
+          "pct": 69,
+          "hue": "var(--r-blue-500)",
+          "tone": "var(--ink-900)",
+          "note": "Correct origin — limited by which SKUs are held at cover."
+        }
+      ],
+      "optimal": "69%",
+      "penalty": "$0.84 avg penalty",
+      "verdictTint": "var(--rose-50)",
+      "verdictTone": "var(--rose-700)"
+    },
+    "heatRows": [
+      {
+        "label": "Z1–2",
+        "volume": "3,300 orders",
+        "optimal": "99%",
+        "eastPct": 96,
+        "westPct": 4,
+        "eastFill": "var(--mod-inventory)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--green-700)",
+        "bg": "transparent",
+        "labelTone": "var(--ink-600)"
+      },
+      {
+        "label": "Z3",
+        "volume": "4,940 orders",
+        "optimal": "98%",
+        "eastPct": 94,
+        "westPct": 6,
+        "eastFill": "var(--mod-inventory)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--green-700)",
+        "bg": "transparent",
+        "labelTone": "var(--ink-600)"
+      },
+      {
+        "label": "Z4",
+        "volume": "6,590 orders",
+        "optimal": "96%",
+        "eastPct": 91,
+        "westPct": 9,
+        "eastFill": "var(--mod-inventory)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--green-700)",
+        "bg": "transparent",
+        "labelTone": "var(--ink-600)"
+      },
+      {
+        "label": "Z5",
+        "volume": "7,420 orders",
+        "optimal": "92%",
+        "eastPct": 74,
+        "westPct": 26,
+        "eastFill": "var(--mod-inventory)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--green-700)",
+        "bg": "transparent",
+        "labelTone": "var(--ink-600)"
+      },
+      {
+        "label": "Z6",
+        "volume": "5,770 orders",
+        "optimal": "78%",
+        "eastPct": 41,
+        "westPct": 59,
+        "eastFill": "color-mix(in oklab, var(--rose-500) 45%, white)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--amber-700)",
+        "bg": "transparent",
+        "labelTone": "var(--ink-600)"
+      },
+      {
+        "label": "Z7",
+        "volume": "7,830 orders",
+        "optimal": "69%",
+        "eastPct": 31,
+        "westPct": 69,
+        "eastFill": "color-mix(in oklab, var(--rose-500) 45%, white)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--rose-700)",
+        "bg": "var(--ink-50)",
+        "labelTone": "var(--ink-900)"
+      },
+      {
+        "label": "Z8",
+        "volume": "5,360 orders",
+        "optimal": "66%",
+        "eastPct": 34,
+        "westPct": 66,
+        "eastFill": "color-mix(in oklab, var(--rose-500) 45%, white)",
+        "westFill": "var(--r-blue-500)",
+        "optTone": "var(--rose-700)",
+        "bg": "transparent",
+        "labelTone": "var(--ink-600)"
+      }
+    ],
+    "simTabs": [
+      {
+        "label": "As-is",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Cost-first",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      },
+      {
+        "label": "CX-protecting",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "sim": {
+      "label": "As-is",
+      "body": "Last month’s 41,200 orders re-costed under the current routing and allocation rules, with the new rate card applied. This is the baseline every alternative is measured against.",
+      "metrics": [
+        {
+          "label": "CPO",
+          "value": "$9.34",
+          "delta": "baseline",
+          "tone": "var(--rose-700)",
+          "deltaTone": "var(--ink-400)",
+          "note": "74¢ over the $8.60 target"
+        },
+        {
+          "label": "On-time",
+          "value": "94.1%",
+          "delta": "baseline",
+          "tone": "var(--amber-700)",
+          "deltaTone": "var(--ink-400)",
+          "note": "DTC floor is 95%"
+        },
+        {
+          "label": "Split rate",
+          "value": "11.4%",
+          "delta": "baseline",
+          "tone": "var(--rose-700)",
+          "deltaTone": "var(--ink-400)",
+          "note": "ceiling is 8%"
+        },
+        {
+          "label": "Monthly cost",
+          "value": "$385K",
+          "delta": "baseline",
+          "tone": "var(--ink-900)",
+          "deltaTone": "var(--ink-400)",
+          "note": "41,200 orders"
+        }
+      ],
+      "alloc": [
+        {
+          "name": "Meridian Express",
+          "share": "58%",
+          "pct": 58,
+          "hue": "var(--mod-inventory)",
+          "flag": "above minimum",
+          "flagTone": "var(--green-700)"
+        },
+        {
+          "name": "Fairline Post",
+          "share": "27%",
+          "pct": 27,
+          "hue": "var(--r-blue-500)",
+          "flag": "",
+          "flagTone": "var(--ink-400)"
+        },
+        {
+          "name": "Regional consolidators",
+          "share": "15%",
+          "pct": 15,
+          "hue": "var(--ink-400)",
+          "flag": "",
+          "flagTone": "var(--ink-400)"
+        }
+      ],
+      "verdict": "Two guardrails already breached before we change anything: DTC on-time is 0.9pp under its floor and the split rate is 3.4pp over its ceiling.",
+      "verdictTint": "var(--rose-50)",
+      "verdictTone": "var(--rose-700)",
+      "verdictIcon": "fa-solid fa-triangle-exclamation"
+    },
+    "splits": [
+      {
+        "cause": "SKU not held at the closer node",
+        "note": "4 fast movers missing from West cover",
+        "share": "7.4%",
+        "cost": "+$4.10",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "cause": "Line out of stock at pick",
+        "note": "partial ship rather than hold the order",
+        "share": "2.6%",
+        "cost": "+$3.80",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "cause": "Oversize line shipped separately",
+        "note": "cast iron and dutch ovens",
+        "share": "1.1%",
+        "cost": "+$5.20",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "cause": "Expedited line pulled forward",
+        "note": "customer-requested, legitimate",
+        "share": "0.3%",
+        "cost": "+$2.90",
+        "tone": "var(--ink-700)"
+      }
+    ],
+    "dim": [
+      {
+        "sku": "Pan care kit",
+        "box": "B-12 · 12×10×4",
+        "ratio": "1.8×",
+        "newBox": "B-06",
+        "save": "$2.1K",
+        "ratioTone": "var(--rose-700)"
+      },
+      {
+        "sku": "Replacement filter 3-pack",
+        "box": "B-12 · 12×10×4",
+        "ratio": "1.7×",
+        "newBox": "B-05",
+        "save": "$1.9K",
+        "ratioTone": "var(--rose-700)"
+      },
+      {
+        "sku": "Silicone spatula pair",
+        "box": "B-10 · 10×8×4",
+        "ratio": "1.6×",
+        "newBox": "mailer",
+        "save": "$1.6K",
+        "ratioTone": "var(--rose-700)"
+      },
+      {
+        "sku": "Whetstone 1000/6000",
+        "box": "B-10 · 10×8×4",
+        "ratio": "1.4×",
+        "newBox": "B-04",
+        "save": "$1.4K",
+        "ratioTone": "var(--amber-700)"
+      },
+      {
+        "sku": "Kitchen shears",
+        "box": "B-08 · 9×7×3",
+        "ratio": "1.4×",
+        "newBox": "mailer",
+        "save": "$1.1K",
+        "ratioTone": "var(--amber-700)"
+      },
+      {
+        "sku": "Paring knife 3.5\"",
+        "box": "B-08 · 9×7×3",
+        "ratio": "1.3×",
+        "newBox": "B-04",
+        "save": "$0.8K",
+        "ratioTone": "var(--amber-700)"
+      }
+    ],
+    "pool": [
+      {
+        "label": "Node repositioning · 4 SKUs",
+        "value": "$14.2K",
+        "pct": 100,
+        "hue": "var(--mod-inventory)",
+        "note": "Zone 7–8 orders shipping from the correct origin. $6.2K one-time transfer."
+      },
+      {
+        "label": "Carrier reallocation",
+        "value": "$11.8K",
+        "pct": 83,
+        "hue": "var(--r-blue-500)",
+        "note": "Inside the 55% Meridian minimum, service-level matched."
+      },
+      {
+        "label": "Dim-weight right-sizing",
+        "value": "$8.9K",
+        "pct": 63,
+        "hue": "color-mix(in oklab, var(--mod-inventory) 55%, white)",
+        "note": "6 SKUs into smaller boxes. Excludes glass and enamel."
+      },
+      {
+        "label": "Split-shipment reduction",
+        "value": "$4.6K",
+        "pct": 32,
+        "hue": "var(--green-500)",
+        "note": "Mostly falls out of the repositioning — not additive."
+      },
+      {
+        "label": "Surcharge cleanup",
+        "value": "$2.1K",
+        "pct": 15,
+        "hue": "var(--ink-400)",
+        "note": "Address validation to cut residential reclassifications."
+      }
+    ],
+    "carriers": [
+      {
+        "name": "Meridian Express",
+        "score": "86",
+        "scoreTone": "var(--green-700)",
+        "rows": [
+          {
+            "label": "cost / order",
+            "value": "$5.94",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "on-time",
+            "value": "96.8%",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "damage / k",
+            "value": "1.8",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "claims paid",
+            "value": "94%",
+            "tone": "var(--green-700)"
+          }
+        ]
+      },
+      {
+        "name": "Fairline Post",
+        "score": "74",
+        "scoreTone": "var(--ink-800)",
+        "rows": [
+          {
+            "label": "cost / order",
+            "value": "$5.12",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "on-time",
+            "value": "93.4%",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "damage / k",
+            "value": "2.4",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "claims paid",
+            "value": "81%",
+            "tone": "var(--amber-700)"
+          }
+        ]
+      },
+      {
+        "name": "Regional consolidators",
+        "score": "68",
+        "scoreTone": "var(--amber-700)",
+        "rows": [
+          {
+            "label": "cost / order",
+            "value": "$4.38",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "on-time",
+            "value": "91.2%",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "label": "damage / k",
+            "value": "3.1",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "label": "coverage",
+            "value": "Z2–5 only",
+            "tone": "var(--ink-600)"
+          }
+        ]
+      }
+    ],
+    "gri": [
+      {
+        "label": "Ground base rates",
+        "note": "all zones, effective Oct 1",
+        "value": "+5.9%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Residential surcharge",
+        "note": "82% of our volume",
+        "value": "+7.1%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Fuel surcharge index",
+        "note": "weekly, floating",
+        "value": "+0.4pp",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Dim divisor",
+        "note": "unchanged at 139",
+        "value": "no change",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Effect on CPO",
+        "note": "at current routing mix",
+        "value": "+$0.62",
+        "tone": "var(--rose-700)"
+      }
+    ]
+  }
+}

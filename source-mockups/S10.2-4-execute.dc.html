@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.2-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-cash);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Working capital · S10.2</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Week-7 trough projects $31K below buffer</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">Approved · 2 levers, $57K of relief</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">trough reprojects to $146K · buffer cleared</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-cash)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-cash)"></span>Lens: Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-cash);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Navigator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Cash Ladder Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Settlement Calendar Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.2-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-cash) 10%, white);border:1px solid color-mix(in oklab, var(--mod-cash) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-cash);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:16px">
+          <div style="min-width:0;display:flex;flex-direction:column;gap:5px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Cash plan · CASH-Q4-0071</span>
+            <span style="font-size:13px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ planLine }}</span>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:14px">
+            <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+              <span style="font-family:var(--font-mono);font-size:18px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ pushedCount }}</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">dispatched</span>
+            </span>
+            <button type="button" onClick="{{ runAll }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:var(--r-sm);border:none;background:{{ runAllBg }};color:{{ runAllFg }};cursor:{{ runAllCursor }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">
+              <i class="{{ runAllIcon }}" style="font-size:11px"></i>{{ runAllLabel }}
+            </button>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-water" style="font-size:9px"></i>Trough reprojection
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">recomputed as each lever lands</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ troughTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ troughTone }}"></span>{{ troughState }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ troughMetrics }}" as="m" hint-placeholder-count="4">
+              <div style="background:var(--ink-0);padding:12px 13px;display:flex;flex-direction:column;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-400)">{{ m.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:20px;font-weight:600;letter-spacing:-0.02em;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ m.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:14px;display:grid;grid-template-columns:52px 1fr;gap:0 8px">
+            <div style="height:112px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;padding:2px 0">
+              <sc-for list="{{ yTicks }}" as="t" hint-placeholder-count="3">
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.label }}</span>
+              </sc-for>
+            </div>
+            <div style="min-width:0;height:112px">
+              <svg viewBox="0 0 700 112" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                <line x1="0" y1="{{ bufferY }}" x2="700" y2="{{ bufferY }}" style="stroke:var(--mod-cash);stroke-width:2;stroke-dasharray:7 5"></line>
+                <path d="{{ beforePath }}" style="fill:none;stroke:var(--ink-300);stroke-width:1.8;stroke-dasharray:5 4;stroke-linejoin:round"></path>
+                <path d="{{ afterPath }}" style="fill:none;stroke:var(--ink-900);stroke-width:2.6;stroke-linejoin:round"></path>
+                <circle cx="{{ troughCx }}" cy="{{ troughBeforeCy }}" r="4" style="fill:var(--ink-0);stroke:var(--ink-300);stroke-width:2"></circle>
+                <circle cx="{{ troughCx }}" cy="{{ troughAfterCy }}" r="5.5" style="fill:{{ troughDotFill }};stroke:var(--ink-0);stroke-width:2"></circle>
+              </svg>
+            </div>
+          </div>
+          <div style="margin-top:8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:0;border-top:1.5px dashed var(--ink-300);display:block"></span>before levers</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:3px;background:var(--ink-900);display:block"></span>after levers</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:0;border-top:2px dashed var(--mod-cash);display:block"></span>buffer $120K</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">weeks 5 to 9 · trough at week 7</span>
+          </div>
+        </div>
+
+        <sc-for list="{{ stages }}" as="d" hint-placeholder-count="4">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+            <div style="padding:13px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--ink-100);background:var(--ink-25)">
+              <span style="width:28px;height:28px;border-radius:var(--r-xs);background:{{ d.tint }};color:{{ d.hue }};display:grid;place-items:center;flex-shrink:0">
+                <i class="{{ d.icon }}" style="font-size:12px"></i>
+              </span>
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ d.name }}</span>
+                  <sc-if value="{{ d.doorHref }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ d.doorHref }}" style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ d.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ d.hue }}">
+                      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8px"></i>{{ d.doorLabel }}
+                    </a>
+                  </sc-if>
+                  <sc-if value="{{ d.human }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:var(--ink-100);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-600)">
+                      <i class="fa-solid fa-user-pen" style="font-size:8px"></i>{{ d.human }}
+                    </span>
+                  </sc-if>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ d.meta }}</span>
+              </span>
+              <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:9px">
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:76px">
+                  <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ d.reliefTone }};font-variant-numeric:tabular-nums">{{ d.relief }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">relief</span>
+                </span>
+                <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ d.statusTint }};font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ d.statusTone }}">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{ d.statusTone }}"></span>{{ d.statusLabel }}
+                </span>
+                <button type="button" onClick="{{ d.push }}" style="height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ d.btnBorder }};background:{{ d.btnBg }};color:{{ d.btnFg }};cursor:{{ d.btnCursor }};font-family:var(--font-sans);font-size:11.5px;font-weight:500">{{ d.btnLabel }}</button>
+              </span>
+            </div>
+            <div style="padding:4px 16px 12px">
+              <sc-for list="{{ d.items }}" as="it" hint-placeholder-count="3">
+                <div style="padding:10px 0;border-bottom:1px solid var(--ink-50);display:flex;align-items:flex-start;gap:12px">
+                  <span style="flex-shrink:0;margin-top:2px;width:18px;height:18px;border-radius:50%;background:{{ it.dotBg }};color:{{ it.dotFg }};display:grid;place-items:center">
+                    <i class="{{ it.dotIcon }}" style="font-size:8.5px"></i>
+                  </span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+                    <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                      <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ it.name }}</span>
+                      <sc-if value="{{ it.tag }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ it.tagTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ it.tagTone }}">
+                          <i class="{{ it.tagIcon }}" style="font-size:8px"></i>{{ it.tag }}
+                        </span>
+                      </sc-if>
+                    </span>
+                    <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ it.detail }}</span>
+                  </span>
+                  <span style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;width:112px">
+                    <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ it.valueTone }};font-variant-numeric:tabular-nums">{{ it.value }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:{{ it.stateTone }}">{{ it.stateLabel }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Weekly monitoring · actual vs plan</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ monTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ monTone }}"></span>{{ monStatus }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 92px 92px 92px 104px;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Watch</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Plan</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Tolerance</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Actual</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">First read</span>
+          </div>
+          <sc-for list="{{ monitors }}" as="m" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:1fr 92px 92px 92px 104px;gap:0 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ m.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ m.note }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ m.plan }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-500);text-align:right;font-variant-numeric:tabular-nums">{{ m.tol }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-300);text-align:right">{{ m.actual }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ m.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ m.tone }}">{{ m.read }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">The trough re-projects every Monday against actuals. If it drifts back under the buffer the card re-opens with the two unused levers still costed and ready.</p>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Dispatch progress</span>
+          <div style="margin-top:11px;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+            <span style="display:block;height:100%;width:{{ progressPct }}%;background:var(--mod-cash);border-radius:var(--r-full);transition:width var(--dur-slow) var(--ease-standard)"></span>
+          </div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ progressRows }}" as="p" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ p.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 26%, white);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-bell" style="font-size:11px;color:var(--mod-cash)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Settlement anomaly watches</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">The plan assumes each channel settles on schedule. These watch for the assumption breaking, which is the way a good ladder goes wrong.</p>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ watches }}" as="w" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:3px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ w.bg }}">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600;color:{{ w.nameTone }}">{{ w.name }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;font-weight:600;color:{{ w.stateTone }}">{{ w.state }}</span>
+                </div>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ w.trigger }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ armBorder }};border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-bolt" style="font-size:11px;color:{{ armIconTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Auto-draw on breach</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ armCopy }}</p>
+          <button type="button" onClick="{{ armToggle }}" style="margin-top:11px;width:100%;height:34px;border-radius:var(--r-sm);border:1px solid {{ armBtnBorder }};background:{{ armBtnBg }};color:{{ armBtnFg }};cursor:{{ armCursor }};font-family:var(--font-sans);font-size:12.5px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px">
+            <i class="{{ armBtnIcon }}" style="font-size:10px"></i>{{ armBtnLabel }}
+          </button>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-rotate-left" style="font-size:10px;color:var(--ink-400)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Reversibility</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ rollback }}" as="r" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ r.bg }}">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:11.5px;font-weight:600;color:{{ r.nameTone }}">{{ r.name }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:{{ r.noteTone }}">{{ r.note }}</span>
+                </span>
+                <button type="button" onClick="{{ r.revert }}" style="flex-shrink:0;height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid {{ r.btnBorder }};background:{{ r.btnBg }};color:{{ r.btnFg }};cursor:{{ r.cursor }};font-family:var(--font-sans);font-size:10.5px;font-weight:500">{{ r.btnLabel }}</button>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:9px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">PO timing reverses until the supplier confirms the new date. A terms ask cannot be unasked — it is a conversation, not a setting.</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--green-50);font-size:11.5px;font-weight:500;color:var(--green-700)">
+          <i class="fa-solid fa-check" style="font-size:10px"></i>Trough reprojects to $146K · buffer cleared in both cases
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S10.2-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-arrow-left" style="font-size:11px"></i>Back to Decide
+        </a>
+        <a href="S00-workspace.dc.html?approved=10.2" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+          {{ closeLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { pushed: {}, busy: null, armed: false, reverted: {} };
+
+  stageData() {
+    return [
+      {
+        id: 'po', name: 'PO timing to Planner', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)',
+        doorHref: 'S9.2-3-decide.dc.html', doorLabel: 'S9.2 replenishment',
+        meta: '2 POs moved week 7 → week 8 · cover recalculated · service level 96.1%',
+        relief: '+$26K', reliefTone: 'var(--green-700)',
+        items: [
+          { name: 'PO-4612 · Core cookware', tag: 'week 8', tagIcon: 'fa-solid fa-calendar-day', tagTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', tagTone: 'var(--mod-inventory)',
+            detail: 'Confirmed date moves to Oct 13, four days after Amazon settles. Cover on three SKUs dips to 24 days at the crossover — inside the Core floor.', value: '$14K', valueTone: 'var(--ink-800)' },
+          { name: 'PO-4618 · filtration', tag: 'week 8', tagIcon: 'fa-solid fa-calendar-day', tagTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', tagTone: 'var(--mod-inventory)',
+            detail: 'Meridian is already on an OTD watch, so the delay is requested with a firm confirm-by date rather than assumed.', value: '$12K', valueTone: 'var(--ink-800)' },
+          { name: 'Reorder points recalculated', tag: null,
+            detail: 'Planner re-runs cover for the affected SKUs at the new dates. If any drops under 21 days the request is withdrawn automatically.', value: '7 SKUs', valueTone: 'var(--ink-800)' },
+        ],
+      },
+      {
+        id: 'terms', name: 'Terms brief to Sourcer', icon: 'fa-solid fa-file-lines', hue: 'var(--mod-inventory)',
+        doorHref: 'S9.17-4-execute.dc.html', doorLabel: 'S9.17 supplier',
+        human: 'Sourcer sends', meta: 'Net 45 → Net 60 ask added to the Kessler brief · answer by Oct 4',
+        relief: '+$31K', reliefTone: 'var(--green-700)',
+        items: [
+          { name: 'Terms ask added to the existing brief', tag: 'one conversation', tagIcon: 'fa-solid fa-comments', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)',
+            detail: 'Kessler is already mid-negotiation on their price notice. The terms ask goes into the same letter rather than arriving as a second request a week later.', value: '15 days', valueTone: 'var(--green-700)' },
+          { name: 'Cash value stated in the brief', tag: null,
+            detail: 'The brief now carries what the terms are worth to us — $31K of working capital per cycle — so the trade against price is visible to whoever runs the call.', value: '$31K', valueTone: 'var(--green-700)' },
+          { name: 'Contingency if declined', tag: null,
+            detail: 'A no on Oct 4 leaves three days before the PO is due. The credit draw stays costed and ready as the fallback, and the card re-opens automatically.', value: 'Oct 4', valueTone: 'var(--amber-700)' },
+        ],
+      },
+      {
+        id: 'watches', name: 'Settlement anomaly watches', icon: 'fa-solid fa-bell', hue: 'var(--mod-cash)',
+        meta: '4 watches armed across the channels the plan depends on',
+        relief: 'guardrail', reliefTone: 'var(--ink-600)',
+        items: [
+          { name: 'Amazon reserve rate', tag: 'critical', tagIcon: 'fa-solid fa-triangle-exclamation', tagTint: 'var(--rose-50)', tagTone: 'var(--rose-700)',
+            detail: 'The plan assumes 7% held as rolling reserve. Every extra point costs about $1.4K of the Oct 12 payout, and the reserve is theirs to change.', value: '7% assumed', valueTone: 'var(--rose-700)' },
+          { name: 'Payout date drift', tag: null,
+            detail: 'A settlement landing two days late moves it past the week boundary and the trough deepens by the full payout. Watched daily from Oct 8.', value: '±2 days', valueTone: 'var(--amber-700)' },
+          { name: 'Wholesale receivable ageing', tag: null,
+            detail: 'Two Faire invoices in week 8 are load-bearing. Anything past 35 days triggers a chase before it becomes a cash problem.', value: '2 invoices', valueTone: 'var(--ink-800)' },
+        ],
+      },
+      {
+        id: 'plan', name: 'Plan of record and reprojection', icon: 'fa-solid fa-chart-line', hue: 'var(--mod-cash)',
+        meta: 'CASH-Q4-0071 · weekly Monday reprojection · Ledger entry',
+        relief: 'logged', reliefTone: 'var(--ink-600)',
+        items: [
+          { name: 'Plan filed to the Ledger', tag: null,
+            detail: 'Both levers, their costs, the two levers not used and why, and the buffer left unchanged at $120K. The next trough starts from this record.', value: 'CASH-Q4-0071', valueTone: 'var(--ink-800)' },
+          { name: 'Weekly reprojection scheduled', tag: 'Mondays', tagIcon: 'fa-solid fa-repeat', tagTint: 'color-mix(in oklab, var(--mod-cash) 12%, white)', tagTone: 'var(--mod-cash)',
+            detail: 'Actual against plan every Monday, with the 13-week ladder rebuilt from live settlement data rather than from last week\u2019s assumptions.', value: '13 weeks', valueTone: 'var(--ink-800)' },
+          { name: 'Unused levers kept costed', tag: null,
+            detail: 'Clearance acceleration and the credit draw stay priced and one click from ready. A reversal does not restart the analysis.', value: '2 held', valueTone: 'var(--green-700)' },
+        ],
+      },
+    ];
+  }
+
+  pushOne(id) {
+    if (this.state.pushed[id] || this.state.busy) return;
+    this.setState({ busy: id });
+    setTimeout(() => {
+      this.setState((s) => {
+        const pushed = Object.assign({}, s.pushed);
+        pushed[id] = true;
+        const reverted = Object.assign({}, s.reverted);
+        delete reverted[id];
+        return { pushed, busy: null, reverted };
+      });
+    }, 880);
+  }
+
+  runSeq(ids) {
+    const next = ids.find((i) => !this.state.pushed[i]);
+    if (!next || this.state.busy) return;
+    this.setState({ busy: next });
+    setTimeout(() => {
+      this.setState((s) => {
+        const pushed = Object.assign({}, s.pushed);
+        pushed[next] = true;
+        return { pushed, busy: null };
+      }, () => setTimeout(() => this.runSeq(ids), 220));
+    }, 880);
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const autoAllowed = mode === 'Approve' || mode === 'Auto';
+
+    const stages = this.stageData();
+    const ids = stages.map((s) => s.id);
+    const done = ids.filter((i) => this.state.pushed[i]);
+    const n = done.length;
+    const allDone = n === ids.length;
+    const busy = this.state.busy;
+    const live = (id) => !!this.state.pushed[id] && !this.state.reverted[id];
+    const totalItems = stages.reduce((a, s) => a + s.items.length, 0);
+    const doneItems = done.reduce((a, i) => a + stages.find((s) => s.id === i).items.length, 0);
+
+    const relief = (live('po') ? 26 : 0) + (live('terms') ? 31 : 0);
+    const trough = 89 + relief;
+    const troughP10 = 66 + relief;
+    const buffer = 120;
+    const clear = trough >= buffer;
+
+    const before = [219, 163, 89, 163, 172];
+    const after = before.map((v, i) => (i === 2 ? trough : i === 1 ? v + Math.round(relief * 0.35) : i > 2 ? v + Math.round(relief * 0.2) : v));
+    const lo = 60, hi = 240, W = 700, top = 8, bot = 100;
+    const x = (i) => (i / 4) * W;
+    const y = (v) => bot - ((v - lo) / (hi - lo)) * (bot - top);
+    const line = (arr) => arr.map((v, i) => (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      planLine: allDone
+        ? 'Both levers are with their owners, four settlement watches are armed, and the plan of record reprojects every Monday against live settlement data.'
+        : 'The PO delay is a request, not a fact, until the suppliers confirm. The terms ask is a conversation Sourcer runs. Nothing here moves money by itself.',
+      pushedCount: n + ' / 4',
+      runAll: () => this.runSeq(ids),
+      runAllLabel: allDone ? 'Plan dispatched' : busy ? 'Dispatching…' : 'Dispatch the plan',
+      runAllIcon: allDone ? 'fa-solid fa-check' : busy ? 'fa-solid fa-spinner' : 'fa-solid fa-play',
+      runAllBg: allDone ? 'var(--green-50)' : 'var(--ink-900)',
+      runAllFg: allDone ? 'var(--green-700)' : 'var(--ink-0)',
+      runAllCursor: allDone || busy ? 'default' : 'pointer',
+
+      troughState: clear ? 'buffer cleared' : relief > 0 ? 'partly closed' : 'not yet closed',
+      troughTone: clear ? 'var(--green-700)' : relief > 0 ? 'var(--amber-700)' : 'var(--rose-700)',
+      troughMetrics: [
+        { label: 'Trough · before', value: '$89K', tone: 'var(--rose-700)', note: '$31K under the $120K buffer' },
+        { label: 'Trough · after', value: '$' + trough + 'K', tone: clear ? 'var(--green-700)' : 'var(--amber-700)', note: clear ? '$' + (trough - buffer) + 'K of headroom' : '$' + (buffer - trough) + 'K still short' },
+        { label: 'P10 case', value: '$' + troughP10 + 'K', tone: troughP10 >= buffer ? 'var(--green-700)' : 'var(--amber-700)', note: troughP10 >= buffer ? 'downside clears too' : 'downside still tight' },
+        { label: 'Cost of the plan', value: '$0.9K', tone: 'var(--ink-900)', note: 'service-level cost only · no interest' },
+      ],
+      yTicks: [
+        { label: '$240K', tone: 'var(--ink-400)' },
+        { label: '$120K', tone: 'var(--mod-cash)' },
+        { label: '$60K', tone: 'var(--ink-400)' },
+      ],
+      beforePath: line(before),
+      afterPath: line(after),
+      bufferY: y(buffer).toFixed(1),
+      troughCx: x(2).toFixed(1),
+      troughBeforeCy: y(89).toFixed(1),
+      troughAfterCy: y(trough).toFixed(1),
+      troughDotFill: clear ? 'var(--green-500)' : 'var(--rose-500)',
+
+      stages: stages.map((s) => {
+        const isDone = live(s.id);
+        const running = busy === s.id;
+        const rev = !!this.state.reverted[s.id];
+        return {
+          name: s.name, meta: s.meta, icon: s.icon, hue: s.hue,
+          doorHref: s.doorHref || null, doorLabel: s.doorLabel, human: s.human || null,
+          relief: s.relief, reliefTone: s.reliefTone,
+          tint: 'color-mix(in oklab, ' + s.hue + ' 12%, white)',
+          statusLabel: rev ? 'withdrawn' : isDone ? (s.id === 'terms' ? 'with reviewer' : 'live') : running ? 'sending' : 'staged',
+          statusTint: rev ? 'var(--amber-50)' : isDone ? 'var(--green-50)' : running ? 'var(--amber-50)' : 'var(--ink-100)',
+          statusTone: rev ? 'var(--amber-700)' : isDone ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-500)',
+          btnLabel: isDone ? 'Done' : running ? 'Sending…' : rev ? 'Resend' : 'Send',
+          btnBg: isDone ? 'var(--ink-50)' : 'var(--ink-900)',
+          btnFg: isDone ? 'var(--ink-400)' : 'var(--ink-0)',
+          btnBorder: isDone ? 'var(--ink-200)' : 'var(--ink-900)',
+          btnCursor: isDone || busy ? 'default' : 'pointer',
+          push: () => this.pushOne(s.id),
+          items: s.items.map((it) => ({
+            name: it.name, detail: it.detail, value: it.value, valueTone: it.valueTone,
+            tag: it.tag || null, tagIcon: it.tagIcon, tagTint: it.tagTint, tagTone: it.tagTone,
+            dotIcon: isDone ? 'fa-solid fa-check' : running ? 'fa-solid fa-ellipsis' : 'fa-solid fa-minus',
+            dotBg: isDone ? 'var(--green-500)' : running ? 'var(--amber-500)' : 'var(--ink-100)',
+            dotFg: isDone || running ? 'var(--ink-0)' : 'var(--ink-400)',
+            stateLabel: isDone ? 'sent' : running ? 'in flight' : 'staged',
+            stateTone: isDone ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-400)',
+          })),
+        };
+      }),
+
+      monStatus: allDone ? 'weekly · armed' : 'arms on dispatch',
+      monTone: allDone ? 'var(--green-700)' : 'var(--ink-400)',
+      monitors: [
+        { label: 'Week-7 trough', note: 'reprojected from live settlement data', plan: '$' + trough + 'K', tol: '≥ $120K', actual: 'awaiting', read: allDone ? 'Aug 25' : 'not armed', tint: allDone ? 'var(--green-50)' : 'var(--ink-100)', tone: allDone ? 'var(--green-700)' : 'var(--ink-500)' },
+        { label: 'Weekly net cash vs plan', note: 'each Monday, all four channels', plan: '±$8K', tol: '±$15K', actual: 'awaiting', read: allDone ? 'Aug 25' : 'not armed', tint: allDone ? 'var(--green-50)' : 'var(--ink-100)', tone: allDone ? 'var(--green-700)' : 'var(--ink-500)' },
+        { label: 'Kessler terms answer', note: 'Net 60 ask · 64% projected', plan: 'Net 60', tol: 'by Oct 4', actual: 'awaiting', read: allDone ? 'Oct 4' : 'not armed', tint: allDone ? 'color-mix(in oklab, var(--mod-cash) 12%, white)' : 'var(--ink-100)', tone: allDone ? 'var(--mod-cash)' : 'var(--ink-500)' },
+        { label: 'PO confirmations', note: '2 suppliers, new dates', plan: '2 of 2', tol: 'by Aug 27', actual: 'awaiting', read: allDone ? 'Aug 27' : 'not armed', tint: allDone ? 'var(--green-50)' : 'var(--ink-100)', tone: allDone ? 'var(--green-700)' : 'var(--ink-500)' },
+        { label: 'Amazon reserve rate', note: 'assumed 7% of the Oct 12 payout', plan: '7%', tol: '≤ 9%', actual: 'awaiting', read: allDone ? 'Oct 12' : 'not armed', tint: allDone ? 'var(--amber-50)' : 'var(--ink-100)', tone: allDone ? 'var(--amber-700)' : 'var(--ink-500)' },
+      ],
+
+      progressPct: ((doneItems / totalItems) * 100).toFixed(0),
+      progressRows: [
+        { label: 'Stages dispatched', value: n + ' of 4', tone: allDone ? 'var(--green-700)' : 'var(--ink-900)' },
+        { label: 'Line items', value: doneItems + ' of ' + totalItems, tone: 'var(--ink-900)' },
+        { label: 'Relief secured', value: '$' + relief + 'K', tone: relief ? 'var(--green-700)' : 'var(--ink-500)' },
+        { label: 'Cash cost', value: '$0', tone: 'var(--green-700)' },
+        { label: 'Levers held in reserve', value: '2', tone: 'var(--ink-900)' },
+      ],
+
+      watches: [
+        { name: 'Amazon reserve above 9%', state: live('watches') ? 'armed' : 'not armed', trigger: 'Costs $1.4K of the Oct 12 payout per point. Re-opens this card with the credit draw pre-selected.' },
+        { name: 'Any payout more than 2 days late', state: live('watches') ? 'armed' : 'not armed', trigger: 'A late settlement crossing the week boundary deepens the trough by the full amount.' },
+        { name: 'Faire receivable past 35 days', state: live('watches') ? 'armed' : 'not armed', trigger: 'Two week-8 invoices are load-bearing. Chase before it becomes a cash problem.' },
+        { name: 'Shopify payout gap over 4 days', state: live('watches') ? 'armed' : 'not armed', trigger: 'The most reliable inflow in the plan. A gap here is a platform issue, not a demand one.' },
+      ].map((w) => ({
+        name: w.name, state: w.state, trigger: w.trigger,
+        nameTone: live('watches') ? 'var(--ink-900)' : 'var(--ink-400)',
+        stateTone: live('watches') ? 'var(--mod-cash)' : 'var(--ink-400)',
+        bg: live('watches') ? 'color-mix(in oklab, var(--mod-cash) 5%, white)' : 'var(--ink-0)',
+      })),
+
+      armBorder: this.state.armed ? 'color-mix(in oklab, var(--mod-cash) 40%, white)' : 'var(--ink-100)',
+      armIconTone: this.state.armed ? 'var(--mod-cash)' : 'var(--ink-400)',
+      armCopy: autoAllowed
+        ? (this.state.armed
+          ? 'Armed. If the reprojected trough falls under $120K inside 5 days of the trough week, $25K draws on the revolving line automatically and the draw is logged with its trigger.'
+          : 'Draws $25K on the revolving line automatically if the trough re-projects under the buffer with less than 5 days of warning left.')
+        : 'Available from the Approve dial upward. At Suggest, a breach re-opens this card with the draw pre-selected and waits for you.',
+      armToggle: () => { if (autoAllowed) this.setState((s) => ({ armed: !s.armed })); },
+      armBtnLabel: !autoAllowed ? 'Locked at Suggest' : this.state.armed ? 'Armed · $25K trigger' : 'Arm auto-draw',
+      armBtnIcon: !autoAllowed ? 'fa-solid fa-lock' : this.state.armed ? 'fa-solid fa-check' : 'fa-solid fa-bolt',
+      armBtnBg: !autoAllowed ? 'var(--ink-50)' : this.state.armed ? 'color-mix(in oklab, var(--mod-cash) 10%, white)' : 'var(--ink-0)',
+      armBtnFg: !autoAllowed ? 'var(--ink-400)' : this.state.armed ? 'var(--mod-cash)' : 'var(--ink-700)',
+      armBtnBorder: !autoAllowed ? 'var(--ink-200)' : this.state.armed ? 'color-mix(in oklab, var(--mod-cash) 40%, white)' : 'var(--ink-200)',
+      armCursor: autoAllowed ? 'pointer' : 'not-allowed',
+
+      rollback: [
+        { id: 'po', name: 'PO date changes', note: 'reversible until supplier confirms', free: true },
+        { id: 'terms', name: 'Terms ask', note: 'cannot be unasked once sent', free: false },
+        { id: 'watches', name: 'Anomaly watches', note: 'disarm at any time', free: true },
+      ].map((r) => {
+        const isLive = live(r.id);
+        const wasReverted = !!this.state.reverted[r.id];
+        return {
+          name: r.name, note: r.note,
+          nameTone: isLive ? 'var(--ink-800)' : 'var(--ink-400)',
+          noteTone: r.free ? 'var(--ink-400)' : 'var(--amber-700)',
+          bg: wasReverted ? 'var(--amber-50)' : 'var(--ink-0)',
+          btnLabel: wasReverted ? 'Withdrawn' : isLive ? (r.free ? 'Withdraw' : 'sent') : 'not sent',
+          btnBg: wasReverted ? 'var(--amber-500)' : 'var(--ink-0)',
+          btnFg: wasReverted ? 'var(--ink-0)' : isLive && r.free ? 'var(--ink-700)' : 'var(--ink-400)',
+          btnBorder: wasReverted ? 'var(--amber-500)' : isLive && r.free ? 'var(--ink-200)' : 'var(--ink-100)',
+          cursor: isLive && r.free ? 'pointer' : 'default',
+          revert: () => {
+            if (!isLive || !r.free) return;
+            this.setState((s) => {
+              const reverted = Object.assign({}, s.reverted);
+              reverted[r.id] = true;
+              const pushed = Object.assign({}, s.pushed);
+              delete pushed[r.id];
+              return { reverted, pushed };
+            });
+          },
+        };
+      }),
+
+      done: allDone,
+      closeLabel: allDone ? 'Close the review' : 'Back to workspace',
+      footStatus: Object.keys(this.state.reverted).length > 0
+        ? 'Execute · ' + Object.keys(this.state.reverted).length + ' item withdrawn · ' + n + ' of 4 dispatched'
+        : allDone
+          ? 'Execute · 2 POs moved · terms ask with Sourcer · 4 watches armed · trough $' + trough + 'K'
+          : 'Execute · ' + n + ' of 4 stages · ' + (totalItems - doneItems) + ' items staged',
+      footTone: allDone ? 'var(--green-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+{
+  "code": "S10.3",
+  "stageKey": "reason",
+  "name": "Account health",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Late-shipment rate",
+        "market": "Amazon · seller fulfilled",
+        "limit": "4.0%",
+        "floor": "3.0%",
+        "today": "3.4%",
+        "risk": "$9.1K/day",
+        "tone": "var(--amber-700)",
+        "riskTone": "var(--rose-700)",
+        "bar": "var(--amber-500)",
+        "pct": "68",
+        "floorPct": "60",
+        "limitPct": "80",
+        "buffer": "0.6pp of their buffer left",
+        "bg": "color-mix(in oklab, var(--rose-500) 3%, white)"
+      },
+      {
+        "label": "Order defect rate",
+        "market": "Amazon · trailing 60 days",
+        "limit": "1.0%",
+        "floor": "0.7%",
+        "today": "0.41%",
+        "risk": "—",
+        "tone": "var(--green-700)",
+        "riskTone": "var(--ink-300)",
+        "bar": "var(--green-500)",
+        "pct": "32",
+        "floorPct": "54",
+        "limitPct": "77",
+        "buffer": "inside both floors",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Pre-fulfilment cancellation",
+        "market": "Amazon",
+        "limit": "2.5%",
+        "floor": "1.8%",
+        "today": "1.1%",
+        "risk": "—",
+        "tone": "var(--green-700)",
+        "riskTone": "var(--ink-300)",
+        "bar": "var(--green-500)",
+        "pct": "37",
+        "floorPct": "60",
+        "limitPct": "83",
+        "buffer": "inside both floors",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Valid tracking rate",
+        "market": "Amazon · inverse metric",
+        "limit": "≥ 95%",
+        "floor": "≥ 97%",
+        "today": "98.6%",
+        "risk": "—",
+        "tone": "var(--green-700)",
+        "riskTone": "var(--ink-300)",
+        "bar": "var(--green-500)",
+        "pct": "23",
+        "floorPct": "50",
+        "limitPct": "83",
+        "buffer": "inside both floors",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "On-time delivery",
+        "market": "Walmart · 95% floor",
+        "limit": "95.0%",
+        "floor": "96.5%",
+        "today": "95.2%",
+        "risk": "$2.4K/day",
+        "tone": "var(--rose-700)",
+        "riskTone": "var(--rose-700)",
+        "bar": "var(--amber-500)",
+        "pct": "74",
+        "floorPct": "54",
+        "limitPct": "77",
+        "buffer": "0.2pp of their buffer left",
+        "bg": "color-mix(in oklab, var(--rose-500) 3%, white)"
+      },
+      {
+        "label": "Policy violations",
+        "market": "all marketplaces",
+        "limit": "0 active",
+        "floor": "0 active",
+        "today": "1 open",
+        "risk": "$1.8K/day",
+        "tone": "var(--amber-700)",
+        "riskTone": "var(--rose-700)",
+        "bar": "var(--amber-500)",
+        "pct": "50",
+        "floorPct": "25",
+        "limitPct": "50",
+        "buffer": "0.0pp of their buffer left",
+        "bg": "color-mix(in oklab, var(--rose-500) 3%, white)"
+      },
+      {
+        "label": "IP complaints",
+        "market": "Amazon · rolling 180 days",
+        "limit": "0 upheld",
+        "floor": "0 filed",
+        "today": "1 filed",
+        "risk": "listing-level",
+        "tone": "var(--amber-700)",
+        "riskTone": "var(--rose-700)",
+        "bar": "var(--amber-500)",
+        "pct": "50",
+        "floorPct": "25",
+        "limitPct": "75",
+        "buffer": "0.5pp of their buffer left",
+        "bg": "color-mix(in oklab, var(--rose-500) 3%, white)"
+      }
+    ],
+    "slas": [
+      {
+        "level": "critical",
+        "label": "Account-level threat",
+        "sla": "2 hrs",
+        "detail": "Suspension notice, account review, or any metric past a marketplace limit. War-room state: pinned to every queue.",
+        "pillBg": "var(--rose-500)",
+        "pillFg": "var(--ink-0)",
+        "tone": "var(--rose-700)",
+        "border": "color-mix(in oklab, var(--rose-500) 30%, white)",
+        "mark": "var(--rose-500)",
+        "bg": "var(--rose-50)"
+      },
+      {
+        "level": "high",
+        "label": "Listing suppression or IP complaint",
+        "sla": "8 hrs",
+        "detail": "Revenue stops on the affected listing immediately. IP matters route to legal before anything is submitted.",
+        "pillBg": "var(--amber-500)",
+        "pillFg": "var(--ink-0)",
+        "tone": "var(--amber-700)",
+        "border": "color-mix(in oklab, var(--amber-500) 30%, white)",
+        "mark": "var(--amber-500)",
+        "bg": "var(--amber-50)"
+      },
+      {
+        "level": "medium",
+        "label": "Metric past our own floor",
+        "sla": "24 hrs",
+        "detail": "The marketplace has not acted. This is the window where an operational fix still works — like today.",
+        "pillBg": "var(--ink-400)",
+        "pillFg": "var(--ink-0)",
+        "tone": "var(--ink-800)",
+        "border": "var(--ink-200)",
+        "mark": "var(--ink-300)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "level": "low",
+        "label": "Policy notice or documentation request",
+        "sla": "72 hrs",
+        "detail": "No revenue at risk yet. Answered from the document vault rather than assembled from scratch.",
+        "pillBg": "var(--ink-300)",
+        "pillFg": "var(--ink-0)",
+        "tone": "var(--ink-700)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-200)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "buffers": [
+      {
+        "label": "Alert at 3.0%, not 4.0%",
+        "detail": "A full percentage point of room. At the current trend that is nine days of warning instead of none.",
+        "icon": "fa-solid fa-bell",
+        "tint": "color-mix(in oklab, var(--mod-actions) 14%, white)",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Operational fix beats a plan of action",
+        "detail": "Fixing the cause while the metric is still inside the limit means never having to explain it to anyone.",
+        "icon": "fa-solid fa-wrench",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Trend, not level",
+        "detail": "A metric at 3.4% and falling is fine. At 3.4% and rising for six days it is the same number and a different problem.",
+        "icon": "fa-solid fa-arrow-trend-up",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Reinstatement is expensive",
+        "detail": "Suppressed listings lose rank and reviews velocity even after they come back. The buffer is cheaper than the recovery.",
+        "icon": "fa-solid fa-rotate-left",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Legal review on IP matters",
+        "detail": "Any response to an intellectual-property complaint goes through counsel before submission. Realify assembles the evidence; it never files the answer."
+      },
+      {
+        "label": "Submissions are human-reviewed",
+        "detail": "Every plan of action, appeal and document response is read and sent by a person, at every dial setting. There is no Auto for talking to a marketplace."
+      },
+      {
+        "label": "No metric gaming",
+        "detail": "Cancellation to avoid a late shipment, or tracking uploaded before dispatch, are both policy violations. The fix is operational or it is nothing."
+      },
+      {
+        "label": "Document vault is the source",
+        "detail": "Invoices, certifications and authorisation letters answer from the vault with current expiry dates — never reconstructed under deadline pressure."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-scale-balanced",
+        "label": "Legal review on IP",
+        "border": "color-mix(in oklab, var(--rose-500) 30%, white)",
+        "bg": "var(--rose-50)",
+        "fg": "var(--rose-700)",
+        "iconTone": "var(--rose-700)"
+      },
+      {
+        "icon": "fa-solid fa-user-pen",
+        "label": "Human-reviewed submissions",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-ban",
+        "label": "No metric gaming",
+        "border": "var(--ink-200)",
+        "bg": "var(--ink-25)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-400)"
+      },
+      {
+        "icon": "fa-solid fa-folder-open",
+        "label": "Vault answers, not drafts",
+        "border": "var(--ink-200)",
+        "bg": "var(--ink-25)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-400)"
+      },
+      {
+        "icon": "fa-solid fa-shield-halved",
+        "label": "Floors tighter than limits",
+        "border": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 8%, white)",
+        "fg": "var(--mod-actions)",
+        "iconTone": "var(--mod-actions)"
+      }
+    ],
+    "deadlines": [
+      {
+        "name": "IP complaint · counter-notice",
+        "left": "4 days",
+        "detail": "Amazon case 8814-2291 · listing suppressed since Aug 16",
+        "tone": "var(--rose-700)",
+        "bg": "var(--rose-50)"
+      },
+      {
+        "name": "Policy notice · response due",
+        "left": "6 days",
+        "detail": "Walmart · condition-description query on 2 listings",
+        "tone": "var(--amber-700)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "Late-shipment · our own floor",
+        "left": "9 days",
+        "detail": "to the 4.0% marketplace limit at the current trend",
+        "tone": "var(--amber-700)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Aug 19 · 05:40",
+        "what": "Health Score Monitor read late shipment at 3.4%, past our 3.0% floor for the sixth consecutive day and still climbing."
+      },
+      {
+        "when": "Aug 19 · 05:41",
+        "what": "Revenue-at-Risk Model priced the exposure at $9.1K a day for listing-level action and $6.8K an hour if the account is reviewed."
+      },
+      {
+        "when": "Aug 19 · 05:44",
+        "what": "Scout found an IP complaint filed Aug 16 with a counter-notice window closing in four days, and pinned both to one card."
+      }
+    ],
+    "exposure": [
+      {
+        "label": "Late shipment · listing level",
+        "note": "Buy Box loss on affected ASINs",
+        "value": "$9.1K/day",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "IP complaint · suppressed listing",
+        "note": "hero SKU, live since Aug 16",
+        "value": "$1.8K/day",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Walmart on-time",
+        "note": "within their limit, past our floor",
+        "value": "$2.4K/day",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Account-level scenario",
+        "note": "Amazon is 45% of GMV",
+        "value": "$6.8K/hour",
+        "tone": "var(--rose-700)"
+      }
+    ]
+  }
+}

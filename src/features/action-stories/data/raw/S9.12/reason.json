@@ -1,0 +1,225 @@
+{
+  "code": "S9.12",
+  "stageKey": "reason",
+  "name": "Returns",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify proposes prevention work and disposition rules, and waits. No listing is edited, no supplier notice goes out and no RMA rule changes until you approve.",
+    "targets": [
+      {
+        "name": "Apparel · tops and dresses",
+        "skus": "62 SKUs · 41% of returns",
+        "target": "12.0%",
+        "actual": "18.4%",
+        "bench": "11.5%",
+        "gap": "+6.4pp over target",
+        "pct": "100%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "name": "Kitchen · ceramics and glass",
+        "skus": "48 SKUs · 22% of returns",
+        "target": "6.0%",
+        "actual": "8.1%",
+        "bench": "6.8%",
+        "gap": "+2.1pp · transit damage",
+        "pct": "48%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Home textiles",
+        "skus": "34 SKUs · 19% of returns",
+        "target": "7.0%",
+        "actual": "7.4%",
+        "bench": "7.9%",
+        "gap": "+0.4pp · inside benchmark",
+        "pct": "18%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Cookware and tools",
+        "skus": "70 SKUs · 18% of returns",
+        "target": "5.0%",
+        "actual": "4.2%",
+        "bench": "5.4%",
+        "gap": "−0.8pp under target",
+        "pct": "10%",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "thresholds": [
+      {
+        "label": "Stop recovering below",
+        "value": "$8.40",
+        "note": "Handling, inspection and repack on an apparel unit. Under this the unit is not worth processing.",
+        "icon": "fa-solid fa-hand",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Return-less refund under",
+        "value": "$14.00",
+        "note": "When inbound shipping alone exceeds what the unit could recover, do not ask for it back.",
+        "icon": "fa-solid fa-truck-fast",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Max prevention spend",
+        "value": "$1.20 / unit",
+        "note": "What a content fix or packaging change may cost per unit sold to be worth doing.",
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "Supplier chargeback floor",
+        "value": "$250",
+        "note": "Below this Realify logs the defect but does not open a CAPA — the admin costs more.",
+        "icon": "fa-solid fa-file-signature",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-700)"
+      }
+    ],
+    "floors": [
+      {
+        "label": "Restock as new",
+        "value": "≥ 72% of price",
+        "meta": "grade A only"
+      },
+      {
+        "label": "Refurbish and relist",
+        "value": "≥ 41% of price",
+        "meta": "net of labour"
+      },
+      {
+        "label": "Liquidate by pallet",
+        "value": "≥ 18% of price",
+        "meta": "quote-dependent"
+      },
+      {
+        "label": "Destroy with record",
+        "value": "last resort",
+        "meta": "disposal fee $1.10"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Opened personal care",
+        "value": "no restock",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Intimates and swimwear",
+        "value": "no restock",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Aerosol · lithium cell",
+        "value": "hazmat path",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Food contact · opened",
+        "value": "destroy",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Condition grade C or worse",
+        "value": "no restock",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Disposal record",
+        "value": "retained 7y",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "costs": [
+      {
+        "label": "Inbound freight",
+        "value": "$11.9K",
+        "pct": "100%",
+        "tone": "var(--rose-700)",
+        "meta": "35% of all-in cost"
+      },
+      {
+        "label": "Inspection and repack",
+        "value": "$8.7K",
+        "pct": "73%",
+        "tone": "var(--amber-700)",
+        "meta": "$8.40 per apparel unit"
+      },
+      {
+        "label": "Value lost on resale",
+        "value": "$7.4K",
+        "pct": "62%",
+        "tone": "var(--amber-700)",
+        "meta": "grade B relist discount"
+      },
+      {
+        "label": "Destroyed units",
+        "value": "$3.9K",
+        "pct": "33%",
+        "tone": "var(--rose-700)",
+        "meta": "412 units · hygiene rules"
+      },
+      {
+        "label": "Recovered",
+        "value": "−$18.2K",
+        "pct": "54%",
+        "tone": "var(--green-700)",
+        "meta": "restock and refurbish credit"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Ke",
+        "name": "Keeper",
+        "role": "Owns disposition — grades condition, routes each unit and holds the value floors.",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns the page — size charts, fit copy, imagery and review surfacing.",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)"
+      },
+      {
+        "initials": "Sh",
+        "name": "Shipper",
+        "role": "Owns packaging and transit damage, and the carrier claims that follow.",
+        "hue": "var(--mod-cash)",
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)"
+      },
+      {
+        "initials": "So",
+        "name": "Sourcer",
+        "role": "Owns supplier quality — opens CAPA, tracks the deadline, holds the chargeback.",
+        "hue": "var(--ink-700)",
+        "tint": "var(--ink-100)"
+      }
+    ]
+  }
+}

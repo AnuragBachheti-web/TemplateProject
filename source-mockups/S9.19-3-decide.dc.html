@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.19-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-ads);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-ads) 12%, white);color:var(--mod-ads);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Promo calendar · S9.19</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Q4 calendar build — Prime Fall deadline Aug 21</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-ads)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-ads)"></span>Lens: Ads · Margin · Inventory
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-ads);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Promoter + Pricer
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <i class="fa-solid fa-boxes-stacked" style="font-size:10px;color:var(--ink-400)"></i>Planner, Bidder
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Incrementality Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Promo Conflict Detector
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.19-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-ads) 10%, white);border:1px solid color-mix(in oklab, var(--mod-ads) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-ads);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-ads) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden">
+          <div style="padding:15px 18px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-ads) 12%, white);color:var(--mod-ads);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-calendar-check" style="font-size:9px"></i>{{ slateLabel }}
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">6 events · $240K budget · 2.4pp dilution cap</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:0;padding:2px;border-radius:var(--r-full);background:var(--ink-100)">
+              <sc-for list="{{ slateTabs }}" as="t" hint-placeholder-count="3">
+                <button type="button" onClick="{{ t.pick }}" style="height:26px;padding:0 12px;border-radius:var(--r-full);border:none;background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11.5px;font-weight:{{ t.weight }};transition:background var(--dur-fast) var(--ease-standard)">{{ t.label }}</button>
+              </sc-for>
+            </span>
+          </div>
+          <div style="padding:11px 18px 0;font-size:21px;font-weight:700;letter-spacing:-0.015em;line-height:1.25;color:var(--ink-900);text-wrap:pretty">{{ heroTitle }}</div>
+          <div style="padding:6px 18px 0;font-size:12.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ heroBody }}</div>
+          <div style="margin:14px 18px 16px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ heroMetrics }}" as="m" hint-placeholder-count="5">
+              <div style="background:var(--ink-0);padding:12px 13px;display:flex;flex-direction:column;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-400)">{{ m.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:20px;font-weight:600;letter-spacing:-0.02em;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ m.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <sc-for list="{{ events }}" as="e" hint-placeholder-count="6">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ e.border }};border-left:3px solid {{ e.mark }};border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:11px">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <button type="button" onClick="{{ e.toggle }}" style="flex-shrink:0;margin-top:1px;width:20px;height:20px;border-radius:var(--r-xs);border:1.5px solid {{ e.boxBorder }};background:{{ e.boxBg }};color:var(--ink-0);cursor:pointer;display:grid;place-items:center;padding:0">
+                <i class="fa-solid fa-check" style="font-size:10px;opacity:{{ e.checkOpacity }}"></i>
+              </button>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+                <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ e.name }}</span>
+                  <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ e.objTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ e.objTone }}">{{ e.objective }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ e.window }}</span>
+                  <sc-if value="{{ e.warn }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:var(--rose-50);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--rose-700)">
+                      <i class="fa-solid fa-triangle-exclamation" style="font-size:8px"></i>{{ e.warn }}
+                    </span>
+                  </sc-if>
+                </span>
+                <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ e.detail }}</span>
+              </span>
+              <span style="flex-shrink:0;display:flex;align-items:center;gap:14px">
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:84px">
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--green-700);font-variant-numeric:tabular-nums">{{ e.cm }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">incr. CM</span>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:68px">
+                  <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ e.confTone }};font-variant-numeric:tabular-nums">{{ e.confidence }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">confidence</span>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:72px">
+                  <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--rose-700);font-variant-numeric:tabular-nums">{{ e.cost }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">promo cost</span>
+                </span>
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding-top:9px;border-top:1px dashed var(--ink-200);flex-wrap:wrap">
+              <span style="display:flex;align-items:center;gap:8px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Depth</span>
+                <span style="display:flex;gap:4px">
+                  <sc-for list="{{ e.depths }}" as="d" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ d.pick }}" style="height:26px;min-width:42px;padding:0 9px;border-radius:var(--r-full);border:1px solid {{ d.border }};background:{{ d.bg }};color:{{ d.fg }};cursor:pointer;font-family:var(--font-mono);font-size:10.5px;font-weight:{{ d.weight }}">{{ d.label }}</button>
+                  </sc-for>
+                </span>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Channels</span>
+                <span style="display:flex;gap:4px;flex-wrap:wrap">
+                  <sc-for list="{{ e.channels }}" as="c" hint-placeholder-count="3">
+                    <span style="display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ c.bg }};border:1px solid {{ c.border }};font-size:10.5px;color:{{ c.fg }}">{{ c.label }}</span>
+                  </sc-for>
+                </span>
+              </span>
+              <span style="margin-left:auto;display:flex;align-items:center;gap:12px">
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500)">{{ e.support }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:{{ e.invTone }}">{{ e.inventory }}</span>
+              </span>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Calendar totals</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ totals }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ t.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Against the guardrails</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ b.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ b.tone }};font-variant-numeric:tabular-nums">{{ b.value }}</span>
+                </div>
+                <span style="position:relative;height:8px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                  <span style="position:absolute;left:0;top:0;bottom:0;width:{{ b.pct }}%;background:{{ b.tone }};display:block"></span>
+                  <span style="position:absolute;top:-2px;bottom:-2px;left:{{ b.limitPct }}%;width:2px;background:var(--ink-900);display:block"></span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ b.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Policy check</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:{{ policyTone }}">
+              <span style="width:7px;height:7px;border-radius:50%;background:{{ policyTone }}"></span>{{ policyStatus }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="{{ c.icon }}" style="font-size:10px;color:{{ c.tone }};margin-top:3px;flex-shrink:0;width:12px;text-align:center"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ c.label }}</span>
+                  <span style="font-size:11px;line-height:1.45;color:{{ c.noteTone }};text-wrap:pretty">{{ c.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Where it lands</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ routes }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm)">
+                <i class="{{ r.icon }}" style="font-size:10px;color:{{ r.hue }};margin-top:2px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;font-weight:600;color:var(--ink-900)">{{ r.label }}</span>
+                  <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ r.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--rose-50);font-size:11.5px;font-weight:500;color:var(--rose-700)">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size:10px"></i>{{ blockReason }}
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button type="button" style="height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">Export the calendar</button>
+        <sc-if value="{{ canApprove }}" hint-placeholder-val="{{ true }}">
+          <a href="S9.19-4-execute.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+            {{ ctaLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+          </a>
+        </sc-if>
+        <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+          <span style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-100);color:var(--ink-400);font-size:14px;font-weight:500;cursor:not-allowed">
+            <i class="fa-solid fa-lock" style="font-size:11px"></i>{{ ctaLabel }}
+          </span>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+
+  <sc-if value="{{ modal.open }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:color-mix(in oklab, var(--ink-900) 42%, transparent);display:grid;place-items:center;z-index:20">
+      <div style="width:560px;background:var(--ink-0);border:1px solid var(--ink-200);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);overflow:hidden">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:11px;background:var(--rose-50)">
+          <span style="width:30px;height:30px;border-radius:50%;background:var(--rose-500);color:var(--ink-0);display:grid;place-items:center;flex-shrink:0">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:13px"></i>
+          </span>
+          <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+            <span style="font-size:14px;font-weight:700;color:var(--rose-700)">Confirm simultaneous deep discount</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--rose-700)">{{ modal.scope }}</span>
+          </span>
+        </div>
+        <div style="padding:18px 20px;display:flex;flex-direction:column;gap:13px">
+          <p style="margin:0;font-size:13px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{{ modal.body }}</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-sm);overflow:hidden">
+            <sc-for list="{{ modal.stats }}" as="s" hint-placeholder-count="4">
+              <div style="background:var(--ink-0);padding:11px 13px;display:flex;flex-direction:column;gap:2px">
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ s.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:var(--r-sm);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <i class="fa-solid fa-circle-info" style="font-size:11px;color:var(--ink-500);margin-top:2px;flex-shrink:0"></i>
+            <span style="font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ modal.note }}</span>
+          </div>
+        </div>
+        <div style="padding:14px 20px;border-top:1px solid var(--ink-100);background:var(--ink-25);display:flex;align-items:center;gap:10px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">second confirmation required</span>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:9px">
+            <button type="button" onClick="{{ modal.cancel }}" style="height:36px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:13px;font-weight:500;color:var(--ink-600)">Reduce to 20%</button>
+            <button type="button" onClick="{{ modal.confirm }}" style="height:36px;padding:0 16px;border-radius:var(--r-sm);border:none;background:var(--rose-500);color:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:13px;font-weight:600">Confirm 25% on all channels</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = {
+    slate: 'full',
+    off: {},
+    depth: { prime: 20, earlybf: 25, walmart: 15, bfcm: 25, gift: 12, clear: 40 },
+    confirmed: false,
+    modal: false,
+  };
+
+  eventData() {
+    return [
+      {
+        id: 'prime', name: 'Prime Fall Deal Event', objective: 'share', window: 'Oct 8–9',
+        detail: '22 SKUs at the platform minimum with 500 units committed each. Rank held five weeks after last year\u2019s event, which is the whole case for running it at near-zero contribution.',
+        depths: [20, 25], baseCm: 41, baseCost: 34, confidence: 64, skus: 22,
+        channels: ['Amazon'], support: 'media $8K', inventory: '11,000 units reserved', invWarn: true,
+      },
+      {
+        id: 'earlybf', name: 'Early Black Friday', objective: 'volume', window: 'Nov 3–10',
+        detail: 'Window moved back four days to clear the Walmart overlap, and the 14 shared SKUs now run at matched depth. 34 SKUs on DTC with four email sends behind it.',
+        depths: [15, 20, 25], baseCm: 96, baseCost: 62, confidence: 71, skus: 34,
+        channels: ['Shopify DTC', 'Email'], support: '4 sends', inventory: 'cover confirmed',
+      },
+      {
+        id: 'walmart', name: 'Walmart Deal Days', objective: 'share', window: 'Nov 12–18',
+        detail: '18 SKUs at the 15% platform minimum with a clean 30-day price history. Buy Box target +3.1pp, held four weeks after — the persistence test is part of the contract.',
+        depths: [15, 20], baseCm: 28, baseCost: 22, confidence: 61, skus: 18,
+        channels: ['Walmart'], support: 'none', inventory: 'cover confirmed',
+      },
+      {
+        id: 'bfcm', name: 'Black Friday / Cyber Monday', objective: 'volume', window: 'Nov 28 – Dec 1',
+        detail: 'All four channels at once, 48 SKUs, $32K of media behind it. Six SKUs need their Amazon coupons suppressed or the effective depth reaches 34%.',
+        depths: [15, 20, 25], baseCm: 184, baseCost: 118, confidence: 76, skus: 48,
+        channels: ['Shopify DTC', 'Amazon', 'Walmart', 'Faire', 'Email'], support: 'media $32K · 6 sends', inventory: 'cover confirmed',
+      },
+      {
+        id: 'gift', name: 'Gift guide push', objective: 'margin', window: 'Dec 12–19',
+        detail: 'Shifted a week later so no SKU is promoted inside the 14-day protection window. Shallow depth carried by bundles — best incrementality per margin dollar in the library.',
+        depths: [10, 12, 15], baseCm: 62, baseCost: 24, confidence: 78, skus: 26,
+        channels: ['Shopify DTC', 'Email', 'SMS'], support: '3 sends', inventory: 'cover confirmed',
+      },
+      {
+        id: 'clear', name: 'Year-end clearance', objective: 'clearance', window: 'Dec 26–31',
+        detail: 'Four aged cohorts across all channels. Recovery projected at 68% of landed cost against a 62% floor, and the units are not going to sell at full price in January.',
+        depths: [35, 40, 45], baseCm: 19, baseCost: 28, confidence: 66, skus: 41,
+        channels: ['Shopify DTC', 'Amazon', 'Walmart'], support: '1 send', inventory: 'aged 180+ days',
+      },
+    ];
+  }
+
+  slates() {
+    return {
+      full: {
+        label: 'Full calendar · recommended', off: {}, depth: { prime: 20, earlybf: 25, walmart: 15, bfcm: 25, gift: 12, clear: 40 },
+        title: 'Six events, two conflicts fixed by moving windows rather than cutting depth',
+        body: 'Early BF shifts to Nov 3–10 and the gift guide to Dec 12–19; both conflicts disappear without giving up a single event. BFCM stays at 25% on all four channels, which is the one decision that needs a second confirmation.',
+      },
+      trimmed: {
+        label: 'Trimmed calendar', off: { walmart: true, gift: true }, depth: { prime: 20, earlybf: 25, walmart: 15, bfcm: 25, gift: 12, clear: 40 },
+        title: 'Four events — drop the two lowest-confidence windows',
+        body: 'Walmart Deal Days and the gift guide come out. Less to run, less to go wrong, and $86K of projected incremental contribution left on the table — including the highest-confidence event in the set.',
+      },
+      protected: {
+        label: 'Margin-protected', off: {}, depth: { prime: 20, earlybf: 15, walmart: 15, bfcm: 20, gift: 10, clear: 35 },
+        title: 'Same six events, every depth pulled back one step',
+        body: 'The history library says depth buys gross lift and borrows most of it back. This tests that directly: shallower everywhere, dilution well inside the cap, and roughly a fifth less incremental contribution.',
+      },
+    };
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const list = this.eventData();
+    const slates = this.slates();
+    const slateKey = slates[this.state.slate] ? this.state.slate : 'full';
+    const isOn = (id) => !this.state.off[id];
+
+    const objStyle = {
+      volume: { tint: 'color-mix(in oklab, var(--mod-ads) 12%, white)', tone: 'var(--mod-ads)', mark: 'var(--mod-ads)' },
+      margin: { tint: 'var(--green-50)', tone: 'var(--green-700)', mark: 'var(--green-500)' },
+      share: { tint: 'var(--r-blue-50)', tone: 'var(--r-blue-700)', mark: 'var(--r-blue-500)' },
+      clearance: { tint: 'var(--amber-50)', tone: 'var(--amber-700)', mark: 'var(--amber-500)' },
+    };
+
+    let cm = 0, cost = 0, units = 0, confSum = 0, onCount = 0, skus = 0;
+    list.forEach((e) => {
+      if (!isOn(e.id)) return;
+      const d = this.state.depth[e.id];
+      const base = e.depths[Math.floor(e.depths.length / 2)] || d;
+      const ratio = d / base;
+      cm += e.baseCm * (0.55 + 0.45 * ratio);
+      cost += e.baseCost * ratio;
+      skus += e.skus;
+      confSum += e.confidence;
+      onCount += 1;
+      units += Math.round(e.skus * d * 14);
+    });
+    const conf = onCount ? Math.round(confSum / onCount) : 0;
+    const dilution = cost / 100 * 1.62;
+    const budget = cost + 54 + 18 + 12 - 62;
+    const budgetUsed = cost + 42;
+
+    const bfcmDeep = isOn('bfcm') && this.state.depth.bfcm >= 25;
+    const needsConfirm = bfcmDeep && !this.state.confirmed;
+    const overBudget = budgetUsed > 240;
+    const overDilution = dilution > 2.4;
+    const blocked = onCount === 0 || needsConfirm || overBudget || overDilution;
+    const blockReason = onCount === 0
+      ? 'Approve at least one event to continue'
+      : needsConfirm
+        ? 'BFCM at 25% on four channels needs a second confirmation'
+        : overBudget
+          ? 'Promo budget of $' + budgetUsed.toFixed(0) + 'K exceeds the $240K ceiling'
+          : 'Projected dilution of ' + dilution.toFixed(2) + 'pp breaks the 2.4pp cap';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      pinnedTop: onCount + ' of 6 events approved · $' + cm.toFixed(0) + 'K incremental CM',
+      pinnedSub: 'promo spend $' + budgetUsed.toFixed(0) + 'K of $240K · dilution ' + dilution.toFixed(2) + 'pp',
+
+      slateTabs: [
+        { key: 'full', label: 'Full calendar' },
+        { key: 'trimmed', label: 'Trimmed' },
+        { key: 'protected', label: 'Margin-protected' },
+      ].map((t) => ({
+        label: t.label,
+        pick: () => this.setState({
+          slate: t.key,
+          off: Object.assign({}, slates[t.key].off),
+          depth: Object.assign({}, slates[t.key].depth),
+          confirmed: false,
+        }),
+        bg: slateKey === t.key ? 'var(--ink-0)' : 'transparent',
+        fg: slateKey === t.key ? 'var(--ink-900)' : 'var(--ink-500)',
+        weight: slateKey === t.key ? '600' : '500',
+      })),
+      slateLabel: slates[slateKey].label,
+      heroTitle: slates[slateKey].title,
+      heroBody: slates[slateKey].body,
+
+      heroMetrics: [
+        { label: 'Incremental CM', value: '$' + cm.toFixed(0) + 'K', tone: 'var(--green-700)', note: 'after trough accounting, Q4' },
+        { label: 'Promo spend', value: '$' + budgetUsed.toFixed(0) + 'K', tone: overBudget ? 'var(--rose-700)' : 'var(--ink-900)', note: 'of the $240K ceiling' },
+        { label: 'Dilution', value: dilution.toFixed(2) + 'pp', tone: overDilution ? 'var(--rose-700)' : dilution > 2 ? 'var(--amber-700)' : 'var(--green-700)', note: 'cap is 2.4pp' },
+        { label: 'Events', value: String(onCount), tone: 'var(--ink-900)', note: skus + ' SKU slots across the quarter' },
+        { label: 'Mean confidence', value: conf + '%', tone: conf >= 70 ? 'var(--green-700)' : 'var(--amber-700)', note: 'from the incrementality model' },
+      ],
+
+      events: list.map((e) => {
+        const on = isOn(e.id);
+        const d = this.state.depth[e.id];
+        const base = e.depths[Math.floor(e.depths.length / 2)] || d;
+        const ratio = d / base;
+        const st = objStyle[e.objective];
+        const deep = e.id === 'bfcm' && d >= 25;
+        return {
+          name: e.name, detail: e.detail, window: e.window, objective: e.objective,
+          objTint: st.tint, objTone: st.tone,
+          warn: deep && !this.state.confirmed ? 'confirm required' : (e.invWarn && on ? '3 SKUs under cover' : null),
+          cm: '$' + (e.baseCm * (0.55 + 0.45 * ratio)).toFixed(0) + 'K',
+          cost: '$' + (e.baseCost * ratio).toFixed(0) + 'K',
+          confidence: e.confidence + '%',
+          confTone: e.confidence >= 70 ? 'var(--green-700)' : 'var(--amber-700)',
+          support: e.support, inventory: e.inventory,
+          invTone: e.invWarn ? 'var(--amber-700)' : 'var(--ink-500)',
+          toggle: () => this.setState((s) => {
+            const off = Object.assign({}, s.off);
+            if (off[e.id]) { delete off[e.id]; } else { off[e.id] = true; }
+            return { off };
+          }),
+          boxBorder: on ? 'var(--ink-900)' : 'var(--ink-300)',
+          boxBg: on ? 'var(--ink-900)' : 'var(--ink-0)',
+          checkOpacity: on ? 1 : 0,
+          border: deep && !this.state.confirmed ? 'color-mix(in oklab, var(--rose-500) 40%, white)' : on ? 'var(--ink-200)' : 'var(--ink-100)',
+          mark: deep && !this.state.confirmed ? 'var(--rose-500)' : on ? st.mark : 'var(--ink-100)',
+          depths: e.depths.map((v) => ({
+            label: v + '%',
+            pick: () => this.setState((s) => {
+              const depth = Object.assign({}, s.depth);
+              depth[e.id] = v;
+              const confirmed = e.id === 'bfcm' && v >= 25 ? false : s.confirmed;
+              const modal = e.id === 'bfcm' && v >= 25 ? true : s.modal;
+              return { depth, confirmed, modal };
+            }),
+            bg: d === v ? (e.id === 'bfcm' && v >= 25 ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-0)',
+            fg: d === v ? 'var(--ink-0)' : 'var(--ink-600)',
+            border: d === v ? (e.id === 'bfcm' && v >= 25 ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-200)',
+            weight: d === v ? '600' : '500',
+          })),
+          channels: e.channels.map((c) => ({
+            label: c,
+            bg: on ? 'var(--ink-25)' : 'var(--ink-0)',
+            border: 'var(--ink-200)',
+            fg: on ? 'var(--ink-700)' : 'var(--ink-400)',
+          })),
+        };
+      }),
+
+      totals: [
+        { label: 'Incremental CM', value: '$' + cm.toFixed(0) + 'K', tone: 'var(--green-700)' },
+        { label: 'Discount cost', value: '$' + cost.toFixed(0) + 'K', tone: 'var(--rose-700)' },
+        { label: 'Media + sends', value: '$42K', tone: 'var(--ink-900)' },
+        { label: 'Total promo spend', value: '$' + budgetUsed.toFixed(0) + 'K', tone: overBudget ? 'var(--rose-700)' : 'var(--ink-900)' },
+        { label: 'Net contribution', value: '$' + (cm - 42).toFixed(0) + 'K', tone: 'var(--green-700)' },
+        { label: 'Promo revenue share', value: (28 + onCount * 1.2).toFixed(0) + '%', tone: 'var(--ink-900)' },
+      ],
+
+      bars: [
+        { label: 'Promo budget', value: '$' + budgetUsed.toFixed(0) + 'K', pct: Math.min(100, (budgetUsed / 280) * 100).toFixed(0), limitPct: ((240 / 280) * 100).toFixed(0), tone: overBudget ? 'var(--rose-500)' : 'var(--green-500)', note: 'ceiling $240K · scale 0–280K' },
+        { label: 'Margin dilution', value: dilution.toFixed(2) + 'pp', pct: Math.min(100, (dilution / 3.2) * 100).toFixed(0), limitPct: ((2.4 / 3.2) * 100).toFixed(0), tone: overDilution ? 'var(--rose-500)' : 'var(--green-500)', note: 'cap 2.4pp · scale 0–3.2pp' },
+        { label: 'Promo revenue share', value: (28 + onCount * 1.2).toFixed(0) + '%', pct: Math.min(100, ((28 + onCount * 1.2) / 45) * 100).toFixed(0), limitPct: ((38 / 45) * 100).toFixed(0), tone: (28 + onCount * 1.2) <= 38 ? 'var(--green-500)' : 'var(--amber-500)', note: 'ceiling 38% · scale 0–45%' },
+      ],
+
+      policyStatus: blocked ? (onCount === 0 ? 'nothing approved' : 'confirmation needed') : 'in band',
+      policyTone: blocked ? (onCount === 0 ? 'var(--ink-400)' : 'var(--rose-700)') : 'var(--green-700)',
+      checks: [
+        {
+          label: 'Conflicts resolved',
+          icon: 'fa-solid fa-circle-check', tone: 'var(--green-700)', noteTone: 'var(--ink-400)',
+          note: 'Overlap and parity fixed by moving the DTC window; protection fixed by moving the gift guide. Both without cutting an event.',
+        },
+        {
+          label: 'Cross-channel depth',
+          icon: needsConfirm ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check',
+          tone: needsConfirm ? 'var(--rose-700)' : 'var(--green-700)',
+          noteTone: needsConfirm ? 'var(--rose-700)' : 'var(--ink-400)',
+          note: needsConfirm
+            ? '25% on four channels at once needs a second confirmation before approval.'
+            : (bfcmDeep ? 'BFCM at 25% on all channels — confirmed and logged.' : 'No simultaneous discount above 20% across channels.'),
+        },
+        {
+          label: 'Deal-stacking suppressed',
+          icon: 'fa-solid fa-circle-check', tone: 'var(--green-700)', noteTone: 'var(--ink-400)',
+          note: 'The 6 stacked Amazon coupons are suppressed for the BFCM window, keeping effective depth at the deal price.',
+        },
+        {
+          label: 'MAP and deal minimums',
+          icon: 'fa-solid fa-lock', tone: 'var(--ink-400)', noteTone: 'var(--ink-400)',
+          note: 'Every depth is MAP-compliant and clears each platform minimum. No pre-event price raises anywhere in the set.',
+        },
+        {
+          label: 'Inventory commitments',
+          icon: isOn('prime') ? 'fa-solid fa-circle-exclamation' : 'fa-solid fa-circle-check',
+          tone: isOn('prime') ? 'var(--amber-700)' : 'var(--green-700)', noteTone: 'var(--ink-400)',
+          note: isOn('prime')
+            ? '3 Prime SKUs are 40–120 units short of the 500 commitment. Planner has 11 days to pull the inbound forward.'
+            : 'No marketplace unit commitments outstanding.',
+        },
+      ],
+
+      routes: [
+        { label: 'Deal submissions', note: (isOn('prime') ? 1 : 0) + (isOn('walmart') ? 1 : 0) + ' marketplace submissions as deadline tasks', icon: 'fa-solid fa-hourglass-half', hue: 'var(--mod-ads)' },
+        { label: 'Promo configs + codes', note: onCount + ' events across the channel platforms', icon: 'fa-solid fa-percent', hue: 'var(--mod-ads)' },
+        { label: 'Planner · S9.3', note: 'unit reservations and cover checks per event', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)' },
+        { label: 'Bidder', note: 'media plan for the Prime and BFCM windows', icon: 'fa-solid fa-bullhorn', hue: 'var(--mod-ads)' },
+        { label: 'Lifecycle · S9.13', note: 'email and SMS entries with segments', icon: 'fa-solid fa-envelope', hue: 'var(--violet-500)' },
+      ],
+
+      modal: {
+        open: this.state.modal,
+        scope: 'BFCM · 48 SKUs · Shopify DTC, Amazon, Walmart, Faire · Nov 28 – Dec 1',
+        body: 'Running 25% off on four channels at the same time removes every price reference a buyer could compare against. Last year the same move produced the best incrementality in the library — and the deepest margin cost of any single event we have run.',
+        stats: [
+          { label: 'Incremental CM', value: '$184K', tone: 'var(--green-700)', note: '68% incremental after trough' },
+          { label: 'Discount cost', value: '$118K', tone: 'var(--rose-700)', note: '49% of the whole promo budget' },
+          { label: 'Dilution contribution', value: '1.91pp', tone: 'var(--amber-700)', note: 'of the 2.4pp cap' },
+          { label: 'Effective depth risk', value: '34%', tone: 'var(--rose-700)', note: 'on 6 SKUs if coupons are not suppressed' },
+        ],
+        note: 'Confirming also logs the decision against the BFCM Metric Contract, so the +14-day incrementality readout is judged against 68% incremental rather than the gross lift.',
+        confirm: () => this.setState({ confirmed: true, modal: false }),
+        cancel: () => this.setState((s) => {
+          const depth = Object.assign({}, s.depth);
+          depth.bfcm = 20;
+          return { depth, modal: false, confirmed: false };
+        }),
+      },
+
+      blocked,
+      canApprove: !blocked,
+      blockReason,
+      ctaLabel: 'Approve calendar & continue',
+      footStatus: onCount === 0
+        ? 'Decide · nothing approved yet'
+        : 'Decide · ' + onCount + ' events · $' + cm.toFixed(0) + 'K incremental CM · $' + budgetUsed.toFixed(0) + 'K spend · ' + dilution.toFixed(2) + 'pp dilution',
+      footTone: blocked ? 'var(--rose-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

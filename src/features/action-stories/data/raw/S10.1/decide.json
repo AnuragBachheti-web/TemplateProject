@@ -1,0 +1,318 @@
+{
+  "code": "S10.1",
+  "stageKey": "decide",
+  "name": "Variance bridge",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "spawn": true,
+    "annotate": true,
+    "adjustBand": false,
+    "escalate": false,
+    "cards": {
+      "pack": true,
+      "pass": true
+    },
+    "band": 1200,
+    "person": null
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "2 actions selected",
+    "pinnedSub": "2 cards · annotating",
+    "options": [
+      {
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "boxRadius": "var(--r-xs)",
+        "boxIcon": "fa-solid fa-check",
+        "boxIconSize": "10px",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--mod-intel)",
+        "title": "Spawn remediation cards",
+        "badge": "recommended",
+        "badgeIcon": "fa-solid fa-star",
+        "badgeTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "badgeTone": "var(--mod-intel)",
+        "body": "The fee change is not a variance to accept — it is a cost with two possible fixes, each owned by a different flow. Spawning links this bridge to them bidirectionally, so the card that fixes it knows why it exists.",
+        "metric": "−$2,210 / day",
+        "metricLabel": "if unaddressed",
+        "metricTone": "var(--rose-700)",
+        "hasCards": true,
+        "cards": [
+          {
+            "title": "Packaging right-size for the 31 reclassified SKUs",
+            "chip": "S9.18 fulfilment",
+            "href": "S9.18-3-decide.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "chipTone": "var(--mod-inventory)",
+            "detail": "Four of the 31 already appear on the dim-weight candidate list. Right-sizing those boxes drops them back under the tier boundary rather than paying the new tier forever.",
+            "value": "−$1,480",
+            "valueLabel": "of the $2,210",
+            "valueTone": "var(--green-700)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "border": "var(--ink-200)",
+            "bg": "var(--ink-25)"
+          },
+          {
+            "title": "Pass-through check on the residual SKUs",
+            "chip": "S9.11 repricing",
+            "href": "S9.11-2-analyze.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+            "chipTone": "var(--mod-margin)",
+            "detail": "The 27 SKUs that cannot be right-sized need the fee absorbed or passed through. Elasticity and competitive headroom decide which — that is the repricing flow’s question, not this one.",
+            "value": "−$730",
+            "valueLabel": "of the $2,210",
+            "valueTone": "var(--amber-700)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "border": "var(--ink-200)",
+            "bg": "var(--ink-25)"
+          }
+        ]
+      },
+      {
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "boxRadius": "var(--r-xs)",
+        "boxIcon": "fa-solid fa-check",
+        "boxIconSize": "10px",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--mod-intel)",
+        "title": "Annotate and archive",
+        "badge": "writes to metric history",
+        "badgeIcon": "fa-solid fa-book",
+        "badgeTint": "var(--ink-100)",
+        "badgeTone": "var(--ink-600)",
+        "body": "Records what yesterday was, so the same shape next month opens with the answer attached instead of starting a fresh investigation.",
+        "metric": null,
+        "hasNote": true,
+        "note": "Aug 18 CM fell $1,840 (14.7%) against the trailing 7-day mean. Amazon revised dimensional-weight tiers effective that day, reclassifying 31 SKUs upward at −$2,210. The 9.11 price slate offset +$610 on its first full day; returns, mix and staged ad bids account for the rest within normal variation. Residual +$130 · 1.0%. Two remediation cards spawned — packaging right-size and pass-through check. This is a recurring daily cost until one of them lands."
+      },
+      {
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "boxRadius": "var(--r-xs)",
+        "boxIcon": "fa-solid fa-check",
+        "boxIconSize": "10px",
+        "checkOpacity": 0,
+        "titleTone": "var(--ink-600)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "title": "Adjust the contract band",
+        "badge": null,
+        "badgeIcon": "fa-solid fa-file-signature",
+        "badgeTint": "var(--amber-50)",
+        "badgeTone": "var(--amber-700)",
+        "body": "The band decides which days raise a card at all. Tightening it surfaces smaller moves and more of them; widening it means days like yesterday pass unremarked.",
+        "metric": null,
+        "metricLabel": "new band",
+        "metricTone": "var(--green-700)",
+        "hasBand": false,
+        "bandOptions": [
+          {
+            "label": "±$800",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          },
+          {
+            "label": "±$1,200",
+            "bg": "var(--ink-900)",
+            "fg": "var(--ink-0)",
+            "border": "var(--ink-900)",
+            "weight": "600"
+          },
+          {
+            "label": "±$1,800",
+            "bg": "var(--ink-0)",
+            "fg": "var(--ink-600)",
+            "border": "var(--ink-200)",
+            "weight": "500"
+          }
+        ],
+        "bandNote": "unchanged · current contract",
+        "bandTone": "var(--ink-400)"
+      },
+      {
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "boxRadius": "var(--r-xs)",
+        "boxIcon": "fa-solid fa-check",
+        "boxIconSize": "10px",
+        "checkOpacity": 0,
+        "titleTone": "var(--ink-600)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "title": "Escalate with the bridge attached",
+        "badge": null,
+        "badgeIcon": "fa-solid fa-user-check",
+        "badgeTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "badgeTone": "var(--mod-intel)",
+        "body": "For when the fix needs someone outside this flow. The recipient gets the waterfall, the classifier output and the drill rows — not a summary of them.",
+        "metric": null,
+        "hasEscalate": false,
+        "people": [
+          {
+            "name": "A. Castellanos · Ops",
+            "initials": "AC",
+            "avBg": "var(--r-blue-500)",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "name": "R. Vance · Controller",
+            "initials": "RV",
+            "avBg": "var(--mod-margin)",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "name": "L. Duarte · Fulfilment",
+            "initials": "LD",
+            "avBg": "var(--mod-inventory)",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      }
+    ],
+    "summary": [
+      {
+        "label": "Actions selected",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Cards spawning",
+        "value": "2",
+        "tone": "var(--mod-intel)"
+      },
+      {
+        "label": "Annotation",
+        "value": "yes",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Band",
+        "value": "±$1,200",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Escalation",
+        "value": "none",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "recurState": "being addressed",
+    "recurTone": "var(--green-700)",
+    "recurrence": [
+      {
+        "label": "Daily",
+        "note": "at yesterday’s Amazon volume",
+        "value": "−$2,210",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Rest of the month",
+        "note": "12 days remaining",
+        "value": "−$26.5K",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Addressed by the cards",
+        "note": "packaging plus pass-through",
+        "value": "−$2,210",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "policyStatus": "clean",
+    "policyTone": "var(--green-700)",
+    "checks": [
+      {
+        "label": "Contract untouched",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "CM v3 and its ±$1,200 band are unchanged. Nothing here re-bases history."
+      },
+      {
+        "label": "Investigated once",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "The annotation lands in metric history with the bridge attached, so this day never gets re-opened cold."
+      },
+      {
+        "label": "Ownership",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "2 cards created in the flows that own the fix, linked back to this bridge."
+      },
+      {
+        "label": "Nothing auto-executes",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "note": "This step spawns and annotates. Any actual price or packaging change is decided in its own flow with its own guardrails."
+      }
+    ],
+    "history": [
+      {
+        "date": "Jul 22",
+        "value": "−$1,610",
+        "tone": "var(--rose-700)",
+        "note": "Carrier GRI, first full day. Annotated and routed to fulfilment; became rule set v14."
+      },
+      {
+        "date": "Jun 30",
+        "value": "+$2,240",
+        "tone": "var(--green-700)",
+        "note": "Prime Fall halo on cookware. Annotated as expected, no action."
+      },
+      {
+        "date": "Jun 14",
+        "value": "−$1,290",
+        "tone": "var(--rose-700)",
+        "note": "Returns cluster on the apparel-adjacent cohort. Became the \"runs small\" work."
+      }
+    ],
+    "blocked": false,
+    "canApprove": true,
+    "blockReason": "Annotate at least, or the day gets investigated again tomorrow",
+    "ctaLabel": "Record triage & continue",
+    "footStatus": "Decide · 2 actions · 2 card spawning · annotating to history",
+    "footTone": "var(--ink-500)"
+  }
+}

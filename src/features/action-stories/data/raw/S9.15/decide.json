@@ -1,0 +1,554 @@
+{
+  "code": "S9.15",
+  "stageKey": "decide",
+  "name": "Search visibility",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "sprint": "balanced",
+    "off": {
+      "crawl": true,
+      "priceGuide": true,
+      "productSchema": true,
+      "cooktop": true
+    },
+    "routes": {
+      "comparison": "draft",
+      "lead": "draft",
+      "cooktop": "draft",
+      "priceGuide": "brief"
+    }
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "6 of 10 items approved",
+    "pinnedSub": "6.5 weeks · $9.9K / mo projected",
+    "sprintTabs": [
+      {
+        "label": "Balanced",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Content only",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      },
+      {
+        "label": "Technical only",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "sprintLabel": "Balanced sprint · recommended",
+    "heroTitle": "Fix the template, consolidate, then write one definitive page",
+    "heroBody": "Two technical repairs the content depends on, three pages that carry the comparative tier, and schema on the guides we already have.",
+    "slateMeta": "10 items · 10.5 weeks if everything ships",
+    "heroMetrics": [
+      {
+        "label": "Traffic value",
+        "value": "+$9.9K",
+        "tone": "var(--green-700)",
+        "note": "per month, de-duplicated across queries"
+      },
+      {
+        "label": "Citation share",
+        "value": "+9pp",
+        "tone": "var(--mod-discover)",
+        "note": "blended across the three intent tiers"
+      },
+      {
+        "label": "Effort",
+        "value": "6.5 wks",
+        "tone": "var(--ink-900)",
+        "note": "2 briefs, 4 engineering items"
+      },
+      {
+        "label": "Confidence",
+        "value": "78%",
+        "tone": "var(--green-700)",
+        "note": "mean across the approved set"
+      }
+    ],
+    "groups": [
+      {
+        "label": "Technical fixes",
+        "hue": "var(--ink-600)",
+        "meta": "3 of 4 approved",
+        "items": [
+          {
+            "name": "Fix guide-template LCP",
+            "detail": "Hero images on the guide template are unsized and unpreloaded, putting p75 LCP at 2.9s against a 2.5s threshold. Every content gain rides on this one.",
+            "owner": "Steward",
+            "ownerIcon": "fa-solid fa-shield-halved",
+            "url": null,
+            "value": "+$1.2K",
+            "weeks": "1 wks",
+            "conf": "78%",
+            "confTone": "var(--green-700)",
+            "border": "var(--ink-200)",
+            "mark": "var(--ink-300)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "isContent": false,
+            "plain": true,
+            "scope": "1 template · 186 pages affected",
+            "routes": [],
+            "routeNote": null,
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Resolve 9 redirect chains and 4 duplicate canonicals",
+            "detail": "Three chains are three hops deep and sit on guide URLs. The duplicate canonicals are why four pages are not indexed.",
+            "owner": "Steward",
+            "ownerIcon": "fa-solid fa-shield-halved",
+            "url": null,
+            "value": "+$0.6K",
+            "weeks": "0.5 wks",
+            "conf": "84%",
+            "confTone": "var(--green-700)",
+            "border": "var(--ink-200)",
+            "mark": "var(--ink-300)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "isContent": false,
+            "plain": true,
+            "scope": "13 URLs · no new path patterns",
+            "routes": [],
+            "routeNote": null,
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Surface 8 discovered-not-crawled guides",
+            "detail": "Eight guides are known and never fetched because nothing links to them. Sitemap entry plus two internal links each.",
+            "owner": "Steward",
+            "ownerIcon": "fa-solid fa-shield-halved",
+            "url": null,
+            "value": "+$0.8K",
+            "weeks": "0.5 wks",
+            "conf": "80%",
+            "confTone": "var(--green-700)",
+            "border": "var(--ink-100)",
+            "mark": "var(--ink-100)",
+            "boxBorder": "var(--ink-300)",
+            "boxBg": "var(--ink-0)",
+            "checkOpacity": 0,
+            "isContent": false,
+            "plain": true,
+            "scope": "8 pages · 16 internal links",
+            "routes": [],
+            "routeNote": null,
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Consolidate 3 cannibalisation pairs",
+            "detail": "Redirect the weaker page of each pair into the stronger one and set canonicals. Without this the new comparison page competes with our own thin pages.",
+            "owner": "Merchandiser",
+            "ownerIcon": "fa-solid fa-tags",
+            "url": null,
+            "value": "+$2.2K",
+            "weeks": "1 wks",
+            "conf": "76%",
+            "confTone": "var(--ink-700)",
+            "border": "var(--ink-200)",
+            "mark": "var(--ink-300)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "isContent": false,
+            "plain": true,
+            "scope": "6 pages → 3 · 301s + canonical",
+            "routes": [],
+            "routeNote": null,
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          }
+        ]
+      },
+      {
+        "label": "Content briefs · drafted by Realify, published by an editor",
+        "hue": "var(--mod-discover)",
+        "meta": "2 of 4 approved",
+        "items": [
+          {
+            "name": "Definitive comparison page · carbon steel vs cast iron",
+            "detail": "Nine-row comparison table, weight and heat-retention figures with published sources, answer-first headings. Projected entry into 9 of the 14 competitor-only citations.",
+            "owner": "Merchandiser",
+            "ownerIcon": "fa-solid fa-tags",
+            "url": "/guides/carbon-steel-vs-cast-iron",
+            "value": "+$4.1K",
+            "weeks": "2 wks",
+            "conf": "74%",
+            "confTone": "var(--ink-700)",
+            "border": "var(--ink-200)",
+            "mark": "var(--mod-discover)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "Draft + editorial review",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "Auto-publish",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "routeNote": "Realify drafts the full page; an editor reviews, edits and publishes it.",
+            "routeTone": "var(--ink-500)",
+            "dep": "consolidation approved",
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Rewrite lead-removal page with the certification stated",
+            "detail": "The certification number is in a PDF nobody links to. Stating it in text, with a reduction percentage per contaminant, is what the cited answers all have.",
+            "owner": "Merchandiser",
+            "ownerIcon": "fa-solid fa-tags",
+            "url": "/guides/filtration",
+            "value": "+$2.1K",
+            "weeks": "1 wks",
+            "conf": "79%",
+            "confTone": "var(--green-700)",
+            "border": "var(--ink-200)",
+            "mark": "var(--mod-discover)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "Draft + editorial review",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "Auto-publish",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "routeNote": "Realify drafts the full page; an editor reviews, edits and publishes it.",
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Cooktop compatibility explainer with material table",
+            "detail": "Replaces a hedged paragraph with a material-by-material table and a stated test method. Also fixes the listing-outranks-explainer problem.",
+            "owner": "Merchandiser",
+            "ownerIcon": "fa-solid fa-tags",
+            "url": "/guides/cooktop-compatibility",
+            "value": "+$1.8K",
+            "weeks": "1.5 wks",
+            "conf": "71%",
+            "confTone": "var(--ink-700)",
+            "border": "var(--ink-100)",
+            "mark": "var(--ink-100)",
+            "boxBorder": "var(--ink-300)",
+            "boxBg": "var(--ink-0)",
+            "checkOpacity": 0,
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "Draft + editorial review",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "Auto-publish",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "routeNote": "Realify drafts the full page; an editor reviews, edits and publishes it.",
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Price-bounded recommendation page · pans under $120",
+            "detail": "A new page for a query with nothing behind it. Named recommendation and price in the opening, Product schema linking to the SKU.",
+            "owner": "Merchandiser",
+            "ownerIcon": "fa-solid fa-tags",
+            "url": "/guides/best-carbon-steel-pans-under-120",
+            "value": "+$1.6K",
+            "weeks": "1.5 wks",
+            "conf": "64%",
+            "confTone": "var(--amber-700)",
+            "border": "var(--ink-100)",
+            "mark": "var(--ink-100)",
+            "boxBorder": "var(--ink-300)",
+            "boxBg": "var(--ink-0)",
+            "checkOpacity": 0,
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only",
+                "bg": "var(--ink-900)",
+                "fg": "var(--ink-0)",
+                "border": "var(--ink-900)"
+              },
+              {
+                "label": "Draft + editorial review",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              },
+              {
+                "label": "Auto-publish",
+                "bg": "var(--ink-0)",
+                "fg": "var(--ink-600)",
+                "border": "var(--ink-200)"
+              }
+            ],
+            "routeNote": "Realify writes the brief and the outline; a writer produces the copy.",
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          }
+        ]
+      },
+      {
+        "label": "Structured data batches",
+        "hue": "var(--violet-700)",
+        "meta": "1 of 2 approved",
+        "items": [
+          {
+            "name": "FAQ and Article schema on 40 guide pages",
+            "detail": "Generated from existing headings and body content, not written separately. Raises the structured-formatting score on every page it touches.",
+            "owner": "Steward",
+            "ownerIcon": "fa-solid fa-shield-halved",
+            "url": null,
+            "value": "+$1.4K",
+            "weeks": "1 wks",
+            "conf": "77%",
+            "confTone": "var(--ink-700)",
+            "border": "var(--ink-200)",
+            "mark": "var(--violet-500)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "isContent": false,
+            "plain": true,
+            "scope": "40 pages · 2 schema types",
+            "routes": [],
+            "routeNote": null,
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          },
+          {
+            "name": "Product schema on recommendation blocks",
+            "detail": "Links every named recommendation in a guide to its SKU, price and availability so the transactional tier has something to cite.",
+            "owner": "Steward",
+            "ownerIcon": "fa-solid fa-shield-halved",
+            "url": null,
+            "value": "+$0.9K",
+            "weeks": "0.5 wks",
+            "conf": "73%",
+            "confTone": "var(--ink-700)",
+            "border": "var(--ink-100)",
+            "mark": "var(--ink-100)",
+            "boxBorder": "var(--ink-300)",
+            "boxBg": "var(--ink-0)",
+            "checkOpacity": 0,
+            "isContent": false,
+            "plain": true,
+            "scope": "22 blocks · 18 SKUs",
+            "routes": [],
+            "routeNote": null,
+            "routeTone": "var(--ink-500)",
+            "dep": null,
+            "depTint": "var(--green-50)",
+            "depTone": "var(--green-700)",
+            "depIcon": "fa-solid fa-link"
+          }
+        ]
+      }
+    ],
+    "totals": [
+      {
+        "label": "Traffic value / mo",
+        "value": "+$9.9K",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Sum before de-duplication",
+        "value": "$11.6K",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Effort",
+        "value": "6.5 wks",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Pages drafted by Realify",
+        "value": "2",
+        "tone": "var(--mod-discover)"
+      },
+      {
+        "label": "Editorial reviews needed",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "tierProj": [
+      {
+        "label": "Comparative",
+        "now": "7%",
+        "proj": "26%",
+        "nowPct": "16",
+        "projPct": "58",
+        "targetPct": "67",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Informational",
+        "now": "31%",
+        "proj": "38%",
+        "nowPct": "69",
+        "projPct": "84",
+        "targetPct": "89",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Transactional",
+        "now": "18%",
+        "proj": "18%",
+        "nowPct": "40",
+        "projPct": "40",
+        "targetPct": "56",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "policyStatus": "in band",
+    "policyTone": "var(--green-700)",
+    "checks": [
+      {
+        "label": "No auto-publish",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Every approved page routes through an editor before it goes live."
+      },
+      {
+        "label": "Canonical URL structure",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "New pages sit under /guides/{topic}. Consolidation uses 301s, not new path patterns."
+      },
+      {
+        "label": "Consolidate before publishing",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Cannibalisation pairs resolve before the new comparison page ships."
+      },
+      {
+        "label": "Brand voice review",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "note": "Every draft carries the voice checklist. A page that reads like keyword filler is rejected at review, not published and measured."
+      }
+    ],
+    "editorial": [
+      {
+        "name": "carbon steel vs cast iron",
+        "state": "draft → editor review",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "lead-removal page with the certification stated",
+        "state": "draft → editor review",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "editorialEmpty": false,
+    "blocked": false,
+    "canApprove": true,
+    "ctaLabel": "Approve 6 items & continue",
+    "footStatus": "Decide · 6 of 10 approved · 6.5 wks · +$9.9K / mo",
+    "footTone": "var(--ink-500)"
+  }
+}

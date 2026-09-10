@@ -1,0 +1,218 @@
+{
+  "code": "S10.4",
+  "stageKey": "reason",
+  "name": "Fee integrity",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest",
+    "recoveryFloor": 25
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "$890\nexpiring",
+    "pinMark": "var(--mod-cash)",
+    "pinTone": "var(--mod-cash)",
+    "pinnedTop": "$4,120 recoverable",
+    "pinnedSub": "11 claims · 3 expire inside 21 days",
+    "floor": 25,
+    "floorNote": "At a $25 floor all 11 ledger claims clear it. A further $84 across 6 sub-floor discrepancies is logged as measured leakage rather than filed — assembly costs more than the recovery.",
+    "policy": [
+      {
+        "rule": "Recovery floor per claim",
+        "setting": "$25",
+        "tone": "var(--mod-cash)",
+        "why": "Below this, evidence assembly costs more than the claim returns. Sub-floor items are logged so leakage is still a number."
+      },
+      {
+        "rule": "Evidence standard",
+        "setting": "complete",
+        "tone": "var(--ink-900)",
+        "why": "A claim files only when every document policy names for that type is attached. Partial submissions burn the window and the goodwill."
+      },
+      {
+        "rule": "Batch minimum",
+        "setting": "3 claims",
+        "tone": "var(--ink-900)",
+        "why": "Filing is batched to keep case volume legible to the marketplace and to keep the analyst cost per claim near $8."
+      },
+      {
+        "rule": "Denied claims",
+        "setting": "1 appeal",
+        "tone": "var(--ink-900)",
+        "why": "One appeal with new evidence. After that it is written off and recorded — a second appeal on the same facts is noise."
+      },
+      {
+        "rule": "Speculative claims",
+        "setting": "never",
+        "tone": "var(--rose-700)",
+        "why": "No claim is filed on a fee we cannot tie to the marketplace’s own record. Volume is not the metric; recovery rate is."
+      }
+    ],
+    "windows": [
+      {
+        "type": "Dimension or tier fee error",
+        "channel": "Amazon FBA",
+        "window": "90 days",
+        "starts": "from the date the fee was charged",
+        "left": "16 days left",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "type": "Lost inventory not reimbursed",
+        "channel": "Amazon FBA",
+        "window": "18 months",
+        "starts": "from the adjustment date, after the 30-day auto-match",
+        "left": "29 days left",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "type": "Refund without return",
+        "channel": "Amazon FBA",
+        "window": "60 days",
+        "starts": "from the refund, once the return window elapses",
+        "left": "9 days left",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "type": "Inbound shortage",
+        "channel": "Walmart WFS · portal only",
+        "window": "30 days",
+        "starts": "from the receipt posting",
+        "left": "44 days left",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "candidacy": [
+      {
+        "icon": "fa-solid fa-database",
+        "label": "The inputs are their records",
+        "detail": "Fee tables, measured dimensions, adjustment logs and refund events all come from the marketplace. Realify is reconciling, not estimating."
+      },
+      {
+        "icon": "fa-solid fa-check-double",
+        "label": "The test is deterministic",
+        "detail": "A claim either matches a published window with the named evidence or it does not. There is no elasticity, no forecast, no judgment call."
+      },
+      {
+        "icon": "fa-solid fa-feather",
+        "label": "The downside is a denial",
+        "detail": "A wrong claim returns a polite no. Nothing repriced, no customer affected, no inventory committed — the cheapest possible way to be wrong."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "Claim windows deterministic",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "Evidence standard per type",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-ban",
+        "label": "No speculative claims",
+        "border": "color-mix(in oklab, var(--rose-500) 30%, white)",
+        "bg": "var(--rose-50)",
+        "fg": "var(--rose-700)",
+        "iconTone": "var(--rose-700)"
+      },
+      {
+        "icon": "fa-solid fa-rotate-left",
+        "label": "One appeal, then logged",
+        "border": "var(--ink-200)",
+        "bg": "var(--ink-25)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-400)"
+      },
+      {
+        "icon": "fa-solid fa-coins",
+        "label": "Recovery posts to Cash lens",
+        "border": "color-mix(in oklab, var(--mod-cash) 30%, white)",
+        "bg": "color-mix(in oklab, var(--mod-cash) 8%, white)",
+        "fg": "var(--mod-cash)",
+        "iconTone": "var(--mod-cash)"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Filing windows are policy, not preference",
+        "detail": "Each window is read from the marketplace’s published claim policy and versioned. When a policy changes, the ledger re-sorts the same day."
+      },
+      {
+        "label": "Evidence standards per claim type",
+        "detail": "Dimension claims need a measured-dimension record; lost-inventory claims need the shipment reconciliation; shortage claims need carrier proof of delivery."
+      },
+      {
+        "label": "Recovered cash is attributed, not absorbed",
+        "detail": "Every recovery posts to the Cash lens with the claim reference attached, so the period total is auditable line by line."
+      }
+    ],
+    "expiring": [
+      {
+        "name": "Refund without return · 2 orders",
+        "left": "9 days",
+        "detail": "$400 · return window elapsed with no inbound scan on either order",
+        "tone": "var(--rose-700)",
+        "bg": "var(--rose-50)"
+      },
+      {
+        "name": "Dimension tier · Knife Block 6pc",
+        "left": "16 days",
+        "detail": "$310 · billed Large Standard against a measured Standard envelope",
+        "tone": "var(--rose-700)",
+        "bg": "var(--rose-50)"
+      },
+      {
+        "name": "Lost inventory · 2 units unmatched",
+        "left": "21 days",
+        "detail": "$180 · adjustment posted 38 days ago, never reimbursed",
+        "tone": "var(--amber-700)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Aug 19 · 02:10",
+        "what": "The Fee Reconciliation Engine finished the monthly pass over 41,880 fee lines and found 17 discrepancies against the marketplace’s own measurements and adjustment logs."
+      },
+      {
+        "when": "Aug 19 · 02:14",
+        "what": "Eleven cleared the $25 floor at $4,120 total. The remaining six, $84 together, were logged as measured leakage without being promoted to claims."
+      },
+      {
+        "when": "Aug 19 · 02:16",
+        "what": "The Claim Evidence Assembler scored completeness per claim and sorted by deadline rather than value — $890 of the total closes within 21 days."
+      }
+    ],
+    "footStatus": "Reason · 11 claims above floor · $890 expiring · windows locked to published policy"
+  }
+}

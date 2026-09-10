@@ -1,0 +1,260 @@
+{
+  "code": "S9.8",
+  "stageKey": "reason",
+  "name": "Launch",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "seq": "dtc"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will build the launch plan and the checklist, then wait. Every system write — listing, PO, ads, email — needs your approval.",
+    "targets": [
+      {
+        "label": "Day 30",
+        "date": "by Oct 12",
+        "units": "180 u",
+        "meta": "DTC 110 · Amazon 70 · $19.6K revenue"
+      },
+      {
+        "label": "Day 60",
+        "date": "by Nov 11",
+        "units": "460 u",
+        "meta": "all three channels · $50.1K revenue"
+      },
+      {
+        "label": "Day 90",
+        "date": "by Dec 11",
+        "units": "840 u",
+        "meta": "holiday peak included · $91.6K revenue"
+      }
+    ],
+    "milestones": [
+      {
+        "label": "Review milestone",
+        "value": "25 by day 45",
+        "icon": "fa-solid fa-star",
+        "note": "Seeded through the review program at a 4.3 minimum average, or the listing loses conversion."
+      },
+      {
+        "label": "Rank target · Amazon",
+        "value": "top 20 · dutch oven",
+        "icon": "fa-solid fa-list-ol",
+        "note": "Category rank by day 60. Currently no presence on the term."
+      },
+      {
+        "label": "Rank target · Google",
+        "value": "page 1 · 3 terms",
+        "icon": "fa-solid fa-magnifying-glass",
+        "note": "Organic by day 90, paid from day one."
+      },
+      {
+        "label": "Content live",
+        "value": "all channels day 0",
+        "icon": "fa-solid fa-image",
+        "note": "Seven-shot set, three A+ modules, video on DTC only at launch."
+      }
+    ],
+    "sequencing": [
+      {
+        "name": "DTC-first",
+        "detail": "Launch on northwind.com Sep 12, Amazon Oct 03, Walmart Oct 17. Reviews and content read come from our own traffic first.",
+        "tradeoffs": [
+          {
+            "icon": "fa-solid fa-plus",
+            "text": "Launch promo stays off the marketplace price ladder",
+            "tone": "var(--green-700)"
+          },
+          {
+            "icon": "fa-solid fa-plus",
+            "text": "First 25 reviews come from email list buyers · 4.6 average historically",
+            "tone": "var(--green-700)"
+          },
+          {
+            "icon": "fa-solid fa-minus",
+            "text": "Costs about three weeks of Amazon velocity and delays the rank build",
+            "tone": "var(--rose-700)"
+          }
+        ],
+        "metaLabel": "Amazon opens",
+        "metaValue": "day 21",
+        "bg": "color-mix(in oklab, var(--mod-hubs) 6%, white)",
+        "border": "color-mix(in oklab, var(--mod-hubs) 32%, white)",
+        "dot": "var(--mod-hubs)",
+        "fill": "var(--mod-hubs)",
+        "weight": 700,
+        "recShow": "inline-flex",
+        "metaTone": "var(--mod-hubs)"
+      },
+      {
+        "name": "Amazon-first",
+        "detail": "Launch on Amazon Sep 12 with DTC live but unpromoted, Walmart Oct 03. Buys velocity and rank fastest.",
+        "tradeoffs": [
+          {
+            "icon": "fa-solid fa-plus",
+            "text": "Rank build starts three weeks earlier · top 20 reachable by day 40",
+            "tone": "var(--green-700)"
+          },
+          {
+            "icon": "fa-solid fa-minus",
+            "text": "Launch promo sets the reference price on the ladder",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "icon": "fa-solid fa-minus",
+            "text": "Cannibalization on the 4qt is sharper · same shopper, same page",
+            "tone": "var(--rose-700)"
+          }
+        ],
+        "metaLabel": "DTC opens",
+        "metaValue": "day 0 · soft",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "dot": "var(--ink-300)",
+        "fill": "transparent",
+        "weight": 500,
+        "recShow": "none",
+        "metaTone": "var(--ink-600)"
+      }
+    ],
+    "seqNote": "DTC-first gives us the reviews and the content read before Amazon sees the listing, and it protects the launch promo from the marketplace price ladder. It costs about three weeks of Amazon velocity and delays the rank build.",
+    "kill": [
+      {
+        "gate": "Day 30",
+        "rule": "Kill if under 180 units at a spend cap of $2.5K",
+        "action": "stop-buy + markdown"
+      },
+      {
+        "gate": "Day 14",
+        "rule": "Kill if CVR is under 4.0% with content live and 500+ sessions",
+        "action": "pause ads, hold buy"
+      },
+      {
+        "gate": "Day 45",
+        "rule": "Kill if the review average sits under 3.8 across 15+ reviews",
+        "action": "stop-buy + quality review"
+      },
+      {
+        "gate": "Any gate",
+        "rule": "Kill if returns exceed 12% on 40+ units shipped",
+        "action": "stop-buy + hand to 9.12"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Launch ad budget",
+        "value": "$2.5K/mo · story 9.4 envelope",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "MAP floor",
+        "value": "$103.20 from day one",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Cash · initial buy",
+        "value": "wk-7 trough owns the ceiling",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "readiness": [
+      {
+        "label": "Content pack",
+        "value": "18 / 25",
+        "pct": "72%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Inventory inbound",
+        "value": "16 / 20",
+        "pct": "80%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Price architecture",
+        "value": "20 / 20",
+        "pct": "100%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Ads plan",
+        "value": "17 / 20",
+        "pct": "85%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Review program",
+        "value": "15 / 15",
+        "pct": "100%",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "lead": true,
+        "role": "Owns the content pack, the listing build and the launch narrative.",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)"
+      },
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "lead": false,
+        "role": "Sizes the initial buy and the follow-on PO gate.",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "lead": false,
+        "role": "Builds the launch ad plan inside the $2.5K cap.",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+      },
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "lead": false,
+        "role": "Owns list, launch promo and MAP posture.",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)"
+      },
+      {
+        "initials": "Po",
+        "name": "Promoter",
+        "lead": false,
+        "role": "Owns the email and SMS announcement and the review program.",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+      },
+      {
+        "initials": "Ar",
+        "name": "Arbiter",
+        "lead": false,
+        "role": "Sequences the checklist and resolves conflicts between the five.",
+        "hue": "var(--ink-700)",
+        "tint": "var(--ink-100)"
+      }
+    ]
+  }
+}

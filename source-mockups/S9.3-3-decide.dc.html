@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.3-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-inventory);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-inventory) 12%, white);color:var(--mod-inventory);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Allocation · S9.3</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Rebalance — 6 channel stock-outs with sister-channel excess</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">1,840 u misallocated · $46K tied up</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">6 stock-outs · 4 excess pools · 5 lanes</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pl" size="sm" color="var(--mod-inventory)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:inline-flex;align-items:center;gap:3px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-inventory)"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+          </span>
+          Lens: Inventory · Margin
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-inventory);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Planner + Shipper
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Marginal Allocation Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Transfer Cost Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.3-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.3-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.3-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-inventory) 10%, white);border:1px solid color-mix(in oklab, var(--mod-inventory) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-inventory);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.3-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-inventory);border-radius:var(--r-lg);padding:15px 18px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Transfer slate</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">approve per lane · quantities re-round to full cartons</span>
+            <button type="button" onClick="{{ onReset }}" style="margin-left:auto;height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-sans);font-size:11.5px;font-weight:500;color:var(--ink-600);cursor:pointer">Reset to Realify's slate</button>
+          </div>
+          <div style="margin-top:13px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+            <sc-for list="{{ totals }}" as="t" hint-placeholder-count="4">
+              <div style="padding:11px 13px;border:1px solid {{ t.border }};border-radius:var(--r-md);background:{{ t.bg }}">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">{{ t.label }}</span>
+                <div style="margin-top:6px;font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:24px;letter-spacing:-0.02em;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.value }}</div>
+                <div style="margin-top:3px;font-family:var(--font-mono);font-size:10px;color:{{ t.metaTone }}">{{ t.meta }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ lanes }}" as="l" hint-placeholder-count="6">
+            <div style="background:var(--ink-0);border:1px solid {{ l.border }};border-left:3px solid {{ l.edge }};border-radius:var(--r-lg);overflow:hidden;flex-shrink:0;opacity:{{ l.dim }}">
+              <div style="display:grid;grid-template-columns:34px minmax(0,1fr) 148px 116px 108px 120px;align-items:center;gap:12px;padding:12px 16px">
+                <button type="button" onClick="{{ l.onToggle }}" style="width:22px;height:22px;border-radius:var(--r-xs);border:1.5px solid {{ l.boxBorder }};background:{{ l.boxBg }};color:var(--ink-0);cursor:pointer;display:grid;place-items:center;padding:0">
+                  <i class="fa-solid fa-check" style="font-size:10px;opacity:{{ l.checkOpacity }}"></i>
+                </button>
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                    <span style="font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--mod-inventory)">{{ l.id }}</span>
+                    <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ l.name }}</span>
+                    <span style="display:{{ l.flagShow }};align-items:center;gap:5px;height:20px;padding:0 8px;border-radius:var(--r-full);background:{{ l.flagTint }};font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:{{ l.flagTone }}">{{ l.flag }}</span>
+                  </div>
+                  <div style="margin-top:4px;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ l.lane }}</div>
+                </div>
+                <div>
+                  <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Quantity</div>
+                  <div style="margin-top:4px;display:flex;align-items:center;gap:6px">
+                    <button type="button" onClick="{{ l.onDown }}" style="width:22px;height:22px;border-radius:var(--r-xs);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-700);cursor:pointer;font-family:var(--font-mono);font-size:11px;line-height:1;padding:0">−</button>
+                    <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ l.qty }}</span>
+                    <button type="button" onClick="{{ l.onUp }}" style="width:22px;height:22px;border-radius:var(--r-xs);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-700);cursor:pointer;font-family:var(--font-mono);font-size:11px;line-height:1;padding:0">+</button>
+                  </div>
+                  <div style="margin-top:4px;font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ l.qtyNote }}</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Cost</div>
+                  <div style="margin-top:4px;font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ l.cost }}</div>
+                  <div style="margin-top:2px;font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ l.perUnit }}</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">CM served</div>
+                  <div style="margin-top:4px;font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ l.cmTone }};font-variant-numeric:tabular-nums">{{ l.cm }}</div>
+                  <div style="margin-top:2px;font-family:var(--font-mono);font-size:9px;color:{{ l.ratioTone }}">{{ l.ratio }}</div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Arrives</div>
+                  <div style="margin-top:4px;font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ l.etaTone }};font-variant-numeric:tabular-nums">{{ l.eta }}</div>
+                  <div style="margin-top:2px;font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ l.etaNote }}</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink-100);border-top:1px solid var(--ink-100)">
+                <sc-for list="{{ l.options }}" as="o" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ o.onPick }}" style="display:block;text-align:left;padding:11px 13px;border:none;background:{{ o.bg }};cursor:pointer;font-family:var(--font-sans)">
+                    <div style="display:flex;align-items:center;gap:8px">
+                      <span style="flex-shrink:0;width:13px;height:13px;border-radius:50%;border:1.5px solid {{ o.dot }};display:grid;place-items:center">
+                        <span style="width:6px;height:6px;border-radius:50%;background:{{ o.fill }}"></span>
+                      </span>
+                      <span style="font-size:12.5px;font-weight:{{ o.weight }};color:var(--ink-900)">{{ o.name }}</span>
+                      <span style="margin-left:auto;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ o.tone }};font-variant-numeric:tabular-nums">{{ o.value }}</span>
+                    </div>
+                    <div style="margin-top:6px;font-size:11.5px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ o.note }}</div>
+                  </button>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--ink-25)">
+                <span style="font-family:var(--font-mono);font-size:10px;color:{{ l.footTone }}">{{ l.foot }}</span>
+                <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ l.footRight }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Cover after the slate</span>
+        <div style="margin-top:11px;display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ after }}" as="a" hint-placeholder-count="5">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12.5px;color:var(--ink-700)">{{ a.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ a.from }} → <strong style="color:{{ a.tone }}">{{ a.to }}</strong></span>
+              </div>
+              <div style="margin-top:6px;position:relative;height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                <div style="position:absolute;left:0;top:0;bottom:0;width:{{ a.fromPct }};background:var(--ink-300);border-radius:var(--r-full)"></div>
+                <div style="position:absolute;left:0;top:0;bottom:0;width:{{ a.toPct }};background:{{ a.tone }};border-radius:var(--r-full)"></div>
+              </div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ a.meta }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Rule check</span>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--r-sm);background:{{ c.bg }};border:1px solid {{ c.border }}">
+                <i class="{{ c.icon }}" style="font-size:11px;color:{{ c.tone }}"></i>
+                <span style="flex:1;min-width:0;font-size:12px;line-height:1.45;color:{{ c.tone }};text-wrap:pretty">{{ c.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">On approval</span>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ onApprove }}" as="o" hint-placeholder-count="5">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="{{ o.icon }}" style="margin-top:3px;font-size:10px;color:var(--mod-inventory);width:13px"></i>
+                <span style="flex:1;min-width:0;font-size:12.5px;line-height:1.45;color:var(--ink-700);text-wrap:pretty">{{ o.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Downstream</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">Two of these lanes are the transfers story 9.4 pairs with its budget shift: T-142 gates the TikTok scale-up and T-149 gates the Meta increase. Approving them here is what unblocks that slate.</p>
+          <a href="S9.4-3-decide.dc.html" style="margin-top:10px;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid color-mix(in oklab, var(--mod-ads) 34%, white);background:color-mix(in oklab, var(--mod-ads) 8%, white);font-size:12px;font-weight:500;color:var(--mod-ads)" style-hover="background:color-mix(in oklab, var(--mod-ads) 14%, white);color:var(--mod-ads)">
+            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px"></i>Paired slate · S9.4
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ footerStatus }}</span>
+      <a href="S9.3-2-analyze.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Analyze
+      </a>
+      <a href="S9.3-4-execute.dc.html" style="display:{{ approveShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        {{ approveLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+      <span style="display:{{ blockShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--rose-50);border:1px solid var(--rose-500);color:var(--rose-700);font-size:14px;font-weight:500">
+        <i class="fa-solid fa-lock" style="font-size:11px"></i>Economics floor blocks approval
+      </span>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { dropped: {}, qty: {}, route: {} };
+
+  LANES() {
+    return [
+      { id: 'T-142', name: 'Ridgeline mug + bowl → FBA-West', lane: 'DC-East → FBA-West · LTL + FBA inbound', base: 1400, step: 100, carton: 100, per: 2.05, cmPer: 11.36, eta: 'Sep 02', etaNote: '6 d receipt', flag: 'buy box lost', flagTint: 'var(--rose-50)', flagTone: 'var(--rose-700)', pair: true,
+        options: [
+          { key: 'transfer', name: 'Transfer', value: '5.5×', note: 'Restores Buy Box on both SKUs and serves the demand DC-East cannot reach.', tone: 'var(--green-700)' },
+          { key: 'expedite', name: 'Expedite', value: '3.1×', note: 'Air freight lands Aug 27 instead of Sep 02. Costs $1.9K more for five days.', tone: 'var(--amber-700)' },
+          { key: 'hold', name: 'Hold', value: '0×', note: 'Wait for the supplier K PO on Sep 23. Three more weeks at zero on FBA-West.', tone: 'var(--rose-700)' },
+        ] },
+      { id: 'T-149', name: 'Quilted oven mitt → DTC', lane: 'DC-West → DC-East · ground parcel', base: 320, step: 40, carton: 40, per: 0.94, cmPer: 10.60, eta: 'Aug 29', etaNote: '3 d ground', flag: 'best ratio', flagTint: 'var(--green-50)', flagTone: 'var(--green-700)', pair: true,
+        options: [
+          { key: 'transfer', name: 'Transfer', value: '11.3×', note: 'Moves units from $6.80 wholesale to $18.40 DTC. Cheapest lane on the board.', tone: 'var(--green-700)' },
+          { key: 'expedite', name: 'Expedite', value: '7.2×', note: 'Next-day air lands Aug 27. Rarely worth it on a lane this short.', tone: 'var(--ink-600)' },
+          { key: 'hold', name: 'Hold', value: '0×', note: 'DTC runs out in nine days and the mitt is in the Meta campaign from Sep 01.', tone: 'var(--rose-700)' },
+        ] },
+      { id: 'T-151', name: 'Alder chef knife → FBA-East', lane: 'FBA-West → FBA-East · removal + re-inbound', base: 180, step: 20, carton: 20, per: 2.24, cmPer: 11.20, eta: 'Sep 04', etaNote: '9 d · removal adds 3', flag: 'arrives 1 d late', flagTint: 'var(--amber-50)', flagTone: 'var(--amber-700)', pair: false,
+        options: [
+          { key: 'transfer', name: 'Transfer', value: '5.0×', note: 'Lands one day after FBA-East runs dry. Better than a two-week gap.', tone: 'var(--green-700)' },
+          { key: 'expedite', name: 'Expedite', value: '2.8×', note: 'Cannot beat the removal window — FBA controls the first three days.', tone: 'var(--rose-700)' },
+          { key: 'hold', name: 'Hold', value: '0×', note: 'Eight days of cover left, then two weeks out until the next PO.', tone: 'var(--rose-700)' },
+        ] },
+      { id: 'T-152', name: 'Carbon steel pan → WFS', lane: 'DC-West → WFS · LTL + WFS inbound', base: 120, step: 20, carton: 20, per: 1.60, cmPer: 10.00, eta: 'Aug 30', etaNote: '4 d receipt', flag: '', flagTint: 'var(--ink-50)', flagTone: 'var(--ink-500)', pair: false,
+        options: [
+          { key: 'transfer', name: 'Transfer', value: '6.3×', note: 'Minimum move that clears the WFS floor. Realify does not fill this channel.', tone: 'var(--green-700)' },
+          { key: 'expedite', name: 'Expedite', value: '4.1×', note: 'WFS inbound appointments are the constraint, not the freight.', tone: 'var(--ink-600)' },
+          { key: 'hold', name: 'Hold', value: '0×', note: 'Four days of cover. WFS is the lowest-CM channel, so the loss is small.', tone: 'var(--amber-700)' },
+        ] },
+      { id: 'T-153', name: 'Ridgeline mug top-up → FBA-East', lane: 'DC-East → FBA-East · LTL + FBA inbound', base: 240, step: 60, carton: 60, per: 1.86, cmPer: 11.36, eta: 'Sep 01', etaNote: '5 d receipt', flag: '', flagTint: 'var(--ink-50)', flagTone: 'var(--ink-500)', pair: false,
+        options: [
+          { key: 'transfer', name: 'Transfer', value: '6.1×', note: 'FBA-East is at 1.6 weeks. This holds it above floor until the PO lands.', tone: 'var(--green-700)' },
+          { key: 'expedite', name: 'Expedite', value: '3.4×', note: 'Not needed — the clock is ten days and the lane is five.', tone: 'var(--ink-600)' },
+          { key: 'hold', name: 'Hold', value: '0×', note: 'Would drop under floor next week and risk Buy Box on a second node.', tone: 'var(--rose-700)' },
+        ] },
+      { id: 'T-154', name: 'Cut-glass tumbler → WFS', lane: 'DC-East → WFS · LTL + WFS inbound', base: 250, step: 50, carton: 50, per: 2.40, cmPer: 3.20, eta: 'Sep 02', etaNote: '5 d receipt', flag: 'under the bar', flagTint: 'var(--rose-50)', flagTone: 'var(--rose-700)', pair: false, defaultDrop: true,
+        options: [
+          { key: 'hold', name: 'Hold', value: '—', note: 'The Verrier PO lands Sep 18 with 900 units. Realify recommends waiting.', tone: 'var(--green-700)' },
+          { key: 'transfer', name: 'Transfer', value: '1.3×', note: 'Under the 1.5× economics floor. The unit sells either way, just later.', tone: 'var(--rose-700)' },
+          { key: 'expedite', name: 'Expedite', value: '0.9×', note: 'Loses money outright once air freight is counted.', tone: 'var(--rose-700)' },
+        ] },
+    ];
+  }
+
+  qtyOf(l) { return this.state.qty[l.id] == null ? l.base : this.state.qty[l.id]; }
+  routeOf(l) { return this.state.route[l.id] || l.options[0].key; }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-inventory)' }[mode] ?? 'var(--ink-400)';
+    const lanes = this.LANES();
+    const isOn = (l) => (this.state.dropped[l.id] == null ? !l.defaultDrop : !this.state.dropped[l.id]);
+    const active = lanes.filter((l) => isOn(l) && this.routeOf(l) !== 'hold');
+    let units = 0, cost = 0, cm = 0;
+    active.forEach((l) => {
+      const q = this.qtyOf(l);
+      const exp = this.routeOf(l) === 'expedite';
+      units += q;
+      cost += q * (l.per + (exp ? 1.35 : 0));
+      cm += q * l.cmPer;
+    });
+    const ratio = cost ? cm / cost : 0;
+    const capOk = units <= 1200 * 5;
+    const k = (n) => '$' + (n / 1000).toFixed(1) + 'K';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      onReset: () => this.setState({ dropped: {}, qty: {}, route: {} }),
+      totals: [
+        { label: 'Units moving', value: units.toLocaleString('en-US'), meta: active.length + ' of 6 lanes', tone: 'var(--ink-900)', metaTone: 'var(--ink-500)', border: 'var(--ink-100)', bg: 'var(--ink-25)' },
+        { label: 'Transfer cost', value: k(cost), meta: units ? '$' + (cost / units).toFixed(2) + ' per unit' : 'nothing scheduled', tone: 'var(--ink-900)', metaTone: 'var(--ink-500)', border: 'var(--ink-100)', bg: 'var(--ink-25)' },
+        { label: 'CM served', value: k(cm), meta: 'over 4 weeks', tone: 'var(--green-700)', metaTone: 'var(--ink-500)', border: 'var(--ink-100)', bg: 'var(--ink-25)' },
+        { label: 'Return', value: ratio.toFixed(1) + '×', meta: ratio >= 1.5 ? 'clears the 1.5× floor' : 'under the 1.5× floor', tone: ratio >= 1.5 ? 'var(--green-700)' : 'var(--rose-700)', metaTone: ratio >= 1.5 ? 'var(--green-700)' : 'var(--rose-700)', border: ratio >= 1.5 ? 'color-mix(in oklab, var(--green-500) 34%, white)' : 'var(--rose-500)', bg: ratio >= 1.5 ? 'var(--green-50)' : 'var(--rose-50)' },
+      ],
+      lanes: lanes.map((l) => {
+        const sel = isOn(l);
+        const route = this.routeOf(l);
+        const q = this.qtyOf(l);
+        const exp = route === 'expedite';
+        const lCost = q * (l.per + (exp ? 1.35 : 0));
+        const lCm = route === 'hold' ? 0 : q * l.cmPer;
+        const r = lCost ? lCm / lCost : 0;
+        return {
+          id: l.id, name: l.name, lane: l.lane,
+          dim: sel ? 1 : 0.5,
+          border: sel && r < 1.5 && route !== 'hold' ? 'color-mix(in oklab, var(--rose-500) 34%, white)' : 'var(--ink-100)',
+          edge: !sel ? 'var(--ink-200)' : route === 'hold' ? 'var(--ink-300)' : l.pair ? 'var(--mod-inventory)' : 'var(--mod-hubs)',
+          boxBg: sel ? 'var(--mod-inventory)' : 'var(--ink-0)',
+          boxBorder: sel ? 'var(--mod-inventory)' : 'var(--ink-300)',
+          checkOpacity: sel ? 1 : 0,
+          flag: l.flag, flagShow: l.flag ? 'inline-flex' : 'none', flagTint: l.flagTint, flagTone: l.flagTone,
+          qty: route === 'hold' ? '0 u' : q.toLocaleString('en-US') + ' u',
+          qtyNote: 'carton ' + l.carton + ' · base ' + l.base,
+          onDown: () => this.setState((st) => ({ qty: Object.assign({}, st.qty, { [l.id]: Math.max(l.step, this.qtyOf(l) - l.step) }) })),
+          onUp: () => this.setState((st) => ({ qty: Object.assign({}, st.qty, { [l.id]: this.qtyOf(l) + l.step }) })),
+          cost: route === 'hold' ? '—' : '$' + Math.round(lCost).toLocaleString('en-US'),
+          perUnit: route === 'hold' ? 'no move' : '$' + (l.per + (exp ? 1.35 : 0)).toFixed(2) + '/u',
+          cm: route === 'hold' ? '—' : '$' + Math.round(lCm).toLocaleString('en-US'),
+          cmTone: route === 'hold' ? 'var(--ink-400)' : 'var(--green-700)',
+          ratio: route === 'hold' ? 'held' : r.toFixed(1) + '× return',
+          ratioTone: route === 'hold' ? 'var(--ink-400)' : r >= 1.5 ? 'var(--green-700)' : 'var(--rose-700)',
+          eta: route === 'hold' ? '—' : exp ? 'earlier' : l.eta,
+          etaNote: route === 'hold' ? 'waiting on a PO' : exp ? 'air · 5 d sooner' : l.etaNote,
+          etaTone: route === 'hold' ? 'var(--ink-400)' : l.flag === 'arrives 1 d late' ? 'var(--amber-700)' : 'var(--ink-900)',
+          options: l.options.map((o) => ({
+            name: o.name, note: o.note, value: o.value, tone: o.tone,
+            bg: route === o.key ? 'color-mix(in oklab, var(--mod-inventory) 5%, white)' : 'var(--ink-0)',
+            dot: route === o.key ? 'var(--mod-inventory)' : 'var(--ink-300)',
+            fill: route === o.key ? 'var(--mod-inventory)' : 'transparent',
+            weight: route === o.key ? 700 : 500,
+            onPick: () => this.setState((st) => ({ route: Object.assign({}, st.route, { [l.id]: o.key }) })),
+          })),
+          foot: route === 'hold' ? 'Held · no pick wave, no inbound plan' : l.pair ? 'Gates a budget shift in story 9.4' : 'Pick wave and inbound plan create on approval',
+          footTone: route === 'hold' ? 'var(--ink-500)' : l.pair ? 'var(--mod-ads)' : 'var(--ink-500)',
+          footRight: route === 'hold' ? 'revisit next cycle' : 'pick wave ' + (l.eta === 'Aug 29' ? 'Aug 26' : 'Aug 27'),
+          onToggle: () => this.setState((st) => ({ dropped: Object.assign({}, st.dropped, { [l.id]: isOn(l) }) })),
+        };
+      }),
+      after: [
+        { label: 'FBA-West · mug', from: '0.0 wk', to: '4.1 wk', fromPct: '0%', toPct: '82%', tone: 'var(--green-700)', meta: 'Buy Box eligible again on Sep 02' },
+        { label: 'FBA-West · bowl', from: '0.0 wk', to: '3.6 wk', fromPct: '0%', toPct: '72%', tone: 'var(--green-700)', meta: 'same wave as the mug' },
+        { label: 'DTC · oven mitt', from: '1.2 wk', to: '4.6 wk', fromPct: '24%', toPct: '92%', tone: 'var(--green-700)', meta: 'lands before the Meta campaign opens' },
+        { label: 'FBA-East · chef knife', from: '1.1 wk', to: '3.2 wk', fromPct: '22%', toPct: '64%', tone: 'var(--amber-700)', meta: 'one day of gap before it lands' },
+        { label: 'WFS · tumbler set', from: '0.0 wk', to: '0.0 wk', fromPct: '0%', toPct: '0%', tone: 'var(--rose-700)', meta: 'held · Verrier PO lands Sep 18' },
+      ],
+      checks: [
+        { text: 'No source node drops under its own floor — DC-East keeps 2.4 weeks after T-142.', ok: true },
+        { text: ratio >= 1.5 ? 'Every scheduled lane clears the 1.5× economics floor.' : 'The slate as selected returns ' + ratio.toFixed(1) + '×, under the 1.5× floor.', ok: ratio >= 1.5 },
+        { text: capOk ? units.toLocaleString('en-US') + ' units fits pick capacity across two waves.' : 'Pick capacity exceeded — split across more waves.', ok: capOk },
+        { text: 'One lane per SKU per cycle · no SKU appears twice on the slate.', ok: true },
+      ].map((c) => ({
+        text: c.text,
+        icon: c.ok ? 'fa-solid fa-circle-check' : 'fa-solid fa-triangle-exclamation',
+        tone: c.ok ? 'var(--green-700)' : 'var(--rose-700)',
+        bg: c.ok ? 'var(--green-50)' : 'var(--rose-50)',
+        border: c.ok ? 'color-mix(in oklab, var(--green-500) 40%, white)' : 'color-mix(in oklab, var(--rose-500) 40%, white)',
+      })),
+      onApprove: [
+        { label: 'Transfer orders create with their lane and carton counts', icon: 'fa-solid fa-file-lines' },
+        { label: 'Pick waves post to the WMS at each origin node', icon: 'fa-solid fa-warehouse' },
+        { label: 'FBA and WFS inbound plans and labels generate', icon: 'fa-solid fa-tags' },
+        { label: 'Channel listing quantities update as units land', icon: 'fa-solid fa-store' },
+        { label: 'T-142 and T-149 unblock the paired slate in story 9.4', icon: 'fa-solid fa-link' },
+      ],
+      footerStatus: 'Decide · ' + active.length + ' lanes · ' + units.toLocaleString('en-US') + ' u · ' + k(cost) + ' cost · ' + ratio.toFixed(1) + '× return',
+      approveShow: ratio >= 1.5 ? 'inline-flex' : 'none',
+      blockShow: ratio >= 1.5 ? 'none' : 'inline-flex',
+      approveLabel: active.length === 5 ? 'Approve all 5 lanes' : 'Approve ' + active.length + ' lanes',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

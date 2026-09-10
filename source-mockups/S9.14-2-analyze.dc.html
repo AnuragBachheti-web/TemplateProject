@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.14-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-discover);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-discover) 12%, white);color:var(--mod-discover);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Agentic commerce · S9.14</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">46 queries · 184 answers sampled</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">4 wrong-spec answers · 1 root cause</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-discover)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-discover)"></span>Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-discover);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Merchandiser + Scout, Steward
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Agentic Readiness Score
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Answer-Surface Monitor
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.14-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.14-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-discover) 10%, white);border:1px solid color-mix(in oklab, var(--mod-discover) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-discover);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.14-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.14-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0"><x-import component-from-global-scope="RealifyDesignSystem_002c39.IntelCard" tag="Realify signal · agentic commerce" title="On 46 sampled queries agents recommended our hero SKU 11× vs competitor A's 29×" hint-size="100%,190px">Four answers quoted a wrong specification — all four traced to a single stale attribute on the <strong>Walmart feed</strong>, last picked up nine days ago. Competitor A carries 21 machine-readable attributes per product to our 12, and publishes returns and shipping as structured policy. The gap is not price or rating; it is what the surfaces can read with confidence.</x-import></div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Agentic Readiness Score</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:10px">
+              <span style="font-family:var(--font-mono);font-size:26px;font-weight:600;letter-spacing:-0.02em;color:var(--ink-900);font-variant-numeric:tabular-nums">61</span>
+              <span style="display:flex;flex-direction:column;gap:1px">
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">out of 100</span>
+                <span style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--rose-700)">−7 in three weeks</span>
+              </span>
+            </span>
+          </div>
+          <div style="margin-top:13px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+            <sc-for list="{{ dims }}" as="d" hint-placeholder-count="4">
+              <div style="border:1px solid {{ d.border }};border-radius:var(--r-md);padding:12px 13px;display:flex;flex-direction:column;gap:9px;background:{{ d.bg }}">
+                <span style="display:flex;align-items:flex-start;gap:8px">
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:600;line-height:1.3;color:var(--ink-900);text-wrap:pretty">{{ d.name }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ d.weight }}</span>
+                  </span>
+                  <span style="margin-left:auto;flex-shrink:0;font-family:var(--font-mono);font-size:19px;font-weight:600;color:{{ d.tone }};font-variant-numeric:tabular-nums">{{ d.score }}</span>
+                </span>
+                <span style="height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                  <span style="display:block;height:100%;width:{{ d.score }}%;background:{{ d.tone }};border-radius:var(--r-full)"></span>
+                </span>
+                <span style="display:flex;flex-direction:column;gap:6px">
+                  <sc-for list="{{ d.rows }}" as="r" hint-placeholder-count="4">
+                    <span style="display:flex;align-items:baseline;gap:7px">
+                      <span style="flex:1;min-width:0;font-size:11px;color:var(--ink-600)">{{ r.label }}</span>
+                      <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ r.tone }};font-variant-numeric:tabular-nums">{{ r.value }}</span>
+                    </span>
+                  </sc-for>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Scout · weekly query battery</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ batteryMeta }}</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:0;padding:2px;border-radius:var(--r-full);background:var(--ink-100)">
+              <sc-for list="{{ surfaceTabs }}" as="t" hint-placeholder-count="5">
+                <button type="button" onClick="{{ t.pick }}" style="height:26px;padding:0 11px;border-radius:var(--r-full);border:none;background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11.5px;font-weight:{{ t.weight }};transition:background var(--dur-fast) var(--ease-standard)">{{ t.label }}</button>
+              </sc-for>
+            </span>
+          </div>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;padding:13px 15px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <span style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Citation share</span>
+              <span style="font-family:var(--font-mono);font-size:24px;font-weight:600;letter-spacing:-0.02em;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ shareValue }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:{{ shareTrendTone }};font-variant-numeric:tabular-nums">{{ shareTrend }}</span>
+            </span>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ sovBars }}" as="b" hint-placeholder-count="4">
+                <span style="display:flex;align-items:center;gap:10px">
+                  <span style="flex-shrink:0;width:104px;font-size:11.5px;font-weight:{{ b.weight }};color:{{ b.labelTone }}">{{ b.label }}</span>
+                  <span style="flex:1;min-width:0;height:16px;border-radius:var(--r-xs);background:var(--ink-100);overflow:hidden;display:block">
+                    <span style="display:block;height:100%;width:{{ b.pct }}%;background:{{ b.hue }};border-radius:var(--r-xs)"></span>
+                  </span>
+                  <span style="flex-shrink:0;width:74px;text-align:right;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ b.value }}</span>
+                </span>
+              </sc-for>
+            </span>
+          </div>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:1fr 118px 74px 74px 74px 96px;gap:0 10px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Sampled query</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Surface</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Us</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Comp A</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Comp B</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Why not us</span>
+          </div>
+          <sc-for list="{{ queries }}" as="q" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:1fr 118px 74px 74px 74px 96px;gap:0 10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;font-size:12.5px;color:var(--ink-800);text-wrap:pretty">{{ q.text }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500)">{{ q.surface }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ q.usTone }};text-align:right;font-variant-numeric:tabular-nums">{{ q.us }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ q.a }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ q.b }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ q.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:{{ q.tone }}">{{ q.reason }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Every "missing attribute" row is a query where the surface had no field to match the shopper's constraint. Those are the cheapest citations to win back.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 14px">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Mismatch log · answers that contradicted the canonical record</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">click a row to trace it</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:var(--rose-50);font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--rose-700)">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--rose-700)"></span>4 of 184 answers · 2.2%
+            </span>
+          </div>
+
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ mismatches }}" as="m" hint-placeholder-count="4">
+              <button type="button" onClick="{{ m.pick }}" style="width:100%;text-align:left;cursor:pointer;font-family:var(--font-sans);display:grid;grid-template-columns:118px 1fr 150px 150px;gap:0 12px;align-items:center;padding:10px 12px;border:1px solid {{ m.border }};border-radius:var(--r-sm);background:{{ m.bg }};transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500)">{{ m.surface }}</span>
+                <span style="min-width:0;font-size:12.5px;color:var(--ink-800);text-wrap:pretty">{{ m.claim }}</span>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Agent said</span>
+                  <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--rose-700)">{{ m.said }}</span>
+                </span>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Canonical</span>
+                  <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--green-700)">{{ m.truth }}</span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:13px;padding:13px 15px;border-radius:var(--r-md);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <div style="display:flex;align-items:center;gap:9px">
+              <i class="fa-solid fa-route" style="font-size:11px;color:var(--mod-discover)"></i>
+              <span style="font-size:13px;font-weight:700;color:var(--ink-900)">{{ trace.title }}</span>
+              <span style="margin-left:auto;display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ trace.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ trace.tone }}">{{ trace.badge }}</span>
+            </div>
+            <div style="margin-top:11px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+              <sc-for list="{{ trace.chain }}" as="c" hint-placeholder-count="4">
+                <div style="border:1px solid {{ c.border }};border-radius:var(--r-sm);background:var(--ink-0);padding:10px 11px;display:flex;flex-direction:column;gap:4px">
+                  <span style="display:flex;align-items:center;gap:6px">
+                    <i class="{{ c.icon }}" style="font-size:9.5px;color:{{ c.tone }}"></i>
+                    <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ c.stage }}</span>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ c.tone }};text-wrap:pretty">{{ c.value }}</span>
+                  <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ c.note }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p style="margin:11px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ trace.body }}</p>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Us vs competitor A</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ versus }}" as="v" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ v.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ v.tone }};font-variant-numeric:tabular-nums">{{ v.us }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-400);font-variant-numeric:tabular-nums">vs {{ v.them }}</span>
+                </div>
+                <span style="display:flex;gap:3px;height:5px">
+                  <span style="flex:{{ v.usFlex }};background:{{ v.tone }};border-radius:var(--r-full);display:block"></span>
+                  <span style="flex:{{ v.themFlex }};background:var(--ink-200);border-radius:var(--r-full);display:block"></span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Freshness by channel</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ freshness }}" as="f" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{ f.tone }};flex-shrink:0"></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:12px;color:var(--ink-700)">{{ f.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ f.note }}</span>
+                </span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ f.tone }};font-variant-numeric:tabular-nums">{{ f.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Walmart is the only channel outside the 6-hour floor, and it is the channel behind all four mismatches.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Cheapest citations to win</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ quickWins }}" as="w" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:3px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm)">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:12px;font-weight:600;color:var(--ink-900)">{{ w.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--mod-discover);font-variant-numeric:tabular-nums">{{ w.gain }}</span>
+                </div>
+                <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ w.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Analyze · readiness 61 / 100 · 4 dimensions scored · 4 mismatches, one root cause</span>
+      <a href="S9.14-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Decide<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { surface: 'all', mismatch: 'walmart-capacity' };
+
+  surfaceData() {
+    return {
+      all: { label: 'All surfaces', share: '16%', trend: '−6pp in 3 weeks', meta: '46 queries · 184 answers · sampled Monday 04:00' },
+      chatgpt: { label: 'ChatGPT', share: '19%', trend: '−4pp in 3 weeks', meta: '46 queries · 46 answers · product cards' },
+      google: { label: 'Google AI', share: '12%', trend: '−9pp in 3 weeks', meta: '46 queries · 46 answers · AI overview' },
+      perplexity: { label: 'Perplexity', share: '24%', trend: '−2pp in 3 weeks', meta: '46 queries · 46 answers · source list' },
+      rufus: { label: 'Rufus', share: '8%', trend: '−5pp in 3 weeks', meta: '46 queries · 46 answers · in-marketplace' },
+    };
+  }
+
+  queryData() {
+    return [
+      { text: 'best carbon steel pan for induction under $120', surface: 'chatgpt', us: 1, a: 4, b: 2, reason: 'missing attr', tone: 'var(--amber-700)', tint: 'var(--amber-50)' },
+      { text: 'dishwasher safe knife block with sharpener', surface: 'google', us: 0, a: 3, b: 3, reason: 'no schema', tone: 'var(--rose-700)', tint: 'var(--rose-50)' },
+      { text: 'water filter pitcher that removes lead', surface: 'perplexity', us: 2, a: 2, b: 1, reason: 'even', tone: 'var(--ink-600)', tint: 'var(--ink-100)' },
+      { text: 'nonstick pan safe above 500°F', surface: 'chatgpt', us: 0, a: 3, b: 1, reason: 'wrong spec', tone: 'var(--rose-700)', tint: 'var(--rose-50)' },
+      { text: 'kitchen scale accurate to 1 gram', surface: 'google', us: 1, a: 2, b: 2, reason: 'missing attr', tone: 'var(--amber-700)', tint: 'var(--amber-50)' },
+      { text: 'stock pot 12 quart with strainer lid', surface: 'rufus', us: 0, a: 4, b: 2, reason: 'stale feed', tone: 'var(--rose-700)', tint: 'var(--rose-50)' },
+      { text: 'return policy on cookware sets', surface: 'perplexity', us: 1, a: 3, b: 2, reason: 'policy text', tone: 'var(--amber-700)', tint: 'var(--amber-50)' },
+      { text: 'oven safe skillet with lid for two people', surface: 'chatgpt', us: 2, a: 3, b: 1, reason: 'missing attr', tone: 'var(--amber-700)', tint: 'var(--amber-50)' },
+      { text: 'cutting board that will not warp', surface: 'google', us: 0, a: 3, b: 4, reason: 'no schema', tone: 'var(--rose-700)', tint: 'var(--rose-50)' },
+      { text: 'pan set compatible with glass cooktop', surface: 'rufus', us: 1, a: 2, b: 2, reason: 'missing attr', tone: 'var(--amber-700)', tint: 'var(--amber-50)' },
+    ];
+  }
+
+  mismatchData() {
+    return [
+      {
+        id: 'walmart-capacity', surface: 'ChatGPT', claim: 'Quoted the 12-quart stock pot as 10 quarts on a capacity query',
+        said: '10 qt', truth: '12 qt', badge: 'root cause · stale feed', tint: 'var(--rose-50)', tone: 'var(--rose-700)',
+        title: 'Capacity attribute · stale Walmart feed',
+        body: 'The PIM was corrected nine days ago when the SKU moved to the 12-quart body. The Walmart feed never picked the change up, and three surfaces read the marketplace listing rather than the storefront. One field, four wrong answers, and the query it lost is the highest-volume one in the battery.',
+        chain: [
+          { stage: 'Canonical record', value: 'capacity = 12 qt', note: 'PIM, updated 9 days ago', icon: 'fa-solid fa-database', tone: 'var(--green-700)', border: 'var(--ink-100)' },
+          { stage: 'Feed', value: 'capacity = 10 qt', note: 'Walmart feed, last pickup 9 days ago', icon: 'fa-solid fa-triangle-exclamation', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 34%, white)' },
+          { stage: 'Marketplace listing', value: '10 qt shown', note: 'Walmart PDP, indexed 6 days ago', icon: 'fa-solid fa-store', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 24%, white)' },
+          { stage: 'Answer', value: '"holds 10 quarts"', note: 'ChatGPT, Google AI, Rufus', icon: 'fa-solid fa-robot', tone: 'var(--rose-700)', border: 'var(--ink-100)' },
+        ],
+      },
+      {
+        id: 'heat', surface: 'Google AI', claim: 'Said the nonstick line is rated to 500°F',
+        said: '500°F', truth: '450°F', badge: 'copy vs spec conflict', tint: 'var(--amber-50)', tone: 'var(--amber-700)',
+        title: 'Heat rating · marketing copy read as specification',
+        body: 'The specification field says 450°F. A PDP paragraph written last spring says "handles anything your oven can throw at it, up to 500 degrees". The surface trusted the prose because there was no structured field adjacent to it. This is the case the brand rule about superlatives exists to prevent.',
+        chain: [
+          { stage: 'Canonical record', value: 'max_temp = 450°F', note: 'PIM spec field', icon: 'fa-solid fa-database', tone: 'var(--green-700)', border: 'var(--ink-100)' },
+          { stage: 'PDP copy', value: '"up to 500 degrees"', note: 'body paragraph, no source field', icon: 'fa-solid fa-file-lines', tone: 'var(--amber-700)', border: 'color-mix(in oklab, var(--amber-500) 34%, white)' },
+          { stage: 'Schema', value: 'no maxTemperature', note: 'field absent from Product schema', icon: 'fa-solid fa-code', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 24%, white)' },
+          { stage: 'Answer', value: '"rated to 500°F"', note: 'Google AI Mode', icon: 'fa-solid fa-robot', tone: 'var(--amber-700)', border: 'var(--ink-100)' },
+        ],
+      },
+      {
+        id: 'returns', surface: 'Perplexity', claim: 'Told a shopper cookware returns close after 14 days',
+        said: '14 days', truth: '45 days', badge: 'policy not machine-readable', tint: 'var(--amber-50)', tone: 'var(--amber-700)',
+        title: 'Return window · policy published only as prose',
+        body: 'The 45-day window lives in a help-centre page written for humans. The surface found a 14-day line in a third-party marketplace policy and used it. Publishing returns as structured policy removes the ambiguity entirely — and it is the single item on the roadmap that touches every surface at once.',
+        chain: [
+          { stage: 'Canonical record', value: 'returns = 45 days', note: 'policy record, current', icon: 'fa-solid fa-database', tone: 'var(--green-700)', border: 'var(--ink-100)' },
+          { stage: 'Publication', value: 'help-centre prose', note: 'no MerchantReturnPolicy type', icon: 'fa-solid fa-file-lines', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 34%, white)' },
+          { stage: 'Third party', value: '14-day marketplace text', note: 'reseller listing, outranked ours', icon: 'fa-solid fa-store', tone: 'var(--amber-700)', border: 'color-mix(in oklab, var(--amber-500) 24%, white)' },
+          { stage: 'Answer', value: '"14 days to return"', note: 'Perplexity', icon: 'fa-solid fa-robot', tone: 'var(--amber-700)', border: 'var(--ink-100)' },
+        ],
+      },
+      {
+        id: 'price', surface: 'Rufus', claim: 'Quoted a price $8 below the storefront on the hero SKU',
+        said: '$91.00', truth: '$99.00', badge: 'price staleness', tint: 'var(--rose-50)', tone: 'var(--rose-700)',
+        title: 'Price staleness · 11-hour feed lag',
+        body: 'A promotional price expired at midnight and the feed carried it for another eleven hours. The answer was accurate when it was generated and wrong when the shopper read it. Cutting the regeneration cadence to two hours closes most of this; pulling rather than publishing a stale price closes the rest.',
+        chain: [
+          { stage: 'Canonical record', value: 'price = $99.00', note: 'storefront, effective 00:00', icon: 'fa-solid fa-database', tone: 'var(--green-700)', border: 'var(--ink-100)' },
+          { stage: 'Feed', value: 'price = $91.00', note: 'expired promo, 11h lag', icon: 'fa-solid fa-triangle-exclamation', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 34%, white)' },
+          { stage: 'Surface cache', value: '$91.00 held', note: 'read at 07:40, cached 6h', icon: 'fa-solid fa-clock', tone: 'var(--amber-700)', border: 'color-mix(in oklab, var(--amber-500) 24%, white)' },
+          { stage: 'Answer', value: '"$91 at Northwind"', note: 'Rufus', icon: 'fa-solid fa-robot', tone: 'var(--rose-700)', border: 'var(--ink-100)' },
+        ],
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const surfaces = this.surfaceData();
+    const sel = surfaces[this.state.surface] ? this.state.surface : 'all';
+    const cur = surfaces[sel];
+
+    const allQueries = this.queryData();
+    const queries = sel === 'all' ? allQueries : allQueries.filter((q) => q.surface === sel);
+    const labelFor = { chatgpt: 'ChatGPT', google: 'Google AI', perplexity: 'Perplexity', rufus: 'Rufus' };
+
+    const sovBySurface = {
+      all: [['Competitor A', 29, 'var(--ink-500)'], ['Us', 11, 'var(--mod-discover)'], ['Competitor B', 18, 'var(--ink-300)'], ['Everyone else', 12, 'var(--ink-200)']],
+      chatgpt: [['Competitor A', 9, 'var(--ink-500)'], ['Us', 4, 'var(--mod-discover)'], ['Competitor B', 5, 'var(--ink-300)'], ['Everyone else', 3, 'var(--ink-200)']],
+      google: [['Competitor A', 11, 'var(--ink-500)'], ['Us', 2, 'var(--mod-discover)'], ['Competitor B', 7, 'var(--ink-300)'], ['Everyone else', 4, 'var(--ink-200)']],
+      perplexity: [['Competitor A', 5, 'var(--ink-500)'], ['Us', 4, 'var(--mod-discover)'], ['Competitor B', 3, 'var(--ink-300)'], ['Everyone else', 3, 'var(--ink-200)']],
+      rufus: [['Competitor A', 4, 'var(--ink-500)'], ['Us', 1, 'var(--mod-discover)'], ['Competitor B', 3, 'var(--ink-300)'], ['Everyone else', 2, 'var(--ink-200)']],
+    };
+    const bars = sovBySurface[sel];
+    const maxBar = Math.max.apply(null, bars.map((b) => b[1]));
+
+    const mism = this.mismatchData();
+    const trace = mism.find((m) => m.id === this.state.mismatch) || mism[0];
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      dims: [
+        {
+          name: 'Structured data', weight: 'weight 35%', score: 58, tone: 'var(--rose-500)',
+          border: 'color-mix(in oklab, var(--rose-500) 22%, white)', bg: 'var(--ink-0)',
+          rows: [
+            { label: 'GTIN coverage', value: '94%', tone: 'var(--amber-700)' },
+            { label: 'Required attrs', value: '78%', tone: 'var(--rose-700)' },
+            { label: 'Schema types', value: '61%', tone: 'var(--rose-700)' },
+            { label: 'Feed freshness', value: '11h', tone: 'var(--rose-700)' },
+          ],
+        },
+        {
+          name: 'Factual density', weight: 'weight 25%', score: 66, tone: 'var(--amber-500)',
+          border: 'color-mix(in oklab, var(--amber-500) 22%, white)', bg: 'var(--ink-0)',
+          rows: [
+            { label: 'Attributes / PDP', value: '12', tone: 'var(--amber-700)' },
+            { label: 'Spec Q&A coverage', value: '34%', tone: 'var(--rose-700)' },
+            { label: 'Sourced claims', value: '81%', tone: 'var(--amber-700)' },
+            { label: 'Comparison tables', value: '18 SKUs', tone: 'var(--ink-700)' },
+          ],
+        },
+        {
+          name: 'Policy readability', weight: 'weight 20%', score: 44, tone: 'var(--rose-500)',
+          border: 'color-mix(in oklab, var(--rose-500) 22%, white)', bg: 'var(--ink-0)',
+          rows: [
+            { label: 'Returns', value: 'prose only', tone: 'var(--rose-700)' },
+            { label: 'Shipping', value: 'partial', tone: 'var(--amber-700)' },
+            { label: 'Warranty', value: 'absent', tone: 'var(--rose-700)' },
+            { label: 'Price validity', value: 'present', tone: 'var(--green-700)' },
+          ],
+        },
+        {
+          name: 'Real-time accuracy', weight: 'weight 20%', score: 79, tone: 'var(--amber-500)',
+          border: 'color-mix(in oklab, var(--amber-500) 22%, white)', bg: 'var(--ink-0)',
+          rows: [
+            { label: 'Price match', value: '99.1%', tone: 'var(--amber-700)' },
+            { label: 'Availability match', value: '96.4%', tone: 'var(--rose-700)' },
+            { label: 'Staleness p90', value: '14h', tone: 'var(--rose-700)' },
+            { label: 'Mismatch rate', value: '2.2%', tone: 'var(--amber-700)' },
+          ],
+        },
+      ],
+
+      surfaceTabs: ['all', 'chatgpt', 'google', 'perplexity', 'rufus'].map((k) => ({
+        label: surfaces[k].label,
+        pick: () => this.setState({ surface: k }),
+        bg: sel === k ? 'var(--ink-0)' : 'transparent',
+        fg: sel === k ? 'var(--ink-900)' : 'var(--ink-500)',
+        weight: sel === k ? '600' : '500',
+      })),
+      batteryMeta: cur.meta,
+      shareValue: cur.share,
+      shareTrend: cur.trend,
+      shareTrendTone: 'var(--rose-700)',
+      sovBars: bars.map((b) => ({
+        label: b[0], value: b[1] + ' citations', pct: Math.round((b[1] / maxBar) * 100), hue: b[2],
+        weight: b[0] === 'Us' ? '700' : '500',
+        labelTone: b[0] === 'Us' ? 'var(--ink-900)' : 'var(--ink-600)',
+      })),
+      queries: queries.map((q) => ({
+        text: q.text,
+        surface: labelFor[q.surface],
+        us: q.us, a: q.a, b: q.b,
+        usTone: q.us === 0 ? 'var(--rose-700)' : q.us >= q.a ? 'var(--green-700)' : 'var(--ink-800)',
+        reason: q.reason, tone: q.tone, tint: q.tint,
+      })),
+
+      mismatches: mism.map((m) => ({
+        surface: m.surface, claim: m.claim, said: m.said, truth: m.truth,
+        pick: () => this.setState({ mismatch: m.id }),
+        border: m.id === trace.id ? 'var(--mod-discover)' : 'var(--ink-100)',
+        bg: m.id === trace.id ? 'color-mix(in oklab, var(--mod-discover) 6%, white)' : 'var(--ink-0)',
+      })),
+      trace: {
+        title: trace.title, badge: trace.badge, tint: trace.tint, tone: trace.tone, body: trace.body,
+        chain: trace.chain.map((c) => ({ stage: c.stage, value: c.value, note: c.note, icon: c.icon, tone: c.tone, border: c.border })),
+      },
+
+      versus: [
+        { label: 'Attributes per product', us: '12', them: '21', tone: 'var(--rose-500)', usFlex: 12, themFlex: 9 },
+        { label: 'Schema types on PDP', us: '3', them: '6', tone: 'var(--rose-500)', usFlex: 3, themFlex: 3 },
+        { label: 'Policy as structured data', us: '1 of 3', them: '3 of 3', tone: 'var(--rose-500)', usFlex: 1, themFlex: 2 },
+        { label: 'Feed refresh cadence', us: '12h', them: '2h', tone: 'var(--rose-500)', usFlex: 2, themFlex: 10 },
+        { label: 'Review count on hero SKU', us: '412', them: '388', tone: 'var(--green-700)', usFlex: 412, themFlex: 0 },
+        { label: 'Price competitiveness', us: '$99', them: '$104', tone: 'var(--green-700)', usFlex: 5, themFlex: 0 },
+      ],
+
+      freshness: [
+        { label: 'Storefront (Shopify)', note: 'live inventory + price', value: '2 min', tone: 'var(--green-700)' },
+        { label: 'Google Merchant Center', note: 'scheduled fetch', value: '4h', tone: 'var(--green-700)' },
+        { label: 'Amazon listing feed', note: 'batch push', value: '6h', tone: 'var(--amber-500)' },
+        { label: 'Walmart feed', note: 'attribute mapping broken', value: '9 days', tone: 'var(--rose-500)' },
+      ],
+
+      quickWins: [
+        { label: 'Fix Walmart attribute mapping', gain: '+5pp', note: 'One mapping repair closes all four mismatches and the highest-volume lost query.' },
+        { label: '26 missing attributes on 12 hero SKUs', gain: '+6pp', note: 'Every one of them is a constraint shoppers asked about in the battery.' },
+        { label: 'Publish returns + warranty as policy schema', gain: '+3pp', note: 'Touches all four surfaces at once and removes the third-party 14-day answer.' },
+        { label: 'GTIN backfill on 43 variants', gain: '+4pp', note: 'Without a GTIN a variant is invisible to two of the four surfaces.' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

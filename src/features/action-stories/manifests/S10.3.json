@@ -1,0 +1,425 @@
+[
+  {
+    "code": "S10.3",
+    "name": "Account health",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "metrics",
+        "blockType": "labelValueList",
+        "binding": "data.metrics"
+      },
+      {
+        "slotName": "slas",
+        "blockType": "labelValueList",
+        "binding": "data.slas"
+      },
+      {
+        "slotName": "buffers",
+        "blockType": "labelValueList",
+        "binding": "data.buffers"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "chips",
+        "blockType": "labelValueList",
+        "binding": "data.chips"
+      },
+      {
+        "slotName": "deadlines",
+        "blockType": "table",
+        "binding": "data.deadlines"
+      },
+      {
+        "slotName": "trigger",
+        "blockType": "itemQueue",
+        "binding": "data.trigger"
+      },
+      {
+        "slotName": "exposure",
+        "blockType": "labelValueList",
+        "binding": "data.exposure"
+      }
+    ]
+  },
+  {
+    "code": "S10.3",
+    "name": "Account health",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "gauges",
+        "blockType": "labelValueList",
+        "binding": "data.gauges"
+      },
+      {
+        "slotName": "feedCount",
+        "blockType": "text",
+        "binding": "data.feedCount"
+      },
+      {
+        "slotName": "filters",
+        "blockType": "labelValueList",
+        "binding": "data.filters"
+      },
+      {
+        "slotName": "feed",
+        "blockType": "table",
+        "binding": "data.feed"
+      },
+      {
+        "slotName": "sel",
+        "blockType": "object",
+        "binding": "data.sel"
+      }
+    ]
+  },
+  {
+    "code": "S10.3",
+    "name": "Account health",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "labelValueList",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_blocked",
+        "blockType": "flag",
+        "binding": "data.blocked"
+      },
+      {
+        "slotName": "guardrail_can_approve",
+        "blockType": "flag",
+        "binding": "data.canApprove"
+      },
+      {
+        "slotName": "guardrail_reason",
+        "blockType": "text",
+        "binding": "data.blockReason"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.ctaLabel"
+      },
+      {
+        "slotName": "warRoom",
+        "blockType": "flag",
+        "binding": "data.warRoom"
+      },
+      {
+        "slotName": "normalMode",
+        "blockType": "flag",
+        "binding": "data.normalMode"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "modeTabs",
+        "blockType": "labelValueList",
+        "binding": "data.modeTabs"
+      },
+      {
+        "slotName": "pinPill",
+        "blockType": "text",
+        "binding": "data.pinPill"
+      },
+      {
+        "slotName": "pinBadge",
+        "blockType": "text",
+        "binding": "data.pinBadge"
+      },
+      {
+        "slotName": "pinTitle",
+        "blockType": "text",
+        "binding": "data.pinTitle"
+      },
+      {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle"
+      },
+      {
+        "slotName": "heroBody",
+        "blockType": "text",
+        "binding": "data.heroBody"
+      },
+      {
+        "slotName": "queueNote",
+        "blockType": "text",
+        "binding": "data.queueNote"
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics"
+      },
+      {
+        "slotName": "actions",
+        "blockType": "itemQueue",
+        "binding": "data.actions"
+      },
+      {
+        "slotName": "timeline",
+        "blockType": "table",
+        "binding": "data.timeline"
+      },
+      {
+        "slotName": "warEvidence",
+        "blockType": "labelValueList",
+        "binding": "data.warEvidence"
+      },
+      {
+        "slotName": "totals",
+        "blockType": "labelValueList",
+        "binding": "data.totals"
+      },
+      {
+        "slotName": "expiry",
+        "blockType": "labelValueList",
+        "binding": "data.expiry"
+      },
+      {
+        "slotName": "policyStatus",
+        "blockType": "text",
+        "binding": "data.policyStatus"
+      },
+      {
+        "slotName": "reviewerTitle",
+        "blockType": "text",
+        "binding": "data.reviewerTitle"
+      },
+      {
+        "slotName": "reviewers",
+        "blockType": "table",
+        "binding": "data.reviewers"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S10.3",
+    "name": "Account health",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "railLabel",
+        "blockType": "text",
+        "binding": "data.railLabel"
+      },
+      {
+        "slotName": "planLine",
+        "blockType": "text",
+        "binding": "data.planLine"
+      },
+      {
+        "slotName": "pushedCount",
+        "blockType": "text",
+        "binding": "data.pushedCount"
+      },
+      {
+        "slotName": "runAllLabel",
+        "blockType": "text",
+        "binding": "data.runAllLabel"
+      },
+      {
+        "slotName": "runAllIcon",
+        "blockType": "text",
+        "binding": "data.runAllIcon"
+      },
+      {
+        "slotName": "stages",
+        "blockType": "itemQueue",
+        "binding": "data.stages"
+      },
+      {
+        "slotName": "recoveryState",
+        "blockType": "text",
+        "binding": "data.recoveryState"
+      },
+      {
+        "slotName": "recoveryMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.recoveryMetrics"
+      },
+      {
+        "slotName": "yTicks",
+        "blockType": "labelValueList",
+        "binding": "data.yTicks"
+      },
+      {
+        "slotName": "xTicks",
+        "blockType": "labelValueList",
+        "binding": "data.xTicks"
+      },
+      {
+        "slotName": "limitY",
+        "blockType": "text",
+        "binding": "data.limitY"
+      },
+      {
+        "slotName": "floorY",
+        "blockType": "text",
+        "binding": "data.floorY"
+      },
+      {
+        "slotName": "projPath",
+        "blockType": "text",
+        "binding": "data.projPath"
+      },
+      {
+        "slotName": "doNothingPath",
+        "blockType": "text",
+        "binding": "data.doNothingPath"
+      },
+      {
+        "slotName": "actualPath",
+        "blockType": "text",
+        "binding": "data.actualPath"
+      },
+      {
+        "slotName": "actualDots",
+        "blockType": "series",
+        "binding": "data.actualDots"
+      },
+      {
+        "slotName": "recoveryFoot",
+        "blockType": "text",
+        "binding": "data.recoveryFoot"
+      },
+      {
+        "slotName": "pollStatus",
+        "blockType": "text",
+        "binding": "data.pollStatus"
+      },
+      {
+        "slotName": "cases",
+        "blockType": "itemQueue",
+        "binding": "data.cases"
+      },
+      {
+        "slotName": "progressPct",
+        "blockType": "text",
+        "binding": "data.progressPct"
+      },
+      {
+        "slotName": "progressRows",
+        "blockType": "labelValueList",
+        "binding": "data.progressRows"
+      },
+      {
+        "slotName": "vaultStatus",
+        "blockType": "text",
+        "binding": "data.vaultStatus"
+      },
+      {
+        "slotName": "vault",
+        "blockType": "labelValueList",
+        "binding": "data.vault"
+      },
+      {
+        "slotName": "armCopy",
+        "blockType": "text",
+        "binding": "data.armCopy"
+      },
+      {
+        "slotName": "armBtnLabel",
+        "blockType": "text",
+        "binding": "data.armBtnLabel"
+      },
+      {
+        "slotName": "armBtnIcon",
+        "blockType": "text",
+        "binding": "data.armBtnIcon"
+      },
+      {
+        "slotName": "rules",
+        "blockType": "labelValueList",
+        "binding": "data.rules"
+      },
+      {
+        "slotName": "recurrence",
+        "blockType": "labelValueList",
+        "binding": "data.recurrence"
+      },
+      {
+        "slotName": "done",
+        "blockType": "flag",
+        "binding": "data.done"
+      },
+      {
+        "slotName": "closeLabel",
+        "blockType": "text",
+        "binding": "data.closeLabel"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  }
+]

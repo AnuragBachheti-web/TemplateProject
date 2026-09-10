@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.15-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-discover);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-discover) 12%, white);color:var(--mod-discover);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Search visibility · S9.15</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Citation share dropping — 14 comparison queries cite competitors only</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">Approved · 6 items, 6.5 weeks</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">+$8.7K / mo projected · 3 drafts to editorial</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-discover)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-discover)"></span>Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-discover);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Merchandiser + Scout
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Visibility Gap Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Citation Tracker
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.15-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.15-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.15-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.15-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-discover) 10%, white);border:1px solid color-mix(in oklab, var(--mod-discover) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-discover);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:16px">
+          <div style="min-width:0;display:flex;flex-direction:column;gap:5px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Deployment · SEO-Q4-11</span>
+            <span style="font-size:13px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ planLine }}</span>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:14px">
+            <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+              <span style="font-family:var(--font-mono);font-size:18px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ pushedCount }}</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">pushed</span>
+            </span>
+            <button type="button" onClick="{{ pushAll }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:var(--r-sm);border:none;background:{{ pushAllBg }};color:{{ pushAllFg }};cursor:{{ pushAllCursor }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">
+              <i class="{{ pushAllIcon }}" style="font-size:11px"></i>{{ pushAllLabel }}
+            </button>
+          </div>
+        </div>
+
+        <sc-for list="{{ dests }}" as="d" hint-placeholder-count="4">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+            <div style="padding:13px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--ink-100);background:var(--ink-25)">
+              <span style="width:28px;height:28px;border-radius:var(--r-xs);background:{{ d.tint }};color:{{ d.hue }};display:grid;place-items:center;flex-shrink:0">
+                <i class="{{ d.icon }}" style="font-size:12px"></i>
+              </span>
+              <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ d.name }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ d.meta }}</span>
+              </span>
+              <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:9px">
+                <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ d.statusTint }};font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ d.statusTone }}">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{ d.statusTone }}"></span>{{ d.statusLabel }}
+                </span>
+                <button type="button" onClick="{{ d.push }}" style="height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ d.btnBorder }};background:{{ d.btnBg }};color:{{ d.btnFg }};cursor:{{ d.btnCursor }};font-family:var(--font-sans);font-size:11.5px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)">{{ d.btnLabel }}</button>
+              </span>
+            </div>
+
+            <div style="padding:4px 16px 12px">
+              <sc-for list="{{ d.items }}" as="it" hint-placeholder-count="3">
+                <div style="padding:11px 0;border-bottom:1px solid var(--ink-50);display:flex;align-items:flex-start;gap:12px">
+                  <span style="flex-shrink:0;margin-top:2px;width:18px;height:18px;border-radius:50%;background:{{ it.dotBg }};color:{{ it.dotFg }};display:grid;place-items:center">
+                    <i class="{{ it.dotIcon }}" style="font-size:8.5px"></i>
+                  </span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+                    <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                      <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ it.name }}</span>
+                      <sc-if value="{{ it.tag }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ it.tagTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ it.tagTone }}">
+                          <i class="{{ it.tagIcon }}" style="font-size:8px"></i>{{ it.tag }}
+                        </span>
+                      </sc-if>
+                      <sc-if value="{{ it.url }}" hint-placeholder-val="{{ false }}">
+                        <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ it.url }}</span>
+                      </sc-if>
+                    </span>
+                    <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ it.detail }}</span>
+                    <sc-if value="{{ it.hasDiff }}" hint-placeholder-val="{{ false }}">
+                      <span style="margin-top:2px;display:grid;grid-template-columns:1fr 22px 1fr;align-items:center;gap:8px;padding:9px 11px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:var(--ink-25)">
+                        <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Current</span>
+                          <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-600);text-decoration:line-through;text-decoration-color:var(--ink-300)">{{ it.before }}</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right" style="font-size:9px;color:var(--ink-300);justify-self:center"></i>
+                        <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">After push</span>
+                          <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ it.afterTone }}">{{ it.after }}</span>
+                        </span>
+                      </span>
+                    </sc-if>
+                  </span>
+                  <span style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;width:104px">
+                    <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ it.value }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:{{ it.stateTone }}">{{ it.stateLabel }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Monitoring · rank and citation per cluster</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:{{ watchTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ watchTone }}"></span>{{ watchStatus }}
+            </span>
+          </div>
+          <div style="margin-top:11px;display:grid;grid-template-columns:1fr 72px 80px 88px 104px;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Cluster</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Rank</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Cite now</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Target</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">First read</span>
+          </div>
+          <sc-for list="{{ monitors }}" as="m" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1fr 72px 80px 88px 104px;gap:0 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ m.name }}</span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ m.meta }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);text-align:right;font-variant-numeric:tabular-nums">{{ m.rank }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ m.citeTone }};text-align:right;font-variant-numeric:tabular-nums">{{ m.cite }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-500);text-align:right;font-variant-numeric:tabular-nums">{{ m.target }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--r-full);background:{{ m.tint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ m.tone }}">{{ m.read }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Traffic quality watch</span>
+            <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Sessions are only worth having if they behave like the ones we already convert. These read at 14 and 28 days per new page.</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ quality }}" as="q" hint-placeholder-count="4">
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ q.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ q.bench }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ q.tone }};font-variant-numeric:tabular-nums">{{ q.floor }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Decay watches</span>
+            <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Each one re-opens this card with the read attached rather than filing a report nobody opens.</p>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ decay }}" as="d" hint-placeholder-count="3">
+                <div style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm)">
+                  <i class="fa-solid fa-arrow-rotate-left" style="font-size:10px;color:var(--mod-discover);margin-top:2px;flex-shrink:0"></i>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ d.rule }}</span>
+                    <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ d.action }}</span>
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Push progress</span>
+          <div style="margin-top:11px;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+            <span style="display:block;height:100%;width:{{ progressPct }}%;background:var(--mod-discover);border-radius:var(--r-full);transition:width var(--dur-slow) var(--ease-standard)"></span>
+          </div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ progressRows }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ p.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-discover) 26%, white);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-user-pen" style="font-size:11px;color:var(--mod-discover)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Editorial handoff</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ drafts }}" as="d" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:3px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ d.bg }}">
+                <span style="font-size:11.5px;font-weight:600;color:{{ d.nameTone }};text-wrap:pretty">{{ d.name }}</span>
+                <span style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ d.owner }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;font-weight:600;color:{{ d.stateTone }}">{{ d.state }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Drafts land in the CMS unpublished with the brief attached. Realify cannot publish them at any dial setting.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ armBorder }};border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-bolt" style="font-size:11px;color:{{ armIconTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Auto re-brief on decay</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ armCopy }}</p>
+          <button type="button" onClick="{{ armToggle }}" style="margin-top:11px;width:100%;height:34px;border-radius:var(--r-sm);border:1px solid {{ armBtnBorder }};background:{{ armBtnBg }};color:{{ armBtnFg }};cursor:{{ armCursor }};font-family:var(--font-sans);font-size:12.5px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px">
+            <i class="{{ armBtnIcon }}" style="font-size:10px"></i>{{ armBtnLabel }}
+          </button>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-rotate-left" style="font-size:10px;color:var(--ink-400)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Rollback</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ rollback }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ r.bg }}">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:11.5px;font-weight:600;color:{{ r.nameTone }}">{{ r.name }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ r.version }}</span>
+                </span>
+                <button type="button" onClick="{{ r.revert }}" style="flex-shrink:0;height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid {{ r.btnBorder }};background:{{ r.btnBg }};color:{{ r.btnFg }};cursor:{{ r.cursor }};font-family:var(--font-sans);font-size:10.5px;font-weight:500">{{ r.btnLabel }}</button>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:9px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Reverting the redirect map restores the six original URLs, which re-opens the cannibalisation the consolidation fixed — the tracker will say so within a week.</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--green-50);font-size:11.5px;font-weight:500;color:var(--green-700)">
+          <i class="fa-solid fa-check" style="font-size:10px"></i>3 drafts with editors · first citation read in 14 days
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S9.15-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-arrow-left" style="font-size:11px"></i>Back to Decide
+        </a>
+        <a href="S00-workspace.dc.html?approved=9.15" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+          {{ closeLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { pushed: {}, busy: null, armed: false, reverted: {} };
+
+  destData() {
+    return [
+      {
+        id: 'onpage', name: 'Web · template and on-page changes', icon: 'fa-solid fa-code', hue: 'var(--mod-discover)',
+        meta: '1 template · 40 pages · release r-2291',
+        items: [
+          {
+            name: 'Guide template · sized and preloaded hero', tag: 'CWV', tagIcon: 'fa-solid fa-gauge-high', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)',
+            detail: 'Width and height attributes on the hero image plus a preload hint. The only change to the template in this release.',
+            before: 'LCP 2.9s p75 · fails', after: 'LCP 2.1s p75 projected', afterTone: 'var(--green-700)', value: '186 pages',
+          },
+          {
+            name: 'FAQ and Article schema', tag: null, url: '/guides/*',
+            detail: 'Generated from existing headings and body content on 40 guide pages. No new copy, no duplicated text.',
+            before: 'schema on 61% of pages', after: 'schema on 100% of guides', afterTone: 'var(--green-700)', value: '40 pages',
+          },
+          {
+            name: 'Internal links to orphaned guides', tag: null,
+            detail: 'Two contextual links each into the eight guides that were discovered and never crawled, from pages that already rank.',
+            before: '8 pages with no inbound links', after: '16 contextual links added', afterTone: 'var(--ink-900)', value: '16 links',
+          },
+        ],
+      },
+      {
+        id: 'redirects', name: 'Redirects, canonicals and sitemap', icon: 'fa-solid fa-diagram-project', hue: 'var(--mod-margin)',
+        meta: '3 consolidations · 9 chains · sitemap regenerated',
+        items: [
+          {
+            name: 'Consolidate 3 cannibalisation pairs', tag: 'unblocks the new page', tagIcon: 'fa-solid fa-link', tagTint: 'color-mix(in oklab, var(--mod-discover) 12%, white)', tagTone: 'var(--mod-discover)',
+            detail: 'The weaker page of each pair 301s into the stronger one, with canonicals set to match. Runs before any new page ships.',
+            before: '6 pages competing on 3 queries', after: '3 pages · 3 permanent redirects', afterTone: 'var(--green-700)', value: '6 → 3',
+          },
+          {
+            name: 'Flatten 9 redirect chains', tag: null,
+            detail: 'Every chain resolves to a single hop. Three of them were three deep on guide URLs.',
+            before: '9 chains · up to 3 hops', after: '9 single hops', afterTone: 'var(--green-700)', value: '9 URLs',
+          },
+          {
+            name: 'Resolve 4 duplicate canonicals + regenerate sitemap', tag: null,
+            detail: 'The four duplicates are why those pages were never indexed. The sitemap picks up the eight orphaned guides at the same time.',
+            before: '174 of 186 indexed', after: '186 of 186 submitted', afterTone: 'var(--green-700)', value: '12 pages',
+          },
+        ],
+      },
+      {
+        id: 'editorial', name: 'Editorial workflow · drafts, not publishes', icon: 'fa-solid fa-user-pen', hue: 'var(--violet-500)',
+        meta: '3 items · CMS drafts assigned · nothing goes live from here',
+        items: [
+          {
+            name: 'Carbon steel vs cast iron · full draft', tag: 'draft only', tagIcon: 'fa-solid fa-lock', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)',
+            url: '/guides/carbon-steel-vs-cast-iron',
+            detail: 'Nine-row comparison table, sourced weight and heat-retention figures, answer-first headings. Enters the CMS unpublished with the brief and source list attached.',
+            before: 'no page · 4 thin pages consolidated', after: 'draft with J. Okafor · due Oct 4', afterTone: 'var(--violet-700)', value: '1 draft',
+          },
+          {
+            name: 'Lead-removal rewrite · full draft', tag: 'draft only', tagIcon: 'fa-solid fa-lock', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)',
+            url: '/guides/filtration',
+            detail: 'States the certification number in text with a reduction percentage per contaminant. Legal review flagged on the draft because it is a compliance claim.',
+            before: '"reduces heavy metals"', after: 'draft with M. Reyes · legal flag', afterTone: 'var(--violet-700)', value: '1 draft',
+          },
+          {
+            name: 'Brand-voice and source checklist', tag: null,
+            detail: 'Attached to both drafts. An editor cannot mark a page ready until every comparison row has a source and the voice items pass.',
+            before: 'checklist applied manually', after: 'attached to every draft', afterTone: 'var(--ink-900)', value: '2 drafts',
+          },
+        ],
+      },
+      {
+        id: 'tracker', name: 'Citation Tracker · monitoring config', icon: 'fa-solid fa-binoculars', hue: 'var(--mod-ads)',
+        meta: 'weekly per cluster · 3 decay watches armed',
+        items: [
+          {
+            name: 'Per-cluster rank and citation reads', tag: null,
+            detail: 'Weekly pass across 412 queries, split by cluster and intent tier, with the 14 competitor-only queries marked as the primary set.',
+            before: 'account-level weekly report', after: 'per-cluster with a primary set', afterTone: 'var(--mod-ads)', value: '6 clusters',
+          },
+          {
+            name: 'Traffic quality read at 14 and 28 days', tag: null,
+            detail: 'Conversion rate, assisted revenue and bounce on organic entrances to each new page, against the site baseline.',
+            before: 'not measured per page', after: '2 reads per new page', afterTone: 'var(--ink-900)', value: '3 pages',
+          },
+          {
+            name: 'Decay watches', tag: null,
+            detail: 'Citation loss, rank slide and quality shortfall each re-open this card with the read attached rather than filing a separate report.',
+            before: 'no decay trigger', after: '3 watches armed', afterTone: 'var(--green-700)', value: '3 watches',
+          },
+        ],
+      },
+    ];
+  }
+
+  pushOne(id) {
+    if (this.state.pushed[id] || this.state.busy) return;
+    this.setState({ busy: id });
+    setTimeout(() => {
+      this.setState((s) => {
+        const pushed = Object.assign({}, s.pushed);
+        pushed[id] = true;
+        const reverted = Object.assign({}, s.reverted);
+        delete reverted[id];
+        return { pushed, busy: null, reverted };
+      });
+    }, 900);
+  }
+
+  pushSeq(ids) {
+    const next = ids.find((i) => !this.state.pushed[i]);
+    if (!next || this.state.busy) return;
+    this.setState({ busy: next });
+    setTimeout(() => {
+      this.setState((s) => {
+        const pushed = Object.assign({}, s.pushed);
+        pushed[next] = true;
+        return { pushed, busy: null };
+      }, () => setTimeout(() => this.pushSeq(ids), 220));
+    }, 900);
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const autoAllowed = mode === 'Approve' || mode === 'Auto';
+
+    const dests = this.destData();
+    const ids = dests.map((d) => d.id);
+    const pushedIds = ids.filter((i) => this.state.pushed[i]);
+    const n = pushedIds.length;
+    const busy = this.state.busy;
+    const allDone = n === ids.length;
+    const counts = { onpage: 3, redirects: 3, editorial: 3, tracker: 3 };
+    const totalItems = 12;
+    const pushedItems = pushedIds.reduce((a, i) => a + counts[i], 0);
+    const live = (id) => !!this.state.pushed[id] && !this.state.reverted[id];
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      planLine: allDone
+        ? 'Template and schema are live, the six competing pages are three, two drafts sit with editors, and the tracker reads per cluster weekly with three decay watches armed.'
+        : 'Consolidation and template work ship first so the new pages land on clean ground. Drafts go to editors unpublished — Realify writes, a human decides.',
+      pushedCount: n + ' / 4',
+      pushAll: () => this.pushSeq(ids),
+      pushAllLabel: allDone ? 'All destinations pushed' : busy ? 'Pushing…' : 'Push all in order',
+      pushAllIcon: allDone ? 'fa-solid fa-check' : busy ? 'fa-solid fa-spinner' : 'fa-solid fa-paper-plane',
+      pushAllBg: allDone ? 'var(--green-50)' : 'var(--ink-900)',
+      pushAllFg: allDone ? 'var(--green-700)' : 'var(--ink-0)',
+      pushAllCursor: allDone || busy ? 'default' : 'pointer',
+
+      dests: dests.map((d) => {
+        const done = live(d.id);
+        const running = busy === d.id;
+        const rev = !!this.state.reverted[d.id];
+        return {
+          name: d.name, meta: d.meta, icon: d.icon, hue: d.hue,
+          tint: 'color-mix(in oklab, ' + d.hue + ' 12%, white)',
+          statusLabel: rev ? 'reverted' : done ? (d.id === 'editorial' ? 'with editors' : 'live') : running ? 'pushing' : 'staged',
+          statusTint: rev ? 'var(--amber-50)' : done ? 'var(--green-50)' : running ? 'var(--amber-50)' : 'var(--ink-100)',
+          statusTone: rev ? 'var(--amber-700)' : done ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-500)',
+          btnLabel: done ? 'Pushed' : running ? 'Pushing…' : rev ? 'Re-push' : 'Push',
+          btnBg: done ? 'var(--ink-50)' : 'var(--ink-900)',
+          btnFg: done ? 'var(--ink-400)' : 'var(--ink-0)',
+          btnBorder: done ? 'var(--ink-200)' : 'var(--ink-900)',
+          btnCursor: done || busy ? 'default' : 'pointer',
+          push: () => this.pushOne(d.id),
+          items: d.items.map((it) => ({
+            name: it.name, detail: it.detail, value: it.value, url: it.url || null,
+            tag: it.tag || null, tagIcon: it.tagIcon, tagTint: it.tagTint, tagTone: it.tagTone,
+            hasDiff: !!it.before, before: it.before, after: it.after, afterTone: it.afterTone,
+            dotIcon: done ? 'fa-solid fa-check' : running ? 'fa-solid fa-ellipsis' : 'fa-solid fa-minus',
+            dotBg: done ? 'var(--green-500)' : running ? 'var(--amber-500)' : 'var(--ink-100)',
+            dotFg: done || running ? 'var(--ink-0)' : 'var(--ink-400)',
+            stateLabel: done ? (d.id === 'editorial' ? 'in review' : 'live') : running ? 'in flight' : 'staged',
+            stateTone: done ? 'var(--green-700)' : running ? 'var(--amber-700)' : 'var(--ink-400)',
+          })),
+        };
+      }),
+
+      progressPct: ((pushedItems / totalItems) * 100).toFixed(0),
+      progressRows: [
+        { label: 'Destinations pushed', value: n + ' of 4', tone: allDone ? 'var(--green-700)' : 'var(--ink-900)' },
+        { label: 'Line items', value: pushedItems + ' of ' + totalItems, tone: 'var(--ink-900)' },
+        { label: 'LCP p75', value: live('onpage') ? '2.1s projected' : '2.9s current', tone: live('onpage') ? 'var(--green-700)' : 'var(--rose-700)' },
+        { label: 'Pages competing', value: live('redirects') ? '3' : '6', tone: live('redirects') ? 'var(--green-700)' : 'var(--rose-700)' },
+        { label: 'Drafts with editors', value: live('editorial') ? '2' : '0', tone: live('editorial') ? 'var(--violet-700)' : 'var(--ink-500)' },
+      ],
+
+      drafts: [
+        { id: 'comparison', name: 'Carbon steel vs cast iron', owner: 'J. Okafor · editor', state: live('editorial') ? 'in review · due Oct 4' : 'not sent' },
+        { id: 'lead', name: 'Lead-removal rewrite', owner: 'M. Reyes · editor', state: live('editorial') ? 'in review · legal flag' : 'not sent' },
+        { id: 'checklist', name: 'Voice + source checklist', owner: 'attached to both drafts', state: live('editorial') ? 'attached' : 'not sent' },
+      ].map((d) => ({
+        name: d.name, owner: d.owner, state: d.state,
+        nameTone: live('editorial') ? 'var(--ink-800)' : 'var(--ink-400)',
+        stateTone: live('editorial') ? 'var(--violet-700)' : 'var(--ink-400)',
+        bg: live('editorial') ? 'color-mix(in oklab, var(--violet-500) 5%, white)' : 'var(--ink-0)',
+      })),
+
+      armBorder: this.state.armed ? 'color-mix(in oklab, var(--mod-discover) 40%, white)' : 'var(--ink-100)',
+      armIconTone: this.state.armed ? 'var(--mod-discover)' : 'var(--ink-400)',
+      armCopy: autoAllowed
+        ? (this.state.armed
+          ? 'Armed. A cluster that loses citations for three consecutive weeks gets a fresh brief drafted and queued for an editor automatically.'
+          : 'Lets Realify draft a replacement brief when a cluster decays, instead of waiting for the next review. Publishing still needs an editor.')
+        : 'Available from the Approve dial upward. At Suggest, a decay watch re-opens this card and waits for you.',
+      armToggle: () => { if (autoAllowed) this.setState((s) => ({ armed: !s.armed })); },
+      armBtnLabel: !autoAllowed ? 'Locked at Suggest' : this.state.armed ? 'Armed · 3 weeks of loss' : 'Arm auto re-brief',
+      armBtnIcon: !autoAllowed ? 'fa-solid fa-lock' : this.state.armed ? 'fa-solid fa-check' : 'fa-solid fa-bolt',
+      armBtnBg: !autoAllowed ? 'var(--ink-50)' : this.state.armed ? 'color-mix(in oklab, var(--mod-discover) 10%, white)' : 'var(--ink-0)',
+      armBtnFg: !autoAllowed ? 'var(--ink-400)' : this.state.armed ? 'var(--mod-discover)' : 'var(--ink-700)',
+      armBtnBorder: !autoAllowed ? 'var(--ink-200)' : this.state.armed ? 'color-mix(in oklab, var(--mod-discover) 40%, white)' : 'var(--ink-200)',
+      armCursor: autoAllowed ? 'pointer' : 'not-allowed',
+
+      monitors: [
+        { name: 'Cookware comparisons', meta: '96 queries · primary set', rank: '4.1', cite: '6%', citeTone: 'var(--rose-700)', target: '30%', read: allDone ? '14 days' : 'not armed', tint: allDone ? 'var(--green-50)' : 'var(--ink-100)', tone: allDone ? 'var(--green-700)' : 'var(--ink-500)' },
+        { name: 'Water filtration', meta: '68 queries · primary set', rank: '3.8', cite: '9%', citeTone: 'var(--rose-700)', target: '30%', read: allDone ? '14 days' : 'not armed', tint: allDone ? 'var(--green-50)' : 'var(--ink-100)', tone: allDone ? 'var(--green-700)' : 'var(--ink-500)' },
+        { name: 'Cooktop compatibility', meta: '52 queries · deferred content', rank: '5.4', cite: '4%', citeTone: 'var(--rose-700)', target: '25%', read: allDone ? '28 days' : 'not armed', tint: allDone ? 'var(--amber-50)' : 'var(--ink-100)', tone: allDone ? 'var(--amber-700)' : 'var(--ink-500)' },
+        { name: 'Knife care', meta: '74 queries · control cluster', rank: '2.9', cite: '34%', citeTone: 'var(--green-700)', target: '40%', read: allDone ? 'weekly' : 'not armed', tint: allDone ? 'var(--green-50)' : 'var(--ink-100)', tone: allDone ? 'var(--green-700)' : 'var(--ink-500)' },
+      ],
+      watchStatus: allDone ? 'weekly · armed' : 'arms on push',
+      watchTone: allDone ? 'var(--green-700)' : 'var(--ink-400)',
+
+      quality: [
+        { label: 'Organic entrance CVR', bench: 'site 3.1%', floor: 'floor 2.4%', tone: 'var(--ink-900)' },
+        { label: 'Assisted revenue per session', bench: 'site $1.42', floor: 'floor $1.10', tone: 'var(--ink-900)' },
+        { label: 'Bounce on guide entrances', bench: 'site 54%', floor: 'ceiling 62%', tone: 'var(--ink-900)' },
+        { label: 'PDP click-through from guides', bench: 'site 18%', floor: 'floor 14%', tone: 'var(--ink-900)' },
+      ],
+
+      decay: [
+        { rule: 'Citation share on a primary cluster falls 3 consecutive weeks', action: this.state.armed ? 'Re-opens this card and drafts a fresh brief for an editor.' : 'Re-opens this card with the three reads attached.' },
+        { rule: 'A consolidated URL loses rank versus the pre-merge pages', action: 'Flags the consolidation for review before anything else is merged.' },
+        { rule: 'New-page traffic converts below the 2.4% floor at 28 days', action: 'Sends the page back to Decide — the citations are not worth the sessions.' },
+      ],
+
+      rollback: [
+        { id: 'onpage', name: 'Template + schema release', version: 'r-2291 · restore r-2287' },
+        { id: 'redirects', name: 'Redirect + canonical map', version: '3 merges · restore 6 URLs' },
+        { id: 'editorial', name: 'Editorial drafts', version: '2 drafts · withdraw from queue' },
+        { id: 'tracker', name: 'Tracker config', version: 'per-cluster · restore account-level' },
+      ].map((r) => {
+        const isLive = live(r.id);
+        const wasReverted = !!this.state.reverted[r.id];
+        return {
+          name: r.name, version: r.version,
+          nameTone: isLive ? 'var(--ink-800)' : 'var(--ink-400)',
+          bg: wasReverted ? 'var(--amber-50)' : 'var(--ink-0)',
+          btnLabel: wasReverted ? 'Reverted' : isLive ? (r.id === 'editorial' ? 'Withdraw' : 'Revert') : 'not pushed',
+          btnBg: wasReverted ? 'var(--amber-500)' : 'var(--ink-0)',
+          btnFg: wasReverted ? 'var(--ink-0)' : isLive ? 'var(--ink-700)' : 'var(--ink-400)',
+          btnBorder: wasReverted ? 'var(--amber-500)' : isLive ? 'var(--ink-200)' : 'var(--ink-100)',
+          cursor: isLive ? 'pointer' : 'default',
+          revert: () => {
+            if (!isLive) return;
+            this.setState((s) => {
+              const reverted = Object.assign({}, s.reverted);
+              reverted[r.id] = true;
+              const pushed = Object.assign({}, s.pushed);
+              delete pushed[r.id];
+              return { reverted, pushed };
+            });
+          },
+        };
+      }),
+
+      done: allDone,
+      closeLabel: allDone ? 'Close the review' : 'Back to workspace',
+      footStatus: Object.keys(this.state.reverted).length > 0
+        ? 'Execute · ' + Object.keys(this.state.reverted).length + ' destination reverted · ' + n + ' of 4 live'
+        : allDone
+          ? 'Execute · 4 of 4 pushed · 12 line items · 2 drafts awaiting an editor'
+          : 'Execute · ' + n + ' of 4 pushed · ' + (totalItems - pushedItems) + ' line items staged',
+      footTone: allDone ? 'var(--green-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

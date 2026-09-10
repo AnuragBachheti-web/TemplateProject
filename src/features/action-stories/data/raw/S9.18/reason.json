@@ -1,0 +1,290 @@
+{
+  "code": "S9.18",
+  "stageKey": "reason",
+  "name": "Fulfilment cost",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "headline": [
+      {
+        "label": "CPO target",
+        "value": "$8.60",
+        "tone": "var(--ink-900)",
+        "note": "set at the start of the fiscal year"
+      },
+      {
+        "label": "CPO actual",
+        "value": "$9.34",
+        "tone": "var(--rose-700)",
+        "note": "74¢ over, of which 62¢ arrived this month"
+      },
+      {
+        "label": "Monthly gap",
+        "value": "$30.5K",
+        "tone": "var(--rose-700)",
+        "note": "41,200 orders at 74¢"
+      },
+      {
+        "label": "As % of AOV",
+        "value": "16.3%",
+        "tone": "var(--amber-700)",
+        "note": "ceiling is 15.0% of a $57.40 AOV"
+      }
+    ],
+    "targets": [
+      {
+        "label": "Pick and pack",
+        "note": "3PL per-order labour and handling",
+        "target": "$2.40",
+        "actual": "$2.38",
+        "ceiling": "$2.60",
+        "owner": "Shipper · 3PL",
+        "actualTone": "var(--green-700)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Postage",
+        "note": "zone × weight tier, after the GRI",
+        "target": "$5.10",
+        "actual": "$5.79",
+        "ceiling": "$5.40",
+        "owner": "Shipper",
+        "actualTone": "var(--rose-700)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Packaging",
+        "note": "box, void fill, label, tape",
+        "target": "$0.86",
+        "actual": "$0.83",
+        "ceiling": "$0.95",
+        "owner": "Shipper",
+        "actualTone": "var(--green-700)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Surcharges and claims",
+        "note": "residential, fuel, damage claims",
+        "target": "$0.24",
+        "actual": "$0.34",
+        "ceiling": "$0.35",
+        "owner": "Shipper",
+        "actualTone": "var(--amber-700)",
+        "weight": "400",
+        "size": "12px",
+        "rule": "var(--ink-100)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Cost per order",
+        "note": null,
+        "target": "$8.60",
+        "actual": "$9.34",
+        "ceiling": "$9.30",
+        "owner": "Shipper",
+        "actualTone": "var(--rose-700)",
+        "weight": "600",
+        "size": "13px",
+        "rule": "transparent",
+        "bg": "var(--ink-25)"
+      }
+    ],
+    "promise": [
+      {
+        "channel": "Shopify DTC · standard",
+        "note": "promised at checkout, free over $35",
+        "promise": "3 days",
+        "state": "94.1%",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "channel": "Shopify DTC · expedited",
+        "note": "paid upgrade, 8% of orders",
+        "promise": "2 days",
+        "state": "97.8%",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "channel": "Amazon · seller fulfilled",
+        "note": "platform SLA, not ours to set",
+        "promise": "2 days",
+        "state": "96.4%",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "channel": "Walmart Marketplace",
+        "note": "platform SLA, on-time floor 95%",
+        "promise": "3 days",
+        "state": "95.2%",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "guardrails": [
+      {
+        "label": "Maximum transit days",
+        "note": "no route may exceed this, at any price",
+        "limit": "5 days",
+        "state": "holds",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Damage rate ceiling",
+        "note": "claims per thousand shipments",
+        "limit": "2.5 / k",
+        "state": "2.1 / k",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Split-shipment ceiling",
+        "note": "share of multi-line orders split",
+        "limit": "8%",
+        "state": "11.4%",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "On-time floor · DTC",
+        "note": "against the promise shown at checkout",
+        "limit": "95%",
+        "state": "94.1%",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Weekend dwell",
+        "note": "orders sitting unshipped over a weekend",
+        "limit": "0",
+        "state": "holds",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Carrier volume minimums",
+        "detail": "Meridian Express holds a 55% minimum share with a tiered discount that resets below it. Allocation can move within the band, not through it."
+      },
+      {
+        "label": "Rate card commitments",
+        "detail": "Both national carriers are inside multi-year agreements to July. The GRI is contractual, so absorbing it is the only option — the question is what we stop paying elsewhere."
+      },
+      {
+        "label": "Marketplace SLAs",
+        "detail": "Amazon and Walmart transit promises are platform terms. No routing rule may put them at risk to save postage."
+      },
+      {
+        "label": "Packaging safety spec",
+        "detail": "Glass and enamel keep the current void-fill spec regardless of dim-weight savings. The damage ceiling is a floor on box choice, not a variable."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-file-contract",
+        "label": "Meridian 55% minimum share"
+      },
+      {
+        "icon": "fa-solid fa-calendar",
+        "label": "Rate cards fixed to July"
+      },
+      {
+        "icon": "fa-solid fa-store",
+        "label": "Marketplace SLAs untouchable"
+      },
+      {
+        "icon": "fa-solid fa-box-open",
+        "label": "Glass keeps its void fill"
+      },
+      {
+        "icon": "fa-solid fa-clock",
+        "label": "5-day maximum transit"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Sep 19",
+        "what": "Rate Card Engine ingested the Meridian GRI: 5.9% on ground, 7.1% on residential surcharges, effective Oct 1."
+      },
+      {
+        "when": "Sep 20",
+        "what": "Realized CPO moved from $8.72 to $9.34 in the weekly read — 62¢ of which is the GRI and 12¢ was already drifting."
+      },
+      {
+        "when": "Sep 21",
+        "what": "Node Optimizer found 31% of Zone 7–8 orders shipping from the East node while the West held cover, and pinned the card."
+      }
+    ],
+    "nodes": [
+      {
+        "name": "East node · Allentown PA",
+        "share": "68% of orders",
+        "detail": "3PL operated · 14,800 SKU-units",
+        "note": "Reaches Zones 2–5 in two days. Zone 7–8 orders from here cost $2.90 more and take two days longer."
+      },
+      {
+        "name": "West node · Reno NV",
+        "share": "32% of orders",
+        "detail": "3PL operated · 6,400 SKU-units",
+        "note": "Covers Zones 6–8 in two days but holds only 9 of the 15 fast-moving SKUs at cover."
+      }
+    ],
+    "carriers": [
+      {
+        "name": "Meridian Express · ground",
+        "share": "58%",
+        "gri": "+5.9%",
+        "pct": 58,
+        "hue": "var(--mod-inventory)",
+        "griTone": "var(--rose-700)"
+      },
+      {
+        "name": "Fairline Post · economy",
+        "share": "27%",
+        "gri": "+3.2%",
+        "pct": 27,
+        "hue": "var(--r-blue-500)",
+        "griTone": "var(--amber-700)"
+      },
+      {
+        "name": "Regional consolidators",
+        "share": "15%",
+        "gri": "no change",
+        "pct": 15,
+        "hue": "var(--ink-400)",
+        "griTone": "var(--green-700)"
+      }
+    ]
+  }
+}

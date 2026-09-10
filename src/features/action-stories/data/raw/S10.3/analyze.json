@@ -1,0 +1,612 @@
+{
+  "code": "S10.3",
+  "stageKey": "analyze",
+  "name": "Account health",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "sel": "late",
+    "filter": "all"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "Late-shipment rate 3.4%, past our 3.0% floor",
+    "pinnedSub": "5 open events · $13.3K/day total exposure · 2 deadlines inside a week",
+    "gauges": [
+      {
+        "market": "Amazon",
+        "label": "Late shipment",
+        "value": "3.4%",
+        "delta": "+0.4pp",
+        "note": "0.6pp of their buffer",
+        "tone": "var(--amber-700)",
+        "mark": "var(--amber-500)",
+        "border": "color-mix(in oklab, var(--amber-500) 26%, white)",
+        "bg": "var(--amber-50)",
+        "deltaTone": "var(--rose-700)",
+        "spark": [
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "23",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "15",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "38",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "54",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "62",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "77",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "85",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "var(--amber-500)"
+          }
+        ]
+      },
+      {
+        "market": "Amazon",
+        "label": "Order defect rate",
+        "value": "0.41%",
+        "delta": "−0.03",
+        "note": "inside both floors",
+        "tone": "var(--green-700)",
+        "mark": "var(--green-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "deltaTone": "var(--green-700)",
+        "spark": [
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "82",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "64",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "73",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "45",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "36",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "27",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "18",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "market": "Amazon",
+        "label": "Cancellation",
+        "value": "1.1%",
+        "delta": "+0.1pp",
+        "note": "inside both floors",
+        "tone": "var(--green-700)",
+        "mark": "var(--green-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "deltaTone": "var(--ink-400)",
+        "spark": [
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "50",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "50",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "50",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "50",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "market": "Amazon",
+        "label": "Valid tracking",
+        "value": "98.6%",
+        "delta": "flat",
+        "note": "inside both floors",
+        "tone": "var(--green-700)",
+        "mark": "var(--green-500)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "deltaTone": "var(--ink-400)",
+        "spark": [
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "33",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "33",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--green-500) 34%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "var(--green-500)"
+          }
+        ]
+      },
+      {
+        "market": "Walmart",
+        "label": "On-time delivery",
+        "value": "95.2%",
+        "delta": "−0.6pp",
+        "note": "0.2pp above their floor",
+        "tone": "var(--rose-700)",
+        "mark": "var(--rose-500)",
+        "border": "color-mix(in oklab, var(--rose-500) 26%, white)",
+        "bg": "var(--rose-50)",
+        "deltaTone": "var(--green-700)",
+        "spark": [
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "87",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "75",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "56",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "44",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "37",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "25",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "13",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--rose-500) 28%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "var(--rose-500)"
+          }
+        ]
+      },
+      {
+        "market": "All",
+        "label": "Open policy events",
+        "value": "4",
+        "delta": "+2",
+        "note": "2 with deadlines inside a week",
+        "tone": "var(--amber-700)",
+        "mark": "var(--amber-500)",
+        "border": "color-mix(in oklab, var(--amber-500) 26%, white)",
+        "bg": "var(--amber-50)",
+        "deltaTone": "var(--rose-700)",
+        "spark": [
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "12",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "33",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "33",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "33",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "67",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "color-mix(in oklab, var(--amber-500) 30%, white)"
+          },
+          {
+            "h": "100",
+            "fill": "var(--amber-500)"
+          }
+        ]
+      }
+    ],
+    "feedCount": "5 of 5 shown · newest first",
+    "filters": [
+      {
+        "label": "All events",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Deadline soon",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "feed": [
+      {
+        "severity": "medium",
+        "market": "Amazon",
+        "title": "Late-shipment rate 3.4%, past our 3.0% floor",
+        "summary": "Six consecutive days above our own floor and still climbing. The marketplace has not acted, which is exactly the window an operational fix works in.",
+        "caseId": "internal · no case open",
+        "deadline": "9 days to 4.0%",
+        "dlTint": "var(--amber-50)",
+        "dlTone": "var(--amber-700)",
+        "risk": "$9.1K/day",
+        "riskTone": "var(--rose-700)",
+        "icon": "fa-solid fa-truck-fast",
+        "sevBg": "var(--amber-500)",
+        "sevFg": "var(--ink-0)",
+        "bg": "var(--ink-0)",
+        "border": "color-mix(in oklab, var(--mod-actions) 34%, white)",
+        "mark": "var(--mod-actions)",
+        "titleTone": "var(--ink-900)",
+        "iconTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+        "iconTone": "var(--mod-actions)"
+      },
+      {
+        "severity": "high",
+        "market": "Amazon",
+        "title": "IP complaint — hero SKU listing suppressed",
+        "summary": "Filed Aug 16 by a claimant with no registered mark in our category. Counter-notice window closes in four days and the listing has been dark since filing.",
+        "caseId": "case 8814-2291",
+        "deadline": "4 days",
+        "dlTint": "var(--rose-50)",
+        "dlTone": "var(--rose-700)",
+        "risk": "$1.8K/day",
+        "riskTone": "var(--rose-700)",
+        "icon": "fa-solid fa-scale-balanced",
+        "sevBg": "var(--rose-500)",
+        "sevFg": "var(--ink-0)",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "mark": "var(--rose-500)",
+        "titleTone": "var(--ink-700)",
+        "iconTint": "var(--rose-50)",
+        "iconTone": "var(--rose-700)"
+      },
+      {
+        "severity": "high",
+        "market": "Walmart",
+        "title": "Two listings suppressed — condition description",
+        "summary": "Automated content check flagged the phrase \"like new\" in refurbished-adjacent copy. A content fix, not a compliance failure — but revenue stops either way.",
+        "caseId": "case WM-40118",
+        "deadline": "6 days",
+        "dlTint": "var(--amber-50)",
+        "dlTone": "var(--amber-700)",
+        "risk": "$0.6K/day",
+        "riskTone": "var(--rose-700)",
+        "icon": "fa-solid fa-eye-slash",
+        "sevBg": "var(--rose-500)",
+        "sevFg": "var(--ink-0)",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "mark": "var(--rose-500)",
+        "titleTone": "var(--ink-700)",
+        "iconTint": "var(--rose-50)",
+        "iconTone": "var(--rose-700)"
+      },
+      {
+        "severity": "medium",
+        "market": "Walmart",
+        "title": "On-time delivery 95.2%, floor is 96.5%",
+        "summary": "Inside Walmart’s 95% requirement and outside ours. Same East node cause as the Amazon metric — one fix moves both.",
+        "caseId": "internal · no case open",
+        "deadline": "no deadline",
+        "dlTint": "var(--ink-100)",
+        "dlTone": "var(--ink-600)",
+        "risk": "$2.4K/day",
+        "riskTone": "var(--rose-700)",
+        "icon": "fa-solid fa-clock",
+        "sevBg": "var(--amber-500)",
+        "sevFg": "var(--ink-0)",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "mark": "var(--amber-500)",
+        "titleTone": "var(--ink-700)",
+        "iconTint": "var(--amber-50)",
+        "iconTone": "var(--amber-700)"
+      },
+      {
+        "severity": "low",
+        "market": "Amazon",
+        "title": "Documentation request — supplier invoices",
+        "summary": "Routine authenticity check on three SKUs. Answerable entirely from the document vault with current invoices and authorisation letters.",
+        "caseId": "case 8791-4402",
+        "deadline": "11 days",
+        "dlTint": "var(--ink-100)",
+        "dlTone": "var(--ink-600)",
+        "risk": "none yet",
+        "riskTone": "var(--green-700)",
+        "icon": "fa-solid fa-file-lines",
+        "sevBg": "var(--ink-300)",
+        "sevFg": "var(--ink-0)",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-200)",
+        "titleTone": "var(--ink-700)",
+        "iconTint": "var(--ink-100)",
+        "iconTone": "var(--ink-600)"
+      }
+    ],
+    "sel": {
+      "severity": "medium",
+      "title": "Late-shipment rate 3.4%, past our 3.0% floor",
+      "caseId": "internal · no case open",
+      "detail": "Late shipment measures orders dispatched after the promised handling window. At 3.4% we are inside Amazon’s 4.0% limit and outside our own 3.0% floor — the metric is not yet a problem for them and is already a problem for us.",
+      "icon": "fa-solid fa-truck-fast",
+      "sevBg": "var(--amber-500)",
+      "sevFg": "var(--ink-0)",
+      "border": "color-mix(in oklab, var(--amber-500) 30%, white)",
+      "iconTint": "var(--amber-50)",
+      "iconTone": "var(--amber-700)",
+      "stats": [
+        {
+          "label": "Current",
+          "value": "3.4%",
+          "note": "their limit is 4.0%",
+          "tone": "var(--amber-700)"
+        },
+        {
+          "label": "Trend",
+          "value": "+0.4pp / wk",
+          "note": "six days rising",
+          "tone": "var(--rose-700)"
+        },
+        {
+          "label": "Late orders",
+          "value": "184",
+          "note": "trailing 30 days",
+          "tone": "var(--ink-900)"
+        },
+        {
+          "label": "Days of buffer",
+          "value": "9",
+          "note": "at the current trend",
+          "tone": "var(--amber-700)"
+        }
+      ],
+      "panelTitle": "Root cause · 184 late orders decomposed",
+      "panelTone": "var(--mod-actions)",
+      "causes": [
+        {
+          "label": "East 3PL Monday backlog",
+          "value": "78%",
+          "pct": 78,
+          "tone": "var(--rose-700)",
+          "note": "Weekend orders queue behind Monday inbound receiving and ship a day late."
+        },
+        {
+          "label": "Oversize items awaiting pick",
+          "value": "11%",
+          "pct": 11,
+          "tone": "var(--amber-700)",
+          "note": "Cast iron and dutch ovens need two pickers, which the Monday roster does not have."
+        },
+        {
+          "label": "Address validation holds",
+          "value": "7%",
+          "pct": 7,
+          "tone": "var(--ink-700)",
+          "note": "Residential reclassifications pause dispatch for manual review."
+        },
+        {
+          "label": "Genuine stock-outs at pick",
+          "value": "4%",
+          "pct": 4,
+          "tone": "var(--ink-700)",
+          "note": "Cover was there at order, gone at pick. A forecasting issue, not a fulfilment one."
+        }
+      ],
+      "hasLinks": true,
+      "links": [
+        {
+          "label": "S9.18 fulfilment",
+          "href": "S9.18-3-decide.dc.html",
+          "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+          "tone": "var(--mod-inventory)"
+        },
+        {
+          "label": "S9.12 returns",
+          "href": "S9.12-2-analyze.dc.html",
+          "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+          "tone": "var(--mod-margin)"
+        }
+      ],
+      "risk": [
+        {
+          "label": "Listing-level action",
+          "note": "Buy Box loss on affected ASINs",
+          "value": "$9.1K/day",
+          "tone": "var(--rose-700)"
+        },
+        {
+          "label": "Account-level review",
+          "note": "if the metric passes 4.0%",
+          "value": "$6.8K/hour",
+          "tone": "var(--rose-700)"
+        },
+        {
+          "label": "Recovery cost",
+          "note": "rank and review velocity after reinstatement",
+          "value": "3–5 weeks",
+          "tone": "var(--amber-700)"
+        }
+      ],
+      "evidenceTitle": "What the fix looks like",
+      "evidence": [
+        {
+          "label": "Handling-time buffer on weekend orders",
+          "detail": "One extra day on orders placed Fri–Sun. Projected 1.9% within 14 days. No listing changes, no submission.",
+          "icon": "fa-solid fa-clock",
+          "tone": "var(--green-700)",
+          "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+          "bg": "var(--green-50)"
+        },
+        {
+          "label": "Monday roster change at the 3PL",
+          "detail": "Two additional pickers for the oversize queue. Addresses the 11% without touching promise times.",
+          "icon": "fa-solid fa-users",
+          "tone": "var(--ink-700)",
+          "border": "var(--ink-100)",
+          "bg": "var(--ink-0)"
+        },
+        {
+          "label": "No plan of action needed yet",
+          "detail": "Nothing is submitted while the metric is inside their limit. Fixing it now means never explaining it.",
+          "icon": "fa-solid fa-file-circle-check",
+          "tone": "var(--green-700)",
+          "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+          "bg": "var(--green-50)"
+        }
+      ]
+    }
+  }
+}

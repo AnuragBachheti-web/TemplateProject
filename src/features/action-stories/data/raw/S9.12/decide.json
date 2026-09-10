@@ -1,0 +1,596 @@
+{
+  "code": "S9.12",
+  "stageKey": "decide",
+  "name": "Returns",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "off": {},
+    "routes": {
+      "A": "restock",
+      "B": "refurb",
+      "C": "liquidate",
+      "H": "destroy"
+    },
+    "rl": true,
+    "rlT": 14
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "heroValue": "+$21.4K",
+    "confBadge": "77% ± 8",
+    "tradeoff": "6 prevention fixes plus the disposition rules save +$21.4K a quarter — +$16.6K by preventing returns and +$4.8K by routing the ones that still happen. The fit cohort is projected to fall from 18.4% to 9.4%, read on a lag rather than immediately.",
+    "liveStats": [
+      {
+        "label": "Prevention",
+        "value": "+$16.6K",
+        "pct": "100%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Disposition",
+        "value": "+$4.8K",
+        "pct": "29%",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "Fixes selected",
+        "value": "6 of 6",
+        "pct": "100%",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Cohort rate after",
+        "value": "9.4%",
+        "pct": "51%",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "spendNote": "One-time spend $1,880 · payback in 1 weeks",
+    "slate": [
+      {
+        "title": "Republish size charts from production measurements",
+        "note": "Six styles remeasured off the production run, not the sample. Adds a per-style fit note.",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "delta": "−9.0pp",
+        "effort": "2 days",
+        "tag": "fit cluster",
+        "tagShow": "inline-flex",
+        "tagTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "tagTone": "var(--mod-margin)",
+        "cm": "+$6,400",
+        "cmTone": "var(--green-700)",
+        "conf": "84%",
+        "confPct": "84%",
+        "confTone": "var(--green-700)",
+        "ownerTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "ownerTone": "var(--mod-margin)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)",
+        "boxBg": "var(--mod-margin)",
+        "boxBorder": "var(--mod-margin)",
+        "checkOpacity": 1
+      },
+      {
+        "title": "Surface fit reviews above the fold",
+        "note": "Pin the three most-helpful fit reviews and a “runs small — size up” badge on the 18 SKUs.",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "delta": "−4.5pp",
+        "effort": "1 day",
+        "tag": "PDP fit tool",
+        "tagShow": "inline-flex",
+        "tagTint": "var(--r-blue-50)",
+        "tagTone": "var(--r-blue-600)",
+        "cm": "+$3,100",
+        "cmTone": "var(--green-700)",
+        "conf": "71%",
+        "confPct": "71%",
+        "confTone": "var(--amber-700)",
+        "ownerTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "ownerTone": "var(--mod-margin)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)",
+        "boxBg": "var(--mod-margin)",
+        "boxBorder": "var(--mod-margin)",
+        "checkOpacity": 1
+      },
+      {
+        "title": "Divider and 32ECT carton for mixed orders",
+        "note": "$0.34 per order on roughly 3,400 mixed orders a quarter. Cuts the 4.1× damage multiple.",
+        "owner": "Shipper",
+        "ownerInitials": "Sh",
+        "delta": "−5.2pp",
+        "effort": "1 week",
+        "tag": "packaging",
+        "tagShow": "inline-flex",
+        "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "tagTone": "var(--mod-cash)",
+        "cm": "+$2,600",
+        "cmTone": "var(--green-700)",
+        "conf": "78%",
+        "confPct": "78%",
+        "confTone": "var(--green-700)",
+        "ownerTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "ownerTone": "var(--mod-cash)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)",
+        "boxBg": "var(--mod-margin)",
+        "boxBorder": "var(--mod-margin)",
+        "checkOpacity": 1
+      },
+      {
+        "title": "Open supplier CAPA on lots 4412–4419",
+        "note": "Thread weight below spec. 30-day corrective deadline, $2.8K chargeback on the affected lot.",
+        "owner": "Sourcer",
+        "ownerInitials": "So",
+        "delta": "−11.0pp",
+        "effort": "30 days",
+        "tag": "deadline Oct 4",
+        "tagShow": "inline-flex",
+        "tagTint": "var(--ink-100)",
+        "tagTone": "var(--ink-700)",
+        "cm": "+$2,200",
+        "cmTone": "var(--green-700)",
+        "conf": "66%",
+        "confPct": "66%",
+        "confTone": "var(--amber-700)",
+        "ownerTint": "var(--ink-100)",
+        "ownerTone": "var(--ink-700)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)",
+        "boxBg": "var(--mod-margin)",
+        "boxBorder": "var(--mod-margin)",
+        "checkOpacity": 1
+      },
+      {
+        "title": "Colour-correct two colourways and add a swatch macro",
+        "note": "Reshoot is not needed — the raw files white-balance correctly. Adds a macro to the gallery.",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "delta": "−3.1pp",
+        "effort": "3 days",
+        "tag": "content",
+        "tagShow": "inline-flex",
+        "tagTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "tagTone": "var(--mod-margin)",
+        "cm": "+$1,400",
+        "cmTone": "var(--green-700)",
+        "conf": "74%",
+        "confPct": "74%",
+        "confTone": "var(--amber-700)",
+        "ownerTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "ownerTone": "var(--mod-margin)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)",
+        "boxBg": "var(--mod-margin)",
+        "boxBorder": "var(--mod-margin)",
+        "checkOpacity": 1
+      },
+      {
+        "title": "Suppress M and L on the two worst styles until the fix ships",
+        "note": "Those two size pairs return at 28% and 24%. Two weeks of suppression costs less than the returns.",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "delta": "−2.4pp",
+        "effort": "same day",
+        "tag": "temporary",
+        "tagShow": "inline-flex",
+        "tagTint": "var(--amber-50)",
+        "tagTone": "var(--amber-700)",
+        "cm": "+$900",
+        "cmTone": "var(--green-700)",
+        "conf": "88%",
+        "confPct": "88%",
+        "confTone": "var(--green-700)",
+        "ownerTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "ownerTone": "var(--mod-margin)",
+        "bg": "color-mix(in oklab, var(--mod-margin) 4%, white)",
+        "boxBg": "var(--mod-margin)",
+        "boxBorder": "var(--mod-margin)",
+        "checkOpacity": 1
+      }
+    ],
+    "slateFoot": "6 of 6 selected · +$16.6K of prevention value · median confidence 77%",
+    "treeNote": "all four grades inside policy",
+    "treeTone": "var(--green-700)",
+    "tree": [
+      {
+        "grade": "Grade A",
+        "units": "1,840 u",
+        "test": "Tags on, unworn, original packaging, no odour.",
+        "edge": "var(--green-500)",
+        "border": "var(--ink-100)",
+        "delta": "Optimal route · Realify default",
+        "deltaTone": "var(--green-700)",
+        "routes": [
+          {
+            "label": "Restock as new",
+            "value": "$34.60",
+            "bg": "color-mix(in oklab, var(--green-500) 8%, white)",
+            "border": "color-mix(in oklab, var(--green-500) 40%, white)",
+            "dotBg": "var(--green-500)",
+            "dotBorder": "var(--green-500)",
+            "dotOpacity": 1,
+            "weight": 600,
+            "tone": "var(--ink-900)",
+            "valTone": "var(--ink-900)",
+            "cursor": "pointer"
+          },
+          {
+            "label": "Refurbish",
+            "value": "$20.70",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-700)",
+            "valTone": "var(--ink-500)",
+            "cursor": "pointer"
+          },
+          {
+            "label": "Liquidate",
+            "value": "$7.90",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-700)",
+            "valTone": "var(--ink-500)",
+            "cursor": "pointer"
+          }
+        ]
+      },
+      {
+        "grade": "Grade B",
+        "units": "980 u",
+        "test": "Worn once, needs steam or re-tag. No damage.",
+        "edge": "var(--amber-500)",
+        "border": "var(--ink-100)",
+        "delta": "Optimal route · Realify default",
+        "deltaTone": "var(--green-700)",
+        "routes": [
+          {
+            "label": "Restock as new",
+            "value": "not allowed",
+            "bg": "var(--ink-25)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-400)",
+            "valTone": "var(--rose-700)",
+            "cursor": "default"
+          },
+          {
+            "label": "Refurbish and relist",
+            "value": "$20.70",
+            "bg": "color-mix(in oklab, var(--amber-500) 8%, white)",
+            "border": "color-mix(in oklab, var(--amber-500) 40%, white)",
+            "dotBg": "var(--amber-500)",
+            "dotBorder": "var(--amber-500)",
+            "dotOpacity": 1,
+            "weight": 600,
+            "tone": "var(--ink-900)",
+            "valTone": "var(--ink-900)",
+            "cursor": "pointer"
+          },
+          {
+            "label": "Liquidate",
+            "value": "$7.90",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-700)",
+            "valTone": "var(--ink-500)",
+            "cursor": "pointer"
+          }
+        ]
+      },
+      {
+        "grade": "Grade C",
+        "units": "620 u",
+        "test": "Visible wear, mark or missing component.",
+        "edge": "var(--ink-400)",
+        "border": "var(--ink-100)",
+        "delta": "Optimal route · Realify default",
+        "deltaTone": "var(--green-700)",
+        "routes": [
+          {
+            "label": "Refurbish",
+            "value": "below floor",
+            "bg": "var(--ink-25)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-400)",
+            "valTone": "var(--rose-700)",
+            "cursor": "default"
+          },
+          {
+            "label": "Liquidate by pallet",
+            "value": "$7.90",
+            "bg": "color-mix(in oklab, var(--ink-400) 8%, white)",
+            "border": "color-mix(in oklab, var(--ink-400) 40%, white)",
+            "dotBg": "var(--ink-400)",
+            "dotBorder": "var(--ink-400)",
+            "dotOpacity": 1,
+            "weight": 600,
+            "tone": "var(--ink-900)",
+            "valTone": "var(--ink-900)",
+            "cursor": "pointer"
+          },
+          {
+            "label": "Destroy",
+            "value": "−$1.10",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-700)",
+            "valTone": "var(--ink-500)",
+            "cursor": "pointer"
+          }
+        ]
+      },
+      {
+        "grade": "Hygiene · hazmat",
+        "units": "412 u",
+        "test": "Opened personal care, intimates, swim, aerosol, cell.",
+        "edge": "var(--rose-500)",
+        "border": "var(--ink-100)",
+        "delta": "Optimal route · Realify default",
+        "deltaTone": "var(--green-700)",
+        "routes": [
+          {
+            "label": "Restock",
+            "value": "locked",
+            "bg": "var(--ink-25)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-400)",
+            "valTone": "var(--rose-700)",
+            "cursor": "default"
+          },
+          {
+            "label": "Liquidate",
+            "value": "locked",
+            "bg": "var(--ink-25)",
+            "border": "var(--ink-100)",
+            "dotBg": "var(--ink-0)",
+            "dotBorder": "var(--ink-300)",
+            "dotOpacity": 0,
+            "weight": 500,
+            "tone": "var(--ink-400)",
+            "valTone": "var(--rose-700)",
+            "cursor": "default"
+          },
+          {
+            "label": "Destroy with record",
+            "value": "−$1.10",
+            "bg": "color-mix(in oklab, var(--rose-500) 8%, white)",
+            "border": "color-mix(in oklab, var(--rose-500) 40%, white)",
+            "dotBg": "var(--rose-500)",
+            "dotBorder": "var(--rose-500)",
+            "dotOpacity": 1,
+            "weight": 600,
+            "tone": "var(--ink-900)",
+            "valTone": "var(--ink-900)",
+            "cursor": "pointer"
+          }
+        ]
+      }
+    ],
+    "rlState": "on · threshold $14",
+    "rlTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+    "rlTone": "var(--mod-margin)",
+    "rlBtnLabel": "Turn rule off",
+    "rlBtnBg": "var(--ink-0)",
+    "rlBtnBorder": "var(--ink-200)",
+    "rlBtnTone": "var(--ink-600)",
+    "rlThreshold": 14,
+    "rlLabel": "$14",
+    "rlCopy": "Balanced against the $8.40 handling cost: units under this value cannot recover their own freight and inspection.",
+    "rlStats": [
+      {
+        "label": "Units affected",
+        "value": "380",
+        "note": "per quarter, of 3,852 returns",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Freight saved",
+        "value": "+$2,356",
+        "note": "inbound plus inspection avoided",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Value given away",
+        "value": "$342",
+        "note": "nearly all were destined for destroy",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "zoneMeta": "Dial: Suggest · nothing is published or sent until you approve",
+    "actions": [
+      {
+        "title": "Approve all 6 fixes",
+        "note": "Publishes content, sends the CAPA notice and updates the RMA rules.",
+        "href": "S9.12-4-execute.dc.html",
+        "icon": "fa-solid fa-check",
+        "tone": "var(--ink-0)",
+        "titleTone": "var(--ink-0)",
+        "bg": "var(--ink-900)",
+        "border": "var(--ink-900)",
+        "hoverBorder": "var(--r-blue-500)"
+      },
+      {
+        "title": "Content fixes only",
+        "note": "Ship the page work now, hold packaging and the supplier CAPA for review.",
+        "href": "S9.12-4-execute.dc.html",
+        "icon": "fa-solid fa-file-pen",
+        "tone": "var(--mod-margin)",
+        "titleTone": "var(--ink-900)",
+        "bg": "var(--ink-0)",
+        "border": "color-mix(in oklab, var(--mod-margin) 30%, white)",
+        "hoverBorder": "var(--mod-margin)"
+      },
+      {
+        "title": "Disposition rules only",
+        "note": "Change routing and the return-less rule without touching any listing.",
+        "href": "S9.12-4-execute.dc.html",
+        "icon": "fa-solid fa-diagram-project",
+        "tone": "var(--ink-600)",
+        "titleTone": "var(--ink-900)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "hoverBorder": "var(--ink-400)"
+      },
+      {
+        "title": "Send back to Analyze",
+        "note": "Reject with a note. Realify re-clusters with your correction.",
+        "href": "S9.12-2-analyze.dc.html",
+        "icon": "fa-solid fa-rotate-left",
+        "tone": "var(--ink-600)",
+        "titleTone": "var(--ink-900)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "hoverBorder": "var(--ink-400)"
+      }
+    ],
+    "split": [
+      {
+        "label": "Prevention · compounds",
+        "value": "+$16.6K",
+        "pct": "100%",
+        "tone": "var(--green-700)",
+        "meta": "per quarter, and again next quarter"
+      },
+      {
+        "label": "Disposition routing",
+        "value": "+$2.4K",
+        "pct": "14%",
+        "tone": "var(--mod-margin)",
+        "meta": "on units already coming back"
+      },
+      {
+        "label": "Return-less refund",
+        "value": "+$2.4K",
+        "pct": "14%",
+        "tone": "var(--mod-margin)",
+        "meta": "380 units skip the freight"
+      }
+    ],
+    "checks": [
+      {
+        "text": "Hygiene and hazmat units route to destroy with a record — lock satisfied.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Every grade routes at or above its value floor.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Return-less threshold sits under the refurbish floor.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Supplier CAPA carries a 30-day deadline and a $2.8K chargeback — above the $250 floor.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      }
+    ],
+    "projection": [
+      {
+        "label": "today",
+        "value": "18.4%",
+        "pct": "100%",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "day 21",
+        "value": "14.8%",
+        "pct": "80%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "day 45",
+        "value": "9.4%",
+        "pct": "51%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "target",
+        "value": "12.0%",
+        "pct": "65%",
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "projNote": "The selected set reaches the 12% target on the projection.",
+    "capaCopy": "Notice goes to the supplier with lot codes, failure mode, unit count and photographs attached. Realify holds the chargeback until the deadline passes.",
+    "capa": [
+      {
+        "label": "Lots affected",
+        "value": "4412–4419",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Corrective deadline",
+        "value": "Oct 4 · 30d",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Chargeback held",
+        "value": "$2,800",
+        "tone": "var(--ink-800)"
+      },
+      {
+        "label": "Units in scope",
+        "value": "1,240",
+        "tone": "var(--ink-800)"
+      }
+    ],
+    "footerStatus": "Decide · 6 fixes · +$21.4K/qtr · cohort 18.4% → 9.4%",
+    "approveLabel": "Approve 6 fixes and rules",
+    "approveShow": "inline-flex",
+    "blockShow": "none"
+  }
+}

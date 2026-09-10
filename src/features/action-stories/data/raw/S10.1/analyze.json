@@ -1,0 +1,411 @@
+{
+  "code": "S10.1",
+  "stageKey": "analyze",
+  "name": "Variance bridge",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "sel": "fba"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "Drilling FBA fee · −$2,210",
+    "pinnedSub": "CM $10,640 vs $12,480 · residual +$130 · 1.0%",
+    "yTicks": [
+      "$13,200",
+      "$12,300",
+      "$11,400",
+      "$10,450",
+      "$9,500"
+    ],
+    "bars": [
+      {
+        "key": "baseline",
+        "label": "Baseline",
+        "sublabel": "7-day mean",
+        "value": "$12,480",
+        "top": "19.5",
+        "height": "80.5",
+        "fill": "var(--ink-400)",
+        "stroke": "var(--ink-500)",
+        "tag": null,
+        "anchor": true,
+        "valueTone": "var(--ink-900)",
+        "labelWeight": "700",
+        "labelTone": "var(--ink-800)",
+        "opacity": 1,
+        "labelTop": "11.5",
+        "tagTop": "0"
+      },
+      {
+        "key": "fba",
+        "label": "FBA fee",
+        "sublabel": "change",
+        "value": "−$2,210",
+        "top": "19.5",
+        "height": "59.7",
+        "fill": "var(--rose-500)",
+        "stroke": "var(--rose-700)",
+        "tag": "unexpected",
+        "tagTint": "var(--rose-500)",
+        "tagTone": "var(--ink-0)",
+        "valueTone": "var(--rose-700)",
+        "labelWeight": "700",
+        "labelTone": "var(--ink-900)",
+        "opacity": 1,
+        "labelTop": "11.5",
+        "tagTop": "80.7"
+      },
+      {
+        "key": "price",
+        "label": "Price effect",
+        "sublabel": "9.11 slate",
+        "value": "+$610",
+        "top": "62.7",
+        "height": "16.5",
+        "fill": "var(--green-500)",
+        "stroke": "var(--green-700)",
+        "tag": "our action",
+        "tagTint": "var(--mod-intel)",
+        "tagTone": "var(--ink-0)",
+        "valueTone": "var(--green-700)",
+        "labelWeight": "500",
+        "labelTone": "var(--ink-500)",
+        "opacity": 0.62,
+        "labelTop": "54.7",
+        "tagTop": "80.7"
+      },
+      {
+        "key": "returns",
+        "label": "Returns",
+        "sublabel": "",
+        "value": "−$240",
+        "top": "62.7",
+        "height": "6.5",
+        "fill": "var(--rose-500)",
+        "stroke": "var(--rose-700)",
+        "tag": "expected",
+        "tagTint": "var(--ink-200)",
+        "tagTone": "var(--ink-700)",
+        "valueTone": "var(--rose-700)",
+        "labelWeight": "500",
+        "labelTone": "var(--ink-500)",
+        "opacity": 0.62,
+        "labelTop": "54.7",
+        "tagTop": "70.7"
+      },
+      {
+        "key": "mix",
+        "label": "Mix",
+        "sublabel": "",
+        "value": "+$185",
+        "top": "64.2",
+        "height": "5.0",
+        "fill": "var(--green-500)",
+        "stroke": "var(--green-700)",
+        "tag": "expected",
+        "tagTint": "var(--ink-200)",
+        "tagTone": "var(--ink-700)",
+        "valueTone": "var(--green-700)",
+        "labelWeight": "500",
+        "labelTone": "var(--ink-500)",
+        "opacity": 0.62,
+        "labelTop": "56.2",
+        "tagTop": "70.7"
+      },
+      {
+        "key": "ads",
+        "label": "Ads",
+        "sublabel": "efficiency",
+        "value": "−$315",
+        "top": "64.2",
+        "height": "8.5",
+        "fill": "var(--rose-500)",
+        "stroke": "var(--rose-700)",
+        "tag": "expected",
+        "tagTint": "var(--ink-200)",
+        "tagTone": "var(--ink-700)",
+        "valueTone": "var(--rose-700)",
+        "labelWeight": "500",
+        "labelTone": "var(--ink-500)",
+        "opacity": 0.62,
+        "labelTop": "56.2",
+        "tagTop": "74.2"
+      },
+      {
+        "key": "residual",
+        "label": "Residual",
+        "sublabel": "1.0%",
+        "value": "+$130",
+        "top": "69.2",
+        "height": "3.5",
+        "fill": "var(--green-500)",
+        "stroke": "var(--green-700)",
+        "tag": "within 5%",
+        "tagTint": "var(--green-500)",
+        "tagTone": "var(--ink-0)",
+        "valueTone": "var(--green-700)",
+        "labelWeight": "500",
+        "labelTone": "var(--ink-500)",
+        "opacity": 0.62,
+        "labelTop": "61.2",
+        "tagTop": "74.2"
+      },
+      {
+        "key": "end",
+        "label": "Aug 18",
+        "sublabel": "actual",
+        "value": "$10,640",
+        "top": "69.2",
+        "height": "30.8",
+        "fill": "var(--ink-400)",
+        "stroke": "var(--ink-500)",
+        "tag": null,
+        "valueTone": "var(--rose-700)",
+        "labelWeight": "700",
+        "labelTone": "var(--ink-800)",
+        "opacity": 1,
+        "labelTop": "61.2",
+        "tagTop": "0"
+      }
+    ],
+    "drill": {
+      "name": "FBA fee change",
+      "tag": "unexpected",
+      "tagTint": "var(--rose-50)",
+      "tagTone": "var(--rose-700)",
+      "value": "−$2,210",
+      "valueTone": "var(--rose-700)",
+      "scope": "31 SKUs · Amazon only · recurs daily",
+      "evidence": "Amazon revised its dimensional-weight tier boundaries on Aug 18. Thirty-one of our SKUs crossed into the next tier — the products did not change size, the tier did. This is not a one-day event: at yesterday’s volume it costs roughly $2,210 every day until the packaging is right-sized or the prices absorb it.",
+      "rows": [
+        {
+          "sku": "Pan care kit",
+          "channel": "Amazon",
+          "units": "184",
+          "effect": "−$672",
+          "tone": "var(--rose-700)",
+          "event": "dim tier 2 → 3"
+        },
+        {
+          "sku": "Replacement filter 3-pack",
+          "channel": "Amazon",
+          "units": "211",
+          "effect": "−$518",
+          "tone": "var(--rose-700)",
+          "event": "dim tier 2 → 3"
+        },
+        {
+          "sku": "Silicone spatula pair",
+          "channel": "Amazon",
+          "units": "167",
+          "effect": "−$401",
+          "tone": "var(--rose-700)",
+          "event": "dim tier 1 → 2"
+        },
+        {
+          "sku": "Whetstone 1000/6000",
+          "channel": "Amazon",
+          "units": "96",
+          "effect": "−$288",
+          "tone": "var(--rose-700)",
+          "event": "dim tier 2 → 3"
+        },
+        {
+          "sku": "27 further SKUs",
+          "channel": "Amazon",
+          "units": "742",
+          "effect": "−$331",
+          "tone": "var(--rose-700)",
+          "event": "mixed tiers"
+        }
+      ],
+      "footnote": "31 SKUs affected · all Amazon · none on other channels",
+      "rowsTotal": "−$2,210"
+    },
+    "recon": [
+      {
+        "label": "Baseline",
+        "value": "$12,480",
+        "tone": "var(--ink-900)",
+        "note": "trailing 7-day mean CM"
+      },
+      {
+        "label": "Attributed",
+        "value": "−$1,970",
+        "tone": "var(--rose-700)",
+        "note": "five expected drivers plus one unexpected"
+      },
+      {
+        "label": "Residual",
+        "value": "+$130",
+        "tone": "var(--green-700)",
+        "note": "1.0% of the move · target under 5%"
+      },
+      {
+        "label": "Yesterday",
+        "value": "$10,640",
+        "tone": "var(--rose-700)",
+        "note": "reconciles exactly to settlement"
+      }
+    ],
+    "classifier": [
+      {
+        "label": "FBA fee · change",
+        "value": "−$2,210",
+        "tone": "var(--rose-700)",
+        "tag": "unexpected",
+        "tagTint": "var(--rose-50)",
+        "tagTone": "var(--rose-700)",
+        "confidence": "evidence: fee schedule diff",
+        "reason": "No Ledger action and no forecast term explains it. Amazon published revised dimensional-weight tiers effective Aug 18.",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-25)",
+        "mark": "var(--rose-500)"
+      },
+      {
+        "label": "Price effect · 9.11 slate",
+        "value": "+$610",
+        "tone": "var(--green-700)",
+        "tag": "our action",
+        "tagTint": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+        "tagTone": "var(--mod-intel)",
+        "confidence": "evidence: Ledger self-attribution",
+        "reason": "Attributed to our own price slate from the Ledger before any other driver was considered. Twelve SKUs stepped Aug 17.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "mark": "var(--mod-intel)"
+      },
+      {
+        "label": "Returns",
+        "value": "−$240",
+        "tone": "var(--rose-700)",
+        "tag": "expected",
+        "tagTint": "var(--ink-100)",
+        "tagTone": "var(--ink-600)",
+        "confidence": "evidence: within 1.2σ of trailing",
+        "reason": "Return volume sits 0.4pp above the trailing mean, inside normal daily variation for the apparel-adjacent cohort.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "mark": "var(--ink-200)"
+      },
+      {
+        "label": "Mix",
+        "value": "+$185",
+        "tone": "var(--green-700)",
+        "tag": "expected",
+        "tagTint": "var(--ink-100)",
+        "tagTone": "var(--ink-600)",
+        "confidence": "evidence: composition shift only",
+        "reason": "The basket tilted toward higher-CM cookware. Volume is flat; only what sold changed.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "mark": "var(--ink-200)"
+      },
+      {
+        "label": "Ads · efficiency",
+        "value": "−$315",
+        "tone": "var(--rose-700)",
+        "tag": "expected",
+        "tagTint": "var(--ink-100)",
+        "tagTone": "var(--ink-600)",
+        "confidence": "evidence: staged bid rollout, day 2",
+        "reason": "Day two of the staged bid rollout from the ads sweep. Within the projected band for the settling period.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "mark": "var(--ink-200)"
+      },
+      {
+        "label": "Residual · 1.0%",
+        "value": "+$130",
+        "tone": "var(--green-700)",
+        "tag": "residual",
+        "tagTint": "var(--green-50)",
+        "tagTone": "var(--green-700)",
+        "confidence": "target under 5%",
+        "reason": "What the bridge could not attribute. At 1.0% of the move it is noise rather than a missing term in the contract.",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "mark": "var(--green-500)"
+      }
+    ],
+    "timeline": [
+      {
+        "time": "Aug 17 · 14:20",
+        "source": "ours",
+        "srcIcon": "fa-solid fa-fingerprint",
+        "srcTint": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+        "srcTone": "var(--mod-intel)",
+        "title": "9.11 slate step executed — 12 SKUs",
+        "titleTone": "var(--mod-intel)",
+        "detail": "Margin-protective repricing pushed in parity-safe order, Amazon last. Auto-revert armed at −8% velocity.",
+        "ref": "LEDGER-PR-0912",
+        "line": true
+      },
+      {
+        "time": "Aug 18 · 00:01",
+        "source": "amazon",
+        "srcIcon": "fa-solid fa-building",
+        "srcTint": "var(--rose-50)",
+        "srcTone": "var(--rose-700)",
+        "title": "Revised dimensional-weight tiers effective",
+        "titleTone": "var(--ink-900)",
+        "detail": "Tier boundaries moved. 31 SKUs reclassified upward with no change to the products themselves.",
+        "ref": "fee schedule 2026-08",
+        "line": true
+      },
+      {
+        "time": "Aug 18 · 06:00",
+        "source": "ours",
+        "srcIcon": "fa-solid fa-fingerprint",
+        "srcTint": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+        "srcTone": "var(--mod-intel)",
+        "title": "Staged bid rollout — tranche 2 of 2 deferred",
+        "titleTone": "var(--mod-intel)",
+        "detail": "Day two of the 50% tranche from the ads sweep. The remaining half waits for the 72-hour check.",
+        "ref": "LEDGER-ADS-0788",
+        "line": true
+      },
+      {
+        "time": "Aug 18 · 11:42",
+        "source": "carrier",
+        "srcIcon": "fa-solid fa-truck",
+        "srcTint": "var(--ink-100)",
+        "srcTone": "var(--ink-600)",
+        "title": "Two inbound consolidations delayed 1 day",
+        "titleTone": "var(--ink-900)",
+        "detail": "No CM effect yesterday. Noted because it affects cover, not margin — the Inventory lens carries it.",
+        "ref": null,
+        "line": true
+      },
+      {
+        "time": "Aug 19 · 06:04",
+        "source": "realify",
+        "srcIcon": "fa-solid fa-shield-halved",
+        "srcTint": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+        "srcTone": "var(--mod-intel)",
+        "title": "Bridge closed · 1 driver unexplained by contract",
+        "titleTone": "var(--ink-900)",
+        "detail": "CM v3 has no term for a fee-tier reclassification, so it lands as unexpected rather than as a variance we planned for.",
+        "ref": "S10.1 · this card",
+        "line": false
+      }
+    ]
+  }
+}

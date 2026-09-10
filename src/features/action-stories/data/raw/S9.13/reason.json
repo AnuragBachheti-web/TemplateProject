@@ -1,0 +1,233 @@
+{
+  "code": "S9.13",
+  "stageKey": "reason",
+  "name": "Lifecycle",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "targets": [
+      {
+        "label": "12-month pLTV, blended",
+        "note": "modelled on cohorts with 2+ orders",
+        "actual": "$121",
+        "target": "$148",
+        "pct": 82,
+        "gap": "−$27 to close",
+        "tone": "var(--amber-500)"
+      },
+      {
+        "label": "Repeat rate by month 6",
+        "note": "second order within 180 days",
+        "actual": "27.4%",
+        "target": "34%",
+        "pct": 81,
+        "gap": "−6.6pp",
+        "tone": "var(--amber-500)"
+      },
+      {
+        "label": "Consumable repurchase within 60 days",
+        "note": "the 12 SKUs on this card",
+        "actual": "38%",
+        "target": "55%",
+        "pct": 69,
+        "gap": "−17pp · the gap driving this story",
+        "tone": "var(--rose-500)"
+      },
+      {
+        "label": "Revenue per recipient",
+        "note": "across all lifecycle sends",
+        "actual": "$0.51",
+        "target": "$0.42 floor",
+        "pct": 100,
+        "gap": "clears the floor",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Unsubscribe rate",
+        "note": "rolling 30 days, email",
+        "actual": "0.19%",
+        "target": "0.30% ceiling",
+        "pct": 63,
+        "gap": "headroom for one more weekly touch",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "governance": [
+      {
+        "icon": "fa-solid fa-envelope",
+        "label": "Frequency cap",
+        "detail": "Four marketing emails and two SMS per person per week, counted across every journey and campaign together."
+      },
+      {
+        "icon": "fa-solid fa-moon",
+        "label": "Quiet hours",
+        "detail": "No sends 9pm–8am in the recipient’s local time. Nothing before 10am on Sundays."
+      },
+      {
+        "icon": "fa-solid fa-layer-group",
+        "label": "Journey collision",
+        "detail": "One lifecycle journey at a time per person. Transactional and shipping messages sit outside the cap."
+      },
+      {
+        "icon": "fa-solid fa-flask-vial",
+        "label": "Holdout floor",
+        "detail": "10% holdout on every flow, 5% where monthly reach is under 2,000. A flow without one cannot report revenue."
+      }
+    ],
+    "offerLimits": [
+      {
+        "label": "New · first 30 days",
+        "value": "content only",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Repeat · 2–4 orders",
+        "value": "up to 10% off",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "VIP · top pLTV decile",
+        "value": "no discount under 90 days",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Lapsed · 90–180 days",
+        "value": "up to 15% off",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Consumable replenishment",
+        "value": "free shipping, no % off",
+        "tone": "var(--mod-hubs)"
+      }
+    ],
+    "brandChips": [
+      {
+        "icon": "fa-solid fa-comment",
+        "label": "Tone: warm, plain-spoken, no urgency countdowns"
+      },
+      {
+        "icon": "fa-solid fa-ban",
+        "label": "No fake scarcity or manufactured deadlines"
+      },
+      {
+        "icon": "fa-solid fa-envelope",
+        "label": "Max 4 emails / week"
+      },
+      {
+        "icon": "fa-solid fa-comment-sms",
+        "label": "Max 2 SMS / week"
+      },
+      {
+        "icon": "fa-solid fa-moon",
+        "label": "Quiet hours 9pm–8am local"
+      },
+      {
+        "icon": "fa-solid fa-image",
+        "label": "Product photography only, no lifestyle stock"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Channel-level marketing consent",
+        "detail": "Email and SMS consent are tracked separately. Neither is inferred from a purchase."
+      },
+      {
+        "label": "Express opt-in for SMS",
+        "detail": "No SMS journey can enrol a profile without a recorded express opt-in and its timestamp."
+      },
+      {
+        "label": "Unsubscribe honoured in 4 hours",
+        "detail": "Propagates across every brand and channel in the workspace. No journey can re-enrol a profile after it."
+      },
+      {
+        "label": "No re-permission campaigns",
+        "detail": "Unsubscribed and suppressed profiles are out of reach for every flow, including win-back."
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Yesterday · 06:12",
+        "what": "Keeper flagged 12 consumable SKUs whose repurchase window closes with no lifecycle touch inside it."
+      },
+      {
+        "when": "Yesterday · 06:14",
+        "what": "Segment Value Model put the untouched cohort at 4,180 profiles and a 42-day median repurchase cycle."
+      },
+      {
+        "when": "Yesterday · 09:40",
+        "what": "Promoter sized the missing flow at $6.1K a month incremental and pinned it to the queue for a decision."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Promoter",
+        "role": "Owns journey design, offer logic and the send calendar.",
+        "icon": "fa-solid fa-bullhorn",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)"
+      },
+      {
+        "name": "Keeper",
+        "role": "Owns retention, suppression health and consent state.",
+        "icon": "fa-solid fa-hand-holding-heart",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)"
+      },
+      {
+        "name": "Segment Value Model (pLTV)",
+        "role": "Scores every profile on 12-month predicted value.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      },
+      {
+        "name": "Incrementality Engine",
+        "role": "Designs and reads the holdout behind every claim.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Profiles with marketing consent",
+        "value": "38,410",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Order history depth",
+        "value": "26 months",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "ESP + SMS event sync",
+        "value": "live · 4 min lag",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Suppression list refresh",
+        "value": "11 min ago",
+        "tone": "var(--green-700)"
+      }
+    ]
+  }
+}

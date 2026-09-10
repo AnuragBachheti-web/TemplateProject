@@ -1,0 +1,519 @@
+{
+  "code": "S10.3",
+  "stageKey": "decide",
+  "name": "Account health",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "war": false,
+    "on": {
+      "buffer": true,
+      "roster": true,
+      "ip": true,
+      "copy": true,
+      "docs": false
+    }
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pageBg": "var(--ink-25)",
+    "headerBg": "var(--ink-0)",
+    "warRoom": false,
+    "normalMode": true,
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "1 metric\nat risk",
+    "modeTabs": [
+      {
+        "label": "Standard",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "War room",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "pinBorder": "var(--ink-100)",
+    "pinShadow": "none",
+    "pinPill": "Urgent",
+    "pinBadge": "Pinned",
+    "pinTitle": "Late-shipment 3.4% ↑ — 0.6pp from threshold",
+    "pinnedTop": "4 of 5 responses selected",
+    "pinnedSub": "queue ordered by expiry · 2 inside a week",
+    "heroBorder": "color-mix(in oklab, var(--mod-actions) 26%, white)",
+    "heroTitle": "Fix the cause first; only two of the five need a submission",
+    "heroBody": "Two operational fixes address 89% of the late-shipment cause and never reach a marketplace inbox. The IP counter-notice and the listing correction do need submissions, both human-reviewed, and the IP matter goes through counsel.",
+    "queueNote": "4 selected · 2 need a submission",
+    "queueTone": "var(--ink-400)",
+    "heroMetrics": [
+      {
+        "label": "Selected",
+        "value": "4",
+        "tone": "var(--ink-900)",
+        "note": "of five available responses"
+      },
+      {
+        "label": "Revenue protected",
+        "value": "$16.8K/day",
+        "tone": "var(--green-700)",
+        "note": "sum of exposures addressed"
+      },
+      {
+        "label": "Submissions",
+        "value": "2",
+        "tone": "var(--ink-900)",
+        "note": "each read and sent by a person"
+      },
+      {
+        "label": "Soonest deadline",
+        "value": "4 days",
+        "tone": "var(--rose-700)",
+        "note": "IP counter-notice"
+      }
+    ],
+    "actions": [
+      {
+        "kind": "legal",
+        "kindBg": "var(--rose-500)",
+        "kindFg": "var(--ink-0)",
+        "title": "Counter-notice on the IP complaint",
+        "body": "Validity is weak on the claimant’s side: no registered mark in our category and our listing predates the cited design by 16 months. The pack is assembled; counsel reads it and files.",
+        "chip": "legal review",
+        "href": "S10.3-4-execute.dc.html",
+        "chipTint": "var(--rose-50)",
+        "chipTone": "var(--rose-700)",
+        "gate": "counsel files",
+        "gateIcon": "fa-solid fa-scale-balanced",
+        "deadline": "4 days",
+        "dlTone": "var(--rose-700)",
+        "protects": "$1.8K/day",
+        "effort": "30 min",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "color-mix(in oklab, var(--rose-500) 30%, white)",
+        "mark": "var(--rose-500)",
+        "hasCurve": false,
+        "changes": [],
+        "hasDraft": true,
+        "draftTitle": "Counter-notice draft · for counsel",
+        "reviewer": "R. Vance · counsel",
+        "draft": "We dispute complaint 8814-2291 in full. The complainant’s registration (filed Mar 2025) covers cookware handle geometry and does not extend to pan bodies. Our listing for the carbon steel skillet 10\" first published 14 Nov 2023, sixteen months prior, with the original image set attached. The product is manufactured on our supplier’s standard tooling under the authorisation letter enclosed. We request immediate reinstatement and note that the complainant has filed nine comparable complaints in twelve months, four subsequently withdrawn.",
+        "attachments": [
+          {
+            "icon": "fa-solid fa-file-shield",
+            "label": "listing record Nov 2023"
+          },
+          {
+            "icon": "fa-solid fa-folder-open",
+            "label": "Kessler authorisation"
+          },
+          {
+            "icon": "fa-solid fa-images",
+            "label": "original image set"
+          },
+          {
+            "icon": "fa-solid fa-list",
+            "label": "claimant filing history"
+          }
+        ]
+      },
+      {
+        "kind": "listing fix",
+        "kindBg": "var(--mod-intel)",
+        "kindFg": "var(--ink-0)",
+        "title": "Correct the condition phrase on nine listings",
+        "body": "Two are suppressed; seven carry the same 2024 template phrase and have not been flagged yet. Fixing only the suppressed pair leaves seven waiting to happen.",
+        "chip": "S9.6 listings",
+        "href": "S9.6-3-decide.dc.html",
+        "chipTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+        "chipTone": "var(--mod-intel)",
+        "gate": null,
+        "deadline": "6 days",
+        "dlTone": "var(--amber-700)",
+        "protects": "$2.1K/day",
+        "effort": "20 min",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--mod-actions)",
+        "hasCurve": false,
+        "changes": [],
+        "hasDraft": true,
+        "draftTitle": "Reinstatement request · with diff",
+        "reviewer": "A. Castellanos",
+        "draft": "The phrase \"like new performance\" has been removed from all nine affected listings and from the source template, replaced with \"filtration performance\". No condition claim remains in any listing. Diff attached for both suppressed items. We request reinstatement of the two suppressed listings and confirm the remaining seven were corrected proactively.",
+        "attachments": [
+          {
+            "icon": "fa-solid fa-code-compare",
+            "label": "copy diff · 9 listings"
+          },
+          {
+            "icon": "fa-solid fa-file-lines",
+            "label": "template v3"
+          }
+        ]
+      },
+      {
+        "kind": "operational",
+        "kindBg": "var(--green-500)",
+        "kindFg": "var(--ink-0)",
+        "title": "Handling-time buffer on weekend orders",
+        "body": "One extra day of handling on Fri–Sun orders. Fixes 78% of the late-shipment cause and the shared 71% of the Walmart on-time cause with one change — and nothing is submitted to anyone.",
+        "chip": "S9.18 fulfilment",
+        "href": "S9.18-3-decide.dc.html",
+        "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "chipTone": "var(--mod-inventory)",
+        "gate": null,
+        "deadline": "9 days",
+        "dlTone": "var(--amber-700)",
+        "protects": "$11.5K/day",
+        "effort": "1 day",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--green-500)",
+        "hasCurve": true,
+        "curveNote": "3.4% → 1.9% within 14 days",
+        "changes": [
+          {
+            "label": "Late shipment · day 14",
+            "value": "1.9%",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Walmart on-time · day 14",
+            "value": "96.9%",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Promise shown at checkout",
+            "value": "+1 day",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "Conversion effect",
+            "value": "−0.3pp",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "Plan of action needed",
+            "value": "none",
+            "tone": "var(--green-700)"
+          }
+        ],
+        "hasDraft": false,
+        "attachments": [],
+        "curvePath": "M0.0 32.3 L60.0 34.2 L120.0 39.8 L180.0 47.3 L240.0 53.0 L300.0 56.7 L360.0 60.5 L420.0 60.5",
+        "doNothingPath": "M0.0 32.3 L60.0 30.4 L120.0 26.7 L180.0 22.9 L240.0 19.2 L300.0 15.4 L360.0 13.5 L420.0 9.8",
+        "limitY": "21.0",
+        "floorY": "39.8",
+        "startY": "32.3",
+        "endY": "60.5"
+      },
+      {
+        "kind": "operational",
+        "kindBg": "var(--green-500)",
+        "kindFg": "var(--ink-0)",
+        "title": "Two extra Monday pickers at the East node",
+        "body": "Addresses the 11% of late orders caused by oversize items waiting on a second picker. Costs 3PL labour and does not touch the promise shown at checkout.",
+        "chip": "S9.18 fulfilment",
+        "href": "S9.18-4-execute.dc.html",
+        "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "chipTone": "var(--mod-inventory)",
+        "gate": null,
+        "deadline": "9 days",
+        "dlTone": "var(--ink-700)",
+        "protects": "$1.4K/day",
+        "effort": "3 days",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "titleTone": "var(--ink-900)",
+        "border": "var(--ink-200)",
+        "mark": "var(--green-500)",
+        "hasCurve": false,
+        "changes": [],
+        "hasDraft": false,
+        "attachments": []
+      },
+      {
+        "kind": "documents",
+        "kindBg": "var(--ink-400)",
+        "kindFg": "var(--ink-0)",
+        "title": "Answer the authenticity request from the vault",
+        "body": "Three invoices and three authorisation letters, all current. Fifteen minutes of assembly and a human read. No revenue at risk today, and $4.2K a day if it goes unanswered.",
+        "chip": null,
+        "gate": null,
+        "deadline": "11 days",
+        "dlTone": "var(--ink-700)",
+        "protects": "$4.2K/day",
+        "effort": "15 min",
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "checkOpacity": 0,
+        "titleTone": "var(--ink-600)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-100)",
+        "hasCurve": false,
+        "changes": [],
+        "hasDraft": false,
+        "attachments": []
+      }
+    ],
+    "timeline": [
+      {
+        "when": "Aug 13",
+        "source": "ours",
+        "srcTint": "color-mix(in oklab, var(--mod-actions) 14%, white)",
+        "srcTone": "var(--mod-actions)",
+        "dotBg": "var(--mod-actions)",
+        "dotBorder": "var(--ink-0)",
+        "line": true,
+        "what": "Late shipment crossed our own 3.0% floor. Card raised, no marketplace action."
+      },
+      {
+        "when": "Aug 16",
+        "source": "amazon",
+        "srcTint": "var(--rose-50)",
+        "srcTone": "var(--rose-700)",
+        "dotBg": "var(--rose-500)",
+        "dotBorder": "var(--ink-0)",
+        "line": true,
+        "what": "IP complaint filed against the hero SKU. Listing suppressed the same day."
+      },
+      {
+        "when": "Aug 18",
+        "source": "ours",
+        "srcTint": "color-mix(in oklab, var(--mod-actions) 14%, white)",
+        "srcTone": "var(--mod-actions)",
+        "dotBg": "var(--mod-actions)",
+        "dotBorder": "var(--ink-0)",
+        "line": true,
+        "what": "Root cause identified: 78% of late orders trace to the East 3PL Monday backlog."
+      },
+      {
+        "when": "Aug 19 · 07:14",
+        "source": "amazon",
+        "srcTint": "var(--rose-50)",
+        "srcTone": "var(--rose-700)",
+        "dotBg": "var(--rose-500)",
+        "dotBorder": "var(--ink-0)",
+        "line": true,
+        "what": "Account-level review opened citing the late-shipment trend. 24-hour response window."
+      },
+      {
+        "when": "Aug 19 · 07:16",
+        "source": "realify",
+        "srcTint": "color-mix(in oklab, var(--mod-actions) 14%, white)",
+        "srcTone": "var(--mod-actions)",
+        "dotBg": "var(--mod-actions)",
+        "dotBorder": "var(--ink-0)",
+        "line": false,
+        "what": "War room opened. Card pinned to three queues, evidence assembled from Ledger and vault."
+      }
+    ],
+    "warEvidence": [
+      {
+        "label": "Late-order decomposition",
+        "source": "Ledger · 184 orders, cause-tagged",
+        "icon": "fa-solid fa-table-list",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "3PL SLA correspondence",
+        "source": "vault · 4 emails, Aug 11–18",
+        "icon": "fa-solid fa-envelope",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "label": "Handling-time change record",
+        "source": "Ledger · queued, not yet live",
+        "icon": "fa-solid fa-clock",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Recovery projection",
+        "source": "Health Monitor · 1.9% by day 14",
+        "icon": "fa-solid fa-chart-line",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Prior compliance record",
+        "source": "vault · 24 months, zero upheld",
+        "icon": "fa-solid fa-shield-halved",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "totals": [
+      {
+        "label": "Responses selected",
+        "value": "4 of 5",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Operational fixes",
+        "value": "2",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Submissions to review",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Legal escalations",
+        "value": "1",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Deadlines covered",
+        "value": "4 of 5",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "expiry": [
+      {
+        "n": "1",
+        "label": "IP counter-notice",
+        "left": "4 days",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "labelTone": "var(--ink-800)"
+      },
+      {
+        "n": "2",
+        "label": "Walmart content response",
+        "left": "6 days",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "labelTone": "var(--ink-800)"
+      },
+      {
+        "n": "3",
+        "label": "Late shipment to 4.0%",
+        "left": "9 days",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "labelTone": "var(--ink-800)"
+      },
+      {
+        "n": "4",
+        "label": "Walmart on-time floor",
+        "left": "9 days",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "labelTone": "var(--ink-800)"
+      },
+      {
+        "n": "5",
+        "label": "Authenticity documents",
+        "left": "11 days",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "labelTone": "var(--ink-400)"
+      }
+    ],
+    "policyStatus": "in band",
+    "policyTone": "var(--green-700)",
+    "checks": [
+      {
+        "label": "Legal review on IP",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Counter-notice routed to counsel with the evidence pack. Realify does not file it."
+      },
+      {
+        "label": "No metric gaming",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Every fix here is operational or a genuine content correction. No cancellations, no pre-dispatch tracking."
+      },
+      {
+        "label": "Cause addressed, not symptom",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "The handling-time buffer fixes 78% of the cause and clears the limit before day 14."
+      },
+      {
+        "label": "All submissions human-reviewed",
+        "icon": "fa-solid fa-lock",
+        "tone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "note": "Every draft is named to a reviewer. There is no dial setting that sends these automatically."
+      },
+      {
+        "label": "Fix precedes the submission",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "The recovery curve is evidence. A plan of action that cites a running fix is answered differently."
+      }
+    ],
+    "reviewerTitle": "Named reviewers",
+    "reviewers": [
+      {
+        "initials": "RV",
+        "name": "R. Vance",
+        "role": "Counsel · IP matters",
+        "count": "1 pack",
+        "avBg": "var(--mod-margin)",
+        "tone": "var(--rose-700)",
+        "bg": "var(--rose-50)"
+      },
+      {
+        "initials": "AC",
+        "name": "A. Castellanos",
+        "role": "Head of Ops · submissions",
+        "count": "1 items",
+        "avBg": "var(--r-blue-500)",
+        "tone": "var(--mod-actions)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "initials": "LD",
+        "name": "L. Duarte",
+        "role": "Fulfilment · 3PL owner",
+        "count": "2 fixes",
+        "avBg": "var(--mod-inventory)",
+        "tone": "var(--green-700)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "blocked": false,
+    "canApprove": true,
+    "blockReason": "A war-room response without the operational fix is a letter, not a remedy",
+    "ctaBg": "var(--ink-900)",
+    "ctaLabel": "Approve plan & continue",
+    "footStatus": "Decide · 4 responses · 2 submissions for review · soonest deadline 4 days",
+    "footTone": "var(--ink-500)"
+  }
+}

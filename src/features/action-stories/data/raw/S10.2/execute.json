@@ -1,0 +1,502 @@
+{
+  "code": "S10.2",
+  "stageKey": "execute",
+  "name": "Working capital",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "reverted": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "planLine": "The PO delay is a request, not a fact, until the suppliers confirm. The terms ask is a conversation Sourcer runs. Nothing here moves money by itself.",
+    "pushedCount": "0 / 4",
+    "runAllLabel": "Dispatch the plan",
+    "runAllIcon": "fa-solid fa-play",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "troughState": "not yet closed",
+    "troughTone": "var(--rose-700)",
+    "troughMetrics": [
+      {
+        "label": "Trough · before",
+        "value": "$89K",
+        "tone": "var(--rose-700)",
+        "note": "$31K under the $120K buffer"
+      },
+      {
+        "label": "Trough · after",
+        "value": "$89K",
+        "tone": "var(--amber-700)",
+        "note": "$31K still short"
+      },
+      {
+        "label": "P10 case",
+        "value": "$66K",
+        "tone": "var(--amber-700)",
+        "note": "downside still tight"
+      },
+      {
+        "label": "Cost of the plan",
+        "value": "$0.9K",
+        "tone": "var(--ink-900)",
+        "note": "service-level cost only · no interest"
+      }
+    ],
+    "yTicks": [
+      {
+        "label": "$240K",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "$120K",
+        "tone": "var(--mod-cash)"
+      },
+      {
+        "label": "$60K",
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "beforePath": "M0.0 18.7 L175.0 47.4 L350.0 85.2 L525.0 47.4 L700.0 42.8",
+    "afterPath": "M0.0 18.7 L175.0 47.4 L350.0 85.2 L525.0 47.4 L700.0 42.8",
+    "bufferY": "69.3",
+    "troughCx": "350.0",
+    "troughBeforeCy": "85.2",
+    "troughAfterCy": "85.2",
+    "troughDotFill": "var(--rose-500)",
+    "stages": [
+      {
+        "name": "PO timing to Planner",
+        "meta": "2 POs moved week 7 → week 8 · cover recalculated · service level 96.1%",
+        "icon": "fa-solid fa-boxes-stacked",
+        "hue": "var(--mod-inventory)",
+        "doorHref": "S9.2-3-decide.dc.html",
+        "doorLabel": "S9.2 replenishment",
+        "human": null,
+        "relief": "+$26K",
+        "reliefTone": "var(--green-700)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Send",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "PO-4612 · Core cookware",
+            "detail": "Confirmed date moves to Oct 13, four days after Amazon settles. Cover on three SKUs dips to 24 days at the crossover — inside the Core floor.",
+            "value": "$14K",
+            "valueTone": "var(--ink-800)",
+            "tag": "week 8",
+            "tagIcon": "fa-solid fa-calendar-day",
+            "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "tagTone": "var(--mod-inventory)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "PO-4618 · filtration",
+            "detail": "Meridian is already on an OTD watch, so the delay is requested with a firm confirm-by date rather than assumed.",
+            "value": "$12K",
+            "valueTone": "var(--ink-800)",
+            "tag": "week 8",
+            "tagIcon": "fa-solid fa-calendar-day",
+            "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+            "tagTone": "var(--mod-inventory)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Reorder points recalculated",
+            "detail": "Planner re-runs cover for the affected SKUs at the new dates. If any drops under 21 days the request is withdrawn automatically.",
+            "value": "7 SKUs",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Terms brief to Sourcer",
+        "meta": "Net 45 → Net 60 ask added to the Kessler brief · answer by Oct 4",
+        "icon": "fa-solid fa-file-lines",
+        "hue": "var(--mod-inventory)",
+        "doorHref": "S9.17-4-execute.dc.html",
+        "doorLabel": "S9.17 supplier",
+        "human": "Sourcer sends",
+        "relief": "+$31K",
+        "reliefTone": "var(--green-700)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Send",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Terms ask added to the existing brief",
+            "detail": "Kessler is already mid-negotiation on their price notice. The terms ask goes into the same letter rather than arriving as a second request a week later.",
+            "value": "15 days",
+            "valueTone": "var(--green-700)",
+            "tag": "one conversation",
+            "tagIcon": "fa-solid fa-comments",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Cash value stated in the brief",
+            "detail": "The brief now carries what the terms are worth to us — $31K of working capital per cycle — so the trade against price is visible to whoever runs the call.",
+            "value": "$31K",
+            "valueTone": "var(--green-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Contingency if declined",
+            "detail": "A no on Oct 4 leaves three days before the PO is due. The credit draw stays costed and ready as the fallback, and the card re-opens automatically.",
+            "value": "Oct 4",
+            "valueTone": "var(--amber-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Settlement anomaly watches",
+        "meta": "4 watches armed across the channels the plan depends on",
+        "icon": "fa-solid fa-bell",
+        "hue": "var(--mod-cash)",
+        "doorHref": null,
+        "human": null,
+        "relief": "guardrail",
+        "reliefTone": "var(--ink-600)",
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Send",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Amazon reserve rate",
+            "detail": "The plan assumes 7% held as rolling reserve. Every extra point costs about $1.4K of the Oct 12 payout, and the reserve is theirs to change.",
+            "value": "7% assumed",
+            "valueTone": "var(--rose-700)",
+            "tag": "critical",
+            "tagIcon": "fa-solid fa-triangle-exclamation",
+            "tagTint": "var(--rose-50)",
+            "tagTone": "var(--rose-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Payout date drift",
+            "detail": "A settlement landing two days late moves it past the week boundary and the trough deepens by the full payout. Watched daily from Oct 8.",
+            "value": "±2 days",
+            "valueTone": "var(--amber-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Wholesale receivable ageing",
+            "detail": "Two Faire invoices in week 8 are load-bearing. Anything past 35 days triggers a chase before it becomes a cash problem.",
+            "value": "2 invoices",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Plan of record and reprojection",
+        "meta": "CASH-Q4-0071 · weekly Monday reprojection · Ledger entry",
+        "icon": "fa-solid fa-chart-line",
+        "hue": "var(--mod-cash)",
+        "doorHref": null,
+        "human": null,
+        "relief": "logged",
+        "reliefTone": "var(--ink-600)",
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Send",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Plan filed to the Ledger",
+            "detail": "Both levers, their costs, the two levers not used and why, and the buffer left unchanged at $120K. The next trough starts from this record.",
+            "value": "CASH-Q4-0071",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Weekly reprojection scheduled",
+            "detail": "Actual against plan every Monday, with the 13-week ladder rebuilt from live settlement data rather than from last week’s assumptions.",
+            "value": "13 weeks",
+            "valueTone": "var(--ink-800)",
+            "tag": "Mondays",
+            "tagIcon": "fa-solid fa-repeat",
+            "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+            "tagTone": "var(--mod-cash)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Unused levers kept costed",
+            "detail": "Clearance acceleration and the credit draw stay priced and one click from ready. A reversal does not restart the analysis.",
+            "value": "2 held",
+            "valueTone": "var(--green-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "monStatus": "arms on dispatch",
+    "monTone": "var(--ink-400)",
+    "monitors": [
+      {
+        "label": "Week-7 trough",
+        "note": "reprojected from live settlement data",
+        "plan": "$89K",
+        "tol": "≥ $120K",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Weekly net cash vs plan",
+        "note": "each Monday, all four channels",
+        "plan": "±$8K",
+        "tol": "±$15K",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Kessler terms answer",
+        "note": "Net 60 ask · 64% projected",
+        "plan": "Net 60",
+        "tol": "by Oct 4",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "PO confirmations",
+        "note": "2 suppliers, new dates",
+        "plan": "2 of 2",
+        "tol": "by Aug 27",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Amazon reserve rate",
+        "note": "assumed 7% of the Oct 12 payout",
+        "plan": "7%",
+        "tol": "≤ 9%",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Stages dispatched",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Relief secured",
+        "value": "$0K",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Cash cost",
+        "value": "$0",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Levers held in reserve",
+        "value": "2",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "watches": [
+      {
+        "name": "Amazon reserve above 9%",
+        "state": "not armed",
+        "trigger": "Costs $1.4K of the Oct 12 payout per point. Re-opens this card with the credit draw pre-selected.",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "Any payout more than 2 days late",
+        "state": "not armed",
+        "trigger": "A late settlement crossing the week boundary deepens the trough by the full amount.",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "Faire receivable past 35 days",
+        "state": "not armed",
+        "trigger": "Two week-8 invoices are load-bearing. Chase before it becomes a cash problem.",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "Shopify payout gap over 4 days",
+        "state": "not armed",
+        "trigger": "The most reliable inflow in the plan. A gap here is a platform issue, not a demand one.",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, a breach re-opens this card with the draw pre-selected and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "rollback": [
+      {
+        "name": "PO date changes",
+        "note": "reversible until supplier confirms",
+        "nameTone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Terms ask",
+        "note": "cannot be unasked once sent",
+        "nameTone": "var(--ink-400)",
+        "noteTone": "var(--amber-700)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Anomaly watches",
+        "note": "disarm at any time",
+        "nameTone": "var(--ink-400)",
+        "noteTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 stages · 12 items staged",
+    "footTone": "var(--ink-500)"
+  }
+}

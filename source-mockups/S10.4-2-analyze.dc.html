@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.4-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--mod-cash)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-cash) 12%, white);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ railDot }};box-shadow:0 0 0 3px {{ railGlow }}"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25;white-space:pre-line">{{ railLabel }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ pinMark }};border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Fee integrity · S10.4</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">$4,120 recoverable — $890 expires in 21 days</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ pinTone }};font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-cash)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-cash)"></span>Lens: Cash · Margin
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-cash);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Controller
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Fee Reconciliation Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Claim Evidence Assembler
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-300);background:var(--ink-100);font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-700)">
+          <i class="fa-solid fa-user-pen" style="font-size:9.5px;color:var(--ink-500)"></i>Strongest early Act candidate
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.4-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.4-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-cash) 10%, white);border:1px solid color-mix(in oklab, var(--mod-cash) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-cash);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.4-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">3</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.4-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">4</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <sc-for list="{{ buckets }}" as="b" hint-placeholder-count="3">
+            <button type="button" onClick="{{ b.pick }}" style="text-align:left;background:{{ b.bg }};border:1px solid {{ b.border }};border-radius:var(--r-lg);padding:13px 14px;cursor:pointer;font-family:var(--font-sans);display:flex;flex-direction:column;gap:5px;transition:border-color var(--dur-fast) var(--ease-standard)">
+              <span style="display:flex;align-items:center;gap:8px">
+                <i class="{{ b.icon }}" style="font-size:11px;color:{{ b.tone }}"></i>
+                <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ b.label }}</span>
+                <span style="margin-left:auto;font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:{{ b.stateTone }}">{{ b.state }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:19px;font-weight:600;letter-spacing:-0.02em;color:{{ b.tone }};font-variant-numeric:tabular-nums">{{ b.value }}</span>
+              <span style="font-size:10.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ b.detail }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-list-check" style="font-size:9px"></i>Discrepancy ledger
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ ledgerMeta }}</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:8px">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">sort</span>
+              <span style="display:flex;align-items:center;gap:3px;padding:3px;border-radius:var(--r-full);background:var(--ink-100)">
+                <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ s.pick }}" style="height:24px;padding:0 11px;border-radius:var(--r-full);border:none;background:{{ s.bg }};color:{{ s.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:{{ s.weight }}">{{ s.label }}</button>
+                </sc-for>
+              </span>
+            </span>
+          </div>
+          <div style="padding:0 16px">
+            <div style="display:grid;grid-template-columns:1.45fr 88px 132px 104px 92px;gap:0 12px;padding:9px 0 6px;border-bottom:1px solid var(--ink-100)">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Claim</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Value</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Evidence</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ deadlineHead }}</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Win rate</span>
+            </div>
+            <sc-for list="{{ rows }}" as="c" hint-placeholder-count="8">
+              <div onClick="{{ c.pick }}" style="display:grid;grid-template-columns:1.45fr 88px 132px 104px 92px;gap:0 12px;align-items:center;padding:10px 8px;margin:0 -8px;border-bottom:1px solid var(--ink-50);cursor:pointer;background:{{ c.rowBg }};border-left:2px solid {{ c.mark }}">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                  <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ c.name }}</span>
+                    <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:{{ c.typeTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ c.typeTone }}">{{ c.typeShort }}</span>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ c.sub }}</span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ c.value }}</span>
+                <span style="display:flex;flex-direction:column;gap:4px">
+                  <span style="height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                    <span style="display:block;height:100%;width:{{ c.evPct }}%;background:{{ c.evTone }};border-radius:var(--r-full)"></span>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:9px;color:{{ c.evTone }}">{{ c.evLabel }}</span>
+                </span>
+                <span style="justify-self:end;display:inline-flex;align-items:center;gap:5px;height:23px;padding:0 9px;border-radius:var(--r-full);background:{{ c.dueTint }};font-family:var(--font-mono);font-size:10px;font-weight:600;color:{{ c.dueTone }}">{{ c.due }}</span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ c.winTone }};text-align:right;font-variant-numeric:tabular-nums">{{ c.win }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:11px 16px;background:var(--ink-25);border-top:1px solid var(--ink-100);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">{{ ledgerFoot }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">claims are a wasting asset — the default sort is the clock, not the money</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:var(--ink-25);display:flex;align-items:center;gap:11px;flex-wrap:wrap">
+            <span style="width:28px;height:28px;border-radius:var(--r-xs);background:{{ selTint }};color:{{ selTone }};display:grid;place-items:center;flex-shrink:0"><i class="{{ selIcon }}" style="font-size:12px"></i></span>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ selName }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ selMeta }}</span>
+            </span>
+            <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:14px">
+              <span style="display:flex;flex-direction:column;align-items:flex-end;gap:1px">
+                <span style="font-family:var(--font-mono);font-size:16px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ selValue }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400)">recoverable</span>
+              </span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:var(--r-full);background:{{ selDueTint }};font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ selDueTone }}">{{ selDue }}</span>
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 268px;gap:0">
+            <div style="min-width:0;padding:13px 16px;border-right:1px solid var(--ink-100)">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">{{ selFactsTitle }}</span>
+              <div style="margin-top:10px;display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Field</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ colLeft }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ colRight }}</span>
+              </div>
+              <sc-for list="{{ facts }}" as="f" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:0 12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+                  <span style="font-size:12px;color:var(--ink-700);text-wrap:pretty">{{ f.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ f.leftTone }};text-align:right;font-variant-numeric:tabular-nums">{{ f.left }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ f.rightTone }};text-align:right;font-variant-numeric:tabular-nums">{{ f.right }}</span>
+                </div>
+              </sc-for>
+              <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ selNote }}</p>
+            </div>
+            <div style="min-width:0;padding:13px 16px;background:var(--ink-25);display:flex;flex-direction:column;gap:9px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Evidence pack</span>
+              <sc-for list="{{ evidence }}" as="e" hint-placeholder-count="4">
+                <div style="display:flex;align-items:flex-start;gap:9px">
+                  <i class="{{ e.icon }}" style="font-size:10px;color:{{ e.tone }};margin-top:3px;flex-shrink:0;width:11px;text-align:center"></i>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                    <span style="font-size:11.5px;font-weight:600;color:{{ e.nameTone }};text-wrap:pretty">{{ e.label }}</span>
+                    <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ e.detail }}</span>
+                  </span>
+                </div>
+              </sc-for>
+              <span style="margin-top:auto;padding:9px 10px;border-radius:var(--r-sm);background:{{ evBoxBg }};border:1px solid {{ evBoxBorder }};font-size:11px;line-height:1.5;color:{{ evBoxTone }};text-wrap:pretty">{{ evBoxCopy }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 34%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-lightbulb" style="font-size:11px;color:var(--mod-cash)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mod-cash)">Insight</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:13px;line-height:1.55;color:var(--ink-800);text-wrap:pretty">$4,120 identified this month: <strong style="font-weight:600">$2,380</strong> in dimension-tier errors across 6 SKUs, <strong style="font-weight:600">$1,340</strong> of unreimbursed lost inventory, <strong style="font-weight:600">$400</strong> refund-without-return. <strong style="font-weight:600;color:var(--rose-700)">$890 expires within 21 days.</strong></p>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ expiryBars }}" as="b" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:60px 1fr 52px;gap:0 9px;align-items:center">
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-500)">{{ b.label }}</span>
+                <span style="height:8px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <span style="display:block;height:100%;width:{{ b.pct }}%;background:{{ b.tone }};border-radius:var(--r-full)"></span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ b.tone }};text-align:right;font-variant-numeric:tabular-nums">{{ b.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Win rate by type</span>
+          <p style="margin:8px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">Twelve months of our own filings, not a vendor benchmark.</p>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ winRates }}" as="w" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-800);text-wrap:pretty">{{ w.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ w.tone }}">{{ w.pct }}</span>
+                </span>
+                <span style="height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <span style="display:block;height:100%;width:{{ w.bar }}%;background:{{ w.tone }};border-radius:var(--r-full)"></span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ w.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--amber-500) 26%, white);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-arrow-trend-up" style="font-size:11px;color:var(--amber-700)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Inflow rate</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--amber-700)">17 / month ↑ 6</span>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:5px;height:52px">
+            <sc-for list="{{ inflow }}" as="i" hint-placeholder-count="6">
+              <span style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;height:100%">
+                <span style="height:{{ i.h }}px;border-radius:2px 2px 0 0;background:{{ i.tone }}"></span>
+                <span style="font-family:var(--font-mono);font-size:8px;color:var(--ink-400);text-align:center">{{ i.label }}</span>
+              </span>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">Discrepancy count has climbed three months running. Recovering the money is the smaller half of the problem — a rising inflow is a systems question.</p>
+          <a href="S10.1-1-reason.dc.html" style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;height:27px;padding:0 10px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-intel) 12%, white);font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--mod-intel)">
+            <i class="fa-solid fa-magnifying-glass-chart" style="font-size:9px"></i>Open a 10.1 investigation
+          </a>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">{{ footStatus }}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S10.4-1-reason.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-arrow-left" style="font-size:11px"></i>Back to Reason
+        </a>
+        <a href="S10.4-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--mod-cash);color:var(--ink-0);transform:translateY(-1px)">
+          Build the claim batch<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":1024},"executionMode":{"editor":"enum","options":["Suggest","Approve","Auto"],"default":"Suggest","tsType":"'Suggest' | 'Approve' | 'Auto'","section":"Shell"}}'>
+class Component extends DCLogic {
+  state = { sort: 'due', filter: 'all', sel: 'FEE-2207' };
+
+  claims() {
+    return [
+      { id: 'FEE-2207', name: 'Refund without return · 2 orders', sub: 'orders 114-8827301 and 114-8830992', type: 'refund', value: 400, days: 9, win: 88, ev: 100,
+        facts: [
+          { label: 'Refund issued', left: 'Jun 26', right: 'Jun 26' },
+          { label: 'Return window closed', left: 'Jul 26', right: 'Jul 26' },
+          { label: 'Inbound scan on either unit', left: 'none', right: 'none', rightTone: 'var(--rose-700)' },
+          { label: 'Units refunded', left: '2', right: '2' },
+          { label: 'Refund value', left: '$400', right: '$400', rightTone: 'var(--mod-cash)' },
+          { label: 'Days since window closed', left: '24', right: 'files inside 60', rightTone: 'var(--rose-700)' },
+        ],
+        colLeft: 'their record', colRight: 'our check',
+        note: 'Both customers were refunded and neither unit came back. Policy reimburses the refunded amount once the return window elapses with no inbound scan — the only fact in question is the scan, and their own log answers it.',
+        evidence: [
+          { label: 'Refund events', detail: 'both order records with refund timestamps', ok: true },
+          { label: 'Return window elapsed', detail: 'Jul 26, 24 days ago', ok: true },
+          { label: 'Inbound scan search', detail: 'no receipt against either RMA', ok: true },
+          { label: 'Order-level fee ledger', detail: 'refund amounts confirmed against settlement', ok: true },
+        ] },
+      { id: 'FEE-2203', name: 'Dimension tier · Knife Block 6pc', sub: 'SKU NW-KNB-06 · 41 units billed Jul 8 – Aug 14', type: 'dim', value: 310, days: 16, win: 91, ev: 100,
+        facts: [
+          { label: 'Length', left: '18.2 in', right: '15.9 in' },
+          { label: 'Width', left: '11.0 in', right: '9.4 in' },
+          { label: 'Height', left: '9.5 in', right: '8.8 in' },
+          { label: 'Unit weight', left: '6.4 lb', right: '6.1 lb' },
+          { label: 'Size tier', left: 'Large Standard', right: 'Standard', rightTone: 'var(--green-700)' },
+          { label: 'Fee per unit', left: '$8.26', right: '$0.70 over', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'billed', colRight: 'measured',
+        note: 'Their own cubiscan re-measure on Jul 30 puts this unit inside Standard on every axis. Every unit billed since the fee change carried the Large Standard rate — 41 units at $0.70 too much, and the 90-day clock started with the first of them.',
+        evidence: [
+          { label: 'Measured-dimension record', detail: 'their cubiscan report, Jul 30', ok: true },
+          { label: 'Fee lines with tier applied', detail: '41 units, itemised', ok: true },
+          { label: 'Correct-tier fee table', detail: 'published Standard rate for the period', ok: true },
+          { label: 'Product spec sheet', detail: 'packaging drawing as corroboration', ok: true },
+        ] },
+      { id: 'FEE-2211', name: 'Lost inventory · 2 units unmatched', sub: 'SKU NW-FLT-01 · adjustment Jul 12', type: 'lost', value: 180, days: 21, win: 76, ev: 100,
+        facts: [
+          { label: 'Adjustment posted', left: 'Jul 12', right: 'Jul 12' },
+          { label: 'Units adjusted out', left: '2', right: '2' },
+          { label: 'Auto-match window', left: '30 days', right: 'elapsed Aug 11', rightTone: 'var(--amber-700)' },
+          { label: 'Reimbursement found', left: 'none', right: 'none', rightTone: 'var(--rose-700)' },
+          { label: 'Replacement cost', left: '$90 / unit', right: '$180', rightTone: 'var(--mod-cash)' },
+          { label: 'Days unmatched', left: '38', right: '21 left to file', rightTone: 'var(--amber-700)' },
+        ],
+        colLeft: 'their record', colRight: 'our check',
+        note: 'Two units left the count on an adjustment and no reimbursement followed inside the 30-day auto-match. The reimbursement gap detector holds claims until that window has genuinely elapsed, which is why this surfaces now rather than in July.',
+        evidence: [
+          { label: 'Inventory adjustment record', detail: 'their ledger, Jul 12', ok: true },
+          { label: 'Reimbursement search', detail: 'no matching credit through Aug 19', ok: true },
+          { label: 'Cost basis', detail: 'landed cost per unit from the PO', ok: true },
+          { label: 'Shipment reconciliation', detail: 'inbound fully received, no discrepancy', ok: true },
+        ] },
+      { id: 'FEE-2210', name: 'Lost inventory · 3 units at East node', sub: 'SKU NW-DUT-05 · adjustment Jun 28', type: 'lost', value: 520, days: 29, win: 78, ev: 100,
+        facts: [
+          { label: 'Adjustment posted', left: 'Jun 28', right: 'Jun 28' },
+          { label: 'Units adjusted out', left: '3', right: '3' },
+          { label: 'Auto-match window', left: '30 days', right: 'elapsed Jul 28', rightTone: 'var(--amber-700)' },
+          { label: 'Reimbursement found', left: 'none', right: 'none', rightTone: 'var(--rose-700)' },
+          { label: 'Replacement cost', left: '$173 / unit', right: '$520', rightTone: 'var(--mod-cash)' },
+          { label: 'Days unmatched', left: '52', right: '29 left to file', rightTone: 'var(--amber-700)' },
+        ],
+        colLeft: 'their record', colRight: 'our check',
+        note: 'The largest single unreimbursed adjustment in the ledger, and the one where the cost basis matters most — claimed at landed cost from the PO rather than at retail, which is what policy pays and what history says gets approved.',
+        evidence: [
+          { label: 'Inventory adjustment record', detail: 'their ledger, Jun 28', ok: true },
+          { label: 'Reimbursement search', detail: 'no matching credit in 52 days', ok: true },
+          { label: 'Cost basis', detail: '$173 landed, PO-4471', ok: true },
+          { label: 'Shipment reconciliation', detail: 'inbound receipt matched in full', ok: true },
+        ] },
+      { id: 'FEE-2201', name: 'Dimension tier · Dutch Oven 5qt', sub: 'SKU NW-DUT-05 · 88 units billed Jun 2 – Aug 16', type: 'dim', value: 640, days: 34, win: 94, ev: 100,
+        facts: [
+          { label: 'Length', left: '14.8 in', right: '13.1 in' },
+          { label: 'Width', left: '13.9 in', right: '12.6 in' },
+          { label: 'Height', left: '9.2 in', right: '8.4 in' },
+          { label: 'Unit weight', left: '13.1 lb', right: '12.4 lb' },
+          { label: 'Size tier', left: 'Large Bulky', right: 'Large Standard', rightTone: 'var(--green-700)' },
+          { label: 'Fee per unit', left: '$14.05', right: '$7.27 over', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'billed', colRight: 'measured',
+        note: 'The clearest claim in the batch and the largest. A packaging change in May reduced the carton, their re-measure on Jun 14 recorded it, and the fee tier never followed. 88 units at $7.27 too much.',
+        evidence: [
+          { label: 'Measured-dimension record', detail: 'their cubiscan report, Jun 14', ok: true },
+          { label: 'Fee lines with tier applied', detail: '88 units, itemised', ok: true },
+          { label: 'Packaging change record', detail: 'carton spec v3, effective May 20', ok: true },
+          { label: 'Correct-tier fee table', detail: 'Large Standard rate for the period', ok: true },
+        ] },
+      { id: 'FEE-2212', name: 'Damaged in warehouse · 4 units', sub: 'SKU NW-SAU-12 · adjustment Jun 20', type: 'lost', value: 410, days: 36, win: 74, ev: 80, evNeed: 'photos',
+        facts: [
+          { label: 'Adjustment posted', left: 'Jun 20', right: 'Jun 20' },
+          { label: 'Units damaged', left: '4', right: '4' },
+          { label: 'Damage attributed to', left: 'warehouse', right: 'warehouse', rightTone: 'var(--green-700)' },
+          { label: 'Reimbursement found', left: 'partial', right: '$0 of $410', rightTone: 'var(--rose-700)' },
+          { label: 'Replacement cost', left: '$102 / unit', right: '$410', rightTone: 'var(--mod-cash)' },
+          { label: 'Condition photos', left: 'not attached', right: 'needed', rightTone: 'var(--amber-700)' },
+        ],
+        colLeft: 'their record', colRight: 'our check',
+        note: 'Attribution is already in their record, so the claim is sound — but this type is only paid with condition photographs, and ours are in the 3PL portal rather than the vault. Until they are attached the claim stays staged and does not file.',
+        evidence: [
+          { label: 'Inventory adjustment record', detail: 'their ledger, Jun 20', ok: true },
+          { label: 'Damage attribution', detail: 'warehouse-damaged, not carrier', ok: true },
+          { label: 'Condition photographs', detail: 'pull from the 3PL portal — 4 units', ok: false },
+          { label: 'Cost basis', detail: '$102 landed, PO-4402', ok: true },
+        ] },
+      { id: 'FEE-2202', name: 'Dimension tier · Sauté Pan 12in', sub: 'SKU NW-SAU-12 · 62 units billed Jun 9 – Aug 12', type: 'dim', value: 520, days: 41, win: 94, ev: 100,
+        facts: [
+          { label: 'Length', left: '20.4 in', right: '18.1 in' },
+          { label: 'Width', left: '13.2 in', right: '12.9 in' },
+          { label: 'Height', left: '4.6 in', right: '4.2 in' },
+          { label: 'Unit weight', left: '7.8 lb', right: '7.5 lb' },
+          { label: 'Size tier', left: 'Large Bulky', right: 'Large Standard', rightTone: 'var(--green-700)' },
+          { label: 'Fee per unit', left: '$12.90', right: '$8.39 over', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'billed', colRight: 'measured',
+        note: 'The billed length crosses the Large Standard limit by 2.4 inches; the measured length does not cross it at all. Same pattern as the Dutch Oven, same May packaging programme, same evidence shape.',
+        evidence: [
+          { label: 'Measured-dimension record', detail: 'their cubiscan report, Jun 21', ok: true },
+          { label: 'Fee lines with tier applied', detail: '62 units, itemised', ok: true },
+          { label: 'Packaging change record', detail: 'carton spec v3, effective May 20', ok: true },
+          { label: 'Correct-tier fee table', detail: 'Large Standard rate for the period', ok: true },
+        ] },
+      { id: 'FEE-2213', name: 'Inbound shortage · Walmart WFS', sub: 'PO-4488 · 6 units short on receipt Jul 5', type: 'lost', value: 230, days: 44, win: 61, ev: 45, evNeed: 'POD + BOL',
+        facts: [
+          { label: 'Units shipped', left: '48', right: '48' },
+          { label: 'Units received', left: '42', right: '42' },
+          { label: 'Shortage', left: '6', right: '6', rightTone: 'var(--rose-700)' },
+          { label: 'Carrier proof of delivery', left: 'not on file', right: 'needed', rightTone: 'var(--amber-700)' },
+          { label: 'Bill of lading', left: 'not on file', right: 'needed', rightTone: 'var(--amber-700)' },
+          { label: 'Claim value at cost', left: '$38 / unit', right: '$230', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'their record', colRight: 'our check',
+        note: 'The weakest claim in the ledger and the honest reason is evidence, not merit. Walmart shortage claims need carrier proof of delivery and the bill of lading, both with the freight broker. Win rate on this type without them is close to zero, which is why it is staged rather than queued.',
+        evidence: [
+          { label: 'Receipt record', detail: 'their WFS receipt, 42 of 48', ok: true },
+          { label: 'Carrier proof of delivery', detail: 'request from the freight broker', ok: false },
+          { label: 'Bill of lading', detail: 'request from the freight broker', ok: false },
+          { label: 'Cost basis', detail: '$38 landed, PO-4488', ok: true },
+        ] },
+      { id: 'FEE-2204', name: 'Dimension tier · Enamel Casserole 3qt', sub: 'SKU NW-ENC-03 · 54 units billed Jun 18 – Aug 15', type: 'dim', value: 430, days: 47, win: 91, ev: 100,
+        facts: [
+          { label: 'Length', left: '13.6 in', right: '12.2 in' },
+          { label: 'Width', left: '11.8 in', right: '11.1 in' },
+          { label: 'Height', left: '8.4 in', right: '7.9 in' },
+          { label: 'Unit weight', left: '9.6 lb', right: '9.2 lb' },
+          { label: 'Size tier', left: 'Large Bulky', right: 'Large Standard', rightTone: 'var(--green-700)' },
+          { label: 'Fee per unit', left: '$12.31', right: '$7.96 over', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'billed', colRight: 'measured',
+        note: 'Same programme, third SKU. Filing these three together rather than separately is deliberate — one batch, one evidence shape, one reviewer on their side.',
+        evidence: [
+          { label: 'Measured-dimension record', detail: 'their cubiscan report, Jun 27', ok: true },
+          { label: 'Fee lines with tier applied', detail: '54 units, itemised', ok: true },
+          { label: 'Packaging change record', detail: 'carton spec v3, effective May 20', ok: true },
+          { label: 'Correct-tier fee table', detail: 'Large Standard rate for the period', ok: true },
+        ] },
+      { id: 'FEE-2205', name: 'Dimension tier · Cast-iron Skillet 10in', sub: 'SKU NW-CIS-10 · 39 units billed Jun 24 – Aug 9', type: 'dim', value: 310, days: 52, win: 89, ev: 100,
+        facts: [
+          { label: 'Length', left: '12.9 in', right: '11.6 in' },
+          { label: 'Width', left: '11.4 in', right: '10.8 in' },
+          { label: 'Height', left: '3.1 in', right: '2.8 in' },
+          { label: 'Unit weight', left: '8.2 lb', right: '7.9 lb' },
+          { label: 'Size tier', left: 'Large Standard', right: 'Standard', rightTone: 'var(--green-700)' },
+          { label: 'Fee per unit', left: '$9.61', right: '$7.95 over', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'billed', colRight: 'measured',
+        note: 'A tier crossing on weight rather than dimension, which is the harder argument of the two — hence 89% rather than 94%. The measured weight sits 0.3 lb inside the Standard limit.',
+        evidence: [
+          { label: 'Measured-dimension record', detail: 'their cubiscan report, Jul 3', ok: true },
+          { label: 'Fee lines with tier applied', detail: '39 units, itemised', ok: true },
+          { label: 'Weight verification', detail: 'their scale record, same pass', ok: true },
+          { label: 'Correct-tier fee table', detail: 'Standard rate for the period', ok: true },
+        ] },
+      { id: 'FEE-2206', name: 'Dimension tier · Filtration Pitcher', sub: 'SKU NW-FLT-01 · 28 units billed Jul 2 – Aug 11', type: 'dim', value: 170, days: 58, win: 86, ev: 100,
+        facts: [
+          { label: 'Length', left: '11.2 in', right: '10.4 in' },
+          { label: 'Width', left: '6.8 in', right: '6.2 in' },
+          { label: 'Height', left: '10.9 in', right: '10.5 in' },
+          { label: 'Unit weight', left: '2.4 lb', right: '2.2 lb' },
+          { label: 'Size tier', left: 'Large Standard', right: 'Standard', rightTone: 'var(--green-700)' },
+          { label: 'Fee per unit', left: '$7.94', right: '$6.07 over', rightTone: 'var(--mod-cash)' },
+        ],
+        colLeft: 'billed', colRight: 'measured',
+        note: 'The smallest dimension claim in the ledger at $170 — comfortably above the $25 floor, and it rides the same batch at no extra assembly cost.',
+        evidence: [
+          { label: 'Measured-dimension record', detail: 'their cubiscan report, Jul 18', ok: true },
+          { label: 'Fee lines with tier applied', detail: '28 units, itemised', ok: true },
+          { label: 'Correct-tier fee table', detail: 'Standard rate for the period', ok: true },
+          { label: 'Product spec sheet', detail: 'packaging drawing as corroboration', ok: true },
+        ] },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const all = this.claims();
+    const typeMeta = {
+      dim: { short: 'dimension', tint: 'color-mix(in oklab, var(--mod-cash) 12%, white)', tone: 'var(--mod-cash)', icon: 'fa-solid fa-ruler-combined' },
+      lost: { short: 'inventory', tint: 'var(--amber-50)', tone: 'var(--amber-700)', icon: 'fa-solid fa-box-open' },
+      refund: { short: 'refund', tint: 'var(--rose-50)', tone: 'var(--rose-700)', icon: 'fa-solid fa-rotate-left' },
+    };
+    const money = (n) => '$' + n.toLocaleString('en-US');
+    const sum = (list) => list.reduce((a, c) => a + c.value, 0);
+
+    const filter = this.state.filter;
+    const shown = filter === 'all' ? all : all.filter((c) => c.type === filter);
+    const sort = this.state.sort;
+    const sorted = shown.slice().sort((a, b) => sort === 'due' ? a.days - b.days : sort === 'value' ? b.value - a.value : b.win - a.win);
+    const sel = all.find((c) => c.id === this.state.sel) || all[0];
+    const selMeta = typeMeta[sel.type];
+    const incomplete = all.filter((c) => c.ev < 100);
+
+    const bucketDefs = [
+      { key: 'dim', label: 'Dimension audit', detail: 'billed tier against their own measured dimensions, per SKU and per fee line' },
+      { key: 'lost', label: 'Reimbursement gaps', detail: 'inventory adjustments still unreimbursed after the 30-day auto-match' },
+      { key: 'refund', label: 'Refund without return', detail: 'refunds issued where the return window closed with no inbound scan' },
+    ];
+
+    const dueTint = (d) => d <= 21 ? (d <= 16 ? 'var(--rose-50)' : 'var(--amber-50)') : 'var(--ink-100)';
+    const dueTone = (d) => d <= 21 ? (d <= 16 ? 'var(--rose-700)' : 'var(--amber-700)') : 'var(--ink-500)';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      railDot: 'var(--amber-500)',
+      railGlow: 'var(--amber-50)',
+      railLabel: '$890\nexpiring',
+      pinMark: 'var(--mod-cash)',
+      pinTone: 'var(--mod-cash)',
+      pinnedTop: '$4,120 recoverable',
+      pinnedSub: '11 claims · sorted by deadline',
+
+      buckets: bucketDefs.map((b) => {
+        const list = all.filter((c) => c.type === b.key);
+        const active = filter === b.key;
+        const m = typeMeta[b.key];
+        return {
+          label: b.label, detail: b.detail, icon: m.icon, tone: m.tone,
+          value: money(sum(list)),
+          state: active ? 'filtering' : list.length + ' claims',
+          stateTone: active ? m.tone : 'var(--ink-400)',
+          bg: active ? m.tint : 'var(--ink-0)',
+          border: active ? m.tone : 'var(--ink-100)',
+          pick: () => this.setState({ filter: active ? 'all' : b.key }),
+        };
+      }),
+
+      sorts: [
+        { key: 'due', label: 'Expiring' },
+        { key: 'value', label: 'Value' },
+        { key: 'win', label: 'Win rate' },
+      ].map((s) => ({
+        label: s.label,
+        bg: sort === s.key ? 'var(--ink-0)' : 'transparent',
+        fg: sort === s.key ? 'var(--ink-900)' : 'var(--ink-500)',
+        weight: sort === s.key ? '600' : '500',
+        pick: () => this.setState({ sort: s.key }),
+      })),
+      deadlineHead: sort === 'due' ? 'Deadline ↑' : 'Deadline',
+      ledgerMeta: (filter === 'all' ? '11 claims · ' : sorted.length + ' of 11 · ') + money(sum(sorted)) + ' · above the $25 floor',
+      ledgerFoot: incomplete.length + ' claims hold incomplete evidence and will not file until it is attached · ' + money(sum(all.filter((c) => c.days <= 21))) + ' closes inside 21 days',
+
+      rows: sorted.map((c) => {
+        const m = typeMeta[c.type];
+        const active = c.id === this.state.sel;
+        return {
+          name: c.name, sub: c.id + ' · ' + c.sub, value: money(c.value),
+          typeShort: m.short, typeTint: m.tint, typeTone: m.tone,
+          evPct: c.ev, evLabel: c.ev === 100 ? 'complete' : c.ev + '% · ' + (c.evNeed || 'documents missing'),
+          evTone: c.ev === 100 ? 'var(--green-700)' : c.ev >= 70 ? 'var(--amber-700)' : 'var(--rose-700)',
+          due: c.days + ' days', dueTint: dueTint(c.days), dueTone: dueTone(c.days),
+          win: c.win + '%', winTone: c.win >= 85 ? 'var(--green-700)' : c.win >= 70 ? 'var(--ink-700)' : 'var(--amber-700)',
+          rowBg: active ? 'color-mix(in oklab, var(--mod-cash) 6%, white)' : 'transparent',
+          mark: active ? 'var(--mod-cash)' : 'transparent',
+          pick: () => this.setState({ sel: c.id }),
+        };
+      }),
+
+      selName: sel.name,
+      selMeta: sel.id + ' · ' + sel.sub + ' · win rate ' + sel.win + '% from our own filings',
+      selValue: money(sel.value),
+      selIcon: selMeta.icon, selTint: selMeta.tint, selTone: selMeta.tone,
+      selDue: sel.days + ' days to file', selDueTint: dueTint(sel.days), selDueTone: dueTone(sel.days),
+      selFactsTitle: sel.type === 'dim' ? 'Billed against measured' : 'Their record against our reconciliation',
+      colLeft: sel.colLeft, colRight: sel.colRight,
+      facts: sel.facts.map((f) => ({ label: f.label, left: f.left, right: f.right, leftTone: f.leftTone || 'var(--ink-500)', rightTone: f.rightTone || 'var(--ink-900)' })),
+      selNote: sel.note,
+      evidence: sel.evidence.map((e) => ({
+        label: e.label, detail: e.detail,
+        icon: e.ok ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation',
+        tone: e.ok ? 'var(--green-700)' : 'var(--amber-700)',
+        nameTone: e.ok ? 'var(--ink-800)' : 'var(--amber-700)',
+      })),
+      evBoxCopy: sel.ev === 100
+        ? 'Evidence complete. This claim can join the batch path — the policy test is deterministic and the documents policy names are all attached.'
+        : 'Evidence incomplete at ' + sel.ev + '%. The claim stays staged with a document checklist and files itself the moment the last item lands, with ' + sel.days + ' days of window in hand.',
+      evBoxBg: sel.ev === 100 ? 'var(--green-50)' : 'var(--amber-50)',
+      evBoxBorder: sel.ev === 100 ? 'color-mix(in oklab, var(--green-500) 24%, white)' : 'color-mix(in oklab, var(--amber-500) 24%, white)',
+      evBoxTone: sel.ev === 100 ? 'var(--green-700)' : 'var(--amber-700)',
+
+      expiryBars: [
+        { label: '≤ 21 days', value: '$890', pct: 22, tone: 'var(--rose-700)' },
+        { label: '22–35 days', value: '$1,570', pct: 38, tone: 'var(--amber-700)' },
+        { label: '36–48 days', value: '$1,180', pct: 29, tone: 'var(--ink-700)' },
+        { label: '49+ days', value: '$480', pct: 12, tone: 'var(--ink-400)' },
+      ],
+
+      winRates: [
+        { label: 'Dimension or tier error', pct: '94%', bar: 94, detail: '47 of 50 filed in the last 12 months', tone: 'var(--green-700)' },
+        { label: 'Refund without return', pct: '88%', bar: 88, detail: '22 of 25 · denials were scan-timing disputes', tone: 'var(--green-700)' },
+        { label: 'Unreimbursed inventory', pct: '76%', bar: 76, detail: '34 of 45 · cost-basis challenges are the usual denial', tone: 'var(--amber-700)' },
+      ],
+
+      inflow: [
+        { label: 'Mar', h: 22, tone: 'var(--ink-200)' },
+        { label: 'Apr', h: 18, tone: 'var(--ink-200)' },
+        { label: 'May', h: 26, tone: 'var(--ink-200)' },
+        { label: 'Jun', h: 33, tone: 'var(--ink-300)' },
+        { label: 'Jul', h: 40, tone: 'var(--amber-500)' },
+        { label: 'Aug', h: 52, tone: 'var(--amber-700)' },
+      ],
+
+      footStatus: 'Analyze · ' + sorted.length + ' claims shown · ' + money(sum(all)) + ' identified · sorted by ' + (sort === 'due' ? 'deadline' : sort === 'value' ? 'value' : 'win rate'),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

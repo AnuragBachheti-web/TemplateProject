@@ -1,0 +1,455 @@
+{
+  "code": "S9.17",
+  "stageKey": "execute",
+  "name": "Supplier performance",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "brief": "K",
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "reverted": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "planLine": "Briefs and messages generate here; nothing reaches a supplier without a person sending it. The buy-plan change and the qualification tasks go out to Planner and Sourcer.",
+    "pushedCount": "0 / 4",
+    "runAllLabel": "Generate everything",
+    "runAllIcon": "fa-solid fa-wand-magic-sparkles",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "briefTabs": [
+      {
+        "label": "Kessler",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Tsuyo",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "brief": {
+      "label": "Kessler",
+      "title": "Counter Kessler at +3.0% against a +2.9% should-cost move",
+      "meta": "Brief SUP-0184-K · prepared for Sourcer · response due Oct 4 · internal only",
+      "sections": [
+        {
+          "head": "Situation",
+          "body": "Kessler gave formal notice of +8.0% across 14 SKUs effective Jan 1, using the 90-day clause correctly. They are our largest supplier at 31% of spend, single-source on four SKUs, and $374K of their POs are in flight. They have also been below the Tier 1 OTD floor for two quarters."
+        },
+        {
+          "head": "Should-cost basis",
+          "body": "Rebuilding their basket from published indices gives +2.9%: steel +4.1% at 38% weight, labour +3.2% at 22%, energy +1.8% at 9%, offset by the Ningbo–LA lane at −6.2% on 19% of input cost. Overhead and margin held flat per contract. The unexplained gap is 5.1pp, or $44.9K a year at current volume."
+        },
+        {
+          "head": "Opening move",
+          "body": "Lead with the build-up, not the counter-number. Ask them to walk their own cost breakdown against the same indices — they provided the input mix in March, so this is their arithmetic, not ours. The freight line is the one they will not have accounted for."
+        },
+        {
+          "head": "What we can offer",
+          "body": "Volume they have never had committed: 34% YoY growth, currently ordered PO by PO. An 18-month commitment at the new volume is worth more to their planning than the 5.1pp is worth to their margin, and it costs us nothing we were not going to spend."
+        },
+        {
+          "head": "If they refuse",
+          "body": "Nanjing Ironworks quotes −1.8% on all four single-source SKUs at 14 weeks to qualify, and Hoyt Forge covers two of them domestically in 8 weeks at +4.2%. Dual-sourcing 40% is a live option, not a bluff — it is costed at $63K including the safety-stock build."
+        }
+      ],
+      "currency": [
+        {
+          "label": "18-month volume commitment",
+          "value": "+34% units",
+          "icon": "fa-solid fa-box",
+          "tone": "var(--green-700)"
+        },
+        {
+          "label": "Net 45 → Net 60",
+          "value": "$31K cash",
+          "icon": "fa-solid fa-clock",
+          "tone": "var(--green-700)"
+        },
+        {
+          "label": "Rolling 12-week forecast",
+          "value": "planning value",
+          "icon": "fa-solid fa-chart-line",
+          "tone": "var(--ink-700)"
+        },
+        {
+          "label": "Index-linked clause at renewal",
+          "value": "both ways",
+          "icon": "fa-solid fa-link",
+          "tone": "var(--ink-700)"
+        }
+      ],
+      "anchors": [
+        {
+          "label": "Open at",
+          "value": "+2.9%",
+          "tone": "var(--ink-800)"
+        },
+        {
+          "label": "Target",
+          "value": "+3.0%",
+          "tone": "var(--green-700)"
+        },
+        {
+          "label": "Walk-away",
+          "value": "+5.0%",
+          "tone": "var(--rose-700)"
+        },
+        {
+          "label": "Their ask",
+          "value": "+8.0%",
+          "tone": "var(--ink-400)"
+        }
+      ],
+      "ladder": [
+        {
+          "n": "1",
+          "text": "Index-linked +2.9% with no commitment. Their arithmetic, our terms."
+        },
+        {
+          "n": "2",
+          "text": "+3.0% flat for 18 months in exchange for committed volume and Net 60."
+        },
+        {
+          "n": "3",
+          "text": "+3.8% for 12 months if they hold OTD at 96% with a delivery credit clause."
+        },
+        {
+          "n": "4",
+          "text": "Above +5.0%: end the conversation, start Nanjing qualification the same week."
+        }
+      ]
+    },
+    "briefStatus": "draft outline",
+    "briefStatusTint": "var(--ink-100)",
+    "briefStatusTone": "var(--ink-500)",
+    "briefBtnLabel": "Generate",
+    "briefBtnBg": "var(--ink-900)",
+    "briefBtnFg": "var(--ink-0)",
+    "briefBtnBorder": "var(--ink-900)",
+    "briefBtnCursor": "pointer",
+    "commsStatus": "drafted",
+    "commsTint": "var(--ink-100)",
+    "commsTone": "var(--ink-500)",
+    "commsBtnLabel": "Send to reviewers",
+    "commsBtnBg": "var(--ink-900)",
+    "commsBtnFg": "var(--ink-0)",
+    "commsBtnBorder": "var(--ink-900)",
+    "commsBtnCursor": "pointer",
+    "comms": [
+      {
+        "to": "Kessler Metalworks",
+        "subject": "Your Jan 1 price notice — our response and a proposal",
+        "body": "Acknowledges the notice inside the clause window, sets out the index build-up we used, and proposes +3.0% for 18 months against committed volume and Net 60 terms. Raises OTD in the same letter, not a separate one.",
+        "reviewer": "D. Halloran · Sourcer",
+        "attach": "should-cost pack attached"
+      },
+      {
+        "to": "Meridian Filtration",
+        "subject": "Delivery performance and a second source for cartridges",
+        "body": "States plainly that 50% of cartridge volume is moving to a second source because of four quarters below the OTD floor, and that the remaining half is theirs to keep on a 93% commitment.",
+        "reviewer": "D. Halloran · Sourcer",
+        "attach": "scorecard attached"
+      },
+      {
+        "to": "Verdant Woodcraft",
+        "subject": "Ending our supply agreement — transition and open POs",
+        "body": "Confirms the six-week wind-down, that all $14K of open POs will be honoured in full, and the defect history that led here. No blame, no negotiation — the decision is made.",
+        "reviewer": "A. Castellanos · Head of Ops",
+        "attach": "PPM history attached"
+      }
+    ],
+    "buyPlan": [
+      {
+        "name": "Safety stock · carbon steel pans",
+        "detail": "Interim build while Kessler negotiation runs. Releases if the counter lands at or under +3%.",
+        "value": "+$34K",
+        "tone": "var(--amber-700)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "Safety stock · filter cartridges",
+        "detail": "Covers the 11-week Aquatek qualification window on 50% of volume.",
+        "value": "+$12K",
+        "tone": "var(--amber-700)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "Safety stock · utensils",
+        "detail": "Six weeks of cover through the Alder transition.",
+        "value": "+$6K",
+        "tone": "var(--ink-800)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "Lead-time parameters",
+        "detail": "Meridian −4 days on the Aquatek share, Verdant +2 days on Alder. Reorder points recalculated.",
+        "value": "3 SKU groups",
+        "tone": "var(--ink-800)",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      }
+    ],
+    "planBtnLabel": "Send to Planner",
+    "planBtnBg": "var(--ink-900)",
+    "planBtnFg": "var(--ink-0)",
+    "planBtnBorder": "var(--ink-900)",
+    "planBtnCursor": "pointer",
+    "qual": [
+      {
+        "name": "NDA and cost breakdown request",
+        "prog": "Aquatek OEM",
+        "owner": "Sourcer",
+        "due": "Sep 30",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "Certification transfer review",
+        "prog": "Aquatek OEM",
+        "owner": "Quality",
+        "due": "Oct 10",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "Three sample lots at production rate",
+        "prog": "Aquatek OEM",
+        "owner": "Quality",
+        "due": "Nov 7",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "First article inspection sign-off",
+        "prog": "Aquatek OEM",
+        "owner": "Quality",
+        "due": "Dec 5",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "Finish and moisture-content samples",
+        "prog": "Alder & Co",
+        "owner": "Quality",
+        "due": "Oct 3",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "FSC chain-of-custody check",
+        "prog": "Alder & Co",
+        "owner": "Sourcer",
+        "due": "Oct 8",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      },
+      {
+        "name": "First production lot approval",
+        "prog": "Alder & Co",
+        "owner": "Quality",
+        "due": "Oct 31",
+        "dotIcon": "fa-solid fa-minus",
+        "dotBg": "var(--ink-100)",
+        "dotFg": "var(--ink-400)"
+      }
+    ],
+    "qualBtnLabel": "Assign tasks",
+    "qualBtnBg": "var(--ink-900)",
+    "qualBtnFg": "var(--ink-0)",
+    "qualBtnBorder": "var(--ink-900)",
+    "qualBtnCursor": "pointer",
+    "monStatus": "arms on generate",
+    "monTone": "var(--ink-400)",
+    "monitors": [
+      {
+        "label": "Kessler settlement",
+        "note": "final agreed increase vs anchors",
+        "target": "+3.0%",
+        "walk": "+5.0%",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Kessler terms",
+        "note": "Net 60 ask, cash value $31K",
+        "target": "Net 60",
+        "walk": "Net 45",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Tsuyo terms",
+        "note": "Net 45 ask, cash value $19K",
+        "target": "Net 45",
+        "walk": "Net 30",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Post-change OTD · Aquatek",
+        "note": "90-day scorecard from first shipment",
+        "target": "≥ 93%",
+        "walk": "< 90%",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Post-change PPM · Alder",
+        "note": "defect rate and return rate on 3 lots",
+        "target": "≤ 2,500",
+        "walk": "> 3,000",
+        "actual": "awaiting",
+        "read": "not armed",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Artefacts ready",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Briefs generated",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Messages in review",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Safety stock added",
+        "value": "$0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Qualification tasks",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "reviewQueue": [
+      {
+        "name": "Kessler counter letter",
+        "owner": "D. Halloran · Sourcer",
+        "state": "not routed",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "Meridian dual-source notice",
+        "owner": "D. Halloran · Sourcer",
+        "state": "not routed",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "name": "Verdant termination letter",
+        "owner": "A. Castellanos · Ops",
+        "state": "not routed",
+        "nameTone": "var(--ink-400)",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, a missed deadline re-opens this card and waits for you.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "rollback": [
+      {
+        "name": "Supplier drafts",
+        "note": "3 messages · withdraw from review",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Buy-plan change",
+        "note": "$52K safety stock · restore v11",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      },
+      {
+        "name": "Qualification tasks",
+        "note": "7 tasks · unassign both programmes",
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "btnLabel": "not sent",
+        "btnBg": "var(--ink-0)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-100)",
+        "cursor": "default"
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 generated",
+    "footTone": "var(--ink-500)"
+  }
+}

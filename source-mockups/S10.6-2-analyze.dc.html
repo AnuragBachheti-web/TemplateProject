@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.6-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--mod-actions)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-actions) 12%, white);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ railDot }};box-shadow:0 0 0 3px {{ railGlow }}"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25;white-space:pre-line">{{ railLabel }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ pinMark }};border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Peak readiness · S10.6</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Prime Fall T-4 — inventory 84% · deals 100% · creative 60%</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ pinTone }};font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-actions)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-actions)"></span>Lens: all five
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-actions);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Arbiter coordinates; Forecaster lead
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Event Forecast Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Moment Contract
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-300);background:var(--ink-100);font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-700)">
+          <i class="fa-solid fa-user-pen" style="font-size:9.5px;color:var(--ink-500)"></i>Pacing at Assist in-event
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.6-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:18px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.6-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-actions) 10%, white);border:1px solid color-mix(in oklab, var(--mod-actions) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-actions);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:18px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.6-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">3</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:18px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.6-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">4</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Execute</span>
+        </a>
+        <span style="width:18px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.6-5-live.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><i class="fa-solid fa-tower-broadcast" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Live</span>
+        </a>
+        <span style="margin-left:auto;display:flex;align-items:center;gap:10px">
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+          <span style="display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:var(--r-full);background:{{ tChipBg }};border:1px solid {{ tChipBorder }};font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ tChipTone }}">
+            <i class="fa-solid fa-hourglass-half" style="font-size:9px"></i>{{ tChip }}
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-actions) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:color-mix(in oklab, var(--mod-actions) 5%, white);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-list-check" style="font-size:9px"></i>Readiness · 6 desks
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">select a desk to see what is actually behind the number</span>
+            <span style="margin-left:auto;display:flex;align-items:baseline;gap:9px">
+              <span style="font-family:var(--font-mono);font-size:19px;font-weight:600;color:{{ overallTone }};font-variant-numeric:tabular-nums">{{ overallScore }}</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">weighted readiness</span>
+            </span>
+          </div>
+          <div style="padding:0 16px">
+            <div style="display:grid;grid-template-columns:1.35fr 168px 1fr 104px;gap:0 12px;padding:9px 0 6px;border-bottom:1px solid var(--ink-100)">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Desk</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Readiness</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Gap</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Owner · clock</span>
+            </div>
+            <sc-for list="{{ desks }}" as="d" hint-placeholder-count="6">
+              <div onClick="{{ d.pick }}" style="display:grid;grid-template-columns:1.35fr 168px 1fr 104px;gap:0 12px;align-items:center;padding:11px 8px;margin:0 -8px;border-bottom:1px solid var(--ink-50);cursor:pointer;background:{{ d.rowBg }};border-left:2px solid {{ d.mark }}">
+                <span style="min-width:0;display:flex;align-items:center;gap:10px">
+                  <span style="width:26px;height:26px;border-radius:var(--r-xs);background:{{ d.tint }};color:{{ d.hue }};display:grid;place-items:center;flex-shrink:0"><i class="{{ d.icon }}" style="font-size:11px"></i></span>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ d.name }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ d.lens }}</span>
+                  </span>
+                </span>
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span style="flex:1;height:7px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                    <span style="display:block;height:100%;width:{{ d.score }}%;background:{{ d.tone }};border-radius:var(--r-full)"></span>
+                  </span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ d.tone }};font-variant-numeric:tabular-nums">{{ d.scoreLabel }}</span>
+                </span>
+                <span style="font-size:11.5px;line-height:1.45;color:{{ d.gapTone }};text-wrap:pretty">{{ d.gap }}</span>
+                <span style="justify-self:end;display:flex;flex-direction:column;align-items:flex-end;gap:1px">
+                  <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">{{ d.owner }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;font-weight:600;color:{{ d.clockTone }}">{{ d.clock }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:11px 16px;background:var(--ink-25);border-top:1px solid var(--ink-100);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">{{ deskFoot }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">weighted by each desk's share of forecast revenue at risk</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:var(--ink-25);display:flex;align-items:center;gap:11px;flex-wrap:wrap">
+            <span style="width:28px;height:28px;border-radius:var(--r-xs);background:{{ selTint }};color:{{ selHue }};display:grid;place-items:center;flex-shrink:0"><i class="{{ selIcon }}" style="font-size:12px"></i></span>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ selName }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ selMeta }}</span>
+            </span>
+            <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:12px">
+              <sc-if value="{{ selDoorHref }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ selDoorHref }}" style="display:inline-flex;align-items:center;gap:6px;height:27px;padding:0 11px;border-radius:var(--r-full);background:{{ selTint }};font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ selHue }}">
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8.5px"></i>{{ selDoorLabel }}
+                </a>
+              </sc-if>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:var(--r-full);background:{{ selStateTint }};font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ selStateTone }}">{{ selState }}</span>
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 300px;gap:0">
+            <div style="min-width:0;padding:13px 16px;border-right:1px solid var(--ink-100)">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">{{ selTableTitle }}</span>
+              <div style="margin-top:10px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ selCol0 }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ selCol1 }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ selCol2 }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400);text-align:right">{{ selCol3 }}</span>
+              </div>
+              <sc-for list="{{ selRows }}" as="r" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:0 12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ r.name }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ r.sub }}</span>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ r.a }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ r.bTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.b }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ r.cTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.c }}</span>
+                </div>
+              </sc-for>
+              <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ selNote }}</p>
+            </div>
+            <div style="min-width:0;padding:13px 16px;background:var(--ink-25);display:flex;flex-direction:column;gap:9px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">{{ selSideTitle }}</span>
+              <sc-for list="{{ selSide }}" as="s" hint-placeholder-count="4">
+                <div style="display:flex;align-items:flex-start;gap:9px">
+                  <i class="{{ s.icon }}" style="font-size:10px;color:{{ s.tone }};margin-top:3px;flex-shrink:0;width:11px;text-align:center"></i>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                    <span style="font-size:11.5px;font-weight:600;color:{{ s.nameTone }};text-wrap:pretty">{{ s.label }}</span>
+                    <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ s.detail }}</span>
+                  </span>
+                </div>
+              </sc-for>
+              <sc-if value="{{ selCallout }}" hint-placeholder-val="{{ false }}">
+                <span style="margin-top:auto;padding:10px 11px;border-radius:var(--r-sm);background:{{ selCalloutBg }};border:1px solid {{ selCalloutBorder }};display:flex;flex-direction:column;gap:3px">
+                  <span style="font-size:11.5px;font-weight:600;color:{{ selCalloutTone }};text-wrap:pretty">{{ selCalloutTitle }}</span>
+                  <span style="font-size:11px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ selCallout }}</span>
+                </span>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Inbound cutoffs</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">the deadlines that do not negotiate</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--rose-700)">FBA closes in 31 hours</span>
+          </div>
+          <div style="margin-top:14px;position:relative;height:66px">
+            <span style="position:absolute;left:0;right:0;top:30px;height:2px;background:var(--ink-100)"></span>
+            <span style="position:absolute;left:0;top:30px;height:2px;width:{{ nowPct }}%;background:var(--mod-actions)"></span>
+            <span style="position:absolute;left:{{ nowPct }}%;top:18px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px">
+              <span style="width:11px;height:11px;border-radius:50%;background:var(--mod-actions);border:2px solid var(--ink-0);box-shadow:0 0 0 3px color-mix(in oklab, var(--mod-actions) 20%, white)"></span>
+              <span style="font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--mod-actions);white-space:nowrap">now · T-4</span>
+            </span>
+            <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5">
+              <span style="position:absolute;left:{{ t.pct }}%;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;width:96px">
+                <span style="font-family:var(--font-mono);font-size:9px;font-weight:600;color:{{ t.tone }};text-align:center;line-height:1.25;white-space:pre-line">{{ t.label }}</span>
+                <span style="width:9px;height:9px;border-radius:50%;background:{{ t.tone }};border:2px solid var(--ink-0)"></span>
+                <span style="font-family:var(--font-mono);font-size:8.5px;color:var(--ink-400);text-align:center">{{ t.when }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What broke last time</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">annotated Ledger history · BFCM 2025 and Prime Spring 2026</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ learningSummary }}</span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ learnings }}" as="l" hint-placeholder-count="4">
+              <div style="padding:11px 12px;border:1px solid {{ l.border }};border-radius:var(--r-sm);background:{{ l.bg }};display:grid;grid-template-columns:1fr 132px;gap:0 12px;align-items:center">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:4px">
+                  <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ l.name }}</span>
+                    <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:var(--ink-100);font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-600)">{{ l.event }}</span>
+                  </span>
+                  <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ l.detail }}</span>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+                  <span style="display:inline-flex;align-items:center;gap:5px;height:23px;padding:0 9px;border-radius:var(--r-full);background:{{ l.stateTint }};font-family:var(--font-mono);font-size:9.5px;font-weight:600;color:{{ l.stateTone }}">
+                    <i class="{{ l.stateIcon }}" style="font-size:8.5px"></i>{{ l.state }}
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ l.cost }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-actions) 34%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-lightbulb" style="font-size:11px;color:var(--mod-actions)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mod-actions)">Insight</span>
+          </div>
+          <p style="margin:9px 0 0;font-size:13px;line-height:1.55;color:var(--ink-800);text-wrap:pretty">Two Heroes are short at P50 with the FBA cutoff <strong style="font-weight:600;color:var(--rose-700)">31 hours</strong> out. Air freight costs <strong style="font-weight:600">$3.1K</strong> against <strong style="font-weight:600">$9.4K</strong> of projected stockout contribution loss — a 3× return on the most expensive shipping we buy.</p>
+          <p style="margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Creative is the other gap, and it is the one no amount of money fixes at T-4. Six DTC assets are outstanding; the honest options are a reduced DTC lineup or reused evergreen creative.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Event forecast · 96 hours</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ forecast }}" as="f" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ f.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ f.tone }};font-variant-numeric:tabular-nums">{{ f.value }}</span>
+                </span>
+                <span style="height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <span style="display:block;height:100%;width:{{ f.pct }}%;background:{{ f.tone }};border-radius:var(--r-full)"></span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">3.4× a normal 96-hour window. The P10 case still clears the cash buffer; the P90 case is where cover, not demand, becomes the constraint.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-heart-pulse" style="font-size:11px;color:var(--ink-400)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Headroom before the spike</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ headroom }}" as="h" hint-placeholder-count="3">
+              <div style="padding:10px 11px;border:1px solid {{ h.border }};border-radius:var(--r-sm);background:{{ h.bg }};display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ h.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ h.tone }}">{{ h.value }}</span>
+                </span>
+                <span style="font-size:10.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ h.detail }}</span>
+                <a href="{{ h.href }}" style="display:inline-flex;align-items:center;gap:6px;height:25px;padding:0 9px;border-radius:var(--r-full);background:var(--ink-25);border:1px solid var(--ink-200);font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-600);align-self:flex-start">
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8px"></i>{{ h.link }}
+                </a>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">{{ footStatus }}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S10.6-1-reason.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-arrow-left" style="font-size:11px"></i>Back to Reason
+        </a>
+        <a href="S10.6-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--mod-actions);color:var(--ink-0);transform:translateY(-1px)">
+          Open the T-4 gate<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":1024},"executionMode":{"editor":"enum","options":["Suggest","Approve","Auto"],"default":"Suggest","tsType":"'Suggest' | 'Approve' | 'Auto'","section":"Shell"}}'>
+class Component extends DCLogic {
+  state = { sel: 'inventory' };
+
+  deskData() {
+    return [
+      {
+        id: 'inventory', name: 'Inventory', lens: 'Planner · Inventory lens', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)',
+        score: 84, gap: '2 Heroes short at P50 · FBA cutoff in 31 hours', gapTone: 'var(--rose-700)',
+        owner: 'Planner', clock: '31h', clockTone: 'var(--rose-700)', state: 'gap priced',
+        meta: '14 event SKUs · cover measured against the event forecast, not the trailing run rate',
+        tableTitle: 'Cover against event forecast', col0: 'SKU · role', col1: 'On hand', col2: 'P50 need', col3: 'Gap',
+        rows: [
+          { name: 'Dutch Oven 5qt', sub: 'Hero · 41% of event revenue', a: '820', b: '1,140', c: '−320', bTone: 'var(--ink-600)', cTone: 'var(--rose-700)' },
+          { name: 'Sauté Pan 12in', sub: 'Hero · 18% of event revenue', a: '410', b: '590', c: '−180', bTone: 'var(--ink-600)', cTone: 'var(--rose-700)' },
+          { name: 'Knife Block 6pc', sub: 'Core', a: '360', b: '300', c: '+60', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Cast-iron Skillet 10in', sub: 'Core', a: '520', b: '440', c: '+80', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Remaining 10 SKUs', sub: 'Core and Margin Driver', a: '2,940', b: '2,510', c: '+430', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+        ],
+        note: 'The two Hero shortfalls carry 59% of forecast event revenue between them, which is why a 500-unit gap is worth $9.4K of contribution rather than a proportional share. Air freight closes both for $3.1K if it is tendered before the cutoff.',
+        sideTitle: 'The air-freight call',
+        side: [
+          { label: 'Air freight · both lanes', detail: '$3.1K, arrives Aug 22 — one day before open', icon: 'fa-solid fa-plane', ok: true },
+          { label: 'Projected stockout loss', detail: '$9.4K of contribution at P50 demand', icon: 'fa-solid fa-arrow-trend-down', ok: false },
+          { label: 'Sea freight alternative', detail: 'Arrives Sep 4 — after the window closes entirely', icon: 'fa-solid fa-ship', ok: false },
+          { label: 'Transfer from West node', detail: 'Covers 140 of 500 units, $340 of freight, arrives in time', icon: 'fa-solid fa-truck-fast', ok: true },
+        ],
+        calloutTitle: '3× return on the most expensive freight we buy',
+        callout: 'Air freight is normally the answer to a planning failure. Here it is the answer to a forecast that moved, and the math is unambiguous — $3.1K against $9.4K, with the transfer covering the rest.',
+        calloutTone: 'var(--green-700)', calloutBg: 'var(--green-50)', calloutBorder: 'color-mix(in oklab, var(--green-500) 24%, white)',
+      },
+      {
+        id: 'deals', name: 'Deals and promos', lens: 'Promoter · Margin lens', icon: 'fa-solid fa-tags', hue: 'var(--mod-ads)',
+        score: 100, gap: 'Lineup locked and confirmed across 14 SKUs', gapTone: 'var(--green-700)',
+        owner: 'Promoter', clock: 'locked', clockTone: 'var(--green-700)', state: 'complete',
+        doorHref: 'S9.19-1-reason.dc.html', doorLabel: 'S9.19 calendar',
+        meta: 'submitted Aug 14 from the 9.19 calendar · all three deal types confirmed',
+        tableTitle: 'Deal lineup', col0: 'Deal', col1: 'SKUs', col2: 'Depth', col3: 'Status',
+        rows: [
+          { name: 'Prime Fall Deal', sub: 'Amazon · days 1–2', a: '6', b: '22%', c: 'confirmed', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Lightning Deals', sub: 'Amazon · 8 slots across 96h', a: '4', b: '25%', c: 'confirmed', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Coupon stack', sub: 'Amazon · full window', a: '9', b: '10%', c: 'confirmed', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Walmart Rollback', sub: 'days 2–4 · 9 shared SKUs', a: '9', b: '18%', c: 'confirmed', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'DTC sitewide', sub: 'Shopify · full window', a: '14', b: '15%', c: 'confirmed', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+        ],
+        note: 'The 9.19 conflict detector cleared the Walmart overlap on the nine shared SKUs by staggering depth rather than dates — 18% against 22%, which keeps parity inside policy while both windows run.',
+        sideTitle: 'Margin at event depth',
+        side: [
+          { label: 'Blended CM at depth', detail: '31.4% against 38.2% at list — inside the posture', icon: 'fa-solid fa-percent', ok: true },
+          { label: 'Deepest single depth', detail: '25% on Lightning Deals, floor is 30%', icon: 'fa-solid fa-arrow-down', ok: true },
+          { label: 'Parity check', detail: 'All four channels inside marketplace fair-pricing rules', icon: 'fa-solid fa-scale-balanced', ok: true },
+          { label: 'Inventory commitment', detail: 'Deal terms commit 2,400 units — cover must hold', icon: 'fa-solid fa-link', ok: true },
+        ],
+        calloutTitle: null, callout: null,
+      },
+      {
+        id: 'creative', name: 'Creative and content', lens: 'Merchandiser · Sales lens', icon: 'fa-solid fa-images', hue: 'var(--mod-intel)',
+        score: 60, gap: '6 of 15 DTC assets outstanding · studio has 2 days', gapTone: 'var(--rose-700)',
+        owner: 'Merchandiser', clock: '2 days', clockTone: 'var(--rose-700)', state: 'behind',
+        meta: 'the gap money cannot close — no override buys a finished asset at T-4',
+        tableTitle: 'Asset readiness', col0: 'Asset set', col1: 'Needed', col2: 'Delivered', col3: 'State',
+        rows: [
+          { name: 'Amazon deal imagery', sub: 'A+ and deal badges', a: '8', b: '8', c: 'ready', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Walmart lineup', sub: 'Rollback hero shots', a: '5', b: '5', c: 'ready', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'DTC email · 3 sends', sub: 'hero, mid-event, last-call', a: '3', b: '1', c: '2 short', bTone: 'var(--amber-700)', cTone: 'var(--rose-700)' },
+          { name: 'DTC paid social', sub: 'video and static variants', a: '8', b: '5', c: '3 short', bTone: 'var(--amber-700)', cTone: 'var(--rose-700)' },
+          { name: 'SMS creative', sub: '2 sends', a: '2', b: '1', c: '1 short', bTone: 'var(--amber-700)', cTone: 'var(--rose-700)' },
+        ],
+        note: 'Every outstanding asset is DTC, which is also the channel with the thinnest forecast. That makes the trade legible: a reduced DTC lineup costs about $6K of the $48K DTC forecast, and reused evergreen creative costs conversion rather than presence.',
+        sideTitle: 'The honest options',
+        side: [
+          { label: 'Reduce the DTC lineup', detail: 'Two sends instead of three, five social variants instead of eight', icon: 'fa-solid fa-scissors', ok: true },
+          { label: 'Reuse evergreen creative', detail: 'Available now, historically 18% weaker on click-through', icon: 'fa-solid fa-recycle', ok: true },
+          { label: 'Rush the studio', detail: 'Possible for 3 of 6 assets at a $1.4K rush fee', icon: 'fa-solid fa-bolt', ok: true },
+          { label: 'Wait and hope', detail: 'Not an option — the send calendar is already scheduled', icon: 'fa-solid fa-ban', ok: false },
+        ],
+        calloutTitle: 'Content freshness is separate and fine',
+        callout: 'All 14 event listings passed the 10.5 canonical check this morning. The creative gap is production capacity, not drift — which is the better problem to have four days out.',
+        calloutTone: 'var(--green-700)', calloutBg: 'var(--green-50)', calloutBorder: 'color-mix(in oklab, var(--green-500) 24%, white)',
+      },
+      {
+        id: 'ads', name: 'Ad readiness', lens: 'Bidder · Ads lens', icon: 'fa-solid fa-bullseye', hue: 'var(--mod-ads)',
+        score: 92, gap: 'Budgets staged; 3 campaigns need creative before they can launch', gapTone: 'var(--amber-700)',
+        owner: 'Bidder', clock: '2 days', clockTone: 'var(--amber-700)', state: 'staged',
+        meta: '$52K event budget staged against a $18K normal 96-hour spend',
+        tableTitle: 'Budget and campaign state', col0: 'Channel', col1: 'Normal 96h', col2: 'Event budget', col3: 'State',
+        rows: [
+          { name: 'Amazon Sponsored', sub: 'products, brands, display', a: '$9.4K', b: '$28K', c: 'armed', bTone: 'var(--mod-ads)', cTone: 'var(--green-700)' },
+          { name: 'Google Shopping', sub: 'PMax and standard', a: '$4.2K', b: '$11K', c: 'armed', bTone: 'var(--mod-ads)', cTone: 'var(--green-700)' },
+          { name: 'Meta', sub: 'prospecting and retargeting', a: '$2.8K', b: '$8K', c: 'creative gap', bTone: 'var(--mod-ads)', cTone: 'var(--amber-700)' },
+          { name: 'TikTok Spark', sub: 'from the 9.4 shift', a: '$1.6K', b: '$5K', c: 'creative gap', bTone: 'var(--mod-ads)', cTone: 'var(--amber-700)' },
+        ],
+        note: 'Budgets are staged rather than live — they arm at T-0 with the contract, not before. The three campaigns waiting on creative are the same DTC assets holding the Merchandiser desk at 60%, so one delivery clears both.',
+        sideTitle: 'Pacing at Assist',
+        side: [
+          { label: 'Daily cap bound', detail: '+180% while mROAS stays above 1.4×', icon: 'fa-solid fa-gauge-high', ok: true },
+          { label: 'What pacing may do', detail: 'Shift budget between armed campaigns, inside the cap', icon: 'fa-solid fa-shuffle', ok: true },
+          { label: 'What still asks', detail: 'New campaigns, new creative, anything outside the bound', icon: 'fa-solid fa-hand', ok: true },
+          { label: 'Creative fatigue watch', detail: 'Runs hourly during the event rather than daily', icon: 'fa-solid fa-eye', ok: true },
+        ],
+        calloutTitle: null, callout: null,
+      },
+      {
+        id: 'health', name: 'Account health', lens: 'Keeper · Sales lens', icon: 'fa-solid fa-heart-pulse', hue: 'var(--mod-actions)',
+        score: 74, gap: 'Late-shipment headroom is 0.6pp with volume about to triple', gapTone: 'var(--amber-700)',
+        owner: 'Keeper', clock: 'pre-arm', clockTone: 'var(--amber-700)', state: 'thin headroom',
+        doorHref: 'S10.3-1-reason.dc.html', doorLabel: 'S10.3 health',
+        meta: 'the desk that turns a good event into a suspended account if it is ignored',
+        tableTitle: 'Metric headroom before the spike', col0: 'Metric', col1: 'Today', col2: 'Limit', col3: 'Headroom',
+        rows: [
+          { name: 'Late shipment rate', sub: 'Amazon · rolling 30 days', a: '3.4%', b: '4.0%', c: '0.6pp', bTone: 'var(--ink-600)', cTone: 'var(--rose-700)' },
+          { name: 'Order defect rate', sub: 'Amazon · rolling 60 days', a: '0.42%', b: '1.0%', c: '0.58pp', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Cancellation rate', sub: 'Amazon · pre-fulfilment', a: '1.1%', b: '2.5%', c: '1.4pp', bTone: 'var(--ink-600)', cTone: 'var(--green-700)' },
+          { name: 'Walmart on-time', sub: 'rolling 30 days', a: '96.2%', b: '95.0%', c: '1.2pp', bTone: 'var(--ink-600)', cTone: 'var(--amber-700)' },
+        ],
+        note: 'Late shipment is the one that matters: 78% of current late orders trace to the East 3PL Monday backlog, and day 2 of the event is a Monday. A handling-time buffer armed before the window costs promise speed and protects the account.',
+        sideTitle: 'Preventive arming',
+        side: [
+          { label: 'Handling-time buffer', detail: '+1 day on East-node SKUs for the event window only', icon: 'fa-solid fa-shield-halved', ok: true },
+          { label: 'Cost of the buffer', detail: 'Slower promise, roughly 2% conversion on affected SKUs', icon: 'fa-solid fa-arrow-trend-down', ok: false },
+          { label: 'Cost of not arming', detail: 'Late shipment crosses 4% and suppression is automatic', icon: 'fa-solid fa-triangle-exclamation', ok: false },
+          { label: 'Monitoring cadence', detail: 'Hourly during the event instead of daily', icon: 'fa-solid fa-eye', ok: true },
+        ],
+        calloutTitle: 'No override touches this threshold',
+        callout: 'Account-health limits are marketplace-enforced and the Moment Contract cannot widen them. What the contract can do is arm the buffer early, which is why this desk sits in the gate rather than in the fine print.',
+        calloutTone: 'var(--rose-700)', calloutBg: 'var(--rose-50)', calloutBorder: 'color-mix(in oklab, var(--rose-500) 24%, white)',
+      },
+      {
+        id: 'cash', name: 'Cash plan', lens: 'Navigator · Cash lens', icon: 'fa-solid fa-coins', hue: 'var(--mod-cash)',
+        score: 88, gap: 'Spike funded; settlement lag pushes the Week-7 trough deeper', gapTone: 'var(--amber-700)',
+        owner: 'Navigator', clock: 'wk-7', clockTone: 'var(--amber-700)', state: 'funded',
+        doorHref: 'S10.2-1-reason.dc.html', doorLabel: 'S10.2 ladder',
+        meta: 'the event spends before it collects — 14 to 21 days of settlement lag',
+        tableTitle: 'Event cash shape', col0: 'Line', col1: 'Timing', col2: 'Amount', col3: 'Effect',
+        rows: [
+          { name: 'Ad spend', sub: 'billed within the window', a: 'Aug 23–26', b: '−$52K', c: 'immediate', bTone: 'var(--rose-700)', cTone: 'var(--ink-700)' },
+          { name: 'Air freight', sub: 'if approved at the gate', a: 'Aug 20', b: '−$3.1K', c: 'immediate', bTone: 'var(--rose-700)', cTone: 'var(--ink-700)' },
+          { name: 'Amazon settlement', sub: 'biweekly, reserve modelled', a: 'Sep 8', b: '+$164K', c: 'lag 16d', bTone: 'var(--green-700)', cTone: 'var(--amber-700)' },
+          { name: 'Shopify payouts', sub: 'rolling 2-day', a: 'Aug 25+', b: '+$46K', c: 'lag 2d', bTone: 'var(--green-700)', cTone: 'var(--green-700)' },
+          { name: 'Walmart settlement', sub: 'net terms', a: 'Sep 4', b: '+$58K', c: 'lag 12d', bTone: 'var(--green-700)', cTone: 'var(--amber-700)' },
+        ],
+        note: 'The event is cash-negative for sixteen days before it is cash-positive. That is normal and it is funded — but it deepens the Week-7 trough already tracked in 10.2, which is why the two cards are linked rather than solved separately.',
+        sideTitle: 'Trough effect',
+        side: [
+          { label: 'Trough before the event', detail: '$31K below buffer in Week 7', icon: 'fa-solid fa-arrow-trend-down', ok: false },
+          { label: 'Trough with the event', detail: '$44K below buffer — 13K deeper', icon: 'fa-solid fa-arrow-trend-down', ok: false },
+          { label: 'Credit line available', detail: '$120K undrawn, 9.4% annualised', icon: 'fa-solid fa-building-columns', ok: true },
+          { label: 'Cover from event margin', detail: 'The event pays for the draw four times over', icon: 'fa-solid fa-check', ok: true },
+        ],
+        calloutTitle: null, callout: null,
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const desks = this.deskData();
+    const sel = desks.find((d) => d.id === this.state.sel) || desks[0];
+    const weights = { inventory: 0.30, deals: 0.18, creative: 0.16, ads: 0.16, health: 0.12, cash: 0.08 };
+    const overall = Math.round(desks.reduce((a, d) => a + d.score * weights[d.id], 0));
+    const behind = desks.filter((d) => d.score < 85);
+
+    const tone = (s) => s >= 95 ? 'var(--green-700)' : s >= 80 ? 'var(--amber-700)' : 'var(--rose-700)';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      railDot: 'var(--amber-500)',
+      railGlow: 'var(--amber-50)',
+      railLabel: 'T-4\ndays',
+      pinMark: 'var(--mod-actions)',
+      pinTone: 'var(--mod-actions)',
+      pinnedTop: 'Readiness ' + overall + '%',
+      pinnedSub: 'inventory 84% · deals 100% · creative 60%',
+      tChip: 'T-4 days',
+      tChipBg: 'var(--amber-50)',
+      tChipBorder: 'color-mix(in oklab, var(--amber-500) 26%, white)',
+      tChipTone: 'var(--amber-700)',
+
+      overallScore: overall + '%',
+      overallTone: tone(overall),
+      desks: desks.map((d) => {
+        const active = d.id === this.state.sel;
+        return {
+          name: d.name, lens: d.lens, icon: d.icon, hue: d.hue,
+          tint: 'color-mix(in oklab, ' + d.hue + ' 12%, white)',
+          score: d.score, scoreLabel: d.score + '%', tone: tone(d.score),
+          gap: d.gap, gapTone: d.gapTone,
+          owner: d.owner, clock: d.clock, clockTone: d.clockTone,
+          rowBg: active ? 'color-mix(in oklab, var(--mod-actions) 6%, white)' : 'transparent',
+          mark: active ? 'var(--mod-actions)' : 'transparent',
+          pick: () => this.setState({ sel: d.id }),
+        };
+      }),
+      deskFoot: behind.length + ' desks below 85% · ' + behind.map((d) => d.name.toLowerCase()).join(', ') + ' — each one has a named owner and a clock',
+
+      selName: sel.name + ' · ' + sel.score + '% ready',
+      selMeta: sel.meta,
+      selIcon: sel.icon, selHue: sel.hue, selTint: 'color-mix(in oklab, ' + sel.hue + ' 12%, white)',
+      selState: sel.state,
+      selStateTint: sel.score >= 95 ? 'var(--green-50)' : sel.score >= 80 ? 'var(--amber-50)' : 'var(--rose-50)',
+      selStateTone: tone(sel.score),
+      selDoorHref: sel.doorHref || null, selDoorLabel: sel.doorLabel,
+      selTableTitle: sel.tableTitle,
+      selCol0: sel.col0, selCol1: sel.col1, selCol2: sel.col2, selCol3: sel.col3,
+      selRows: sel.rows,
+      selNote: sel.note,
+      selSideTitle: sel.sideTitle,
+      selSide: sel.side.map((s) => ({
+        label: s.label, detail: s.detail, icon: s.icon,
+        tone: s.ok ? 'var(--green-700)' : 'var(--rose-700)',
+        nameTone: s.ok ? 'var(--ink-800)' : 'var(--rose-700)',
+      })),
+      selCallout: sel.callout, selCalloutTitle: sel.calloutTitle,
+      selCalloutTone: sel.calloutTone, selCalloutBg: sel.calloutBg, selCalloutBorder: sel.calloutBorder,
+
+      nowPct: 34,
+      timeline: [
+        { label: 'FBA\ncutoff', when: 'Aug 20 · 23:59', pct: 6, tone: 'var(--rose-700)' },
+        { label: 'WFS\ncutoff', when: 'Aug 21 · 18:00', pct: 26, tone: 'var(--amber-700)' },
+        { label: 'Creative\ndue', when: 'Aug 21 · 18:00', pct: 48, tone: 'var(--amber-700)' },
+        { label: 'Event\nopens', when: 'Aug 23 · 00:01', pct: 70, tone: 'var(--mod-actions)' },
+        { label: 'Contract\nexpires', when: 'Aug 27 · 06:00', pct: 94, tone: 'var(--ink-600)' },
+      ],
+
+      learningSummary: '3 of 4 addressed in this plan',
+      learnings: [
+        { name: 'Ad budgets exhausted by 14:00 on day 1', event: 'BFCM 2025', cost: 'cost $12K CM',
+          detail: 'Caps were set at normal levels and the whole lineup went dark for ten hours on the highest-traffic day of the year. The spend-cap override exists because of this.',
+          state: 'addressed', stateIcon: 'fa-solid fa-check', stateTint: 'var(--green-50)', stateTone: 'var(--green-700)',
+          border: 'color-mix(in oklab, var(--green-500) 20%, white)', bg: 'var(--ink-0)' },
+        { name: 'Hero SKU stocked out at hour 31', event: 'Prime Spring 2026', cost: 'cost $8.6K CM',
+          detail: 'Cover was measured against the trailing run rate rather than the event forecast. The readiness scorecard now measures against the forecast, which is how this year\u2019s gap was found at T-4 instead of T-0.',
+          state: 'addressed', stateIcon: 'fa-solid fa-check', stateTint: 'var(--green-50)', stateTone: 'var(--green-700)',
+          border: 'color-mix(in oklab, var(--green-500) 20%, white)', bg: 'var(--ink-0)' },
+        { name: 'Late-shipment rate crossed 4% on day 3', event: 'BFCM 2025', cost: '11 days suppressed',
+          detail: 'The East 3PL backlogged on the Monday and nobody armed a handling buffer. Day 2 this year is a Monday, and the Keeper desk is in the gate for exactly this reason.',
+          state: 'in this plan', stateIcon: 'fa-solid fa-shield-halved', stateTint: 'color-mix(in oklab, var(--mod-actions) 12%, white)', stateTone: 'var(--mod-actions)',
+          border: 'color-mix(in oklab, var(--mod-actions) 22%, white)', bg: 'color-mix(in oklab, var(--mod-actions) 4%, white)' },
+        { name: 'Overrides stayed live for eleven days after', event: 'BFCM 2025', cost: 'cost $4.1K margin',
+          detail: 'Wider spend caps and deeper promo authority were never rolled back, and nobody noticed until the monthly variance bridge. Automatic expiry is the whole reason the contract has a date on it.',
+          state: 'addressed', stateIcon: 'fa-solid fa-check', stateTint: 'var(--green-50)', stateTone: 'var(--green-700)',
+          border: 'color-mix(in oklab, var(--green-500) 20%, white)', bg: 'var(--ink-0)' },
+      ],
+
+      forecast: [
+        { label: 'P10 · soft event', value: '$198K', pct: 54, tone: 'var(--ink-600)' },
+        { label: 'P50 · plan', value: '$291K', pct: 79, tone: 'var(--mod-actions)' },
+        { label: 'P90 · strong event', value: '$368K', pct: 100, tone: 'var(--green-700)' },
+        { label: 'Normal 96 hours', value: '$86K', pct: 23, tone: 'var(--ink-400)' },
+      ],
+
+      headroom: [
+        { label: 'Account health', value: '0.6pp', detail: 'Late-shipment headroom with volume about to triple. Buffer arming is in the gate.', tone: 'var(--rose-700)', border: 'color-mix(in oklab, var(--rose-500) 24%, white)', bg: 'var(--rose-50)', href: 'S10.3-1-reason.dc.html', link: 'S10.3 · account health' },
+        { label: 'Cash trough', value: '−$44K', detail: 'Week 7 goes $13K deeper with the event. Credit line covers it at 9.4%.', tone: 'var(--amber-700)', border: 'color-mix(in oklab, var(--amber-500) 24%, white)', bg: 'var(--ink-0)', href: 'S10.2-1-reason.dc.html', link: 'S10.2 · cash ladder' },
+        { label: 'Deal lineup', value: '100%', detail: 'Confirmed from the 9.19 calendar with the Walmart overlap already resolved.', tone: 'var(--green-700)', border: 'var(--ink-100)', bg: 'var(--ink-0)', href: 'S9.19-2-analyze.dc.html', link: 'S9.19 · calendar' },
+      ],
+
+      footStatus: 'Analyze · readiness ' + overall + '% · ' + behind.length + ' desks behind · FBA cutoff 31h · air freight $3.1K against $9.4K exposure',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

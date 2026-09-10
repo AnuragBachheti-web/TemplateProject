@@ -1,0 +1,536 @@
+{
+  "code": "S10.5",
+  "stageKey": "decide",
+  "name": "Catalog integrity",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "paths": {
+      "D1": "dispute",
+      "D2": "rebuild_dispute",
+      "D3": "replay_guard",
+      "D4": "repush_lock",
+      "D5": "patch_replay",
+      "D6": "dispute",
+      "D7": "repush",
+      "D8": "repush"
+    },
+    "prevent": {
+      "imageLock": true,
+      "themeLock": true,
+      "monitorUpgrade": false,
+      "partialGuard": true
+    },
+    "blocks": {
+      "B1": "relist",
+      "B2": "relist",
+      "B3": "relist",
+      "B4": "relist",
+      "B5": "relist",
+      "B6": "markdown"
+    }
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--rose-500)",
+    "railGlow": "var(--rose-50)",
+    "railLabel": "14 drifts\nopen",
+    "pinMark": "var(--rose-500)",
+    "pinTone": "var(--rose-700)",
+    "pinnedTop": "$640 / day stopped",
+    "pinnedSub": "6 of 8 repairs fix the cause too",
+    "heroValue": "$640/day",
+    "repairCount": 8,
+    "capitalValue": "$18,045",
+    "detectValue": "7.7h",
+    "detectTone": "var(--amber-700)",
+    "detectPct": "82",
+    "detectNote": "Still outside the 4-hour target. Repairs alone do not move detection — only the monitor upgrade does, and it is the one line item here with a running cost.",
+    "recurLabel": "every cause addressed",
+    "recurTint": "var(--green-50)",
+    "recurTone": "var(--green-700)",
+    "heroLine": "Eight repairs stop $640 a day of quiet loss and return $18,045 of stranded stock to sale. Every one of them fixes the cause as well as the value, which is what stops this card reappearing next month. 1 block goes to the 9.9 ladder instead of back on sale.",
+    "pathSummary": "6 cause fixes · 0 value-only",
+    "repairs": [
+      {
+        "name": "Hero image · ASIN B0Y",
+        "channel": "Amazon",
+        "severity": "critical",
+        "sevTint": "var(--rose-50)",
+        "sevTone": "var(--rose-700)",
+        "chosenNote": "Asset restored immediately, then a brand-registry dispute filed with the PIM version history and entitlement. Three to five days to lock the field.",
+        "cost": "$310/day",
+        "recurState": "cause fixed",
+        "recurTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Re-push only",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Re-push + registry dispute",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "Variation family · Enamel set",
+        "channel": "Amazon",
+        "severity": "critical",
+        "sevTint": "var(--rose-50)",
+        "sevTone": "var(--rose-700)",
+        "chosenNote": "Family rebuilt, then a registry dispute over parent-edit rights. This is the drift most likely to recur without it.",
+        "cost": "$150/day",
+        "recurState": "cause fixed",
+        "recurTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Rebuild family",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Rebuild + dispute",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "Quantity zeroed · Cast-iron Skillet",
+        "channel": "Walmart",
+        "severity": "high",
+        "sevTint": "var(--amber-50)",
+        "sevTone": "var(--amber-700)",
+        "chosenNote": "Replay now, plus a guard that refuses to apply a partial inventory file. Kills the whole class, not this instance.",
+        "cost": "$60/day",
+        "recurState": "cause fixed",
+        "recurTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Replay feed",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Replay + partial-file guard",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "Price drift · Filtration Pitcher",
+        "channel": "Shopify",
+        "severity": "critical",
+        "sevTint": "var(--rose-50)",
+        "sevTone": "var(--rose-700)",
+        "chosenNote": "Price served live rather than from the theme cache. Slightly slower page, no stale prices.",
+        "cost": "$40/day",
+        "recurState": "cause fixed",
+        "recurTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Purge cache + re-push",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Re-push + exclude price from cache",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "Titles truncated · 4 Walmart listings",
+        "channel": "Walmart",
+        "severity": "high",
+        "sevTint": "var(--amber-50)",
+        "sevTone": "var(--amber-700)",
+        "chosenNote": "Character limit corrected in the feed template, then replayed across all four. One fix, four listings, no recurrence.",
+        "cost": "$30/day",
+        "recurState": "cause fixed",
+        "recurTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Re-push values",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Patch template + replay",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "Bullet 3 replaced · Knife Block",
+        "channel": "Amazon",
+        "severity": "high",
+        "sevTint": "var(--amber-50)",
+        "sevTone": "var(--amber-700)",
+        "chosenNote": "Copy restored and disputed on the restricted-claim grounds, which is the stronger argument than voice.",
+        "cost": "$20/day",
+        "recurState": "cause fixed",
+        "recurTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Re-push copy",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Re-push + dispute",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "A+ modules missing · Enamel Casserole",
+        "channel": "Amazon",
+        "severity": "medium",
+        "sevTint": "var(--ink-100)",
+        "sevTone": "var(--ink-600)",
+        "chosenNote": "Both modules restored on the daily cycle. Re-index drops are a platform behaviour, so recurrence is possible and cheap to fix again.",
+        "cost": "$20/day",
+        "recurState": "may recur",
+        "recurTone": "var(--amber-700)",
+        "options": [
+          {
+            "label": "Re-push modules",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      },
+      {
+        "name": "Secondary images · 2 listings",
+        "channel": "Amazon",
+        "severity": "medium",
+        "sevTint": "var(--ink-100)",
+        "sevTone": "var(--ink-600)",
+        "chosenNote": "Full set and order restored on the daily cycle.",
+        "cost": "$10/day",
+        "recurState": "may recur",
+        "recurTone": "var(--amber-700)",
+        "options": [
+          {
+            "label": "Re-push image set",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          },
+          {
+            "label": "Re-push + image lock",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      }
+    ],
+    "prevention": [
+      {
+        "label": "Hero image lock via registry",
+        "detail": "Brand registry blocks contributed images on entitled ASINs. Available on 38 of our 41 fast-lane listings.",
+        "effect": "prevents 4 of the 5 contribution drifts",
+        "tag": "supported",
+        "tagTint": "var(--green-50)",
+        "tagTone": "var(--green-700)",
+        "nameTone": "var(--ink-900)",
+        "effectTone": "var(--mod-actions)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 5%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check",
+        "cursor": "pointer"
+      },
+      {
+        "label": "Price excluded from theme cache",
+        "detail": "Storefront renders price live instead of from a cached snapshot. Costs about 40ms on the product page.",
+        "effect": "prevents the price class entirely",
+        "tag": null,
+        "nameTone": "var(--ink-900)",
+        "effectTone": "var(--mod-actions)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 5%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check",
+        "cursor": "pointer"
+      },
+      {
+        "label": "Partial-file guard on feeds",
+        "detail": "An inventory or content file that arrives incomplete is rejected rather than applied to the rows it reached.",
+        "effect": "prevents 3 of the 8 pipeline drifts",
+        "tag": null,
+        "nameTone": "var(--ink-900)",
+        "effectTone": "var(--mod-actions)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 5%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check",
+        "cursor": "pointer"
+      },
+      {
+        "label": "Move 24 listings to the fast lane",
+        "detail": "30-minute critical-field checks on the 24 standard-lane listings that carry more than $200/day each.",
+        "effect": "critical detection 9.4h → 2.1h",
+        "tag": "running cost",
+        "tagTint": "var(--amber-50)",
+        "tagTone": "var(--amber-700)",
+        "nameTone": "var(--ink-600)",
+        "effectTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "boxBg": "var(--ink-0)",
+        "boxBorder": "var(--ink-300)",
+        "boxIcon": "fa-solid fa-xmark",
+        "cursor": "pointer"
+      }
+    ],
+    "strandedSummary": "$18,045 of $18,400 recovered",
+    "blocks": [
+      {
+        "name": "Dutch Oven 5qt",
+        "units": "210 units",
+        "capital": "$8,200",
+        "storage": "$41/mo",
+        "chosenNote": "Clears automatically when the variation family is rebuilt — no separate work, full price recovery.",
+        "recover": "$8,200",
+        "recoverLabel": "at full price",
+        "recoverTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Relist with family rebuild",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          },
+          {
+            "label": "Remove and liquidate",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      },
+      {
+        "name": "Sauté Pan 12in",
+        "units": "96 units",
+        "capital": "$3,400",
+        "storage": "$28/mo",
+        "chosenNote": "The suppression flag is the truncated title. Patching the template lifts the flag and the block sells.",
+        "recover": "$3,400",
+        "recoverLabel": "at full price",
+        "recoverTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Relist after title patch",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          },
+          {
+            "label": "Remove and liquidate",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      },
+      {
+        "name": "Filtration Pitcher",
+        "units": "140 units",
+        "capital": "$2,600",
+        "storage": "$52/mo",
+        "chosenNote": "Offer closed by a bulk edit in June. Recreating it costs 20 minutes and returns the block to sale at list.",
+        "recover": "$2,600",
+        "recoverLabel": "at full price",
+        "recoverTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Recreate offer",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          },
+          {
+            "label": "Route to 9.9 ladder",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      },
+      {
+        "name": "Knife Block 6pc",
+        "units": "48 units",
+        "capital": "$1,900",
+        "storage": "$22/mo",
+        "chosenNote": "FBA stranded on a missing attribute after the packaging change. The same measurement that supports the fee claim in 10.4 unstrands this.",
+        "recover": "$1,900",
+        "recoverLabel": "at full price",
+        "recoverTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Add dimension attribute",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          },
+          {
+            "label": "Remove to a merchant offer",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      },
+      {
+        "name": "Cast-iron Skillet 10in",
+        "units": "60 units",
+        "capital": "$1,600",
+        "storage": "$19/mo",
+        "chosenNote": "The repack changed the barcode. Relabelling costs about $180 of handling and returns the block at list.",
+        "recover": "$1,420",
+        "recoverLabel": "net of relabel",
+        "recoverTone": "var(--green-700)",
+        "options": [
+          {
+            "label": "Relabel to the new GTIN",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          },
+          {
+            "label": "Remove and liquidate",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          }
+        ]
+      },
+      {
+        "name": "Enamel Casserole 3qt",
+        "units": "36 units",
+        "capital": "$700",
+        "storage": "$8/mo",
+        "chosenNote": "Joins the cohort it already belongs to. Sells through before the surcharge date instead of coming back here in six weeks.",
+        "recover": "$525",
+        "recoverLabel": "ladder estimate",
+        "recoverTone": "var(--amber-700)",
+        "options": [
+          {
+            "label": "Recreate offer",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "fg": "var(--ink-600)",
+            "weight": "500"
+          },
+          {
+            "label": "Route to 9.9 ladder",
+            "bg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+            "fg": "var(--mod-actions)",
+            "weight": "600"
+          }
+        ]
+      }
+    ],
+    "summary": [
+      {
+        "label": "Daily bleed stopped",
+        "value": "$640",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Stranded capital recovered",
+        "value": "$18,045",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Feed rows unblocked",
+        "value": "412",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Prevention measures armed",
+        "value": "3 of 4",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Disputes filed",
+        "value": "3",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "causeCount": "6 of 8",
+    "causeTone": "var(--green-700)",
+    "approveLabel": "Approve the slate · 8 repairs",
+    "approveSub": "$640/day · $18,045 unstranded · 3 preventions",
+    "approvalNote": "Every repair is a canonical re-push with a diff. Nothing is edited by hand in a marketplace console, because a hand edit is the next drift.",
+    "footStatus": "Decide · 8 repairs · 6 fix the cause · $18,045 unstranded · detection 7.7h against a 4h target"
+  }
+}

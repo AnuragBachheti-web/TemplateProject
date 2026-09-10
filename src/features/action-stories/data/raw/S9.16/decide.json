@@ -1,0 +1,670 @@
+{
+  "code": "S9.16",
+  "stageKey": "decide",
+  "name": "Channel launch",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "mode": "pilot",
+    "prod": "inhouse",
+    "off": {
+      "NW-4471": true,
+      "NW-2209": true,
+      "NW-8830": true
+    },
+    "ack": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedTop": "Limited pilot · 15 SKUs",
+    "pinnedSub": "breakeven M10 · exposure $92.5K of $75K",
+    "modes": [
+      {
+        "label": "Full go",
+        "body": "All 18 SKUs, $52K launch spend, no gate. The case reaches breakeven in month 13 and the exposure lands at $77K.",
+        "badge": "over appetite",
+        "badgeTint": "var(--rose-50)",
+        "badgeTone": "var(--rose-700)",
+        "aValue": "M13",
+        "aLabel": "breakeven",
+        "bValue": "$77.0K",
+        "bLabel": "exposure",
+        "aTone": "var(--rose-700)",
+        "bTone": "var(--rose-700)",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-200)",
+        "radioBorder": "var(--ink-300)",
+        "radioBg": "var(--ink-0)",
+        "dotOpacity": 0,
+        "titleTone": "var(--ink-600)"
+      },
+      {
+        "label": "Limited pilot",
+        "body": "15 SKUs of heroes and traffic drivers, capped integration, a 90-day gate with the scale and kill rules agreed in advance.",
+        "badge": "recommended",
+        "badgeTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "badgeTone": "var(--mod-hubs)",
+        "aValue": "M10",
+        "aLabel": "breakeven",
+        "bValue": "$92.5K",
+        "bLabel": "exposure",
+        "aTone": "var(--green-700)",
+        "bTone": "var(--green-700)",
+        "bg": "var(--ink-0)",
+        "border": "color-mix(in oklab, var(--mod-hubs) 34%, white)",
+        "mark": "var(--mod-hubs)",
+        "radioBorder": "var(--mod-hubs)",
+        "radioBg": "var(--mod-hubs)",
+        "dotOpacity": 1,
+        "titleTone": "var(--ink-900)"
+      },
+      {
+        "label": "No-go",
+        "body": "Decline the category now, file the reasoning and the numbers, and set the conditions that would make us look again.",
+        "badge": "defensible",
+        "badgeTint": "var(--ink-100)",
+        "badgeTone": "var(--ink-600)",
+        "aValue": "$0",
+        "aLabel": "exposure",
+        "bValue": "46 hrs",
+        "bLabel": "lift avoided",
+        "aTone": "var(--ink-700)",
+        "bTone": "var(--ink-700)",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "mark": "var(--ink-200)",
+        "radioBorder": "var(--ink-300)",
+        "radioBg": "var(--ink-0)",
+        "dotOpacity": 0,
+        "titleTone": "var(--ink-600)"
+      }
+    ],
+    "showScope": true,
+    "skuRule": "pilot rule: 10–20 SKUs from Heroes and Traffic Drivers",
+    "skuCount": 15,
+    "skuCountTone": "var(--ink-900)",
+    "skus": [
+      {
+        "name": "Carbon steel skillet 10\"",
+        "price": "$48.00",
+        "units": "240",
+        "role": "hero",
+        "cm": "21.9%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Carbon steel skillet 12\"",
+        "price": "$62.00",
+        "units": "180",
+        "role": "hero",
+        "cm": "23.4%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Pan care kit",
+        "price": "$24.00",
+        "units": "420",
+        "role": "traffic driver",
+        "cm": "6.8%",
+        "cmTone": "var(--rose-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Enamel dutch oven 5qt",
+        "price": "$96.00",
+        "units": "90",
+        "role": "hero",
+        "cm": "24.8%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Enamel braiser 3qt",
+        "price": "$78.00",
+        "units": "110",
+        "role": "hero",
+        "cm": "22.6%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Filter pitcher 10-cup",
+        "price": "$44.00",
+        "units": "260",
+        "role": "hero",
+        "cm": "19.7%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Replacement filter 3-pack",
+        "price": "$28.00",
+        "units": "520",
+        "role": "traffic driver",
+        "cm": "14.2%",
+        "cmTone": "var(--ink-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Faucet filter mount",
+        "price": "$32.00",
+        "units": "180",
+        "role": "traffic driver",
+        "cm": "11.4%",
+        "cmTone": "var(--rose-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "none",
+        "assetTone": "var(--ink-300)",
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "checkOpacity": 0,
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "name": "Chef knife 8\"",
+        "price": "$68.00",
+        "units": "150",
+        "role": "hero",
+        "cm": "25.1%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Paring knife 3.5\"",
+        "price": "$22.00",
+        "units": "340",
+        "role": "traffic driver",
+        "cm": "9.6%",
+        "cmTone": "var(--rose-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Whetstone 1000/6000",
+        "price": "$36.00",
+        "units": "200",
+        "role": "traffic driver",
+        "cm": "17.8%",
+        "cmTone": "var(--ink-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Wooden spoon set",
+        "price": "$19.00",
+        "units": "480",
+        "role": "traffic driver",
+        "cm": "8.2%",
+        "cmTone": "var(--rose-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Silicone spatula pair",
+        "price": "$16.00",
+        "units": "460",
+        "role": "traffic driver",
+        "cm": "7.4%",
+        "cmTone": "var(--rose-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Cast iron griddle",
+        "price": "$54.00",
+        "units": "130",
+        "role": "hero",
+        "cm": "20.3%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Pour-over kettle",
+        "price": "$72.00",
+        "units": "100",
+        "role": "hero",
+        "cm": "22.1%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "3 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      },
+      {
+        "name": "Seasoning wax 4oz",
+        "price": "$14.00",
+        "units": "300",
+        "role": "traffic driver",
+        "cm": "5.1%",
+        "cmTone": "var(--rose-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "none",
+        "assetTone": "var(--ink-300)",
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "checkOpacity": 0,
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "name": "Knife block 6-slot",
+        "price": "$88.00",
+        "units": "60",
+        "role": "hero",
+        "cm": "18.4%",
+        "cmTone": "var(--green-700)",
+        "roleTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "roleTone": "var(--mod-hubs)",
+        "assets": "none",
+        "assetTone": "var(--ink-300)",
+        "boxBorder": "var(--ink-300)",
+        "boxBg": "var(--ink-0)",
+        "checkOpacity": 0,
+        "nameTone": "var(--ink-400)",
+        "bg": "var(--ink-25)"
+      },
+      {
+        "name": "Kitchen shears",
+        "price": "$26.00",
+        "units": "280",
+        "role": "traffic driver",
+        "cm": "12.9%",
+        "cmTone": "var(--ink-700)",
+        "roleTint": "var(--ink-100)",
+        "roleTone": "var(--ink-600)",
+        "assets": "1 planned",
+        "assetTone": "var(--ink-500)",
+        "boxBorder": "var(--ink-900)",
+        "boxBg": "var(--ink-900)",
+        "checkOpacity": 1,
+        "nameTone": "var(--ink-900)",
+        "bg": "transparent"
+      }
+    ],
+    "unitsTotal": "3,960",
+    "invValue": "$62.5K",
+    "invTone": "var(--amber-700)",
+    "blendedCm": "17.1%",
+    "prodTabs": [
+      {
+        "label": "In-house",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Agency",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "creative": [
+      {
+        "label": "In-house production",
+        "note": "existing studio, 1 shoot day per fortnight",
+        "qty": "12 / mo",
+        "cost": "$1.9K",
+        "weight": "400",
+        "labelTone": "var(--ink-600)",
+        "costTone": "var(--ink-800)",
+        "size": "11.5px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Creator fees",
+        "note": "4 creators, flat fee + 6% affiliate",
+        "qty": "4",
+        "cost": "$1.2K",
+        "weight": "400",
+        "labelTone": "var(--ink-600)",
+        "costTone": "var(--ink-800)",
+        "size": "11.5px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Editing contractor",
+        "note": "per-video rate, platform formats",
+        "qty": "12 / mo",
+        "cost": "$0.1K",
+        "weight": "400",
+        "labelTone": "var(--ink-600)",
+        "costTone": "var(--ink-800)",
+        "size": "11.5px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Brand review",
+        "note": "in-house approval before anything runs",
+        "qty": "4 hrs / wk",
+        "cost": "—",
+        "weight": "400",
+        "labelTone": "var(--ink-600)",
+        "costTone": "var(--ink-800)",
+        "size": "11.5px",
+        "rule": "var(--ink-50)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Monthly run cost",
+        "note": null,
+        "qty": "12 assets",
+        "cost": "$3.2K",
+        "weight": "600",
+        "labelTone": "var(--ink-900)",
+        "costTone": "var(--green-700)",
+        "size": "13px",
+        "rule": "transparent",
+        "bg": "var(--ink-25)"
+      }
+    ],
+    "prodNote": "Twelve assets a month from the existing studio. Slower to start and the reason the pilot clears breakeven at M10.",
+    "prodNoteTone": "var(--ink-500)",
+    "gateDate": "Dec 22 · 90 days from listing live",
+    "gate": [
+      {
+        "verdict": "Scale",
+        "rule": "Run-rate GMV ≥ $30K/mo, new-buyer share ≥ 50% and CAC ≤ $20 at day 90.",
+        "then": "Release the remaining SKUs and lift the creative budget to $6K/mo.",
+        "icon": "fa-solid fa-arrow-trend-up",
+        "tone": "var(--green-700)",
+        "tint": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 30%, white)"
+      },
+      {
+        "verdict": "Continue as-is",
+        "rule": "Run-rate $18–30K/mo with CAC inside $24 and no MAP incidents.",
+        "then": "Hold the pilot for a second 90 days, no additional spend.",
+        "icon": "fa-solid fa-arrows-left-right",
+        "tone": "var(--amber-700)",
+        "tint": "var(--amber-50)",
+        "border": "color-mix(in oklab, var(--amber-500) 30%, white)"
+      },
+      {
+        "verdict": "Kill",
+        "rule": "Run-rate < $18K/mo, or CAC > $24, or cannibalisation > 6% of Shopify DTC.",
+        "then": "Wind-down runs on the path defined below — delist, recall, close.",
+        "icon": "fa-solid fa-circle-stop",
+        "tone": "var(--rose-700)",
+        "tint": "var(--rose-50)",
+        "border": "color-mix(in oklab, var(--rose-500) 30%, white)"
+      }
+    ],
+    "ledgerRef": "LEDGER-CH-0031 · business case attached",
+    "doc": {
+      "title": "Limited pilot approved — 15 SKUs, 90-day gate",
+      "body": "The audience argument is strong and the economics are marginal at full scope, so we buy the information rather than the channel. Fifteen SKUs, integration capped at $14K on the existing connector, creative produced in-house, and a gate at day 90 whose scale and kill rules are written below before anyone has a stake in the answer.",
+      "points": [
+        {
+          "label": "Why now",
+          "note": "Eleven sellers in the subcategory and onboarding incentives expire Sep 26",
+          "icon": "fa-solid fa-clock-rotate-left",
+          "tone": "var(--mod-hubs)"
+        },
+        {
+          "label": "What we are buying",
+          "note": "A read on CAC and new-buyer share that no model can give us",
+          "icon": "fa-solid fa-magnifying-glass-chart",
+          "tone": "var(--mod-hubs)"
+        },
+        {
+          "label": "What it costs to be wrong",
+          "note": "$92.5K, of which $62.5K is inventory recoverable elsewhere",
+          "icon": "fa-solid fa-shield-halved",
+          "tone": "var(--green-700)"
+        },
+        {
+          "label": "What we will not do",
+          "note": "No MAP exceptions, no unapproved creator claims, no custom middleware",
+          "icon": "fa-solid fa-lock",
+          "tone": "var(--ink-500)"
+        }
+      ]
+    },
+    "ackTitle": "Wind-down path defined before approval",
+    "ackBody": "Kill at the gate means: delist all listings within 5 days, halt creative and creator contracts at the next break, recall sellable inventory to the primary warehouse, and keep the buyer service window open for 30 days. Nothing is committed that cannot be undone on that path.",
+    "ackOpacity": 0,
+    "ackBoxBorder": "var(--ink-300)",
+    "ackBoxBg": "var(--ink-0)",
+    "ackBorder": "var(--ink-200)",
+    "ackBg": "var(--ink-0)",
+    "summary": [
+      {
+        "label": "Decision",
+        "value": "Pilot",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "SKUs live",
+        "value": "15",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Breakeven",
+        "value": "M10",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Monthly creative",
+        "value": "$3.2K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Gate",
+        "value": "Dec 22",
+        "tone": "var(--mod-hubs)"
+      }
+    ],
+    "expPct": "100",
+    "expValue": "$92.5K",
+    "expTone": "var(--rose-500)",
+    "expRows": [
+      {
+        "label": "Launch spend",
+        "value": "$30.0K"
+      },
+      {
+        "label": "Inventory at risk",
+        "value": "$62.5K"
+      },
+      {
+        "label": "Headroom left",
+        "value": "$0.0K"
+      }
+    ],
+    "policyStatus": "out of band",
+    "policyTone": "var(--rose-700)",
+    "checks": [
+      {
+        "label": "Exposure appetite",
+        "icon": "fa-solid fa-circle-xmark",
+        "tone": "var(--rose-700)",
+        "noteTone": "var(--rose-700)",
+        "note": "$92.5K exceeds the $75K cap. A bigger budget is not one of the options."
+      },
+      {
+        "label": "Breakeven floor",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Breakeven M10, inside the M12 floor."
+      },
+      {
+        "label": "MAP posture",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "No seller-funded discounts below MAP. Platform-funded promotional slots only."
+      },
+      {
+        "label": "Integration capacity",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "noteTone": "var(--ink-400)",
+        "note": "Capped at $14K on the existing connector, half the Q4 allowance."
+      },
+      {
+        "label": "Reversibility",
+        "icon": "fa-solid fa-circle-xmark",
+        "tone": "var(--rose-700)",
+        "noteTone": "var(--rose-700)",
+        "note": "The wind-down path has to be acknowledged before this can be approved."
+      }
+    ],
+    "revisitTitle": "If the gate says kill",
+    "revisit": [
+      {
+        "label": "Delist within 5 days",
+        "note": "All listings pulled, catalogue mapping left intact for a later attempt.",
+        "icon": "fa-solid fa-list-check"
+      },
+      {
+        "label": "Recall sellable inventory",
+        "note": "Units return to the primary warehouse and re-enter normal channels.",
+        "icon": "fa-solid fa-boxes-packing"
+      },
+      {
+        "label": "Close creative commitments",
+        "note": "Creator contracts end at the next break; no cancellation fees carried.",
+        "icon": "fa-solid fa-file-circle-xmark"
+      }
+    ],
+    "blocked": true,
+    "canApprove": false,
+    "ctaLabel": "Approve pilot & continue",
+    "ctaHref": "S9.16-4-execute.dc.html",
+    "footStatus": "Decide · pilot · 15 SKUs · breakeven M10 · exposure $92.5K",
+    "footTone": "var(--rose-700)",
+    "blockReason": "Full-launch exposure of $92.5K breaks the $75K appetite set in Reason"
+  }
+}

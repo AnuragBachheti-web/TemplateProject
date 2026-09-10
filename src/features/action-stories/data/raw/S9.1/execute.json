@@ -1,0 +1,377 @@
+{
+  "code": "S9.1",
+  "stageKey": "execute",
+  "name": "Assortment",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null,
+    "armed": false,
+    "restored": false
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "planLine": "Grouped by destination so each system gets one write. Markdown and sourcing hand off as cards; Planner and the channels take direct pushes with a diff on every line.",
+    "pushedCount": "0 / 4",
+    "pushAllLabel": "Push all destinations",
+    "pushAllIcon": "fa-solid fa-paper-plane",
+    "pushAllBg": "var(--ink-900)",
+    "pushAllFg": "var(--ink-0)",
+    "pushAllCursor": "pointer",
+    "dests": [
+      {
+        "name": "Markdown & recovery",
+        "meta": "12 exit SKUs · $27K at cost · 3 recovery cards",
+        "icon": "fa-solid fa-tags",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Markdown card MD-3312",
+            "detail": "Ladder-eligible exits with more than 8 weeks of cover. Opens as a clearance cohort in the markdown story with the storage-cost clock already running.",
+            "value": "6 SKUs",
+            "chip": "Open S9.9",
+            "chipHref": "S9.9-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+            "chipTone": "var(--mod-margin)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Liquidation quote request",
+            "detail": "Below the ladder recovery floor at current velocity. Two quotes already on file at 22% and 27% of cost.",
+            "value": "4 SKUs",
+            "chip": "Open S9.9",
+            "chipHref": "S9.9-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+            "chipTone": "var(--mod-margin)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Donation routing",
+            "detail": "Novelty egg cups and chalkboard labels — recovery value under the $8.40 handling floor, tax value beats liquidation.",
+            "value": "2 SKUs",
+            "chip": "Open S9.9",
+            "chipHref": "S9.9-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+            "chipTone": "var(--mod-margin)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Planner",
+        "meta": "34 SKUs · stop-buy and depth flags · 3 open POs",
+        "icon": "fa-solid fa-clipboard-list",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Stop-buy flags",
+            "detail": "No further replenishment on the exit set. Flags sit ahead of the next planning run so nothing re-enters the buy sheet.",
+            "value": "12 SKUs",
+            "chip": null,
+            "hasDiff": true,
+            "before": "replenish · auto",
+            "after": "stop-buy · locked",
+            "afterTone": "var(--rose-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Depth reduction to 4 weeks cover",
+            "detail": "Buy depth cut on the Supporting tail. Ranging is untouched, so no channel goes dark.",
+            "value": "22 SKUs",
+            "chip": null,
+            "hasDiff": true,
+            "before": "cover 10–14 wks",
+            "after": "cover 4 wks",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Open PO cancellations",
+            "detail": "PO-88412, PO-88437 and PO-88501 carry exit SKUs inside their cancel window (closes in 6, 9 and 11 days). Cancel requests go with the flags.",
+            "value": "3 POs",
+            "chip": null,
+            "hasDiff": true,
+            "before": "$6.4K inbound",
+            "after": "cancel requested",
+            "afterTone": "var(--amber-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Channel ranging updates",
+        "meta": "4 channels · every change diffed before push",
+        "icon": "fa-solid fa-diagram-project",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Shopify · collections and nav",
+            "detail": "Exit SKUs leave 4 collections, gap fills land as drafts in Cookware and Storage, two nav facets recount.",
+            "value": "30 edits",
+            "chip": null,
+            "hasDiff": true,
+            "before": "4 collections · 214 live",
+            "after": "4 collections · 206 live, 4 drafts",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Amazon · listing status",
+            "detail": "Exits move to Inactive with the ASIN kept so review history survives. Grow SKUs get max-order-quantity raised.",
+            "value": "32 edits",
+            "chip": null,
+            "hasDiff": true,
+            "before": "214 active · 12 at MOQ 3",
+            "after": "202 active · 12 inactive",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Walmart · item flags",
+            "detail": "Exits unpublish, reduce set flags to limited-depth, gap fills open as setup-pending until the sourcing brief lands.",
+            "value": "34 edits",
+            "chip": null,
+            "hasDiff": true,
+            "before": "214 published",
+            "after": "202 published · 4 pending",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Faire · wholesale sheet",
+            "detail": "Exit lines drop off the wholesale assortment sheet at the next catalogue refresh, 3 grow SKUs move to the front page.",
+            "value": "18 edits",
+            "chip": null,
+            "hasDiff": true,
+            "before": "sheet rev 14",
+            "after": "sheet rev 15",
+            "afterTone": "var(--ink-900)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Gap fills → sourcing",
+        "meta": "4 new lines · $6K test buy · sourcing brief per line",
+        "icon": "fa-solid fa-lightbulb",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Push",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Enamel Dutch oven 5.5qt",
+            "detail": "Ranged by 4 of 5 rivals. Brief carries the demand estimate, target landed cost and the two suppliers Prospector already shortlisted.",
+            "value": "est. 42 u/mo",
+            "chip": "Hand to S9.20",
+            "chipHref": "S9.20-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "chipTone": "var(--mod-discover)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Glass storage 12-pc set",
+            "detail": "Ranged by all 5 rivals and the largest single gap in the set. Needs a packaging spec before the first buy.",
+            "value": "est. 61 u/mo",
+            "chip": "Hand to S9.20",
+            "chipHref": "S9.20-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "chipTone": "var(--mod-discover)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Ceramic knife block",
+            "detail": "Bundles with the existing Alder knife line. Test quantity only until the 60-day read.",
+            "value": "est. 28 u/mo",
+            "chip": "Hand to S9.20",
+            "chipHref": "S9.20-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "chipTone": "var(--mod-discover)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Silicone bakeware set",
+            "detail": "Thinnest margin of the four — the brief asks sourcing to hold unless landed cost comes in under $9.20.",
+            "value": "est. 19 u/mo",
+            "chip": "Hand to S9.20",
+            "chipHref": "S9.20-1-reason.dc.html",
+            "chipTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "chipTone": "var(--mod-discover)",
+            "hasDiff": false,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Destinations pushed",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items written",
+        "value": "0 of 14",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Channel edits",
+        "value": "114 staged",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Capital release started",
+        "value": "waiting on Planner",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "armBorder": "var(--ink-100)",
+    "armIconTone": "var(--ink-400)",
+    "armCopy": "Available from the Approve dial upward. At Suggest, every quarter comes back through this four-step flow.",
+    "armBtnLabel": "Locked at Suggest",
+    "armBtnIcon": "fa-solid fa-lock",
+    "armBtnBg": "var(--ink-50)",
+    "armBtnFg": "var(--ink-400)",
+    "armBtnBorder": "var(--ink-200)",
+    "armCursor": "not-allowed",
+    "restoreLabel": "Nothing pushed yet",
+    "restoreFg": "var(--ink-400)",
+    "restoreCursor": "default",
+    "watchStatus": "arms on push",
+    "watchTone": "var(--ink-400)",
+    "watches": [
+      {
+        "when": "Day 30",
+        "rule": "Any grow SKU falling out of Hero or Core",
+        "action": "Raises an exception and pauses further depth increases on that SKU."
+      },
+      {
+        "when": "Day 60",
+        "rule": "Gap fills not yet reaching Supporting",
+        "action": "Flags for a range-or-drop call before the second buy."
+      },
+      {
+        "when": "Day 90",
+        "rule": "Reduce set migrating up two bands",
+        "action": "Proposes restoring depth — the cut was too deep."
+      }
+    ],
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 destinations pushed · 14 line items staged",
+    "footTone": "var(--ink-500)"
+  }
+}

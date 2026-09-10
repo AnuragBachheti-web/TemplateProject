@@ -1,0 +1,247 @@
+{
+  "code": "S9.3",
+  "stageKey": "reason",
+  "name": "Allocation",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will size the transfer slate and wait. No pick wave, FBA shipment or listing quantity changes without your approval.",
+    "rules": [
+      {
+        "label": "Protect DTC margin",
+        "value": "first claim on scarce units",
+        "icon": "fa-solid fa-shield-halved",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 30%, white)"
+      },
+      {
+        "label": "Defend Buy Box eligibility",
+        "value": "never let FBA go zero",
+        "icon": "fa-solid fa-cube",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 10%, white)",
+        "border": "color-mix(in oklab, var(--mod-ads) 28%, white)"
+      },
+      {
+        "label": "Safety stock per channel",
+        "value": "2 wk minimum cover",
+        "icon": "fa-solid fa-layer-group",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 10%, white)",
+        "border": "color-mix(in oklab, var(--mod-inventory) 28%, white)"
+      },
+      {
+        "label": "Transfers pay for themselves",
+        "value": "CM gain > 1.5× cost",
+        "icon": "fa-solid fa-scale-balanced",
+        "hue": "var(--r-blue-600)",
+        "tint": "var(--r-blue-50)",
+        "border": "color-mix(in oklab, var(--r-blue-500) 24%, white)"
+      },
+      {
+        "label": "One lane per SKU per cycle",
+        "value": "no ping-pong",
+        "icon": "fa-solid fa-repeat",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-50)",
+        "border": "var(--ink-200)"
+      }
+    ],
+    "channels": [
+      {
+        "name": "DTC · northwind.com",
+        "hue": "var(--mod-margin)",
+        "cm": "$18.40",
+        "floor": "2.0 wk",
+        "now": "4.6 wk",
+        "status": "excess on 3 SKUs",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "note": "Highest CM per unit. Ships from DC-East."
+      },
+      {
+        "name": "Amazon FBA-West",
+        "hue": "var(--mod-ads)",
+        "cm": "$11.20",
+        "floor": "2.0 wk",
+        "now": "0.0 wk",
+        "status": "stocked out",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "note": "Buy Box lost on 2 SKUs while stock sits in DC-East."
+      },
+      {
+        "name": "Amazon FBA-East",
+        "hue": "var(--mod-ads)",
+        "cm": "$11.20",
+        "floor": "2.0 wk",
+        "now": "1.4 wk",
+        "status": "under floor",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "note": "Two SKUs will stock out inside 10 days."
+      },
+      {
+        "name": "Walmart · WFS",
+        "hue": "var(--mod-hubs)",
+        "cm": "$9.60",
+        "floor": "1.5 wk",
+        "now": "3.1 wk",
+        "status": "healthy",
+        "tint": "var(--green-50)",
+        "tone": "var(--green-700)",
+        "note": "Small pool, slowest velocity. Excess on 1 SKU."
+      },
+      {
+        "name": "DC-West · wholesale",
+        "hue": "var(--ink-500)",
+        "cm": "$6.80",
+        "floor": "1.0 wk",
+        "now": "5.2 wk",
+        "status": "excess on 2 SKUs",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "note": "Lowest CM. First place Realify looks for units."
+      }
+    ],
+    "economics": [
+      {
+        "label": "Transfer cost per unit",
+        "value": "$0.90 – $2.40",
+        "icon": "fa-solid fa-truck",
+        "note": "Pick, pack, freight and inbound receipt, by lane. DC-East to FBA-West is the dearest."
+      },
+      {
+        "label": "Minimum CM gain",
+        "value": "1.5× cost",
+        "icon": "fa-solid fa-scale-balanced",
+        "note": "Below that the move is churn: the unit sells either way, just later and somewhere else."
+      },
+      {
+        "label": "Cost of an unserved unit",
+        "value": "CM plus rank effect",
+        "icon": "fa-solid fa-triangle-exclamation",
+        "note": "A stock-out on FBA also costs Buy Box share, which is why those lanes clear the bar easily."
+      },
+      {
+        "label": "Split shipments",
+        "value": "allowed above 400 u",
+        "icon": "fa-solid fa-arrows-split-up-and-left",
+        "note": "Large lanes split across two waves so the first units land inside the week."
+      }
+    ],
+    "locked": [
+      {
+        "label": "FBA inbound window",
+        "value": "6 d receipt · West · story 9.2 reads it",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Min-stock commitments",
+        "value": "2 channels · contractual",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Pick capacity",
+        "value": "1,200 u/day · WMS owns it",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Open POs in flight",
+        "value": "9 POs · story 9.2",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "mismatch": [
+      {
+        "label": "Units in the wrong place",
+        "value": "1,840 u",
+        "pct": "100%",
+        "tone": "var(--rose-700)",
+        "meta": "across 6 channel-SKU pairs"
+      },
+      {
+        "label": "Capital tied up in excess",
+        "value": "$46K",
+        "pct": "74%",
+        "tone": "var(--amber-700)",
+        "meta": "at cost · 4 excess pools"
+      },
+      {
+        "label": "Demand unserved this week",
+        "value": "$14.2K",
+        "pct": "62%",
+        "tone": "var(--rose-700)",
+        "meta": "CM at the stocked-out channels"
+      },
+      {
+        "label": "Buy Box share at risk",
+        "value": "2 SKUs",
+        "pct": "34%",
+        "tone": "var(--rose-700)",
+        "meta": "FBA-West · zero on hand"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "On-hand by channel and node",
+        "meta": "5 nodes"
+      },
+      {
+        "label": "Velocity by channel · 30 d",
+        "meta": "per SKU"
+      },
+      {
+        "label": "CM per unit by channel",
+        "meta": "after fees"
+      },
+      {
+        "label": "Lane cost and transit times",
+        "meta": "5 lanes"
+      },
+      {
+        "label": "Inbound receipt windows",
+        "meta": "FBA + WFS"
+      },
+      {
+        "label": "Open POs and in-transit",
+        "meta": "story 9.2"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "role": "Decides which channel gets the next unit and how many move.",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "initials": "Sh",
+        "name": "Shipper",
+        "role": "Owns lane choice, pick waves, labels and inbound plans.",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)"
+      }
+    ]
+  }
+}

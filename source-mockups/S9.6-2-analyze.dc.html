@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.6-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-intel);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-intel) 12%, white);color:var(--mod-intel);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Listings · S9.6</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Listing audit — 18 listings below CVR benchmark</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">18 of 214 listings · $34K CM at stake</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Audit run 06:15 · weekly cadence</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-intel)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:inline-flex;align-items:center;gap:3px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-intel)"></span>
+          </span>
+          Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-intel);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Merchandiser + Pricer, Keeper
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Buy Box Attribution Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>CVR Diagnostic
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.6-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.6-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-intel) 10%, white);border:1px solid color-mix(in oklab, var(--mod-intel) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-intel);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.6-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.6-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:14px;padding:16px 24px 0;overflow-y:auto">
+
+      <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink-100)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Catalogue audit · below target</span>
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ gridMeta }}</span>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Sort</span>
+            <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="4">
+              <button type="button" onClick="{{ s.onPick }}" style="height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid {{ s.border }};background:{{ s.bg }};font-family:var(--font-sans);font-size:11px;font-weight:{{ s.weight }};color:{{ s.tone }};cursor:pointer">{{ s.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 104px 104px 104px 104px 104px 132px;align-items:center;gap:10px;padding:9px 16px;background:var(--ink-25);border-bottom:1px solid var(--ink-100)">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Listing</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">CVR</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Buy Box</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Content</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Review gap</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">CM at stake</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Primary lever</span>
+        </div>
+        <sc-for list="{{ grid }}" as="g" hint-placeholder-count="8">
+          <button type="button" onClick="{{ g.onPick }}" style="display:grid;width:100%;text-align:left;grid-template-columns:minmax(0,1fr) 104px 104px 104px 104px 104px 132px;align-items:center;gap:10px;padding:11px 16px;border:none;border-bottom:1px solid var(--ink-100);border-left:3px solid {{ g.edge }};background:{{ g.bg }};cursor:pointer;font-family:var(--font-sans)">
+            <div style="min-width:0">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:13px;font-weight:600;color:var(--ink-900)">{{ g.name }}</span>
+                <span style="display:inline-flex;padding:2px 7px;border-radius:var(--r-xs);background:{{ g.roleTint }};color:{{ g.roleHue }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase">{{ g.role }}</span>
+              </div>
+              <div style="margin-top:3px;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-400)">{{ g.sku }}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ g.cvrTone }};font-variant-numeric:tabular-nums">{{ g.cvr }}</div>
+              <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400);font-variant-numeric:tabular-nums">{{ g.cvrTarget }}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ g.bbTone }};font-variant-numeric:tabular-nums">{{ g.bb }}</div>
+              <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400);font-variant-numeric:tabular-nums">{{ g.bbTarget }}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ g.contentTone }};font-variant-numeric:tabular-nums">{{ g.content }}</div>
+              <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ g.images }}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ g.reviewTone }};font-variant-numeric:tabular-nums">{{ g.reviewGap }}</div>
+              <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400);font-variant-numeric:tabular-nums">{{ g.reviews }}</div>
+            </div>
+            <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ g.stake }}</span>
+            <div style="display:flex;justify-content:flex-end">
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ g.leverTint }};font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.06em;color:{{ g.leverTone }}">{{ g.lever }}</span>
+            </div>
+          </button>
+        </sc-for>
+        <div style="display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--ink-25)">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">8 of 18 shown · sorted by {{ sortLabel }}</span>
+          <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Primary lever comes from the Buy Box attribution, not the content score</span>
+        </div>
+      </div>
+
+      <div style="flex-shrink:0;display:flex;align-items:center;gap:14px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-intel);border-radius:var(--r-lg);padding:14px 18px">
+        <div style="min-width:0">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Selected listing</span>
+          <div style="margin-top:6px;font-size:15px;font-weight:700;color:var(--ink-900)">{{ sel.name }}</div>
+          <div style="margin-top:5px;font-size:12.5px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ sel.claim }}</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:18px">
+          <sc-for list="{{ sel.headline }}" as="h" hint-placeholder-count="3">
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">{{ h.label }}</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:17px;font-weight:600;color:{{ h.tone }};font-variant-numeric:tabular-nums">{{ h.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex-shrink:0;display:grid;grid-template-columns:340px 1fr 320px;gap:14px">
+
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Buy Box loss · attribution</span>
+          <p style="margin:8px 0 0;font-size:12px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ sel.waterfallNote }}</p>
+          <div style="margin-top:13px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ sel.waterfall }}" as="w" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12.5px;font-weight:{{ w.weight }};color:var(--ink-800);text-wrap:pretty">{{ w.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ w.tone }};font-variant-numeric:tabular-nums">{{ w.pct }}</span>
+                </div>
+                <div style="margin-top:6px;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <div style="width:{{ w.pct }};height:100%;border-radius:var(--r-full);background:{{ w.tone }}"></div>
+                </div>
+                <div style="margin-top:5px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ w.detail }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:14px;padding:10px 12px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-intel) 6%, white);border:1px solid color-mix(in oklab, var(--mod-intel) 26%, white)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mod-intel)">True lever</span>
+            <p style="margin:6px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-700);text-wrap:pretty">{{ sel.lever }}</p>
+          </div>
+        </div>
+
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">CVR diagnostic</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ sel.diagMeta }}</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px">
+            <sc-for list="{{ sel.diag }}" as="d" hint-placeholder-count="6">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px dashed var(--ink-200)">
+                <i class="{{ d.icon }}" style="margin-top:3px;font-size:11px;color:{{ d.tone }};width:14px"></i>
+                <div style="min-width:0;flex:1">
+                  <div style="display:flex;align-items:baseline;gap:8px">
+                    <span style="flex:1;min-width:0;font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ d.label }}</span>
+                    <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ d.tone }};font-variant-numeric:tabular-nums">{{ d.value }}</span>
+                  </div>
+                  <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ d.note }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:baseline;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Side by side</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">vs category leader</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <sc-for list="{{ sel.compare }}" as="c" hint-placeholder-count="2">
+              <div style="border:1px solid {{ c.border }};border-radius:var(--r-md);overflow:hidden">
+                <div style="padding:8px 10px;background:{{ c.headBg }};border-bottom:1px solid {{ c.border }}">
+                  <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:{{ c.headTone }}">{{ c.who }}</div>
+                  <div style="margin-top:4px;font-size:11.5px;font-weight:600;line-height:1.35;color:var(--ink-900);text-wrap:pretty">{{ c.title }}</div>
+                </div>
+                <div style="padding:9px 10px">
+                  <div style="display:flex;gap:4px">
+                    <sc-for list="{{ c.shots }}" as="s" hint-placeholder-count="5">
+                      <span style="flex:1;height:26px;border-radius:3px;background:{{ s.bg }};border:1px {{ s.style }} {{ s.border }}"></span>
+                    </sc-for>
+                  </div>
+                  <div style="margin-top:6px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ c.shotNote }}</div>
+                  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+                    <sc-for list="{{ c.rows }}" as="r" hint-placeholder-count="4">
+                      <div style="display:flex;align-items:baseline;gap:8px">
+                        <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ r.label }}</span>
+                        <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ r.tone }};font-variant-numeric:tabular-nums">{{ r.value }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ sel.compareNote }}</p>
+        </div>
+      </div>
+
+      <div style="height:4px;flex-shrink:0"></div>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Analyze · 18 listings audited · attribution complete</span>
+      <a href="S9.6-1-reason.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Reason
+      </a>
+      <a href="S9.6-3-decide.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Size the fixes<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { sel: 'l1', sort: 'CM at stake' };
+
+  ROWS() {
+    return [
+      { id: 'l1', name: 'Ridgeline stoneware bowl', sku: 'NW-CER-1120 · Amazon', role: 'Hero', cvr: 9.8, target: 13, bb: 62, bbTarget: 95, content: 78, images: '4 img · 1 A+', reviews: 412, rivalReviews: 1180, stake: 8.4, lever: 'Offer + delivery', leverKind: 'price',
+        claim: 'CVR is 3.2 points under the Hero target, but 74% of the Buy Box loss is price and delivery promise — content is the second lever here, not the first.',
+        waterfallNote: 'Where the Buy Box actually goes when we lose it, sampled hourly over 90 days.',
+        waterfall: [
+          { label: 'Price competitiveness', pct: '46%', detail: '$1.75 above the lowest compliant seller', tone: 'var(--rose-500)', weight: 700 },
+          { label: 'Fulfilment + delivery promise', pct: '28%', detail: '3-day promise against their 2-day', tone: 'var(--amber-500)', weight: 700 },
+          { label: 'Seller rating', pct: '14%', detail: '4.8 vs 4.9 · 12 late shipments in 90 d', tone: 'var(--ink-400)', weight: 500 },
+          { label: 'Availability', pct: '12%', detail: '2 short windows in the last 30 days', tone: 'var(--ink-300)', weight: 500 },
+        ],
+        lever: 'Fix the offer first: a $0.60 price move plus switching this SKU to the 2-day promise recovers about 29 points of Buy Box share. Content work lifts CVR on the traffic that share brings back.',
+        diagMeta: '30 days · 41,200 sessions',
+        diag: [
+          { label: 'Traffic mix', value: '42% paid', note: 'Paid traffic converts 2.1 points lower here. The paid share is up 9 points month over month.', icon: 'fa-solid fa-signal', tone: 'var(--amber-700)' },
+          { label: 'Content completeness', value: '5 of 8', note: 'Missing size guide, care instructions and comparison module.', icon: 'fa-solid fa-list-check', tone: 'var(--rose-700)' },
+          { label: 'Images', value: '4 · 2 low-res', note: 'Two images are under the 2400px standard. No lifestyle or scale shot.', icon: 'fa-solid fa-image', tone: 'var(--rose-700)' },
+          { label: 'Reviews vs top rival', value: '412 vs 1,180', note: 'Rating is level at 4.6. The gap is volume, not sentiment.', icon: 'fa-solid fa-star', tone: 'var(--amber-700)' },
+          { label: 'Unanswered Q&amp;A', value: '7 open', note: 'Three ask about oven use — a claim we cannot make without the test document.', icon: 'fa-solid fa-circle-question', tone: 'var(--amber-700)' },
+          { label: 'Backend keyword coverage', value: '61%', note: '14 ranked terms missing from the backend fields, including two head terms.', icon: 'fa-solid fa-tags', tone: 'var(--rose-700)' },
+        ],
+        compare: [
+          { who: 'Ours', title: 'Ridgeline Stoneware Bowl, 8 inch, Speckled Grey', us: true, shotNote: '4 images · 1 A+ module',
+            shots: [1, 1, 1, 1, 0, 0, 0],
+            rows: [
+              { label: 'Title length', value: '48 chars', tone: 'var(--rose-700)' },
+              { label: 'Bullets', value: '3', tone: 'var(--rose-700)' },
+              { label: 'A+ modules', value: '1', tone: 'var(--rose-700)' },
+              { label: 'Rating · count', value: '4.6 · 412', tone: 'var(--ink-700)' },
+            ] },
+          { who: 'Category leader', title: 'Hearthline Speckled Stoneware Serving Bowl, 8in, Dishwasher + Microwave Safe', us: false, shotNote: '8 images · 4 A+ modules',
+            shots: [1, 1, 1, 1, 1, 1, 1],
+            rows: [
+              { label: 'Title length', value: '78 chars', tone: 'var(--green-700)' },
+              { label: 'Bullets', value: '5', tone: 'var(--green-700)' },
+              { label: 'A+ modules', value: '4', tone: 'var(--green-700)' },
+              { label: 'Rating · count', value: '4.6 · 1,180', tone: 'var(--green-700)' },
+            ] },
+        ],
+        compareNote: 'Same rating, four times the review base and twice the content. The title gap alone costs us two head terms in backend coverage.' },
+
+      { id: 'l2', name: 'Ridgeline mug 14oz', sku: 'NW-CER-1210 · Amazon', role: 'Hero', cvr: 11.4, target: 13, bb: 88, bbTarget: 95, content: 84, images: '5 img · 2 A+', reviews: 903, rivalReviews: 1040, stake: 6.1, lever: 'Content', leverKind: 'content',
+        claim: 'Buy Box is nearly at target, so this is a conversion problem: Kettle &amp; Co out-converts us by 1.2 points on shared traffic since their A+ refresh.',
+        waterfallNote: 'Where the Buy Box actually goes when we lose it, sampled hourly over 90 days.',
+        waterfall: [
+          { label: 'Price competitiveness', pct: '18%', detail: 'at parity with the lowest compliant seller', tone: 'var(--ink-400)', weight: 500 },
+          { label: 'Fulfilment + delivery promise', pct: '22%', detail: '2-day promise on both sides', tone: 'var(--ink-400)', weight: 500 },
+          { label: 'Seller rating', pct: '11%', detail: '4.8 vs 4.7 · we lead', tone: 'var(--ink-300)', weight: 500 },
+          { label: 'Availability', pct: '49%', detail: '3 stock-outs in 90 days on FBA-West', tone: 'var(--rose-500)', weight: 700 },
+        ],
+        lever: 'Availability is doing most of the damage — that is a replenishment fix, already covered by story 9.2. The content answer is the comparison module and a second lifestyle shot.',
+        diagMeta: '30 days · 68,400 sessions',
+        diag: [
+          { label: 'Traffic mix', value: '28% paid', note: 'Healthy organic share. Conversion gap is not a traffic-quality problem.', icon: 'fa-solid fa-signal', tone: 'var(--green-700)' },
+          { label: 'Content completeness', value: '6 of 8', note: 'Missing comparison module and care instructions.', icon: 'fa-solid fa-list-check', tone: 'var(--amber-700)' },
+          { label: 'Images', value: '5 · all clean', note: 'All above standard. No lifestyle shot with a hand for scale.', icon: 'fa-solid fa-image', tone: 'var(--amber-700)' },
+          { label: 'Reviews vs top rival', value: '903 vs 1,040', note: 'Close. Review velocity favours us at 5.1 a day.', icon: 'fa-solid fa-star', tone: 'var(--green-700)' },
+          { label: 'Unanswered Q&amp;A', value: '2 open', note: 'Both about microwave use. Answerable from the existing certificate.', icon: 'fa-solid fa-circle-question', tone: 'var(--amber-700)' },
+          { label: 'Backend keyword coverage', value: '82%', note: 'Four ranked terms missing, all long tail.', icon: 'fa-solid fa-tags', tone: 'var(--amber-700)' },
+        ],
+        compare: [
+          { who: 'Ours', title: 'Ridgeline Stoneware Mug 14oz, Speckled Grey', us: true, shotNote: '5 images · 2 A+ modules',
+            shots: [1, 1, 1, 1, 1, 0, 0],
+            rows: [
+              { label: 'Title length', value: '44 chars', tone: 'var(--amber-700)' },
+              { label: 'Bullets', value: '4', tone: 'var(--amber-700)' },
+              { label: 'A+ modules', value: '2', tone: 'var(--amber-700)' },
+              { label: 'Rating · count', value: '4.7 · 903', tone: 'var(--ink-700)' },
+            ] },
+          { who: 'Category leader', title: 'Kettle &amp; Co Stoneware Mug 14oz, Microwave Safe, Speckled Glaze Set of 2', us: false, shotNote: '7 images · 3 A+ modules',
+            shots: [1, 1, 1, 1, 1, 1, 1],
+            rows: [
+              { label: 'Title length', value: '72 chars', tone: 'var(--green-700)' },
+              { label: 'Bullets', value: '5', tone: 'var(--green-700)' },
+              { label: 'A+ modules', value: '3', tone: 'var(--green-700)' },
+              { label: 'Rating · count', value: '4.5 · 1,040', tone: 'var(--ink-700)' },
+            ] },
+        ],
+        compareNote: 'They win on content depth and the set-of-two framing. Our rating is higher, which the comparison module can make visible.' },
+
+      { id: 'l3', name: 'Cut-glass tumbler set', sku: 'NW-GLS-3390 · Amazon', role: 'Margin Driver', cvr: 7.2, target: 9, bb: 54, bbTarget: 85, content: 71, images: '4 img · 0 A+', reviews: 186, rivalReviews: 640, stake: 5.2, lever: 'Content + reviews', leverKind: 'content',
+        claim: 'No A+ content at all on a $34 set. Content score 71 against a category median of 88, and the review base is a third of the leader.',
+        waterfallNote: 'Where the Buy Box actually goes when we lose it, sampled hourly over 90 days.',
+        waterfall: [
+          { label: 'Price competitiveness', pct: '31%', detail: '$0.60 above Verrand Home', tone: 'var(--amber-500)', weight: 700 },
+          { label: 'Fulfilment + delivery promise', pct: '19%', detail: '2-day promise on both sides', tone: 'var(--ink-400)', weight: 500 },
+          { label: 'Seller rating', pct: '9%', detail: '4.8 vs 4.6 · we lead', tone: 'var(--ink-300)', weight: 500 },
+          { label: 'Availability', pct: '41%', detail: 'in transit from Verrier · 12 short days', tone: 'var(--rose-500)', weight: 700 },
+        ],
+        lever: 'Availability clears when the Verrier PO lands Sep 18. Until then, build the content so the recovered traffic converts: A+ modules first, then a review campaign.',
+        diagMeta: '30 days · 22,900 sessions',
+        diag: [
+          { label: 'Traffic mix', value: '51% paid', note: 'Over half the traffic is bought. Organic rank is 6 on the head term.', icon: 'fa-solid fa-signal', tone: 'var(--rose-700)' },
+          { label: 'Content completeness', value: '4 of 8', note: 'No A+ modules, no size guide, no care instructions.', icon: 'fa-solid fa-list-check', tone: 'var(--rose-700)' },
+          { label: 'Images', value: '4 · 1 low-res', note: 'No shot of the set together, which is what buyers ask about.', icon: 'fa-solid fa-image', tone: 'var(--rose-700)' },
+          { label: 'Reviews vs top rival', value: '186 vs 640', note: 'Rating 4.8 against 4.6 — we win on sentiment, lose on volume.', icon: 'fa-solid fa-star', tone: 'var(--amber-700)' },
+          { label: 'Unanswered Q&amp;A', value: '4 open', note: 'All about glass thickness and dishwasher use.', icon: 'fa-solid fa-circle-question', tone: 'var(--amber-700)' },
+          { label: 'Backend keyword coverage', value: '48%', note: 'Weakest coverage in the audit. Missing eight ranked terms.', icon: 'fa-solid fa-tags', tone: 'var(--rose-700)' },
+        ],
+        compare: [
+          { who: 'Ours', title: 'Cut-Glass Tumbler Set, 4 Pack, 12oz', us: true, shotNote: '4 images · no A+ module',
+            shots: [1, 1, 1, 1, 0, 0, 0],
+            rows: [
+              { label: 'Title length', value: '36 chars', tone: 'var(--rose-700)' },
+              { label: 'Bullets', value: '3', tone: 'var(--rose-700)' },
+              { label: 'A+ modules', value: '0', tone: 'var(--rose-700)' },
+              { label: 'Rating · count', value: '4.8 · 186', tone: 'var(--ink-700)' },
+            ] },
+          { who: 'Category leader', title: 'Verrand Home Cut-Glass Tumblers Set of 4, 12oz, Dishwasher Safe Heavy Base', us: false, shotNote: '9 images · 4 A+ modules',
+            shots: [1, 1, 1, 1, 1, 1, 1],
+            rows: [
+              { label: 'Title length', value: '76 chars', tone: 'var(--green-700)' },
+              { label: 'Bullets', value: '5', tone: 'var(--green-700)' },
+              { label: 'A+ modules', value: '4', tone: 'var(--green-700)' },
+              { label: 'Rating · count', value: '4.6 · 640', tone: 'var(--green-700)' },
+            ] },
+        ],
+        compareNote: 'The clearest content gap in the audit. Their heavy-base claim answers the exact question our Q&amp;A keeps getting.' },
+
+      { id: 'l4', name: 'Carbon steel pan 10in', sku: 'NW-PAN-2210 · Amazon', role: 'Traffic Driver', cvr: 6.4, target: 8, bb: 71, bbTarget: 80, content: 80, images: '6 img · 2 A+', reviews: 1420, rivalReviews: 1510, stake: 3.8, lever: 'Backend keywords', leverKind: 'keywords',
+        claim: 'Content and reviews are both fine. The gap is discovery: 62% keyword coverage and organic rank 8 on the two terms that carry the category.',
+        waterfallNote: 'Where the Buy Box actually goes when we lose it, sampled hourly over 90 days.',
+        waterfall: [
+          { label: 'Price competitiveness', pct: '38%', detail: '$1.10 above NorthPeak', tone: 'var(--amber-500)', weight: 700 },
+          { label: 'Fulfilment + delivery promise', pct: '24%', detail: '3-day promise on the west coast', tone: 'var(--amber-500)', weight: 500 },
+          { label: 'Seller rating', pct: '16%', detail: '4.8 vs 4.8 · level', tone: 'var(--ink-300)', weight: 500 },
+          { label: 'Availability', pct: '22%', detail: '1 short window in 30 days', tone: 'var(--ink-400)', weight: 500 },
+        ],
+        lever: 'This is a Traffic Driver with thin CM, so studio work does not clear the bar. Keeper updates the backend fields and we re-read rank in 14 days.',
+        diagMeta: '30 days · 58,100 sessions',
+        diag: [
+          { label: 'Traffic mix', value: '36% paid', note: 'Organic rank 8 on the head term is the constraint.', icon: 'fa-solid fa-signal', tone: 'var(--amber-700)' },
+          { label: 'Content completeness', value: '7 of 8', note: 'Only the care-instruction block is missing.', icon: 'fa-solid fa-list-check', tone: 'var(--green-700)' },
+          { label: 'Images', value: '6 · all clean', note: 'Above standard. Seasoning sequence shot is a nice extra.', icon: 'fa-solid fa-image', tone: 'var(--green-700)' },
+          { label: 'Reviews vs top rival', value: '1,420 vs 1,510', note: 'Effectively level, and our rating is higher.', icon: 'fa-solid fa-star', tone: 'var(--green-700)' },
+          { label: 'Unanswered Q&amp;A', value: '1 open', note: 'Induction compatibility. Answerable today.', icon: 'fa-solid fa-circle-question', tone: 'var(--green-700)' },
+          { label: 'Backend keyword coverage', value: '62%', note: 'Missing carbon-steel and pre-seasoned variants that carry the category.', icon: 'fa-solid fa-tags', tone: 'var(--rose-700)' },
+        ],
+        compare: [
+          { who: 'Ours', title: 'Carbon Steel Frying Pan 10 inch, Pre-Seasoned', us: true, shotNote: '6 images · 2 A+ modules',
+            shots: [1, 1, 1, 1, 1, 1, 0],
+            rows: [
+              { label: 'Title length', value: '46 chars', tone: 'var(--amber-700)' },
+              { label: 'Bullets', value: '5', tone: 'var(--green-700)' },
+              { label: 'A+ modules', value: '2', tone: 'var(--amber-700)' },
+              { label: 'Rating · count', value: '4.8 · 1,420', tone: 'var(--green-700)' },
+            ] },
+          { who: 'Category leader', title: 'NorthPeak Carbon Steel Skillet 10in Pre-Seasoned Oven Safe Induction Ready', us: false, shotNote: '7 images · 3 A+ modules',
+            shots: [1, 1, 1, 1, 1, 1, 1],
+            rows: [
+              { label: 'Title length', value: '74 chars', tone: 'var(--green-700)' },
+              { label: 'Bullets', value: '5', tone: 'var(--ink-700)' },
+              { label: 'A+ modules', value: '3', tone: 'var(--green-700)' },
+              { label: 'Rating · count', value: '4.8 · 1,510', tone: 'var(--ink-700)' },
+            ] },
+        ],
+        compareNote: 'Their title carries three ranked terms ours does not. That is a backend and title fix, not a photography job.' },
+
+      { id: 'l5', name: 'Ridgeline serving platter', sku: 'NW-CER-1180 · Amazon', role: 'Hero', cvr: 10.9, target: 13, bb: 81, bbTarget: 95, content: 86, images: '6 img · 3 A+', reviews: 268, rivalReviews: 510, stake: 3.4, lever: 'Reviews', leverKind: 'reviews' },
+      { id: 'l6', name: 'Alder chef knife 8in', sku: 'NW-KNF-0480 · Amazon', role: 'Core', cvr: 8.1, target: 10, bb: 58, bbTarget: 90, content: 82, images: '5 img · 2 A+', reviews: 640, rivalReviews: 720, stake: 2.9, lever: 'Offer', leverKind: 'price' },
+      { id: 'l7', name: 'Herringbone dish towel 3-pk', sku: 'NW-TEX-5120 · Walmart', role: 'Core', cvr: 7.4, target: 10, bb: 76, bbTarget: 90, content: 68, images: '3 img · 0 A+', reviews: 94, rivalReviews: 380, stake: 2.4, lever: 'Content', leverKind: 'content' },
+      { id: 'l8', name: 'Enamel roasting tin', sku: 'NW-PAN-2280 · Amazon', role: 'Core', cvr: 6.9, target: 10, bb: 84, bbTarget: 90, content: 74, images: '4 img · 1 A+', reviews: 122, rivalReviews: 410, stake: 1.8, lever: 'Content + reviews', leverKind: 'content' },
+    ];
+  }
+
+  FALLBACK(r) {
+    return {
+      claim: 'Selected from the audit grid. The Buy Box attribution below decides whether this is a content, offer or discovery problem.',
+      waterfallNote: 'Where the Buy Box actually goes when we lose it, sampled hourly over 90 days.',
+      waterfall: [
+        { label: 'Price competitiveness', pct: '34%', detail: 'against the lowest compliant seller', tone: 'var(--amber-500)', weight: 700 },
+        { label: 'Fulfilment + delivery promise', pct: '26%', detail: 'delivery promise comparison', tone: 'var(--amber-500)', weight: 500 },
+        { label: 'Seller rating', pct: '18%', detail: 'seller feedback and late shipments', tone: 'var(--ink-400)', weight: 500 },
+        { label: 'Availability', pct: '22%', detail: 'short windows in the last 30 days', tone: 'var(--ink-400)', weight: 500 },
+      ],
+      lever: 'Primary lever for this listing is ' + r.lever.toLowerCase() + '. Realify sizes the fixes on the next step against the ' + r.role + ' target.',
+      diagMeta: '30 days',
+      diag: [
+        { label: 'Content completeness', value: r.content + ' score', note: 'Against a category median of 88.', icon: 'fa-solid fa-list-check', tone: r.content < 80 ? 'var(--rose-700)' : 'var(--amber-700)' },
+        { label: 'Images', value: r.images, note: 'Measured against the seven-shot standard.', icon: 'fa-solid fa-image', tone: 'var(--amber-700)' },
+        { label: 'Reviews vs top rival', value: r.reviews + ' vs ' + r.rivalReviews.toLocaleString('en-US'), note: 'Volume gap, not a sentiment gap.', icon: 'fa-solid fa-star', tone: 'var(--amber-700)' },
+        { label: 'Buy Box share', value: r.bb + '% of ' + r.bbTarget + '%', note: 'Attribution on the left shows where it goes.', icon: 'fa-solid fa-cube', tone: 'var(--rose-700)' },
+      ],
+      compare: [
+        { who: 'Ours', title: r.name, us: true, shotNote: r.images, shots: [1, 1, 1, 1, 0, 0, 0], rows: [{ label: 'Content score', value: String(r.content), tone: 'var(--rose-700)' }, { label: 'Reviews', value: String(r.reviews), tone: 'var(--amber-700)' }] },
+        { who: 'Category leader', title: 'Category leader listing', us: false, shotNote: '8 images · 4 A+ modules', shots: [1, 1, 1, 1, 1, 1, 1], rows: [{ label: 'Content score', value: '91', tone: 'var(--green-700)' }, { label: 'Reviews', value: String(r.rivalReviews), tone: 'var(--green-700)' }] },
+      ],
+      compareNote: 'Full side-by-side render pulls from the live listing on each channel.',
+    };
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-intel)' }[mode] ?? 'var(--ink-400)';
+    const roleColor = { Hero: 'var(--mod-discover)', Core: 'var(--r-blue-500)', 'Margin Driver': 'var(--mod-margin)', 'Traffic Driver': 'var(--mod-hubs)', Supporting: 'var(--ink-500)' };
+    const leverTint = { price: 'var(--rose-50)', content: 'color-mix(in oklab, var(--mod-discover) 10%, white)', keywords: 'color-mix(in oklab, var(--mod-intel) 10%, white)', reviews: 'var(--amber-50)' };
+    const leverTone = { price: 'var(--rose-700)', content: 'var(--mod-discover)', keywords: 'var(--mod-intel)', reviews: 'var(--amber-700)' };
+    const sortKey = this.state.sort;
+    const rows = this.ROWS().slice().sort((a, b) => {
+      if (sortKey === 'CVR gap') return (a.cvr - a.target) - (b.cvr - b.target);
+      if (sortKey === 'Buy Box') return a.bb - b.bb;
+      if (sortKey === 'Content score') return a.content - b.content;
+      return b.stake - a.stake;
+    });
+    const selRow = rows.find((r) => r.id === this.state.sel) || rows[0];
+    const detail = selRow.waterfall ? selRow : Object.assign({}, selRow, this.FALLBACK(selRow));
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      gridMeta: '18 listings · $34K CM at stake · audit run 06:15',
+      sortLabel: sortKey.toLowerCase(),
+      sorts: ['CM at stake', 'CVR gap', 'Buy Box', 'Content score'].map((label) => ({
+        label,
+        bg: sortKey === label ? 'color-mix(in oklab, var(--mod-intel) 12%, white)' : 'var(--ink-0)',
+        border: sortKey === label ? 'color-mix(in oklab, var(--mod-intel) 34%, white)' : 'var(--ink-200)',
+        tone: sortKey === label ? 'var(--mod-intel)' : 'var(--ink-600)',
+        weight: sortKey === label ? 600 : 500,
+        onPick: () => this.setState({ sort: label }),
+      })),
+      grid: rows.map((r) => {
+        const active = r.id === selRow.id;
+        return {
+          name: r.name, sku: r.sku, role: r.role,
+          roleHue: roleColor[r.role], roleTint: 'color-mix(in oklab, ' + roleColor[r.role] + ' 12%, white)',
+          cvr: r.cvr.toFixed(1) + '%', cvrTarget: 'target ' + r.target.toFixed(0) + '%',
+          cvrTone: r.cvr < r.target - 2 ? 'var(--rose-700)' : 'var(--amber-700)',
+          bb: r.bb + '%', bbTarget: 'target ' + r.bbTarget + '%',
+          bbTone: r.bb < r.bbTarget - 15 ? 'var(--rose-700)' : r.bb < r.bbTarget ? 'var(--amber-700)' : 'var(--green-700)',
+          content: String(r.content), images: r.images,
+          contentTone: r.content < 76 ? 'var(--rose-700)' : r.content < 85 ? 'var(--amber-700)' : 'var(--green-700)',
+          reviewGap: '−' + (r.rivalReviews - r.reviews).toLocaleString('en-US'),
+          reviews: r.reviews.toLocaleString('en-US') + ' ours',
+          reviewTone: r.rivalReviews - r.reviews > 500 ? 'var(--rose-700)' : 'var(--amber-700)',
+          stake: '$' + r.stake.toFixed(1) + 'K',
+          lever: r.lever, leverTint: leverTint[r.leverKind], leverTone: leverTone[r.leverKind],
+          bg: active ? 'color-mix(in oklab, var(--mod-intel) 5%, white)' : 'var(--ink-0)',
+          edge: active ? 'var(--mod-intel)' : 'transparent',
+          onPick: () => this.setState({ sel: r.id }),
+        };
+      }),
+      sel: Object.assign({}, detail, {
+        headline: [
+          { label: 'CVR now', value: selRow.cvr.toFixed(1) + '%', tone: 'var(--rose-700)' },
+          { label: 'Role target', value: selRow.target.toFixed(0) + '%', tone: 'var(--ink-900)' },
+          { label: 'Buy Box', value: selRow.bb + '%', tone: selRow.bb < selRow.bbTarget - 15 ? 'var(--rose-700)' : 'var(--amber-700)' },
+          { label: 'CM at stake', value: '$' + selRow.stake.toFixed(1) + 'K', tone: 'var(--ink-900)' },
+        ],
+        compare: detail.compare.map((c) => ({
+          who: c.who, title: c.title, shotNote: c.shotNote, rows: c.rows,
+          border: c.us ? 'color-mix(in oklab, var(--mod-intel) 30%, white)' : 'var(--ink-100)',
+          headBg: c.us ? 'color-mix(in oklab, var(--mod-intel) 7%, white)' : 'var(--ink-25)',
+          headTone: c.us ? 'var(--mod-intel)' : 'var(--ink-500)',
+          shots: c.shots.map((s) => ({
+            bg: s ? 'var(--ink-100)' : 'transparent',
+            border: s ? 'var(--ink-200)' : 'var(--ink-300)',
+            style: s ? 'solid' : 'dashed',
+          })),
+        })),
+      }),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

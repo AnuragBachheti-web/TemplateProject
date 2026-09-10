@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.9-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-margin);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-margin) 12%, white);color:var(--mod-margin);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Markdown · S9.9</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">38 SKUs cross the 271-day FBA surcharge in 26 days</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">4,180 units · $118K capital locked</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Fee cliff Sep 13 · 26 days</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pr" size="sm" color="var(--mod-margin)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="display:inline-flex;align-items:center;gap:3px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-inventory)"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-cash)"></span>
+          </span>
+          Lens: Margin · Inventory · Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-margin);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Pricer + Planner
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Markdown Ladder Optimizer
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Elasticity Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Storage Cost Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.9-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.9-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.9-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.9-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-margin) 10%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-margin);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;display:flex;align-items:center;gap:14px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ headEdge }};border-radius:var(--r-lg);padding:14px 18px">
+          <div style="min-width:0">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Markdown schedule</span>
+            <div style="margin-top:5px;font-size:15px;font-weight:700;color:var(--ink-900)">{{ headline }}</div>
+            <div style="margin-top:4px;font-family:var(--font-mono);font-size:10.5px;color:{{ headTone }}">{{ headMeta }}</div>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:18px">
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Steps scheduled</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ schedCount }}</div>
+            </div>
+            <div style="width:1px;height:34px;background:var(--ink-100)"></div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Live now</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:15px;font-weight:600;color:{{ liveTone }};font-variant-numeric:tabular-nums">{{ liveCount }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Price steps · future-dated pushes</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ stepMeta }}</span>
+            <a href="S9.9-3-decide.dc.html" style="margin-left:auto;font-size:11.5px;font-weight:500;color:var(--ink-500)" style-hover="color:var(--ink-900)">Amend the ladders →</a>
+          </div>
+          <div style="display:grid;grid-template-columns:92px minmax(0,1fr) 128px 96px 108px 108px 146px;align-items:center;gap:10px;padding:9px 16px;background:var(--ink-25);border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Date</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Cohort · step</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Channels</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Depth</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">SKUs</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Sell-thru</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Status</span>
+          </div>
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:92px minmax(0,1fr) 128px 96px 108px 108px 146px;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--ink-100);background:{{ s.rowBg }};opacity:{{ s.dim }}">
+              <div>
+                <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-900)">{{ s.date }}</div>
+                <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ s.rel }}</div>
+              </div>
+              <div style="min-width:0;display:flex;align-items:center;gap:9px">
+                <span style="flex-shrink:0;width:9px;height:9px;border-radius:3px;background:{{ s.hue }}"></span>
+                <div style="min-width:0">
+                  <div style="font-size:12.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ s.label }}</div>
+                  <div style="margin-top:2px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ s.units }}</div>
+                </div>
+              </div>
+              <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">{{ s.channels }}</span>
+              <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ s.depthTone }};text-align:right;font-variant-numeric:tabular-nums">{{ s.depth }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ s.skus }}</span>
+              <div style="text-align:right">
+                <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ s.stTone }};font-variant-numeric:tabular-nums">{{ s.st }}</div>
+                <div style="margin-top:2px;font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ s.stMeta }}</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:flex-end;gap:7px">
+                <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ s.statusTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ s.statusTone }}">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{ s.statusTone }}"></span>{{ s.status }}
+                </span>
+                <button type="button" onClick="{{ s.onAct }}" style="display:{{ s.btnShow }};height:26px;padding:0 10px;border-radius:var(--r-sm);border:1px solid {{ s.btnBorder }};background:{{ s.btnBg }};font-family:var(--font-sans);font-size:11px;font-weight:500;color:{{ s.btnTone }};cursor:pointer">{{ s.btnLabel }}</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 16px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Handoffs</span>
+            <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ handoffs }}" as="h" hint-placeholder-count="4">
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border-radius:var(--r-md);border:1px solid {{ h.border }};background:{{ h.bg }}">
+                  <span style="flex-shrink:0;width:24px;height:24px;border-radius:var(--r-xs);background:{{ h.tint }};color:{{ h.hue }};display:grid;place-items:center;font-family:var(--font-mono);font-size:8.5px;font-weight:600">{{ h.who }}</span>
+                  <div style="min-width:0;flex:1">
+                    <div style="display:flex;align-items:baseline;gap:8px">
+                      <span style="flex:1;min-width:0;font-size:12.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ h.label }}</span>
+                      <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;color:{{ h.statusTone }}">{{ h.status }}</span>
+                    </div>
+                    <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ h.detail }}</div>
+                  </div>
+                  <button type="button" onClick="{{ h.onSend }}" style="display:{{ h.btnShow }};flex-shrink:0;height:26px;padding:0 10px;border-radius:var(--r-sm);border:1px solid var(--ink-900);background:var(--ink-900);font-family:var(--font-sans);font-size:11px;font-weight:500;color:var(--ink-0);cursor:pointer">Send</button>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:var(--ink-0);border:1px solid {{ armBorder }};border-left:3px solid var(--violet-500);border-radius:var(--r-lg);padding:15px 16px">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Optional arm</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 8px;border-radius:var(--r-full);background:color-mix(in oklab, var(--violet-500) 10%, white);font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet-700)">Assist level</span>
+              <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:var(--r-full);background:{{ armTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ armTone }}">{{ armState }}</span>
+            </div>
+            <div style="margin-top:11px;font-size:13.5px;font-weight:600;line-height:1.45;color:var(--ink-900);text-wrap:pretty">Auto-advance the ladder if sell-through is under 80% of plan at a checkpoint</div>
+            <p style="margin:7px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ armCopy }}</p>
+            <div style="margin-top:11px;display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{ armRows }}" as="a" hint-placeholder-count="4">
+                <div style="display:flex;align-items:baseline;gap:10px">
+                  <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-700)">{{ a.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ a.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <button type="button" onClick="{{ onArm }}" style="margin-top:12px;height:32px;padding:0 13px;border-radius:var(--r-sm);border:1px solid {{ armBtnBorder }};background:{{ armBtnBg }};font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:{{ armBtnTone }};cursor:{{ armCursor }}">{{ armBtnLabel }}</button>
+            <p style="margin:9px 0 0;font-family:var(--font-mono);font-size:9.5px;line-height:1.5;color:var(--ink-400)">{{ armGate }}</p>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Rollback</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:var(--r-full);background:{{ rbTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ rbStateTone }}">{{ rbState }}</span>
+          </div>
+          <p style="margin:10px 0 0;max-width:820px;font-size:12.5px;line-height:1.6;color:var(--ink-600);text-wrap:pretty">{{ rbCopy }}</p>
+          <div style="margin-top:12px;display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+            <button type="button" onClick="{{ onCancel }}" style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:var(--r-sm);border:1px solid {{ cancelBorder }};background:var(--ink-0);font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:{{ cancelTone }};cursor:{{ cancelCursor }}">
+              <i class="fa-solid fa-calendar-xmark" style="font-size:10px"></i>{{ cancelLabel }}
+            </button>
+            <button type="button" onClick="{{ onRestore }}" style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:var(--r-sm);border:1px solid {{ restoreBorder }};background:var(--ink-0);font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:{{ restoreTone }};cursor:{{ restoreCursor }}">
+              <i class="fa-solid fa-rotate-left" style="font-size:10px"></i>{{ restoreLabel }}
+            </button>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ rbHint }}</span>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Schedule tray</span>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ tray }}" as="t" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:9px">
+              <i class="{{ t.icon }}" style="font-size:11px;color:{{ t.tone }};width:14px"></i>
+              <span style="flex:1;min-width:0;font-size:12.5px;color:var(--ink-700)">{{ t.label }}</span>
+              <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10px;color:{{ t.tone }}">{{ t.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <button type="button" onClick="{{ onScheduleAll }}" style="margin-top:13px;width:100%;height:40px;border-radius:var(--r-sm);border:none;background:{{ allBg }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:{{ allTone }};cursor:{{ allCursor }}">{{ allLabel }}</button>
+        <p style="margin:9px 0 0;font-family:var(--font-mono);font-size:10px;line-height:1.5;color:var(--ink-400)">{{ allNote }}</p>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Sell-through vs ladder</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:9.5px;color:{{ monTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ monTone }}"></span>{{ monState }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:13px">
+            <sc-for list="{{ monitors }}" as="m" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12.5px;font-weight:500;color:var(--ink-800)">{{ m.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                </div>
+                <div style="margin-top:7px;position:relative;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <div style="position:absolute;left:0;top:0;bottom:0;width:{{ m.planPct }};background:var(--ink-300);border-radius:var(--r-full)"></div>
+                  <div style="position:absolute;left:0;top:0;bottom:0;width:{{ m.realPct }};background:{{ m.tone }};border-radius:var(--r-full)"></div>
+                </div>
+                <div style="margin-top:5px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ m.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Checkpoints</span>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ checkpoints }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <span style="flex-shrink:0;margin-top:4px;width:7px;height:7px;border-radius:50%;background:{{ c.dot }}"></span>
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:baseline;gap:8px">
+                    <span style="flex:1;min-width:0;font-size:12.5px;font-weight:500;color:var(--ink-800)">{{ c.label }}</span>
+                    <span style="flex-shrink:0;font-family:var(--font-mono);font-size:10px;color:var(--ink-500)">{{ c.date }}</span>
+                  </div>
+                  <div style="margin-top:2px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ c.note }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Ledger</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ ledgerCopy }}</p>
+          <a href="S00-workspace.dc.html" style="margin-top:8px;display:inline-flex;font-size:11.5px;font-weight:500;color:var(--ink-500)" style-hover="color:var(--ink-900)">Open the Ledger entry →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ footerStatus }}</span>
+      <a href="S9.9-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Decide
+      </a>
+      <button type="button" onClick="{{ onScheduleAll }}" style="display:{{ footerSchedShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);border:none;background:var(--ink-900);color:var(--ink-0);font-family:var(--font-sans);font-size:14px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);transform:translateY(-1px)">
+        {{ footerSchedLabel }}<i class="fa-solid fa-calendar-check" style="font-size:11px"></i>
+      </button>
+      <a href="S00-workspace.dc.html?approved=9.9" style="display:{{ footerDoneShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Back to Workspace<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { sched: {}, sent: {}, armed: false, cancelled: false, restored: false, stamp: {} };
+
+  STEPS() {
+    return [
+      { id: 'p1', date: 'Aug 20', rel: 'in 2 days', label: 'Seasonal · step 1', hue: 'var(--mod-margin)', units: '520 u · 11 SKUs', channels: 'DTC, AMZ, email', depth: '30%', skus: '11', st: '—', stMeta: 'plan 44%' },
+      { id: 'p2', date: 'Aug 20', rel: 'in 2 days', label: 'Discontinued · liquidation pickup', hue: 'var(--ink-500)', units: '540 u · 4 SKUs', channels: 'liquidator', depth: 'quote', skus: '4', st: '—', stMeta: 'whole lot' },
+      { id: 'p3', date: 'Aug 22', rel: 'in 4 days', label: 'Core · step 1', hue: 'var(--r-blue-500)', units: '680 u · 14 SKUs', channels: 'DTC, AMZ, email', depth: '25%', skus: '14', st: '—', stMeta: 'plan 41%' },
+      { id: 'p4', date: 'Aug 22', rel: 'in 4 days', label: 'Hero · step 1', hue: 'var(--mod-discover)', units: '260 u · 9 SKUs', channels: 'DTC, AMZ promo', depth: '20%', skus: '9', st: '—', stMeta: 'plan 32%' },
+      { id: 'p5', date: 'Sep 01', rel: 'in 14 days', label: 'Seasonal · step 2', hue: 'var(--mod-margin)', units: '480 u · 11 SKUs', channels: 'all + outlet', depth: '50%', skus: '11', st: '—', stMeta: 'checkpoint' },
+      { id: 'p6', date: 'Sep 03', rel: 'in 16 days', label: 'Core · step 2', hue: 'var(--r-blue-500)', units: '740 u · 14 SKUs', channels: 'all + outlet', depth: '45%', skus: '14', st: '—', stMeta: 'checkpoint' },
+      { id: 'p7', date: 'Sep 05', rel: 'in 18 days', label: 'Hero · step 2', hue: 'var(--mod-discover)', units: '340 u · 9 SKUs', channels: 'DTC, AMZ promo', depth: '35%', skus: '9', st: '—', stMeta: 'checkpoint' },
+      { id: 'p8', date: 'Sep 14', rel: 'in 27 days', label: 'Seasonal · step 3 · outlet', hue: 'var(--mod-margin)', units: '180 u · 6 SKUs', channels: 'outlet only', depth: '65%', skus: '6', st: '—', stMeta: 'tail' },
+      { id: 'p9', date: 'Sep 26', rel: 'in 39 days', label: 'Hero · step 3 · email', hue: 'var(--mod-discover)', units: '150 u · 5 SKUs', channels: 'DTC, email', depth: '40%', skus: '5', st: '—', stMeta: 'tail' },
+    ];
+  }
+
+  HANDOFFS() {
+    return [
+      { id: 'h1', who: 'Pl', label: 'Stop-buy flag on all 38 SKUs', detail: 'Planner drops them from the replenishment cycle and cancels two open POs.', hue: 'var(--mod-inventory)', tint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)' },
+      { id: 'h2', who: 'Bd', label: 'Shift $1.8K/mo into clearance campaigns', detail: 'Bidder moves spend from full-price campaigns on these SKUs to clearance exact-match.', hue: 'var(--mod-ads)', tint: 'color-mix(in oklab, var(--mod-ads) 12%, white)' },
+      { id: 'h3', who: 'Po', label: 'Promo codes and outlet listings', detail: '6 codes for the DTC steps, 14 outlet listings for depth over 40%.', hue: 'var(--mod-discover)', tint: 'color-mix(in oklab, var(--mod-discover) 12%, white)' },
+      { id: 'h4', who: 'Ca', label: 'Recovery schedule to the Cash lens', detail: '$71.4K posted across weeks 1 to 8, weighted to weeks 3 and 4.', hue: 'var(--mod-cash)', tint: 'color-mix(in oklab, var(--mod-cash) 12%, white)' },
+    ];
+  }
+
+  clock() {
+    const d = new Date();
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+
+  schedule(ids) {
+    const t = this.clock();
+    this.setState((st) => {
+      const sched = Object.assign({}, st.sched), stamp = Object.assign({}, st.stamp);
+      ids.forEach((id) => { sched[id] = true; stamp[id] = t; });
+      return { sched, stamp, cancelled: false, restored: false };
+    });
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const steps = this.STEPS();
+    const cancelled = this.state.cancelled;
+    const restored = this.state.restored;
+    const isSched = (s) => !!this.state.sched[s.id] && !cancelled;
+    const schedList = steps.filter(isSched);
+    const pending = steps.filter((s) => !isSched(s));
+    const any = schedList.length > 0;
+    const all = pending.length === 0;
+    const liveNow = schedList.filter((s) => s.rel.indexOf('in 2 days') === 0 || s.rel.indexOf('in 4 days') === 0).length;
+    const armAllowed = mode !== 'Suggest';
+    const armed = this.state.armed && armAllowed;
+    const sentCount = this.HANDOFFS().filter((h) => this.state.sent[h.id]).length;
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      headEdge: cancelled ? 'var(--rose-500)' : all ? 'var(--green-500)' : 'var(--mod-margin)',
+      headline: cancelled ? 'Schedule cancelled — no future steps remain' : all ? 'All nine steps scheduled · first push Aug 20' : schedList.length + ' of 9 steps scheduled',
+      headMeta: cancelled
+        ? 'Executed prices restored from the Ledger. The cohort is back at full price and the stop-buy flag stays in place.'
+        : restored
+          ? 'Prices restored to their pre-markdown values. Scheduled steps were cancelled first.'
+          : all
+            ? 'Sell-through reads at each step boundary · recovery posts to the Cash lens as it lands'
+            : 'Steps push at 00:01 local on their date · nothing is live until then',
+      headTone: cancelled ? 'var(--rose-700)' : 'var(--ink-500)',
+      schedCount: schedList.length + ' of 9',
+      liveCount: String(liveNow),
+      liveTone: liveNow ? 'var(--mod-margin)' : 'var(--ink-400)',
+      stepMeta: cancelled ? 'cancelled · prices restored' : schedList.length + ' scheduled · ' + pending.length + ' draft',
+
+      steps: steps.map((s) => {
+        const sc = isSched(s);
+        const soon = s.rel.indexOf('in 2 days') === 0 || s.rel.indexOf('in 4 days') === 0;
+        return {
+          date: s.date, rel: s.rel, label: s.label, hue: s.hue, units: s.units, channels: s.channels, depth: s.depth, skus: s.skus,
+          st: sc && soon ? 'on plan' : s.st, stMeta: s.stMeta,
+          stTone: sc && soon ? 'var(--green-700)' : 'var(--ink-400)',
+          rowBg: sc && soon ? 'color-mix(in oklab, var(--mod-margin) 4%, white)' : 'var(--ink-0)',
+          dim: cancelled ? 0.5 : 1,
+          depthTone: parseInt(s.depth, 10) >= 50 ? 'var(--rose-700)' : parseInt(s.depth, 10) >= 35 ? 'var(--amber-700)' : 'var(--ink-900)',
+          status: cancelled ? 'cancelled' : sc ? 'scheduled ' + this.state.stamp[s.id] : 'draft',
+          statusTone: cancelled ? 'var(--rose-700)' : sc ? 'var(--green-700)' : 'var(--ink-500)',
+          statusTint: cancelled ? 'var(--rose-50)' : sc ? 'var(--green-50)' : 'var(--ink-50)',
+          btnShow: !cancelled && !sc ? 'inline-flex' : 'none',
+          btnLabel: 'Schedule',
+          btnBg: 'var(--ink-900)', btnTone: 'var(--ink-0)', btnBorder: 'var(--ink-900)',
+          onAct: () => this.schedule([s.id]),
+        };
+      }),
+
+      handoffs: this.HANDOFFS().map((h) => {
+        const sent = !!this.state.sent[h.id] && !cancelled;
+        return {
+          who: h.who, label: h.label, detail: h.detail, hue: h.hue, tint: h.tint,
+          status: sent ? 'sent' : 'ready',
+          statusTone: sent ? 'var(--green-700)' : 'var(--ink-400)',
+          bg: sent ? 'var(--green-50)' : 'var(--ink-25)',
+          border: sent ? 'color-mix(in oklab, var(--green-500) 26%, white)' : 'var(--ink-100)',
+          btnShow: sent ? 'none' : 'inline-flex',
+          onSend: () => this.setState((st) => ({ sent: Object.assign({}, st.sent, { [h.id]: true }) })),
+        };
+      }),
+
+      armState: armed ? 'Armed' : armAllowed ? 'Available' : 'Dial-gated',
+      armTint: armed ? 'var(--green-50)' : armAllowed ? 'var(--ink-50)' : 'var(--amber-50)',
+      armTone: armed ? 'var(--green-700)' : armAllowed ? 'var(--ink-500)' : 'var(--amber-700)',
+      armBorder: armed ? 'color-mix(in oklab, var(--violet-500) 30%, white)' : 'var(--ink-100)',
+      armCopy: armed
+        ? 'Armed. At each checkpoint Realify compares sell-through against the ladder plan and pulls the next step forward if it is under 80%, then logs the change and tells you.'
+        : armAllowed
+          ? 'Assist level means Realify acts inside a rule you set, then tells you. It can only advance to the next step already in the approved ladder — never deeper than the cohort cap.'
+          : 'This is an Assist-level arm: Realify advances a step without asking. The dial is at Suggest, so it is disabled — move to Approve or Auto first.',
+      armRows: [
+        { label: 'Trigger', value: 'sell-through < 80% of plan' },
+        { label: 'Action', value: 'pull the next step forward' },
+        { label: 'Bounded by', value: 'the approved ladder only' },
+        { label: 'Checkpoints', value: '3 · Sep 01, 03, 05' },
+      ],
+      armBtnLabel: armed ? 'Auto-advance armed' : armAllowed ? 'Arm auto-advance' : 'Requires Approve or Auto',
+      armBtnBg: armed ? 'var(--ink-50)' : armAllowed ? 'color-mix(in oklab, var(--violet-500) 8%, white)' : 'var(--ink-50)',
+      armBtnTone: armed ? 'var(--ink-500)' : armAllowed ? 'var(--violet-700)' : 'var(--ink-400)',
+      armBtnBorder: armed ? 'var(--ink-200)' : armAllowed ? 'color-mix(in oklab, var(--violet-500) 40%, white)' : 'var(--ink-200)',
+      armCursor: armAllowed && !armed ? 'pointer' : 'default',
+      onArm: () => { if (armAllowed && !armed) this.setState({ armed: true }); },
+      armGate: 'Dial: ' + mode + ' · Assist-level arms need Approve or higher',
+
+      rbState: cancelled ? 'Cancelled and restored' : any ? 'Available' : 'Nothing scheduled yet',
+      rbTint: cancelled ? 'var(--amber-50)' : any ? 'var(--green-50)' : 'var(--ink-50)',
+      rbStateTone: cancelled ? 'var(--amber-700)' : any ? 'var(--green-700)' : 'var(--ink-500)',
+      rbCopy: cancelled
+        ? 'All scheduled steps were cancelled before their push date and the two executed prices were restored from the Ledger. The liquidation pickup was stopped inside its 5-day window.'
+        : any
+          ? 'Scheduled steps can be cancelled any time before their push date. Prices that already executed restore from the Ledger, which holds the pre-markdown value for every SKU.'
+          : 'Both controls become available once a step is scheduled. The Ledger already holds the pre-markdown price for all 38 SKUs.',
+      cancelLabel: cancelled ? 'Steps cancelled' : 'Cancel scheduled steps',
+      cancelBorder: any && !cancelled ? 'var(--ink-300)' : 'var(--ink-200)',
+      cancelTone: any && !cancelled ? 'var(--rose-700)' : 'var(--ink-400)',
+      cancelCursor: any && !cancelled ? 'pointer' : 'default',
+      onCancel: () => { if (any && !cancelled) this.setState({ cancelled: true }); },
+      restoreLabel: restored ? 'Prices restored' : 'Restore executed prices',
+      restoreBorder: any && !restored ? 'var(--ink-300)' : 'var(--ink-200)',
+      restoreTone: any && !restored ? 'var(--rose-700)' : 'var(--ink-400)',
+      restoreCursor: any && !restored ? 'pointer' : 'default',
+      onRestore: () => { if (any && !restored) this.setState({ restored: true, cancelled: true }); },
+      rbHint: cancelled ? 'Ledger holds both the markdown and the restore' : '38 SKUs · pre-markdown prices on file',
+
+      tray: [
+        { label: 'Price steps', icon: all && !cancelled ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle', tone: all && !cancelled ? 'var(--green-700)' : 'var(--ink-400)', value: schedList.length + ' of 9' },
+        { label: 'Handoffs', icon: sentCount === 4 ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle', tone: sentCount === 4 ? 'var(--green-700)' : 'var(--ink-400)', value: sentCount + ' of 4' },
+        { label: 'Promo codes', icon: this.state.sent.h3 ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle', tone: this.state.sent.h3 ? 'var(--green-700)' : 'var(--ink-400)', value: '6 codes' },
+        { label: 'Outlet listings', icon: this.state.sent.h3 ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle', tone: this.state.sent.h3 ? 'var(--green-700)' : 'var(--ink-400)', value: '14 SKUs' },
+        { label: 'Auto-advance', icon: armed ? 'fa-solid fa-shield-halved' : 'fa-regular fa-circle', tone: armed ? 'var(--violet-700)' : 'var(--ink-400)', value: armed ? 'armed' : 'off' },
+      ],
+      allLabel: cancelled ? 'Schedule cancelled' : all ? 'All steps scheduled' : any ? 'Schedule remaining ' + pending.length : 'Schedule all 9 steps',
+      allBg: all || cancelled ? 'var(--ink-100)' : 'var(--mod-margin)',
+      allTone: all || cancelled ? 'var(--ink-500)' : 'var(--ink-0)',
+      allCursor: all || cancelled ? 'default' : 'pointer',
+      allNote: cancelled
+        ? 'Nothing is scheduled. Re-approve on Decide to rebuild the schedule.'
+        : all
+          ? 'First push Aug 20 at 00:01. Sell-through reads at every step boundary and the checkpoints gate steps 2 and 3.'
+          : 'Steps schedule as future-dated pushes — nothing changes price today.',
+      onScheduleAll: () => { if (pending.length && !cancelled) this.schedule(pending.map((s) => s.id)); },
+
+      monState: cancelled ? 'stopped' : any ? 'reading' : 'starts at first push',
+      monTone: cancelled ? 'var(--rose-700)' : any ? 'var(--green-700)' : 'var(--ink-400)',
+      monitors: [
+        { label: 'Sell-through vs ladder', value: any ? '18% of 4,180 u' : 'plan 44% by Sep 01', planPct: '44%', realPct: any ? '18%' : '0%', tone: any ? 'var(--amber-700)' : 'var(--ink-300)', note: any ? 'Day 2 of step 1. Grey bar is the plan, colour is actual.' : 'Read at every step boundary against the approved ladder.' },
+        { label: 'Recovery to date', value: any ? '$9.4K of $71.4K' : 'projected $71.4K', planPct: '100%', realPct: any ? '13%' : '0%', tone: any ? 'var(--green-700)' : 'var(--ink-300)', note: 'Posts to the Cash lens ladder as it lands.' },
+        { label: 'Margin dilution', value: any ? '0.3 pp so far' : 'projected 1.9 pp', planPct: '95%', realPct: any ? '15%' : '0%', tone: 'var(--ink-700)', note: 'Cap is 1.8 pp. Realify stops the ladder rather than crossing it.' },
+        { label: 'Units before the cliff', value: any ? '1,240 of 3,344' : 'target 3,344 u', planPct: '100%', realPct: any ? '37%' : '0%', tone: any ? 'var(--amber-700)' : 'var(--ink-300)', note: 'Everything cleared by Sep 13 avoids the aged surcharge.' },
+      ],
+      checkpoints: [
+        { label: 'Checkpoint 1 · seasonal step 2', date: 'Sep 01', dot: 'var(--mod-margin)', note: 'Advances if step 1 sell-through is under 80% of the 44% plan.' },
+        { label: 'Checkpoint 2 · core step 2', date: 'Sep 03', dot: 'var(--r-blue-500)', note: 'Same rule against a 41% plan. This is the largest cohort.' },
+        { label: 'Checkpoint 3 · hero step 2', date: 'Sep 05', dot: 'var(--mod-discover)', note: 'Hero depth is capped at 40%, so there is only one step left after this.' },
+      ],
+      ledgerCopy: cancelled
+        ? 'Two entries: the Aug 18 markdown schedule and the cancellation with the restore, each holding every pre-markdown price.'
+        : any
+          ? 'Logged Aug 18 · ' + schedList.length + ' scheduled steps, 4 cohort routes, projected $71.4K recovery at 1.9 pp dilution. Pre-markdown prices captured for all 38 SKUs.'
+          : 'On scheduling, Realify writes one entry with every step, the cohort routes and the pre-markdown price for each SKU.',
+
+      footerStatus: cancelled ? 'Execute · schedule cancelled · prices restored' : all ? 'Execute · 9 steps scheduled · monitoring at every boundary' : 'Execute · ' + schedList.length + ' of 9 scheduled · ' + sentCount + ' of 4 handoffs sent',
+      footerSchedShow: all || cancelled ? 'none' : 'inline-flex',
+      footerSchedLabel: any ? 'Schedule remaining ' + pending.length : 'Schedule all 9 steps',
+      footerDoneShow: all || cancelled ? 'inline-flex' : 'none',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

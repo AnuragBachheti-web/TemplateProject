@@ -1,0 +1,300 @@
+[
+  {
+    "code": "S9.11",
+    "name": "Repricing",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.dialNote"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "targets",
+        "blockType": "labelValueList",
+        "binding": "data.targets"
+      },
+      {
+        "slotName": "cohorts",
+        "blockType": "table",
+        "binding": "data.cohorts"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "opportunity",
+        "blockType": "labelValueList",
+        "binding": "data.opportunity"
+      },
+      {
+        "slotName": "evidence",
+        "blockType": "labelValueList",
+        "binding": "data.evidence"
+      },
+      {
+        "slotName": "agents",
+        "blockType": "table",
+        "binding": "data.agents"
+      }
+    ]
+  },
+  {
+    "code": "S9.11",
+    "name": "Repricing",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "sorts",
+        "blockType": "labelValueList",
+        "binding": "data.sorts"
+      },
+      {
+        "slotName": "sortNote",
+        "blockType": "text",
+        "binding": "data.sortNote"
+      },
+      {
+        "slotName": "rows",
+        "blockType": "table",
+        "binding": "data.rows"
+      },
+      {
+        "slotName": "sel",
+        "blockType": "object",
+        "binding": "data.sel"
+      },
+      {
+        "slotName": "rollup",
+        "blockType": "labelValueList",
+        "binding": "data.rollup"
+      },
+      {
+        "slotName": "concentration",
+        "blockType": "labelValueList",
+        "binding": "data.concentration"
+      },
+      {
+        "slotName": "excluded",
+        "blockType": "labelValueList",
+        "binding": "data.excluded"
+      }
+    ]
+  },
+  {
+    "code": "S9.11",
+    "name": "Repricing",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.heroValue"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "itemQueue",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel"
+      },
+      {
+        "slotName": "confBadge",
+        "blockType": "text",
+        "binding": "data.confBadge"
+      },
+      {
+        "slotName": "tradeoff",
+        "blockType": "text",
+        "binding": "data.tradeoff"
+      },
+      {
+        "slotName": "tol",
+        "blockType": "number",
+        "binding": "data.tol"
+      },
+      {
+        "slotName": "tolLabel",
+        "blockType": "text",
+        "binding": "data.tolLabel"
+      },
+      {
+        "slotName": "liveStats",
+        "blockType": "labelValueList",
+        "binding": "data.liveStats"
+      },
+      {
+        "slotName": "slateMeta",
+        "blockType": "text",
+        "binding": "data.slateMeta"
+      },
+      {
+        "slotName": "restNote",
+        "blockType": "text",
+        "binding": "data.restNote"
+      },
+      {
+        "slotName": "slate",
+        "blockType": "itemQueue",
+        "binding": "data.slate"
+      },
+      {
+        "slotName": "zoneMeta",
+        "blockType": "text",
+        "binding": "data.zoneMeta"
+      },
+      {
+        "slotName": "actions",
+        "blockType": "table",
+        "binding": "data.actions"
+      },
+      {
+        "slotName": "summary",
+        "blockType": "labelValueList",
+        "binding": "data.summary"
+      },
+      {
+        "slotName": "ladder",
+        "blockType": "table",
+        "binding": "data.ladder"
+      },
+      {
+        "slotName": "testCopy",
+        "blockType": "text",
+        "binding": "data.testCopy"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.11",
+    "name": "Repricing",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.headline"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "headMeta",
+        "blockType": "text",
+        "binding": "data.headMeta"
+      },
+      {
+        "slotName": "writtenCount",
+        "blockType": "text",
+        "binding": "data.writtenCount"
+      },
+      {
+        "slotName": "armState",
+        "blockType": "text",
+        "binding": "data.armState"
+      },
+      {
+        "slotName": "stages",
+        "blockType": "itemQueue",
+        "binding": "data.stages"
+      },
+      {
+        "slotName": "guardState",
+        "blockType": "text",
+        "binding": "data.guardState"
+      },
+      {
+        "slotName": "guardCopy",
+        "blockType": "text",
+        "binding": "data.guardCopy"
+      },
+      {
+        "slotName": "guardParts",
+        "blockType": "labelValueList",
+        "binding": "data.guardParts"
+      },
+      {
+        "slotName": "rbLabel",
+        "blockType": "text",
+        "binding": "data.rbLabel"
+      },
+      {
+        "slotName": "rbHint",
+        "blockType": "text",
+        "binding": "data.rbHint"
+      },
+      {
+        "slotName": "pushCopy",
+        "blockType": "text",
+        "binding": "data.pushCopy"
+      },
+      {
+        "slotName": "allLabel",
+        "blockType": "text",
+        "binding": "data.allLabel"
+      },
+      {
+        "slotName": "allNote",
+        "blockType": "text",
+        "binding": "data.allNote"
+      },
+      {
+        "slotName": "monState",
+        "blockType": "text",
+        "binding": "data.monState"
+      },
+      {
+        "slotName": "monitors",
+        "blockType": "labelValueList",
+        "binding": "data.monitors"
+      },
+      {
+        "slotName": "ledgerCopy",
+        "blockType": "text",
+        "binding": "data.ledgerCopy"
+      },
+      {
+        "slotName": "chain",
+        "blockType": "labelValueList",
+        "binding": "data.chain"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      },
+      {
+        "slotName": "footerPushLabel",
+        "blockType": "text",
+        "binding": "data.footerPushLabel"
+      }
+    ]
+  }
+]

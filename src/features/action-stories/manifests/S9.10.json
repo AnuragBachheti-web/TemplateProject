@@ -1,0 +1,305 @@
+[
+  {
+    "code": "S9.10",
+    "name": "Exit",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.dialNote"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "targets",
+        "blockType": "labelValueList",
+        "binding": "data.targets"
+      },
+      {
+        "slotName": "exceptions",
+        "blockType": "labelValueList",
+        "binding": "data.exceptions"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "bleed",
+        "blockType": "labelValueList",
+        "binding": "data.bleed"
+      },
+      {
+        "slotName": "stack",
+        "blockType": "labelValueList",
+        "binding": "data.stack"
+      },
+      {
+        "slotName": "agents",
+        "blockType": "table",
+        "binding": "data.agents"
+      }
+    ]
+  },
+  {
+    "code": "S9.10",
+    "name": "Exit",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "zeroY",
+        "blockType": "text",
+        "binding": "data.zeroY"
+      },
+      {
+        "slotName": "bars",
+        "blockType": "labelValueList",
+        "binding": "data.bars"
+      },
+      {
+        "slotName": "tabs",
+        "blockType": "labelValueList",
+        "binding": "data.tabs"
+      },
+      {
+        "slotName": "sel",
+        "blockType": "object",
+        "binding": "data.sel"
+      },
+      {
+        "slotName": "list",
+        "blockType": "table",
+        "binding": "data.list"
+      },
+      {
+        "slotName": "basket",
+        "blockType": "table",
+        "binding": "data.basket"
+      },
+      {
+        "slotName": "classes",
+        "blockType": "labelValueList",
+        "binding": "data.classes"
+      },
+      {
+        "slotName": "upside",
+        "blockType": "labelValueList",
+        "binding": "data.upside"
+      }
+    ]
+  },
+  {
+    "code": "S9.10",
+    "name": "Exit",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "itemQueue",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel"
+      },
+      {
+        "slotName": "tabs",
+        "blockType": "labelValueList",
+        "binding": "data.tabs"
+      },
+      {
+        "slotName": "totals",
+        "blockType": "labelValueList",
+        "binding": "data.totals"
+      },
+      {
+        "slotName": "tabNote",
+        "blockType": "text",
+        "binding": "data.tabNote"
+      },
+      {
+        "slotName": "slateMeta",
+        "blockType": "text",
+        "binding": "data.slateMeta"
+      },
+      {
+        "slotName": "exits",
+        "blockType": "itemQueue",
+        "binding": "data.exits"
+      },
+      {
+        "slotName": "fixes",
+        "blockType": "itemQueue",
+        "binding": "data.fixes"
+      },
+      {
+        "slotName": "fixTotals",
+        "blockType": "labelValueList",
+        "binding": "data.fixTotals"
+      },
+      {
+        "slotName": "summary",
+        "blockType": "labelValueList",
+        "binding": "data.summary"
+      },
+      {
+        "slotName": "onApprove",
+        "blockType": "labelValueList",
+        "binding": "data.onApprove"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.10",
+    "name": "Exit",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.headline"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "headMeta",
+        "blockType": "text",
+        "binding": "data.headMeta"
+      },
+      {
+        "slotName": "doneCount",
+        "blockType": "text",
+        "binding": "data.doneCount"
+      },
+      {
+        "slotName": "revState",
+        "blockType": "text",
+        "binding": "data.revState"
+      },
+      {
+        "slotName": "flowMeta",
+        "blockType": "text",
+        "binding": "data.flowMeta"
+      },
+      {
+        "slotName": "runLabel",
+        "blockType": "text",
+        "binding": "data.runLabel"
+      },
+      {
+        "slotName": "steps",
+        "blockType": "labelValueList",
+        "binding": "data.steps"
+      },
+      {
+        "slotName": "guardState",
+        "blockType": "text",
+        "binding": "data.guardState"
+      },
+      {
+        "slotName": "guardCopy",
+        "blockType": "text",
+        "binding": "data.guardCopy"
+      },
+      {
+        "slotName": "guardRows",
+        "blockType": "labelValueList",
+        "binding": "data.guardRows"
+      },
+      {
+        "slotName": "rbState",
+        "blockType": "text",
+        "binding": "data.rbState"
+      },
+      {
+        "slotName": "rbCopy",
+        "blockType": "text",
+        "binding": "data.rbCopy"
+      },
+      {
+        "slotName": "rbRows",
+        "blockType": "labelValueList",
+        "binding": "data.rbRows"
+      },
+      {
+        "slotName": "rbLabel",
+        "blockType": "text",
+        "binding": "data.rbLabel"
+      },
+      {
+        "slotName": "rbHint",
+        "blockType": "text",
+        "binding": "data.rbHint"
+      },
+      {
+        "slotName": "tray",
+        "blockType": "labelValueList",
+        "binding": "data.tray"
+      },
+      {
+        "slotName": "allLabel",
+        "blockType": "text",
+        "binding": "data.allLabel"
+      },
+      {
+        "slotName": "allNote",
+        "blockType": "text",
+        "binding": "data.allNote"
+      },
+      {
+        "slotName": "monState",
+        "blockType": "text",
+        "binding": "data.monState"
+      },
+      {
+        "slotName": "monitors",
+        "blockType": "labelValueList",
+        "binding": "data.monitors"
+      },
+      {
+        "slotName": "roles",
+        "blockType": "itemQueue",
+        "binding": "data.roles"
+      },
+      {
+        "slotName": "ledgerCopy",
+        "blockType": "text",
+        "binding": "data.ledgerCopy"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      },
+      {
+        "slotName": "footerRunLabel",
+        "blockType": "text",
+        "binding": "data.footerRunLabel"
+      }
+    ]
+  }
+]

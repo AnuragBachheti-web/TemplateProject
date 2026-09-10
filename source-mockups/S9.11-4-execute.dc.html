@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.11-4 Execute" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-margin);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-margin) 12%, white);color:var(--mod-margin);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Repricing · S9.11</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Margin-protective repricing — 41 SKUs · +$9.7K/mo</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">41 SKUs · +$9.7K/mo at 82% ± 7</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Tested headroom ≥$1.10 · <4% volume loss</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pr" size="sm" color="var(--mod-margin)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+          Lens: Margin
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-margin);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Pricer, Controller governs
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Elasticity Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Competitive Headroom Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.11-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.11-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.11-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.11-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-margin) 10%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-margin);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 4 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;display:flex;align-items:center;gap:14px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ headEdge }};border-radius:var(--r-lg);padding:14px 18px">
+          <div style="min-width:0">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Price writes · parity-safe order</span>
+            <div style="margin-top:5px;font-size:15px;font-weight:700;color:var(--ink-900)">{{ headline }}</div>
+            <div style="margin-top:4px;font-family:var(--font-mono);font-size:10.5px;color:{{ headTone }}">{{ headMeta }}</div>
+          </div>
+          <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:18px">
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Written</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ writtenCount }}</div>
+            </div>
+            <div style="width:1px;height:34px;background:var(--ink-100)"></div>
+            <div style="text-align:right">
+              <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Auto-revert</div>
+              <div style="margin-top:4px;font-family:var(--font-mono);font-size:15px;font-weight:600;color:{{ armTone }}">{{ armState }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Staged pushes</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">DTC and Walmart first · Amazon after the crawl re-reads us</span>
+          </div>
+          <sc-for list="{{ stages }}" as="s" hint-placeholder-count="4">
+            <div style="border-bottom:1px solid var(--ink-100)">
+              <div style="display:grid;grid-template-columns:32px minmax(0,1fr) 132px 108px 124px 132px;align-items:center;gap:12px;padding:12px 16px;background:{{ s.rowBg }}">
+                <span style="width:24px;height:24px;border-radius:50%;background:{{ s.numBg }};color:{{ s.numTone }};display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">{{ s.n }}</span>
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                    <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ s.channel }}</span>
+                    <span style="display:{{ s.gateShow }};align-items:center;gap:5px;height:20px;padding:0 8px;border-radius:var(--r-full);background:{{ s.gateTint }};font-family:var(--font-mono);font-size:9px;letter-spacing:0.05em;color:{{ s.gateTone }}">{{ s.gate }}</span>
+                  </div>
+                  <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ s.note }}</div>
+                </div>
+                <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-600);font-variant-numeric:tabular-nums">{{ s.when }}</span>
+                <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ s.count }}</span>
+                <div style="display:flex;justify-content:flex-end">
+                  <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:{{ s.statusTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ s.statusTone }}">
+                    <span style="width:6px;height:6px;border-radius:50%;background:{{ s.statusTone }}"></span>{{ s.status }}
+                  </span>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:7px">
+                  <button type="button" onClick="{{ s.onPush }}" style="display:{{ s.btnShow }};height:28px;padding:0 12px;border-radius:var(--r-sm);border:1px solid {{ s.btnBorder }};background:{{ s.btnBg }};font-family:var(--font-sans);font-size:11.5px;font-weight:500;color:{{ s.btnTone }};cursor:{{ s.btnCursor }}">{{ s.btnLabel }}</button>
+                  <button type="button" onClick="{{ s.onDiff }}" style="height:28px;padding:0 10px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-mono);font-size:10px;color:var(--ink-600);cursor:pointer">{{ s.diffLabel }}</button>
+                </div>
+              </div>
+              <div style="display:{{ s.diffShow }};flex-direction:column;background:var(--ink-25);border-top:1px solid var(--ink-100)">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) 96px 96px 74px 108px 118px;align-items:center;gap:10px;padding:8px 16px 8px 48px;border-bottom:1px solid var(--ink-100)">
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">SKU</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Old</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">New</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Δ</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Revert to</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Ledger hash</span>
+                </div>
+                <sc-for list="{{ s.diff }}" as="d" hint-placeholder-count="4">
+                  <div style="display:grid;grid-template-columns:minmax(0,1fr) 96px 96px 74px 108px 118px;align-items:center;gap:10px;padding:8px 16px 8px 48px;border-bottom:1px solid var(--ink-100)">
+                    <div style="min-width:0;display:flex;align-items:center;gap:8px">
+                      <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-800)">{{ d.sku }}</span>
+                      <span style="display:{{ d.tagShow }};align-items:center;height:17px;padding:0 6px;border-radius:var(--r-full);background:{{ d.tagTint }};font-family:var(--font-mono);font-size:8.5px;color:{{ d.tagTone }}">{{ d.tag }}</span>
+                    </div>
+                    <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-500);text-align:right;text-decoration:line-through;font-variant-numeric:tabular-nums">{{ d.old }}</span>
+                    <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ d.newTone }};text-align:right;font-variant-numeric:tabular-nums">{{ d.nu }}</span>
+                    <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--green-700);text-align:right;font-variant-numeric:tabular-nums">{{ d.delta }}</span>
+                    <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500);text-align:right;font-variant-numeric:tabular-nums">{{ d.revert }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9.5px;color:{{ d.hashTone }};text-align:right">{{ d.hash }}</span>
+                  </div>
+                </sc-for>
+                <div style="padding:9px 16px 9px 48px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ s.diffFoot }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ guardBorder }};border-left:3px solid {{ guardEdge }};border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <i class="fa-solid fa-shield-halved" style="font-size:13px;color:{{ guardEdge }}"></i>
+            <span style="font-size:14px;font-weight:700;color:var(--ink-900)">Auto-revert guardrail</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:var(--r-full);background:{{ guardTint }};font-family:var(--font-mono);font-size:9.5px;color:{{ guardTone }}">{{ guardState }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">first Act-level automation in the product</span>
+          </div>
+          <p style="margin:10px 0 0;max-width:860px;font-size:13px;line-height:1.6;color:var(--ink-600);text-wrap:pretty">{{ guardCopy }}</p>
+          <div style="margin-top:13px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+            <sc-for list="{{ guardParts }}" as="g" hint-placeholder-count="4">
+              <div style="padding:11px 13px;border:1px solid {{ g.border }};border-radius:var(--r-md);background:{{ g.bg }}">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="width:18px;height:18px;border-radius:50%;background:{{ g.dotBg }};color:{{ g.dotTone }};display:grid;place-items:center"><i class="{{ g.icon }}" style="font-size:8px"></i></span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-500)">{{ g.label }}</span>
+                </div>
+                <div style="margin-top:7px;font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ g.tone }};font-variant-numeric:tabular-nums">{{ g.value }}</div>
+                <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ g.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <button type="button" onClick="{{ onRevertAll }}" style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:var(--r-sm);border:1px solid {{ rbBorder }};background:var(--ink-0);font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:{{ rbTone }};cursor:{{ rbCursor }}">
+              <i class="fa-solid fa-rotate-left" style="font-size:10px"></i>{{ rbLabel }}
+            </button>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ rbHint }}</span>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Push all</span>
+        <p style="margin:8px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">{{ pushCopy }}</p>
+        <button type="button" onClick="{{ onPushAll }}" style="margin-top:12px;width:100%;height:40px;border-radius:var(--r-sm);border:none;background:{{ allBg }};font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:{{ allTone }};cursor:{{ allCursor }}">{{ allLabel }}</button>
+        <p style="margin:9px 0 0;font-family:var(--font-mono);font-size:10px;line-height:1.5;color:var(--ink-400)">{{ allNote }}</p>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Realized vs predicted</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:9.5px;color:{{ monTone }}">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ monTone }}"></span>{{ monState }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ monitors }}" as="m" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12.5px;font-weight:500;color:var(--ink-800)">{{ m.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                </div>
+                <div style="margin-top:6px;position:relative;height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <div style="position:absolute;left:0;top:0;bottom:0;width:{{ m.predPct }};background:var(--ink-300);border-radius:var(--r-full)"></div>
+                  <div style="position:absolute;left:0;top:0;bottom:0;width:{{ m.pct }};background:{{ m.tone }};border-radius:var(--r-full)"></div>
+                </div>
+                <div style="margin-top:4px;font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ m.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:12px;display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-margin) 6%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 22%, white)">
+            <i class="fa-solid fa-arrow-rotate-right" style="margin-top:2px;font-size:10px;color:var(--mod-margin)"></i>
+            <span style="flex:1;min-width:0;font-size:11.5px;line-height:1.5;color:var(--ink-700);text-wrap:pretty">Feeds the engine — every realized elasticity is written back to the Elasticity Engine, so the next slate is measured on these SKUs rather than assumed.</span>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Ledger chain</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ ledgerCopy }}</p>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+            <sc-for list="{{ chain }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="width:6px;height:6px;border-radius:50%;background:{{ c.tone }};flex-shrink:0"></span>
+                <span style="flex:1;min-width:0;font-family:var(--font-mono);font-size:10px;color:var(--ink-600)">{{ c.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;color:{{ c.tone }}">{{ c.hash }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <a href="S00-workspace.dc.html" style="margin-top:10px;display:inline-flex;font-size:11.5px;font-weight:500;color:var(--ink-500)" style-hover="color:var(--ink-900)">Open the repricing entry →</a>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ footerStatus }}</span>
+      <a href="S9.11-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Decide
+      </a>
+      <button type="button" onClick="{{ onPushAll }}" style="display:{{ footerPushShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);border:none;background:var(--ink-900);color:var(--ink-0);font-family:var(--font-sans);font-size:14px;font-weight:500;cursor:pointer;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);transform:translateY(-1px)">
+        {{ footerPushLabel }}<i class="fa-solid fa-bolt" style="font-size:11px"></i>
+      </button>
+      <a href="S00-workspace.dc.html?approved=9.11" style="display:{{ footerDoneShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Back to Workspace<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { pushed: {}, open: {}, reverted: false, stamp: {} };
+
+  STAGES() {
+    return [
+      { key: 'dtc', n: '1', channel: 'DTC · northwind.com', count: '41 SKUs', when: 'immediate', note: 'Written first. Sets the parity reference every other channel is checked against.', gate: '', 
+        diff: [
+          { sku: 'NW-KNF-0480', old: '$68.00', nu: '$71.99', delta: '+5.9%', revert: '$68.00', tag: 'micro-step 2/3', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)' },
+          { sku: 'NW-CER-1120', old: '$24.00', nu: '$26.99', delta: '+12.5%', revert: '$24.00', tag: '' },
+          { sku: 'NW-PAN-2210', old: '$54.00', nu: '$57.99', delta: '+7.4%', revert: '$54.00', tag: 'parity watch', tagTint: 'var(--rose-50)', tagTone: 'var(--rose-700)' },
+          { sku: 'NW-GLS-3390', old: '$38.00', nu: '$40.99', delta: '+7.9%', revert: '$38.00', tag: 'test · 50/50', tagTint: 'var(--r-blue-50)', tagTone: 'var(--r-blue-600)' },
+        ], foot: '+37 more SKUs in this stage · full diff exports to CSV from the Ledger' },
+      { key: 'wfs', n: '2', channel: 'Walmart · WFS', count: '38 SKUs', when: '+2 min', note: 'Same prices, checked against the ±2% parity band before each write.', gate: 'after DTC', gateTint: 'var(--ink-100)', gateTone: 'var(--ink-600)',
+        diff: [
+          { sku: 'NW-KNF-0480', old: '$68.00', nu: '$71.99', delta: '+5.9%', revert: '$68.00', tag: '' },
+          { sku: 'NW-CER-1120', old: '$24.00', nu: '$26.99', delta: '+12.5%', revert: '$24.00', tag: '' },
+          { sku: 'NW-TEX-6040', old: '$42.00', nu: '$43.99', delta: '+4.7%', revert: '$42.00', tag: 'MAP ceiling', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)' },
+        ], foot: '3 SKUs not listed on Walmart · skipped rather than failed' },
+      { key: 'crawl', n: '3', channel: 'Crawl re-read window', count: '—', when: '+45 min', note: 'Realify waits for the Amazon crawl to re-read our DTC price so fair-pricing sees the new reference, not the old one.', gate: 'fair-pricing hold', gateTint: 'var(--amber-50)', gateTone: 'var(--amber-700)',
+        diff: [], foot: 'No writes in this stage. The wait is the guardrail.' },
+      { key: 'amz', n: '4', channel: 'Amazon · FBA', count: '41 SKUs', when: '+45 min', note: 'Written last so Amazon is never above our lowest advertised price, even briefly.', gate: 'Amazon last', gateTint: 'var(--rose-50)', gateTone: 'var(--rose-700)',
+        diff: [
+          { sku: 'NW-KNF-0480', old: '$68.00', nu: '$71.99', delta: '+5.9%', revert: '$68.00', tag: 'Buy Box 0.82', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)' },
+          { sku: 'NW-PAN-2210', old: '$54.00', nu: '$57.99', delta: '+7.4%', revert: '$54.00', tag: '3P at $56.40', tagTint: 'var(--rose-50)', tagTone: 'var(--rose-700)' },
+          { sku: 'NW-CER-1210', old: '$16.00', nu: '$17.99', delta: '+12.4%', revert: '$16.00', tag: '' },
+        ], foot: 'Buy Box share is read 15 minutes after each write · a loss pauses the remaining micro-steps' },
+    ];
+  }
+
+  clock() { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+  hash(k, i) { const s = (k + i).split('').reduce((a, c) => (a * 33 + c.charCodeAt(0)) % 16777216, 7); return '0x' + s.toString(16).padStart(6, '0'); }
+
+  push(keys) {
+    const t = this.clock();
+    this.setState((st) => {
+      const pushed = Object.assign({}, st.pushed), stamp = Object.assign({}, st.stamp);
+      keys.forEach((k) => { pushed[k] = true; stamp[k] = t; });
+      return { pushed, stamp, reverted: false };
+    });
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const stages = this.STAGES();
+    const rv = this.state.reverted;
+    const isDone = (s) => !!this.state.pushed[s.key] && !rv;
+    const doneList = stages.filter(isDone);
+    const priceStages = stages.filter((s) => s.key !== 'crawl');
+    const donePrice = priceStages.filter(isDone);
+    const armed = donePrice.length > 0 && !rv;
+    const allDone = stages.every(isDone);
+    const order = ['dtc', 'wfs', 'crawl', 'amz'];
+    const nextKey = order.find((k) => !this.state.pushed[k]) || null;
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      headEdge: rv ? 'var(--amber-500)' : allDone ? 'var(--green-500)' : 'var(--mod-margin)',
+      headline: rv ? 'Reverted — all 41 SKUs are back at their prior price' : allDone ? '41 SKUs live on all three channels · +$9.7K/mo committed' : donePrice.length ? donePrice.length + ' of 3 channels written' : 'Nothing written yet · 41 SKUs staged',
+      headMeta: rv
+        ? 'Prior prices restored in the same parity-safe order. The Ledger holds both the write and the revert.'
+        : allDone
+          ? 'Auto-revert armed on every SKU · velocity baseline captured from the 14 days before the write'
+          : donePrice.length
+            ? 'Stage ' + (order.indexOf(nextKey) + 1) + ' is next. Parity holds at every intermediate state.'
+            : 'Approved on Decide. Realify writes DTC first and Amazon last so parity is never inverted.',
+      headTone: rv ? 'var(--amber-700)' : 'var(--ink-500)',
+      writtenCount: donePrice.length + ' of 3',
+      armState: rv ? 'used' : armed ? 'armed' : 'not armed',
+      armTone: rv ? 'var(--amber-700)' : armed ? 'var(--green-700)' : 'var(--ink-400)',
+
+      stages: stages.map((s, si) => {
+        const d = isDone(s);
+        const isNext = s.key === nextKey && !rv;
+        const open = !!this.state.open[s.key];
+        return {
+          n: s.n, channel: s.channel, note: s.note, when: s.when,
+          count: s.count,
+          gate: s.gate, gateShow: s.gate ? 'inline-flex' : 'none', gateTint: s.gateTint, gateTone: s.gateTone,
+          rowBg: d ? 'color-mix(in oklab, var(--mod-margin) 4%, white)' : 'var(--ink-0)',
+          numBg: d ? 'var(--mod-margin)' : isNext ? 'var(--ink-900)' : 'var(--ink-100)',
+          numTone: d || isNext ? 'var(--ink-0)' : 'var(--ink-500)',
+          status: rv ? 'reverted' : d ? (s.key === 'crawl' ? 'waited ' + this.state.stamp[s.key] : 'written ' + this.state.stamp[s.key]) : isNext ? 'ready' : 'queued',
+          statusTone: rv ? 'var(--amber-700)' : d ? 'var(--green-700)' : isNext ? 'var(--ink-900)' : 'var(--ink-400)',
+          statusTint: rv ? 'var(--amber-50)' : d ? 'var(--green-50)' : isNext ? 'var(--ink-100)' : 'var(--ink-50)',
+          btnShow: !d && !rv ? 'inline-flex' : 'none',
+          btnLabel: s.key === 'crawl' ? 'Wait out window' : 'Push stage',
+          btnBg: isNext ? 'var(--ink-900)' : 'var(--ink-0)',
+          btnBorder: isNext ? 'var(--ink-900)' : 'var(--ink-200)',
+          btnTone: isNext ? 'var(--ink-0)' : 'var(--ink-400)',
+          btnCursor: isNext ? 'pointer' : 'default',
+          onPush: () => { if (isNext) this.push([s.key]); },
+          diffLabel: open ? 'hide diff' : 'view diff',
+          diffShow: open ? 'flex' : 'none',
+          onDiff: () => this.setState((st) => ({ open: Object.assign({}, st.open, { [s.key]: !st.open[s.key] }) })),
+          diffFoot: s.foot,
+          diff: s.diff.map((r, i) => ({
+            sku: r.sku, old: r.old, nu: r.nu, delta: r.delta, revert: r.revert,
+            tag: r.tag, tagShow: r.tag ? 'inline-flex' : 'none', tagTint: r.tagTint || 'var(--ink-100)', tagTone: r.tagTone || 'var(--ink-600)',
+            newTone: d ? 'var(--green-700)' : 'var(--ink-900)',
+            hash: d ? this.hash(s.key, i) : 'pending',
+            hashTone: d ? 'var(--mod-margin)' : 'var(--ink-400)',
+          })),
+        };
+      }),
+
+      guardEdge: rv ? 'var(--amber-500)' : armed ? 'var(--green-500)' : 'var(--ink-300)',
+      guardBorder: armed && !rv ? 'color-mix(in oklab, var(--green-500) 30%, white)' : 'var(--ink-100)',
+      guardState: rv ? 'fired · manual' : armed ? 'armed on ' + (allDone ? '41' : '41') + ' SKUs' : 'arms on first write',
+      guardTint: rv ? 'var(--amber-50)' : armed ? 'var(--green-50)' : 'var(--ink-50)',
+      guardTone: rv ? 'var(--amber-700)' : armed ? 'var(--green-700)' : 'var(--ink-500)',
+      guardCopy: rv
+        ? 'The guardrail was used manually — every SKU is back at its prior price and the arming is released. Realify keeps the velocity series so the next slate can read what actually happened during the window the new prices were live.'
+        : armed
+          ? 'This is the first automation in Realify that acts without asking. It watches units per day per SKU against the 14-day pre-change baseline; a SKU that loses more than 8% of velocity is written back to its old price and reported here. Reverting is always the safe direction, which is why it does not need an approval.'
+          : 'On the first price write, Realify captures a 14-day velocity baseline per SKU and arms the revert. Until then nothing is being watched, because nothing has changed.',
+      guardParts: [
+        { label: 'Watches', value: 'units / day', note: 'Per SKU, per channel, against the 14-day pre-change baseline.', icon: 'fa-solid fa-eye' },
+        { label: 'Trigger', value: '−8% velocity', note: 'Sustained over three days, not a single bad day.', icon: 'fa-solid fa-bolt' },
+        { label: 'Window', value: '14 days', note: 'After that the price is treated as the new normal.', icon: 'fa-solid fa-clock' },
+        { label: 'Action', value: 'restore prior', note: 'Writes the old price back in the same parity-safe order.', icon: 'fa-solid fa-rotate-left' },
+      ].map((g) => ({
+        label: g.label, value: g.value, note: g.note, icon: g.icon,
+        bg: armed && !rv ? 'var(--green-50)' : 'var(--ink-25)',
+        border: armed && !rv ? 'color-mix(in oklab, var(--green-500) 26%, white)' : 'var(--ink-100)',
+        dotBg: armed && !rv ? 'var(--green-700)' : 'var(--ink-200)',
+        dotTone: armed && !rv ? 'var(--ink-0)' : 'var(--ink-500)',
+        tone: armed && !rv ? 'var(--green-700)' : 'var(--ink-600)',
+      })),
+      rbLabel: rv ? 'All prices reverted' : 'Revert all 41 SKUs now',
+      rbBorder: armed && !rv ? 'var(--ink-300)' : 'var(--ink-200)',
+      rbTone: armed && !rv ? 'var(--rose-700)' : 'var(--ink-400)',
+      rbCursor: armed && !rv ? 'pointer' : 'default',
+      onRevertAll: () => { if (armed && !rv) this.setState({ reverted: true }); },
+      rbHint: rv ? 'Ledger holds the write chain and the revert' : armed ? 'One click · or automatically if the guardrail fires' : 'Available once a price has been written',
+
+      pushCopy: rv ? 'Re-approve on Decide to write the slate again.' : allDone ? 'All four stages are complete.' : 'Stages must run in order — parity depends on it.',
+      allLabel: rv ? 'Reverted' : allDone ? 'All stages complete' : 'Run all remaining stages',
+      allBg: allDone || rv ? 'var(--ink-100)' : 'var(--mod-margin)',
+      allTone: allDone || rv ? 'var(--ink-500)' : 'var(--ink-0)',
+      allCursor: allDone || rv ? 'default' : 'pointer',
+      allNote: allDone && !rv ? 'Every write hash-chains to the Ledger. Buy Box share is re-read 15 minutes after the Amazon stage.' : 'Realify holds the crawl window between Walmart and Amazon whether you run the stages one by one or all at once.',
+      onPushAll: () => { if (!allDone && !rv) this.push(order.filter((k) => !this.state.pushed[k])); },
+
+      monState: rv ? 'stopped' : allDone ? 'reading' : 'starts on first write',
+      monTone: rv ? 'var(--amber-700)' : allDone ? 'var(--green-700)' : 'var(--ink-400)',
+      monitors: [
+        { label: 'Realized elasticity', value: allDone && !rv ? '−1.18 vs −1.24' : 'no read yet', predPct: '82%', pct: allDone && !rv ? '78%' : '0%', tone: allDone && !rv ? 'var(--green-700)' : 'var(--ink-300)', note: allDone && !rv ? 'Slightly less elastic than predicted, on 6 days of data. Grey is predicted, colour is realized.' : 'Grey shows the predicted curve; the colour fills in as units accumulate.' },
+        { label: 'CM per month', value: allDone && !rv ? '+$10.2K vs +$9.7K' : 'predicted +$9.7K', predPct: '90%', pct: allDone && !rv ? '95%' : '0%', tone: allDone && !rv ? 'var(--green-700)' : 'var(--ink-300)', note: allDone && !rv ? 'Running 5% ahead of prediction, inside the ± 7 band.' : 'Read against the pre-change baseline, not against last month.' },
+        { label: 'Velocity vs baseline', value: allDone && !rv ? '−2.6% worst SKU' : 'baseline pending', predPct: '38%', pct: allDone && !rv ? '32%' : '0%', tone: allDone && !rv ? 'var(--green-700)' : 'var(--ink-300)', note: allDone && !rv ? 'Worst SKU is well inside the −8% trigger. Nothing is close to reverting.' : 'The −8% trigger is measured from this baseline.' },
+        { label: 'Buy Box share', value: allDone && !rv ? '91% held' : 'pre-write 94%', predPct: '94%', pct: allDone && !rv ? '91%' : '0%', tone: allDone && !rv ? 'var(--amber-700)' : 'var(--ink-300)', note: allDone && !rv ? 'Three points down on the eleven sensitive SKUs. Micro-step 3 of 3 is held until this recovers.' : 'Read 15 minutes after each Amazon write.' },
+      ],
+      ledgerCopy: rv
+        ? 'Three entries: the approval, the write chain and the revert. Each hash includes the previous one, so the sequence cannot be edited after the fact.'
+        : donePrice.length
+          ? 'Every write appends a hash that includes the previous entry — the approval, each channel push, and any revert form one chain per SKU.'
+          : 'On the first push, Realify opens a chain: approval hash, then one hash per channel write, then any revert.',
+      chain: [
+        { label: 'Approval · 41 SKUs · tolerance 4.0%', hash: '0x1a4f92', tone: 'var(--mod-margin)' },
+        { label: donePrice.length ? 'DTC write · 41 prices' : 'DTC write · pending', hash: this.state.pushed.dtc && !rv ? this.hash('dtc', 0) : '—', tone: this.state.pushed.dtc && !rv ? 'var(--mod-margin)' : 'var(--ink-300)' },
+        { label: this.state.pushed.amz && !rv ? 'Amazon write · 41 prices' : 'Amazon write · pending', hash: this.state.pushed.amz && !rv ? this.hash('amz', 0) : '—', tone: this.state.pushed.amz && !rv ? 'var(--mod-margin)' : 'var(--ink-300)' },
+        { label: rv ? 'Revert · 41 SKUs restored' : 'Revert · not used', hash: rv ? '0x9c31be' : '—', tone: rv ? 'var(--amber-700)' : 'var(--ink-300)' },
+      ],
+      footerStatus: rv ? 'Execute · reverted · prior prices restored' : allDone ? 'Execute · 41 SKUs live · auto-revert armed' : 'Execute · ' + donePrice.length + ' of 3 channels written',
+      footerPushShow: allDone || rv ? 'none' : 'inline-flex',
+      footerPushLabel: donePrice.length ? 'Run remaining stages' : 'Push stage 1 · DTC',
+      footerDoneShow: allDone || rv ? 'inline-flex' : 'none',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

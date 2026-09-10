@@ -1,0 +1,330 @@
+[
+  {
+    "code": "S9.18",
+    "name": "Fulfilment cost",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "headline",
+        "blockType": "labelValueList",
+        "binding": "data.headline"
+      },
+      {
+        "slotName": "targets",
+        "blockType": "labelValueList",
+        "binding": "data.targets"
+      },
+      {
+        "slotName": "promise",
+        "blockType": "table",
+        "binding": "data.promise"
+      },
+      {
+        "slotName": "guardrails",
+        "blockType": "labelValueList",
+        "binding": "data.guardrails"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "chips",
+        "blockType": "labelValueList",
+        "binding": "data.chips"
+      },
+      {
+        "slotName": "trigger",
+        "blockType": "itemQueue",
+        "binding": "data.trigger"
+      },
+      {
+        "slotName": "nodes",
+        "blockType": "table",
+        "binding": "data.nodes"
+      },
+      {
+        "slotName": "carriers",
+        "blockType": "table",
+        "binding": "data.carriers"
+      }
+    ]
+  },
+  {
+    "code": "S9.18",
+    "name": "Fulfilment cost",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "yTicks",
+        "blockType": "itemQueue",
+        "binding": "data.yTicks"
+      },
+      {
+        "slotName": "zoneBars",
+        "blockType": "labelValueList",
+        "binding": "data.zoneBars"
+      },
+      {
+        "slotName": "zone",
+        "blockType": "object",
+        "binding": "data.zone"
+      },
+      {
+        "slotName": "heatRows",
+        "blockType": "labelValueList",
+        "binding": "data.heatRows"
+      },
+      {
+        "slotName": "simTabs",
+        "blockType": "labelValueList",
+        "binding": "data.simTabs"
+      },
+      {
+        "slotName": "sim",
+        "blockType": "object",
+        "binding": "data.sim"
+      },
+      {
+        "slotName": "splits",
+        "blockType": "table",
+        "binding": "data.splits"
+      },
+      {
+        "slotName": "dim",
+        "blockType": "table",
+        "binding": "data.dim"
+      },
+      {
+        "slotName": "pool",
+        "blockType": "labelValueList",
+        "binding": "data.pool"
+      },
+      {
+        "slotName": "carriers",
+        "blockType": "itemQueue",
+        "binding": "data.carriers"
+      },
+      {
+        "slotName": "gri",
+        "blockType": "labelValueList",
+        "binding": "data.gri"
+      }
+    ]
+  },
+  {
+    "code": "S9.18",
+    "name": "Fulfilment cost",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "labelValueList",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_blocked",
+        "blockType": "flag",
+        "binding": "data.blocked"
+      },
+      {
+        "slotName": "guardrail_can_approve",
+        "blockType": "flag",
+        "binding": "data.canApprove"
+      },
+      {
+        "slotName": "guardrail_reason",
+        "blockType": "text",
+        "binding": "data.blockReason"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.ctaLabel"
+      },
+      {
+        "slotName": "slateTabs",
+        "blockType": "labelValueList",
+        "binding": "data.slateTabs"
+      },
+      {
+        "slotName": "slateLabel",
+        "blockType": "text",
+        "binding": "data.slateLabel"
+      },
+      {
+        "slotName": "slateMeta",
+        "blockType": "text",
+        "binding": "data.slateMeta"
+      },
+      {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle"
+      },
+      {
+        "slotName": "heroBody",
+        "blockType": "text",
+        "binding": "data.heroBody"
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics"
+      },
+      {
+        "slotName": "groups",
+        "blockType": "labelValueList",
+        "binding": "data.groups"
+      },
+      {
+        "slotName": "totals",
+        "blockType": "labelValueList",
+        "binding": "data.totals"
+      },
+      {
+        "slotName": "bars",
+        "blockType": "labelValueList",
+        "binding": "data.bars"
+      },
+      {
+        "slotName": "policyStatus",
+        "blockType": "text",
+        "binding": "data.policyStatus"
+      },
+      {
+        "slotName": "routes",
+        "blockType": "labelValueList",
+        "binding": "data.routes"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.18",
+    "name": "Fulfilment cost",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "planLine",
+        "blockType": "text",
+        "binding": "data.planLine"
+      },
+      {
+        "slotName": "pushedCount",
+        "blockType": "text",
+        "binding": "data.pushedCount"
+      },
+      {
+        "slotName": "runAllLabel",
+        "blockType": "text",
+        "binding": "data.runAllLabel"
+      },
+      {
+        "slotName": "runAllIcon",
+        "blockType": "text",
+        "binding": "data.runAllIcon"
+      },
+      {
+        "slotName": "stages",
+        "blockType": "itemQueue",
+        "binding": "data.stages"
+      },
+      {
+        "slotName": "monitors",
+        "blockType": "labelValueList",
+        "binding": "data.monitors"
+      },
+      {
+        "slotName": "monStatus",
+        "blockType": "text",
+        "binding": "data.monStatus"
+      },
+      {
+        "slotName": "progressPct",
+        "blockType": "text",
+        "binding": "data.progressPct"
+      },
+      {
+        "slotName": "progressRows",
+        "blockType": "labelValueList",
+        "binding": "data.progressRows"
+      },
+      {
+        "slotName": "armCopy",
+        "blockType": "text",
+        "binding": "data.armCopy"
+      },
+      {
+        "slotName": "armBtnLabel",
+        "blockType": "text",
+        "binding": "data.armBtnLabel"
+      },
+      {
+        "slotName": "armBtnIcon",
+        "blockType": "text",
+        "binding": "data.armBtnIcon"
+      },
+      {
+        "slotName": "refire",
+        "blockType": "itemQueue",
+        "binding": "data.refire"
+      },
+      {
+        "slotName": "rollback",
+        "blockType": "table",
+        "binding": "data.rollback"
+      },
+      {
+        "slotName": "done",
+        "blockType": "flag",
+        "binding": "data.done"
+      },
+      {
+        "slotName": "closeLabel",
+        "blockType": "text",
+        "binding": "data.closeLabel"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  }
+]

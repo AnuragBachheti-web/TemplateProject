@@ -1,0 +1,286 @@
+{
+  "code": "S9.16",
+  "stageKey": "reason",
+  "name": "Channel launch",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "criteria": [
+      {
+        "label": "Breakeven month",
+        "note": "cumulative contribution margin covers launch spend",
+        "target": "M9",
+        "floor": "M12",
+        "floorTone": "var(--amber-700)",
+        "measure": "cumulative CM vs spend",
+        "owner": "Navigator"
+      },
+      {
+        "label": "Year-1 GMV",
+        "note": "first 12 months from listing live",
+        "target": "$480K",
+        "floor": "$300K",
+        "floorTone": "var(--amber-700)",
+        "measure": "channel settlement",
+        "owner": "Navigator"
+      },
+      {
+        "label": "Run-rate GMV at M6",
+        "note": "the ramp matters more than the annual total",
+        "target": "$40K / mo",
+        "floor": "$25K / mo",
+        "floorTone": "var(--amber-700)",
+        "measure": "trailing 30 days",
+        "owner": "Navigator"
+      },
+      {
+        "label": "Blended CAC",
+        "note": "paid, creator fees and sampling included",
+        "target": "≤ $18",
+        "floor": "≤ $24",
+        "floorTone": "var(--rose-700)",
+        "measure": "spend ÷ new buyers",
+        "owner": "Prospector"
+      },
+      {
+        "label": "Per-unit CM after fees",
+        "note": "commission, payment, fulfilment, returns",
+        "target": "≥ 18%",
+        "floor": "≥ 12%",
+        "floorTone": "var(--rose-700)",
+        "measure": "unit economics model",
+        "owner": "Merchandiser"
+      },
+      {
+        "label": "New-buyer share",
+        "note": "the whole audience argument rests on this",
+        "target": "≥ 55%",
+        "floor": "≥ 40%",
+        "floorTone": "var(--rose-700)",
+        "measure": "first-order match",
+        "owner": "Prospector"
+      },
+      {
+        "label": "Existing-channel impact",
+        "note": "cannibalisation ceiling on Shopify and Amazon",
+        "target": "≤ 3%",
+        "floor": "≤ 6%",
+        "floorTone": "var(--rose-700)",
+        "measure": "cohort vs control",
+        "owner": "Navigator"
+      }
+    ],
+    "rationale": [
+      {
+        "label": "Audience we cannot reach today",
+        "note": "68% of category buyers on the platform are under 35; that cohort is 24% of our base.",
+        "weight": "primary",
+        "pct": 100,
+        "tone": "var(--mod-hubs)",
+        "titleTone": "var(--ink-900)"
+      },
+      {
+        "label": "Discovery mechanics we have no equivalent of",
+        "note": "Product discovery happens in feed, not in search. Our SEO and Amazon strength does not transfer.",
+        "weight": "strong",
+        "pct": 74,
+        "tone": "var(--mod-hubs)",
+        "titleTone": "var(--ink-900)"
+      },
+      {
+        "label": "Category opened with low competitive density",
+        "note": "Eleven sellers in the subcategory today. That advantage has a short shelf life.",
+        "weight": "timing",
+        "pct": 52,
+        "tone": "var(--r-blue-500)",
+        "titleTone": "var(--ink-900)"
+      },
+      {
+        "label": "Against: content operating cost is permanent",
+        "note": "The channel needs 12–16 new videos a month forever. Nothing about that gets cheaper at scale.",
+        "weight": "counter",
+        "pct": 66,
+        "tone": "var(--rose-500)",
+        "titleTone": "var(--rose-700)"
+      }
+    ],
+    "risk": [
+      {
+        "label": "Maximum exposure",
+        "note": "hard cap across integration, creative and inventory",
+        "value": "$75K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Integration spend cap",
+        "note": "existing connector only, no custom middleware",
+        "value": "$22K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Creative and creator budget",
+        "note": "first 90 days, costed as a line item not an afterthought",
+        "value": "$28K",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Inventory at risk",
+        "note": "units committed that cannot be sold elsewhere at full price",
+        "value": "$25K",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Decision reversibility",
+        "note": "wind-down path must be defined before approval",
+        "value": "≤ 30 days",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "locked": [
+      {
+        "label": "MAP posture",
+        "detail": "No price below MAP on any channel, whatever the platform’s promotional calendar pushes. Platform-funded discounts are acceptable; ours are not."
+      },
+      {
+        "label": "Content control",
+        "detail": "Brand-owned creative is approved before it runs. Creator content carries no product claim we have not signed off, and no claim about competitors at all."
+      },
+      {
+        "label": "Integration capacity",
+        "detail": "One engineer-month available in Q4. The channel runs on the existing connector and the existing catalogue mapping, or it waits."
+      },
+      {
+        "label": "Written rationale either way",
+        "detail": "Go, pilot or no-go, the reasoning is filed as a Ledger asset with the numbers it was based on, so the next person to ask can read the answer."
+      }
+    ],
+    "chips": [
+      {
+        "icon": "fa-solid fa-tag",
+        "label": "MAP floor holds on all channels"
+      },
+      {
+        "icon": "fa-solid fa-photo-film",
+        "label": "Brand creative approved pre-flight"
+      },
+      {
+        "icon": "fa-solid fa-user-check",
+        "label": "No unapproved creator claims"
+      },
+      {
+        "icon": "fa-solid fa-plug",
+        "label": "Existing connector only"
+      },
+      {
+        "icon": "fa-solid fa-clock",
+        "label": "1 engineer-month in Q4"
+      },
+      {
+        "icon": "fa-solid fa-file-signature",
+        "label": "Rationale filed either way"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Sep 8",
+        "what": "The platform opened Home &amp; Kitchen to new sellers in our region, with the category fee schedule published."
+      },
+      {
+        "when": "Sep 11",
+        "what": "Prospector scored audience overlap against our buyer base and flagged the under-35 gap as the largest unaddressed segment."
+      },
+      {
+        "when": "Sep 15",
+        "what": "Navigator opened a business case and pinned the card. Onboarding incentives expire Sep 26, which is what makes this a dated decision."
+      }
+    ],
+    "existing": [
+      {
+        "name": "Shopify DTC",
+        "note": "$186K / mo · 41% of GMV",
+        "cm": "34%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "name": "Amazon",
+        "note": "$204K / mo · 45% of GMV",
+        "cm": "19%",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "name": "Walmart Marketplace",
+        "note": "$41K / mo · 9% of GMV",
+        "cm": "16%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Faire wholesale",
+        "note": "$23K / mo · 5% of GMV",
+        "cm": "27%",
+        "tone": "var(--green-700)"
+      }
+    ],
+    "agents": [
+      {
+        "name": "Prospector",
+        "role": "Audience overlap, competitive density and CAC estimates.",
+        "icon": "fa-solid fa-magnifying-glass-chart",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)"
+      },
+      {
+        "name": "Navigator",
+        "role": "Owns the business case and the 90-day gate.",
+        "icon": "fa-solid fa-compass",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)"
+      },
+      {
+        "name": "Merchandiser",
+        "role": "Assortment, listing content and per-unit economics.",
+        "icon": "fa-solid fa-tags",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+      },
+      {
+        "name": "Planner",
+        "role": "Inventory positioning and the units committed to the pilot.",
+        "icon": "fa-solid fa-boxes-stacked",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "name": "Channel Fit Score",
+        "role": "Five-axis fit model, calibrated on our four live channels.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      },
+      {
+        "name": "Business Case Model",
+        "role": "P&amp;L ramp with P10 / P50 / P90 and launch costs.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      }
+    ]
+  }
+}

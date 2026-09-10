@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.13-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-hubs);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-hubs) 12%, white);color:var(--mod-hubs);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Lifecycle · S9.13</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Replenishment flow missing — 12 consumable SKUs, 42-day cycle</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-hubs)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-hubs)"></span>Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-hubs);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Promoter + Keeper
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Segment Value Model (pLTV)
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Incrementality Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.13-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.13-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.13-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-hubs) 10%, white);border:1px solid color-mix(in oklab, var(--mod-hubs) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-hubs);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.13-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-hubs) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden">
+          <div style="padding:15px 18px 0;display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-hubs) 12%, white);color:var(--mod-hubs);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-wand-magic-sparkles" style="font-size:9px"></i>Recommended journey slate
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ slateMeta }}</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:var(--r-full);background:var(--green-50);font-size:11px;font-weight:600;color:var(--green-700)">
+              <i class="fa-solid fa-signal" style="font-size:9px"></i>Confidence {{ confLabel }}
+            </span>
+          </div>
+          <div style="padding:11px 18px 0;font-size:22px;font-weight:700;letter-spacing:-0.015em;line-height:1.25;color:var(--ink-900);text-wrap:pretty">{{ heroTitle }}</div>
+          <div style="padding:6px 18px 0;font-size:12.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Four new flows, three modifications and two removals. Every new journey ships with its holdout designed in, so the revenue claim is readable six to ten weeks after launch.</div>
+
+          <div style="margin:14px 18px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ heroMetrics }}" as="m" hint-placeholder-count="4">
+              <div style="background:var(--ink-0);padding:12px 14px;display:flex;flex-direction:column;gap:4px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-400)">{{ m.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:21px;font-weight:600;letter-spacing:-0.02em;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                <span style="font-size:11px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ m.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 300px;gap:14px">
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Offer logic by segment</span>
+              <div style="margin-left:auto;display:flex;align-items:center;gap:0;padding:2px;border-radius:var(--r-full);background:var(--ink-100)">
+                <sc-for list="{{ offerModes }}" as="o" hint-placeholder-count="2">
+                  <button type="button" onClick="{{ o.pick }}" style="height:26px;padding:0 12px;border-radius:var(--r-full);border:none;background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11.5px;font-weight:{{ o.weight }};transition:background var(--dur-fast) var(--ease-standard)">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="margin-top:11px;display:grid;grid-template-columns:1fr 150px 74px;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Segment</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Treatment</span>
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">CM impact</span>
+            </div>
+            <sc-for list="{{ offerRows }}" as="r" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:1fr 150px 74px;gap:0 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--ink-50)">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ r.segment }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ r.size }}</span>
+                </span>
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:{{ r.tone }}">
+                  <i class="{{ r.icon }}" style="font-size:9.5px"></i>{{ r.treatment }}
+                </span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ r.cmTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.cm }}</span>
+              </div>
+            </sc-for>
+            <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:{{ offerNoteTone }};text-wrap:pretty">{{ offerNote }}</p>
+          </div>
+
+          <div style="background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Frequency governance</span>
+            <p style="margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Marketing emails per person per week, counted across every journey together.</p>
+            <div style="margin-top:11px;display:flex;gap:6px">
+              <sc-for list="{{ caps }}" as="c" hint-placeholder-count="3">
+                <button type="button" onClick="{{ c.pick }}" style="flex:1;height:44px;border-radius:var(--r-sm);border:1.5px solid {{ c.border }};background:{{ c.bg }};cursor:pointer;font-family:var(--font-mono);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:border-color var(--dur-fast) var(--ease-standard)">
+                  <span style="font-size:15px;font-weight:600;color:{{ c.fg }}">{{ c.n }}</span>
+                  <span style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ c.tag }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ capEffects }}" as="e" hint-placeholder-count="3">
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ e.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ e.tone }};font-variant-numeric:tabular-nums">{{ e.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:11px;padding:9px 11px;border-radius:var(--r-sm);background:{{ capNoteBg }};display:flex;align-items:flex-start;gap:8px">
+              <i class="{{ capNoteIcon }}" style="font-size:10px;color:{{ capNoteTone }};margin-top:2px"></i>
+              <span style="font-size:11px;line-height:1.45;color:{{ capNoteTone }};text-wrap:pretty">{{ capNote }}</span>
+            </div>
+          </div>
+        </div>
+
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+          <div style="flex-shrink:0">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:{{ g.hue }}">{{ g.label }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ g.meta }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                <div style="background:var(--ink-0);border:1px solid {{ it.border }};border-left:3px solid {{ it.mark }};border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:flex-start;gap:12px">
+                    <button type="button" onClick="{{ it.toggle }}" style="flex-shrink:0;margin-top:1px;width:20px;height:20px;border-radius:var(--r-xs);border:1.5px solid {{ it.boxBorder }};background:{{ it.boxBg }};color:var(--ink-0);cursor:pointer;display:grid;place-items:center;padding:0">
+                      <i class="fa-solid fa-check" style="font-size:10px;opacity:{{ it.checkOpacity }}"></i>
+                    </button>
+                    <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+                      <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                        <span style="font-size:13.5px;font-weight:600;color:var(--ink-900)">{{ it.name }}</span>
+                        <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:var(--ink-100);font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-600)">
+                          <i class="{{ it.channelIcon }}" style="font-size:8.5px"></i>{{ it.channel }}
+                        </span>
+                        <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ it.offerTint }};font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:{{ it.offerTone }}">{{ it.offer }}</span>
+                      </span>
+                      <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ it.detail }}</span>
+                    </span>
+                    <span style="flex-shrink:0;display:flex;align-items:center;gap:18px">
+                      <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:82px">
+                        <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ it.revTone }};font-variant-numeric:tabular-nums">{{ it.rev }}</span>
+                        <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">incr / mo</span>
+                      </span>
+                      <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:78px">
+                        <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-700);font-variant-numeric:tabular-nums">{{ it.reach }}</span>
+                        <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">reach / mo</span>
+                      </span>
+                    </span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:12px;padding-top:9px;border-top:1px dashed var(--ink-200);flex-wrap:wrap">
+                    <sc-if value="{{ it.needsHoldout }}" hint-placeholder-val="{{ true }}">
+                      <span style="display:flex;align-items:center;gap:9px">
+                        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Holdout</span>
+                        <span style="display:flex;gap:4px">
+                          <sc-for list="{{ it.holdoutOptions }}" as="h" hint-placeholder-count="4">
+                            <button type="button" onClick="{{ h.pick }}" style="height:26px;min-width:42px;padding:0 8px;border-radius:var(--r-full);border:1px solid {{ h.border }};background:{{ h.bg }};color:{{ h.fg }};cursor:pointer;font-family:var(--font-mono);font-size:10.5px;font-weight:600;transition:background var(--dur-fast) var(--ease-standard)">{{ h.label }}</button>
+                          </sc-for>
+                        </span>
+                        <span style="font-family:var(--font-mono);font-size:10.5px;color:{{ it.holdoutTone }};font-variant-numeric:tabular-nums">{{ it.holdoutNote }}</span>
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{ it.noHoldout }}" hint-placeholder-val="{{ false }}">
+                      <span style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500)">
+                        <i class="fa-solid fa-circle-minus" style="font-size:9.5px;color:var(--ink-300)"></i>{{ it.holdoutNote }}
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{ it.test }}" hint-placeholder-val="{{ false }}">
+                      <span data-nav="unbuilt" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:color-mix(in oklab, var(--violet-500) 12%, white);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--violet-700)">
+                        <i class="fa-solid fa-flask" style="font-size:8.5px"></i>{{ it.test }}
+                      </span>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Tests routed to the Hypothesis Register</span>
+            <span data-nav="unbuilt" style="margin-left:auto;font-size:11.5px;font-weight:500;color:var(--ink-500)" style-hover="color:var(--ink-900)">Open S10.7 →</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ tests }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--ink-100);border-radius:var(--r-sm)">
+                <i class="fa-solid fa-flask" style="font-size:11px;color:var(--violet-700);flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ t.name }}</span>
+                  <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ t.detail }}</span>
+                </span>
+                <span style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:14px">
+                  <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500);font-variant-numeric:tabular-nums">{{ t.mde }}</span>
+                  <span style="font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-800);font-variant-numeric:tabular-nums">{{ t.weeks }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Live totals · approved only</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ totals }}" as="t" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ t.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Policy check</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:{{ policyTone }}">
+              <span style="width:7px;height:7px;border-radius:50%;background:{{ policyTone }}"></span>{{ policyStatus }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="{{ c.icon }}" style="font-size:10px;color:{{ c.tone }};margin-top:3px;flex-shrink:0;width:12px;text-align:center"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ c.label }}</span>
+                  <span style="font-size:11px;line-height:1.45;color:{{ c.noteTone }};text-wrap:pretty">{{ c.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-flask-vial" style="font-size:10px;color:var(--mod-hubs)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Holdout ledger</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ ledger }}" as="l" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-800)">{{ l.name }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ l.tone }};font-variant-numeric:tabular-nums">{{ l.pct }}</span>
+                </div>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400);font-variant-numeric:tabular-nums">{{ l.detail }}</span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ ledgerEmpty }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:11.5px;color:var(--ink-400)">No measurable flow approved yet.</span>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--rose-50);font-size:11.5px;font-weight:500;color:var(--rose-700)">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size:10px"></i>{{ blockReason }}
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button type="button" style="height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">Send to Promoter for review</button>
+        <sc-if value="{{ canApprove }}" hint-placeholder-val="{{ true }}">
+          <a href="S9.13-4-execute.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+            {{ ctaLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+          </a>
+        </sc-if>
+        <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+          <span style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-100);color:var(--ink-400);font-size:14px;font-weight:500;cursor:not-allowed">
+            <i class="fa-solid fa-lock" style="font-size:11px"></i>Approve &amp; continue
+          </span>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = {
+    off: {},
+    holdouts: { replen: 10, delivery: 10, winback: 10, sms: 5, thankyou: 10, vip: 10 },
+    offerMode: 'margin',
+    cap: 4,
+  };
+
+  itemData() {
+    return [
+      {
+        group: 'new', id: 'replen', name: 'Consumable replenishment · per-SKU interval', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'free shipping', offerGrowth: '10% off',
+        detail: 'One send timed to each SKU\u2019s own median cycle, between day 31 and day 58. Covers the twelve consumables and the 4,180 profiles who buy them.',
+        rev: 6.1, revGrowth: 7.2, cost: 0.6, costGrowth: 1.9, reach: 4180, sends: 4180, weeks: 6, needsHoldout: true,
+        test: '2 tests → S10.7',
+      },
+      {
+        group: 'new', id: 'delivery', name: 'Post-first-delivery care · day 3–5', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'content only', offerGrowth: 'content only',
+        detail: 'Care and use content on the item just delivered. Takes the slot the unmeasured thank-you email currently occupies, which is why that flow is being modified below.',
+        rev: 2.4, revGrowth: 2.4, cost: 0, costGrowth: 0, reach: 7540, sends: 7540, weeks: 8, needsHoldout: true,
+        test: null,
+      },
+      {
+        group: 'new', id: 'winback', name: 'Win-back at 90–120 days idle', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'up to 10% off', offerGrowth: 'up to 20% off',
+        detail: 'Fires while return rates are still readable rather than at 180 days. Replaces the existing win-back on the kill list below.',
+        rev: 1.8, revGrowth: 2.2, cost: 0.9, costGrowth: 1.9, reach: 3860, sends: 3860, weeks: 10, needsHoldout: true,
+        test: '1 test → S10.7',
+      },
+      {
+        group: 'new', id: 'sms', name: 'Refill reminder over SMS · day 40–45', channel: 'sms', channelIcon: 'fa-solid fa-comment-sms',
+        offer: 'no offer', offerGrowth: 'no offer',
+        detail: 'Only the 6,240 profiles with a recorded express opt-in, one message inside sending hours. Additive to the email flow, not a replacement — reach is 1,850 a month.',
+        rev: 0.9, revGrowth: 0.9, cost: 0.1, costGrowth: 0.1, reach: 1850, sends: 1850, weeks: 8, needsHoldout: true,
+        test: null,
+      },
+      {
+        group: 'mod', id: 'thankyou', name: 'Post-purchase thank-you · attach holdout, move trigger', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'content only', offerGrowth: 'content only',
+        detail: 'Trigger moves from order-shipped to order-confirmed so it stops colliding with the day 3–5 slot, and a holdout is attached so its revenue becomes claimable.',
+        rev: 0, revGrowth: 0, cost: 0, costGrowth: 0, reach: 7540, sends: 0, weeks: 8, needsHoldout: true,
+        test: null,
+      },
+      {
+        group: 'mod', id: 'browse', name: 'Browse abandon · one email, bottom decile suppressed', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'content only', offerGrowth: 'content only',
+        detail: 'Cuts the second and third email, where the measured lift was indistinguishable from zero, and drops the bottom pLTV decile from the audience. 11,400 fewer sends a month.',
+        rev: -0.3, revGrowth: -0.3, cost: 0, costGrowth: 0, reach: 6100, sends: -11400, weeks: 0, needsHoldout: false,
+        holdoutNote: 'keeps its existing 10% holdout', test: null,
+      },
+      {
+        group: 'mod', id: 'vip', name: 'VIP early access · attach holdout at next launch', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'early access', offerGrowth: 'early access',
+        detail: 'The flow marketing reports as best-performing has no control group. A holdout at the next launch turns the number into a claim — or shows the audience buys anyway.',
+        rev: 0, revGrowth: 0, cost: 0, costGrowth: 0, reach: 1180, sends: 0, weeks: 12, needsHoldout: true,
+        test: null,
+      },
+      {
+        group: 'kill', id: 'killwinback', name: 'Retire win-back · 180 day', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'was 15% off', offerGrowth: 'was 15% off',
+        detail: 'Ten weeks of measurement put the lift at $0.04 per recipient, p=0.41. Removing it saves $1.1K a month of offer cost and 3,220 sends, with no significant revenue loss.',
+        rev: -0.2, revGrowth: -0.2, cost: -1.1, costGrowth: -1.1, reach: 0, sends: -3220, weeks: 0, needsHoldout: false,
+        holdoutNote: 'removal · nothing to measure', test: null,
+      },
+      {
+        group: 'kill', id: 'sunset', name: 'Sunset the bottom-decile weekly promo', channel: 'email', channelIcon: 'fa-solid fa-envelope',
+        offer: 'none', offerGrowth: 'none',
+        detail: '3,340 profiles at $27 pLTV and a 4% repeat rate. Cutting them to monthly slows consent decay by roughly 40% and protects deliverability for everything else.',
+        rev: -0.2, revGrowth: -0.2, cost: -0.2, costGrowth: -0.2, reach: 0, sends: -13360, weeks: 0, needsHoldout: false,
+        holdoutNote: 'removal · nothing to measure', test: null,
+      },
+    ];
+  }
+
+  money(k, digits) {
+    const d = digits === undefined ? 1 : digits;
+    const s = k < 0 ? '−' : '+';
+    return s + '$' + Math.abs(k).toFixed(d) + 'K';
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const growth = this.state.offerMode === 'growth';
+    const cap = this.state.cap;
+    const capMult = cap === 3 ? 0.88 : cap === 5 ? 1.06 : 1;
+    const items = this.itemData();
+    const isOn = (id) => !this.state.off[id];
+    const on = items.filter((i) => isOn(i.id));
+
+    const itemRev = (i) => (growth ? i.revGrowth : i.rev) * (i.group === 'new' ? capMult : 1);
+    const itemCost = (i) => (growth ? i.costGrowth : i.cost);
+
+    const revT = on.reduce((a, i) => a + itemRev(i), 0);
+    const costT = on.reduce((a, i) => a + itemCost(i), 0);
+    const sendsT = on.reduce((a, i) => a + i.sends, 0);
+    const netCM = revT * 0.42 - costT;
+    const withheld = on.reduce((a, i) => {
+      const h = i.needsHoldout ? (this.state.holdouts[i.id] ?? 0) : 0;
+      return a + Math.max(0, itemRev(i)) * (h / 100);
+    }, 0);
+
+    const zeroHoldout = on.filter((i) => i.needsHoldout && (this.state.holdouts[i.id] ?? 0) === 0);
+    const thinHoldout = on.filter((i) => i.needsHoldout && (this.state.holdouts[i.id] ?? 0) === 5 && i.reach >= 2000);
+    const overDepth = growth;
+    const complaint = cap === 3 ? 0.03 : cap === 5 ? 0.12 : 0.05;
+    const overComplaint = complaint > 0.1;
+
+    const blocked = zeroHoldout.length > 0 || overDepth || on.length === 0;
+    const blockReason = on.length === 0
+      ? 'Approve at least one decision to continue'
+      : zeroHoldout.length > 0
+        ? zeroHoldout.length + (zeroHoldout.length === 1 ? ' flow has' : ' flows have') + ' no holdout — no holdout, no revenue claim'
+        : 'Growth offers put lapsed depth at 20%, over the 15% ceiling set in Reason';
+
+    const groupDefs = [
+      { key: 'new', label: 'New flows', hue: 'var(--mod-hubs)', mark: 'var(--mod-hubs)' },
+      { key: 'mod', label: 'Modifications', hue: 'var(--ink-600)', mark: 'var(--ink-300)' },
+      { key: 'kill', label: 'Kill list', hue: 'var(--rose-700)', mark: 'var(--rose-500)' },
+    ];
+
+    const holdoutOpts = [0, 5, 10, 20];
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      pinnedTop: on.length + ' of 9 decisions approved',
+      pinnedSub: (growth ? 'growth offers' : 'margin-safe offers') + ' · cap ' + cap + ' / week',
+
+      slateMeta: '4 new · 3 modified · 2 retired',
+      confLabel: growth ? 'Medium · 64%' : 'Med-high · 74%',
+      heroTitle: 'Cover the 42-day window, retire what the holdouts cannot justify',
+      heroMetrics: [
+        { label: 'Incremental revenue', value: this.money(revT), tone: revT >= 0 ? 'var(--green-700)' : 'var(--rose-700)', note: 'per month, measured against holdouts' },
+        { label: 'Net contribution', value: this.money(netCM), tone: 'var(--ink-900)', note: 'after offer and shipping cost' },
+        { label: 'Sends per month', value: (sendsT >= 0 ? '+' : '−') + Math.abs(sendsT).toLocaleString('en-US'), tone: sendsT <= 0 ? 'var(--green-700)' : 'var(--ink-900)', note: sendsT <= 0 ? 'fewer sends, more revenue' : 'added to the weekly load' },
+        { label: 'Held back', value: '$' + withheld.toFixed(1) + 'K', tone: 'var(--mod-hubs)', note: 'revenue withheld to keep claims valid' },
+      ],
+
+      offerModes: [
+        { label: 'Margin-safe', pick: () => this.setState({ offerMode: 'margin' }), bg: growth ? 'transparent' : 'var(--ink-0)', fg: growth ? 'var(--ink-500)' : 'var(--ink-900)', weight: growth ? '500' : '600' },
+        { label: 'Growth', pick: () => this.setState({ offerMode: 'growth' }), bg: growth ? 'var(--ink-0)' : 'transparent', fg: growth ? 'var(--ink-900)' : 'var(--ink-500)', weight: growth ? '600' : '500' },
+      ],
+      offerRows: [
+        { segment: 'New · first 30 days', size: '6,240 profiles', treatment: 'Content only', icon: 'fa-solid fa-book-open', tone: 'var(--ink-700)', cm: '—', cmTone: 'var(--ink-400)' },
+        { segment: 'Repeat · 2–4 orders', size: '14,180 profiles', treatment: growth ? '10% off' : 'Free shipping', icon: growth ? 'fa-solid fa-percent' : 'fa-solid fa-truck', tone: growth ? 'var(--amber-700)' : 'var(--ink-700)', cm: growth ? '−4.1pp' : '−1.8pp', cmTone: growth ? 'var(--amber-700)' : 'var(--ink-700)' },
+        { segment: 'VIP · top pLTV decile', size: '3,860 profiles', treatment: 'Early access, no discount', icon: 'fa-solid fa-star', tone: 'var(--ink-700)', cm: '0.0pp', cmTone: 'var(--green-700)' },
+        { segment: 'Lapsed · 90–180 days', size: '3,860 profiles', treatment: growth ? '20% off' : '10% off', icon: 'fa-solid fa-percent', tone: growth ? 'var(--rose-700)' : 'var(--ink-700)', cm: growth ? '−8.4pp' : '−3.9pp', cmTone: growth ? 'var(--rose-700)' : 'var(--ink-700)' },
+        { segment: 'Bottom 30%', size: '7,850 profiles', treatment: growth ? '10% off' : 'Suppressed from offers', icon: growth ? 'fa-solid fa-percent' : 'fa-solid fa-ban', tone: growth ? 'var(--amber-700)' : 'var(--ink-500)', cm: growth ? '−6.2pp' : '0.0pp', cmTone: growth ? 'var(--amber-700)' : 'var(--green-700)' },
+      ],
+      offerNote: growth
+        ? 'Lapsed depth of 20% breaks the 15% ceiling set in Reason, and discounting the bottom decile spends margin on profiles at $27 pLTV. Approval stays blocked while this mode is selected.'
+        : 'Every treatment sits inside the depth ceilings from Reason. Free shipping beats a percentage on the consumable cohort because the basket is small and the margin rate is high.',
+      offerNoteTone: growth ? 'var(--rose-700)' : 'var(--ink-400)',
+
+      caps: [3, 4, 5].map((n) => ({
+        n: String(n),
+        tag: n === 4 ? 'current' : n === 3 ? 'tighter' : 'looser',
+        pick: () => this.setState({ cap: n }),
+        bg: cap === n ? 'color-mix(in oklab, var(--mod-hubs) 10%, white)' : 'var(--ink-0)',
+        border: cap === n ? 'var(--mod-hubs)' : 'var(--ink-200)',
+        fg: cap === n ? 'var(--ink-900)' : 'var(--ink-500)',
+      })),
+      capEffects: [
+        { label: 'New-flow revenue', value: (capMult === 1 ? 'baseline' : (capMult > 1 ? '+' : '−') + Math.round(Math.abs(1 - capMult) * 100) + '%'), tone: capMult >= 1 ? 'var(--ink-900)' : 'var(--amber-700)' },
+        { label: 'Projected complaint rate', value: complaint.toFixed(2) + '%', tone: overComplaint ? 'var(--rose-700)' : 'var(--green-700)' },
+        { label: 'Journey collision rule', value: 'one at a time', tone: 'var(--ink-900)' },
+      ],
+      capNote: cap === 5
+        ? 'A fifth weekly email pushes the projected complaint rate past the 0.10% ceiling. Allowed, but it will be flagged on every read.'
+        : cap === 3
+          ? 'Tightening to three protects consent but clips the new flows by 12% — the replenishment send loses to campaign traffic in the queue.'
+          : 'Four holds the current load. The two removals free enough room for all four new flows without raising anyone\u2019s weekly count.',
+      capNoteBg: cap === 5 ? 'var(--rose-50)' : cap === 3 ? 'var(--amber-50)' : 'var(--ink-25)',
+      capNoteTone: cap === 5 ? 'var(--rose-700)' : cap === 3 ? 'var(--amber-700)' : 'var(--ink-500)',
+      capNoteIcon: cap === 4 ? 'fa-solid fa-circle-check' : 'fa-solid fa-triangle-exclamation',
+
+      groups: groupDefs.map((g) => {
+        const list = items.filter((i) => i.group === g.key);
+        const active = list.filter((i) => isOn(i.id)).length;
+        return {
+          label: g.label, hue: g.hue,
+          meta: active + ' of ' + list.length + ' approved',
+          items: list.map((i) => {
+            const onFlag = isOn(i.id);
+            const h = this.state.holdouts[i.id] ?? 0;
+            const weeks = h === 0 ? null : Math.round(i.weeks * (10 / h) * (h > 10 ? 1.15 : 1));
+            const rev = itemRev(i);
+            return {
+              name: i.name, detail: i.detail, channel: i.channel, channelIcon: i.channelIcon,
+              offer: growth ? i.offerGrowth : i.offer,
+              offerTint: (growth ? i.offerGrowth : i.offer).indexOf('off') > -1 ? 'var(--amber-50)' : 'var(--ink-100)',
+              offerTone: (growth ? i.offerGrowth : i.offer).indexOf('off') > -1 ? 'var(--amber-700)' : 'var(--ink-600)',
+              rev: i.rev === 0 && i.revGrowth === 0 ? 'claim only' : this.money(rev),
+              revTone: i.rev === 0 ? 'var(--ink-500)' : rev >= 0 ? 'var(--green-700)' : 'var(--rose-700)',
+              reach: i.reach === 0 ? '—' : i.reach.toLocaleString('en-US'),
+              border: onFlag ? 'var(--ink-200)' : 'var(--ink-100)',
+              mark: onFlag ? g.mark : 'var(--ink-100)',
+              boxBorder: onFlag ? 'var(--ink-900)' : 'var(--ink-300)',
+              boxBg: onFlag ? 'var(--ink-900)' : 'var(--ink-0)',
+              checkOpacity: onFlag ? 1 : 0,
+              needsHoldout: i.needsHoldout,
+              noHoldout: !i.needsHoldout,
+              holdoutOptions: holdoutOpts.map((v) => ({
+                label: v + '%',
+                pick: () => this.setState((s) => {
+                  const holdouts = Object.assign({}, s.holdouts);
+                  holdouts[i.id] = v;
+                  return { holdouts };
+                }),
+                bg: h === v ? (v === 0 ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-0)',
+                fg: h === v ? 'var(--ink-0)' : 'var(--ink-600)',
+                border: h === v ? (v === 0 ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-200)',
+              })),
+              holdoutNote: i.needsHoldout
+                ? (h === 0
+                  ? 'no control group — revenue cannot be claimed'
+                  : Math.round(i.reach * (h / 100)).toLocaleString('en-US') + ' held back · reads in ' + weeks + ' weeks' + (h === 5 && i.reach >= 2000 ? ' · below the 10% standard' : ''))
+                : i.holdoutNote,
+              holdoutTone: h === 0 ? 'var(--rose-700)' : (h === 5 && i.reach >= 2000) ? 'var(--amber-700)' : 'var(--ink-500)',
+              test: i.test,
+              toggle: () => this.setState((s) => {
+                const off = Object.assign({}, s.off);
+                if (off[i.id]) { delete off[i.id]; } else { off[i.id] = true; }
+                return { off };
+              }),
+            };
+          }),
+        };
+      }),
+
+      tests: [
+        { name: 'Replenishment subject line · product name vs cycle reminder', detail: 'Two-arm split inside the treated group, running on top of the holdout rather than replacing it.', mde: 'MDE 8%', weeks: '4 wks' },
+        { name: 'Replenishment offer · free shipping vs 10% off', detail: 'Settles the margin question with evidence instead of a policy argument.', mde: 'MDE 11%', weeks: '6 wks' },
+        { name: 'Win-back timing · day 90 vs day 120', detail: 'Finds the real edge of the window before the offer depth is tuned.', mde: 'MDE 14%', weeks: '10 wks' },
+      ],
+
+      totals: [
+        { label: 'Incremental revenue / mo', value: this.money(revT), tone: revT >= 0 ? 'var(--green-700)' : 'var(--rose-700)' },
+        { label: 'Offer + shipping cost / mo', value: (costT >= 0 ? '$' : '−$') + Math.abs(costT).toFixed(1) + 'K', tone: costT > 1 ? 'var(--amber-700)' : 'var(--ink-900)' },
+        { label: 'Net contribution / mo', value: this.money(netCM), tone: 'var(--ink-900)' },
+        { label: 'Revenue held in holdouts', value: '$' + withheld.toFixed(1) + 'K', tone: 'var(--mod-hubs)' },
+        { label: 'Sends per month', value: (sendsT >= 0 ? '+' : '−') + Math.abs(sendsT).toLocaleString('en-US'), tone: sendsT <= 0 ? 'var(--green-700)' : 'var(--ink-900)' },
+      ],
+
+      policyStatus: blocked ? (on.length === 0 ? 'nothing approved' : 'out of band') : overComplaint || thinHoldout.length > 0 ? 'watch' : 'in band',
+      policyTone: blocked ? (on.length === 0 ? 'var(--ink-400)' : 'var(--rose-700)') : overComplaint || thinHoldout.length > 0 ? 'var(--amber-500)' : 'var(--green-700)',
+      checks: [
+        {
+          label: 'Holdout on every measurable flow',
+          icon: zeroHoldout.length > 0 ? 'fa-solid fa-circle-xmark' : thinHoldout.length > 0 ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-check',
+          tone: zeroHoldout.length > 0 ? 'var(--rose-700)' : thinHoldout.length > 0 ? 'var(--amber-500)' : 'var(--green-700)',
+          noteTone: zeroHoldout.length > 0 ? 'var(--rose-700)' : 'var(--ink-400)',
+          note: zeroHoldout.length > 0
+            ? zeroHoldout.map((i) => i.name.split(' · ')[0]).join(', ') + ' set to 0%. No holdout, no revenue claim.'
+            : thinHoldout.length > 0
+              ? thinHoldout.length + ' flow at the 5% floor despite reach above 2,000 — readable, but slowly.'
+              : 'All measurable flows carry 10% or more.',
+        },
+        {
+          label: 'Offer depth inside segment ceilings',
+          icon: overDepth ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check',
+          tone: overDepth ? 'var(--rose-700)' : 'var(--green-700)',
+          noteTone: overDepth ? 'var(--rose-700)' : 'var(--ink-400)',
+          note: overDepth ? 'Lapsed at 20% against a 15% ceiling; bottom decile discounted against policy.' : 'Deepest offer is 10% on lapsed, against a 15% ceiling.',
+        },
+        {
+          label: 'Weekly frequency cap',
+          icon: overComplaint ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-check',
+          tone: overComplaint ? 'var(--amber-500)' : 'var(--green-700)',
+          noteTone: overComplaint ? 'var(--amber-700)' : 'var(--ink-400)',
+          note: overComplaint ? 'Cap 5 projects 0.12% complaints against a 0.10% ceiling.' : 'Cap ' + cap + ' with the two removals nets ' + Math.abs(sendsT).toLocaleString('en-US') + ' ' + (sendsT <= 0 ? 'fewer' : 'more') + ' sends a month.',
+        },
+        {
+          label: 'Consent boundaries',
+          icon: 'fa-solid fa-lock',
+          tone: 'var(--ink-400)',
+          noteTone: 'var(--ink-400)',
+          note: 'SMS flow enrols only express opt-ins. Suppression and unsubscribe rules are untouched by this slate.',
+        },
+      ],
+
+      ledger: on.filter((i) => i.needsHoldout && (this.state.holdouts[i.id] ?? 0) > 0).map((i) => {
+        const h = this.state.holdouts[i.id];
+        const weeks = Math.round(i.weeks * (10 / h) * (h > 10 ? 1.15 : 1));
+        return {
+          name: i.name.split(' · ')[0],
+          pct: h + '%',
+          tone: h >= 10 ? 'var(--green-700)' : 'var(--amber-700)',
+          detail: Math.round(i.reach * (h / 100)).toLocaleString('en-US') + ' held · reads in ' + weeks + ' wks',
+        };
+      }),
+      ledgerEmpty: on.filter((i) => i.needsHoldout && (this.state.holdouts[i.id] ?? 0) > 0).length === 0,
+
+      blocked: blocked && on.length > 0,
+      canApprove: !blocked,
+      ctaLabel: 'Approve ' + on.length + ' decisions & continue',
+      footStatus: on.length === 0
+        ? 'Decide · nothing approved yet'
+        : 'Decide · ' + on.length + ' of 9 approved · ' + (growth ? 'growth offers' : 'margin-safe offers') + ' · cap ' + cap + ' / week',
+      footTone: on.length === 0 ? 'var(--ink-400)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

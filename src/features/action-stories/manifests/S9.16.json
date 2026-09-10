@@ -1,0 +1,525 @@
+[
+  {
+    "code": "S9.16",
+    "name": "Channel launch",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "criteria",
+        "blockType": "labelValueList",
+        "binding": "data.criteria"
+      },
+      {
+        "slotName": "rationale",
+        "blockType": "labelValueList",
+        "binding": "data.rationale"
+      },
+      {
+        "slotName": "risk",
+        "blockType": "labelValueList",
+        "binding": "data.risk"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "chips",
+        "blockType": "labelValueList",
+        "binding": "data.chips"
+      },
+      {
+        "slotName": "trigger",
+        "blockType": "itemQueue",
+        "binding": "data.trigger"
+      },
+      {
+        "slotName": "existing",
+        "blockType": "table",
+        "binding": "data.existing"
+      },
+      {
+        "slotName": "agents",
+        "blockType": "itemQueue",
+        "binding": "data.agents"
+      }
+    ]
+  },
+  {
+    "code": "S9.16",
+    "name": "Channel launch",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "fit",
+        "blockType": "labelValueList",
+        "binding": "data.fit"
+      },
+      {
+        "slotName": "unit",
+        "blockType": "labelValueList",
+        "binding": "data.unit"
+      },
+      {
+        "slotName": "caseTabs",
+        "blockType": "labelValueList",
+        "binding": "data.caseTabs"
+      },
+      {
+        "slotName": "selLabel",
+        "blockType": "text",
+        "binding": "data.selLabel"
+      },
+      {
+        "slotName": "caseMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.caseMetrics"
+      },
+      {
+        "slotName": "bandPath",
+        "blockType": "text",
+        "binding": "data.bandPath"
+      },
+      {
+        "slotName": "p10Path",
+        "blockType": "text",
+        "binding": "data.p10Path"
+      },
+      {
+        "slotName": "p50Path",
+        "blockType": "text",
+        "binding": "data.p50Path"
+      },
+      {
+        "slotName": "p90Path",
+        "blockType": "text",
+        "binding": "data.p90Path"
+      },
+      {
+        "slotName": "selPath",
+        "blockType": "text",
+        "binding": "data.selPath"
+      },
+      {
+        "slotName": "p10W",
+        "blockType": "number",
+        "binding": "data.p10W"
+      },
+      {
+        "slotName": "p50W",
+        "blockType": "number",
+        "binding": "data.p50W"
+      },
+      {
+        "slotName": "p90W",
+        "blockType": "number",
+        "binding": "data.p90W"
+      },
+      {
+        "slotName": "zeroY",
+        "blockType": "text",
+        "binding": "data.zeroY"
+      },
+      {
+        "slotName": "hasBreakeven",
+        "blockType": "flag",
+        "binding": "data.hasBreakeven"
+      },
+      {
+        "slotName": "beX",
+        "blockType": "text",
+        "binding": "data.beX"
+      },
+      {
+        "slotName": "selDots",
+        "blockType": "series",
+        "binding": "data.selDots"
+      },
+      {
+        "slotName": "yTicks",
+        "blockType": "labelValueList",
+        "binding": "data.yTicks"
+      },
+      {
+        "slotName": "xTicks",
+        "blockType": "labelValueList",
+        "binding": "data.xTicks"
+      },
+      {
+        "slotName": "plCols",
+        "blockType": "itemQueue",
+        "binding": "data.plCols"
+      },
+      {
+        "slotName": "plRows",
+        "blockType": "labelValueList",
+        "binding": "data.plRows"
+      },
+      {
+        "slotName": "caseNote",
+        "blockType": "text",
+        "binding": "data.caseNote"
+      },
+      {
+        "slotName": "critRows",
+        "blockType": "labelValueList",
+        "binding": "data.critRows"
+      },
+      {
+        "slotName": "critSummary",
+        "blockType": "text",
+        "binding": "data.critSummary"
+      },
+      {
+        "slotName": "launchCosts",
+        "blockType": "labelValueList",
+        "binding": "data.launchCosts"
+      },
+      {
+        "slotName": "conflict",
+        "blockType": "labelValueList",
+        "binding": "data.conflict"
+      },
+      {
+        "slotName": "lift",
+        "blockType": "labelValueList",
+        "binding": "data.lift"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.16",
+    "name": "Channel launch",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.pinnedSub"
+      },
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.pinnedTop"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "labelValueList",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_blocked",
+        "blockType": "flag",
+        "binding": "data.blocked"
+      },
+      {
+        "slotName": "guardrail_can_approve",
+        "blockType": "flag",
+        "binding": "data.canApprove"
+      },
+      {
+        "slotName": "guardrail_reason",
+        "blockType": "text",
+        "binding": "data.blockReason"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.ctaLabel"
+      },
+      {
+        "slotName": "modes",
+        "blockType": "labelValueList",
+        "binding": "data.modes"
+      },
+      {
+        "slotName": "showScope",
+        "blockType": "flag",
+        "binding": "data.showScope"
+      },
+      {
+        "slotName": "skuRule",
+        "blockType": "text",
+        "binding": "data.skuRule"
+      },
+      {
+        "slotName": "skuCount",
+        "blockType": "number",
+        "binding": "data.skuCount"
+      },
+      {
+        "slotName": "skus",
+        "blockType": "itemQueue",
+        "binding": "data.skus"
+      },
+      {
+        "slotName": "unitsTotal",
+        "blockType": "text",
+        "binding": "data.unitsTotal"
+      },
+      {
+        "slotName": "invValue",
+        "blockType": "text",
+        "binding": "data.invValue"
+      },
+      {
+        "slotName": "blendedCm",
+        "blockType": "text",
+        "binding": "data.blendedCm"
+      },
+      {
+        "slotName": "prodTabs",
+        "blockType": "labelValueList",
+        "binding": "data.prodTabs"
+      },
+      {
+        "slotName": "creative",
+        "blockType": "labelValueList",
+        "binding": "data.creative"
+      },
+      {
+        "slotName": "prodNote",
+        "blockType": "text",
+        "binding": "data.prodNote"
+      },
+      {
+        "slotName": "gateDate",
+        "blockType": "text",
+        "binding": "data.gateDate"
+      },
+      {
+        "slotName": "gate",
+        "blockType": "table",
+        "binding": "data.gate"
+      },
+      {
+        "slotName": "ledgerRef",
+        "blockType": "text",
+        "binding": "data.ledgerRef"
+      },
+      {
+        "slotName": "doc",
+        "blockType": "object",
+        "binding": "data.doc"
+      },
+      {
+        "slotName": "ackTitle",
+        "blockType": "text",
+        "binding": "data.ackTitle"
+      },
+      {
+        "slotName": "ackBody",
+        "blockType": "text",
+        "binding": "data.ackBody"
+      },
+      {
+        "slotName": "ackOpacity",
+        "blockType": "number",
+        "binding": "data.ackOpacity"
+      },
+      {
+        "slotName": "summary",
+        "blockType": "labelValueList",
+        "binding": "data.summary"
+      },
+      {
+        "slotName": "expPct",
+        "blockType": "text",
+        "binding": "data.expPct"
+      },
+      {
+        "slotName": "expValue",
+        "blockType": "text",
+        "binding": "data.expValue"
+      },
+      {
+        "slotName": "expRows",
+        "blockType": "labelValueList",
+        "binding": "data.expRows"
+      },
+      {
+        "slotName": "policyStatus",
+        "blockType": "text",
+        "binding": "data.policyStatus"
+      },
+      {
+        "slotName": "revisitTitle",
+        "blockType": "text",
+        "binding": "data.revisitTitle"
+      },
+      {
+        "slotName": "revisit",
+        "blockType": "labelValueList",
+        "binding": "data.revisit"
+      },
+      {
+        "slotName": "ctaHref",
+        "blockType": "text",
+        "binding": "data.ctaHref"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.16",
+    "name": "Channel launch",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "channelCount",
+        "blockType": "text",
+        "binding": "data.channelCount"
+      },
+      {
+        "slotName": "planLine",
+        "blockType": "text",
+        "binding": "data.planLine"
+      },
+      {
+        "slotName": "pushedCount",
+        "blockType": "text",
+        "binding": "data.pushedCount"
+      },
+      {
+        "slotName": "runAllLabel",
+        "blockType": "text",
+        "binding": "data.runAllLabel"
+      },
+      {
+        "slotName": "runAllIcon",
+        "blockType": "text",
+        "binding": "data.runAllIcon"
+      },
+      {
+        "slotName": "stages",
+        "blockType": "itemQueue",
+        "binding": "data.stages"
+      },
+      {
+        "slotName": "checklist",
+        "blockType": "table",
+        "binding": "data.checklist"
+      },
+      {
+        "slotName": "checklistStatus",
+        "blockType": "text",
+        "binding": "data.checklistStatus"
+      },
+      {
+        "slotName": "trackStatus",
+        "blockType": "text",
+        "binding": "data.trackStatus"
+      },
+      {
+        "slotName": "trackCopy",
+        "blockType": "text",
+        "binding": "data.trackCopy"
+      },
+      {
+        "slotName": "tracking",
+        "blockType": "labelValueList",
+        "binding": "data.tracking"
+      },
+      {
+        "slotName": "progressPct",
+        "blockType": "text",
+        "binding": "data.progressPct"
+      },
+      {
+        "slotName": "progressRows",
+        "blockType": "labelValueList",
+        "binding": "data.progressRows"
+      },
+      {
+        "slotName": "gateState",
+        "blockType": "text",
+        "binding": "data.gateState"
+      },
+      {
+        "slotName": "gateRows",
+        "blockType": "labelValueList",
+        "binding": "data.gateRows"
+      },
+      {
+        "slotName": "armCopy",
+        "blockType": "text",
+        "binding": "data.armCopy"
+      },
+      {
+        "slotName": "armBtnLabel",
+        "blockType": "text",
+        "binding": "data.armBtnLabel"
+      },
+      {
+        "slotName": "armBtnIcon",
+        "blockType": "text",
+        "binding": "data.armBtnIcon"
+      },
+      {
+        "slotName": "winddown",
+        "blockType": "labelValueList",
+        "binding": "data.winddown"
+      },
+      {
+        "slotName": "windLabel",
+        "blockType": "text",
+        "binding": "data.windLabel"
+      },
+      {
+        "slotName": "windIcon",
+        "blockType": "text",
+        "binding": "data.windIcon"
+      },
+      {
+        "slotName": "done",
+        "blockType": "flag",
+        "binding": "data.done"
+      },
+      {
+        "slotName": "closeLabel",
+        "blockType": "text",
+        "binding": "data.closeLabel"
+      },
+      {
+        "slotName": "footStatus",
+        "blockType": "text",
+        "binding": "data.footStatus"
+      }
+    ]
+  }
+]

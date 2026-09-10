@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.19-2 Analyze" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-ads);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-ads) 12%, white);color:var(--mod-ads);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Promo calendar · S9.19</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Q4 calendar build — Prime Fall deadline Aug 21</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">5 conflicts · 3 blocking</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">13 weeks · 6 lanes · 9 event blocks</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-ads)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-ads)"></span>Lens: Ads · Margin · Inventory
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-ads);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Promoter + Pricer
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <i class="fa-solid fa-boxes-stacked" style="font-size:10px;color:var(--ink-400)"></i>Planner, Bidder
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Incrementality Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Promo Conflict Detector
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.19-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-ads) 10%, white);border:1px solid color-mix(in oklab, var(--mod-ads) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-ads);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.19-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;display:flex;align-items:center;gap:10px">
+          <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-ads) 10%, white);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--mod-ads)">
+            <i class="fa-solid fa-table-columns" style="font-size:8.5px"></i>Canvas
+          </span>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 2 of 4</span>
+        </span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;overflow-y:auto;padding:16px 24px 0;display:flex;flex-direction:column;gap:14px">
+
+      <div style="flex-shrink:0"><x-import component-from-global-scope="RealifyDesignSystem_002c39.IntelCard" tag="Realify signal · incrementality" title="Last year's 20%-off event measured 31% incremental after trough accounting; the proposed repeat overlaps a Walmart deal window on 14 shared SKUs" hint-size="100%,168px">The headline said +58%. Netting the two-week trough that followed leaves 31% — real, but a third of what the event was credited with. The repeat as drawn also collides with Walmart Deal Days: <strong>14 SKUs discounted 25% on DTC and 15% on Walmart in the same week</strong>, which is a parity term, not a preference.</x-import></div>
+
+      <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px 14px">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Q4 calendar canvas</span>
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">one lane per channel · click a block to inspect it</span>
+          <span style="margin-left:auto;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+            <sc-for list="{{ windows }}" as="w" hint-placeholder-count="3">
+              <span style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:var(--r-full);background:{{ w.tint }};border:1px solid {{ w.border }};font-family:var(--font-mono);font-size:10px;font-weight:500;color:{{ w.tone }}">
+                <i class="fa-solid fa-hourglass-half" style="font-size:9px"></i>{{ w.label }}
+                <span style="font-weight:700">{{ w.left }}</span>
+              </span>
+            </sc-for>
+          </span>
+        </div>
+
+        <div style="margin-top:13px;display:grid;grid-template-columns:118px 1fr;gap:0 10px">
+          <div></div>
+          <div style="display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="13">
+              <span style="display:flex;flex-direction:column;align-items:center;gap:1px">
+                <span style="font-family:var(--font-mono);font-size:9px;font-weight:{{ w.weight }};color:{{ w.tone }}">{{ w.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:8px;color:var(--ink-300)">{{ w.month }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ lanes }}" as="l" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:118px 1fr;gap:0 10px;align-items:center">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:11.5px;font-weight:600;color:var(--ink-800)">{{ l.name }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ l.note }}</span>
+              </span>
+              <span style="display:grid;grid-template-columns:repeat(13,1fr);gap:3px;min-height:42px;background:{{ l.bg }};border-radius:var(--r-xs);padding:3px 0">
+                <sc-for list="{{ l.blocks }}" as="b" hint-placeholder-count="2">
+                  <button type="button" onClick="{{ b.pick }}" style="grid-column:{{ b.col }};height:36px;border-radius:var(--r-xs);border:1px solid {{ b.border }};background:{{ b.bg }};cursor:pointer;padding:0 8px;display:flex;flex-direction:column;justify-content:center;gap:1px;overflow:hidden;text-align:left;transition:border-color var(--dur-fast) var(--ease-standard)">
+                    <span style="display:flex;align-items:center;gap:5px;min-width:0">
+                      <span style="font-size:10.5px;font-weight:700;color:{{ b.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.label }}</span>
+                      <sc-if value="{{ b.conflicts }}" hint-placeholder-val="{{ false }}">
+                        <span style="flex-shrink:0;display:inline-flex;align-items:center;gap:3px;height:15px;padding:0 5px;border-radius:var(--r-full);background:var(--rose-500);color:var(--ink-0);font-family:var(--font-mono);font-size:8px;font-weight:700">
+                          <i class="fa-solid fa-triangle-exclamation" style="font-size:7px"></i>{{ b.conflicts }}
+                        </span>
+                      </sc-if>
+                    </span>
+                    <span style="font-family:var(--font-mono);font-size:8.5px;color:{{ b.subFg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.sub }}</span>
+                  </button>
+                </sc-for>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:11px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:11px;border-top:1px solid var(--ink-100)">
+          <sc-for list="{{ legend }}" as="g" hint-placeholder-count="4">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)">
+              <span style="width:11px;height:11px;border-radius:2px;background:{{ g.fill }};border:1px solid {{ g.border }}"></span>{{ g.label }}
+            </span>
+          </sc-for>
+          <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">blocks show depth · badge counts conflicts on that block</span>
+        </div>
+      </div>
+
+      <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 372px;gap:14px">
+        <div style="min-width:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-ads) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-size:14px;font-weight:700;color:var(--ink-900)">{{ sel.name }}</span>
+            <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ sel.objTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ sel.objTone }}">{{ sel.objective }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ sel.meta }}</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-sm);overflow:hidden">
+            <sc-for list="{{ sel.stats }}" as="s" hint-placeholder-count="4">
+              <div style="background:var(--ink-0);padding:10px 12px;display:flex;flex-direction:column;gap:2px">
+                <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ s.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:16px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                <span style="font-size:10px;line-height:1.35;color:var(--ink-400);text-wrap:pretty">{{ s.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:13px;display:grid;grid-template-columns:1fr 300px;gap:16px">
+            <div style="min-width:0;display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Matched history · {{ sel.history.name }}</span>
+              <span style="font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ sel.history.read }}</span>
+              <div style="margin-top:2px;height:104px">
+                <svg viewBox="0 0 460 104" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                  <rect x="{{ sel.history.eventX }}" y="4" width="{{ sel.history.eventW }}" height="82" style="fill:var(--mod-ads);fill-opacity:0.09"></rect>
+                  <line x1="0" y1="{{ sel.history.baseY }}" x2="460" y2="{{ sel.history.baseY }}" style="stroke:var(--ink-400);stroke-width:1.2;stroke-dasharray:5 4"></line>
+                  <path d="{{ sel.history.troughPath }}" style="fill:var(--rose-500);fill-opacity:0.13"></path>
+                  <path d="{{ sel.history.path }}" style="fill:none;stroke:var(--ink-900);stroke-width:2.2;stroke-linejoin:round"></path>
+                  <sc-for list="{{ sel.history.dots }}" as="d" hint-placeholder-count="12">
+                    <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="2.4" style="fill:var(--ink-0);stroke:var(--ink-900);stroke-width:1.5"></circle>
+                  </sc-for>
+                </svg>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0">
+                <sc-for list="{{ sel.history.ticks }}" as="t" hint-placeholder-count="4">
+                  <span style="text-align:center;font-family:var(--font-mono);font-size:9px;color:{{ t.tone }}">{{ t.label }}</span>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-600)"><span style="width:14px;height:0;border-top:1.5px dashed var(--ink-400);display:block"></span>matched baseline</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:var(--rose-700)"><span style="width:11px;height:11px;border-radius:2px;background:color-mix(in oklab, var(--rose-500) 24%, white)"></span>post-promo trough</span>
+              </div>
+            </div>
+            <div style="min-width:0;display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Conflicts on this block</span>
+              <sc-for list="{{ sel.conflicts }}" as="c" hint-placeholder-count="2">
+                <div style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid {{ c.border }};border-radius:var(--r-sm);background:{{ c.bg }}">
+                  <i class="{{ c.icon }}" style="font-size:10px;color:{{ c.tone }};margin-top:2px;flex-shrink:0"></i>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:11.5px;font-weight:600;color:{{ c.tone }};text-wrap:pretty">{{ c.title }}</span>
+                    <span style="font-size:10.5px;line-height:1.45;color:var(--ink-600);text-wrap:pretty">{{ c.detail }}</span>
+                  </span>
+                </div>
+              </sc-for>
+              <sc-if value="{{ sel.clean }}" hint-placeholder-val="{{ false }}">
+                <span style="font-size:11.5px;color:var(--green-700)">No conflicts detected on this block.</span>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div style="min-width:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">All conflicts</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--rose-500)"></span>3 blocking
+            </span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ conflicts }}" as="c" hint-placeholder-count="5">
+              <button type="button" onClick="{{ c.pick }}" style="width:100%;text-align:left;cursor:pointer;font-family:var(--font-sans);display:flex;flex-direction:column;gap:3px;padding:10px 11px;border:1px solid {{ c.border }};border-left:3px solid {{ c.mark }};border-radius:var(--r-sm);background:{{ c.bg }}">
+                <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                  <span style="font-size:11.5px;font-weight:600;color:var(--ink-900)">{{ c.title }}</span>
+                  <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:{{ c.sevTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ c.sevTone }}">{{ c.severity }}</span>
+                </span>
+                <span style="font-size:10.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ c.detail }}</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ c.fix }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px 14px">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Promo history library</span>
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">true incrementality measured against the post-promo trough, not against the week before</span>
+          <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">click a row to load it into the panel above</span>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1.5fr 96px 100px 116px 92px 96px 104px;gap:0 12px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Past event</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Depth</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Gross lift</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">True incremental</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Margin cost</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Halo</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Cannibalised</span>
+        </div>
+        <sc-for list="{{ library }}" as="h" hint-placeholder-count="6">
+          <button type="button" onClick="{{ h.pick }}" style="width:100%;text-align:left;cursor:pointer;font-family:var(--font-sans);display:grid;grid-template-columns:1.5fr 96px 100px 116px 92px 96px 104px;gap:0 12px;align-items:center;padding:10px 6px;border:none;border-bottom:1px solid var(--ink-50);border-left:2px solid {{ h.mark }};background:{{ h.bg }};transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-25)">
+            <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+              <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ h.name }}</span>
+              <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ h.meta }}</span>
+            </span>
+            <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ h.depth }}</span>
+            <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-500);text-align:right;font-variant-numeric:tabular-nums">{{ h.gross }}</span>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:3px;align-items:flex-end">
+              <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ h.incTone }};font-variant-numeric:tabular-nums">{{ h.incremental }}</span>
+              <span style="width:100%;height:4px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                <span style="display:block;height:100%;width:{{ h.incPct }}%;background:{{ h.incTone }};border-radius:var(--r-full)"></span>
+              </span>
+            </span>
+            <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--rose-700);text-align:right;font-variant-numeric:tabular-nums">{{ h.margin }}</span>
+            <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--green-700);text-align:right;font-variant-numeric:tabular-nums">{{ h.halo }}</span>
+            <span style="font-family:var(--font-mono);font-size:11.5px;color:{{ h.cannTone }};text-align:right;font-variant-numeric:tabular-nums">{{ h.cannibalised }}</span>
+          </button>
+        </sc-for>
+        <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">The two shallow events beat the two deepest on incrementality per margin dollar. That is the pattern the Decide step is built around — depth buys gross lift and borrows most of it back.</p>
+      </div>
+
+      <div style="height:6px;flex-shrink:0"></div>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">Analyze · 9 blocks across 6 lanes · 5 conflicts, 3 blocking · 6 past events re-scored</span>
+      <a href="S9.19-3-decide.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Decide<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { sel: 'earlybf', hist: 'bf20' };
+
+  eventData() {
+    return {
+      prime: {
+        name: 'Prime Fall Deal Event', objective: 'share', meta: 'Oct 8–9 · Amazon · 22 SKUs',
+        stats: [
+          ['Depth', '20%', 'platform minimum', 'var(--ink-900)'],
+          ['SKUs', '22', '4 above cover risk', 'var(--amber-700)'],
+          ['Units committed', '11,000', '500 per SKU, reserved', 'var(--ink-900)'],
+          ['Projected incremental', '$41K CM', 'confidence 64%', 'var(--amber-700)'],
+        ],
+        conflicts: ['inventory'], history: 'prime24',
+      },
+      earlybf: {
+        name: 'Early Black Friday', objective: 'volume', meta: 'Nov 7–14 · Shopify DTC + email · 34 SKUs',
+        stats: [
+          ['Depth', '25%', 'at the non-clearance ceiling', 'var(--amber-700)'],
+          ['SKUs', '34', '14 shared with Walmart window', 'var(--rose-700)'],
+          ['Projected gross lift', '+52%', 'before trough accounting', 'var(--ink-500)'],
+          ['Projected incremental', '$96K CM', 'confidence 71%', 'var(--green-700)'],
+        ],
+        conflicts: ['overlap', 'parity'], history: 'bf20',
+      },
+      walmart: {
+        name: 'Walmart Deal Days', objective: 'share', meta: 'Nov 12–18 · Walmart · 18 SKUs',
+        stats: [
+          ['Depth', '15%', 'platform minimum', 'var(--ink-900)'],
+          ['SKUs', '18', '14 also in the DTC window', 'var(--rose-700)'],
+          ['Buy Box target', '+3.1pp', 'held four weeks after', 'var(--ink-900)'],
+          ['Projected incremental', '$28K CM', 'confidence 61%', 'var(--amber-700)'],
+        ],
+        conflicts: ['overlap', 'parity'], history: 'wm15',
+      },
+      bfcm: {
+        name: 'Black Friday / Cyber Monday', objective: 'volume', meta: 'Nov 28 – Dec 1 · all channels + media · 48 SKUs',
+        stats: [
+          ['Depth', '25%', 'all channels simultaneously', 'var(--amber-700)'],
+          ['SKUs', '48', '6 with stacked Amazon coupons', 'var(--rose-700)'],
+          ['Media support', '$32K', 'Bidder, event window only', 'var(--ink-900)'],
+          ['Projected incremental', '$184K CM', 'confidence 76%', 'var(--green-700)'],
+        ],
+        conflicts: ['stacking', 'protection'], history: 'bfcm25',
+      },
+      gift: {
+        name: 'Gift guide push', objective: 'margin', meta: 'Dec 5–12 · Shopify DTC + email/SMS · 26 SKUs',
+        stats: [
+          ['Depth', '12%', 'shallow by design', 'var(--green-700)'],
+          ['SKUs', '26', '11 promoted 8 days earlier', 'var(--amber-700)'],
+          ['Full-price mix', '54%', 'bundles carry the rest', 'var(--green-700)'],
+          ['Projected incremental', '$62K CM', 'confidence 78%', 'var(--green-700)'],
+        ],
+        conflicts: ['protection'], history: 'gift10',
+      },
+      clear: {
+        name: 'Year-end clearance', objective: 'clearance', meta: 'Dec 26–31 · all channels · aged lines',
+        stats: [
+          ['Depth', '40%', 'clearance ceiling is 45%', 'var(--amber-700)'],
+          ['Cohorts', '4', 'aged 180+ days', 'var(--ink-900)'],
+          ['Recovery', '68%', 'floor is 62% of landed cost', 'var(--green-700)'],
+          ['Projected incremental', '$19K CM', 'confidence 66%', 'var(--amber-700)'],
+        ],
+        conflicts: [], history: 'clear40',
+      },
+    };
+  }
+
+  conflictData() {
+    return {
+      overlap: {
+        title: 'Same SKU in overlapping promos', severity: 'blocking', event: 'earlybf',
+        detail: '14 SKUs appear in both the DTC early-BF window (Nov 7–14) and Walmart Deal Days (Nov 12–18), overlapping for three days.',
+        fix: 'Fix: shift the DTC window to Nov 3–10, or drop the 14 from one of the two.',
+      },
+      parity: {
+        title: 'Marketplace parity violation', severity: 'blocking', event: 'earlybf',
+        detail: 'Those same 14 SKUs would show 25% off on DTC and 15% off on Walmart in the same week. Walmart parity terms require our lowest advertised price.',
+        fix: 'Fix: match depth at 15%, or exclude the shared SKUs from the DTC event.',
+      },
+      stacking: {
+        title: 'Deal-stacking risk', severity: 'blocking', event: 'bfcm',
+        detail: '6 BFCM SKUs carry an active Amazon coupon that stacks on top of the deal price, taking the effective discount to 34% — past both the depth ceiling and the CM floor.',
+        fix: 'Fix: suppress the coupons for the window, or reduce deal depth on those 6.',
+      },
+      protection: {
+        title: 'Full-price protection window', severity: 'warning', event: 'gift',
+        detail: '11 gift-guide SKUs were promoted 8 days earlier in BFCM, inside the 14-day minimum gap set in Reason.',
+        fix: 'Fix: start the gift guide Dec 12, or swap those 11 for full-price alternates.',
+      },
+      inventory: {
+        title: 'Unit commitment above cover', severity: 'warning', event: 'prime',
+        detail: 'Prime Fall requires 500 units per SKU. Three SKUs have 380–460 units of cover before the event, so the commitment cannot be met without an expedited inbound.',
+        fix: 'Fix: drop the 3 SKUs, or pull the inbound forward — Planner has 11 days.',
+      },
+    };
+  }
+
+  libraryData() {
+    return [
+      {
+        id: 'bf20', name: 'Early BF 20% off · last year', meta: 'Nov 8–15 · DTC · 31 SKUs', depth: '20%', gross: '+58%', incremental: '31%', incPct: 31, margin: '$71K', halo: '+6%', cannibalised: '−27%', cannTone: 'var(--rose-700)', incTone: 'var(--rose-700)',
+        curve: [100, 102, 99, 101, 158, 152, 74, 79, 88, 94, 98, 100], eventFrom: 4, eventTo: 5,
+        read: 'The event doubled weekly revenue for two weeks and then sold 25% below baseline for the fortnight after. Netting the trough leaves 31% genuinely incremental — the rest was demand pulled forward from December at a 20% discount.',
+      },
+      {
+        id: 'bfcm25', name: 'BFCM 25% off · last year', meta: 'Nov 29 – Dec 2 · all channels · 44 SKUs', depth: '25%', gross: '+141%', incremental: '68%', incPct: 68, margin: '$164K', halo: '+11%', cannibalised: '−18%', cannTone: 'var(--amber-700)', incTone: 'var(--green-700)',
+        curve: [100, 104, 101, 106, 241, 188, 92, 97, 103, 106, 108, 105], eventFrom: 4, eventTo: 5,
+        read: 'The one event where depth paid for itself. New-buyer share hit 44% and the post-event trough was shallow because most of the volume came from customers who had never bought from us before.',
+      },
+      {
+        id: 'gift10', name: 'Gift guide 10% + bundles', meta: 'Dec 6–13 · DTC · 22 SKUs', depth: '10%', gross: '+34%', incremental: '29%', incPct: 29, margin: '$21K', halo: '+9%', cannibalised: '−5%', cannTone: 'var(--green-700)', incTone: 'var(--green-700)',
+        curve: [100, 103, 101, 104, 134, 128, 104, 106, 108, 105, 103, 102], eventFrom: 4, eventTo: 5,
+        read: 'Almost all of the lift survived. A shallow discount attached to bundles produced 29% incremental at a third of the margin cost of the 20%-off event — the best incrementality per margin dollar in the library.',
+      },
+      {
+        id: 'prime24', name: 'Prime Fall 20% off', meta: 'Oct 10–11 · Amazon · 19 SKUs', depth: '20%', gross: '+96%', incremental: '52%', incPct: 52, margin: '$48K', halo: '+4%', cannibalised: '−19%', cannTone: 'var(--amber-700)', incTone: 'var(--green-700)',
+        curve: [100, 101, 100, 102, 196, 141, 84, 91, 97, 100, 101, 100], eventFrom: 4, eventTo: 5,
+        read: 'Rank held for five weeks after the event, which is what makes the share objective defensible here. Review velocity tripled during the window and stayed 40% above baseline afterwards.',
+      },
+      {
+        id: 'wm15', name: 'Walmart Deal Days 15%', meta: 'Nov 14–20 · Walmart · 15 SKUs', depth: '15%', gross: '+63%', incremental: '44%', incPct: 44, margin: '$26K', halo: '+2%', cannibalised: '−14%', cannTone: 'var(--amber-700)', incTone: 'var(--green-700)',
+        curve: [100, 99, 102, 100, 163, 138, 89, 93, 98, 101, 100, 99], eventFrom: 4, eventTo: 5,
+        read: 'Buy Box share rose 3.4pp and held 1.8pp four weeks later, clearing the persistence test in the share contract. Modest halo — Walmart buyers rarely cross to our other channels.',
+      },
+      {
+        id: 'clear40', name: 'Year-end clearance 40%', meta: 'Dec 27 – Jan 2 · all channels · aged', depth: '40%', gross: '+88%', incremental: '81%', incPct: 81, margin: '$34K', halo: '+1%', cannibalised: '−6%', cannTone: 'var(--green-700)', incTone: 'var(--green-700)',
+        curve: [100, 98, 96, 94, 188, 156, 92, 90, 94, 97, 99, 100], eventFrom: 4, eventTo: 5,
+        read: 'Highest incrementality in the library, because nobody was going to buy 14-month-old inventory at full price. Recovery came in at 71% of landed cost against a 62% floor.',
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const events = this.eventData();
+    const conflicts = this.conflictData();
+    const library = this.libraryData();
+    const selKey = events[this.state.sel] ? this.state.sel : 'earlybf';
+    const sel = events[selKey];
+
+    const objStyle = {
+      volume: { tint: 'color-mix(in oklab, var(--mod-ads) 12%, white)', tone: 'var(--mod-ads)', fill: 'color-mix(in oklab, var(--mod-ads) 14%, white)', border: 'color-mix(in oklab, var(--mod-ads) 40%, white)', fg: 'var(--mod-ads)' },
+      margin: { tint: 'var(--green-50)', tone: 'var(--green-700)', fill: 'var(--green-50)', border: 'color-mix(in oklab, var(--green-500) 34%, white)', fg: 'var(--green-700)' },
+      share: { tint: 'var(--r-blue-50)', tone: 'var(--r-blue-700)', fill: 'var(--r-blue-50)', border: 'color-mix(in oklab, var(--r-blue-500) 34%, white)', fg: 'var(--r-blue-700)' },
+      clearance: { tint: 'var(--amber-50)', tone: 'var(--amber-700)', fill: 'var(--amber-50)', border: 'color-mix(in oklab, var(--amber-500) 34%, white)', fg: 'var(--amber-700)' },
+    };
+
+    const blockFor = (id, col, label, sub) => {
+      const e = events[id];
+      const st = objStyle[e.objective];
+      const active = id === selKey;
+      const cCount = e.conflicts.length;
+      return {
+        col, label, sub, conflicts: cCount || null,
+        pick: () => this.setState({ sel: id, hist: e.history }),
+        bg: active ? st.fill : 'var(--ink-25)',
+        border: active ? st.border : 'var(--ink-200)',
+        fg: active ? st.fg : 'var(--ink-700)',
+        subFg: active ? st.fg : 'var(--ink-400)',
+      };
+    };
+
+    const histKey = library.some((h) => h.id === this.state.hist) ? this.state.hist : sel.history;
+    const h = library.find((x) => x.id === histKey);
+    const W = 460, top = 4, bot = 86, lo = 60, hi = 250;
+    const hx = (i) => (i / 11) * W;
+    const hy = (v) => bot - ((v - lo) / (hi - lo)) * (bot - top);
+    const path = h.curve.map((v, i) => (i === 0 ? 'M' : 'L') + hx(i).toFixed(1) + ' ' + hy(v).toFixed(1)).join(' ');
+    const troughIdx = [6, 7, 8, 9];
+    const troughPath = 'M' + hx(6).toFixed(1) + ' ' + hy(100).toFixed(1) + ' '
+      + troughIdx.map((i) => 'L' + hx(i).toFixed(1) + ' ' + hy(h.curve[i]).toFixed(1)).join(' ')
+      + ' L' + hx(9).toFixed(1) + ' ' + hy(100).toFixed(1) + ' Z';
+
+    const selConflicts = sel.conflicts.map((k) => {
+      const c = conflicts[k];
+      const blocking = c.severity === 'blocking';
+      return {
+        title: c.title, detail: c.detail,
+        icon: blocking ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-triangle-exclamation',
+        tone: blocking ? 'var(--rose-700)' : 'var(--amber-700)',
+        border: blocking ? 'color-mix(in oklab, var(--rose-500) 30%, white)' : 'color-mix(in oklab, var(--amber-500) 30%, white)',
+        bg: blocking ? 'var(--rose-50)' : 'var(--amber-50)',
+      };
+    });
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      windows: [
+        { label: 'Prime Fall submits', left: '2 days', tint: 'var(--rose-50)', border: 'color-mix(in oklab, var(--rose-500) 30%, white)', tone: 'var(--rose-700)' },
+        { label: 'Walmart Deal Days', left: '42 days', tint: 'var(--amber-50)', border: 'color-mix(in oklab, var(--amber-500) 30%, white)', tone: 'var(--amber-700)' },
+        { label: 'BFCM media lock', left: '58 days', tint: 'var(--ink-50)', border: 'var(--ink-200)', tone: 'var(--ink-600)' },
+      ],
+
+      weeks: ['Oct 6', 'Oct 13', 'Oct 20', 'Oct 27', 'Nov 3', 'Nov 10', 'Nov 17', 'Nov 24', 'Dec 1', 'Dec 8', 'Dec 15', 'Dec 22', 'Dec 29'].map((l, i) => ({
+        label: l.split(' ')[1],
+        month: i === 0 || l.indexOf('Nov') === 0 || l.indexOf('Dec') === 0 ? l.split(' ')[0] : '',
+        weight: [0, 4, 5, 7, 8, 12].indexOf(i) >= 0 ? '700' : '500',
+        tone: [0, 4, 5, 7, 8, 12].indexOf(i) >= 0 ? 'var(--ink-800)' : 'var(--ink-400)',
+      })),
+
+      lanes: [
+        {
+          name: 'Shopify DTC', note: '41% of GMV', bg: 'var(--ink-25)',
+          blocks: [
+            blockFor('earlybf', '5 / span 2', 'Early Black Friday', '25% off · 34 SKUs'),
+            blockFor('bfcm', '8 / span 2', 'BFCM', '25% off · 48 SKUs'),
+            blockFor('gift', '10 / span 2', 'Gift guide', '12% + bundles'),
+            blockFor('clear', '13 / span 1', 'Clearance', '40% · aged'),
+          ],
+        },
+        {
+          name: 'Amazon', note: '45% of GMV', bg: 'var(--ink-25)',
+          blocks: [
+            blockFor('prime', '1 / span 1', 'Prime Fall', '20% · 22 SKUs'),
+            blockFor('bfcm', '8 / span 2', 'BFCM', '25% off · 48 SKUs'),
+            blockFor('clear', '13 / span 1', 'Clearance', '40% · aged'),
+          ],
+        },
+        {
+          name: 'Walmart', note: '9% of GMV', bg: 'var(--ink-25)',
+          blocks: [
+            blockFor('walmart', '6 / span 2', 'Walmart Deal Days', '15% · 18 SKUs'),
+            blockFor('bfcm', '8 / span 2', 'BFCM', '25% off'),
+            blockFor('clear', '13 / span 1', 'Clearance', '40%'),
+          ],
+        },
+        {
+          name: 'Faire wholesale', note: '5% of GMV', bg: 'var(--ink-25)',
+          blocks: [
+            blockFor('bfcm', '8 / span 2', 'BFCM trade offer', '15% · net terms'),
+          ],
+        },
+        {
+          name: 'Email / SMS', note: 'to S9.13', bg: 'var(--ink-25)',
+          blocks: [
+            blockFor('earlybf', '5 / span 2', 'Early BF sends', '4 sends · 2 segments'),
+            blockFor('bfcm', '8 / span 2', 'BFCM sends', '6 sends · SMS on'),
+            blockFor('gift', '10 / span 2', 'Gift guide sends', '3 sends'),
+          ],
+        },
+        {
+          name: 'Paid media', note: 'Bidder', bg: 'var(--ink-25)',
+          blocks: [
+            blockFor('prime', '1 / span 1', 'Prime support', '$8K'),
+            blockFor('bfcm', '8 / span 2', 'BFCM support', '$32K'),
+          ],
+        },
+      ],
+
+      legend: [
+        { label: 'Volume objective', fill: objStyle.volume.fill, border: objStyle.volume.border },
+        { label: 'Margin objective', fill: objStyle.margin.fill, border: objStyle.margin.border },
+        { label: 'Share objective', fill: objStyle.share.fill, border: objStyle.share.border },
+        { label: 'Clearance objective', fill: objStyle.clearance.fill, border: objStyle.clearance.border },
+      ],
+
+      sel: {
+        name: sel.name, meta: sel.meta,
+        objective: sel.objective, objTint: objStyle[sel.objective].tint, objTone: objStyle[sel.objective].tone,
+        stats: sel.stats.map((s) => ({ label: s[0], value: s[1], note: s[2], tone: s[3] })),
+        conflicts: selConflicts,
+        clean: selConflicts.length === 0,
+        history: {
+          name: h.name, read: h.read,
+          path, troughPath,
+          baseY: hy(100).toFixed(1),
+          eventX: hx(h.eventFrom).toFixed(1),
+          eventW: (hx(h.eventTo + 1) - hx(h.eventFrom)).toFixed(1),
+          dots: h.curve.map((v, i) => ({ cx: hx(i).toFixed(1), cy: hy(v).toFixed(1) })),
+          ticks: [
+            { label: '4 wks before', tone: 'var(--ink-400)' },
+            { label: 'event', tone: 'var(--mod-ads)' },
+            { label: 'trough', tone: 'var(--rose-700)' },
+            { label: 'recovery', tone: 'var(--ink-400)' },
+          ],
+        },
+      },
+
+      conflicts: Object.keys(conflicts).map((k) => {
+        const c = conflicts[k];
+        const blocking = c.severity === 'blocking';
+        const active = c.event === selKey;
+        return {
+          title: c.title, detail: c.detail, fix: c.fix, severity: c.severity,
+          pick: () => this.setState({ sel: c.event, hist: events[c.event].history }),
+          sevTint: blocking ? 'var(--rose-50)' : 'var(--amber-50)',
+          sevTone: blocking ? 'var(--rose-700)' : 'var(--amber-700)',
+          mark: blocking ? 'var(--rose-500)' : 'var(--amber-500)',
+          border: active ? 'var(--ink-300)' : 'var(--ink-100)',
+          bg: active ? 'var(--ink-25)' : 'var(--ink-0)',
+        };
+      }),
+
+      library: library.map((x) => ({
+        name: x.name, meta: x.meta, depth: x.depth, gross: x.gross,
+        incremental: x.incremental, incPct: x.incPct, incTone: x.incTone,
+        margin: x.margin, halo: x.halo, cannibalised: x.cannibalised, cannTone: x.cannTone,
+        pick: () => this.setState({ hist: x.id }),
+        mark: x.id === histKey ? 'var(--mod-ads)' : 'transparent',
+        bg: x.id === histKey ? 'color-mix(in oklab, var(--mod-ads) 6%, white)' : 'transparent',
+      })),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

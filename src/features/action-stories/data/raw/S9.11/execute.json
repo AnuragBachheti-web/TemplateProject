@@ -1,0 +1,416 @@
+{
+  "code": "S9.11",
+  "stageKey": "execute",
+  "name": "Repricing",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "open": {},
+    "reverted": false,
+    "stamp": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "headEdge": "var(--mod-margin)",
+    "headline": "Nothing written yet · 41 SKUs staged",
+    "headMeta": "Approved on Decide. Realify writes DTC first and Amazon last so parity is never inverted.",
+    "headTone": "var(--ink-500)",
+    "writtenCount": "0 of 3",
+    "armState": "not armed",
+    "armTone": "var(--ink-400)",
+    "stages": [
+      {
+        "n": "1",
+        "channel": "DTC · northwind.com",
+        "note": "Written first. Sets the parity reference every other channel is checked against.",
+        "when": "immediate",
+        "count": "41 SKUs",
+        "gate": "",
+        "gateShow": "none",
+        "rowBg": "var(--ink-0)",
+        "numBg": "var(--ink-900)",
+        "numTone": "var(--ink-0)",
+        "status": "ready",
+        "statusTone": "var(--ink-900)",
+        "statusTint": "var(--ink-100)",
+        "btnShow": "inline-flex",
+        "btnLabel": "Push stage",
+        "btnBg": "var(--ink-900)",
+        "btnBorder": "var(--ink-900)",
+        "btnTone": "var(--ink-0)",
+        "btnCursor": "pointer",
+        "diffLabel": "view diff",
+        "diffShow": "none",
+        "diffFoot": "+37 more SKUs in this stage · full diff exports to CSV from the Ledger",
+        "diff": [
+          {
+            "sku": "NW-KNF-0480",
+            "old": "$68.00",
+            "nu": "$71.99",
+            "delta": "+5.9%",
+            "revert": "$68.00",
+            "tag": "micro-step 2/3",
+            "tagShow": "inline-flex",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-CER-1120",
+            "old": "$24.00",
+            "nu": "$26.99",
+            "delta": "+12.5%",
+            "revert": "$24.00",
+            "tag": "",
+            "tagShow": "none",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-PAN-2210",
+            "old": "$54.00",
+            "nu": "$57.99",
+            "delta": "+7.4%",
+            "revert": "$54.00",
+            "tag": "parity watch",
+            "tagShow": "inline-flex",
+            "tagTint": "var(--rose-50)",
+            "tagTone": "var(--rose-700)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-GLS-3390",
+            "old": "$38.00",
+            "nu": "$40.99",
+            "delta": "+7.9%",
+            "revert": "$38.00",
+            "tag": "test · 50/50",
+            "tagShow": "inline-flex",
+            "tagTint": "var(--r-blue-50)",
+            "tagTone": "var(--r-blue-600)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "n": "2",
+        "channel": "Walmart · WFS",
+        "note": "Same prices, checked against the ±2% parity band before each write.",
+        "when": "+2 min",
+        "count": "38 SKUs",
+        "gate": "after DTC",
+        "gateShow": "inline-flex",
+        "gateTint": "var(--ink-100)",
+        "gateTone": "var(--ink-600)",
+        "rowBg": "var(--ink-0)",
+        "numBg": "var(--ink-100)",
+        "numTone": "var(--ink-500)",
+        "status": "queued",
+        "statusTone": "var(--ink-400)",
+        "statusTint": "var(--ink-50)",
+        "btnShow": "inline-flex",
+        "btnLabel": "Push stage",
+        "btnBg": "var(--ink-0)",
+        "btnBorder": "var(--ink-200)",
+        "btnTone": "var(--ink-400)",
+        "btnCursor": "default",
+        "diffLabel": "view diff",
+        "diffShow": "none",
+        "diffFoot": "3 SKUs not listed on Walmart · skipped rather than failed",
+        "diff": [
+          {
+            "sku": "NW-KNF-0480",
+            "old": "$68.00",
+            "nu": "$71.99",
+            "delta": "+5.9%",
+            "revert": "$68.00",
+            "tag": "",
+            "tagShow": "none",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-CER-1120",
+            "old": "$24.00",
+            "nu": "$26.99",
+            "delta": "+12.5%",
+            "revert": "$24.00",
+            "tag": "",
+            "tagShow": "none",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-TEX-6040",
+            "old": "$42.00",
+            "nu": "$43.99",
+            "delta": "+4.7%",
+            "revert": "$42.00",
+            "tag": "MAP ceiling",
+            "tagShow": "inline-flex",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "n": "3",
+        "channel": "Crawl re-read window",
+        "note": "Realify waits for the Amazon crawl to re-read our DTC price so fair-pricing sees the new reference, not the old one.",
+        "when": "+45 min",
+        "count": "—",
+        "gate": "fair-pricing hold",
+        "gateShow": "inline-flex",
+        "gateTint": "var(--amber-50)",
+        "gateTone": "var(--amber-700)",
+        "rowBg": "var(--ink-0)",
+        "numBg": "var(--ink-100)",
+        "numTone": "var(--ink-500)",
+        "status": "queued",
+        "statusTone": "var(--ink-400)",
+        "statusTint": "var(--ink-50)",
+        "btnShow": "inline-flex",
+        "btnLabel": "Wait out window",
+        "btnBg": "var(--ink-0)",
+        "btnBorder": "var(--ink-200)",
+        "btnTone": "var(--ink-400)",
+        "btnCursor": "default",
+        "diffLabel": "view diff",
+        "diffShow": "none",
+        "diffFoot": "No writes in this stage. The wait is the guardrail.",
+        "diff": []
+      },
+      {
+        "n": "4",
+        "channel": "Amazon · FBA",
+        "note": "Written last so Amazon is never above our lowest advertised price, even briefly.",
+        "when": "+45 min",
+        "count": "41 SKUs",
+        "gate": "Amazon last",
+        "gateShow": "inline-flex",
+        "gateTint": "var(--rose-50)",
+        "gateTone": "var(--rose-700)",
+        "rowBg": "var(--ink-0)",
+        "numBg": "var(--ink-100)",
+        "numTone": "var(--ink-500)",
+        "status": "queued",
+        "statusTone": "var(--ink-400)",
+        "statusTint": "var(--ink-50)",
+        "btnShow": "inline-flex",
+        "btnLabel": "Push stage",
+        "btnBg": "var(--ink-0)",
+        "btnBorder": "var(--ink-200)",
+        "btnTone": "var(--ink-400)",
+        "btnCursor": "default",
+        "diffLabel": "view diff",
+        "diffShow": "none",
+        "diffFoot": "Buy Box share is read 15 minutes after each write · a loss pauses the remaining micro-steps",
+        "diff": [
+          {
+            "sku": "NW-KNF-0480",
+            "old": "$68.00",
+            "nu": "$71.99",
+            "delta": "+5.9%",
+            "revert": "$68.00",
+            "tag": "Buy Box 0.82",
+            "tagShow": "inline-flex",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-PAN-2210",
+            "old": "$54.00",
+            "nu": "$57.99",
+            "delta": "+7.4%",
+            "revert": "$54.00",
+            "tag": "3P at $56.40",
+            "tagShow": "inline-flex",
+            "tagTint": "var(--rose-50)",
+            "tagTone": "var(--rose-700)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          },
+          {
+            "sku": "NW-CER-1210",
+            "old": "$16.00",
+            "nu": "$17.99",
+            "delta": "+12.4%",
+            "revert": "$16.00",
+            "tag": "",
+            "tagShow": "none",
+            "tagTint": "var(--ink-100)",
+            "tagTone": "var(--ink-600)",
+            "newTone": "var(--ink-900)",
+            "hash": "pending",
+            "hashTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "guardEdge": "var(--ink-300)",
+    "guardBorder": "var(--ink-100)",
+    "guardState": "arms on first write",
+    "guardTint": "var(--ink-50)",
+    "guardTone": "var(--ink-500)",
+    "guardCopy": "On the first price write, Realify captures a 14-day velocity baseline per SKU and arms the revert. Until then nothing is being watched, because nothing has changed.",
+    "guardParts": [
+      {
+        "label": "Watches",
+        "value": "units / day",
+        "note": "Per SKU, per channel, against the 14-day pre-change baseline.",
+        "icon": "fa-solid fa-eye",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "dotBg": "var(--ink-200)",
+        "dotTone": "var(--ink-500)",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "label": "Trigger",
+        "value": "−8% velocity",
+        "note": "Sustained over three days, not a single bad day.",
+        "icon": "fa-solid fa-bolt",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "dotBg": "var(--ink-200)",
+        "dotTone": "var(--ink-500)",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "label": "Window",
+        "value": "14 days",
+        "note": "After that the price is treated as the new normal.",
+        "icon": "fa-solid fa-clock",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "dotBg": "var(--ink-200)",
+        "dotTone": "var(--ink-500)",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "label": "Action",
+        "value": "restore prior",
+        "note": "Writes the old price back in the same parity-safe order.",
+        "icon": "fa-solid fa-rotate-left",
+        "bg": "var(--ink-25)",
+        "border": "var(--ink-100)",
+        "dotBg": "var(--ink-200)",
+        "dotTone": "var(--ink-500)",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "rbLabel": "Revert all 41 SKUs now",
+    "rbBorder": "var(--ink-200)",
+    "rbTone": "var(--ink-400)",
+    "rbCursor": "default",
+    "rbHint": "Available once a price has been written",
+    "pushCopy": "Stages must run in order — parity depends on it.",
+    "allLabel": "Run all remaining stages",
+    "allBg": "var(--mod-margin)",
+    "allTone": "var(--ink-0)",
+    "allCursor": "pointer",
+    "allNote": "Realify holds the crawl window between Walmart and Amazon whether you run the stages one by one or all at once.",
+    "monState": "starts on first write",
+    "monTone": "var(--ink-400)",
+    "monitors": [
+      {
+        "label": "Realized elasticity",
+        "value": "no read yet",
+        "predPct": "82%",
+        "pct": "0%",
+        "tone": "var(--ink-300)",
+        "note": "Grey shows the predicted curve; the colour fills in as units accumulate."
+      },
+      {
+        "label": "CM per month",
+        "value": "predicted +$9.7K",
+        "predPct": "90%",
+        "pct": "0%",
+        "tone": "var(--ink-300)",
+        "note": "Read against the pre-change baseline, not against last month."
+      },
+      {
+        "label": "Velocity vs baseline",
+        "value": "baseline pending",
+        "predPct": "38%",
+        "pct": "0%",
+        "tone": "var(--ink-300)",
+        "note": "The −8% trigger is measured from this baseline."
+      },
+      {
+        "label": "Buy Box share",
+        "value": "pre-write 94%",
+        "predPct": "94%",
+        "pct": "0%",
+        "tone": "var(--ink-300)",
+        "note": "Read 15 minutes after each Amazon write."
+      }
+    ],
+    "ledgerCopy": "On the first push, Realify opens a chain: approval hash, then one hash per channel write, then any revert.",
+    "chain": [
+      {
+        "label": "Approval · 41 SKUs · tolerance 4.0%",
+        "hash": "0x1a4f92",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "DTC write · pending",
+        "hash": "—",
+        "tone": "var(--ink-300)"
+      },
+      {
+        "label": "Amazon write · pending",
+        "hash": "—",
+        "tone": "var(--ink-300)"
+      },
+      {
+        "label": "Revert · not used",
+        "hash": "—",
+        "tone": "var(--ink-300)"
+      }
+    ],
+    "footerStatus": "Execute · 0 of 3 channels written",
+    "footerPushShow": "inline-flex",
+    "footerPushLabel": "Push stage 1 · DTC",
+    "footerDoneShow": "none"
+  }
+}

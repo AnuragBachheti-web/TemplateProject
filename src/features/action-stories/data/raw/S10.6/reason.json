@@ -1,0 +1,374 @@
+{
+  "code": "S10.6",
+  "stageKey": "reason",
+  "name": "Peak readiness",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "posture": "revenue",
+    "channels": {
+      "amazon": true,
+      "walmart": true,
+      "shopify": true,
+      "tiktok": false
+    },
+    "overrides": {
+      "spend": true,
+      "reprice": true,
+      "promo": true,
+      "transfer": true,
+      "air": false
+    }
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "T-4\ndays",
+    "pinMark": "var(--mod-actions)",
+    "pinTone": "var(--mod-actions)",
+    "pinnedTop": "T-4 · contract unsigned",
+    "pinnedSub": "inventory 84% · deals 100% · creative 60%",
+    "tChip": "T-4 days",
+    "tChipBg": "var(--amber-50)",
+    "tChipBorder": "color-mix(in oklab, var(--amber-500) 26%, white)",
+    "tChipTone": "var(--amber-700)",
+    "postures": [
+      {
+        "label": "Revenue-max",
+        "tag": "volume first",
+        "detail": "Where a call is close, take the units. Share and rank gained in a peak window carry into the quarter that follows.",
+        "rules": [
+          {
+            "label": "Bidder tie-breaker",
+            "value": "spend to mROAS 1.2×",
+            "tone": "var(--mod-actions)"
+          },
+          {
+            "label": "Pricer tie-breaker",
+            "value": "match, hold Buy Box",
+            "tone": "var(--mod-actions)"
+          },
+          {
+            "label": "Planner tie-breaker",
+            "value": "never stock out",
+            "tone": "var(--mod-actions)"
+          },
+          {
+            "label": "Accepted cost",
+            "value": "−1.4pp blended CM",
+            "tone": "var(--amber-700)"
+          }
+        ],
+        "bg": "color-mix(in oklab, var(--mod-actions) 6%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 40%, white)",
+        "dotBorder": "var(--mod-actions)",
+        "dotBg": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+        "dotInner": "var(--mod-actions)",
+        "tagTone": "var(--mod-actions)"
+      },
+      {
+        "label": "Margin-protect",
+        "tag": "contribution first",
+        "detail": "Where a call is close, keep the contribution. A peak that buys volume at a loss is a peak that flatters the top line only.",
+        "rules": [
+          {
+            "label": "Bidder tie-breaker",
+            "value": "spend to mROAS 1.8×",
+            "tone": "var(--mod-margin)"
+          },
+          {
+            "label": "Pricer tie-breaker",
+            "value": "hold above floor",
+            "tone": "var(--mod-margin)"
+          },
+          {
+            "label": "Planner tie-breaker",
+            "value": "no air freight",
+            "tone": "var(--mod-margin)"
+          },
+          {
+            "label": "Accepted cost",
+            "value": "−$34K P50 revenue",
+            "tone": "var(--amber-700)"
+          }
+        ],
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "dotBorder": "var(--ink-300)",
+        "dotBg": "var(--ink-0)",
+        "dotInner": "transparent",
+        "tagTone": "var(--ink-400)"
+      }
+    ],
+    "postureNote": "Revenue-max is the posture, so every desk resolves a close call toward volume for 96 hours. That is a real cost — about 1.4pp of blended contribution — and naming it here is what makes it a decision rather than a drift.",
+    "channelSummary": "3 of 4 · $291K P50 combined",
+    "channels": [
+      {
+        "name": "Amazon",
+        "detail": "Prime Fall deal lineup confirmed — 14 SKUs across 3 deal types.",
+        "forecast": "$182K",
+        "ready": "ready",
+        "readyTone": "var(--green-700)",
+        "readyTint": "var(--green-50)",
+        "nameTone": "var(--ink-900)",
+        "forecastTone": "var(--ink-900)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 5%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 28%, white)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "Walmart",
+        "detail": "Rollback window overlaps days 2–4; 9 shared SKUs already flagged in 9.19.",
+        "forecast": "$61K",
+        "ready": "ready",
+        "readyTone": "var(--green-700)",
+        "readyTint": "var(--green-50)",
+        "nameTone": "var(--ink-900)",
+        "forecastTone": "var(--ink-900)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 5%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 28%, white)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "Shopify DTC",
+        "detail": "Email and SMS sequences built; creative at 60% and the gap is all DTC.",
+        "forecast": "$48K",
+        "ready": "creative 60%",
+        "readyTone": "var(--amber-700)",
+        "readyTint": "var(--amber-50)",
+        "nameTone": "var(--ink-900)",
+        "forecastTone": "var(--ink-900)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 5%, white)",
+        "border": "color-mix(in oklab, var(--mod-actions) 28%, white)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "TikTok Shop",
+        "detail": "Cover is thin after the 9.4 shift. Including it means competing with Amazon for the same units.",
+        "forecast": "$14K",
+        "ready": "thin cover",
+        "readyTone": "var(--rose-700)",
+        "readyTint": "var(--rose-50)",
+        "nameTone": "var(--ink-500)",
+        "forecastTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "boxBg": "var(--ink-0)",
+        "boxBorder": "var(--ink-300)",
+        "boxIcon": "fa-solid fa-xmark"
+      }
+    ],
+    "overrideSummary": "4 of 5 armed · 1 needs a named sponsor",
+    "overrideTone": "var(--amber-700)",
+    "overrides": [
+      {
+        "name": "Higher spend caps",
+        "desk": "Bidder",
+        "detail": "Daily budget ceilings raised while mROAS stays above the event floor. Pacing inside this bound runs at Assist.",
+        "bound": "+180% daily cap",
+        "normal": "normally +25%",
+        "trigger": "mROAS above 1.4× on the campaign",
+        "expiry": "Aug 27 · 06:00",
+        "nameTone": "var(--ink-900)",
+        "boundTone": "var(--mod-actions)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "Faster repricing cadence",
+        "desk": "Pricer",
+        "detail": "Competitive repricing every 15 minutes instead of every 4 hours. Floors and MAP unchanged.",
+        "bound": "15-min cadence",
+        "normal": "normally 4h",
+        "trigger": "Buy Box loss or a competitor move",
+        "expiry": "Aug 27 · 06:00",
+        "nameTone": "var(--ink-900)",
+        "boundTone": "var(--mod-actions)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "Deeper promo authority",
+        "desk": "Promoter",
+        "detail": "Discount depth to 30% without a second approval on event SKUs only, and never below the recovery floor.",
+        "bound": "30% depth",
+        "normal": "normally 20%",
+        "trigger": "sell-through below 70% of plan at a checkpoint",
+        "expiry": "Aug 27 · 06:00",
+        "nameTone": "var(--ink-900)",
+        "boundTone": "var(--amber-700)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "Same-day transfer authority",
+        "desk": "Shipper",
+        "detail": "Node-to-node transfers up to $4K of freight without a Cash-lens check, so cover follows demand inside the window.",
+        "bound": "$4K freight",
+        "normal": "normally $1.2K",
+        "trigger": "node cover below 4 days on an event SKU",
+        "expiry": "Aug 27 · 06:00",
+        "nameTone": "var(--ink-900)",
+        "boundTone": "var(--mod-actions)",
+        "boxBg": "var(--mod-actions)",
+        "boxBorder": "var(--mod-actions)",
+        "boxIcon": "fa-solid fa-check"
+      },
+      {
+        "name": "Air-freight authority",
+        "desk": "Planner",
+        "detail": "Expedite an inbound without returning to a Decide step. This is the expensive one, and it is off by default for a reason.",
+        "bound": "$6K per lane",
+        "normal": "requires approval",
+        "trigger": "P50 cover shortfall inside the window",
+        "expiry": "Aug 27 · 06:00",
+        "nameTone": "var(--ink-500)",
+        "boundTone": "var(--ink-400)",
+        "boxBg": "var(--ink-0)",
+        "boxBorder": "var(--ink-300)",
+        "boxIcon": "fa-solid fa-xmark"
+      }
+    ],
+    "cutoffs": [
+      {
+        "label": "FBA inbound cutoff",
+        "left": "31 hours",
+        "detail": "Aug 20 · 23:59 — anything not tendered misses the window",
+        "pct": 82,
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "WFS inbound cutoff",
+        "left": "2 days",
+        "detail": "Aug 21 · 18:00 — Walmart receiving closes earlier this year",
+        "pct": 64,
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Creative delivery",
+        "left": "2 days",
+        "detail": "6 of 15 DTC assets outstanding with the studio",
+        "pct": 60,
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Deal lineup lock",
+        "left": "locked",
+        "detail": "Submitted Aug 14 · confirmed across 14 SKUs",
+        "pct": 100,
+        "tone": "var(--green-700)"
+      }
+    ],
+    "summary": [
+      {
+        "label": "Event window",
+        "value": "96 hours",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Channels participating",
+        "value": "3 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Combined P50 revenue",
+        "value": "$291K",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Overrides armed",
+        "value": "4 of 5",
+        "tone": "var(--mod-actions)"
+      },
+      {
+        "label": "Posture",
+        "value": "Revenue-max",
+        "tone": "var(--mod-actions)"
+      }
+    ],
+    "summaryNote": "The contract approves as one unit at the Decide step. Picking overrides individually here is drafting; signing is a single decision, because a partially-signed constitution is not one.",
+    "chips": [
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "MAP floors",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "Marketplace parity",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "Cash buffer minimum",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-lock",
+        "label": "Account-health thresholds",
+        "border": "var(--ink-300)",
+        "bg": "var(--ink-100)",
+        "fg": "var(--ink-700)",
+        "iconTone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-clock-rotate-left",
+        "label": "Auto-expiry Aug 27 · 06:00",
+        "border": "color-mix(in oklab, var(--mod-actions) 30%, white)",
+        "bg": "color-mix(in oklab, var(--mod-actions) 8%, white)",
+        "fg": "var(--mod-actions)",
+        "iconTone": "var(--mod-actions)"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Aug 12 · T-11",
+        "what": "The Event Forecast Model closed on a P50 of $291K across four channels, 3.4× a normal 96-hour window, and opened a readiness card at T-8 as scheduled."
+      },
+      {
+        "when": "Aug 19 · 06:00",
+        "what": "The T-4 checkpoint re-scored every desk: inventory 84%, deals 100%, creative 60%. Two Heroes are short at P50 with the FBA cutoff 31 hours out."
+      },
+      {
+        "when": "Aug 19 · 06:02",
+        "what": "Arbiter assembled the Moment Contract draft — the temporary authority each desk needs to move at event speed, with every bound and expiry stated before anyone signs."
+      }
+    ],
+    "footStatus": "Reason · T-4 · 3 channels · 4 overrides drafted · expiry Aug 27 · 06:00"
+  }
+}

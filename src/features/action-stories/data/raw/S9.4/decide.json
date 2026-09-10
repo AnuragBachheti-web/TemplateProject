@@ -1,0 +1,370 @@
+{
+  "code": "S9.4",
+  "stageKey": "decide",
+  "name": "Allocation",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "mode": "paired",
+    "deltas": {},
+    "dropped": {},
+    "cadence": 1
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "modes": [
+      {
+        "label": "Approve paired",
+        "divider": "none",
+        "bg": "color-mix(in oklab, var(--mod-ads) 12%, white)",
+        "tone": "var(--mod-ads)",
+        "weight": 600
+      },
+      {
+        "label": "Budget only",
+        "divider": "1px solid var(--ink-200)",
+        "bg": "var(--ink-0)",
+        "tone": "var(--ink-600)",
+        "weight": 500
+      },
+      {
+        "label": "Modify",
+        "divider": "1px solid var(--ink-200)",
+        "bg": "var(--ink-0)",
+        "tone": "var(--ink-600)",
+        "weight": 500
+      }
+    ],
+    "cmStr": "+$11.8K",
+    "cmTone": "var(--ink-900)",
+    "movedStr": "$21.0K",
+    "envNote": "net $0 · inside the envelope",
+    "envTone": "var(--ink-500)",
+    "coverStr": "4.1 wk",
+    "coverTone": "var(--green-700)",
+    "coverBg": "var(--green-50)",
+    "coverBorder": "color-mix(in oklab, var(--green-500) 40%, white)",
+    "coverNote": "clears the 3 wk guardrail",
+    "pairStr": "2 of 2",
+    "pairNote": "created through story 9.3",
+    "resLabel": "Conflict resolution · Bidder vs Planner",
+    "resCopy": "Bidder proposed +$25K into TikTok Spark on marginal CM alone. Planner capped it at +$18K pending transfer T-142, because +$25K drops cover on the two scaled SKUs to 2.4 weeks. Arbiter took the Planner cap: the extra $7K earns $4.1K of CM but risks a stock-out on a Hero, and a Hero stock-out costs more than the CM it buys.",
+    "resIcon": "fa-solid fa-scale-balanced",
+    "resTone": "var(--ink-600)",
+    "resBg": "var(--ink-25)",
+    "resBorder": "var(--ink-100)",
+    "slateMeta": "5 of 5 moves · 2 paired transfers",
+    "slateHint": "switch to Modify to re-size a move",
+    "slateFoot": "Sources −$21.0K · destinations $21.0K · CM +$11.8K per month",
+    "slate": [
+      {
+        "name": "TikTok · Spark Ads",
+        "hue": "var(--mod-margin)",
+        "dim": 1,
+        "rowBg": "var(--ink-0)",
+        "deltaStr": "+$18.0K/mo",
+        "deltaTone": "var(--green-700)",
+        "rangeStr": "$9K → $27K",
+        "stepShow": "none",
+        "capNote": "floor $4K · cap $24K",
+        "linkIcon": "fa-solid fa-link",
+        "linkTone": "var(--mod-inventory)",
+        "pairLabel": "Transfer T-142 · 1,400 u Ridgeline mug + bowl to FBA-West",
+        "pairTone": "var(--ink-800)",
+        "pairWeight": 600,
+        "pairDim": 1,
+        "pairChipShow": "inline-flex",
+        "pairId": "T-142",
+        "pairMeta": "arrives Sep 02 · 6 days",
+        "cmStr": "+$11.7K",
+        "cmTone": "var(--ink-900)",
+        "coverStr": "4.1 wk",
+        "coverTone": "var(--green-700)",
+        "coverMeta": "from 2.4 wk",
+        "togLabel": "Drop",
+        "togBg": "var(--ink-0)",
+        "togTone": "var(--ink-500)",
+        "togBorder": "var(--ink-200)"
+      },
+      {
+        "name": "Meta · Advantage+",
+        "hue": "var(--mod-discover)",
+        "dim": 1,
+        "rowBg": "var(--ink-0)",
+        "deltaStr": "+$3.0K/mo",
+        "deltaTone": "var(--green-700)",
+        "rangeStr": "$22K → $25K",
+        "stepShow": "none",
+        "capNote": "floor $12K · cap $28K",
+        "linkIcon": "fa-solid fa-link",
+        "linkTone": "var(--mod-inventory)",
+        "pairLabel": "Transfer T-149 · 320 u quilted oven mitt to DC-East",
+        "pairTone": "var(--ink-800)",
+        "pairWeight": 600,
+        "pairDim": 1,
+        "pairChipShow": "inline-flex",
+        "pairId": "T-149",
+        "pairMeta": "arrives Aug 29 · 3 days",
+        "cmStr": "+$0.8K",
+        "cmTone": "var(--ink-900)",
+        "coverStr": "4.6 wk",
+        "coverTone": "var(--green-700)",
+        "coverMeta": "from 2.9 wk",
+        "togLabel": "Drop",
+        "togBg": "var(--ink-0)",
+        "togTone": "var(--ink-500)",
+        "togBorder": "var(--ink-200)"
+      },
+      {
+        "name": "Walmart DSP · prospecting",
+        "hue": "var(--mod-hubs)",
+        "dim": 1,
+        "rowBg": "var(--ink-0)",
+        "deltaStr": "−$12.0K/mo",
+        "deltaTone": "var(--rose-700)",
+        "rangeStr": "$18K → $6K",
+        "stepShow": "none",
+        "capNote": "floor $6K · cap $20K",
+        "linkIcon": "fa-solid fa-minus",
+        "linkTone": "var(--ink-200)",
+        "pairLabel": "No inventory move needed — freed stock stays put",
+        "pairTone": "var(--ink-500)",
+        "pairWeight": 400,
+        "pairDim": 1,
+        "pairChipShow": "none",
+        "pairId": "",
+        "pairMeta": "co-op match holds at the $6K floor",
+        "cmStr": "+$1.4K",
+        "cmTone": "var(--ink-900)",
+        "coverStr": "—",
+        "coverTone": "var(--ink-400)",
+        "coverMeta": "not stock-bound",
+        "togLabel": "Drop",
+        "togBg": "var(--ink-0)",
+        "togTone": "var(--ink-500)",
+        "togBorder": "var(--ink-200)"
+      },
+      {
+        "name": "Google · PMax long tail",
+        "hue": "var(--r-blue-500)",
+        "dim": 1,
+        "rowBg": "var(--ink-0)",
+        "deltaStr": "−$6.0K/mo",
+        "deltaTone": "var(--rose-700)",
+        "rangeStr": "$26K → $20K",
+        "stepShow": "none",
+        "capNote": "floor $18K · cap $34K",
+        "linkIcon": "fa-solid fa-minus",
+        "linkTone": "var(--ink-200)",
+        "pairLabel": "No inventory move needed",
+        "pairTone": "var(--ink-500)",
+        "pairWeight": 400,
+        "pairDim": 1,
+        "pairChipShow": "none",
+        "pairId": "",
+        "pairMeta": "brand terms sit inside the $18K floor",
+        "cmStr": "−$2.1K",
+        "cmTone": "var(--rose-700)",
+        "coverStr": "—",
+        "coverTone": "var(--ink-400)",
+        "coverMeta": "not stock-bound",
+        "togLabel": "Drop",
+        "togBg": "var(--ink-0)",
+        "togTone": "var(--ink-500)",
+        "togBorder": "var(--ink-200)"
+      },
+      {
+        "name": "Amazon SP · defensive brand",
+        "hue": "var(--mod-ads)",
+        "dim": 1,
+        "rowBg": "var(--ink-0)",
+        "deltaStr": "−$3.0K/mo",
+        "deltaTone": "var(--rose-700)",
+        "rangeStr": "$52K → $49K",
+        "stepShow": "none",
+        "capNote": "floor $46K · cap $62K",
+        "linkIcon": "fa-solid fa-minus",
+        "linkTone": "var(--ink-200)",
+        "pairLabel": "No inventory move needed",
+        "pairTone": "var(--ink-500)",
+        "pairWeight": 400,
+        "pairDim": 1,
+        "pairChipShow": "none",
+        "pairId": "",
+        "pairMeta": "stays $3K above the rank-defense floor",
+        "cmStr": "+$0.1K",
+        "cmTone": "var(--ink-900)",
+        "coverStr": "—",
+        "coverTone": "var(--ink-400)",
+        "coverMeta": "not stock-bound",
+        "togLabel": "Drop",
+        "togBg": "var(--ink-0)",
+        "togTone": "var(--ink-500)",
+        "togBorder": "var(--ink-200)"
+      }
+    ],
+    "effects": [
+      {
+        "name": "TikTok",
+        "hue": "var(--mod-margin)",
+        "from": "$9K",
+        "to": "$27K",
+        "tone": "var(--green-700)",
+        "bound": "$-3K to cap"
+      },
+      {
+        "name": "Meta",
+        "hue": "var(--mod-discover)",
+        "from": "$22K",
+        "to": "$25K",
+        "tone": "var(--green-700)",
+        "bound": "$3K to cap"
+      },
+      {
+        "name": "Walmart DSP",
+        "hue": "var(--mod-hubs)",
+        "from": "$18K",
+        "to": "$6K",
+        "tone": "var(--rose-700)",
+        "bound": "at floor"
+      },
+      {
+        "name": "Google",
+        "hue": "var(--r-blue-500)",
+        "from": "$26K",
+        "to": "$20K",
+        "tone": "var(--rose-700)",
+        "bound": "$14K to cap"
+      },
+      {
+        "name": "Amazon SP",
+        "hue": "var(--mod-ads)",
+        "from": "$52K",
+        "to": "$49K",
+        "tone": "var(--rose-700)",
+        "bound": "$13K to cap"
+      }
+    ],
+    "arbLog": [
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "time": "06:22",
+        "said": "Proposed +$25K into TikTok Spark. Marginal CM per dollar is 2.31 against 0.88 on Walmart DSP.",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+      },
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "time": "06:23",
+        "said": "Capped at +$18K. At +$25K the two scaled SKUs fall to 2.4 wk of cover, under the guardrail. Offered transfer T-142.",
+        "hue": "var(--mod-inventory)",
+        "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)"
+      },
+      {
+        "initials": "Ar",
+        "name": "Arbiter",
+        "time": "06:24",
+        "said": "Took the cap and paired the shift with T-142 and T-149. Priced the disagreement at $4.1K of CM foregone.",
+        "hue": "var(--ink-700)",
+        "tint": "var(--ink-100)"
+      }
+    ],
+    "guards": [
+      {
+        "text": "Cover on scaled SKUs holds at 4.1 wk, above the 3 wk guardrail.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Envelope balances at $0 net change against the $130K month.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      },
+      {
+        "text": "Every channel stays inside its floor and cap. Amazon holds $8.4K of rank defense.",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "bg": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 40%, white)"
+      }
+    ],
+    "cadences": [
+      {
+        "label": "Weekly · Monday 06:00",
+        "meta": "re-reads curves and cover, proposes deltas",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "dot": "var(--ink-300)",
+        "fill": "transparent",
+        "weight": 500
+      },
+      {
+        "label": "Bi-weekly · Monday 06:00",
+        "meta": "steadier pacing, slower to react",
+        "bg": "color-mix(in oklab, var(--mod-ads) 8%, white)",
+        "border": "color-mix(in oklab, var(--mod-ads) 34%, white)",
+        "dot": "var(--mod-ads)",
+        "fill": "var(--mod-ads)",
+        "weight": 600
+      },
+      {
+        "label": "On 20% mROAS drift",
+        "meta": "event-driven, no fixed schedule",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)",
+        "dot": "var(--ink-300)",
+        "fill": "transparent",
+        "weight": 500
+      }
+    ],
+    "onApprove": [
+      {
+        "label": "Budget changes applied via platform APIs",
+        "value": "5 channels",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Transfer orders created through story 9.3",
+        "value": "2 transfers",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Re-optimization cadence set",
+        "value": "bi-weekly",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Projected CM logged for the variance check",
+        "value": "+$11.8K",
+        "tone": "var(--ink-700)"
+      }
+    ],
+    "footerStatus": "Decide · paired slate · 5 moves",
+    "approveShow": "inline-flex",
+    "blockShow": "none",
+    "blockLabel": "Blocked by coverage guardrail",
+    "approveLabel": "Approve paired slate"
+  }
+}

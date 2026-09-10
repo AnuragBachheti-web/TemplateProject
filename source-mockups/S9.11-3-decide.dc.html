@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.11-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-margin);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-margin) 12%, white);color:var(--mod-margin);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Repricing · S9.11</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Margin-protective repricing — 41 SKUs · +$9.7K/mo</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">41 SKUs · +$9.7K/mo at 82% ± 7</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Tested headroom ≥$1.10 · <4% volume loss</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Pr" size="sm" color="var(--mod-margin)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--mod-margin)"></span>
+          Lens: Margin
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-margin);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Pricer, Controller governs
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Elasticity Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Competitive Headroom Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.11-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.11-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.11-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-margin) 10%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-margin);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.11-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;display:flex;align-items:stretch;gap:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-margin) 26%, white);border-radius:var(--r-lg);overflow:hidden">
+          <div style="flex:1;min-width:0;padding:20px 22px;background:linear-gradient(180deg, color-mix(in oklab, var(--mod-margin) 6%, white), var(--ink-0))">
+            <div style="display:flex;align-items:center;gap:9px">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mod-margin)">Realify recommends</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:var(--r-full);background:var(--green-50);border:1px solid color-mix(in oklab, var(--green-500) 30%, white);font-family:var(--font-mono);font-size:9.5px;color:var(--green-700)">
+                <i class="fa-solid fa-circle-check" style="font-size:9px"></i>{{ confBadge }}
+              </span>
+            </div>
+            <div style="margin-top:10px;display:flex;align-items:baseline;gap:12px">
+              <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:56px;line-height:1;letter-spacing:-0.03em;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ heroValue }}</span>
+              <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:22px;letter-spacing:-0.01em;color:var(--ink-500)">/ month</span>
+            </div>
+            <p style="margin:12px 0 0;max-width:620px;font-size:13.5px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">{{ tradeoff }}</p>
+          </div>
+          <div style="flex-shrink:0;width:300px;padding:20px 22px;border-left:1px solid var(--ink-100);display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Max volume loss you accept</span>
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:500;font-size:34px;line-height:1;letter-spacing:-0.02em;color:var(--mod-margin);font-variant-numeric:tabular-nums">{{ tolLabel }}</span>
+              <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-400)">per SKU · predicted</span>
+            </div>
+            <input type="range" min="1" max="8" step="0.5" value="{{ tol }}" onChange="{{ onTol }}" onInput="{{ onTol }}" style="width:100%;accent-color:var(--mod-margin);cursor:pointer" />
+            <div style="display:flex;align-items:center;justify-content:space-between;font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;color:var(--ink-400)">
+              <span>1%</span><span>cautious</span><span>8%</span>
+            </div>
+            <div style="margin-top:2px;padding-top:12px;border-top:1px dashed var(--ink-200);display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{ liveStats }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex;align-items:baseline;gap:9px">
+                  <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ s.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Price slate</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ slateMeta }}</span>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:8px">
+              <button type="button" onClick="{{ onAll }}" style="height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-mono);font-size:9.5px;color:var(--ink-600);cursor:pointer">select all in tolerance</button>
+              <button type="button" onClick="{{ onNone }}" style="height:26px;padding:0 10px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-family:var(--font-mono);font-size:9.5px;color:var(--ink-600);cursor:pointer">clear</button>
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:30px minmax(0,1fr) 152px 62px 118px 96px 92px 116px;align-items:center;gap:9px;padding:9px 16px;background:var(--ink-25);border-bottom:1px solid var(--ink-100)">
+            <span></span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">SKU</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Old → new</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Δ%</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Volume Δ</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">CM / mo</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Conf.</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400);text-align:right">Roll / test</span>
+          </div>
+          <sc-for list="{{ slate }}" as="r" hint-placeholder-count="9">
+            <div style="display:grid;grid-template-columns:30px minmax(0,1fr) 152px 62px 118px 96px 92px 116px;align-items:center;gap:9px;padding:10px 16px;border-bottom:1px solid var(--ink-100);background:{{ r.bg }};opacity:{{ r.dim }}">
+              <button type="button" onClick="{{ r.onToggle }}" style="width:20px;height:20px;border-radius:var(--r-xs);border:1.5px solid {{ r.boxBorder }};background:{{ r.boxBg }};color:var(--ink-0);cursor:{{ r.cursor }};display:grid;place-items:center;padding:0">
+                <i class="fa-solid fa-check" style="font-size:9px;opacity:{{ r.checkOpacity }}"></i>
+              </button>
+              <div style="min-width:0">
+                <div style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900)">{{ r.sku }}</div>
+                <div style="margin-top:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                  <span style="font-size:11px;color:var(--ink-500);text-wrap:pretty">{{ r.name }}</span>
+                  <span style="display:{{ r.tagShow }};align-items:center;gap:5px;height:18px;padding:0 7px;border-radius:var(--r-full);background:{{ r.tagTint }};font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.04em;color:{{ r.tagTone }}">{{ r.tag }}</span>
+                </div>
+              </div>
+              <span style="font-family:var(--font-mono);font-size:12px;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ r.prices }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ r.pct }}</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:{{ r.volTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.vol }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ r.cmTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.cm }}</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:{{ r.confTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.conf }}</span>
+              <div style="display:flex;justify-content:flex-end;gap:0;border:1px solid var(--ink-200);border-radius:var(--r-full);overflow:hidden;width:fit-content;margin-left:auto">
+                <sc-for list="{{ r.modes }}" as="m" hint-placeholder-count="2">
+                  <button type="button" onClick="{{ m.onPick }}" style="height:24px;padding:0 10px;border:none;background:{{ m.bg }};font-family:var(--font-mono);font-size:9.5px;font-weight:{{ m.weight }};color:{{ m.tone }};cursor:pointer">{{ m.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--ink-25)">
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ restNote }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">Volume Δ shown as P10–P90 band</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-margin) 24%, white);border-radius:var(--r-lg);padding:16px 18px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mod-margin)">Approval zone</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ zoneMeta }}</span>
+          </div>
+          <div style="margin-top:13px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+            <sc-for list="{{ actions }}" as="a" hint-placeholder-count="4">
+              <a href="{{ a.href }}" style="display:flex;flex-direction:column;gap:6px;padding:13px 14px;border:1px solid {{ a.border }};border-radius:var(--r-md);background:{{ a.bg }};text-decoration:none" style-hover="border-color:{{ a.hoverBorder }}">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <i class="{{ a.icon }}" style="font-size:11px;color:{{ a.tone }}"></i>
+                  <span style="font-size:13px;font-weight:600;color:{{ a.titleTone }}">{{ a.title }}</span>
+                </div>
+                <span style="font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ a.note }}</span>
+              </a>
+            </sc-for>
+          </div>
+          <div style="margin-top:13px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--r-md);background:color-mix(in oklab, var(--mod-margin) 6%, white);border:1px solid color-mix(in oklab, var(--mod-margin) 24%, white)">
+            <i class="fa-solid fa-shield-halved" style="margin-top:2px;font-size:12px;color:var(--mod-margin)"></i>
+            <div style="min-width:0">
+              <div style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Auto-revert arms on approval — velocity −8% within 14d restores the prior price</div>
+              <p style="margin:4px 0 0;max-width:820px;font-size:12px;line-height:1.55;color:var(--ink-700);text-wrap:pretty">Realify watches units per day per SKU against the pre-change baseline. A SKU that loses more than 8% of velocity inside fourteen days is written back to its old price automatically and reported here — no approval needed for the revert, because reverting is always the safe direction.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+        <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">As selected</span>
+        <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ summary }}" as="s" hint-placeholder-count="6">
+            <div style="display:flex;align-items:baseline;gap:9px;padding-bottom:9px;border-bottom:1px dashed var(--ink-200)">
+              <span style="flex:1;min-width:0;font-size:12.5px;color:var(--ink-700);text-wrap:pretty">{{ s.label }}</span>
+              <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Rule check</span>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--r-sm);background:{{ c.bg }};border:1px solid {{ c.border }}">
+                <i class="{{ c.icon }}" style="font-size:11px;color:{{ c.tone }}"></i>
+                <span style="flex:1;min-width:0;font-size:12px;line-height:1.45;color:{{ c.tone }};text-wrap:pretty">{{ c.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Tolerance effect</span>
+          <p style="margin:8px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">Where the slider sits relative to the whole candidate set.</p>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ ladder }}" as="l" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="flex-shrink:0;width:34px;font-family:var(--font-mono);font-size:10px;color:{{ l.tone }};font-variant-numeric:tabular-nums">{{ l.tol }}</span>
+                <div style="flex:1;min-width:0;height:5px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <div style="width:{{ l.pct }};height:100%;border-radius:var(--r-full);background:{{ l.tone }}"></div>
+                </div>
+                <span style="flex-shrink:0;width:76px;text-align:right;font-family:var(--font-mono);font-size:10px;font-weight:{{ l.weight }};color:{{ l.tone }};font-variant-numeric:tabular-nums">{{ l.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--ink-200)">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Tests routed</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ testCopy }}</p>
+          <span data-nav="unbuilt" style="margin-top:10px;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid color-mix(in oklab, var(--r-blue-500) 34%, white);background:var(--r-blue-50);font-size:12px;font-weight:500;color:var(--r-blue-600)" style-hover="background:color-mix(in oklab, var(--r-blue-500) 14%, white);color:var(--r-blue-600)">
+            <i class="fa-solid fa-flask" style="font-size:9px"></i>Hypothesis Register
+          </span>
+        </div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ footerStatus }}</span>
+      <a href="S9.11-2-analyze.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--ink-200);font-size:13.5px;font-weight:500;color:var(--ink-600)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+        <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to Analyze
+      </a>
+      <a href="S9.11-4-execute.dc.html" style="display:{{ approveShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        {{ approveLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+      <span style="display:{{ blockShow }};align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--rose-50);border:1px solid var(--rose-500);color:var(--rose-700);font-size:14px;font-weight:500">
+        <i class="fa-solid fa-lock" style="font-size:11px"></i>Confidence floor blocks approval
+      </span>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = { tol: 4, off: {}, mode: {} };
+
+  SLATE() {
+    return [
+      { sku: 'NW-KNF-0480', name: 'Alder chef knife 8in', old: 68.00, nu: 71.99, loss: 3.4, p10: 5.1, p90: 1.8, cm: 1240, conf: 88, tag: 'Buy Box sensitive · micro-step 2/3', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)', pref: 'roll' },
+      { sku: 'NW-CER-1120', name: 'Ridgeline stoneware bowl', old: 24.00, nu: 26.99, loss: 2.2, p10: 3.6, p90: 1.0, cm: 1080, conf: 84, tag: '', pref: 'roll' },
+      { sku: 'NW-PAN-2210', name: 'Carbon steel pan 10in', old: 54.00, nu: 57.99, loss: 3.9, p10: 6.2, p90: 1.9, cm: 980, conf: 81, tag: 'Buy Box sensitive · parity watch', tagTint: 'var(--rose-50)', tagTone: 'var(--rose-700)', pref: 'roll' },
+      { sku: 'NW-GLS-3390', name: 'Cut-glass tumbler set of 4', old: 38.00, nu: 40.99, loss: 3.8, p10: 6.4, p90: 1.2, cm: 610, conf: 64, tag: 'reaches significance ~9d', tagTint: 'var(--r-blue-50)', tagTone: 'var(--r-blue-600)', pref: 'test' },
+      { sku: 'NW-TEX-5180', name: 'Quilted oven mitt pair', old: 19.00, nu: 20.99, loss: 1.8, p10: 2.9, p90: 0.8, cm: 740, conf: 86, tag: '', pref: 'roll' },
+      { sku: 'NW-CER-1210', name: 'Ridgeline mug 14oz', old: 16.00, nu: 17.99, loss: 2.4, p10: 3.8, p90: 1.1, cm: 890, conf: 85, tag: '', pref: 'roll' },
+      { sku: 'NW-TEX-6040', name: 'Linen apron · natural', old: 42.00, nu: 43.99, loss: 2.1, p10: 3.4, p90: 0.9, cm: 420, conf: 79, tag: 'MAP ceiling $43.99', tagTint: 'var(--ink-100)', tagTone: 'var(--ink-600)', pref: 'roll' },
+      { sku: 'NW-WOD-7710', name: 'Walnut cutting board L', old: 78.00, nu: 80.99, loss: 3.6, p10: 6.8, p90: 1.6, cm: 560, conf: 61, tag: 'prior only', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)', pref: 'test' },
+      { sku: 'NW-BRD-8820', name: 'Sourdough proofing basket', old: 29.00, nu: 31.99, loss: 6.2, p10: 11.4, p90: 2.1, cm: 480, conf: 72, tag: 'over tolerance at 4%', tagTint: 'var(--rose-50)', tagTone: 'var(--rose-700)', pref: 'roll' },
+    ];
+  }
+
+  modeOf(r) { return this.state.mode[r.sku] || r.pref; }
+  inTol(r) { return r.loss <= this.state.tol; }
+  isOn(r) { return this.inTol(r) && !this.state.off[r.sku]; }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const segTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const tol = this.state.tol;
+    const slate = this.SLATE();
+    const on = slate.filter((r) => this.isOn(r));
+    // the visible 9 rows stand for 41; scale the hidden remainder by tolerance
+    const hiddenAll = 33;
+    const hiddenIn = Math.max(0, Math.min(hiddenAll, Math.round(hiddenAll * Math.min(1, (tol - 0.6) / 3.4))));
+    const count = on.length + hiddenIn;
+    const cmVisible = on.reduce((a, r) => a + (this.modeOf(r) === 'test' ? Math.round(r.cm * 0.5) : r.cm), 0);
+    const cmHidden = hiddenIn * 114;
+    const total = cmVisible + cmHidden;
+    const conf = Math.max(58, Math.min(88, Math.round(90 - tol * 2.1)));
+    const band = Math.max(4, Math.round(3 + tol * 1.1));
+    const avgLoss = count ? (on.reduce((a, r) => a + r.loss, 0) + hiddenIn * Math.min(tol, 3.1)) / count : 0;
+    const tests = on.filter((r) => this.modeOf(r) === 'test').length;
+    const k = (n) => (n >= 1000 ? '+$' + (n / 1000).toFixed(1) + 'K' : '+$' + n);
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? segTone : 'var(--ink-200)' })),
+      heroValue: k(total),
+      confBadge: conf + '% ± ' + band,
+      tradeoff: count + ' SKUs raised a median 5.4%, trading about ' + avgLoss.toFixed(1) + '% of predicted units for ' + k(total) + ' of contribution margin a month. ' + (tests ? tests + ' of them go out as split tests rather than rolls, so their share of that total only lands if the test wins.' : 'Every SKU in the slate rolls straight out — no tests are queued at this tolerance.'),
+      tol: tol,
+      tolLabel: tol.toFixed(1) + '%',
+      onTol: (e) => this.setState({ tol: parseFloat(e.target.value) }),
+      liveStats: [
+        { label: 'SKUs selected', value: count + ' of 41', tone: 'var(--ink-900)' },
+        { label: 'CM per month', value: k(total), tone: 'var(--green-700)' },
+        { label: 'Confidence', value: conf + '% ± ' + band, tone: conf >= 70 ? 'var(--green-700)' : 'var(--amber-700)' },
+      ],
+      slateMeta: on.length + ' of 9 shown selected · ' + hiddenIn + ' of 33 more in tolerance',
+      restNote: '+' + hiddenAll + ' further SKUs follow the same rules · ' + hiddenIn + ' currently in tolerance',
+      onAll: () => this.setState({ off: {} }),
+      onNone: () => this.setState({ off: Object.fromEntries(slate.map((r) => [r.sku, true])) }),
+      slate: slate.map((r) => {
+        const sel = this.isOn(r);
+        const inTol = this.inTol(r);
+        const m = this.modeOf(r);
+        const cm = m === 'test' ? Math.round(r.cm * 0.5) : r.cm;
+        return {
+          sku: r.sku, name: r.name,
+          prices: '$' + r.old.toFixed(2) + ' → $' + r.nu.toFixed(2),
+          pct: '+' + (((r.nu - r.old) / r.old) * 100).toFixed(1) + '%',
+          vol: '−' + r.loss.toFixed(1) + '% · −' + r.p90.toFixed(1) + '–' + r.p10.toFixed(1),
+          volTone: r.loss > tol ? 'var(--rose-700)' : r.loss > 3 ? 'var(--amber-700)' : 'var(--ink-600)',
+          cm: sel ? '+$' + cm.toLocaleString('en-US') : '—',
+          cmTone: sel ? 'var(--green-700)' : 'var(--ink-400)',
+          conf: r.conf + '%',
+          confTone: r.conf >= 70 ? 'var(--green-700)' : 'var(--amber-700)',
+          tag: inTol ? r.tag : 'over tolerance at ' + tol.toFixed(1) + '%',
+          tagShow: (inTol ? r.tag : true) ? 'inline-flex' : 'none',
+          tagTint: inTol ? (r.tagTint || 'var(--ink-100)') : 'var(--rose-50)',
+          tagTone: inTol ? (r.tagTone || 'var(--ink-600)') : 'var(--rose-700)',
+          bg: sel ? 'color-mix(in oklab, var(--mod-margin) 4%, white)' : 'var(--ink-0)',
+          dim: inTol ? 1 : 0.45,
+          boxBg: sel ? 'var(--mod-margin)' : 'var(--ink-0)',
+          boxBorder: sel ? 'var(--mod-margin)' : inTol ? 'var(--ink-300)' : 'var(--ink-200)',
+          checkOpacity: sel ? 1 : 0,
+          cursor: inTol ? 'pointer' : 'default',
+          onToggle: () => { if (inTol) this.setState((st) => ({ off: Object.assign({}, st.off, { [r.sku]: !st.off[r.sku] }) })); },
+          modes: [
+            { key: 'roll', label: 'Roll' },
+            { key: 'test', label: 'Test' },
+          ].map((o) => ({
+            label: o.label,
+            bg: m === o.key ? (o.key === 'test' ? 'var(--r-blue-50)' : 'color-mix(in oklab, var(--mod-margin) 14%, white)') : 'var(--ink-0)',
+            tone: m === o.key ? (o.key === 'test' ? 'var(--r-blue-600)' : 'var(--mod-margin)') : 'var(--ink-500)',
+            weight: m === o.key ? 700 : 500,
+            onPick: () => this.setState((st) => ({ mode: Object.assign({}, st.mode, { [r.sku]: o.key }) })),
+          })),
+        };
+      }),
+      zoneMeta: mode === 'Suggest' ? 'Dial: Suggest · your approval is required for every write' : 'Dial: ' + mode,
+      actions: [
+        { title: 'Approve ' + count + '-SKU slate', note: 'Writes all selected prices in parity-safe order and arms auto-revert.', href: 'S9.11-4-execute.dc.html', icon: 'fa-solid fa-check', tone: 'var(--ink-0)', titleTone: 'var(--ink-0)', bg: 'var(--ink-900)', border: 'var(--ink-900)', hoverBorder: 'var(--r-blue-500)' },
+        { title: 'Approve subset', note: 'Take the ' + Math.max(1, Math.round(count * 0.45)) + ' highest-confidence SKUs now, hold the rest for next week.', href: 'S9.11-4-execute.dc.html', icon: 'fa-solid fa-layer-group', tone: 'var(--mod-margin)', titleTone: 'var(--ink-900)', bg: 'var(--ink-0)', border: 'color-mix(in oklab, var(--mod-margin) 30%, white)', hoverBorder: 'var(--mod-margin)' },
+        { title: 'Modify prices', note: 'Edit any new price by hand. Rounding, MAP and parity are re-checked on save.', href: 'S9.11-3-decide.dc.html', icon: 'fa-solid fa-pen', tone: 'var(--ink-600)', titleTone: 'var(--ink-900)', bg: 'var(--ink-0)', border: 'var(--ink-200)', hoverBorder: 'var(--ink-400)' },
+        { title: 'Send back to Analyze', note: 'Reject the slate with a note. Realify re-reads bands and elasticity.', href: 'S9.11-2-analyze.dc.html', icon: 'fa-solid fa-rotate-left', tone: 'var(--ink-600)', titleTone: 'var(--ink-900)', bg: 'var(--ink-0)', border: 'var(--ink-200)', hoverBorder: 'var(--ink-400)' },
+      ],
+      summary: [
+        { label: 'SKUs selected', value: count + ' of 41', tone: 'var(--ink-900)' },
+        { label: 'CM per month', value: k(total), tone: 'var(--green-700)' },
+        { label: 'Rolls · tests', value: (count - tests) + ' · ' + tests, tone: 'var(--ink-900)' },
+        { label: 'Median raise', value: '+5.4%', tone: 'var(--ink-900)' },
+        { label: 'Predicted volume loss', value: '−' + avgLoss.toFixed(1) + '%', tone: avgLoss > 4 ? 'var(--rose-700)' : 'var(--amber-700)' },
+        { label: 'Auto-revert', value: 'arms on approval', tone: 'var(--mod-margin)' },
+      ],
+      checks: [
+        { text: 'Every selected price clears its MAP ceiling and rounds to x.99.', ok: true },
+        { text: conf >= 70 ? 'Slate confidence ' + conf + '% is above the 70% floor.' : 'Slate confidence ' + conf + '% is under the 70% floor — tighten the tolerance or route more SKUs to test.', ok: conf >= 70 },
+        { text: 'Cross-channel parity holds at every step · Amazon is written last.', ok: true },
+        { text: tests ? tests + ' SKU' + (tests === 1 ? '' : 's') + ' routed to test rather than rolled — significance reads in about nine days.' : 'No SKUs routed to test at this tolerance.', ok: true },
+      ].map((c) => ({
+        text: c.text,
+        icon: c.ok ? 'fa-solid fa-circle-check' : 'fa-solid fa-triangle-exclamation',
+        tone: c.ok ? 'var(--green-700)' : 'var(--rose-700)',
+        bg: c.ok ? 'var(--green-50)' : 'var(--rose-50)',
+        border: c.ok ? 'color-mix(in oklab, var(--green-500) 40%, white)' : 'color-mix(in oklab, var(--rose-500) 40%, white)',
+      })),
+      ladder: [2, 3, 4, 5, 6].map((t) => {
+        const n = Math.round(41 * Math.min(1, (t - 0.6) / 3.4));
+        const v = Math.round(n * 237);
+        return {
+          tol: t.toFixed(1) + '%',
+          value: n + ' · $' + (v / 1000).toFixed(1) + 'K',
+          pct: Math.round((n / 41) * 100) + '%',
+          tone: Math.abs(t - tol) < 0.5 ? 'var(--mod-margin)' : 'var(--ink-400)',
+          weight: Math.abs(t - tol) < 0.5 ? 700 : 500,
+        };
+      }),
+      testCopy: tests
+        ? tests + ' SKU' + (tests === 1 ? '' : 's') + ' go out as 50/50 split tests on DTC. Each opens a hypothesis with its predicted lift, so the read is recorded whether it wins or loses.'
+        : 'Nothing is routed to test at this tolerance. Prior-only SKUs still carry wide intervals — routing them to test is usually the better trade.',
+      footerStatus: 'Decide · ' + count + ' SKUs · ' + k(total) + '/mo · ' + conf + '% ± ' + band + ' · tolerance ' + tol.toFixed(1) + '%',
+      approveLabel: 'Approve ' + count + '-SKU slate',
+      approveShow: conf >= 70 ? 'inline-flex' : 'none',
+      blockShow: conf >= 70 ? 'none' : 'inline-flex',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

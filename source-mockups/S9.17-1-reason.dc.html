@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S9.17-1 Reason" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-inventory);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-inventory) 12%, white);color:var(--mod-inventory);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Supplier performance · S9.17</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Supplier K +8% cost notice — should-cost says +2.9%</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--ink-800);font-variant-numeric:tabular-nums">Response due Oct 4 · 90-day notice clause</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">6 suppliers · $2.84M annual spend</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-inventory)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-inventory)"></span>Lens: Inventory · Margin · Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-inventory);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Sourcer + Navigator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Supplier Scorecard Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Should-Cost Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S9.17-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-inventory) 10%, white);border:1px solid color-mix(in oklab, var(--mod-inventory) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-inventory);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">1</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.17-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">2</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.17-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S9.17-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 1 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What we are deciding</span>
+          <p style="margin:9px 0 0;font-size:14px;line-height:1.6;color:var(--ink-700);text-wrap:pretty">A supplier has asked for 8% and we have twelve days to answer. The question is not whether 8% feels like a lot — it is whether 8% is what the market actually moved, and what our position is if we say no. This step sets the performance standards each tier is held to and the terms we cannot trade away.</p>
+          <div style="margin-top:13px;display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:var(--r-md);background:color-mix(in oklab, var(--mod-inventory) 8%, white);border:1px solid color-mix(in oklab, var(--mod-inventory) 26%, white)">
+            <i class="fa-solid fa-scale-unbalanced" style="font-size:12px;color:var(--mod-inventory)"></i>
+            <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">A cost increase is judged against the market, not against what we paid last year</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-500);flex-shrink:0">should-cost built from indices + lanes</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 10px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Performance standards by tier</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">tier is set by spend share and criticality, reviewed annually</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:0 14px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Standard</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mod-inventory);text-align:right">Tier 1 · strategic</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Tier 2 · core</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Tier 3 · tactical</span>
+          </div>
+          <sc-for list="{{ standards }}" as="s" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:0 14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ s.label }}</span>
+                <span style="font-size:11px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ s.note }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ s.t1 }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ s.t2 }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ s.t3 }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:11px 0 8px;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Two suppliers are outside their tier floors today, which is context for any price conversation: a supplier asking for more money while missing OTD has a weaker case than the spreadsheet suggests.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:16px 18px 12px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Suppliers in scope</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">$2.84M annual spend · 2 strategic flags · 9 open POs</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1.4fr 62px 84px 78px 82px 1fr;gap:0 12px;padding-bottom:7px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Supplier</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Tier</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Spend</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Share</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Terms</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Standing</span>
+          </div>
+          <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:1.4fr 62px 84px 78px 82px 1fr;gap:0 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="display:flex;align-items:center;gap:7px">
+                  <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ s.name }}</span>
+                  <sc-if value="{{ s.strategic }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;gap:4px;height:19px;padding:0 7px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-inventory) 12%, white);font-family:var(--font-mono);font-size:8.5px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--mod-inventory)">
+                      <i class="fa-solid fa-star" style="font-size:7.5px"></i>strategic
+                    </span>
+                  </sc-if>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ s.scope }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);font-variant-numeric:tabular-nums">{{ s.tier }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ s.spend }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ s.share }}</span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-600);text-align:right;font-variant-numeric:tabular-nums">{{ s.terms }}</span>
+              <span style="min-width:0;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:var(--r-full);background:{{ s.tint }};font-size:11px;font-weight:500;color:{{ s.tone }};justify-self:start">{{ s.standing }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-200);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-lock" style="font-size:11px;color:var(--ink-500)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Locked</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">not negotiable in Decide</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px">
+            <sc-for list="{{ locked }}" as="l" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="fa-solid fa-lock" style="font-size:9px;color:var(--ink-300);margin-top:4px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ l.label }}</span>
+                  <span style="font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ l.detail }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:13px;display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--ink-100)">
+            <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+              <span style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-25);font-size:12px;color:var(--ink-700)">
+                <i class="{{ c.icon }}" style="font-size:10px;color:var(--ink-400)"></i>{{ c.label }}
+              </span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What raised this</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ trigger }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ t.when }}</span>
+                <span style="font-size:12px;line-height:1.5;color:var(--ink-700);text-wrap:pretty">{{ t.what }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Supplier K · contract</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber-700)">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--amber-500)"></span>187 days left
+            </span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ contract }}" as="c" hint-placeholder-count="6">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ c.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ c.tone }};font-variant-numeric:tabular-nums">{{ c.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Open POs · must be honoured</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ pos }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:12px;color:var(--ink-700)">{{ p.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ p.note }}</span>
+                </span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--ink-100);display:flex;align-items:baseline;gap:9px">
+            <span style="flex:1;font-size:12px;font-weight:600;color:var(--ink-900)">Total committed</span>
+            <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">$412K</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Agents on this</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ agents }}" as="a" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:10px">
+                <span style="flex-shrink:0;width:24px;height:24px;border-radius:var(--r-xs);background:{{ a.tint }};color:{{ a.hue }};display:grid;place-items:center">
+                  <i class="{{ a.icon }}" style="font-size:10px"></i>
+                </span>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ a.name }}</span>
+                  <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ a.role }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Next step does</span>
+          <p style="margin:9px 0 0;font-size:12px;line-height:1.55;color:var(--ink-500);text-wrap:pretty">Puts the six scorecards side by side with their trend, plots actual cost drift against a should-cost benchmark built from material indices and freight lanes, maps concentration risk, and sizes our negotiating leverage against the alternatives.</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">Reason · 6 standards across 3 tiers · 6 suppliers · $412K of open POs locked</span>
+      <a href="S9.17-2-analyze.dc.html" style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+        Continue to Analyze<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+
+      standards: [
+        { label: 'On-time delivery', note: 'against confirmed date, not requested date', t1: '≥ 96%', t2: '≥ 93%', t3: '≥ 90%' },
+        { label: 'Defect rate', note: 'parts per million at receiving inspection', t1: '≤ 800', t2: '≤ 1,500', t3: '≤ 2,500' },
+        { label: 'Responsiveness SLA', note: 'first substantive reply to a sourcing request', t1: '24 hrs', t2: '48 hrs', t3: '72 hrs' },
+        { label: 'Payment terms', note: 'target we hold in every renewal', t1: 'Net 60', t2: 'Net 45', t3: 'Net 30' },
+        { label: 'Price-change notice', note: 'contractual minimum before a new price applies', t1: '90 days', t2: '60 days', t3: '30 days' },
+        { label: 'Cost transparency', note: 'material, labour and freight broken out on request', t1: 'required', t2: 'requested', t3: 'not required' },
+      ],
+
+      suppliers: [
+        { name: 'Kessler Metalworks (K)', scope: 'carbon steel pans, griddles · 4 single-source SKUs', tier: 'Tier 1', spend: '$880K', share: '31%', terms: 'Net 45', strategic: true, standing: '+8% notice · OTD 94.1%', tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+        { name: 'Arcadia Enamelworks (A)', scope: 'enamel cast iron · 2 single-source SKUs', tier: 'Tier 1', spend: '$682K', share: '24%', terms: 'Net 60', strategic: true, standing: 'all standards met', tint: 'var(--green-50)', tone: 'var(--green-700)' },
+        { name: 'Meridian Filtration (M)', scope: 'filter cartridges, pitchers', tier: 'Tier 2', spend: '$511K', share: '18%', terms: 'Net 45', strategic: false, standing: 'OTD 89.2% · below floor', tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+        { name: 'Tsuyo Blades (T)', scope: 'knives, whetstones', tier: 'Tier 2', spend: '$398K', share: '14%', terms: 'Net 30', strategic: false, standing: 'terms below target', tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+        { name: 'Verdant Woodcraft (V)', scope: 'utensils, boards', tier: 'Tier 3', spend: '$227K', share: '8%', terms: 'Net 30', strategic: false, standing: '3,140 PPM · above ceiling', tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+        { name: 'Pallas Packaging (P)', scope: 'cartons, inserts', tier: 'Tier 3', spend: '$142K', share: '5%', terms: 'Net 30', strategic: false, standing: 'all standards met', tint: 'var(--green-50)', tone: 'var(--green-700)' },
+      ],
+
+      locked: [
+        { label: 'Current contract terms', detail: 'Supplier K runs to Mar 31 with a 90-day price-change notice and a 500-unit MOQ. Nothing decided here overrides a signed term before it expires.' },
+        { label: 'Strategic-supplier flags', detail: 'K and A are flagged strategic: exit requires exec sign-off, and no exit is executed inside a quarter without a qualified alternate already producing.' },
+        { label: 'Open POs', detail: '$412K across 9 POs is committed. Any transition honours them in full — no cancellation to gain negotiating position.' },
+        { label: 'One conversation per supplier', detail: 'Realify drafts the counter and the message. A person sends it. No supplier ever receives anything Realify generated without a human reading it first.' },
+      ],
+
+      chips: [
+        { icon: 'fa-solid fa-file-contract', label: 'K: Net 45 · MOQ 500 · to Mar 31' },
+        { icon: 'fa-solid fa-star', label: 'K and A flagged strategic' },
+        { icon: 'fa-solid fa-clipboard-check', label: '9 open POs · $412K honoured' },
+        { icon: 'fa-solid fa-clock', label: '90-day notice clause on K' },
+        { icon: 'fa-solid fa-user-pen', label: 'No message sent without review' },
+        { icon: 'fa-solid fa-shield-halved', label: 'No exit without qualified alternate' },
+      ],
+
+      trigger: [
+        { when: 'Sep 22 · 09:14', what: 'Supplier K submitted a formal price notice of +8.0% across 14 SKUs, effective Jan 1 under the 90-day clause.' },
+        { when: 'Sep 22 · 09:40', what: 'Should-Cost Model reran the build-up from steel, freight and labour indices and returned +2.9% for the same basket.' },
+        { when: 'Sep 22 · 11:02', what: 'Scorecard Engine flagged two other suppliers outside tier floors and pinned all three to one card rather than three.' },
+      ],
+
+      contract: [
+        { label: 'Expires', value: 'Mar 31', tone: 'var(--amber-700)' },
+        { label: 'Payment terms', value: 'Net 45', tone: 'var(--ink-800)' },
+        { label: 'Terms target (Tier 1)', value: 'Net 60', tone: 'var(--ink-500)' },
+        { label: 'Price-change notice', value: '90 days', tone: 'var(--ink-800)' },
+        { label: 'MOQ', value: '500 units', tone: 'var(--ink-800)' },
+        { label: 'Volume commitment', value: 'none', tone: 'var(--rose-700)' },
+        { label: 'Exclusivity', value: 'none', tone: 'var(--green-700)' },
+      ],
+
+      pos: [
+        { label: 'PO-4417 · skillets', note: 'in production · lands Oct 18', value: '$164K' },
+        { label: 'PO-4429 · griddles', note: 'confirmed · lands Nov 6', value: '$118K' },
+        { label: 'PO-4436 · skillet 12"', note: 'confirmed · lands Nov 22', value: '$92K' },
+        { label: '6 smaller POs', note: 'across A, M, T and V', value: '$38K' },
+      ],
+
+      agents: [
+        { name: 'Sourcer', role: 'Owns supplier relationships, scorecards and qualification.', icon: 'fa-solid fa-handshake', hue: 'var(--mod-inventory)', tint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)' },
+        { name: 'Navigator', role: 'Prices the cash value of payment terms and volume commitments.', icon: 'fa-solid fa-compass', hue: 'var(--mod-hubs)', tint: 'color-mix(in oklab, var(--mod-hubs) 12%, white)' },
+        { name: 'Supplier Scorecard Engine', role: 'OTD, defect PPM and responsiveness per supplier, per quarter.', icon: 'fa-solid fa-gears', hue: 'var(--ink-600)', tint: 'var(--ink-100)' },
+        { name: 'Should-Cost Model', role: 'Rebuilds each basket from material indices, freight lanes and labour.', icon: 'fa-solid fa-gears', hue: 'var(--ink-600)', tint: 'var(--ink-100)' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

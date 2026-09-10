@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.5-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--mod-actions)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-actions) 12%, white);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ railDot }};box-shadow:0 0 0 3px {{ railGlow }}"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25;white-space:pre-line">{{ railLabel }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ pinMark }};border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Catalog integrity · S10.5</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Hero image replaced by third-party contribution — 41h ago</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ pinTone }};font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-actions)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-actions)"></span>Lens: Sales
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-actions);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Steward + Merchandiser
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Sync Integrity Monitor
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Stranded Inventory Scanner
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-300);background:var(--ink-100);font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-700)">
+          <i class="fa-solid fa-user-pen" style="font-size:9.5px;color:var(--ink-500)"></i>Silent revenue loss
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.5-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.5-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.5-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-actions) 10%, white);border:1px solid color-mix(in oklab, var(--mod-actions) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-actions);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.5-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">4</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-actions) 34%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-md);padding:17px 19px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-screwdriver-wrench" style="font-size:9px"></i>Repair slate
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-full);background:{{ recurTint }};font-family:var(--font-mono);font-size:9.5px;font-weight:600;color:{{ recurTone }}">{{ recurLabel }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">repairing the value and repairing the cause are different decisions</span>
+          </div>
+          <div style="margin-top:13px;display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap">
+            <span style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:44px;line-height:1;letter-spacing:-0.03em;color:var(--ink-900)">{{ heroValue }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">daily bleed stopped · {{ repairCount }} repairs</span>
+            </span>
+            <span style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-family:var(--font-mono);font-size:24px;font-weight:600;letter-spacing:-0.02em;color:var(--mod-actions);font-variant-numeric:tabular-nums">{{ capitalValue }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">stranded capital returned to sale</span>
+            </span>
+            <span style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-family:var(--font-mono);font-size:24px;font-weight:600;letter-spacing:-0.02em;color:{{ detectTone }};font-variant-numeric:tabular-nums">{{ detectValue }}</span>
+              <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">projected time to detect · critical fields</span>
+            </span>
+          </div>
+          <p style="margin:13px 0 0;font-size:13px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ heroLine }}</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:var(--ink-25);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Repairs · 8 drifts</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">each row picks a path — the cheap path fixes the value, the other fixes the cause</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-700)">{{ pathSummary }}</span>
+          </div>
+          <div style="padding:0 16px">
+            <sc-for list="{{ repairs }}" as="r" hint-placeholder-count="8">
+              <div style="padding:12px 0;border-bottom:1px solid var(--ink-50);display:grid;grid-template-columns:1fr 258px 78px;gap:0 14px;align-items:center">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:4px">
+                  <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ r.name }}</span>
+                    <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:{{ r.sevTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ r.sevTone }}">{{ r.severity }}</span>
+                    <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:var(--ink-100);font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-600)">{{ r.channel }}</span>
+                  </span>
+                  <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ r.chosenNote }}</span>
+                </span>
+                <span style="display:flex;flex-wrap:wrap;gap:5px;align-items:flex-start">
+                  <sc-for list="{{ r.options }}" as="o" hint-placeholder-count="2">
+                    <button type="button" onClick="{{ o.pick }}" style="min-height:26px;padding:4px 10px;border-radius:var(--r-full);border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:{{ o.weight }};text-align:left;line-height:1.3">{{ o.label }}</button>
+                  </sc-for>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-900);font-variant-numeric:tabular-nums">{{ r.cost }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:{{ r.recurTone }}">{{ r.recurState }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-actions) 26%, white);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-shield-halved" style="font-size:9px"></i>Prevention
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">the part that decides whether this card comes back next month</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:9px">
+            <sc-for list="{{ prevention }}" as="p" hint-placeholder-count="4">
+              <button type="button" onClick="{{ p.toggle }}" style="text-align:left;padding:11px 12px;border:1px solid {{ p.border }};border-radius:var(--r-sm);background:{{ p.bg }};cursor:{{ p.cursor }};font-family:var(--font-sans);display:flex;align-items:flex-start;gap:10px">
+                <span style="flex-shrink:0;margin-top:1px;width:18px;height:18px;border-radius:5px;border:1.5px solid {{ p.boxBorder }};background:{{ p.boxBg }};color:var(--ink-0);display:grid;place-items:center">
+                  <i class="{{ p.boxIcon }}" style="font-size:8.5px"></i>
+                </span>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+                  <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                    <span style="font-size:12px;font-weight:600;color:{{ p.nameTone }};text-wrap:pretty">{{ p.label }}</span>
+                    <sc-if value="{{ p.tag }}" hint-placeholder-val="{{ false }}">
+                      <span style="display:inline-flex;align-items:center;height:19px;padding:0 7px;border-radius:var(--r-full);background:{{ p.tagTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ p.tagTone }}">{{ p.tag }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ p.detail }}</span>
+                  <span style="font-family:var(--font-mono);font-size:10px;color:{{ p.effectTone }}">{{ p.effect }}</span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:var(--ink-25);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Stranded blocks · relist against removal</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--mod-actions)">{{ strandedSummary }}</span>
+          </div>
+          <div style="padding:0 16px">
+            <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="6">
+              <div style="padding:12px 0;border-bottom:1px solid var(--ink-50);display:grid;grid-template-columns:1fr 232px 92px;gap:0 14px;align-items:center">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:4px">
+                  <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ b.name }}</span>
+                    <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ b.units }} · {{ b.capital }} · {{ b.storage }}</span>
+                  </span>
+                  <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ b.chosenNote }}</span>
+                </span>
+                <span style="display:flex;flex-wrap:wrap;gap:5px">
+                  <sc-for list="{{ b.options }}" as="o" hint-placeholder-count="2">
+                    <button type="button" onClick="{{ o.pick }}" style="min-height:26px;padding:4px 10px;border-radius:var(--r-full);border:1px solid {{ o.border }};background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:{{ o.weight }};line-height:1.3">{{ o.label }}</button>
+                  </sc-for>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ b.recoverTone }};font-variant-numeric:tabular-nums">{{ b.recover }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-400)">{{ b.recoverLabel }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:11px 16px;background:var(--ink-25);border-top:1px solid var(--ink-100)">
+            <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Relisting is right where the block is stranded by a fixable defect. Where the units are stranded because demand moved on, the honest answer is the markdown ladder in 9.9 — not a relist that strands them again in six weeks.</span>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">What this slate buys</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ summary }}" as="s" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600);text-wrap:pretty">{{ s.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ s.tone }};font-variant-numeric:tabular-nums">{{ s.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:11px;padding-top:11px;border-top:1px solid var(--ink-100);display:flex;align-items:baseline;gap:9px">
+            <span style="flex:1;font-size:12px;font-weight:600;color:var(--ink-900)">Repairs that also fix the cause</span>
+            <span style="font-family:var(--font-mono);font-size:14px;font-weight:600;color:{{ causeTone }};font-variant-numeric:tabular-nums">{{ causeCount }}</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-stopwatch" style="font-size:11px;color:{{ detectTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Time to detect</span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="display:flex;align-items:baseline;gap:8px">
+                <span style="flex:1;font-size:11.5px;color:var(--ink-600)">Today</span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--rose-700)">9.4h</span>
+              </span>
+              <span style="height:7px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                <span style="display:block;height:100%;width:100%;background:var(--rose-500);border-radius:var(--r-full)"></span>
+              </span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="display:flex;align-items:baseline;gap:8px">
+                <span style="flex:1;font-size:11.5px;color:var(--ink-600)">With this slate</span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ detectTone }}">{{ detectValue }}</span>
+              </span>
+              <span style="height:7px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                <span style="display:block;height:100%;width:{{ detectPct }}%;background:{{ detectTone }};border-radius:var(--r-full);transition:width var(--dur-base) var(--ease-standard)"></span>
+              </span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="display:flex;align-items:baseline;gap:8px">
+                <span style="flex:1;font-size:11.5px;color:var(--ink-600)">Target</span>
+                <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:var(--green-700)">4.0h</span>
+              </span>
+              <span style="height:7px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                <span style="display:block;height:100%;width:43%;background:var(--green-500);border-radius:var(--r-full)"></span>
+              </span>
+            </div>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">{{ detectNote }}</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-actions) 30%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mod-actions)">Approval zone</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <a href="S10.5-4-execute.dc.html" style="display:flex;align-items:center;gap:9px;height:42px;padding:0 13px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:13px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--mod-actions);color:var(--ink-0)">
+              <i class="fa-solid fa-check" style="font-size:11px"></i>
+              <span style="display:flex;flex-direction:column;line-height:1.2">
+                <span>{{ approveLabel }}</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;opacity:0.75">{{ approveSub }}</span>
+              </span>
+            </a>
+            <a href="S10.5-4-execute.dc.html" style="display:flex;align-items:center;gap:9px;height:42px;padding:0 13px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13px;font-weight:500;color:var(--ink-800);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+              <i class="fa-solid fa-bolt" style="font-size:11px;color:var(--rose-700)"></i>
+              <span style="display:flex;flex-direction:column;line-height:1.2">
+                <span>Critical fields only, now</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">3 repairs · $500/day · under 30 minutes</span>
+              </span>
+            </a>
+            <a href="S10.5-2-analyze.dc.html" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 13px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:12.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+              <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Back to the drift grid
+            </a>
+          </div>
+          <p style="margin:11px 0 0;font-size:11px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ approvalNote }}</p>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">{{ footStatus }}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S10.5-4-execute.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--mod-actions);color:var(--ink-0);transform:translateY(-1px)">
+          Approve and repair<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":1024},"executionMode":{"editor":"enum","options":["Suggest","Approve","Auto"],"default":"Suggest","tsType":"'Suggest' | 'Approve' | 'Auto'","section":"Shell"}}'>
+class Component extends DCLogic {
+  state = {
+    paths: { D1: 'dispute', D2: 'rebuild_dispute', D3: 'replay_guard', D4: 'repush_lock', D5: 'patch_replay', D6: 'dispute', D7: 'repush', D8: 'repush' },
+    prevent: { imageLock: true, themeLock: true, monitorUpgrade: false, partialGuard: true },
+    blocks: { B1: 'relist', B2: 'relist', B3: 'relist', B4: 'relist', B5: 'relist', B6: 'markdown' },
+  };
+
+  repairDefs() {
+    return [
+      { id: 'D1', name: 'Hero image · ASIN B0Y', channel: 'Amazon', severity: 'critical', sev: 'critical', cost: 310,
+        options: [
+          { key: 'repush', label: 'Re-push only', note: 'Canonical asset restored in about 20 minutes. Nothing stops the same contribution being accepted again tomorrow.', recur: 'high' },
+          { key: 'dispute', label: 'Re-push + registry dispute', note: 'Asset restored immediately, then a brand-registry dispute filed with the PIM version history and entitlement. Three to five days to lock the field.', recur: 'low' },
+        ] },
+      { id: 'D2', name: 'Variation family · Enamel set', channel: 'Amazon', severity: 'critical', sev: 'critical', cost: 150,
+        options: [
+          { key: 'rebuild', label: 'Rebuild family', note: 'Structure restored and the review pool returns within about 24 hours. The seller who edited the parent can do it again.', recur: 'high' },
+          { key: 'rebuild_dispute', label: 'Rebuild + dispute', note: 'Family rebuilt, then a registry dispute over parent-edit rights. This is the drift most likely to recur without it.', recur: 'low' },
+        ] },
+      { id: 'D3', name: 'Quantity zeroed · Cast-iron Skillet', channel: 'Walmart', severity: 'high', sev: 'high', cost: 60,
+        options: [
+          { key: 'replay', label: 'Replay feed', note: 'Quantity restored in one cycle, about 20 minutes. The next timeout does the same thing again.', recur: 'high' },
+          { key: 'replay_guard', label: 'Replay + partial-file guard', note: 'Replay now, plus a guard that refuses to apply a partial inventory file. Kills the whole class, not this instance.', recur: 'low' },
+        ] },
+      { id: 'D4', name: 'Price drift · Filtration Pitcher', channel: 'Shopify', severity: 'critical', sev: 'critical', cost: 40,
+        options: [
+          { key: 'repush', label: 'Purge cache + re-push', note: 'Canonical price live in about 10 minutes. The cache can serve a stale price again on the next rebuild.', recur: 'medium' },
+          { key: 'repush_lock', label: 'Re-push + exclude price from cache', note: 'Price served live rather than from the theme cache. Slightly slower page, no stale prices.', recur: 'low' },
+        ] },
+      { id: 'D5', name: 'Titles truncated · 4 Walmart listings', channel: 'Walmart', severity: 'high', sev: 'high', cost: 30,
+        options: [
+          { key: 'repush', label: 'Re-push values', note: 'Titles corrected, then overwritten again by the same template on the next cycle. Repairs that undo themselves are worse than none.', recur: 'high' },
+          { key: 'patch_replay', label: 'Patch template + replay', note: 'Character limit corrected in the feed template, then replayed across all four. One fix, four listings, no recurrence.', recur: 'low' },
+        ] },
+      { id: 'D6', name: 'Bullet 3 replaced · Knife Block', channel: 'Amazon', severity: 'high', sev: 'high', cost: 20,
+        options: [
+          { key: 'repush', label: 'Re-push copy', note: 'Brand copy restored. The contributed claim can return.', recur: 'high' },
+          { key: 'dispute', label: 'Re-push + dispute', note: 'Copy restored and disputed on the restricted-claim grounds, which is the stronger argument than voice.', recur: 'low' },
+        ] },
+      { id: 'D7', name: 'A+ modules missing · Enamel Casserole', channel: 'Amazon', severity: 'medium', sev: 'medium', cost: 20,
+        options: [
+          { key: 'repush', label: 'Re-push modules', note: 'Both modules restored on the daily cycle. Re-index drops are a platform behaviour, so recurrence is possible and cheap to fix again.', recur: 'medium' },
+        ] },
+      { id: 'D8', name: 'Secondary images · 2 listings', channel: 'Amazon', severity: 'medium', sev: 'medium', cost: 10,
+        options: [
+          { key: 'repush', label: 'Re-push image set', note: 'Full set and order restored on the daily cycle.', recur: 'medium' },
+          { key: 'repush_lock', label: 'Re-push + image lock', note: 'Restored and the set locked through registry where the category supports it.', recur: 'low' },
+        ] },
+    ];
+  }
+
+  blockDefs() {
+    return [
+      { id: 'B1', name: 'Dutch Oven 5qt', units: '210 units', capital: '$8,200', storage: '$41/mo',
+        options: [
+          { key: 'relist', label: 'Relist with family rebuild', note: 'Clears automatically when the variation family is rebuilt — no separate work, full price recovery.', recover: 8200, recoverLabel: 'at full price' },
+          { key: 'remove', label: 'Remove and liquidate', note: 'Liquidation quote is 50% of capital on a block that a rebuild frees this week. Hard to justify.', recover: 4100, recoverLabel: 'liquidation' },
+        ] },
+      { id: 'B2', name: 'Sauté Pan 12in', units: '96 units', capital: '$3,400', storage: '$28/mo',
+        options: [
+          { key: 'relist', label: 'Relist after title patch', note: 'The suppression flag is the truncated title. Patching the template lifts the flag and the block sells.', recover: 3400, recoverLabel: 'at full price' },
+          { key: 'remove', label: 'Remove and liquidate', note: 'Recovers less than half on stock whose only defect is a feed template.', recover: 1700, recoverLabel: 'liquidation' },
+        ] },
+      { id: 'B3', name: 'Filtration Pitcher', units: '140 units', capital: '$2,600', storage: '$52/mo',
+        options: [
+          { key: 'relist', label: 'Recreate offer', note: 'Offer closed by a bulk edit in June. Recreating it costs 20 minutes and returns the block to sale at list.', recover: 2600, recoverLabel: 'at full price' },
+          { key: 'markdown', label: 'Route to 9.9 ladder', note: 'Sixty-one days stranded and the highest storage of any block. If velocity does not return within two weeks, the ladder is the honest path.', recover: 1950, recoverLabel: 'ladder estimate' },
+        ] },
+      { id: 'B4', name: 'Knife Block 6pc', units: '48 units', capital: '$1,900', storage: '$22/mo',
+        options: [
+          { key: 'relist', label: 'Add dimension attribute', note: 'FBA stranded on a missing attribute after the packaging change. The same measurement that supports the fee claim in 10.4 unstrands this.', recover: 1900, recoverLabel: 'at full price' },
+          { key: 'remove', label: 'Remove to a merchant offer', note: 'Sells from our own node instead, at a lower conversion and a slower promise.', recover: 1520, recoverLabel: 'merchant-fulfilled' },
+        ] },
+      { id: 'B5', name: 'Cast-iron Skillet 10in', units: '60 units', capital: '$1,600', storage: '$19/mo',
+        options: [
+          { key: 'relist', label: 'Relabel to the new GTIN', note: 'The repack changed the barcode. Relabelling costs about $180 of handling and returns the block at list.', recover: 1420, recoverLabel: 'net of relabel' },
+          { key: 'remove', label: 'Remove and liquidate', note: 'Avoids the relabel and recovers 60%. Only sensible if the SKU were exiting anyway.', recover: 960, recoverLabel: 'liquidation' },
+        ] },
+      { id: 'B6', name: 'Enamel Casserole 3qt', units: '36 units', capital: '$700', storage: '$8/mo',
+        options: [
+          { key: 'relist', label: 'Recreate offer', note: 'Possible, but this SKU is already in the 9.9 markdown cohort for the fee cliff — relisting it at list price strands it again.', recover: 700, recoverLabel: 'at full price' },
+          { key: 'markdown', label: 'Route to 9.9 ladder', note: 'Joins the cohort it already belongs to. Sells through before the surcharge date instead of coming back here in six weeks.', recover: 525, recoverLabel: 'ladder estimate' },
+        ] },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const money = (n) => '$' + Math.round(n).toLocaleString('en-US');
+    const sevMeta = {
+      critical: { tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+      high: { tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+      medium: { tint: 'var(--ink-100)', tone: 'var(--ink-600)' },
+    };
+    const recurTone = { low: 'var(--green-700)', medium: 'var(--amber-700)', high: 'var(--rose-700)' };
+    const recurWord = { low: 'cause fixed', medium: 'may recur', high: 'will recur' };
+
+    const defs = this.repairDefs();
+    const chosen = defs.map((d) => {
+      const key = this.state.paths[d.id] || d.options[0].key;
+      const opt = d.options.find((o) => o.key === key) || d.options[0];
+      return { def: d, opt: opt };
+    });
+    const dailyStopped = defs.reduce((a, d) => a + d.cost, 0);
+    const causeFixed = chosen.filter((c) => c.opt.recur === 'low').length;
+    const willRecur = chosen.filter((c) => c.opt.recur === 'high').length;
+
+    const p = this.state.prevent;
+    const preventCount = Object.keys(p).filter((k) => p[k]).length;
+    let detect = 9.4;
+    if (p.monitorUpgrade) detect -= 5.6;
+    if (p.partialGuard) detect -= 0.9;
+    if (p.imageLock) detect -= 0.5;
+    if (p.themeLock) detect -= 0.3;
+    detect = Math.max(1.4, detect);
+    const detectMet = detect <= 4;
+
+    const blocks = this.blockDefs();
+    const blockChosen = blocks.map((b) => {
+      const key = this.state.blocks[b.id] || b.options[0].key;
+      const opt = b.options.find((o) => o.key === key) || b.options[0];
+      return { def: b, opt: opt };
+    });
+    const capital = blockChosen.reduce((a, b) => a + b.opt.recover, 0);
+    const toLadder = blockChosen.filter((b) => b.opt.key === 'markdown').length;
+
+    const optBtn = (active, o, pick) => ({
+      label: o.label,
+      bg: active ? 'color-mix(in oklab, var(--mod-actions) 12%, white)' : 'var(--ink-0)',
+      border: active ? 'color-mix(in oklab, var(--mod-actions) 40%, white)' : 'var(--ink-200)',
+      fg: active ? 'var(--mod-actions)' : 'var(--ink-600)',
+      weight: active ? '600' : '500',
+      pick: pick,
+    });
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      railDot: 'var(--rose-500)',
+      railGlow: 'var(--rose-50)',
+      railLabel: '14 drifts\nopen',
+      pinMark: 'var(--rose-500)',
+      pinTone: 'var(--rose-700)',
+      pinnedTop: money(dailyStopped) + ' / day stopped',
+      pinnedSub: causeFixed + ' of 8 repairs fix the cause too',
+
+      heroValue: money(dailyStopped) + '/day',
+      repairCount: 8,
+      capitalValue: money(capital),
+      detectValue: detect.toFixed(1) + 'h',
+      detectTone: detectMet ? 'var(--green-700)' : 'var(--amber-700)',
+      detectPct: Math.min(100, (detect / 9.4) * 100).toFixed(0),
+      detectNote: detectMet
+        ? 'Inside the 4-hour target. The monitor upgrade is what moves this number; the field locks reduce how often there is anything to find.'
+        : 'Still outside the 4-hour target. Repairs alone do not move detection — only the monitor upgrade does, and it is the one line item here with a running cost.',
+      recurLabel: willRecur ? willRecur + ' repair' + (willRecur > 1 ? 's' : '') + ' will recur' : 'every cause addressed',
+      recurTint: willRecur ? 'var(--amber-50)' : 'var(--green-50)',
+      recurTone: willRecur ? 'var(--amber-700)' : 'var(--green-700)',
+      heroLine: 'Eight repairs stop ' + money(dailyStopped) + ' a day of quiet loss and return ' + money(capital) + ' of stranded stock to sale. ' + (willRecur
+        ? willRecur + ' of them fix only the value — the cheap path, chosen deliberately or by accident, and the same drift returns.'
+        : 'Every one of them fixes the cause as well as the value, which is what stops this card reappearing next month.') + (toLadder ? ' ' + toLadder + ' block' + (toLadder > 1 ? 's go' : ' goes') + ' to the 9.9 ladder instead of back on sale.' : ''),
+
+      pathSummary: causeFixed + ' cause fixes · ' + willRecur + ' value-only',
+      repairs: chosen.map((c) => ({
+        name: c.def.name, channel: c.def.channel, severity: c.def.severity,
+        sevTint: sevMeta[c.def.sev].tint, sevTone: sevMeta[c.def.sev].tone,
+        chosenNote: c.opt.note,
+        cost: money(c.def.cost) + '/day',
+        recurState: recurWord[c.opt.recur],
+        recurTone: recurTone[c.opt.recur],
+        options: c.def.options.map((o) => optBtn(o.key === c.opt.key, o, () => this.setState((s) => {
+          const paths = Object.assign({}, s.paths); paths[c.def.id] = o.key; return { paths: paths };
+        }))),
+      })),
+
+      prevention: [
+        { key: 'imageLock', label: 'Hero image lock via registry', tag: 'supported', tagTint: 'var(--green-50)', tagTone: 'var(--green-700)',
+          detail: 'Brand registry blocks contributed images on entitled ASINs. Available on 38 of our 41 fast-lane listings.',
+          effect: 'prevents 4 of the 5 contribution drifts' },
+        { key: 'themeLock', label: 'Price excluded from theme cache', tag: null,
+          detail: 'Storefront renders price live instead of from a cached snapshot. Costs about 40ms on the product page.',
+          effect: 'prevents the price class entirely' },
+        { key: 'partialGuard', label: 'Partial-file guard on feeds', tag: null,
+          detail: 'An inventory or content file that arrives incomplete is rejected rather than applied to the rows it reached.',
+          effect: 'prevents 3 of the 8 pipeline drifts' },
+        { key: 'monitorUpgrade', label: 'Move 24 listings to the fast lane', tag: 'running cost', tagTint: 'var(--amber-50)', tagTone: 'var(--amber-700)',
+          detail: '30-minute critical-field checks on the 24 standard-lane listings that carry more than $200/day each.',
+          effect: 'critical detection 9.4h → 2.1h' },
+      ].map((r) => {
+        const on = !!p[r.key];
+        return {
+          label: r.label, detail: r.detail, effect: r.effect, tag: r.tag,
+          tagTint: r.tagTint, tagTone: r.tagTone,
+          nameTone: on ? 'var(--ink-900)' : 'var(--ink-600)',
+          effectTone: on ? 'var(--mod-actions)' : 'var(--ink-400)',
+          bg: on ? 'color-mix(in oklab, var(--mod-actions) 5%, white)' : 'var(--ink-0)',
+          border: on ? 'color-mix(in oklab, var(--mod-actions) 30%, white)' : 'var(--ink-100)',
+          boxBg: on ? 'var(--mod-actions)' : 'var(--ink-0)',
+          boxBorder: on ? 'var(--mod-actions)' : 'var(--ink-300)',
+          boxIcon: on ? 'fa-solid fa-check' : 'fa-solid fa-xmark',
+          cursor: 'pointer',
+          toggle: () => this.setState((s) => {
+            const prevent = Object.assign({}, s.prevent); prevent[r.key] = !prevent[r.key]; return { prevent: prevent };
+          }),
+        };
+      }),
+
+      strandedSummary: money(capital) + ' of $18,400 recovered',
+      blocks: blockChosen.map((b) => ({
+        name: b.def.name, units: b.def.units, capital: b.def.capital, storage: b.def.storage,
+        chosenNote: b.opt.note,
+        recover: money(b.opt.recover), recoverLabel: b.opt.recoverLabel,
+        recoverTone: b.opt.key === 'relist' ? 'var(--green-700)' : b.opt.key === 'markdown' ? 'var(--amber-700)' : 'var(--ink-700)',
+        options: b.def.options.map((o) => optBtn(o.key === b.opt.key, o, () => this.setState((s) => {
+          const bl = Object.assign({}, s.blocks); bl[b.def.id] = o.key; return { blocks: bl };
+        }))),
+      })),
+
+      summary: [
+        { label: 'Daily bleed stopped', value: money(dailyStopped), tone: 'var(--green-700)' },
+        { label: 'Stranded capital recovered', value: money(capital), tone: 'var(--mod-actions)' },
+        { label: 'Feed rows unblocked', value: '412', tone: 'var(--ink-900)' },
+        { label: 'Prevention measures armed', value: preventCount + ' of 4', tone: preventCount >= 3 ? 'var(--green-700)' : 'var(--amber-700)' },
+        { label: 'Disputes filed', value: chosen.filter((c) => c.opt.key.indexOf('dispute') >= 0).length + '', tone: 'var(--ink-900)' },
+      ],
+      causeCount: causeFixed + ' of 8',
+      causeTone: causeFixed >= 6 ? 'var(--green-700)' : 'var(--amber-700)',
+
+      approveLabel: 'Approve the slate · 8 repairs',
+      approveSub: money(dailyStopped) + '/day · ' + money(capital) + ' unstranded · ' + preventCount + ' preventions',
+      approvalNote: 'Every repair is a canonical re-push with a diff. Nothing is edited by hand in a marketplace console, because a hand edit is the next drift.',
+
+      footStatus: 'Decide · 8 repairs · ' + causeFixed + ' fix the cause · ' + money(capital) + ' unstranded · detection ' + detect.toFixed(1) + 'h against a 4h target',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

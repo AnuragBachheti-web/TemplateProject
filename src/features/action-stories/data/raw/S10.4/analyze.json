@@ -1,0 +1,469 @@
+{
+  "code": "S10.4",
+  "stageKey": "analyze",
+  "name": "Fee integrity",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "sort": "due",
+    "filter": "all",
+    "sel": "FEE-2207"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "$890\nexpiring",
+    "pinMark": "var(--mod-cash)",
+    "pinTone": "var(--mod-cash)",
+    "pinnedTop": "$4,120 recoverable",
+    "pinnedSub": "11 claims · sorted by deadline",
+    "buckets": [
+      {
+        "label": "Dimension audit",
+        "detail": "billed tier against their own measured dimensions, per SKU and per fee line",
+        "icon": "fa-solid fa-ruler-combined",
+        "tone": "var(--mod-cash)",
+        "value": "$2,380",
+        "state": "6 claims",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)"
+      },
+      {
+        "label": "Reimbursement gaps",
+        "detail": "inventory adjustments still unreimbursed after the 30-day auto-match",
+        "icon": "fa-solid fa-box-open",
+        "tone": "var(--amber-700)",
+        "value": "$1,340",
+        "state": "4 claims",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)"
+      },
+      {
+        "label": "Refund without return",
+        "detail": "refunds issued where the return window closed with no inbound scan",
+        "icon": "fa-solid fa-rotate-left",
+        "tone": "var(--rose-700)",
+        "value": "$400",
+        "state": "1 claims",
+        "stateTone": "var(--ink-400)",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-100)"
+      }
+    ],
+    "sorts": [
+      {
+        "label": "Expiring",
+        "bg": "var(--ink-0)",
+        "fg": "var(--ink-900)",
+        "weight": "600"
+      },
+      {
+        "label": "Value",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      },
+      {
+        "label": "Win rate",
+        "bg": "transparent",
+        "fg": "var(--ink-500)",
+        "weight": "500"
+      }
+    ],
+    "deadlineHead": "Deadline ↑",
+    "ledgerMeta": "11 claims · $4,120 · above the $25 floor",
+    "ledgerFoot": "2 claims hold incomplete evidence and will not file until it is attached · $890 closes inside 21 days",
+    "rows": [
+      {
+        "name": "Refund without return · 2 orders",
+        "sub": "FEE-2207 · orders 114-8827301 and 114-8830992",
+        "value": "$400",
+        "typeShort": "refund",
+        "typeTint": "var(--rose-50)",
+        "typeTone": "var(--rose-700)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "9 days",
+        "dueTint": "var(--rose-50)",
+        "dueTone": "var(--rose-700)",
+        "win": "88%",
+        "winTone": "var(--green-700)",
+        "rowBg": "color-mix(in oklab, var(--mod-cash) 6%, white)",
+        "mark": "var(--mod-cash)"
+      },
+      {
+        "name": "Dimension tier · Knife Block 6pc",
+        "sub": "FEE-2203 · SKU NW-KNB-06 · 41 units billed Jul 8 – Aug 14",
+        "value": "$310",
+        "typeShort": "dimension",
+        "typeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "typeTone": "var(--mod-cash)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "16 days",
+        "dueTint": "var(--rose-50)",
+        "dueTone": "var(--rose-700)",
+        "win": "91%",
+        "winTone": "var(--green-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Lost inventory · 2 units unmatched",
+        "sub": "FEE-2211 · SKU NW-FLT-01 · adjustment Jul 12",
+        "value": "$180",
+        "typeShort": "inventory",
+        "typeTint": "var(--amber-50)",
+        "typeTone": "var(--amber-700)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "21 days",
+        "dueTint": "var(--amber-50)",
+        "dueTone": "var(--amber-700)",
+        "win": "76%",
+        "winTone": "var(--ink-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Lost inventory · 3 units at East node",
+        "sub": "FEE-2210 · SKU NW-DUT-05 · adjustment Jun 28",
+        "value": "$520",
+        "typeShort": "inventory",
+        "typeTint": "var(--amber-50)",
+        "typeTone": "var(--amber-700)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "29 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "78%",
+        "winTone": "var(--ink-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Dimension tier · Dutch Oven 5qt",
+        "sub": "FEE-2201 · SKU NW-DUT-05 · 88 units billed Jun 2 – Aug 16",
+        "value": "$640",
+        "typeShort": "dimension",
+        "typeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "typeTone": "var(--mod-cash)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "34 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "94%",
+        "winTone": "var(--green-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Damaged in warehouse · 4 units",
+        "sub": "FEE-2212 · SKU NW-SAU-12 · adjustment Jun 20",
+        "value": "$410",
+        "typeShort": "inventory",
+        "typeTint": "var(--amber-50)",
+        "typeTone": "var(--amber-700)",
+        "evPct": 80,
+        "evLabel": "80% · photos",
+        "evTone": "var(--amber-700)",
+        "due": "36 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "74%",
+        "winTone": "var(--ink-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Dimension tier · Sauté Pan 12in",
+        "sub": "FEE-2202 · SKU NW-SAU-12 · 62 units billed Jun 9 – Aug 12",
+        "value": "$520",
+        "typeShort": "dimension",
+        "typeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "typeTone": "var(--mod-cash)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "41 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "94%",
+        "winTone": "var(--green-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Inbound shortage · Walmart WFS",
+        "sub": "FEE-2213 · PO-4488 · 6 units short on receipt Jul 5",
+        "value": "$230",
+        "typeShort": "inventory",
+        "typeTint": "var(--amber-50)",
+        "typeTone": "var(--amber-700)",
+        "evPct": 45,
+        "evLabel": "45% · POD + BOL",
+        "evTone": "var(--rose-700)",
+        "due": "44 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "61%",
+        "winTone": "var(--amber-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Dimension tier · Enamel Casserole 3qt",
+        "sub": "FEE-2204 · SKU NW-ENC-03 · 54 units billed Jun 18 – Aug 15",
+        "value": "$430",
+        "typeShort": "dimension",
+        "typeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "typeTone": "var(--mod-cash)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "47 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "91%",
+        "winTone": "var(--green-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Dimension tier · Cast-iron Skillet 10in",
+        "sub": "FEE-2205 · SKU NW-CIS-10 · 39 units billed Jun 24 – Aug 9",
+        "value": "$310",
+        "typeShort": "dimension",
+        "typeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "typeTone": "var(--mod-cash)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "52 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "89%",
+        "winTone": "var(--green-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      },
+      {
+        "name": "Dimension tier · Filtration Pitcher",
+        "sub": "FEE-2206 · SKU NW-FLT-01 · 28 units billed Jul 2 – Aug 11",
+        "value": "$170",
+        "typeShort": "dimension",
+        "typeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "typeTone": "var(--mod-cash)",
+        "evPct": 100,
+        "evLabel": "complete",
+        "evTone": "var(--green-700)",
+        "due": "58 days",
+        "dueTint": "var(--ink-100)",
+        "dueTone": "var(--ink-500)",
+        "win": "86%",
+        "winTone": "var(--green-700)",
+        "rowBg": "transparent",
+        "mark": "transparent"
+      }
+    ],
+    "selName": "Refund without return · 2 orders",
+    "selMeta": "FEE-2207 · orders 114-8827301 and 114-8830992 · win rate 88% from our own filings",
+    "selValue": "$400",
+    "selIcon": "fa-solid fa-rotate-left",
+    "selTint": "var(--rose-50)",
+    "selTone": "var(--rose-700)",
+    "selDue": "9 days to file",
+    "selDueTint": "var(--rose-50)",
+    "selDueTone": "var(--rose-700)",
+    "selFactsTitle": "Their record against our reconciliation",
+    "colLeft": "their record",
+    "colRight": "our check",
+    "facts": [
+      {
+        "label": "Refund issued",
+        "left": "Jun 26",
+        "right": "Jun 26",
+        "leftTone": "var(--ink-500)",
+        "rightTone": "var(--ink-900)"
+      },
+      {
+        "label": "Return window closed",
+        "left": "Jul 26",
+        "right": "Jul 26",
+        "leftTone": "var(--ink-500)",
+        "rightTone": "var(--ink-900)"
+      },
+      {
+        "label": "Inbound scan on either unit",
+        "left": "none",
+        "right": "none",
+        "leftTone": "var(--ink-500)",
+        "rightTone": "var(--rose-700)"
+      },
+      {
+        "label": "Units refunded",
+        "left": "2",
+        "right": "2",
+        "leftTone": "var(--ink-500)",
+        "rightTone": "var(--ink-900)"
+      },
+      {
+        "label": "Refund value",
+        "left": "$400",
+        "right": "$400",
+        "leftTone": "var(--ink-500)",
+        "rightTone": "var(--mod-cash)"
+      },
+      {
+        "label": "Days since window closed",
+        "left": "24",
+        "right": "files inside 60",
+        "leftTone": "var(--ink-500)",
+        "rightTone": "var(--rose-700)"
+      }
+    ],
+    "selNote": "Both customers were refunded and neither unit came back. Policy reimburses the refunded amount once the return window elapses with no inbound scan — the only fact in question is the scan, and their own log answers it.",
+    "evidence": [
+      {
+        "label": "Refund events",
+        "detail": "both order records with refund timestamps",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "nameTone": "var(--ink-800)"
+      },
+      {
+        "label": "Return window elapsed",
+        "detail": "Jul 26, 24 days ago",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "nameTone": "var(--ink-800)"
+      },
+      {
+        "label": "Inbound scan search",
+        "detail": "no receipt against either RMA",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "nameTone": "var(--ink-800)"
+      },
+      {
+        "label": "Order-level fee ledger",
+        "detail": "refund amounts confirmed against settlement",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)",
+        "nameTone": "var(--ink-800)"
+      }
+    ],
+    "evBoxCopy": "Evidence complete. This claim can join the batch path — the policy test is deterministic and the documents policy names are all attached.",
+    "evBoxBg": "var(--green-50)",
+    "evBoxBorder": "color-mix(in oklab, var(--green-500) 24%, white)",
+    "evBoxTone": "var(--green-700)",
+    "expiryBars": [
+      {
+        "label": "≤ 21 days",
+        "value": "$890",
+        "pct": 22,
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "22–35 days",
+        "value": "$1,570",
+        "pct": 38,
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "36–48 days",
+        "value": "$1,180",
+        "pct": 29,
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "49+ days",
+        "value": "$480",
+        "pct": 12,
+        "tone": "var(--ink-400)"
+      }
+    ],
+    "winRates": [
+      {
+        "label": "Dimension or tier error",
+        "pct": "94%",
+        "bar": 94,
+        "detail": "47 of 50 filed in the last 12 months",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Refund without return",
+        "pct": "88%",
+        "bar": 88,
+        "detail": "22 of 25 · denials were scan-timing disputes",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Unreimbursed inventory",
+        "pct": "76%",
+        "bar": 76,
+        "detail": "34 of 45 · cost-basis challenges are the usual denial",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "inflow": [
+      {
+        "label": "Mar",
+        "h": 22,
+        "tone": "var(--ink-200)"
+      },
+      {
+        "label": "Apr",
+        "h": 18,
+        "tone": "var(--ink-200)"
+      },
+      {
+        "label": "May",
+        "h": 26,
+        "tone": "var(--ink-200)"
+      },
+      {
+        "label": "Jun",
+        "h": 33,
+        "tone": "var(--ink-300)"
+      },
+      {
+        "label": "Jul",
+        "h": 40,
+        "tone": "var(--amber-500)"
+      },
+      {
+        "label": "Aug",
+        "h": 52,
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "footStatus": "Analyze · 11 claims shown · $4,120 identified · sorted by deadline"
+  }
+}

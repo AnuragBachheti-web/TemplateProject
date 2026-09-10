@@ -1,0 +1,399 @@
+{
+  "code": "S9.2",
+  "stageKey": "execute",
+  "name": "Replenishment",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest",
+    "approvalThreshold": 25000
+  },
+  "state": {
+    "sent": {},
+    "cancelled": {},
+    "stamp": {}
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "pinnedStatus": "Approved on Decide · drafts ready",
+    "poMeta": "12 POs · $87.8K · 10,120 u",
+    "orders": [
+      {
+        "id": "k",
+        "name": "Supplier K · stoneware",
+        "hue": "var(--mod-inventory)",
+        "terms": "Net 30 · ships Aug 22 · sea · arrives Sep 23 · order closes Thu 17:00 CST",
+        "channel": "EDI 850",
+        "channelIcon": "fa-solid fa-right-left",
+        "value": "$37.2K",
+        "units": "5,100 u · 3 lines",
+        "pos": [
+          {
+            "label": "PO-2301 · DC-East"
+          },
+          {
+            "label": "PO-2302 · DC-East"
+          },
+          {
+            "label": "PO-2303 · FBA-West"
+          },
+          {
+            "label": "PO-2304 · FBA-East"
+          }
+        ],
+        "opacity": 1,
+        "cardBorder": "var(--ink-100)",
+        "status": "Draft",
+        "statusTone": "var(--ink-500)",
+        "statusTint": "var(--ink-50)",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$11,174",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$26,074",
+            "meta": "net 30"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "5,100 u",
+            "meta": "4 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "24 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeBg": "color-mix(in oklab, var(--amber-500) 6%, white)",
+        "routeLabel": "Approval chain · above $25.0K",
+        "noRouteShow": "none",
+        "chain": [
+          {
+            "initials": "AC",
+            "name": "Alex Carter",
+            "state": "approved 09:38",
+            "bg": "var(--green-50)",
+            "border": "color-mix(in oklab, var(--green-500) 40%, white)",
+            "avBg": "var(--green-500)",
+            "avTone": "var(--ink-0)",
+            "tone": "var(--green-700)"
+          },
+          {
+            "initials": "DR",
+            "name": "Dana Reyes",
+            "state": "next in chain",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "avBg": "var(--ink-200)",
+            "avTone": "var(--ink-600)",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "initials": "PM",
+            "name": "Priya Malhotra",
+            "state": "queued",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "avBg": "var(--ink-200)",
+            "avTone": "var(--ink-600)",
+            "tone": "var(--ink-400)"
+          }
+        ],
+        "amendShow": "inline-flex",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · EDI 850",
+        "sendBg": "var(--ink-900)",
+        "sendTone": "var(--ink-0)",
+        "sendBorder": "var(--ink-900)",
+        "sendCursor": "pointer"
+      },
+      {
+        "id": "vg",
+        "name": "Verrier Glass",
+        "hue": "var(--r-blue-500)",
+        "terms": "Net 45 · ships Aug 25 · sea · arrives Sep 18",
+        "channel": "Email PDF + portal ack",
+        "channelIcon": "fa-solid fa-envelope",
+        "value": "$22.9K",
+        "units": "1,260 u · 2 lines",
+        "pos": [
+          {
+            "label": "PO-2305 · DC-East"
+          },
+          {
+            "label": "PO-2306 · DC-East"
+          },
+          {
+            "label": "PO-2307 · DC-East"
+          }
+        ],
+        "opacity": 1,
+        "cardBorder": "var(--ink-100)",
+        "status": "Draft",
+        "statusTone": "var(--ink-500)",
+        "statusTint": "var(--ink-50)",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$6,874",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$16,040",
+            "meta": "net 45"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "1,260 u",
+            "meta": "3 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "24 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeBg": "var(--ink-25)",
+        "routeLabel": "Approval",
+        "noRouteShow": "inline-flex",
+        "chain": [],
+        "amendShow": "inline-flex",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · Email PDF + portal ack",
+        "sendBg": "var(--ink-900)",
+        "sendTone": "var(--ink-0)",
+        "sendBorder": "var(--ink-900)",
+        "sendCursor": "pointer"
+      },
+      {
+        "id": "nl",
+        "name": "Northline Metals",
+        "hue": "var(--mod-hubs)",
+        "terms": "Net 30 · ships Aug 21 · sea · arrives Sep 02",
+        "channel": "EDI 850",
+        "channelIcon": "fa-solid fa-right-left",
+        "value": "$16.5K",
+        "units": "1,360 u · 3 lines",
+        "pos": [
+          {
+            "label": "PO-2308 · DC-West"
+          },
+          {
+            "label": "PO-2309 · FBA-West"
+          }
+        ],
+        "opacity": 1,
+        "cardBorder": "var(--ink-100)",
+        "status": "Draft",
+        "statusTone": "var(--ink-500)",
+        "statusTint": "var(--ink-50)",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$4,946",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$11,542",
+            "meta": "net 30"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "1,360 u",
+            "meta": "2 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "12 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeBg": "var(--ink-25)",
+        "routeLabel": "Approval",
+        "noRouteShow": "inline-flex",
+        "chain": [],
+        "amendShow": "inline-flex",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · EDI 850",
+        "sendBg": "var(--ink-900)",
+        "sendTone": "var(--ink-0)",
+        "sendBorder": "var(--ink-900)",
+        "sendCursor": "pointer"
+      },
+      {
+        "id": "ag",
+        "name": "Ashgrove Mills · textiles",
+        "hue": "var(--mod-margin)",
+        "terms": "Net 45 · ships Aug 22 · sea · arrives Sep 09",
+        "channel": "Supplier portal task",
+        "channelIcon": "fa-solid fa-list-check",
+        "value": "$11.1K",
+        "units": "2,400 u · 3 lines",
+        "pos": [
+          {
+            "label": "PO-2310 · FBA-West"
+          },
+          {
+            "label": "PO-2311 · FBA-East"
+          },
+          {
+            "label": "PO-2312 · DC-East"
+          }
+        ],
+        "opacity": 1,
+        "cardBorder": "var(--ink-100)",
+        "status": "Draft",
+        "statusTone": "var(--ink-500)",
+        "statusTint": "var(--ink-50)",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$3,344",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$7,804",
+            "meta": "net 45"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "2,400 u",
+            "meta": "3 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "24 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeBg": "var(--ink-25)",
+        "routeLabel": "Approval",
+        "noRouteShow": "inline-flex",
+        "chain": [],
+        "amendShow": "inline-flex",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · Supplier portal task",
+        "sendBg": "var(--ink-900)",
+        "sendTone": "var(--ink-0)",
+        "sendBorder": "var(--ink-900)",
+        "sendCursor": "pointer"
+      }
+    ],
+    "channels": [
+      {
+        "icon": "fa-solid fa-right-left",
+        "label": "EDI 850 · Supplier K, Northline",
+        "value": "6 POs queued",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-envelope",
+        "label": "Email PDF · Verrier Glass",
+        "value": "3 POs queued",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "icon": "fa-solid fa-list-check",
+        "label": "Portal task · Ashgrove Mills",
+        "value": "3 POs queued",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "allLabel": "Transmit 4 supplier books",
+    "allBg": "var(--mod-inventory)",
+    "allTone": "var(--ink-0)",
+    "allCursor": "pointer",
+    "allNote": "One PO ($37.2K) routes for approval instead of going out. Everything else leaves immediately.",
+    "wmsState": "staged",
+    "wmsTone": "var(--ink-400)",
+    "receipts": [
+      {
+        "label": "DC-East · Ridgeline, glass, towels",
+        "value": "4,020 u"
+      },
+      {
+        "label": "DC-West · pans, knives, tins",
+        "value": "1,040 u"
+      },
+      {
+        "label": "FBA-West · mugs, mitts, pans",
+        "value": "3,340 u"
+      },
+      {
+        "label": "FBA-East · mugs, towels",
+        "value": "1,720 u"
+      }
+    ],
+    "cashState": "pending transmit",
+    "cashTone": "var(--ink-400)",
+    "outflow": [
+      {
+        "label": "Wk 1 · deposits on transmit",
+        "value": "$26,339",
+        "pct": "100%"
+      },
+      {
+        "label": "Wk 5 · Northline balance",
+        "value": "$11,542",
+        "pct": "43.818765803321256%"
+      },
+      {
+        "label": "Wk 6 · Supplier K balance",
+        "value": "$26,074",
+        "pct": "98.9908653955671%"
+      },
+      {
+        "label": "Wk 8 · Verrier + Ashgrove",
+        "value": "$23,843",
+        "pct": "90.52370213444497%"
+      }
+    ],
+    "monState": "armed on transmit",
+    "monTone": "var(--ink-400)",
+    "monitors": [
+      {
+        "label": "PO confirmation SLA",
+        "value": "24 h",
+        "note": "Suppliers acknowledge within 24 h, Northline within 12 h."
+      },
+      {
+        "label": "ETA drift alerts",
+        "value": "> 3 d",
+        "note": "Any ship date or ETA that slips more than three days pings this cycle and the Inventory lens."
+      },
+      {
+        "label": "Return to queue",
+        "value": "> 20%",
+        "note": "If demand deviates more than 20% from P50 before arrival, Realify reopens the cycle with a resized book."
+      }
+    ],
+    "rollState": "Nothing transmitted yet",
+    "rollTint": "var(--ink-50)",
+    "rollTone": "var(--ink-500)",
+    "rollCopy": "Nothing has left the building. Amend quantities on Decide or cancel the cycle outright — the book stays in the Actions queue until you transmit.",
+    "footerStatus": "Execute · 12 POs drafted · nothing transmitted",
+    "footerSendShow": "inline-flex",
+    "footerSendLabel": "Transmit all POs",
+    "footerDoneShow": "none"
+  }
+}

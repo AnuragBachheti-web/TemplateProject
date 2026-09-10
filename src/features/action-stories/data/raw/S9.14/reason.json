@@ -1,0 +1,251 @@
+{
+  "code": "S9.14",
+  "stageKey": "reason",
+  "name": "Agentic commerce",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "surfaces": [
+      {
+        "name": "ChatGPT shopping",
+        "note": "product cards + inline citation",
+        "now": "19%",
+        "target": "35%",
+        "pct": 54,
+        "gap": "−16pp",
+        "tone": "var(--amber-500)",
+        "sessions": "2,140 / mo",
+        "cvr": "4.8%",
+        "cvrTone": "var(--green-700)"
+      },
+      {
+        "name": "Google AI Mode",
+        "note": "AI overview, shopping graph",
+        "now": "12%",
+        "target": "28%",
+        "pct": 43,
+        "gap": "−16pp · weakest surface",
+        "tone": "var(--rose-500)",
+        "sessions": "3,610 / mo",
+        "cvr": "3.9%",
+        "cvrTone": "var(--green-700)"
+      },
+      {
+        "name": "Perplexity",
+        "note": "comparison answers, source list",
+        "now": "24%",
+        "target": "35%",
+        "pct": 69,
+        "gap": "−11pp",
+        "tone": "var(--amber-500)",
+        "sessions": "640 / mo",
+        "cvr": "5.2%",
+        "cvrTone": "var(--green-700)"
+      },
+      {
+        "name": "Amazon Rufus",
+        "note": "in-marketplace assistant",
+        "now": "8%",
+        "target": "25%",
+        "pct": 32,
+        "gap": "−17pp",
+        "tone": "var(--rose-500)",
+        "sessions": "not attributable",
+        "cvr": "ATC proxy",
+        "cvrTone": "var(--ink-400)"
+      }
+    ],
+    "thresholds": [
+      {
+        "label": "GTIN coverage",
+        "note": "every sellable variant carries a valid GTIN",
+        "floor": "100%",
+        "actual": "94%",
+        "tone": "var(--amber-500)",
+        "tint": "var(--amber-50)",
+        "state": "below"
+      },
+      {
+        "label": "Required attribute completeness",
+        "note": "category-required fields populated from the PIM",
+        "floor": "95%",
+        "actual": "78%",
+        "tone": "var(--rose-500)",
+        "tint": "var(--rose-50)",
+        "state": "below"
+      },
+      {
+        "label": "Schema coverage on PDPs",
+        "note": "Product, Offer, rating and policy types present",
+        "floor": "100%",
+        "actual": "61%",
+        "tone": "var(--rose-500)",
+        "tint": "var(--rose-50)",
+        "state": "below"
+      },
+      {
+        "label": "Feed freshness",
+        "note": "time from PIM change to feed pickup",
+        "floor": "< 6h",
+        "actual": "11h p50",
+        "tone": "var(--rose-500)",
+        "tint": "var(--rose-50)",
+        "state": "below"
+      },
+      {
+        "label": "Price + availability accuracy",
+        "note": "what the agent reads vs what the site charges",
+        "floor": "99.5%",
+        "actual": "99.1%",
+        "tone": "var(--amber-500)",
+        "tint": "var(--amber-50)",
+        "state": "below"
+      },
+      {
+        "label": "Factual density per PDP",
+        "note": "machine-readable spec attributes per product page",
+        "floor": "18 attrs",
+        "actual": "12 attrs",
+        "tone": "var(--amber-500)",
+        "tint": "var(--amber-50)",
+        "state": "below"
+      }
+    ],
+    "brandChips": [
+      {
+        "icon": "fa-solid fa-file-lines",
+        "label": "No claim without a source field behind it"
+      },
+      {
+        "icon": "fa-solid fa-ban",
+        "label": "No superlatives an agent can restate as fact"
+      },
+      {
+        "icon": "fa-solid fa-ruler",
+        "label": "Units and dimensions in the buyer’s locale"
+      },
+      {
+        "icon": "fa-solid fa-comment",
+        "label": "Tone: plain, specific, no marketing adjectives in specs"
+      },
+      {
+        "icon": "fa-solid fa-scale-balanced",
+        "label": "Comparisons cite the competitor’s published number or not at all"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Canonical product facts, single source",
+        "detail": "The PIM is the only source of truth. No channel-level attribute overrides — a fix goes in once and regenerates everywhere."
+      },
+      {
+        "label": "Machine-readable policy requirement",
+        "detail": "Returns, shipping and warranty publish as structured data. Human-readable copy is generated from the same record, never written separately."
+      },
+      {
+        "label": "No synthetic specifications",
+        "detail": "Nothing enters the catalogue that was inferred, scraped from a competitor or generated. Missing means missing."
+      },
+      {
+        "label": "Price parity with the storefront",
+        "detail": "The feed price is the site price at read time. A stale price is pulled rather than published."
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Monday · 04:00",
+        "what": "Scout ran the weekly 46-query battery across all four surfaces and logged every citation and recommendation."
+      },
+      {
+        "when": "Monday · 04:22",
+        "what": "Hero SKU citation count fell to 11 against competitor A’s 29 — a nine-point share drop in three weeks."
+      },
+      {
+        "when": "Monday · 06:10",
+        "what": "Steward traced four wrong-spec answers to a single stale attribute on the Walmart feed and pinned the card for a decision."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Merchandiser",
+        "role": "Owns catalogue attributes, PDP content and the enrichment queue.",
+        "icon": "fa-solid fa-tags",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+      },
+      {
+        "name": "Scout",
+        "role": "Runs the query battery and tracks competitor citations per surface.",
+        "icon": "fa-solid fa-binoculars",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+      },
+      {
+        "name": "Steward",
+        "role": "Owns feed integrity, schema deploys and the mismatch log.",
+        "icon": "fa-solid fa-shield-halved",
+        "hue": "var(--mod-margin)",
+        "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)"
+      },
+      {
+        "name": "Agentic Readiness Score",
+        "role": "Scores structured data, factual density, policy and accuracy.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      },
+      {
+        "name": "Answer-Surface Monitor",
+        "role": "Samples answers and diffs them against the canonical record.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      }
+    ],
+    "sources": [
+      {
+        "label": "SKUs in scope",
+        "value": "1,240",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Query battery size",
+        "value": "46 queries",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Answer samples this week",
+        "value": "184",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "PIM sync",
+        "value": "live · 2 min lag",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Walmart feed pickup",
+        "value": "9 days stale",
+        "tone": "var(--rose-700)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "code": "S9.11",
+  "stageKey": "analyze",
+  "name": "Repricing",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "sku": "k1",
+    "sort": "headroom"
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "sorts": [
+      {
+        "label": "headroom",
+        "bg": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+        "border": "color-mix(in oklab, var(--mod-margin) 34%, white)",
+        "tone": "var(--mod-margin)"
+      },
+      {
+        "label": "Buy Box risk",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "confidence",
+        "bg": "var(--ink-0)",
+        "border": "var(--ink-200)",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "sortNote": "sorted by headroom per unit",
+    "rows": [
+      {
+        "name": "Alder chef knife 8in",
+        "sku": "NW-KNF-0480",
+        "cohort": "tested · Buy Box sensitive",
+        "elast": "−1.24",
+        "conf": "88% ± 5",
+        "headroom": "$1.86",
+        "bb": "0.82 high",
+        "source": "tested",
+        "srcTint": "var(--green-50)",
+        "srcTone": "var(--green-700)",
+        "bbTint": "var(--rose-50)",
+        "bbTone": "var(--rose-700)",
+        "parityIcon": "fa-solid fa-circle-check",
+        "parityTone": "var(--green-700)",
+        "bandLeft": "34.4%",
+        "bandWidth": "40.6%",
+        "dotLeft": "31.3%",
+        "newLeft": "43.7%",
+        "bandLabel": "$68.00 → $71.99 · band $69–82",
+        "bg": "color-mix(in oklab, var(--mod-margin) 5%, white)",
+        "edge": "var(--mod-margin)"
+      },
+      {
+        "name": "Ridgeline stoneware bowl",
+        "sku": "NW-CER-1120",
+        "cohort": "tested · low sensitivity",
+        "elast": "−0.91",
+        "conf": "84% ± 6",
+        "headroom": "$1.62",
+        "bb": "0.31 low",
+        "source": "tested",
+        "srcTint": "var(--green-50)",
+        "srcTone": "var(--green-700)",
+        "bbTint": "var(--ink-50)",
+        "bbTone": "var(--ink-600)",
+        "parityIcon": "fa-solid fa-circle-check",
+        "parityTone": "var(--green-700)",
+        "bandLeft": "34.4%",
+        "bandWidth": "40.6%",
+        "dotLeft": "25.0%",
+        "newLeft": "43.7%",
+        "bandLabel": "$24.00 → $26.99 · band $26–32",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      },
+      {
+        "name": "Carbon steel pan 10in",
+        "sku": "NW-PAN-2210",
+        "cohort": "tested · Buy Box sensitive",
+        "elast": "−1.41",
+        "conf": "81% ± 7",
+        "headroom": "$1.54",
+        "bb": "0.91 high",
+        "source": "tested",
+        "srcTint": "var(--green-50)",
+        "srcTone": "var(--green-700)",
+        "bbTint": "var(--rose-50)",
+        "bbTone": "var(--rose-700)",
+        "parityIcon": "fa-solid fa-triangle-exclamation",
+        "parityTone": "var(--amber-700)",
+        "bandLeft": "32.1%",
+        "bandWidth": "46.4%",
+        "dotLeft": "28.6%",
+        "newLeft": "42.8%",
+        "bandLabel": "$54.00 → $57.99 · band $55–68",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      },
+      {
+        "name": "Cut-glass tumbler set of 4",
+        "sku": "NW-GLS-3390",
+        "cohort": "prior only",
+        "elast": "−1.10",
+        "conf": "64% ± 14",
+        "headroom": "$1.42",
+        "bb": "0.44 mid",
+        "source": "prior",
+        "srcTint": "var(--amber-50)",
+        "srcTone": "var(--amber-700)",
+        "bbTint": "var(--amber-50)",
+        "bbTone": "var(--amber-700)",
+        "parityIcon": "fa-solid fa-circle-check",
+        "parityTone": "var(--green-700)",
+        "bandLeft": "31.8%",
+        "bandWidth": "45.5%",
+        "dotLeft": "27.3%",
+        "newLeft": "40.9%",
+        "bandLabel": "$38.00 → $40.99 · band $39–49",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      },
+      {
+        "name": "Quilted oven mitt pair",
+        "sku": "NW-TEX-5180",
+        "cohort": "tested · low sensitivity",
+        "elast": "−0.78",
+        "conf": "86% ± 5",
+        "headroom": "$1.34",
+        "bb": "0.22 low",
+        "source": "tested",
+        "srcTint": "var(--green-50)",
+        "srcTone": "var(--green-700)",
+        "bbTint": "var(--ink-50)",
+        "bbTone": "var(--ink-600)",
+        "parityIcon": "fa-solid fa-circle-check",
+        "parityTone": "var(--green-700)",
+        "bandLeft": "33.3%",
+        "bandWidth": "41.7%",
+        "dotLeft": "25.0%",
+        "newLeft": "41.6%",
+        "bandLabel": "$19.00 → $20.99 · band $20–25",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      },
+      {
+        "name": "Ridgeline mug 14oz",
+        "sku": "NW-CER-1210",
+        "cohort": "tested · low sensitivity",
+        "elast": "−0.86",
+        "conf": "85% ± 6",
+        "headroom": "$1.24",
+        "bb": "0.28 low",
+        "source": "tested",
+        "srcTint": "var(--green-50)",
+        "srcTone": "var(--green-700)",
+        "bbTint": "var(--ink-50)",
+        "bbTone": "var(--ink-600)",
+        "parityIcon": "fa-solid fa-circle-check",
+        "parityTone": "var(--green-700)",
+        "bandLeft": "33.3%",
+        "bandWidth": "41.7%",
+        "dotLeft": "25.0%",
+        "newLeft": "41.6%",
+        "bandLabel": "$16.00 → $17.99 · band $17–22",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      },
+      {
+        "name": "Linen apron · natural",
+        "sku": "NW-TEX-6040",
+        "cohort": "contract-constrained",
+        "elast": "−1.02",
+        "conf": "79% ± 8",
+        "headroom": "$1.16",
+        "bb": "0.38 mid",
+        "source": "tested",
+        "srcTint": "var(--green-50)",
+        "srcTone": "var(--green-700)",
+        "bbTint": "var(--ink-50)",
+        "bbTone": "var(--ink-600)",
+        "parityIcon": "fa-solid fa-lock",
+        "parityTone": "var(--rose-700)",
+        "bandLeft": "40.0%",
+        "bandWidth": "40.0%",
+        "dotLeft": "30.0%",
+        "newLeft": "40.0%",
+        "bandLabel": "$42.00 → $43.99 · band $44–52",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      },
+      {
+        "name": "Walnut cutting board L",
+        "sku": "NW-WOD-7710",
+        "cohort": "prior only",
+        "elast": "−1.33",
+        "conf": "61% ± 15",
+        "headroom": "$1.10",
+        "bb": "0.56 mid",
+        "source": "prior",
+        "srcTint": "var(--amber-50)",
+        "srcTone": "var(--amber-700)",
+        "bbTint": "var(--amber-50)",
+        "bbTone": "var(--amber-700)",
+        "parityIcon": "fa-solid fa-triangle-exclamation",
+        "parityTone": "var(--amber-700)",
+        "bandLeft": "36.1%",
+        "bandWidth": "41.7%",
+        "dotLeft": "33.3%",
+        "newLeft": "41.6%",
+        "bandLabel": "$78.00 → $80.99 · band $79–94",
+        "bg": "var(--ink-0)",
+        "edge": "transparent"
+      }
+    ],
+    "sel": {
+      "name": "Alder chef knife 8in",
+      "hue": "var(--amber-500)",
+      "tag": "Buy Box sensitive · micro-step 2/3",
+      "meta": "tested Apr 14 · n=1,840 units",
+      "copy": "The measured curve says a 5.9% raise costs 3.4% of units — inside tolerance and worth $1.86 of CM each. Buy Box sensitivity is 0.82, so Realify proposes the raise in three steps of $1.33 with a five-day read between them, rather than one move that could cost the box outright.",
+      "stats": [
+        {
+          "label": "Now → proposed",
+          "value": "$68.00 → $71.99",
+          "meta": "+5.9% · x.99 rounded",
+          "tone": "var(--ink-900)"
+        },
+        {
+          "label": "Volume Δ",
+          "value": "−3.4%",
+          "meta": "P10 −5.1% · P90 −1.8%",
+          "tone": "var(--amber-700)"
+        },
+        {
+          "label": "CM / month",
+          "value": "+$1,240",
+          "meta": "largest single contributor",
+          "tone": "var(--green-700)"
+        },
+        {
+          "label": "Confidence",
+          "value": "88% ± 5",
+          "meta": "tested · n=1,840",
+          "tone": "var(--green-700)"
+        },
+        {
+          "label": "Buy Box",
+          "value": "0.82",
+          "meta": "high · micro-step",
+          "tone": "var(--amber-700)"
+        }
+      ],
+      "parity": [
+        {
+          "channel": "DTC",
+          "price": "$71.99",
+          "note": "Written first. Sets the parity reference.",
+          "icon": "fa-solid fa-circle-check",
+          "tone": "var(--green-700)"
+        },
+        {
+          "channel": "Walmart",
+          "price": "$71.99",
+          "note": "Written second, within the ±2% band.",
+          "icon": "fa-solid fa-circle-check",
+          "tone": "var(--green-700)"
+        },
+        {
+          "channel": "Amazon",
+          "price": "$71.99",
+          "note": "Written last, after the crawl re-reads DTC.",
+          "icon": "fa-solid fa-clock",
+          "tone": "var(--amber-700)"
+        }
+      ],
+      "tagTint": "var(--amber-50)",
+      "tagTone": "var(--amber-700)"
+    },
+    "rollup": [
+      {
+        "label": "SKUs in the slate",
+        "value": "41 of 214",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Median raise",
+        "value": "+5.4%",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Predicted volume loss",
+        "value": "−3.1%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Revenue effect",
+        "value": "+$14.6K/mo",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Rolls · tests",
+        "value": "32 · 9",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "concentration": [
+      {
+        "label": "11 Buy Box sensitive SKUs",
+        "value": "$4.9K/mo",
+        "pct": "50%",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "18 low-sensitivity rolls",
+        "value": "$3.7K/mo",
+        "pct": "38%",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "9 prior-only tests",
+        "value": "$1.1K/mo",
+        "pct": "11%",
+        "tone": "var(--r-blue-600)"
+      },
+      {
+        "label": "3 MAP-capped",
+        "value": "$0.4K/mo",
+        "pct": "4%",
+        "tone": "var(--rose-700)"
+      }
+    ],
+    "excluded": [
+      {
+        "label": "Already at band ceiling",
+        "value": "46 SKUs",
+        "icon": "fa-solid fa-circle-check",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Headroom under $1.10",
+        "value": "88 SKUs",
+        "icon": "fa-solid fa-minus",
+        "tone": "var(--ink-400)"
+      },
+      {
+        "label": "In an active promotion",
+        "value": "4 SKUs",
+        "icon": "fa-solid fa-tag",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "label": "Predicted loss over 4%",
+        "value": "35 SKUs",
+        "icon": "fa-solid fa-triangle-exclamation",
+        "tone": "var(--rose-700)"
+      }
+    ]
+  }
+}

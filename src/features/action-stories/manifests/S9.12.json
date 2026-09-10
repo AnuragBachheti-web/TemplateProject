@@ -1,0 +1,345 @@
+[
+  {
+    "code": "S9.12",
+    "name": "Returns",
+    "stageKey": "reason",
+    "blocks": [
+      {
+        "slotName": "rationale",
+        "blockType": "text",
+        "binding": "data.dialNote"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "targets",
+        "blockType": "table",
+        "binding": "data.targets"
+      },
+      {
+        "slotName": "thresholds",
+        "blockType": "labelValueList",
+        "binding": "data.thresholds"
+      },
+      {
+        "slotName": "floors",
+        "blockType": "labelValueList",
+        "binding": "data.floors"
+      },
+      {
+        "slotName": "locked",
+        "blockType": "labelValueList",
+        "binding": "data.locked"
+      },
+      {
+        "slotName": "costs",
+        "blockType": "labelValueList",
+        "binding": "data.costs"
+      },
+      {
+        "slotName": "agents",
+        "blockType": "table",
+        "binding": "data.agents"
+      }
+    ]
+  },
+  {
+    "code": "S9.12",
+    "name": "Returns",
+    "stageKey": "analyze",
+    "blocks": [
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "clusters",
+        "blockType": "table",
+        "binding": "data.clusters"
+      },
+      {
+        "slotName": "sel",
+        "blockType": "object",
+        "binding": "data.sel"
+      },
+      {
+        "slotName": "disposition",
+        "blockType": "table",
+        "binding": "data.disposition"
+      },
+      {
+        "slotName": "sizes",
+        "blockType": "table",
+        "binding": "data.sizes"
+      },
+      {
+        "slotName": "method",
+        "blockType": "labelValueList",
+        "binding": "data.method"
+      },
+      {
+        "slotName": "owners",
+        "blockType": "labelValueList",
+        "binding": "data.owners"
+      }
+    ]
+  },
+  {
+    "code": "S9.12",
+    "name": "Returns",
+    "stageKey": "decide",
+    "blocks": [
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.heroValue"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "guardrail_verdict",
+        "blockType": "itemQueue",
+        "binding": "data.checks"
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel"
+      },
+      {
+        "slotName": "confBadge",
+        "blockType": "text",
+        "binding": "data.confBadge"
+      },
+      {
+        "slotName": "tradeoff",
+        "blockType": "text",
+        "binding": "data.tradeoff"
+      },
+      {
+        "slotName": "liveStats",
+        "blockType": "labelValueList",
+        "binding": "data.liveStats"
+      },
+      {
+        "slotName": "spendNote",
+        "blockType": "text",
+        "binding": "data.spendNote"
+      },
+      {
+        "slotName": "slate",
+        "blockType": "table",
+        "binding": "data.slate"
+      },
+      {
+        "slotName": "slateFoot",
+        "blockType": "text",
+        "binding": "data.slateFoot"
+      },
+      {
+        "slotName": "treeNote",
+        "blockType": "text",
+        "binding": "data.treeNote"
+      },
+      {
+        "slotName": "tree",
+        "blockType": "itemQueue",
+        "binding": "data.tree"
+      },
+      {
+        "slotName": "rlState",
+        "blockType": "text",
+        "binding": "data.rlState"
+      },
+      {
+        "slotName": "rlBtnLabel",
+        "blockType": "text",
+        "binding": "data.rlBtnLabel"
+      },
+      {
+        "slotName": "rlThreshold",
+        "blockType": "number",
+        "binding": "data.rlThreshold"
+      },
+      {
+        "slotName": "rlLabel",
+        "blockType": "text",
+        "binding": "data.rlLabel"
+      },
+      {
+        "slotName": "rlCopy",
+        "blockType": "text",
+        "binding": "data.rlCopy"
+      },
+      {
+        "slotName": "rlStats",
+        "blockType": "labelValueList",
+        "binding": "data.rlStats"
+      },
+      {
+        "slotName": "zoneMeta",
+        "blockType": "text",
+        "binding": "data.zoneMeta"
+      },
+      {
+        "slotName": "actions",
+        "blockType": "table",
+        "binding": "data.actions"
+      },
+      {
+        "slotName": "split",
+        "blockType": "labelValueList",
+        "binding": "data.split"
+      },
+      {
+        "slotName": "projection",
+        "blockType": "labelValueList",
+        "binding": "data.projection"
+      },
+      {
+        "slotName": "projNote",
+        "blockType": "text",
+        "binding": "data.projNote"
+      },
+      {
+        "slotName": "capaCopy",
+        "blockType": "text",
+        "binding": "data.capaCopy"
+      },
+      {
+        "slotName": "capa",
+        "blockType": "labelValueList",
+        "binding": "data.capa"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      }
+    ]
+  },
+  {
+    "code": "S9.12",
+    "name": "Returns",
+    "stageKey": "execute",
+    "blocks": [
+      {
+        "slotName": "primaryInsight",
+        "blockType": "text",
+        "binding": "data.headline"
+      },
+      {
+        "slotName": "execution_lane",
+        "blockType": "text",
+        "binding": "data.execLabel"
+      },
+      {
+        "slotName": "headMeta",
+        "blockType": "text",
+        "binding": "data.headMeta"
+      },
+      {
+        "slotName": "appliedCount",
+        "blockType": "text",
+        "binding": "data.appliedCount"
+      },
+      {
+        "slotName": "recheckState",
+        "blockType": "text",
+        "binding": "data.recheckState"
+      },
+      {
+        "slotName": "filters",
+        "blockType": "labelValueList",
+        "binding": "data.filters"
+      },
+      {
+        "slotName": "items",
+        "blockType": "itemQueue",
+        "binding": "data.items"
+      },
+      {
+        "slotName": "itemsFoot",
+        "blockType": "text",
+        "binding": "data.itemsFoot"
+      },
+      {
+        "slotName": "monState",
+        "blockType": "text",
+        "binding": "data.monState"
+      },
+      {
+        "slotName": "bars",
+        "blockType": "labelValueList",
+        "binding": "data.bars"
+      },
+      {
+        "slotName": "monStats",
+        "blockType": "labelValueList",
+        "binding": "data.monStats"
+      },
+      {
+        "slotName": "applyCopy",
+        "blockType": "text",
+        "binding": "data.applyCopy"
+      },
+      {
+        "slotName": "allLabel",
+        "blockType": "text",
+        "binding": "data.allLabel"
+      },
+      {
+        "slotName": "allNote",
+        "blockType": "text",
+        "binding": "data.allNote"
+      },
+      {
+        "slotName": "rqTitle",
+        "blockType": "text",
+        "binding": "data.rqTitle"
+      },
+      {
+        "slotName": "rqCopy",
+        "blockType": "text",
+        "binding": "data.rqCopy"
+      },
+      {
+        "slotName": "rqDate",
+        "blockType": "text",
+        "binding": "data.rqDate"
+      },
+      {
+        "slotName": "suppressed",
+        "blockType": "labelValueList",
+        "binding": "data.suppressed"
+      },
+      {
+        "slotName": "suppressNote",
+        "blockType": "text",
+        "binding": "data.suppressNote"
+      },
+      {
+        "slotName": "ledger",
+        "blockType": "labelValueList",
+        "binding": "data.ledger"
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus"
+      },
+      {
+        "slotName": "footerPushLabel",
+        "blockType": "text",
+        "binding": "data.footerPushLabel"
+      }
+    ]
+  }
+]

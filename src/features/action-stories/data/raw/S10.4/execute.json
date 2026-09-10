@@ -1,0 +1,453 @@
+{
+  "code": "S10.4",
+  "stageKey": "execute",
+  "name": "Fee integrity",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {
+    "pushed": {},
+    "busy": null
+  },
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "railDot": "var(--amber-500)",
+    "railGlow": "var(--amber-50)",
+    "railLabel": "$890\nexpiring",
+    "pinMark": "var(--mod-cash)",
+    "pinTone": "var(--mod-cash)",
+    "pinnedTop": "$4,120 recoverable",
+    "pinnedSub": "0 of 4 stages dispatched",
+    "planLine": "The expiring claim files first, then the batches. Nothing here changes a price or moves a unit — the whole downside of this stage is a marketplace saying no.",
+    "pushedCount": "0 / 4",
+    "runAllLabel": "File the batch",
+    "runAllIcon": "fa-solid fa-play",
+    "runAllBg": "var(--ink-900)",
+    "runAllFg": "var(--ink-0)",
+    "runAllCursor": "pointer",
+    "stages": [
+      {
+        "name": "Batch filing via API",
+        "meta": "9 claims · one batch per type, one evidence shape each, case IDs captured on acknowledgement",
+        "icon": "fa-solid fa-paper-plane",
+        "hue": "var(--mod-cash)",
+        "doorHref": null,
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "cardBorder": "color-mix(in oklab, var(--mod-cash) 26%, white)",
+        "headBg": "color-mix(in oklab, var(--mod-cash) 5%, white)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "File",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Dimension-tier batch · 6 claims",
+            "detail": "Filed together with the measured-dimension records and itemised fee lines attached. Batching keeps case volume legible to a reviewer who sees the same argument six times.",
+            "value": "$2,380",
+            "valueTone": "var(--mod-cash)",
+            "tag": "one submission",
+            "tagIcon": "fa-solid fa-layer-group",
+            "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+            "tagTone": "var(--mod-cash)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Unreimbursed inventory · 2 claims",
+            "detail": "Both claimed at landed cost from the originating PO rather than at retail — the cost basis history says gets approved.",
+            "value": "$700",
+            "valueTone": "var(--mod-cash)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Refund without return · 2 orders",
+            "detail": "Filed first in the batch because it has the least window left. Refund events, elapsed return window and the empty inbound-scan search all attached.",
+            "value": "$400",
+            "valueTone": "var(--rose-700)",
+            "tag": "expires in 9 days",
+            "tagIcon": "fa-solid fa-hourglass-half",
+            "tagTint": "var(--rose-50)",
+            "tagTone": "var(--rose-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Portal tasks and document requests",
+        "meta": "where no API path exists, or the evidence is with someone else",
+        "icon": "fa-solid fa-list-check",
+        "hue": "var(--amber-700)",
+        "doorHref": null,
+        "tint": "color-mix(in oklab, var(--amber-700) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "staged",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-500)",
+        "btnLabel": "Run",
+        "btnBg": "var(--ink-900)",
+        "btnFg": "var(--ink-0)",
+        "btnBorder": "var(--ink-900)",
+        "btnCursor": "pointer",
+        "items": [
+          {
+            "name": "Walmart shortage · portal task",
+            "detail": "WFS shortage claims file through the seller portal by hand. A task with the assembled pack attached goes to the Controller, dated against the 44-day window.",
+            "value": "$230 · 44 days",
+            "valueTone": "var(--amber-700)",
+            "tag": "no api path",
+            "tagIcon": "fa-solid fa-plug-circle-xmark",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Condition photographs · 3PL portal",
+            "detail": "Request to the 3PL for the four damaged units. The claim is assembled and waiting; it files itself the moment the images land.",
+            "value": "$410 · staged",
+            "valueTone": "var(--amber-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Carrier POD and bill of lading",
+            "detail": "Request to the freight broker on PO-4488. Without both documents the shortage claim wins about a fifth of the time, so it does not go early.",
+            "value": "requested",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "staged",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Cash lens posting",
+        "meta": "expected recovery scheduled, realised recovery attributed on approval",
+        "icon": "fa-solid fa-coins",
+        "hue": "var(--mod-cash)",
+        "doorHref": "S00-workspace.dc.html",
+        "doorLabel": "Cash lens",
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for filing",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Expected recovery on the ladder",
+            "detail": "Placed at the historic decision lag per type — 9 days for dimension claims, 18 for inventory — so the forecast is not optimistic about timing.",
+            "value": "$3,080 expected",
+            "valueTone": "var(--green-700)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Attribution tile updated",
+            "detail": "Recovered dollars stay attributed to this flow with their claim references, so the period figure is auditable line by line rather than asserted.",
+            "value": "$11.7K YTD",
+            "valueTone": "var(--mod-cash)",
+            "tag": "persistent",
+            "tagIcon": "fa-solid fa-thumbtack",
+            "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+            "tagTone": "var(--mod-cash)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Write-off log posted",
+            "detail": "$84 of sub-floor leakage recorded against the period. Not chased, still counted — the number that argues for fixing the cause.",
+            "value": "$84 logged",
+            "valueTone": "var(--ink-800)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "meta": "case outcomes, recovery rate by type, discrepancy inflow",
+        "icon": "fa-solid fa-chart-line",
+        "hue": "var(--mod-cash)",
+        "doorHref": null,
+        "tint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+        "cardBorder": "var(--ink-100)",
+        "headBg": "var(--ink-25)",
+        "statusLabel": "waits for filing",
+        "statusTint": "var(--ink-100)",
+        "statusTone": "var(--ink-400)",
+        "btnLabel": "Blocked",
+        "btnBg": "var(--ink-50)",
+        "btnFg": "var(--ink-400)",
+        "btnBorder": "var(--ink-200)",
+        "btnCursor": "default",
+        "items": [
+          {
+            "name": "Case outcomes polled daily",
+            "detail": "Every case ID is polled for a decision. An approval posts to the Cash lens; a denial gets one appeal with new evidence and then a write-off entry.",
+            "value": "9 cases",
+            "valueTone": "var(--mod-cash)",
+            "tag": null,
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Recovery rate by type",
+            "detail": "Outcomes update the win rates this ledger sorts by. A type that starts losing gets a lower priority and, past 25% denials, loses the batch path.",
+            "value": "3 types",
+            "valueTone": "var(--mod-cash)",
+            "tag": "feeds the engine",
+            "tagIcon": "fa-solid fa-rotate",
+            "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+            "tagTone": "var(--mod-cash)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          },
+          {
+            "name": "Discrepancy inflow watch",
+            "detail": "Seventeen this month against eleven in May. A fourth consecutive rise opens a 10.1 investigation into why fees are drifting rather than filing another batch.",
+            "value": "17 / month",
+            "valueTone": "var(--amber-700)",
+            "tag": "rising",
+            "tagIcon": "fa-solid fa-arrow-trend-up",
+            "tagTint": "var(--amber-50)",
+            "tagTone": "var(--amber-700)",
+            "dotIcon": "fa-solid fa-minus",
+            "dotBg": "var(--ink-100)",
+            "dotFg": "var(--ink-400)",
+            "stateLabel": "blocked",
+            "stateTone": "var(--ink-400)"
+          }
+        ]
+      }
+    ],
+    "pollStatus": "arms on stage 4",
+    "pollTone": "var(--ink-400)",
+    "cases": [
+      {
+        "name": "Dimension tier · Dutch Oven 5qt",
+        "sub": "FEE-2201 · 88 units",
+        "value": "$640",
+        "path": "API",
+        "caseId": "not filed",
+        "caseTone": "var(--ink-400)",
+        "status": "queued",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Dimension tier · Sauté Pan 12in",
+        "sub": "FEE-2202 · 62 units",
+        "value": "$520",
+        "path": "API",
+        "caseId": "not filed",
+        "caseTone": "var(--ink-400)",
+        "status": "queued",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Dimension tier · Knife Block 6pc",
+        "sub": "FEE-2203 · 41 units · 16 days",
+        "value": "$310",
+        "path": "API",
+        "caseId": "not filed",
+        "caseTone": "var(--ink-400)",
+        "status": "queued",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Refund without return",
+        "sub": "FEE-2207 · 2 orders · 9 days",
+        "value": "$400",
+        "path": "API",
+        "caseId": "not filed",
+        "caseTone": "var(--ink-400)",
+        "status": "queued",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Lost inventory · East node",
+        "sub": "FEE-2210 · 3 units",
+        "value": "$520",
+        "path": "API",
+        "caseId": "not filed",
+        "caseTone": "var(--ink-400)",
+        "status": "queued",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "name": "Walmart inbound shortage",
+        "sub": "FEE-2213 · PO-4488 · awaiting POD",
+        "value": "$230",
+        "path": "portal",
+        "caseId": "no case yet",
+        "caseTone": "var(--ink-400)",
+        "status": "staged",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      },
+      {
+        "name": "Damaged in warehouse",
+        "sub": "FEE-2212 · awaiting photographs",
+        "value": "$410",
+        "path": "staged",
+        "caseId": "no case yet",
+        "caseTone": "var(--ink-400)",
+        "status": "staged",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "attrBg": "var(--ink-0)",
+    "attrBorder": "var(--ink-100)",
+    "attrValue": "$8,480",
+    "attrLabel": "Realify recovered · before this batch",
+    "attrCopy": "The tile is persistent by design. Recovery is the one place where the platform can show its own contribution in dollars rather than in adjectives.",
+    "attrRows": [
+      {
+        "label": "Dimension claims",
+        "value": "$4,560",
+        "tone": "var(--mod-cash)"
+      },
+      {
+        "label": "Unreimbursed inventory",
+        "value": "$2,480",
+        "tone": "var(--mod-cash)"
+      },
+      {
+        "label": "Refund without return",
+        "value": "$1,440",
+        "tone": "var(--mod-cash)"
+      },
+      {
+        "label": "Written off and logged",
+        "value": "$328",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "progressPct": "0",
+    "progressRows": [
+      {
+        "label": "Stages complete",
+        "value": "0 of 4",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Cases with IDs",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Staged on documents",
+        "value": "0",
+        "tone": "var(--ink-500)"
+      },
+      {
+        "label": "Expected recovery",
+        "value": "—",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "monitors": [
+      {
+        "label": "Case outcomes",
+        "state": "off",
+        "detail": "Approvals post to the Cash lens; denials get one appeal with new evidence, then a write-off entry.",
+        "tone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Recovery rate by type",
+        "state": "off",
+        "detail": "Outcomes rewrite the win rates the ledger sorts by. Past 25% denials in a type, the batch path pauses.",
+        "tone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      },
+      {
+        "label": "Window alarms",
+        "state": "off",
+        "detail": "Any staged claim inside seven days of its deadline escalates rather than expiring quietly.",
+        "tone": "var(--ink-400)",
+        "bg": "var(--ink-0)"
+      }
+    ],
+    "inflowState": "not armed",
+    "done": false,
+    "closeLabel": "Back to workspace",
+    "footStatus": "Execute · 0 of 4 stages · expiring claim files first",
+    "footTone": "var(--ink-500)"
+  }
+}

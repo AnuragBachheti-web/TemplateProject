@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.4-1 Reason" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--mod-cash)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-cash) 12%, white);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ railDot }};box-shadow:0 0 0 3px {{ railGlow }}"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25;white-space:pre-line">{{ railLabel }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ pinMark }};border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Fee integrity · S10.4</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">$4,120 recoverable — $890 expires in 21 days</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ pinTone }};font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-cash)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-cash)"></span>Lens: Cash · Margin
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-cash);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Controller
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Fee Reconciliation Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Claim Evidence Assembler
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-300);background:var(--ink-100);font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-700)">
+          <i class="fa-solid fa-user-pen" style="font-size:9.5px;color:var(--ink-500)"></i>Strongest early Act candidate
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.4-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-cash) 10%, white);border:1px solid color-mix(in oklab, var(--mod-cash) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-cash);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">1</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.4-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">2</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.4-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">3</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.4-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center"><span style="font-family:var(--font-mono);font-size:10px;font-weight:600">4</span></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 1 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Recovery policy</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">what gets pursued, and what gets logged instead</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:7px;height:24px;padding:0 10px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-cash) 10%, white);font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--mod-cash)">floor ${{ floor }} per claim</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1.05fr 128px 1.5fr;gap:0 14px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Rule</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Setting</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Reasoning</span>
+          </div>
+          <sc-for list="{{ policy }}" as="p" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:1.05fr 128px 1.5fr;gap:0 14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="font-size:12.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ p.rule }}</span>
+              <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ p.tone }};text-align:right;font-variant-numeric:tabular-nums">{{ p.setting }}</span>
+              <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ p.why }}</span>
+            </div>
+          </sc-for>
+          <div style="margin-top:11px;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r-sm);background:var(--ink-25);border:1px solid var(--ink-100)">
+            <i class="fa-solid fa-scale-unbalanced" style="font-size:11px;color:var(--ink-400)"></i>
+            <span style="font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ floorNote }}</span>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:var(--ink-100);color:var(--ink-700);font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-lock" style="font-size:8.5px;color:var(--ink-500)"></i>Locked · filing windows
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">read from published policy — never inferred</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1.25fr 108px 1fr 132px;gap:0 14px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Claim type</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Window</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Clock starts</span>
+            <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Oldest candidate</span>
+          </div>
+          <sc-for list="{{ windows }}" as="w" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1.25fr 108px 1fr 132px;gap:0 14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--ink-50)">
+              <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ w.type }}</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ w.channel }}</span>
+              </span>
+              <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-700);font-variant-numeric:tabular-nums">{{ w.window }}</span>
+              <span style="font-size:11.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ w.starts }}</span>
+              <span style="justify-self:end;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-full);background:{{ w.tint }};font-family:var(--font-mono);font-size:10px;font-weight:600;color:{{ w.tone }}">{{ w.left }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:11px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">A claim is not an opinion about a fee. It either falls inside a published window with the evidence that policy names, or it does not — which is why this is the flow that graduates first.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:15px 17px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-gauge-simple-high" style="font-size:9px"></i>Act candidacy
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">why this one graduates before repricing does</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-500)">today: {{ execLabel }}</span>
+          </div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ candidacy }}" as="c" hint-placeholder-count="3">
+              <div style="background:var(--ink-0);padding:12px 13px;display:flex;flex-direction:column;gap:5px">
+                <i class="{{ c.icon }}" style="font-size:12px;color:var(--mod-cash)"></i>
+                <span style="font-size:12px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ c.label }}</span>
+                <span style="font-size:11px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ c.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);background:var(--amber-50);border:1px solid color-mix(in oklab, var(--amber-500) 24%, white);display:flex;align-items:flex-start;gap:10px">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:11px;color:var(--amber-700);margin-top:2px"></i>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:12px;font-weight:600;color:var(--amber-700)">The counterweight: claim volume is itself a relationship risk</span>
+              <span style="font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">Batch filing gets capped at 40 claims a week per account, and a denial rate above 25% in any type pauses the batch path and returns it here for review. A recovery flow that annoys a marketplace has not recovered anything.</span>
+            </span>
+          </div>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Locked constraints</span>
+          <div style="margin-top:11px;display:flex;flex-wrap:wrap;gap:7px">
+            <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+              <span style="display:inline-flex;align-items:center;gap:6px;height:27px;padding:0 10px;border-radius:var(--r-full);border:1px solid {{ c.border }};background:{{ c.bg }};font-size:11px;font-weight:500;color:{{ c.fg }}">
+                <i class="{{ c.icon }}" style="font-size:9.5px;color:{{ c.iconTone }}"></i>{{ c.label }}
+              </span>
+            </sc-for>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ locked }}" as="l" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:11.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ l.label }}</span>
+                <span style="font-size:10.5px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ l.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--rose-500) 24%, white);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-hourglass-half" style="font-size:11px;color:var(--rose-700)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Wasting asset</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--rose-700)">$890 / 21 days</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ expiring }}" as="e" hint-placeholder-count="3">
+              <div style="padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ e.bg }};display:flex;flex-direction:column;gap:3px">
+                <span style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ e.name }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ e.tone }}">{{ e.left }}</span>
+                </span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ e.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:9px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">An unfiled claim is not a backlog item. On the day the window closes it stops being money.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Why this card exists</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ trigger }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;gap:10px">
+                <span style="flex-shrink:0;width:74px;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400);padding-top:1px">{{ t.when }}</span>
+                <span style="min-width:0;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ t.what }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">{{ footStatus }}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">Dismiss card</a>
+        <a href="S10.4-2-analyze.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--mod-cash);color:var(--ink-0);transform:translateY(-1px)">
+          Open the discrepancy ledger<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":1024},"executionMode":{"editor":"enum","options":["Suggest","Approve","Auto"],"default":"Suggest","tsType":"'Suggest' | 'Approve' | 'Auto'","section":"Shell"},"recoveryFloor":{"editor":"range","min":25,"max":500,"step":25,"default":25,"unit":"$","tsType":"number","section":"Policy"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+    const floor = this.props.recoveryFloor ?? 25;
+
+    const values = [640, 520, 520, 430, 410, 400, 310, 310, 230, 180, 170];
+    const above = values.filter((v) => v >= floor);
+    const below = values.filter((v) => v < floor);
+    const belowSum = below.reduce((a, b) => a + b, 0);
+    const micro = 84;
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      railDot: 'var(--amber-500)',
+      railGlow: 'var(--amber-50)',
+      railLabel: '$890\nexpiring',
+      pinMark: 'var(--mod-cash)',
+      pinTone: 'var(--mod-cash)',
+      pinnedTop: '$4,120 recoverable',
+      pinnedSub: '11 claims · 3 expire inside 21 days',
+
+      floor: floor,
+      floorNote: below.length
+        ? 'At a $' + floor + ' floor, ' + below.length + ' of the 11 ledger claims fall below it — $' + belowSum + ' moves to the write-off log rather than the filing queue, and $' + micro + ' of sub-floor discrepancies were never promoted. Leakage is still counted; it is just not chased.'
+        : 'At a $' + floor + ' floor all 11 ledger claims clear it. A further $' + micro + ' across 6 sub-floor discrepancies is logged as measured leakage rather than filed — assembly costs more than the recovery.',
+
+      policy: [
+        { rule: 'Recovery floor per claim', setting: '$' + floor, tone: 'var(--mod-cash)', why: 'Below this, evidence assembly costs more than the claim returns. Sub-floor items are logged so leakage is still a number.' },
+        { rule: 'Evidence standard', setting: 'complete', tone: 'var(--ink-900)', why: 'A claim files only when every document policy names for that type is attached. Partial submissions burn the window and the goodwill.' },
+        { rule: 'Batch minimum', setting: '3 claims', tone: 'var(--ink-900)', why: 'Filing is batched to keep case volume legible to the marketplace and to keep the analyst cost per claim near $8.' },
+        { rule: 'Denied claims', setting: '1 appeal', tone: 'var(--ink-900)', why: 'One appeal with new evidence. After that it is written off and recorded — a second appeal on the same facts is noise.' },
+        { rule: 'Speculative claims', setting: 'never', tone: 'var(--rose-700)', why: 'No claim is filed on a fee we cannot tie to the marketplace\u2019s own record. Volume is not the metric; recovery rate is.' },
+      ],
+
+      windows: [
+        { type: 'Dimension or tier fee error', channel: 'Amazon FBA', window: '90 days', starts: 'from the date the fee was charged', left: '16 days left', tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+        { type: 'Lost inventory not reimbursed', channel: 'Amazon FBA', window: '18 months', starts: 'from the adjustment date, after the 30-day auto-match', left: '29 days left', tint: 'var(--amber-50)', tone: 'var(--amber-700)' },
+        { type: 'Refund without return', channel: 'Amazon FBA', window: '60 days', starts: 'from the refund, once the return window elapses', left: '9 days left', tint: 'var(--rose-50)', tone: 'var(--rose-700)' },
+        { type: 'Inbound shortage', channel: 'Walmart WFS · portal only', window: '30 days', starts: 'from the receipt posting', left: '44 days left', tint: 'var(--green-50)', tone: 'var(--green-700)' },
+      ],
+
+      candidacy: [
+        { icon: 'fa-solid fa-database', label: 'The inputs are their records', detail: 'Fee tables, measured dimensions, adjustment logs and refund events all come from the marketplace. Realify is reconciling, not estimating.' },
+        { icon: 'fa-solid fa-check-double', label: 'The test is deterministic', detail: 'A claim either matches a published window with the named evidence or it does not. There is no elasticity, no forecast, no judgment call.' },
+        { icon: 'fa-solid fa-feather', label: 'The downside is a denial', detail: 'A wrong claim returns a polite no. Nothing repriced, no customer affected, no inventory committed — the cheapest possible way to be wrong.' },
+      ],
+
+      chips: [
+        { icon: 'fa-solid fa-lock', label: 'Claim windows deterministic', border: 'var(--ink-300)', bg: 'var(--ink-100)', fg: 'var(--ink-700)', iconTone: 'var(--ink-500)' },
+        { icon: 'fa-solid fa-lock', label: 'Evidence standard per type', border: 'var(--ink-300)', bg: 'var(--ink-100)', fg: 'var(--ink-700)', iconTone: 'var(--ink-500)' },
+        { icon: 'fa-solid fa-ban', label: 'No speculative claims', border: 'color-mix(in oklab, var(--rose-500) 30%, white)', bg: 'var(--rose-50)', fg: 'var(--rose-700)', iconTone: 'var(--rose-700)' },
+        { icon: 'fa-solid fa-rotate-left', label: 'One appeal, then logged', border: 'var(--ink-200)', bg: 'var(--ink-25)', fg: 'var(--ink-700)', iconTone: 'var(--ink-400)' },
+        { icon: 'fa-solid fa-coins', label: 'Recovery posts to Cash lens', border: 'color-mix(in oklab, var(--mod-cash) 30%, white)', bg: 'color-mix(in oklab, var(--mod-cash) 8%, white)', fg: 'var(--mod-cash)', iconTone: 'var(--mod-cash)' },
+      ],
+
+      locked: [
+        { label: 'Filing windows are policy, not preference', detail: 'Each window is read from the marketplace\u2019s published claim policy and versioned. When a policy changes, the ledger re-sorts the same day.' },
+        { label: 'Evidence standards per claim type', detail: 'Dimension claims need a measured-dimension record; lost-inventory claims need the shipment reconciliation; shortage claims need carrier proof of delivery.' },
+        { label: 'Recovered cash is attributed, not absorbed', detail: 'Every recovery posts to the Cash lens with the claim reference attached, so the period total is auditable line by line.' },
+      ],
+
+      expiring: [
+        { name: 'Refund without return · 2 orders', left: '9 days', detail: '$400 · return window elapsed with no inbound scan on either order', tone: 'var(--rose-700)', bg: 'var(--rose-50)' },
+        { name: 'Dimension tier · Knife Block 6pc', left: '16 days', detail: '$310 · billed Large Standard against a measured Standard envelope', tone: 'var(--rose-700)', bg: 'var(--rose-50)' },
+        { name: 'Lost inventory · 2 units unmatched', left: '21 days', detail: '$180 · adjustment posted 38 days ago, never reimbursed', tone: 'var(--amber-700)', bg: 'var(--ink-0)' },
+      ],
+
+      trigger: [
+        { when: 'Aug 19 · 02:10', what: 'The Fee Reconciliation Engine finished the monthly pass over 41,880 fee lines and found 17 discrepancies against the marketplace\u2019s own measurements and adjustment logs.' },
+        { when: 'Aug 19 · 02:14', what: 'Eleven cleared the $25 floor at $4,120 total. The remaining six, $84 together, were logged as measured leakage without being promoted to claims.' },
+        { when: 'Aug 19 · 02:16', what: 'The Claim Evidence Assembler scored completeness per claim and sorted by deadline rather than value — $890 of the total closes within 21 days.' },
+      ],
+
+      footStatus: 'Reason · 11 claims above floor · $890 expiring · windows locked to published policy',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

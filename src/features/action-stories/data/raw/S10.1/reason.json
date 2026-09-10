@@ -1,0 +1,392 @@
+{
+  "code": "S10.1",
+  "stageKey": "reason",
+  "name": "Variance bridge",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "setup": [
+      {
+        "label": "Metric",
+        "value": "CM v3",
+        "size": "19px",
+        "tone": "var(--ink-900)",
+        "note": "contribution margin, contract-defined"
+      },
+      {
+        "label": "Comparison",
+        "value": "Aug 18",
+        "size": "19px",
+        "tone": "var(--ink-900)",
+        "note": "against the trailing 7-day mean"
+      },
+      {
+        "label": "Materiality band",
+        "value": "±$1,200",
+        "size": "19px",
+        "tone": "var(--ink-900)",
+        "note": "inside it, no card is raised"
+      },
+      {
+        "label": "Yesterday",
+        "value": "−$1,840",
+        "size": "19px",
+        "tone": "var(--rose-700)",
+        "note": "$640 past the band"
+      }
+    ],
+    "terms": [
+      {
+        "term": "Net rev",
+        "definition": "Gross revenue less discounts and cancellations, at the order date rather than the settlement date."
+      },
+      {
+        "term": "COGS",
+        "definition": "Landed cost at the moving average in force on the order date, including freight and duty."
+      },
+      {
+        "term": "Fees",
+        "definition": "Channel commission, referral and payment processing as settled, not as quoted."
+      },
+      {
+        "term": "Fulfillment",
+        "definition": "Pick, pack, postage and packaging — the same CPO components the fulfilment flow reads."
+      },
+      {
+        "term": "Returns",
+        "definition": "Actual refunds processed in the period, not a provision. Restocking recovery is netted in."
+      },
+      {
+        "term": "Ads",
+        "definition": "Platform spend attributed to the day it ran, including any deal or promotion fees."
+      }
+    ],
+    "contractChips": [
+      {
+        "icon": "fa-solid fa-calendar-check",
+        "label": "Effective Jun 1 · v3"
+      },
+      {
+        "icon": "fa-solid fa-code-compare",
+        "label": "Supersedes v2 · fees moved to settled"
+      },
+      {
+        "icon": "fa-solid fa-scale-balanced",
+        "label": "Re-bases history on change"
+      },
+      {
+        "icon": "fa-solid fa-user-shield",
+        "label": "Controller owns the definition"
+      }
+    ],
+    "bandRows": [
+      {
+        "label": "Baseline",
+        "note": "trailing 7-day mean CM",
+        "value": "$12,480",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Yesterday",
+        "note": "Aug 18, all four channels",
+        "value": "$10,640",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Variance",
+        "note": "14.7% below baseline",
+        "value": "−$1,840",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Past the band by",
+        "note": "the reason this card exists",
+        "value": "$640",
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "order": [
+      {
+        "n": "1",
+        "label": "Our own actions, from the Ledger",
+        "detail": "Anything we executed — price steps, bid changes, promo starts — is attributed to itself before anything else is considered.",
+        "tint": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+        "tone": "var(--mod-intel)"
+      },
+      {
+        "n": "2",
+        "label": "Known external events",
+        "detail": "Fee schedule changes, carrier rate updates, platform policy shifts already ingested by the engines.",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "n": "3",
+        "label": "Volume, price and mix effects",
+        "detail": "Decomposed separately so a shift in what sold is never confused with a change in what it earns.",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "n": "4",
+        "label": "Cost and efficiency drivers",
+        "detail": "Returns, fulfilment and ad efficiency, each measured against its own trailing baseline.",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)"
+      },
+      {
+        "n": "5",
+        "label": "Residual",
+        "detail": "What is left. Under 5% is normal noise; a residual that grows is a sign the contract is missing a term.",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)"
+      }
+    ],
+    "lenses": [
+      {
+        "name": "Margin",
+        "metric": "CM v3",
+        "state": "breached",
+        "tone": "var(--rose-700)",
+        "band": "band ±$1,200",
+        "icon": "fa-solid fa-percent",
+        "mark": "var(--mod-intel)",
+        "border": "color-mix(in oklab, var(--mod-intel) 34%, white)",
+        "bg": "color-mix(in oklab, var(--mod-intel) 5%, white)",
+        "nameTone": "var(--ink-900)"
+      },
+      {
+        "name": "Sales",
+        "metric": "net revenue",
+        "state": "in band",
+        "tone": "var(--green-700)",
+        "band": "band ±$4,000",
+        "icon": "fa-solid fa-chart-line",
+        "mark": "var(--ink-200)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "nameTone": "var(--ink-600)"
+      },
+      {
+        "name": "Inventory",
+        "metric": "cover days",
+        "state": "in band",
+        "tone": "var(--green-700)",
+        "band": "band ±2 days",
+        "icon": "fa-solid fa-boxes-stacked",
+        "mark": "var(--ink-200)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "nameTone": "var(--ink-600)"
+      },
+      {
+        "name": "Ads",
+        "metric": "blended ROAS",
+        "state": "in band",
+        "tone": "var(--green-700)",
+        "band": "band ±0.3×",
+        "icon": "fa-solid fa-bullhorn",
+        "mark": "var(--ink-200)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "nameTone": "var(--ink-600)"
+      },
+      {
+        "name": "Cash",
+        "metric": "net position",
+        "state": "in band",
+        "tone": "var(--green-700)",
+        "band": "band ±$9,000",
+        "icon": "fa-solid fa-wallet",
+        "mark": "var(--ink-200)",
+        "border": "var(--ink-100)",
+        "bg": "var(--ink-0)",
+        "nameTone": "var(--ink-600)"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Aug 19 · 06:02",
+        "what": "Variance Bridge Engine closed the books on Aug 18 and measured CM at $10,640 against a $12,480 baseline."
+      },
+      {
+        "when": "Aug 19 · 06:03",
+        "what": "The −$1,840 move cleared the ±$1,200 materiality band, so the bridge ran a full decomposition rather than logging the day quietly."
+      },
+      {
+        "when": "Aug 19 · 06:04",
+        "what": "Anomaly Classifier tagged five of six drivers expected and one unexpected — an FBA fee change worth −$2,210 that nothing in the contract anticipated."
+      }
+    ],
+    "residual": [
+      {
+        "h": "24",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "18",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "32",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "22",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "46",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "28",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "16",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "38",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "26",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "20",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "62",
+        "fill": "var(--amber-500)"
+      },
+      {
+        "h": "30",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "24",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "14",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "36",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "52",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "22",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "18",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "28",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "34",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "84",
+        "fill": "var(--amber-500)"
+      },
+      {
+        "h": "26",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "20",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "32",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "24",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "16",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "42",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "30",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "22",
+        "fill": "color-mix(in oklab, var(--mod-intel) 32%, white)"
+      },
+      {
+        "h": "20",
+        "fill": "var(--mod-intel)"
+      }
+    ],
+    "agents": [
+      {
+        "name": "Steward",
+        "role": "Owns the bridge, the contract and the residual target.",
+        "icon": "fa-solid fa-shield-halved",
+        "hue": "var(--mod-intel)",
+        "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+      },
+      {
+        "name": "Scout",
+        "role": "Watches for external causes — fee schedules, policy changes, competitor moves.",
+        "icon": "fa-solid fa-binoculars",
+        "hue": "var(--mod-intel)",
+        "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+      },
+      {
+        "name": "Variance Bridge Engine",
+        "role": "Decomposes the daily move in the order above and computes the residual.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      },
+      {
+        "name": "Anomaly Classifier",
+        "role": "Tags each driver expected or unexpected, with the evidence it used.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      }
+    ]
+  }
+}

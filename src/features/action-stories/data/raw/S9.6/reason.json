@@ -1,0 +1,173 @@
+{
+  "code": "S9.6",
+  "stageKey": "reason",
+  "name": "Listings",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will draft every edit and show the before and after. Nothing reaches a listing without your approval.",
+    "roles": [
+      {
+        "name": "Heroes",
+        "hue": "var(--mod-discover)",
+        "cvr": "13.0%",
+        "bb": "95%",
+        "content": "7 img · 3 A+",
+        "below": "4 of 12",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "why": "Traffic is expensive here. A point of CVR is worth more than anywhere else in the catalogue."
+      },
+      {
+        "name": "Core",
+        "hue": "var(--r-blue-500)",
+        "cvr": "10.0%",
+        "bb": "90%",
+        "content": "6 img · 2 A+",
+        "below": "7 of 68",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "why": "The base of the range. Content completeness matters more than polish."
+      },
+      {
+        "name": "Margin Drivers",
+        "hue": "var(--mod-margin)",
+        "cvr": "9.0%",
+        "bb": "85%",
+        "content": "6 img · 2 A+",
+        "below": "3 of 24",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "why": "High CM per unit, so a small CVR gain pays for a lot of studio time."
+      },
+      {
+        "name": "Traffic Drivers",
+        "hue": "var(--mod-hubs)",
+        "cvr": "8.0%",
+        "bb": "80%",
+        "content": "5 img · 1 A+",
+        "below": "3 of 41",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "why": "Thin CM. Fixes have to be cheap or they do not clear the bar."
+      },
+      {
+        "name": "Supporting",
+        "hue": "var(--ink-500)",
+        "cvr": "6.0%",
+        "bb": "none",
+        "content": "4 img",
+        "below": "1 of 69",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "why": "No Buy Box target. Realify will not spend studio hours here."
+      }
+    ],
+    "locked": [
+      {
+        "name": "Brand voice guide",
+        "owner": "Marketing owns · v4.2",
+        "rule": "Sentence case, no exclamation marks, no superlatives without a source. Realify drafts inside the guide and flags anything that needs a human line."
+      },
+      {
+        "name": "Image standards",
+        "owner": "Studio owns",
+        "rule": "Seven-shot set, white background on the hero, 2400px minimum, props only in lifestyle frames. Realify can reorder and request shots but never generates imagery."
+      },
+      {
+        "name": "Restricted claims per category",
+        "owner": "Legal owns",
+        "rule": "Stoneware may not carry food-safety or oven-temperature claims without the test document on file. Dishwasher-safe requires the current certificate reference."
+      }
+    ],
+    "rules": [
+      {
+        "label": "Attribution before edits",
+        "icon": "fa-solid fa-diagram-project",
+        "def": "A Buy Box loss caused by delivery promise does not get fixed with a new title. The waterfall decides the lever."
+      },
+      {
+        "label": "Lift ranges, not point estimates",
+        "icon": "fa-solid fa-chart-simple",
+        "def": "Every fix carries a range and a confidence from prior fixes on comparable listings."
+      },
+      {
+        "label": "One listing, one push",
+        "icon": "fa-solid fa-code-compare",
+        "def": "Edits batch per listing so the 14-day pre and post read is attributable."
+      },
+      {
+        "label": "Snapshot before publish",
+        "icon": "fa-solid fa-camera",
+        "def": "The current version is saved so a restore is one click, not a rewrite."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Listing content · 214 SKUs",
+        "meta": "3 channels"
+      },
+      {
+        "label": "Sessions and CVR · 30 days",
+        "meta": "412K sessions"
+      },
+      {
+        "label": "Buy Box win/loss log",
+        "meta": "hourly · 90 d"
+      },
+      {
+        "label": "Competitor listings",
+        "meta": "9 sellers"
+      },
+      {
+        "label": "Review and Q&amp;A feeds",
+        "meta": "daily"
+      },
+      {
+        "label": "Ranked search terms",
+        "meta": "1,840 terms"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns titles, bullets, images and A+ modules.",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+      },
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "role": "Owns any price or offer change the attribution calls for.",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)"
+      },
+      {
+        "initials": "Ke",
+        "name": "Keeper",
+        "role": "Owns backend keywords, category data and compliance checks.",
+        "hue": "var(--mod-intel)",
+        "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+      }
+    ]
+  }
+}

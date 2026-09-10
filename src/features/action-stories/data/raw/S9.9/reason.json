@@ -1,0 +1,245 @@
+{
+  "code": "S9.9",
+  "stageKey": "reason",
+  "name": "Markdown",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "dialNote": "Realify will build the ladders and schedule nothing. Every price step, promo code and outlet listing waits for your approval.",
+    "targets": [
+      {
+        "label": "Sell-through target",
+        "value": "80%",
+        "meta": "of the 4,180 units",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Deadline",
+        "value": "Sep 13",
+        "meta": "271-day FBA surcharge",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Margin-dilution cap",
+        "value": "1.8 pp",
+        "meta": "blended · quarter to date 33.3%",
+        "tone": "var(--ink-900)"
+      },
+      {
+        "label": "Capital locked",
+        "value": "$118K",
+        "meta": "4,180 units at cost",
+        "tone": "var(--ink-900)"
+      }
+    ],
+    "brandRules": [
+      {
+        "label": "Max 40% off hero lines",
+        "value": "Ridgeline, Alder",
+        "icon": "fa-solid fa-crown",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 10%, white)",
+        "border": "color-mix(in oklab, var(--mod-discover) 30%, white)"
+      },
+      {
+        "label": "Deep discounts outlet-only",
+        "value": "over 40%",
+        "icon": "fa-solid fa-store",
+        "hue": "var(--mod-hubs)",
+        "tint": "color-mix(in oklab, var(--mod-hubs) 10%, white)",
+        "border": "color-mix(in oklab, var(--mod-hubs) 28%, white)"
+      },
+      {
+        "label": "No marketplace clearance",
+        "value": "2 brands",
+        "icon": "fa-solid fa-ban",
+        "hue": "var(--rose-700)",
+        "tint": "var(--rose-50)",
+        "border": "color-mix(in oklab, var(--rose-500) 34%, white)"
+      },
+      {
+        "label": "One ladder per SKU per quarter",
+        "value": "no re-runs",
+        "icon": "fa-solid fa-repeat",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-50)",
+        "border": "var(--ink-200)"
+      },
+      {
+        "label": "Never below recovery floor",
+        "value": "liquidate instead",
+        "icon": "fa-solid fa-shield-halved",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)",
+        "border": "color-mix(in oklab, var(--green-500) 30%, white)"
+      }
+    ],
+    "recovery": [
+      {
+        "label": "Recovery floor",
+        "value": "52% of cost",
+        "hue": "var(--mod-margin)",
+        "tint": "var(--green-50)",
+        "note": "The point where another markdown step recovers less than a liquidation quote."
+      },
+      {
+        "label": "Liquidation quote on file",
+        "value": "38% of cost",
+        "hue": "var(--ink-500)",
+        "tint": "var(--ink-100)",
+        "note": "Valid 14 days, whole-lot only, no brand restrictions on resale channel."
+      },
+      {
+        "label": "Donation write-off value",
+        "value": "31% of cost",
+        "hue": "var(--r-blue-500)",
+        "tint": "var(--r-blue-50)",
+        "note": "Tax deduction at cost basis, plus the storage and fee avoidance."
+      },
+      {
+        "label": "Storage accrual if held",
+        "value": "$1.9K/mo",
+        "hue": "var(--rose-700)",
+        "tint": "var(--rose-50)",
+        "note": "Rises to $4.3K a month once the surcharge applies on Sep 13."
+      }
+    ],
+    "cohorts": [
+      {
+        "name": "Hero lines · Ridgeline, Alder",
+        "hue": "var(--mod-discover)",
+        "depth": "40%",
+        "floor": "$18.40",
+        "channels": "DTC, AMZ",
+        "units": "820 u · $31K",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "note": "Brand-critical. Depth capped and outlet excluded."
+      },
+      {
+        "name": "Core · kitchen textiles",
+        "hue": "var(--r-blue-500)",
+        "depth": "55%",
+        "floor": "$4.10",
+        "channels": "all + outlet",
+        "units": "1,640 u · $38K",
+        "tint": "var(--ink-100)",
+        "tone": "var(--ink-600)",
+        "note": "The bulk of the cohort. Elastic and easy to move."
+      },
+      {
+        "name": "Seasonal · summer serveware",
+        "hue": "var(--mod-margin)",
+        "depth": "65%",
+        "floor": "$6.80",
+        "channels": "all + outlet",
+        "units": "1,180 u · $34K",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "note": "Season is over. Holding costs a year of storage."
+      },
+      {
+        "name": "Discontinued · glass carafes",
+        "hue": "var(--ink-500)",
+        "depth": "no cap",
+        "floor": "liquidate",
+        "channels": "outlet, liq.",
+        "units": "540 u · $15K",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "note": "No future assortment role. Speed beats recovery."
+      }
+    ],
+    "locked": [
+      {
+        "label": "MAP floors",
+        "value": "3 of 4 cohorts",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Channel restrictions",
+        "value": "2 brands · no marketplace clearance",
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Cash ladder",
+        "value": "recovery lands wk 3-7 · story 9.2 reads it",
+        "tone": "var(--ink-500)"
+      }
+    ],
+    "clock": [
+      {
+        "label": "Days to the fee cliff",
+        "value": "26 d",
+        "pct": "29%",
+        "tone": "var(--rose-700)",
+        "meta": "Sep 13 · 271 days on hand"
+      },
+      {
+        "label": "Fee if nothing moves",
+        "value": "$6.2K",
+        "pct": "100%",
+        "tone": "var(--rose-700)",
+        "meta": "aged surcharge on 4,180 units"
+      },
+      {
+        "label": "Storage accrued so far",
+        "value": "$4.7K",
+        "pct": "52%",
+        "tone": "var(--amber-700)",
+        "meta": "since the cohort formed in March"
+      },
+      {
+        "label": "Weeks to clear at plan",
+        "value": "5.4 wk",
+        "pct": "60%",
+        "tone": "var(--ink-700)",
+        "meta": "first two steps only"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "On-hand and age by SKU",
+        "meta": "38 SKUs"
+      },
+      {
+        "label": "Elasticity from prior markdowns",
+        "meta": "14 tests"
+      },
+      {
+        "label": "FBA fee schedule and cliffs",
+        "meta": "current"
+      },
+      {
+        "label": "Outlet and liquidation quotes",
+        "meta": "2 quotes"
+      },
+      {
+        "label": "Clearance capacity per channel",
+        "meta": "4 channels"
+      },
+      {
+        "label": "Blended margin quarter to date",
+        "meta": "33.3%"
+      }
+    ]
+  }
+}

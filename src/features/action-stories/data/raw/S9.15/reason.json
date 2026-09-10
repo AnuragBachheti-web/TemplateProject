@@ -1,0 +1,283 @@
+{
+  "code": "S9.15",
+  "stageKey": "reason",
+  "name": "Search visibility",
+  "props": {
+    "$preview": {
+      "width": 1440,
+      "height": 1024
+    },
+    "executionMode": "Suggest"
+  },
+  "state": {},
+  "data": {
+    "execLabel": "Suggest",
+    "execSegs": [
+      {
+        "bg": "var(--ink-400)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      },
+      {
+        "bg": "var(--ink-200)"
+      }
+    ],
+    "clusters": [
+      {
+        "name": "Cookware comparisons",
+        "note": "carbon steel vs cast iron, pan buying guides · 96 queries",
+        "tier": "comparative",
+        "rank": "4.1",
+        "citeNow": "6%",
+        "citeTarget": "30%",
+        "value": "$14.2K",
+        "citeTone": "var(--rose-700)",
+        "tierTint": "color-mix(in oklab, var(--mod-discover) 14%, white)",
+        "tierTone": "var(--mod-discover)"
+      },
+      {
+        "name": "Water filtration",
+        "note": "lead removal, filter life, pitcher vs faucet · 68 queries",
+        "tier": "comparative",
+        "rank": "3.8",
+        "citeNow": "9%",
+        "citeTarget": "30%",
+        "value": "$9.6K",
+        "citeTone": "var(--rose-700)",
+        "tierTint": "color-mix(in oklab, var(--mod-discover) 14%, white)",
+        "tierTone": "var(--mod-discover)"
+      },
+      {
+        "name": "Knife care and sharpening",
+        "note": "how-to, angle guides, maintenance · 74 queries",
+        "tier": "informational",
+        "rank": "2.9",
+        "citeNow": "34%",
+        "citeTarget": "40%",
+        "value": "$6.1K",
+        "citeTone": "var(--green-700)",
+        "tierTint": "var(--r-blue-50)",
+        "tierTone": "var(--r-blue-700)"
+      },
+      {
+        "name": "Cooktop compatibility",
+        "note": "induction, glass, gas — what works with what · 52 queries",
+        "tier": "comparative",
+        "rank": "5.4",
+        "citeNow": "4%",
+        "citeTarget": "25%",
+        "value": "$7.8K",
+        "citeTone": "var(--rose-700)",
+        "tierTint": "color-mix(in oklab, var(--mod-discover) 14%, white)",
+        "tierTone": "var(--mod-discover)"
+      },
+      {
+        "name": "Buy-intent product terms",
+        "note": "\"buy 12 quart stock pot\", model numbers · 78 queries",
+        "tier": "transactional",
+        "rank": "2.2",
+        "citeNow": "18%",
+        "citeTarget": "25%",
+        "value": "$18.4K",
+        "citeTone": "var(--amber-700)",
+        "tierTint": "var(--green-50)",
+        "tierTone": "var(--green-700)"
+      },
+      {
+        "name": "Care and warranty questions",
+        "note": "seasoning, dishwasher safety, replacement · 44 queries",
+        "tier": "informational",
+        "rank": "3.1",
+        "citeNow": "28%",
+        "citeTarget": "40%",
+        "value": "$3.2K",
+        "citeTone": "var(--amber-700)",
+        "tierTint": "var(--r-blue-50)",
+        "tierTone": "var(--r-blue-700)"
+      }
+    ],
+    "tiers": [
+      {
+        "label": "Informational",
+        "note": "How-to and explainer queries. Already our strongest tier.",
+        "now": "31%",
+        "target": "40%",
+        "pct": 78,
+        "targetPct": 100,
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Comparative",
+        "note": "X vs Y, best-for, buying guides. Fourteen of these cite competitors only.",
+        "now": "7%",
+        "target": "30%",
+        "pct": 23,
+        "targetPct": 100,
+        "tone": "var(--rose-700)"
+      },
+      {
+        "label": "Transactional",
+        "note": "Product and model terms where the PDP should be the citation.",
+        "now": "18%",
+        "target": "25%",
+        "pct": 72,
+        "targetPct": 100,
+        "tone": "var(--amber-700)"
+      }
+    ],
+    "standards": [
+      {
+        "label": "Factual density",
+        "note": "sourced numbers per 500 words",
+        "floor": "≥ 6",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "state": "below"
+      },
+      {
+        "label": "Structured formatting",
+        "note": "tables, definition lists, answer-first headings",
+        "floor": "required",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "state": "partial"
+      },
+      {
+        "label": "Sourced claims",
+        "note": "every comparison cites a published figure",
+        "floor": "100%",
+        "tint": "var(--rose-50)",
+        "tone": "var(--rose-700)",
+        "state": "below"
+      },
+      {
+        "label": "Schema on content pages",
+        "note": "Article, FAQ, Product where applicable",
+        "floor": "required",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "state": "partial"
+      },
+      {
+        "label": "Core Web Vitals",
+        "note": "LCP, INP, CLS at p75",
+        "floor": "all green",
+        "tint": "var(--amber-50)",
+        "tone": "var(--amber-700)",
+        "state": "1 failing"
+      }
+    ],
+    "locked": [
+      {
+        "label": "Brand voice",
+        "detail": "Plain, specific, no superlatives. A draft that reads like SEO filler does not ship, whatever it ranks for."
+      },
+      {
+        "label": "Canonical URL structure",
+        "detail": "/guides/{topic} for content, /products/{sku} for PDPs. No new path patterns, no parameterised duplicates."
+      },
+      {
+        "label": "No auto-publish",
+        "detail": "Realify drafts briefs and copy. A human editor approves and publishes every page, always."
+      },
+      {
+        "label": "No competitor scraping",
+        "detail": "Comparisons cite the competitor’s own published figures or say nothing. Nothing inferred from their pages."
+      }
+    ],
+    "brandChips": [
+      {
+        "icon": "fa-solid fa-comment",
+        "label": "Tone: plain, specific, no hype"
+      },
+      {
+        "icon": "fa-solid fa-link",
+        "label": "/guides/{topic} · /products/{sku}"
+      },
+      {
+        "icon": "fa-solid fa-user-pen",
+        "label": "Human editor approves every page"
+      },
+      {
+        "icon": "fa-solid fa-quote-right",
+        "label": "Claims cite a published source"
+      },
+      {
+        "icon": "fa-solid fa-ban",
+        "label": "No thin variants for keyword coverage"
+      }
+    ],
+    "trigger": [
+      {
+        "when": "Sunday · 02:00",
+        "what": "Citation Tracker completed its weekly pass across 412 tracked queries and 3 answer surfaces."
+      },
+      {
+        "when": "Sunday · 02:18",
+        "what": "Fourteen comparison queries returned competitor-only citations — up from six four weeks ago."
+      },
+      {
+        "when": "Monday · 08:05",
+        "what": "Visibility Gap Engine sized the competitor-only set at $11.4K of monthly traffic value and pinned the card."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Merchandiser",
+        "role": "Owns content briefs, PDP copy and the editorial queue.",
+        "icon": "fa-solid fa-tags",
+        "hue": "var(--mod-discover)",
+        "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+      },
+      {
+        "name": "Scout",
+        "role": "Tracks rank, citations and competitor coverage per cluster.",
+        "icon": "fa-solid fa-binoculars",
+        "hue": "var(--mod-ads)",
+        "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+      },
+      {
+        "name": "Visibility Gap Engine",
+        "role": "Finds queries where competitors are cited and we are absent.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      },
+      {
+        "name": "Citation Tracker",
+        "role": "Samples AI answers and snippets weekly, per cluster.",
+        "icon": "fa-solid fa-gears",
+        "hue": "var(--ink-600)",
+        "tint": "var(--ink-100)"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Tracked queries",
+        "value": "412",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Content pages in scope",
+        "value": "186",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Search Console sync",
+        "value": "6h lag",
+        "tone": "var(--green-700)"
+      },
+      {
+        "label": "Crawl completed",
+        "value": "2 days ago",
+        "tone": "var(--ink-700)"
+      },
+      {
+        "label": "Citation samples this week",
+        "value": "1,236",
+        "tone": "var(--ink-700)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.2-3 Decide" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-900)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:var(--ink-100);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 3px var(--green-50)"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25">All<br>systems</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid var(--mod-cash);border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Working capital · S10.2</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">Week-7 trough projects $31K below buffer</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ pinnedTone }};font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-cash)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-cash)"></span>Lens: Cash
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-cash);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Navigator
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Cash Ladder Engine
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Settlement Calendar Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:0">
+        <a href="S10.2-1-reason.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Reason</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-2-analyze.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-600);display:grid;place-items:center"><i class="fa-solid fa-check" style="font-size:9px"></i></span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-600)">Analyze</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-3-decide.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);background:color-mix(in oklab, var(--mod-cash) 10%, white);border:1px solid color-mix(in oklab, var(--mod-cash) 30%, white)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--mod-cash);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">3</span>
+          <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">Decide</span>
+        </a>
+        <span style="width:22px;height:1px;background:var(--ink-200)"></span>
+        <a href="S10.2-4-execute.dc.html" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 13px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--ink-100);color:var(--ink-500);display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;font-weight:600">4</span>
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-500)">Execute</span>
+        </a>
+        <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Step 3 of 4</span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ heroBorder }};border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:15px 18px 16px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-sliders" style="font-size:9px"></i>Lever slate
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">no lever is shown without its consequence</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:{{ gapNoteTone }}">{{ gapNote }}</span>
+          </div>
+          <div style="margin-top:11px;font-size:20px;font-weight:700;letter-spacing:-0.015em;line-height:1.25;color:var(--ink-900);text-wrap:pretty">{{ heroTitle }}</div>
+          <div style="margin-top:6px;font-size:12.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ heroBody }}</div>
+          <div style="margin-top:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ink-100);border:1px solid var(--ink-100);border-radius:var(--r-md);overflow:hidden">
+            <sc-for list="{{ heroMetrics }}" as="m" hint-placeholder-count="5">
+              <div style="background:var(--ink-0);padding:12px 13px;display:flex;flex-direction:column;gap:3px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-400)">{{ m.label }}</span>
+                <span style="font-family:var(--font-mono);font-size:20px;font-weight:600;letter-spacing:-0.02em;color:{{ m.tone }};font-variant-numeric:tabular-nums">{{ m.value }}</span>
+                <span style="font-size:10.5px;line-height:1.4;color:var(--ink-400);text-wrap:pretty">{{ m.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:13px;position:relative;height:30px">
+            <span style="position:absolute;left:0;right:0;top:13px;height:5px;border-radius:var(--r-full);background:var(--ink-100);display:block"></span>
+            <span style="position:absolute;left:0;top:13px;height:5px;width:{{ closedPct }}%;border-radius:var(--r-full);background:{{ closedBar }};display:block"></span>
+            <span style="position:absolute;left:{{ needPct }}%;top:4px;bottom:4px;width:2px;background:var(--ink-900);display:block"></span>
+          </div>
+          <div style="margin-top:2px;display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500)">gap closed</span>
+            <span style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ closedTone }};font-variant-numeric:tabular-nums">{{ closedValue }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">of $31K needed · $54K in the P10 case</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">total cost of the chosen levers {{ totalCost }}</span>
+          </div>
+        </div>
+
+        <sc-for list="{{ levers }}" as="l" hint-placeholder-count="4">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ l.border }};border-left:3px solid {{ l.mark }};border-radius:var(--r-md);padding:13px 15px;display:flex;flex-direction:column;gap:11px">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <span style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:5px;width:22px">
+                <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:{{ l.rankTone }}">{{ l.rank }}</span>
+              </span>
+              <button type="button" onClick="{{ l.toggle }}" style="flex-shrink:0;margin-top:1px;width:20px;height:20px;border-radius:var(--r-xs);border:1.5px solid {{ l.boxBorder }};background:{{ l.boxBg }};color:var(--ink-0);cursor:pointer;display:grid;place-items:center;padding:0">
+                <i class="fa-solid fa-check" style="font-size:10px;opacity:{{ l.checkOpacity }}"></i>
+              </button>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+                <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span style="font-size:14px;font-weight:700;color:{{ l.titleTone }}">{{ l.title }}</span>
+                  <a href="{{ l.href }}" style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ l.chipTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ l.chipTone }}">
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:8px"></i>{{ l.chip }}
+                  </a>
+                  <sc-if value="{{ l.badge }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;height:21px;padding:0 8px;border-radius:var(--r-full);background:{{ l.badgeTint }};font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:{{ l.badgeTone }}">{{ l.badge }}</span>
+                  </sc-if>
+                </span>
+                <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ l.body }}</span>
+              </span>
+              <span style="flex-shrink:0;display:flex;align-items:center;gap:14px">
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:78px">
+                  <span style="font-family:var(--font-mono);font-size:14px;font-weight:600;color:var(--green-700);font-variant-numeric:tabular-nums">{{ l.relief }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">relief</span>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:84px">
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ l.costTone }};font-variant-numeric:tabular-nums">{{ l.cost }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">cost</span>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;width:66px">
+                  <span style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-700);font-variant-numeric:tabular-nums">{{ l.lead }}</span>
+                  <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">lead time</span>
+                </span>
+              </span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;padding-top:10px;border-top:1px dashed var(--ink-200)">
+              <div style="min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:{{ l.consequenceTone }}">Cross-story consequence</span>
+                <span style="font-size:11.5px;line-height:1.55;color:var(--ink-600);text-wrap:pretty">{{ l.consequence }}</span>
+                <sc-if value="{{ l.hasSize }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:flex;align-items:center;gap:12px;margin-top:3px;flex-wrap:wrap">
+                    <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ l.sizeLabel }}</span>
+                    <span style="display:flex;gap:5px">
+                      <sc-for list="{{ l.sizes }}" as="z" hint-placeholder-count="3">
+                        <button type="button" onClick="{{ z.pick }}" style="height:28px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ z.border }};background:{{ z.bg }};color:{{ z.fg }};cursor:pointer;font-family:var(--font-mono);font-size:10.5px;font-weight:{{ z.weight }}">{{ z.label }}</button>
+                      </sc-for>
+                    </span>
+                    <span style="font-size:11px;line-height:1.45;color:{{ l.sizeNoteTone }};text-wrap:pretty">{{ l.sizeNote }}</span>
+                  </span>
+                </sc-if>
+              </div>
+              <div style="min-width:0;display:flex;flex-direction:column;gap:7px">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Priced against</span>
+                <sc-for list="{{ l.priced }}" as="p" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:baseline;gap:8px">
+                    <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ p.label }}</span>
+                    <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ p.tone }};font-variant-numeric:tabular-nums">{{ p.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ policyBorder }};border-radius:var(--r-lg);padding:14px 16px;display:flex;flex-direction:column;gap:11px">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <button type="button" onClick="{{ bufferToggle }}" style="flex-shrink:0;margin-top:1px;width:20px;height:20px;border-radius:var(--r-xs);border:1.5px solid {{ bufferBoxBorder }};background:{{ bufferBoxBg }};color:var(--ink-0);cursor:pointer;display:grid;place-items:center;padding:0">
+              <i class="fa-solid fa-check" style="font-size:10px;opacity:{{ bufferOpacity }}"></i>
+            </button>
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+              <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span style="font-size:14px;font-weight:700;color:{{ bufferTitleTone }}">Update the buffer policy</span>
+                <sc-if value="{{ bufferChanged }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;border-radius:var(--r-full);background:var(--amber-50);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber-700)">
+                    <i class="fa-solid fa-file-signature" style="font-size:8px"></i>logged decision
+                  </span>
+                </sc-if>
+              </span>
+              <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">Lowering the buffer closes the gap on paper without changing a single cash flow. It is a legitimate answer — and it is a decision that gets logged with a name against it, because next quarter's trough will be measured against the number chosen here.</span>
+            </span>
+          </div>
+          <sc-if value="{{ bufferOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px dashed var(--ink-200);flex-wrap:wrap">
+              <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">Minimum buffer</span>
+              <span style="display:flex;gap:5px">
+                <sc-for list="{{ bufferOptions }}" as="b" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ b.pick }}" style="height:28px;padding:0 12px;border-radius:var(--r-full);border:1px solid {{ b.border }};background:{{ b.bg }};color:{{ b.fg }};cursor:pointer;font-family:var(--font-mono);font-size:11px;font-weight:{{ b.weight }}">{{ b.label }}</button>
+                </sc-for>
+              </span>
+              <span style="font-size:11px;line-height:1.45;color:{{ bufferNoteTone }};text-wrap:pretty">{{ bufferNote }}</span>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Chosen plan</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ totals }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="flex:1;min-width:0;font-size:12px;color:var(--ink-600)">{{ t.label }}</span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:{{ t.tone }};font-variant-numeric:tabular-nums">{{ t.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Week-7 after levers</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:{{ afterTone }}">
+              <span style="width:7px;height:7px;border-radius:50%;background:{{ afterTone }}"></span>{{ afterState }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ afterRows }}" as="a" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-600)">{{ a.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ a.tone }};font-variant-numeric:tabular-nums">{{ a.value }}</span>
+                </div>
+                <span style="position:relative;height:7px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden;display:block">
+                  <span style="position:absolute;left:0;top:0;bottom:0;width:{{ a.pct }}%;background:{{ a.tone }};display:block"></span>
+                  <span style="position:absolute;top:-2px;bottom:-2px;left:{{ a.markPct }}%;width:2px;background:var(--ink-900);display:block"></span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:11px 0 0;font-size:11px;line-height:1.5;color:var(--ink-400);text-wrap:pretty">The black mark is the buffer. Both the P50 and P10 lines have to clear it, or the plan only works if the quarter goes well.</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Policy check</span>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:{{ policyTone }}">
+              <span style="width:7px;height:7px;border-radius:50%;background:{{ policyTone }}"></span>{{ policyStatus }}
+            </span>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <i class="{{ c.icon }}" style="font-size:10px;color:{{ c.tone }};margin-top:3px;flex-shrink:0;width:12px;text-align:center"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ c.label }}</span>
+                  <span style="font-size:11px;line-height:1.45;color:{{ c.noteTone }};text-wrap:pretty">{{ c.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Where it lands</span>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ routes }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ r.bg }}">
+                <i class="{{ r.icon }}" style="font-size:10px;color:{{ r.hue }};margin-top:2px;flex-shrink:0"></i>
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;font-weight:600;color:{{ r.nameTone }}">{{ r.label }}</span>
+                  <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ r.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);background:var(--rose-50);font-size:11.5px;font-weight:500;color:var(--rose-700)">
+          <i class="fa-solid fa-triangle-exclamation" style="font-size:10px"></i>{{ blockReason }}
+        </span>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button type="button" style="height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50)">Export the ladder</button>
+        <sc-if value="{{ canApprove }}" hint-placeholder-val="{{ true }}">
+          <a href="S10.2-4-execute.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--r-blue-500);color:var(--ink-0);transform:translateY(-1px)">
+            {{ ctaLabel }}<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+          </a>
+        </sc-if>
+        <sc-if value="{{ blocked }}" hint-placeholder-val="{{ false }}">
+          <span style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-100);color:var(--ink-400);font-size:14px;font-weight:500;cursor:not-allowed">
+            <i class="fa-solid fa-lock" style="font-size:11px"></i>{{ ctaLabel }}
+          </span>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1024},&quot;executionMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Suggest&quot;,&quot;Approve&quot;,&quot;Auto&quot;],&quot;default&quot;:&quot;Suggest&quot;,&quot;tsType&quot;:&quot;'Suggest' | 'Approve' | 'Auto'&quot;,&quot;section&quot;:&quot;Shell&quot;}}">
+class Component extends DCLogic {
+  state = {
+    on: { po: true, terms: true, clearance: false, credit: false },
+    poSize: 2, drawSize: 25, clearSize: 1,
+    bufferOpen: false, buffer: 120,
+  };
+
+  leverDefs() {
+    return [
+      {
+        key: 'po', title: 'Delay two POs by one week', rank: '1',
+        chip: 'S9.2 replenishment', href: 'S9.2-3-decide.dc.html',
+        chipTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', chipTone: 'var(--mod-inventory)',
+        badge: 'recommended', badgeTint: 'color-mix(in oklab, var(--mod-cash) 12%, white)', badgeTone: 'var(--mod-cash)',
+        body: 'Two of the six week-7 POs are for Core SKUs at 31 and 34 days of cover. Moving them into week 8 puts the outflow after the Amazon settlement lands.',
+        lead: '0 days',
+        consequence: 'Cover on four SKUs drops to 24 days at the point of the delay, which is inside the Core service-level floor of 95% but not comfortable. Priced through the replenishment engine: 96.1% projected service level, no Hero SKU affected, no stock-out risk inside the window.',
+        consequenceTone: 'var(--mod-inventory)',
+        sizeLabel: 'POs delayed',
+        sizes: [
+          { v: 1, label: '1 PO', relief: 14, cost: 0.4, note: 'Cover holds at 28 days. Service level 96.8% — barely a trade.' },
+          { v: 2, label: '2 POs', relief: 26, cost: 0.9, note: 'Cover 24 days on four SKUs. Service level 96.1%, above the 95% floor.' },
+          { v: 3, label: '3 POs', relief: 38, cost: 3.2, note: 'A Hero SKU falls to 19 days and service level drops to 93.4% — under the floor.' },
+        ],
+        priced: [
+          ['Projected service level', 'dyn-service'],
+          ['Hero SKUs affected', 'dyn-hero'],
+          ['Cost of the delay', 'dyn-cost'],
+        ],
+      },
+      {
+        key: 'terms', title: 'Negotiate Kessler to Net 60', rank: '2',
+        chip: 'S9.17 supplier brief', href: 'S9.17-4-execute.dc.html',
+        chipTint: 'color-mix(in oklab, var(--mod-inventory) 12%, white)', chipTone: 'var(--mod-inventory)',
+        badge: 'brief already drafted', badgeTint: 'var(--green-50)', badgeTone: 'var(--green-700)',
+        body: 'Kessler is mid-negotiation on their price notice and the terms ask is already on the brief. Net 45 to Net 60 moves the $88K PO out of week 7 entirely.',
+        lead: '12 days',
+        consequence: 'This is the only lever that costs nothing and improves DPO permanently — 15 days of terms is worth $31K of working capital every cycle, not just this one. The risk is that it is a negotiation, not a decision: Kessler can say no, and the answer will not be known until Oct 4.',
+        consequenceTone: 'var(--green-700)',
+        relief: 31, cost: 0,
+        priced: [
+          ['Cash value of 15 days', '$31K'],
+          ['Interest or margin cost', '$0'],
+          ['Probability of success', '64%'],
+        ],
+      },
+      {
+        key: 'clearance', title: 'Accelerate the clearance ladder', rank: '3',
+        chip: 'S9.9 markdown', href: 'S9.9-3-decide.dc.html',
+        chipTint: 'color-mix(in oklab, var(--mod-margin) 12%, white)', chipTone: 'var(--mod-margin)',
+        body: 'Pull the first two ladder steps forward from week 9 to week 6, bringing recovery cash in ahead of the trough rather than after it.',
+        lead: '5 days',
+        consequence: 'Deeper discounts earlier means lower total recovery: the same units clear at 61% of landed cost instead of 68%. That is real margin given up to buy timing — and it is only worth it if the timing is what actually matters.',
+        consequenceTone: 'var(--mod-margin)',
+        sizeLabel: 'Steps pulled forward',
+        sizes: [
+          { v: 1, label: '1 step', relief: 18, cost: 2.4, note: 'Recovery 65% instead of 68%. Modest, and the cohort still clears before the fee cliff.' },
+          { v: 2, label: '2 steps', relief: 32, cost: 5.8, note: 'Recovery 61%. Meaningful margin given up, and the brand-exposure note applies on two hero-adjacent lines.' },
+        ],
+        priced: [
+          ['Recovery rate', 'dyn-recovery'],
+          ['Margin given up', 'dyn-cost'],
+          ['Cash arrives', 'week 6'],
+        ],
+      },
+      {
+        key: 'credit', title: 'Draw the revolving line', rank: '4',
+        chip: 'Meridian Bank · 9.4%', href: 'S10.2-4-execute.dc.html',
+        chipTint: 'var(--ink-100)', chipTone: 'var(--ink-600)',
+        body: 'The cheapest facility, three business days to draw, no covenant tested below 60% utilisation. Available at any size in $25K increments.',
+        lead: '3 days',
+        consequence: 'Straightforward and priced to the dollar — but it treats a timing problem as a funding problem. Drawn for 21 days it costs interest and nothing else; drawn as a habit it becomes the reason the conversion cycle never gets fixed.',
+        consequenceTone: 'var(--ink-600)',
+        sizeLabel: 'Draw',
+        sizes: [
+          { v: 25, label: '$25K', relief: 25, cost: 0.41, note: '21 days outstanding at 9.4% — $410 of interest. Closes most of the P50 gap alone.' },
+          { v: 50, label: '$50K', relief: 50, cost: 0.81, note: 'Covers the P10 case as well. $810 of interest, utilisation 20%.' },
+          { v: 75, label: '$75K', relief: 75, cost: 1.22, note: 'More than the trough needs. Utilisation 30%, still under every covenant.' },
+        ],
+        priced: [
+          ['Interest for 21 days', 'dyn-cost'],
+          ['Utilisation after draw', 'dyn-util'],
+          ['Covenant tested', 'no · under 60%'],
+        ],
+      },
+    ];
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const st = this.state;
+    const defs = this.leverDefs();
+    const on = (k) => !!st.on[k];
+
+    const poOpt = defs[0].sizes.find((s) => s.v === st.poSize) || defs[0].sizes[1];
+    const clearOpt = defs[2].sizes.find((s) => s.v === st.clearSize) || defs[2].sizes[0];
+    const creditOpt = defs[3].sizes.find((s) => s.v === st.drawSize) || defs[3].sizes[0];
+
+    const relief = {
+      po: poOpt.relief, terms: 31, clearance: clearOpt.relief, credit: creditOpt.relief,
+    };
+    const cost = {
+      po: poOpt.cost, terms: 0, clearance: clearOpt.cost, credit: creditOpt.cost,
+    };
+
+    let closed = 0, totalCost = 0, chosen = 0;
+    Object.keys(relief).forEach((k) => {
+      if (!on(k)) return;
+      closed += relief[k];
+      totalCost += cost[k];
+      chosen += 1;
+    });
+
+    const buffer = st.buffer;
+    const bufferChanged = buffer !== 120;
+    const gapP50 = Math.max(0, buffer - 89);
+    const gapP10 = Math.max(0, buffer - 66);
+    const afterP50 = 89 + closed;
+    const afterP10 = 66 + closed;
+    const p50Clear = afterP50 >= buffer;
+    const p10Clear = afterP10 >= buffer;
+
+    const serviceOk = st.poSize <= 2 || !on('po');
+    const blocked = chosen === 0 || !p50Clear || !serviceOk;
+    const blockReason = chosen === 0
+      ? 'Pick at least one lever — the trough does not resolve itself'
+      : !serviceOk
+        ? 'Three delayed POs drop service level to 93.4%, under the 95% Core floor'
+        : 'The P50 trough still sits $' + (buffer - afterP50) + 'K under the buffer';
+
+    const sizeButtons = (list, current, key) => list.map((s) => ({
+      label: s.label,
+      pick: () => this.setState((prev) => {
+        const o = {};
+        o[key] = s.v;
+        const onN = Object.assign({}, prev.on);
+        onN[key === 'poSize' ? 'po' : key === 'clearSize' ? 'clearance' : 'credit'] = true;
+        o.on = onN;
+        return o;
+      }),
+      bg: current === s.v ? (s.cost > 3 ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-0)',
+      fg: current === s.v ? 'var(--ink-0)' : 'var(--ink-600)',
+      border: current === s.v ? (s.cost > 3 ? 'var(--rose-500)' : 'var(--ink-900)') : 'var(--ink-200)',
+      weight: current === s.v ? '600' : '500',
+    }));
+
+    const pricedFor = (k) => {
+      if (k === 'po') return [
+        { label: 'Projected service level', value: st.poSize === 1 ? '96.8%' : st.poSize === 2 ? '96.1%' : '93.4%', tone: st.poSize === 3 ? 'var(--rose-700)' : 'var(--green-700)' },
+        { label: 'Hero SKUs affected', value: st.poSize === 3 ? '1' : '0', tone: st.poSize === 3 ? 'var(--rose-700)' : 'var(--green-700)' },
+        { label: 'Cost of the delay', value: '$' + poOpt.cost.toFixed(1) + 'K', tone: poOpt.cost > 3 ? 'var(--rose-700)' : 'var(--ink-800)' },
+      ];
+      if (k === 'terms') return [
+        { label: 'Cash value of 15 days', value: '$31K', tone: 'var(--green-700)' },
+        { label: 'Interest or margin cost', value: '$0', tone: 'var(--green-700)' },
+        { label: 'Probability of success', value: '64%', tone: 'var(--amber-700)' },
+      ];
+      if (k === 'clearance') return [
+        { label: 'Recovery rate', value: st.clearSize === 1 ? '65%' : '61%', tone: st.clearSize === 1 ? 'var(--amber-700)' : 'var(--rose-700)' },
+        { label: 'Margin given up', value: '$' + clearOpt.cost.toFixed(1) + 'K', tone: 'var(--rose-700)' },
+        { label: 'Cash arrives', value: 'week 6', tone: 'var(--green-700)' },
+      ];
+      return [
+        { label: 'Interest for 21 days', value: '$' + Math.round(creditOpt.cost * 1000), tone: 'var(--ink-800)' },
+        { label: 'Utilisation after draw', value: Math.round((st.drawSize / 150) * 100) + '%', tone: st.drawSize > 75 ? 'var(--amber-700)' : 'var(--green-700)' },
+        { label: 'Covenant tested', value: 'no', tone: 'var(--green-700)' },
+      ];
+    };
+
+    return {
+      execLabel: mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < filled ? dialTone : 'var(--ink-200)' })),
+      pinnedTop: chosen + ' lever' + (chosen === 1 ? '' : 's') + ' · $' + closed + 'K of relief',
+      pinnedTone: p50Clear ? 'var(--green-700)' : 'var(--rose-700)',
+      pinnedSub: 'week-7 trough $' + afterP50 + 'K vs $' + buffer + 'K buffer · cost $' + totalCost.toFixed(1) + 'K',
+
+      heroBorder: p50Clear ? 'color-mix(in oklab, var(--green-500) 30%, white)' : 'color-mix(in oklab, var(--mod-cash) 26%, white)',
+      heroTitle: chosen === 0
+        ? 'Nothing selected — the trough stands at $31K below buffer'
+        : p10Clear
+          ? 'The plan clears the buffer in both the P50 and P10 cases'
+          : p50Clear
+            ? 'The plan clears the P50 trough but not the P10 case'
+            : 'Still $' + (buffer - afterP50) + 'K short of the buffer',
+      heroBody: 'Four levers, ranked by cost per dollar of relief. The terms negotiation is free and permanent but uncertain; the PO delay is free and certain but borrows cover; clearance and credit both cost real money. Every number here is computed by the story that owns the consequence.',
+      gapNote: p10Clear ? 'P10 case covered' : p50Clear ? 'P50 covered · P10 short by $' + (buffer - afterP10) + 'K' : 'gap remaining $' + (buffer - afterP50) + 'K',
+      gapNoteTone: p10Clear ? 'var(--green-700)' : p50Clear ? 'var(--amber-700)' : 'var(--rose-700)',
+
+      heroMetrics: [
+        { label: 'Relief chosen', value: '$' + closed + 'K', tone: closed > 0 ? 'var(--green-700)' : 'var(--ink-400)', note: 'against a $' + gapP50 + 'K P50 gap' },
+        { label: 'Total cost', value: '$' + totalCost.toFixed(1) + 'K', tone: totalCost > 4 ? 'var(--amber-700)' : 'var(--ink-900)', note: 'interest plus margin given up' },
+        { label: 'Week-7 trough', value: '$' + afterP50 + 'K', tone: p50Clear ? 'var(--green-700)' : 'var(--rose-700)', note: 'buffer is $' + buffer + 'K' },
+        { label: 'P10 trough', value: '$' + afterP10 + 'K', tone: p10Clear ? 'var(--green-700)' : 'var(--amber-700)', note: 'the case that has to survive' },
+        { label: 'Levers', value: String(chosen), tone: 'var(--ink-900)', note: '4 available, 1 needs 12 days' },
+      ],
+
+      closedPct: Math.min(100, (closed / 60) * 100).toFixed(0),
+      needPct: ((gapP50 / 60) * 100).toFixed(0),
+      closedBar: p50Clear ? 'var(--green-500)' : 'var(--amber-500)',
+      closedValue: '$' + closed + 'K',
+      closedTone: p50Clear ? 'var(--green-700)' : 'var(--amber-700)',
+      totalCost: '$' + totalCost.toFixed(1) + 'K',
+
+      levers: defs.map((d) => {
+        const isOn = on(d.key);
+        const hasSize = !!d.sizes;
+        const bad = d.key === 'po' && st.poSize === 3 && isOn;
+        const opt = d.key === 'po' ? poOpt : d.key === 'clearance' ? clearOpt : d.key === 'credit' ? creditOpt : null;
+        return {
+          rank: d.rank, rankTone: isOn ? 'var(--mod-cash)' : 'var(--ink-300)',
+          title: d.title, body: d.body,
+          chip: d.chip, href: d.href, chipTint: d.chipTint, chipTone: d.chipTone,
+          badge: d.badge || null, badgeTint: d.badgeTint, badgeTone: d.badgeTone,
+          relief: '+$' + relief[d.key] + 'K',
+          cost: cost[d.key] === 0 ? 'free' : '$' + cost[d.key].toFixed(1) + 'K',
+          costTone: cost[d.key] === 0 ? 'var(--green-700)' : cost[d.key] > 3 ? 'var(--rose-700)' : 'var(--amber-700)',
+          lead: d.lead,
+          toggle: () => this.setState((prev) => {
+            const o = Object.assign({}, prev.on);
+            o[d.key] = !o[d.key];
+            return { on: o };
+          }),
+          boxBorder: isOn ? 'var(--ink-900)' : 'var(--ink-300)',
+          boxBg: isOn ? 'var(--ink-900)' : 'var(--ink-0)',
+          checkOpacity: isOn ? 1 : 0,
+          titleTone: isOn ? 'var(--ink-900)' : 'var(--ink-600)',
+          border: bad ? 'color-mix(in oklab, var(--rose-500) 40%, white)' : isOn ? 'var(--ink-200)' : 'var(--ink-100)',
+          mark: bad ? 'var(--rose-500)' : isOn ? 'var(--mod-cash)' : 'var(--ink-100)',
+          consequence: d.consequence, consequenceTone: d.consequenceTone,
+          hasSize,
+          sizeLabel: d.sizeLabel,
+          sizes: hasSize ? sizeButtons(d.sizes, d.key === 'po' ? st.poSize : d.key === 'clearance' ? st.clearSize : st.drawSize, d.key === 'po' ? 'poSize' : d.key === 'clearance' ? 'clearSize' : 'drawSize') : [],
+          sizeNote: opt ? opt.note : '',
+          sizeNoteTone: opt && opt.cost > 3 ? 'var(--rose-700)' : 'var(--ink-500)',
+          priced: pricedFor(d.key),
+        };
+      }),
+
+      bufferOpen: st.bufferOpen,
+      bufferToggle: () => this.setState((p) => ({ bufferOpen: !p.bufferOpen, buffer: p.bufferOpen ? 120 : p.buffer })),
+      bufferOpacity: st.bufferOpen ? 1 : 0,
+      bufferBoxBorder: st.bufferOpen ? 'var(--ink-900)' : 'var(--ink-300)',
+      bufferBoxBg: st.bufferOpen ? 'var(--ink-900)' : 'var(--ink-0)',
+      bufferTitleTone: st.bufferOpen ? 'var(--ink-900)' : 'var(--ink-600)',
+      bufferChanged,
+      policyBorder: bufferChanged ? 'color-mix(in oklab, var(--amber-500) 34%, white)' : 'var(--ink-100)',
+      bufferOptions: [100, 120, 140].map((v) => ({
+        label: '$' + v + 'K',
+        pick: () => this.setState({ buffer: v, bufferOpen: true }),
+        bg: buffer === v ? (v < 120 ? 'var(--amber-500)' : 'var(--ink-900)') : 'var(--ink-0)',
+        fg: buffer === v ? 'var(--ink-0)' : 'var(--ink-600)',
+        border: buffer === v ? (v < 120 ? 'var(--amber-500)' : 'var(--ink-900)') : 'var(--ink-200)',
+        weight: buffer === v ? '600' : '500',
+      })),
+      bufferNote: buffer === 100
+        ? 'Cuts the buffer to 4 weeks of fixed obligations. The gap shrinks to $11K without a single cash flow changing.'
+        : buffer === 120
+          ? 'Unchanged — 5 weeks of fixed obligations, as set by the board in January.'
+          : 'Raises the floor to 6 weeks. The gap grows to $51K, and next quarter is measured against the higher number too.',
+      bufferNoteTone: buffer === 100 ? 'var(--amber-700)' : 'var(--ink-500)',
+
+      totals: [
+        { label: 'Levers chosen', value: String(chosen), tone: chosen ? 'var(--ink-900)' : 'var(--amber-700)' },
+        { label: 'Relief', value: '$' + closed + 'K', tone: 'var(--green-700)' },
+        { label: 'Interest cost', value: on('credit') ? '$' + Math.round(creditOpt.cost * 1000) : '$0', tone: 'var(--ink-900)' },
+        { label: 'Margin given up', value: on('clearance') ? '$' + clearOpt.cost.toFixed(1) + 'K' : '$0', tone: on('clearance') ? 'var(--rose-700)' : 'var(--ink-500)' },
+        { label: 'Service-level cost', value: on('po') ? '$' + poOpt.cost.toFixed(1) + 'K' : '$0', tone: on('po') && poOpt.cost > 3 ? 'var(--rose-700)' : 'var(--ink-900)' },
+        { label: 'Permanent DPO gain', value: on('terms') ? '+15 days' : 'none', tone: on('terms') ? 'var(--green-700)' : 'var(--ink-500)' },
+      ],
+
+      afterState: p10Clear ? 'both cases clear' : p50Clear ? 'P50 only' : 'below buffer',
+      afterTone: p10Clear ? 'var(--green-700)' : p50Clear ? 'var(--amber-700)' : 'var(--rose-700)',
+      afterRows: [
+        { label: 'Before levers · P50', value: '$89K', pct: ((89 / 200) * 100).toFixed(0), markPct: ((buffer / 200) * 100).toFixed(0), tone: 'var(--rose-500)' },
+        { label: 'After levers · P50', value: '$' + afterP50 + 'K', pct: Math.min(100, (afterP50 / 200) * 100).toFixed(0), markPct: ((buffer / 200) * 100).toFixed(0), tone: p50Clear ? 'var(--green-500)' : 'var(--amber-500)' },
+        { label: 'Before levers · P10', value: '$66K', pct: ((66 / 200) * 100).toFixed(0), markPct: ((buffer / 200) * 100).toFixed(0), tone: 'var(--rose-500)' },
+        { label: 'After levers · P10', value: '$' + afterP10 + 'K', pct: Math.min(100, (afterP10 / 200) * 100).toFixed(0), markPct: ((buffer / 200) * 100).toFixed(0), tone: p10Clear ? 'var(--green-500)' : 'var(--amber-500)' },
+      ],
+
+      policyStatus: blocked ? (chosen === 0 ? 'nothing chosen' : 'out of band') : 'in band',
+      policyTone: blocked ? (chosen === 0 ? 'var(--ink-400)' : 'var(--rose-700)') : 'var(--green-700)',
+      checks: [
+        {
+          label: 'Buffer cleared · P50', icon: p50Clear ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark',
+          tone: p50Clear ? 'var(--green-700)' : 'var(--rose-700)', noteTone: p50Clear ? 'var(--ink-400)' : 'var(--rose-700)',
+          note: p50Clear ? 'Week 7 lands at $' + afterP50 + 'K against a $' + buffer + 'K floor.' : 'Week 7 still $' + (buffer - afterP50) + 'K under the buffer.',
+        },
+        {
+          label: 'Buffer cleared · P10', icon: p10Clear ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation',
+          tone: p10Clear ? 'var(--green-700)' : 'var(--amber-700)', noteTone: 'var(--ink-400)',
+          note: p10Clear ? 'The downside case clears too — the plan does not depend on the quarter going well.' : 'P10 lands at $' + afterP10 + 'K. Workable, but it assumes revenue holds.',
+        },
+        {
+          label: 'Service-level floor', icon: serviceOk ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark',
+          tone: serviceOk ? 'var(--green-700)' : 'var(--rose-700)', noteTone: serviceOk ? 'var(--ink-400)' : 'var(--rose-700)',
+          note: serviceOk ? 'No PO delay drops Core service level below the 95% floor, and no Hero SKU is touched.' : 'Three delayed POs put a Hero SKU at 19 days of cover and service level at 93.4%.',
+        },
+        {
+          label: 'Fixed obligations untouched', icon: 'fa-solid fa-lock', tone: 'var(--ink-400)', noteTone: 'var(--ink-400)',
+          note: 'Payroll, rent, loan servicing and the Oct 20 tax remittance are outside every lever. $186K across the 13 weeks.',
+        },
+        {
+          label: 'Buffer policy', icon: bufferChanged ? 'fa-solid fa-circle-exclamation' : 'fa-solid fa-circle-check',
+          tone: bufferChanged ? 'var(--amber-700)' : 'var(--green-700)', noteTone: 'var(--ink-400)',
+          note: bufferChanged ? 'Buffer moved to $' + buffer + 'K. Logged as a decision with a named owner and a review date.' : 'Buffer unchanged at $120K. The gap is being closed with cash, not with arithmetic.',
+        },
+      ],
+
+      routes: [
+        { label: 'PO timing to Planner', note: on('po') ? st.poSize + ' PO' + (st.poSize === 1 ? '' : 's') + ' moved to week 8, cover recalculated' : 'not selected', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)', bg: on('po') ? 'var(--ink-25)' : 'var(--ink-0)', nameTone: on('po') ? 'var(--ink-900)' : 'var(--ink-400)' },
+        { label: 'Terms brief to Sourcer', note: on('terms') ? 'Net 60 ask added to the Kessler brief, answer by Oct 4' : 'not selected', icon: 'fa-solid fa-file-lines', hue: 'var(--mod-inventory)', bg: on('terms') ? 'var(--ink-25)' : 'var(--ink-0)', nameTone: on('terms') ? 'var(--ink-900)' : 'var(--ink-400)' },
+        { label: 'Clearance acceleration', note: on('clearance') ? clearOpt.label + ' pulled forward to week 6, recovery re-modelled' : 'not selected', icon: 'fa-solid fa-tags', hue: 'var(--mod-margin)', bg: on('clearance') ? 'var(--ink-25)' : 'var(--ink-0)', nameTone: on('clearance') ? 'var(--ink-900)' : 'var(--ink-400)' },
+        { label: 'Credit drawdown task', note: on('credit') ? '$' + st.drawSize + 'K on the revolving line, 3-day lead' : 'not selected', icon: 'fa-solid fa-landmark', hue: 'var(--mod-cash)', bg: on('credit') ? 'var(--ink-25)' : 'var(--ink-0)', nameTone: on('credit') ? 'var(--ink-900)' : 'var(--ink-400)' },
+      ],
+
+      blocked,
+      canApprove: !blocked,
+      blockReason,
+      ctaLabel: 'Approve plan & continue',
+      footStatus: chosen === 0
+        ? 'Decide · no levers chosen · trough stands at $89K'
+        : 'Decide · ' + chosen + ' lever' + (chosen === 1 ? '' : 's') + ' · $' + closed + 'K relief · cost $' + totalCost.toFixed(1) + 'K · trough $' + afterP50 + 'K',
+      footTone: blocked ? 'var(--rose-700)' : 'var(--ink-500)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

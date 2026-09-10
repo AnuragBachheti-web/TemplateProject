@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/motion.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/tokens/layout.css">
+<link rel="stylesheet" href="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="_ds/realify-design-system-002c390c-74ee-4120-b12d-4d177bbdc7b4/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink-25); -webkit-font-smoothing: antialiased; }
+  a { color: var(--r-blue-600); text-decoration: none; }
+  a:hover { color: var(--r-blue-500); }
+</style>
+</helmet>
+
+<div data-screen-label="S10.6-5 Live" style="width:1440px;height:1024px;position:relative;overflow:hidden;background:var(--ink-25);font-family:var(--font-sans);color:var(--text-body);display:flex">
+
+  <aside style="flex:0 0 68px;width:68px;border-right:1px solid var(--ink-100);background:var(--ink-0);display:flex;flex-direction:column;align-items:center;padding:14px 0 12px">
+    <a href="S00-workspace.dc.html" style="display:grid;place-items:center;width:36px;height:36px;margin-bottom:14px;color:var(--ink-900)">
+      <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:currentColor;stroke:none"><path d="M12 20.4 L4.8 16.6 L12 12.8 L19.2 16.6 Z" style="fill:var(--ink-800);fill-opacity:0.15"></path><path d="M4.8 16.6 L12 20.4 L12 21.7 L4.8 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.24"></path><path d="M19.2 16.6 L12 20.4 L12 21.7 L19.2 17.9 Z" style="fill:var(--ink-800);fill-opacity:0.11"></path><path d="M12 3.2 L18 6.6 L12 10 L6 6.6 Z" style="fill-opacity:0.95"></path><path d="M6 6.6 L12 10 L12 13.6 L6 10.2 Z" style="fill-opacity:0.55"></path><path d="M18 6.6 L12 10 L12 13.6 L18 10.2 Z" style="fill-opacity:0.3"></path><circle cx="12" cy="6.6" r="1.8" style="fill:var(--amber-500)"></circle></svg>
+    </a>
+    <a href="S00-chat.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/new-chat.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Chat</span>
+    </a>
+    <a href="S00-workspace.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--mod-actions)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);background:color-mix(in oklab, var(--mod-actions) 12%, white);display:grid;place-items:center">
+        <img src="icons/workspace.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:1">
+      </span>
+      <span style="font-size:10px;font-weight:600">Workspace</span>
+    </a>
+    <a href="S00-explore.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/catalog.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Explore</span>
+    </a>
+    <a href="S00-prompts.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/ai.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Prompts</span>
+    </a>
+    <a href="S00-agents.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/agents.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Agents</span>
+    </a>
+    <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+      <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+        <img src="icons/integrations.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+      </span>
+      <span style="font-size:10px;font-weight:500">Integrations</span>
+    </span>
+    <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <span data-nav="unbuilt" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:60px;padding:5px 0;color:var(--ink-400);transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        <span style="width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center">
+          <img src="icons/settings.png" alt="" style="width:32px;height:32px;object-fit:contain;mix-blend-mode:multiply;opacity:0.62">
+        </span>
+        <span style="font-size:10px;font-weight:500">Settings</span>
+      </span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding-bottom:2px">
+        <span style="width:7px;height:7px;border-radius:50%;background:{{ railDot }};box-shadow:0 0 0 3px {{ railGlow }}"></span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-400);text-align:center;line-height:1.25;white-space:pre-line">{{ railLabel }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="flex:0 0 56px;height:56px;display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 24px;border-bottom:1px solid var(--ink-100)">
+      <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:19px;letter-spacing:-0.025em;color:var(--ink-900)">Realify</span>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:9px;height:38px;padding:0 11px 0 6px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);cursor:pointer;font-family:var(--font-sans);transition:border-color var(--dur-fast) var(--ease-standard)" style-hover="border-color:var(--ink-300)">
+        <span style="width:26px;height:26px;border-radius:var(--r-xs);background:var(--r-blue-500);color:var(--ink-0);display:grid;place-items:center;font-family:var(--font-mono);font-size:9px;font-weight:600">NH</span>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.2">
+          <span style="font-size:12.5px;font-weight:500;color:var(--ink-800)">Northwind Home &amp; Kitchen</span>
+          <span style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">4 channels</span>
+        </span>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:9px;height:34px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50)">
+        <i class="fa-solid fa-gauge-simple-high" style="font-size:12px;color:var(--ink-500)"></i>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-400)">Execution</span>
+        <span style="font-size:12px;font-weight:600;color:var(--ink-900)">{{ execLabel }}</span>
+        <span style="display:flex;align-items:center;gap:2px">
+          <sc-for list="{{ execSegs }}" as="seg" hint-placeholder-count="3">
+            <span style="width:12px;height:4px;border-radius:2px;background:{{ seg.bg }}"></span>
+          </sc-for>
+        </span>
+      </div>
+      <button type="button" style="display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 8px;border:none;background:transparent;font-family:var(--font-sans);font-size:12.5px;font-weight:500;color:var(--ink-500);cursor:pointer;transition:color var(--dur-fast) var(--ease-standard)" style-hover="color:var(--ink-800)">
+        Help <i class="fa-solid fa-chevron-down" style="font-size:8px"></i>
+      </button>
+      <x-import component-from-global-scope="realify-ledger" from="./ledger-overlay.js" hint-size="34px,34px"></x-import>
+      <button type="button" style="position:relative;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink-500);cursor:pointer;display:grid;place-items:center;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-100);color:var(--ink-800)">
+        <img src="icons/alerts.png" alt="" style="width:26px;height:26px;object-fit:contain;mix-blend-mode:multiply">
+        <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rose-500);border:1.5px solid var(--ink-25)"></span>
+      </button>
+      <span style="width:1px;height:22px;background:var(--ink-100)"></span>
+      <button type="button" style="display:flex;align-items:center;gap:7px;padding:0;border:none;background:transparent;cursor:pointer">
+        <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="AC" size="sm" hint-size="28px,28px"></x-import>
+        <i class="fa-solid fa-chevron-down" style="font-size:9px;color:var(--ink-400)"></i>
+      </button>
+    </header>
+
+    <div style="flex:0 0 auto;padding:14px 24px 0">
+      <a href="S00-workspace.dc.html" style="display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)" style-hover="color:var(--ink-800)">
+        <i class="fa-solid fa-arrow-left" style="font-size:9px"></i>Workspace · Actions Queue
+      </a>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:16px;background:var(--ink-0);border:1px solid var(--ink-100);border-left:3px solid {{ pinMark }};border-radius:var(--r-md);padding:13px 16px">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="display:inline-flex;padding:3px 8px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">Peak readiness · S10.6</span>
+            <x-import component-from-global-scope="RealifyDesignSystem_002c39.Badge" tone="ink" icon="fa-solid fa-thumbtack" hint-size="auto,22px">Pinned</x-import>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink-900)">{{ pinnedHeadline }}</div>
+        </div>
+        <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+            <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:{{ pinTone }};font-variant-numeric:tabular-nums">{{ pinnedTop }}</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ pinnedSub }}</span>
+          </div>
+          <x-import component-from-global-scope="RealifyDesignSystem_002c39.Avatar" initials="Me" size="sm" color="var(--mod-actions)" hint-size="28px,28px"></x-import>
+          <a href="S00-workspace.dc.html" title="Close and return to the queue" style="flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-400);display:grid;place-items:center;font-size:14px;line-height:1;transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">×</a>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--mod-actions)"></span>Lens: all five
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:11.5px;font-weight:500;color:var(--ink-700)">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--ink-500);stroke-width:1.4;stroke-linejoin:round">
+            <path d="M12 5 L18 8.5 L12 12 L6 8.5 Z" style="fill:var(--mod-actions);fill-opacity:0.3"></path>
+            <path d="M6 8.5 L12 12 L12 16.5 L6 13 Z"></path>
+            <path d="M18 8.5 L12 12 L12 16.5 L18 13 Z"></path>
+          </svg>
+          Arbiter coordinates; Forecaster lead
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Event Forecast Model
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">
+          <i class="fa-solid fa-gears" style="font-size:10px;color:var(--ink-400)"></i>Moment Contract
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-300);background:var(--ink-100);font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--ink-700)">
+          <i class="fa-solid fa-user-pen" style="font-size:9.5px;color:var(--ink-500)"></i>Pacing at Assist in-event
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-50);font-size:11.5px;font-weight:600;color:var(--ink-900)">
+          <i class="fa-solid fa-gauge-simple-high" style="font-size:10px;color:var(--ink-400)"></i>Dial: {{ execLabel }}
+        </span>
+      </div>
+
+      <div style="margin-top:12px;padding-bottom:14px;border-bottom:1px solid var(--ink-100);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 13px;border-radius:var(--r-full);background:{{ liveBannerBg }};border:1px solid {{ liveBannerBorder }}">
+          <span style="width:8px;height:8px;border-radius:50%;background:{{ liveDot }};box-shadow:0 0 0 3px {{ liveGlow }}"></span>
+          <span style="font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:{{ liveTone }}">{{ liveLabel }}</span>
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:9px;height:32px;padding:0 13px;border-radius:var(--r-full);background:var(--ink-25);border:1px solid var(--ink-200)">
+          <i class="fa-solid fa-file-signature" style="font-size:10px;color:{{ contractTone }}"></i>
+          <span style="font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ contractTone }}">{{ contractChip }}</span>
+        </span>
+        <div style="display:flex;align-items:center;gap:3px;padding:3px;border-radius:var(--r-full);background:var(--ink-100)">
+          <sc-for list="{{ phases }}" as="p" hint-placeholder-count="3">
+            <button type="button" onClick="{{ p.pick }}" style="height:26px;padding:0 12px;border-radius:var(--r-full);border:none;background:{{ p.bg }};color:{{ p.fg }};cursor:pointer;font-family:var(--font-sans);font-size:11.5px;font-weight:{{ p.weight }}">{{ p.label }}</button>
+          </sc-for>
+        </div>
+        <span style="margin-left:auto;display:flex;align-items:center;gap:14px">
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">{{ clockLabel }}</span>
+          <a href="S10.6-4-execute.dc.html" style="display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);font-size:12px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+            <i class="fa-solid fa-arrow-left" style="font-size:10px"></i>Prep checklist
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 336px;grid-template-rows:minmax(0,1fr);gap:16px;padding:16px 24px 0">
+
+      <div style="min-width:0;min-height:0;overflow-y:auto;padding-right:4px;display:flex;flex-direction:column;gap:14px">
+
+        <sc-if value="{{ expired }}" hint-placeholder-val="{{ false }}">
+          <div style="flex-shrink:0;background:var(--ink-900);border-radius:var(--r-lg);padding:15px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span style="width:32px;height:32px;border-radius:var(--r-xs);background:rgba(255,255,255,0.12);color:var(--ink-0);display:grid;place-items:center;flex-shrink:0"><i class="fa-solid fa-clock-rotate-left" style="font-size:14px"></i></span>
+            <span style="min-width:0;display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:14px;font-weight:600;color:var(--ink-0);letter-spacing:-0.01em">Moment Contract expired · Aug 27 · 06:00</span>
+              <span style="font-size:11.5px;line-height:1.5;color:rgba(255,255,255,0.72);text-wrap:pretty">All five overrides rolled back automatically. Spend caps are at +25%, repricing is back to four-hourly, promo depth is capped at 20%, transfer authority is $1.2K, and pacing asks again. Nobody had to remember.</span>
+            </span>
+            <span style="margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 12px;border-radius:var(--r-full);background:rgba(255,255,255,0.14);font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-0)">
+              <i class="fa-solid fa-check" style="font-size:9px"></i>5 of 5 restored
+            </span>
+          </div>
+        </sc-if>
+
+        <div style="flex-shrink:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+          <sc-for list="{{ lensTiles }}" as="t" hint-placeholder-count="5">
+            <div style="background:var(--ink-0);border:1px solid {{ t.border }};border-radius:var(--r-lg);box-shadow:{{ t.shadow }};padding:13px 14px;display:flex;flex-direction:column;gap:6px">
+              <span style="display:flex;align-items:center;gap:7px">
+                <i class="{{ t.icon }}" style="font-size:11px;color:{{ t.hue }}"></i>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-500)">{{ t.lens }}</span>
+              </span>
+              <span style="font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:29px;line-height:1;letter-spacing:-0.03em;color:var(--ink-900)">{{ t.value }}</span>
+              <span style="display:flex;align-items:baseline;gap:6px">
+                <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ t.deltaTone }};font-variant-numeric:tabular-nums">{{ t.delta }}</span>
+                <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ t.deltaLabel }}</span>
+              </span>
+              <span style="height:26px;margin-top:2px">
+                <svg viewBox="0 0 120 26" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+                  <path d="{{ t.fillPath }}" style="fill:{{ t.fill }}"></path>
+                  <path d="{{ t.linePath }}" style="fill:none;stroke:{{ t.hue }};stroke-width:1.8;stroke-linejoin:round"></path>
+                </svg>
+              </span>
+              <span style="font-size:10.5px;line-height:1.4;color:var(--ink-500);text-wrap:pretty">{{ t.note }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-actions) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden">
+          <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:color-mix(in oklab, var(--mod-actions) 5%, white);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-actions) 12%, white);color:var(--mod-actions);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+              <i class="fa-solid fa-bolt" style="font-size:9px"></i>In-flight adjustments
+            </span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ adjustMeta }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ adjustTone }}">{{ adjustSummary }}</span>
+          </div>
+          <div style="padding:0 16px">
+            <sc-for list="{{ adjustments }}" as="a" hint-placeholder-count="5">
+              <div style="padding:12px 0;border-bottom:1px solid var(--ink-50);display:grid;grid-template-columns:1fr 152px 128px;gap:0 14px;align-items:center">
+                <span style="min-width:0;display:flex;align-items:flex-start;gap:11px">
+                  <span style="flex-shrink:0;margin-top:1px;width:24px;height:24px;border-radius:var(--r-xs);background:{{ a.tint }};color:{{ a.hue }};display:grid;place-items:center"><i class="{{ a.icon }}" style="font-size:10px"></i></span>
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:4px">
+                    <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                      <span style="font-size:12.5px;font-weight:600;color:var(--ink-900)">{{ a.name }}</span>
+                      <span style="display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 8px;border-radius:var(--r-full);background:{{ a.authTint }};font-family:var(--font-mono);font-size:8.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ a.authTone }}">
+                        <i class="{{ a.authIcon }}" style="font-size:8px"></i>{{ a.auth }}
+                      </span>
+                      <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ a.when }}</span>
+                    </span>
+                    <span style="font-size:11.5px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ a.detail }}</span>
+                    <span style="font-family:var(--font-mono);font-size:10px;color:{{ a.boundTone }}">{{ a.bound }}</span>
+                  </span>
+                </span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:{{ a.effectTone }};font-variant-numeric:tabular-nums">{{ a.effect }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-400)">{{ a.effectLabel }}</span>
+                </span>
+                <span style="justify-self:end;display:flex;flex-direction:column;gap:5px;align-items:flex-end">
+                  <sc-if value="{{ a.needsCall }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:flex;gap:5px">
+                      <button type="button" onClick="{{ a.approve }}" style="height:28px;padding:0 11px;border-radius:var(--r-full);border:none;background:var(--ink-900);color:var(--ink-0);cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:600">Apply</button>
+                      <button type="button" onClick="{{ a.decline }}" style="height:28px;padding:0 11px;border-radius:var(--r-full);border:1px solid var(--ink-200);background:var(--ink-0);color:var(--ink-600);cursor:pointer;font-family:var(--font-sans);font-size:11px;font-weight:500">Hold</button>
+                    </span>
+                  </sc-if>
+                  <sc-if value="{{ a.stateLabel }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--r-full);background:{{ a.stateTint }};font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ a.stateTone }}">
+                      <i class="{{ a.stateIcon }}" style="font-size:8.5px"></i>{{ a.stateLabel }}
+                    </span>
+                  </sc-if>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:11px 16px;background:var(--ink-25);border-top:1px solid var(--ink-100);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-600)">{{ adjustFoot }}</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">every card says whether Realify acted or asked — never ambiguous, especially at 02:00</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ showReadout }}" hint-placeholder-val="{{ false }}">
+          <div style="flex-shrink:0;background:var(--ink-0);border:1px solid color-mix(in oklab, var(--mod-cash) 26%, white);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden">
+            <div style="padding:13px 16px;border-bottom:1px solid var(--ink-100);background:color-mix(in oklab, var(--mod-cash) 5%, white);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:var(--r-xs);background:color-mix(in oklab, var(--mod-cash) 12%, white);color:var(--mod-cash);font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase">
+                <i class="fa-solid fa-chart-line" style="font-size:9px"></i>Post-event readout · +14 days
+              </span>
+              <span style="font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">measured against the post-event trough, not the week before</span>
+            </div>
+            <div style="padding:14px 16px">
+              <div style="display:grid;grid-template-columns:1.6fr 118px 118px 118px;gap:0 12px;padding-bottom:6px;border-bottom:1px solid var(--ink-100)">
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400)">Measure</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Naive</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Trough-adj</span>
+                <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-400);text-align:right">Against plan</span>
+              </div>
+              <sc-for list="{{ readout }}" as="r" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:1.6fr 118px 118px 118px;gap:0 12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--ink-50)">
+                  <span style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ r.label }}</span>
+                    <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ r.detail }}</span>
+                  </span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-400);text-align:right;font-variant-numeric:tabular-nums">{{ r.naive }}</span>
+                  <span style="font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-900);text-align:right;font-variant-numeric:tabular-nums">{{ r.adjusted }}</span>
+                  <span style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;color:{{ r.planTone }};text-align:right;font-variant-numeric:tabular-nums">{{ r.plan }}</span>
+                </div>
+              </sc-for>
+              <p style="margin:12px 0 0;font-size:11.5px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">The naive column is what a dashboard would report. The trough-adjusted column subtracts the four days of borrowed demand that followed, and it is the only number worth carrying into next year's forecast.</p>
+            </div>
+            <div style="padding:13px 16px;background:var(--ink-25);border-top:1px solid var(--ink-100)">
+              <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Annotated to the Ledger for next year's T-8 card</span>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ annotations }}" as="a" hint-placeholder-count="4">
+                  <div style="display:flex;align-items:flex-start;gap:10px">
+                    <i class="{{ a.icon }}" style="font-size:10px;color:{{ a.tone }};margin-top:3px;flex-shrink:0;width:12px;text-align:center"></i>
+                    <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                      <span style="font-size:11.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ a.label }}</span>
+                      <span style="font-size:11px;line-height:1.45;color:var(--ink-500);text-wrap:pretty">{{ a.detail }}</span>
+                    </span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="height:4px;flex-shrink:0"></div>
+      </div>
+
+      <aside style="min-width:0;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px">
+
+        <div style="flex-shrink:0;background:{{ paceBg }};border:1px solid {{ paceBorder }};border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:15px 16px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <i class="fa-solid fa-gauge-high" style="font-size:11px;color:{{ paceTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:{{ paceTone }}">Against P50</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-400)">{{ paceHour }}</span>
+          </div>
+          <span style="margin-top:10px;display:block;font-family:var(--font-display);font-variation-settings:'opsz' 144;font-weight:400;font-size:42px;line-height:1;letter-spacing:-0.03em;color:var(--ink-900)">{{ paceValue }}</span>
+          <span style="margin-top:5px;display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-400)">{{ paceLabel }}</span>
+          <div style="margin-top:13px;height:60px">
+            <svg viewBox="0 0 288 60" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+              <path d="{{ bandPath }}" style="fill:color-mix(in oklab, var(--mod-actions) 10%, white)"></path>
+              <path d="{{ p50Path }}" style="fill:none;stroke:var(--ink-300);stroke-width:1.6;stroke-dasharray:5 4"></path>
+              <path d="{{ actualPath }}" style="fill:none;stroke:var(--ink-900);stroke-width:2.4;stroke-linejoin:round"></path>
+              <circle cx="{{ actualX }}" cy="{{ actualY }}" r="3.4" style="fill:{{ paceTone }};stroke:var(--ink-0);stroke-width:1.6"></circle>
+            </svg>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">hour 0</span>
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">P10–P90 band</span>
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">hour 96</span>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ paceCopy }}</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid {{ healthBorder }};border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-heart-pulse" style="font-size:11px;color:{{ healthTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Account health · hourly</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ healthTone }}">{{ healthState }}</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ healthRows }}" as="h" hint-placeholder-count="3">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:baseline;gap:8px">
+                  <span style="flex:1;min-width:0;font-size:11.5px;color:var(--ink-700);text-wrap:pretty">{{ h.label }}</span>
+                  <span style="flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ h.tone }};font-variant-numeric:tabular-nums">{{ h.value }}</span>
+                </span>
+                <span style="position:relative;height:6px;border-radius:var(--r-full);background:var(--ink-100);overflow:hidden">
+                  <span style="display:block;height:100%;width:{{ h.pct }}%;background:{{ h.tone }};border-radius:var(--r-full)"></span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400)">{{ h.detail }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:var(--ink-500);text-wrap:pretty">{{ healthCopy }}</p>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-boxes-stacked" style="font-size:11px;color:var(--mod-inventory)"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Cover watch</span>
+            <span style="margin-left:auto;font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:{{ coverTone }}">{{ coverState }}</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ coverRows }}" as="c" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:1fr 62px 56px;gap:0 9px;align-items:center;padding:8px 10px;border:1px solid var(--ink-100);border-radius:var(--r-sm);background:{{ c.bg }}">
+                <span style="min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;font-weight:600;color:var(--ink-900);text-wrap:pretty">{{ c.name }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ c.sub }}</span>
+                </span>
+                <span style="font-family:var(--font-mono);font-size:11px;font-weight:600;color:{{ c.tone }};text-align:right;font-variant-numeric:tabular-nums">{{ c.left }}</span>
+                <span style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-400);text-align:right">{{ c.hours }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="flex-shrink:0;background:var(--ink-0);border:1px solid var(--ink-100);border-radius:var(--r-lg);padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <i class="fa-solid fa-file-signature" style="font-size:11px;color:{{ contractTone }}"></i>
+            <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">Contract clock</span>
+          </div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ clauseRows }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{ c.tone }};flex-shrink:0"></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11.5px;color:var(--ink-800);text-wrap:pretty">{{ c.label }}</span>
+                  <span style="font-family:var(--font-mono);font-size:9px;color:var(--ink-400)">{{ c.used }}</span>
+                </span>
+                <span style="flex-shrink:0;font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{ c.tone }}">{{ c.state }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:11px;padding:10px 11px;border-radius:var(--r-sm);background:{{ expiryBg }};border:1px solid {{ expiryBorder }};display:flex;align-items:flex-start;gap:9px">
+            <i class="fa-solid fa-clock-rotate-left" style="font-size:10px;color:{{ expiryTone }};margin-top:2px"></i>
+            <span style="font-size:11px;line-height:1.5;color:var(--ink-600);text-wrap:pretty">{{ expiryCopy }}</span>
+          </div>
+        </div>
+
+        <div style="height:2px;flex-shrink:0"></div>
+      </aside>
+    </div>
+
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--ink-100);background:var(--ink-0)">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:{{ footTone }}">{{ footStatus }}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <a href="S10.6-1-reason.dc.html" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 15px;border-radius:var(--r-sm);border:1px solid var(--ink-200);background:var(--ink-0);font-size:13.5px;font-weight:500;color:var(--ink-600);transition:background var(--dur-fast) var(--ease-standard)" style-hover="background:var(--ink-50);color:var(--ink-900)">
+          <i class="fa-solid fa-file-signature" style="font-size:11px"></i>Read the contract
+        </a>
+        <a href="S00-workspace.dc.html?approved=10.6" style="display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:var(--r-sm);background:var(--ink-900);color:var(--ink-0);font-size:14px;font-weight:500;transition:background var(--dur-fast) var(--ease-standard),transform var(--dur-fast) var(--ease-standard)" style-hover="background:var(--mod-actions);color:var(--ink-0);transform:translateY(-1px)">
+          Back to workspace<i class="fa-solid fa-arrow-right" style="font-size:11px"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":1024},"executionMode":{"editor":"enum","options":["Suggest","Approve","Auto"],"default":"Suggest","tsType":"'Suggest' | 'Approve' | 'Auto'","section":"Shell"}}'>
+class Component extends DCLogic {
+  state = { phase: 'live', calls: {} };
+
+  spark(vals, hue) {
+    const lo = Math.min.apply(null, vals) - 2, hi = Math.max.apply(null, vals) + 2;
+    const x = (i) => (i / (vals.length - 1)) * 120;
+    const y = (v) => 24 - ((v - lo) / (hi - lo)) * 22;
+    const line = vals.map((v, i) => (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    return { linePath: line, fillPath: line + ' L120 26 L0 26 Z' };
+  }
+
+  renderVals() {
+    const mode = this.props.executionMode ?? 'Suggest';
+    const filled = { Suggest: 1, Approve: 2, Auto: 3 }[mode] ?? 1;
+    const dialTone = { Suggest: 'var(--ink-400)', Approve: 'var(--r-blue-500)', Auto: 'var(--mod-margin)' }[mode] ?? 'var(--ink-400)';
+
+    const phase = this.state.phase;
+    const isLive = phase === 'live';
+    const isPeak = phase === 'peak';
+    const expired = phase === 'after';
+    const hour = isLive ? 38 : isPeak ? 62 : 96;
+
+    const money = (n) => '$' + Math.round(n).toLocaleString('en-US');
+
+    const tileDefs = isLive ? [
+      { lens: 'Sales', icon: 'fa-solid fa-chart-line', hue: 'var(--mod-discover)', value: '$119K', delta: '+108%', deltaLabel: 'of P50 pace', up: true, note: 'Hour 38 of 96. Ahead of plan on Amazon, behind on DTC as expected.', series: [8, 14, 22, 31, 44, 58, 71, 86, 102, 119] },
+      { lens: 'Margin', icon: 'fa-solid fa-percent', hue: 'var(--mod-margin)', value: '31.8%', delta: '+0.4pp', deltaLabel: 'against event plan', up: true, note: 'Deal depth is landing where modelled; no unplanned discounting.', series: [32.1, 31.4, 31.6, 31.2, 31.5, 31.7, 31.6, 31.9, 31.7, 31.8] },
+      { lens: 'Inventory', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)', value: '2.9 d', delta: '−1.6 d', deltaLabel: 'cover on Heroes', up: false, note: 'Dutch Oven cover is the tightest line on this screen.', series: [6.4, 6.0, 5.5, 5.1, 4.6, 4.1, 3.7, 3.3, 3.1, 2.9] },
+      { lens: 'Ads', icon: 'fa-solid fa-bullseye', hue: 'var(--mod-ads)', value: '2.4×', delta: '+0.3×', deltaLabel: 'mROAS against floor', up: true, note: 'Well above the 1.4× bound, which is why pacing keeps spending.', series: [2.9, 2.8, 2.7, 2.6, 2.6, 2.5, 2.5, 2.4, 2.4, 2.4] },
+      { lens: 'Cash', icon: 'fa-solid fa-coins', hue: 'var(--mod-cash)', value: '−$38K', delta: '$0 drawn', deltaLabel: 'credit line untouched', up: true, note: 'Shopify payouts are landing on a 2-day rolling cycle.', series: [-4, -9, -14, -19, -24, -28, -32, -35, -37, -38] },
+    ] : isPeak ? [
+      { lens: 'Sales', icon: 'fa-solid fa-chart-line', hue: 'var(--mod-discover)', value: '$208K', delta: '+114%', deltaLabel: 'of P50 pace', up: true, note: 'Hour 62. Tracking between P50 and P90 with 34 hours left.', series: [8, 22, 44, 71, 102, 128, 152, 174, 192, 208] },
+      { lens: 'Margin', icon: 'fa-solid fa-percent', hue: 'var(--mod-margin)', value: '31.1%', delta: '−0.3pp', deltaLabel: 'against event plan', up: false, note: 'Lightning Deal depth ran on the four highest-velocity SKUs.', series: [32.1, 31.6, 31.5, 31.7, 31.6, 31.4, 31.3, 31.2, 31.1, 31.1] },
+      { lens: 'Inventory', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)', value: '0.9 d', delta: '−2.0 d', deltaLabel: 'cover on Heroes', up: false, note: 'Dutch Oven runs out inside the window unless something changes.', series: [6.4, 5.5, 4.6, 3.7, 3.1, 2.6, 2.1, 1.6, 1.2, 0.9] },
+      { lens: 'Ads', icon: 'fa-solid fa-bullseye', hue: 'var(--mod-ads)', value: '1.6×', delta: '+0.2×', deltaLabel: 'above the 1.4× bound', up: true, note: 'Approaching the bound. Pacing throttles automatically at 1.4×.', series: [2.9, 2.6, 2.5, 2.3, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6] },
+      { lens: 'Cash', icon: 'fa-solid fa-coins', hue: 'var(--mod-cash)', value: '−$61K', delta: '$0 drawn', deltaLabel: 'credit line untouched', up: true, note: 'Ad spend is front-loaded; settlement is still 14 days out.', series: [-8, -18, -27, -35, -42, -48, -53, -57, -59, -61] },
+    ] : [
+      { lens: 'Sales', icon: 'fa-solid fa-chart-line', hue: 'var(--mod-discover)', value: '$318K', delta: '+109%', deltaLabel: 'of P50 plan', up: true, note: 'Closed above P50, below P90. The forecast held.', series: [8, 44, 102, 152, 192, 232, 264, 288, 306, 318] },
+      { lens: 'Margin', icon: 'fa-solid fa-percent', hue: 'var(--mod-margin)', value: '31.2%', delta: '−0.2pp', deltaLabel: 'against event plan', up: false, note: 'Inside the posture. Revenue-max cost 0.2pp, not the 1.4pp budgeted.', series: [32.1, 31.6, 31.5, 31.4, 31.3, 31.2, 31.2, 31.1, 31.2, 31.2] },
+      { lens: 'Inventory', icon: 'fa-solid fa-boxes-stacked', hue: 'var(--mod-inventory)', value: '0 stockouts', delta: '4.2 hours', deltaLabel: 'closest call', up: true, note: 'The Dutch Oven finished with 34 units. Air freight earned its fee.', series: [6.4, 4.6, 3.1, 2.1, 1.4, 0.9, 0.6, 0.4, 0.3, 0.2] },
+      { lens: 'Ads', icon: 'fa-solid fa-bullseye', hue: 'var(--mod-ads)', value: '1.9×', delta: '$51K spent', deltaLabel: 'of $52K staged', up: true, note: 'Never went dark. Last year it did, for ten hours.', series: [2.9, 2.5, 2.2, 2.0, 1.8, 1.7, 1.8, 1.9, 1.9, 1.9] },
+      { lens: 'Cash', icon: 'fa-solid fa-coins', hue: 'var(--mod-cash)', value: '−$44K', delta: '$0 drawn', deltaLabel: 'credit line untouched', up: true, note: 'The trough held without the draw. $470 of interest unspent.', series: [-8, -27, -42, -53, -60, -64, -61, -55, -49, -44] },
+    ];
+
+    const adjustDefs = isLive ? [
+      { id: 'a1', name: 'Amazon Sponsored budget +$4.2K', desk: 'Bidder', icon: 'fa-solid fa-gauge-high', hue: 'var(--mod-ads)', auto: true,
+        when: '02:14', detail: 'Moved from Meta prospecting, which is pacing at 61% of its budget with a 1.7× mROAS against Amazon\u2019s 2.4×.',
+        bound: 'inside +180% cap · mROAS 2.4× against a 1.4× floor', effect: '+$2.1K CM', effectLabel: 'projected', done: true },
+      { id: 'a2', name: 'Dutch Oven repriced +$3.00', desk: 'Pricer', icon: 'fa-solid fa-tag', hue: 'var(--mod-margin)', auto: true,
+        when: '03:40', detail: 'Cover fell under 4 days and demand held, so price rose within the match band rather than the unit selling out early at a deal price.',
+        bound: 'inside match band · above MAP · Buy Box retained', effect: '+$1.4K CM', effectLabel: 'projected', done: true },
+      { id: 'a3', name: 'West-node transfer · 90 units', desk: 'Shipper', icon: 'fa-solid fa-truck-fast', hue: 'var(--mod-inventory)', auto: true,
+        when: '05:02', detail: 'Sauté Pan cover at the East node dropped under 4 days. $280 of freight, arriving within 18 hours.',
+        bound: 'inside $4K freight authority', effect: '−$280', effectLabel: 'freight', done: true },
+      { id: 'a4', name: 'Air-freight a second Dutch Oven lane', desk: 'Planner', icon: 'fa-solid fa-plane', hue: 'var(--mod-inventory)', auto: false,
+        when: '08:20', detail: 'At the current pace the Dutch Oven runs out around hour 74. A second air lane arrives hour 60 for $2.8K and protects roughly $7.2K of contribution.',
+        bound: 'outside the $6K lane authority already used — needs a call', effect: '+$4.4K CM', effectLabel: 'net projected', done: false },
+      { id: 'a5', name: 'Deepen DTC discount to 22%', desk: 'Promoter', icon: 'fa-solid fa-percent', hue: 'var(--mod-ads)', auto: false,
+        when: '08:35', detail: 'DTC is pacing at 78% of its P50 while Amazon runs ahead. Deeper discount would lift DTC volume, but the units are the same units Amazon is selling at full deal price.',
+        bound: 'inside 30% depth authority — but the trade is cannibalisation', effect: '−$900 CM', effectLabel: 'net projected', done: false },
+    ] : isPeak ? [
+      { id: 'b1', name: 'Ad pacing throttled on 6 campaigns', desk: 'Bidder', icon: 'fa-solid fa-gauge-high', hue: 'var(--mod-ads)', auto: true,
+        when: '14:08', detail: 'mROAS on six campaigns approached the 1.4× floor. Spend was reduced rather than held, which is what the bound is for.',
+        bound: 'floor enforcement · no override required', effect: '−$3.1K spend', effectLabel: 'redirected', done: true },
+      { id: 'b2', name: 'Dutch Oven price +$5.00 more', desk: 'Pricer', icon: 'fa-solid fa-tag', hue: 'var(--mod-margin)', auto: true,
+        when: '15:30', detail: 'Cover under one day with 34 hours to run. Raising price slows velocity to land the remaining units at the end of the window rather than at hour 70.',
+        bound: 'inside match band · above MAP', effect: '+$2.8K CM', effectLabel: 'projected', done: true },
+      { id: 'b3', name: 'Suppress Dutch Oven from DTC', desk: 'Merchandiser', icon: 'fa-solid fa-eye-slash', hue: 'var(--mod-intel)', auto: false,
+        when: '16:02', detail: 'Concentrating the remaining units on Amazon, where CM per unit is $4.10 higher after fees. DTC customers see an out-of-stock on a hero product mid-event.',
+        bound: 'a customer-experience call, not a bounded one', effect: '+$1.9K CM', effectLabel: 'projected', done: false },
+      { id: 'b4', name: 'Handling buffer to +2 days', desk: 'Keeper', icon: 'fa-solid fa-shield-halved', hue: 'var(--mod-actions)', auto: false,
+        when: '16:20', detail: 'Late shipment is at 3.8% with the Monday backlog building. A second buffer day protects the account and slows every promise on the East node.',
+        bound: 'account-health thresholds cannot be widened — only protected', effect: 'account risk', effectLabel: 'the real trade', done: false },
+    ] : [
+      { id: 'c1', name: 'All overrides rolled back', desk: 'Arbiter', icon: 'fa-solid fa-clock-rotate-left', hue: 'var(--mod-actions)', auto: true,
+        when: 'Aug 27 · 06:00', detail: 'Spend caps to +25%, repricing to four-hourly, promo depth to 20%, transfer authority to $1.2K, pacing back to asking. Automatic, unprompted, logged.',
+        bound: 'contract expiry · no human action required', effect: '5 of 5', effectLabel: 'restored', done: true },
+      { id: 'c2', name: 'Handling buffer removed', desk: 'Keeper', icon: 'fa-solid fa-shield-halved', hue: 'var(--mod-actions)', auto: true,
+        when: 'Aug 27 · 06:00', detail: 'East-node promise back to normal. Late shipment finished at 3.6%, never crossing 4% — the buffer did its job and then left.',
+        bound: 'window-scoped by definition', effect: '3.6% final', effectLabel: 'late shipment', done: true },
+      { id: 'c3', name: 'Deal badges and A+ reverted', desk: 'Merchandiser', icon: 'fa-solid fa-images', hue: 'var(--mod-intel)', auto: true,
+        when: 'Aug 27 · 06:05', detail: 'Thirteen assets reverted to evergreen. Nothing advertises a price that ended yesterday, which is the kind of thing that gets noticed by a marketplace.',
+        bound: 'scheduled at publish time', effect: '13 assets', effectLabel: 'reverted', done: true },
+    ];
+
+    const doneCount = adjustDefs.filter((a) => a.auto).length;
+    const pending = adjustDefs.filter((a) => !a.auto && !this.state.calls[a.id]);
+
+    // pacing chart
+    const W = 288, H = 60;
+    const pts = 13;
+    const p50 = [0, 6, 13, 21, 30, 39, 48, 57, 66, 75, 84, 92, 100];
+    const p10 = p50.map((v) => v * 0.68);
+    const p90 = p50.map((v) => v * 1.27);
+    const actualFull = [0, 7, 15, 24, 34, 43, 53, 62, 72, 81, 90, 98, 109];
+    const cut = isLive ? 6 : isPeak ? 9 : 13;
+    const actual = actualFull.slice(0, cut);
+    const x = (i) => (i / (pts - 1)) * W;
+    const y = (v) => H - 3 - (v / 130) * (H - 8);
+    const path = (arr) => arr.map((v, i) => (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    const band = path(p90) + ' ' + p10.slice().reverse().map((v, i) => 'L' + x(pts - 1 - i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ') + ' Z';
+
+    const paceNum = isLive ? 108 : isPeak ? 114 : 109;
+
+    return {
+      execLabel: isLive || isPeak ? 'Assist' : mode,
+      execSegs: [0, 1, 2].map((i) => ({ bg: i < (isLive || isPeak ? 2 : filled) ? (isLive || isPeak ? 'var(--mod-actions)' : dialTone) : 'var(--ink-200)' })),
+      railDot: expired ? 'var(--green-500)' : 'var(--mod-actions)',
+      railGlow: expired ? 'var(--green-50)' : 'color-mix(in oklab, var(--mod-actions) 18%, white)',
+      railLabel: expired ? 'event\nclosed' : 'hour ' + hour + '\nof 96',
+      pinMark: expired ? 'var(--green-500)' : 'var(--mod-actions)',
+      pinTone: expired ? 'var(--green-700)' : 'var(--mod-actions)',
+      pinnedHeadline: expired
+        ? 'Prime Fall closed — ' + money(318000) + ' · 0 stockouts · contract expired'
+        : 'Prime Fall LIVE — hour ' + hour + ' of 96 · pacing ' + paceNum + '% of P50',
+      pinnedTop: expired ? 'Closed · ' + money(318000) + ' · 0 stockouts' : 'Hour ' + hour + ' · pacing ' + paceNum + '% of P50',
+      pinnedSub: expired ? 'contract expired, all overrides restored' : pending.length ? pending.length + ' adjustment' + (pending.length > 1 ? 's need' : ' needs') + ' a call' : 'all adjustments inside contract bounds',
+
+      liveLabel: expired ? 'Event closed · Aug 26 · 23:59' : 'Live · hour ' + hour + ' of 96',
+      liveDot: expired ? 'var(--ink-400)' : 'var(--rose-500)',
+      liveGlow: expired ? 'var(--ink-100)' : 'var(--rose-50)',
+      liveTone: expired ? 'var(--ink-600)' : 'var(--rose-700)',
+      liveBannerBg: expired ? 'var(--ink-25)' : 'var(--rose-50)',
+      liveBannerBorder: expired ? 'var(--ink-200)' : 'color-mix(in oklab, var(--rose-500) 26%, white)',
+      contractChip: expired ? 'Contract expired · guardrails restored' : 'Contract live · expires Aug 27 · 06:00',
+      contractTone: expired ? 'var(--green-700)' : 'var(--mod-actions)',
+      phases: [
+        { key: 'live', label: 'Hour 38' },
+        { key: 'peak', label: 'Hour 62 · peak' },
+        { key: 'after', label: 'After' },
+      ].map((p) => ({
+        label: p.label,
+        bg: phase === p.key ? 'var(--ink-0)' : 'transparent',
+        fg: phase === p.key ? 'var(--ink-900)' : 'var(--ink-500)',
+        weight: phase === p.key ? '600' : '500',
+        pick: () => this.setState({ phase: p.key }),
+      })),
+      clockLabel: expired ? 'readout at +14 days · Sep 10' : 'refreshed 40 seconds ago',
+      expired: expired,
+
+      lensTiles: tileDefs.map((t) => {
+        const sp = this.spark(t.series, t.hue);
+        return {
+          lens: t.lens, icon: t.icon, hue: t.hue, value: t.value,
+          delta: t.delta, deltaLabel: t.deltaLabel,
+          deltaTone: t.up ? 'var(--green-700)' : 'var(--rose-700)',
+          note: t.note,
+          linePath: sp.linePath, fillPath: sp.fillPath,
+          fill: 'color-mix(in oklab, ' + t.hue + ' 10%, white)',
+          border: t.up ? 'var(--ink-100)' : 'color-mix(in oklab, var(--amber-500) 26%, white)',
+          shadow: t.up ? 'none' : 'var(--shadow-xs)',
+        };
+      }),
+
+      adjustMeta: expired ? 'rollback actions · all automatic' : doneCount + ' taken at Assist · ' + pending.length + ' escalated for a call',
+      adjustSummary: expired ? 'contract closed cleanly' : pending.length ? pending.length + ' waiting on you' : 'nothing waiting',
+      adjustTone: pending.length ? 'var(--amber-700)' : 'var(--green-700)',
+      adjustments: adjustDefs.map((a) => {
+        const called = this.state.calls[a.id];
+        return {
+          name: a.name, detail: a.detail, bound: a.bound, when: a.when,
+          icon: a.icon, hue: a.hue, tint: 'color-mix(in oklab, ' + a.hue + ' 12%, white)',
+          auth: a.auto ? 'Assist · within contract bounds' : 'needs a call',
+          authIcon: a.auto ? 'fa-solid fa-bolt' : 'fa-solid fa-user',
+          authTint: a.auto ? 'color-mix(in oklab, var(--mod-actions) 12%, white)' : 'var(--amber-50)',
+          authTone: a.auto ? 'var(--mod-actions)' : 'var(--amber-700)',
+          boundTone: a.auto ? 'var(--ink-500)' : 'var(--amber-700)',
+          effect: a.effect, effectLabel: a.effectLabel,
+          effectTone: a.effect.indexOf('−') === 0 ? 'var(--ink-700)' : a.effect.indexOf('+') === 0 ? 'var(--green-700)' : 'var(--ink-900)',
+          needsCall: !a.auto && !called,
+          approve: () => this.setState((s) => { const c = Object.assign({}, s.calls); c[a.id] = 'applied'; return { calls: c }; }),
+          decline: () => this.setState((s) => { const c = Object.assign({}, s.calls); c[a.id] = 'held'; return { calls: c }; }),
+          stateLabel: a.auto ? 'applied' : called === 'applied' ? 'applied' : called === 'held' ? 'held' : null,
+          stateIcon: called === 'held' ? 'fa-solid fa-hand' : 'fa-solid fa-check',
+          stateTint: called === 'held' ? 'var(--ink-100)' : 'var(--green-50)',
+          stateTone: called === 'held' ? 'var(--ink-600)' : 'var(--green-700)',
+        };
+      }),
+      adjustFoot: expired
+        ? 'Three rollback actions, all automatic, all logged. The contract closing is itself a Ledger entry.'
+        : doneCount + ' actions taken without asking, every one inside a bound written four days ago. ' + (pending.length ? pending.length + ' sit here because they are outside a bound or outside the math — cannibalisation and customer experience are not bounded quantities.' : 'Nothing is waiting on a human right now.'),
+
+      paceBg: expired ? 'var(--ink-0)' : 'color-mix(in oklab, var(--mod-actions) 5%, white)',
+      paceBorder: expired ? 'var(--ink-100)' : 'color-mix(in oklab, var(--mod-actions) 34%, white)',
+      paceTone: expired ? 'var(--green-700)' : 'var(--mod-actions)',
+      paceHour: 'hour ' + hour,
+      paceValue: paceNum + '%',
+      paceLabel: expired ? 'of P50 at close' : 'of P50 pace at this hour',
+      bandPath: band, p50Path: path(p50), actualPath: path(actual),
+      actualX: x(actual.length - 1).toFixed(1),
+      actualY: y(actual[actual.length - 1]).toFixed(1),
+      paceCopy: expired
+        ? 'Closed at 109% of P50, inside the band the model drew four days earlier. A forecast that holds is worth more than a forecast that flatters.'
+        : isPeak
+          ? 'Tracking between P50 and P90. The constraint from here is cover, not demand — which is the problem the air freight was supposed to solve and mostly did.'
+          : 'Ahead of P50 and inside the band. Amazon is carrying the overperformance; DTC is behind, which is what a reduced creative lineup buys you.',
+
+      healthBorder: isPeak ? 'color-mix(in oklab, var(--amber-500) 30%, white)' : 'var(--ink-100)',
+      healthTone: isPeak ? 'var(--amber-700)' : 'var(--green-700)',
+      healthState: expired ? '3.6% final' : isPeak ? '3.8% · watching' : '3.5% · steady',
+      healthRows: [
+        { label: 'Late shipment rate', value: expired ? '3.6%' : isPeak ? '3.8%' : '3.5%', pct: expired ? 90 : isPeak ? 95 : 88, detail: 'limit 4.0% · our alarm at 3.7%', tone: (isPeak ? 'var(--amber-700)' : 'var(--green-700)') },
+        { label: 'Order defect rate', value: expired ? '0.46%' : '0.44%', pct: 45, detail: 'limit 1.0% · comfortable throughout', tone: 'var(--green-700)' },
+        { label: 'Cancellation rate', value: expired ? '1.2%' : '1.1%', pct: 46, detail: 'limit 2.5% · no cover-driven cancellations', tone: 'var(--green-700)' },
+      ],
+      healthCopy: expired
+        ? 'Never crossed 4%. Last BFCM it did, on day 3, and cost eleven days of suppression — the buffer was worth its $4.2K of conversion.'
+        : isPeak
+          ? 'At 3.8% the pre-alarm has fired. The buffer is holding it under the limit; a second buffer day is the pending call above.'
+          : 'The handling buffer is doing its job. Hourly polling with a pre-alarm 0.3pp inside the marketplace limit.',
+
+      coverTone: isPeak ? 'var(--rose-700)' : expired ? 'var(--green-700)' : 'var(--amber-700)',
+      coverState: expired ? '0 stockouts' : isPeak ? '1 at risk' : '2 tight',
+      coverRows: (expired ? [
+        { name: 'Dutch Oven 5qt', sub: 'closed with 34 units', left: 'held', hours: '4.2h spare', tone: 'var(--green-700)', bg: 'var(--green-50)' },
+        { name: 'Sauté Pan 12in', sub: 'closed with 96 units', left: 'held', hours: '11h spare', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+        { name: 'Knife Block 6pc', sub: 'closed with 140 units', left: 'held', hours: 'comfortable', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+        { name: 'All 14 event SKUs', sub: 'zero stockouts across 96 hours', left: '14 of 14', hours: '—', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+      ] : isPeak ? [
+        { name: 'Dutch Oven 5qt', sub: '210 units left · Hero', left: '0.9 d', hours: 'out hour 74', tone: 'var(--rose-700)', bg: 'var(--rose-50)' },
+        { name: 'Sauté Pan 12in', sub: '188 units left · Hero', left: '1.6 d', hours: 'out hour 88', tone: 'var(--amber-700)', bg: 'var(--ink-0)' },
+        { name: 'Knife Block 6pc', sub: '240 units left · Core', left: '3.1 d', hours: 'holds', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+        { name: 'Filtration Pitcher', sub: '310 units left · Core', left: '4.4 d', hours: 'holds', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+      ] : [
+        { name: 'Dutch Oven 5qt', sub: '520 units left · Hero', left: '2.9 d', hours: 'holds', tone: 'var(--amber-700)', bg: 'var(--ink-0)' },
+        { name: 'Sauté Pan 12in', sub: '392 units left · Hero', left: '3.4 d', hours: 'holds', tone: 'var(--amber-700)', bg: 'var(--ink-0)' },
+        { name: 'Knife Block 6pc', sub: '318 units left · Core', left: '5.2 d', hours: 'holds', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+        { name: 'Cast-iron Skillet', sub: '461 units left · Core', left: '6.1 d', hours: 'holds', tone: 'var(--green-700)', bg: 'var(--ink-0)' },
+      ]),
+
+      clauseRows: [
+        { label: 'Spend caps +180%', used: expired ? 'peaked at +142% · restored' : 'currently at +' + (isPeak ? '142' : '96') + '%', state: expired ? 'restored' : 'live', tone: expired ? 'var(--green-700)' : 'var(--mod-actions)' },
+        { label: 'Repricing every 15 min', used: expired ? '318 reprices · restored to 4h' : (isPeak ? '241' : '148') + ' reprices so far', state: expired ? 'restored' : 'live', tone: expired ? 'var(--green-700)' : 'var(--mod-actions)' },
+        { label: 'Promo depth to 30%', used: expired ? 'deepest used 25% · restored to 20%' : 'deepest used ' + (isPeak ? '25' : '22') + '%', state: expired ? 'restored' : 'live', tone: expired ? 'var(--green-700)' : 'var(--mod-actions)' },
+        { label: 'Transfers to $4K freight', used: expired ? '$1.1K used · restored to $1.2K' : '$' + (isPeak ? '1.1' : '0.3') + 'K used', state: expired ? 'restored' : 'live', tone: expired ? 'var(--green-700)' : 'var(--mod-actions)' },
+        { label: 'Pacing at Assist', used: expired ? '11 actions taken · back to asking' : (isPeak ? '9' : '3') + ' actions taken', state: expired ? 'restored' : 'live', tone: expired ? 'var(--green-700)' : 'var(--mod-actions)' },
+      ],
+      expiryBg: expired ? 'var(--green-50)' : 'var(--ink-25)',
+      expiryBorder: expired ? 'color-mix(in oklab, var(--green-500) 24%, white)' : 'var(--ink-100)',
+      expiryTone: expired ? 'var(--green-700)' : 'var(--mod-actions)',
+      expiryCopy: expired
+        ? 'Expired on schedule at 06:00. Last year the overrides stayed live for eleven days and cost $4.1K of margin before the variance bridge found them.'
+        : 'Expires Aug 27 at 06:00 — ' + (isPeak ? '58' : '82') + ' hours from now. No renewal path; a second event needs a second signature.',
+
+      showReadout: expired,
+      readout: [
+        { label: 'Revenue', detail: 'Gross across four channels for the 96-hour window', naive: '$318K', adjusted: '$261K', plan: '+$4K', planTone: 'var(--green-700)' },
+        { label: 'Contribution margin', detail: 'After fees, fulfilment, returns and event ad spend', naive: '$99K', adjusted: '$78K', plan: '+$6K', planTone: 'var(--green-700)' },
+        { label: 'Incremental units', detail: 'Against the four days of borrowed demand that followed', naive: '4,180', adjusted: '3,120', plan: '+180', planTone: 'var(--green-700)' },
+        { label: 'Blended CM rate', detail: 'Revenue-max posture budgeted −1.4pp of dilution', naive: '31.2%', adjusted: '29.8%', plan: '+1.2pp', planTone: 'var(--green-700)' },
+        { label: 'Post-event trough', detail: 'Days 5–8 ran 26% below the pre-event baseline', naive: '—', adjusted: '−$57K', plan: 'as modelled', planTone: 'var(--ink-600)' },
+      ],
+      annotations: [
+        { label: 'Ad budgets never went dark', detail: 'The +180% cap was reached at hour 62 and pacing throttled at the mROAS floor rather than at the budget. Last year\u2019s ten dark hours cost $12K; this year cost nothing.', icon: 'fa-solid fa-check', tone: 'var(--green-700)' },
+        { label: 'Air freight was correctly priced', detail: '$3.1K bought zero stockouts with 4.2 hours of margin on the closest SKU. Keep the T-4 cover-against-forecast check; it is what found the gap.', icon: 'fa-solid fa-check', tone: 'var(--green-700)' },
+        { label: 'Creative capacity is the recurring constraint', detail: 'Third event running where DTC assets arrive late. The fix is a T-14 creative gate, not a bigger rush budget — annotated for next year\u2019s T-8 card.', icon: 'fa-solid fa-triangle-exclamation', tone: 'var(--amber-700)' },
+        { label: 'Cover, not demand, is the P90 constraint', detail: 'At hour 62 the model was tracking toward P90 and inventory could not follow. Next year\u2019s buy should be sized against P75, not P50.', icon: 'fa-solid fa-lightbulb', tone: 'var(--mod-actions)' },
+      ],
+
+      footStatus: expired
+        ? 'Post-event · $261K trough-adjusted revenue · 0 stockouts · contract expired on schedule · 4 learnings in the Ledger'
+        : 'Live · hour ' + hour + ' of 96 · pacing ' + paceNum + '% of P50 · ' + doneCount + ' Assist actions · ' + pending.length + ' awaiting a call',
+      footTone: expired ? 'var(--green-700)' : 'var(--mod-actions)',
+    };
+  }
+}
+
+</script>
+</body>
+</html>
