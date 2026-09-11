@@ -6,8 +6,25 @@
 // overrides below and their confidence levels.
 
 // ---- filtering out pure presentation values ------------------------------------------------
-
-const STYLE_VALUE_PATTERNS = [/^var\(--/, /^#[0-9a-f]{3,8}$/i, /^rgba?\(/i, /^color-mix\(/i, /^linear-gradient\(/i]
+//
+// RENDERED_UI_FORENSIC_AUDIT.md §3.5/§8: confirmed leaking raw internal values as visible content
+// — a FontAwesome glyph string (`fa-solid fa-paper-plane`) and a CSS border shorthand
+// (`1px solid var(--ink-200)`) neither matched any pattern here, and both are TOP-LEVEL scalar
+// fields (`pushAllIcon`, `divider`), so — unlike a nested item field — no key-name-based decorative
+// check ever ran on them either (`planSlotNames` below only ever filtered top-level fields by
+// VALUE). Both new patterns are still purely VALUE-shaped checks, same as every existing one here —
+// never a key-name guess for a top-level field, which is what keeps this from ever risking a real
+// business field (an "iconCount" a real number, an "iconLabel" a real sentence — neither matches
+// either pattern below).
+const STYLE_VALUE_PATTERNS = [
+  /^var\(--/,
+  /^#[0-9a-f]{3,8}$/i,
+  /^rgba?\(/i,
+  /^color-mix\(/i,
+  /^linear-gradient\(/i,
+  /^fa[srlbd]?-(solid|regular|light|duotone|brands)\b/i, // an icon glyph name, e.g. "fa-solid fa-lock"
+  /^\d+(\.\d+)?(px|em|rem)\s+(solid|dashed|dotted|double|groove|ridge|none)\b/i, // a border/divider shorthand
+]
 
 const STYLE_KEYWORD_VALUES = new Set([
   'inline-flex',
@@ -26,6 +43,7 @@ const STYLE_KEYWORD_VALUES = new Set([
   'wait',
   'row',
   'column',
+  'transparent',
 ])
 
 function isStyleString(v) {
@@ -53,26 +71,24 @@ function isPlainObject(v) {
 // A field can be decorative by NAME even when its value isn't a recognizable CSS/style string —
 // an icon glyph name (e.g. "fa-solid fa-truck-fast") is a plain string, but it's still styling,
 // not content, and neither a table column nor a chart axis should be built from one.
-const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/
-const DECORATIVE_EXACT_KEYS = new Set([
-  'icon',
-  'tone',
-  'tint',
-  'bg',
-  'border',
-  'mark',
-  'hue',
-  'fill',
-  'stroke',
-  'cursor',
-  'shadow',
-  'opacity',
-  'edge',
-  'glow',
+//
+// RENDERED_UI_FORENSIC_AUDIT.md §3.5/§8: a plain trailing-suffix regex missed a compound key like
+// `dotInner` ("dot" isn't the LAST word) — confirmed leaking "Dot Inner: transparent" as visible
+// text on S9.1/Decide's `slates`. Checked word-by-word (splitting on camelCase boundaries) instead,
+// so the decorative word can appear anywhere in the key, not only at the end. Never matches a key
+// merely for CONTAINING a decorative-looking substring — "dot" is only a match as a whole
+// camelCase word ("dotInner" → ["dot","Inner"]), so a real field like "dotation" or "iconography"
+// (neither of which occurs in this dataset, but the rule is deliberately word-bounded, not a raw
+// substring test) is never a false positive.
+const DECORATIVE_WORDS = new Set([
+  'bg', 'fg', 'tone', 'tint', 'border', 'cursor', 'icon', 'glow', 'edge', 'dot', 'shadow',
+  'opacity', 'mark', 'hue', 'fill', 'stroke', 'weight', 'divider', 'radius',
 ])
+const CAMEL_WORD_RE = /[A-Z]?[a-z0-9]+|[A-Z]+(?![a-z])/g
 
 function isDecorativeKey(key) {
-  return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key)
+  const words = String(key).match(CAMEL_WORD_RE) ?? []
+  return words.some((w) => DECORATIVE_WORDS.has(w.toLowerCase()))
 }
 
 /** An item's own keys, minus anything decorative by name or by (CSS-style) value. */
@@ -93,6 +109,11 @@ const CHART_COORD_KEYS = new Set(['h', 'value', 'x', 'y', 'cx', 'cy', 'r'])
 // A row's magnitude can live under any of these names — the same alias list
 // LabelValueListBlock.jsx already picks its displayed value from (`value ?? note ?? detail ??
 // amount ?? pct`), narrowed to the ones that are actually numeric magnitudes rather than free text.
+// Deliberately does NOT include a generic 1-2 letter key like `n` — that name is just as often a
+// step/sequence number (S9.6/decide.sequence, S9.11/execute.stages, S10.1/reason.order all use
+// `n: "1"/"2"/"3"` as an ordinal, not a magnitude) as it is a count, and a false-positive bar chart
+// (plotting step numbers as bar heights) is worse than leaving a real count-shaped row
+// (S9.1/decide.moveBar) in labelValueList, where it still renders correctly, just not as a chart.
 const CHART_MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount']
 
 function isNumericLike(v) {
@@ -100,6 +121,12 @@ function isNumericLike(v) {
   if (typeof v === 'string' && v.trim() !== '') return Number.isFinite(Number(v))
   return false
 }
+
+// A rich, uniform, >=4-column labeled row set normally promotes from labelValueList to table (see
+// classifyBlockType's own comment on why) — this is the narrow, explicit exemption list for raw
+// keys that should keep the compact checklist treatment regardless of column count. Raw-key-keyed,
+// same style as EXACT_KEY_OVERRIDES/PRIORITY_GROUPS below — never a workflow code.
+const CHECKLIST_RAW_KEYS = new Set(['checks'])
 
 // A coordinate/pixel-position value (x/y/cx/cy/top/height) is always a plain float in this
 // dataset, so isNumericLike's strict `Number(v)` is the right test for those. A *magnitude*
@@ -115,15 +142,72 @@ function looksLikeMagnitude(v) {
   return FORMATTED_MAGNITUDE_RE.test(v.trim())
 }
 
+// ---- unit-compatibility check (confirmed bug fix: S9.1/decide.checks plots a ratio, a dollar
+// figure and a percent on one shared linear bar scale — see extraction/audit-report.md §A.4 and
+// AUDIT_REPORT.md §7.1/§7.2) ---------------------------------------------------------------------
+//
+// A bar chart's y-axis is one shared linear scale — every bar on it must be the same *kind* of
+// number, or the comparison it invites ("this bar is taller than that one") is meaningless or
+// actively misleading (a $440K capital-ceiling figure dwarfing a 2.31 GMROI ratio and a 5.6% exit
+// rate is not "bigger", it's a different unit entirely). This infers a coarse unit from the
+// formatted string's own symbol — currency glyph, trailing "%", trailing "px" — deliberately
+// ignoring the K/M magnitude suffix (parseMagnitude already expands "$18.0K" to a real number of
+// the *same* currency unit as "$4,120", so two currency figures at different scales are still
+// legitimately comparable; only a genuinely different unit is not).
+function magnitudeUnit(v) {
+  if (typeof v === 'number') return 'number'
+  if (typeof v !== 'string') return null
+  const s = v.trim()
+  if (s === '') return null
+  if (/[$€£]/.test(s)) return 'currency'
+  if (/%\s*$/.test(s)) return 'percent'
+  if (/px\s*$/i.test(s)) return 'px'
+  return 'number'
+}
+
 /**
- * Bar-shaped: every row has a string `label` *and* a numeric-looking magnitude — the exact shape
- * that used to hide inside `labelValueList` (S9.2/decide.weeks, S9.9/decide.cash,
- * S9.10/reason.stack: `{label, value, h}`), because the plain "every item has a label" check ran
- * first and never looked any further. Checked before that plain check for exactly this reason.
+ * True when the array's *dominant* magnitude key — whichever CHART_MAGNITUDE_KEYS name at least one
+ * row actually populates with a real magnitude — reports one consistent unit among the rows that
+ * populate it. Deliberately does NOT compare a row that falls back to a *different* key (its own
+ * dominant-key field is blank/absent) against that dominant unit: a blank `value` with an `h: "2px"`
+ * fallback (S9.2/decide.weeks' zero-revenue weeks, drawn as a 2px sliver in the original mockup) is
+ * a rendering-fallback gap, not a competing semantic unit — that row simply has no opinion on the
+ * dominant metric's unit, so it doesn't count against consistency.
+ */
+function hasConsistentMagnitudeUnits(value) {
+  const dominantKey = CHART_MAGNITUDE_KEYS.find((k) => value.some((item) => looksLikeMagnitude(item?.[k])))
+  if (!dominantKey) return true
+  const units = new Set(
+    value
+      .map((item) => item?.[dominantKey])
+      .filter((v) => looksLikeMagnitude(v))
+      .map(magnitudeUnit)
+      .filter((u) => u !== null),
+  )
+  return units.size <= 1
+}
+
+/** Same idea as hasConsistentMagnitudeUnits, for a bare array of magnitudes (no per-item key to pick). */
+function hasConsistentBareUnits(value) {
+  const units = new Set(value.map(magnitudeUnit).filter((u) => u !== null))
+  return units.size <= 1
+}
+
+/**
+ * Bar-shaped: every row has a string `label` *and* a numeric-looking magnitude, *and* the array's
+ * dominant magnitude key shares one coarse unit across the rows that populate it (see
+ * hasConsistentMagnitudeUnits above) — the exact shape that used to hide inside `labelValueList`
+ * (S9.2/decide.weeks, S9.9/decide.cash, S9.10/reason.stack: `{label, value, h}`), because the plain
+ * "every item has a label" check ran first and never looked any further. Checked before that plain
+ * check for exactly this reason. The unit guard keeps a same-shape-but-different-meaning row group
+ * (a governance checklist mixing a ratio/dollar-figure/percent, a totals row mixing dollars with a
+ * bare SKU count) out of barChart — it falls through to the shape checks below and lands in
+ * labelValueList instead, the same place every other heterogeneous-unit row group already renders.
  */
 function isBarChartShaped(value) {
-  return value.every(
-    (item) => typeof item.label === 'string' && CHART_MAGNITUDE_KEYS.some((k) => looksLikeMagnitude(item[k])),
+  return (
+    value.every((item) => typeof item.label === 'string' && CHART_MAGNITUDE_KEYS.some((k) => looksLikeMagnitude(item[k]))) &&
+    hasConsistentMagnitudeUnits(value)
   )
 }
 
@@ -176,6 +260,40 @@ function isSliderShaped(value) {
 const SVG_LINE_PATH_RE = /^M\s*-?[\d.]+\s+-?[\d.]+(?:\s+L\s*-?[\d.]+\s+-?[\d.]+)+$/i
 
 /**
+ * Multi-series lineChart-shaped: every row is a plain object carrying its own raw SVG path string
+ * under `path` — LineChartBlock.jsx already renders an array of `{path, name?, tone?}` as one line
+ * per entry (see its own doc comment), but classifyBlockType never produced that shape: a curve row
+ * almost always also carries a descriptive `label` ("DTC · $18.40"), so it was caught by the plain
+ * "every item has a string label" rule below before this ever ran (confirmed:
+ * S9.3/analyze.curves — 4 real trend lines, rendered as an unreadable raw-path text list). Checked
+ * before every other array-of-objects rule: a `path` string is unambiguous — nothing else in this
+ * vocabulary uses that key for anything but a real SVG path.
+ */
+function isMultiSeriesLineShaped(value) {
+  return value.every((item) => typeof item.path === 'string' && item.path.trim().length > 0)
+}
+
+/**
+ * Labeled-scatter-shaped: every row has numeric `x`/`cx` and `y`/`cy` (optionally `r`, sizing a
+ * bubble) *and* a string `label` naming the point — the same coordinate shape `isScatterShaped`
+ * (below) already recognizes, except every one of these rows also carries a text annotation
+ * (S9.4/analyze.points: `"Amazon Ads · $52K · 0.95"`; S9.9/analyze.ladders: a markdown-ladder
+ * scenario name + its own dollar/point figures), which used to make it lose to the plain "every
+ * item has a label" catch-all before ever reaching the label-less-only scatter check further down.
+ * Checked after bar/waterfall/heatmap (a labeled row with a real magnitude key still prefers those,
+ * unchanged) but before the plain label catch-all, so a labeled point plots as a point instead of
+ * flattening into a text list with no chart at all.
+ */
+function isLabeledScatterShaped(value) {
+  return value.every((item) => {
+    if (typeof item.label !== 'string') return false
+    const hasX = item.x !== undefined ? isNumericLike(item.x) : isNumericLike(item.cx)
+    const hasY = item.y !== undefined ? isNumericLike(item.y) : isNumericLike(item.cy)
+    return hasX && hasY && (item.x !== undefined || item.cx !== undefined) && (item.y !== undefined || item.cy !== undefined)
+  })
+}
+
+/**
  * @param {*} value
  * @param {string} [rawKey] - the field's own raw key name, when known. Only used for the
  *   axis-label-array override below; every other rule classifies on shape alone.
@@ -192,6 +310,11 @@ export function classifyBlockType(value, rawKey) {
   if (Array.isArray(value)) {
     if (value.length === 0) return null
     if (value.every((item) => isPlainObject(item))) {
+      // A `path`-per-row array is an unambiguous multi-series trend line (see
+      // isMultiSeriesLineShaped's own comment) — checked first, before anything that keys off
+      // `label`, since a curve row almost always carries one too.
+      if (isMultiSeriesLineShaped(value)) return 'lineChart'
+
       // These three chart signatures all overlap with "every item has a label" (waterfall and bar
       // rows carry a label too; a heatmap's outer rows do as well) — checked in most-specific-first
       // order, and all three *before* the plain "every item has a label" catch-all below, or that
@@ -201,17 +324,48 @@ export function classifyBlockType(value, rawKey) {
       if (isHeatmapGridShaped(value)) return 'heatmapGrid'
       if (isBarChartShaped(value)) return 'barChart'
 
-      // An array of plain objects that all have a string "label" reads as a checklist/metric/chip
-      // row list.
-      if (value.every((item) => typeof item.label === 'string')) return 'labelValueList'
+      // A labeled point (real x/y coordinates plus a text annotation) is a scatter/bubble chart,
+      // not a plain list — see isLabeledScatterShaped's own comment. Checked before the plain
+      // "every item has a label" catch-all for the same reason as the three chart shapes above.
+      if (isLabeledScatterShaped(value)) return 'scatterChart'
 
-      // Bar-shaped but unlabeled: every item carries a numeric magnitude, even if it also carries
-      // raw x/y pixel-position fields left over from the mockup's own hand-drawn layout (e.g.
-      // S9.15/analyze.bars: {x, y, h, op} — no label, but a real height). Checked before the
-      // scatter check below for exactly that reason: a magnitude reading wins over treating the
-      // same row as a bare coordinate, matching how the old single SeriesBlock's own runtime
-      // dispatch always preferred 'h'/'value' over x/y when both were present.
-      if (value.every((item) => CHART_MAGNITUDE_KEYS.some((k) => looksLikeMagnitude(item[k])))) return 'barChart'
+      // A labeled row set that's actually a RICH, uniform, multi-column record (e.g.
+      // {label, value, current, why} — S9.1/reason.policy) reads better as a real table (columns:
+      // Policy | Current | Target | Why) than as a stacked label/value list, where each record's
+      // extra fields (`current`, `why`) each take their own line, roughly tripling the vertical
+      // height for the same information (FORENSIC_AUDIT_S9.1.md's density findings, confirmed
+      // against the reference's own "POLICY" table). Gated at >=4 meaningful columns (stricter than
+      // plain `table`'s >=3) specifically because a plain 2-3-column labeled checklist (a simple
+      // "name: value" list) reads FINE as labelValueList and shouldn't be force-fit into a table
+      // just for having a label — this only promotes the genuinely record-shaped case.
+      // `CHECKLIST_RAW_KEYS` is a narrow, explicit exemption for the one confirmed case where a
+      // rich, uniform, labeled row set is still better as a compact rail checklist than a table —
+      // a guardrail policy-check row (`checks`) reads as a live pass/fail gate, one glance per row,
+      // not tabular data a reader compares column-to-column; kept in the same
+      // vocabulary-keyed-table style as EXACT_KEY_OVERRIDES/PRIORITY_GROUPS above (a raw key name,
+      // never a workflow code).
+      if (value.every((item) => typeof item.label === 'string')) {
+        const labeledKeys = value.map((item) => meaningfulKeys(item))
+        const labeledUniform = labeledKeys.every((keys) => keys.length === labeledKeys[0].length && new Set(keys).size === keys.length)
+        const labeledAllScalar = value.every((item, i) => labeledKeys[i].every((k) => ['string', 'number', 'boolean'].includes(typeof item[k])))
+        const isRichRecord = labeledUniform && labeledAllScalar && labeledKeys[0].length >= 4
+        if (isRichRecord && !CHECKLIST_RAW_KEYS.has(rawKey)) return 'table'
+        return 'labelValueList'
+      }
+
+      // Bar-shaped but unlabeled: every item carries a numeric magnitude sharing one unit, even if
+      // it also carries raw x/y pixel-position fields left over from the mockup's own hand-drawn
+      // layout (e.g. S9.15/analyze.bars: {x, y, h, op} — no label, but a real height). Checked
+      // before the scatter check below for exactly that reason: a magnitude reading wins over
+      // treating the same row as a bare coordinate, matching how the old single SeriesBlock's own
+      // runtime dispatch always preferred 'h'/'value' over x/y when both were present. Same
+      // unit-compatibility guard as isBarChartShaped, for the same reason (§ above).
+      if (
+        value.every((item) => CHART_MAGNITUDE_KEYS.some((k) => looksLikeMagnitude(item[k]))) &&
+        hasConsistentMagnitudeUnits(value)
+      ) {
+        return 'barChart'
+      }
 
       const perItemKeys = value.map((item) => meaningfulKeys(item))
 
@@ -249,12 +403,14 @@ export function classifyBlockType(value, rawKey) {
     // whether its labels happened to parse as numbers. See extraction/audit.js's A.4 check.
     if (typeof rawKey === 'string' && /(Ticks|Cols)$/.test(rawKey)) return 'itemQueue'
     // An array of genuinely numeric bare values (numbers, or numeric strings) is a bar chart's
-    // magnitudes (unlabeled — BarChartBlock falls back to a bare index per bar). Anything else
-    // non-object — plain labels, mixed types (e.g. `["M1","M3","Yr 1"]`, month-column headers, not
-    // values) — isn't plottable; ItemQueueBlock already renders a bare non-object item as its own
-    // simple row, so that's a far better fit than forcing it through a chart renderer that has no
-    // numbers to draw.
-    return value.every(looksLikeMagnitude) ? 'barChart' : 'itemQueue'
+    // magnitudes (unlabeled — BarChartBlock falls back to a bare index per bar), *provided* they
+    // all share one unit (same guard as isBarChartShaped, § above — a bare array mixing "$5" and
+    // "10%" is exactly as misleading on one linear scale as a labeled row group would be). Anything
+    // else non-object — plain labels, mixed types (e.g. `["M1","M3","Yr 1"]`, month-column headers,
+    // not values), or a mixed-unit numeric set — isn't plottable as-is; ItemQueueBlock already
+    // renders a bare non-object item as its own simple row, so that's a far better fit than forcing
+    // it through a chart renderer that has no consistent numbers to draw.
+    return value.every(looksLikeMagnitude) && hasConsistentBareUnits(value) ? 'barChart' : 'itemQueue'
   }
   if (isPlainObject(value)) {
     if (Object.keys(value).length === 0) return null
@@ -275,10 +431,28 @@ export function classifyBlockType(value, rawKey) {
 // project's real, shipping vocabulary (see the task's field list) mapped onto whichever raw
 // mockup key we found actually carries that concept — see REPORT.md for the confidence behind
 // each of these.
+//
+// `execLabel` and `checks` are DELIBERATELY NOT bound to the `execution_lane`/`guardrail_verdict`
+// slot names, even though Part 2's original REPORT.md proposed exactly that — INTEGRATION.md's own
+// later cross-check against the real `/v1/proposals` API (`proposalVocabulary.js`,
+// `fromProposal.js`) found both are genuine name collisions, not matches:
+//   - the real `execution_lane` is server-derived from `guardrail_verdict` ("agent" only when the
+//     verdict is `within_limits`) and means "who/what executes"; `execLabel` here is an editable
+//     mockup prop ("Suggest"/"Assist") controlling how the SCREEN displays itself — an unrelated
+//     concept that happens to share a name.
+//   - the real `guardrail_verdict` is a 4-value enum (`within_limits`/`beyond_limits`/
+//     `not_applicable`/`undetermined`); `checks` here is a governance CHECKLIST (an array of rows)
+//     — a different shape entirely, not just different values.
+// Binding either real API field into these slots unchanged would silently show the wrong thing to
+// a real user the moment a backend replaces these fixtures (exactly the risk INTEGRATION.md flags
+// loudly). `display_mode`/`guardrail_checks` name what this data actually IS instead of borrowing
+// a real vocabulary name it isn't; see services/proposalFieldMapping.js for the actual real-field
+// contract (documented, not guessed) and the derivation this UI would need once the real
+// `execution_lane`/`guardrail_verdict` fields exist.
 const EXACT_KEY_OVERRIDES = [
-  { key: 'execLabel', slotName: 'execution_lane', when: (v) => typeof v === 'string' },
+  { key: 'execLabel', slotName: 'display_mode', when: (v) => typeof v === 'string' },
   { key: 'severity', slotName: 'severity', when: (v) => typeof v === 'string' },
-  { key: 'checks', slotName: 'guardrail_verdict', when: (v) => Array.isArray(v) },
+  { key: 'checks', slotName: 'guardrail_checks', when: (v) => Array.isArray(v) },
   { key: 'blocked', slotName: 'guardrail_blocked', when: (v) => typeof v === 'boolean' },
   { key: 'blockShow', slotName: 'guardrail_blocked', when: (v) => typeof v === 'string' },
   { key: 'canApprove', slotName: 'guardrail_can_approve', when: (v) => typeof v === 'boolean' },
@@ -342,6 +516,73 @@ export function planSlotNames(dataObject) {
   return { slotNames: rawKeyToSlotName, collisions }
 }
 
+// ---- table/column metadata suppression --------------------------------------------------------
+//
+// RENDERED_UI_FORENSIC_AUDIT.md §3.1/§5: a field shaped like `[{key, label, numeric?}, ...]` (e.g.
+// S9.1/analyze.cols) isn't content — it's the column *description* for a sibling table, which
+// already shows the exact same information as its own real column headers. Confirmed rendering
+// almost 2.5x taller than the analytical chart on the same screen for zero net new information.
+//
+// The relationship is structural, not name-based: a descriptor array is suppressed only when every
+// one of its own items unambiguously carries a `key`+`label` pair (never true of ordinary business
+// data by coincidence) AND a real sibling `table` block's own resolved rows share almost all of
+// those same `key` values as their own column keys — i.e. the descriptor is provably *describing*
+// that exact table, not merely resembling one. Never keyed on a raw field name or workflow code;
+// a workflow with no such relationship is completely unaffected.
+function isColumnDescriptorArray(value) {
+  return (
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.every((item) => isPlainObject(item) && typeof item.key === 'string' && typeof item.label === 'string')
+  )
+}
+
+function tableColumnKeySet(value) {
+  const keys = new Set()
+  if (!Array.isArray(value)) return keys
+  for (const row of value) {
+    if (!isPlainObject(row)) continue
+    for (const key of Object.keys(row)) keys.add(key)
+  }
+  return keys
+}
+
+// How much of a descriptor array's own `key` values must appear as real columns on a sibling table
+// before it's confidently "describing" that table rather than merely overlapping it by coincidence.
+const METADATA_MATCH_THRESHOLD = 0.8
+
+/**
+ * @param {Array<{slotName, blockType, binding}>} blocks - a stage's already-classified block list.
+ * @param {object} dataObject - the fixture's own `data` object (bindings are always `data.<key>`).
+ * @returns {Set<string>} slotNames to drop entirely — each one is column/row metadata for a real
+ *   sibling `table` block already in this same list, confirmed structurally, not guessed.
+ */
+export function findMetadataDescriptorSlots(blocks, dataObject) {
+  const suppressed = new Set()
+  const rawKeyOf = (block) => (block.binding.startsWith('data.') ? block.binding.slice('data.'.length) : block.binding)
+
+  for (const block of blocks) {
+    if (block.blockType !== 'labelValueList' && block.blockType !== 'itemQueue') continue
+    const value = dataObject?.[rawKeyOf(block)]
+    if (!isColumnDescriptorArray(value)) continue
+
+    const descriptorKeys = new Set(value.map((item) => item.key))
+    if (descriptorKeys.size === 0) continue
+
+    const hasMatchingSiblingTable = blocks.some((other) => {
+      if (other === block || other.blockType !== 'table') return false
+      const columnKeys = tableColumnKeySet(dataObject?.[rawKeyOf(other)])
+      if (columnKeys.size === 0) return false
+      const overlap = [...descriptorKeys].filter((k) => columnKeys.has(k)).length
+      return overlap / descriptorKeys.size >= METADATA_MATCH_THRESHOLD
+    })
+
+    if (hasMatchingSiblingTable) suppressed.add(block.slotName)
+  }
+
+  return suppressed
+}
+
 // ---- item-level hints (report-only; never renames anything) ---------------------------------
 
 const ITEM_LEVEL_CANDIDATES = {
@@ -371,4 +612,152 @@ export function detectItemLevelHints(arrayValue) {
     if (match) hints[concept] = match
   }
   return hints
+}
+
+// ---- section planning (Phase 2 — declarative screen composition) ----------------------------
+//
+// A generic, vocabulary/shape-driven rule for grouping a stage's blocks into sections — never a
+// per-workflow special case (AUDIT_REPORT.md §11/§25's explicit constraint: "no code change to the
+// engine" for a new screen design, and no hand-authored layout per workflow either). Every input
+// this reasons about is either the project's own real, shipping slot-name vocabulary
+// (`guardrail_*`, the hero vocabulary below) or a block's own declared shape (blockType, and — for
+// `object` only — its key count) — nothing here reads a workflow's `code` or reasons about what a
+// specific screen "means."
+//
+// FORENSIC_AUDIT_S9.1.md §1/§5/§8/§19 traced the dominant cause of the reference-fidelity gap to
+// exactly this function: it used to derive a block's *section* purely from its *blockType shape*
+// (a scalar string was *always* "summary", full stop), and every consumer downstream then treated
+// "summary" as inherently secondary/rail content for every workflow — so a stage's own headline
+// (`heroTitle`), classified `text` like any other one-line string, silently ended up in the
+// narrowest, least prominent part of the page. `sectionIdFor` now checks a small, explicit,
+// vocabulary-keyed table of known SEMANTIC concepts first — never `if (workflowCode === "S9.1")`,
+// only "does this raw key/slotName match a known concept name" — and only falls back to the old
+// shape-only rule when nothing more specific matches. This is strictly additive: a stage whose
+// data doesn't use any of this vocabulary sections exactly as it did before.
+const CHART_BLOCK_TYPES = new Set(['lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid'])
+const SUMMARY_SCALAR_TYPES = new Set(['text', 'number', 'flag'])
+
+// The generic "this scalar text IS the stage's own headline, not a footnote" vocabulary — the
+// exact same slot names layout/heroSlot.js already establishes, at runtime, as recurring verbatim
+// across every workflow that has one (`heroTitle` alone appears in 8 of the 26 workflows' `decide`
+// stages; `rationale`/`primaryInsight` are this generator's own cross-workflow priority-group
+// winners, see PRIORITY_GROUPS above) — promoted here into a real, generation-time semantic
+// signal instead of only ever being a renderer-side, after-the-fact heuristic. `heroSub` joins the
+// same vocabulary as heroTitle's paired subheadline (confirmed alongside it wherever `heroTitle`
+// is present with a matching `heroSub`).
+const HERO_SLOT_NAMES = new Set(['rationale', 'primaryInsight', 'heroTitle', 'heroSub'])
+
+// `heroSub` gets a distinct role from `heroTitle`/`rationale`/`primaryInsight`: it's always a
+// companion to a headline, never a headline on its own, so the runtime block treats it as a
+// quieter subheadline — no repeated "Realify signal" eyebrow stacked directly under the one the
+// title already showed (see TextBlock.jsx's own `role === 'heroSub'` branch).
+const HERO_SUB_SLOT_NAMES = new Set(['heroSub'])
+
+// Blocks that are not themselves a hero headline, but that the reference composes together WITH
+// one as a single recommendation panel (a headline, its supporting metrics, and a proportional
+// mix bar) — keyed by raw fixture key, exactly like EXACT_KEY_OVERRIDES/PRIORITY_GROUPS above.
+// Confirmed narrow today (currently only S9.1's `decide` stage has both `heroMetrics`/`moveBar`
+// alongside a `heroTitle`), but declared by VOCABULARY, not by workflow code — a future workflow
+// using these same raw key names alongside its own `heroTitle` benefits automatically, with zero
+// code change here. Only takes effect when the stage actually has a hero slot present (guarded in
+// `sectionIdFor` below) — a workflow using `moveBar` for something unrelated, with no hero slot at
+// all, is completely unaffected.
+const HERO_COMPANION_KEYS = new Set(['heroMetrics', 'moveBar'])
+
+// A small rollup of headline metrics (a workflow's own "totals"/"live totals" concept, `totals` —
+// confirmed present, by this exact raw key, in 14 of the 26 workflows) and a confidence/provenance
+// footnote list (`basis`) are both genuinely secondary/contextual — real rail content — but neither
+// is "just a scalar," so the old shape-only rule had no way to route them there deliberately; they
+// fell into "details" (main) purely because they're arrays, not because anyone decided that's where
+// they belong. Keyed by raw fixture key, same pattern as every other override table in this file.
+const ROLLUP_KEYS = new Set(['totals'])
+const PROVENANCE_KEYS = new Set(['basis'])
+
+// `region` is the declarative placement signal FORENSIC_AUDIT_S9.1.md §19/§25 calls for: "scalar/
+// text" no longer implies "rail" — a section now says where it belongs, and a block only ever
+// falls back to this table's default when it doesn't carry its own `role`/section override (see
+// composeSections.js's region-resolution order). `recommendation` has no visible title — the
+// reference's own hero panel has no separate section header above it either (TextBlock's existing
+// hero treatment already renders its own in-panel eyebrow); everything else keeps its existing,
+// reviewed title text unchanged.
+const SECTION_ORDER = [
+  { id: 'guardrails', title: 'Guardrails', region: 'rail' },
+  { id: 'recommendation', title: null, region: 'main' },
+  { id: 'summary', title: 'Summary', region: 'rail' },
+  { id: 'rollup', title: 'Totals', region: 'rail' },
+  { id: 'provenance', title: 'Basis', region: 'rail' },
+  { id: 'analysis', title: 'Analysis', region: 'main' },
+  { id: 'details', title: 'Details', region: 'main' },
+]
+
+// Only worth sectioning once a stage is genuinely crowded — a 5-block stage gains nothing from 4+
+// section headers and would just add visual noise for no benefit (matches the spirit of
+// StageRenderer's own historical grid-eligibility threshold, extended to "is this stage big enough
+// that grouping helps at all").
+const MIN_BLOCKS_TO_SECTION = 9
+
+/**
+ * @param {string} rawKey - the block's own raw fixture key (e.g. `binding` minus its `data.` prefix).
+ * @param {string} slotName
+ * @param {string} blockType
+ * @param {*} value - the block's resolved value (only consulted for `object`'s own size check).
+ * @param {boolean} hasHeroSlot - true when this same stage has at least one HERO_SLOT_NAMES block.
+ * @returns {string} one of SECTION_ORDER's ids.
+ */
+function sectionIdFor(rawKey, slotName, blockType, value, hasHeroSlot) {
+  if (HERO_SLOT_NAMES.has(slotName)) return 'recommendation'
+  if (hasHeroSlot && HERO_COMPANION_KEYS.has(rawKey)) return 'recommendation'
+  if (slotName.startsWith('guardrail_')) return 'guardrails'
+  if (ROLLUP_KEYS.has(rawKey)) return 'rollup'
+  if (PROVENANCE_KEYS.has(rawKey)) return 'provenance'
+  if (CHART_BLOCK_TYPES.has(blockType)) return 'analysis'
+  if (SUMMARY_SCALAR_TYPES.has(blockType)) return 'summary'
+  if (blockType === 'object' && isPlainObject(value) && Object.keys(value).length <= 3) return 'summary'
+  return 'details'
+}
+
+/**
+ * @param {Array<{slotName, blockType, binding}>} blocks - a stage's already-built block list.
+ * @param {object} dataObject - the fixture's own `data` object (bindings are always `data.<key>`).
+ * @returns {{
+ *   sections: Array<{id, title, region}>|undefined,
+ *   sectionBySlot: Map<string,string>,
+ *   roleBySlot: Map<string,string>,
+ *   layoutBySlot: Map<string,{group:string, span:number}>,
+ * }}
+ *   `sections` is `undefined` when the stage is too small to benefit (see MIN_BLOCKS_TO_SECTION) —
+ *   the manifest simply omits the field, and every consumer already treats that as "unsectioned"
+ *   (which resolves to the "main" region — see composeSections.js).
+ */
+export function planSections(blocks, dataObject) {
+  const empty = { sections: undefined, sectionBySlot: new Map(), roleBySlot: new Map(), layoutBySlot: new Map() }
+  if (blocks.length < MIN_BLOCKS_TO_SECTION) return empty
+
+  const hasHeroSlot = blocks.some((b) => HERO_SLOT_NAMES.has(b.slotName))
+
+  const sectionBySlot = new Map()
+  const roleBySlot = new Map()
+  const layoutBySlot = new Map()
+  const usedIds = new Set()
+  for (const block of blocks) {
+    const rawKey = block.binding.startsWith('data.') ? block.binding.slice('data.'.length) : block.binding
+    const id = sectionIdFor(rawKey, block.slotName, block.blockType, dataObject?.[rawKey], hasHeroSlot)
+    sectionBySlot.set(block.slotName, id)
+    usedIds.add(id)
+
+    if (HERO_SUB_SLOT_NAMES.has(block.slotName)) roleBySlot.set(block.slotName, 'heroSub')
+    else if (HERO_SLOT_NAMES.has(block.slotName)) roleBySlot.set(block.slotName, 'hero')
+    // Every member of the composed recommendation panel — the hero text itself and its companion
+    // metrics/mix-bar — shares one explicit group and a full-width span, so composeSections.js
+    // fuses them into one panel regardless of blockType (see its own doc comment on `layout.group`
+    // overriding the scalar-only heuristic). Never emitted for any other section.
+    if (id === 'recommendation') layoutBySlot.set(block.slotName, { group: 'recommendation', span: 12 })
+  }
+
+  // Sectioning a stage where every block landed in the same single bucket doesn't help either —
+  // one section with no siblings is just a redundant header.
+  if (usedIds.size < 2) return empty
+
+  const sections = SECTION_ORDER.filter((s) => usedIds.has(s.id))
+  return { sections, sectionBySlot, roleBySlot, layoutBySlot }
 }

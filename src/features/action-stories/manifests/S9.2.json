@@ -2,6 +2,7 @@
   {
     "code": "S9.2",
     "name": "Replenishment",
+    "headline": "Weekly PO cycle — 12 POs · $88K · cash check ✓",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,13 +11,13 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
       {
         "slotName": "policy",
-        "blockType": "labelValueList",
+        "blockType": "table",
         "binding": "data.policy"
       },
       {
@@ -34,291 +35,392 @@
   {
     "code": "S9.2",
     "name": "Replenishment",
+    "headline": "Weekly PO cycle — 12 POs · $88K · cash check ✓",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "roles",
         "blockType": "itemQueue",
-        "binding": "data.roles"
+        "binding": "data.roles",
+        "section": "details"
       },
       {
         "slotName": "fanOuter",
         "blockType": "text",
-        "binding": "data.fanOuter"
+        "binding": "data.fanOuter",
+        "section": "summary"
       },
       {
         "slotName": "fanInner",
         "blockType": "text",
-        "binding": "data.fanInner"
+        "binding": "data.fanInner",
+        "section": "summary"
       },
       {
         "slotName": "p50",
         "blockType": "lineChart",
-        "binding": "data.p50"
+        "binding": "data.p50",
+        "section": "analysis"
       },
       {
         "slotName": "actual",
         "blockType": "lineChart",
-        "binding": "data.actual"
+        "binding": "data.actual",
+        "section": "analysis"
       },
       {
         "slotName": "horizons",
         "blockType": "labelValueList",
-        "binding": "data.horizons"
+        "binding": "data.horizons",
+        "section": "details"
       },
       {
         "slotName": "coverY",
         "blockType": "text",
-        "binding": "data.coverY"
+        "binding": "data.coverY",
+        "section": "summary"
       },
       {
         "slotName": "coverLabelY",
         "blockType": "text",
-        "binding": "data.coverLabelY"
-      },
-      {
-        "slotName": "cols",
-        "blockType": "labelValueList",
-        "binding": "data.cols"
+        "binding": "data.coverLabelY",
+        "section": "summary"
       },
       {
         "slotName": "rows",
         "blockType": "table",
-        "binding": "data.rows"
+        "binding": "data.rows",
+        "section": "details"
       },
       {
         "slotName": "gaps",
         "blockType": "table",
-        "binding": "data.gaps"
+        "binding": "data.gaps",
+        "section": "details"
       },
       {
         "slotName": "movement",
         "blockType": "barChart",
-        "binding": "data.movement"
+        "binding": "data.movement",
+        "section": "analysis"
       }
     ]
   },
   {
     "code": "S9.2",
     "name": "Replenishment",
+    "headline": "Weekly PO cycle — 12 POs · $88K · cash check ✓",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.approveLabel"
+        "binding": "data.approveLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "pinnedOutlay",
         "blockType": "text",
-        "binding": "data.pinnedOutlay"
+        "binding": "data.pinnedOutlay",
+        "section": "summary"
       },
       {
         "slotName": "pinnedService",
         "blockType": "text",
-        "binding": "data.pinnedService"
+        "binding": "data.pinnedService",
+        "section": "summary"
       },
       {
         "slotName": "svcStr",
         "blockType": "text",
-        "binding": "data.svcStr"
+        "binding": "data.svcStr",
+        "section": "summary"
       },
       {
         "slotName": "svcNote",
         "blockType": "text",
-        "binding": "data.svcNote"
+        "binding": "data.svcNote",
+        "section": "summary"
       },
       {
         "slotName": "outlayStr",
         "blockType": "text",
-        "binding": "data.outlayStr"
+        "binding": "data.outlayStr",
+        "section": "summary"
       },
       {
         "slotName": "outlayNote",
         "blockType": "text",
-        "binding": "data.outlayNote"
+        "binding": "data.outlayNote",
+        "section": "summary"
       },
       {
         "slotName": "lostStr",
         "blockType": "text",
-        "binding": "data.lostStr"
+        "binding": "data.lostStr",
+        "section": "summary"
       },
       {
         "slotName": "headStr",
         "blockType": "text",
-        "binding": "data.headStr"
+        "binding": "data.headStr",
+        "section": "summary"
       },
       {
         "slotName": "headNote",
         "blockType": "text",
-        "binding": "data.headNote"
-      },
-      {
-        "slotName": "guardIcon",
-        "blockType": "text",
-        "binding": "data.guardIcon"
+        "binding": "data.headNote",
+        "section": "summary"
       },
       {
         "slotName": "guardText",
         "blockType": "text",
-        "binding": "data.guardText"
+        "binding": "data.guardText",
+        "section": "summary"
       },
       {
         "slotName": "notchVal",
         "blockType": "number",
-        "binding": "data.notchVal"
+        "binding": "data.notchVal",
+        "section": "summary"
       },
       {
         "slotName": "ticks",
         "blockType": "labelValueList",
-        "binding": "data.ticks"
+        "binding": "data.ticks",
+        "section": "details"
       },
       {
         "slotName": "notchNarr",
         "blockType": "text",
-        "binding": "data.notchNarr"
+        "binding": "data.notchNarr",
+        "section": "summary"
       },
       {
         "slotName": "bookMeta",
         "blockType": "text",
-        "binding": "data.bookMeta"
+        "binding": "data.bookMeta",
+        "section": "summary"
       },
       {
         "slotName": "totalStr",
         "blockType": "text",
-        "binding": "data.totalStr"
+        "binding": "data.totalStr",
+        "section": "summary"
       },
       {
         "slotName": "suppliers",
         "blockType": "itemQueue",
-        "binding": "data.suppliers"
+        "binding": "data.suppliers",
+        "section": "details"
       },
       {
         "slotName": "deferSummary",
         "blockType": "text",
-        "binding": "data.deferSummary"
+        "binding": "data.deferSummary",
+        "section": "summary"
       },
       {
         "slotName": "ladder",
-        "blockType": "labelValueList",
-        "binding": "data.ladder"
+        "blockType": "table",
+        "binding": "data.ladder",
+        "section": "details"
       },
       {
         "slotName": "weeks",
         "blockType": "barChart",
-        "binding": "data.weeks"
+        "binding": "data.weeks",
+        "section": "analysis"
       },
       {
         "slotName": "effects",
         "blockType": "labelValueList",
-        "binding": "data.effects"
+        "binding": "data.effects",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.2",
     "name": "Replenishment",
+    "headline": "Weekly PO cycle — 12 POs · $88K · cash check ✓",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "pinnedStatus",
         "blockType": "text",
-        "binding": "data.pinnedStatus"
+        "binding": "data.pinnedStatus",
+        "section": "summary"
       },
       {
         "slotName": "poMeta",
         "blockType": "text",
-        "binding": "data.poMeta"
+        "binding": "data.poMeta",
+        "section": "summary"
       },
       {
         "slotName": "orders",
         "blockType": "barChart",
-        "binding": "data.orders"
+        "binding": "data.orders",
+        "section": "analysis"
       },
       {
         "slotName": "channels",
         "blockType": "labelValueList",
-        "binding": "data.channels"
+        "binding": "data.channels",
+        "section": "details"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "wmsState",
         "blockType": "text",
-        "binding": "data.wmsState"
+        "binding": "data.wmsState",
+        "section": "summary"
       },
       {
         "slotName": "receipts",
         "blockType": "labelValueList",
-        "binding": "data.receipts"
+        "binding": "data.receipts",
+        "section": "details"
       },
       {
         "slotName": "cashState",
         "blockType": "text",
-        "binding": "data.cashState"
+        "binding": "data.cashState",
+        "section": "summary"
       },
       {
         "slotName": "outflow",
         "blockType": "barChart",
-        "binding": "data.outflow"
+        "binding": "data.outflow",
+        "section": "analysis"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
         "blockType": "labelValueList",
-        "binding": "data.monitors"
+        "binding": "data.monitors",
+        "section": "details"
       },
       {
         "slotName": "rollState",
         "blockType": "text",
-        "binding": "data.rollState"
+        "binding": "data.rollState",
+        "section": "summary"
       },
       {
         "slotName": "rollCopy",
         "blockType": "text",
-        "binding": "data.rollCopy"
+        "binding": "data.rollCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerSendLabel",
         "blockType": "text",
-        "binding": "data.footerSendLabel"
+        "binding": "data.footerSendLabel",
+        "section": "summary"
       }
     ]
   }

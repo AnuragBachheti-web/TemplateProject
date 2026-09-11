@@ -1,7 +1,9 @@
 import { humanizeSlotName } from './humanizeSlotName';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
-export default function NumberBlock({ slotName, data }) {
+/** @param {boolean} [compact] - see TextBlock.jsx's own doc comment for what this means and why. */
+export default function NumberBlock({ slotName, data, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -9,12 +11,19 @@ export default function NumberBlock({ slotName, data }) {
     return <ErrorState slotName={slotName} message={`expected a number, got ${typeof data}`} />;
   }
 
+  if (compact) {
+    return (
+      <div className="flex min-w-0 items-baseline justify-between gap-3 py-[7px]">
+        <span className="min-w-0 truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
+        <span className="shrink-0 font-mono text-[13px] font-semibold tabular-nums text-rf-text-primary">{data.toLocaleString()}</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas px-4 py-3">
-      <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
-        {humanizeSlotName(slotName)}
-      </p>
+    <BlockCard padding="compact">
+      <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
       <p className="mt-1 font-mono text-[14px] font-semibold text-rf-text-primary">{data.toLocaleString()}</p>
-    </div>
+    </BlockCard>
   );
 }

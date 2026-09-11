@@ -2,6 +2,7 @@
   {
     "code": "S9.12",
     "name": "Returns",
+    "headline": "Apparel returns 1.6× category benchmark — 'runs small' cluster",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,7 +11,7 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -49,10 +50,11 @@
   {
     "code": "S9.12",
     "name": "Returns",
+    "headline": "Apparel returns 1.6× category benchmark — 'runs small' cluster",
     "stageKey": "analyze",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -68,7 +70,7 @@
       },
       {
         "slotName": "disposition",
-        "blockType": "barChart",
+        "blockType": "lineChart",
         "binding": "data.disposition"
       },
       {
@@ -91,254 +93,363 @@
   {
     "code": "S9.12",
     "name": "Returns",
+    "headline": "Apparel returns 1.6× category benchmark — 'runs small' cluster",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.heroValue"
+        "binding": "data.heroValue",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "itemQueue",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.approveLabel"
+        "binding": "data.approveLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "confBadge",
         "blockType": "text",
-        "binding": "data.confBadge"
+        "binding": "data.confBadge",
+        "section": "summary"
       },
       {
         "slotName": "tradeoff",
         "blockType": "text",
-        "binding": "data.tradeoff"
+        "binding": "data.tradeoff",
+        "section": "summary"
       },
       {
         "slotName": "liveStats",
-        "blockType": "barChart",
-        "binding": "data.liveStats"
+        "blockType": "labelValueList",
+        "binding": "data.liveStats",
+        "section": "details"
       },
       {
         "slotName": "spendNote",
         "blockType": "text",
-        "binding": "data.spendNote"
+        "binding": "data.spendNote",
+        "section": "summary"
       },
       {
         "slotName": "slate",
         "blockType": "table",
-        "binding": "data.slate"
+        "binding": "data.slate",
+        "section": "details"
       },
       {
         "slotName": "slateFoot",
         "blockType": "text",
-        "binding": "data.slateFoot"
+        "binding": "data.slateFoot",
+        "section": "summary"
       },
       {
         "slotName": "treeNote",
         "blockType": "text",
-        "binding": "data.treeNote"
+        "binding": "data.treeNote",
+        "section": "summary"
       },
       {
         "slotName": "tree",
         "blockType": "itemQueue",
-        "binding": "data.tree"
+        "binding": "data.tree",
+        "section": "details"
       },
       {
         "slotName": "rlState",
         "blockType": "text",
-        "binding": "data.rlState"
+        "binding": "data.rlState",
+        "section": "summary"
       },
       {
         "slotName": "rlBtnLabel",
         "blockType": "text",
-        "binding": "data.rlBtnLabel"
+        "binding": "data.rlBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "rlThreshold",
         "blockType": "number",
-        "binding": "data.rlThreshold"
+        "binding": "data.rlThreshold",
+        "section": "summary"
       },
       {
         "slotName": "rlLabel",
         "blockType": "text",
-        "binding": "data.rlLabel"
+        "binding": "data.rlLabel",
+        "section": "summary"
       },
       {
         "slotName": "rlCopy",
         "blockType": "text",
-        "binding": "data.rlCopy"
+        "binding": "data.rlCopy",
+        "section": "summary"
       },
       {
         "slotName": "rlStats",
-        "blockType": "barChart",
-        "binding": "data.rlStats"
+        "blockType": "labelValueList",
+        "binding": "data.rlStats",
+        "section": "details"
       },
       {
         "slotName": "zoneMeta",
         "blockType": "text",
-        "binding": "data.zoneMeta"
+        "binding": "data.zoneMeta",
+        "section": "summary"
       },
       {
         "slotName": "actions",
         "blockType": "table",
-        "binding": "data.actions"
+        "binding": "data.actions",
+        "section": "details"
       },
       {
         "slotName": "split",
         "blockType": "barChart",
-        "binding": "data.split"
+        "binding": "data.split",
+        "section": "analysis"
       },
       {
         "slotName": "projection",
         "blockType": "barChart",
-        "binding": "data.projection"
+        "binding": "data.projection",
+        "section": "analysis"
       },
       {
         "slotName": "projNote",
         "blockType": "text",
-        "binding": "data.projNote"
+        "binding": "data.projNote",
+        "section": "summary"
       },
       {
         "slotName": "capaCopy",
         "blockType": "text",
-        "binding": "data.capaCopy"
+        "binding": "data.capaCopy",
+        "section": "summary"
       },
       {
         "slotName": "capa",
         "blockType": "labelValueList",
-        "binding": "data.capa"
+        "binding": "data.capa",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.12",
     "name": "Returns",
+    "headline": "Apparel returns 1.6× category benchmark — 'runs small' cluster",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.headline"
+        "binding": "data.headline",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headMeta",
         "blockType": "text",
-        "binding": "data.headMeta"
+        "binding": "data.headMeta",
+        "section": "summary"
       },
       {
         "slotName": "appliedCount",
         "blockType": "text",
-        "binding": "data.appliedCount"
+        "binding": "data.appliedCount",
+        "section": "summary"
       },
       {
         "slotName": "recheckState",
         "blockType": "text",
-        "binding": "data.recheckState"
+        "binding": "data.recheckState",
+        "section": "summary"
       },
       {
         "slotName": "filters",
         "blockType": "labelValueList",
-        "binding": "data.filters"
+        "binding": "data.filters",
+        "section": "details"
       },
       {
         "slotName": "items",
         "blockType": "itemQueue",
-        "binding": "data.items"
+        "binding": "data.items",
+        "section": "details"
       },
       {
         "slotName": "itemsFoot",
         "blockType": "text",
-        "binding": "data.itemsFoot"
+        "binding": "data.itemsFoot",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "bars",
         "blockType": "barChart",
-        "binding": "data.bars"
+        "binding": "data.bars",
+        "section": "analysis"
       },
       {
         "slotName": "monStats",
         "blockType": "labelValueList",
-        "binding": "data.monStats"
+        "binding": "data.monStats",
+        "section": "details"
       },
       {
         "slotName": "applyCopy",
         "blockType": "text",
-        "binding": "data.applyCopy"
+        "binding": "data.applyCopy",
+        "section": "summary"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "rqTitle",
         "blockType": "text",
-        "binding": "data.rqTitle"
+        "binding": "data.rqTitle",
+        "section": "summary"
       },
       {
         "slotName": "rqCopy",
         "blockType": "text",
-        "binding": "data.rqCopy"
+        "binding": "data.rqCopy",
+        "section": "summary"
       },
       {
         "slotName": "rqDate",
         "blockType": "text",
-        "binding": "data.rqDate"
+        "binding": "data.rqDate",
+        "section": "summary"
       },
       {
         "slotName": "suppressed",
         "blockType": "labelValueList",
-        "binding": "data.suppressed"
+        "binding": "data.suppressed",
+        "section": "details"
       },
       {
         "slotName": "suppressNote",
         "blockType": "text",
-        "binding": "data.suppressNote"
+        "binding": "data.suppressNote",
+        "section": "summary"
       },
       {
         "slotName": "ledger",
         "blockType": "labelValueList",
-        "binding": "data.ledger"
+        "binding": "data.ledger",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerPushLabel",
         "blockType": "text",
-        "binding": "data.footerPushLabel"
+        "binding": "data.footerPushLabel",
+        "section": "summary"
       }
     ]
   }

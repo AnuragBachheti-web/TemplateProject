@@ -2,348 +2,495 @@
   {
     "code": "S9.13",
     "name": "Lifecycle",
+    "headline": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
     "stageKey": "reason",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "targets",
         "blockType": "barChart",
-        "binding": "data.targets"
+        "binding": "data.targets",
+        "section": "analysis"
       },
       {
         "slotName": "governance",
         "blockType": "labelValueList",
-        "binding": "data.governance"
+        "binding": "data.governance",
+        "section": "details"
       },
       {
         "slotName": "offerLimits",
         "blockType": "labelValueList",
-        "binding": "data.offerLimits"
+        "binding": "data.offerLimits",
+        "section": "details"
       },
       {
         "slotName": "brandChips",
         "blockType": "labelValueList",
-        "binding": "data.brandChips"
+        "binding": "data.brandChips",
+        "section": "details"
       },
       {
         "slotName": "locked",
         "blockType": "labelValueList",
-        "binding": "data.locked"
+        "binding": "data.locked",
+        "section": "details"
       },
       {
         "slotName": "trigger",
         "blockType": "itemQueue",
-        "binding": "data.trigger"
+        "binding": "data.trigger",
+        "section": "details"
       },
       {
         "slotName": "agents",
         "blockType": "itemQueue",
-        "binding": "data.agents"
+        "binding": "data.agents",
+        "section": "details"
       },
       {
         "slotName": "sources",
         "blockType": "labelValueList",
-        "binding": "data.sources"
+        "binding": "data.sources",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.13",
     "name": "Lifecycle",
+    "headline": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "rfmCols",
         "blockType": "labelValueList",
-        "binding": "data.rfmCols"
+        "binding": "data.rfmCols",
+        "section": "details"
       },
       {
         "slotName": "rfmGrid",
         "blockType": "heatmapGrid",
-        "binding": "data.rfmGrid"
+        "binding": "data.rfmGrid",
+        "section": "analysis"
       },
       {
         "slotName": "segTitle",
         "blockType": "text",
-        "binding": "data.segTitle"
+        "binding": "data.segTitle",
+        "section": "summary"
       },
       {
         "slotName": "segNote",
         "blockType": "text",
-        "binding": "data.segNote"
+        "binding": "data.segNote",
+        "section": "summary"
       },
       {
         "slotName": "segStats",
         "blockType": "labelValueList",
-        "binding": "data.segStats"
+        "binding": "data.segStats",
+        "section": "details"
       },
       {
         "slotName": "flows",
         "blockType": "table",
-        "binding": "data.flows"
+        "binding": "data.flows",
+        "section": "details"
       },
       {
         "slotName": "detail",
         "blockType": "object",
-        "binding": "data.detail"
+        "binding": "data.detail",
+        "section": "details"
       },
       {
         "slotName": "moments",
         "blockType": "itemQueue",
-        "binding": "data.moments"
+        "binding": "data.moments",
+        "section": "details"
       },
       {
         "slotName": "suppression",
-        "blockType": "barChart",
-        "binding": "data.suppression"
+        "blockType": "table",
+        "binding": "data.suppression",
+        "section": "details"
       },
       {
         "slotName": "listHealth",
-        "blockType": "barChart",
-        "binding": "data.listHealth"
+        "blockType": "labelValueList",
+        "binding": "data.listHealth",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.13",
     "name": "Lifecycle",
+    "headline": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "labelValueList",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "slateMeta",
         "blockType": "text",
-        "binding": "data.slateMeta"
+        "binding": "data.slateMeta",
+        "section": "summary"
       },
       {
         "slotName": "confLabel",
         "blockType": "text",
-        "binding": "data.confLabel"
+        "binding": "data.confLabel",
+        "section": "summary"
       },
       {
         "slotName": "heroTitle",
         "blockType": "text",
-        "binding": "data.heroTitle"
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "heroMetrics",
-        "blockType": "barChart",
-        "binding": "data.heroMetrics"
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "offerModes",
         "blockType": "labelValueList",
-        "binding": "data.offerModes"
+        "binding": "data.offerModes",
+        "section": "details"
       },
       {
         "slotName": "offerRows",
         "blockType": "table",
-        "binding": "data.offerRows"
+        "binding": "data.offerRows",
+        "section": "details"
       },
       {
         "slotName": "offerNote",
         "blockType": "text",
-        "binding": "data.offerNote"
+        "binding": "data.offerNote",
+        "section": "summary"
       },
       {
         "slotName": "caps",
         "blockType": "itemQueue",
-        "binding": "data.caps"
+        "binding": "data.caps",
+        "section": "details"
       },
       {
         "slotName": "capEffects",
         "blockType": "labelValueList",
-        "binding": "data.capEffects"
+        "binding": "data.capEffects",
+        "section": "details"
       },
       {
         "slotName": "capNote",
         "blockType": "text",
-        "binding": "data.capNote"
-      },
-      {
-        "slotName": "capNoteIcon",
-        "blockType": "text",
-        "binding": "data.capNoteIcon"
+        "binding": "data.capNote",
+        "section": "summary"
       },
       {
         "slotName": "groups",
         "blockType": "labelValueList",
-        "binding": "data.groups"
+        "binding": "data.groups",
+        "section": "details"
       },
       {
         "slotName": "tests",
         "blockType": "table",
-        "binding": "data.tests"
+        "binding": "data.tests",
+        "section": "details"
       },
       {
         "slotName": "totals",
-        "blockType": "barChart",
-        "binding": "data.totals"
+        "blockType": "labelValueList",
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "ledger",
         "blockType": "barChart",
-        "binding": "data.ledger"
+        "binding": "data.ledger",
+        "section": "analysis"
       },
       {
         "slotName": "ledgerEmpty",
         "blockType": "flag",
-        "binding": "data.ledgerEmpty"
+        "binding": "data.ledgerEmpty",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.13",
     "name": "Lifecycle",
+    "headline": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "planLine",
         "blockType": "text",
-        "binding": "data.planLine"
+        "binding": "data.planLine",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "pushAllLabel",
         "blockType": "text",
-        "binding": "data.pushAllLabel"
-      },
-      {
-        "slotName": "pushAllIcon",
-        "blockType": "text",
-        "binding": "data.pushAllIcon"
+        "binding": "data.pushAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "dests",
         "blockType": "itemQueue",
-        "binding": "data.dests"
+        "binding": "data.dests",
+        "section": "details"
       },
       {
         "slotName": "progressPct",
         "blockType": "text",
-        "binding": "data.progressPct"
+        "binding": "data.progressPct",
+        "section": "summary"
       },
       {
         "slotName": "progressRows",
         "blockType": "labelValueList",
-        "binding": "data.progressRows"
+        "binding": "data.progressRows",
+        "section": "details"
       },
       {
         "slotName": "armCopy",
         "blockType": "text",
-        "binding": "data.armCopy"
+        "binding": "data.armCopy",
+        "section": "summary"
       },
       {
         "slotName": "armBtnLabel",
         "blockType": "text",
-        "binding": "data.armBtnLabel"
-      },
-      {
-        "slotName": "armBtnIcon",
-        "blockType": "text",
-        "binding": "data.armBtnIcon"
+        "binding": "data.armBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "reads",
         "blockType": "table",
-        "binding": "data.reads"
+        "binding": "data.reads",
+        "section": "details"
       },
       {
         "slotName": "watchStatus",
         "blockType": "text",
-        "binding": "data.watchStatus"
+        "binding": "data.watchStatus",
+        "section": "summary"
       },
       {
         "slotName": "flags",
         "blockType": "table",
-        "binding": "data.flags"
+        "binding": "data.flags",
+        "section": "details"
       },
       {
         "slotName": "rollback",
         "blockType": "table",
-        "binding": "data.rollback"
+        "binding": "data.rollback",
+        "section": "details"
       },
       {
         "slotName": "revertLabel",
         "blockType": "text",
-        "binding": "data.revertLabel"
+        "binding": "data.revertLabel",
+        "section": "summary"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

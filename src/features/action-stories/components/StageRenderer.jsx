@@ -4,46 +4,42 @@ import { validateBlockData } from '@/features/action-stories/manifests/blockType
 import { BLOCK_REGISTRY } from '@/features/action-stories/blocks';
 import { humanizeSlotName } from '@/features/action-stories/blocks/humanizeSlotName';
 import { findNearestStep } from '@/features/action-stories/blocks/sliderSteps';
+import BlockErrorBoundary from '@/features/action-stories/blocks/BlockErrorBoundary';
+import { composeSections } from '@/features/action-stories/layout/composeSections';
+import StageSections from '@/features/action-stories/components/StageSections';
 
 function BlockPlaceholder({ slotName, reason }) {
   return (
-    <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-[12px] text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">
+    <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-[12px] text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">
       <span className="font-semibold">{humanizeSlotName(slotName)}</span> — {reason}
     </div>
   );
 }
 
-// A short/scalar block (a one-line text value, a number, a flag, a small object with only a
-// handful of fields) is cheap to read at a glance, but StageRenderer used to stack every block
-// full-width in one plain vertical column regardless — a stage full of these renders as a wall of
-// giant, nearly-empty cards (see extraction/audit.js's B.1/B.2 checks: this is exactly the "0 of 5
-// orders created" / "Suggest" / "n/a" screen). Consecutive blocks like this are grouped into a
-// responsive grid row instead; anything richer (table/series/itemQueue/labelValueList/slider, or a
-// placeholder) still gets its own full-width row, in its original position.
-function isGridEligible(blockType, value) {
-  if (blockType === 'text' || blockType === 'number' || blockType === 'flag') return true
-  if (blockType === 'object' && value !== null && typeof value === 'object' && !Array.isArray(value)) {
-    return Object.keys(value).length <= 3
-  }
-  return false
-}
-
-function groupIntoRows(items) {
-  const rows = []
-  let currentGrid = null
-  for (const item of items) {
-    if (item.gridEligible) {
-      if (!currentGrid) {
-        currentGrid = { type: 'grid', items: [] }
-        rows.push(currentGrid)
-      }
-      currentGrid.items.push(item)
-    } else {
-      currentGrid = null
-      rows.push({ type: 'single', item })
+/**
+ * Every slotName that should render its `compact` variant (a bare label/value row, or a card-less
+ * chart/list, instead of its own bordered card) — anything sharing a row with siblings inside a
+ * shared panel, wherever that panel ends up: every block composeSections placed in the `rail`
+ * region (a lone item there still nests inside that section's one shared panel, never a second,
+ * redundant border-within-a-border), plus every block that's part of a `grid`-type row in EITHER
+ * region — a heuristic metric-strip (GridPanel) or an explicitly-authored composed panel
+ * (ComposedPanel; see StageSections.jsx) both already provide the shared card, so their own members
+ * render bare.
+ */
+function computeCompactSlots({ main, rail }) {
+  const compact = new Set();
+  for (const section of rail) {
+    for (const row of section.rows) {
+      if (row.type === 'grid') row.items.forEach((item) => compact.add(item.slotName));
+      else compact.add(row.slotName);
     }
   }
-  return rows
+  for (const section of main) {
+    for (const row of section.rows) {
+      if (row.type === 'grid') row.items.forEach((item) => compact.add(item.slotName));
+    }
+  }
+  return compact;
 }
 
 /**
@@ -52,9 +48,28 @@ function groupIntoRows(items) {
  * (Part 2's validateBlockData), and hand it to whichever component the block registry has for
  * that type.
  *
+ * StageRenderer owns exactly that data pipeline — binding, validation, registry lookup, error
+ * isolation, and the slider cross-block state below — and nothing about *layout*. Composition
+ * (which blocks share a row, which section they belong to) is delegated to composeSections.js (a
+ * pure function) + StageSections.jsx (the presentational component that turns its output into DOM)
+ * — see those files' own doc comments for why that split exists (AUDIT_REPORT.md §18/§25: a layout
+ * heuristic is a different *kind* of concern from this file's data-pipeline orchestration, and
+ * letting it grow here risked a second god-component responsibility on top of the first).
+ *
+ * Runs in two passes on purpose: the first resolves/validates every block and builds the
+ * *metadata* composeSections needs (no JSX yet); composeSections then decides the section/row
+ * structure; only then does the second pass build each block's actual node, now knowing whether it
+ * should render `compact` (grouped with siblings inside one shared panel) or as its own full card.
+ * A block can't know this about itself — it's a property of its neighbors and its section, which
+ * is exactly the kind of decision this file delegates to the layout layer rather than owning.
+ *
  * An unknown blockType, or a binding that resolves to nothing, never crashes the page and never
  * disappears silently — both render a visibly labeled placeholder and log a console warning, so a
- * bad manifest entry is loud during development instead of an invisible gap in production.
+ * bad manifest entry is loud during development instead of an invisible gap in production. A
+ * genuine JS exception thrown *inside* a block's own render (not a validation failure this
+ * pipeline already caught, but a real bug — a Recharts edge case, a null-deref) is caught too: every
+ * block is wrapped in its own BlockErrorBoundary, so one bad block shows a small inline error
+ * instead of white-screening the whole stage (AUDIT_REPORT.md §14/§24 P0 #1).
  *
  * `sliderPositions` and `overrides` are the only cross-block state in this renderer. A slider
  * block (SliderBlock.jsx) is a plain, stateless function like every other block — StageRenderer
@@ -64,6 +79,17 @@ function groupIntoRows(items) {
  * remounts per stage), never persisted, never sent anywhere. No workflow uses this today; it
  * exists for the day a Decide-stage "simulate" slider has real data to bind to (see
  * manifests/REPORT.md).
+ *
+ * Every manifest block renders here, in place — including a `role: "hero"` block (see
+ * layout/heroSlot.js's HERO_SLOT_NAMES, and classifyBlocks.js's `planSections`), which is no longer
+ * plucked out of the body and duplicated into the page header as a stand-in subtitle. That old
+ * mechanism conflated two different problems — "this stage's own headline deserves prominent
+ * treatment" and "the page needs a per-instance subtitle" — with one hack; FORENSIC_AUDIT_S9.1.md
+ * §6 traces why. The two are solved separately now: a hero block gets real in-place prominence via
+ * its own section's `region: "main"` (see classifyBlocks.js's `recommendation` section) and
+ * TextBlock's existing hero visual treatment, while the page header's subtitle is the Action
+ * Story's own real, extracted `headline` field (see StagePage.jsx) — never fixture content
+ * standing in for it.
  */
 export default function StageRenderer({ manifest, fixture }) {
   const [sliderPositions, setSliderPositions] = useState({}); // slotName -> current numeric value
@@ -79,70 +105,72 @@ export default function StageRenderer({ manifest, fixture }) {
     }
   }
 
-  const items = manifest.blocks.map((block) => {
-    const resolved = resolveBinding(block.binding, fixture);
-    let value = overrides[block.slotName] !== undefined ? overrides[block.slotName] : resolved;
-
+  // Pass 1 — resolve + validate every block; no JSX yet, just enough metadata for composeSections.
+  const resolvedBlocks = manifest.blocks.map((block) => {
+    const rawResolved = resolveBinding(block.binding, fixture);
+    let value = overrides[block.slotName] !== undefined ? overrides[block.slotName] : rawResolved;
     if (block.blockType === 'slider' && value && sliderPositions[block.slotName] !== undefined) {
       value = { ...value, value: sliderPositions[block.slotName] };
     }
 
     const Component = BLOCK_REGISTRY[block.blockType];
-
+    let placeholderReason = null;
     if (!Component) {
-      const reason = `unknown block type "${block.blockType}"`;
-      console.warn(`[StageRenderer] ${manifest.code}/${manifest.stageKey} "${block.slotName}": ${reason}`);
-      return { key: block.slotName, gridEligible: false, node: <BlockPlaceholder key={block.slotName} slotName={block.slotName} reason={reason} /> };
+      placeholderReason = `unknown block type "${block.blockType}"`;
+    } else if (value === undefined) {
+      placeholderReason = `binding "${block.binding}" resolved to nothing`;
+    } else {
+      const problems = validateBlockData(block.blockType, value);
+      if (problems.length > 0) placeholderReason = problems.join('; ');
     }
 
-    if (value === undefined) {
-      const reason = `binding "${block.binding}" resolved to nothing`;
-      console.warn(`[StageRenderer] ${manifest.code}/${manifest.stageKey} "${block.slotName}": ${reason}`);
-      return { key: block.slotName, gridEligible: false, node: <BlockPlaceholder key={block.slotName} slotName={block.slotName} reason={reason} /> };
+    if (placeholderReason) {
+      console.warn(`[StageRenderer] ${manifest.code}/${manifest.stageKey} "${block.slotName}": ${placeholderReason}`);
     }
 
-    const problems = validateBlockData(block.blockType, value);
-    if (problems.length > 0) {
-      const reason = problems.join('; ');
-      console.warn(`[StageRenderer] ${manifest.code}/${manifest.stageKey} "${block.slotName}": ${reason}`);
-      return { key: block.slotName, gridEligible: false, node: <BlockPlaceholder key={block.slotName} slotName={block.slotName} reason={reason} /> };
+    return { block, Component, value, placeholderReason };
+  });
+
+  const layoutItems = resolvedBlocks.map(({ block, value, placeholderReason }) => ({
+    slotName: block.slotName,
+    blockType: block.blockType,
+    layout: block.layout,
+    section: block.section,
+    region: block.region,
+    value,
+    forceFullWidth: Boolean(placeholderReason) || block.blockType === 'slider',
+  }));
+
+  const sections = composeSections(layoutItems, manifest.sections);
+  const compactSlots = computeCompactSlots(sections);
+
+  // Pass 2 — build each block's actual node, now that compact-ness is known.
+  const nodesBySlot = {};
+  for (const { block, Component, value, placeholderReason } of resolvedBlocks) {
+    if (placeholderReason) {
+      nodesBySlot[block.slotName] = <BlockPlaceholder slotName={block.slotName} reason={placeholderReason} />;
+      continue;
     }
 
     if (block.blockType === 'slider') {
-      return {
-        key: block.slotName,
-        gridEligible: false,
-        node: (
+      nodesBySlot[block.slotName] = (
+        <BlockErrorBoundary slotName={block.slotName} blockType={block.blockType}>
           <Component
-            key={block.slotName}
             slotName={block.slotName}
             data={value}
             onChange={(next) => handleSliderChange(block.slotName, value, next)}
           />
-        ),
-      };
+        </BlockErrorBoundary>
+      );
+      continue;
     }
 
-    return {
-      key: block.slotName,
-      gridEligible: isGridEligible(block.blockType, value),
-      node: <Component key={block.slotName} slotName={block.slotName} data={value} />,
-    };
-  });
+    nodesBySlot[block.slotName] = (
+      <BlockErrorBoundary slotName={block.slotName} blockType={block.blockType}>
+        <Component slotName={block.slotName} data={value} compact={compactSlots.has(block.slotName)} role={block.role} />
+      </BlockErrorBoundary>
+    );
+  }
 
-  const rows = groupIntoRows(items);
-
-  return (
-    <div className="flex flex-col gap-3 p-6">
-      {rows.map((row, i) =>
-        row.type === 'single' ? (
-          row.item.node
-        ) : (
-          <div key={`grid-${i}`} className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {row.items.map((item) => item.node)}
-          </div>
-        ),
-      )}
-    </div>
-  );
+  return <StageSections sections={sections} nodesBySlot={nodesBySlot} />;
 }

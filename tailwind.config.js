@@ -57,33 +57,41 @@ export default {
   ],
   theme: {
     extend: {
+      // Reference design system's real type roles (previously all three aliased to Inter, so the
+      // reference's Fraunces-display/Inter-UI/JetBrains-Mono-data hierarchy could never show up no
+      // matter what markup used `font-serif`/`font-mono`) — see src/styles/realify-tokens.css for
+      // the same fonts as CSS custom properties, used where a Tailwind utility isn't the natural fit.
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Inter', 'sans-serif'],
-        mono: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Fraunces', 'Times New Roman', 'serif'],
+        mono: ['"JetBrains Mono"', 'Menlo', 'monospace'],
       },
       boxShadow: {
         card: '0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.03)',
+        xs: '0 1px 2px rgba(10,15,26,0.04)',
+        sm: '0 1px 3px rgba(10,15,26,0.06), 0 1px 2px rgba(10,15,26,0.04)',
+        md: '0 4px 12px rgba(10,15,26,0.06), 0 2px 4px rgba(10,15,26,0.04)',
+      },
+      // One real utility (`max-w-page`) for the stage page's own content cap, backed by
+      // `--page-max` in realify-tokens.css — FORENSIC_AUDIT_S9.1.md §12/§19/§25 found this same
+      // 1280px cap hardcoded independently in StagePage.jsx AND StageActionBar.jsx, with the
+      // matching CSS token already defined but never actually consumed. Change the page's max
+      // width in exactly one place (the CSS token) from now on, never here or in a component.
+      maxWidth: {
+        page: 'var(--page-max)',
       },
       colors: {
-        // ── Brand palette — edit CSS vars in src/index.css to retheme the whole app ──
-        brand: 'rgb(var(--color-brand) / <alpha-value>)',
-        'brand-hover': 'rgb(var(--color-brand-hover) / <alpha-value>)',
-        'brand-subtle': 'rgb(var(--color-brand-subtle) / <alpha-value>)',
-        // ── Danger palette — edit CSS vars in src/index.css to retheme destructive UI ──
-        danger: 'rgb(var(--color-danger) / <alpha-value>)',
-        'danger-hover': 'rgb(var(--color-danger-hover) / <alpha-value>)',
-        'danger-text': 'rgb(var(--color-danger-text) / <alpha-value>)',
-        // ── Cobalt-blue accent palette — edit CSS vars in src/index.css ──
-        'cb-200': 'rgb(var(--cb-200) / <alpha-value>)',
-        'cb-300': 'rgb(var(--cb-300) / <alpha-value>)',
-        'cb-400': 'rgb(var(--cb-400) / <alpha-value>)',
-        'cb-500': 'rgb(var(--cb-500) / <alpha-value>)',
-        'cb-600': 'rgb(var(--cb-600) / <alpha-value>)',
-        'cb-700': 'rgb(var(--cb-700) / <alpha-value>)',
-        'cb-800': 'rgb(var(--cb-800) / <alpha-value>)',
-        'cb-850': 'rgb(var(--cb-850) / <alpha-value>)',
-        'cb-900': 'rgb(var(--cb-900) / <alpha-value>)',
+        // `brand`/`brand-hover`/`brand-subtle`, `danger`/`danger-hover`/`danger-text`, and
+        // `cb-200`…`cb-900` used to be defined here, reading CSS custom properties
+        // (`--color-brand`, `--cb-500`, etc.) that don't exist anywhere in this repo's CSS and
+        // were never referenced by a single class name in `src/` (grep-confirmed both ways) —
+        // dead config inherited from the target `realifyai` app this scaffold merges into
+        // (AUDIT_REPORT.md §6/§17: "the design-token surface a new engineer sees in
+        // tailwind.config.js is partly fictional relative to what this app actually renders
+        // with"). Removed rather than wired: this app's real color system is `rf-*`
+        // (rfColorsFromTokensCss() below) end to end, and inventing values for a second,
+        // unused palette just to keep the names defined would be the opposite fix.
+        //
         // ── rf-* tokens — generated from tokens.css, see rfColorsFromTokensCss() above ──
         ...rfColorsFromTokensCss(),
       },

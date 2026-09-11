@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url'
 import { validateManifest } from '../src/features/action-stories/manifests/validateManifest.js'
 import { resolveBinding } from '../src/features/action-stories/manifests/resolveBinding.js'
 import { validateBlockData } from '../src/features/action-stories/manifests/blockTypes.js'
-import { classifyBlockType, planSlotNames, detectItemLevelHints } from './classifyBlocks.js'
+import { classifyBlockType, planSlotNames, detectItemLevelHints, planSections, findMetadataDescriptorSlots } from './classifyBlocks.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -25,10 +25,12 @@ const MANIFESTS_OUT_DIR = path.resolve(
 
 // Slot names that genuinely land on the app's real vocabulary — everything else is a
 // descriptive, mockup-specific name. Used only to tally the report; doesn't affect generation.
+// `execution_lane` and `guardrail_verdict` are deliberately NOT in this set — see
+// classifyBlocks.js's EXACT_KEY_OVERRIDES comment and services/proposalFieldMapping.js: those two
+// real vocabulary names are reserved for the real API fields they actually mean once a backend is
+// wired, not spent on `display_mode`/`guardrail_checks` (this UI's own, differently-shaped concepts).
 const VOCAB_SLOT_NAMES = new Set([
-  'execution_lane',
   'severity',
-  'guardrail_verdict',
   'guardrail_blocked',
   'guardrail_can_approve',
   'guardrail_reason',
@@ -37,10 +39,10 @@ const VOCAB_SLOT_NAMES = new Set([
 ])
 
 function buildStageManifest(fixture) {
-  const { code, stageKey, name, data } = fixture
+  const { code, stageKey, name, headline, data } = fixture
   const { slotNames, collisions } = planSlotNames(data || {})
 
-  const blocks = []
+  let blocks = []
   const itemLevelHints = [] // { rawKey, hints }
   const skippedForBadShape = []
 
@@ -70,7 +72,47 @@ function buildStageManifest(fixture) {
     }
   }
 
-  const manifest = { code, name, stageKey, blocks }
+  // Table/column metadata suppression (RENDERED_UI_FORENSIC_AUDIT.md §3.1/§5): a block that's
+  // provably column/row metadata for a real sibling `table` block in this same stage (see
+  // classifyBlocks.js's findMetadataDescriptorSlots for the exact structural match required) is
+  // dropped before section planning — it never occupies a section slot, never becomes an orphaned
+  // block, and never needs a runtime opt-out, because it simply never becomes a block at all.
+  const metadataSlots = findMetadataDescriptorSlots(blocks, data || {})
+  if (metadataSlots.size > 0) {
+    blocks = blocks.filter((b) => !metadataSlots.has(b.slotName))
+  }
+
+  // Phase 2 — declarative sections: a generic, vocabulary/shape-driven grouping (see
+  // classifyBlocks.js's planSections for the exact rule and why it's never workflow-specific).
+  // Only emitted for a stage past MIN_BLOCKS_TO_SECTION — a small stage's manifest stays exactly
+  // as before (no `sections` field, no block `.section`/`.role`/`.layout` field), which is also
+  // how every one of these manifests looked before Phase 2 ever existed.
+  //
+  // Phase 3 (FORENSIC_AUDIT_S9.1.md's fix) adds `section.region` ("main"|"rail" — declarative
+  // placement, replacing the renderer's old name-based `RAIL_SECTION_IDS` guess) and, per block,
+  // an optional `role` ("hero" today — a scalar's own semantic weight, independent of its
+  // blockType shape) and `layout` (`{group, span}` — an explicit composition hint, e.g. fusing a
+  // headline with its supporting metrics into one panel). All three are additive: a manifest that
+  // doesn't need them simply doesn't have them, and every existing consumer already treats an
+  // absent `region`/`role`/`layout` as "use the old inferred behavior" (see composeSections.js).
+  const { sections, sectionBySlot, roleBySlot, layoutBySlot } = planSections(blocks, data || {})
+  if (sections) {
+    for (const block of blocks) {
+      block.section = sectionBySlot.get(block.slotName)
+      const role = roleBySlot.get(block.slotName)
+      if (role) block.role = role
+      const layout = layoutBySlot.get(block.slotName)
+      if (layout) block.layout = layout
+    }
+  }
+
+  // `headline` (the Action Story INSTANCE identity — see extract.js/parseMockup.js) is kept as a
+  // field distinct from `name` (the workflow/category identity) all the way through — never
+  // folded into it, never overloading one field with two meanings (FORENSIC_AUDIT_S9.1.md §6/§17).
+  // Omitted entirely when this fixture never had one (an older/differently-shaped mockup export),
+  // same "absent, not fabricated" rule extraction already applies.
+  const identity = { code, name, ...(headline ? { headline } : {}), stageKey }
+  const manifest = sections ? { ...identity, sections, blocks } : { ...identity, blocks }
   return { manifest, collisions, itemLevelHints, selfCheckProblems: skippedForBadShape }
 }
 
@@ -213,20 +255,22 @@ function writeReportMarkdown(perCode, totals) {
   lines.push('| Vocabulary field | Confidence | Finding |')
   lines.push('|---|---|---|')
   lines.push(
-    '| `execution_lane` | **Confident** | `data.execLabel` on every one of the 105 stage files. *(Corrected ' +
-      'after actually running the app in Part 3: the real values are only "Suggest" and "Assist" — "Assist" ' +
-      'appears exactly once, on `S10.6/live`. The `executionMode` prop\'s declared enum is "Suggest"/"Approve"/' +
-      '"Auto", but no fixture\'s rendered `execLabel` ever actually takes the "Approve" or "Auto" value, and ' +
-      '"Assist" isn\'t in that declared enum at all — the earlier version of this report stated the declared ' +
-      'schema\'s options as if they were the observed values, without checking. Bound directly either way; this ' +
-      'is a data-accuracy correction to the finding, not a rendering change.)* |',
+    '| `execution_lane` | **NAME COLLISION — not bound to this slot name** | `data.execLabel` (values "Suggest" ' +
+      'and "Assist") is real, and present on every one of the 105 stage files, but INTEGRATION.md\'s later ' +
+      'cross-check against the actual `/v1/proposals` API found the real `execution_lane` is server-derived from ' +
+      '`guardrail_verdict` and means "who/what executes" — an unrelated concept from this UI-display-mode prop ' +
+      'that just happens to share a name. Bound instead to a `display_mode` slot (see ' +
+      '`services/proposalFieldMapping.js`), so the real `execution_lane` field stays free for its real meaning ' +
+      'once a backend exists. |',
   )
   lines.push(
-    '| `guardrail_verdict` | **Confident, two shapes** | `data.checks` (an array of governance check rows) plus ' +
-      '`blocked`/`canApprove`/`blockReason`/`ctaLabel` is the decision gate on most `decide` stages — but a ' +
-      'second, disjoint naming convention (`approveShow`/`blockShow`/`approveLabel`) is used by another set of ' +
-      'workflows for the exact same concept. Both are mapped to `guardrail_*` slot names; which raw keys are ' +
-      'present differs per workflow (see the per-code table). |',
+    '| `guardrail_verdict` | **NAME COLLISION — not bound to this slot name** | `data.checks` (an array of ' +
+      'governance check rows) plus `blocked`/`canApprove`/`blockReason`/`ctaLabel` (or the disjoint ' +
+      '`approveShow`/`blockShow`/`approveLabel` naming a second set of workflows uses for the same concept) is ' +
+      'the decision gate on most `decide` stages — but the real `guardrail_verdict` is a 4-value enum ' +
+      '(`within_limits`/`beyond_limits`/`not_applicable`/`undetermined`), a different shape entirely, not just ' +
+      'different values. The checklist is bound instead to `guardrail_checks`; see ' +
+      '`services/proposalFieldMapping.js` for how the real enum would map onto this UI once a backend exists. |',
   )
   lines.push(
     '| `severity` | **Real, but scattered and off-enum** | A literal `severity` field appears in ' +
@@ -348,11 +392,63 @@ function writeReportMarkdown(perCode, totals) {
       '`extraction/classifyBlocks.js`.',
   )
   lines.push('')
+  lines.push('## Manifest schema')
+  lines.push('')
+  lines.push(
+    'One stage manifest: `{ code, name, headline?, stageKey, sections?, blocks: [...] }`. `code`/`name`/`stageKey` ' +
+      'are required strings; `headline` (optional) is the Action Story INSTANCE identity — a real per-run ' +
+      'sentence, e.g. "Quarterly assortment review — 214 active SKUs" — kept as its own field, distinct from ' +
+      '`name` (the workflow/category identity, e.g. "Assortment"); see FORENSIC_AUDIT_S9.1.md §6/§17 for why ' +
+      'these were never the same concept. `blocks` is a required array of ' +
+      '`{ slotName, blockType, binding, role?, region?, layout?, section? }` — `slotName`/`blockType`/`binding` ' +
+      'are required strings, everything else is optional (see below). `sections`, when present, is ' +
+      '`[{ id, title, region? }]` — `id` is a required non-empty string (referenced by a block\'s own `section` ' +
+      'field), `title` is the optional heading text shown above that section\'s blocks, `region` (optional, ' +
+      '"main"|"rail") is where that section physically renders — declaratively, not inferred from its id/name. ' +
+      'A manifest with no `sections` field, or blocks with no `layout`/`section`/`role`/`region` fields, is fully ' +
+      'valid and renders exactly as it did before this schema existed — every field here is additive, never ' +
+      'required.',
+  )
+  lines.push('')
+  lines.push('## Layout & sections schema (Phase 2/3 — declarative screen composition)')
+  lines.push('')
+  lines.push(
+    '`block.section` (optional string) points at one of this manifest\'s own `sections[].id` — a block with no ' +
+      '`section`, or one naming an id `sections` never declared, renders in an implicit trailing "unsectioned" ' +
+      'area instead (never dropped). `block.role` (optional string, e.g. `"hero"`) is a semantic weight ' +
+      'independent of blockType — a `text` block tagged `role: "hero"` is treated as this stage\'s own headline, ' +
+      'never routed to the rail merely because its blockType happens to be scalar. `block.region` (optional ' +
+      '"main"|"rail") lets one block override where it renders even against its own section\'s region. ' +
+      '`block.layout` (optional `{ group?, span? }`): `group` is a string — two or more ADJACENT blocks sharing ' +
+      'the same non-empty `group` merge into one composed panel, regardless of their blockType (normally only a ' +
+      'short scalar — text/number/flag/small object — merges automatically; an explicit `group` overrides that ' +
+      'for any block type, including a chart or table). `span` is an integer 1–12 (a 12-column grid within that ' +
+      'panel); invalid/out-of-range values are clamped, never rejected. None of this is enforced by ' +
+      '`validateManifest()` beyond basic type-checking — a malformed `layout`/`sections`/`role`/`region` value ' +
+      'degrades gracefully (treated as absent) rather than failing the whole stage, computed by ' +
+      '`src/features/action-stories/layout/composeSections.js` (a pure function — see its own tests for the ' +
+      'exact fallback rules).',
+  )
+  lines.push('')
+  lines.push(
+    'This generator assigns `sections`/`block.section`/`block.role`/`block.layout` itself, via a small, generic, ' +
+      'vocabulary/shape-driven rule (never a per-workflow special case) — see classifyBlocks.js\'s `planSections`: ' +
+      'a hero-vocabulary slot (`rationale`/`primaryInsight`/`heroTitle`/`heroSub`) → `role: "hero"` + a ' +
+      '"recommendation" section (`region: "main"`), joined there by its known companion raw keys ' +
+      '(`heroMetrics`/`moveBar`) when a hero slot is present in the same stage, all sharing one explicit ' +
+      '`layout.group` + `span: 12`; any `guardrail_*` slotName → a "Guardrails" section (`region: "rail"`); the ' +
+      'raw keys `totals`/`basis` → "Totals"/"Basis" rail sections; the 5 chart blockTypes → "Analysis" ' +
+      '(`region: "main"`); a remaining scalar (text/number/flag/small object) → "Summary" (`region: "rail"`); ' +
+      'everything else → "Details" (`region: "main"`). Only applied once a stage has enough blocks to benefit ' +
+      '(today: 9+) and lands in at least 2 distinct sections — a small, already-simple stage keeps the old flat ' +
+      'layout untouched.',
+  )
+  lines.push('')
   lines.push('## Confidence by workflow')
   lines.push('')
   lines.push(
     'This table is about *mechanical* soundness, not semantic confidence: every workflow listed generated at ' +
-      'least one `execution_lane` block and passed `validateManifest()` and every block\'s own self-check with no ' +
+      'least one `display_mode` block and passed `validateManifest()` and every block\'s own self-check with no ' +
       'problems — see the last section below (0 for all three, every run). For *semantic* confidence — how much ' +
       'to trust a given `slotName` as truly meaning what the vocabulary says — see the field-by-field table above; ' +
       'the "Item-level hints" column here is a pointer into that discussion, not a confidence score by itself.',

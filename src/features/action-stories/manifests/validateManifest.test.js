@@ -54,4 +54,64 @@ describe('validateManifest', () => {
     })
     expect(problems.some((p) => p.includes('binding'))).toBe(true)
   })
+
+  describe('optional identity/semantic-placement fields (all additive — absent is always valid)', () => {
+    it('accepts a manifest with no headline/role/region/layout/sections at all (old-shape manifest)', () => {
+      expect(validateManifest(validManifest)).toEqual([])
+    })
+
+    it('accepts a valid "headline" distinct from "name"', () => {
+      expect(validateManifest({ ...validManifest, headline: 'Quarterly assortment review — 214 active SKUs' })).toEqual([])
+    })
+
+    it('flags a non-string "headline" when present', () => {
+      const problems = validateManifest({ ...validManifest, headline: 42 })
+      expect(problems.some((p) => p.includes('headline'))).toBe(true)
+    })
+
+    it('accepts a valid block "role"/"region"/"layout"', () => {
+      const manifest = {
+        ...validManifest,
+        blocks: [{ slotName: 'heroTitle', blockType: 'text', binding: 'data.heroTitle', role: 'hero', region: 'main', layout: { group: 'recommendation', span: 12 } }],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('flags an invalid block "region" (must be main|rail)', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        blocks: [{ slotName: 'x', blockType: 'text', binding: 'data.x', region: 'sidebar' }],
+      })
+      expect(problems.some((p) => p.includes('"region"'))).toBe(true)
+    })
+
+    it('flags an out-of-range block "layout.span" (must be 1-12)', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        blocks: [{ slotName: 'x', blockType: 'text', binding: 'data.x', layout: { group: 'g', span: 13 } }],
+      })
+      expect(problems.some((p) => p.includes('layout.span'))).toBe(true)
+    })
+
+    it('accepts valid declared "sections" with a "region"', () => {
+      const manifest = {
+        ...validManifest,
+        sections: [{ id: 'guardrails', title: 'Guardrails', region: 'rail' }, { id: 'details', title: 'Details', region: 'main' }],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('flags a section with an invalid "region"', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        sections: [{ id: 'guardrails', title: 'Guardrails', region: 'sidebar' }],
+      })
+      expect(problems.some((p) => p.includes('"region"'))).toBe(true)
+    })
+
+    it('flags a non-array "sections"', () => {
+      const problems = validateManifest({ ...validManifest, sections: 'nope' })
+      expect(problems.some((p) => p.includes('"sections"'))).toBe(true)
+    })
+  })
 })

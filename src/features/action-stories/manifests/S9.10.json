@@ -2,6 +2,7 @@
   {
     "code": "S9.10",
     "name": "Exit",
+    "headline": "9 SKUs negative true contribution — 3 consecutive months",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,7 +11,7 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -21,12 +22,12 @@
       },
       {
         "slotName": "exceptions",
-        "blockType": "labelValueList",
+        "blockType": "table",
         "binding": "data.exceptions"
       },
       {
         "slotName": "locked",
-        "blockType": "labelValueList",
+        "blockType": "table",
         "binding": "data.locked"
       },
       {
@@ -49,256 +50,372 @@
   {
     "code": "S9.10",
     "name": "Exit",
+    "headline": "9 SKUs negative true contribution — 3 consecutive months",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "zeroY",
         "blockType": "text",
-        "binding": "data.zeroY"
+        "binding": "data.zeroY",
+        "section": "summary"
       },
       {
         "slotName": "bars",
         "blockType": "barChart",
-        "binding": "data.bars"
+        "binding": "data.bars",
+        "section": "analysis"
       },
       {
         "slotName": "tabs",
         "blockType": "labelValueList",
-        "binding": "data.tabs"
+        "binding": "data.tabs",
+        "section": "details"
       },
       {
         "slotName": "sel",
         "blockType": "object",
-        "binding": "data.sel"
+        "binding": "data.sel",
+        "section": "details"
       },
       {
         "slotName": "list",
         "blockType": "table",
-        "binding": "data.list"
+        "binding": "data.list",
+        "section": "details"
       },
       {
         "slotName": "basket",
         "blockType": "table",
-        "binding": "data.basket"
+        "binding": "data.basket",
+        "section": "details"
       },
       {
         "slotName": "classes",
         "blockType": "labelValueList",
-        "binding": "data.classes"
+        "binding": "data.classes",
+        "section": "details"
       },
       {
         "slotName": "upside",
         "blockType": "labelValueList",
-        "binding": "data.upside"
+        "binding": "data.upside",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.10",
     "name": "Exit",
+    "headline": "9 SKUs negative true contribution — 3 consecutive months",
     "stageKey": "decide",
-    "blocks": [
+    "sections": [
       {
-        "slotName": "execution_lane",
-        "blockType": "text",
-        "binding": "data.execLabel"
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
       },
       {
-        "slotName": "guardrail_verdict",
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
+    "blocks": [
+      {
+        "slotName": "display_mode",
+        "blockType": "text",
+        "binding": "data.execLabel",
+        "section": "summary"
+      },
+      {
+        "slotName": "guardrail_checks",
         "blockType": "itemQueue",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.approveLabel"
+        "binding": "data.approveLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "tabs",
         "blockType": "labelValueList",
-        "binding": "data.tabs"
+        "binding": "data.tabs",
+        "section": "details"
       },
       {
         "slotName": "totals",
         "blockType": "labelValueList",
-        "binding": "data.totals"
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "tabNote",
         "blockType": "text",
-        "binding": "data.tabNote"
+        "binding": "data.tabNote",
+        "section": "summary"
       },
       {
         "slotName": "slateMeta",
         "blockType": "text",
-        "binding": "data.slateMeta"
+        "binding": "data.slateMeta",
+        "section": "summary"
       },
       {
         "slotName": "exits",
         "blockType": "itemQueue",
-        "binding": "data.exits"
+        "binding": "data.exits",
+        "section": "details"
       },
       {
         "slotName": "fixes",
         "blockType": "itemQueue",
-        "binding": "data.fixes"
+        "binding": "data.fixes",
+        "section": "details"
       },
       {
         "slotName": "fixTotals",
         "blockType": "labelValueList",
-        "binding": "data.fixTotals"
+        "binding": "data.fixTotals",
+        "section": "details"
       },
       {
         "slotName": "summary",
         "blockType": "barChart",
-        "binding": "data.summary"
+        "binding": "data.summary",
+        "section": "analysis"
       },
       {
         "slotName": "onApprove",
         "blockType": "labelValueList",
-        "binding": "data.onApprove"
+        "binding": "data.onApprove",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.10",
     "name": "Exit",
+    "headline": "9 SKUs negative true contribution — 3 consecutive months",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.headline"
+        "binding": "data.headline",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headMeta",
         "blockType": "text",
-        "binding": "data.headMeta"
+        "binding": "data.headMeta",
+        "section": "summary"
       },
       {
         "slotName": "doneCount",
         "blockType": "text",
-        "binding": "data.doneCount"
+        "binding": "data.doneCount",
+        "section": "summary"
       },
       {
         "slotName": "revState",
         "blockType": "text",
-        "binding": "data.revState"
+        "binding": "data.revState",
+        "section": "summary"
       },
       {
         "slotName": "flowMeta",
         "blockType": "text",
-        "binding": "data.flowMeta"
+        "binding": "data.flowMeta",
+        "section": "summary"
       },
       {
         "slotName": "runLabel",
         "blockType": "text",
-        "binding": "data.runLabel"
+        "binding": "data.runLabel",
+        "section": "summary"
       },
       {
         "slotName": "steps",
-        "blockType": "labelValueList",
-        "binding": "data.steps"
+        "blockType": "table",
+        "binding": "data.steps",
+        "section": "details"
       },
       {
         "slotName": "guardState",
         "blockType": "text",
-        "binding": "data.guardState"
+        "binding": "data.guardState",
+        "section": "summary"
       },
       {
         "slotName": "guardCopy",
         "blockType": "text",
-        "binding": "data.guardCopy"
+        "binding": "data.guardCopy",
+        "section": "summary"
       },
       {
         "slotName": "guardRows",
         "blockType": "labelValueList",
-        "binding": "data.guardRows"
+        "binding": "data.guardRows",
+        "section": "details"
       },
       {
         "slotName": "rbState",
         "blockType": "text",
-        "binding": "data.rbState"
+        "binding": "data.rbState",
+        "section": "summary"
       },
       {
         "slotName": "rbCopy",
         "blockType": "text",
-        "binding": "data.rbCopy"
+        "binding": "data.rbCopy",
+        "section": "summary"
       },
       {
         "slotName": "rbRows",
         "blockType": "labelValueList",
-        "binding": "data.rbRows"
+        "binding": "data.rbRows",
+        "section": "details"
       },
       {
         "slotName": "rbLabel",
         "blockType": "text",
-        "binding": "data.rbLabel"
+        "binding": "data.rbLabel",
+        "section": "summary"
       },
       {
         "slotName": "rbHint",
         "blockType": "text",
-        "binding": "data.rbHint"
+        "binding": "data.rbHint",
+        "section": "summary"
       },
       {
         "slotName": "tray",
         "blockType": "labelValueList",
-        "binding": "data.tray"
+        "binding": "data.tray",
+        "section": "details"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
-        "blockType": "labelValueList",
-        "binding": "data.monitors"
+        "blockType": "table",
+        "binding": "data.monitors",
+        "section": "details"
       },
       {
         "slotName": "roles",
         "blockType": "itemQueue",
-        "binding": "data.roles"
+        "binding": "data.roles",
+        "section": "details"
       },
       {
         "slotName": "ledgerCopy",
         "blockType": "text",
-        "binding": "data.ledgerCopy"
+        "binding": "data.ledgerCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerRunLabel",
         "blockType": "text",
-        "binding": "data.footerRunLabel"
+        "binding": "data.footerRunLabel",
+        "section": "summary"
       }
     ]
   }

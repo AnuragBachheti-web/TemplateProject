@@ -1,81 +1,107 @@
-/* AUTO-GENERATED — DO NOT EDIT */
+/* Realify design tokens — values sourced directly from the reference design system
+ * (`Realify Workspace Dashboard Build/_ds/.../tokens/colors.css`, the same bundle the original
+ * `source-mockups/*.dc.html` screens load), not invented. Every existing `--rf-*` NAME below is
+ * unchanged on purpose — nothing that already consumes `bg-rf-brand-blue-500` etc. needs to
+ * change — only the underlying VALUES were wrong (a generic blue-accent SaaS palette that was
+ * never actually Realify's own system). `--rf-brand-blue-*` now holds the reference's real
+ * "Realify blue" — which is in fact a graphite scale anchored on the brand mark (#383838), not a
+ * literal blue; kept under its original name to avoid a sweeping rename across every block file.
+ *
+ * Reference scales this maps from (see the _ds bundle's own colors.css for the full ramp):
+ *   ink-0/25/50/100/200/300/400/500/900  → surfaces, borders, text
+ *   r-blue-300..600 (graphite)           → brand-blue-* (the accent)
+ *   rose-500 / amber-500 / green-500     → status critical / warning / success
+ *   violet-500                            → status purple (AI/Simulate accent)
+ *
+ * Dark-mode counterparts are NOT in the reference (the source DLS is light-mode only) — derived
+ * here following the same warm-neutral-graphite character, inverted, so the existing dark-mode
+ * activation path (useThemeStore.js) keeps working with a real, reference-consistent palette
+ * instead of reverting to the old generic-blue one.
+ */
 
 :root {
-  --rf-border-default: #D7DEE6;
-  --rf-border-default-rgb: 215 222 230;
-  --rf-border-strong: #B9C4D0;
-  --rf-border-strong-rgb: 185 196 208;
-  --rf-border-subtle: #E8ECF1;
-  --rf-border-subtle-rgb: 232 236 241;
-  --rf-brand-blue-400: #5C8DFF;
-  --rf-brand-blue-400-rgb: 92 141 255;
-  --rf-brand-blue-500: #2E6BFF;
-  --rf-brand-blue-500-rgb: 46 107 255;
-  --rf-brand-blue-600: #1E4FD8;
-  --rf-brand-blue-600-rgb: 30 79 216;
-  --rf-brand-focus-ring: #2E6BFF;
-  --rf-brand-focus-ring-rgb: 46 107 255;
-  --rf-brand-indicator: #2E6BFF;
-  --rf-brand-indicator-rgb: 46 107 255;
-  --rf-brand-purple-500: #7B5CFF;
-  --rf-brand-purple-500-rgb: 123 92 255;
-  --rf-brand-purple-600: #5A38DB;
-  --rf-brand-purple-600-rgb: 90 56 219;
-  --rf-brand-tint-08: rgba(46, 107, 255, 0.08);
-  --rf-brand-tint-08-rgb: 46 107 255;
-  --rf-brand-tint-16: rgba(46, 107, 255, 0.16);
-  --rf-brand-tint-16-rgb: 46 107 255;
-  --rf-status-critical: #D93A41;
-  --rf-status-critical-rgb: 217 58 65;
-  --rf-status-purple: #7B5CFF;
-  --rf-status-purple-rgb: 123 92 255;
-  --rf-status-success: #1B8A5A;
-  --rf-status-success-rgb: 27 138 90;
-  --rf-status-warning: #C77A00;
-  --rf-status-warning-rgb: 199 122 0;
+  --rf-border-default: #D4DAE4;
+  --rf-border-default-rgb: 212 218 228;
+  --rf-border-strong: #B4BCCA;
+  --rf-border-strong-rgb: 180 188 202;
+  --rf-border-subtle: #E8ECF3;
+  --rf-border-subtle-rgb: 232 236 243;
+  --rf-brand-blue-400: #797979;
+  --rf-brand-blue-400-rgb: 121 121 121;
+  --rf-brand-blue-500: #383838;
+  --rf-brand-blue-500-rgb: 56 56 56;
+  --rf-brand-blue-600: #2E2E2E;
+  --rf-brand-blue-600-rgb: 46 46 46;
+  --rf-brand-focus-ring: #383838;
+  --rf-brand-focus-ring-rgb: 56 56 56;
+  --rf-brand-indicator: #383838;
+  --rf-brand-indicator-rgb: 56 56 56;
+  --rf-brand-purple-500: #7C3AED;
+  --rf-brand-purple-500-rgb: 124 58 237;
+  --rf-brand-purple-600: #5B21B6;
+  --rf-brand-purple-600-rgb: 91 33 182;
+  --rf-brand-tint-08: rgba(56, 56, 56, 0.06);
+  --rf-brand-tint-08-rgb: 56 56 56;
+  --rf-brand-tint-16: rgba(56, 56, 56, 0.12);
+  --rf-brand-tint-16-rgb: 56 56 56;
+  --rf-status-critical: #E11D48;
+  --rf-status-critical-rgb: 225 29 72;
+  --rf-status-purple: #7C3AED;
+  --rf-status-purple-rgb: 124 58 237;
+  --rf-status-success: #10A36D;
+  --rf-status-success-rgb: 16 163 109;
+  --rf-status-warning: #F59E0B;
+  --rf-status-warning-rgb: 245 158 11;
   --rf-surface-canvas: #FFFFFF;
   --rf-surface-canvas-rgb: 255 255 255;
   --rf-surface-overlay: #FFFFFF;
   --rf-surface-overlay-rgb: 255 255 255;
-  --rf-surface-raised: #FAFBFC;
-  --rf-surface-raised-rgb: 250 251 252;
-  --rf-surface-sunken: #F4F6F8;
-  --rf-surface-sunken-rgb: 244 246 248;
-  --rf-text-disabled: #A9B3BD;
-  --rf-text-disabled-rgb: 169 179 189;
-  --rf-text-primary: #0B1117;
-  --rf-text-primary-rgb: 11 17 23;
-  --rf-text-secondary: #56636F;
-  --rf-text-secondary-rgb: 86 99 111;
-  --rf-text-tertiary: #86929E;
-  --rf-text-tertiary-rgb: 134 146 158;
+  --rf-surface-raised: #F4F6FA;
+  --rf-surface-raised-rgb: 244 246 250;
+  /* The page CANVAS (Shell.jsx's own outer background) vs. a white CARD surface used to differ by
+   * only 2-5 RGB units (#FAFBFD vs #FFFFFF) — visually indistinguishable at real screen brightness,
+   * reading as one flat white page (RENDERED_UI_FORENSIC_AUDIT.md-successor task's "the current UI
+   * looks too plain white" finding). This is a value-only change — the token NAME and every existing
+   * `bg-rf-surface-sunken` consumer (Shell.jsx's page background, table row hover, this same file's
+   * dark-mode counterpart) are untouched; only the shade itself now gives the page canvas genuine,
+   * if still restrained, tonal separation from the white panels sitting on it. */
+  --rf-surface-sunken: #F1F3F8;
+  --rf-surface-sunken-rgb: 241 243 248;
+  --rf-text-disabled: #B4BCCA;
+  --rf-text-disabled-rgb: 180 188 202;
+  --rf-text-primary: #0A0F1A;
+  --rf-text-primary-rgb: 10 15 26;
+  --rf-text-secondary: #5E6878;
+  --rf-text-secondary-rgb: 94 104 120;
+  --rf-text-tertiary: #8891A3;
+  --rf-text-tertiary-rgb: 136 145 163;
 }
 
 [data-theme="dark"] {
-  --rf-border-default: #263149;
-  --rf-border-default-rgb: 38 49 73;
-  --rf-border-strong: #35405C;
-  --rf-border-strong-rgb: 53 64 92;
-  --rf-border-subtle: #1B2436;
-  --rf-border-subtle-rgb: 27 36 54;
-  --rf-brand-blue-400: #5C8DFF;
-  --rf-brand-blue-400-rgb: 92 141 255;
-  --rf-brand-blue-500: #2E6BFF;
-  --rf-brand-blue-500-rgb: 46 107 255;
-  --rf-brand-blue-600: #1E4FD8;
-  --rf-brand-blue-600-rgb: 30 79 216;
-  --rf-brand-focus-ring: #5C8DFF;
-  --rf-brand-focus-ring-rgb: 92 141 255;
-  --rf-brand-indicator: #5C8DFF;
-  --rf-brand-indicator-rgb: 92 141 255;
-  --rf-brand-purple-500: #7B5CFF;
-  --rf-brand-purple-500-rgb: 123 92 255;
-  --rf-brand-purple-600: #5A38DB;
-  --rf-brand-purple-600-rgb: 90 56 219;
-  --rf-brand-tint-08: rgba(92, 141, 255, 0.12);
-  --rf-brand-tint-08-rgb: 92 141 255;
-  --rf-brand-tint-16: rgba(92, 141, 255, 0.2);
-  --rf-brand-tint-16-rgb: 92 141 255;
+  --rf-border-default: #3F4858;
+  --rf-border-default-rgb: 63 72 88;
+  --rf-border-strong: #5E6878;
+  --rf-border-strong-rgb: 94 104 120;
+  --rf-border-subtle: #262E3D;
+  --rf-border-subtle-rgb: 38 46 61;
+  --rf-brand-blue-400: #C4C3C3;
+  --rf-brand-blue-400-rgb: 196 195 195;
+  --rf-brand-blue-500: #A8A8A8;
+  --rf-brand-blue-500-rgb: 168 168 168;
+  --rf-brand-blue-600: #797979;
+  --rf-brand-blue-600-rgb: 121 121 121;
+  --rf-brand-focus-ring: #C4C3C3;
+  --rf-brand-focus-ring-rgb: 196 195 195;
+  --rf-brand-indicator: #C4C3C3;
+  --rf-brand-indicator-rgb: 196 195 195;
+  --rf-brand-purple-500: #9B82FF;
+  --rf-brand-purple-500-rgb: 155 130 255;
+  --rf-brand-purple-600: #7C3AED;
+  --rf-brand-purple-600-rgb: 124 58 237;
+  --rf-brand-tint-08: rgba(196, 195, 195, 0.1);
+  --rf-brand-tint-08-rgb: 196 195 195;
+  --rf-brand-tint-16: rgba(196, 195, 195, 0.18);
+  --rf-brand-tint-16-rgb: 196 195 195;
   --rf-status-critical: #F2555C;
   --rf-status-critical-rgb: 242 85 92;
   --rf-status-purple: #9B82FF;
@@ -84,20 +110,20 @@
   --rf-status-success-rgb: 51 200 138;
   --rf-status-warning: #F5A524;
   --rf-status-warning-rgb: 245 165 36;
-  --rf-surface-canvas: #0A0E16;
-  --rf-surface-canvas-rgb: 10 14 22;
-  --rf-surface-overlay: #182236;
-  --rf-surface-overlay-rgb: 24 34 54;
-  --rf-surface-raised: #111826;
-  --rf-surface-raised-rgb: 17 24 38;
-  --rf-surface-sunken: #060911;
-  --rf-surface-sunken-rgb: 6 9 17;
-  --rf-text-disabled: #4A5468;
-  --rf-text-disabled-rgb: 74 84 104;
-  --rf-text-primary: #F2F5FA;
-  --rf-text-primary-rgb: 242 245 250;
-  --rf-text-secondary: #9AA5B8;
-  --rf-text-secondary-rgb: 154 165 184;
-  --rf-text-tertiary: #75809A;
-  --rf-text-tertiary-rgb: 117 128 154;
+  --rf-surface-canvas: #161C2A;
+  --rf-surface-canvas-rgb: 22 28 42;
+  --rf-surface-overlay: #1E2634;
+  --rf-surface-overlay-rgb: 30 38 52;
+  --rf-surface-raised: #262E3D;
+  --rf-surface-raised-rgb: 38 46 61;
+  --rf-surface-sunken: #0A0F1A;
+  --rf-surface-sunken-rgb: 10 15 26;
+  --rf-text-disabled: #5E6878;
+  --rf-text-disabled-rgb: 94 104 120;
+  --rf-text-primary: #FAFBFD;
+  --rf-text-primary-rgb: 250 251 253;
+  --rf-text-secondary: #B4BCCA;
+  --rf-text-secondary-rgb: 180 188 202;
+  --rf-text-tertiary: #8891A3;
+  --rf-text-tertiary-rgb: 136 145 163;
 }

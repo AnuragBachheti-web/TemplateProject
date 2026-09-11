@@ -2,6 +2,7 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { parseMagnitude } from './chartGeometry';
 import { sequentialColor, sequentialTextColor } from './chartPalette';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
 // Same rule extraction/classifyBlocks.js uses to decide a key is styling, not content — kept as
@@ -9,7 +10,7 @@ import { EmptyState, ErrorState } from './BlockStates';
 // imported here).
 const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/;
 const DECORATIVE_EXACT_KEYS = new Set([
-  'icon', 'tone', 'tint', 'bg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow',
+  'icon', 'tone', 'tint', 'bg', 'fg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow', 'weight',
 ]);
 function isDecorativeKey(key) {
   return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key);
@@ -46,16 +47,31 @@ export default function HeatmapGridBlock({ slotName, data }) {
     return <ErrorState slotName={slotName} message="no cells to plot" />;
   }
 
-  let metricKey = null;
+  // The "primary" metric a heatmap colors by must be picked by which field name is *consistently*
+  // numeric across the whole grid, not merely the first numeric-looking field found in whichever
+  // cell happens to be visited first — object key insertion order is not a stable contract a real
+  // API is expected to preserve, so a positional pick would silently change the chosen metric (and
+  // therefore every cell's color) if a future response ever reordered its own JSON keys
+  // (AUDIT_REPORT.md §9's HeatmapGrid row). Tallying numeric-hit counts per field name across every
+  // cell and taking the field with the most hits (ties broken alphabetically) is deterministic
+  // regardless of per-cell key order.
+  const hitCounts = new Map(); // field name -> number of cells where it looks numeric
   for (const row of rows) {
     for (const cell of row.cells) {
-      const hit = cellFields(cell).find(([, v]) => isNumericLike(v));
-      if (hit) {
-        metricKey = hit[0];
-        break;
+      for (const [key, v] of cellFields(cell)) {
+        if (!isNumericLike(v)) continue;
+        hitCounts.set(key, (hitCounts.get(key) ?? 0) + 1);
       }
     }
-    if (metricKey) break;
+  }
+  let metricKey = null;
+  let bestCount = 0;
+  for (const key of [...hitCounts.keys()].sort()) {
+    const count = hitCounts.get(key);
+    if (count > bestCount) {
+      metricKey = key;
+      bestCount = count;
+    }
   }
 
   const metricValues = metricKey
@@ -98,16 +114,20 @@ export default function HeatmapGridBlock({ slotName, data }) {
     }
   });
 
+  // `title` gives a sighted mouse user per-cell detail on hover, but isn't reliably announced by
+  // assistive tech and has no keyboard-focus trigger (AUDIT_REPORT.md §16: "not screen-reader-
+  // equivalent") — the outer role="img" + a matrix-shape summary is the same fallback pattern
+  // every other chart block uses.
+  const chartLabel = `Heatmap grid, ${rows.length} rows by ${colCount} columns${metricKey ? `, colored by ${humanizeSlotName(metricKey)}` : ''}.`;
+
   return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-3">
-      <p className="mb-2 text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
-        {humanizeSlotName(slotName)}
-      </p>
-      <div className="overflow-x-auto">
+    <BlockCard>
+      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <div className="overflow-x-auto" role="img" aria-label={chartLabel}>
         <div className="grid gap-1" style={{ gridTemplateColumns: `auto repeat(${colCount}, minmax(52px, 1fr))` }}>
           {gridItems}
         </div>
       </div>
-    </div>
+    </BlockCard>
   );
 }

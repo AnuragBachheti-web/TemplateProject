@@ -2,10 +2,11 @@
   {
     "code": "S9.14",
     "name": "Agentic commerce",
+    "headline": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
     "stageKey": "reason",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -16,7 +17,7 @@
       },
       {
         "slotName": "thresholds",
-        "blockType": "labelValueList",
+        "blockType": "table",
         "binding": "data.thresholds"
       },
       {
@@ -49,286 +50,400 @@
   {
     "code": "S9.14",
     "name": "Agentic commerce",
+    "headline": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "dims",
         "blockType": "itemQueue",
-        "binding": "data.dims"
+        "binding": "data.dims",
+        "section": "details"
       },
       {
         "slotName": "surfaceTabs",
         "blockType": "labelValueList",
-        "binding": "data.surfaceTabs"
+        "binding": "data.surfaceTabs",
+        "section": "details"
       },
       {
         "slotName": "batteryMeta",
         "blockType": "text",
-        "binding": "data.batteryMeta"
+        "binding": "data.batteryMeta",
+        "section": "summary"
       },
       {
         "slotName": "shareValue",
         "blockType": "text",
-        "binding": "data.shareValue"
+        "binding": "data.shareValue",
+        "section": "summary"
       },
       {
         "slotName": "shareTrend",
         "blockType": "text",
-        "binding": "data.shareTrend"
+        "binding": "data.shareTrend",
+        "section": "summary"
       },
       {
         "slotName": "sovBars",
         "blockType": "barChart",
-        "binding": "data.sovBars"
+        "binding": "data.sovBars",
+        "section": "analysis"
       },
       {
         "slotName": "queries",
         "blockType": "table",
-        "binding": "data.queries"
+        "binding": "data.queries",
+        "section": "details"
       },
       {
         "slotName": "mismatches",
         "blockType": "table",
-        "binding": "data.mismatches"
+        "binding": "data.mismatches",
+        "section": "details"
       },
       {
         "slotName": "trace",
         "blockType": "object",
-        "binding": "data.trace"
+        "binding": "data.trace",
+        "section": "details"
       },
       {
         "slotName": "versus",
-        "blockType": "labelValueList",
-        "binding": "data.versus"
+        "blockType": "table",
+        "binding": "data.versus",
+        "section": "details"
       },
       {
         "slotName": "freshness",
         "blockType": "labelValueList",
-        "binding": "data.freshness"
+        "binding": "data.freshness",
+        "section": "details"
       },
       {
         "slotName": "quickWins",
         "blockType": "labelValueList",
-        "binding": "data.quickWins"
+        "binding": "data.quickWins",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.14",
     "name": "Agentic commerce",
+    "headline": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "labelValueList",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "slateMeta",
         "blockType": "text",
-        "binding": "data.slateMeta"
+        "binding": "data.slateMeta",
+        "section": "summary"
       },
       {
         "slotName": "confLabel",
         "blockType": "text",
-        "binding": "data.confLabel"
+        "binding": "data.confLabel",
+        "section": "summary"
       },
       {
         "slotName": "heroMetrics",
         "blockType": "labelValueList",
-        "binding": "data.heroMetrics"
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "caps",
         "blockType": "itemQueue",
-        "binding": "data.caps"
+        "binding": "data.caps",
+        "section": "details"
       },
       {
         "slotName": "weeksLabel",
         "blockType": "text",
-        "binding": "data.weeksLabel"
+        "binding": "data.weeksLabel",
+        "section": "summary"
       },
       {
         "slotName": "weeksPct",
         "blockType": "text",
-        "binding": "data.weeksPct"
+        "binding": "data.weeksPct",
+        "section": "summary"
       },
       {
         "slotName": "weeksNote",
         "blockType": "text",
-        "binding": "data.weeksNote"
+        "binding": "data.weeksNote",
+        "section": "summary"
       },
       {
         "slotName": "surfaceProj",
         "blockType": "table",
-        "binding": "data.surfaceProj"
+        "binding": "data.surfaceProj",
+        "section": "details"
       },
       {
         "slotName": "rankMeta",
         "blockType": "text",
-        "binding": "data.rankMeta"
+        "binding": "data.rankMeta",
+        "section": "summary"
       },
       {
         "slotName": "items",
         "blockType": "itemQueue",
-        "binding": "data.items"
+        "binding": "data.items",
+        "section": "details"
       },
       {
         "slotName": "totals",
         "blockType": "labelValueList",
-        "binding": "data.totals"
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "waves",
         "blockType": "labelValueList",
-        "binding": "data.waves"
+        "binding": "data.waves",
+        "section": "details"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.14",
     "name": "Agentic commerce",
+    "headline": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "planLine",
         "blockType": "text",
-        "binding": "data.planLine"
+        "binding": "data.planLine",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "pushAllLabel",
         "blockType": "text",
-        "binding": "data.pushAllLabel"
-      },
-      {
-        "slotName": "pushAllIcon",
-        "blockType": "text",
-        "binding": "data.pushAllIcon"
+        "binding": "data.pushAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "dests",
         "blockType": "itemQueue",
-        "binding": "data.dests"
+        "binding": "data.dests",
+        "section": "details"
       },
       {
         "slotName": "progressPct",
         "blockType": "text",
-        "binding": "data.progressPct"
+        "binding": "data.progressPct",
+        "section": "summary"
       },
       {
         "slotName": "progressRows",
         "blockType": "labelValueList",
-        "binding": "data.progressRows"
+        "binding": "data.progressRows",
+        "section": "details"
       },
       {
         "slotName": "armCopy",
         "blockType": "text",
-        "binding": "data.armCopy"
+        "binding": "data.armCopy",
+        "section": "summary"
       },
       {
         "slotName": "armBtnLabel",
         "blockType": "text",
-        "binding": "data.armBtnLabel"
-      },
-      {
-        "slotName": "armBtnIcon",
-        "blockType": "text",
-        "binding": "data.armBtnIcon"
+        "binding": "data.armBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
         "blockType": "table",
-        "binding": "data.monitors"
+        "binding": "data.monitors",
+        "section": "details"
       },
       {
         "slotName": "watchStatus",
         "blockType": "text",
-        "binding": "data.watchStatus"
+        "binding": "data.watchStatus",
+        "section": "summary"
       },
       {
         "slotName": "flags",
         "blockType": "table",
-        "binding": "data.flags"
+        "binding": "data.flags",
+        "section": "details"
       },
       {
         "slotName": "rollback",
         "blockType": "table",
-        "binding": "data.rollback"
+        "binding": "data.rollback",
+        "section": "details"
       },
       {
         "slotName": "deferred",
         "blockType": "labelValueList",
-        "binding": "data.deferred"
+        "binding": "data.deferred",
+        "section": "details"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

@@ -111,6 +111,16 @@ API response as it is against a local fixture).
 
 ## 4. What's confirmed vs. still a guess
 
+**Status update (post-audit fix):** the `execution_lane`/`guardrail_verdict` collision this section
+flags below is now closed at the manifest layer — `extraction/classifyBlocks.js` no longer binds
+either real vocabulary name to the mockup fields described here; they're named `display_mode` and
+`guardrail_checks` instead (see that file's own comment, and
+`src/services/proposalFieldMapping.js` for the documented real-field contract + derivation this UI
+would use once a backend actually sends `execution_lane`/`guardrail_verdict`). The research below —
+what the real API actually contains — is unchanged and still the reference for wiring it correctly;
+only the "what our manifests currently map to it" column is now stale in a good way (nothing maps
+to it any more, on purpose).
+
 Part 2's `manifests/REPORT.md` already documents, in detail, which vocabulary fields
 (`action_type`, `lens`, `severity`, `state`, `target`, `current_value`, `proposed_value`,
 `currency`, `impact_minor`, `confidence`, `guardrail_verdict`, `execution_lane`, `source`,
@@ -144,10 +154,23 @@ schema actually is, so the remapping work has a concrete target instead of anoth
 
 ## 5. Deliberately not done here
 
-Per the original brief: no auth, no ledger/mutation wiring beyond the existing
-`TODO(action-stories-mutations)` in `useActionStoriesStore.js`, and no dependency beyond what
-Part 1 pinned (`react`/`react-dom` ^19.2.4, `react-router-dom` ^7.14.0, `zustand` ^5.0.12, `axios`
-^1.17.0, `recharts` ^2.15.4, plus the devDependencies already in `package.json`). `recharts` in
-particular is still unused — `SeriesBlock.jsx` renders chart data as a raw inline `<path>` or a
-plain value list rather than a real chart; wiring it up to `recharts` was out of scope for this
-pass and is a reasonable next step once the merge lands.
+**Status update (post-audit fix):** the `TODO(action-stories-mutations)` this section originally
+pointed at is resolved — `useActionStoriesStore.js`'s `confirmStage` is now a real async mutation
+(`services/actionStoriesMutations.js`), with a genuine loading/success/failure lifecycle and
+persistence that survives a refresh. What's still genuinely absent, and out of scope for this
+scaffold to invent: **auth** (no login, no session, no per-user permission check anywhere in the
+app) and a **live backend endpoint** — `confirmStageMutation` persists to `localStorage` today,
+not a real `POST /v1/action-stories/:code/:stageKey/confirm`, because no such endpoint exists in
+this environment. Swapping its body for a real `httpClient.post(...)` call is the same one-file
+pattern `services/actionStoriesService.js`'s own swap already established; every caller (the
+store, `StageActionBar`) already awaits it and handles rejection, so nothing downstream changes.
+
+`recharts` is fully wired and in active use — 5 chart block types (`BarChartBlock`,
+`LineChartBlock`, `ScatterChartBlock`, `WaterfallChartBlock`, `HeatmapGridBlock`) are built on it;
+the `SeriesBlock.jsx`-renders-a-raw-`<path>` description below is from an earlier phase of this
+project and no longer describes the current code.
+
+No dependency beyond what Part 1 pinned (`react`/`react-dom` ^19.2.4, `react-router-dom` ^7.14.0,
+`zustand` ^5.0.12, `axios` ^1.17.0 — now actually used, by `services/httpClient.js` — `recharts`
+^2.15.4, plus the devDependencies already in `package.json`, plus `jsdom` added later purely as a
+test-time dependency for the handful of components that need a real DOM render to test).

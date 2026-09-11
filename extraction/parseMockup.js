@@ -138,3 +138,35 @@ export function extractBreadcrumbName(html, code) {
   const m = html.match(re)
   return m ? decodeHtmlEntities(m[1].trim()) : null
 }
+
+/**
+ * The Action Story INSTANCE headline — a different concept from extractBreadcrumbName's workflow/
+ * category label, and a different DOM node. Every stage screen's own context banner (the bordered
+ * strip right under the breadcrumb) carries two distinct pieces of text: a small mono badge
+ * (`>NAME · CODE<`, the workflow/category identity extractBreadcrumbName reads) and, as its own
+ * sibling `<div>` right below it, one real per-instance sentence naming *this specific run*
+ * ("Quarterly assortment review — 214 active SKUs", "Competitor undercut — hero SKU, −7% · Buy Box
+ * lost 2h ago", ...). Confirmed present, with this exact style signature, in every stage file
+ * checked across multiple workflows (S9.1, S9.2, S9.5, S10.1, ...) — a consistent shell pattern,
+ * not a one-off. FORENSIC_AUDIT_S9.1.md §4/§6/§17 documents that this text existed only in this
+ * static markup and was never captured by any extraction function before this one — silently
+ * discarded on every prior extraction run, not merely unclassified downstream.
+ *
+ * Deliberately matched by its exact, distinctive inline style (not by DOM position/adjacency to
+ * the badge) — regex-based extraction has no real DOM tree to walk, and this style string is
+ * unique to this one banner element across every mockup file inspected.
+ */
+const INSTANCE_HEADLINE_RE = /<div style="font-size:15px;font-weight:700;color:var\(--ink-900\)">([^<]*)<\/div>/
+
+export function extractInstanceHeadline(html) {
+  const m = html.match(INSTANCE_HEADLINE_RE)
+  if (!m) return null
+  const text = decodeHtmlEntities(m[1].trim())
+  // A handful of stage screens (confirmed: S10.3, S10.6) template this banner from per-instance
+  // component state instead of a static literal — this static-markup regex has no script sandbox
+  // to evaluate that against, so it can only ever see the raw, unresolved `{{ expr }}` mustache
+  // text still sitting in the export. Surfacing that literally as a user-facing subtitle would be
+  // worse than having none at all (raw template syntax leaking into the UI) — treated the same as
+  // "no banner found."
+  return /\{\{.*\}\}/.test(text) ? null : text
+}

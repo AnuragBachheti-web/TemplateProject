@@ -1,4 +1,5 @@
 import { humanizeSlotName } from './humanizeSlotName';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
 function isPlainObject(v) {
@@ -35,12 +36,11 @@ export default function SliderBlock({ slotName, data, onChange }) {
   }
 
   const unit = data.unit || '';
+  const label = data.label || humanizeSlotName(slotName);
 
   return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas px-4 py-3">
-      <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
-        {data.label || humanizeSlotName(slotName)}
-      </p>
+    <BlockCard padding="compact">
+      <BlockTitle>{label}</BlockTitle>
       <p className="mt-1 flex items-baseline gap-2">
         <span className="text-[24px] font-bold text-emerald-600">
           {data.value}
@@ -56,6 +56,8 @@ export default function SliderBlock({ slotName, data, onChange }) {
         step={data.step || 1}
         value={data.value}
         onChange={(event) => onChange?.(Number(event.target.value))}
+        aria-label={label}
+        aria-valuetext={`${data.value}${unit}`}
         className="mt-3 w-full accent-emerald-600"
       />
 
@@ -64,6 +66,6 @@ export default function SliderBlock({ slotName, data, onChange }) {
         {data.scaleLabels?.mid && <span>{data.scaleLabels.mid}</span>}
         <span>{data.scaleLabels?.max ?? `${data.max}${unit}`}</span>
       </div>
-    </div>
+    </BlockCard>
   );
 }

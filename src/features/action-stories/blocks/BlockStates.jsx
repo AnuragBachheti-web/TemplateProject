@@ -14,7 +14,7 @@ import { humanizeSlotName } from './humanizeSlotName';
  */
 export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
   return (
-    <div className="rounded-lg border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
+    <div className="rounded-2xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
       <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
         {humanizeSlotName(slotName)}
       </p>
@@ -25,7 +25,7 @@ export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
 
 export function ErrorState({ slotName, message }) {
   return (
-    <div className="rounded-lg border border-dashed border-rose-300 bg-rose-50 px-4 py-3 dark:border-rose-500/40 dark:bg-rose-500/10">
+    <div className="rounded-2xl border border-dashed border-rose-300 bg-rose-50 px-4 py-3 dark:border-rose-500/40 dark:bg-rose-500/10">
       <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rose-700 dark:text-rose-400">
         {humanizeSlotName(slotName)}
       </p>

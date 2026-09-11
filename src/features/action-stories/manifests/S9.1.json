@@ -2,6 +2,7 @@
   {
     "code": "S9.1",
     "name": "Assortment",
+    "headline": "Quarterly assortment review — 214 active SKUs",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,13 +11,13 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
       {
         "slotName": "policy",
-        "blockType": "labelValueList",
+        "blockType": "table",
         "binding": "data.policy"
       },
       {
@@ -34,10 +35,11 @@
   {
     "code": "S9.1",
     "name": "Assortment",
+    "headline": "Quarterly assortment review — 214 active SKUs",
     "stageKey": "analyze",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -50,11 +52,6 @@
         "slotName": "points",
         "blockType": "scatterChart",
         "binding": "data.points"
-      },
-      {
-        "slotName": "cols",
-        "blockType": "labelValueList",
-        "binding": "data.cols"
       },
       {
         "slotName": "rows",
@@ -76,214 +73,306 @@
   {
     "code": "S9.1",
     "name": "Assortment",
+    "headline": "Quarterly assortment review — 214 active SKUs",
     "stageKey": "decide",
-    "blocks": [
+    "sections": [
       {
-        "slotName": "execution_lane",
-        "blockType": "text",
-        "binding": "data.execLabel"
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
       },
       {
-        "slotName": "guardrail_verdict",
-        "blockType": "barChart",
-        "binding": "data.checks"
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "provenance",
+        "title": "Basis",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
+    "blocks": [
+      {
+        "slotName": "display_mode",
+        "blockType": "text",
+        "binding": "data.execLabel",
+        "section": "summary"
+      },
+      {
+        "slotName": "guardrail_checks",
+        "blockType": "labelValueList",
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "slateName",
         "blockType": "text",
-        "binding": "data.slateName"
+        "binding": "data.slateName",
+        "section": "summary"
       },
       {
         "slotName": "confLabel",
         "blockType": "text",
-        "binding": "data.confLabel"
+        "binding": "data.confLabel",
+        "section": "summary"
       },
       {
         "slotName": "heroTitle",
         "blockType": "text",
-        "binding": "data.heroTitle"
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "heroSub",
         "blockType": "text",
-        "binding": "data.heroSub"
+        "binding": "data.heroSub",
+        "section": "recommendation",
+        "role": "heroSub",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "heroMetrics",
         "blockType": "barChart",
-        "binding": "data.heroMetrics"
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "moveBar",
         "blockType": "labelValueList",
-        "binding": "data.moveBar"
+        "binding": "data.moveBar",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "slates",
-        "blockType": "itemQueue",
-        "binding": "data.slates"
+        "blockType": "table",
+        "binding": "data.slates",
+        "section": "details"
       },
       {
         "slotName": "approvedCount",
         "blockType": "text",
-        "binding": "data.approvedCount"
+        "binding": "data.approvedCount",
+        "section": "summary"
       },
       {
         "slotName": "toggleAllLabel",
         "blockType": "text",
-        "binding": "data.toggleAllLabel"
+        "binding": "data.toggleAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "groups",
         "blockType": "table",
-        "binding": "data.groups"
+        "binding": "data.groups",
+        "section": "details"
       },
       {
         "slotName": "focusTitle",
         "blockType": "text",
-        "binding": "data.focusTitle"
+        "binding": "data.focusTitle",
+        "section": "summary"
       },
       {
         "slotName": "focusMeta",
         "blockType": "text",
-        "binding": "data.focusMeta"
+        "binding": "data.focusMeta",
+        "section": "summary"
       },
       {
         "slotName": "focusRows",
         "blockType": "table",
-        "binding": "data.focusRows"
+        "binding": "data.focusRows",
+        "section": "details"
       },
       {
         "slotName": "focusFooter",
         "blockType": "text",
-        "binding": "data.focusFooter"
+        "binding": "data.focusFooter",
+        "section": "summary"
       },
       {
         "slotName": "totals",
-        "blockType": "barChart",
-        "binding": "data.totals"
+        "blockType": "labelValueList",
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "basis",
         "blockType": "labelValueList",
-        "binding": "data.basis"
+        "binding": "data.basis",
+        "section": "provenance"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.1",
     "name": "Assortment",
+    "headline": "Quarterly assortment review — 214 active SKUs",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "planLine",
         "blockType": "text",
-        "binding": "data.planLine"
+        "binding": "data.planLine",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "pushAllLabel",
         "blockType": "text",
-        "binding": "data.pushAllLabel"
-      },
-      {
-        "slotName": "pushAllIcon",
-        "blockType": "text",
-        "binding": "data.pushAllIcon"
+        "binding": "data.pushAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "dests",
         "blockType": "itemQueue",
-        "binding": "data.dests"
+        "binding": "data.dests",
+        "section": "details"
       },
       {
         "slotName": "progressPct",
         "blockType": "text",
-        "binding": "data.progressPct"
+        "binding": "data.progressPct",
+        "section": "summary"
       },
       {
         "slotName": "progressRows",
         "blockType": "labelValueList",
-        "binding": "data.progressRows"
+        "binding": "data.progressRows",
+        "section": "details"
       },
       {
         "slotName": "armCopy",
         "blockType": "text",
-        "binding": "data.armCopy"
+        "binding": "data.armCopy",
+        "section": "summary"
       },
       {
         "slotName": "armBtnLabel",
         "blockType": "text",
-        "binding": "data.armBtnLabel"
-      },
-      {
-        "slotName": "armBtnIcon",
-        "blockType": "text",
-        "binding": "data.armBtnIcon"
+        "binding": "data.armBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "restoreLabel",
         "blockType": "text",
-        "binding": "data.restoreLabel"
+        "binding": "data.restoreLabel",
+        "section": "summary"
       },
       {
         "slotName": "watchStatus",
         "blockType": "text",
-        "binding": "data.watchStatus"
+        "binding": "data.watchStatus",
+        "section": "summary"
       },
       {
         "slotName": "watches",
         "blockType": "table",
-        "binding": "data.watches"
+        "binding": "data.watches",
+        "section": "details"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

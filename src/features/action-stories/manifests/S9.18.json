@@ -2,328 +2,472 @@
   {
     "code": "S9.18",
     "name": "Fulfilment cost",
+    "headline": "Cost-per-order drift +$0.62 — carrier GRI ingested",
     "stageKey": "reason",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headline",
-        "blockType": "barChart",
-        "binding": "data.headline"
+        "blockType": "labelValueList",
+        "binding": "data.headline",
+        "section": "details"
       },
       {
         "slotName": "targets",
         "blockType": "labelValueList",
-        "binding": "data.targets"
+        "binding": "data.targets",
+        "section": "details"
       },
       {
         "slotName": "promise",
         "blockType": "table",
-        "binding": "data.promise"
+        "binding": "data.promise",
+        "section": "details"
       },
       {
         "slotName": "guardrails",
-        "blockType": "labelValueList",
-        "binding": "data.guardrails"
+        "blockType": "table",
+        "binding": "data.guardrails",
+        "section": "details"
       },
       {
         "slotName": "locked",
         "blockType": "labelValueList",
-        "binding": "data.locked"
+        "binding": "data.locked",
+        "section": "details"
       },
       {
         "slotName": "chips",
         "blockType": "labelValueList",
-        "binding": "data.chips"
+        "binding": "data.chips",
+        "section": "details"
       },
       {
         "slotName": "trigger",
         "blockType": "itemQueue",
-        "binding": "data.trigger"
+        "binding": "data.trigger",
+        "section": "details"
       },
       {
         "slotName": "nodes",
         "blockType": "table",
-        "binding": "data.nodes"
+        "binding": "data.nodes",
+        "section": "details"
       },
       {
         "slotName": "carriers",
         "blockType": "barChart",
-        "binding": "data.carriers"
+        "binding": "data.carriers",
+        "section": "analysis"
       }
     ]
   },
   {
     "code": "S9.18",
     "name": "Fulfilment cost",
+    "headline": "Cost-per-order drift +$0.62 — carrier GRI ingested",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "yTicks",
         "blockType": "itemQueue",
-        "binding": "data.yTicks"
+        "binding": "data.yTicks",
+        "section": "details"
       },
       {
         "slotName": "zoneBars",
-        "blockType": "labelValueList",
-        "binding": "data.zoneBars"
+        "blockType": "table",
+        "binding": "data.zoneBars",
+        "section": "details"
       },
       {
         "slotName": "zone",
         "blockType": "object",
-        "binding": "data.zone"
+        "binding": "data.zone",
+        "section": "details"
       },
       {
         "slotName": "heatRows",
-        "blockType": "labelValueList",
-        "binding": "data.heatRows"
+        "blockType": "table",
+        "binding": "data.heatRows",
+        "section": "details"
       },
       {
         "slotName": "simTabs",
         "blockType": "labelValueList",
-        "binding": "data.simTabs"
+        "binding": "data.simTabs",
+        "section": "details"
       },
       {
         "slotName": "sim",
         "blockType": "object",
-        "binding": "data.sim"
+        "binding": "data.sim",
+        "section": "details"
       },
       {
         "slotName": "splits",
         "blockType": "table",
-        "binding": "data.splits"
+        "binding": "data.splits",
+        "section": "details"
       },
       {
         "slotName": "dim",
         "blockType": "table",
-        "binding": "data.dim"
+        "binding": "data.dim",
+        "section": "details"
       },
       {
         "slotName": "pool",
         "blockType": "barChart",
-        "binding": "data.pool"
+        "binding": "data.pool",
+        "section": "analysis"
       },
       {
         "slotName": "carriers",
         "blockType": "itemQueue",
-        "binding": "data.carriers"
+        "binding": "data.carriers",
+        "section": "details"
       },
       {
         "slotName": "gri",
         "blockType": "labelValueList",
-        "binding": "data.gri"
+        "binding": "data.gri",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.18",
     "name": "Fulfilment cost",
+    "headline": "Cost-per-order drift +$0.62 — carrier GRI ingested",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "labelValueList",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_reason",
         "blockType": "text",
-        "binding": "data.blockReason"
+        "binding": "data.blockReason",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "slateTabs",
         "blockType": "labelValueList",
-        "binding": "data.slateTabs"
+        "binding": "data.slateTabs",
+        "section": "details"
       },
       {
         "slotName": "slateLabel",
         "blockType": "text",
-        "binding": "data.slateLabel"
+        "binding": "data.slateLabel",
+        "section": "summary"
       },
       {
         "slotName": "slateMeta",
         "blockType": "text",
-        "binding": "data.slateMeta"
+        "binding": "data.slateMeta",
+        "section": "summary"
       },
       {
         "slotName": "heroTitle",
         "blockType": "text",
-        "binding": "data.heroTitle"
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "heroBody",
         "blockType": "text",
-        "binding": "data.heroBody"
+        "binding": "data.heroBody",
+        "section": "summary"
       },
       {
         "slotName": "heroMetrics",
-        "blockType": "barChart",
-        "binding": "data.heroMetrics"
+        "blockType": "table",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "groups",
         "blockType": "labelValueList",
-        "binding": "data.groups"
+        "binding": "data.groups",
+        "section": "details"
       },
       {
         "slotName": "totals",
         "blockType": "labelValueList",
-        "binding": "data.totals"
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "bars",
-        "blockType": "barChart",
-        "binding": "data.bars"
+        "blockType": "table",
+        "binding": "data.bars",
+        "section": "details"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "routes",
         "blockType": "labelValueList",
-        "binding": "data.routes"
+        "binding": "data.routes",
+        "section": "details"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.18",
     "name": "Fulfilment cost",
+    "headline": "Cost-per-order drift +$0.62 — carrier GRI ingested",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "planLine",
         "blockType": "text",
-        "binding": "data.planLine"
+        "binding": "data.planLine",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "runAllLabel",
         "blockType": "text",
-        "binding": "data.runAllLabel"
-      },
-      {
-        "slotName": "runAllIcon",
-        "blockType": "text",
-        "binding": "data.runAllIcon"
+        "binding": "data.runAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "stages",
         "blockType": "itemQueue",
-        "binding": "data.stages"
+        "binding": "data.stages",
+        "section": "details"
       },
       {
         "slotName": "monitors",
-        "blockType": "labelValueList",
-        "binding": "data.monitors"
+        "blockType": "table",
+        "binding": "data.monitors",
+        "section": "details"
       },
       {
         "slotName": "monStatus",
         "blockType": "text",
-        "binding": "data.monStatus"
+        "binding": "data.monStatus",
+        "section": "summary"
       },
       {
         "slotName": "progressPct",
         "blockType": "text",
-        "binding": "data.progressPct"
+        "binding": "data.progressPct",
+        "section": "summary"
       },
       {
         "slotName": "progressRows",
         "blockType": "labelValueList",
-        "binding": "data.progressRows"
+        "binding": "data.progressRows",
+        "section": "details"
       },
       {
         "slotName": "armCopy",
         "blockType": "text",
-        "binding": "data.armCopy"
+        "binding": "data.armCopy",
+        "section": "summary"
       },
       {
         "slotName": "armBtnLabel",
         "blockType": "text",
-        "binding": "data.armBtnLabel"
-      },
-      {
-        "slotName": "armBtnIcon",
-        "blockType": "text",
-        "binding": "data.armBtnIcon"
+        "binding": "data.armBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "refire",
         "blockType": "itemQueue",
-        "binding": "data.refire"
+        "binding": "data.refire",
+        "section": "details"
       },
       {
         "slotName": "rollback",
         "blockType": "table",
-        "binding": "data.rollback"
+        "binding": "data.rollback",
+        "section": "details"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

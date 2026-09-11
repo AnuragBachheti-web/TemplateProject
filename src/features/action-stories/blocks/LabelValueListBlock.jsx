@@ -1,42 +1,66 @@
 import { humanizeSlotName } from './humanizeSlotName';
-import { flattenDisplayValue } from './flattenDisplayValue';
 import { flattenNestedEntry } from './nestedEntryText';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { isDecorativeKey } from './decorativeKeys';
 
-// Same rule extraction/classifyBlocks.js uses to decide a key is styling, not content — kept as
-// its own local copy (this is a runtime component; that module is generation-only tooling, never
-// imported here).
-const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/;
-const DECORATIVE_EXACT_KEYS = new Set([
-  'icon', 'tone', 'tint', 'bg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow',
-]);
-function isDecorativeKey(key) {
-  return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key);
+// The keys an explicit, well-known value concept lives under — checked in this priority order
+// first, exactly as before. Real fixture data uses many OTHER field names for the same idea
+// (`meta`, `n`, `w`, `key`, `numeric`, ...) that can never be enumerated exhaustively — see
+// resolvePrimaryValue below for how those are handled generically instead of by growing this list.
+const PRIORITY_VALUE_KEYS = ['value', 'note', 'detail', 'amount', 'pct'];
+
+// Past this length, a flattened field reads as real prose (an explanation, a "why"), not a short
+// figure — it keeps its own full-width line below the primary row instead of being squeezed inline
+// next to it. Below it (a percentage, a count, a short code), it's compact enough to sit inline.
+const INLINE_MAX_LENGTH = 18;
+
+/**
+ * Decides which of an item's own fields is "the" value for its row. `label` is always the row's
+ * own left-hand identity, never a value candidate. The explicit priority keys win when present
+ * (unchanged behavior for every fixture already using this vocabulary); otherwise the first
+ * remaining non-decorative field is promoted — this is what makes `{label, meta}`, `{label, n, w}`,
+ * `{label, key, numeric}` all resolve to a real primary value instead of leaving it blank and
+ * demoting every one of those fields to a stacked "extra entry" line (RENDERED_UI_FORENSIC_AUDIT.md
+ * §3.2 — confirmed inflating `cols`, `moveBar`, `inputs`, and several rail blocks to 2–3 lines/row).
+ * @returns {{ key: string|null, raw: * }}
+ */
+function resolvePrimaryValue(item) {
+  for (const key of PRIORITY_VALUE_KEYS) {
+    if (item[key] !== null && item[key] !== undefined) return { key, raw: item[key] };
+  }
+  const fallbackKey = Object.keys(item).find(
+    (k) => k !== 'label' && !isDecorativeKey(k) && item[k] !== null && item[k] !== undefined,
+  );
+  return fallbackKey !== undefined ? { key: fallbackKey, raw: item[fallbackKey] } : { key: null, raw: undefined };
 }
 
-// The keys the primary value is picked from — anything else on the item (once decorative keys are
-// out of the way) used to be silently dropped even though it's real content (see
-// extraction/audit.js's A.3 "classified-but-incomplete" check).
-const PICKED_VALUE_KEYS = new Set(['label', 'value', 'note', 'detail', 'amount', 'pct']);
-
-// A nested array (e.g. a group's own `items`, a cohort grid's own `cells`) needs the same compact
-// per-entry summary ObjectBlock and ItemQueueBlock's sub-lists use — flattenDisplayValue alone
-// returns '' for an array of plain (non-JSX) objects, which used to make this look "empty" and
-// get silently dropped even though every item has real label/value content.
-function entryText(value) {
-  if (Array.isArray(value)) return value.map(flattenNestedEntry).filter(Boolean).join(', ');
-  return flattenDisplayValue(value);
-}
-
-function extraEntries(item) {
-  if (item === null || typeof item !== 'object') return [];
-  return Object.entries(item)
-    .filter(([key, value]) => !PICKED_VALUE_KEYS.has(key) && !isDecorativeKey(key) && value !== null && value !== undefined)
-    .map(([key, value]) => [key, entryText(value)])
+/**
+ * Every field the row's own label/primary-value pick didn't already consume, split into two
+ * buckets: short enough to sit INLINE on the same line as the primary value (a percentage, a
+ * count, a short code — `{label, n, w}`'s `w`, `{label, key, numeric}`'s `numeric`), or long enough
+ * that it's real prose and keeps its own secondary line (a `why`/`note` explanation) — preserving
+ * every field either way, never dropping one, just choosing where it reads best.
+ */
+function extraEntries(item, usedKeys) {
+  if (item === null || typeof item !== 'object') return { inline: [], long: [] };
+  const entries = Object.entries(item)
+    .filter(([key, value]) => !usedKeys.has(key) && !isDecorativeKey(key) && value !== null && value !== undefined)
+    .map(([key, value]) => [key, flattenNestedEntry(value)])
     .filter(([, text]) => text !== '');
+  return {
+    inline: entries.filter(([, text]) => text.length <= INLINE_MAX_LENGTH),
+    long: entries.filter(([, text]) => text.length > INLINE_MAX_LENGTH),
+  };
 }
 
-export default function LabelValueListBlock({ slotName, data }) {
+/**
+ * @param {boolean} [compact] - true when this list is already nested inside a shared panel (e.g.
+ *   the Guardrails rail — see StageSections.jsx) — renders without its own outer card border/title
+ *   bar, matching the reference's "Policy check" pattern (a bare row list inside one panel), not a
+ *   card-inside-a-card.
+ */
+export default function LabelValueListBlock({ slotName, data, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -47,29 +71,50 @@ export default function LabelValueListBlock({ slotName, data }) {
     return <EmptyState slotName={slotName} message="No rows." />;
   }
 
-  return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-3">
-      <p className="mb-2 text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
-        {humanizeSlotName(slotName)}
-      </p>
-      <ul className="flex flex-col divide-y divide-rf-border-subtle">
-        {data.map((item, i) => (
+  const list = (
+    <ul className="flex flex-col divide-y divide-rf-border-subtle">
+      {data.map((item, i) => {
+        const primary = resolvePrimaryValue(item ?? {});
+        const usedKeys = new Set(['label', primary.key].filter((k) => k !== null));
+        const { inline, long } = extraEntries(item, usedKeys);
+        return (
           <li key={i} className="flex flex-col gap-0.5 py-1.5 text-[12.5px]">
             <div className="flex items-center justify-between gap-3">
               <span className="text-rf-text-secondary">{item?.label}</span>
-              <span className="truncate font-medium text-rf-text-primary">
-                {flattenDisplayValue(item?.value ?? item?.note ?? item?.detail ?? item?.amount ?? item?.pct)}
+              <span className="flex min-w-0 items-baseline gap-1.5 truncate font-medium text-rf-text-primary">
+                {flattenNestedEntry(primary.raw)}
+                {inline.map(([key, text]) => (
+                  <span key={key} className="shrink-0 text-[10.5px] font-normal text-rf-text-tertiary">
+                    · {text}
+                  </span>
+                ))}
               </span>
             </div>
-            {extraEntries(item).map(([key, text]) => (
+            {long.map(([key, text]) => (
               <div key={key} className="flex items-center justify-between gap-3 text-[10.5px] text-rf-text-tertiary">
                 <span>{humanizeSlotName(key)}</span>
                 <span className="truncate">{text}</span>
               </div>
             ))}
           </li>
-        ))}
-      </ul>
-    </div>
+        );
+      })}
+    </ul>
+  );
+
+  if (compact) {
+    return (
+      <div className="py-1.5">
+        <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{humanizeSlotName(slotName)}</p>
+        {list}
+      </div>
+    );
+  }
+
+  return (
+    <BlockCard>
+      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      {list}
+    </BlockCard>
   );
 }

@@ -2,77 +2,108 @@
   {
     "code": "S9.19",
     "name": "Promo calendar",
+    "headline": "Q4 calendar build — Prime Fall deadline Aug 21",
     "stageKey": "reason",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "contractCount",
         "blockType": "text",
-        "binding": "data.contractCount"
+        "binding": "data.contractCount",
+        "section": "summary"
       },
       {
         "slotName": "events",
         "blockType": "itemQueue",
-        "binding": "data.events"
+        "binding": "data.events",
+        "section": "details"
       },
       {
         "slotName": "contract",
         "blockType": "object",
-        "binding": "data.contract"
+        "binding": "data.contract",
+        "section": "details"
       },
       {
         "slotName": "budget",
         "blockType": "barChart",
-        "binding": "data.budget"
+        "binding": "data.budget",
+        "section": "analysis"
       },
       {
         "slotName": "guardrails",
-        "blockType": "labelValueList",
-        "binding": "data.guardrails"
+        "blockType": "table",
+        "binding": "data.guardrails",
+        "section": "details"
       },
       {
         "slotName": "locked",
         "blockType": "labelValueList",
-        "binding": "data.locked"
+        "binding": "data.locked",
+        "section": "details"
       },
       {
         "slotName": "chips",
         "blockType": "labelValueList",
-        "binding": "data.chips"
+        "binding": "data.chips",
+        "section": "details"
       },
       {
         "slotName": "deadlines",
         "blockType": "table",
-        "binding": "data.deadlines"
+        "binding": "data.deadlines",
+        "section": "details"
       },
       {
         "slotName": "trigger",
         "blockType": "itemQueue",
-        "binding": "data.trigger"
+        "binding": "data.trigger",
+        "section": "details"
       },
       {
         "slotName": "lastYear",
         "blockType": "labelValueList",
-        "binding": "data.lastYear"
+        "binding": "data.lastYear",
+        "section": "details"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.19",
     "name": "Promo calendar",
+    "headline": "Q4 calendar build — Prime Fall deadline Aug 21",
     "stageKey": "analyze",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -116,219 +147,308 @@
   {
     "code": "S9.19",
     "name": "Promo calendar",
+    "headline": "Q4 calendar build — Prime Fall deadline Aug 21",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "labelValueList",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_reason",
         "blockType": "text",
-        "binding": "data.blockReason"
+        "binding": "data.blockReason",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "slateTabs",
         "blockType": "labelValueList",
-        "binding": "data.slateTabs"
+        "binding": "data.slateTabs",
+        "section": "details"
       },
       {
         "slotName": "slateLabel",
         "blockType": "text",
-        "binding": "data.slateLabel"
+        "binding": "data.slateLabel",
+        "section": "summary"
       },
       {
         "slotName": "heroTitle",
         "blockType": "text",
-        "binding": "data.heroTitle"
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "heroBody",
         "blockType": "text",
-        "binding": "data.heroBody"
+        "binding": "data.heroBody",
+        "section": "summary"
       },
       {
         "slotName": "heroMetrics",
         "blockType": "labelValueList",
-        "binding": "data.heroMetrics"
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "events",
         "blockType": "itemQueue",
-        "binding": "data.events"
+        "binding": "data.events",
+        "section": "details"
       },
       {
         "slotName": "totals",
-        "blockType": "barChart",
-        "binding": "data.totals"
+        "blockType": "labelValueList",
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "bars",
-        "blockType": "barChart",
-        "binding": "data.bars"
+        "blockType": "table",
+        "binding": "data.bars",
+        "section": "details"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "routes",
         "blockType": "labelValueList",
-        "binding": "data.routes"
+        "binding": "data.routes",
+        "section": "details"
       },
       {
         "slotName": "modal",
         "blockType": "object",
-        "binding": "data.modal"
+        "binding": "data.modal",
+        "section": "details"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.19",
     "name": "Promo calendar",
+    "headline": "Q4 calendar build — Prime Fall deadline Aug 21",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "planLine",
         "blockType": "text",
-        "binding": "data.planLine"
+        "binding": "data.planLine",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "runAllLabel",
         "blockType": "text",
-        "binding": "data.runAllLabel"
-      },
-      {
-        "slotName": "runAllIcon",
-        "blockType": "text",
-        "binding": "data.runAllIcon"
+        "binding": "data.runAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "pacing",
-        "blockType": "barChart",
-        "binding": "data.pacing"
+        "blockType": "table",
+        "binding": "data.pacing",
+        "section": "details"
       },
       {
         "slotName": "adjustments",
         "blockType": "table",
-        "binding": "data.adjustments"
+        "binding": "data.adjustments",
+        "section": "details"
       },
       {
         "slotName": "stages",
         "blockType": "itemQueue",
-        "binding": "data.stages"
+        "binding": "data.stages",
+        "section": "details"
       },
       {
         "slotName": "readStatus",
         "blockType": "text",
-        "binding": "data.readStatus"
+        "binding": "data.readStatus",
+        "section": "summary"
       },
       {
         "slotName": "readouts",
         "blockType": "table",
-        "binding": "data.readouts"
+        "binding": "data.readouts",
+        "section": "details"
       },
       {
         "slotName": "progressPct",
         "blockType": "text",
-        "binding": "data.progressPct"
+        "binding": "data.progressPct",
+        "section": "summary"
       },
       {
         "slotName": "progressRows",
         "blockType": "labelValueList",
-        "binding": "data.progressRows"
+        "binding": "data.progressRows",
+        "section": "details"
       },
       {
         "slotName": "tasks",
         "blockType": "table",
-        "binding": "data.tasks"
+        "binding": "data.tasks",
+        "section": "details"
       },
       {
         "slotName": "armCopy",
         "blockType": "text",
-        "binding": "data.armCopy"
+        "binding": "data.armCopy",
+        "section": "summary"
       },
       {
         "slotName": "armBtnLabel",
         "blockType": "text",
-        "binding": "data.armBtnLabel"
-      },
-      {
-        "slotName": "armBtnIcon",
-        "blockType": "text",
-        "binding": "data.armBtnIcon"
+        "binding": "data.armBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "exits",
         "blockType": "itemQueue",
-        "binding": "data.exits"
+        "binding": "data.exits",
+        "section": "details"
       },
       {
         "slotName": "rollback",
         "blockType": "table",
-        "binding": "data.rollback"
+        "binding": "data.rollback",
+        "section": "details"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

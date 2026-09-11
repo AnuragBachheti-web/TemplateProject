@@ -2,6 +2,7 @@
   {
     "code": "S9.4",
     "name": "Allocation",
+    "headline": "Budget + inventory pairing — $18K shift proposal",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,7 +11,7 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -44,316 +45,417 @@
   {
     "code": "S9.4",
     "name": "Allocation",
+    "headline": "Budget + inventory pairing — $18K shift proposal",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "legend",
         "blockType": "itemQueue",
-        "binding": "data.legend"
+        "binding": "data.legend",
+        "section": "details"
       },
       {
         "slotName": "gridX",
         "blockType": "labelValueList",
-        "binding": "data.gridX"
+        "binding": "data.gridX",
+        "section": "details"
       },
       {
         "slotName": "breakY",
         "blockType": "text",
-        "binding": "data.breakY"
+        "binding": "data.breakY",
+        "section": "summary"
       },
       {
         "slotName": "breakLabelY",
         "blockType": "text",
-        "binding": "data.breakLabelY"
+        "binding": "data.breakLabelY",
+        "section": "summary"
       },
       {
         "slotName": "curves",
-        "blockType": "itemQueue",
-        "binding": "data.curves"
+        "blockType": "lineChart",
+        "binding": "data.curves",
+        "section": "analysis"
       },
       {
         "slotName": "points",
-        "blockType": "labelValueList",
-        "binding": "data.points"
+        "blockType": "scatterChart",
+        "binding": "data.points",
+        "section": "analysis"
       },
       {
         "slotName": "shiftPath",
         "blockType": "lineChart",
-        "binding": "data.shiftPath"
+        "binding": "data.shiftPath",
+        "section": "analysis"
       },
       {
         "slotName": "targetX",
         "blockType": "text",
-        "binding": "data.targetX"
+        "binding": "data.targetX",
+        "section": "summary"
       },
       {
         "slotName": "targetY",
         "blockType": "text",
-        "binding": "data.targetY"
+        "binding": "data.targetY",
+        "section": "summary"
       },
       {
         "slotName": "targetLx",
         "blockType": "text",
-        "binding": "data.targetLx"
+        "binding": "data.targetLx",
+        "section": "summary"
       },
       {
         "slotName": "targetLy",
         "blockType": "text",
-        "binding": "data.targetLy"
-      },
-      {
-        "slotName": "cols",
-        "blockType": "labelValueList",
-        "binding": "data.cols"
+        "binding": "data.targetLy",
+        "section": "summary"
       },
       {
         "slotName": "rows",
         "blockType": "table",
-        "binding": "data.rows"
+        "binding": "data.rows",
+        "section": "details"
       },
       {
         "slotName": "conflicts",
         "blockType": "table",
-        "binding": "data.conflicts"
+        "binding": "data.conflicts",
+        "section": "details"
       },
       {
         "slotName": "assumptions",
         "blockType": "labelValueList",
-        "binding": "data.assumptions"
+        "binding": "data.assumptions",
+        "section": "details"
       },
       {
         "slotName": "pacing",
         "blockType": "barChart",
-        "binding": "data.pacing"
+        "binding": "data.pacing",
+        "section": "analysis"
       }
     ]
   },
   {
     "code": "S9.4",
     "name": "Allocation",
+    "headline": "Budget + inventory pairing — $18K shift proposal",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.approveLabel"
+        "binding": "data.approveLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "modes",
         "blockType": "labelValueList",
-        "binding": "data.modes"
+        "binding": "data.modes",
+        "section": "details"
       },
       {
         "slotName": "cmStr",
         "blockType": "text",
-        "binding": "data.cmStr"
+        "binding": "data.cmStr",
+        "section": "summary"
       },
       {
         "slotName": "movedStr",
         "blockType": "text",
-        "binding": "data.movedStr"
+        "binding": "data.movedStr",
+        "section": "summary"
       },
       {
         "slotName": "envNote",
         "blockType": "text",
-        "binding": "data.envNote"
+        "binding": "data.envNote",
+        "section": "summary"
       },
       {
         "slotName": "coverStr",
         "blockType": "text",
-        "binding": "data.coverStr"
+        "binding": "data.coverStr",
+        "section": "summary"
       },
       {
         "slotName": "coverNote",
         "blockType": "text",
-        "binding": "data.coverNote"
+        "binding": "data.coverNote",
+        "section": "summary"
       },
       {
         "slotName": "pairStr",
         "blockType": "text",
-        "binding": "data.pairStr"
+        "binding": "data.pairStr",
+        "section": "summary"
       },
       {
         "slotName": "pairNote",
         "blockType": "text",
-        "binding": "data.pairNote"
+        "binding": "data.pairNote",
+        "section": "summary"
       },
       {
         "slotName": "resLabel",
         "blockType": "text",
-        "binding": "data.resLabel"
+        "binding": "data.resLabel",
+        "section": "summary"
       },
       {
         "slotName": "resCopy",
         "blockType": "text",
-        "binding": "data.resCopy"
-      },
-      {
-        "slotName": "resIcon",
-        "blockType": "text",
-        "binding": "data.resIcon"
+        "binding": "data.resCopy",
+        "section": "summary"
       },
       {
         "slotName": "slateMeta",
         "blockType": "text",
-        "binding": "data.slateMeta"
+        "binding": "data.slateMeta",
+        "section": "summary"
       },
       {
         "slotName": "slateHint",
         "blockType": "text",
-        "binding": "data.slateHint"
+        "binding": "data.slateHint",
+        "section": "summary"
       },
       {
         "slotName": "slateFoot",
         "blockType": "text",
-        "binding": "data.slateFoot"
+        "binding": "data.slateFoot",
+        "section": "summary"
       },
       {
         "slotName": "slate",
         "blockType": "table",
-        "binding": "data.slate"
+        "binding": "data.slate",
+        "section": "details"
       },
       {
         "slotName": "effects",
         "blockType": "table",
-        "binding": "data.effects"
+        "binding": "data.effects",
+        "section": "details"
       },
       {
         "slotName": "arbLog",
         "blockType": "table",
-        "binding": "data.arbLog"
+        "binding": "data.arbLog",
+        "section": "details"
       },
       {
         "slotName": "guards",
         "blockType": "itemQueue",
-        "binding": "data.guards"
+        "binding": "data.guards",
+        "section": "details"
       },
       {
         "slotName": "cadences",
         "blockType": "labelValueList",
-        "binding": "data.cadences"
+        "binding": "data.cadences",
+        "section": "details"
       },
       {
         "slotName": "onApprove",
         "blockType": "labelValueList",
-        "binding": "data.onApprove"
+        "binding": "data.onApprove",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "blockLabel",
         "blockType": "text",
-        "binding": "data.blockLabel"
+        "binding": "data.blockLabel",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.4",
     "name": "Allocation",
+    "headline": "Budget + inventory pairing — $18K shift proposal",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "apiMeta",
         "blockType": "text",
-        "binding": "data.apiMeta"
+        "binding": "data.apiMeta",
+        "section": "summary"
       },
       {
         "slotName": "changes",
         "blockType": "table",
-        "binding": "data.changes"
+        "binding": "data.changes",
+        "section": "details"
       },
       {
         "slotName": "trState",
         "blockType": "text",
-        "binding": "data.trState"
+        "binding": "data.trState",
+        "section": "summary"
       },
       {
         "slotName": "transfers",
-        "blockType": "labelValueList",
-        "binding": "data.transfers"
+        "blockType": "table",
+        "binding": "data.transfers",
+        "section": "details"
       },
       {
         "slotName": "trCopy",
         "blockType": "text",
-        "binding": "data.trCopy"
+        "binding": "data.trCopy",
+        "section": "summary"
       },
       {
         "slotName": "cadences",
         "blockType": "labelValueList",
-        "binding": "data.cadences"
+        "binding": "data.cadences",
+        "section": "details"
       },
       {
         "slotName": "cadNote",
         "blockType": "text",
-        "binding": "data.cadNote"
+        "binding": "data.cadNote",
+        "section": "summary"
       },
       {
         "slotName": "rbState",
         "blockType": "text",
-        "binding": "data.rbState"
+        "binding": "data.rbState",
+        "section": "summary"
       },
       {
         "slotName": "rbCopy",
         "blockType": "text",
-        "binding": "data.rbCopy"
+        "binding": "data.rbCopy",
+        "section": "summary"
       },
       {
         "slotName": "tray",
         "blockType": "labelValueList",
-        "binding": "data.tray"
+        "binding": "data.tray",
+        "section": "details"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
         "blockType": "barChart",
-        "binding": "data.monitors"
+        "binding": "data.monitors",
+        "section": "analysis"
       },
       {
         "slotName": "ledgerCopy",
         "blockType": "text",
-        "binding": "data.ledgerCopy"
+        "binding": "data.ledgerCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerApplyLabel",
         "blockType": "text",
-        "binding": "data.footerApplyLabel"
+        "binding": "data.footerApplyLabel",
+        "section": "summary"
       }
     ]
   }

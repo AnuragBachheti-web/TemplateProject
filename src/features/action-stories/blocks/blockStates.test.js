@@ -7,7 +7,6 @@ import TextBlock from './TextBlock';
 import NumberBlock from './NumberBlock';
 import FlagBlock from './FlagBlock';
 import LabelValueListBlock from './LabelValueListBlock';
-import TableBlock from './TableBlock';
 import ItemQueueBlock from './ItemQueueBlock';
 import LineChartBlock from './LineChartBlock';
 import BarChartBlock from './BarChartBlock';
@@ -24,7 +23,8 @@ const CASES = [
   { Component: NumberBlock, empty: undefined, wrongType: 'nope', valid: 42 },
   { Component: FlagBlock, empty: undefined, wrongType: 'nope', valid: true },
   { Component: LabelValueListBlock, empty: [], wrongType: 'nope', valid: [{ label: 'a', value: 1 }] },
-  { Component: TableBlock, empty: [], wrongType: 'nope', valid: [{ name: 'A', sku: 'X-1', qty: 3 }] },
+  // TableBlock is NOT in this matrix — it now uses useState (sort/page position), so calling it
+  // as a bare function throws "Invalid hook call" outside a real render. See TableBlock.test.jsx.
   { Component: ItemQueueBlock, empty: [], wrongType: 'nope', valid: [{ title: 'a' }] },
   { Component: LineChartBlock, empty: [], wrongType: 42, valid: 'M0 0 L10 10' },
   { Component: BarChartBlock, empty: [], wrongType: 'nope', valid: [1, 2, 3] },

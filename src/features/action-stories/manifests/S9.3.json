@@ -2,124 +2,190 @@
   {
     "code": "S9.3",
     "name": "Allocation",
+    "headline": "Rebalance — 6 channel stock-outs with sister-channel excess",
     "stageKey": "reason",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.dialNote"
+        "binding": "data.dialNote",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "rules",
         "blockType": "labelValueList",
-        "binding": "data.rules"
+        "binding": "data.rules",
+        "section": "details"
       },
       {
         "slotName": "channels",
         "blockType": "table",
-        "binding": "data.channels"
+        "binding": "data.channels",
+        "section": "details"
       },
       {
         "slotName": "economics",
         "blockType": "labelValueList",
-        "binding": "data.economics"
+        "binding": "data.economics",
+        "section": "details"
       },
       {
         "slotName": "locked",
         "blockType": "labelValueList",
-        "binding": "data.locked"
+        "binding": "data.locked",
+        "section": "details"
       },
       {
         "slotName": "mismatch",
         "blockType": "barChart",
-        "binding": "data.mismatch"
+        "binding": "data.mismatch",
+        "section": "analysis"
       },
       {
         "slotName": "inputs",
         "blockType": "labelValueList",
-        "binding": "data.inputs"
+        "binding": "data.inputs",
+        "section": "details"
       },
       {
         "slotName": "agents",
         "blockType": "table",
-        "binding": "data.agents"
+        "binding": "data.agents",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.3",
     "name": "Allocation",
+    "headline": "Rebalance — 6 channel stock-outs with sister-channel excess",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "legend",
         "blockType": "labelValueList",
-        "binding": "data.legend"
+        "binding": "data.legend",
+        "section": "details"
       },
       {
         "slotName": "cols",
         "blockType": "labelValueList",
-        "binding": "data.cols"
+        "binding": "data.cols",
+        "section": "details"
       },
       {
         "slotName": "matrix",
         "blockType": "itemQueue",
-        "binding": "data.matrix"
+        "binding": "data.matrix",
+        "section": "details"
       },
       {
         "slotName": "curves",
-        "blockType": "labelValueList",
-        "binding": "data.curves"
+        "blockType": "lineChart",
+        "binding": "data.curves",
+        "section": "analysis"
       },
       {
         "slotName": "lanes",
         "blockType": "table",
-        "binding": "data.lanes"
+        "binding": "data.lanes",
+        "section": "details"
       },
       {
         "slotName": "sel",
         "blockType": "object",
-        "binding": "data.sel"
+        "binding": "data.sel",
+        "section": "details"
       },
       {
         "slotName": "pools",
         "blockType": "table",
-        "binding": "data.pools"
+        "binding": "data.pools",
+        "section": "details"
       },
       {
         "slotName": "clocks",
         "blockType": "barChart",
-        "binding": "data.clocks"
+        "binding": "data.clocks",
+        "section": "analysis"
       },
       {
         "slotName": "capacity",
         "blockType": "labelValueList",
-        "binding": "data.capacity"
+        "binding": "data.capacity",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S9.3",
     "name": "Allocation",
+    "headline": "Rebalance — 6 channel stock-outs with sister-channel excess",
     "stageKey": "decide",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "itemQueue",
         "binding": "data.checks"
       },
@@ -140,7 +206,7 @@
       },
       {
         "slotName": "after",
-        "blockType": "labelValueList",
+        "blockType": "table",
         "binding": "data.after"
       },
       {
@@ -158,112 +224,161 @@
   {
     "code": "S9.3",
     "name": "Allocation",
+    "headline": "Rebalance — 6 channel stock-outs with sister-channel excess",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.headline"
+        "binding": "data.headline",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headMeta",
         "blockType": "text",
-        "binding": "data.headMeta"
+        "binding": "data.headMeta",
+        "section": "summary"
       },
       {
         "slotName": "createdCount",
         "blockType": "text",
-        "binding": "data.createdCount"
+        "binding": "data.createdCount",
+        "section": "summary"
       },
       {
         "slotName": "cancelState",
         "blockType": "text",
-        "binding": "data.cancelState"
+        "binding": "data.cancelState",
+        "section": "summary"
       },
       {
         "slotName": "orderMeta",
         "blockType": "text",
-        "binding": "data.orderMeta"
+        "binding": "data.orderMeta",
+        "section": "summary"
       },
       {
         "slotName": "orders",
         "blockType": "table",
-        "binding": "data.orders"
+        "binding": "data.orders",
+        "section": "details"
       },
       {
         "slotName": "systems",
         "blockType": "itemQueue",
-        "binding": "data.systems"
+        "binding": "data.systems",
+        "section": "details"
       },
       {
         "slotName": "rbState",
         "blockType": "text",
-        "binding": "data.rbState"
+        "binding": "data.rbState",
+        "section": "summary"
       },
       {
         "slotName": "rbCopy",
         "blockType": "text",
-        "binding": "data.rbCopy"
+        "binding": "data.rbCopy",
+        "section": "summary"
       },
       {
         "slotName": "rbLabel",
         "blockType": "text",
-        "binding": "data.rbLabel"
+        "binding": "data.rbLabel",
+        "section": "summary"
       },
       {
         "slotName": "rbHint",
         "blockType": "text",
-        "binding": "data.rbHint"
+        "binding": "data.rbHint",
+        "section": "summary"
       },
       {
         "slotName": "tray",
         "blockType": "labelValueList",
-        "binding": "data.tray"
+        "binding": "data.tray",
+        "section": "details"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
         "blockType": "barChart",
-        "binding": "data.monitors"
+        "binding": "data.monitors",
+        "section": "analysis"
       },
       {
         "slotName": "watchCopy",
         "blockType": "text",
-        "binding": "data.watchCopy"
+        "binding": "data.watchCopy",
+        "section": "summary"
       },
       {
         "slotName": "ledgerCopy",
         "blockType": "text",
-        "binding": "data.ledgerCopy"
+        "binding": "data.ledgerCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerCreateLabel",
         "blockType": "text",
-        "binding": "data.footerCreateLabel"
+        "binding": "data.footerCreateLabel",
+        "section": "summary"
       }
     ]
   }

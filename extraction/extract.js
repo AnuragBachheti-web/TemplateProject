@@ -19,6 +19,7 @@ import {
   parseDataProps,
   flattenPropsDefaults,
   extractBreadcrumbName,
+  extractInstanceHeadline,
 } from './parseMockup.js'
 import { runScreenScript } from './dcLogicSandbox.js'
 
@@ -83,23 +84,29 @@ function main() {
       if (!name) {
         throw new Error(`breadcrumb ">NAME · ${code}<" not found in markup`)
       }
+      // Distinct from `name` (the workflow/category identity above): the Action Story INSTANCE
+      // headline, when this screen's banner has one — see extractInstanceHeadline's own doc
+      // comment. Not every mockup export is guaranteed to carry this exact banner shape, so absence
+      // (`null`) is a normal, non-fatal outcome, unlike a missing breadcrumb name.
+      const headline = extractInstanceHeadline(html)
 
       const { state, data } = runScreenScript(scriptTag.body, propsDefaults)
 
-      const fixture = { code, stageKey, name, props: propsDefaults, state, data }
+      const fixture = { code, stageKey, name, ...(headline ? { headline } : {}), props: propsDefaults, state, data }
 
       const outDir = path.join(RAW_OUT_DIR, code)
       fs.mkdirSync(outDir, { recursive: true })
       fs.writeFileSync(path.join(outDir, `${stageKey}.json`), JSON.stringify(fixture, null, 2) + '\n')
 
-      extracted.push({ filename, code, stageKey, name })
+      extracted.push({ filename, code, stageKey, name, headline })
 
       if (!workflows.has(code)) {
-        workflows.set(code, { code, name, stages: new Set(), nameVariants: new Set() })
+        workflows.set(code, { code, name, stages: new Set(), nameVariants: new Set(), headlineVariants: new Set() })
       }
       const wf = workflows.get(code)
       wf.stages.add(stageKey)
       wf.nameVariants.add(name)
+      if (headline) wf.headlineVariants.add(headline)
     } catch (err) {
       failed.push({ filename, reason: err.message })
     }
@@ -109,6 +116,14 @@ function main() {
     .map((wf) => ({
       code: wf.code,
       name: wf.name,
+      // Workflow/category identity (`name`) and Action Story instance identity (`headline`) are
+      // kept as two separate fields end to end, never overloaded onto one — see
+      // FORENSIC_AUDIT_S9.1.md §6/§17 for why conflating them was the original bug. `headline` is
+      // first-seen-wins across a workflow's stages (like `name`) since every mockup checked keeps
+      // it constant across its own reason/analyze/decide/execute run; omitted entirely when no
+      // stage of this workflow had a matching banner (an older/differently-shaped export), so a
+      // missing headline degrades to "no subtitle" downstream, never a fabricated one.
+      ...(wf.headlineVariants.size > 0 ? { headline: [...wf.headlineVariants][0] } : {}),
       stages: STAGE_ORDER.filter((s) => wf.stages.has(s)),
     }))
     .sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
@@ -118,6 +133,9 @@ function main() {
   for (const wf of workflows.values()) {
     if (wf.nameVariants.size > 1) {
       warnings.push(`${wf.code}: breadcrumb name differs across its stages: ${[...wf.nameVariants].join(' / ')}`)
+    }
+    if (wf.headlineVariants.size > 1) {
+      warnings.push(`${wf.code}: instance headline differs across its stages: ${[...wf.headlineVariants].join(' / ')}`)
     }
   }
 

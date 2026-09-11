@@ -2,6 +2,7 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } f
 import { humanizeSlotName } from './humanizeSlotName';
 import { parseSvgPathPoints } from './chartGeometry';
 import { categoricalColor } from './chartPalette';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
 /**
@@ -44,12 +45,23 @@ export default function LineChartBlock({ slotName, data }) {
 
   const showLegend = series.length > 1;
 
+  // Chart accessibility fallback (AUDIT_REPORT.md §16) — names the trend(s) and their direction
+  // (rising/falling/flat, comparing the first and last plotted point) since Recharts' own SVG
+  // carries no text a screen reader can use.
+  const chartLabel = series
+    .map((s, idx) => {
+      const pts = seriesPoints[idx].filter((p) => Number.isFinite(p.y));
+      if (pts.length < 2) return `${s.name || s.label || 'Series'}: not enough data to describe a trend.`;
+      const delta = pts[pts.length - 1].y - pts[0].y;
+      const direction = delta > 0 ? 'rising' : delta < 0 ? 'falling' : 'flat';
+      return `${s.name || s.label || 'Series'}: ${direction} trend across ${pts.length} points.`;
+    })
+    .join(' ');
+
   return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-3">
-      <p className="mb-2 text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
-        {humanizeSlotName(slotName)}
-      </p>
-      <div className={showLegend ? 'h-24 w-full' : 'h-20 w-full'}>
+    <BlockCard>
+      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <div className={showLegend ? 'h-64 w-full' : 'h-56 w-full'} role="img" aria-label={`Line chart. ${chartLabel}`}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={merged} margin={{ top: 4, right: 6, bottom: 0, left: 6 }}>
             <XAxis dataKey="i" hide />
@@ -65,7 +77,7 @@ export default function LineChartBlock({ slotName, data }) {
                 key={idx}
                 type="monotone"
                 dataKey={`y${idx}`}
-                name={s.name || humanizeSlotName(slotName)}
+                name={s.name || s.label || humanizeSlotName(slotName)}
                 stroke={categoricalColor(idx)}
                 strokeWidth={2}
                 dot={false}
@@ -75,6 +87,6 @@ export default function LineChartBlock({ slotName, data }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </div>
+    </BlockCard>
   );
 }

@@ -46,8 +46,9 @@ App.jsx (router) ──> Shell.jsx  (left sidebar: sab 26 workflows ki list)
         ▼
    StagePage har block ke liye:
       1. StepTracker.jsx        → upar wali "1.Reason 2.Analyze 3.Decide 4.Execute" pill strip
-      2. StageRenderer.jsx      → beech ka poora content (blocks ek ke niche ek)
-      3. StageActionBar.jsx     → neeche "Approve / Start" button (sirf decide/execute stage pe)
+      2. StageRenderer.jsx      → beech ka poora content (bind → validate → registry lookup)
+      3. StageSections.jsx      → StageRenderer ka output ko sections/rows mein arrange karta hai
+      4. StageActionBar.jsx     → neeche "Approve / Start" button (sirf decide/execute stage pe)
         ▼
    StageRenderer.jsx, manifest.blocks array ke har entry ke liye:
       a. resolveBinding(block.binding, fixture)   → JSON path se value nikalta hai
@@ -55,15 +56,20 @@ App.jsx (router) ──> Shell.jsx  (left sidebar: sab 26 workflows ki list)
       b. validateBlockData(block.blockType, value) → value sahi shape mein hai ya nahi check
       c. BLOCK_REGISTRY[block.blockType]           → sahi component choose karta hai
                                                       (text / table / itemQueue / labelValueList / ...)
-      d. <Component data={value} />                → asli render
+      d. <Component data={value} />                → asli render, ek BlockErrorBoundary ke andar
+   composeSections.js, StageRenderer ke output (har block ka slotName/blockType/layout/section)
+   ko leke decide karta hai: kaunse blocks ek row mein saath dikhenge (grid), aur kaunse section
+   (Guardrails/Summary/Analysis/Details) mein jayenge — section 3.5 mein detail hai.
 ```
 
 Do cheezein yaad rakhna:
 
 - **Koi bhi step crash nahi karta.** Agar binding galat hai, ya blockType unknown hai, ya data
   wrong shape mein hai — screen crash nahi hoti, ek chhota "placeholder" box dikhta hai aur
-  console mein warning aati hai. Ye jaan-bujh kar design kiya gaya hai (dev mein loud, prod mein
-  safe).
+  console mein warning aati hai. Aur agar kisi block ke apne render code mein hi ek real JS bug
+  hai (validation ke baad bhi) — wo bhi poori screen crash nahi karta, kyunki har block apne
+  `BlockErrorBoundary` ke andar wrapped hai; sirf wahi ek card error dikhata hai, baaki sab normal
+  rehta hai.
 - **Zustand store** (`useActionStoriesStore.js`) sirf ek chhoti si UI state rakhta hai — "Approve
   button dabaya ya nahi". Ye kaunsa workflow/stage khula hai, ye state store mein NAHI hai — wo
   hamesha URL mein hi hota hai (`useParams()` se seedha padha jata hai). Isliye refresh/back-forward
@@ -85,10 +91,12 @@ Matlab: **"template" (engine) hamesha same rehta hai**, aur "4-5 variation" (act
 variations × ~4-5 stages = ~104 screens) sirf do JSON files badal ke banti hain — koi naya
 component nahi likhna padta.
 
-Ek block-type ka poora vocabulary (9 types) fix hai, `manifests/blockTypes.js` mein defined:
+Ek block-type ka poora vocabulary (13 types) fix hai, `manifests/blockTypes.js` mein defined:
 
 ```
-text, number, flag, labelValueList, table, itemQueue, series, object, slider
+text, number, flag, labelValueList, table, itemQueue,
+lineChart, barChart, scatterChart, waterfallChart, heatmapGrid,   ← 5 real charts, recharts se banaye
+object, slider
 ```
 
 `blocks/index.js` mein ek simple map hai: `blockType → Component`.
@@ -97,7 +105,8 @@ export const BLOCK_REGISTRY = {
   text: TextBlock,
   table: TableBlock,
   itemQueue: ItemQueueBlock,
-  ... // total 9
+  barChart: BarChartBlock,
+  ... // total 13
 };
 ```
 **Naya block type chahiye ho to:** ek naya component `blocks/` mein banao, `blockTypes.js` mein
@@ -106,6 +115,39 @@ lagane ki zarurat nahi — wo blindly registry lookup karta hai.
 
 **Naya workflow/screen chahiye ho (ya kisi existing ko change karna ho):** sirf uska
 `manifests/<CODE>.json` aur `data/raw/<CODE>/<stage>.json` change/add karo. Code change zero.
+
+---
+
+## 3.5. Sections aur layout (optional, manifest se control hota hai)
+
+Har manifest block ab **do optional fields** bhi le sakta hai — dono backward-compatible hain
+(purane manifests bina inke bhi waise hi chalte hain jaise pehle chalte the):
+
+```json
+{ "slotName": "heroMetrics", "blockType": "barChart", "binding": "data.heroMetrics",
+  "section": "analysis",
+  "layout": { "group": "hero-row", "span": 2 } }
+```
+
+- **`section`** — manifest ke top-level `sections: [{id, title}]` array mein se kisi ek `id` ko
+  point karta hai. Isse pura stage "Guardrails / Summary / Analysis / Details" jaise named regions
+  mein dikhta hai, ek flat list ki jagah. `extraction/generateManifests.js` ye khud generate karta
+  hai — ek **generic rule** se (slotName `guardrail_*` se shuru hota hai → Guardrails section;
+  chart types → Analysis; scalar text/number/flag/chhota object → Summary; baaki sab → Details).
+  Koi workflow-specific hardcoding nahi — same rule sab 26 workflows pe chalta hai. Chhoti stages
+  (9 blocks se kam) sections skip kar dete hain — unko zarurat nahi.
+- **`layout.group`** — do ya zyada blocks jo yehi same `group` string share karte hain, agar ek
+  doosre ke bilkul next-to-next (adjacent) hain, to ek grid row mein saath dikhte hain — chahe
+  unka blockType chahe kuch bhi ho (normally sirf text/number/flag/chhota-object grid mein jaate
+  hain, `group` diya ho to koi bhi block type saath aa sakta hai).
+- **`layout.span`** — 1, 2, ya 3 (3-column grid mein kitni columns lega).
+
+Ye sab compute karta hai `layout/composeSections.js` — ek **pure function**, koi React/JSX nahi,
+isliye directly unit-test ho sakta hai (`composeSections.test.js`). `layout/gridEligibility.js`
+mein wahi purana heuristic hai (text/number/flag/chhota-object = grid-eligible) — jab koi block
+explicit `layout.group` nahi deta, to yehi heuristic fallback ki tarah use hota hai. Presentation
+side `components/StageSections.jsx` karta hai — sections ko `<section aria-label>` + `<h2>` ke
+saath render karta hai.
 
 ---
 
@@ -126,30 +168,39 @@ src/
 └── features/action-stories/
     ├── components/
     │   ├── Shell.jsx           Left sidebar (26 workflows ki list) + <Outlet/>. App ka "frame".
-    │   ├── StageRenderer.jsx   ⭐ MAIN ENGINE. Manifest ke blocks ko fixture data se render karta hai.
+    │   ├── StageRenderer.jsx   ⭐ MAIN ENGINE. Bind → validate → registry lookup → error-isolate.
+    │   ├── StageSections.jsx   Layout/sections ko actual DOM mein arrange karta hai (presentational only).
+    │   ├── AsyncState.jsx      Shared Loading/Error UI — har fetch karne wali jagah yehi use karti hai.
     │   ├── StageActionBar.jsx  Neeche ka Approve/Start button.
     │   └── StepTracker.jsx     Upar ki Reason→Analyze→Decide→Execute pill strip.
+    ├── layout/
+    │   ├── composeSections.js  Pure function — blocks + optional sections/layout metadata →
+    │   │                        {sections, rows} structure. Koi JSX nahi, isliye unit-testable.
+    │   └── gridEligibility.js  Purana isGridEligible heuristic — jab explicit layout.group na ho,
+    │                            tab fallback ki tarah use hota hai.
     ├── pages/
     │   ├── ActionStoriesHome.jsx  `/action-stories` khulte hi pehle workflow ke pehle stage
     │                               pe redirect kar deta hai.
     │   └── StagePage.jsx       URL se code+stageKey padhta hai, manifest+fixture fetch karta
     │                            hai, aur Shell/StageRenderer/StageActionBar ko jodta hai.
     ├── manifests/
-    │   ├── <CODE>.json (×26)   Har workflow ke liye: [{stageKey, blocks:[{slotName, blockType,
-    │                            binding}]}]. "Is screen pe kya dikhega" — STRUCTURE.
+    │   ├── <CODE>.json (×26)   Har workflow ke liye: [{stageKey, sections?, blocks:[{slotName,
+    │                            blockType, binding, layout?, section?}]}]. `sections`/`layout`/
+    │                            `section` sab optional hain (section 3.5 dekho).
     │   ├── resolveBinding.js   "data.dialNote" jaisa string path leke fixture se value nikalta hai.
-    │   ├── blockTypes.js       9 block types ki definition + validator har ek ke liye.
+    │   ├── blockTypes.js       13 block types ki definition + validator har ek ke liye.
     │   ├── validateManifest.js Manifest file khud sahi shape mein hai ya nahi, check karta hai.
     │   └── REPORT.md           Bahut detail mein likha document — kaunsa field genuinely real
     │                            data se match karta hai, kaunsa sirf guess hai. Zaroor padhna
     │                            jab backend field-mapping karni ho.
-    ├── blocks/                 9 "dumb" presentational components (TextBlock, TableBlock,
-    │                            ItemQueueBlock, LabelValueListBlock, NumberBlock, FlagBlock,
-    │                            SeriesBlock, ObjectBlock, SliderBlock) — sirf render karte hain,
-    │                            koi API call nahi karte. Har ek `{ slotName, data }` leta hai.
+    ├── blocks/                 13 "dumb" presentational components (Text/Number/Flag/
+    │                            LabelValueList/Table/ItemQueue, 5 chart blocks — recharts se —
+    │                            BarChart/LineChart/ScatterChart/WaterfallChart/HeatmapGrid,
+    │                            Object, Slider) — sirf render karte hain, koi API call nahi karte.
+    │                            Har ek `{ slotName, data }` leta hai, ek BlockErrorBoundary ke andar.
     └── data/
         ├── index.json          Sab 26 workflows ki list: {code, name, stages: [...]}
-        └── raw/<CODE>/<stage>.json (×104)   Actual "API response" jaisa data — abhi local file.
+        └── raw/<CODE>/<stage>.json (×105)   Actual "API response" jaisa data — abhi local file.
 ```
 
 Extra (build-time, app ka part NAHI hai — `extraction/` folder):
@@ -170,24 +221,29 @@ karti hai — koi network call nahi ho raha. Ye file khud comment mein likhti ha
 ```
 
 Matlab: `getWorkflowIndex()` aur `getStageData(code, stageKey)` — sirf inn 2 functions ka andar
-ka code badalna hoga (axios/httpClient call se), signature same rahega, to koi aur file
-(`StagePage`, `Shell`, etc.) ko touch karne ki zarurat nahi. `INTEGRATION.md` mein exact "before
-vs after" code diya hua hai.
+ka code badalna hoga (`services/httpClient.js` — axios-based, timeout + retry-once + error
+taxonomy already ready — call karke), signature same rahega, to koi aur file (`StagePage`, `Shell`,
+etc.) ko touch karne ki zarurat nahi. `INTEGRATION.md` mein exact "before vs after" code diya hua
+hai. Har failure ab `ActionStoriesError` (`services/actionStoriesErrors.js`) ban ke aata hai — ek
+safe `.userMessage` (UI dikhata hai) + raw `.message`/`.cause` (sirf console ke liye).
 
-⚠️ **Important gotcha (INTEGRATION.md se):** kuch field names jo abhi mockup-data mein hain
-(`execution_lane`, `guardrail_verdict`) waise hi naam se real backend mein bhi hain, lekin **matlab
-alag hai** — real data aane par ye galat cheez dikha sakte hain agar bina check kiye wire kar diya
-jaye. Backend connect karte waqt `INTEGRATION.md` ka table zaroor dekh lena.
+✅ **Field-collision fix ho chuka hai:** `execLabel`/`checks` ab `execution_lane`/`guardrail_verdict`
+naam se manifest mein nahi bindhte — `display_mode`/`guardrail_checks` naam use hote hain, taaki
+real backend ke `execution_lane`/`guardrail_verdict` (jo poori tarah alag cheez hain — dekho
+`INTEGRATION.md` §4 aur `services/proposalFieldMapping.js`) galti se overwrite na ho jayen.
 
 ---
 
 ## 6. Abhi kya incomplete/decorative hai (taaki confuse na ho)
 
-- **Approve/Start button** — sirf UI hai, koi backend save nahi hoti (refresh karoge to reset ho
-  jayega). Real mutation store mein `TODO(action-stories-mutations)` comment ke saath likha hai.
+- **Approve/Start button** — ab ek real mutation hai (`services/actionStoriesMutations.js` +
+  `useActionStoriesStore.js`) — click → loading → confirm/fail → `localStorage` mein persist
+  (refresh karoge to bhi state sahi dikhega). Real backend abhi bhi nahi hai (koi live endpoint
+  nahi) — jab real `POST /v1/action-stories/:code/:stageKey/confirm` ban jaye, sirf
+  `confirmStageMutation`'s andar ka code badalna hoga, baaki sab same rahega.
 - **Slider block** — abhi kisi bhi screen mein use nahi ho raha, code ready hai future ke liye.
-- **`recharts` library** — installed hai but abhi use nahi ho rahi; `SeriesBlock.jsx` chart ko
-  raw SVG path se dikhata hai, real chart library baad mein wire hogi.
+- `recharts` library ab **use ho rahi hai** — 5 chart blocks (bar/line/scatter/waterfall/heatmap)
+  isi se bane hain. Ye ab stale nahi hai.
 
 ---
 

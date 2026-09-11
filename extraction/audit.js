@@ -75,7 +75,7 @@ function isPureStyleValue(v) {
 
 const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/
 const DECORATIVE_EXACT_KEYS = new Set([
-  'icon', 'tone', 'tint', 'bg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow',
+  'icon', 'tone', 'tint', 'bg', 'fg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow', 'weight',
 ])
 function isDecorativeKey(key) {
   return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key)
@@ -99,32 +99,11 @@ const OB_STYLE_VALUE_RE = /^(var\(--|#[0-9a-f]{3,8}$|rgba?\(|color-mix\(|linear-
 function obIsStyleString(v) {
   return typeof v === 'string' && OB_STYLE_VALUE_RE.test(v)
 }
-function obIsRenderablePrimitive(v) {
-  return (typeof v === 'string' && !obIsStyleString(v)) || typeof v === 'number' || typeof v === 'boolean'
-}
-function obIsReactDescriptor(v) {
-  return v !== null && typeof v === 'object' && 'type' in v && typeof v.props === 'object'
-}
-// Mirrors ObjectBlock.jsx's renderEntryValue: primitives, JSX descriptors, arrays (joined), and
-// one level of nested plain object (joined) all render as text; anything that still reduces to
-// '' after that is genuinely dropped.
+// Mirrors ObjectBlock.jsx's renderEntryValue exactly: a bare style-string value renders nothing,
+// everything else (including arbitrarily-nested objects/arrays) goes through flattenNestedEntryPreview.
 function objectRenderText(v) {
-  if (obIsRenderablePrimitive(v)) return String(v)
-  if (obIsReactDescriptor(v)) return flattenJsxPreview(v)
-  // Compact per-item summary (flattenNestedEntry), not a full field-by-field dump — mirrors
-  // ObjectBlock.jsx's own fix for this (a 9-item chart-bar array would otherwise turn into an
-  // unreadable wall of pixel-position numbers instead of "PRICE $24.00, COGS −$10.56, …").
-  if (Array.isArray(v)) return v.map(flattenNestedEntryPreview).filter(Boolean).join(', ')
-  if (isPlainObject(v)) {
-    return Object.entries(v)
-      .map(([k, sub]) => {
-        const text = objectRenderText(sub)
-        return text ? `${k}: ${text}` : ''
-      })
-      .filter(Boolean)
-      .join(', ')
-  }
-  return ''
+  if (obIsStyleString(v)) return ''
+  return flattenNestedEntryPreview(v)
 }
 
 // The 5 chart blockTypes classifyBlocks.js can produce for an array-of-objects value.
@@ -163,20 +142,41 @@ function flattenJsxPreview(value) {
   return ''
 }
 
-// Mirrors blocks/nestedEntryText.js's flattenNestedEntry — the compact "label (+ value)" /
-// "field: before → after" per-item summary ItemQueueBlock's sub-lists, LabelValueListBlock's
-// extra entries, and ObjectBlock's array entries all use, instead of a full field-by-field dump.
-function flattenNestedEntryPreview(entry) {
+// Mirrors blocks/nestedEntryText.js's flattenNestedEntry exactly — the compact "label (+ value)" /
+// "field: before → after" / recursive "key: value, key: value" per-item summary ItemQueueBlock's
+// sub-lists, LabelValueListBlock's extra entries, and ObjectBlock's entries all use, instead of a
+// full field-by-field dump or (the bug this mirrors the fix for) silently dropping anything past
+// one level of nesting. See nestedEntryText.js's own doc comment for the full recognized-shape list.
+const NESTED_MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount']
+const NESTED_MAX_DEPTH = 6
+function flattenNestedEntryPreview(entry, depth = 0) {
   if (entry === null || entry === undefined) return ''
   if (typeof entry !== 'object') return flattenJsxPreview(entry)
+  if (depth >= NESTED_MAX_DEPTH) return '…'
+  if ('type' in entry && isPlainObject(entry.props)) return flattenJsxPreview(entry)
+  if (Array.isArray(entry)) {
+    return entry.map((item) => flattenNestedEntryPreview(item, depth + 1)).filter(Boolean).join(', ')
+  }
   if ('field' in entry && 'before' in entry && 'after' in entry) {
     return `${flattenJsxPreview(entry.field)}: ${flattenJsxPreview(entry.before)} → ${flattenJsxPreview(entry.after)}`
   }
   if ('label' in entry) {
-    const v = entry.value !== undefined ? ` ${flattenJsxPreview(entry.value)}` : ''
+    const v = entry.value !== undefined ? ` ${flattenNestedEntryPreview(entry.value, depth + 1)}`.trimEnd() : ''
     return `${flattenJsxPreview(entry.label)}${v}`
   }
-  return flattenJsxPreview(entry)
+  const magnitudeKey = NESTED_MAGNITUDE_KEYS.find((k) => entry[k] !== undefined)
+  const hasNestedSibling = Object.entries(entry).some(
+    ([k, v]) => k !== magnitudeKey && !isDecorativeKey(k) && v !== null && typeof v === 'object',
+  )
+  if (magnitudeKey !== undefined && !hasNestedSibling) return flattenJsxPreview(entry[magnitudeKey])
+  return Object.entries(entry)
+    .filter(([k]) => !isDecorativeKey(k))
+    .map(([k, sub]) => {
+      const text = flattenNestedEntryPreview(sub, depth + 1)
+      return text ? `${k}: ${text}` : ''
+    })
+    .filter(Boolean)
+    .join(', ')
 }
 
 // ============================================================================================
@@ -370,8 +370,8 @@ function runAuditA3(stages) {
           for (const [k, v] of Object.entries(item)) {
             if (used.has(k) || isDecorativeKey(k)) continue // extra-fields pass excludes these too
             if (v === null || v === undefined || v === '' || Array.isArray(v)) continue // nothing to show either way (empty string: correctly invisible, same as EmptyState; non-empty array: rendered as a nested sub-list)
-            if (flattenJsxPreview(v)) continue // extra-fields pass DOES render this — not dropped
-            droppedKeys.add(k) // only a value that still flattens to '' (e.g. a nested plain object) is genuinely still dropped
+            if (flattenNestedEntryPreview(v)) continue // extra-fields pass (now recursive) DOES render this — not dropped
+            droppedKeys.add(k) // only a value that still flattens to '' is genuinely still dropped
           }
         }
         if (droppedKeys.size > 0) {
@@ -391,10 +391,9 @@ function runAuditA3(stages) {
           for (const [k, v] of Object.entries(item)) {
             if (KNOWN.has(k) || isDecorativeKey(k)) continue
             if (v === null || v === undefined || v === '') continue // nothing to show — correctly invisible, same as EmptyState
-            // extra-entries pass (LabelValueListBlock.jsx's entryText) renders anything flattenable
-            // — including an array, via a per-item summary rather than flattenDisplayValue alone.
-            const text = Array.isArray(v) ? v.map(flattenNestedEntryPreview).filter(Boolean).join(', ') : flattenJsxPreview(v)
-            if (text) continue // renders fine — not dropped
+            // extra-entries pass (LabelValueListBlock.jsx) now routes every value — scalar, array,
+            // or nested object — through the same recursive flattenNestedEntry.
+            if (flattenNestedEntryPreview(v)) continue // renders fine — not dropped
             dropped.add(k) // only a value that still produces no text is genuinely still dropped
           }
         }

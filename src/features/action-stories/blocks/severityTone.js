@@ -9,17 +9,24 @@
  * "critical"/"blocking". Both vocabularies are mapped here so a real severity from either scheme
  * gets a real color; anything unrecognized falls back to the neutral "watch" tone rather than
  * guessing.
+ *
+ * Uses the design system's own `rf-status-*` tokens (`tokens.css`), not hardcoded Tailwind
+ * palette literals — previously this was the one place in the codebase with a second, parallel,
+ * non-token-based status-color system (`bg-rose-500` etc.) sitting alongside the real one every
+ * other status/severity indicator in the app is meant to share (AUDIT_REPORT.md §17). `watch`, the
+ * neutral/default tone, has no dedicated status token (nothing is "wrong" about it) — it reads
+ * from the same border/text-tertiary tokens every other neutral UI element already uses.
  */
 const SEVERITY_TONE = {
-  crit: { dot: 'bg-rose-500', text: 'text-rose-700 dark:text-rose-400' },
-  critical: { dot: 'bg-rose-500', text: 'text-rose-700 dark:text-rose-400' },
-  blocking: { dot: 'bg-rose-500', text: 'text-rose-700 dark:text-rose-400' },
-  high: { dot: 'bg-rose-500', text: 'text-rose-700 dark:text-rose-400' },
-  act: { dot: 'bg-amber-500', text: 'text-amber-700 dark:text-amber-400' },
-  medium: { dot: 'bg-amber-500', text: 'text-amber-700 dark:text-amber-400' },
-  opp: { dot: 'bg-emerald-500', text: 'text-emerald-700 dark:text-emerald-400' },
-  low: { dot: 'bg-emerald-500', text: 'text-emerald-700 dark:text-emerald-400' },
-  watch: { dot: 'bg-slate-300 dark:bg-slate-600', text: 'text-slate-600 dark:text-slate-400' },
+  crit: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
+  critical: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
+  blocking: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
+  high: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
+  act: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning' },
+  medium: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning' },
+  opp: { dot: 'bg-rf-status-success', text: 'text-rf-status-success' },
+  low: { dot: 'bg-rf-status-success', text: 'text-rf-status-success' },
+  watch: { dot: 'bg-rf-border-strong', text: 'text-rf-text-tertiary' },
 };
 
 const DEFAULT_TONE = SEVERITY_TONE.watch;

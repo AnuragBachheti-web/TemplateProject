@@ -2,6 +2,7 @@
   {
     "code": "S9.11",
     "name": "Repricing",
+    "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,13 +11,13 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
       {
         "slotName": "targets",
-        "blockType": "barChart",
+        "blockType": "labelValueList",
         "binding": "data.targets"
       },
       {
@@ -49,10 +50,11 @@
   {
     "code": "S9.11",
     "name": "Repricing",
+    "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
     "stageKey": "analyze",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -96,204 +98,303 @@
   {
     "code": "S9.11",
     "name": "Repricing",
+    "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.heroValue"
+        "binding": "data.heroValue",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "itemQueue",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.approveLabel"
+        "binding": "data.approveLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "confBadge",
         "blockType": "text",
-        "binding": "data.confBadge"
+        "binding": "data.confBadge",
+        "section": "summary"
       },
       {
         "slotName": "tradeoff",
         "blockType": "text",
-        "binding": "data.tradeoff"
+        "binding": "data.tradeoff",
+        "section": "summary"
       },
       {
         "slotName": "tol",
         "blockType": "number",
-        "binding": "data.tol"
+        "binding": "data.tol",
+        "section": "summary"
       },
       {
         "slotName": "tolLabel",
         "blockType": "text",
-        "binding": "data.tolLabel"
+        "binding": "data.tolLabel",
+        "section": "summary"
       },
       {
         "slotName": "liveStats",
         "blockType": "labelValueList",
-        "binding": "data.liveStats"
+        "binding": "data.liveStats",
+        "section": "details"
       },
       {
         "slotName": "slateMeta",
         "blockType": "text",
-        "binding": "data.slateMeta"
+        "binding": "data.slateMeta",
+        "section": "summary"
       },
       {
         "slotName": "restNote",
         "blockType": "text",
-        "binding": "data.restNote"
+        "binding": "data.restNote",
+        "section": "summary"
       },
       {
         "slotName": "slate",
         "blockType": "barChart",
-        "binding": "data.slate"
+        "binding": "data.slate",
+        "section": "analysis"
       },
       {
         "slotName": "zoneMeta",
         "blockType": "text",
-        "binding": "data.zoneMeta"
+        "binding": "data.zoneMeta",
+        "section": "summary"
       },
       {
         "slotName": "actions",
         "blockType": "table",
-        "binding": "data.actions"
+        "binding": "data.actions",
+        "section": "details"
       },
       {
         "slotName": "summary",
         "blockType": "labelValueList",
-        "binding": "data.summary"
+        "binding": "data.summary",
+        "section": "details"
       },
       {
         "slotName": "ladder",
         "blockType": "barChart",
-        "binding": "data.ladder"
+        "binding": "data.ladder",
+        "section": "analysis"
       },
       {
         "slotName": "testCopy",
         "blockType": "text",
-        "binding": "data.testCopy"
+        "binding": "data.testCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.11",
     "name": "Repricing",
+    "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.headline"
+        "binding": "data.headline",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headMeta",
         "blockType": "text",
-        "binding": "data.headMeta"
+        "binding": "data.headMeta",
+        "section": "summary"
       },
       {
         "slotName": "writtenCount",
         "blockType": "text",
-        "binding": "data.writtenCount"
+        "binding": "data.writtenCount",
+        "section": "summary"
       },
       {
         "slotName": "armState",
         "blockType": "text",
-        "binding": "data.armState"
+        "binding": "data.armState",
+        "section": "summary"
       },
       {
         "slotName": "stages",
         "blockType": "itemQueue",
-        "binding": "data.stages"
+        "binding": "data.stages",
+        "section": "details"
       },
       {
         "slotName": "guardState",
         "blockType": "text",
-        "binding": "data.guardState"
+        "binding": "data.guardState",
+        "section": "summary"
       },
       {
         "slotName": "guardCopy",
         "blockType": "text",
-        "binding": "data.guardCopy"
+        "binding": "data.guardCopy",
+        "section": "summary"
       },
       {
         "slotName": "guardParts",
         "blockType": "labelValueList",
-        "binding": "data.guardParts"
+        "binding": "data.guardParts",
+        "section": "details"
       },
       {
         "slotName": "rbLabel",
         "blockType": "text",
-        "binding": "data.rbLabel"
+        "binding": "data.rbLabel",
+        "section": "summary"
       },
       {
         "slotName": "rbHint",
         "blockType": "text",
-        "binding": "data.rbHint"
+        "binding": "data.rbHint",
+        "section": "summary"
       },
       {
         "slotName": "pushCopy",
         "blockType": "text",
-        "binding": "data.pushCopy"
+        "binding": "data.pushCopy",
+        "section": "summary"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
         "blockType": "barChart",
-        "binding": "data.monitors"
+        "binding": "data.monitors",
+        "section": "analysis"
       },
       {
         "slotName": "ledgerCopy",
         "blockType": "text",
-        "binding": "data.ledgerCopy"
+        "binding": "data.ledgerCopy",
+        "section": "summary"
       },
       {
         "slotName": "chain",
         "blockType": "labelValueList",
-        "binding": "data.chain"
+        "binding": "data.chain",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerPushLabel",
         "blockType": "text",
-        "binding": "data.footerPushLabel"
+        "binding": "data.footerPushLabel",
+        "section": "summary"
       }
     ]
   }

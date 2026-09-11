@@ -1,6 +1,6 @@
 import { humanizeSlotName } from './humanizeSlotName';
-import { flattenDisplayValue } from './flattenDisplayValue';
 import { flattenNestedEntry } from './nestedEntryText';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
 // A style-only string carries no information worth a row of its own — a lone descriptor object
@@ -15,49 +15,26 @@ function isStyleString(v) {
   return typeof v === 'string' && STYLE_VALUE_RE.test(v);
 }
 
-function isRenderablePrimitive(v) {
-  return (typeof v === 'string' && !isStyleString(v)) || typeof v === 'number' || typeof v === 'boolean';
-}
-
-function isReactDescriptor(v) {
-  return v !== null && typeof v === 'object' && 'type' in v && typeof v.props === 'object';
-}
-
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
 }
 
 /**
- * Turns any value into displayable text for one dt/dd row, instead of ObjectBlock only accepting
- * primitives/JSX-descriptors and dropping everything else (a nested plain object, an array) with
- * no visual trace — see extraction/audit.js's A.3 "classified-but-incomplete" check.
+ * Turns any value into displayable text for one dt/dd row. A bare style-string value (a color, a
+ * CSS keyword) is deliberately excluded here — ObjectBlock is *correct* to show nothing for it,
+ * same as any other block treats a decorative-only field — everything else, including a nested
+ * plain object or array at any depth, is handed to flattenNestedEntry (shared with
+ * LabelValueListBlock/ItemQueueBlock — see its own doc comment for exactly what it recovers and
+ * the previous one-level limit this replaces; extraction/audit.js's A.3 "classified-but-incomplete"
+ * check is what originally found this gap).
  */
 function renderEntryValue(v) {
-  if (isRenderablePrimitive(v)) return flattenDisplayValue(v);
-  if (isReactDescriptor(v)) return flattenDisplayValue(v);
-  if (Array.isArray(v)) {
-    // A per-item summary (flattenNestedEntry — the same "label + value" style summarizer
-    // ItemQueueBlock's own sub-lists use), not a recursive dump of every field of every item: a
-    // 9-bar chart's own pixel-position bookkeeping (x/y/w/h/cx/nx/linkY/...) would otherwise turn
-    // one dt/dd row into an unreadable wall of numbers instead of "PRICE $24.00, COGS −$10.56, …".
-    return v.map(flattenNestedEntry).filter(Boolean).join(', ');
-  }
-  if (isPlainObject(v)) {
-    // One level of nesting only — a lone descriptor's own descriptor. Anything deeper than this
-    // isn't worth guessing a layout for inline.
-    const joined = Object.entries(v)
-      .map(([k, sub]) => {
-        const text = renderEntryValue(sub);
-        return text ? `${k}: ${text}` : '';
-      })
-      .filter(Boolean)
-      .join(', ');
-    return joined;
-  }
-  return '';
+  if (isStyleString(v)) return '';
+  return flattenNestedEntry(v);
 }
 
-export default function ObjectBlock({ slotName, data }) {
+/** @param {boolean} [compact] - see TextBlock.jsx's own doc comment for what this means and why. */
+export default function ObjectBlock({ slotName, data, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -73,19 +50,30 @@ export default function ObjectBlock({ slotName, data }) {
     return <EmptyState slotName={slotName} message="No details." />;
   }
 
+  const rows = (
+    <dl className="flex flex-col gap-1">
+      {entries.map(([key, value]) => (
+        <div key={key} className="flex items-center justify-between gap-3 text-[12.5px]">
+          <dt className="text-rf-text-secondary">{humanizeSlotName(key)}</dt>
+          <dd className="truncate font-medium text-rf-text-primary">{value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+
+  if (compact) {
+    return (
+      <div className="py-1.5">
+        <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{humanizeSlotName(slotName)}</p>
+        {rows}
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-3">
-      <p className="mb-2 text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
-        {humanizeSlotName(slotName)}
-      </p>
-      <dl className="flex flex-col gap-1">
-        {entries.map(([key, value]) => (
-          <div key={key} className="flex items-center justify-between gap-3 text-[12.5px]">
-            <dt className="text-rf-text-secondary">{humanizeSlotName(key)}</dt>
-            <dd className="truncate font-medium text-rf-text-primary">{value}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
+    <BlockCard>
+      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      {rows}
+    </BlockCard>
   );
 }

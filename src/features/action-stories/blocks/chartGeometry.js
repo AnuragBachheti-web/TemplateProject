@@ -7,16 +7,32 @@ export function toNumber(v) {
 }
 
 /**
+ * Canonical coordinate convention for this module, shared by every chart block that plots a raw
+ * SVG-space coordinate straight from the mockup's own hand-drawn layout (a path's `y`, a scatter
+ * point's `y`/`cy`): SVG/screen space grows DOWNWARD (y=0 at the top), while Recharts' Cartesian
+ * plane — like every other chart axis — grows UPWARD (y=0 at the bottom). Every such raw y must be
+ * negated exactly once, at the point it enters a chart block, so a rising trend in the source
+ * artwork plots as rising here too. This is the ONE place that conversion is defined; every
+ * consumer (LineChartBlock via parseSvgPathPoints, ScatterChartBlock directly) calls this instead
+ * of re-deriving its own sign — the previous divergence (LineChartBlock negated, ScatterChartBlock
+ * didn't) is exactly what made every raw-coordinate scatter chart render upside down relative to
+ * its design (confirmed against S9.1/analyze.points' real cy values, AUDIT_REPORT.md §7.3).
+ */
+export function svgYToPlotY(y) {
+  return -y;
+}
+
+/**
  * The mockups' own sparkline paths are plain "M x0 y0 L x1 y1 L x2 y2 …" strings — already real
  * (x, y) data, just wrapped for an SVG this app doesn't draw by hand. Parsed back into points
- * instead of drawn as a raw <path>, so it becomes a real, hoverable chart. SVG y grows downward,
- * so y is flipped here — otherwise a rising trend would visually plot as falling.
+ * instead of drawn as a raw <path>, so it becomes a real, hoverable chart. See svgYToPlotY above
+ * for why y is flipped here — otherwise a rising trend would visually plot as falling.
  */
 export function parseSvgPathPoints(path) {
   const segments = path.match(/[ML]\s*-?[\d.]+\s+-?[\d.]+/gi) || [];
   return segments.map((seg, i) => {
     const [x, y] = seg.slice(1).trim().split(/\s+/).map(Number);
-    return { i, x, y: -y };
+    return { i, x, y: svgYToPlotY(y) };
   });
 }
 

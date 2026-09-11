@@ -2,6 +2,7 @@
   {
     "code": "S9.6",
     "name": "Listings",
+    "headline": "Listing audit — 18 listings below CVR benchmark",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,7 +11,7 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -44,10 +45,11 @@
   {
     "code": "S9.6",
     "name": "Listings",
+    "headline": "Listing audit — 18 listings below CVR benchmark",
     "stageKey": "analyze",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -81,174 +83,242 @@
   {
     "code": "S9.6",
     "name": "Listings",
+    "headline": "Listing audit — 18 listings below CVR benchmark",
     "stageKey": "decide",
-    "blocks": [
+    "sections": [
       {
-        "slotName": "execution_lane",
-        "blockType": "text",
-        "binding": "data.execLabel"
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
       },
       {
-        "slotName": "guardrail_verdict",
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
+    "blocks": [
+      {
+        "slotName": "display_mode",
+        "blockType": "text",
+        "binding": "data.execLabel",
+        "section": "summary"
+      },
+      {
+        "slotName": "guardrail_checks",
         "blockType": "itemQueue",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.approveLabel"
+        "binding": "data.approveLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "modes",
         "blockType": "labelValueList",
-        "binding": "data.modes"
+        "binding": "data.modes",
+        "section": "details"
       },
       {
         "slotName": "totals",
         "blockType": "labelValueList",
-        "binding": "data.totals"
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "modeNote",
         "blockType": "text",
-        "binding": "data.modeNote"
+        "binding": "data.modeNote",
+        "section": "summary"
       },
       {
         "slotName": "fixMeta",
         "blockType": "text",
-        "binding": "data.fixMeta"
+        "binding": "data.fixMeta",
+        "section": "summary"
       },
       {
         "slotName": "fixes",
         "blockType": "table",
-        "binding": "data.fixes"
+        "binding": "data.fixes",
+        "section": "details"
       },
       {
         "slotName": "focus",
         "blockType": "object",
-        "binding": "data.focus"
+        "binding": "data.focus",
+        "section": "details"
       },
       {
         "slotName": "sequence",
         "blockType": "labelValueList",
-        "binding": "data.sequence"
+        "binding": "data.sequence",
+        "section": "details"
       },
       {
         "slotName": "expCopy",
         "blockType": "text",
-        "binding": "data.expCopy"
+        "binding": "data.expCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S9.6",
     "name": "Listings",
+    "headline": "Listing audit — 18 listings below CVR benchmark",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headMeta",
         "blockType": "text",
-        "binding": "data.headMeta"
+        "binding": "data.headMeta",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "snapLabel",
         "blockType": "text",
-        "binding": "data.snapLabel"
+        "binding": "data.snapLabel",
+        "section": "summary"
       },
       {
         "slotName": "tabs",
         "blockType": "labelValueList",
-        "binding": "data.tabs"
+        "binding": "data.tabs",
+        "section": "details"
       },
       {
         "slotName": "diff",
         "blockType": "object",
-        "binding": "data.diff"
+        "binding": "data.diff",
+        "section": "details"
       },
       {
         "slotName": "offerRows",
         "blockType": "labelValueList",
-        "binding": "data.offerRows"
+        "binding": "data.offerRows",
+        "section": "details"
       },
       {
         "slotName": "offerState",
         "blockType": "text",
-        "binding": "data.offerState"
+        "binding": "data.offerState",
+        "section": "summary"
       },
       {
         "slotName": "offerLabel",
         "blockType": "text",
-        "binding": "data.offerLabel"
+        "binding": "data.offerLabel",
+        "section": "summary"
       },
       {
         "slotName": "snapState",
         "blockType": "text",
-        "binding": "data.snapState"
+        "binding": "data.snapState",
+        "section": "summary"
       },
       {
         "slotName": "snapCopy",
         "blockType": "text",
-        "binding": "data.snapCopy"
+        "binding": "data.snapCopy",
+        "section": "summary"
       },
       {
         "slotName": "snapRows",
         "blockType": "labelValueList",
-        "binding": "data.snapRows"
+        "binding": "data.snapRows",
+        "section": "details"
       },
       {
         "slotName": "queue",
         "blockType": "labelValueList",
-        "binding": "data.queue"
+        "binding": "data.queue",
+        "section": "details"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
-        "blockType": "labelValueList",
-        "binding": "data.monitors"
+        "blockType": "table",
+        "binding": "data.monitors",
+        "section": "details"
       },
       {
         "slotName": "ledgerCopy",
         "blockType": "text",
-        "binding": "data.ledgerCopy"
+        "binding": "data.ledgerCopy",
+        "section": "summary"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerPushLabel",
         "blockType": "text",
-        "binding": "data.footerPushLabel"
+        "binding": "data.footerPushLabel",
+        "section": "summary"
       }
     ]
   }

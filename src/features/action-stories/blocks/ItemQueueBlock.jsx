@@ -2,7 +2,9 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { flattenNestedEntry } from './nestedEntryText';
 import { severityTone } from './severityTone';
+import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { isDecorativeKey } from './decorativeKeys';
 
 // Candidate field names an item might carry each concept under — kept in sync with (but
 // independently of) extraction/classifyBlocks.js's ITEM_LEVEL_CANDIDATES; that module is
@@ -11,6 +13,10 @@ import { EmptyState, ErrorState } from './BlockStates';
 // e.g. S10.1/execute.history, S9.13/reason.trigger) are last-resort headlines, tried only after
 // the strong identity fields — better than falling all the way through to a bare "Item N".
 const HEADLINE_KEYS = ['title', 'name', 'label', 'product', 'theme', 'verdict', 'lens', 'term', 'date', 'when'];
+// 'meta' joins this list (RENDERED_UI_FORENSIC_AUDIT.md §3/§13): confirmed real descriptive text
+// on destination cards ("12 exit SKUs · $27K at cost · 3 recovery cards") and guard rows ("none
+// yet · guard is not armed") — previously fell through to a plain "Meta: ..." extra-field line
+// despite being exactly the kind of prose this list already exists to recognize.
 const DETAIL_KEYS = [
   'note',
   'detail',
@@ -24,22 +30,11 @@ const DETAIL_KEYS = [
   'sub',
   'what',
   'definition',
+  'meta',
 ];
 const IDENTIFIER_KEYS = ['sku', 'id', 'caseId', 'ref'];
 const STATE_KEYS = ['status', 'state'];
 const SEVERITY_KEYS = ['severity'];
-
-// Same rule extraction/classifyBlocks.js uses to decide a key is styling, not content — kept as
-// its own local copy (this is a runtime component; that module is generation-only tooling, never
-// imported here). Without this, "extra fields" below would render raw color/icon keys like `hue`
-// or `icon` as if they were real data.
-const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/;
-const DECORATIVE_EXACT_KEYS = new Set([
-  'icon', 'tone', 'tint', 'bg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow',
-]);
-function isDecorativeKey(key) {
-  return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key);
-}
 
 function pickKey(item, keys) {
   return keys.find((key) => item[key] !== undefined && item[key] !== null);
@@ -65,18 +60,21 @@ function findNestedLists(item, usedKeys) {
 /**
  * Every field the headline/detail/identifier/state/severity picks and the nested-list scan above
  * didn't already consume — a second metric, a formatted figure, a status badge's own display
- * value — used to just vanish with no visual trace (see extraction/audit.js's A.3
- * "classified-but-incomplete" check; this is exactly what broke S9.1/analyze's `rows`, where
- * `role`/`vel`/`cm`/`turns`/`gmroi`/`cpw` all disappeared, leaving only a bare product name).
- * Rendered as a compact "extra fields" line rather than dropped. Arrays are skipped here — an
- * empty one has nothing to show, and a non-empty one is already covered by findNestedLists above.
+ * value, or (the gap this fixes) a nested plain object (e.g. S9.6/decide.focus's `before`/`after`,
+ * S10.1/analyze.drill's own descriptor) — used to just vanish with no visual trace (see
+ * extraction/audit.js's A.3 "classified-but-incomplete" check; this is exactly what broke
+ * S9.1/analyze's `rows`, where `role`/`vel`/`cm`/`turns`/`gmroi`/`cpw` all disappeared, leaving
+ * only a bare product name). Rendered as a compact "extra fields" line rather than dropped. Arrays
+ * are skipped here — an empty one has nothing to show, and a non-empty one is already covered by
+ * findNestedLists above; a nested *object* has no such existing coverage, so it goes through
+ * flattenNestedEntry here instead of being silently excluded.
  */
 function findExtraFields(item, usedKeys) {
   const fields = [];
   for (const [key, value] of Object.entries(item)) {
     if (usedKeys.has(key) || isDecorativeKey(key)) continue;
     if (value === null || value === undefined || Array.isArray(value)) continue;
-    const text = flattenDisplayValue(value);
+    const text = flattenNestedEntry(value);
     if (!text) continue;
     fields.push([key, text]);
   }
@@ -86,7 +84,7 @@ function findExtraFields(item, usedKeys) {
 function Item({ item, index }) {
   if (item === null || typeof item !== 'object') {
     return (
-      <li className="rounded-md border border-rf-border-subtle px-3 py-2 text-[12.5px] text-rf-text-primary">
+      <li className="rounded-xl border border-rf-border-subtle px-3 py-2 text-[12.5px] text-rf-text-primary">
         {flattenDisplayValue(item)}
       </li>
     );
@@ -110,7 +108,7 @@ function Item({ item, index }) {
   const extraFields = findExtraFields(item, usedKeys);
 
   return (
-    <li className="relative overflow-hidden rounded-md border border-rf-border-subtle bg-rf-surface-raised py-2 pl-4 pr-3">
+    <li className="relative overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised py-2 pl-4 pr-3">
       {tone && <span className={`absolute inset-y-0 left-0 w-1 ${tone.dot}`} />}
       <div className="flex items-center justify-between gap-2">
         <p className="truncate text-[12.5px] font-semibold text-rf-text-primary">{headline}</p>
@@ -151,7 +149,105 @@ function Item({ item, index }) {
   );
 }
 
-export default function ItemQueueBlock({ slotName, data }) {
+// A DECORATIVE-value color token (`var(--mod-discover)`, `#3b82f6`, ...) on an otherwise-plain item
+// is a real, meaningful signal even though it isn't "content" — it's the same per-item color
+// coding a chart/legend uses elsewhere for this exact data (e.g. S9.1/analyze.roles' `hue`, which
+// colors that same role's scatter-plot cluster). Used only for SimpleChipList's dot below; never
+// promoted into a text field anywhere else.
+const COLOR_KEY_CANDIDATES = ['hue', 'tint', 'bg', 'fill', 'dotBg'];
+const CSS_COLOR_RE = /^(var\(--|#[0-9a-f]{3,8}$|rgba?\(|hsla?\()/i;
+
+function colorOf(item) {
+  for (const key of COLOR_KEY_CANDIDATES) {
+    const v = item?.[key];
+    if (typeof v === 'string' && CSS_COLOR_RE.test(v.trim())) return v;
+  }
+  return null;
+}
+
+// Mirrors layout/blockSizing.js's own `itemTextWeight` (same definition, independently copied —
+// see this file's HEADLINE_KEYS comment for the convention: a block component never imports the
+// layout layer, it stays a self-contained, dumb presentational unit). Nested arrays/objects are
+// deliberately excluded from the weight — a rich `stats`/nested sub-list already reads fine inside
+// a half-width card; it's the FLAT fields that determine whether a card is short enough to sit
+// two-up.
+function itemWeight(item) {
+  if (item === null || typeof item !== 'object') return String(item ?? '').length;
+  let total = 0;
+  for (const [key, value] of Object.entries(item)) {
+    if (isDecorativeKey(key) || value === null || value === undefined) continue;
+    if (typeof value === 'string') total += value.length;
+    else if (typeof value === 'number' || typeof value === 'boolean') total += 4;
+  }
+  return total;
+}
+
+/**
+ * True when every item is short enough (headline + a field or two, or a compact nested stats
+ * list) that two full `<Item>` cards side by side still read comfortably — option-picker-shaped
+ * content (e.g. S9.9/analyze's `candidates`: a name, a recovery figure, a rec flag, a compact
+ * 4-value stats list) rather than a long narrative per row. Same weight threshold `blockSizing.js`
+ * uses to decide this block's own outer panel span, applied one level down to its own items —
+ * density-driven, never keyed on item count alone (RENDERED_UI_FORENSIC_AUDIT.md successor task's
+ * "itemQueue/option-card sizing" requirement).
+ */
+function isCompactCard(data) {
+  if (data.length < 2) return false;
+  const avg = data.reduce((sum, item) => sum + itemWeight(item), 0) / data.length;
+  return avg <= 80;
+}
+
+/**
+ * True when an item carries nothing but a headline (every other concept this component knows how
+ * to surface — detail/identifier/state/severity/nested lists/extra fields — is absent). A list
+ * where EVERY item is this simple (e.g. S9.1/analyze.roles: `{name, hue}, only a legend label and
+ * a color) reads far better as a dense, wrapped row of compact chips than as N full-width bordered
+ * `<li>` rows stacked vertically — the exact "six large stacked pills" density complaint this
+ * checks for. A list with even one richer item (a detail line, a status pill, ...) keeps the
+ * existing per-row treatment unchanged, since collapsing THAT down to a bare chip would drop real
+ * content, not just tighten layout.
+ */
+function isUniformlySimple(data) {
+  return data.every((item) => {
+    if (item === null || typeof item !== 'object') return true; // a bare scalar item is "simple" too
+    const headlineKey = pickKey(item, HEADLINE_KEYS);
+    const usedKeys = new Set([headlineKey].filter(Boolean));
+    return (
+      !pickKey(item, DETAIL_KEYS) &&
+      !pickKey(item, IDENTIFIER_KEYS) &&
+      !pickKey(item, STATE_KEYS) &&
+      !pickKey(item, SEVERITY_KEYS) &&
+      findNestedLists(item, usedKeys).length === 0 &&
+      findExtraFields(item, usedKeys).length === 0
+    );
+  });
+}
+
+function SimpleChipList({ data }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {data.map((item, i) => {
+        const color = colorOf(item);
+        const label = flattenDisplayValue(item?.[pickKey(item ?? {}, HEADLINE_KEYS)] ?? item) || `Item ${i + 1}`;
+        return (
+          <span
+            key={i}
+            className="inline-flex items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-canvas px-2.5 py-1 text-[11.5px] font-medium text-rf-text-primary"
+          >
+            {color && <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full" style={{ backgroundColor: color }} />}
+            {label}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+/**
+ * @param {boolean} [compact] - see LabelValueListBlock/TextBlock's own doc comments — bare content,
+ *   no own card, when already inside a shared panel.
+ */
+export default function ItemQueueBlock({ slotName, data, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -162,16 +258,33 @@ export default function ItemQueueBlock({ slotName, data }) {
     return <EmptyState slotName={slotName} message="Nothing in the queue." />;
   }
 
+  const body = isUniformlySimple(data) ? (
+    <SimpleChipList data={data} />
+  ) : (
+    <ul className={isCompactCard(data) ? 'grid grid-cols-1 gap-1.5 sm:grid-cols-2' : 'flex flex-col gap-1.5'}>
+      {data.map((item, i) => (
+        <Item key={i} item={item} index={i} />
+      ))}
+    </ul>
+  );
+
+  if (compact) {
+    return (
+      <div className="py-1.5">
+        <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
+          {humanizeSlotName(slotName)} · {data.length}
+        </p>
+        {body}
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-3">
-      <p className="mb-2 text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
+    <BlockCard>
+      <BlockTitle className="mb-2">
         {humanizeSlotName(slotName)} · {data.length}
-      </p>
-      <ul className="flex flex-col gap-1.5">
-        {data.map((item, i) => (
-          <Item key={i} item={item} index={i} />
-        ))}
-      </ul>
-    </div>
+      </BlockTitle>
+      {body}
+    </BlockCard>
   );
 }

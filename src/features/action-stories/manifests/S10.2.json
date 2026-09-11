@@ -2,453 +2,647 @@
   {
     "code": "S10.2",
     "name": "Working capital",
+    "headline": "Week-7 trough projects $31K below buffer",
     "stageKey": "reason",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "headline",
-        "blockType": "barChart",
-        "binding": "data.headline"
+        "blockType": "labelValueList",
+        "binding": "data.headline",
+        "section": "details"
       },
       {
         "slotName": "buffer",
         "blockType": "barChart",
-        "binding": "data.buffer"
+        "binding": "data.buffer",
+        "section": "analysis"
       },
       {
         "slotName": "credit",
         "blockType": "table",
-        "binding": "data.credit"
+        "binding": "data.credit",
+        "section": "details"
       },
       {
         "slotName": "terms",
-        "blockType": "labelValueList",
-        "binding": "data.terms"
+        "blockType": "table",
+        "binding": "data.terms",
+        "section": "details"
       },
       {
         "slotName": "locked",
         "blockType": "labelValueList",
-        "binding": "data.locked"
+        "binding": "data.locked",
+        "section": "details"
       },
       {
         "slotName": "chips",
         "blockType": "labelValueList",
-        "binding": "data.chips"
+        "binding": "data.chips",
+        "section": "details"
       },
       {
         "slotName": "trigger",
         "blockType": "itemQueue",
-        "binding": "data.trigger"
+        "binding": "data.trigger",
+        "section": "details"
       },
       {
         "slotName": "capital",
         "blockType": "barChart",
-        "binding": "data.capital"
+        "binding": "data.capital",
+        "section": "analysis"
       },
       {
         "slotName": "settlement",
         "blockType": "table",
-        "binding": "data.settlement"
+        "binding": "data.settlement",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S10.2",
     "name": "Working capital",
+    "headline": "Week-7 trough projects $31K below buffer",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "flowTicks",
         "blockType": "itemQueue",
-        "binding": "data.flowTicks"
+        "binding": "data.flowTicks",
+        "section": "details"
       },
       {
         "slotName": "netTicks",
         "blockType": "labelValueList",
-        "binding": "data.netTicks"
+        "binding": "data.netTicks",
+        "section": "details"
       },
       {
         "slotName": "weeks",
-        "blockType": "labelValueList",
-        "binding": "data.weeks"
+        "blockType": "table",
+        "binding": "data.weeks",
+        "section": "details"
       },
       {
         "slotName": "p10Band",
         "blockType": "text",
-        "binding": "data.p10Band"
+        "binding": "data.p10Band",
+        "section": "summary"
       },
       {
         "slotName": "p10Path",
         "blockType": "lineChart",
-        "binding": "data.p10Path"
+        "binding": "data.p10Path",
+        "section": "analysis"
       },
       {
         "slotName": "netPath",
         "blockType": "lineChart",
-        "binding": "data.netPath"
+        "binding": "data.netPath",
+        "section": "analysis"
       },
       {
         "slotName": "bufferY",
         "blockType": "text",
-        "binding": "data.bufferY"
+        "binding": "data.bufferY",
+        "section": "summary"
       },
       {
         "slotName": "troughX",
         "blockType": "text",
-        "binding": "data.troughX"
+        "binding": "data.troughX",
+        "section": "summary"
       },
       {
         "slotName": "troughW",
         "blockType": "text",
-        "binding": "data.troughW"
+        "binding": "data.troughW",
+        "section": "summary"
       },
       {
         "slotName": "gapArea",
         "blockType": "text",
-        "binding": "data.gapArea"
+        "binding": "data.gapArea",
+        "section": "summary"
       },
       {
         "slotName": "netDots",
         "blockType": "scatterChart",
-        "binding": "data.netDots"
+        "binding": "data.netDots",
+        "section": "analysis"
       },
       {
         "slotName": "sel",
         "blockType": "object",
-        "binding": "data.sel"
+        "binding": "data.sel",
+        "section": "details"
       },
       {
         "slotName": "ccc",
-        "blockType": "labelValueList",
-        "binding": "data.ccc"
+        "blockType": "table",
+        "binding": "data.ccc",
+        "section": "details"
       },
       {
         "slotName": "cccTrend",
         "blockType": "barChart",
-        "binding": "data.cccTrend"
+        "binding": "data.cccTrend",
+        "section": "analysis"
       },
       {
         "slotName": "roles",
         "blockType": "barChart",
-        "binding": "data.roles"
+        "binding": "data.roles",
+        "section": "analysis"
       },
       {
         "slotName": "anatomy",
         "blockType": "labelValueList",
-        "binding": "data.anatomy"
+        "binding": "data.anatomy",
+        "section": "details"
       },
       {
         "slotName": "scenarios",
         "blockType": "barChart",
-        "binding": "data.scenarios"
+        "binding": "data.scenarios",
+        "section": "analysis"
       }
     ]
   },
   {
     "code": "S10.2",
     "name": "Working capital",
+    "headline": "Week-7 trough projects $31K below buffer",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "rollup",
+        "title": "Totals",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "labelValueList",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_reason",
         "blockType": "text",
-        "binding": "data.blockReason"
+        "binding": "data.blockReason",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "heroTitle",
         "blockType": "text",
-        "binding": "data.heroTitle"
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "heroBody",
         "blockType": "text",
-        "binding": "data.heroBody"
+        "binding": "data.heroBody",
+        "section": "summary"
       },
       {
         "slotName": "gapNote",
         "blockType": "text",
-        "binding": "data.gapNote"
+        "binding": "data.gapNote",
+        "section": "summary"
       },
       {
         "slotName": "heroMetrics",
-        "blockType": "barChart",
-        "binding": "data.heroMetrics"
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "closedPct",
         "blockType": "text",
-        "binding": "data.closedPct"
+        "binding": "data.closedPct",
+        "section": "summary"
       },
       {
         "slotName": "needPct",
         "blockType": "text",
-        "binding": "data.needPct"
+        "binding": "data.needPct",
+        "section": "summary"
       },
       {
         "slotName": "closedValue",
         "blockType": "text",
-        "binding": "data.closedValue"
+        "binding": "data.closedValue",
+        "section": "summary"
       },
       {
         "slotName": "totalCost",
         "blockType": "text",
-        "binding": "data.totalCost"
+        "binding": "data.totalCost",
+        "section": "summary"
       },
       {
         "slotName": "levers",
         "blockType": "itemQueue",
-        "binding": "data.levers"
+        "binding": "data.levers",
+        "section": "details"
       },
       {
         "slotName": "bufferOpen",
         "blockType": "flag",
-        "binding": "data.bufferOpen"
+        "binding": "data.bufferOpen",
+        "section": "summary"
       },
       {
         "slotName": "bufferOpacity",
         "blockType": "number",
-        "binding": "data.bufferOpacity"
+        "binding": "data.bufferOpacity",
+        "section": "summary"
       },
       {
         "slotName": "bufferChanged",
         "blockType": "flag",
-        "binding": "data.bufferChanged"
+        "binding": "data.bufferChanged",
+        "section": "summary"
       },
       {
         "slotName": "bufferOptions",
         "blockType": "labelValueList",
-        "binding": "data.bufferOptions"
+        "binding": "data.bufferOptions",
+        "section": "details"
       },
       {
         "slotName": "bufferNote",
         "blockType": "text",
-        "binding": "data.bufferNote"
+        "binding": "data.bufferNote",
+        "section": "summary"
       },
       {
         "slotName": "totals",
         "blockType": "labelValueList",
-        "binding": "data.totals"
+        "binding": "data.totals",
+        "section": "rollup"
       },
       {
         "slotName": "afterState",
         "blockType": "text",
-        "binding": "data.afterState"
+        "binding": "data.afterState",
+        "section": "summary"
       },
       {
         "slotName": "afterRows",
         "blockType": "barChart",
-        "binding": "data.afterRows"
+        "binding": "data.afterRows",
+        "section": "analysis"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "routes",
         "blockType": "labelValueList",
-        "binding": "data.routes"
+        "binding": "data.routes",
+        "section": "details"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S10.2",
     "name": "Working capital",
+    "headline": "Week-7 trough projects $31K below buffer",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "planLine",
         "blockType": "text",
-        "binding": "data.planLine"
+        "binding": "data.planLine",
+        "section": "summary"
       },
       {
         "slotName": "pushedCount",
         "blockType": "text",
-        "binding": "data.pushedCount"
+        "binding": "data.pushedCount",
+        "section": "summary"
       },
       {
         "slotName": "runAllLabel",
         "blockType": "text",
-        "binding": "data.runAllLabel"
-      },
-      {
-        "slotName": "runAllIcon",
-        "blockType": "text",
-        "binding": "data.runAllIcon"
+        "binding": "data.runAllLabel",
+        "section": "summary"
       },
       {
         "slotName": "troughState",
         "blockType": "text",
-        "binding": "data.troughState"
+        "binding": "data.troughState",
+        "section": "summary"
       },
       {
         "slotName": "troughMetrics",
         "blockType": "barChart",
-        "binding": "data.troughMetrics"
+        "binding": "data.troughMetrics",
+        "section": "analysis"
       },
       {
         "slotName": "yTicks",
         "blockType": "labelValueList",
-        "binding": "data.yTicks"
+        "binding": "data.yTicks",
+        "section": "details"
       },
       {
         "slotName": "beforePath",
         "blockType": "lineChart",
-        "binding": "data.beforePath"
+        "binding": "data.beforePath",
+        "section": "analysis"
       },
       {
         "slotName": "afterPath",
         "blockType": "lineChart",
-        "binding": "data.afterPath"
+        "binding": "data.afterPath",
+        "section": "analysis"
       },
       {
         "slotName": "bufferY",
         "blockType": "text",
-        "binding": "data.bufferY"
+        "binding": "data.bufferY",
+        "section": "summary"
       },
       {
         "slotName": "troughCx",
         "blockType": "text",
-        "binding": "data.troughCx"
+        "binding": "data.troughCx",
+        "section": "summary"
       },
       {
         "slotName": "troughBeforeCy",
         "blockType": "text",
-        "binding": "data.troughBeforeCy"
+        "binding": "data.troughBeforeCy",
+        "section": "summary"
       },
       {
         "slotName": "troughAfterCy",
         "blockType": "text",
-        "binding": "data.troughAfterCy"
+        "binding": "data.troughAfterCy",
+        "section": "summary"
       },
       {
         "slotName": "stages",
         "blockType": "itemQueue",
-        "binding": "data.stages"
+        "binding": "data.stages",
+        "section": "details"
       },
       {
         "slotName": "monStatus",
         "blockType": "text",
-        "binding": "data.monStatus"
+        "binding": "data.monStatus",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
-        "blockType": "labelValueList",
-        "binding": "data.monitors"
+        "blockType": "table",
+        "binding": "data.monitors",
+        "section": "details"
       },
       {
         "slotName": "progressPct",
         "blockType": "text",
-        "binding": "data.progressPct"
+        "binding": "data.progressPct",
+        "section": "summary"
       },
       {
         "slotName": "progressRows",
         "blockType": "labelValueList",
-        "binding": "data.progressRows"
+        "binding": "data.progressRows",
+        "section": "details"
       },
       {
         "slotName": "watches",
         "blockType": "table",
-        "binding": "data.watches"
+        "binding": "data.watches",
+        "section": "details"
       },
       {
         "slotName": "armCopy",
         "blockType": "text",
-        "binding": "data.armCopy"
+        "binding": "data.armCopy",
+        "section": "summary"
       },
       {
         "slotName": "armBtnLabel",
         "blockType": "text",
-        "binding": "data.armBtnLabel"
-      },
-      {
-        "slotName": "armBtnIcon",
-        "blockType": "text",
-        "binding": "data.armBtnIcon"
+        "binding": "data.armBtnLabel",
+        "section": "summary"
       },
       {
         "slotName": "rollback",
         "blockType": "table",
-        "binding": "data.rollback"
+        "binding": "data.rollback",
+        "section": "details"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

@@ -2,6 +2,7 @@
   {
     "code": "S9.5",
     "name": "Competitive",
+    "headline": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
     "stageKey": "reason",
     "blocks": [
       {
@@ -10,7 +11,7 @@
         "binding": "data.dialNote"
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -44,10 +45,11 @@
   {
     "code": "S9.5",
     "name": "Competitive",
+    "headline": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
     "stageKey": "analyze",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -76,10 +78,11 @@
   {
     "code": "S9.5",
     "name": "Competitive",
+    "headline": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
     "stageKey": "decide",
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel"
       },
@@ -108,97 +111,133 @@
   {
     "code": "S9.5",
     "name": "Competitive",
+    "headline": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "pushMeta",
         "blockType": "text",
-        "binding": "data.pushMeta"
+        "binding": "data.pushMeta",
+        "section": "summary"
       },
       {
         "slotName": "pushes",
         "blockType": "barChart",
-        "binding": "data.pushes"
+        "binding": "data.pushes",
+        "section": "analysis"
       },
       {
         "slotName": "tasks",
-        "blockType": "labelValueList",
-        "binding": "data.tasks"
+        "blockType": "table",
+        "binding": "data.tasks",
+        "section": "details"
       },
       {
         "slotName": "cadences",
         "blockType": "labelValueList",
-        "binding": "data.cadences"
+        "binding": "data.cadences",
+        "section": "details"
       },
       {
         "slotName": "patState",
         "blockType": "text",
-        "binding": "data.patState"
+        "binding": "data.patState",
+        "section": "summary"
       },
       {
         "slotName": "patCopy",
         "blockType": "text",
-        "binding": "data.patCopy"
+        "binding": "data.patCopy",
+        "section": "summary"
       },
       {
         "slotName": "patRows",
         "blockType": "labelValueList",
-        "binding": "data.patRows"
+        "binding": "data.patRows",
+        "section": "details"
       },
       {
         "slotName": "rbState",
         "blockType": "text",
-        "binding": "data.rbState"
+        "binding": "data.rbState",
+        "section": "summary"
       },
       {
         "slotName": "rbCopy",
         "blockType": "text",
-        "binding": "data.rbCopy"
+        "binding": "data.rbCopy",
+        "section": "summary"
       },
       {
         "slotName": "tray",
         "blockType": "labelValueList",
-        "binding": "data.tray"
+        "binding": "data.tray",
+        "section": "details"
       },
       {
         "slotName": "allLabel",
         "blockType": "text",
-        "binding": "data.allLabel"
+        "binding": "data.allLabel",
+        "section": "summary"
       },
       {
         "slotName": "allNote",
         "blockType": "text",
-        "binding": "data.allNote"
+        "binding": "data.allNote",
+        "section": "summary"
       },
       {
         "slotName": "monState",
         "blockType": "text",
-        "binding": "data.monState"
+        "binding": "data.monState",
+        "section": "summary"
       },
       {
         "slotName": "monitors",
         "blockType": "barChart",
-        "binding": "data.monitors"
+        "binding": "data.monitors",
+        "section": "analysis"
       },
       {
         "slotName": "counters",
         "blockType": "itemQueue",
-        "binding": "data.counters"
+        "binding": "data.counters",
+        "section": "details"
       },
       {
         "slotName": "footerStatus",
         "blockType": "text",
-        "binding": "data.footerStatus"
+        "binding": "data.footerStatus",
+        "section": "summary"
       },
       {
         "slotName": "footerPushLabel",
         "blockType": "text",
-        "binding": "data.footerPushLabel"
+        "binding": "data.footerPushLabel",
+        "section": "summary"
       }
     ]
   }

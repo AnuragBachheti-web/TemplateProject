@@ -2,308 +2,459 @@
   {
     "code": "S10.1",
     "name": "Variance bridge",
+    "headline": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
     "stageKey": "reason",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "setup",
-        "blockType": "labelValueList",
-        "binding": "data.setup"
+        "blockType": "table",
+        "binding": "data.setup",
+        "section": "details"
       },
       {
         "slotName": "terms",
         "blockType": "itemQueue",
-        "binding": "data.terms"
+        "binding": "data.terms",
+        "section": "details"
       },
       {
         "slotName": "contractChips",
         "blockType": "labelValueList",
-        "binding": "data.contractChips"
+        "binding": "data.contractChips",
+        "section": "details"
       },
       {
         "slotName": "bandRows",
         "blockType": "barChart",
-        "binding": "data.bandRows"
+        "binding": "data.bandRows",
+        "section": "analysis"
       },
       {
         "slotName": "order",
         "blockType": "labelValueList",
-        "binding": "data.order"
+        "binding": "data.order",
+        "section": "details"
       },
       {
         "slotName": "lenses",
         "blockType": "table",
-        "binding": "data.lenses"
+        "binding": "data.lenses",
+        "section": "details"
       },
       {
         "slotName": "trigger",
         "blockType": "itemQueue",
-        "binding": "data.trigger"
+        "binding": "data.trigger",
+        "section": "details"
       },
       {
         "slotName": "residual",
         "blockType": "barChart",
-        "binding": "data.residual"
+        "binding": "data.residual",
+        "section": "analysis"
       },
       {
         "slotName": "agents",
         "blockType": "itemQueue",
-        "binding": "data.agents"
+        "binding": "data.agents",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S10.1",
     "name": "Variance bridge",
+    "headline": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
     "stageKey": "analyze",
+    "sections": [
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "yTicks",
         "blockType": "itemQueue",
-        "binding": "data.yTicks"
+        "binding": "data.yTicks",
+        "section": "details"
       },
       {
         "slotName": "bars",
         "blockType": "waterfallChart",
-        "binding": "data.bars"
+        "binding": "data.bars",
+        "section": "analysis"
       },
       {
         "slotName": "drill",
         "blockType": "object",
-        "binding": "data.drill"
+        "binding": "data.drill",
+        "section": "details"
       },
       {
         "slotName": "recon",
         "blockType": "barChart",
-        "binding": "data.recon"
+        "binding": "data.recon",
+        "section": "analysis"
       },
       {
         "slotName": "classifier",
         "blockType": "barChart",
-        "binding": "data.classifier"
+        "binding": "data.classifier",
+        "section": "analysis"
       },
       {
         "slotName": "timeline",
         "blockType": "itemQueue",
-        "binding": "data.timeline"
+        "binding": "data.timeline",
+        "section": "details"
       }
     ]
   },
   {
     "code": "S10.1",
     "name": "Variance bridge",
+    "headline": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
     "stageKey": "decide",
+    "sections": [
+      {
+        "id": "guardrails",
+        "title": "Guardrails",
+        "region": "rail"
+      },
+      {
+        "id": "recommendation",
+        "title": null,
+        "region": "main"
+      },
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
         "slotName": "rationale",
         "blockType": "text",
-        "binding": "data.pinnedSub"
+        "binding": "data.pinnedSub",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
         "slotName": "primaryInsight",
         "blockType": "text",
-        "binding": "data.pinnedTop"
+        "binding": "data.pinnedTop",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
       },
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
-        "slotName": "guardrail_verdict",
+        "slotName": "guardrail_checks",
         "blockType": "labelValueList",
-        "binding": "data.checks"
+        "binding": "data.checks",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_blocked",
         "blockType": "flag",
-        "binding": "data.blocked"
+        "binding": "data.blocked",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_can_approve",
         "blockType": "flag",
-        "binding": "data.canApprove"
+        "binding": "data.canApprove",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_reason",
         "blockType": "text",
-        "binding": "data.blockReason"
+        "binding": "data.blockReason",
+        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
         "blockType": "text",
-        "binding": "data.ctaLabel"
+        "binding": "data.ctaLabel",
+        "section": "guardrails"
       },
       {
         "slotName": "options",
         "blockType": "itemQueue",
-        "binding": "data.options"
+        "binding": "data.options",
+        "section": "details"
       },
       {
         "slotName": "summary",
         "blockType": "labelValueList",
-        "binding": "data.summary"
+        "binding": "data.summary",
+        "section": "details"
       },
       {
         "slotName": "recurState",
         "blockType": "text",
-        "binding": "data.recurState"
+        "binding": "data.recurState",
+        "section": "summary"
       },
       {
         "slotName": "recurrence",
         "blockType": "barChart",
-        "binding": "data.recurrence"
+        "binding": "data.recurrence",
+        "section": "analysis"
       },
       {
         "slotName": "policyStatus",
         "blockType": "text",
-        "binding": "data.policyStatus"
+        "binding": "data.policyStatus",
+        "section": "summary"
       },
       {
         "slotName": "history",
         "blockType": "barChart",
-        "binding": "data.history"
+        "binding": "data.history",
+        "section": "analysis"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   },
   {
     "code": "S10.1",
     "name": "Variance bridge",
+    "headline": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
     "stageKey": "execute",
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Summary",
+        "region": "rail"
+      },
+      {
+        "id": "analysis",
+        "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "details",
+        "title": "Details",
+        "region": "main"
+      }
+    ],
     "blocks": [
       {
-        "slotName": "execution_lane",
+        "slotName": "display_mode",
         "blockType": "text",
-        "binding": "data.execLabel"
+        "binding": "data.execLabel",
+        "section": "summary"
       },
       {
         "slotName": "confTitle",
         "blockType": "text",
-        "binding": "data.confTitle"
+        "binding": "data.confTitle",
+        "section": "summary"
       },
       {
         "slotName": "confMeta",
         "blockType": "text",
-        "binding": "data.confMeta"
-      },
-      {
-        "slotName": "confIcon",
-        "blockType": "text",
-        "binding": "data.confIcon"
+        "binding": "data.confMeta",
+        "section": "summary"
       },
       {
         "slotName": "confState",
         "blockType": "text",
-        "binding": "data.confState"
+        "binding": "data.confState",
+        "section": "summary"
       },
       {
         "slotName": "commitLabel",
         "blockType": "text",
-        "binding": "data.commitLabel"
-      },
-      {
-        "slotName": "commitIcon",
-        "blockType": "text",
-        "binding": "data.commitIcon"
+        "binding": "data.commitLabel",
+        "section": "summary"
       },
       {
         "slotName": "entryRef",
         "blockType": "text",
-        "binding": "data.entryRef"
+        "binding": "data.entryRef",
+        "section": "summary"
       },
       {
         "slotName": "entryText",
         "blockType": "text",
-        "binding": "data.entryText"
+        "binding": "data.entryText",
+        "section": "summary"
       },
       {
         "slotName": "entryChips",
         "blockType": "labelValueList",
-        "binding": "data.entryChips"
+        "binding": "data.entryChips",
+        "section": "details"
       },
       {
         "slotName": "neverTwice",
         "blockType": "text",
-        "binding": "data.neverTwice"
+        "binding": "data.neverTwice",
+        "section": "summary"
       },
       {
         "slotName": "spawnStatus",
         "blockType": "text",
-        "binding": "data.spawnStatus"
+        "binding": "data.spawnStatus",
+        "section": "summary"
       },
       {
         "slotName": "spawned",
         "blockType": "barChart",
-        "binding": "data.spawned"
+        "binding": "data.spawned",
+        "section": "analysis"
       },
       {
         "slotName": "tomorrow",
         "blockType": "labelValueList",
-        "binding": "data.tomorrow"
+        "binding": "data.tomorrow",
+        "section": "details"
       },
       {
         "slotName": "recorded",
         "blockType": "labelValueList",
-        "binding": "data.recorded"
+        "binding": "data.recorded",
+        "section": "details"
       },
       {
         "slotName": "historyCount",
         "blockType": "text",
-        "binding": "data.historyCount"
+        "binding": "data.historyCount",
+        "section": "summary"
       },
       {
         "slotName": "history",
         "blockType": "barChart",
-        "binding": "data.history"
+        "binding": "data.history",
+        "section": "analysis"
       },
       {
         "slotName": "contract",
         "blockType": "labelValueList",
-        "binding": "data.contract"
+        "binding": "data.contract",
+        "section": "details"
       },
       {
         "slotName": "govStats",
         "blockType": "labelValueList",
-        "binding": "data.govStats"
+        "binding": "data.govStats",
+        "section": "details"
       },
       {
         "slotName": "done",
         "blockType": "flag",
-        "binding": "data.done"
+        "binding": "data.done",
+        "section": "summary"
       },
       {
         "slotName": "closeLabel",
         "blockType": "text",
-        "binding": "data.closeLabel"
+        "binding": "data.closeLabel",
+        "section": "summary"
       },
       {
         "slotName": "footStatus",
         "blockType": "text",
-        "binding": "data.footStatus"
+        "binding": "data.footStatus",
+        "section": "summary"
       }
     ]
   }

@@ -1,0 +1,108 @@
+/* Additive Realify design tokens — typography, spacing, radius, elevation, motion, module hues,
+ * and semantic tints. Copied from the reference design system's own token files
+ * (`Realify Workspace Dashboard Build/_ds/.../tokens/{typography,spacing,elevation,motion}.css`,
+ * `colors.css`'s module-hue + semantic-tint section) with the SAME variable names the reference
+ * itself uses — not renamed to rf-* — so this can be cross-checked directly against the DLS docs.
+ * `tokens.css`'s existing `--rf-*` names (colors only) are untouched and still the ones every
+ * existing Tailwind `rf-*` utility class reads from; this file is additive, for the parts of the
+ * reference system tokens.css never had a slot for at all (fonts, type scale, spacing/radius
+ * scale, shadows, motion, module hues, 50/700 semantic tints for badges/chips).
+ */
+
+:root {
+  /* ---- Fonts ---- */
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+
+  /* ---- Type scale ---- */
+  --text-hero: clamp(42px, 7.5vw, 112px);
+  --text-title: clamp(32px, 4.5vw, 56px);
+  --text-h3: 28px;
+  --text-h4: 22px;
+  --text-kpi: 32px;
+  --text-body-lg: 17px;
+  --text-body: 14px;
+  --text-body-sm: 13px;
+  --text-caption: 12px;
+  --text-label: 11px;
+  --text-micro: 10px;
+
+  --leading-tight: 1.1;
+  --leading-body: 1.55;
+  --leading-prose: 1.7;
+
+  --tracking-display: -0.025em;
+  --tracking-label: 0.14em;
+
+  /* ---- Spacing (4pt system) ---- */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px;
+
+  /* ---- Radius ---- */
+  --r-xs: 6px; --r-sm: 8px; --r-md: 12px; --r-lg: 16px;
+  --r-xl: 24px; --r-2xl: 32px; --r-full: 999px;
+
+  /* ---- Elevation ---- */
+  --shadow-xs: 0 1px 2px rgba(10,15,26,0.04);
+  --shadow-sm: 0 1px 3px rgba(10,15,26,0.06), 0 1px 2px rgba(10,15,26,0.04);
+  --shadow-md: 0 4px 12px rgba(10,15,26,0.06), 0 2px 4px rgba(10,15,26,0.04);
+  --shadow-lg: 0 12px 32px rgba(10,15,26,0.08), 0 4px 8px rgba(10,15,26,0.04);
+  --shadow-focus: 0 0 0 4px rgba(56,56,56,0.18);
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+
+  /* ---- Layout ----
+     FORENSIC_AUDIT_S9.1.md §12/§19/§25: this token was defined but never consumed anywhere in
+     src/ — StagePage.jsx and StageActionBar.jsx each independently hardcoded the literal
+     `max-w-[1280px]` instead, two copies of one number with no shared source of truth. Both now
+     reference this token directly (`max-w-[var(--page-max)]`) instead.
+     The value itself: the reference mockups are a fixed 1440px canvas (`width:1440px`, every
+     `S*-*.dc.html`) with a 68px icon-only rail, so the reference's own two-column content grid
+     (main + 320px rail + 16px gap, inside `padding:16px 24px 0`) has ~1440-68-48 = 1324px to work
+     with. This app's sidebar is deliberately wider (240px, not 68px — Shell.jsx's own doc comment:
+     it lists 26 workflow instances by name, a different job from the reference's icon-only module
+     switcher), so matching the reference's full 1440px canvas here would double-count rail width
+     the reference never actually had to give up. 1320px matches the reference's own *content*
+     width (main+rail+gap) almost exactly, without inheriting a width budget that was never really
+     available once this app's own, intentionally wider navigation is accounted for. */
+  --page-max: 1320px;
+
+  /* ---- Module hues (Realify's 8 product surfaces each carry a calibrated secondary) — used only
+     where Action Stories has a real, generic signal for "which module" a screen belongs to
+     (there isn't one in the current manifest data), so these stay defined for future use but the
+     app itself defaults every screen to the graphite anchor (--rf-brand-blue-500) rather than
+     guessing a module per workflow. */
+  --mod-intel: #383838;
+  --mod-margin: #0ea57a;
+  --mod-inventory: #7c3aed;
+  --mod-ads: #ea580c;
+  --mod-cash: #e11d48;
+  --mod-actions: #1f2937;
+  --mod-discover: #d97706;
+  --mod-hubs: #0369a1;
+
+  /* ---- Semantic tints (badge/chip backgrounds — 50-step) ---- */
+  --tint-critical: #FFF1F2;
+  --tint-warning: #FFF7E6;
+  --tint-success: #ECFDF4;
+  --tint-purple: #F5F0FF;
+}
+
+[data-theme="dark"] {
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.32), 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.32), 0 2px 4px rgba(0,0,0,0.24);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.24);
+  --shadow-focus: 0 0 0 4px rgba(196,195,195,0.24);
+
+  --tint-critical: rgba(242,85,92,0.14);
+  --tint-warning: rgba(245,165,36,0.14);
+  --tint-success: rgba(51,200,138,0.14);
+  --tint-purple: rgba(155,130,255,0.14);
+}
