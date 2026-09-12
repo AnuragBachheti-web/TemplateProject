@@ -20,8 +20,9 @@ import {
   flattenPropsDefaults,
   extractBreadcrumbName,
   extractInstanceHeadline,
+  extractControlElements,
 } from './parseMockup.js'
-import { runScreenScript } from './dcLogicSandbox.js'
+import { runScreenScript, attachRawRecords, computeControlPayload } from './dcLogicSandbox.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -90,7 +91,35 @@ function main() {
       // (`null`) is a normal, non-fatal outcome, unlike a missing breadcrumb name.
       const headline = extractInstanceHeadline(html)
 
-      const { state, data } = runScreenScript(scriptTag.body, propsDefaults)
+      // P0 fix (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §2/§3): recover a real interactive control's
+      // own declared bounds from the TEMPLATE markup (never present in the <script data-dc-script>
+      // block runScreenScript's sandbox executes), then multi-sample the screen's own real logic at
+      // several positions across that range so its actual dependency set can be measured, not guessed.
+      const controls = extractControlElements(html)
+      const { state, data: rawRenderData, rawCandidates, controlSamples } = runScreenScript(
+        scriptTag.body,
+        propsDefaults,
+        controls,
+      )
+
+      // Preserve raw structured records (never destroy them by only keeping renderVals()'s own
+      // formatted-string projection — see attachRawRecords' own doc comment) before anything else
+      // touches `data`.
+      let data = attachRawRecords(rawRenderData, rawCandidates)
+
+      // Turn each confirmed control's bare current-value field into its real, complete slider shape
+      // — {min, max, step, value, dependencies, steps} — so classifyBlocks.js's existing, unmodified
+      // isSliderShaped() (a plain generic {min,max,value} shape check) recognizes it with zero
+      // classifier changes, exactly like every other real slider would.
+      if (controlSamples.length > 0) {
+        const patched = { ...data }
+        for (const sample of controlSamples) {
+          const baseValue = data[sample.stateKey]
+          if (typeof baseValue !== 'number') continue // markup/state mismatch — never fabricate a shape
+          patched[sample.stateKey] = computeControlPayload(data, { ...sample, default: baseValue }, sample.samples)
+        }
+        data = patched
+      }
 
       const fixture = { code, stageKey, name, ...(headline ? { headline } : {}), props: propsDefaults, state, data }
 

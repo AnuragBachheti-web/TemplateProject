@@ -278,7 +278,67 @@
         "reason": "No Ledger action and no forecast term explains it. Amazon published revised dimensional-weight tiers effective Aug 18.",
         "border": "var(--ink-300)",
         "bg": "var(--ink-25)",
-        "mark": "var(--rose-500)"
+        "mark": "var(--rose-500)",
+        "__raw": {
+          "key": "fba",
+          "label": "FBA fee",
+          "sublabel": "change",
+          "delta": -2210,
+          "tag": "unexpected",
+          "tagTint": "var(--rose-500)",
+          "tagTone": "var(--ink-0)",
+          "classTag": "unexpected",
+          "classTint": "var(--rose-50)",
+          "classTone": "var(--rose-700)",
+          "confidence": "evidence: fee schedule diff",
+          "reason": "No Ledger action and no forecast term explains it. Amazon published revised dimensional-weight tiers effective Aug 18.",
+          "scope": "31 SKUs · Amazon only · recurs daily",
+          "evidence": "Amazon revised its dimensional-weight tier boundaries on Aug 18. Thirty-one of our SKUs crossed into the next tier — the products did not change size, the tier did. This is not a one-day event: at yesterday’s volume it costs roughly $2,210 every day until the packaging is right-sized or the prices absorb it.",
+          "rows": [
+            {
+              "sku": "Pan care kit",
+              "channel": "Amazon",
+              "units": "184",
+              "effect": "−$672",
+              "tone": "var(--rose-700)",
+              "event": "dim tier 2 → 3"
+            },
+            {
+              "sku": "Replacement filter 3-pack",
+              "channel": "Amazon",
+              "units": "211",
+              "effect": "−$518",
+              "tone": "var(--rose-700)",
+              "event": "dim tier 2 → 3"
+            },
+            {
+              "sku": "Silicone spatula pair",
+              "channel": "Amazon",
+              "units": "167",
+              "effect": "−$401",
+              "tone": "var(--rose-700)",
+              "event": "dim tier 1 → 2"
+            },
+            {
+              "sku": "Whetstone 1000/6000",
+              "channel": "Amazon",
+              "units": "96",
+              "effect": "−$288",
+              "tone": "var(--rose-700)",
+              "event": "dim tier 2 → 3"
+            },
+            {
+              "sku": "27 further SKUs",
+              "channel": "Amazon",
+              "units": "742",
+              "effect": "−$331",
+              "tone": "var(--rose-700)",
+              "event": "mixed tiers"
+            }
+          ],
+          "footnote": "31 SKUs affected · all Amazon · none on other channels",
+          "total": "−$2,210"
+        }
       },
       {
         "label": "Price effect · 9.11 slate",
@@ -291,7 +351,67 @@
         "reason": "Attributed to our own price slate from the Ledger before any other driver was considered. Twelve SKUs stepped Aug 17.",
         "border": "var(--ink-100)",
         "bg": "var(--ink-0)",
-        "mark": "var(--mod-intel)"
+        "mark": "var(--mod-intel)",
+        "__raw": {
+          "key": "price",
+          "label": "Price effect",
+          "sublabel": "9.11 slate",
+          "delta": 610,
+          "tag": "our action",
+          "tagTint": "var(--mod-intel)",
+          "tagTone": "var(--ink-0)",
+          "classTag": "our action",
+          "classTint": "color-mix(in oklab, var(--mod-intel) 14%, white)",
+          "classTone": "var(--mod-intel)",
+          "confidence": "evidence: Ledger self-attribution",
+          "reason": "Attributed to our own price slate from the Ledger before any other driver was considered. Twelve SKUs stepped Aug 17.",
+          "scope": "12 SKUs · all channels · LEDGER-PR-0912",
+          "evidence": "The margin-protective repricing slate executed on Aug 17 and its first full day was Aug 18. This is our own action, self-attributed from the Ledger rather than discovered — which is why it appears as a named line rather than as unexplained lift. Realised volume loss is 2.9% against a 4% prediction.",
+          "rows": [
+            {
+              "sku": "Carbon steel skillet 10\"",
+              "channel": "all four",
+              "units": "132",
+              "effect": "+$168",
+              "tone": "var(--green-700)",
+              "event": "+$1.40 step"
+            },
+            {
+              "sku": "Enamel dutch oven 5qt",
+              "channel": "Shopify, Amazon",
+              "units": "41",
+              "effect": "+$142",
+              "tone": "var(--green-700)",
+              "event": "+$3.10 step"
+            },
+            {
+              "sku": "Chef knife 8\"",
+              "channel": "all four",
+              "units": "78",
+              "effect": "+$121",
+              "tone": "var(--green-700)",
+              "event": "+$1.90 step"
+            },
+            {
+              "sku": "Filter pitcher 10-cup",
+              "channel": "Shopify, Walmart",
+              "units": "104",
+              "effect": "+$98",
+              "tone": "var(--green-700)",
+              "event": "+$1.10 step"
+            },
+            {
+              "sku": "8 further SKUs",
+              "channel": "mixed",
+              "units": "286",
+              "effect": "+$81",
+              "tone": "var(--green-700)",
+              "event": "micro-steps"
+            }
+          ],
+          "footnote": "12 SKUs · volume loss 2.9% vs 4% predicted",
+          "total": "+$610"
+        }
       },
       {
         "label": "Returns",
@@ -304,7 +424,59 @@
         "reason": "Return volume sits 0.4pp above the trailing mean, inside normal daily variation for the apparel-adjacent cohort.",
         "border": "var(--ink-100)",
         "bg": "var(--ink-0)",
-        "mark": "var(--ink-200)"
+        "mark": "var(--ink-200)",
+        "__raw": {
+          "key": "returns",
+          "label": "Returns",
+          "sublabel": "",
+          "delta": -240,
+          "tag": "expected",
+          "tagTint": "var(--ink-200)",
+          "tagTone": "var(--ink-700)",
+          "classTag": "expected",
+          "classTint": "var(--ink-100)",
+          "classTone": "var(--ink-600)",
+          "confidence": "evidence: within 1.2σ of trailing",
+          "reason": "Return volume sits 0.4pp above the trailing mean, inside normal daily variation for the apparel-adjacent cohort.",
+          "scope": "38 refunds · all channels",
+          "evidence": "Refunds processed yesterday ran $240 of CM above the trailing average. The rate is 0.4pp higher than the seven-day mean, which is inside normal daily variation — no cluster, no single SKU driving it, and the \"runs small\" cohort is not represented.",
+          "rows": [
+            {
+              "sku": "Enamel braiser 3qt",
+              "channel": "Amazon",
+              "units": "6",
+              "effect": "−$74",
+              "tone": "var(--rose-700)",
+              "event": "damage in transit"
+            },
+            {
+              "sku": "Wooden spoon set",
+              "channel": "Shopify",
+              "units": "9",
+              "effect": "−$61",
+              "tone": "var(--rose-700)",
+              "event": "not as described"
+            },
+            {
+              "sku": "Filter pitcher 10-cup",
+              "channel": "Walmart",
+              "units": "5",
+              "effect": "−$48",
+              "tone": "var(--rose-700)",
+              "event": "changed mind"
+            },
+            {
+              "sku": "18 further refunds",
+              "channel": "mixed",
+              "units": "18",
+              "effect": "−$57",
+              "tone": "var(--rose-700)",
+              "event": "mixed reasons"
+            }
+          ],
+          "footnote": "38 refunds · rate 0.4pp above trailing mean",
+          "total": "−$240"
+        }
       },
       {
         "label": "Mix",
@@ -317,7 +489,59 @@
         "reason": "The basket tilted toward higher-CM cookware. Volume is flat; only what sold changed.",
         "border": "var(--ink-100)",
         "bg": "var(--ink-0)",
-        "mark": "var(--ink-200)"
+        "mark": "var(--ink-200)",
+        "__raw": {
+          "key": "mix",
+          "label": "Mix",
+          "sublabel": "",
+          "delta": 185,
+          "tag": "expected",
+          "tagTint": "var(--ink-200)",
+          "tagTone": "var(--ink-700)",
+          "classTag": "expected",
+          "classTint": "var(--ink-100)",
+          "classTone": "var(--ink-600)",
+          "confidence": "evidence: composition shift only",
+          "reason": "The basket tilted toward higher-CM cookware. Volume is flat; only what sold changed.",
+          "scope": "composition · no volume change",
+          "evidence": "Total units were within 1% of the trailing mean, so this is composition rather than demand. Cookware took 4.1pp more of the mix than usual and accessories took less, which is worth $185 at unchanged prices.",
+          "rows": [
+            {
+              "sku": "Cookware cohort",
+              "channel": "all four",
+              "units": "+4.1pp",
+              "effect": "+$264",
+              "tone": "var(--green-700)",
+              "event": "mix share up"
+            },
+            {
+              "sku": "Knives cohort",
+              "channel": "all four",
+              "units": "+0.8pp",
+              "effect": "+$41",
+              "tone": "var(--green-700)",
+              "event": "mix share up"
+            },
+            {
+              "sku": "Accessories cohort",
+              "channel": "all four",
+              "units": "−3.6pp",
+              "effect": "−$96",
+              "tone": "var(--rose-700)",
+              "event": "mix share down"
+            },
+            {
+              "sku": "Storage cohort",
+              "channel": "all four",
+              "units": "−1.3pp",
+              "effect": "−$24",
+              "tone": "var(--rose-700)",
+              "event": "mix share down"
+            }
+          ],
+          "footnote": "total units within 1% of trailing mean",
+          "total": "+$185"
+        }
       },
       {
         "label": "Ads · efficiency",
@@ -330,7 +554,59 @@
         "reason": "Day two of the staged bid rollout from the ads sweep. Within the projected band for the settling period.",
         "border": "var(--ink-100)",
         "bg": "var(--ink-0)",
-        "mark": "var(--ink-200)"
+        "mark": "var(--ink-200)",
+        "__raw": {
+          "key": "ads",
+          "label": "Ads",
+          "sublabel": "efficiency",
+          "delta": -315,
+          "tag": "expected",
+          "tagTint": "var(--ink-200)",
+          "tagTone": "var(--ink-700)",
+          "classTag": "expected",
+          "classTint": "var(--ink-100)",
+          "classTone": "var(--ink-600)",
+          "confidence": "evidence: staged bid rollout, day 2",
+          "reason": "Day two of the staged bid rollout from the ads sweep. Within the projected band for the settling period.",
+          "scope": "9 campaigns · Amazon and Google",
+          "evidence": "Spend was flat and attributed revenue fell, which is the expected shape on day two of a staged bid change — the 50% tranche is still settling. The ads flow projected a two-to-four day dip of this size before mROAS recovers.",
+          "rows": [
+            {
+              "sku": "Cookware · Amazon SP",
+              "channel": "Amazon",
+              "units": "—",
+              "effect": "−$142",
+              "tone": "var(--rose-700)",
+              "event": "bid tranche day 2"
+            },
+            {
+              "sku": "Knives · Google PMax",
+              "channel": "Google",
+              "units": "—",
+              "effect": "−$88",
+              "tone": "var(--rose-700)",
+              "event": "bid tranche day 2"
+            },
+            {
+              "sku": "Filtration · Amazon SB",
+              "channel": "Amazon",
+              "units": "—",
+              "effect": "−$61",
+              "tone": "var(--rose-700)",
+              "event": "bid tranche day 2"
+            },
+            {
+              "sku": "6 further campaigns",
+              "channel": "mixed",
+              "units": "—",
+              "effect": "−$24",
+              "tone": "var(--rose-700)",
+              "event": "unchanged bids"
+            }
+          ],
+          "footnote": "projected dip $250–$400 · recovery expected by Aug 21",
+          "total": "−$315"
+        }
       },
       {
         "label": "Residual · 1.0%",
@@ -343,7 +619,51 @@
         "reason": "What the bridge could not attribute. At 1.0% of the move it is noise rather than a missing term in the contract.",
         "border": "var(--ink-100)",
         "bg": "var(--ink-0)",
-        "mark": "var(--green-500)"
+        "mark": "var(--green-500)",
+        "__raw": {
+          "key": "residual",
+          "label": "Residual",
+          "sublabel": "1.0%",
+          "delta": 130,
+          "tag": "within 5%",
+          "tagTint": "var(--green-500)",
+          "tagTone": "var(--ink-0)",
+          "classTag": "residual",
+          "classTint": "var(--green-50)",
+          "classTone": "var(--green-700)",
+          "confidence": "target under 5%",
+          "reason": "What the bridge could not attribute. At 1.0% of the move it is noise rather than a missing term in the contract.",
+          "scope": "unattributed · 1.0% of the move",
+          "evidence": "One hundred and thirty dollars the bridge could not assign to any driver. At 1.0% of the move this is rounding across settlement timing and FX on the Faire orders — not a signal. It becomes a signal if it holds above 5% for a week, which is what the governance strip watches.",
+          "rows": [
+            {
+              "sku": "Settlement timing",
+              "channel": "Amazon",
+              "units": "—",
+              "effect": "+$74",
+              "tone": "var(--green-700)",
+              "event": "fees posted late"
+            },
+            {
+              "sku": "FX on wholesale",
+              "channel": "Faire",
+              "units": "—",
+              "effect": "+$38",
+              "tone": "var(--green-700)",
+              "event": "CAD conversion"
+            },
+            {
+              "sku": "Rounding",
+              "channel": "all four",
+              "units": "—",
+              "effect": "+$18",
+              "tone": "var(--green-700)",
+              "event": "per-order rounding"
+            }
+          ],
+          "footnote": "30-day residual average 1.4% · target under 5%",
+          "total": "+$130"
+        }
       }
     ],
     "timeline": [

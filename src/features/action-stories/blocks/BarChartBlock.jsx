@@ -2,7 +2,7 @@ import { ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip } from 
 import { humanizeSlotName } from './humanizeSlotName';
 import { parseMagnitude } from './chartGeometry';
 import { categoricalColor, positiveColor, negativeColor } from './chartPalette';
-import { BlockCard, BlockTitle } from './BlockCard';
+import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
@@ -114,7 +114,7 @@ export default function BarChartBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{humanizeSlotName(slotName)}</p>
+        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
         {chart}
       </div>
     );

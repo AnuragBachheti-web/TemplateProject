@@ -1,7 +1,9 @@
 import { humanizeSlotName } from './humanizeSlotName';
 import { flattenNestedEntry } from './nestedEntryText';
-import { BlockCard, BlockTitle } from './BlockCard';
+import { deltaTone } from './deltaTone';
+import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { isHiddenKey } from './decorativeKeys';
 
 // A style-only string carries no information worth a row of its own — a lone descriptor object
 // like `sel` mixes real content (a title, a case id) with the same *Bg/*Tone/*Border siblings the
@@ -33,6 +35,13 @@ function renderEntryValue(v) {
   return flattenNestedEntry(v);
 }
 
+// This block previously filtered only by VALUE (isStyleString above) — never by KEY, unlike
+// TableBlock/ItemQueueBlock/LabelValueListBlock, which all check `isDecorativeKey`/`isHiddenKey` on
+// the field name itself. Harmless today (no `object`-classified block in the current corpus happens
+// to carry a `__raw` or bg/fg/tone-named sibling), but a real gap: a future `object` block with
+// exactly that shape would have leaked it exactly like ItemQueueBlock/LabelValueListBlock did.
+// Filtered below via the same shared `isHiddenKey`, not a fourth local copy.
+
 /** @param {boolean} [compact] - see TextBlock.jsx's own doc comment for what this means and why. */
 export default function ObjectBlock({ slotName, data, compact }) {
   if (data === null || data === undefined) {
@@ -43,7 +52,8 @@ export default function ObjectBlock({ slotName, data, compact }) {
   }
 
   const entries = Object.entries(data)
-    .map(([key, v]) => [key, renderEntryValue(v)])
+    .filter(([key]) => !isHiddenKey(key))
+    .map(([key, v]) => [key, renderEntryValue(v), v])
     .filter(([, text]) => text !== '');
 
   if (entries.length === 0) {
@@ -52,19 +62,25 @@ export default function ObjectBlock({ slotName, data, compact }) {
 
   const rows = (
     <dl className="flex flex-col gap-1">
-      {entries.map(([key, value]) => (
-        <div key={key} className="flex items-center justify-between gap-3 text-[12.5px]">
-          <dt className="text-rf-text-secondary">{humanizeSlotName(key)}</dt>
-          <dd className="truncate font-medium text-rf-text-primary">{value}</dd>
-        </div>
-      ))}
+      {entries.map(([key, value, raw]) => {
+        // Color from the field's OWN sign/wording (deltaTone), never from a style-string value —
+        // that's already stripped out above by isStyleString/renderEntryValue. See deltaTone.js's
+        // own doc comment for why this is the one signal that survives a real API swap.
+        const tone = deltaTone(raw);
+        return (
+          <div key={key} className="flex items-center justify-between gap-3 text-[12.5px]">
+            <dt className="text-rf-text-secondary">{humanizeSlotName(key)}</dt>
+            <dd className={`truncate font-medium ${tone ? tone.text : 'text-rf-text-primary'}`}>{value}</dd>
+          </div>
+        );
+      })}
     </dl>
   );
 
   if (compact) {
     return (
       <div className="py-1.5">
-        <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{humanizeSlotName(slotName)}</p>
+        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
         {rows}
       </div>
     );

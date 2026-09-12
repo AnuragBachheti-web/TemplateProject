@@ -1,5 +1,123 @@
 import { describe, it, expect } from 'vitest'
-import { classifyBlockType, planSections, findMetadataDescriptorSlots } from './classifyBlocks.js'
+import {
+  classifyBlockType,
+  planSections,
+  findMetadataDescriptorSlots,
+  findNestedControlColumns,
+  orderBlocksSemantically,
+} from './classifyBlocks.js'
+
+describe('classifyBlockType — orphaned rich field disqualifies table promotion (S9.1/execute.dests regression)', () => {
+  it('does not promote a row set to table when a row has a genuinely rich, non-control nested array (would render blank in a table cell)', () => {
+    const dests = [
+      { name: 'Markdown & recovery', meta: '12 exit SKUs', statusLabel: 'staged', btnLabel: 'Push', items: [{ name: 'A', before: 'x', after: 'y' }] },
+      { name: 'Channel sync', meta: '30 edits', statusLabel: 'staged', btnLabel: 'Push', items: [{ name: 'B', before: 'p', after: 'q' }] },
+    ]
+    expect(classifyBlockType(dests, 'dests')).toBe('itemQueue')
+  })
+
+  it('__raw (the extraction-time raw-record companion) never counts as an orphaned field', () => {
+    const rows = [
+      { sku: 'A', name: 'Alpha', price: 10, qty: 2, __raw: { sku: 'A', old: 9 } },
+      { sku: 'B', name: 'Beta', price: 20, qty: 4, __raw: { sku: 'B', old: 18 } },
+    ]
+    expect(classifyBlockType(rows, 'rows')).toBe('table')
+  })
+
+  it('a genuinely empty array field does not disqualify table promotion', () => {
+    const rows = [
+      { sku: 'A', name: 'Alpha', price: 10, qty: 2, notes: [] },
+      { sku: 'B', name: 'Beta', price: 20, qty: 4, notes: [] },
+    ]
+    expect(classifyBlockType(rows, 'rows')).toBe('table')
+  })
+})
+
+
+describe('classifyBlockType — identity-field generalization (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §3/§7/§8)', () => {
+  it('classifies a rich, uniform, sku-identified record as table — the S9.11 Decide canonical shape', () => {
+    const slate = [
+      { sku: 'NW-KNF-0480', name: 'Alder chef knife', prices: '$68.00 -> $71.99', pct: '+5.9%', vol: '-3.4%', cm: '+$1,240', conf: '88%', tag: 'Buy Box sensitive' },
+      { sku: 'NW-CER-1120', name: 'Ridgeline bowl', prices: '$24.00 -> $26.99', pct: '+12.5%', vol: '-2.2%', cm: '+$1,080', conf: '84%', tag: '' },
+    ]
+    expect(classifyBlockType(slate, 'slate')).toBe('table')
+  })
+
+  it('classifies a rich, uniform, id-identified record as table too — the rule is shape-driven, not one extra key name', () => {
+    const rows = [
+      { id: 'C1', title: 'Claim one', value: '$120', due: '3d', state: 'open' },
+      { id: 'C2', title: 'Claim two', value: '$80', due: '5d', state: 'open' },
+    ]
+    expect(classifyBlockType(rows, 'claims')).toBe('table')
+  })
+
+  it('a generalized identity field with too few columns falls back to itemQueue, not labelValueList (no literal "label" to satisfy that block type\'s own validator)', () => {
+    const rows = [{ sku: 'A', qty: 3 }, { sku: 'B', qty: 5 }]
+    expect(classifyBlockType(rows)).toBe('itemQueue')
+  })
+
+  it('falls back to a fully-unique-string fallback identity when none of the named candidates match', () => {
+    const rows = [
+      { ref: 'R-1', a: 'x', b: 1, c: true },
+      { ref: 'R-2', a: 'y', b: 2, c: false },
+    ]
+    expect(classifyBlockType(rows)).toBe('table')
+  })
+
+  it('does not invent an identity from a single-row array (no uniqueness to confirm against)', () => {
+    const rows = [{ ref: 'R-1', a: 'x', b: 1 }]
+    expect(classifyBlockType(rows)).toBe('itemQueue')
+  })
+
+  it('still prefers a real scatter/bar chart over table promotion when the only meaningful columns beyond identity are plot coordinates', () => {
+    const points = [
+      { label: 'P1', x: 10, y: 20 },
+      { label: 'P2', x: 30, y: 40 },
+    ]
+    expect(classifyBlockType(points)).toBe('scatterChart')
+  })
+})
+
+describe('classifyBlockType — nested row-level control (S9.11/decide.slate.modes)', () => {
+  const slateWithModes = [
+    {
+      sku: 'A', name: 'Alpha', prices: '$1', pct: '+1%', cm: '$1', conf: '88%',
+      modes: [{ label: 'Roll' }, { label: 'Test' }],
+    },
+    {
+      sku: 'B', name: 'Beta', prices: '$2', pct: '+2%', cm: '$2', conf: '84%',
+      modes: [{ label: 'Roll' }, { label: 'Test' }],
+    },
+  ]
+
+  it('a nested {label,...} option array does not disqualify the row set from becoming a table', () => {
+    expect(classifyBlockType(slateWithModes, 'slate')).toBe('table')
+  })
+
+  it('findNestedControlColumns reports exactly the nested-control column(s), not the scalar ones', () => {
+    expect(findNestedControlColumns(slateWithModes)).toEqual(['modes'])
+  })
+
+  it('findNestedControlColumns returns nothing for a plain scalar table', () => {
+    const rows = [{ sku: 'A', qty: 1 }, { sku: 'B', qty: 2 }]
+    expect(findNestedControlColumns(rows)).toEqual([])
+  })
+})
+
+describe('classifyBlockType — gauge/threshold detection', () => {
+  it('classifies a magnitude + threshold-sibling row set as gauge, not table or barChart', () => {
+    const bars = [
+      { label: 'Spend cap', value: '62%', limitPct: '80%' },
+      { label: 'Service floor', value: '91%', limitPct: '95%' },
+    ]
+    expect(classifyBlockType(bars, 'bars')).toBe('gauge')
+  })
+
+  it('does not misclassify an ordinary magnitude row (no threshold-shaped sibling) as gauge', () => {
+    const rows = [{ label: 'W1', value: '$26.3K' }, { label: 'W2', value: '$24.1K' }]
+    expect(classifyBlockType(rows)).toBe('barChart')
+  })
+})
 
 describe('classifyBlockType — scalars', () => {
   it('classifies plain scalars', () => {
@@ -127,12 +245,20 @@ describe('classifyBlockType — precedence ordering', () => {
 })
 
 describe('classifyBlockType — untouched shapes (regression guard)', () => {
-  it('still classifies uniform >=3-scalar-column rows as table', () => {
+  it('classifies a uniform >=4-scalar-column, generalized-identity record as table', () => {
+    const rows = [
+      { name: 'A', sku: 'X-1', qty: 3, price: 10 },
+      { name: 'B', sku: 'X-2', qty: 5, price: 20 },
+    ]
+    expect(classifyBlockType(rows)).toBe('table')
+  })
+
+  it('a generalized-identity row set with only 3 scalar columns stays itemQueue, not table (DYNAMIC_COMPOSITION_PHASE2_REPORT.md: the >=3 threshold over-promoted short bordered cards to table across ~40% of the reference corpus)', () => {
     const rows = [
       { name: 'A', sku: 'X-1', qty: 3 },
       { name: 'B', sku: 'X-2', qty: 5 },
     ]
-    expect(classifyBlockType(rows)).toBe('table')
+    expect(classifyBlockType(rows)).toBe('itemQueue')
   })
 
   it('still classifies variable-shape rich rows as itemQueue', () => {
@@ -409,7 +535,10 @@ describe('planSections — semantic placement (FORENSIC_AUDIT_S9.1.md fix: "scal
   it('every SECTION_ORDER entry declares a region, and guardrails/summary/rollup/provenance are rail while recommendation/analysis/details are main', () => {
     const blocks = [
       block('guardrail_blocked', 'flag'), block('heroTitle', 'text'), block('totals', 'labelValueList'), block('basis', 'labelValueList'),
-      block('chart1', 'barChart'), block('tbl', 'table'), block('a', 'text'), block('b', 'number'), block('c', 'flag'),
+      // Two charts (not one) so the chart+table pairing (an unambiguous-1-of-each rule) never
+      // fires here — this test is only about section/region vocabulary completeness, not pairing.
+      block('chart1', 'barChart'), block('chart2', 'lineChart'), block('tbl', 'table'), block('q', 'itemQueue'),
+      block('a', 'text'), block('b', 'number'), block('c', 'flag'),
     ]
     const { sections } = planSections(blocks, {})
     const regionOf = (id) => sections.find((s) => s.id === id)?.region
@@ -419,7 +548,170 @@ describe('planSections — semantic placement (FORENSIC_AUDIT_S9.1.md fix: "scal
     expect(regionOf('provenance')).toBe('rail')
     expect(regionOf('recommendation')).toBe('main')
     expect(regionOf('analysis')).toBe('main')
-    expect(regionOf('details')).toBe('main') // "tbl" (a table) lands here, and details is main too
+    expect(regionOf('details')).toBe('main') // "tbl"/"q" land here, and details is main too
+  })
+})
+
+describe('planSections — control-dependency composition (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §7/§9/§11)', () => {
+  function block(slotName, blockType, binding) {
+    return { slotName, blockType, binding: binding ?? `data.${slotName}` }
+  }
+
+  it('fuses a slider block and every block its own measured dependencies name into one "decision" section + shared layout.group', () => {
+    const blocks = [
+      block('tol', 'slider'),
+      block('slate', 'table'),
+      block('liveStats', 'labelValueList'),
+      block('unrelatedA', 'text'),
+      block('unrelatedB', 'number'),
+      block('unrelatedC', 'flag'),
+      block('unrelatedD', 'text'),
+      block('unrelatedE', 'text'),
+      block('unrelatedF', 'text'),
+    ]
+    const dataObject = {
+      tol: { min: 1, max: 8, value: 4, dependencies: ['slate', 'liveStats'] },
+      slate: [],
+      liveStats: [],
+    }
+    const { sectionBySlot, layoutBySlot } = planSections(blocks, dataObject)
+    expect(sectionBySlot.get('tol')).toBe('decision')
+    expect(sectionBySlot.get('slate')).toBe('decision')
+    expect(sectionBySlot.get('liveStats')).toBe('decision')
+    expect(sectionBySlot.get('unrelatedA')).not.toBe('decision')
+    expect(layoutBySlot.get('tol').group).toBe(layoutBySlot.get('slate').group)
+    expect(layoutBySlot.get('tol').group).toBe(layoutBySlot.get('liveStats').group)
+  })
+
+  it('does not create a "decision" section for a slider with no measured dependencies', () => {
+    const blocks = [
+      block('tol', 'slider'), block('a', 'text'), block('b', 'number'), block('c', 'flag'),
+      block('d', 'text'), block('e', 'text'), block('f', 'text'), block('g', 'text'), block('h', 'text'),
+    ]
+    const dataObject = { tol: { min: 1, max: 8, value: 4, dependencies: [] } }
+    const { sectionBySlot } = planSections(blocks, dataObject)
+    expect(sectionBySlot.get('tol')).not.toBe('decision')
+  })
+
+  it('only groups a dependency that is a real slotName-resolvable raw key present in this same stage\'s blocks', () => {
+    const blocks = [
+      block('tol', 'slider'), block('slate', 'table'), block('a', 'text'), block('b', 'number'),
+      block('c', 'flag'), block('d', 'text'), block('e', 'text'), block('f', 'text'), block('g', 'text'),
+    ]
+    const dataObject = { tol: { min: 1, max: 8, value: 4, dependencies: ['slate', 'somethingNotAedBlock'] } }
+    const { sectionBySlot } = planSections(blocks, dataObject)
+    expect(sectionBySlot.get('slate')).toBe('decision')
+    expect(sectionBySlot.get('a')).not.toBe('decision')
+  })
+})
+
+describe('planSections — execution/diff composition (Pattern E: destination + before/after)', () => {
+  function block(slotName, blockType, binding) {
+    return { slotName, blockType, binding: binding ?? `data.${slotName}` }
+  }
+
+  it('routes an itemQueue block whose items carry a direct before/after pair into "execution"', () => {
+    const blocks = [
+      block('dests', 'itemQueue'), block('a', 'text'), block('b', 'number'), block('c', 'flag'),
+      block('d', 'text'), block('e', 'text'), block('f', 'text'), block('g', 'text'), block('h', 'text'),
+    ]
+    const dataObject = { dests: [{ name: 'X', before: 'old', after: 'new' }] }
+    const { sectionBySlot, sections } = planSections(blocks, dataObject)
+    expect(sectionBySlot.get('dests')).toBe('execution')
+    expect(sections.find((s) => s.id === 'execution').region).toBe('main')
+  })
+
+  it('routes an itemQueue block whose items carry a NESTED before/after diff list (a destination card\'s own line items) into "execution"', () => {
+    const blocks = [
+      block('dests', 'itemQueue'), block('a', 'text'), block('b', 'number'), block('c', 'flag'),
+      block('d', 'text'), block('e', 'text'), block('f', 'text'), block('g', 'text'), block('h', 'text'),
+    ]
+    const dataObject = {
+      dests: [{ name: 'Markdown & recovery', items: [{ name: 'Stop-buy flags', before: 'auto', after: 'locked' }] }],
+    }
+    const { sectionBySlot } = planSections(blocks, dataObject)
+    expect(sectionBySlot.get('dests')).toBe('execution')
+  })
+
+  it('does NOT route a plain itemQueue with no diff shape into "execution"', () => {
+    const blocks = [
+      block('feed', 'itemQueue'), block('a', 'text'), block('b', 'number'), block('c', 'flag'),
+      block('d', 'text'), block('e', 'text'), block('f', 'text'), block('g', 'text'), block('h', 'text'),
+    ]
+    const dataObject = { feed: [{ title: 'Event one', detail: 'Something happened' }] }
+    const { sectionBySlot } = planSections(blocks, dataObject)
+    expect(sectionBySlot.get('feed')).not.toBe('execution')
+  })
+})
+
+describe('planSections — chart+table pairing was tried and removed (regression guard)', () => {
+  function block(slotName, blockType, binding) {
+    return { slotName, blockType, binding: binding ?? `data.${slotName}` }
+  }
+
+  // A full 105-screen validation against the reference corpus found this heuristic fabricated a
+  // relationship in 4 of 5 real occurrences (only 1 was a genuine chart+table pairing; the other 3
+  // "charts" were plain label/value summary lists with no chart geometry at all). Removed rather
+  // than patched — see classifyBlocks.js's own doc comment above findControlDependencyGroups.
+  // This guard confirms an unambiguous single-chart/single-table stage no longer gets a fabricated
+  // `pair:` group — each keeps its own independently-assigned section instead.
+  it('does not invent a chart+table pairing group for an otherwise-unrelated chart and table', () => {
+    const blocks = [
+      block('chart1', 'barChart'), block('rows', 'table'), block('a', 'text'), block('b', 'number'),
+      block('c', 'flag'), block('d', 'text'), block('e', 'text'), block('f', 'text'), block('g', 'text'),
+    ]
+    const { layoutBySlot } = planSections(blocks, {})
+    expect(layoutBySlot.get('chart1')).toBeUndefined()
+    expect(layoutBySlot.get('rows')).toBeUndefined()
+  })
+})
+
+describe('orderBlocksSemantically — L3 dynamic ordering (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §5)', () => {
+  function block(slotName, blockType, binding) {
+    return { slotName, blockType, binding: binding ?? `data.${slotName}` }
+  }
+
+  it('moves a hero-vocabulary block to the front, regardless of its original position', () => {
+    const blocks = [block('a', 'text'), block('b', 'table'), block('heroTitle', 'text'), block('c', 'number')]
+    const ordered = orderBlocksSemantically(blocks, {})
+    expect(ordered[0].slotName).toBe('heroTitle')
+  })
+
+  it('moves a control (slider) with real measured dependencies to the front, ahead of unrelated content', () => {
+    const blocks = [block('a', 'text'), block('tol', 'slider'), block('b', 'table')]
+    const dataObject = { tol: { min: 1, max: 8, value: 4, dependencies: ['b'] } }
+    const ordered = orderBlocksSemantically(blocks, dataObject)
+    expect(ordered[0].slotName).toBe('tol')
+  })
+
+  it('orders a control\'s dependents as metrics-first, then table/chart — regardless of their original order', () => {
+    const blocks = [
+      block('slate', 'table'), block('liveStats', 'labelValueList'), block('tol', 'slider'), block('unrelated', 'text'),
+    ]
+    const dataObject = { tol: { min: 1, max: 8, value: 4, dependencies: ['slate', 'liveStats'] } }
+    const ordered = orderBlocksSemantically(blocks, dataObject)
+    const names = ordered.map((b) => b.slotName)
+    expect(names.indexOf('tol')).toBeLessThan(names.indexOf('liveStats'))
+    expect(names.indexOf('liveStats')).toBeLessThan(names.indexOf('slate'))
+  })
+
+  it('preserves original relative order for blocks the signals do not distinguish (stable sort)', () => {
+    const blocks = [block('a', 'text'), block('b', 'table'), block('c', 'itemQueue'), block('d', 'number')]
+    const ordered = orderBlocksSemantically(blocks, {})
+    expect(ordered.map((b) => b.slotName)).toEqual(['a', 'b', 'c', 'd'])
+  })
+
+  it('never mutates the input array', () => {
+    const blocks = [block('heroTitle', 'text'), block('a', 'number')]
+    const copy = [...blocks]
+    orderBlocksSemantically(blocks, {})
+    expect(blocks).toEqual(copy)
+  })
+
+  it('works even for a stage below the sectioning threshold (does not depend on planSections)', () => {
+    const blocks = [block('a', 'text'), block('heroTitle', 'text')]
+    const ordered = orderBlocksSemantically(blocks, {})
+    expect(ordered[0].slotName).toBe('heroTitle')
   })
 })
 

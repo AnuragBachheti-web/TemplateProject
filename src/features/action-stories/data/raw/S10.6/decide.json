@@ -92,7 +92,43 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "inventory",
+          "name": "Inventory",
+          "icon": "fa-solid fa-boxes-stacked",
+          "hue": "var(--mod-inventory)",
+          "score": "84%",
+          "options": [
+            {
+              "key": "air",
+              "label": "Air freight both lanes",
+              "note": "Both Hero gaps close for $3.1K, tendered before tomorrow night’s cutoff. Closes $9.4K of projected contribution loss.",
+              "cost": "−$3.1K",
+              "closes": 9400,
+              "owner": null,
+              "kind": "go"
+            },
+            {
+              "key": "transfer",
+              "label": "Transfer only",
+              "note": "Covers 140 of the 500 units for $340. The remaining 360 units are the Dutch Oven, which is 41% of event revenue.",
+              "cost": "−$340",
+              "closes": 2600,
+              "owner": null,
+              "kind": "adjust"
+            },
+            {
+              "key": "accept",
+              "label": "Accept the gap",
+              "note": "Both Heroes stock out somewhere around hour 30, which is where last Prime Spring went wrong. Escalates to the Planner with the number attached.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": "Planner · today 18:00",
+              "kind": "escalate"
+            }
+          ]
+        }
       },
       {
         "name": "Deals and promos",
@@ -122,7 +158,34 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "deals",
+          "name": "Deals and promos",
+          "icon": "fa-solid fa-tags",
+          "hue": "var(--mod-ads)",
+          "score": "100%",
+          "options": [
+            {
+              "key": "go",
+              "label": "Go",
+              "note": "Lineup locked across 14 SKUs and four channels, Walmart overlap already staggered by depth. Nothing to decide here.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": null,
+              "kind": "go"
+            },
+            {
+              "key": "trim",
+              "label": "Trim the coupon stack",
+              "note": "Drops 10% coupons on nine SKUs, protects about 0.8pp of blended CM and gives up roughly $9K of P50 revenue.",
+              "cost": "+0.8pp CM",
+              "closes": 0,
+              "owner": null,
+              "kind": "adjust"
+            }
+          ]
+        }
       },
       {
         "name": "Creative and content",
@@ -159,7 +222,43 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "creative",
+          "name": "Creative and content",
+          "icon": "fa-solid fa-images",
+          "hue": "var(--mod-intel)",
+          "score": "60%",
+          "options": [
+            {
+              "key": "reduce",
+              "label": "Reduce the DTC lineup",
+              "note": "Two email sends instead of three, five social variants instead of eight. Costs about $6K of the $48K DTC forecast and needs nothing from the studio.",
+              "cost": "−$6K rev",
+              "closes": 0,
+              "owner": null,
+              "kind": "adjust"
+            },
+            {
+              "key": "rush",
+              "label": "Rush 3 assets",
+              "note": "$1.4K rush fee delivers three of the six by tomorrow evening. The other three still get evergreen creative.",
+              "cost": "−$1.4K",
+              "closes": 4000,
+              "owner": null,
+              "kind": "adjust"
+            },
+            {
+              "key": "escalate",
+              "label": "Escalate to the studio",
+              "note": "Full lineup by the deadline requires a commitment the studio has not given. Escalates with the revenue at stake stated.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": "Merchandiser · today 17:00",
+              "kind": "escalate"
+            }
+          ]
+        }
       },
       {
         "name": "Ad readiness",
@@ -189,7 +288,34 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "ads",
+          "name": "Ad readiness",
+          "icon": "fa-solid fa-bullseye",
+          "hue": "var(--mod-ads)",
+          "score": "92%",
+          "options": [
+            {
+              "key": "go",
+              "label": "Go · arm at T-0",
+              "note": "$52K staged across four channels, arming with the contract rather than now. The two campaigns waiting on creative launch when the assets land.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": null,
+              "kind": "go"
+            },
+            {
+              "key": "trim",
+              "label": "Hold TikTok budget",
+              "note": "Removes $5K from a channel with thin cover, avoiding spend that competes with Amazon for the same units.",
+              "cost": "−$5K spend",
+              "closes": 0,
+              "owner": null,
+              "kind": "adjust"
+            }
+          ]
+        }
       },
       {
         "name": "Account health",
@@ -226,7 +352,43 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "health",
+          "name": "Account health",
+          "icon": "fa-solid fa-heart-pulse",
+          "hue": "var(--mod-actions)",
+          "score": "74%",
+          "options": [
+            {
+              "key": "buffer",
+              "label": "Arm handling buffer",
+              "note": "+1 day on East-node SKUs for the window. Costs roughly 2% conversion on those SKUs and keeps late shipment under 4% through the Monday.",
+              "cost": "−$4.2K rev",
+              "closes": 0,
+              "owner": null,
+              "kind": "go"
+            },
+            {
+              "key": "monitor",
+              "label": "Hourly monitoring only",
+              "note": "Watches the metric without slowing the promise. Detection is faster but the backlog still happens, and suppression is automatic at 4%.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": null,
+              "kind": "adjust"
+            },
+            {
+              "key": "escalate",
+              "label": "Escalate to the 3PL",
+              "note": "A staffing commitment for the Monday would remove the trade entirely. Escalates to the Shipper with last year’s eleven suppressed days attached.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": "Shipper · today 16:00",
+              "kind": "escalate"
+            }
+          ]
+        }
       },
       {
         "name": "Cash plan",
@@ -256,7 +418,34 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "cash",
+          "name": "Cash plan",
+          "icon": "fa-solid fa-coins",
+          "hue": "var(--mod-cash)",
+          "score": "88%",
+          "options": [
+            {
+              "key": "draw",
+              "label": "Pre-arrange the draw",
+              "note": "$60K credit line arranged before the window at 9.4% — about $470 of interest for the sixteen days of settlement lag.",
+              "cost": "−$470",
+              "closes": 0,
+              "owner": null,
+              "kind": "go"
+            },
+            {
+              "key": "delay",
+              "label": "Delay the Supplier K PO",
+              "note": "Pushes $88K past the trough and avoids the draw. Costs service level on the next replenishment cycle.",
+              "cost": "$0",
+              "closes": 0,
+              "owner": null,
+              "kind": "adjust"
+            }
+          ]
+        }
       }
     ],
     "hasEscalations": false,

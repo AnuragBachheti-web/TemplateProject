@@ -11,6 +11,7 @@ import { createRoot } from 'react-dom/client';
 import { act } from 'react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 
+import { ToastProvider } from './ui/Toast';
 import Shell from './components/Shell';
 import ActionStoriesHome from './pages/ActionStoriesHome';
 import StagePage from './pages/StagePage';
@@ -23,14 +24,18 @@ function mountAt(initialPath) {
   const root = createRoot(container);
   act(() => {
     root.render(
-      <MemoryRouter initialEntries={[initialPath]}>
-        <Routes>
-          <Route path="/action-stories" element={<Shell />}>
-            <Route index element={<ActionStoriesHome />} />
-            <Route path=":code/:stageKey" element={<StagePage />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>,
+      // StagePage -> StageActionBar calls useToast() — needs a real ToastProvider above it, same
+      // as App.jsx mounts at the real app root.
+      <ToastProvider>
+        <MemoryRouter initialEntries={[initialPath]}>
+          <Routes>
+            <Route path="/action-stories" element={<Shell />}>
+              <Route index element={<ActionStoriesHome />} />
+              <Route path=":code/:stageKey" element={<StagePage />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </ToastProvider>,
     );
   });
   return { container, root };

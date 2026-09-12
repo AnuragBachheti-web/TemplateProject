@@ -8,6 +8,12 @@ import BlockErrorBoundary from '@/features/action-stories/blocks/BlockErrorBound
 import { composeSections } from '@/features/action-stories/layout/composeSections';
 import StageSections from '@/features/action-stories/components/StageSections';
 
+/** A block's binding is always `data.<rawKey>` — this is the fixture's own field name, independent
+ * of whatever slotName vocabulary renaming a manifest applied to it. */
+function rawKeyOf(binding) {
+  return typeof binding === 'string' && binding.startsWith('data.') ? binding.slice('data.'.length) : binding;
+}
+
 function BlockPlaceholder({ slotName, reason }) {
   return (
     <div className="rounded-xl border border-dashed border-amber-300 bg-amber-50 px-3 py-2 text-[12px] text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">
@@ -76,9 +82,18 @@ function computeCompactSlots({ main, rail }) {
  * owns its current position, and derives what any *other* block on the same screen should show
  * instead of its real resolved value by looking up the nearest precomputed `steps` entry (see
  * findNearestStep). All of it is local React state: reset the moment you navigate away (StagePage
- * remounts per stage), never persisted, never sent anywhere. No workflow uses this today; it
- * exists for the day a Decide-stage "simulate" slider has real data to bind to (see
- * manifests/REPORT.md).
+ * remounts per stage), never persisted, never sent anywhere.
+ *
+ * `overrides` is keyed by RAW FIXTURE KEY (see rawKeyOf above), not by slotName — a `steps` entry
+ * (`{at, ...rawKey: itsValueAtThatPosition}`) is extraction-time data (see
+ * extraction/dcLogicSandbox.js's computeControlPayload), generated before any manifest-level
+ * slotName renaming happens, so matching overrides by the block's own binding rather than its
+ * slotName is what keeps this correct regardless of whether a particular field happened to get a
+ * vocabulary rename. DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §9/§11: this mechanism used to be fully
+ * wired but never exercised by real data (0 of 105 fixtures ever produced a `{min,max,value}`
+ * slider shape) — extraction now measures and populates real `steps` for every real slider found in
+ * the reference corpus (S9.11/S9.2/S9.12's own Decide-stage controls), so dragging one now actually
+ * recomputes its real dependent blocks.
  *
  * Every manifest block renders here, in place — including a `role: "hero"` block (see
  * layout/heroSlot.js's HERO_SLOT_NAMES, and classifyBlocks.js's `planSections`), which is no longer
@@ -108,7 +123,8 @@ export default function StageRenderer({ manifest, fixture }) {
   // Pass 1 — resolve + validate every block; no JSX yet, just enough metadata for composeSections.
   const resolvedBlocks = manifest.blocks.map((block) => {
     const rawResolved = resolveBinding(block.binding, fixture);
-    let value = overrides[block.slotName] !== undefined ? overrides[block.slotName] : rawResolved;
+    const override = overrides[rawKeyOf(block.binding)];
+    let value = override !== undefined ? override : rawResolved;
     if (block.blockType === 'slider' && value && sliderPositions[block.slotName] !== undefined) {
       value = { ...value, value: sliderPositions[block.slotName] };
     }

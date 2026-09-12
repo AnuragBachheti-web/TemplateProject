@@ -170,3 +170,66 @@ export function extractInstanceHeadline(html) {
   // "no banner found."
   return /\{\{.*\}\}/.test(text) ? null : text
 }
+
+// ---- interactive control extraction (P0 fix: DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §2/§9) ------
+//
+// A mockup's interactive control (a range slider, today — the only control shape found anywhere in
+// the reference corpus) lives entirely in the screen's TEMPLATE MARKUP as a plain HTML `<input>`
+// with literal `min`/`max`/`step` attributes and a two-way-bound `value="{{ stateKey }}"` mustache
+// expression — never inside the `<script data-dc-script>` block extractDcScriptTag reads (that
+// block only holds the screen's *logic*, not its markup). The forensic audit's S9.11 Decide deep
+// dive confirmed this is exactly why a slider's bounds could never be recovered before: nothing
+// upstream of this function ever looked at the template markup at all, only at renderVals()'s
+// return VALUE (the current position, not the control's own declared range).
+//
+// Deliberately narrow and structural, not name-based: matches ONLY a literal
+// `<input type="range" ...>` tag, reads its own `min`/`max`/`step` attributes verbatim (never
+// guessed/inferred when absent — per the task's own "no fabricated bounds" rule), and only resolves
+// a `value="{{ EXPR }}"` binding when EXPR is a bare identifier (no dots, no calls) — anything more
+// complex is left unrecognized rather than guessed at. Works identically for any workflow's markup;
+// nothing here reads a filename, a workflow code, or a stage name.
+const RANGE_INPUT_RE = /<input\b[^>]*\btype=["']range["'][^>]*>/gi
+const ATTR_RE = /([a-zA-Z-]+)\s*=\s*"([^"]*)"/g
+const BARE_IDENTIFIER_RE = /^[A-Za-z_$][A-Za-z0-9_$]*$/
+
+function parseTagAttrs(tag) {
+  const attrs = {}
+  let m
+  ATTR_RE.lastIndex = 0
+  while ((m = ATTR_RE.exec(tag))) {
+    attrs[m[1].toLowerCase()] = m[2]
+  }
+  return attrs
+}
+
+/** Strips a mustache `{{ expr }}` wrapper and returns the trimmed inner expression, or null if the
+ * attribute isn't mustache-bound at all (a literal value, not a template binding). */
+function mustacheExpr(rawAttrValue) {
+  const m = typeof rawAttrValue === 'string' && rawAttrValue.match(/^\{\{\s*(.*?)\s*\}\}$/)
+  return m ? m[1] : null
+}
+
+/**
+ * @param {string} html - the WHOLE mockup file's text (not just the data-dc-script block).
+ * @returns {Array<{ type: 'range', stateKey: string, min: number, max: number, step: number }>}
+ *   One entry per recognized range input — only entries whose `value` binds to a bare state-key
+ *   identifier and whose `min`/`max` are both real, present, finite numbers are returned; anything
+ *   else (a computed expression, a missing bound) is silently skipped rather than guessed at.
+ */
+export function extractControlElements(html) {
+  const controls = []
+  const tags = html.match(RANGE_INPUT_RE) || []
+  for (const tag of tags) {
+    const attrs = parseTagAttrs(tag)
+    const stateKey = mustacheExpr(attrs.value)
+    if (!stateKey || !BARE_IDENTIFIER_RE.test(stateKey)) continue
+
+    const min = Number(attrs.min)
+    const max = Number(attrs.max)
+    if (!Number.isFinite(min) || !Number.isFinite(max) || min >= max) continue
+    const step = Number.isFinite(Number(attrs.step)) && Number(attrs.step) > 0 ? Number(attrs.step) : 1
+
+    controls.push({ type: 'range', stateKey, min, max, step })
+  }
+  return controls
+}

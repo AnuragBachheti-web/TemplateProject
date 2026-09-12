@@ -23,6 +23,17 @@
     ],
     "blocks": [
       {
+        "slotName": "rationale",
+        "blockType": "barChart",
+        "binding": "data.rationale",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -33,17 +44,6 @@
         "blockType": "table",
         "binding": "data.criteria",
         "section": "details"
-      },
-      {
-        "slotName": "rationale",
-        "blockType": "barChart",
-        "binding": "data.rationale",
-        "section": "recommendation",
-        "role": "hero",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
       },
       {
         "slotName": "risk",
@@ -71,7 +71,7 @@
       },
       {
         "slotName": "existing",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.existing",
         "section": "details"
       },
@@ -123,6 +123,16 @@
         }
       },
       {
+        "slotName": "caseMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.caseMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -130,9 +140,9 @@
       },
       {
         "slotName": "fit",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.fit",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "unit",
@@ -151,12 +161,6 @@
         "blockType": "text",
         "binding": "data.selLabel",
         "section": "summary"
-      },
-      {
-        "slotName": "caseMetrics",
-        "blockType": "labelValueList",
-        "binding": "data.caseMetrics",
-        "section": "details"
       },
       {
         "slotName": "bandPath",
@@ -415,7 +419,7 @@
       },
       {
         "slotName": "skus",
-        "blockType": "itemQueue",
+        "blockType": "table",
         "binding": "data.skus",
         "section": "details"
       },
@@ -463,7 +467,7 @@
       },
       {
         "slotName": "gate",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.gate",
         "section": "details"
       },

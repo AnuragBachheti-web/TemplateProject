@@ -83,6 +83,11 @@ export function validateManifest(manifest) {
     if (block.role !== undefined && !isNonEmptyString(block.role)) {
       problems.push(`${where}: "role" must be a non-empty string when present`)
     }
+    if (block.dependencies !== undefined) {
+      if (!Array.isArray(block.dependencies) || !block.dependencies.every(isNonEmptyString)) {
+        problems.push(`${where}: "dependencies" must be an array of non-empty strings when present`)
+      }
+    }
     if (block.region !== undefined && !REGIONS.has(block.region)) {
       problems.push(`${where}: "region" must be one of: ${[...REGIONS].join(', ')}`)
     }
@@ -99,6 +104,18 @@ export function validateManifest(manifest) {
             problems.push(`${where}: "layout.span" must be a number between ${MIN_SPAN} and ${MAX_SPAN}`)
           }
         }
+      }
+    }
+  })
+
+  // A dependency is only meaningful when it names another real block in THIS SAME manifest — a
+  // stale/typo'd reference (a slotName that got renamed, or never existed) fails loudly here rather
+  // than silently resolving to "nothing depends on anything" at render time.
+  manifest.blocks.forEach((block, i) => {
+    if (!Array.isArray(block.dependencies)) return
+    for (const dep of block.dependencies) {
+      if (typeof dep === 'string' && !seenSlotNames.has(dep)) {
+        problems.push(`blocks[${i}]: "dependencies" references unknown slotName "${dep}"`)
       }
     }
   })

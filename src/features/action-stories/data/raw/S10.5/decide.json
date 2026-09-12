@@ -94,7 +94,29 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D1",
+          "name": "Hero image · ASIN B0Y",
+          "channel": "Amazon",
+          "severity": "critical",
+          "sev": "critical",
+          "cost": 310,
+          "options": [
+            {
+              "key": "repush",
+              "label": "Re-push only",
+              "note": "Canonical asset restored in about 20 minutes. Nothing stops the same contribution being accepted again tomorrow.",
+              "recur": "high"
+            },
+            {
+              "key": "dispute",
+              "label": "Re-push + registry dispute",
+              "note": "Asset restored immediately, then a brand-registry dispute filed with the PIM version history and entitlement. Three to five days to lock the field.",
+              "recur": "low"
+            }
+          ]
+        }
       },
       {
         "name": "Variation family · Enamel set",
@@ -121,7 +143,29 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D2",
+          "name": "Variation family · Enamel set",
+          "channel": "Amazon",
+          "severity": "critical",
+          "sev": "critical",
+          "cost": 150,
+          "options": [
+            {
+              "key": "rebuild",
+              "label": "Rebuild family",
+              "note": "Structure restored and the review pool returns within about 24 hours. The seller who edited the parent can do it again.",
+              "recur": "high"
+            },
+            {
+              "key": "rebuild_dispute",
+              "label": "Rebuild + dispute",
+              "note": "Family rebuilt, then a registry dispute over parent-edit rights. This is the drift most likely to recur without it.",
+              "recur": "low"
+            }
+          ]
+        }
       },
       {
         "name": "Quantity zeroed · Cast-iron Skillet",
@@ -148,7 +192,29 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D3",
+          "name": "Quantity zeroed · Cast-iron Skillet",
+          "channel": "Walmart",
+          "severity": "high",
+          "sev": "high",
+          "cost": 60,
+          "options": [
+            {
+              "key": "replay",
+              "label": "Replay feed",
+              "note": "Quantity restored in one cycle, about 20 minutes. The next timeout does the same thing again.",
+              "recur": "high"
+            },
+            {
+              "key": "replay_guard",
+              "label": "Replay + partial-file guard",
+              "note": "Replay now, plus a guard that refuses to apply a partial inventory file. Kills the whole class, not this instance.",
+              "recur": "low"
+            }
+          ]
+        }
       },
       {
         "name": "Price drift · Filtration Pitcher",
@@ -175,7 +241,29 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D4",
+          "name": "Price drift · Filtration Pitcher",
+          "channel": "Shopify",
+          "severity": "critical",
+          "sev": "critical",
+          "cost": 40,
+          "options": [
+            {
+              "key": "repush",
+              "label": "Purge cache + re-push",
+              "note": "Canonical price live in about 10 minutes. The cache can serve a stale price again on the next rebuild.",
+              "recur": "medium"
+            },
+            {
+              "key": "repush_lock",
+              "label": "Re-push + exclude price from cache",
+              "note": "Price served live rather than from the theme cache. Slightly slower page, no stale prices.",
+              "recur": "low"
+            }
+          ]
+        }
       },
       {
         "name": "Titles truncated · 4 Walmart listings",
@@ -202,7 +290,29 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D5",
+          "name": "Titles truncated · 4 Walmart listings",
+          "channel": "Walmart",
+          "severity": "high",
+          "sev": "high",
+          "cost": 30,
+          "options": [
+            {
+              "key": "repush",
+              "label": "Re-push values",
+              "note": "Titles corrected, then overwritten again by the same template on the next cycle. Repairs that undo themselves are worse than none.",
+              "recur": "high"
+            },
+            {
+              "key": "patch_replay",
+              "label": "Patch template + replay",
+              "note": "Character limit corrected in the feed template, then replayed across all four. One fix, four listings, no recurrence.",
+              "recur": "low"
+            }
+          ]
+        }
       },
       {
         "name": "Bullet 3 replaced · Knife Block",
@@ -229,7 +339,29 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D6",
+          "name": "Bullet 3 replaced · Knife Block",
+          "channel": "Amazon",
+          "severity": "high",
+          "sev": "high",
+          "cost": 20,
+          "options": [
+            {
+              "key": "repush",
+              "label": "Re-push copy",
+              "note": "Brand copy restored. The contributed claim can return.",
+              "recur": "high"
+            },
+            {
+              "key": "dispute",
+              "label": "Re-push + dispute",
+              "note": "Copy restored and disputed on the restricted-claim grounds, which is the stronger argument than voice.",
+              "recur": "low"
+            }
+          ]
+        }
       },
       {
         "name": "A+ modules missing · Enamel Casserole",
@@ -249,7 +381,23 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D7",
+          "name": "A+ modules missing · Enamel Casserole",
+          "channel": "Amazon",
+          "severity": "medium",
+          "sev": "medium",
+          "cost": 20,
+          "options": [
+            {
+              "key": "repush",
+              "label": "Re-push modules",
+              "note": "Both modules restored on the daily cycle. Re-index drops are a platform behaviour, so recurrence is possible and cheap to fix again.",
+              "recur": "medium"
+            }
+          ]
+        }
       },
       {
         "name": "Secondary images · 2 listings",
@@ -276,7 +424,29 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "D8",
+          "name": "Secondary images · 2 listings",
+          "channel": "Amazon",
+          "severity": "medium",
+          "sev": "medium",
+          "cost": 10,
+          "options": [
+            {
+              "key": "repush",
+              "label": "Re-push image set",
+              "note": "Full set and order restored on the daily cycle.",
+              "recur": "medium"
+            },
+            {
+              "key": "repush_lock",
+              "label": "Re-push + image lock",
+              "note": "Restored and the set locked through registry where the category supports it.",
+              "recur": "low"
+            }
+          ]
+        }
       }
     ],
     "prevention": [
@@ -367,7 +537,30 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "B1",
+          "name": "Dutch Oven 5qt",
+          "units": "210 units",
+          "capital": "$8,200",
+          "storage": "$41/mo",
+          "options": [
+            {
+              "key": "relist",
+              "label": "Relist with family rebuild",
+              "note": "Clears automatically when the variation family is rebuilt — no separate work, full price recovery.",
+              "recover": 8200,
+              "recoverLabel": "at full price"
+            },
+            {
+              "key": "remove",
+              "label": "Remove and liquidate",
+              "note": "Liquidation quote is 50% of capital on a block that a rebuild frees this week. Hard to justify.",
+              "recover": 4100,
+              "recoverLabel": "liquidation"
+            }
+          ]
+        }
       },
       {
         "name": "Sauté Pan 12in",
@@ -393,7 +586,30 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "B2",
+          "name": "Sauté Pan 12in",
+          "units": "96 units",
+          "capital": "$3,400",
+          "storage": "$28/mo",
+          "options": [
+            {
+              "key": "relist",
+              "label": "Relist after title patch",
+              "note": "The suppression flag is the truncated title. Patching the template lifts the flag and the block sells.",
+              "recover": 3400,
+              "recoverLabel": "at full price"
+            },
+            {
+              "key": "remove",
+              "label": "Remove and liquidate",
+              "note": "Recovers less than half on stock whose only defect is a feed template.",
+              "recover": 1700,
+              "recoverLabel": "liquidation"
+            }
+          ]
+        }
       },
       {
         "name": "Filtration Pitcher",
@@ -419,7 +635,30 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "B3",
+          "name": "Filtration Pitcher",
+          "units": "140 units",
+          "capital": "$2,600",
+          "storage": "$52/mo",
+          "options": [
+            {
+              "key": "relist",
+              "label": "Recreate offer",
+              "note": "Offer closed by a bulk edit in June. Recreating it costs 20 minutes and returns the block to sale at list.",
+              "recover": 2600,
+              "recoverLabel": "at full price"
+            },
+            {
+              "key": "markdown",
+              "label": "Route to 9.9 ladder",
+              "note": "Sixty-one days stranded and the highest storage of any block. If velocity does not return within two weeks, the ladder is the honest path.",
+              "recover": 1950,
+              "recoverLabel": "ladder estimate"
+            }
+          ]
+        }
       },
       {
         "name": "Knife Block 6pc",
@@ -445,7 +684,30 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "B4",
+          "name": "Knife Block 6pc",
+          "units": "48 units",
+          "capital": "$1,900",
+          "storage": "$22/mo",
+          "options": [
+            {
+              "key": "relist",
+              "label": "Add dimension attribute",
+              "note": "FBA stranded on a missing attribute after the packaging change. The same measurement that supports the fee claim in 10.4 unstrands this.",
+              "recover": 1900,
+              "recoverLabel": "at full price"
+            },
+            {
+              "key": "remove",
+              "label": "Remove to a merchant offer",
+              "note": "Sells from our own node instead, at a lower conversion and a slower promise.",
+              "recover": 1520,
+              "recoverLabel": "merchant-fulfilled"
+            }
+          ]
+        }
       },
       {
         "name": "Cast-iron Skillet 10in",
@@ -471,7 +733,30 @@
             "fg": "var(--ink-600)",
             "weight": "500"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "B5",
+          "name": "Cast-iron Skillet 10in",
+          "units": "60 units",
+          "capital": "$1,600",
+          "storage": "$19/mo",
+          "options": [
+            {
+              "key": "relist",
+              "label": "Relabel to the new GTIN",
+              "note": "The repack changed the barcode. Relabelling costs about $180 of handling and returns the block at list.",
+              "recover": 1420,
+              "recoverLabel": "net of relabel"
+            },
+            {
+              "key": "remove",
+              "label": "Remove and liquidate",
+              "note": "Avoids the relabel and recovers 60%. Only sensible if the SKU were exiting anyway.",
+              "recover": 960,
+              "recoverLabel": "liquidation"
+            }
+          ]
+        }
       },
       {
         "name": "Enamel Casserole 3qt",
@@ -497,7 +782,30 @@
             "fg": "var(--mod-actions)",
             "weight": "600"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "B6",
+          "name": "Enamel Casserole 3qt",
+          "units": "36 units",
+          "capital": "$700",
+          "storage": "$8/mo",
+          "options": [
+            {
+              "key": "relist",
+              "label": "Recreate offer",
+              "note": "Possible, but this SKU is already in the 9.9 markdown cohort for the fee cliff — relisting it at list price strands it again.",
+              "recover": 700,
+              "recoverLabel": "at full price"
+            },
+            {
+              "key": "markdown",
+              "label": "Route to 9.9 ladder",
+              "note": "Joins the cohort it already belongs to. Sells through before the surcharge date instead of coming back here in six weeks.",
+              "recover": 525,
+              "recoverLabel": "ladder estimate"
+            }
+          ]
+        }
       }
     ],
     "summary": [

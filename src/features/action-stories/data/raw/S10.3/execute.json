@@ -105,7 +105,45 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "ops",
+          "name": "Operational fixes",
+          "icon": "fa-solid fa-wrench",
+          "hue": "var(--green-700)",
+          "doorHref": "S9.18-4-execute.dc.html",
+          "doorLabel": "S9.18 fulfilment",
+          "meta": "handling-time buffer and Monday roster · nothing submitted to anyone",
+          "items": [
+            {
+              "name": "Handling-time buffer on weekend orders",
+              "tag": "live first",
+              "tagIcon": "fa-solid fa-bolt",
+              "tagTint": "var(--green-50)",
+              "tagTone": "var(--green-700)",
+              "detail": "One extra day on Fri–Sun orders, applied in the OMS ahead of anything being filed. The recovery curve starts from the moment this lands, which is what the submissions cite.",
+              "value": "78% of cause",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Two extra Monday pickers at the East node",
+              "tag": null,
+              "detail": "Requested with the 3PL for the oversize queue. Addresses the 11% that waits on a second picker without touching the promise shown at checkout.",
+              "value": "11% of cause",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Zone 7–8 routing already live",
+              "tag": "from S9.18",
+              "tagIcon": "fa-solid fa-route",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Rule set v14 moved Zone 7–8 orders to the West node last week. It is already contributing to the Walmart on-time recovery.",
+              "value": "contributing",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "name": "Submissions",
@@ -171,7 +209,47 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "submit",
+          "name": "Submissions",
+          "icon": "fa-solid fa-paper-plane",
+          "hue": "var(--mod-actions)",
+          "human": "sent by a person",
+          "meta": "2 filings · case IDs tracked from acknowledgement",
+          "items": [
+            {
+              "name": "IP counter-notice · case 8814-2291",
+              "tag": "counsel filed",
+              "tagIcon": "fa-solid fa-scale-balanced",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)",
+              "detail": "R. Vance read the pack and filed at 09:20. Amazon acknowledged with a 5–9 business-day review window. The listing stays suppressed until it resolves.",
+              "value": "ack 09:24",
+              "valueTone": "var(--rose-700)"
+            },
+            {
+              "name": "Walmart content reinstatement · WM-40118",
+              "tag": "with diff",
+              "tagIcon": "fa-solid fa-code-compare",
+              "tagTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+              "tagTone": "var(--mod-intel)",
+              "detail": "All nine listings corrected including the seven not yet flagged, then the reinstatement request filed with the diff as evidence. A. Castellanos sent it.",
+              "value": "9 listings",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Authenticity documents · case 8791-4402",
+              "tag": "from vault",
+              "tagIcon": "fa-solid fa-folder-open",
+              "tagTint": "var(--green-50)",
+              "tagTone": "var(--green-700)",
+              "detail": "Three invoices and three authorisation letters pulled with current expiry dates, read and submitted. Eleven days of window remained.",
+              "value": "6 documents",
+              "valueTone": "var(--green-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Vault and expiry tracking",
@@ -231,7 +309,40 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "vault",
+          "name": "Vault and expiry tracking",
+          "icon": "fa-solid fa-folder-open",
+          "hue": "var(--mod-actions)",
+          "meta": "documents indexed · 2 certifications expiring inside 60 days",
+          "items": [
+            {
+              "name": "Submitted documents indexed",
+              "tag": null,
+              "detail": "Everything sent today is filed against its case with the submission timestamp, so a follow-up request is answered from the record rather than reassembled.",
+              "value": "6 filed",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Two certifications expiring",
+              "tag": "unrelated",
+              "tagIcon": "fa-solid fa-clock",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "A food-contact certificate and a lab report both lapse within 60 days. Nothing depends on them today, which is exactly when to renew them.",
+              "value": "46 and 58 days",
+              "valueTone": "var(--amber-700)"
+            },
+            {
+              "name": "Renewal tasks created",
+              "tag": null,
+              "detail": "Two tasks with owners and dates, timed to complete before expiry rather than after a marketplace asks.",
+              "value": "2 tasks",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "name": "Monitoring and prevention",
@@ -291,7 +402,40 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "monitor",
+          "name": "Monitoring and prevention",
+          "icon": "fa-solid fa-chart-line",
+          "hue": "var(--mod-actions)",
+          "meta": "recovery curves, case polling, recurrence watch, preventive rule",
+          "items": [
+            {
+              "name": "Recovery curves armed",
+              "tag": "daily",
+              "tagIcon": "fa-solid fa-repeat",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "Late shipment and Walmart on-time both read daily against the projection. A miss of more than 0.3pp for two days re-opens this card.",
+              "value": "2 metrics",
+              "valueTone": "var(--mod-actions)"
+            },
+            {
+              "name": "Case polling every 4 hours",
+              "tag": null,
+              "detail": "Three open cases polled for status change. A response from either marketplace wakes the card with the clock recalculated.",
+              "value": "3 cases",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Event written to the pattern library",
+              "tag": null,
+              "detail": "Cause, response, timings and outcome recorded. The next late-shipment drift opens with this event attached rather than as a new investigation.",
+              "value": "HLTH-0264",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       }
     ],
     "recoveryState": "not started",

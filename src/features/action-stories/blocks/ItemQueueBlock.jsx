@@ -2,9 +2,10 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { flattenNestedEntry } from './nestedEntryText';
 import { severityTone } from './severityTone';
-import { BlockCard, BlockTitle } from './BlockCard';
+import { deltaTone } from './deltaTone';
+import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
-import { isDecorativeKey } from './decorativeKeys';
+import { isHiddenKey } from './decorativeKeys';
 
 // Candidate field names an item might carry each concept under — kept in sync with (but
 // independently of) extraction/classifyBlocks.js's ITEM_LEVEL_CANDIDATES; that module is
@@ -50,7 +51,7 @@ function pickKey(item, keys) {
 function findNestedLists(item, usedKeys) {
   const lists = [];
   for (const [key, value] of Object.entries(item)) {
-    if (usedKeys.has(key) || !Array.isArray(value) || value.length === 0) continue;
+    if (usedKeys.has(key) || isHiddenKey(key) || !Array.isArray(value) || value.length === 0) continue;
     const entries = value.map(flattenNestedEntry).filter(Boolean);
     if (entries.length > 0) lists.push([key, entries]);
   }
@@ -68,11 +69,17 @@ function findNestedLists(item, usedKeys) {
  * are skipped here — an empty one has nothing to show, and a non-empty one is already covered by
  * findNestedLists above; a nested *object* has no such existing coverage, so it goes through
  * flattenNestedEntry here instead of being silently excluded.
+ *
+ * `isHiddenKey` (decorative-by-name OR internal-by-`__`-convention, see decorativeKeys.js's own
+ * doc comment) is what keeps extraction's own `__raw` companion — a row's real numbers behind a
+ * formatted display string, never meant to be shown — from reaching this exact "extra fields" text.
+ * Previously this only checked `isDecorativeKey`, so `__raw` fell straight through and rendered as
+ * a garbled "Raw: Name: Hero, N: 14, X: 78, ..." line on every item that carried one.
  */
 function findExtraFields(item, usedKeys) {
   const fields = [];
   for (const [key, value] of Object.entries(item)) {
-    if (usedKeys.has(key) || isDecorativeKey(key)) continue;
+    if (usedKeys.has(key) || isHiddenKey(key)) continue;
     if (value === null || value === undefined || Array.isArray(value)) continue;
     const text = flattenNestedEntry(value);
     if (!text) continue;
@@ -124,11 +131,17 @@ function Item({ item, index }) {
       )}
       {extraFields.length > 0 && (
         <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
-          {extraFields.map(([key, text]) => (
-            <span key={key} className="text-[10.5px] text-rf-text-secondary">
-              <span className="text-rf-text-tertiary">{humanizeSlotName(key)}:</span> {text}
-            </span>
-          ))}
+          {extraFields.map(([key, text]) => {
+            // Colored from the field's OWN sign/wording (deltaTone) — the same signal every other
+            // block now shares, not a per-block guess. See deltaTone.js's doc comment.
+            const tone = deltaTone(text);
+            return (
+              <span key={key} className="text-[10.5px] text-rf-text-secondary">
+                <span className="text-rf-text-tertiary">{humanizeSlotName(key)}:</span>{' '}
+                <span className={tone ? tone.text : undefined}>{text}</span>
+              </span>
+            );
+          })}
         </div>
       )}
       {nestedLists.map(([key, entries]) => (
@@ -175,7 +188,7 @@ function itemWeight(item) {
   if (item === null || typeof item !== 'object') return String(item ?? '').length;
   let total = 0;
   for (const [key, value] of Object.entries(item)) {
-    if (isDecorativeKey(key) || value === null || value === undefined) continue;
+    if (isHiddenKey(key) || value === null || value === undefined) continue;
     if (typeof value === 'string') total += value.length;
     else if (typeof value === 'number' || typeof value === 'boolean') total += 4;
   }
@@ -271,9 +284,9 @@ export default function ItemQueueBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
+        <CompactEyebrow>
           {humanizeSlotName(slotName)} · {data.length}
-        </p>
+        </CompactEyebrow>
         {body}
       </div>
     );

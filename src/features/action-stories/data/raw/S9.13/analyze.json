@@ -29,16 +29,124 @@
     ],
     "rfmCols": [
       {
-        "label": "0–30 days"
+        "label": "0–30 days",
+        "__raw": {
+          "key": "top",
+          "label": "Top pLTV decile",
+          "note": "$310 median",
+          "cells": [
+            {
+              "c": "1,940",
+              "l": "$318",
+              "heat": 3
+            },
+            {
+              "c": "1,120",
+              "l": "$304",
+              "heat": 3
+            },
+            {
+              "c": "520",
+              "l": "$288",
+              "heat": 2
+            },
+            {
+              "c": "280",
+              "l": "$262",
+              "heat": 1
+            }
+          ]
+        }
       },
       {
-        "label": "31–60 days"
+        "label": "31–60 days",
+        "__raw": {
+          "key": "next",
+          "label": "Next 20%",
+          "note": "$186 median",
+          "cells": [
+            {
+              "c": "2,410",
+              "l": "$204",
+              "heat": 3
+            },
+            {
+              "c": "2,960",
+              "l": "$191",
+              "heat": 2
+            },
+            {
+              "c": "1,780",
+              "l": "$174",
+              "heat": 2
+            },
+            {
+              "c": "2,180",
+              "l": "$151",
+              "heat": 1
+            }
+          ]
+        }
       },
       {
-        "label": "61–120 days"
+        "label": "61–120 days",
+        "__raw": {
+          "key": "mid",
+          "label": "Middle 40%",
+          "note": "$104 median",
+          "cells": [
+            {
+              "c": "3,120",
+              "l": "$118",
+              "heat": 2
+            },
+            {
+              "c": "4,060",
+              "l": "$109",
+              "heat": 2
+            },
+            {
+              "c": "3,440",
+              "l": "$96",
+              "heat": 1
+            },
+            {
+              "c": "5,740",
+              "l": "$78",
+              "heat": 0
+            }
+          ]
+        }
       },
       {
-        "label": "120+ days"
+        "label": "120+ days",
+        "__raw": {
+          "key": "low",
+          "label": "Bottom 30%",
+          "note": "$41 median",
+          "cells": [
+            {
+              "c": "1,180",
+              "l": "$52",
+              "heat": 1
+            },
+            {
+              "c": "1,640",
+              "l": "$46",
+              "heat": 1
+            },
+            {
+              "c": "1,690",
+              "l": "$38",
+              "heat": 0
+            },
+            {
+              "c": "3,340",
+              "l": "$27",
+              "heat": 0
+            }
+          ]
+        }
       }
     ],
     "rfmGrid": [
@@ -232,7 +340,56 @@
         "verdictTint": "var(--green-50)",
         "verdictTone": "var(--green-700)",
         "mark": "transparent",
-        "bg": "transparent"
+        "bg": "transparent",
+        "__raw": {
+          "id": "welcome",
+          "name": "Welcome · 3 emails",
+          "meta": "email · trigger: first order",
+          "reach": "4,820",
+          "cvr": "3.1%",
+          "rpr": "$0.94",
+          "lift": "+$0.41",
+          "liftTone": "var(--green-700)",
+          "verdict": "working",
+          "verdictTint": "var(--green-50)",
+          "verdictTone": "var(--green-700)",
+          "badge": "holdout 10% · significant",
+          "tint": "var(--green-50)",
+          "tone": "var(--green-700)",
+          "body": "Cleanest measurement in the set. Read over 14 weeks with a stable 10% holdout, and the lift concentrates in email two rather than the discount in email three.",
+          "stats": [
+            [
+              "10%",
+              "holdout"
+            ],
+            [
+              "482",
+              "held back"
+            ],
+            [
+              "+77%",
+              "vs holdout"
+            ],
+            [
+              "p<0.01",
+              "significance"
+            ]
+          ],
+          "bars": [
+            [
+              "Treated",
+              "$0.94",
+              100,
+              "var(--mod-hubs)"
+            ],
+            [
+              "Holdout",
+              "$0.53",
+              56,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       },
       {
         "name": "Browse abandon",
@@ -246,7 +403,56 @@
         "verdictTint": "var(--amber-50)",
         "verdictTone": "var(--amber-700)",
         "mark": "transparent",
-        "bg": "transparent"
+        "bg": "transparent",
+        "__raw": {
+          "id": "browse",
+          "name": "Browse abandon",
+          "meta": "email · trigger: 2+ product views",
+          "reach": "9,140",
+          "cvr": "1.8%",
+          "rpr": "$0.62",
+          "lift": "+$0.11",
+          "liftTone": "var(--amber-700)",
+          "verdict": "thin",
+          "verdictTint": "var(--amber-50)",
+          "verdictTone": "var(--amber-700)",
+          "badge": "holdout 10% · marginal",
+          "tint": "var(--amber-50)",
+          "tone": "var(--amber-700)",
+          "body": "Highest reach and the smallest lift. Most of the measured revenue would have arrived anyway — the flow is mostly taking credit for organic return visits.",
+          "stats": [
+            [
+              "10%",
+              "holdout"
+            ],
+            [
+              "914",
+              "held back"
+            ],
+            [
+              "+22%",
+              "vs holdout"
+            ],
+            [
+              "p=0.09",
+              "significance"
+            ]
+          ],
+          "bars": [
+            [
+              "Treated",
+              "$0.62",
+              100,
+              "var(--mod-hubs)"
+            ],
+            [
+              "Holdout",
+              "$0.51",
+              82,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       },
       {
         "name": "Cart abandon",
@@ -260,7 +466,56 @@
         "verdictTint": "var(--green-50)",
         "verdictTone": "var(--green-700)",
         "mark": "transparent",
-        "bg": "transparent"
+        "bg": "transparent",
+        "__raw": {
+          "id": "cart",
+          "name": "Cart abandon",
+          "meta": "email + SMS · trigger: cart idle 4h",
+          "reach": "6,310",
+          "cvr": "8.4%",
+          "rpr": "$2.84",
+          "lift": "+$0.38",
+          "liftTone": "var(--green-700)",
+          "verdict": "working",
+          "verdictTint": "var(--green-50)",
+          "verdictTone": "var(--green-700)",
+          "badge": "holdout 10% · significant",
+          "tint": "var(--green-50)",
+          "tone": "var(--green-700)",
+          "body": "Best revenue per recipient by a distance, but the holdout shows 62% of those orders would have landed without the message. The claim is the $0.38, not the $2.84.",
+          "stats": [
+            [
+              "10%",
+              "holdout"
+            ],
+            [
+              "631",
+              "held back"
+            ],
+            [
+              "+15%",
+              "vs holdout"
+            ],
+            [
+              "p<0.01",
+              "significance"
+            ]
+          ],
+          "bars": [
+            [
+              "Treated",
+              "$2.84",
+              100,
+              "var(--mod-hubs)"
+            ],
+            [
+              "Holdout",
+              "$2.46",
+              87,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       },
       {
         "name": "Post-purchase thank-you",
@@ -274,7 +529,56 @@
         "verdictTint": "var(--rose-50)",
         "verdictTone": "var(--rose-700)",
         "mark": "transparent",
-        "bg": "transparent"
+        "bg": "transparent",
+        "__raw": {
+          "id": "thanks",
+          "name": "Post-purchase thank-you",
+          "meta": "email · trigger: order shipped",
+          "reach": "7,540",
+          "cvr": "0.9%",
+          "rpr": "$0.18",
+          "lift": "no holdout",
+          "liftTone": "var(--rose-700)",
+          "verdict": "unmeasured",
+          "verdictTint": "var(--rose-50)",
+          "verdictTone": "var(--rose-700)",
+          "badge": "no holdout · claim unusable",
+          "tint": "var(--rose-50)",
+          "tone": "var(--rose-700)",
+          "body": "Runs to everyone, so there is nothing to compare against. It also occupies the day 3–5 slot the post-first-delivery moment needs, which is why it appears in the modification list rather than the kill list.",
+          "stats": [
+            [
+              "0%",
+              "holdout"
+            ],
+            [
+              "0",
+              "held back"
+            ],
+            [
+              "n/a",
+              "vs holdout"
+            ],
+            [
+              "none",
+              "significance"
+            ]
+          ],
+          "bars": [
+            [
+              "Treated",
+              "$0.18",
+              100,
+              "var(--ink-400)"
+            ],
+            [
+              "Holdout",
+              "not run",
+              0,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       },
       {
         "name": "Win-back · 180 day",
@@ -288,7 +592,56 @@
         "verdictTint": "var(--rose-50)",
         "verdictTone": "var(--rose-700)",
         "mark": "transparent",
-        "bg": "transparent"
+        "bg": "transparent",
+        "__raw": {
+          "id": "winback",
+          "name": "Win-back · 180 day",
+          "meta": "email · trigger: 180 days idle",
+          "reach": "3,220",
+          "cvr": "1.1%",
+          "rpr": "$0.31",
+          "lift": "+$0.04",
+          "liftTone": "var(--rose-700)",
+          "verdict": "not proven",
+          "verdictTint": "var(--rose-50)",
+          "verdictTone": "var(--rose-700)",
+          "badge": "holdout 5% · not significant",
+          "tint": "var(--rose-50)",
+          "tone": "var(--rose-700)",
+          "body": "Fires 90 days after the window where win-back actually works, and the 15% offer is spent on profiles that were already gone. The 5% holdout is too small to read at this reach.",
+          "stats": [
+            [
+              "5%",
+              "holdout"
+            ],
+            [
+              "161",
+              "held back"
+            ],
+            [
+              "+15%",
+              "vs holdout"
+            ],
+            [
+              "p=0.41",
+              "significance"
+            ]
+          ],
+          "bars": [
+            [
+              "Treated",
+              "$0.31",
+              100,
+              "var(--mod-hubs)"
+            ],
+            [
+              "Holdout",
+              "$0.27",
+              87,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       },
       {
         "name": "VIP early access",
@@ -302,7 +655,56 @@
         "verdictTint": "var(--rose-50)",
         "verdictTone": "var(--rose-700)",
         "mark": "transparent",
-        "bg": "transparent"
+        "bg": "transparent",
+        "__raw": {
+          "id": "vip",
+          "name": "VIP early access",
+          "meta": "email · trigger: top decile + launch",
+          "reach": "1,180",
+          "cvr": "6.2%",
+          "rpr": "$3.10",
+          "lift": "no holdout",
+          "liftTone": "var(--rose-700)",
+          "verdict": "unmeasured",
+          "verdictTint": "var(--rose-50)",
+          "verdictTone": "var(--rose-700)",
+          "badge": "no holdout · claim unusable",
+          "tint": "var(--rose-50)",
+          "tone": "var(--rose-700)",
+          "body": "Marketing reports this as the highest-performing flow in the account. It is also the one with no control group — the audience is the top pLTV decile, who buy at this rate regardless.",
+          "stats": [
+            [
+              "0%",
+              "holdout"
+            ],
+            [
+              "0",
+              "held back"
+            ],
+            [
+              "n/a",
+              "vs holdout"
+            ],
+            [
+              "none",
+              "significance"
+            ]
+          ],
+          "bars": [
+            [
+              "Treated",
+              "$3.10",
+              100,
+              "var(--ink-400)"
+            ],
+            [
+              "Holdout",
+              "not run",
+              0,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       },
       {
         "name": "Consumable replenishment",
@@ -316,7 +718,56 @@
         "verdictTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
         "verdictTone": "var(--mod-hubs)",
         "mark": "var(--mod-hubs)",
-        "bg": "color-mix(in oklab, var(--mod-hubs) 6%, white)"
+        "bg": "color-mix(in oklab, var(--mod-hubs) 6%, white)",
+        "__raw": {
+          "id": "replen-gap",
+          "name": "Consumable replenishment",
+          "meta": "not built · the gap on this card",
+          "reach": "4,180",
+          "cvr": "—",
+          "rpr": "—",
+          "lift": "projected +$1.46",
+          "liftTone": "var(--mod-hubs)",
+          "verdict": "missing",
+          "verdictTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+          "verdictTone": "var(--mod-hubs)",
+          "badge": "proposed · holdout 10% at creation",
+          "tint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+          "tone": "var(--mod-hubs)",
+          "body": "No journey covers the 42-day repurchase window. Projection uses the welcome flow’s measured lift on the same cohort, discounted 30% for the weaker trigger, and the holdout is designed in before launch rather than added after.",
+          "stats": [
+            [
+              "10%",
+              "holdout"
+            ],
+            [
+              "418",
+              "to hold"
+            ],
+            [
+              "$6.1K",
+              "per month"
+            ],
+            [
+              "6 wks",
+              "to read"
+            ]
+          ],
+          "bars": [
+            [
+              "Projected treated",
+              "$1.46",
+              100,
+              "var(--mod-hubs)"
+            ],
+            [
+              "Projected holdout",
+              "$0.00",
+              0,
+              "var(--ink-300)"
+            ]
+          ]
+        }
       }
     ],
     "detail": {

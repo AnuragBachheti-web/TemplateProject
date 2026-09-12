@@ -114,4 +114,37 @@ describe('validateManifest', () => {
       expect(problems.some((p) => p.includes('"sections"'))).toBe(true)
     })
   })
+
+  describe('block.dependencies (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §5/§9/§11)', () => {
+    it('accepts a block whose dependencies reference other real slotNames in this same manifest', () => {
+      const manifest = {
+        ...validManifest,
+        blocks: [
+          { slotName: 'tol', blockType: 'slider', binding: 'data.tol', dependencies: ['slate'] },
+          { slotName: 'slate', blockType: 'table', binding: 'data.slate' },
+        ],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('flags a dependency referencing a slotName that does not exist in this manifest', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        blocks: [{ slotName: 'tol', blockType: 'slider', binding: 'data.tol', dependencies: ['doesNotExist'] }],
+      })
+      expect(problems.some((p) => p.includes('dependencies') && p.includes('doesNotExist'))).toBe(true)
+    })
+
+    it('flags a non-array "dependencies"', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        blocks: [{ slotName: 'tol', blockType: 'slider', binding: 'data.tol', dependencies: 'slate' }],
+      })
+      expect(problems.some((p) => p.includes('dependencies'))).toBe(true)
+    })
+
+    it('is fully optional — a manifest with no block.dependencies anywhere is still valid', () => {
+      expect(validateManifest(validManifest)).toEqual([])
+    })
+  })
 })

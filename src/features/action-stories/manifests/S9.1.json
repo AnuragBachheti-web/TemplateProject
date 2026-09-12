@@ -22,7 +22,7 @@
       },
       {
         "slotName": "roles",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.roles"
       },
       {
@@ -109,6 +109,48 @@
     ],
     "blocks": [
       {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroSub",
+        "blockType": "text",
+        "binding": "data.heroSub",
+        "section": "recommendation",
+        "role": "heroSub",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "table",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "moveBar",
+        "blockType": "labelValueList",
+        "binding": "data.moveBar",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -149,48 +191,6 @@
         "blockType": "text",
         "binding": "data.confLabel",
         "section": "summary"
-      },
-      {
-        "slotName": "heroTitle",
-        "blockType": "text",
-        "binding": "data.heroTitle",
-        "section": "recommendation",
-        "role": "hero",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
-        "slotName": "heroSub",
-        "blockType": "text",
-        "binding": "data.heroSub",
-        "section": "recommendation",
-        "role": "heroSub",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
-        "slotName": "heroMetrics",
-        "blockType": "barChart",
-        "binding": "data.heroMetrics",
-        "section": "recommendation",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
-        "slotName": "moveBar",
-        "blockType": "labelValueList",
-        "binding": "data.moveBar",
-        "section": "recommendation",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
       },
       {
         "slotName": "slates",
@@ -278,6 +278,11 @@
         "region": "rail"
       },
       {
+        "id": "execution",
+        "title": "Execution",
+        "region": "main"
+      },
+      {
         "id": "details",
         "title": "Details",
         "region": "main"
@@ -312,7 +317,7 @@
         "slotName": "dests",
         "blockType": "itemQueue",
         "binding": "data.dests",
-        "section": "details"
+        "section": "execution"
       },
       {
         "slotName": "progressPct",
@@ -352,7 +357,7 @@
       },
       {
         "slotName": "watches",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.watches",
         "section": "details"
       },

@@ -137,7 +137,47 @@
             "icon": "fa-solid fa-list",
             "label": "claimant filing history"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "ip",
+          "kind": "legal",
+          "title": "Counter-notice on the IP complaint",
+          "chip": "legal review",
+          "href": "S10.3-4-execute.dc.html",
+          "chipTint": "var(--rose-50)",
+          "chipTone": "var(--rose-700)",
+          "gate": "counsel files",
+          "gateIcon": "fa-solid fa-scale-balanced",
+          "body": "Validity is weak on the claimant’s side: no registered mark in our category and our listing predates the cited design by 16 months. The pack is assembled; counsel reads it and files.",
+          "deadline": "4 days",
+          "dlTone": "var(--rose-700)",
+          "protects": "$1.8K/day",
+          "effort": "30 min",
+          "kindBg": "var(--rose-500)",
+          "kindFg": "var(--ink-0)",
+          "hasDraft": true,
+          "draftTitle": "Counter-notice draft · for counsel",
+          "reviewer": "R. Vance · counsel",
+          "draft": "We dispute complaint 8814-2291 in full. The complainant’s registration (filed Mar 2025) covers cookware handle geometry and does not extend to pan bodies. Our listing for the carbon steel skillet 10\" first published 14 Nov 2023, sixteen months prior, with the original image set attached. The product is manufactured on our supplier’s standard tooling under the authorisation letter enclosed. We request immediate reinstatement and note that the complainant has filed nine comparable complaints in twelve months, four subsequently withdrawn.",
+          "attachments": [
+            {
+              "icon": "fa-solid fa-file-shield",
+              "label": "listing record Nov 2023"
+            },
+            {
+              "icon": "fa-solid fa-folder-open",
+              "label": "Kessler authorisation"
+            },
+            {
+              "icon": "fa-solid fa-images",
+              "label": "original image set"
+            },
+            {
+              "icon": "fa-solid fa-list",
+              "label": "claimant filing history"
+            }
+          ]
+        }
       },
       {
         "kind": "listing fix",
@@ -175,7 +215,37 @@
             "icon": "fa-solid fa-file-lines",
             "label": "template v3"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "copy",
+          "kind": "listing fix",
+          "title": "Correct the condition phrase on nine listings",
+          "chip": "S9.6 listings",
+          "href": "S9.6-3-decide.dc.html",
+          "chipTint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+          "chipTone": "var(--mod-intel)",
+          "body": "Two are suppressed; seven carry the same 2024 template phrase and have not been flagged yet. Fixing only the suppressed pair leaves seven waiting to happen.",
+          "deadline": "6 days",
+          "dlTone": "var(--amber-700)",
+          "protects": "$2.1K/day",
+          "effort": "20 min",
+          "kindBg": "var(--mod-intel)",
+          "kindFg": "var(--ink-0)",
+          "hasDraft": true,
+          "draftTitle": "Reinstatement request · with diff",
+          "reviewer": "A. Castellanos",
+          "draft": "The phrase \"like new performance\" has been removed from all nine affected listings and from the source template, replaced with \"filtration performance\". No condition claim remains in any listing. Diff attached for both suppressed items. We request reinstatement of the two suppressed listings and confirm the remaining seven were corrected proactively.",
+          "attachments": [
+            {
+              "icon": "fa-solid fa-code-compare",
+              "label": "copy diff · 9 listings"
+            },
+            {
+              "icon": "fa-solid fa-file-lines",
+              "label": "template v3"
+            }
+          ]
+        }
       },
       {
         "kind": "operational",
@@ -234,7 +304,76 @@
         "limitY": "21.0",
         "floorY": "39.8",
         "startY": "32.3",
-        "endY": "60.5"
+        "endY": "60.5",
+        "__raw": {
+          "key": "buffer",
+          "kind": "operational",
+          "title": "Handling-time buffer on weekend orders",
+          "chip": "S9.18 fulfilment",
+          "href": "S9.18-3-decide.dc.html",
+          "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+          "chipTone": "var(--mod-inventory)",
+          "body": "One extra day of handling on Fri–Sun orders. Fixes 78% of the late-shipment cause and the shared 71% of the Walmart on-time cause with one change — and nothing is submitted to anyone.",
+          "deadline": "9 days",
+          "dlTone": "var(--amber-700)",
+          "protects": "$11.5K/day",
+          "effort": "1 day",
+          "kindBg": "var(--green-500)",
+          "kindFg": "var(--ink-0)",
+          "hasCurve": true,
+          "curveNote": "3.4% → 1.9% within 14 days",
+          "curve": [
+            3.4,
+            3.3,
+            3,
+            2.6,
+            2.3,
+            2.1,
+            1.9,
+            1.9
+          ],
+          "doNothing": [
+            3.4,
+            3.5,
+            3.7,
+            3.9,
+            4.1,
+            4.3,
+            4.4,
+            4.6
+          ],
+          "limit": 4,
+          "floor": 3,
+          "lo": 1.5,
+          "hi": 4.8,
+          "changes": [
+            {
+              "label": "Late shipment · day 14",
+              "value": "1.9%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Walmart on-time · day 14",
+              "value": "96.9%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Promise shown at checkout",
+              "value": "+1 day",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Conversion effect",
+              "value": "−0.3pp",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Plan of action needed",
+              "value": "none",
+              "tone": "var(--green-700)"
+            }
+          ]
+        }
       },
       {
         "kind": "operational",
@@ -260,7 +399,24 @@
         "hasCurve": false,
         "changes": [],
         "hasDraft": false,
-        "attachments": []
+        "attachments": [],
+        "__raw": {
+          "key": "roster",
+          "kind": "operational",
+          "title": "Two extra Monday pickers at the East node",
+          "chip": "S9.18 fulfilment",
+          "href": "S9.18-4-execute.dc.html",
+          "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+          "chipTone": "var(--mod-inventory)",
+          "body": "Addresses the 11% of late orders caused by oversize items waiting on a second picker. Costs 3PL labour and does not touch the promise shown at checkout.",
+          "deadline": "9 days",
+          "dlTone": "var(--ink-700)",
+          "protects": "$1.4K/day",
+          "effort": "3 days",
+          "kindBg": "var(--green-500)",
+          "kindFg": "var(--ink-0)",
+          "hasCurve": false
+        }
       },
       {
         "kind": "documents",
@@ -283,7 +439,21 @@
         "hasCurve": false,
         "changes": [],
         "hasDraft": false,
-        "attachments": []
+        "attachments": [],
+        "__raw": {
+          "key": "docs",
+          "kind": "documents",
+          "title": "Answer the authenticity request from the vault",
+          "chip": null,
+          "body": "Three invoices and three authorisation letters, all current. Fifteen minutes of assembly and a human read. No revenue at risk today, and $4.2K a day if it goes unanswered.",
+          "deadline": "11 days",
+          "dlTone": "var(--ink-700)",
+          "protects": "$4.2K/day",
+          "effort": "15 min",
+          "kindBg": "var(--ink-400)",
+          "kindFg": "var(--ink-0)",
+          "hasDraft": false
+        }
       }
     ],
     "timeline": [

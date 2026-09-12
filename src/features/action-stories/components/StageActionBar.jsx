@@ -1,12 +1,21 @@
+import { useEffect, useRef, useState } from 'react';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
+import ConfirmDialog from '../ui/ConfirmDialog';
+import { useToast } from '../ui/Toast';
+import Alert from '../ui/Alert';
 
 /**
- * The Confirm/Approve/Start button on a decide/execute stage. Now backed by a real mutation
- * lifecycle (click -> loading -> success/failure -> persisted) via useActionStoriesStore's
+ * The Confirm/Approve/Start button on a decide/execute stage. Backed by a real mutation lifecycle
+ * (click -> confirm dialog -> loading -> success/failure -> persisted) via useActionStoriesStore's
  * `confirmStage` — see services/actionStoriesMutations.js for exactly what "real" means here
  * today (no live backend exists yet; genuinely persisted, genuinely async, genuinely failable,
  * ready to point at a real endpoint later) versus AUDIT_REPORT.md §13's previous finding
  * ("UI exists. It does not perform any business operation").
+ *
+ * The button itself no longer fires the mutation directly — it opens a ConfirmDialog first. This
+ * used to be a single click with no way back (an "execute" stage genuinely writes live prices once
+ * a real backend exists — INTEGRATION.md §3); gating it behind an explicit second confirmation is
+ * Nielsen Norman's own "error prevention" heuristic, not decoration.
  *
  * Navigation (the sidebar, StepTracker) stays entirely separate from this — clicking Approve never
  * navigates anywhere, and navigating away never affects an in-flight or completed confirmation.
@@ -16,6 +25,32 @@ export default function StageActionBar({ code, stageKey, ctaLabel }) {
   const isPending = useActionStoriesStore((s) => s.isStagePending(code, stageKey));
   const error = useActionStoriesStore((s) => s.getStageError(code, stageKey));
   const confirmStage = useActionStoriesStore((s) => s.confirmStage);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const { notify } = useToast();
+  const label = ctaLabel || (stageKey === 'decide' ? 'Approve' : 'Start');
+
+  // Closes the dialog AND raises a toast on the falling edge of `isPending` — the exact moment a
+  // mutation this dialog was gating just settled (confirmed, or failed) — never merely "no longer
+  // pending", which a STALE error from a previous failed attempt would also satisfy. Without
+  // tracking the edge, only whether `error` is truthy right now, reopening the dialog for a retry
+  // (error still sitting in state from the last failure, nothing pending yet) would close it again
+  // on the very next render, and would re-toast the OLD failure a second time.
+  //
+  // This toast is deliberately IN ADDITION TO, not instead of, the persistent inline
+  // Confirmed/error indicator below — a transient notice for the moment (even if the user has
+  // scrolled away from this bar), backed by a status that stays visible for as long as it's true.
+  const wasPendingRef = useRef(false);
+  useEffect(() => {
+    if (wasPendingRef.current && !isPending) {
+      setDialogOpen(false);
+      if (isConfirmed) {
+        notify(`${label} confirmed for ${code}.`, { tone: 'success' });
+      } else if (error) {
+        notify(error.userMessage, { tone: 'critical' });
+      }
+    }
+    wasPendingRef.current = isPending;
+  }, [isPending, isConfirmed, error, notify, label, code]);
 
   // Eligibility: only a decide/execute stage carries a real business action at all — a
   // reason/analyze/live stage has nothing to approve. (No per-user permission system exists in
@@ -24,30 +59,26 @@ export default function StageActionBar({ code, stageKey, ctaLabel }) {
   // dependency this component cannot fabricate.)
   if (stageKey !== 'decide' && stageKey !== 'execute') return null;
 
-  const label = ctaLabel || (stageKey === 'decide' ? 'Approve' : 'Start');
-
   return (
     <div className="mx-auto flex w-full max-w-page items-center gap-3 border-t border-rf-border-subtle bg-rf-surface-canvas px-6 py-3.5">
+      {/* Alert.jsx's compact pill — the same shared component every persistent status/warning
+          elsewhere should use, not a bespoke inline `role="alert"`/`role="status"` pill re-hand-
+          -rolled per call site (this was the very last one of those left). */}
       {isConfirmed && (
-        <span role="status" className="inline-flex items-center gap-1.5 text-[12px] font-medium text-rf-status-success">
-          <i className="fa-solid fa-circle-check text-[11px]" aria-hidden="true" />
+        <Alert tone="success" compact>
           Confirmed
-        </span>
+        </Alert>
       )}
       {error && !isConfirmed && (
-        <span
-          role="alert"
-          className="inline-flex items-center gap-2 rounded-full bg-rf-status-critical/10 px-3 py-1 text-[11.5px] font-medium text-rf-status-critical"
-        >
-          <i className="fa-solid fa-triangle-exclamation text-[10px]" aria-hidden="true" />
+        <Alert tone="critical" compact>
           {error.userMessage}
-        </span>
+        </Alert>
       )}
       <button
         type="button"
         disabled={isConfirmed || isPending}
         aria-busy={isPending}
-        onClick={() => confirmStage(code, stageKey)}
+        onClick={() => setDialogOpen(true)}
         className={`ml-auto inline-flex h-10 items-center gap-2 rounded-lg px-[18px] text-[13.5px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
           isConfirmed
             ? 'cursor-default bg-rf-surface-sunken text-rf-text-tertiary'
@@ -65,6 +96,16 @@ export default function StageActionBar({ code, stageKey, ctaLabel }) {
         {isConfirmed ? 'Done' : isPending ? 'Confirming…' : error ? `Retry ${label}` : label}
         {!isConfirmed && !isPending && <i className="fa-solid fa-arrow-right text-[11px]" aria-hidden="true" />}
       </button>
+      <ConfirmDialog
+        open={dialogOpen}
+        title={`${label} this stage?`}
+        description={`This performs a real action against ${code}'s ${stageKey} stage and can't be undone from here.`}
+        confirmLabel={label}
+        cancelLabel="Cancel"
+        onConfirm={() => confirmStage(code, stageKey)}
+        onCancel={() => setDialogOpen(false)}
+        loading={isPending}
+      />
     </div>
   );
 }

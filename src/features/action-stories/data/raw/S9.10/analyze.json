@@ -41,7 +41,108 @@
         "vy": "8.0",
         "value": "$24.00",
         "valTone": "var(--ink-700)",
-        "label": "PRICE"
+        "label": "PRICE",
+        "__raw": {
+          "id": "a1",
+          "name": "Bamboo utensil crock",
+          "sku": "NW-STO-4480 · Amazon + DTC",
+          "role": "Supporting",
+          "cls": "structural",
+          "driver": "structural",
+          "cm": -4.1,
+          "bleed": -1.2,
+          "units": 620,
+          "price": 24,
+          "lines": [
+            [
+              "Price",
+              24
+            ],
+            [
+              "COGS",
+              -10.56
+            ],
+            [
+              "Freight",
+              -1.49
+            ],
+            [
+              "Fees",
+              -3.6
+            ],
+            [
+              "Fulfilment",
+              -2.74
+            ],
+            [
+              "Returns",
+              -2.35
+            ],
+            [
+              "Ads",
+              -3.5
+            ],
+            [
+              "Storage",
+              -0.74
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Structural · COGS and freight",
+              "share": "46%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "landed cost is 50% of price before a single fee"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "24%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "9.8% return rate · lid warping complaints"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "19%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "$3.50/unit allocated · 0.6× mROAS"
+            },
+            {
+              "label": "Fee-driven",
+              "share": "11%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "standard referral, correctly classified"
+            }
+          ],
+          "cls_label": "Structural — no single lever fixes it",
+          "cls_copy": "Landed cost alone eats half the price. Cutting ads entirely still leaves the item at −$0.60 a unit, and price headroom is 4% before it prices above the category leader. Realify classifies this as structural.",
+          "tests": [
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+4% before category leader",
+              "result": "−$3.14",
+              "verdict": "still negative",
+              "ok": false
+            },
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$3.50/unit",
+              "result": "−$0.60",
+              "verdict": "still negative",
+              "ok": false
+            },
+            {
+              "lever": "Fee reclassification",
+              "headroom": "no error found",
+              "result": "−$4.10",
+              "verdict": "no change",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "129.5",
@@ -56,7 +157,109 @@
         "vy": "8.0",
         "value": "−$10.56",
         "valTone": "var(--rose-700)",
-        "label": "COGS"
+        "label": "COGS",
+        "__raw": {
+          "id": "a2",
+          "name": "Silicone spatula trio",
+          "sku": "NW-UTL-4210 · Amazon",
+          "role": "Traffic Driver",
+          "cls": "fixable",
+          "driver": "ad-driven",
+          "cm": -2.4,
+          "bleed": -0.9,
+          "units": 880,
+          "price": 18.5,
+          "route": "ads",
+          "lines": [
+            [
+              "Price",
+              18.5
+            ],
+            [
+              "COGS",
+              -6.3
+            ],
+            [
+              "Freight",
+              -0.92
+            ],
+            [
+              "Fees",
+              -2.78
+            ],
+            [
+              "Fulfilment",
+              -3.1
+            ],
+            [
+              "Returns",
+              -0.74
+            ],
+            [
+              "Ads",
+              -6.4
+            ],
+            [
+              "Storage",
+              -0.66
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Ad-driven",
+              "share": "71%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "$6.40/unit allocated · broad match on a $18 item"
+            },
+            {
+              "label": "Fulfilment",
+              "share": "16%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "oversize-light band · correct"
+            },
+            {
+              "label": "Structural",
+              "share": "9%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "COGS is 34% of price · healthy"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "4%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "2.1% return rate"
+            }
+          ],
+          "cls_label": "Fixable — one lever turns it positive",
+          "cls_copy": "This item is not a bad product, it is a bad campaign. Allocated ads run $6.40 on an $18.50 item because it sits in a broad-match ad group flagged in story 9.7. Cutting the broad match leaves $2.10 of true CM per unit.",
+          "tests": [
+            {
+              "lever": "Cut broad-match ads",
+              "headroom": "$6.40/unit allocated",
+              "result": "+$2.10",
+              "verdict": "turns positive",
+              "ok": true
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+9% before rival parity",
+              "result": "−$0.74",
+              "verdict": "not enough alone",
+              "ok": false
+            },
+            {
+              "lever": "Fee reclassification",
+              "headroom": "no error found",
+              "result": "−$2.40",
+              "verdict": "no change",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "234.0",
@@ -71,7 +274,109 @@
         "vy": "72.2",
         "value": "−$1.49",
         "valTone": "var(--rose-700)",
-        "label": "FREIGHT"
+        "label": "FREIGHT",
+        "__raw": {
+          "id": "a3",
+          "name": "Enamel camp plate 10in",
+          "sku": "NW-CAM-2260 · Walmart",
+          "role": "Supporting",
+          "cls": "fixable",
+          "driver": "fee-driven",
+          "cm": -1.8,
+          "bleed": -0.5,
+          "units": 410,
+          "price": 21,
+          "route": "fees",
+          "lines": [
+            [
+              "Price",
+              21
+            ],
+            [
+              "COGS",
+              -7.14
+            ],
+            [
+              "Freight",
+              -1.05
+            ],
+            [
+              "Fees",
+              -3.15
+            ],
+            [
+              "Fulfilment",
+              -6.2
+            ],
+            [
+              "Returns",
+              -0.84
+            ],
+            [
+              "Ads",
+              -3.02
+            ],
+            [
+              "Storage",
+              -0.6
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Fee-driven · misclassified size",
+              "share": "62%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "billed as standard-large since March · $2.90/unit error"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "21%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "$3.02/unit · defensible at correct fees"
+            },
+            {
+              "label": "Structural",
+              "share": "12%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "COGS 34% of price"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "5%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "4.0% return rate"
+            }
+          ],
+          "cls_label": "Fixable — a fee error, not a product problem",
+          "cls_copy": "The dimensional record has this plate in the standard-large band. Measured, it is standard-small. The reclassification is worth $2.90 a unit and is recoverable for 90 days of past charges.",
+          "tests": [
+            {
+              "lever": "Fee reclassification",
+              "headroom": "$2.90/unit + 90 d recovery",
+              "result": "+$1.10",
+              "verdict": "turns positive",
+              "ok": true
+            },
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$3.02/unit",
+              "result": "+$1.22",
+              "verdict": "turns positive",
+              "ok": true
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+6% before rival parity",
+              "result": "−$0.54",
+              "verdict": "not enough alone",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "338.4",
@@ -86,7 +391,108 @@
         "vy": "81.3",
         "value": "−$3.60",
         "valTone": "var(--rose-700)",
-        "label": "FEES"
+        "label": "FEES",
+        "__raw": {
+          "id": "a4",
+          "name": "Glass storage lid · 4in",
+          "sku": "NW-GLS-3480 · Amazon",
+          "role": "Supporting",
+          "cls": "structural",
+          "driver": "returns-driven",
+          "cm": -6.2,
+          "bleed": -0.8,
+          "units": 340,
+          "price": 12,
+          "lines": [
+            [
+              "Price",
+              12
+            ],
+            [
+              "COGS",
+              -4.32
+            ],
+            [
+              "Freight",
+              -0.72
+            ],
+            [
+              "Fees",
+              -1.8
+            ],
+            [
+              "Fulfilment",
+              -3.4
+            ],
+            [
+              "Returns",
+              -5.28
+            ],
+            [
+              "Ads",
+              -2.3
+            ],
+            [
+              "Storage",
+              -0.38
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Returns-driven",
+              "share": "58%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "31% return rate · fit complaints on 3 base sizes"
+            },
+            {
+              "label": "Fulfilment",
+              "share": "22%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "fragile handling surcharge"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "13%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "$2.30/unit allocated"
+            },
+            {
+              "label": "Structural",
+              "share": "7%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "COGS 36% of price"
+            }
+          ],
+          "cls_label": "Structural — the return rate is the product",
+          "cls_copy": "A 31% return rate on a $12 item cannot be fixed with price or ads. The complaints are about fit across three base sizes, which is a design problem. Story 9.12 has the quality case open.",
+          "tests": [
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$2.30/unit",
+              "result": "−$3.90",
+              "verdict": "still negative",
+              "ok": false
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+11% before rival parity",
+              "result": "−$4.88",
+              "verdict": "still negative",
+              "ok": false
+            },
+            {
+              "lever": "Fee reclassification",
+              "headroom": "no error found",
+              "result": "−$6.20",
+              "verdict": "no change",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "442.8",
@@ -101,7 +507,108 @@
         "vy": "103.2",
         "value": "−$2.74",
         "valTone": "var(--rose-700)",
-        "label": "FULFILMENT"
+        "label": "FULFILMENT",
+        "__raw": {
+          "id": "a5",
+          "name": "Wire fruit basket",
+          "sku": "NW-STO-4520 · DTC",
+          "role": "Supporting",
+          "cls": "structural",
+          "driver": "structural",
+          "cm": -3.4,
+          "bleed": -0.6,
+          "units": 280,
+          "price": 32,
+          "lines": [
+            [
+              "Price",
+              32
+            ],
+            [
+              "COGS",
+              -15.36
+            ],
+            [
+              "Freight",
+              -3.84
+            ],
+            [
+              "Fees",
+              -0.96
+            ],
+            [
+              "Fulfilment",
+              -8.6
+            ],
+            [
+              "Returns",
+              -1.28
+            ],
+            [
+              "Ads",
+              -4.4
+            ],
+            [
+              "Storage",
+              -0.96
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Structural · freight and fulfilment",
+              "share": "54%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "bulky and light · worst possible shipping profile"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "26%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "$4.40/unit allocated"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "12%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "4.0% return rate"
+            },
+            {
+              "label": "Fee-driven",
+              "share": "8%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "DTC only · no marketplace fees"
+            }
+          ],
+          "cls_label": "Structural — dimensional weight kills it",
+          "cls_copy": "Bulky and light is the worst shipping profile there is, and no lever changes the box. Cutting ads gets it to $1.00 a unit, but at 280 units a month that is $280 of CM for the shelf space and the storage.",
+          "tests": [
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$4.40/unit",
+              "result": "+$1.00",
+              "verdict": "barely positive",
+              "ok": false
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+3% before rival parity",
+              "result": "−$2.44",
+              "verdict": "still negative",
+              "ok": false
+            },
+            {
+              "lever": "Fee reclassification",
+              "headroom": "no error found",
+              "result": "−$3.40",
+              "verdict": "no change",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "547.3",
@@ -116,7 +623,109 @@
         "vy": "119.9",
         "value": "−$2.35",
         "valTone": "var(--rose-700)",
-        "label": "RETURNS"
+        "label": "RETURNS",
+        "__raw": {
+          "id": "a6",
+          "name": "Linen napkin 6-pk · sage",
+          "sku": "NW-TEX-5240 · Amazon",
+          "role": "Core",
+          "cls": "exception",
+          "driver": "structural",
+          "cm": -1.4,
+          "bleed": -0.4,
+          "units": 290,
+          "price": 34,
+          "exception": "Contractual · Priya Malhotra",
+          "lines": [
+            [
+              "Price",
+              34
+            ],
+            [
+              "COGS",
+              -17.68
+            ],
+            [
+              "Freight",
+              -2.04
+            ],
+            [
+              "Fees",
+              -5.1
+            ],
+            [
+              "Fulfilment",
+              -4.4
+            ],
+            [
+              "Returns",
+              -1.7
+            ],
+            [
+              "Ads",
+              -3.6
+            ],
+            [
+              "Storage",
+              -0.88
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Structural · COGS",
+              "share": "61%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "supplier agreement fixes the cost through Q1"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "19%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "$3.60/unit allocated"
+            },
+            {
+              "label": "Fee-driven",
+              "share": "13%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "correct classification"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "7%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "5.0% return rate"
+            }
+          ],
+          "cls_label": "Structural — but held by a registry exception",
+          "cls_copy": "The supplier agreement requires this colourway through Q1 next year, and Priya Malhotra sponsors the exception. Realify still shows the number every month: it is costing $0.4K a month to honour the contract.",
+          "tests": [
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$3.60/unit",
+              "result": "+$2.20",
+              "verdict": "turns positive",
+              "ok": true
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+2% before rival parity",
+              "result": "−$0.72",
+              "verdict": "not enough alone",
+              "ok": false
+            },
+            {
+              "lever": "Exit before Q1",
+              "headroom": "blocked by contract",
+              "result": "blocked",
+              "verdict": "sponsor required",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "651.7",
@@ -131,7 +740,109 @@
         "vy": "134.2",
         "value": "−$3.50",
         "valTone": "var(--rose-700)",
-        "label": "ADS"
+        "label": "ADS",
+        "__raw": {
+          "id": "a7",
+          "name": "Ridgeline bowl 12in · sand",
+          "sku": "NW-CER-1196 · Amazon + DTC",
+          "role": "Core",
+          "cls": "exception",
+          "driver": "structural",
+          "cm": -2.1,
+          "bleed": -0.5,
+          "units": 240,
+          "price": 58,
+          "exception": "Range completer · Alex Carter",
+          "lines": [
+            [
+              "Price",
+              58
+            ],
+            [
+              "COGS",
+              -27.84
+            ],
+            [
+              "Freight",
+              -4.06
+            ],
+            [
+              "Fees",
+              -8.7
+            ],
+            [
+              "Fulfilment",
+              -9.2
+            ],
+            [
+              "Returns",
+              -4.06
+            ],
+            [
+              "Ads",
+              -5.4
+            ],
+            [
+              "Storage",
+              -0.84
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Structural · COGS and fulfilment",
+              "share": "52%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "large ceramic · heavy and fragile"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "23%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "7.0% return rate · breakage in transit"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "16%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "$5.40/unit allocated"
+            },
+            {
+              "label": "Fee-driven",
+              "share": "9%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "correct classification"
+            }
+          ],
+          "cls_label": "Structural — but it completes the size ladder",
+          "cls_copy": "The 12in loses $2.10 a unit and the review date on its exception passed on Aug 01. Basket analysis says it pulls $19 of attached CM: buyers who see three sizes buy the 10in. That is the case the sponsor has to re-make.",
+          "tests": [
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$5.40/unit",
+              "result": "+$3.30",
+              "verdict": "turns positive",
+              "ok": true
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+7% before rival parity",
+              "result": "+$1.96",
+              "verdict": "turns positive",
+              "ok": true
+            },
+            {
+              "lever": "Exit and keep 8in + 10in",
+              "headroom": "costs $19/order attached CM",
+              "result": "net −$0.9K/mo",
+              "verdict": "worse than holding",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "756.2",
@@ -146,7 +857,108 @@
         "vy": "155.5",
         "value": "−$0.74",
         "valTone": "var(--rose-700)",
-        "label": "STORAGE"
+        "label": "STORAGE",
+        "__raw": {
+          "id": "a8",
+          "name": "Copper measuring set",
+          "sku": "NW-UTL-4610 · Amazon",
+          "role": "Margin Driver",
+          "cls": "structural",
+          "driver": "ad-driven",
+          "cm": -0.9,
+          "bleed": -0.3,
+          "units": 320,
+          "price": 28,
+          "lines": [
+            [
+              "Price",
+              28
+            ],
+            [
+              "COGS",
+              -12.6
+            ],
+            [
+              "Freight",
+              -1.68
+            ],
+            [
+              "Fees",
+              -4.2
+            ],
+            [
+              "Fulfilment",
+              -3.9
+            ],
+            [
+              "Returns",
+              -1.4
+            ],
+            [
+              "Ads",
+              -4.6
+            ],
+            [
+              "Storage",
+              -0.52
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Ad-driven",
+              "share": "44%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "$4.60/unit · 0.8× mROAS at current bid"
+            },
+            {
+              "label": "Structural · COGS",
+              "share": "31%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "45% of price · copper input cost up 14%"
+            },
+            {
+              "label": "Fee-driven",
+              "share": "15%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "correct classification"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "10%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "5.0% return rate"
+            }
+          ],
+          "cls_label": "Structural — the input cost moved, not the campaign",
+          "cls_copy": "Cutting ads turns it positive at $3.70, but volume falls to about 90 units a month without paid support. Copper is up 14% since the last cost review, and there is no headroom on price against a rival at $26.",
+          "tests": [
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$4.60/unit",
+              "result": "+$3.70",
+              "verdict": "positive but 90 u/mo",
+              "ok": false
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "none · rival at $26",
+              "result": "−$0.90",
+              "verdict": "no headroom",
+              "ok": false
+            },
+            {
+              "lever": "Renegotiate COGS",
+              "headroom": "reviewed Jun · no movement",
+              "result": "−$0.90",
+              "verdict": "no change",
+              "ok": false
+            }
+          ]
+        }
       },
       {
         "x": "860.6",
@@ -161,7 +973,108 @@
         "vy": "174.0",
         "value": "−$0.98",
         "valTone": "var(--rose-700)",
-        "label": "TRUE CM"
+        "label": "TRUE CM",
+        "__raw": {
+          "id": "a9",
+          "name": "Acacia serving board · small",
+          "sku": "NW-BRD-1910 · Walmart",
+          "role": "Supporting",
+          "cls": "structural",
+          "driver": "fee-driven",
+          "cm": -2.6,
+          "bleed": -0.3,
+          "units": 190,
+          "price": 26,
+          "lines": [
+            [
+              "Price",
+              26
+            ],
+            [
+              "COGS",
+              -11.44
+            ],
+            [
+              "Freight",
+              -2.34
+            ],
+            [
+              "Fees",
+              -4.16
+            ],
+            [
+              "Fulfilment",
+              -5.2
+            ],
+            [
+              "Returns",
+              -1.04
+            ],
+            [
+              "Ads",
+              -3.9
+            ],
+            [
+              "Storage",
+              -0.52
+            ]
+          ],
+          "drivers": [
+            {
+              "label": "Fee-driven · Walmart referral",
+              "share": "38%",
+              "tone": "var(--rose-700)",
+              "weight": 700,
+              "meta": "16% referral on a low-price wood item"
+            },
+            {
+              "label": "Structural · freight",
+              "share": "29%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "heavy for its price point"
+            },
+            {
+              "label": "Ad-driven",
+              "share": "24%",
+              "tone": "var(--amber-700)",
+              "weight": 500,
+              "meta": "$3.90/unit allocated"
+            },
+            {
+              "label": "Returns-driven",
+              "share": "9%",
+              "tone": "var(--ink-500)",
+              "weight": 500,
+              "meta": "4.0% return rate"
+            }
+          ],
+          "cls_label": "Structural on this channel — Walmart economics do not work",
+          "cls_copy": "The same board is positive on DTC at $3.10 a unit. On Walmart the referral and freight combination puts it under water and there is no fee error to fix. This is a channel exit, not a product exit.",
+          "tests": [
+            {
+              "lever": "Cut all allocated ads",
+              "headroom": "$3.90/unit",
+              "result": "+$1.30",
+              "verdict": "positive at 60 u/mo",
+              "ok": false
+            },
+            {
+              "lever": "Price up within headroom",
+              "headroom": "+5% before rival parity",
+              "result": "−$1.30",
+              "verdict": "still negative",
+              "ok": false
+            },
+            {
+              "lever": "Exit Walmart, keep DTC",
+              "headroom": "DTC CM +$3.10/unit",
+              "result": "+$0.6K/mo",
+              "verdict": "channel exit works",
+              "ok": true
+            }
+          ]
+        }
       }
     ],
     "tabs": [

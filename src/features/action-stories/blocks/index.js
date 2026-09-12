@@ -11,6 +11,7 @@ import WaterfallChartBlock from './WaterfallChartBlock';
 import HeatmapGridBlock from './HeatmapGridBlock';
 import ObjectBlock from './ObjectBlock';
 import SliderBlock from './SliderBlock';
+import GaugeBlock from './GaugeBlock';
 
 /**
  * blockType -> component. Adding a new block type later is one entry here plus one component
@@ -30,4 +31,5 @@ export const BLOCK_REGISTRY = {
   heatmapGrid: HeatmapGridBlock,
   object: ObjectBlock,
   slider: SliderBlock,
+  gauge: GaugeBlock,
 };

@@ -43,3 +43,18 @@ export function BlockTitle({ children, className = '' }) {
     </h3>
   );
 }
+
+/**
+ * The compact-mode label every list/chart/object block (GaugeBlock, BarChartBlock,
+ * LabelValueListBlock, ItemQueueBlock, ObjectBlock) puts above its own content when grouped inside
+ * a shared panel — previously five near-identical copies of the same literal string
+ * (`"mb-1(.5) font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary"`), two of
+ * them off by a stray `mb-1.5` vs the other three's `mb-1` for no reason. One shared primitive, same
+ * "a future spacing/type tweak touches 1 file instead of 5" reasoning as BlockTitle above — this is
+ * deliberately a *different* variant from BlockTitle (tertiary not secondary text, 0.1em not 0.14em
+ * tracking, a real `<p>` not an `<h3>`) because it labels a block's own compact-mode content, not a
+ * full card's heading; not merged into BlockTitle itself; not a lesser/generic wrapper.
+ */
+export function CompactEyebrow({ children }) {
+  return <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{children}</p>;
+}

@@ -103,7 +103,47 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "onpage",
+          "name": "Web · template and on-page changes",
+          "icon": "fa-solid fa-code",
+          "hue": "var(--mod-discover)",
+          "meta": "1 template · 40 pages · release r-2291",
+          "items": [
+            {
+              "name": "Guide template · sized and preloaded hero",
+              "tag": "CWV",
+              "tagIcon": "fa-solid fa-gauge-high",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "Width and height attributes on the hero image plus a preload hint. The only change to the template in this release.",
+              "before": "LCP 2.9s p75 · fails",
+              "after": "LCP 2.1s p75 projected",
+              "afterTone": "var(--green-700)",
+              "value": "186 pages"
+            },
+            {
+              "name": "FAQ and Article schema",
+              "tag": null,
+              "url": "/guides/*",
+              "detail": "Generated from existing headings and body content on 40 guide pages. No new copy, no duplicated text.",
+              "before": "schema on 61% of pages",
+              "after": "schema on 100% of guides",
+              "afterTone": "var(--green-700)",
+              "value": "40 pages"
+            },
+            {
+              "name": "Internal links to orphaned guides",
+              "tag": null,
+              "detail": "Two contextual links each into the eight guides that were discovered and never crawled, from pages that already rank.",
+              "before": "8 pages with no inbound links",
+              "after": "16 contextual links added",
+              "afterTone": "var(--ink-900)",
+              "value": "16 links"
+            }
+          ]
+        }
       },
       {
         "name": "Redirects, canonicals and sitemap",
@@ -171,7 +211,46 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "redirects",
+          "name": "Redirects, canonicals and sitemap",
+          "icon": "fa-solid fa-diagram-project",
+          "hue": "var(--mod-margin)",
+          "meta": "3 consolidations · 9 chains · sitemap regenerated",
+          "items": [
+            {
+              "name": "Consolidate 3 cannibalisation pairs",
+              "tag": "unblocks the new page",
+              "tagIcon": "fa-solid fa-link",
+              "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+              "tagTone": "var(--mod-discover)",
+              "detail": "The weaker page of each pair 301s into the stronger one, with canonicals set to match. Runs before any new page ships.",
+              "before": "6 pages competing on 3 queries",
+              "after": "3 pages · 3 permanent redirects",
+              "afterTone": "var(--green-700)",
+              "value": "6 → 3"
+            },
+            {
+              "name": "Flatten 9 redirect chains",
+              "tag": null,
+              "detail": "Every chain resolves to a single hop. Three of them were three deep on guide URLs.",
+              "before": "9 chains · up to 3 hops",
+              "after": "9 single hops",
+              "afterTone": "var(--green-700)",
+              "value": "9 URLs"
+            },
+            {
+              "name": "Resolve 4 duplicate canonicals + regenerate sitemap",
+              "tag": null,
+              "detail": "The four duplicates are why those pages were never indexed. The sitemap picks up the eight orphaned guides at the same time.",
+              "before": "174 of 186 indexed",
+              "after": "186 of 186 submitted",
+              "afterTone": "var(--green-700)",
+              "value": "12 pages"
+            }
+          ]
+        }
       },
       {
         "name": "Editorial workflow · drafts, not publishes",
@@ -242,7 +321,51 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "editorial",
+          "name": "Editorial workflow · drafts, not publishes",
+          "icon": "fa-solid fa-user-pen",
+          "hue": "var(--violet-500)",
+          "meta": "3 items · CMS drafts assigned · nothing goes live from here",
+          "items": [
+            {
+              "name": "Carbon steel vs cast iron · full draft",
+              "tag": "draft only",
+              "tagIcon": "fa-solid fa-lock",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "url": "/guides/carbon-steel-vs-cast-iron",
+              "detail": "Nine-row comparison table, sourced weight and heat-retention figures, answer-first headings. Enters the CMS unpublished with the brief and source list attached.",
+              "before": "no page · 4 thin pages consolidated",
+              "after": "draft with J. Okafor · due Oct 4",
+              "afterTone": "var(--violet-700)",
+              "value": "1 draft"
+            },
+            {
+              "name": "Lead-removal rewrite · full draft",
+              "tag": "draft only",
+              "tagIcon": "fa-solid fa-lock",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "url": "/guides/filtration",
+              "detail": "States the certification number in text with a reduction percentage per contaminant. Legal review flagged on the draft because it is a compliance claim.",
+              "before": "\"reduces heavy metals\"",
+              "after": "draft with M. Reyes · legal flag",
+              "afterTone": "var(--violet-700)",
+              "value": "1 draft"
+            },
+            {
+              "name": "Brand-voice and source checklist",
+              "tag": null,
+              "detail": "Attached to both drafts. An editor cannot mark a page ready until every comparison row has a source and the voice items pass.",
+              "before": "checklist applied manually",
+              "after": "attached to every draft",
+              "afterTone": "var(--ink-900)",
+              "value": "2 drafts"
+            }
+          ]
+        }
       },
       {
         "name": "Citation Tracker · monitoring config",
@@ -307,7 +430,43 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "tracker",
+          "name": "Citation Tracker · monitoring config",
+          "icon": "fa-solid fa-binoculars",
+          "hue": "var(--mod-ads)",
+          "meta": "weekly per cluster · 3 decay watches armed",
+          "items": [
+            {
+              "name": "Per-cluster rank and citation reads",
+              "tag": null,
+              "detail": "Weekly pass across 412 queries, split by cluster and intent tier, with the 14 competitor-only queries marked as the primary set.",
+              "before": "account-level weekly report",
+              "after": "per-cluster with a primary set",
+              "afterTone": "var(--mod-ads)",
+              "value": "6 clusters"
+            },
+            {
+              "name": "Traffic quality read at 14 and 28 days",
+              "tag": null,
+              "detail": "Conversion rate, assisted revenue and bounce on organic entrances to each new page, against the site baseline.",
+              "before": "not measured per page",
+              "after": "2 reads per new page",
+              "afterTone": "var(--ink-900)",
+              "value": "3 pages"
+            },
+            {
+              "name": "Decay watches",
+              "tag": null,
+              "detail": "Citation loss, rank slide and quality shortfall each re-open this card with the read attached rather than filing a separate report.",
+              "before": "no decay trigger",
+              "after": "3 watches armed",
+              "afterTone": "var(--green-700)",
+              "value": "3 watches"
+            }
+          ]
+        }
       }
     ],
     "progressPct": "0",

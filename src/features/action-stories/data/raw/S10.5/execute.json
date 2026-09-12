@@ -108,7 +108,47 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "push",
+          "name": "Canonical re-pushes",
+          "icon": "fa-solid fa-code-compare",
+          "hue": "var(--mod-actions)",
+          "meta": "8 fields across 3 channels · every push carries a diff and a version snapshot",
+          "items": [
+            {
+              "name": "Hero image · ASIN B0Y",
+              "tag": "critical",
+              "tagIcon": "fa-solid fa-triangle-exclamation",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)",
+              "detail": "Canonical asset restored first, before any dispute is filed. The $310/day stops on this push, not on the case decision.",
+              "diffBefore": "contributed image · 40% frame fill · text overlay",
+              "diffAfter": "hero-dutch-5qt-v4.jpg · PIM v4 · 2000px, compliant",
+              "value": "$310/day",
+              "valueTone": "var(--rose-700)"
+            },
+            {
+              "name": "Price · Filtration Pitcher",
+              "tag": null,
+              "detail": "Cache purged and canonical price re-pushed, with price excluded from the theme cache so a rebuild cannot serve a stale value again.",
+              "diffBefore": "$32.99 · 37.4% contribution · cheapest channel",
+              "diffAfter": "$34.99 · 41.2% contribution · parity restored",
+              "value": "$40/day",
+              "valueTone": "var(--ink-900)"
+            },
+            {
+              "name": "Bullets, A+ modules and image sets",
+              "tag": "4 listings",
+              "tagIcon": "fa-solid fa-layer-group",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "Brand copy, both missing A+ modules and the full seven-image set restored from canonical, with the scale reference back in position three.",
+              "value": "$50/day",
+              "valueTone": "var(--ink-900)"
+            }
+          ]
+        }
       },
       {
         "name": "Pipeline fixes and replay",
@@ -176,7 +216,45 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "pipeline",
+          "name": "Pipeline fixes and replay",
+          "icon": "fa-solid fa-diagram-project",
+          "hue": "var(--amber-700)",
+          "meta": "template patch, partial-file guard, 412 rejected rows replayed",
+          "items": [
+            {
+              "name": "Feed template character limit",
+              "tag": "fixes 4 listings",
+              "tagIcon": "fa-solid fa-wrench",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "Template v10 corrects the Walmart title limit, then replays across all four listings. Re-pushing values without this would have been undone on the next cycle.",
+              "diffBefore": "v9 · title limit 72 · truncated mid-word",
+              "diffAfter": "v10 · title limit 200 · full 118-character titles",
+              "value": "$30/day",
+              "valueTone": "var(--ink-900)"
+            },
+            {
+              "name": "Partial-file guard armed",
+              "tag": "prevents a class",
+              "tagIcon": "fa-solid fa-shield-halved",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "An inventory or content file that arrives incomplete is now rejected rather than applied to the rows it reached. This is what zeroed a live SKU for nine hours.",
+              "value": "3 drifts",
+              "valueTone": "var(--mod-actions)"
+            },
+            {
+              "name": "412 rejected rows queued for replay",
+              "tag": null,
+              "detail": "Country-of-origin mapped, CDN URL expiry extended past the retry window, GTIN corrected against the repack. A regression check runs on the next cycle and reports row-level results.",
+              "value": "412 rows",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "name": "Stranded resolutions",
@@ -242,7 +320,42 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "stranded",
+          "name": "Stranded resolutions",
+          "icon": "fa-solid fa-box-open",
+          "hue": "var(--mod-actions)",
+          "doorHref": "S9.9-1-reason.dc.html",
+          "doorLabel": "S9.9 ladder",
+          "meta": "5 blocks relisted · 1 routed to the markdown ladder",
+          "items": [
+            {
+              "name": "Variation family rebuilt · 210 units freed",
+              "tag": null,
+              "detail": "Rebuilding the Enamel family restores the parent and unstrands the largest block at the same time. The pooled reviews return with the structure.",
+              "value": "$8,200",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Four blocks relisted",
+              "tag": null,
+              "detail": "Title patch lifts the suppression on the Sauté Pan, the Pitcher offer is recreated, the dimension attribute is added to the Knife Block, and the Skillet units are relabelled to the new GTIN.",
+              "value": "$9,320",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Enamel Casserole · to the 9.9 ladder",
+              "tag": "honest path",
+              "tagIcon": "fa-solid fa-arrow-right",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "Already in the markdown cohort for the surcharge date. Relisting at list price would strand it again in six weeks, so it joins the ladder instead.",
+              "value": "$525",
+              "valueTone": "var(--amber-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Disputes and monitoring",
@@ -307,7 +420,40 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "watch",
+          "name": "Disputes and monitoring",
+          "icon": "fa-solid fa-shield-halved",
+          "hue": "var(--mod-actions)",
+          "meta": "3 registry disputes · locks armed · time-to-detect KPI live",
+          "items": [
+            {
+              "name": "Three registry disputes filed",
+              "tag": "with evidence",
+              "tagIcon": "fa-solid fa-file-shield",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "Image contribution, variation parent rights and the restricted-claim bullet, each filed with PIM version history and the registry entitlement attached.",
+              "value": "3 cases",
+              "valueTone": "var(--mod-actions)"
+            },
+            {
+              "name": "Field locks and monitor upgrade",
+              "tag": null,
+              "detail": "Image lock armed on 38 entitled ASINs, price excluded from the theme cache, and 24 standard-lane listings moved to 30-minute critical checks.",
+              "value": "detect 2.1h",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Recurrence and stranded balance watches",
+              "tag": null,
+              "detail": "Per-listing drift recurrence, the time-to-detect KPI against its 4-hour target, and the stranded balance tracked to zero rather than to a lower number.",
+              "value": "3 watches",
+              "valueTone": "var(--mod-actions)"
+            }
+          ]
+        }
       }
     ],
     "kpiState": "measured 9.4h",

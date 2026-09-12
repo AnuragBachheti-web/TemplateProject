@@ -105,7 +105,47 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "rfq",
+          "name": "RFQ and sample requests",
+          "icon": "fa-solid fa-file-invoice-dollar",
+          "hue": "var(--mod-discover)",
+          "human": "Sourcer sends",
+          "meta": "3 sample requests · 1 RFQ · drafted, held for review",
+          "items": [
+            {
+              "name": "C-31 · carbon steel wok — sample request",
+              "tag": "Kessler (K)",
+              "tagIcon": "fa-solid fa-industry",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Three units, existing tooling, hammered finish specified with a tolerance note on consistency. Asks them to quote at MOQ 500 in the same reply so the economics land with the sample.",
+              "value": "$2.4K · 18 days",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "C-34 · angle guide — sample request",
+              "tag": "Tsuyo (T)",
+              "tagIcon": "fa-solid fa-industry",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Five units at 15° and 20°, with the tolerance requirement written into the request rather than checked afterwards. Fits the existing stone without a shim.",
+              "value": "$0.9K · 11 days",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "C-27 · roasting set — RFQ before tooling",
+              "tag": "mould quote",
+              "tagIcon": "fa-solid fa-hammer",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "Quote request first, deposit second. Confirms the $4.2K mould cost and the $26.80 unit price at MOQ 300 before any non-recoverable money moves.",
+              "value": "RFQ · 6 days",
+              "valueTone": "var(--amber-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Evaluation cards",
@@ -169,7 +209,40 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "eval",
+          "name": "Evaluation cards",
+          "icon": "fa-solid fa-clipboard-check",
+          "hue": "var(--mod-discover)",
+          "meta": "3 cards · criteria fixed at creation, not after the sample arrives",
+          "items": [
+            {
+              "name": "One card per sampled concept",
+              "tag": null,
+              "detail": "Each card opens with its pass criteria already written from Decide, the supplier quote attached, and a named owner. The card closes as pass or fail with the evidence, never as \"promising\".",
+              "value": "3 cards",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Criteria locked at creation",
+              "tag": "no drift",
+              "tagIcon": "fa-solid fa-lock",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "detail": "Twelve criteria across the three concepts. Changing one after a sample has arrived requires a logged reason — that is the difference between evaluating and rationalising.",
+              "value": "12 criteria",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Photography scheduled per concept",
+              "tag": null,
+              "detail": "Concept shots for evaluation only, booked to land two days after each sample. Not listing photography — that belongs to launch.",
+              "value": "$0.9K",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "name": "Parked watchlist",
@@ -233,7 +306,40 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "watch",
+          "name": "Parked watchlist",
+          "icon": "fa-solid fa-bell",
+          "hue": "var(--ink-600)",
+          "meta": "3 concepts · triggers armed with check cadence",
+          "items": [
+            {
+              "name": "Triggers armed",
+              "tag": null,
+              "detail": "C-40 checked monthly against two scheduled metro mandates, C-42 quarterly against incumbent delistings, C-38 closed with its decay evidence and no scheduled check.",
+              "value": "3 armed",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Evidence attached to each park",
+              "tag": null,
+              "detail": "Every parked concept keeps the curve, the classifier output and the reason it was parked. When a trigger fires the card re-opens with its original analysis rather than starting again.",
+              "value": "3 records",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Trend-decay auto-park armed",
+              "tag": "dial-gated",
+              "tagIcon": "fa-solid fa-gauge-simple-high",
+              "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+              "tagTone": "var(--mod-discover)",
+              "detail": "A sampled concept whose durability falls below 55% mid-cycle parks itself with the decay evidence, rather than spending the second sample round on a category that is closing.",
+              "value": "watch on 3",
+              "valueTone": "var(--mod-discover)"
+            }
+          ]
+        }
       },
       {
         "name": "Launch handoff · lineage",
@@ -316,7 +422,62 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "lineage",
+          "name": "Launch handoff · lineage",
+          "icon": "fa-solid fa-rocket",
+          "hue": "var(--mod-discover)",
+          "doorHref": "S9.8-1-reason.dc.html",
+          "doorLabel": "S9.8 Launch",
+          "meta": "passes flow to the launch flow with full provenance",
+          "items": [
+            {
+              "name": "Lineage chips travel with the concept",
+              "tag": null,
+              "lineage": true,
+              "lineageChips": [
+                {
+                  "icon": "fa-solid fa-stream",
+                  "label": "DISC-2026-34"
+                },
+                {
+                  "icon": "fa-solid fa-magnifying-glass-chart",
+                  "label": "affinity 87"
+                },
+                {
+                  "icon": "fa-solid fa-chart-line",
+                  "label": "durability 74% ± 11"
+                },
+                {
+                  "icon": "fa-solid fa-industry",
+                  "label": "Kessler quote $19.40"
+                },
+                {
+                  "icon": "fa-solid fa-flask",
+                  "label": "sample R1 + R2"
+                }
+              ],
+              "detail": "The launch decision in S9.8 opens with the signal that found the concept, the affinity read, the supplier quote and the sample results — so nobody has to reconstruct why it is on the list.",
+              "value": "5 chips",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Research pack filed to Ledger",
+              "tag": null,
+              "detail": "Full pack per concept including the parked ones: signals, affinity working, economics model, risk flags and the decision. LEDGER-DISC-0341.",
+              "value": "6 concepts",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Cycle summary posted",
+              "tag": null,
+              "detail": "One line back to the innovation goal: what this cycle spent, what it sampled, and what it parked. The 11%-of-revenue gap gets a running record rather than a quarterly surprise.",
+              "value": "$9.4K spent",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       }
     ],
     "pipeCols": [

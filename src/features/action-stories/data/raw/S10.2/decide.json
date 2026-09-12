@@ -150,7 +150,61 @@
             "value": "$0.9K",
             "tone": "var(--ink-800)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "po",
+          "title": "Delay two POs by one week",
+          "rank": "1",
+          "chip": "S9.2 replenishment",
+          "href": "S9.2-3-decide.dc.html",
+          "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+          "chipTone": "var(--mod-inventory)",
+          "badge": "recommended",
+          "badgeTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+          "badgeTone": "var(--mod-cash)",
+          "body": "Two of the six week-7 POs are for Core SKUs at 31 and 34 days of cover. Moving them into week 8 puts the outflow after the Amazon settlement lands.",
+          "lead": "0 days",
+          "consequence": "Cover on four SKUs drops to 24 days at the point of the delay, which is inside the Core service-level floor of 95% but not comfortable. Priced through the replenishment engine: 96.1% projected service level, no Hero SKU affected, no stock-out risk inside the window.",
+          "consequenceTone": "var(--mod-inventory)",
+          "sizeLabel": "POs delayed",
+          "sizes": [
+            {
+              "v": 1,
+              "label": "1 PO",
+              "relief": 14,
+              "cost": 0.4,
+              "note": "Cover holds at 28 days. Service level 96.8% — barely a trade."
+            },
+            {
+              "v": 2,
+              "label": "2 POs",
+              "relief": 26,
+              "cost": 0.9,
+              "note": "Cover 24 days on four SKUs. Service level 96.1%, above the 95% floor."
+            },
+            {
+              "v": 3,
+              "label": "3 POs",
+              "relief": 38,
+              "cost": 3.2,
+              "note": "A Hero SKU falls to 19 days and service level drops to 93.4% — under the floor."
+            }
+          ],
+          "priced": [
+            [
+              "Projected service level",
+              "dyn-service"
+            ],
+            [
+              "Hero SKUs affected",
+              "dyn-hero"
+            ],
+            [
+              "Cost of the delay",
+              "dyn-cost"
+            ]
+          ]
+        }
       },
       {
         "rank": "2",
@@ -196,7 +250,39 @@
             "value": "64%",
             "tone": "var(--amber-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "terms",
+          "title": "Negotiate Kessler to Net 60",
+          "rank": "2",
+          "chip": "S9.17 supplier brief",
+          "href": "S9.17-4-execute.dc.html",
+          "chipTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+          "chipTone": "var(--mod-inventory)",
+          "badge": "brief already drafted",
+          "badgeTint": "var(--green-50)",
+          "badgeTone": "var(--green-700)",
+          "body": "Kessler is mid-negotiation on their price notice and the terms ask is already on the brief. Net 45 to Net 60 moves the $88K PO out of week 7 entirely.",
+          "lead": "12 days",
+          "consequence": "This is the only lever that costs nothing and improves DPO permanently — 15 days of terms is worth $31K of working capital every cycle, not just this one. The risk is that it is a negotiation, not a decision: Kessler can say no, and the answer will not be known until Oct 4.",
+          "consequenceTone": "var(--green-700)",
+          "relief": 31,
+          "cost": 0,
+          "priced": [
+            [
+              "Cash value of 15 days",
+              "$31K"
+            ],
+            [
+              "Interest or margin cost",
+              "$0"
+            ],
+            [
+              "Probability of success",
+              "64%"
+            ]
+          ]
+        }
       },
       {
         "rank": "3",
@@ -256,7 +342,51 @@
             "value": "week 6",
             "tone": "var(--green-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "clearance",
+          "title": "Accelerate the clearance ladder",
+          "rank": "3",
+          "chip": "S9.9 markdown",
+          "href": "S9.9-3-decide.dc.html",
+          "chipTint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+          "chipTone": "var(--mod-margin)",
+          "body": "Pull the first two ladder steps forward from week 9 to week 6, bringing recovery cash in ahead of the trough rather than after it.",
+          "lead": "5 days",
+          "consequence": "Deeper discounts earlier means lower total recovery: the same units clear at 61% of landed cost instead of 68%. That is real margin given up to buy timing — and it is only worth it if the timing is what actually matters.",
+          "consequenceTone": "var(--mod-margin)",
+          "sizeLabel": "Steps pulled forward",
+          "sizes": [
+            {
+              "v": 1,
+              "label": "1 step",
+              "relief": 18,
+              "cost": 2.4,
+              "note": "Recovery 65% instead of 68%. Modest, and the cohort still clears before the fee cliff."
+            },
+            {
+              "v": 2,
+              "label": "2 steps",
+              "relief": 32,
+              "cost": 5.8,
+              "note": "Recovery 61%. Meaningful margin given up, and the brand-exposure note applies on two hero-adjacent lines."
+            }
+          ],
+          "priced": [
+            [
+              "Recovery rate",
+              "dyn-recovery"
+            ],
+            [
+              "Margin given up",
+              "dyn-cost"
+            ],
+            [
+              "Cash arrives",
+              "week 6"
+            ]
+          ]
+        }
       },
       {
         "rank": "4",
@@ -323,7 +453,58 @@
             "value": "no",
             "tone": "var(--green-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "credit",
+          "title": "Draw the revolving line",
+          "rank": "4",
+          "chip": "Meridian Bank · 9.4%",
+          "href": "S10.2-4-execute.dc.html",
+          "chipTint": "var(--ink-100)",
+          "chipTone": "var(--ink-600)",
+          "body": "The cheapest facility, three business days to draw, no covenant tested below 60% utilisation. Available at any size in $25K increments.",
+          "lead": "3 days",
+          "consequence": "Straightforward and priced to the dollar — but it treats a timing problem as a funding problem. Drawn for 21 days it costs interest and nothing else; drawn as a habit it becomes the reason the conversion cycle never gets fixed.",
+          "consequenceTone": "var(--ink-600)",
+          "sizeLabel": "Draw",
+          "sizes": [
+            {
+              "v": 25,
+              "label": "$25K",
+              "relief": 25,
+              "cost": 0.41,
+              "note": "21 days outstanding at 9.4% — $410 of interest. Closes most of the P50 gap alone."
+            },
+            {
+              "v": 50,
+              "label": "$50K",
+              "relief": 50,
+              "cost": 0.81,
+              "note": "Covers the P10 case as well. $810 of interest, utilisation 20%."
+            },
+            {
+              "v": 75,
+              "label": "$75K",
+              "relief": 75,
+              "cost": 1.22,
+              "note": "More than the trough needs. Utilisation 30%, still under every covenant."
+            }
+          ],
+          "priced": [
+            [
+              "Interest for 21 days",
+              "dyn-cost"
+            ],
+            [
+              "Utilisation after draw",
+              "dyn-util"
+            ],
+            [
+              "Covenant tested",
+              "no · under 60%"
+            ]
+          ]
+        }
       }
     ],
     "bufferOpen": false,

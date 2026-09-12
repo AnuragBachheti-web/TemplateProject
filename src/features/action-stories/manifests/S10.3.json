@@ -11,11 +11,6 @@
         "region": "rail"
       },
       {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
-      },
-      {
         "id": "details",
         "title": "Details",
         "region": "main"
@@ -30,9 +25,9 @@
       },
       {
         "slotName": "metrics",
-        "blockType": "barChart",
+        "blockType": "gauge",
         "binding": "data.metrics",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "slas",
@@ -60,7 +55,7 @@
       },
       {
         "slotName": "deadlines",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.deadlines",
         "section": "details"
       },
@@ -181,6 +176,37 @@
         }
       },
       {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroBody",
+        "blockType": "text",
+        "binding": "data.heroBody",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -259,37 +285,10 @@
         "section": "summary"
       },
       {
-        "slotName": "heroTitle",
-        "blockType": "text",
-        "binding": "data.heroTitle",
-        "section": "recommendation",
-        "role": "hero",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
-        "slotName": "heroBody",
-        "blockType": "text",
-        "binding": "data.heroBody",
-        "section": "summary"
-      },
-      {
         "slotName": "queueNote",
         "blockType": "text",
         "binding": "data.queueNote",
         "section": "summary"
-      },
-      {
-        "slotName": "heroMetrics",
-        "blockType": "labelValueList",
-        "binding": "data.heroMetrics",
-        "section": "recommendation",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
       },
       {
         "slotName": "actions",
@@ -398,6 +397,16 @@
         }
       },
       {
+        "slotName": "recoveryMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.recoveryMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -438,12 +447,6 @@
         "blockType": "text",
         "binding": "data.recoveryState",
         "section": "summary"
-      },
-      {
-        "slotName": "recoveryMetrics",
-        "blockType": "labelValueList",
-        "binding": "data.recoveryMetrics",
-        "section": "details"
       },
       {
         "slotName": "yTicks",
@@ -507,7 +510,7 @@
       },
       {
         "slotName": "cases",
-        "blockType": "itemQueue",
+        "blockType": "table",
         "binding": "data.cases",
         "section": "details"
       },

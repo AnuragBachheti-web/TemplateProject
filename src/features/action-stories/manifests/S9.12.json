@@ -17,7 +17,7 @@
       },
       {
         "slotName": "targets",
-        "blockType": "barChart",
+        "blockType": "gauge",
         "binding": "data.targets"
       },
       {
@@ -37,12 +37,12 @@
       },
       {
         "slotName": "costs",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.costs"
       },
       {
         "slotName": "agents",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.agents"
       }
     ]
@@ -102,7 +102,7 @@
         "region": "rail"
       },
       {
-        "id": "recommendation",
+        "id": "decision",
         "title": null,
         "region": "main"
       },
@@ -127,10 +127,144 @@
         "slotName": "primaryInsight",
         "blockType": "text",
         "binding": "data.heroValue",
-        "section": "recommendation",
+        "section": "decision",
         "role": "hero",
         "layout": {
-          "group": "recommendation",
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "rlThreshold",
+        "blockType": "slider",
+        "binding": "data.rlThreshold",
+        "dependencies": [
+          "primaryInsight",
+          "tradeoff",
+          "liveStats",
+          "slate",
+          "tree",
+          "rlState",
+          "rlLabel",
+          "rlCopy",
+          "rlStats",
+          "split",
+          "guardrail_checks",
+          "footerStatus"
+        ],
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "tradeoff",
+        "blockType": "text",
+        "binding": "data.tradeoff",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "liveStats",
+        "blockType": "labelValueList",
+        "binding": "data.liveStats",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "rlState",
+        "blockType": "text",
+        "binding": "data.rlState",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "rlLabel",
+        "blockType": "text",
+        "binding": "data.rlLabel",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "rlCopy",
+        "blockType": "text",
+        "binding": "data.rlCopy",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "rlStats",
+        "blockType": "labelValueList",
+        "binding": "data.rlStats",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "guardrail_checks",
+        "blockType": "itemQueue",
+        "binding": "data.checks",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "slate",
+        "blockType": "table",
+        "binding": "data.slate",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "tree",
+        "blockType": "table",
+        "binding": "data.tree",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "split",
+        "blockType": "table",
+        "binding": "data.split",
+        "section": "decision",
+        "layout": {
+          "group": "control:rlThreshold",
           "span": 12
         }
       },
@@ -139,12 +273,6 @@
         "blockType": "text",
         "binding": "data.execLabel",
         "section": "summary"
-      },
-      {
-        "slotName": "guardrail_checks",
-        "blockType": "itemQueue",
-        "binding": "data.checks",
-        "section": "guardrails"
       },
       {
         "slotName": "guardrail_cta_label",
@@ -159,28 +287,10 @@
         "section": "summary"
       },
       {
-        "slotName": "tradeoff",
-        "blockType": "text",
-        "binding": "data.tradeoff",
-        "section": "summary"
-      },
-      {
-        "slotName": "liveStats",
-        "blockType": "labelValueList",
-        "binding": "data.liveStats",
-        "section": "details"
-      },
-      {
         "slotName": "spendNote",
         "blockType": "text",
         "binding": "data.spendNote",
         "section": "summary"
-      },
-      {
-        "slotName": "slate",
-        "blockType": "table",
-        "binding": "data.slate",
-        "section": "details"
       },
       {
         "slotName": "slateFoot",
@@ -195,46 +305,10 @@
         "section": "summary"
       },
       {
-        "slotName": "tree",
-        "blockType": "itemQueue",
-        "binding": "data.tree",
-        "section": "details"
-      },
-      {
-        "slotName": "rlState",
-        "blockType": "text",
-        "binding": "data.rlState",
-        "section": "summary"
-      },
-      {
         "slotName": "rlBtnLabel",
         "blockType": "text",
         "binding": "data.rlBtnLabel",
         "section": "summary"
-      },
-      {
-        "slotName": "rlThreshold",
-        "blockType": "number",
-        "binding": "data.rlThreshold",
-        "section": "summary"
-      },
-      {
-        "slotName": "rlLabel",
-        "blockType": "text",
-        "binding": "data.rlLabel",
-        "section": "summary"
-      },
-      {
-        "slotName": "rlCopy",
-        "blockType": "text",
-        "binding": "data.rlCopy",
-        "section": "summary"
-      },
-      {
-        "slotName": "rlStats",
-        "blockType": "labelValueList",
-        "binding": "data.rlStats",
-        "section": "details"
       },
       {
         "slotName": "zoneMeta",
@@ -244,15 +318,9 @@
       },
       {
         "slotName": "actions",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.actions",
         "section": "details"
-      },
-      {
-        "slotName": "split",
-        "blockType": "barChart",
-        "binding": "data.split",
-        "section": "analysis"
       },
       {
         "slotName": "projection",
@@ -277,12 +345,6 @@
         "blockType": "labelValueList",
         "binding": "data.capa",
         "section": "details"
-      },
-      {
-        "slotName": "footerStatus",
-        "blockType": "text",
-        "binding": "data.footerStatus",
-        "section": "summary"
       }
     ]
   },
@@ -305,6 +367,11 @@
       {
         "id": "analysis",
         "title": "Analysis",
+        "region": "main"
+      },
+      {
+        "id": "execution",
+        "title": "Execution",
         "region": "main"
       },
       {
@@ -359,7 +426,7 @@
         "slotName": "items",
         "blockType": "itemQueue",
         "binding": "data.items",
-        "section": "details"
+        "section": "execution"
       },
       {
         "slotName": "itemsFoot",

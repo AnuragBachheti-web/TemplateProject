@@ -104,7 +104,49 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "oms",
+          "name": "Routing rules · OMS and 3PL",
+          "icon": "fa-solid fa-code-branch",
+          "hue": "var(--mod-inventory)",
+          "meta": "rule set v14 · versioned to the Ledger · applies at the 02:00 window",
+          "items": [
+            {
+              "name": "Zone 7–8 origin selection",
+              "tag": "v14",
+              "tagIcon": "fa-solid fa-code-commit",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Proximity becomes the first test for Zones 7 and 8, stock depth the tie-break. Falls back to East automatically when the West line is under cover, so the rule cannot strand an order.",
+              "before": "deepest-stock node",
+              "after": "nearest node with cover",
+              "afterTone": "var(--green-700)",
+              "value": "13,190 orders / mo"
+            },
+            {
+              "name": "Zone 5 tie-break",
+              "tag": null,
+              "detail": "Ties resolve on committed transit time rather than a one-cent postage difference. Affects about a quarter of Zone 5 volume.",
+              "before": "lowest unit cost",
+              "after": "shortest transit",
+              "afterTone": "var(--ink-900)",
+              "value": "1,860 orders / mo"
+            },
+            {
+              "name": "Rate shopping with 1-day headroom",
+              "tag": "promise-bound",
+              "tagIcon": "fa-solid fa-shield-halved",
+              "tagTint": "var(--green-50)",
+              "tagTone": "var(--green-700)",
+              "detail": "Cheapest service whose committed transit clears the promise by a day. The Delivery Promise Model supplies the transit table, refreshed weekly.",
+              "before": "cheapest compliant",
+              "after": "cheapest + 1 day slack",
+              "afterTone": "var(--green-700)",
+              "value": "all 41,200 orders"
+            }
+          ]
+        }
       },
       {
         "name": "Carrier configuration",
@@ -170,7 +212,46 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "carrier",
+          "name": "Carrier configuration",
+          "icon": "fa-solid fa-truck",
+          "hue": "var(--r-blue-500)",
+          "meta": "allocation 56 / 28 / 16 · inside the 55% Meridian minimum",
+          "items": [
+            {
+              "name": "Allocation targets by zone band",
+              "tag": null,
+              "detail": "Meridian holds Zones 6–8 and all expedited; Fairline takes Zones 3–5 ground; consolidators keep Zones 2–5 where their on-time is acceptable.",
+              "before": "58 / 27 / 15",
+              "after": "56 / 28 / 16",
+              "afterTone": "var(--green-700)",
+              "value": "3 carriers"
+            },
+            {
+              "name": "GRI rates loaded",
+              "tag": "contractual",
+              "tagIcon": "fa-solid fa-file-contract",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "detail": "New base rates and residential surcharges written into the rate card so every quote from Oct 1 prices correctly rather than under-quoting and reconciling later.",
+              "before": "pre-GRI card",
+              "after": "Oct 1 card · +5.9%",
+              "afterTone": "var(--rose-700)",
+              "value": "2 carriers"
+            },
+            {
+              "name": "Minimum-share monitor",
+              "tag": null,
+              "detail": "Daily check that Meridian volume stays above 55%. If a week trends under, allocation reverts to the v13 mix automatically rather than losing the tier discount.",
+              "before": "monthly manual check",
+              "after": "daily with auto-revert",
+              "afterTone": "var(--green-700)",
+              "value": "guardrail"
+            }
+          ]
+        }
       },
       {
         "name": "Packaging specs and POs",
@@ -236,7 +317,46 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "packaging",
+          "name": "Packaging specs and POs",
+          "icon": "fa-solid fa-box",
+          "hue": "var(--ink-600)",
+          "meta": "6 SKUs right-sized · 2 box POs · glass and enamel unchanged",
+          "items": [
+            {
+              "name": "Pack spec update at the 3PL",
+              "tag": null,
+              "detail": "Care kit and filter 3-pack to B-06 and B-05; whetstone and paring knife to B-04; spatula pair and shears stay boxed pending the damage read.",
+              "before": "B-12 / B-10 / B-08",
+              "after": "B-06 / B-05 / B-04",
+              "afterTone": "var(--green-700)",
+              "value": "6 SKUs"
+            },
+            {
+              "name": "Box purchase orders",
+              "tag": "Pallas Packaging",
+              "tagIcon": "fa-solid fa-file-invoice",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "detail": "Two POs for B-04 and B-05 at 8-week cover. Existing B-12 stock runs down rather than being written off.",
+              "before": "no PO",
+              "after": "2 POs · $1.4K",
+              "afterTone": "var(--ink-900)",
+              "value": "$1.4K"
+            },
+            {
+              "name": "Damage baseline snapshot",
+              "tag": null,
+              "detail": "Current 2.1 claims per thousand recorded per SKU before the change, so any deterioration is attributable rather than argued about.",
+              "before": "no per-SKU baseline",
+              "after": "6 SKUs baselined",
+              "afterTone": "var(--green-700)",
+              "value": "baseline"
+            }
+          ]
+        }
       },
       {
         "name": "Repositioning transfers",
@@ -303,7 +423,48 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "node",
+          "name": "Repositioning transfers",
+          "icon": "fa-solid fa-boxes-stacked",
+          "hue": "var(--violet-500)",
+          "doorHref": "S9.3-1-reason.dc.html",
+          "doorLabel": "S9.3 Planner",
+          "meta": "4 SKUs to Reno · 21-day cover · $6.2K transfer cost",
+          "items": [
+            {
+              "name": "Transfer plan to West node",
+              "tag": "via S9.3",
+              "tagIcon": "fa-solid fa-arrow-right",
+              "tagTint": "color-mix(in oklab, var(--violet-500) 12%, white)",
+              "tagTone": "var(--violet-700)",
+              "detail": "Skillet 10\", skillet 12\", filter pitcher and chef knife move on the next two inbound consolidations rather than as an expedited transfer.",
+              "before": "East-only cover",
+              "after": "21-day cover at Reno",
+              "afterTone": "var(--violet-700)",
+              "value": "2,140 units"
+            },
+            {
+              "name": "Reorder points recalculated",
+              "tag": null,
+              "detail": "West reorder points and safety stock updated for the new demand share so the node does not fall out of cover in week three and undo the routing rule.",
+              "before": "15-day target",
+              "after": "21-day target",
+              "afterTone": "var(--ink-900)",
+              "value": "4 SKUs"
+            },
+            {
+              "name": "Routing rule armed on arrival",
+              "tag": null,
+              "detail": "The Zone 7–8 rule stays inactive per SKU until that SKU is physically at cover in Reno. No rule fires against inventory that has not landed.",
+              "before": "rule fires immediately",
+              "after": "fires per SKU on arrival",
+              "afterTone": "var(--green-700)",
+              "value": "sequenced"
+            }
+          ]
+        }
       }
     ],
     "monitors": [

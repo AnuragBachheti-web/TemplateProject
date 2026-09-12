@@ -1,26 +1,46 @@
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { humanizeSlotName } from './humanizeSlotName';
+import { isHiddenKey } from './decorativeKeys';
 
 // A row's magnitude can live under any of these names — same alias list
 // extraction/classifyBlocks.js's CHART_MAGNITUDE_KEYS and LabelValueListBlock's own
 // label/value picking use, narrowed to real numeric-ish content rather than free text.
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
 
-// Same rule extraction/classifyBlocks.js uses to decide a key is styling, not content — kept as
-// its own local copy, matching every other runtime file's convention (see e.g. TableBlock.jsx's
-// identical comment). Every caller of flattenNestedEntry already filters *its own* top-level keys
-// this way before calling in; this module needs its own copy too because it recurses into keys no
-// caller ever sees directly (a nested object's own `tone`/`fill`/etc. siblings).
-const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/;
-const DECORATIVE_EXACT_KEYS = new Set([
-  'icon', 'tone', 'tint', 'bg', 'fg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow', 'weight',
-]);
-function isDecorativeKey(key) {
-  return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key);
-}
+// Previously this module kept its own third independent copy of "what's decorative" (a trailing-
+// suffix-only regex, the same bug the shared decorativeKeys.js word-boundary version was written to
+// fix — see its own header comment) AND never excluded `__raw` at all, since that convention didn't
+// exist yet when this copy was written. Every caller of flattenNestedEntry already filters *its own*
+// top-level keys via the shared `isHiddenKey`; this module recurses into keys no caller ever sees
+// directly (a nested object's own `tone`/`fill`/`__raw`-if-ever-nested-this-deep siblings), so it
+// needs the same check too — now imported, not re-implemented a fourth time.
 
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
+}
+
+// Coordinate/size keys a chart's own pixel/plot math uses (x/y position, sx/sy/w/h size, r radius,
+// n a bubble's own magnitude) — meaningful to a chart renderer, never to a reader as text ("X: 78,
+// Y: 80, Sx: 11, Sy: 9, R: 4" describes a point on a plot, not a business fact). Confirmed leaking
+// verbatim as an item's own "extra field" text — e.g. S9.1/analyze.roles' `__raw` companion
+// ({name, n, x, y, sx, sy, r}), the bubble-chart geometry behind that scatter plot's Hero/Core/
+// Margin Driver/... clusters — once `__raw` (not a real content field, see TableBlock.jsx's own
+// `HIDDEN_COLUMN_KEYS`) reached this shared flattener the same way any other nested object would.
+//
+// Detected structurally — an object whose keys are almost entirely this coordinate vocabulary, with
+// at most a plain `name`/`label` alongside it and nothing else — never by field name like `__raw` or
+// a workflow code, so this also generalizes to any future nested geometry blob wherever it appears,
+// not only extraction's own raw-record companion. An object that mixes real content in with a
+// coordinate or two (a business record that happens to have its own `width` field) never matches:
+// GEOMETRY_MIN_KEYS requires several coordinate keys AND nothing else but a name to fire.
+const GEOMETRY_KEYS = new Set(['x', 'y', 'cx', 'cy', 'sx', 'sy', 'r', 'rx', 'ry', 'w', 'h', 'width', 'height', 'angle', 'n']);
+const GEOMETRY_MIN_KEYS = 3;
+
+function isChartGeometryObject(entry) {
+  const keys = Object.keys(entry).filter((k) => !isHiddenKey(k));
+  const geoKeys = keys.filter((k) => GEOMETRY_KEYS.has(k.toLowerCase()));
+  const nonGeoKeys = keys.filter((k) => !GEOMETRY_KEYS.has(k.toLowerCase()));
+  return geoKeys.length >= GEOMETRY_MIN_KEYS && nonGeoKeys.every((k) => k === 'name' || k === 'label');
 }
 
 function isReactDescriptor(v) {
@@ -72,6 +92,13 @@ export function flattenNestedEntry(entry, depth = 0) {
 
   if (isReactDescriptor(entry)) return flattenDisplayValue(entry);
 
+  // Chart/plot coordinates, not content — see isChartGeometryObject's own doc comment. Returns ''
+  // (nothing to show) rather than trying to salvage the object's own `name`/`label`: whatever this
+  // geometry is describing already has its own real headline/label rendered by the caller (that's
+  // how a reader identified it as "Hero" or "Core" in the first place) — this object's job was only
+  // ever to tell a chart where to draw the point, never to restate the name a second time as text.
+  if (isChartGeometryObject(entry)) return '';
+
   if (Array.isArray(entry)) {
     return entry
       .map((item) => flattenNestedEntry(item, depth + 1))
@@ -90,14 +117,14 @@ export function flattenNestedEntry(entry, depth = 0) {
 
   const magnitudeKey = MAGNITUDE_KEYS.find((k) => entry[k] !== undefined);
   const hasNestedSibling = Object.entries(entry).some(
-    ([k, v]) => k !== magnitudeKey && !isDecorativeKey(k) && v !== null && typeof v === 'object',
+    ([k, v]) => k !== magnitudeKey && !isHiddenKey(k) && v !== null && typeof v === 'object',
   );
   if (magnitudeKey !== undefined && !hasNestedSibling) {
     return flattenDisplayValue(entry[magnitudeKey]);
   }
 
   const joined = Object.entries(entry)
-    .filter(([key]) => !isDecorativeKey(key))
+    .filter(([key]) => !isHiddenKey(key))
     .map(([key, value]) => {
       const text = flattenNestedEntry(value, depth + 1);
       return text ? `${humanizeSlotName(key)}: ${text}` : '';

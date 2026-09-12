@@ -131,16 +131,45 @@ function packFlowables(flowItems) {
 }
 
 /**
- * Walks one ordered list of items and folds adjacent same-key items into rows — the same
- * adjacency-only rule the original groupIntoRows used (two blocks with the same explicit `group`
- * that AREN'T adjacent do not merge across unrelated content in between; author them adjacently,
- * or put them in the same `section` and adjacent within it, if they belong together).
+ * Stably pulls every item sharing an explicit `layout.group` key adjacent to its group's FIRST
+ * occurrence, without disturbing the relative order of anything else — the generic composition fix
+ * DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §7/§11 calls for: a control block and the dependent blocks
+ * generateManifests.js assigns to its same group (see its own doc comment) are almost never already
+ * adjacent in raw fixture-key order, and authoring every manifest by hand to make them so isn't
+ * something generation-time code can promise. This is what makes "two blocks share a group" alone —
+ * regardless of where each one happened to land in the manifest's own block order — enough for them
+ * to actually compose into one panel, while every item with NO explicit group (the overwhelming
+ * majority of blocks) keeps its exact original position: each such item is its own singleton bucket
+ * below, so the only things that ever move are items that share a real, authored group key.
+ */
+function pullExplicitGroupsAdjacent(items) {
+  const order = []
+  const buckets = new Map()
+  let soloCounter = 0
+  for (const item of items) {
+    const key = explicitGroupKey(item.layout)
+    const bucketKey = key !== null ? `g:${key}` : `solo:${soloCounter++}`
+    if (!buckets.has(bucketKey)) {
+      buckets.set(bucketKey, [])
+      order.push(bucketKey)
+    }
+    buckets.get(bucketKey).push(item)
+  }
+  return order.flatMap((key) => buckets.get(key))
+}
+
+/**
+ * Walks one ordered list of items and folds adjacent same-key items into rows — an explicit
+ * `layout.group` no longer needs its members to already be adjacent in the input (see
+ * pullExplicitGroupsAdjacent above, applied first); the heuristic scalar/small-object grouping below
+ * is still adjacency-only, unchanged from its original behavior.
  *
  * `allowFlow` gates the new mixed-width packing pass to the MAIN region only (see
  * composeOneRegion) — the rail's own composition (a single shared compact panel per section,
  * StageSections.jsx's `RailPanel`) is untouched and was never asked to change.
  */
-function groupIntoRows(items, allowFlow) {
+function groupIntoRows(rawItems, allowFlow) {
+  const items = pullExplicitGroupsAdjacent(rawItems)
   const rows = []
   let current = null
   let currentKey = undefined

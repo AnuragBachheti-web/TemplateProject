@@ -22,7 +22,7 @@
       },
       {
         "slotName": "slas",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.slas"
       },
       {
@@ -37,7 +37,7 @@
       },
       {
         "slotName": "agents",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.agents"
       }
     ]
@@ -93,7 +93,7 @@
       },
       {
         "slotName": "options",
-        "blockType": "itemQueue",
+        "blockType": "table",
         "binding": "data.options"
       },
       {
@@ -120,11 +120,6 @@
         "region": "rail"
       },
       {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
-      },
-      {
         "id": "details",
         "title": "Details",
         "region": "main"
@@ -138,6 +133,12 @@
         "section": "summary"
       },
       {
+        "slotName": "execSegs",
+        "blockType": "itemQueue",
+        "binding": "data.execSegs",
+        "section": "details"
+      },
+      {
         "slotName": "pushMeta",
         "blockType": "text",
         "binding": "data.pushMeta",
@@ -145,9 +146,9 @@
       },
       {
         "slotName": "pushes",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.pushes",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "tasks",
@@ -217,9 +218,9 @@
       },
       {
         "slotName": "monitors",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.monitors",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "counters",

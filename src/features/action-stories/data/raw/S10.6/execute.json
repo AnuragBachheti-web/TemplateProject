@@ -104,7 +104,42 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "inventory",
+          "name": "Inventory · air freight and transfers",
+          "icon": "fa-solid fa-boxes-stacked",
+          "hue": "var(--mod-inventory)",
+          "doorHref": "S9.2-4-execute.dc.html",
+          "doorLabel": "S9.2 replenishment",
+          "meta": "tendered before the FBA cutoff · 31 hours of margin, not 31 days",
+          "items": [
+            {
+              "name": "Air freight tendered · 2 lanes",
+              "tag": "before cutoff",
+              "tagIcon": "fa-solid fa-plane",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)",
+              "detail": "360 units of Dutch Oven and 180 of Sauté Pan booked on Aug 20 departures, arriving Aug 22 — one day before the window opens.",
+              "value": "−$3,100",
+              "valueTone": "var(--rose-700)"
+            },
+            {
+              "name": "West-node transfer created",
+              "tag": null,
+              "detail": "140 units moved to the East node for $340 of freight, covering the balance of the Sauté Pan gap without air.",
+              "value": "−$340",
+              "valueTone": "var(--ink-900)"
+            },
+            {
+              "name": "Event cover recalculated",
+              "tag": null,
+              "detail": "All 14 event SKUs now clear P50 cover for the full 96 hours. Two clear P90 as well; the rest are a P50 plan by design.",
+              "value": "14 of 14",
+              "valueTone": "var(--green-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Ads · budgets staged and armed",
@@ -167,7 +202,45 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "ads",
+          "name": "Ads · budgets staged and armed",
+          "icon": "fa-solid fa-bullseye",
+          "hue": "var(--mod-ads)",
+          "doorHref": "S9.7-4-execute.dc.html",
+          "doorLabel": "S9.7 ads",
+          "meta": "$52K across four channels · arms at T-0, not now",
+          "items": [
+            {
+              "name": "Event budgets staged",
+              "tag": "arms at t-0",
+              "tagIcon": "fa-solid fa-clock",
+              "tagTint": "color-mix(in oklab, var(--mod-ads) 12%, white)",
+              "tagTone": "var(--mod-ads)",
+              "detail": "Amazon $28K, Google $11K, Meta $8K, TikTok $5K — written to each platform as scheduled changes that take effect at 00:01 on Aug 23.",
+              "value": "$52,000",
+              "valueTone": "var(--mod-ads)"
+            },
+            {
+              "name": "Pacing authority armed at Assist",
+              "tag": "within bounds",
+              "tagIcon": "fa-solid fa-gauge-high",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "Budget may move between armed campaigns while mROAS holds above 1.4×, up to the +180% daily cap. New campaigns and new creative still ask.",
+              "value": "+180% cap",
+              "valueTone": "var(--mod-actions)"
+            },
+            {
+              "name": "Creative fatigue watch to hourly",
+              "tag": null,
+              "detail": "Frequency and CTR decay checked hourly rather than daily. In a 96-hour window, a daily check is two data points.",
+              "value": "hourly",
+              "valueTone": "var(--ink-900)"
+            }
+          ]
+        }
       },
       {
         "name": "Creative and listings",
@@ -227,7 +300,42 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "content",
+          "name": "Creative and listings",
+          "icon": "fa-solid fa-images",
+          "hue": "var(--mod-intel)",
+          "doorHref": "S10.5-4-execute.dc.html",
+          "doorLabel": "S10.5 integrity",
+          "meta": "reduced DTC lineup · canonical check re-run on all 14 event listings",
+          "items": [
+            {
+              "name": "DTC lineup reduced to what exists",
+              "tag": "stated cost",
+              "tagIcon": "fa-solid fa-scissors",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "Two email sends and five social variants instead of three and eight. Costs about $6K of the $48K DTC forecast, and the send calendar is rebuilt around what is real.",
+              "value": "−$6K rev",
+              "valueTone": "var(--amber-700)"
+            },
+            {
+              "name": "Event listings verified against canonical",
+              "tag": null,
+              "detail": "All 14 passed the 10.5 field-level check this morning, and the fast-lane monitor cadence holds through the window — a hero image drifting during Prime Fall is a different kind of expensive.",
+              "value": "14 clean",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Deal badges and A+ scheduled",
+              "tag": null,
+              "detail": "Amazon and Walmart deal imagery scheduled to publish at 00:01 and revert at expiry, so nothing advertises a price that has ended.",
+              "value": "13 assets",
+              "valueTone": "var(--ink-900)"
+            }
+          ]
+        }
       },
       {
         "name": "Fulfilment and account health",
@@ -287,7 +395,42 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "ops",
+          "name": "Fulfilment and account health",
+          "icon": "fa-solid fa-heart-pulse",
+          "hue": "var(--mod-actions)",
+          "doorHref": "S10.3-4-execute.dc.html",
+          "doorLabel": "S10.3 health",
+          "meta": "handling buffer armed for the window · hourly metric polling",
+          "items": [
+            {
+              "name": "Handling-time buffer armed",
+              "tag": "window only",
+              "tagIcon": "fa-solid fa-shield-halved",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "+1 day on East-node SKUs from Aug 23 to Aug 27. Costs roughly $4.2K of revenue in conversion and keeps late shipment under 4% through the Monday that broke last BFCM.",
+              "value": "−$4.2K rev",
+              "valueTone": "var(--amber-700)"
+            },
+            {
+              "name": "Account metrics to hourly polling",
+              "tag": null,
+              "detail": "Late shipment, ODR and cancellation checked hourly with a 0.3pp pre-alarm, which is tighter than the marketplace threshold on purpose.",
+              "value": "3 metrics",
+              "valueTone": "var(--ink-900)"
+            },
+            {
+              "name": "3PL notified with the volume forecast",
+              "tag": null,
+              "detail": "P50 and P90 daily order counts sent to both nodes, with the Monday peak called out explicitly rather than left in a spreadsheet.",
+              "value": "both nodes",
+              "valueTone": "var(--ink-900)"
+            }
+          ]
+        }
       },
       {
         "name": "Cash and monitoring",
@@ -350,7 +493,45 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "cash",
+          "name": "Cash and monitoring",
+          "icon": "fa-solid fa-coins",
+          "hue": "var(--mod-cash)",
+          "doorHref": "S10.2-4-execute.dc.html",
+          "doorLabel": "S10.2 cash",
+          "meta": "credit line pre-arranged · war room and post-event readout scheduled",
+          "items": [
+            {
+              "name": "Credit line pre-arranged",
+              "tag": null,
+              "detail": "$60K available on demand at 9.4% for the sixteen days of settlement lag. About $470 of interest, drawn only if the trough needs it.",
+              "value": "−$470",
+              "valueTone": "var(--ink-900)"
+            },
+            {
+              "name": "War room opens at T-0",
+              "tag": "live screen",
+              "tagIcon": "fa-solid fa-tower-broadcast",
+              "tagTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
+              "tagTone": "var(--mod-actions)",
+              "detail": "Pacing tiles per lens go live at 00:01 with in-flight adjustment cards labelled by authority level, so nobody has to guess whether Realify acted or asked.",
+              "value": "Aug 23 · 00:01",
+              "valueTone": "var(--mod-actions)"
+            },
+            {
+              "name": "Post-event readout scheduled",
+              "tag": "trough-adjusted",
+              "tagIcon": "fa-solid fa-chart-line",
+              "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+              "tagTone": "var(--mod-cash)",
+              "detail": "Incrementality measured at +14 days against the post-event trough, not against the week before. Learnings annotate to the Ledger for next year’s T-8 card.",
+              "value": "Sep 10",
+              "valueTone": "var(--mod-cash)"
+            }
+          ]
+        }
       }
     ],
     "pingState": "sends with creative",

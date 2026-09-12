@@ -96,7 +96,10 @@ describe('manifest + fixture sweep — Phase 2/3 layout composition at full scal
     // The full vocabulary classifyBlocks.js's `planSections` can emit — see its own SECTION_ORDER.
     // "recommendation"/"rollup"/"provenance" are the FORENSIC_AUDIT_S9.1.md semantic-placement
     // additions (a stage's own headline group, a metrics rollup, a provenance/basis footnote list).
-    const allowedIds = new Set(['guardrails', 'recommendation', 'summary', 'rollup', 'provenance', 'analysis', 'details']);
+    // "decision" is the DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §7/§11 addition: a control block
+    // (blockType 'slider') fused with every block its own measured `dependencies` names.
+    // "execution" is this pass's own addition (Pattern E: destination + before/after diff).
+    const allowedIds = new Set(['guardrails', 'recommendation', 'decision', 'summary', 'rollup', 'provenance', 'analysis', 'execution', 'details']);
     let sectionedStageCount = 0;
     for (const { code, stageManifests } of manifestsByCode) {
       for (const manifest of stageManifests) {

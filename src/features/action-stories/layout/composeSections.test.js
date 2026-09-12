@@ -205,6 +205,38 @@ describe('composeSections — declarative layout (explicit group/span) composes 
     expect(main[0].rows[0].items).toEqual([{ slotName: 'a', span: 12 }, { slotName: 'b', span: 12 }]);
   });
 
+  it('fuses two blocks sharing an explicit layout.group even when NOT adjacent in the input (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §7/§11: a control and its dependents are almost never already adjacent in raw fixture-key order)', () => {
+    const items = [
+      item('tol', 'slider', { layout: { group: 'control:tol' } }),
+      item('unrelated', 'text'),
+      item('slate', 'table', { layout: { group: 'control:tol' } }),
+    ];
+    const { main } = composeSections(items, undefined);
+    // The fused group takes the position of its first member; the unrelated item is displaced
+    // after it, keeping its own relative order intact (never dropped, never duplicated).
+    expect(main[0].rows).toEqual([
+      { type: 'grid', explicit: true, items: [{ slotName: 'tol', span: 12 }, { slotName: 'slate', span: 12 }] },
+      { type: 'grid', explicit: false, items: [{ slotName: 'unrelated', span: 1 }] },
+    ]);
+  });
+
+  it('non-adjacent grouping never disturbs the relative order of items with NO explicit group at all', () => {
+    const items = [
+      item('a', 'text'),
+      item('tol', 'slider', { layout: { group: 'g' } }),
+      item('b', 'text'),
+      item('slate', 'table', { layout: { group: 'g' } }),
+      item('c', 'text'),
+    ];
+    const { main } = composeSections(items, undefined);
+    // a, b, c stay in their own original relative order (all still heuristically grid-eligible
+    // singletons except slate/tol which are explicit) — only tol/slate move to sit together.
+    const order = main[0].rows.flatMap((r) => (r.type === 'grid' ? r.items.map((i) => i.slotName) : [r.slotName]));
+    expect(order.indexOf('a')).toBeLessThan(order.indexOf('b'));
+    expect(order.indexOf('b')).toBeLessThan(order.indexOf('c'));
+    expect(order.indexOf('tol') + 1).toBe(order.indexOf('slate'));
+  });
+
   it('respects explicit span values of 12, 6, and 4 (a 12-column grid)', () => {
     const items = [
       item('a', 'table', { layout: { group: 'g', span: 12 } }),

@@ -56,7 +56,53 @@
             "value": "11h",
             "tone": "var(--rose-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "walmart-capacity",
+          "surface": "ChatGPT",
+          "claim": "Quoted the 12-quart stock pot as 10 quarts on a capacity query",
+          "said": "10 qt",
+          "truth": "12 qt",
+          "badge": "root cause · stale feed",
+          "tint": "var(--rose-50)",
+          "tone": "var(--rose-700)",
+          "title": "Capacity attribute · stale Walmart feed",
+          "body": "The PIM was corrected nine days ago when the SKU moved to the 12-quart body. The Walmart feed never picked the change up, and three surfaces read the marketplace listing rather than the storefront. One field, four wrong answers, and the query it lost is the highest-volume one in the battery.",
+          "chain": [
+            {
+              "stage": "Canonical record",
+              "value": "capacity = 12 qt",
+              "note": "PIM, updated 9 days ago",
+              "icon": "fa-solid fa-database",
+              "tone": "var(--green-700)",
+              "border": "var(--ink-100)"
+            },
+            {
+              "stage": "Feed",
+              "value": "capacity = 10 qt",
+              "note": "Walmart feed, last pickup 9 days ago",
+              "icon": "fa-solid fa-triangle-exclamation",
+              "tone": "var(--rose-700)",
+              "border": "color-mix(in oklab, var(--rose-500) 34%, white)"
+            },
+            {
+              "stage": "Marketplace listing",
+              "value": "10 qt shown",
+              "note": "Walmart PDP, indexed 6 days ago",
+              "icon": "fa-solid fa-store",
+              "tone": "var(--rose-700)",
+              "border": "color-mix(in oklab, var(--rose-500) 24%, white)"
+            },
+            {
+              "stage": "Answer",
+              "value": "\"holds 10 quarts\"",
+              "note": "ChatGPT, Google AI, Rufus",
+              "icon": "fa-solid fa-robot",
+              "tone": "var(--rose-700)",
+              "border": "var(--ink-100)"
+            }
+          ]
+        }
       },
       {
         "name": "Factual density",
@@ -86,7 +132,53 @@
             "value": "18 SKUs",
             "tone": "var(--ink-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "heat",
+          "surface": "Google AI",
+          "claim": "Said the nonstick line is rated to 500°F",
+          "said": "500°F",
+          "truth": "450°F",
+          "badge": "copy vs spec conflict",
+          "tint": "var(--amber-50)",
+          "tone": "var(--amber-700)",
+          "title": "Heat rating · marketing copy read as specification",
+          "body": "The specification field says 450°F. A PDP paragraph written last spring says \"handles anything your oven can throw at it, up to 500 degrees\". The surface trusted the prose because there was no structured field adjacent to it. This is the case the brand rule about superlatives exists to prevent.",
+          "chain": [
+            {
+              "stage": "Canonical record",
+              "value": "max_temp = 450°F",
+              "note": "PIM spec field",
+              "icon": "fa-solid fa-database",
+              "tone": "var(--green-700)",
+              "border": "var(--ink-100)"
+            },
+            {
+              "stage": "PDP copy",
+              "value": "\"up to 500 degrees\"",
+              "note": "body paragraph, no source field",
+              "icon": "fa-solid fa-file-lines",
+              "tone": "var(--amber-700)",
+              "border": "color-mix(in oklab, var(--amber-500) 34%, white)"
+            },
+            {
+              "stage": "Schema",
+              "value": "no maxTemperature",
+              "note": "field absent from Product schema",
+              "icon": "fa-solid fa-code",
+              "tone": "var(--rose-700)",
+              "border": "color-mix(in oklab, var(--rose-500) 24%, white)"
+            },
+            {
+              "stage": "Answer",
+              "value": "\"rated to 500°F\"",
+              "note": "Google AI Mode",
+              "icon": "fa-solid fa-robot",
+              "tone": "var(--amber-700)",
+              "border": "var(--ink-100)"
+            }
+          ]
+        }
       },
       {
         "name": "Policy readability",
@@ -116,7 +208,53 @@
             "value": "present",
             "tone": "var(--green-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "returns",
+          "surface": "Perplexity",
+          "claim": "Told a shopper cookware returns close after 14 days",
+          "said": "14 days",
+          "truth": "45 days",
+          "badge": "policy not machine-readable",
+          "tint": "var(--amber-50)",
+          "tone": "var(--amber-700)",
+          "title": "Return window · policy published only as prose",
+          "body": "The 45-day window lives in a help-centre page written for humans. The surface found a 14-day line in a third-party marketplace policy and used it. Publishing returns as structured policy removes the ambiguity entirely — and it is the single item on the roadmap that touches every surface at once.",
+          "chain": [
+            {
+              "stage": "Canonical record",
+              "value": "returns = 45 days",
+              "note": "policy record, current",
+              "icon": "fa-solid fa-database",
+              "tone": "var(--green-700)",
+              "border": "var(--ink-100)"
+            },
+            {
+              "stage": "Publication",
+              "value": "help-centre prose",
+              "note": "no MerchantReturnPolicy type",
+              "icon": "fa-solid fa-file-lines",
+              "tone": "var(--rose-700)",
+              "border": "color-mix(in oklab, var(--rose-500) 34%, white)"
+            },
+            {
+              "stage": "Third party",
+              "value": "14-day marketplace text",
+              "note": "reseller listing, outranked ours",
+              "icon": "fa-solid fa-store",
+              "tone": "var(--amber-700)",
+              "border": "color-mix(in oklab, var(--amber-500) 24%, white)"
+            },
+            {
+              "stage": "Answer",
+              "value": "\"14 days to return\"",
+              "note": "Perplexity",
+              "icon": "fa-solid fa-robot",
+              "tone": "var(--amber-700)",
+              "border": "var(--ink-100)"
+            }
+          ]
+        }
       },
       {
         "name": "Real-time accuracy",
@@ -146,7 +284,53 @@
             "value": "2.2%",
             "tone": "var(--amber-700)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "price",
+          "surface": "Rufus",
+          "claim": "Quoted a price $8 below the storefront on the hero SKU",
+          "said": "$91.00",
+          "truth": "$99.00",
+          "badge": "price staleness",
+          "tint": "var(--rose-50)",
+          "tone": "var(--rose-700)",
+          "title": "Price staleness · 11-hour feed lag",
+          "body": "A promotional price expired at midnight and the feed carried it for another eleven hours. The answer was accurate when it was generated and wrong when the shopper read it. Cutting the regeneration cadence to two hours closes most of this; pulling rather than publishing a stale price closes the rest.",
+          "chain": [
+            {
+              "stage": "Canonical record",
+              "value": "price = $99.00",
+              "note": "storefront, effective 00:00",
+              "icon": "fa-solid fa-database",
+              "tone": "var(--green-700)",
+              "border": "var(--ink-100)"
+            },
+            {
+              "stage": "Feed",
+              "value": "price = $91.00",
+              "note": "expired promo, 11h lag",
+              "icon": "fa-solid fa-triangle-exclamation",
+              "tone": "var(--rose-700)",
+              "border": "color-mix(in oklab, var(--rose-500) 34%, white)"
+            },
+            {
+              "stage": "Surface cache",
+              "value": "$91.00 held",
+              "note": "read at 07:40, cached 6h",
+              "icon": "fa-solid fa-clock",
+              "tone": "var(--amber-700)",
+              "border": "color-mix(in oklab, var(--amber-500) 24%, white)"
+            },
+            {
+              "stage": "Answer",
+              "value": "\"$91 at Northwind\"",
+              "note": "Rufus",
+              "icon": "fa-solid fa-robot",
+              "tone": "var(--rose-700)",
+              "border": "var(--ink-100)"
+            }
+          ]
+        }
       }
     ],
     "surfaceTabs": [
@@ -229,7 +413,17 @@
         "usTone": "var(--ink-800)",
         "reason": "missing attr",
         "tone": "var(--amber-700)",
-        "tint": "var(--amber-50)"
+        "tint": "var(--amber-50)",
+        "__raw": {
+          "text": "best carbon steel pan for induction under $120",
+          "surface": "chatgpt",
+          "us": 1,
+          "a": 4,
+          "b": 2,
+          "reason": "missing attr",
+          "tone": "var(--amber-700)",
+          "tint": "var(--amber-50)"
+        }
       },
       {
         "text": "dishwasher safe knife block with sharpener",
@@ -240,7 +434,17 @@
         "usTone": "var(--rose-700)",
         "reason": "no schema",
         "tone": "var(--rose-700)",
-        "tint": "var(--rose-50)"
+        "tint": "var(--rose-50)",
+        "__raw": {
+          "text": "dishwasher safe knife block with sharpener",
+          "surface": "google",
+          "us": 0,
+          "a": 3,
+          "b": 3,
+          "reason": "no schema",
+          "tone": "var(--rose-700)",
+          "tint": "var(--rose-50)"
+        }
       },
       {
         "text": "water filter pitcher that removes lead",
@@ -251,7 +455,17 @@
         "usTone": "var(--green-700)",
         "reason": "even",
         "tone": "var(--ink-600)",
-        "tint": "var(--ink-100)"
+        "tint": "var(--ink-100)",
+        "__raw": {
+          "text": "water filter pitcher that removes lead",
+          "surface": "perplexity",
+          "us": 2,
+          "a": 2,
+          "b": 1,
+          "reason": "even",
+          "tone": "var(--ink-600)",
+          "tint": "var(--ink-100)"
+        }
       },
       {
         "text": "nonstick pan safe above 500°F",
@@ -262,7 +476,17 @@
         "usTone": "var(--rose-700)",
         "reason": "wrong spec",
         "tone": "var(--rose-700)",
-        "tint": "var(--rose-50)"
+        "tint": "var(--rose-50)",
+        "__raw": {
+          "text": "nonstick pan safe above 500°F",
+          "surface": "chatgpt",
+          "us": 0,
+          "a": 3,
+          "b": 1,
+          "reason": "wrong spec",
+          "tone": "var(--rose-700)",
+          "tint": "var(--rose-50)"
+        }
       },
       {
         "text": "kitchen scale accurate to 1 gram",
@@ -273,7 +497,17 @@
         "usTone": "var(--ink-800)",
         "reason": "missing attr",
         "tone": "var(--amber-700)",
-        "tint": "var(--amber-50)"
+        "tint": "var(--amber-50)",
+        "__raw": {
+          "text": "kitchen scale accurate to 1 gram",
+          "surface": "google",
+          "us": 1,
+          "a": 2,
+          "b": 2,
+          "reason": "missing attr",
+          "tone": "var(--amber-700)",
+          "tint": "var(--amber-50)"
+        }
       },
       {
         "text": "stock pot 12 quart with strainer lid",
@@ -284,7 +518,17 @@
         "usTone": "var(--rose-700)",
         "reason": "stale feed",
         "tone": "var(--rose-700)",
-        "tint": "var(--rose-50)"
+        "tint": "var(--rose-50)",
+        "__raw": {
+          "text": "stock pot 12 quart with strainer lid",
+          "surface": "rufus",
+          "us": 0,
+          "a": 4,
+          "b": 2,
+          "reason": "stale feed",
+          "tone": "var(--rose-700)",
+          "tint": "var(--rose-50)"
+        }
       },
       {
         "text": "return policy on cookware sets",
@@ -295,7 +539,17 @@
         "usTone": "var(--ink-800)",
         "reason": "policy text",
         "tone": "var(--amber-700)",
-        "tint": "var(--amber-50)"
+        "tint": "var(--amber-50)",
+        "__raw": {
+          "text": "return policy on cookware sets",
+          "surface": "perplexity",
+          "us": 1,
+          "a": 3,
+          "b": 2,
+          "reason": "policy text",
+          "tone": "var(--amber-700)",
+          "tint": "var(--amber-50)"
+        }
       },
       {
         "text": "oven safe skillet with lid for two people",
@@ -306,7 +560,17 @@
         "usTone": "var(--ink-800)",
         "reason": "missing attr",
         "tone": "var(--amber-700)",
-        "tint": "var(--amber-50)"
+        "tint": "var(--amber-50)",
+        "__raw": {
+          "text": "oven safe skillet with lid for two people",
+          "surface": "chatgpt",
+          "us": 2,
+          "a": 3,
+          "b": 1,
+          "reason": "missing attr",
+          "tone": "var(--amber-700)",
+          "tint": "var(--amber-50)"
+        }
       },
       {
         "text": "cutting board that will not warp",
@@ -317,7 +581,17 @@
         "usTone": "var(--rose-700)",
         "reason": "no schema",
         "tone": "var(--rose-700)",
-        "tint": "var(--rose-50)"
+        "tint": "var(--rose-50)",
+        "__raw": {
+          "text": "cutting board that will not warp",
+          "surface": "google",
+          "us": 0,
+          "a": 3,
+          "b": 4,
+          "reason": "no schema",
+          "tone": "var(--rose-700)",
+          "tint": "var(--rose-50)"
+        }
       },
       {
         "text": "pan set compatible with glass cooktop",
@@ -328,7 +602,17 @@
         "usTone": "var(--ink-800)",
         "reason": "missing attr",
         "tone": "var(--amber-700)",
-        "tint": "var(--amber-50)"
+        "tint": "var(--amber-50)",
+        "__raw": {
+          "text": "pan set compatible with glass cooktop",
+          "surface": "rufus",
+          "us": 1,
+          "a": 2,
+          "b": 2,
+          "reason": "missing attr",
+          "tone": "var(--amber-700)",
+          "tint": "var(--amber-50)"
+        }
       }
     ],
     "mismatches": [

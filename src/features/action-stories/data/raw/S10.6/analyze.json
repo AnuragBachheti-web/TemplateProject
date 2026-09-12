@@ -55,7 +55,107 @@
         "clock": "31h",
         "clockTone": "var(--rose-700)",
         "rowBg": "color-mix(in oklab, var(--mod-actions) 6%, white)",
-        "mark": "var(--mod-actions)"
+        "mark": "var(--mod-actions)",
+        "__raw": {
+          "id": "inventory",
+          "name": "Inventory",
+          "lens": "Planner · Inventory lens",
+          "icon": "fa-solid fa-boxes-stacked",
+          "hue": "var(--mod-inventory)",
+          "score": 84,
+          "gap": "2 Heroes short at P50 · FBA cutoff in 31 hours",
+          "gapTone": "var(--rose-700)",
+          "owner": "Planner",
+          "clock": "31h",
+          "clockTone": "var(--rose-700)",
+          "state": "gap priced",
+          "meta": "14 event SKUs · cover measured against the event forecast, not the trailing run rate",
+          "tableTitle": "Cover against event forecast",
+          "col0": "SKU · role",
+          "col1": "On hand",
+          "col2": "P50 need",
+          "col3": "Gap",
+          "rows": [
+            {
+              "name": "Dutch Oven 5qt",
+              "sub": "Hero · 41% of event revenue",
+              "a": "820",
+              "b": "1,140",
+              "c": "−320",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--rose-700)"
+            },
+            {
+              "name": "Sauté Pan 12in",
+              "sub": "Hero · 18% of event revenue",
+              "a": "410",
+              "b": "590",
+              "c": "−180",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--rose-700)"
+            },
+            {
+              "name": "Knife Block 6pc",
+              "sub": "Core",
+              "a": "360",
+              "b": "300",
+              "c": "+60",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Cast-iron Skillet 10in",
+              "sub": "Core",
+              "a": "520",
+              "b": "440",
+              "c": "+80",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Remaining 10 SKUs",
+              "sub": "Core and Margin Driver",
+              "a": "2,940",
+              "b": "2,510",
+              "c": "+430",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            }
+          ],
+          "note": "The two Hero shortfalls carry 59% of forecast event revenue between them, which is why a 500-unit gap is worth $9.4K of contribution rather than a proportional share. Air freight closes both for $3.1K if it is tendered before the cutoff.",
+          "sideTitle": "The air-freight call",
+          "side": [
+            {
+              "label": "Air freight · both lanes",
+              "detail": "$3.1K, arrives Aug 22 — one day before open",
+              "icon": "fa-solid fa-plane",
+              "ok": true
+            },
+            {
+              "label": "Projected stockout loss",
+              "detail": "$9.4K of contribution at P50 demand",
+              "icon": "fa-solid fa-arrow-trend-down",
+              "ok": false
+            },
+            {
+              "label": "Sea freight alternative",
+              "detail": "Arrives Sep 4 — after the window closes entirely",
+              "icon": "fa-solid fa-ship",
+              "ok": false
+            },
+            {
+              "label": "Transfer from West node",
+              "detail": "Covers 140 of 500 units, $340 of freight, arrives in time",
+              "icon": "fa-solid fa-truck-fast",
+              "ok": true
+            }
+          ],
+          "calloutTitle": "3× return on the most expensive freight we buy",
+          "callout": "Air freight is normally the answer to a planning failure. Here it is the answer to a forecast that moved, and the math is unambiguous — $3.1K against $9.4K, with the transfer covering the rest.",
+          "calloutTone": "var(--green-700)",
+          "calloutBg": "var(--green-50)",
+          "calloutBorder": "color-mix(in oklab, var(--green-500) 24%, white)"
+        }
       },
       {
         "name": "Deals and promos",
@@ -72,7 +172,106 @@
         "clock": "locked",
         "clockTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "deals",
+          "name": "Deals and promos",
+          "lens": "Promoter · Margin lens",
+          "icon": "fa-solid fa-tags",
+          "hue": "var(--mod-ads)",
+          "score": 100,
+          "gap": "Lineup locked and confirmed across 14 SKUs",
+          "gapTone": "var(--green-700)",
+          "owner": "Promoter",
+          "clock": "locked",
+          "clockTone": "var(--green-700)",
+          "state": "complete",
+          "doorHref": "S9.19-1-reason.dc.html",
+          "doorLabel": "S9.19 calendar",
+          "meta": "submitted Aug 14 from the 9.19 calendar · all three deal types confirmed",
+          "tableTitle": "Deal lineup",
+          "col0": "Deal",
+          "col1": "SKUs",
+          "col2": "Depth",
+          "col3": "Status",
+          "rows": [
+            {
+              "name": "Prime Fall Deal",
+              "sub": "Amazon · days 1–2",
+              "a": "6",
+              "b": "22%",
+              "c": "confirmed",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Lightning Deals",
+              "sub": "Amazon · 8 slots across 96h",
+              "a": "4",
+              "b": "25%",
+              "c": "confirmed",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Coupon stack",
+              "sub": "Amazon · full window",
+              "a": "9",
+              "b": "10%",
+              "c": "confirmed",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Walmart Rollback",
+              "sub": "days 2–4 · 9 shared SKUs",
+              "a": "9",
+              "b": "18%",
+              "c": "confirmed",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "DTC sitewide",
+              "sub": "Shopify · full window",
+              "a": "14",
+              "b": "15%",
+              "c": "confirmed",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            }
+          ],
+          "note": "The 9.19 conflict detector cleared the Walmart overlap on the nine shared SKUs by staggering depth rather than dates — 18% against 22%, which keeps parity inside policy while both windows run.",
+          "sideTitle": "Margin at event depth",
+          "side": [
+            {
+              "label": "Blended CM at depth",
+              "detail": "31.4% against 38.2% at list — inside the posture",
+              "icon": "fa-solid fa-percent",
+              "ok": true
+            },
+            {
+              "label": "Deepest single depth",
+              "detail": "25% on Lightning Deals, floor is 30%",
+              "icon": "fa-solid fa-arrow-down",
+              "ok": true
+            },
+            {
+              "label": "Parity check",
+              "detail": "All four channels inside marketplace fair-pricing rules",
+              "icon": "fa-solid fa-scale-balanced",
+              "ok": true
+            },
+            {
+              "label": "Inventory commitment",
+              "detail": "Deal terms commit 2,400 units — cover must hold",
+              "icon": "fa-solid fa-link",
+              "ok": true
+            }
+          ],
+          "calloutTitle": null,
+          "callout": null
+        }
       },
       {
         "name": "Creative and content",
@@ -89,7 +288,107 @@
         "clock": "2 days",
         "clockTone": "var(--rose-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "creative",
+          "name": "Creative and content",
+          "lens": "Merchandiser · Sales lens",
+          "icon": "fa-solid fa-images",
+          "hue": "var(--mod-intel)",
+          "score": 60,
+          "gap": "6 of 15 DTC assets outstanding · studio has 2 days",
+          "gapTone": "var(--rose-700)",
+          "owner": "Merchandiser",
+          "clock": "2 days",
+          "clockTone": "var(--rose-700)",
+          "state": "behind",
+          "meta": "the gap money cannot close — no override buys a finished asset at T-4",
+          "tableTitle": "Asset readiness",
+          "col0": "Asset set",
+          "col1": "Needed",
+          "col2": "Delivered",
+          "col3": "State",
+          "rows": [
+            {
+              "name": "Amazon deal imagery",
+              "sub": "A+ and deal badges",
+              "a": "8",
+              "b": "8",
+              "c": "ready",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Walmart lineup",
+              "sub": "Rollback hero shots",
+              "a": "5",
+              "b": "5",
+              "c": "ready",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "DTC email · 3 sends",
+              "sub": "hero, mid-event, last-call",
+              "a": "3",
+              "b": "1",
+              "c": "2 short",
+              "bTone": "var(--amber-700)",
+              "cTone": "var(--rose-700)"
+            },
+            {
+              "name": "DTC paid social",
+              "sub": "video and static variants",
+              "a": "8",
+              "b": "5",
+              "c": "3 short",
+              "bTone": "var(--amber-700)",
+              "cTone": "var(--rose-700)"
+            },
+            {
+              "name": "SMS creative",
+              "sub": "2 sends",
+              "a": "2",
+              "b": "1",
+              "c": "1 short",
+              "bTone": "var(--amber-700)",
+              "cTone": "var(--rose-700)"
+            }
+          ],
+          "note": "Every outstanding asset is DTC, which is also the channel with the thinnest forecast. That makes the trade legible: a reduced DTC lineup costs about $6K of the $48K DTC forecast, and reused evergreen creative costs conversion rather than presence.",
+          "sideTitle": "The honest options",
+          "side": [
+            {
+              "label": "Reduce the DTC lineup",
+              "detail": "Two sends instead of three, five social variants instead of eight",
+              "icon": "fa-solid fa-scissors",
+              "ok": true
+            },
+            {
+              "label": "Reuse evergreen creative",
+              "detail": "Available now, historically 18% weaker on click-through",
+              "icon": "fa-solid fa-recycle",
+              "ok": true
+            },
+            {
+              "label": "Rush the studio",
+              "detail": "Possible for 3 of 6 assets at a $1.4K rush fee",
+              "icon": "fa-solid fa-bolt",
+              "ok": true
+            },
+            {
+              "label": "Wait and hope",
+              "detail": "Not an option — the send calendar is already scheduled",
+              "icon": "fa-solid fa-ban",
+              "ok": false
+            }
+          ],
+          "calloutTitle": "Content freshness is separate and fine",
+          "callout": "All 14 event listings passed the 10.5 canonical check this morning. The creative gap is production capacity, not drift — which is the better problem to have four days out.",
+          "calloutTone": "var(--green-700)",
+          "calloutBg": "var(--green-50)",
+          "calloutBorder": "color-mix(in oklab, var(--green-500) 24%, white)"
+        }
       },
       {
         "name": "Ad readiness",
@@ -106,7 +405,95 @@
         "clock": "2 days",
         "clockTone": "var(--amber-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "ads",
+          "name": "Ad readiness",
+          "lens": "Bidder · Ads lens",
+          "icon": "fa-solid fa-bullseye",
+          "hue": "var(--mod-ads)",
+          "score": 92,
+          "gap": "Budgets staged; 3 campaigns need creative before they can launch",
+          "gapTone": "var(--amber-700)",
+          "owner": "Bidder",
+          "clock": "2 days",
+          "clockTone": "var(--amber-700)",
+          "state": "staged",
+          "meta": "$52K event budget staged against a $18K normal 96-hour spend",
+          "tableTitle": "Budget and campaign state",
+          "col0": "Channel",
+          "col1": "Normal 96h",
+          "col2": "Event budget",
+          "col3": "State",
+          "rows": [
+            {
+              "name": "Amazon Sponsored",
+              "sub": "products, brands, display",
+              "a": "$9.4K",
+              "b": "$28K",
+              "c": "armed",
+              "bTone": "var(--mod-ads)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Google Shopping",
+              "sub": "PMax and standard",
+              "a": "$4.2K",
+              "b": "$11K",
+              "c": "armed",
+              "bTone": "var(--mod-ads)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Meta",
+              "sub": "prospecting and retargeting",
+              "a": "$2.8K",
+              "b": "$8K",
+              "c": "creative gap",
+              "bTone": "var(--mod-ads)",
+              "cTone": "var(--amber-700)"
+            },
+            {
+              "name": "TikTok Spark",
+              "sub": "from the 9.4 shift",
+              "a": "$1.6K",
+              "b": "$5K",
+              "c": "creative gap",
+              "bTone": "var(--mod-ads)",
+              "cTone": "var(--amber-700)"
+            }
+          ],
+          "note": "Budgets are staged rather than live — they arm at T-0 with the contract, not before. The three campaigns waiting on creative are the same DTC assets holding the Merchandiser desk at 60%, so one delivery clears both.",
+          "sideTitle": "Pacing at Assist",
+          "side": [
+            {
+              "label": "Daily cap bound",
+              "detail": "+180% while mROAS stays above 1.4×",
+              "icon": "fa-solid fa-gauge-high",
+              "ok": true
+            },
+            {
+              "label": "What pacing may do",
+              "detail": "Shift budget between armed campaigns, inside the cap",
+              "icon": "fa-solid fa-shuffle",
+              "ok": true
+            },
+            {
+              "label": "What still asks",
+              "detail": "New campaigns, new creative, anything outside the bound",
+              "icon": "fa-solid fa-hand",
+              "ok": true
+            },
+            {
+              "label": "Creative fatigue watch",
+              "detail": "Runs hourly during the event rather than daily",
+              "icon": "fa-solid fa-eye",
+              "ok": true
+            }
+          ],
+          "calloutTitle": null,
+          "callout": null
+        }
       },
       {
         "name": "Account health",
@@ -123,7 +510,100 @@
         "clock": "pre-arm",
         "clockTone": "var(--amber-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "health",
+          "name": "Account health",
+          "lens": "Keeper · Sales lens",
+          "icon": "fa-solid fa-heart-pulse",
+          "hue": "var(--mod-actions)",
+          "score": 74,
+          "gap": "Late-shipment headroom is 0.6pp with volume about to triple",
+          "gapTone": "var(--amber-700)",
+          "owner": "Keeper",
+          "clock": "pre-arm",
+          "clockTone": "var(--amber-700)",
+          "state": "thin headroom",
+          "doorHref": "S10.3-1-reason.dc.html",
+          "doorLabel": "S10.3 health",
+          "meta": "the desk that turns a good event into a suspended account if it is ignored",
+          "tableTitle": "Metric headroom before the spike",
+          "col0": "Metric",
+          "col1": "Today",
+          "col2": "Limit",
+          "col3": "Headroom",
+          "rows": [
+            {
+              "name": "Late shipment rate",
+              "sub": "Amazon · rolling 30 days",
+              "a": "3.4%",
+              "b": "4.0%",
+              "c": "0.6pp",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--rose-700)"
+            },
+            {
+              "name": "Order defect rate",
+              "sub": "Amazon · rolling 60 days",
+              "a": "0.42%",
+              "b": "1.0%",
+              "c": "0.58pp",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Cancellation rate",
+              "sub": "Amazon · pre-fulfilment",
+              "a": "1.1%",
+              "b": "2.5%",
+              "c": "1.4pp",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Walmart on-time",
+              "sub": "rolling 30 days",
+              "a": "96.2%",
+              "b": "95.0%",
+              "c": "1.2pp",
+              "bTone": "var(--ink-600)",
+              "cTone": "var(--amber-700)"
+            }
+          ],
+          "note": "Late shipment is the one that matters: 78% of current late orders trace to the East 3PL Monday backlog, and day 2 of the event is a Monday. A handling-time buffer armed before the window costs promise speed and protects the account.",
+          "sideTitle": "Preventive arming",
+          "side": [
+            {
+              "label": "Handling-time buffer",
+              "detail": "+1 day on East-node SKUs for the event window only",
+              "icon": "fa-solid fa-shield-halved",
+              "ok": true
+            },
+            {
+              "label": "Cost of the buffer",
+              "detail": "Slower promise, roughly 2% conversion on affected SKUs",
+              "icon": "fa-solid fa-arrow-trend-down",
+              "ok": false
+            },
+            {
+              "label": "Cost of not arming",
+              "detail": "Late shipment crosses 4% and suppression is automatic",
+              "icon": "fa-solid fa-triangle-exclamation",
+              "ok": false
+            },
+            {
+              "label": "Monitoring cadence",
+              "detail": "Hourly during the event instead of daily",
+              "icon": "fa-solid fa-eye",
+              "ok": true
+            }
+          ],
+          "calloutTitle": "No override touches this threshold",
+          "callout": "Account-health limits are marketplace-enforced and the Moment Contract cannot widen them. What the contract can do is arm the buffer early, which is why this desk sits in the gate rather than in the fine print.",
+          "calloutTone": "var(--rose-700)",
+          "calloutBg": "var(--rose-50)",
+          "calloutBorder": "color-mix(in oklab, var(--rose-500) 24%, white)"
+        }
       },
       {
         "name": "Cash plan",
@@ -140,7 +620,106 @@
         "clock": "wk-7",
         "clockTone": "var(--amber-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "cash",
+          "name": "Cash plan",
+          "lens": "Navigator · Cash lens",
+          "icon": "fa-solid fa-coins",
+          "hue": "var(--mod-cash)",
+          "score": 88,
+          "gap": "Spike funded; settlement lag pushes the Week-7 trough deeper",
+          "gapTone": "var(--amber-700)",
+          "owner": "Navigator",
+          "clock": "wk-7",
+          "clockTone": "var(--amber-700)",
+          "state": "funded",
+          "doorHref": "S10.2-1-reason.dc.html",
+          "doorLabel": "S10.2 ladder",
+          "meta": "the event spends before it collects — 14 to 21 days of settlement lag",
+          "tableTitle": "Event cash shape",
+          "col0": "Line",
+          "col1": "Timing",
+          "col2": "Amount",
+          "col3": "Effect",
+          "rows": [
+            {
+              "name": "Ad spend",
+              "sub": "billed within the window",
+              "a": "Aug 23–26",
+              "b": "−$52K",
+              "c": "immediate",
+              "bTone": "var(--rose-700)",
+              "cTone": "var(--ink-700)"
+            },
+            {
+              "name": "Air freight",
+              "sub": "if approved at the gate",
+              "a": "Aug 20",
+              "b": "−$3.1K",
+              "c": "immediate",
+              "bTone": "var(--rose-700)",
+              "cTone": "var(--ink-700)"
+            },
+            {
+              "name": "Amazon settlement",
+              "sub": "biweekly, reserve modelled",
+              "a": "Sep 8",
+              "b": "+$164K",
+              "c": "lag 16d",
+              "bTone": "var(--green-700)",
+              "cTone": "var(--amber-700)"
+            },
+            {
+              "name": "Shopify payouts",
+              "sub": "rolling 2-day",
+              "a": "Aug 25+",
+              "b": "+$46K",
+              "c": "lag 2d",
+              "bTone": "var(--green-700)",
+              "cTone": "var(--green-700)"
+            },
+            {
+              "name": "Walmart settlement",
+              "sub": "net terms",
+              "a": "Sep 4",
+              "b": "+$58K",
+              "c": "lag 12d",
+              "bTone": "var(--green-700)",
+              "cTone": "var(--amber-700)"
+            }
+          ],
+          "note": "The event is cash-negative for sixteen days before it is cash-positive. That is normal and it is funded — but it deepens the Week-7 trough already tracked in 10.2, which is why the two cards are linked rather than solved separately.",
+          "sideTitle": "Trough effect",
+          "side": [
+            {
+              "label": "Trough before the event",
+              "detail": "$31K below buffer in Week 7",
+              "icon": "fa-solid fa-arrow-trend-down",
+              "ok": false
+            },
+            {
+              "label": "Trough with the event",
+              "detail": "$44K below buffer — 13K deeper",
+              "icon": "fa-solid fa-arrow-trend-down",
+              "ok": false
+            },
+            {
+              "label": "Credit line available",
+              "detail": "$120K undrawn, 9.4% annualised",
+              "icon": "fa-solid fa-building-columns",
+              "ok": true
+            },
+            {
+              "label": "Cover from event margin",
+              "detail": "The event pays for the draw four times over",
+              "icon": "fa-solid fa-check",
+              "ok": true
+            }
+          ],
+          "calloutTitle": null,
+          "callout": null
+        }
       }
     ],
     "deskFoot": "3 desks below 85% · inventory, creative and content, account health — each one has a named owner and a clock",

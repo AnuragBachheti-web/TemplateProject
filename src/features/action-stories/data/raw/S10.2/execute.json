@@ -43,25 +43,173 @@
         "label": "Trough · before",
         "value": "$89K",
         "tone": "var(--rose-700)",
-        "note": "$31K under the $120K buffer"
+        "note": "$31K under the $120K buffer",
+        "__raw": {
+          "id": "po",
+          "name": "PO timing to Planner",
+          "icon": "fa-solid fa-boxes-stacked",
+          "hue": "var(--mod-inventory)",
+          "doorHref": "S9.2-3-decide.dc.html",
+          "doorLabel": "S9.2 replenishment",
+          "meta": "2 POs moved week 7 → week 8 · cover recalculated · service level 96.1%",
+          "relief": "+$26K",
+          "reliefTone": "var(--green-700)",
+          "items": [
+            {
+              "name": "PO-4612 · Core cookware",
+              "tag": "week 8",
+              "tagIcon": "fa-solid fa-calendar-day",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Confirmed date moves to Oct 13, four days after Amazon settles. Cover on three SKUs dips to 24 days at the crossover — inside the Core floor.",
+              "value": "$14K",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "PO-4618 · filtration",
+              "tag": "week 8",
+              "tagIcon": "fa-solid fa-calendar-day",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Meridian is already on an OTD watch, so the delay is requested with a firm confirm-by date rather than assumed.",
+              "value": "$12K",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Reorder points recalculated",
+              "tag": null,
+              "detail": "Planner re-runs cover for the affected SKUs at the new dates. If any drops under 21 days the request is withdrawn automatically.",
+              "value": "7 SKUs",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "label": "Trough · after",
         "value": "$89K",
         "tone": "var(--amber-700)",
-        "note": "$31K still short"
+        "note": "$31K still short",
+        "__raw": {
+          "id": "terms",
+          "name": "Terms brief to Sourcer",
+          "icon": "fa-solid fa-file-lines",
+          "hue": "var(--mod-inventory)",
+          "doorHref": "S9.17-4-execute.dc.html",
+          "doorLabel": "S9.17 supplier",
+          "human": "Sourcer sends",
+          "meta": "Net 45 → Net 60 ask added to the Kessler brief · answer by Oct 4",
+          "relief": "+$31K",
+          "reliefTone": "var(--green-700)",
+          "items": [
+            {
+              "name": "Terms ask added to the existing brief",
+              "tag": "one conversation",
+              "tagIcon": "fa-solid fa-comments",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "detail": "Kessler is already mid-negotiation on their price notice. The terms ask goes into the same letter rather than arriving as a second request a week later.",
+              "value": "15 days",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Cash value stated in the brief",
+              "tag": null,
+              "detail": "The brief now carries what the terms are worth to us — $31K of working capital per cycle — so the trade against price is visible to whoever runs the call.",
+              "value": "$31K",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Contingency if declined",
+              "tag": null,
+              "detail": "A no on Oct 4 leaves three days before the PO is due. The credit draw stays costed and ready as the fallback, and the card re-opens automatically.",
+              "value": "Oct 4",
+              "valueTone": "var(--amber-700)"
+            }
+          ]
+        }
       },
       {
         "label": "P10 case",
         "value": "$66K",
         "tone": "var(--amber-700)",
-        "note": "downside still tight"
+        "note": "downside still tight",
+        "__raw": {
+          "id": "watches",
+          "name": "Settlement anomaly watches",
+          "icon": "fa-solid fa-bell",
+          "hue": "var(--mod-cash)",
+          "meta": "4 watches armed across the channels the plan depends on",
+          "relief": "guardrail",
+          "reliefTone": "var(--ink-600)",
+          "items": [
+            {
+              "name": "Amazon reserve rate",
+              "tag": "critical",
+              "tagIcon": "fa-solid fa-triangle-exclamation",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)",
+              "detail": "The plan assumes 7% held as rolling reserve. Every extra point costs about $1.4K of the Oct 12 payout, and the reserve is theirs to change.",
+              "value": "7% assumed",
+              "valueTone": "var(--rose-700)"
+            },
+            {
+              "name": "Payout date drift",
+              "tag": null,
+              "detail": "A settlement landing two days late moves it past the week boundary and the trough deepens by the full payout. Watched daily from Oct 8.",
+              "value": "±2 days",
+              "valueTone": "var(--amber-700)"
+            },
+            {
+              "name": "Wholesale receivable ageing",
+              "tag": null,
+              "detail": "Two Faire invoices in week 8 are load-bearing. Anything past 35 days triggers a chase before it becomes a cash problem.",
+              "value": "2 invoices",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "label": "Cost of the plan",
         "value": "$0.9K",
         "tone": "var(--ink-900)",
-        "note": "service-level cost only · no interest"
+        "note": "service-level cost only · no interest",
+        "__raw": {
+          "id": "plan",
+          "name": "Plan of record and reprojection",
+          "icon": "fa-solid fa-chart-line",
+          "hue": "var(--mod-cash)",
+          "meta": "CASH-Q4-0071 · weekly Monday reprojection · Ledger entry",
+          "relief": "logged",
+          "reliefTone": "var(--ink-600)",
+          "items": [
+            {
+              "name": "Plan filed to the Ledger",
+              "tag": null,
+              "detail": "Both levers, their costs, the two levers not used and why, and the buffer left unchanged at $120K. The next trough starts from this record.",
+              "value": "CASH-Q4-0071",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Weekly reprojection scheduled",
+              "tag": "Mondays",
+              "tagIcon": "fa-solid fa-repeat",
+              "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+              "tagTone": "var(--mod-cash)",
+              "detail": "Actual against plan every Monday, with the 13-week ladder rebuilt from live settlement data rather than from last week’s assumptions.",
+              "value": "13 weeks",
+              "valueTone": "var(--ink-800)"
+            },
+            {
+              "name": "Unused levers kept costed",
+              "tag": null,
+              "detail": "Clearance acceleration and the credit draw stay priced and one click from ready. A reversal does not restart the analysis.",
+              "value": "2 held",
+              "valueTone": "var(--green-700)"
+            }
+          ]
+        }
       }
     ],
     "yTicks": [

@@ -24,6 +24,7 @@ export const BLOCK_TYPES = [
   'heatmapGrid', // a 2D matrix: an array of { label, cells: [{...numeric fields}] } rows
   'object', // a single nested object that isn't any of the above (a lone badge/descriptor)
   'slider', // an interactive { min, max, value } control, optionally with precomputed `steps`
+  'gauge', // rows measured against a threshold: an array of { label?, value|pct, threshold|limit|ceiling|floor|target|cap }
 ]
 
 function isPlainObject(v) {
@@ -213,6 +214,33 @@ export function validateSlider(data) {
   return problems
 }
 
+const THRESHOLD_KEYS = ['threshold', 'limit', 'limitPct', 'ceiling', 'floor', 'target', 'cap']
+
+/**
+ * A gauge/meter row set — see extraction/classifyBlocks.js's isGaugeShaped for the exact detection
+ * rule this mirrors. Every row needs a magnitude (one of barChart's own magnitude keys) AND a
+ * sibling threshold-shaped field it's being measured against; `label` is optional (GaugeBlock falls
+ * back to a bare index, same convention as barChart).
+ */
+export function validateGauge(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((item, i) => {
+    if (!isPlainObject(item)) {
+      problems.push(`item ${i}: expected an object`)
+      return
+    }
+    if (!CHART_MAGNITUDE_KEYS.some((k) => item[k] !== undefined)) {
+      problems.push(`item ${i}: missing a magnitude (one of ${CHART_MAGNITUDE_KEYS.join('/')})`)
+    }
+    if (!THRESHOLD_KEYS.some((k) => item[k] !== undefined)) {
+      problems.push(`item ${i}: missing a threshold (one of ${THRESHOLD_KEYS.join('/')})`)
+    }
+  })
+  return problems
+}
+
 const VALIDATORS = {
   text: validateText,
   number: validateNumber,
@@ -227,6 +255,7 @@ const VALIDATORS = {
   heatmapGrid: validateHeatmapGrid,
   object: validateObject,
   slider: validateSlider,
+  gauge: validateGauge,
 }
 
 /**

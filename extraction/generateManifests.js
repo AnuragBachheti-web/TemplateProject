@@ -13,7 +13,14 @@ import { fileURLToPath } from 'node:url'
 import { validateManifest } from '../src/features/action-stories/manifests/validateManifest.js'
 import { resolveBinding } from '../src/features/action-stories/manifests/resolveBinding.js'
 import { validateBlockData } from '../src/features/action-stories/manifests/blockTypes.js'
-import { classifyBlockType, planSlotNames, detectItemLevelHints, planSections, findMetadataDescriptorSlots } from './classifyBlocks.js'
+import {
+  classifyBlockType,
+  planSlotNames,
+  detectItemLevelHints,
+  planSections,
+  findMetadataDescriptorSlots,
+  orderBlocksSemantically,
+} from './classifyBlocks.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -81,6 +88,39 @@ function buildStageManifest(fixture) {
   if (metadataSlots.size > 0) {
     blocks = blocks.filter((b) => !metadataSlots.has(b.slotName))
   }
+
+  // Dependency metadata (P1 fix — DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §5/§9/§11's highest-leverage
+  // missing manifest field): a `slider` block's own resolved value already carries `dependencies` —
+  // the raw fixture keys extraction/dcLogicSandbox.js's computeControlPayload measured actually
+  // change when the control moves, by re-running the reference's own logic, never guessed from
+  // adjacency. Translated here from raw keys to this manifest's own slotNames (a block's `binding`
+  // is always `data.<rawKey>`) and recorded as the block's own `dependencies` field — the one new
+  // manifest schema field this fix adds (validateManifest.js validates it references real slotNames).
+  // Only ever references a slotName that SURVIVED as a real block in this same manifest — a
+  // dependency whose raw key was pure styling, or got suppressed just above, is simply omitted
+  // rather than left dangling.
+  const survivingSlotNames = new Set(blocks.map((b) => b.slotName))
+  for (const block of blocks) {
+    if (block.blockType !== 'slider') continue
+    const rawKey = block.binding.startsWith('data.') ? block.binding.slice('data.'.length) : block.binding
+    const sliderValue = data?.[rawKey]
+    const rawDeps = Array.isArray(sliderValue?.dependencies) ? sliderValue.dependencies : []
+    if (rawDeps.length === 0) continue
+    const slotDeps = rawDeps
+      .map((k) => slotNames.get(k))
+      .filter((s) => typeof s === 'string' && s !== block.slotName && survivingSlotNames.has(s))
+    if (slotDeps.length > 0) block.dependencies = [...new Set(slotDeps)]
+  }
+
+  // Semantic block ordering (P2 fix — DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md's L3 gap): reorders
+  // `blocks` itself by generic priority (identity/hero -> control -> its dependent metrics -> its
+  // dependent table/chart -> primary analysis -> supporting metadata -> governance), a stable sort
+  // that only ever moves a block the signals actually distinguish — see
+  // classifyBlocks.js's orderBlocksSemantically for the full rule. Applied unconditionally (not
+  // gated by MIN_BLOCKS_TO_SECTION), so even a small, unsectioned stage's hero/control content
+  // still sorts first. Everything downstream (section/layout assignment, the manifest's own
+  // `blocks` array) uses this reordered array from here on.
+  blocks = orderBlocksSemantically(blocks, data || {})
 
   // Phase 2 — declarative sections: a generic, vocabulary/shape-driven grouping (see
   // classifyBlocks.js's planSections for the exact rule and why it's never workflow-specific).

@@ -100,4 +100,11 @@ describe('validateBlockData', () => {
     expect(() => validateBlockData('notAType', {})).not.toThrow()
     expect(validateBlockData('notAType', {}).length).toBeGreaterThan(0)
   })
+
+  it('validates gauge requires a magnitude and a threshold-shaped sibling on every row', () => {
+    expect(validateBlockData('gauge', [{ label: 'A', value: '62%', limitPct: '80%' }])).toEqual([])
+    expect(validateBlockData('gauge', [{ label: 'A', value: '62%' }]).length).toBeGreaterThan(0) // no threshold
+    expect(validateBlockData('gauge', [{ label: 'A', threshold: 80 }]).length).toBeGreaterThan(0) // no magnitude
+    expect(validateBlockData('gauge', 'not an array').length).toBeGreaterThan(0)
+  })
 })

@@ -197,7 +197,18 @@
         "boundTone": "var(--mod-actions)",
         "boxBg": "var(--mod-actions)",
         "boxBorder": "var(--mod-actions)",
-        "boxIcon": "fa-solid fa-check"
+        "boxIcon": "fa-solid fa-check",
+        "__raw": {
+          "key": "spend",
+          "name": "Higher spend caps",
+          "desk": "Bidder",
+          "detail": "Daily budget ceilings raised while mROAS stays above the event floor. Pacing inside this bound runs at Assist.",
+          "bound": "+180% daily cap",
+          "normal": "normally +25%",
+          "trigger": "mROAS above 1.4× on the campaign",
+          "expiry": "Aug 27 · 06:00",
+          "risky": false
+        }
       },
       {
         "name": "Faster repricing cadence",
@@ -211,7 +222,18 @@
         "boundTone": "var(--mod-actions)",
         "boxBg": "var(--mod-actions)",
         "boxBorder": "var(--mod-actions)",
-        "boxIcon": "fa-solid fa-check"
+        "boxIcon": "fa-solid fa-check",
+        "__raw": {
+          "key": "reprice",
+          "name": "Faster repricing cadence",
+          "desk": "Pricer",
+          "detail": "Competitive repricing every 15 minutes instead of every 4 hours. Floors and MAP unchanged.",
+          "bound": "15-min cadence",
+          "normal": "normally 4h",
+          "trigger": "Buy Box loss or a competitor move",
+          "expiry": "Aug 27 · 06:00",
+          "risky": false
+        }
       },
       {
         "name": "Deeper promo authority",
@@ -225,7 +247,18 @@
         "boundTone": "var(--amber-700)",
         "boxBg": "var(--mod-actions)",
         "boxBorder": "var(--mod-actions)",
-        "boxIcon": "fa-solid fa-check"
+        "boxIcon": "fa-solid fa-check",
+        "__raw": {
+          "key": "promo",
+          "name": "Deeper promo authority",
+          "desk": "Promoter",
+          "detail": "Discount depth to 30% without a second approval on event SKUs only, and never below the recovery floor.",
+          "bound": "30% depth",
+          "normal": "normally 20%",
+          "trigger": "sell-through below 70% of plan at a checkpoint",
+          "expiry": "Aug 27 · 06:00",
+          "risky": true
+        }
       },
       {
         "name": "Same-day transfer authority",
@@ -239,7 +272,18 @@
         "boundTone": "var(--mod-actions)",
         "boxBg": "var(--mod-actions)",
         "boxBorder": "var(--mod-actions)",
-        "boxIcon": "fa-solid fa-check"
+        "boxIcon": "fa-solid fa-check",
+        "__raw": {
+          "key": "transfer",
+          "name": "Same-day transfer authority",
+          "desk": "Shipper",
+          "detail": "Node-to-node transfers up to $4K of freight without a Cash-lens check, so cover follows demand inside the window.",
+          "bound": "$4K freight",
+          "normal": "normally $1.2K",
+          "trigger": "node cover below 4 days on an event SKU",
+          "expiry": "Aug 27 · 06:00",
+          "risky": false
+        }
       },
       {
         "name": "Air-freight authority",
@@ -253,7 +297,18 @@
         "boundTone": "var(--ink-400)",
         "boxBg": "var(--ink-0)",
         "boxBorder": "var(--ink-300)",
-        "boxIcon": "fa-solid fa-xmark"
+        "boxIcon": "fa-solid fa-xmark",
+        "__raw": {
+          "key": "air",
+          "name": "Air-freight authority",
+          "desk": "Planner",
+          "detail": "Expedite an inbound without returning to a Decide step. This is the expensive one, and it is off by default for a reason.",
+          "bound": "$6K per lane",
+          "normal": "requires approval",
+          "trigger": "P50 cover shortfall inside the window",
+          "expiry": "Aug 27 · 06:00",
+          "risky": true
+        }
       }
     ],
     "cutoffs": [

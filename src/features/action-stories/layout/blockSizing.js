@@ -111,6 +111,13 @@ function objectSpan(value) {
   return HALF
 }
 
+/** A gauge row set reads like a compact metric strip — a handful of rows share a half-width column
+ * fine; many rows (a long checklist of thresholds) wants the full row to stay legible. */
+function gaugeSpan(value) {
+  if (!Array.isArray(value) || value.length === 0) return FULL
+  return value.length > 5 ? FULL : HALF
+}
+
 const SPAN_BY_BLOCK_TYPE = {
   table: tableSpan,
   itemQueue: itemQueueSpan,
@@ -121,6 +128,7 @@ const SPAN_BY_BLOCK_TYPE = {
   waterfallChart: chartSpan,
   heatmapGrid: chartSpan,
   object: objectSpan,
+  gauge: gaugeSpan,
 }
 
 /**

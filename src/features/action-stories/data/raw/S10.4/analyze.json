@@ -110,7 +110,77 @@
         "win": "88%",
         "winTone": "var(--green-700)",
         "rowBg": "color-mix(in oklab, var(--mod-cash) 6%, white)",
-        "mark": "var(--mod-cash)"
+        "mark": "var(--mod-cash)",
+        "__raw": {
+          "id": "FEE-2207",
+          "name": "Refund without return · 2 orders",
+          "sub": "orders 114-8827301 and 114-8830992",
+          "type": "refund",
+          "value": 400,
+          "days": 9,
+          "win": 88,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Refund issued",
+              "left": "Jun 26",
+              "right": "Jun 26"
+            },
+            {
+              "label": "Return window closed",
+              "left": "Jul 26",
+              "right": "Jul 26"
+            },
+            {
+              "label": "Inbound scan on either unit",
+              "left": "none",
+              "right": "none",
+              "rightTone": "var(--rose-700)"
+            },
+            {
+              "label": "Units refunded",
+              "left": "2",
+              "right": "2"
+            },
+            {
+              "label": "Refund value",
+              "left": "$400",
+              "right": "$400",
+              "rightTone": "var(--mod-cash)"
+            },
+            {
+              "label": "Days since window closed",
+              "left": "24",
+              "right": "files inside 60",
+              "rightTone": "var(--rose-700)"
+            }
+          ],
+          "colLeft": "their record",
+          "colRight": "our check",
+          "note": "Both customers were refunded and neither unit came back. Policy reimburses the refunded amount once the return window elapses with no inbound scan — the only fact in question is the scan, and their own log answers it.",
+          "evidence": [
+            {
+              "label": "Refund events",
+              "detail": "both order records with refund timestamps",
+              "ok": true
+            },
+            {
+              "label": "Return window elapsed",
+              "detail": "Jul 26, 24 days ago",
+              "ok": true
+            },
+            {
+              "label": "Inbound scan search",
+              "detail": "no receipt against either RMA",
+              "ok": true
+            },
+            {
+              "label": "Order-level fee ledger",
+              "detail": "refund amounts confirmed against settlement",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Dimension tier · Knife Block 6pc",
@@ -128,7 +198,76 @@
         "win": "91%",
         "winTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2203",
+          "name": "Dimension tier · Knife Block 6pc",
+          "sub": "SKU NW-KNB-06 · 41 units billed Jul 8 – Aug 14",
+          "type": "dim",
+          "value": 310,
+          "days": 16,
+          "win": 91,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Length",
+              "left": "18.2 in",
+              "right": "15.9 in"
+            },
+            {
+              "label": "Width",
+              "left": "11.0 in",
+              "right": "9.4 in"
+            },
+            {
+              "label": "Height",
+              "left": "9.5 in",
+              "right": "8.8 in"
+            },
+            {
+              "label": "Unit weight",
+              "left": "6.4 lb",
+              "right": "6.1 lb"
+            },
+            {
+              "label": "Size tier",
+              "left": "Large Standard",
+              "right": "Standard",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Fee per unit",
+              "left": "$8.26",
+              "right": "$0.70 over",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "billed",
+          "colRight": "measured",
+          "note": "Their own cubiscan re-measure on Jul 30 puts this unit inside Standard on every axis. Every unit billed since the fee change carried the Large Standard rate — 41 units at $0.70 too much, and the 90-day clock started with the first of them.",
+          "evidence": [
+            {
+              "label": "Measured-dimension record",
+              "detail": "their cubiscan report, Jul 30",
+              "ok": true
+            },
+            {
+              "label": "Fee lines with tier applied",
+              "detail": "41 units, itemised",
+              "ok": true
+            },
+            {
+              "label": "Correct-tier fee table",
+              "detail": "published Standard rate for the period",
+              "ok": true
+            },
+            {
+              "label": "Product spec sheet",
+              "detail": "packaging drawing as corroboration",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Lost inventory · 2 units unmatched",
@@ -146,7 +285,78 @@
         "win": "76%",
         "winTone": "var(--ink-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2211",
+          "name": "Lost inventory · 2 units unmatched",
+          "sub": "SKU NW-FLT-01 · adjustment Jul 12",
+          "type": "lost",
+          "value": 180,
+          "days": 21,
+          "win": 76,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Adjustment posted",
+              "left": "Jul 12",
+              "right": "Jul 12"
+            },
+            {
+              "label": "Units adjusted out",
+              "left": "2",
+              "right": "2"
+            },
+            {
+              "label": "Auto-match window",
+              "left": "30 days",
+              "right": "elapsed Aug 11",
+              "rightTone": "var(--amber-700)"
+            },
+            {
+              "label": "Reimbursement found",
+              "left": "none",
+              "right": "none",
+              "rightTone": "var(--rose-700)"
+            },
+            {
+              "label": "Replacement cost",
+              "left": "$90 / unit",
+              "right": "$180",
+              "rightTone": "var(--mod-cash)"
+            },
+            {
+              "label": "Days unmatched",
+              "left": "38",
+              "right": "21 left to file",
+              "rightTone": "var(--amber-700)"
+            }
+          ],
+          "colLeft": "their record",
+          "colRight": "our check",
+          "note": "Two units left the count on an adjustment and no reimbursement followed inside the 30-day auto-match. The reimbursement gap detector holds claims until that window has genuinely elapsed, which is why this surfaces now rather than in July.",
+          "evidence": [
+            {
+              "label": "Inventory adjustment record",
+              "detail": "their ledger, Jul 12",
+              "ok": true
+            },
+            {
+              "label": "Reimbursement search",
+              "detail": "no matching credit through Aug 19",
+              "ok": true
+            },
+            {
+              "label": "Cost basis",
+              "detail": "landed cost per unit from the PO",
+              "ok": true
+            },
+            {
+              "label": "Shipment reconciliation",
+              "detail": "inbound fully received, no discrepancy",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Lost inventory · 3 units at East node",
@@ -164,7 +374,78 @@
         "win": "78%",
         "winTone": "var(--ink-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2210",
+          "name": "Lost inventory · 3 units at East node",
+          "sub": "SKU NW-DUT-05 · adjustment Jun 28",
+          "type": "lost",
+          "value": 520,
+          "days": 29,
+          "win": 78,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Adjustment posted",
+              "left": "Jun 28",
+              "right": "Jun 28"
+            },
+            {
+              "label": "Units adjusted out",
+              "left": "3",
+              "right": "3"
+            },
+            {
+              "label": "Auto-match window",
+              "left": "30 days",
+              "right": "elapsed Jul 28",
+              "rightTone": "var(--amber-700)"
+            },
+            {
+              "label": "Reimbursement found",
+              "left": "none",
+              "right": "none",
+              "rightTone": "var(--rose-700)"
+            },
+            {
+              "label": "Replacement cost",
+              "left": "$173 / unit",
+              "right": "$520",
+              "rightTone": "var(--mod-cash)"
+            },
+            {
+              "label": "Days unmatched",
+              "left": "52",
+              "right": "29 left to file",
+              "rightTone": "var(--amber-700)"
+            }
+          ],
+          "colLeft": "their record",
+          "colRight": "our check",
+          "note": "The largest single unreimbursed adjustment in the ledger, and the one where the cost basis matters most — claimed at landed cost from the PO rather than at retail, which is what policy pays and what history says gets approved.",
+          "evidence": [
+            {
+              "label": "Inventory adjustment record",
+              "detail": "their ledger, Jun 28",
+              "ok": true
+            },
+            {
+              "label": "Reimbursement search",
+              "detail": "no matching credit in 52 days",
+              "ok": true
+            },
+            {
+              "label": "Cost basis",
+              "detail": "$173 landed, PO-4471",
+              "ok": true
+            },
+            {
+              "label": "Shipment reconciliation",
+              "detail": "inbound receipt matched in full",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Dimension tier · Dutch Oven 5qt",
@@ -182,7 +463,76 @@
         "win": "94%",
         "winTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2201",
+          "name": "Dimension tier · Dutch Oven 5qt",
+          "sub": "SKU NW-DUT-05 · 88 units billed Jun 2 – Aug 16",
+          "type": "dim",
+          "value": 640,
+          "days": 34,
+          "win": 94,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Length",
+              "left": "14.8 in",
+              "right": "13.1 in"
+            },
+            {
+              "label": "Width",
+              "left": "13.9 in",
+              "right": "12.6 in"
+            },
+            {
+              "label": "Height",
+              "left": "9.2 in",
+              "right": "8.4 in"
+            },
+            {
+              "label": "Unit weight",
+              "left": "13.1 lb",
+              "right": "12.4 lb"
+            },
+            {
+              "label": "Size tier",
+              "left": "Large Bulky",
+              "right": "Large Standard",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Fee per unit",
+              "left": "$14.05",
+              "right": "$7.27 over",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "billed",
+          "colRight": "measured",
+          "note": "The clearest claim in the batch and the largest. A packaging change in May reduced the carton, their re-measure on Jun 14 recorded it, and the fee tier never followed. 88 units at $7.27 too much.",
+          "evidence": [
+            {
+              "label": "Measured-dimension record",
+              "detail": "their cubiscan report, Jun 14",
+              "ok": true
+            },
+            {
+              "label": "Fee lines with tier applied",
+              "detail": "88 units, itemised",
+              "ok": true
+            },
+            {
+              "label": "Packaging change record",
+              "detail": "carton spec v3, effective May 20",
+              "ok": true
+            },
+            {
+              "label": "Correct-tier fee table",
+              "detail": "Large Standard rate for the period",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Damaged in warehouse · 4 units",
@@ -200,7 +550,79 @@
         "win": "74%",
         "winTone": "var(--ink-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2212",
+          "name": "Damaged in warehouse · 4 units",
+          "sub": "SKU NW-SAU-12 · adjustment Jun 20",
+          "type": "lost",
+          "value": 410,
+          "days": 36,
+          "win": 74,
+          "ev": 80,
+          "evNeed": "photos",
+          "facts": [
+            {
+              "label": "Adjustment posted",
+              "left": "Jun 20",
+              "right": "Jun 20"
+            },
+            {
+              "label": "Units damaged",
+              "left": "4",
+              "right": "4"
+            },
+            {
+              "label": "Damage attributed to",
+              "left": "warehouse",
+              "right": "warehouse",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Reimbursement found",
+              "left": "partial",
+              "right": "$0 of $410",
+              "rightTone": "var(--rose-700)"
+            },
+            {
+              "label": "Replacement cost",
+              "left": "$102 / unit",
+              "right": "$410",
+              "rightTone": "var(--mod-cash)"
+            },
+            {
+              "label": "Condition photos",
+              "left": "not attached",
+              "right": "needed",
+              "rightTone": "var(--amber-700)"
+            }
+          ],
+          "colLeft": "their record",
+          "colRight": "our check",
+          "note": "Attribution is already in their record, so the claim is sound — but this type is only paid with condition photographs, and ours are in the 3PL portal rather than the vault. Until they are attached the claim stays staged and does not file.",
+          "evidence": [
+            {
+              "label": "Inventory adjustment record",
+              "detail": "their ledger, Jun 20",
+              "ok": true
+            },
+            {
+              "label": "Damage attribution",
+              "detail": "warehouse-damaged, not carrier",
+              "ok": true
+            },
+            {
+              "label": "Condition photographs",
+              "detail": "pull from the 3PL portal — 4 units",
+              "ok": false
+            },
+            {
+              "label": "Cost basis",
+              "detail": "$102 landed, PO-4402",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Dimension tier · Sauté Pan 12in",
@@ -218,7 +640,76 @@
         "win": "94%",
         "winTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2202",
+          "name": "Dimension tier · Sauté Pan 12in",
+          "sub": "SKU NW-SAU-12 · 62 units billed Jun 9 – Aug 12",
+          "type": "dim",
+          "value": 520,
+          "days": 41,
+          "win": 94,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Length",
+              "left": "20.4 in",
+              "right": "18.1 in"
+            },
+            {
+              "label": "Width",
+              "left": "13.2 in",
+              "right": "12.9 in"
+            },
+            {
+              "label": "Height",
+              "left": "4.6 in",
+              "right": "4.2 in"
+            },
+            {
+              "label": "Unit weight",
+              "left": "7.8 lb",
+              "right": "7.5 lb"
+            },
+            {
+              "label": "Size tier",
+              "left": "Large Bulky",
+              "right": "Large Standard",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Fee per unit",
+              "left": "$12.90",
+              "right": "$8.39 over",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "billed",
+          "colRight": "measured",
+          "note": "The billed length crosses the Large Standard limit by 2.4 inches; the measured length does not cross it at all. Same pattern as the Dutch Oven, same May packaging programme, same evidence shape.",
+          "evidence": [
+            {
+              "label": "Measured-dimension record",
+              "detail": "their cubiscan report, Jun 21",
+              "ok": true
+            },
+            {
+              "label": "Fee lines with tier applied",
+              "detail": "62 units, itemised",
+              "ok": true
+            },
+            {
+              "label": "Packaging change record",
+              "detail": "carton spec v3, effective May 20",
+              "ok": true
+            },
+            {
+              "label": "Correct-tier fee table",
+              "detail": "Large Standard rate for the period",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Inbound shortage · Walmart WFS",
@@ -236,7 +727,79 @@
         "win": "61%",
         "winTone": "var(--amber-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2213",
+          "name": "Inbound shortage · Walmart WFS",
+          "sub": "PO-4488 · 6 units short on receipt Jul 5",
+          "type": "lost",
+          "value": 230,
+          "days": 44,
+          "win": 61,
+          "ev": 45,
+          "evNeed": "POD + BOL",
+          "facts": [
+            {
+              "label": "Units shipped",
+              "left": "48",
+              "right": "48"
+            },
+            {
+              "label": "Units received",
+              "left": "42",
+              "right": "42"
+            },
+            {
+              "label": "Shortage",
+              "left": "6",
+              "right": "6",
+              "rightTone": "var(--rose-700)"
+            },
+            {
+              "label": "Carrier proof of delivery",
+              "left": "not on file",
+              "right": "needed",
+              "rightTone": "var(--amber-700)"
+            },
+            {
+              "label": "Bill of lading",
+              "left": "not on file",
+              "right": "needed",
+              "rightTone": "var(--amber-700)"
+            },
+            {
+              "label": "Claim value at cost",
+              "left": "$38 / unit",
+              "right": "$230",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "their record",
+          "colRight": "our check",
+          "note": "The weakest claim in the ledger and the honest reason is evidence, not merit. Walmart shortage claims need carrier proof of delivery and the bill of lading, both with the freight broker. Win rate on this type without them is close to zero, which is why it is staged rather than queued.",
+          "evidence": [
+            {
+              "label": "Receipt record",
+              "detail": "their WFS receipt, 42 of 48",
+              "ok": true
+            },
+            {
+              "label": "Carrier proof of delivery",
+              "detail": "request from the freight broker",
+              "ok": false
+            },
+            {
+              "label": "Bill of lading",
+              "detail": "request from the freight broker",
+              "ok": false
+            },
+            {
+              "label": "Cost basis",
+              "detail": "$38 landed, PO-4488",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Dimension tier · Enamel Casserole 3qt",
@@ -254,7 +817,76 @@
         "win": "91%",
         "winTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2204",
+          "name": "Dimension tier · Enamel Casserole 3qt",
+          "sub": "SKU NW-ENC-03 · 54 units billed Jun 18 – Aug 15",
+          "type": "dim",
+          "value": 430,
+          "days": 47,
+          "win": 91,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Length",
+              "left": "13.6 in",
+              "right": "12.2 in"
+            },
+            {
+              "label": "Width",
+              "left": "11.8 in",
+              "right": "11.1 in"
+            },
+            {
+              "label": "Height",
+              "left": "8.4 in",
+              "right": "7.9 in"
+            },
+            {
+              "label": "Unit weight",
+              "left": "9.6 lb",
+              "right": "9.2 lb"
+            },
+            {
+              "label": "Size tier",
+              "left": "Large Bulky",
+              "right": "Large Standard",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Fee per unit",
+              "left": "$12.31",
+              "right": "$7.96 over",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "billed",
+          "colRight": "measured",
+          "note": "Same programme, third SKU. Filing these three together rather than separately is deliberate — one batch, one evidence shape, one reviewer on their side.",
+          "evidence": [
+            {
+              "label": "Measured-dimension record",
+              "detail": "their cubiscan report, Jun 27",
+              "ok": true
+            },
+            {
+              "label": "Fee lines with tier applied",
+              "detail": "54 units, itemised",
+              "ok": true
+            },
+            {
+              "label": "Packaging change record",
+              "detail": "carton spec v3, effective May 20",
+              "ok": true
+            },
+            {
+              "label": "Correct-tier fee table",
+              "detail": "Large Standard rate for the period",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Dimension tier · Cast-iron Skillet 10in",
@@ -272,7 +904,76 @@
         "win": "89%",
         "winTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2205",
+          "name": "Dimension tier · Cast-iron Skillet 10in",
+          "sub": "SKU NW-CIS-10 · 39 units billed Jun 24 – Aug 9",
+          "type": "dim",
+          "value": 310,
+          "days": 52,
+          "win": 89,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Length",
+              "left": "12.9 in",
+              "right": "11.6 in"
+            },
+            {
+              "label": "Width",
+              "left": "11.4 in",
+              "right": "10.8 in"
+            },
+            {
+              "label": "Height",
+              "left": "3.1 in",
+              "right": "2.8 in"
+            },
+            {
+              "label": "Unit weight",
+              "left": "8.2 lb",
+              "right": "7.9 lb"
+            },
+            {
+              "label": "Size tier",
+              "left": "Large Standard",
+              "right": "Standard",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Fee per unit",
+              "left": "$9.61",
+              "right": "$7.95 over",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "billed",
+          "colRight": "measured",
+          "note": "A tier crossing on weight rather than dimension, which is the harder argument of the two — hence 89% rather than 94%. The measured weight sits 0.3 lb inside the Standard limit.",
+          "evidence": [
+            {
+              "label": "Measured-dimension record",
+              "detail": "their cubiscan report, Jul 3",
+              "ok": true
+            },
+            {
+              "label": "Fee lines with tier applied",
+              "detail": "39 units, itemised",
+              "ok": true
+            },
+            {
+              "label": "Weight verification",
+              "detail": "their scale record, same pass",
+              "ok": true
+            },
+            {
+              "label": "Correct-tier fee table",
+              "detail": "Standard rate for the period",
+              "ok": true
+            }
+          ]
+        }
       },
       {
         "name": "Dimension tier · Filtration Pitcher",
@@ -290,7 +991,76 @@
         "win": "86%",
         "winTone": "var(--green-700)",
         "rowBg": "transparent",
-        "mark": "transparent"
+        "mark": "transparent",
+        "__raw": {
+          "id": "FEE-2206",
+          "name": "Dimension tier · Filtration Pitcher",
+          "sub": "SKU NW-FLT-01 · 28 units billed Jul 2 – Aug 11",
+          "type": "dim",
+          "value": 170,
+          "days": 58,
+          "win": 86,
+          "ev": 100,
+          "facts": [
+            {
+              "label": "Length",
+              "left": "11.2 in",
+              "right": "10.4 in"
+            },
+            {
+              "label": "Width",
+              "left": "6.8 in",
+              "right": "6.2 in"
+            },
+            {
+              "label": "Height",
+              "left": "10.9 in",
+              "right": "10.5 in"
+            },
+            {
+              "label": "Unit weight",
+              "left": "2.4 lb",
+              "right": "2.2 lb"
+            },
+            {
+              "label": "Size tier",
+              "left": "Large Standard",
+              "right": "Standard",
+              "rightTone": "var(--green-700)"
+            },
+            {
+              "label": "Fee per unit",
+              "left": "$7.94",
+              "right": "$6.07 over",
+              "rightTone": "var(--mod-cash)"
+            }
+          ],
+          "colLeft": "billed",
+          "colRight": "measured",
+          "note": "The smallest dimension claim in the ledger at $170 — comfortably above the $25 floor, and it rides the same batch at no extra assembly cost.",
+          "evidence": [
+            {
+              "label": "Measured-dimension record",
+              "detail": "their cubiscan report, Jul 18",
+              "ok": true
+            },
+            {
+              "label": "Fee lines with tier applied",
+              "detail": "28 units, itemised",
+              "ok": true
+            },
+            {
+              "label": "Correct-tier fee table",
+              "detail": "Standard rate for the period",
+              "ok": true
+            },
+            {
+              "label": "Product spec sheet",
+              "detail": "packaging drawing as corroboration",
+              "ok": true
+            }
+          ]
+        }
       }
     ],
     "selName": "Refund without return · 2 orders",

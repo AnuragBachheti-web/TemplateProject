@@ -1,8 +1,9 @@
 import { humanizeSlotName } from './humanizeSlotName';
 import { flattenNestedEntry } from './nestedEntryText';
-import { BlockCard, BlockTitle } from './BlockCard';
+import { deltaTone } from './deltaTone';
+import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
-import { isDecorativeKey } from './decorativeKeys';
+import { isHiddenKey } from './decorativeKeys';
 
 // The keys an explicit, well-known value concept lives under — checked in this priority order
 // first, exactly as before. Real fixture data uses many OTHER field names for the same idea
@@ -30,7 +31,7 @@ function resolvePrimaryValue(item) {
     if (item[key] !== null && item[key] !== undefined) return { key, raw: item[key] };
   }
   const fallbackKey = Object.keys(item).find(
-    (k) => k !== 'label' && !isDecorativeKey(k) && item[k] !== null && item[k] !== undefined,
+    (k) => k !== 'label' && !isHiddenKey(k) && item[k] !== null && item[k] !== undefined,
   );
   return fallbackKey !== undefined ? { key: fallbackKey, raw: item[fallbackKey] } : { key: null, raw: undefined };
 }
@@ -41,11 +42,16 @@ function resolvePrimaryValue(item) {
  * count, a short code — `{label, n, w}`'s `w`, `{label, key, numeric}`'s `numeric`), or long enough
  * that it's real prose and keeps its own secondary line (a `why`/`note` explanation) — preserving
  * every field either way, never dropping one, just choosing where it reads best.
+ *
+ * `isHiddenKey` (not just `isDecorativeKey`) is what excludes extraction's own `__raw` companion —
+ * previously missing here, so an item carrying one leaked it as a garbled extra entry (and,
+ * via resolvePrimaryValue's own fallback above, could in principle even have been promoted to the
+ * row's primary value if it were the only remaining candidate key).
  */
 function extraEntries(item, usedKeys) {
   if (item === null || typeof item !== 'object') return { inline: [], long: [] };
   const entries = Object.entries(item)
-    .filter(([key, value]) => !usedKeys.has(key) && !isDecorativeKey(key) && value !== null && value !== undefined)
+    .filter(([key, value]) => !usedKeys.has(key) && !isHiddenKey(key) && value !== null && value !== undefined)
     .map(([key, value]) => [key, flattenNestedEntry(value)])
     .filter(([, text]) => text !== '');
   return {
@@ -75,27 +81,41 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
     <ul className="flex flex-col divide-y divide-rf-border-subtle">
       {data.map((item, i) => {
         const primary = resolvePrimaryValue(item ?? {});
+        const primaryTone = deltaTone(primary.raw);
         const usedKeys = new Set(['label', primary.key].filter((k) => k !== null));
         const { inline, long } = extraEntries(item, usedKeys);
         return (
           <li key={i} className="flex flex-col gap-0.5 py-1.5 text-[12.5px]">
             <div className="flex items-center justify-between gap-3">
               <span className="text-rf-text-secondary">{item?.label}</span>
-              <span className="flex min-w-0 items-baseline gap-1.5 truncate font-medium text-rf-text-primary">
+              <span
+                className={`flex min-w-0 items-baseline gap-1.5 truncate font-medium ${
+                  primaryTone ? primaryTone.text : 'text-rf-text-primary'
+                }`}
+              >
                 {flattenNestedEntry(primary.raw)}
-                {inline.map(([key, text]) => (
-                  <span key={key} className="shrink-0 text-[10.5px] font-normal text-rf-text-tertiary">
-                    · {text}
-                  </span>
-                ))}
+                {inline.map(([key, text]) => {
+                  const tone = deltaTone(text);
+                  return (
+                    <span
+                      key={key}
+                      className={`shrink-0 text-[10.5px] font-normal ${tone ? tone.text : 'text-rf-text-tertiary'}`}
+                    >
+                      · {text}
+                    </span>
+                  );
+                })}
               </span>
             </div>
-            {long.map(([key, text]) => (
-              <div key={key} className="flex items-center justify-between gap-3 text-[10.5px] text-rf-text-tertiary">
-                <span>{humanizeSlotName(key)}</span>
-                <span className="truncate">{text}</span>
-              </div>
-            ))}
+            {long.map(([key, text]) => {
+              const tone = deltaTone(text);
+              return (
+                <div key={key} className="flex items-center justify-between gap-3 text-[10.5px] text-rf-text-tertiary">
+                  <span>{humanizeSlotName(key)}</span>
+                  <span className={`truncate ${tone ? tone.text : ''}`}>{text}</span>
+                </div>
+              );
+            })}
           </li>
         );
       })}
@@ -105,7 +125,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{humanizeSlotName(slotName)}</p>
+        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
         {list}
       </div>
     );

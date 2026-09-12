@@ -113,7 +113,51 @@
             "stateLabel": "ready",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "integration",
+          "name": "Integration setup",
+          "icon": "fa-solid fa-plug",
+          "hue": "var(--mod-hubs)",
+          "doorHref": "S00-integrations.dc.html",
+          "doorLabel": "Integrations",
+          "meta": "existing connector · $14K cap · no custom middleware",
+          "items": [
+            {
+              "name": "Seller app + API credentials",
+              "tag": "human step",
+              "tagIcon": "fa-solid fa-user",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "detail": "Seller account verification and OAuth grant happen in the platform console. Realify stores the token and the refresh schedule.",
+              "value": "OAuth · 2 scopes"
+            },
+            {
+              "name": "Catalogue mapping",
+              "tag": null,
+              "detail": "15 SKUs mapped to platform category attributes. Three attributes have no equivalent in our data and default to the category norm.",
+              "value": "15 SKUs · 3 defaults"
+            },
+            {
+              "name": "Inventory sync",
+              "tag": null,
+              "detail": "Two-way, 15-minute interval, with a reserved pool so the pilot cannot oversell the Shopify buffer.",
+              "value": "15 min · reserved pool"
+            },
+            {
+              "name": "Order + fulfilment webhook",
+              "tag": null,
+              "detail": "Orders land in the same queue as Walmart. The 3-day handling SLA is tighter than our current 4-day norm, so the queue flags them first.",
+              "value": "SLA 3 days"
+            },
+            {
+              "name": "Tax and shipping profile",
+              "tag": null,
+              "detail": "Existing nexus configuration reused. Free shipping over $35 matches the site to avoid a MAP-adjacent price difference.",
+              "value": "11 states"
+            }
+          ]
+        }
       },
       {
         "name": "Listing batches",
@@ -184,7 +228,50 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "listings",
+          "name": "Listing batches",
+          "icon": "fa-solid fa-tags",
+          "hue": "var(--mod-discover)",
+          "dependsOn": "integration",
+          "meta": "15 listings in 3 batches · brand voice checked · MAP enforced",
+          "items": [
+            {
+              "name": "Batch A · 7 hero SKUs",
+              "tag": "3 videos each",
+              "tagIcon": "fa-solid fa-video",
+              "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+              "tagTone": "var(--mod-discover)",
+              "detail": "Skillets, dutch oven, braiser, filter pitcher, chef knife, griddle, kettle. Copy adapted for platform length limits, claims unchanged.",
+              "value": "7 listings"
+            },
+            {
+              "name": "Batch B · 6 traffic drivers",
+              "tag": "1 video each",
+              "tagIcon": "fa-solid fa-video",
+              "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+              "tagTone": "var(--mod-discover)",
+              "detail": "Care kit, filter 3-pack, whetstone, paring knife, spoon set, shears. Priced at MAP with no channel-specific discount.",
+              "value": "6 listings"
+            },
+            {
+              "name": "Batch C · 2 bundle listings",
+              "tag": "channel-only",
+              "tagIcon": "fa-solid fa-box",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)",
+              "detail": "Two bundles that raise AOV above the $34 channel average without discounting a component below MAP.",
+              "value": "2 listings"
+            },
+            {
+              "name": "MAP and claim check",
+              "tag": null,
+              "detail": "Every listing price checked against MAP and every product claim against the approved claim set before submission.",
+              "value": "15 of 15 pass"
+            }
+          ]
+        }
       },
       {
         "name": "Inventory positioning + agent handoffs",
@@ -252,7 +339,47 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "inventory",
+          "name": "Inventory positioning + agent handoffs",
+          "icon": "fa-solid fa-boxes-stacked",
+          "hue": "var(--mod-inventory)",
+          "dependsOn": "listings",
+          "meta": "2,860 units reserved · Planner and Merchandiser briefed",
+          "items": [
+            {
+              "name": "Reserve pilot units",
+              "tag": "via S9.3",
+              "tagIcon": "fa-solid fa-arrow-right",
+              "tagTint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tagTone": "var(--mod-inventory)",
+              "detail": "Positioning runs through the demand-forecast flow so the reservation is netted out of the Shopify and Amazon plans rather than double-counted.",
+              "value": "2,860 units"
+            },
+            {
+              "name": "Replenishment trigger",
+              "tag": null,
+              "detail": "Pilot SKUs enter the normal reorder logic at a 21-day cover target, lower than the 35-day site norm because the pilot may end.",
+              "value": "21-day cover"
+            },
+            {
+              "name": "Creative production brief",
+              "tag": "Merchandiser",
+              "tagIcon": "fa-solid fa-tags",
+              "tagTint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+              "tagTone": "var(--mod-discover)",
+              "detail": "12 assets a month from the in-house studio, first shoot day Oct 2. Four creators contracted with a flat fee plus 6% affiliate.",
+              "value": "12 / mo · 4 creators"
+            },
+            {
+              "name": "Service and returns routing",
+              "tag": null,
+              "detail": "Platform returns route to the same RMA queue with a separate reason code set, so the pilot’s return rate can be read on its own.",
+              "value": "separate codes"
+            }
+          ]
+        }
       },
       {
         "name": "Tracking card + gate scheduling",
@@ -317,7 +444,44 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "tracking",
+          "name": "Tracking card + gate scheduling",
+          "icon": "fa-solid fa-chart-column",
+          "hue": "var(--mod-hubs)",
+          "dependsOn": "inventory",
+          "meta": "monthly actual-vs-model · gate Dec 22 · wind-down armed",
+          "items": [
+            {
+              "name": "Business-case tracking card",
+              "tag": "auto-created",
+              "tagIcon": "fa-solid fa-wand-magic-sparkles",
+              "tagTint": "color-mix(in oklab, var(--mod-hubs) 12%, white)",
+              "tagTone": "var(--mod-hubs)",
+              "detail": "Opens in the workspace with the approved model attached. Each month it posts actuals against the P50 line and names the variance driver.",
+              "value": "monthly"
+            },
+            {
+              "name": "90-day gate scheduled",
+              "tag": null,
+              "detail": "Dec 22, with the scale, continue and kill rules from Decide already written into the card. It arrives as a decision, not a report.",
+              "value": "Dec 22"
+            },
+            {
+              "name": "Cannibalisation cohort",
+              "tag": null,
+              "detail": "A matched control cohort on Shopify DTC starts at listing live, so the 6% ceiling can be measured rather than argued about.",
+              "value": "control set"
+            },
+            {
+              "name": "Wind-down path stored",
+              "tag": null,
+              "detail": "The five-step delist and recall sequence is attached to the pilot, executable in one action if the gate says kill.",
+              "value": "5 steps"
+            }
+          ]
+        }
       }
     ],
     "checklist": [

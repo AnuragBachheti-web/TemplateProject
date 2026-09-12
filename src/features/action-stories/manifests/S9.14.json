@@ -12,7 +12,7 @@
       },
       {
         "slotName": "surfaces",
-        "blockType": "barChart",
+        "blockType": "gauge",
         "binding": "data.surfaces"
       },
       {
@@ -206,6 +206,16 @@
         }
       },
       {
+        "slotName": "heroMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -246,16 +256,6 @@
         "blockType": "text",
         "binding": "data.confLabel",
         "section": "summary"
-      },
-      {
-        "slotName": "heroMetrics",
-        "blockType": "labelValueList",
-        "binding": "data.heroMetrics",
-        "section": "recommendation",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
       },
       {
         "slotName": "caps",
@@ -337,6 +337,11 @@
         "region": "rail"
       },
       {
+        "id": "execution",
+        "title": "Execution",
+        "region": "main"
+      },
+      {
         "id": "details",
         "title": "Details",
         "region": "main"
@@ -371,7 +376,7 @@
         "slotName": "dests",
         "blockType": "itemQueue",
         "binding": "data.dests",
-        "section": "details"
+        "section": "execution"
       },
       {
         "slotName": "progressPct",
@@ -411,13 +416,13 @@
       },
       {
         "slotName": "flags",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.flags",
         "section": "details"
       },
       {
         "slotName": "rollback",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.rollback",
         "section": "details"
       },

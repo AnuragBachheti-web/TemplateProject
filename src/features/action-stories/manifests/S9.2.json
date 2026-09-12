@@ -22,7 +22,7 @@
       },
       {
         "slotName": "roles",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.roles"
       },
       {
@@ -123,9 +123,9 @@
       },
       {
         "slotName": "movement",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.movement",
-        "section": "analysis"
+        "section": "details"
       }
     ]
   },
@@ -141,22 +141,249 @@
         "region": "rail"
       },
       {
+        "id": "decision",
+        "title": null,
+        "region": "main"
+      },
+      {
         "id": "summary",
         "title": "Summary",
         "region": "rail"
-      },
-      {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
-      },
-      {
-        "id": "details",
-        "title": "Details",
-        "region": "main"
       }
     ],
     "blocks": [
+      {
+        "slotName": "notchVal",
+        "blockType": "slider",
+        "binding": "data.notchVal",
+        "dependencies": [
+          "pinnedOutlay",
+          "pinnedService",
+          "svcStr",
+          "svcNote",
+          "outlayStr",
+          "outlayNote",
+          "lostStr",
+          "headStr",
+          "headNote",
+          "guardText",
+          "ticks",
+          "notchNarr",
+          "bookMeta",
+          "totalStr",
+          "suppliers",
+          "deferSummary",
+          "ladder",
+          "weeks",
+          "effects",
+          "footerStatus"
+        ],
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "pinnedOutlay",
+        "blockType": "text",
+        "binding": "data.pinnedOutlay",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "pinnedService",
+        "blockType": "text",
+        "binding": "data.pinnedService",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "svcStr",
+        "blockType": "text",
+        "binding": "data.svcStr",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "svcNote",
+        "blockType": "text",
+        "binding": "data.svcNote",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "outlayStr",
+        "blockType": "text",
+        "binding": "data.outlayStr",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "outlayNote",
+        "blockType": "text",
+        "binding": "data.outlayNote",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "lostStr",
+        "blockType": "text",
+        "binding": "data.lostStr",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "headStr",
+        "blockType": "text",
+        "binding": "data.headStr",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "headNote",
+        "blockType": "text",
+        "binding": "data.headNote",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "guardText",
+        "blockType": "text",
+        "binding": "data.guardText",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "ticks",
+        "blockType": "labelValueList",
+        "binding": "data.ticks",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "notchNarr",
+        "blockType": "text",
+        "binding": "data.notchNarr",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "bookMeta",
+        "blockType": "text",
+        "binding": "data.bookMeta",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "totalStr",
+        "blockType": "text",
+        "binding": "data.totalStr",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "deferSummary",
+        "blockType": "text",
+        "binding": "data.deferSummary",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "effects",
+        "blockType": "labelValueList",
+        "binding": "data.effects",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "suppliers",
+        "blockType": "itemQueue",
+        "binding": "data.suppliers",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "ladder",
+        "blockType": "table",
+        "binding": "data.ladder",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "weeks",
+        "blockType": "barChart",
+        "binding": "data.weeks",
+        "section": "decision",
+        "layout": {
+          "group": "control:notchVal",
+          "span": 12
+        }
+      },
       {
         "slotName": "display_mode",
         "blockType": "text",
@@ -168,132 +395,6 @@
         "blockType": "text",
         "binding": "data.approveLabel",
         "section": "guardrails"
-      },
-      {
-        "slotName": "pinnedOutlay",
-        "blockType": "text",
-        "binding": "data.pinnedOutlay",
-        "section": "summary"
-      },
-      {
-        "slotName": "pinnedService",
-        "blockType": "text",
-        "binding": "data.pinnedService",
-        "section": "summary"
-      },
-      {
-        "slotName": "svcStr",
-        "blockType": "text",
-        "binding": "data.svcStr",
-        "section": "summary"
-      },
-      {
-        "slotName": "svcNote",
-        "blockType": "text",
-        "binding": "data.svcNote",
-        "section": "summary"
-      },
-      {
-        "slotName": "outlayStr",
-        "blockType": "text",
-        "binding": "data.outlayStr",
-        "section": "summary"
-      },
-      {
-        "slotName": "outlayNote",
-        "blockType": "text",
-        "binding": "data.outlayNote",
-        "section": "summary"
-      },
-      {
-        "slotName": "lostStr",
-        "blockType": "text",
-        "binding": "data.lostStr",
-        "section": "summary"
-      },
-      {
-        "slotName": "headStr",
-        "blockType": "text",
-        "binding": "data.headStr",
-        "section": "summary"
-      },
-      {
-        "slotName": "headNote",
-        "blockType": "text",
-        "binding": "data.headNote",
-        "section": "summary"
-      },
-      {
-        "slotName": "guardText",
-        "blockType": "text",
-        "binding": "data.guardText",
-        "section": "summary"
-      },
-      {
-        "slotName": "notchVal",
-        "blockType": "number",
-        "binding": "data.notchVal",
-        "section": "summary"
-      },
-      {
-        "slotName": "ticks",
-        "blockType": "labelValueList",
-        "binding": "data.ticks",
-        "section": "details"
-      },
-      {
-        "slotName": "notchNarr",
-        "blockType": "text",
-        "binding": "data.notchNarr",
-        "section": "summary"
-      },
-      {
-        "slotName": "bookMeta",
-        "blockType": "text",
-        "binding": "data.bookMeta",
-        "section": "summary"
-      },
-      {
-        "slotName": "totalStr",
-        "blockType": "text",
-        "binding": "data.totalStr",
-        "section": "summary"
-      },
-      {
-        "slotName": "suppliers",
-        "blockType": "itemQueue",
-        "binding": "data.suppliers",
-        "section": "details"
-      },
-      {
-        "slotName": "deferSummary",
-        "blockType": "text",
-        "binding": "data.deferSummary",
-        "section": "summary"
-      },
-      {
-        "slotName": "ladder",
-        "blockType": "table",
-        "binding": "data.ladder",
-        "section": "details"
-      },
-      {
-        "slotName": "weeks",
-        "blockType": "barChart",
-        "binding": "data.weeks",
-        "section": "analysis"
-      },
-      {
-        "slotName": "effects",
-        "blockType": "labelValueList",
-        "binding": "data.effects",
-        "section": "details"
-      },
-      {
-        "slotName": "footerStatus",
-        "blockType": "text",
-        "binding": "data.footerStatus",
-        "section": "summary"
       }
     ]
   },

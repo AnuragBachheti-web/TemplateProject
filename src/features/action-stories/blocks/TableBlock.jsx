@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { humanizeSlotName } from './humanizeSlotName';
 import { flattenDisplayValue } from './flattenDisplayValue';
+import { deltaTone } from './deltaTone';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
-import { isDecorativeKey as isDecorativeColumn } from './decorativeKeys';
+import { isHiddenKey as isHiddenColumn } from './decorativeKeys';
 
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -11,6 +12,68 @@ function isPlainObject(v) {
 
 function isNumericValue(v) {
   return typeof v === 'number' || (typeof v === 'string' && v.trim() !== '' && Number.isFinite(Number(v)));
+}
+
+// `__raw` (and any future `__`-prefixed internal companion — see decorativeKeys.js's own doc
+// comment) is never a real column to show: extraction/dcLogicSandbox.js's attachRawRecords attaches
+// it alongside a row's own formatted display fields so a downstream consumer that needs real
+// numbers can reach them. Previously excluded here via a local, hardcoded
+// `HIDDEN_COLUMN_KEYS = new Set(['__raw'])` — replaced with the shared, generic `isHiddenKey` so a
+// second internal field introduced later doesn't need its own new hardcoded entry in a fourth place.
+
+/** A nested small array of `{label, ...}` options — the same generic shape
+ * extraction/classifyBlocks.js's isNestedControlColumn detects at classification time, re-checked
+ * here at render time (no manifest field carries this — TableBlock works it out from the row data
+ * it already has, the same way every other column-shape decision here already does). */
+function isNestedControlColumn(value) {
+  return (
+    Array.isArray(value) &&
+    value.length >= 2 &&
+    value.length <= 6 &&
+    value.every((opt) => isPlainObject(opt) && typeof opt.label === 'string' && opt.label.trim() !== '')
+  );
+}
+
+/** A row-level segmented control (S9.11/decide.slate's own `modes`: Roll/Test) — options and their
+ * labels come entirely from the row's own data, never hardcoded. Purely local UI state: which
+ * option reads as "selected" for display purposes, seeded from whichever option the data itself
+ * hints is current (the highest `weight`, a convention already used throughout this reference
+ * corpus to mark the active choice — see e.g. slate[].modes[].weight) and otherwise the first
+ * option; clicking another option is a local, per-viewer choice, not a write to any backend. */
+function RowControl({ options }) {
+  const initialIndex = (() => {
+    let best = 0;
+    let bestWeight = -Infinity;
+    options.forEach((opt, i) => {
+      const w = typeof opt.weight === 'number' ? opt.weight : 0;
+      if (w > bestWeight) {
+        bestWeight = w;
+        best = i;
+      }
+    });
+    return best;
+  })();
+  const [selected, setSelected] = useState(initialIndex);
+
+  return (
+    <div className="inline-flex overflow-hidden rounded-md border border-rf-border-subtle text-[10.5px]">
+      {options.map((opt, i) => (
+        <button
+          key={i}
+          type="button"
+          onClick={() => setSelected(i)}
+          aria-pressed={selected === i}
+          className={`px-2 py-0.5 font-medium transition-colors ${
+            selected === i
+              ? 'bg-rf-text-primary text-rf-surface-canvas'
+              : 'bg-transparent text-rf-text-tertiary hover:bg-rf-surface-sunken'
+          }`}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 // Past this many rows, a table gets: a scroll region with a sticky header (so the header stays
@@ -95,12 +158,16 @@ export default function TableBlock({ slotName, data, compact }) {
   const seen = new Set();
   for (const row of allRows) {
     for (const key of Object.keys(row)) {
-      if (seen.has(key) || isDecorativeColumn(key)) continue;
+      if (seen.has(key) || isHiddenColumn(key)) continue;
       seen.add(key);
       columnOrder.push(key);
     }
   }
   const columns = columnOrder;
+
+  // A nested-control column (S9.11/decide.slate's own `modes`) is never sortable/flattened to text
+  // like an ordinary cell — tracked separately so the header/cell rendering below can special-case it.
+  const controlColumns = new Set(columns.filter((col) => allRows.every((row) => isNestedControlColumn(row[col]))));
 
   const isLarge = allRows.length > LARGE_TABLE_ROW_THRESHOLD;
 
@@ -149,16 +216,20 @@ export default function TableBlock({ slotName, data, compact }) {
                       isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''
                     }`}
                   >
-                    <button
-                      type="button"
-                      onClick={() => toggleSort(col)}
-                      className="flex items-center gap-1 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
-                    >
-                      {humanizeSlotName(col)}
-                      <span aria-hidden="true" className="text-rf-text-tertiary">
-                        {isSorted ? (sort.direction === 'asc' ? '▲' : '▼') : ''}
-                      </span>
-                    </button>
+                    {controlColumns.has(col) ? (
+                      <span>{humanizeSlotName(col)}</span>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => toggleSort(col)}
+                        className="flex items-center gap-1 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+                      >
+                        {humanizeSlotName(col)}
+                        <span aria-hidden="true" className="text-rf-text-tertiary">
+                          {isSorted ? (sort.direction === 'asc' ? '▲' : '▼') : ''}
+                        </span>
+                      </button>
+                    )}
                   </th>
                 );
               })}
@@ -169,16 +240,27 @@ export default function TableBlock({ slotName, data, compact }) {
               <tr key={i} className="border-b border-rf-border-subtle last:border-0 hover:bg-rf-surface-sunken">
                 {columns.map((col) => {
                   const value = row[col];
+                  if (controlColumns.has(col)) {
+                    return (
+                      <td key={col} className="px-4 py-2 text-[12px]">
+                        <RowControl options={value} />
+                      </td>
+                    );
+                  }
                   const numeric = isNumericValue(value);
                   const text = flattenDisplayValue(value);
                   const isMissing = value === null || value === undefined || text === '';
+                  // Colored from the cell's OWN sign/wording only (deltaTone) — a real API has no
+                  // reason to send a column-level color, but it will keep sending signed deltas
+                  // ("+3%", "−$450") the same way these fixtures already do. See deltaTone.js.
+                  const tone = !isMissing ? deltaTone(value) : null;
                   return (
                     <td
                       key={col}
                       title={!numeric && text.length > 24 ? text : undefined}
-                      className={`px-4 py-2 text-[12px] ${isMissing ? 'text-rf-text-disabled' : 'text-rf-text-primary'} ${
-                        numeric ? 'whitespace-nowrap text-right font-mono tabular-nums' : 'max-w-xs truncate text-left'
-                      }`}
+                      className={`px-4 py-2 text-[12px] ${
+                        isMissing ? 'text-rf-text-disabled' : tone ? tone.text : 'text-rf-text-primary'
+                      } ${numeric ? 'whitespace-nowrap text-right font-mono tabular-nums' : 'max-w-xs truncate text-left'}`}
                     >
                       {isMissing ? <span aria-hidden="true">—</span> : text}
                       {isMissing && <span className="sr-only">No value</span>}

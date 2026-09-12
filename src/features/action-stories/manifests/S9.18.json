@@ -11,11 +11,6 @@
         "region": "rail"
       },
       {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
-      },
-      {
         "id": "details",
         "title": "Details",
         "region": "main"
@@ -78,9 +73,9 @@
       },
       {
         "slotName": "carriers",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.carriers",
-        "section": "analysis"
+        "section": "details"
       }
     ]
   },
@@ -94,11 +89,6 @@
         "id": "summary",
         "title": "Summary",
         "region": "rail"
-      },
-      {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
       },
       {
         "id": "details",
@@ -163,9 +153,9 @@
       },
       {
         "slotName": "pool",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.pool",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "carriers",
@@ -237,6 +227,37 @@
         }
       },
       {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroBody",
+        "blockType": "text",
+        "binding": "data.heroBody",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "table",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -291,33 +312,6 @@
         "section": "summary"
       },
       {
-        "slotName": "heroTitle",
-        "blockType": "text",
-        "binding": "data.heroTitle",
-        "section": "recommendation",
-        "role": "hero",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
-        "slotName": "heroBody",
-        "blockType": "text",
-        "binding": "data.heroBody",
-        "section": "summary"
-      },
-      {
-        "slotName": "heroMetrics",
-        "blockType": "table",
-        "binding": "data.heroMetrics",
-        "section": "recommendation",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
         "slotName": "groups",
         "blockType": "labelValueList",
         "binding": "data.groups",
@@ -331,7 +325,7 @@
       },
       {
         "slotName": "bars",
-        "blockType": "table",
+        "blockType": "gauge",
         "binding": "data.bars",
         "section": "details"
       },
@@ -365,6 +359,11 @@
         "id": "summary",
         "title": "Summary",
         "region": "rail"
+      },
+      {
+        "id": "execution",
+        "title": "Execution",
+        "region": "main"
       },
       {
         "id": "details",
@@ -401,7 +400,7 @@
         "slotName": "stages",
         "blockType": "itemQueue",
         "binding": "data.stages",
-        "section": "details"
+        "section": "execution"
       },
       {
         "slotName": "monitors",
@@ -447,7 +446,7 @@
       },
       {
         "slotName": "rollback",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.rollback",
         "section": "details"
       },

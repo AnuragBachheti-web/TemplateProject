@@ -32,7 +32,7 @@
       },
       {
         "slotName": "opportunity",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.opportunity"
       },
       {
@@ -42,7 +42,7 @@
       },
       {
         "slotName": "agents",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.agents"
       }
     ]
@@ -102,12 +102,7 @@
     "stageKey": "decide",
     "sections": [
       {
-        "id": "guardrails",
-        "title": "Guardrails",
-        "region": "rail"
-      },
-      {
-        "id": "recommendation",
+        "id": "decision",
         "title": null,
         "region": "main"
       },
@@ -115,16 +110,6 @@
         "id": "summary",
         "title": "Summary",
         "region": "rail"
-      },
-      {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
-      },
-      {
-        "id": "details",
-        "title": "Details",
-        "region": "main"
       }
     ],
     "blocks": [
@@ -132,10 +117,177 @@
         "slotName": "primaryInsight",
         "blockType": "text",
         "binding": "data.heroValue",
-        "section": "recommendation",
+        "section": "decision",
         "role": "hero",
         "layout": {
-          "group": "recommendation",
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "tol",
+        "blockType": "slider",
+        "binding": "data.tol",
+        "dependencies": [
+          "primaryInsight",
+          "confBadge",
+          "tradeoff",
+          "tolLabel",
+          "liveStats",
+          "slateMeta",
+          "restNote",
+          "slate",
+          "actions",
+          "summary",
+          "guardrail_checks",
+          "ladder",
+          "testCopy",
+          "footerStatus",
+          "guardrail_cta_label"
+        ],
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "guardrail_cta_label",
+        "blockType": "text",
+        "binding": "data.approveLabel",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "confBadge",
+        "blockType": "text",
+        "binding": "data.confBadge",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "tradeoff",
+        "blockType": "text",
+        "binding": "data.tradeoff",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "tolLabel",
+        "blockType": "text",
+        "binding": "data.tolLabel",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "liveStats",
+        "blockType": "labelValueList",
+        "binding": "data.liveStats",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "slateMeta",
+        "blockType": "text",
+        "binding": "data.slateMeta",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "restNote",
+        "blockType": "text",
+        "binding": "data.restNote",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "summary",
+        "blockType": "labelValueList",
+        "binding": "data.summary",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "testCopy",
+        "blockType": "text",
+        "binding": "data.testCopy",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "footerStatus",
+        "blockType": "text",
+        "binding": "data.footerStatus",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "guardrail_checks",
+        "blockType": "itemQueue",
+        "binding": "data.checks",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "slate",
+        "blockType": "table",
+        "binding": "data.slate",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "actions",
+        "blockType": "itemQueue",
+        "binding": "data.actions",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "ladder",
+        "blockType": "barChart",
+        "binding": "data.ladder",
+        "section": "decision",
+        "layout": {
+          "group": "control:tol",
           "span": 12
         }
       },
@@ -146,99 +298,9 @@
         "section": "summary"
       },
       {
-        "slotName": "guardrail_checks",
-        "blockType": "itemQueue",
-        "binding": "data.checks",
-        "section": "guardrails"
-      },
-      {
-        "slotName": "guardrail_cta_label",
-        "blockType": "text",
-        "binding": "data.approveLabel",
-        "section": "guardrails"
-      },
-      {
-        "slotName": "confBadge",
-        "blockType": "text",
-        "binding": "data.confBadge",
-        "section": "summary"
-      },
-      {
-        "slotName": "tradeoff",
-        "blockType": "text",
-        "binding": "data.tradeoff",
-        "section": "summary"
-      },
-      {
-        "slotName": "tol",
-        "blockType": "number",
-        "binding": "data.tol",
-        "section": "summary"
-      },
-      {
-        "slotName": "tolLabel",
-        "blockType": "text",
-        "binding": "data.tolLabel",
-        "section": "summary"
-      },
-      {
-        "slotName": "liveStats",
-        "blockType": "labelValueList",
-        "binding": "data.liveStats",
-        "section": "details"
-      },
-      {
-        "slotName": "slateMeta",
-        "blockType": "text",
-        "binding": "data.slateMeta",
-        "section": "summary"
-      },
-      {
-        "slotName": "restNote",
-        "blockType": "text",
-        "binding": "data.restNote",
-        "section": "summary"
-      },
-      {
-        "slotName": "slate",
-        "blockType": "barChart",
-        "binding": "data.slate",
-        "section": "analysis"
-      },
-      {
         "slotName": "zoneMeta",
         "blockType": "text",
         "binding": "data.zoneMeta",
-        "section": "summary"
-      },
-      {
-        "slotName": "actions",
-        "blockType": "table",
-        "binding": "data.actions",
-        "section": "details"
-      },
-      {
-        "slotName": "summary",
-        "blockType": "labelValueList",
-        "binding": "data.summary",
-        "section": "details"
-      },
-      {
-        "slotName": "ladder",
-        "blockType": "barChart",
-        "binding": "data.ladder",
-        "section": "analysis"
-      },
-      {
-        "slotName": "testCopy",
-        "blockType": "text",
-        "binding": "data.testCopy",
-        "section": "summary"
-      },
-      {
-        "slotName": "footerStatus",
-        "blockType": "text",
-        "binding": "data.footerStatus",
         "section": "summary"
       }
     ]
@@ -258,11 +320,6 @@
         "id": "summary",
         "title": "Summary",
         "region": "rail"
-      },
-      {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
       },
       {
         "id": "details",
@@ -368,9 +425,9 @@
       },
       {
         "slotName": "monitors",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.monitors",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "ledgerCopy",

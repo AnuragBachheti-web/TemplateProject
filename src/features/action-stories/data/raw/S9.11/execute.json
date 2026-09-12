@@ -117,7 +117,57 @@
             "hash": "pending",
             "hashTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "dtc",
+          "n": "1",
+          "channel": "DTC · northwind.com",
+          "count": "41 SKUs",
+          "when": "immediate",
+          "note": "Written first. Sets the parity reference every other channel is checked against.",
+          "gate": "",
+          "diff": [
+            {
+              "sku": "NW-KNF-0480",
+              "old": "$68.00",
+              "nu": "$71.99",
+              "delta": "+5.9%",
+              "revert": "$68.00",
+              "tag": "micro-step 2/3",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)"
+            },
+            {
+              "sku": "NW-CER-1120",
+              "old": "$24.00",
+              "nu": "$26.99",
+              "delta": "+12.5%",
+              "revert": "$24.00",
+              "tag": ""
+            },
+            {
+              "sku": "NW-PAN-2210",
+              "old": "$54.00",
+              "nu": "$57.99",
+              "delta": "+7.4%",
+              "revert": "$54.00",
+              "tag": "parity watch",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)"
+            },
+            {
+              "sku": "NW-GLS-3390",
+              "old": "$38.00",
+              "nu": "$40.99",
+              "delta": "+7.9%",
+              "revert": "$38.00",
+              "tag": "test · 50/50",
+              "tagTint": "var(--r-blue-50)",
+              "tagTone": "var(--r-blue-600)"
+            }
+          ],
+          "foot": "+37 more SKUs in this stage · full diff exports to CSV from the Ledger"
+        }
       },
       {
         "n": "2",
@@ -187,7 +237,47 @@
             "hash": "pending",
             "hashTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "wfs",
+          "n": "2",
+          "channel": "Walmart · WFS",
+          "count": "38 SKUs",
+          "when": "+2 min",
+          "note": "Same prices, checked against the ±2% parity band before each write.",
+          "gate": "after DTC",
+          "gateTint": "var(--ink-100)",
+          "gateTone": "var(--ink-600)",
+          "diff": [
+            {
+              "sku": "NW-KNF-0480",
+              "old": "$68.00",
+              "nu": "$71.99",
+              "delta": "+5.9%",
+              "revert": "$68.00",
+              "tag": ""
+            },
+            {
+              "sku": "NW-CER-1120",
+              "old": "$24.00",
+              "nu": "$26.99",
+              "delta": "+12.5%",
+              "revert": "$24.00",
+              "tag": ""
+            },
+            {
+              "sku": "NW-TEX-6040",
+              "old": "$42.00",
+              "nu": "$43.99",
+              "delta": "+4.7%",
+              "revert": "$42.00",
+              "tag": "MAP ceiling",
+              "tagTint": "var(--ink-100)",
+              "tagTone": "var(--ink-600)"
+            }
+          ],
+          "foot": "3 SKUs not listed on Walmart · skipped rather than failed"
+        }
       },
       {
         "n": "3",
@@ -214,7 +304,20 @@
         "diffLabel": "view diff",
         "diffShow": "none",
         "diffFoot": "No writes in this stage. The wait is the guardrail.",
-        "diff": []
+        "diff": [],
+        "__raw": {
+          "key": "crawl",
+          "n": "3",
+          "channel": "Crawl re-read window",
+          "count": "—",
+          "when": "+45 min",
+          "note": "Realify waits for the Amazon crawl to re-read our DTC price so fair-pricing sees the new reference, not the old one.",
+          "gate": "fair-pricing hold",
+          "gateTint": "var(--amber-50)",
+          "gateTone": "var(--amber-700)",
+          "diff": [],
+          "foot": "No writes in this stage. The wait is the guardrail."
+        }
       },
       {
         "n": "4",
@@ -284,7 +387,49 @@
             "hash": "pending",
             "hashTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "key": "amz",
+          "n": "4",
+          "channel": "Amazon · FBA",
+          "count": "41 SKUs",
+          "when": "+45 min",
+          "note": "Written last so Amazon is never above our lowest advertised price, even briefly.",
+          "gate": "Amazon last",
+          "gateTint": "var(--rose-50)",
+          "gateTone": "var(--rose-700)",
+          "diff": [
+            {
+              "sku": "NW-KNF-0480",
+              "old": "$68.00",
+              "nu": "$71.99",
+              "delta": "+5.9%",
+              "revert": "$68.00",
+              "tag": "Buy Box 0.82",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)"
+            },
+            {
+              "sku": "NW-PAN-2210",
+              "old": "$54.00",
+              "nu": "$57.99",
+              "delta": "+7.4%",
+              "revert": "$54.00",
+              "tag": "3P at $56.40",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)"
+            },
+            {
+              "sku": "NW-CER-1210",
+              "old": "$16.00",
+              "nu": "$17.99",
+              "delta": "+12.4%",
+              "revert": "$16.00",
+              "tag": ""
+            }
+          ],
+          "foot": "Buy Box share is read 15 minutes after each write · a loss pauses the remaining micro-steps"
+        }
       }
     ],
     "guardEdge": "var(--ink-300)",

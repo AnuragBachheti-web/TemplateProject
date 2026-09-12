@@ -28,7 +28,19 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { classifyBlockType } from './classifyBlocks.js'
+import {
+  classifyBlockType,
+  isPureStyleValue,
+  isDecorativeKey,
+  planSlotNames,
+  findMetadataDescriptorSlots,
+} from './classifyBlocks.js'
+// The RUNTIME internal-key check (not classifyBlocks.js's own generation-time isDecorativeKey
+// above) — see A.5 below for why this audit needs the actual thing the rendered app checks, not a
+// sixth independently-reimplemented copy of "what's `__`-prefixed". decorativeKeys.js is plain JS
+// with no React import, so pulling it into this Node script doesn't cross the "never import
+// runtime components" line this file's own header comment draws — it's logic, not a component.
+import { isInternalKey } from '../src/features/action-stories/blocks/decorativeKeys.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -52,36 +64,31 @@ function isNumericLike(v) {
   return false
 }
 
-// --- decorative-key / pure-style filtering (mirrors extraction/classifyBlocks.js) ---
-
-const STYLE_VALUE_PATTERNS = [/^var\(--/, /^#[0-9a-f]{3,8}$/i, /^rgba?\(/i, /^color-mix\(/i, /^linear-gradient\(/i]
-const STYLE_KEYWORD_VALUES = new Set([
-  'inline-flex', 'flex', 'flex-start', 'flex-end', 'none', 'block', 'inline', 'inline-block',
-  'grid', 'center', 'pointer', 'default', 'not-allowed', 'wait', 'row', 'column',
-])
-function isStyleString(v) {
-  return typeof v === 'string' && (STYLE_KEYWORD_VALUES.has(v) || STYLE_VALUE_PATTERNS.some((re) => re.test(v)))
-}
-function isPureStyleValue(v) {
-  if (isStyleString(v)) return true
-  if (Array.isArray(v) && v.length > 0) {
-    return v.every((item) => {
-      if (item === null || typeof item !== 'object' || Array.isArray(item)) return false
-      return Object.values(item).every((sub) => isStyleString(sub))
-    })
-  }
-  return false
-}
-
-const DECORATIVE_KEY_SUFFIX_RE = /(Bg|Fg|Tone|Tint|Border|Cursor|Icon|Glow|Edge|Dot|Shadow|Opacity|Mark|Hue|Fill|Stroke)$/
-const DECORATIVE_EXACT_KEYS = new Set([
-  'icon', 'tone', 'tint', 'bg', 'fg', 'border', 'mark', 'hue', 'fill', 'stroke', 'cursor', 'shadow', 'opacity', 'edge', 'glow', 'weight',
-])
-function isDecorativeKey(key) {
-  return DECORATIVE_EXACT_KEYS.has(key) || DECORATIVE_KEY_SUFFIX_RE.test(key)
-}
+// --- decorative-key / pure-style filtering ---
+//
+// Imported directly from extraction/classifyBlocks.js (isPureStyleValue, isDecorativeKey) rather
+// than kept as local copies: this audit tool previously maintained its own duplicates of both, and
+// both had drifted stale relative to the real pipeline — isPureStyleValue was missing the
+// FontAwesome-glyph and border-shorthand patterns (RENDERED_UI_FORENSIC_AUDIT.md §3.5/§8's fix),
+// and isDecorativeKey was still the old trailing-suffix-only regex the word-boundary version
+// replaced for the exact same reason. Together those two stale copies were responsible for 100% of
+// this audit's "orphaned raw key" false positives (every one was a value the real pipeline already
+// correctly excludes — see runAuditA3 below). classifyBlocks.js is a generation-time-only module
+// with no runtime/React dependency, so importing it here doesn't violate this file's own
+// "don't import runtime components" convention (see the header comment) — it only avoids
+// re-duplicating logic that's already shared, generation-time code.
+//
+// `__raw` (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §3/§7 fix): extraction/dcLogicSandbox.js's
+// attachRawRecords attaches this internal companion onto a row whenever a matching raw-record
+// provider was found — never a real content column, so it must never count toward a shape
+// signature (A.4) or a geometry-match ratio (A.2), or every workflow that has one would spuriously
+// look "inconsistent" against a sibling workflow whose reference mockup happens not to expose an
+// equivalent raw-record method. Not exported by classifyBlocks.js (only consumed internally there),
+// so kept as a small local constant here rather than duplicating a whole module's worth of exports
+// for one set literal.
+const HIDDEN_KEYS = new Set(['__raw'])
 function meaningfulKeys(item) {
-  return Object.keys(item).filter((k) => !isDecorativeKey(k) && !isPureStyleValue(item[k]))
+  return Object.keys(item).filter((k) => !HIDDEN_KEYS.has(k) && !isDecorativeKey(k) && !isPureStyleValue(item[k], k))
 }
 
 // --- ItemQueueBlock's actual picking logic (mirrors blocks/ItemQueueBlock.jsx) ---
@@ -106,8 +113,12 @@ function objectRenderText(v) {
   return flattenNestedEntryPreview(v)
 }
 
-// The 5 chart blockTypes classifyBlocks.js can produce for an array-of-objects value.
-const CHART_BLOCK_TYPES = new Set(['lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid'])
+// The blockTypes classifyBlocks.js can produce for an array-of-objects value that already read as
+// a deliberate visualization, not a plain data table — `gauge` (DYNAMIC_COMPOSITION_FORENSIC_
+// AUDIT.md §4/§9 fix) joins the 5 chart types here for the same reason: A.2's under-match backstop
+// exists to catch chart-shaped data that ISN'T yet one of these, so a real gauge row (a magnitude +
+// a threshold sibling) must be excluded the same way a real chart already is.
+const CHART_BLOCK_TYPES = new Set(['lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid', 'gauge'])
 
 // --- A.2's broader geometry candidate vocabulary (deliberately wider than classifyBlocks.js's
 // own CHART_COORD_KEYS/CHART_MAGNITUDE_KEYS) ---
@@ -331,15 +342,36 @@ function runAuditA3(stages) {
   const incomplete = [] // block classified correctly, but its renderer drops some of its own keys
 
   for (const s of stages) {
-    const dataKeys = Object.keys(s.fixture.data ?? {})
+    const data = s.fixture.data ?? {}
+    const dataKeys = Object.keys(data)
     const boundRawKeys = new Set((s.manifest?.blocks ?? []).map((b) => rawKeyFromBinding(b.binding)))
+
+    // Replicate generateManifests.js's own pre-manifest pipeline (planSlotNames → classifyBlockType
+    // → findMetadataDescriptorSlots) so a key the real pipeline deliberately suppresses as
+    // column/row metadata for a sibling table (e.g. a `cols` descriptor array) is never flagged as
+    // an "orphan" here either — it was never a candidate for its own block in the first place. This
+    // is the second of two exclusions this check used to miss entirely (the first being pure-style
+    // values below); see the header comment on the isPureStyleValue/isDecorativeKey imports above.
+    const { slotNames } = planSlotNames(data)
+    const candidateBlocks = []
+    for (const [rawKey, slotName] of slotNames) {
+      const blockType = classifyBlockType(data[rawKey], rawKey)
+      if (blockType) candidateBlocks.push({ slotName, blockType, binding: `data.${rawKey}` })
+    }
+    const metadataSlots = findMetadataDescriptorSlots(candidateBlocks, data)
+    const suppressedRawKeys = new Set(
+      candidateBlocks.filter((b) => metadataSlots.has(b.slotName)).map((b) => rawKeyFromBinding(b.binding)),
+    )
+
     for (const key of dataKeys) {
       if (boundRawKeys.has(key)) continue
-      const value = s.fixture.data[key]
-      // Mirror planSlotNames' own pre-filter: a pure-style value (a bare CSS var/color/keyword, or
-      // an array of nothing but decorative sub-fields) is never even considered for a slot name in
-      // the real pipeline, so it isn't a real "orphan" — it was correctly, deliberately excluded.
-      if (isPureStyleValue(value)) continue
+      const value = data[key]
+      // Mirror planSlotNames' own pre-filter: a pure-style value (a bare CSS var/color/keyword, an
+      // icon glyph name, a border shorthand, or an array of nothing but decorative sub-fields) is
+      // never even considered for a slot name in the real pipeline, so it isn't a real "orphan" — it
+      // was correctly, deliberately excluded.
+      if (isPureStyleValue(value, key)) continue
+      if (suppressedRawKeys.has(key)) continue
       const wouldBeAssignedType = classifyBlockType(value, key)
       if (wouldBeAssignedType !== null) {
         orphaned.push({ code: s.code, stageKey: s.stageKey, rawKey: key, wouldBeType: wouldBeAssignedType, sample: flattenPreview(value) })
@@ -440,7 +472,7 @@ function runAuditA3(stages) {
 // ============================================================================================
 
 const SHAPE_ELIGIBLE_TYPES = new Set([
-  'table', 'itemQueue', 'labelValueList', 'lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid',
+  'table', 'itemQueue', 'labelValueList', 'lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid', 'gauge',
 ])
 
 function shapeSignature(value) {
@@ -501,6 +533,38 @@ function runAuditA4(stages) {
     .filter((g) => g.types.size > 1)
 
   return { strictInconsistent, looseInconsistent }
+}
+
+// ============================================================================================
+// AUDIT A.5 — internal-key exposure watch list (informational — NOT counted in the total-issues
+// number; the runtime already excludes every `__`-prefixed key via the shared `isHiddenKey`, see
+// decorativeKeys.js's own doc comment). This exists purely so a NEW internal field ever attached to
+// any block's own data becomes visible in a generated report immediately, instead of requiring
+// someone to notice it leaking on a rendered screen first — exactly how `__raw`'s own leak (37
+// blocks, this session's own §1-equivalent fix) was originally found. Re-running this after any
+// data/pipeline change costs nothing and needs no browser.
+// ============================================================================================
+
+function runAuditA5(stages) {
+  const found = []
+  for (const s of stages) {
+    for (const block of s.manifest?.blocks ?? []) {
+      if (!['itemQueue', 'labelValueList', 'object', 'table'].includes(block.blockType)) continue
+      const rawKey = rawKeyFromBinding(block.binding)
+      const value = s.fixture.data?.[rawKey]
+      const items =
+        block.blockType === 'object' ? (isPlainObject(value) ? [value] : []) : Array.isArray(value) ? value : []
+      for (const item of items) {
+        if (!isPlainObject(item)) continue
+        const internalKeys = Object.keys(item).filter((k) => isInternalKey(k))
+        if (internalKeys.length > 0) {
+          found.push({ code: s.code, stageKey: s.stageKey, slotName: block.slotName, blockType: block.blockType, internalKeys })
+          break // one flag per block is enough — every item in a given block usually carries the same companion key(s)
+        }
+      }
+    }
+  }
+  return { found }
 }
 
 // ============================================================================================
@@ -577,7 +641,7 @@ function fmtPct(n) {
 }
 
 function writeReport(stages, results) {
-  const { a1, a2, a3, a4, b } = results
+  const { a1, a2, a3, a4, a5, b } = results
   const totalBlocks = stages.reduce((sum, s) => sum + (s.manifest?.blocks?.length ?? 0), 0)
 
   const a1Count = a1.reduce((sum, g) => sum + g.occurrences.length, 0)
@@ -617,6 +681,7 @@ function writeReport(stages, results) {
   lines.push(`| A.4 loose shape-signature inconsistencies (ignoring row count, informational) | ${a4.looseInconsistent.length} | — |`)
   lines.push(`| B.1 stages over 40% scalar density | ${b.densityFlags.length} | — |`)
   lines.push(`| B.2 scalar blocks that would fit at half/third width | ${b.widthFlags.length} | — |`)
+  lines.push(`| A.5 internal (\`__\`-prefixed) keys present (informational, already excluded at render) | ${a5.found.length} | — |`)
   lines.push('')
 
   // ---------------- BUCKET 1: DATA LOSS ----------------
@@ -832,6 +897,31 @@ function writeReport(stages, results) {
   }
   lines.push('')
 
+  // ---------------- BUCKET 2.5: INTERNAL-KEY WATCH LIST (informational) ----------------
+  lines.push('---')
+  lines.push('')
+  lines.push('## Watch list — internal (`__`-prefixed) keys present in the data')
+  lines.push('')
+  lines.push(
+    'Informational — **not** counted in the total-issues number above. Every key listed here is ' +
+      'already excluded from every rendered block by the shared `isHiddenKey` check ' +
+      '(`src/features/action-stories/blocks/decorativeKeys.js`) — this section exists so a *new* ' +
+      'internal field, on any future data change, shows up here on the next `npm run audit` instead ' +
+      'of requiring someone to spot it leaking on a rendered screen first (which is how the `__raw` ' +
+      'leak this section was added to catch was originally found).',
+  )
+  lines.push('')
+  lines.push(`### A.5 — Internal keys found (${a5.found.length} block(s))`)
+  lines.push('')
+  if (a5.found.length === 0) {
+    lines.push('None found.')
+  } else {
+    for (const f of a5.found) {
+      lines.push(`- \`${f.code}/${f.stageKey}\` \`${f.slotName}\` (${f.blockType}) — carries: ${f.internalKeys.map((k) => `\`${k}\``).join(', ')}`)
+    }
+  }
+  lines.push('')
+
   // ---------------- BUCKET 3: LAYOUT ONLY ----------------
   lines.push('---')
   lines.push('')
@@ -909,9 +999,10 @@ function main() {
   const a2 = runAuditA2(stages)
   const a3 = runAuditA3(stages)
   const a4 = runAuditA4(stages)
+  const a5 = runAuditA5(stages)
   const b = runAuditB(stages)
 
-  const totals = writeReport(stages, { a1, a2, a3, a4, b })
+  const totals = writeReport(stages, { a1, a2, a3, a4, a5, b })
 
   console.log('─'.repeat(60))
   console.log('Action Stories audit')
@@ -923,6 +1014,7 @@ function main() {
   console.log(`  data loss:           ${totals.dataLossCount}`)
   console.log(`  misclassification:   ${totals.misclassificationCount}`)
   console.log(`  layout only:         ${totals.layoutOnlyCount}`)
+  console.log(`  internal keys (A.5, informational, already excluded at render time): ${a5.found.length}`)
   console.log('')
   console.log(`Full report: extraction/audit-report.md`)
   console.log('─'.repeat(60))

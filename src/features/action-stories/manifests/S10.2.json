@@ -36,9 +36,9 @@
       },
       {
         "slotName": "buffer",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.buffer",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "credit",
@@ -78,7 +78,7 @@
       },
       {
         "slotName": "settlement",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.settlement",
         "section": "details"
       }
@@ -226,9 +226,9 @@
       },
       {
         "slotName": "roles",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.roles",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "anatomy",
@@ -305,6 +305,37 @@
         }
       },
       {
+        "slotName": "heroTitle",
+        "blockType": "text",
+        "binding": "data.heroTitle",
+        "section": "recommendation",
+        "role": "hero",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroBody",
+        "blockType": "text",
+        "binding": "data.heroBody",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroMetrics",
+        "blockType": "labelValueList",
+        "binding": "data.heroMetrics",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -341,37 +372,10 @@
         "section": "guardrails"
       },
       {
-        "slotName": "heroTitle",
-        "blockType": "text",
-        "binding": "data.heroTitle",
-        "section": "recommendation",
-        "role": "hero",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
-      },
-      {
-        "slotName": "heroBody",
-        "blockType": "text",
-        "binding": "data.heroBody",
-        "section": "summary"
-      },
-      {
         "slotName": "gapNote",
         "blockType": "text",
         "binding": "data.gapNote",
         "section": "summary"
-      },
-      {
-        "slotName": "heroMetrics",
-        "blockType": "labelValueList",
-        "binding": "data.heroMetrics",
-        "section": "recommendation",
-        "layout": {
-          "group": "recommendation",
-          "span": 12
-        }
       },
       {
         "slotName": "closedPct",
@@ -604,7 +608,7 @@
       },
       {
         "slotName": "watches",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.watches",
         "section": "details"
       },
@@ -622,7 +626,7 @@
       },
       {
         "slotName": "rollback",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.rollback",
         "section": "details"
       },

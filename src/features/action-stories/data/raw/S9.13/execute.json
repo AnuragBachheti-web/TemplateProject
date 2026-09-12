@@ -149,7 +149,70 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "esp",
+          "name": "Klaviyo · email journeys",
+          "icon": "fa-solid fa-envelope",
+          "hue": "var(--mod-hubs)",
+          "meta": "3 created · 3 modified · 2 archived · holdouts armed at creation",
+          "items": [
+            {
+              "name": "Consumable replenishment · per-SKU interval",
+              "holdout": "holdout 10% · 418 held",
+              "value": "4,180 / mo",
+              "detail": "Twelve entry conditions, one per SKU, each firing at that SKU’s median cycle. Free-shipping code, no percentage off, quiet hours honoured.",
+              "before": "no flow in the 42-day window",
+              "after": "live · day 31–58 by SKU",
+              "afterTone": "var(--mod-hubs)"
+            },
+            {
+              "name": "Post-first-delivery care · day 3–5",
+              "holdout": "holdout 10% · 754 held",
+              "value": "7,540 / mo",
+              "detail": "Triggers off the carrier delivery event rather than the ship event, so the content lands after the box does.",
+              "before": "slot occupied by thank-you email",
+              "after": "live · day 3–5 post-delivery",
+              "afterTone": "var(--mod-hubs)"
+            },
+            {
+              "name": "Win-back at 90–120 days",
+              "holdout": "holdout 10% · 386 held",
+              "value": "3,860 / mo",
+              "detail": "10% offer, capped at the segment ceiling. Enrolment excludes anyone already in the replenishment flow.",
+              "before": "win-back at 180 days",
+              "after": "live · 90–120 day trigger",
+              "afterTone": "var(--mod-hubs)"
+            },
+            {
+              "name": "Post-purchase thank-you · modified",
+              "holdout": "holdout 10% attached",
+              "value": "7,540 / mo",
+              "detail": "Trigger moves to order-confirmed and a holdout is attached, which makes its revenue claimable for the first time.",
+              "before": "order shipped · no holdout",
+              "after": "order confirmed · 10% holdout",
+              "afterTone": "var(--ink-900)"
+            },
+            {
+              "name": "Browse abandon · trimmed to one email",
+              "holdout": null,
+              "value": "−11,400 / mo",
+              "detail": "Emails two and three removed, bottom pLTV decile dropped from the audience. Existing 10% holdout carries over untouched.",
+              "before": "3 emails · all deciles",
+              "after": "1 email · top 9 deciles",
+              "afterTone": "var(--ink-900)"
+            },
+            {
+              "name": "Win-back 180-day · archived",
+              "holdout": null,
+              "value": "−3,220 / mo",
+              "detail": "Archived rather than deleted so the ten weeks of holdout data stay attached to the version history.",
+              "before": "live · 15% offer",
+              "after": "archived · v6 retained",
+              "afterTone": "var(--rose-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Attentive · SMS",
@@ -198,7 +261,34 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "sms",
+          "name": "Attentive · SMS",
+          "icon": "fa-solid fa-comment-sms",
+          "hue": "var(--violet-500)",
+          "meta": "1 journey · express opt-ins only · 1,850 monthly reach",
+          "items": [
+            {
+              "name": "Refill reminder · day 40–45",
+              "holdout": "holdout 5% · 93 held",
+              "value": "1,850 / mo",
+              "detail": "Audience restricted to the 6,240 profiles with a recorded express opt-in and its timestamp. One message, no offer, inside sending hours.",
+              "before": "no SMS lifecycle journey",
+              "after": "live · day 40–45",
+              "afterTone": "var(--violet-700)"
+            },
+            {
+              "name": "Quiet-hours and cap enforcement",
+              "holdout": null,
+              "value": "2 / wk cap",
+              "detail": "Sends are held to the recipient’s local 8am–9pm window and counted against the shared two-per-week SMS cap.",
+              "before": "cap enforced per journey",
+              "after": "cap enforced across journeys",
+              "afterTone": "var(--ink-900)"
+            }
+          ]
+        }
       },
       {
         "name": "Suppression + segment sync",
@@ -263,7 +353,43 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "lists",
+          "name": "Suppression + segment sync",
+          "icon": "fa-solid fa-filter",
+          "hue": "var(--mod-margin)",
+          "meta": "5 audiences written · consent state unchanged",
+          "items": [
+            {
+              "name": "Replenishment audiences · 12 SKU cohorts",
+              "holdout": null,
+              "value": "4,180 profiles",
+              "detail": "One audience per consumable SKU, refreshed nightly from order history. Anyone who repurchases exits the flow the same night.",
+              "before": "no per-SKU audience",
+              "after": "12 audiences · nightly refresh",
+              "afterTone": "var(--ink-900)"
+            },
+            {
+              "name": "Bottom-decile monthly cohort",
+              "holdout": null,
+              "value": "3,340 profiles",
+              "detail": "Moved from the weekly promo pool to a monthly cadence. Consent and channel state untouched — this is a cadence change, not a suppression.",
+              "before": "weekly promo pool",
+              "after": "monthly cadence",
+              "afterTone": "var(--ink-900)"
+            },
+            {
+              "name": "Suppression list refresh",
+              "holdout": null,
+              "value": "4,120 records",
+              "detail": "Unsubscribes, hard bounces and complaint records re-synced across both platforms before the first send of any new journey.",
+              "before": "synced 11 min ago",
+              "after": "synced at deploy",
+              "afterTone": "var(--green-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Hypothesis Register",
@@ -322,7 +448,37 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "tests",
+          "name": "Hypothesis Register",
+          "icon": "fa-solid fa-flask",
+          "hue": "var(--violet-500)",
+          "meta": "3 tests registered · run inside the treated groups",
+          "items": [
+            {
+              "name": "Replenishment subject line · product vs cycle",
+              "chip": "S10.7",
+              "chipHref": null,
+              "value": "MDE 8% · 4 wks",
+              "detail": "Two-arm split within the treated group. Sits on top of the holdout rather than replacing it, so both readings stay valid."
+            },
+            {
+              "name": "Replenishment offer · free shipping vs 10% off",
+              "chip": "S10.7",
+              "chipHref": null,
+              "value": "MDE 11% · 6 wks",
+              "detail": "Settles the margin question with evidence. Discount arm is capped at the segment ceiling from Reason."
+            },
+            {
+              "name": "Win-back timing · day 90 vs day 120",
+              "chip": "S10.7",
+              "chipHref": null,
+              "value": "MDE 14% · 10 wks",
+              "detail": "Finds the real edge of the window before anyone tunes the offer depth."
+            }
+          ]
+        }
       }
     ],
     "progressPct": "0",

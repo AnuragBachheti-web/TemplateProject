@@ -68,7 +68,83 @@
         "cmTone": "var(--ink-900)",
         "recShow": "none",
         "slaShow": "inline-flex",
-        "slaNote": "5 d build · misses the 4h SLA"
+        "slaNote": "5 d build · misses the 4h SLA",
+        "__raw": {
+          "id": "bundle",
+          "rank": "01",
+          "name": "Bundle counter",
+          "cm": "−$1.4K",
+          "cmRaw": -1.4,
+          "owner": "Merchandiser",
+          "rec": false,
+          "slaNote": "5 d build · misses the 4h SLA",
+          "detail": "List the bowl with the 14oz mug as a $36.90 bundle. Keeps the single-unit price at $24.95 and answers on value instead of price, but the listing takes five days to build and photograph.",
+          "priceAfter": "$36.90",
+          "priceNote": "bundle · single unit stays $24.95",
+          "band": "+3% to +8%",
+          "bandLeft": "52%",
+          "bandWidth": "14%",
+          "bandTone": "var(--green-500)",
+          "bandNote": "Band is wider than a price move because bundle demand on this cohort has only two tests behind it.",
+          "stats": [
+            {
+              "label": "Price after",
+              "value": "$24.95",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "CM after",
+              "value": "35%",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "Buy Box prob",
+              "value": "61%",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Volume band",
+              "value": "+3 to +8%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Time to effect",
+              "value": "5 d",
+              "tone": "var(--rose-700)"
+            }
+          ],
+          "dispatch": [
+            {
+              "who": "Me",
+              "label": "Build the bundle listing and shoot the pair image",
+              "meta": "Merchandiser · 5 d · blocks on photography",
+              "hue": "var(--mod-discover)",
+              "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+            },
+            {
+              "who": "Pr",
+              "label": "Hold single-unit price at $24.95",
+              "meta": "Pricer · no channel push",
+              "hue": "var(--mod-margin)",
+              "tint": "var(--green-50)"
+            }
+          ],
+          "checks": [
+            {
+              "text": "MAP floor untouched — no price move on the single unit.",
+              "ok": true
+            },
+            {
+              "text": "Bundle blended CM 35%, above the 28% Hero floor.",
+              "ok": true
+            },
+            {
+              "text": "Does not answer inside the S1 SLA. Buy Box stays lost for five days.",
+              "ok": false
+            }
+          ],
+          "wrong": "If the bundle does not convert, we have spent five days losing 26 points of Buy Box share. The single-unit price is untouched, so the price answer is still available on Monday."
+        }
       },
       {
         "rank": "02",
@@ -111,7 +187,90 @@
         "cmTone": "var(--ink-900)",
         "recShow": "inline-flex",
         "slaShow": "none",
-        "slaNote": ""
+        "slaNote": "",
+        "__raw": {
+          "id": "match",
+          "rank": "02",
+          "name": "Match within guardrail",
+          "cm": "−$1.7K",
+          "cmRaw": -1.7,
+          "owner": "Pricer",
+          "rec": true,
+          "slaNote": "",
+          "detail": "Move to $23.20 across channels — the lowest compliant price on the ladder, 6% above the MAP floor. Holds the Buy Box at 86% probability and answers inside the SLA.",
+          "priceAfter": "$23.20",
+          "priceNote": "from $24.95 · −7.0% · CM 33%",
+          "band": "+4% to +9%",
+          "bandLeft": "54%",
+          "bandWidth": "16%",
+          "bandTone": "var(--green-500)",
+          "bandNote": "Elasticity on this cohort is 1.4. A 7% cut buys 4-9% more units, which recovers about half the margin given up.",
+          "stats": [
+            {
+              "label": "Price after",
+              "value": "$23.20",
+              "tone": "var(--ink-900)"
+            },
+            {
+              "label": "CM after",
+              "value": "33%",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "Buy Box prob",
+              "value": "86%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Volume band",
+              "value": "+4 to +9%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Time to effect",
+              "value": "30 min",
+              "tone": "var(--green-700)"
+            }
+          ],
+          "dispatch": [
+            {
+              "who": "Pr",
+              "label": "Push $23.20 to Amazon, Shopify and Walmart",
+              "meta": "Pricer · 3 channel writes · 30 min",
+              "hue": "var(--mod-margin)",
+              "tint": "var(--green-50)"
+            },
+            {
+              "who": "Sc",
+              "label": "Tighten the watch on this SKU to every 4 hours",
+              "meta": "Scout · 14 days",
+              "hue": "var(--mod-intel)",
+              "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+            },
+            {
+              "who": "Sc",
+              "label": "Write the event and response to the pattern library",
+              "meta": "Scout · CompetitorA cut #5",
+              "hue": "var(--mod-intel)",
+              "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+            }
+          ],
+          "checks": [
+            {
+              "text": "$23.20 is $1.40 above the $21.80 MAP floor.",
+              "ok": true
+            },
+            {
+              "text": "CM 33% at the new price, above the 28% Hero floor.",
+              "ok": true
+            },
+            {
+              "text": "Answers in 30 minutes, inside the 4h S1 SLA.",
+              "ok": true
+            }
+          ],
+          "wrong": "If the cut turns out to be promotional and CompetitorA reverts, we are 7% cheap on a Hero. Price restore from the Ledger is one click and Scout re-checks every four hours."
+        }
       },
       {
         "rank": "03",
@@ -154,7 +313,83 @@
         "cmTone": "var(--rose-700)",
         "recShow": "none",
         "slaShow": "none",
-        "slaNote": ""
+        "slaNote": "",
+        "__raw": {
+          "id": "partial",
+          "rank": "03",
+          "name": "Partial close · 50% of the gap",
+          "cm": "−$2.1K",
+          "cmRaw": -2.1,
+          "owner": "Pricer",
+          "rec": false,
+          "slaNote": "",
+          "detail": "Move to $24.10, half the distance to CompetitorA. Keeps 36% CM but the Buy Box model only gives it a 54% win rate, because price is the dominant term on this listing.",
+          "priceAfter": "$24.10",
+          "priceNote": "from $24.95 · −3.4% · CM 36%",
+          "band": "+1% to +4%",
+          "bandLeft": "50%",
+          "bandWidth": "9%",
+          "bandTone": "var(--amber-500)",
+          "bandNote": "A half move rarely wins the Buy Box back. The volume band reflects traffic we keep, not share we regain.",
+          "stats": [
+            {
+              "label": "Price after",
+              "value": "$24.10",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "CM after",
+              "value": "36%",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "Buy Box prob",
+              "value": "54%",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Volume band",
+              "value": "+1 to +4%",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Time to effect",
+              "value": "30 min",
+              "tone": "var(--green-700)"
+            }
+          ],
+          "dispatch": [
+            {
+              "who": "Pr",
+              "label": "Push $24.10 to Amazon, Shopify and Walmart",
+              "meta": "Pricer · 3 channel writes · 30 min",
+              "hue": "var(--mod-margin)",
+              "tint": "var(--green-50)"
+            },
+            {
+              "who": "Sc",
+              "label": "Tighten the watch on this SKU to every 4 hours",
+              "meta": "Scout · 14 days",
+              "hue": "var(--mod-intel)",
+              "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+            }
+          ],
+          "checks": [
+            {
+              "text": "$24.10 is well above the $21.80 MAP floor.",
+              "ok": true
+            },
+            {
+              "text": "CM 36%, above the 28% Hero floor.",
+              "ok": true
+            },
+            {
+              "text": "Spends margin without reliably winning the Buy Box back.",
+              "ok": false
+            }
+          ],
+          "wrong": "The likely outcome is the worst of both: 0.85 of margin per unit given up and the Buy Box still lost. Realify would need a second move, and posture allows one price answer per 72 hours."
+        }
       },
       {
         "rank": "04",
@@ -197,7 +432,83 @@
         "cmTone": "var(--rose-700)",
         "recShow": "none",
         "slaShow": "none",
-        "slaNote": ""
+        "slaNote": "",
+        "__raw": {
+          "id": "ads",
+          "rank": "04",
+          "name": "Hold price + boost ads",
+          "cm": "−$2.3K",
+          "cmRaw": -2.3,
+          "owner": "Bidder",
+          "rec": false,
+          "slaNote": "",
+          "detail": "Keep $24.95 and buy back the traffic: raise defensive bids on the four head terms with a $1.9K monthly cap. Protects unit margin, replaces some of the lost Buy Box traffic with paid.",
+          "priceAfter": "$24.95",
+          "priceNote": "unchanged · CM 38% · +$1.9K ad spend",
+          "band": "0% to +3%",
+          "bandLeft": "48%",
+          "bandWidth": "7%",
+          "bandTone": "var(--amber-500)",
+          "bandNote": "Paid traffic converts 2.1 points lower than Buy Box traffic on this listing, so volume barely moves.",
+          "stats": [
+            {
+              "label": "Price after",
+              "value": "$24.95",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "CM after",
+              "value": "38%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Buy Box prob",
+              "value": "58%",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Volume band",
+              "value": "0 to +3%",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "Time to effect",
+              "value": "2 h",
+              "tone": "var(--green-700)"
+            }
+          ],
+          "dispatch": [
+            {
+              "who": "Bd",
+              "label": "Raise defensive bids on 4 head terms, cap $1.9K/mo",
+              "meta": "Bidder · 2 h · Amazon SP",
+              "hue": "var(--mod-ads)",
+              "tint": "color-mix(in oklab, var(--mod-ads) 12%, white)"
+            },
+            {
+              "who": "Sc",
+              "label": "Tighten the watch on this SKU to every 4 hours",
+              "meta": "Scout · 14 days",
+              "hue": "var(--mod-intel)",
+              "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+            }
+          ],
+          "checks": [
+            {
+              "text": "No price move, so MAP and margin floors are untouched.",
+              "ok": true
+            },
+            {
+              "text": "Ad spend fits the envelope in story 9.4 with $3K to spare.",
+              "ok": true
+            },
+            {
+              "text": "Buy Box stays with CompetitorA. We rent the traffic instead of holding it.",
+              "ok": false
+            }
+          ],
+          "wrong": "If the reprice is structural, we pay $1.9K a month indefinitely to replace traffic a $1.75 price cut would have held. Bids can be pulled back in one click."
+        }
       },
       {
         "rank": "05",
@@ -240,7 +551,76 @@
         "cmTone": "var(--rose-700)",
         "recShow": "none",
         "slaShow": "inline-flex",
-        "slaNote": "3 d · misses the 4h SLA"
+        "slaNote": "3 d · misses the 4h SLA",
+        "__raw": {
+          "id": "content",
+          "rank": "05",
+          "name": "Hold price + content upgrade",
+          "cm": "−$2.6K",
+          "cmRaw": -2.6,
+          "owner": "Merchandiser",
+          "rec": false,
+          "slaNote": "3 d · misses the 4h SLA",
+          "detail": "Keep $24.95 and answer on conversion: new hero image set, comparison module, and a size guide. Content is a permanent asset, but it takes three days and does not touch the Buy Box.",
+          "priceAfter": "$24.95",
+          "priceNote": "unchanged · CM 38%",
+          "band": "−2% to +2%",
+          "bandLeft": "44%",
+          "bandWidth": "9%",
+          "bandTone": "var(--ink-300)",
+          "bandNote": "Content lifts conversion on traffic we already get. With the Buy Box lost, there is less traffic to convert.",
+          "stats": [
+            {
+              "label": "Price after",
+              "value": "$24.95",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "CM after",
+              "value": "38%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Buy Box prob",
+              "value": "52%",
+              "tone": "var(--rose-700)"
+            },
+            {
+              "label": "Volume band",
+              "value": "−2 to +2%",
+              "tone": "var(--ink-600)"
+            },
+            {
+              "label": "Time to effect",
+              "value": "3 d",
+              "tone": "var(--rose-700)"
+            }
+          ],
+          "dispatch": [
+            {
+              "who": "Me",
+              "label": "Refresh hero images, add comparison module and size guide",
+              "meta": "Merchandiser · 3 d",
+              "hue": "var(--mod-discover)",
+              "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)"
+            }
+          ],
+          "checks": [
+            {
+              "text": "No price move, so MAP and margin floors are untouched.",
+              "ok": true
+            },
+            {
+              "text": "Content score would go from 92 to about 97, back in the lead.",
+              "ok": true
+            },
+            {
+              "text": "Does not answer inside the S1 SLA and leaves the Buy Box lost.",
+              "ok": false
+            }
+          ],
+          "wrong": "Content is never wasted, but as the only answer to a structural undercut it concedes the Buy Box for three days and then still needs a price decision."
+        }
       },
       {
         "rank": "06",
@@ -283,7 +663,76 @@
         "cmTone": "var(--rose-700)",
         "recShow": "none",
         "slaShow": "none",
-        "slaNote": ""
+        "slaNote": "",
+        "__raw": {
+          "id": "ignore",
+          "rank": "06",
+          "name": "Ignore · accept the share loss",
+          "cm": "−$3.4K",
+          "cmRaw": -3.4,
+          "owner": "no owner",
+          "rec": false,
+          "slaNote": "",
+          "detail": "Do nothing and hold both price and spend. Buy Box share settles at 52%, which is 294 units and 26 points of share over 30 days. The number is here so the choice is explicit.",
+          "priceAfter": "$24.95",
+          "priceNote": "unchanged · CM 38% · share 78% → 52%",
+          "band": "−9% to −5%",
+          "bandLeft": "30%",
+          "bandWidth": "12%",
+          "bandTone": "var(--rose-500)",
+          "bandNote": "The band is the volume we lose, not gain: 294 units over 30 days at the modelled share.",
+          "stats": [
+            {
+              "label": "Price after",
+              "value": "$24.95",
+              "tone": "var(--ink-800)"
+            },
+            {
+              "label": "CM after",
+              "value": "38%",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Buy Box prob",
+              "value": "52%",
+              "tone": "var(--rose-700)"
+            },
+            {
+              "label": "Volume band",
+              "value": "−9 to −5%",
+              "tone": "var(--rose-700)"
+            },
+            {
+              "label": "Time to effect",
+              "value": "none",
+              "tone": "var(--ink-500)"
+            }
+          ],
+          "dispatch": [
+            {
+              "who": "Sc",
+              "label": "Log the decision not to respond, with the quantified loss",
+              "meta": "Scout · pattern library",
+              "hue": "var(--mod-intel)",
+              "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)"
+            }
+          ],
+          "checks": [
+            {
+              "text": "No floors involved. Nothing moves.",
+              "ok": true
+            },
+            {
+              "text": "S1 SLA closes unanswered — that is recorded against the event.",
+              "ok": false
+            },
+            {
+              "text": "294 units and $3.4K of CM given up over 30 days.",
+              "ok": false
+            }
+          ],
+          "wrong": "If CompetitorA reads no response as room to go lower, the next cut starts from $23.20. Two of the nine tracked sellers follow their price within a week."
+        }
       }
     ],
     "sel": {

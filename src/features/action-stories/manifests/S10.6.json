@@ -16,11 +16,6 @@
         "region": "rail"
       },
       {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
-      },
-      {
         "id": "details",
         "title": "Details",
         "region": "main"
@@ -105,9 +100,9 @@
       },
       {
         "slotName": "cutoffs",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.cutoffs",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "summary",
@@ -406,6 +401,26 @@
         }
       },
       {
+        "slotName": "heroValue",
+        "blockType": "text",
+        "binding": "data.heroValue",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
+        "slotName": "heroLine",
+        "blockType": "text",
+        "binding": "data.heroLine",
+        "section": "recommendation",
+        "layout": {
+          "group": "recommendation",
+          "span": 12
+        }
+      },
+      {
         "slotName": "display_mode",
         "blockType": "text",
         "binding": "data.execLabel",
@@ -436,12 +451,6 @@
         "section": "summary"
       },
       {
-        "slotName": "heroValue",
-        "blockType": "text",
-        "binding": "data.heroValue",
-        "section": "summary"
-      },
-      {
         "slotName": "recoveredValue",
         "blockType": "text",
         "binding": "data.recoveredValue",
@@ -454,12 +463,6 @@
         "section": "summary"
       },
       {
-        "slotName": "heroLine",
-        "blockType": "text",
-        "binding": "data.heroLine",
-        "section": "summary"
-      },
-      {
         "slotName": "gateSummary",
         "blockType": "text",
         "binding": "data.gateSummary",
@@ -467,7 +470,7 @@
       },
       {
         "slotName": "gates",
-        "blockType": "itemQueue",
+        "blockType": "table",
         "binding": "data.gates",
         "section": "details"
       },
@@ -521,7 +524,7 @@
       },
       {
         "slotName": "approvers",
-        "blockType": "table",
+        "blockType": "itemQueue",
         "binding": "data.approvers",
         "section": "details"
       },
@@ -584,11 +587,6 @@
         "id": "summary",
         "title": "Summary",
         "region": "rail"
-      },
-      {
-        "id": "analysis",
-        "title": "Analysis",
-        "region": "main"
       },
       {
         "id": "details",
@@ -705,9 +703,9 @@
       },
       {
         "slotName": "deadlines",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.deadlines",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "warState",
@@ -936,9 +934,9 @@
       },
       {
         "slotName": "healthRows",
-        "blockType": "barChart",
+        "blockType": "table",
         "binding": "data.healthRows",
-        "section": "analysis"
+        "section": "details"
       },
       {
         "slotName": "healthCopy",

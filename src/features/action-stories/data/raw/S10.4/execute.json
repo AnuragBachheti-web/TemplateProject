@@ -102,7 +102,43 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "file",
+          "name": "Batch filing via API",
+          "icon": "fa-solid fa-paper-plane",
+          "hue": "var(--mod-cash)",
+          "meta": "9 claims · one batch per type, one evidence shape each, case IDs captured on acknowledgement",
+          "items": [
+            {
+              "name": "Dimension-tier batch · 6 claims",
+              "tag": "one submission",
+              "tagIcon": "fa-solid fa-layer-group",
+              "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+              "tagTone": "var(--mod-cash)",
+              "detail": "Filed together with the measured-dimension records and itemised fee lines attached. Batching keeps case volume legible to a reviewer who sees the same argument six times.",
+              "value": "$2,380",
+              "valueTone": "var(--mod-cash)"
+            },
+            {
+              "name": "Unreimbursed inventory · 2 claims",
+              "tag": null,
+              "detail": "Both claimed at landed cost from the originating PO rather than at retail — the cost basis history says gets approved.",
+              "value": "$700",
+              "valueTone": "var(--mod-cash)"
+            },
+            {
+              "name": "Refund without return · 2 orders",
+              "tag": "expires in 9 days",
+              "tagIcon": "fa-solid fa-hourglass-half",
+              "tagTint": "var(--rose-50)",
+              "tagTone": "var(--rose-700)",
+              "detail": "Filed first in the batch because it has the least window left. Refund events, elapsed return window and the empty inbound-scan search all attached.",
+              "value": "$400",
+              "valueTone": "var(--rose-700)"
+            }
+          ]
+        }
       },
       {
         "name": "Portal tasks and document requests",
@@ -161,7 +197,40 @@
             "stateLabel": "staged",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "manual",
+          "name": "Portal tasks and document requests",
+          "icon": "fa-solid fa-list-check",
+          "hue": "var(--amber-700)",
+          "meta": "where no API path exists, or the evidence is with someone else",
+          "items": [
+            {
+              "name": "Walmart shortage · portal task",
+              "tag": "no api path",
+              "tagIcon": "fa-solid fa-plug-circle-xmark",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "WFS shortage claims file through the seller portal by hand. A task with the assembled pack attached goes to the Controller, dated against the 44-day window.",
+              "value": "$230 · 44 days",
+              "valueTone": "var(--amber-700)"
+            },
+            {
+              "name": "Condition photographs · 3PL portal",
+              "tag": null,
+              "detail": "Request to the 3PL for the four damaged units. The claim is assembled and waiting; it files itself the moment the images land.",
+              "value": "$410 · staged",
+              "valueTone": "var(--amber-700)"
+            },
+            {
+              "name": "Carrier POD and bill of lading",
+              "tag": null,
+              "detail": "Request to the freight broker on PO-4488. Without both documents the shortage claim wins about a fifth of the time, so it does not go early.",
+              "value": "requested",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "name": "Cash lens posting",
@@ -221,7 +290,42 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "cash",
+          "name": "Cash lens posting",
+          "icon": "fa-solid fa-coins",
+          "hue": "var(--mod-cash)",
+          "doorHref": "S00-workspace.dc.html",
+          "doorLabel": "Cash lens",
+          "meta": "expected recovery scheduled, realised recovery attributed on approval",
+          "items": [
+            {
+              "name": "Expected recovery on the ladder",
+              "tag": null,
+              "detail": "Placed at the historic decision lag per type — 9 days for dimension claims, 18 for inventory — so the forecast is not optimistic about timing.",
+              "value": "$3,080 expected",
+              "valueTone": "var(--green-700)"
+            },
+            {
+              "name": "Attribution tile updated",
+              "tag": "persistent",
+              "tagIcon": "fa-solid fa-thumbtack",
+              "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+              "tagTone": "var(--mod-cash)",
+              "detail": "Recovered dollars stay attributed to this flow with their claim references, so the period figure is auditable line by line rather than asserted.",
+              "value": "$11.7K YTD",
+              "valueTone": "var(--mod-cash)"
+            },
+            {
+              "name": "Write-off log posted",
+              "tag": null,
+              "detail": "$84 of sub-floor leakage recorded against the period. Not chased, still counted — the number that argues for fixing the cause.",
+              "value": "$84 logged",
+              "valueTone": "var(--ink-800)"
+            }
+          ]
+        }
       },
       {
         "name": "Monitoring",
@@ -283,7 +387,43 @@
             "stateLabel": "blocked",
             "stateTone": "var(--ink-400)"
           }
-        ]
+        ],
+        "__raw": {
+          "id": "watch",
+          "name": "Monitoring",
+          "icon": "fa-solid fa-chart-line",
+          "hue": "var(--mod-cash)",
+          "meta": "case outcomes, recovery rate by type, discrepancy inflow",
+          "items": [
+            {
+              "name": "Case outcomes polled daily",
+              "tag": null,
+              "detail": "Every case ID is polled for a decision. An approval posts to the Cash lens; a denial gets one appeal with new evidence and then a write-off entry.",
+              "value": "9 cases",
+              "valueTone": "var(--mod-cash)"
+            },
+            {
+              "name": "Recovery rate by type",
+              "tag": "feeds the engine",
+              "tagIcon": "fa-solid fa-rotate",
+              "tagTint": "color-mix(in oklab, var(--mod-cash) 12%, white)",
+              "tagTone": "var(--mod-cash)",
+              "detail": "Outcomes update the win rates this ledger sorts by. A type that starts losing gets a lower priority and, past 25% denials, loses the batch path.",
+              "value": "3 types",
+              "valueTone": "var(--mod-cash)"
+            },
+            {
+              "name": "Discrepancy inflow watch",
+              "tag": "rising",
+              "tagIcon": "fa-solid fa-arrow-trend-up",
+              "tagTint": "var(--amber-50)",
+              "tagTone": "var(--amber-700)",
+              "detail": "Seventeen this month against eleven in May. A fourth consecutive rise opens a 10.1 investigation into why fees are drifting rather than filing another batch.",
+              "value": "17 / month",
+              "valueTone": "var(--amber-700)"
+            }
+          ]
+        }
       }
     ],
     "pollStatus": "arms on stage 4",

@@ -390,7 +390,142 @@
         "mark": "var(--mod-actions)",
         "titleTone": "var(--ink-900)",
         "iconTint": "color-mix(in oklab, var(--mod-actions) 12%, white)",
-        "iconTone": "var(--mod-actions)"
+        "iconTone": "var(--mod-actions)",
+        "__raw": {
+          "key": "late",
+          "severity": "medium",
+          "market": "Amazon",
+          "icon": "fa-solid fa-truck-fast",
+          "title": "Late-shipment rate 3.4%, past our 3.0% floor",
+          "caseId": "internal · no case open",
+          "summary": "Six consecutive days above our own floor and still climbing. The marketplace has not acted, which is exactly the window an operational fix works in.",
+          "deadline": "9 days to 4.0%",
+          "dlTint": "var(--amber-50)",
+          "dlTone": "var(--amber-700)",
+          "risk": "$9.1K/day",
+          "urgent": true,
+          "detail": "Late shipment measures orders dispatched after the promised handling window. At 3.4% we are inside Amazon’s 4.0% limit and outside our own 3.0% floor — the metric is not yet a problem for them and is already a problem for us.",
+          "stats": [
+            [
+              "Current",
+              "3.4%",
+              "their limit is 4.0%",
+              "var(--amber-700)"
+            ],
+            [
+              "Trend",
+              "+0.4pp / wk",
+              "six days rising",
+              "var(--rose-700)"
+            ],
+            [
+              "Late orders",
+              "184",
+              "trailing 30 days",
+              "var(--ink-900)"
+            ],
+            [
+              "Days of buffer",
+              "9",
+              "at the current trend",
+              "var(--amber-700)"
+            ]
+          ],
+          "panelTitle": "Root cause · 184 late orders decomposed",
+          "panelTone": "var(--mod-actions)",
+          "causes": [
+            {
+              "label": "East 3PL Monday backlog",
+              "value": "78%",
+              "pct": 78,
+              "tone": "var(--rose-700)",
+              "note": "Weekend orders queue behind Monday inbound receiving and ship a day late."
+            },
+            {
+              "label": "Oversize items awaiting pick",
+              "value": "11%",
+              "pct": 11,
+              "tone": "var(--amber-700)",
+              "note": "Cast iron and dutch ovens need two pickers, which the Monday roster does not have."
+            },
+            {
+              "label": "Address validation holds",
+              "value": "7%",
+              "pct": 7,
+              "tone": "var(--ink-700)",
+              "note": "Residential reclassifications pause dispatch for manual review."
+            },
+            {
+              "label": "Genuine stock-outs at pick",
+              "value": "4%",
+              "pct": 4,
+              "tone": "var(--ink-700)",
+              "note": "Cover was there at order, gone at pick. A forecasting issue, not a fulfilment one."
+            }
+          ],
+          "hasLinks": true,
+          "links": [
+            {
+              "label": "S9.18 fulfilment",
+              "href": "S9.18-3-decide.dc.html",
+              "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tone": "var(--mod-inventory)"
+            },
+            {
+              "label": "S9.12 returns",
+              "href": "S9.12-2-analyze.dc.html",
+              "tint": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+              "tone": "var(--mod-margin)"
+            }
+          ],
+          "riskRows": [
+            [
+              "Listing-level action",
+              "Buy Box loss on affected ASINs",
+              "$9.1K/day",
+              "var(--rose-700)"
+            ],
+            [
+              "Account-level review",
+              "if the metric passes 4.0%",
+              "$6.8K/hour",
+              "var(--rose-700)"
+            ],
+            [
+              "Recovery cost",
+              "rank and review velocity after reinstatement",
+              "3–5 weeks",
+              "var(--amber-700)"
+            ]
+          ],
+          "evidenceTitle": "What the fix looks like",
+          "evidence": [
+            {
+              "label": "Handling-time buffer on weekend orders",
+              "detail": "One extra day on orders placed Fri–Sun. Projected 1.9% within 14 days. No listing changes, no submission.",
+              "icon": "fa-solid fa-clock",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            },
+            {
+              "label": "Monday roster change at the 3PL",
+              "detail": "Two additional pickers for the oversize queue. Addresses the 11% without touching promise times.",
+              "icon": "fa-solid fa-users",
+              "tone": "var(--ink-700)",
+              "border": "var(--ink-100)",
+              "bg": "var(--ink-0)"
+            },
+            {
+              "label": "No plan of action needed yet",
+              "detail": "Nothing is submitted while the metric is inside their limit. Fixing it now means never explaining it.",
+              "icon": "fa-solid fa-file-circle-check",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            }
+          ]
+        }
       },
       {
         "severity": "high",
@@ -411,7 +546,129 @@
         "mark": "var(--rose-500)",
         "titleTone": "var(--ink-700)",
         "iconTint": "var(--rose-50)",
-        "iconTone": "var(--rose-700)"
+        "iconTone": "var(--rose-700)",
+        "__raw": {
+          "key": "ip",
+          "severity": "high",
+          "market": "Amazon",
+          "icon": "fa-solid fa-scale-balanced",
+          "title": "IP complaint — hero SKU listing suppressed",
+          "caseId": "case 8814-2291",
+          "summary": "Filed Aug 16 by a claimant with no registered mark in our category. Counter-notice window closes in four days and the listing has been dark since filing.",
+          "deadline": "4 days",
+          "dlTint": "var(--rose-50)",
+          "dlTone": "var(--rose-700)",
+          "risk": "$1.8K/day",
+          "urgent": true,
+          "detail": "A design-patent complaint against the carbon steel skillet 10\". Realify has assembled the validity assessment and the evidence pack; counsel reviews and files. Nothing is submitted from here.",
+          "stats": [
+            [
+              "Days suppressed",
+              "3",
+              "since Aug 16",
+              "var(--rose-700)"
+            ],
+            [
+              "Validity",
+              "weak",
+              "claimant assessment",
+              "var(--green-700)"
+            ],
+            [
+              "Counter-notice",
+              "4 days",
+              "window closing",
+              "var(--rose-700)"
+            ],
+            [
+              "Reinstatement",
+              "5–9 days",
+              "if the counter succeeds",
+              "var(--amber-700)"
+            ]
+          ],
+          "panelTitle": "Complaint validity assessment",
+          "panelTone": "var(--rose-700)",
+          "causes": [
+            {
+              "label": "No registered mark in our category",
+              "value": "strong",
+              "pct": 88,
+              "tone": "var(--green-700)",
+              "note": "The claimant’s registration covers cookware handles, not pan bodies. Verified against the register."
+            },
+            {
+              "label": "Our design predates the claim",
+              "value": "strong",
+              "pct": 82,
+              "tone": "var(--green-700)",
+              "note": "First listing Nov 2023; the cited design was registered Mar 2025. Ledger has the original listing record."
+            },
+            {
+              "label": "Claimant history of broad filings",
+              "value": "moderate",
+              "pct": 61,
+              "tone": "var(--amber-700)",
+              "note": "Nine complaints against seven sellers in 12 months, four withdrawn. Pattern, not proof."
+            },
+            {
+              "label": "Product images genuinely similar",
+              "value": "weakness",
+              "pct": 34,
+              "tone": "var(--rose-700)",
+              "note": "The lifestyle shot resembles their catalogue image. Worth reshooting whatever the outcome."
+            }
+          ],
+          "hasLinks": false,
+          "links": [],
+          "riskRows": [
+            [
+              "Suppressed listing",
+              "hero SKU, 11% of Amazon revenue",
+              "$1.8K/day",
+              "var(--rose-700)"
+            ],
+            [
+              "Cumulative to date",
+              "3 days dark",
+              "$5.4K",
+              "var(--rose-700)"
+            ],
+            [
+              "Rank recovery",
+              "after reinstatement",
+              "2–3 weeks",
+              "var(--amber-700)"
+            ]
+          ],
+          "evidenceTitle": "Evidence gathered · for counsel",
+          "evidence": [
+            {
+              "label": "Original listing record · Nov 2023",
+              "detail": "Ledger entry with first-publish timestamp and the original image set. Predates the cited registration by 16 months.",
+              "icon": "fa-solid fa-file-shield",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            },
+            {
+              "label": "Supplier design authorisation",
+              "detail": "Kessler letter confirming the pan body is their standard tooling, not a copy. Vault document, expires Mar 2027.",
+              "icon": "fa-solid fa-folder-open",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            },
+            {
+              "label": "Legal review required before filing",
+              "detail": "Locked in Reason. Counsel reads the pack and files the counter-notice — Realify does not submit IP responses.",
+              "icon": "fa-solid fa-lock",
+              "tone": "var(--ink-600)",
+              "border": "var(--ink-100)",
+              "bg": "var(--ink-0)"
+            }
+          ]
+        }
       },
       {
         "severity": "high",
@@ -432,7 +689,120 @@
         "mark": "var(--rose-500)",
         "titleTone": "var(--ink-700)",
         "iconTint": "var(--rose-50)",
-        "iconTone": "var(--rose-700)"
+        "iconTone": "var(--rose-700)",
+        "__raw": {
+          "key": "suppression",
+          "severity": "high",
+          "market": "Walmart",
+          "icon": "fa-solid fa-eye-slash",
+          "title": "Two listings suppressed — condition description",
+          "caseId": "case WM-40118",
+          "summary": "Automated content check flagged the phrase \"like new\" in refurbished-adjacent copy. A content fix, not a compliance failure — but revenue stops either way.",
+          "deadline": "6 days",
+          "dlTint": "var(--amber-50)",
+          "dlTone": "var(--amber-700)",
+          "risk": "$0.6K/day",
+          "detail": "Walmart’s content policy prohibits condition language that could imply a used or refurbished item on a new-condition listing. Both listings use a phrase inherited from a 2024 template.",
+          "stats": [
+            [
+              "Listings affected",
+              "2",
+              "both filtration",
+              "var(--amber-700)"
+            ],
+            [
+              "Cause",
+              "template",
+              "inherited 2024 copy",
+              "var(--ink-900)"
+            ],
+            [
+              "Fix effort",
+              "20 min",
+              "copy edit and resubmit",
+              "var(--green-700)"
+            ],
+            [
+              "Others at risk",
+              "7",
+              "same template phrase",
+              "var(--amber-700)"
+            ]
+          ],
+          "panelTitle": "Suppression diagnosis",
+          "panelTone": "var(--amber-700)",
+          "causes": [
+            {
+              "label": "Prohibited condition phrasing",
+              "value": "2 listings",
+              "pct": 100,
+              "tone": "var(--rose-700)",
+              "note": "\"Like new performance\" reads as a condition claim to the automated check."
+            },
+            {
+              "label": "Same phrase elsewhere",
+              "value": "7 listings",
+              "pct": 64,
+              "tone": "var(--amber-700)",
+              "note": "Not yet flagged. Fixing only the two suppressed ones leaves seven waiting to happen."
+            },
+            {
+              "label": "Template origin",
+              "value": "2024 copy",
+              "pct": 40,
+              "tone": "var(--ink-700)",
+              "note": "Inherited from a bulk listing import. The template is the defect, not the listings."
+            }
+          ],
+          "hasLinks": true,
+          "links": [
+            {
+              "label": "S9.6 listing fixes",
+              "href": "S9.6-3-decide.dc.html",
+              "tint": "color-mix(in oklab, var(--mod-intel) 12%, white)",
+              "tone": "var(--mod-intel)"
+            }
+          ],
+          "riskRows": [
+            [
+              "Suppressed listings",
+              "2 filtration SKUs on Walmart",
+              "$0.6K/day",
+              "var(--amber-700)"
+            ],
+            [
+              "If the other 7 flag",
+              "same phrase, unfixed",
+              "$2.1K/day",
+              "var(--rose-700)"
+            ],
+            [
+              "Fix window",
+              "before the next content sweep",
+              "6 days",
+              "var(--amber-700)"
+            ]
+          ],
+          "evidenceTitle": "What resolves it",
+          "evidence": [
+            {
+              "label": "Copy edit on all nine listings",
+              "detail": "Replace the phrase across the template and every listing carrying it, not just the two suppressed.",
+              "icon": "fa-solid fa-pen",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            },
+            {
+              "label": "Reinstatement request with the diff",
+              "detail": "Walmart reinstates on evidence of correction. The diff viewer output is the evidence.",
+              "icon": "fa-solid fa-code-compare",
+              "tone": "var(--ink-700)",
+              "border": "var(--ink-100)",
+              "bg": "var(--ink-0)"
+            }
+          ]
+        }
       },
       {
         "severity": "medium",
@@ -453,7 +823,114 @@
         "mark": "var(--amber-500)",
         "titleTone": "var(--ink-700)",
         "iconTint": "var(--amber-50)",
-        "iconTone": "var(--amber-700)"
+        "iconTone": "var(--amber-700)",
+        "__raw": {
+          "key": "ontime",
+          "severity": "medium",
+          "market": "Walmart",
+          "icon": "fa-solid fa-clock",
+          "title": "On-time delivery 95.2%, floor is 96.5%",
+          "caseId": "internal · no case open",
+          "summary": "Inside Walmart’s 95% requirement and outside ours. Same East node cause as the Amazon metric — one fix moves both.",
+          "deadline": "no deadline",
+          "dlTint": "var(--ink-100)",
+          "dlTone": "var(--ink-600)",
+          "risk": "$2.4K/day",
+          "detail": "Walmart measures delivery against the promise shown at checkout rather than dispatch. The 0.2pp of headroom above their floor is not comfortable, and the cause is shared with the Amazon late-shipment metric.",
+          "stats": [
+            [
+              "Current",
+              "95.2%",
+              "their floor is 95.0%",
+              "var(--rose-700)"
+            ],
+            [
+              "Our floor",
+              "96.5%",
+              "1.3pp below it",
+              "var(--amber-700)"
+            ],
+            [
+              "Shared cause",
+              "71%",
+              "same East node backlog",
+              "var(--rose-700)"
+            ],
+            [
+              "Fixed by",
+              "same buffer",
+              "no separate work",
+              "var(--green-700)"
+            ]
+          ],
+          "panelTitle": "Root cause · shared with Amazon",
+          "panelTone": "var(--mod-actions)",
+          "causes": [
+            {
+              "label": "East 3PL Monday backlog",
+              "value": "71%",
+              "pct": 71,
+              "tone": "var(--rose-700)",
+              "note": "The same cause as the Amazon metric. One handling-time change moves both."
+            },
+            {
+              "label": "Zone 7–8 transit from East",
+              "value": "18%",
+              "pct": 18,
+              "tone": "var(--amber-700)",
+              "note": "Five days in transit when the promise is three. The routing fix in S9.18 addresses this."
+            },
+            {
+              "label": "Carrier exceptions",
+              "value": "11%",
+              "pct": 11,
+              "tone": "var(--ink-700)",
+              "note": "Weather and access failures. Not controllable, and inside normal variation."
+            }
+          ],
+          "hasLinks": true,
+          "links": [
+            {
+              "label": "S9.18 fulfilment",
+              "href": "S9.18-3-decide.dc.html",
+              "tint": "color-mix(in oklab, var(--mod-inventory) 12%, white)",
+              "tone": "var(--mod-inventory)"
+            }
+          ],
+          "riskRows": [
+            [
+              "Walmart Pro Seller status",
+              "lost below 95%",
+              "$2.4K/day",
+              "var(--amber-700)"
+            ],
+            [
+              "Buy Box weighting",
+              "on-time is 30% of the score",
+              "ranking effect",
+              "var(--amber-700)"
+            ]
+          ],
+          "evidenceTitle": "What resolves it",
+          "evidence": [
+            {
+              "label": "The same handling-time buffer",
+              "detail": "Projected 96.9% within 14 days, clearing our own floor as well as theirs. No separate work.",
+              "icon": "fa-solid fa-clock",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            },
+            {
+              "label": "Zone 7–8 routing from West",
+              "detail": "Already approved in the fulfilment flow. Removes two transit days on 31% of Zone 7–8 orders.",
+              "icon": "fa-solid fa-route",
+              "tone": "var(--ink-700)",
+              "border": "var(--ink-100)",
+              "bg": "var(--ink-0)"
+            }
+          ]
+        }
       },
       {
         "severity": "low",
@@ -474,7 +951,99 @@
         "mark": "var(--ink-200)",
         "titleTone": "var(--ink-700)",
         "iconTint": "var(--ink-100)",
-        "iconTone": "var(--ink-600)"
+        "iconTone": "var(--ink-600)",
+        "__raw": {
+          "key": "policy",
+          "severity": "low",
+          "market": "Amazon",
+          "icon": "fa-solid fa-file-lines",
+          "title": "Documentation request — supplier invoices",
+          "caseId": "case 8791-4402",
+          "summary": "Routine authenticity check on three SKUs. Answerable entirely from the document vault with current invoices and authorisation letters.",
+          "deadline": "11 days",
+          "dlTint": "var(--ink-100)",
+          "dlTone": "var(--ink-600)",
+          "risk": "none yet",
+          "detail": "Amazon periodically requests supply-chain documentation to verify authenticity. No listing is affected and no metric moves. It becomes serious only if the answer is late or incomplete.",
+          "stats": [
+            [
+              "SKUs queried",
+              "3",
+              "all Kessler-supplied",
+              "var(--ink-900)"
+            ],
+            [
+              "Vault coverage",
+              "3 of 3",
+              "invoices current",
+              "var(--green-700)"
+            ],
+            [
+              "Effort",
+              "15 min",
+              "assemble and review",
+              "var(--green-700)"
+            ],
+            [
+              "Deadline",
+              "11 days",
+              "no revenue at risk",
+              "var(--ink-700)"
+            ]
+          ],
+          "panelTitle": "Vault readiness",
+          "panelTone": "var(--green-700)",
+          "causes": [
+            {
+              "label": "Supplier invoices on file",
+              "value": "3 of 3",
+              "pct": 100,
+              "tone": "var(--green-700)",
+              "note": "Within the 365-day recency window Amazon requires. Nothing to reconstruct."
+            },
+            {
+              "label": "Authorisation letters",
+              "value": "3 of 3",
+              "pct": 100,
+              "tone": "var(--green-700)",
+              "note": "Kessler letters valid to Mar 2027, already scanned and indexed."
+            },
+            {
+              "label": "Documents expiring soon",
+              "value": "2",
+              "pct": 30,
+              "tone": "var(--amber-700)",
+              "note": "Unrelated to this case — two other certifications expire within 60 days."
+            }
+          ],
+          "hasLinks": false,
+          "links": [],
+          "riskRows": [
+            [
+              "Now",
+              "no listing or metric affected",
+              "none",
+              "var(--green-700)"
+            ],
+            [
+              "If unanswered",
+              "listings suppressed pending review",
+              "$4.2K/day",
+              "var(--rose-700)"
+            ]
+          ],
+          "evidenceTitle": "What resolves it",
+          "evidence": [
+            {
+              "label": "Vault assembly, human review",
+              "detail": "Three invoices and three letters pulled with expiry dates shown. A person reads and submits.",
+              "icon": "fa-solid fa-folder-open",
+              "tone": "var(--green-700)",
+              "border": "color-mix(in oklab, var(--green-500) 26%, white)",
+              "bg": "var(--green-50)"
+            }
+          ]
+        }
       }
     ],
     "sel": {
