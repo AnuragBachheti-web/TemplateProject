@@ -17,10 +17,19 @@ import Alert from '../ui/Alert';
  * a real backend exists — INTEGRATION.md §3); gating it behind an explicit second confirmation is
  * Nielsen Norman's own "error prevention" heuristic, not decoration.
  *
+ * `canConfirm`/`blockedReason` come from stageActionEligibility.js's own resolution of this stage's
+ * real `guardrail_*` data — this is currently the ONE real action this app has (there is no
+ * dismiss/snooze/modify/send-back verb anywhere in the mutation layer; none of those have any
+ * backing in the real product/API contract available in this repo — see stageActionEligibility.js's
+ * own doc comment). A blocked proposal never gets a clickable path to `confirmStage` at all: no
+ * dialog opens, no mutation can fire, the reason is shown in its place — "do not expose an
+ * executable path" for an action that isn't actually allowed, rather than a button that silently
+ * fails or (worse) silently succeeds against the proposal's own stated guardrail.
+ *
  * Navigation (the sidebar, StepTracker) stays entirely separate from this — clicking Approve never
  * navigates anywhere, and navigating away never affects an in-flight or completed confirmation.
  */
-export default function StageActionBar({ code, stageKey, ctaLabel }) {
+export default function StageActionBar({ code, stageKey, ctaLabel, canConfirm = true, blockedReason = null }) {
   const isConfirmed = useActionStoriesStore((s) => s.isStageConfirmed(code, stageKey));
   const isPending = useActionStoriesStore((s) => s.isStagePending(code, stageKey));
   const error = useActionStoriesStore((s) => s.getStageError(code, stageKey));
@@ -59,6 +68,12 @@ export default function StageActionBar({ code, stageKey, ctaLabel }) {
   // dependency this component cannot fabricate.)
   if (stageKey !== 'decide' && stageKey !== 'execute') return null;
 
+  // A blocked proposal never gets a clickable path to the mutation at all — see this component's
+  // own doc comment. Moot once actually confirmed (which could only have happened before the
+  // proposal's own data turned blocked, if that were ever possible in a live system), so `isConfirmed`
+  // always wins over a stale `canConfirm: false`.
+  const isBlocked = !canConfirm && !isConfirmed;
+
   return (
     <div className="mx-auto flex w-full max-w-page items-center gap-3 border-t border-rf-border-subtle bg-rf-surface-canvas px-6 py-3.5">
       {/* Alert.jsx's compact pill — the same shared component every persistent status/warning
@@ -74,14 +89,23 @@ export default function StageActionBar({ code, stageKey, ctaLabel }) {
           {error.userMessage}
         </Alert>
       )}
+      {isBlocked && !error && (
+        <Alert tone="warning" compact>
+          {blockedReason || `${label} isn't available for this proposal yet.`}
+        </Alert>
+      )}
       <button
         type="button"
-        disabled={isConfirmed || isPending}
+        disabled={isConfirmed || isPending || isBlocked}
         aria-busy={isPending}
-        onClick={() => setDialogOpen(true)}
+        aria-disabled={isBlocked || undefined}
+        onClick={() => {
+          if (isBlocked) return;
+          setDialogOpen(true);
+        }}
         className={`ml-auto inline-flex h-10 items-center gap-2 rounded-lg px-[18px] text-[13.5px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
-          isConfirmed
-            ? 'cursor-default bg-rf-surface-sunken text-rf-text-tertiary'
+          isConfirmed || isBlocked
+            ? 'cursor-not-allowed bg-rf-surface-sunken text-rf-text-tertiary'
             : isPending
               ? 'cursor-wait bg-rf-brand-blue-500/70 text-white'
               : 'bg-rf-brand-blue-500 text-white hover:bg-rf-brand-blue-600'
@@ -93,8 +117,8 @@ export default function StageActionBar({ code, stageKey, ctaLabel }) {
             className="h-3 w-3 animate-spin rounded-full border-2 border-white/40 border-t-white"
           />
         )}
-        {isConfirmed ? 'Done' : isPending ? 'Confirming…' : error ? `Retry ${label}` : label}
-        {!isConfirmed && !isPending && <i className="fa-solid fa-arrow-right text-[11px]" aria-hidden="true" />}
+        {isConfirmed ? 'Done' : isBlocked ? 'Blocked' : isPending ? 'Confirming…' : error ? `Retry ${label}` : label}
+        {!isConfirmed && !isPending && !isBlocked && <i className="fa-solid fa-arrow-right text-[11px]" aria-hidden="true" />}
       </button>
       <ConfirmDialog
         open={dialogOpen}

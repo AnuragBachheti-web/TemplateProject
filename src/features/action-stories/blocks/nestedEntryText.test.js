@@ -33,6 +33,27 @@ describe('flattenNestedEntry — known shapes (unchanged behavior)', () => {
   });
 });
 
+describe('flattenNestedEntry — label row with OTHER sibling fields beyond value (regression: S9.6/analyze.sel.waterfall/.diag)', () => {
+  it('appends a sibling field even when there is no `value` at all (S9.6/analyze.sel.waterfall\'s own {label, pct, detail} shape — previously rendered as a bare label with the %/detail both silently dropped)', () => {
+    const row = { label: 'Price competitiveness', pct: '46%', detail: '$1.75 above the lowest compliant seller', tone: 'var(--rose-500)', weight: 700 };
+    expect(flattenNestedEntry(row)).toBe('Price competitiveness — 46% · $1.75 above the lowest compliant seller');
+  });
+
+  it('appends a sibling field alongside an existing `value` (S9.6/analyze.sel.diag\'s own {label, value, note} shape — previously the `note` was silently dropped)', () => {
+    const row = { label: 'Traffic mix', value: '42% paid', note: 'Paid traffic converts 2.1 points lower here.', icon: 'fa-solid fa-signal', tone: 'var(--amber-700)' };
+    expect(flattenNestedEntry(row)).toBe('Traffic mix 42% paid — Paid traffic converts 2.1 points lower here.');
+  });
+
+  it('joins multiple sibling fields with " · " when more than one survives', () => {
+    const row = { label: 'X', a: '1', b: '2' };
+    expect(flattenNestedEntry(row)).toBe('X — 1 · 2');
+  });
+
+  it('a plain {label, value} pair with no other fields is completely unaffected (no trailing dash)', () => {
+    expect(flattenNestedEntry({ label: 'Confidence', value: '88%', tone: 'var(--green-700)' })).toBe('Confidence 88%');
+  });
+});
+
 describe('flattenNestedEntry — nested array (regression: previously flattened to \'\')', () => {
   it('summarizes an array of {label, value} rows, joined', () => {
     const arr = [{ label: 'A', value: 1 }, { label: 'B', value: 2 }];

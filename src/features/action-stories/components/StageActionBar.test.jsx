@@ -160,3 +160,50 @@ describe('StageActionBar — confirm-gated mutation lifecycle end to end', () =>
     act(() => root.unmount());
   });
 });
+
+describe('StageActionBar — guardrail-blocked proposal (regression: a proposal whose own data says it cannot be approved used to still show a fully clickable Approve button)', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  it('never opens the confirm dialog, and never lets the mutation fire, when canConfirm is false', async () => {
+    const mutations = await import('@/services/actionStoriesMutations');
+    const spy = vi.spyOn(mutations, 'confirmStageMutation');
+
+    const { container, root } = mount(
+      <StageActionBar code="S9.16" stageKey="decide" canConfirm={false} blockedReason="Full-launch exposure of $92.5K breaks the $75K appetite set in Reason" />,
+    );
+    const button = container.querySelector('button');
+
+    expect(button.disabled).toBe(true);
+    expect(button.textContent).toBe('Blocked');
+    expect(container.querySelector('[role="alert"]').textContent).toContain('Full-launch exposure of $92.5K');
+
+    act(() => button.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull(); // no dialog ever opened
+    expect(spy).not.toHaveBeenCalled(); // and so the mutation itself never had a path to fire
+
+    spy.mockRestore();
+    act(() => root.unmount());
+  });
+
+  it('shows a sensible generic message when blocked with no explicit reason', () => {
+    const { container, root } = mount(<StageActionBar code="S9.101" stageKey="decide" canConfirm={false} />);
+    expect(container.querySelector('[role="alert"]').textContent).toContain("isn't available");
+    act(() => root.unmount());
+  });
+
+  it('an already-confirmed stage stays "Done" even if canConfirm is (stale-)false — confirmed always wins', async () => {
+    const { container, root } = mount(<StageActionBar code="S9.102" stageKey="decide" canConfirm={true} />);
+    act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    const [, confirmButton] = confirmDialogButtons();
+    act(() => confirmButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    await flush();
+    act(() => root.unmount());
+
+    const { container: container2, root: root2 } = mount(<StageActionBar code="S9.102" stageKey="decide" canConfirm={false} blockedReason="stale" />);
+    expect(container2.querySelector('button').textContent).toBe('Done');
+    expect(container2.querySelector('[role="alert"]')).toBeNull();
+    act(() => root2.unmount());
+  });
+});

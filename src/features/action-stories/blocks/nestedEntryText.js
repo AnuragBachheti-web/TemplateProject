@@ -69,7 +69,10 @@ const MAX_DEPTH = 6;
  *   React stub) -> its own inner text, via flattenDisplayValue
  * - `{ field, before, after }` (a diff row) -> "field: before → after"
  * - anything with a `label` -> "label" (plus " value" if a `value` is also present — itself
- *   summarized recursively, so a nested value that's *also* an object/array isn't dropped)
+ *   summarized recursively, so a nested value that's *also* an object/array isn't dropped), plus
+ *   " — " and every OTHER remaining non-decorative sibling field, joined with " · " — not just
+ *   `value`; see this branch's own inline comment for the real data this used to silently drop
+ *   (a waterfall row's own `pct`/`detail`, a diagnostic row's own `note`)
  * - a magnitude-only descriptor with no label (e.g. a sparkline point `{h: "12", fill: "..."}`) ->
  *   just that magnitude, rather than nothing
  * - a plain array -> each entry recursively summarized and joined ("a, b, c")
@@ -112,7 +115,24 @@ export function flattenNestedEntry(entry, depth = 0) {
 
   if ('label' in entry) {
     const value = entry.value !== undefined ? ` ${flattenNestedEntry(entry.value, depth + 1)}`.trimEnd() : '';
-    return `${flattenDisplayValue(entry.label)}${value}`;
+
+    // Every OTHER sibling field beyond label/value is real content too — previously silently
+    // dropped here, since this branch only ever looked for a field literally named "value".
+    // Confirmed hiding S9.6/analyze.sel.waterfall's own `pct`/`detail` entirely (that shape has no
+    // `value` at all, so it rendered as a bare label with NO figure — "Price competitiveness", never
+    // "46%") and .diag's own `note` (silently dropped even though `value` itself did show). Shape-
+    // based, not a hardcoded name list — whatever's left after label/value/decorative/internal keys
+    // are set aside is appended, so a real API's own vocabulary for the same idea (a different key
+    // name entirely) is picked up automatically, not just this corpus's own `pct`/`note`/`detail`.
+    // A plain {label, value} pair (the common case, and every existing test's own expectation) is
+    // completely unaffected: no extra fields means no suffix, same "label value" output as before.
+    const extra = Object.entries(entry)
+      .filter(([key, v]) => key !== 'label' && key !== 'value' && !isHiddenKey(key) && v !== null && v !== undefined)
+      .map(([, v]) => flattenNestedEntry(v, depth + 1))
+      .filter(Boolean);
+    const suffix = extra.length > 0 ? ` — ${extra.join(' · ')}` : '';
+
+    return `${flattenDisplayValue(entry.label)}${value}${suffix}`;
   }
 
   const magnitudeKey = MAGNITUDE_KEYS.find((k) => entry[k] !== undefined);
