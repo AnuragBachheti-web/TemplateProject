@@ -147,4 +147,132 @@ describe('validateManifest', () => {
       expect(validateManifest(validManifest)).toEqual([])
     })
   })
+
+  describe('block.when — conditional rendering', () => {
+    it('is fully optional — a block with no "when" is still valid', () => {
+      expect(validateManifest(validManifest)).toEqual([])
+    })
+
+    it('accepts a valid "when" condition on a block', () => {
+      const manifest = {
+        ...validManifest,
+        blocks: [{ slotName: 'x', blockType: 'flag', binding: 'data.x', when: { path: 'data.x', op: 'eq', value: true } }],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('accepts a nested all/any "when" condition on a block', () => {
+      const manifest = {
+        ...validManifest,
+        blocks: [
+          {
+            slotName: 'x',
+            blockType: 'text',
+            binding: 'data.x',
+            when: { all: [{ path: 'data.a', op: 'exists' }, { any: [{ path: 'data.b', op: 'truthy' }] }] },
+          },
+        ],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('flags a malformed "when" condition (delegated to actionCondition.validateCondition)', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        blocks: [{ slotName: 'x', blockType: 'text', binding: 'data.x', when: { op: 'madeUp' } }],
+      })
+      expect(problems.some((p) => p.includes('blocks[0].when'))).toBe(true)
+    })
+  })
+
+  describe('actions[] — the generic action contract', () => {
+    it('is fully optional — a manifest with no "actions" at all is still valid (no ActionBar renders)', () => {
+      expect(validateManifest(validManifest)).toEqual([])
+    })
+
+    it('accepts a minimal valid action (id + label only)', () => {
+      const manifest = { ...validManifest, actions: [{ id: 'approve', label: 'Approve' }] }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('accepts a fully-populated action', () => {
+      const manifest = {
+        ...validManifest,
+        actions: [
+          {
+            id: 'approve',
+            label: 'Approve',
+            kind: 'primary',
+            action: 'confirm',
+            labelBinding: 'data.ctaLabel',
+            disabledReasonBinding: 'data.blockReason',
+            loadingLabel: 'Approving…',
+            when: { all: [{ path: 'data.blocked', op: 'ne', value: true }] },
+            confirm: { required: true, title: 'Approve?', description: 'This cannot be undone.' },
+            reason: { required: true, label: 'Reason', minLength: 10 },
+          },
+        ],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+
+    it('flags a non-array "actions"', () => {
+      const problems = validateManifest({ ...validManifest, actions: 'nope' })
+      expect(problems.some((p) => p.includes('"actions"'))).toBe(true)
+    })
+
+    it('flags a missing "id" and a missing "label"', () => {
+      const problems = validateManifest({ ...validManifest, actions: [{}] })
+      expect(problems.some((p) => p.includes('"id"'))).toBe(true)
+      expect(problems.some((p) => p.includes('"label"'))).toBe(true)
+    })
+
+    it('flags a duplicate action id', () => {
+      const problems = validateManifest({
+        ...validManifest,
+        actions: [
+          { id: 'approve', label: 'Approve' },
+          { id: 'approve', label: 'Approve again' },
+        ],
+      })
+      expect(problems.some((p) => p.includes('duplicate action id'))).toBe(true)
+    })
+
+    it('flags an invalid "kind"', () => {
+      const problems = validateManifest({ ...validManifest, actions: [{ id: 'a', label: 'A', kind: 'fancy' }] })
+      expect(problems.some((p) => p.includes('"kind"'))).toBe(true)
+    })
+
+    it('flags a malformed "when" condition (delegated to actionCondition.validateCondition)', () => {
+      const problems = validateManifest({ ...validManifest, actions: [{ id: 'a', label: 'A', when: { op: 'madeUp' } }] })
+      expect(problems.some((p) => p.includes('actions[0].when'))).toBe(true)
+    })
+
+    it('flags an invalid "confirm" config', () => {
+      const problems = validateManifest({ ...validManifest, actions: [{ id: 'a', label: 'A', confirm: { required: 'yes' } }] })
+      expect(problems.some((p) => p.includes('confirm') && p.includes('"required"'))).toBe(true)
+    })
+
+    it('flags an invalid "reason" config', () => {
+      const problems = validateManifest({ ...validManifest, actions: [{ id: 'a', label: 'A', reason: { minLength: -1 } }] })
+      expect(problems.some((p) => p.includes('reason') && p.includes('"minLength"'))).toBe(true)
+    })
+
+    it('flags a malformed action definition (not an object) instead of throwing', () => {
+      const problems = validateManifest({ ...validManifest, actions: ['nope'] })
+      expect(problems.some((p) => p.includes('actions[0]: must be an object'))).toBe(true)
+    })
+
+    it('supports multiple, independently-shaped actions on the same stage', () => {
+      const manifest = {
+        ...validManifest,
+        actions: [
+          { id: 'approve', label: 'Approve', kind: 'primary' },
+          { id: 'decline', label: 'Decline', kind: 'destructive', reason: { required: true, minLength: 10 } },
+          { id: 'dismiss', label: 'Dismiss', kind: 'secondary' },
+        ],
+      }
+      expect(validateManifest(manifest)).toEqual([])
+    })
+  })
 })

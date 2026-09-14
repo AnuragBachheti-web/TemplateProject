@@ -46,35 +46,87 @@ function confirmDialogButtons() {
   return dialog ? Array.from(dialog.querySelectorAll('button')) : [];
 }
 
-describe('StageActionBar — confirm-gated mutation lifecycle end to end', () => {
+function buttonsIn(container) {
+  return Array.from(container.querySelectorAll('button'));
+}
+
+describe('StageActionBar — genericity (§18-H proof: unrelated action sets through ONE shared component)', () => {
   beforeEach(() => {
     window.localStorage.clear();
   });
 
-  it('renders nothing on a reason/analyze/live stage (no business action exists there)', () => {
-    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="reason" />);
+  it('renders nothing when the manifest declares no actions at all', () => {
+    const { container, root } = mount(<StageActionBar code="T.0" stageKey="reason" actions={undefined} fixture={{ data: {} }} />);
     expect(container.textContent).toBe('');
     act(() => root.unmount());
   });
 
-  it('click opens a confirm dialog first — the mutation does not fire until Confirm is clicked', () => {
-    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="decide" />);
-    const button = container.querySelector('button');
-    expect(button.textContent).toBe('Approve');
+  it('renders nothing for an explicit empty actions array', () => {
+    const { container, root } = mount(<StageActionBar code="T.0" stageKey="reason" actions={[]} fixture={{ data: {} }} />);
+    expect(container.textContent).toBe('');
+    act(() => root.unmount());
+  });
 
-    expect(confirmDialogButtons()).toHaveLength(0); // nothing open yet
+  it('template A: a single simple action with no confirm/reason executes immediately on click', async () => {
+    const actions = [{ id: 'retry', label: 'Retry', kind: 'primary' }];
+    const { container, root } = mount(<StageActionBar code="T.A" stageKey="live" actions={actions} fixture={{ data: {} }} />);
+    const [button] = buttonsIn(container);
+    expect(button.textContent).toBe('Retry');
+
+    act(() => button.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    // No dialog — it just started running immediately, straight into its own loading state.
+    expect(confirmDialogButtons()).toHaveLength(0);
+    expect(buttonsIn(container)[0].getAttribute('aria-busy')).toBe('true');
+    await flush();
+    expect(buttonsIn(container)[0].textContent).toBe('Done');
+    act(() => root.unmount());
+  });
+
+  it('template B: two independent actions (Approve + Decline) render side by side, each with its own lifecycle', async () => {
+    const actions = [
+      { id: 'approve', label: 'Approve', kind: 'primary', confirm: { required: true } },
+      { id: 'decline', label: 'Decline', kind: 'destructive', reason: { required: true, minLength: 5 } },
+    ];
+    const { container, root } = mount(<StageActionBar code="T.B" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
+    const labels = buttonsIn(container).map((b) => b.textContent);
+    expect(labels).toEqual(['Approve', 'Decline']);
+    act(() => root.unmount());
+  });
+
+  it('template C: three differently-configured actions (dismiss, escalate, request_changes) all render through the same component', () => {
+    const actions = [
+      { id: 'dismiss', label: 'Dismiss', kind: 'secondary' },
+      { id: 'escalate', label: 'Escalate', kind: 'destructive', confirm: { required: true, title: 'Escalate this?' } },
+      { id: 'request_changes', label: 'Request changes', kind: 'primary', reason: { required: true, label: 'What needs to change?', minLength: 10 } },
+    ];
+    const { container, root } = mount(<StageActionBar code="T.C" stageKey="analyze" actions={actions} fixture={{ data: {} }} />);
+    expect(buttonsIn(container).map((b) => b.textContent)).toEqual(['Dismiss', 'Escalate', 'Request changes']);
+    act(() => root.unmount());
+  });
+});
+
+describe('StageActionBar — confirmation flow', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  it('click opens a confirm dialog first — the mutation does not fire until Confirm is clicked', () => {
+    const actions = [{ id: 'approve', label: 'Approve', confirm: { required: true } }];
+    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
+    const button = container.querySelector('button');
+
+    expect(confirmDialogButtons()).toHaveLength(0);
     act(() => button.dispatchEvent(new MouseEvent('click', { bubbles: true })));
 
-    // The CTA itself is untouched — no mutation started, no loading state — only the dialog opened.
     expect(button.disabled).toBe(false);
-    expect(button.textContent).toBe('Approve');
     const dialogButtons = confirmDialogButtons();
     expect(dialogButtons.map((b) => b.textContent)).toEqual(['Cancel', 'Approve']);
     act(() => root.unmount());
   });
 
   it('Cancel closes the dialog without ever starting the mutation', () => {
-    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="decide" />);
+    const actions = [{ id: 'approve', label: 'Approve', confirm: { required: true } }];
+    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
     act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
     const [cancelButton] = confirmDialogButtons();
     act(() => cancelButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
@@ -84,54 +136,37 @@ describe('StageActionBar — confirm-gated mutation lifecycle end to end', () =>
     act(() => root.unmount());
   });
 
-  it('Confirm in the dialog -> loading (disabled, aria-busy) -> confirmed, dialog auto-closes', async () => {
-    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="decide" />);
+  it('Confirm -> loading (disabled, spinner) -> done, dialog auto-closes, persists across a fresh mount', async () => {
+    const actions = [{ id: 'approve', label: 'Approve', confirm: { required: true } }];
+    const { container, root } = mount(<StageActionBar code="S9.97" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
     act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
     const [, confirmButton] = confirmDialogButtons();
-
     act(() => confirmButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
 
     const button = container.querySelector('button');
     expect(button.disabled).toBe(true);
-    expect(button.getAttribute('aria-busy')).toBe('true');
-    expect(button.textContent).toContain('Confirming');
-    // Both dialog buttons disable immediately too — no double-submit, no cancel mid-flight.
     expect(confirmDialogButtons().every((b) => b.disabled)).toBe(true);
 
     await flush();
 
     expect(container.querySelector('button').disabled).toBe(true);
     expect(container.querySelector('button').textContent).toBe('Done');
-    expect(container.textContent).toContain('Confirmed');
-    expect(document.body.querySelector('[role="dialog"]')).toBeNull(); // settled -> auto-closed
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
     act(() => root.unmount());
-  });
 
-  it('persists the confirmation across a fresh mount (regression: refresh used to lose it)', async () => {
-    // A code/stageKey pair unused by any earlier test in this file — the in-memory Zustand store
-    // is a module-level singleton shared across every test in this file (only reset per test FILE,
-    // not per test), so reusing "S9.99/decide" here would read back the already-confirmed state
-    // the earlier "Confirm in the dialog -> ... -> confirmed" test left behind.
-    const first = mount(<StageActionBar code="S9.97" stageKey="decide" />);
-    act(() => first.container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
-    const [, confirmButton] = confirmDialogButtons();
-    act(() => confirmButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
-    await flush();
-    expect(first.container.querySelector('button').textContent).toBe('Done');
-    act(() => first.root.unmount());
-
-    // A fresh component instance (simulating a page reload) reads the same persisted state.
-    const second = mount(<StageActionBar code="S9.97" stageKey="decide" />);
+    // A fresh mount (simulating a page reload) reads the same persisted completion.
+    const second = mount(<StageActionBar code="S9.97" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
     expect(second.container.querySelector('button').textContent).toBe('Done');
     act(() => second.root.unmount());
   });
 
-  it('shows a retryable error state and label when the mutation fails, and the dialog auto-closes', async () => {
+  it('shows a retryable error and label when the mutation fails, and Retry reopens the same dialog rather than silently re-running', async () => {
     const mutations = await import('@/services/actionStoriesMutations');
-    vi.spyOn(mutations, 'confirmStageMutation').mockRejectedValueOnce(
+    vi.spyOn(mutations, 'dispatchAction').mockRejectedValueOnce(
       Object.assign(new Error('boom'), { code: 'SERVER_ERROR', retryable: true, userMessage: 'Something went wrong on our end.' }),
     );
-    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="execute" />);
+    const actions = [{ id: 'confirm', label: 'Start', confirm: { required: true } }];
+    const { container, root } = mount(<StageActionBar code="S9.99" stageKey="execute" actions={actions} fixture={{ data: {} }} />);
     act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
     const [, confirmButton] = confirmDialogButtons();
     act(() => confirmButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
@@ -139,71 +174,179 @@ describe('StageActionBar — confirm-gated mutation lifecycle end to end', () =>
 
     expect(container.querySelector('[role="alert"]').textContent).toContain('Something went wrong');
     const button = container.querySelector('button');
-    expect(button.disabled).toBe(false); // not stuck — a retry is possible
+    expect(button.disabled).toBe(false);
     expect(button.textContent).toContain('Retry');
-    expect(document.body.querySelector('[role="dialog"]')).toBeNull(); // settled (failed) -> auto-closed
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
 
-    // Clicking "Retry ..." opens the same confirm dialog again, not a silent second mutation.
     act(() => button.dispatchEvent(new MouseEvent('click', { bubbles: true })));
     expect(confirmDialogButtons()).toHaveLength(2);
 
-    mutations.confirmStageMutation.mockRestore();
+    mutations.dispatchAction.mockRestore();
     act(() => root.unmount());
   });
 
-  it('a decorative CTA label from the manifest overrides the default Approve/Start text', () => {
-    // A code unused by any earlier test in this file — the in-memory Zustand store is a
-    // module-level singleton that isn't reset between tests just because localStorage was
-    // cleared, so reusing "S9.99/decide" here would read back an already-confirmed state.
-    const { container, root } = mount(<StageActionBar code="S9.100" stageKey="decide" ctaLabel="Ship it" />);
-    expect(container.querySelector('button').textContent).toBe('Ship it');
+  it('a simple action with no confirm/reason config runs immediately, no dialog ever opens', async () => {
+    const actions = [{ id: 'dismiss', label: 'Dismiss' }];
+    const { container, root } = mount(<StageActionBar code="S9.98" stageKey="reason" actions={actions} fixture={{ data: {} }} />);
+    act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+    await flush();
+    expect(container.querySelector('button').textContent).toBe('Done');
     act(() => root.unmount());
   });
 });
 
-describe('StageActionBar — guardrail-blocked proposal (regression: a proposal whose own data says it cannot be approved used to still show a fully clickable Approve button)', () => {
+describe('StageActionBar — eligibility (generic "when", not a hardcoded guardrail field)', () => {
   beforeEach(() => {
     window.localStorage.clear();
   });
 
-  it('never opens the confirm dialog, and never lets the mutation fire, when canConfirm is false', async () => {
-    const mutations = await import('@/services/actionStoriesMutations');
-    const spy = vi.spyOn(mutations, 'confirmStageMutation');
+  function guardrailAction() {
+    return {
+      id: 'approve',
+      label: 'Approve',
+      confirm: { required: true },
+      when: {
+        all: [
+          { path: 'data.blocked', op: 'ne', value: true },
+          { path: 'data.canApprove', op: 'ne', value: false },
+        ],
+      },
+      disabledReasonBinding: 'data.blockReason',
+    };
+  }
 
-    const { container, root } = mount(
-      <StageActionBar code="S9.16" stageKey="decide" canConfirm={false} blockedReason="Full-launch exposure of $92.5K breaks the $75K appetite set in Reason" />,
-    );
+  it('never opens the confirm dialog, and the mutation never fires, when the "when" condition fails', async () => {
+    const mutations = await import('@/services/actionStoriesMutations');
+    const spy = vi.spyOn(mutations, 'dispatchAction');
+
+    const fixture = { data: { blocked: true, blockReason: 'Full-launch exposure of $92.5K breaks the $75K appetite set in Reason' } };
+    const { container, root } = mount(<StageActionBar code="S9.16" stageKey="decide" actions={[guardrailAction()]} fixture={fixture} />);
     const button = container.querySelector('button');
 
     expect(button.disabled).toBe(true);
-    expect(button.textContent).toBe('Blocked');
+    expect(button.textContent).toBe('Unavailable');
     expect(container.querySelector('[role="alert"]').textContent).toContain('Full-launch exposure of $92.5K');
 
     act(() => button.dispatchEvent(new MouseEvent('click', { bubbles: true })));
-    expect(document.body.querySelector('[role="dialog"]')).toBeNull(); // no dialog ever opened
-    expect(spy).not.toHaveBeenCalled(); // and so the mutation itself never had a path to fire
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+    expect(spy).not.toHaveBeenCalled();
 
     spy.mockRestore();
     act(() => root.unmount());
   });
 
-  it('shows a sensible generic message when blocked with no explicit reason', () => {
-    const { container, root } = mount(<StageActionBar code="S9.101" stageKey="decide" canConfirm={false} />);
-    expect(container.querySelector('[role="alert"]').textContent).toContain("isn't available");
+  it('is enabled by default when the stage carries none of the "when" condition\'s fields at all', () => {
+    const { container, root } = mount(<StageActionBar code="S9.101" stageKey="decide" actions={[guardrailAction()]} fixture={{ data: {} }} />);
+    expect(container.querySelector('button').disabled).toBe(false);
     act(() => root.unmount());
   });
 
-  it('an already-confirmed stage stays "Done" even if canConfirm is (stale-)false — confirmed always wins', async () => {
-    const { container, root } = mount(<StageActionBar code="S9.102" stageKey="decide" canConfirm={true} />);
+  it('an already-done action stays "Done" even if it would now be ineligible — done always wins', async () => {
+    const eligibleFixture = { data: { blocked: false, canApprove: true } };
+    const { container, root } = mount(<StageActionBar code="S9.102" stageKey="decide" actions={[guardrailAction()]} fixture={eligibleFixture} />);
     act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
     const [, confirmButton] = confirmDialogButtons();
     act(() => confirmButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
     await flush();
     act(() => root.unmount());
 
-    const { container: container2, root: root2 } = mount(<StageActionBar code="S9.102" stageKey="decide" canConfirm={false} blockedReason="stale" />);
+    const blockedFixture = { data: { blocked: true } };
+    const { container: container2, root: root2 } = mount(<StageActionBar code="S9.102" stageKey="decide" actions={[guardrailAction()]} fixture={blockedFixture} />);
     expect(container2.querySelector('button').textContent).toBe('Done');
     expect(container2.querySelector('[role="alert"]')).toBeNull();
     act(() => root2.unmount());
+  });
+});
+
+describe('StageActionBar — reason requirement', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  function actionWithReason() {
+    return { id: 'decline', label: 'Decline', kind: 'destructive', confirm: { required: true }, reason: { required: true, label: 'Reason', minLength: 10 } };
+  }
+
+  it('Confirm stays disabled until the reason meets the minimum length', () => {
+    const { container, root } = mount(<StageActionBar code="S9.200" stageKey="decide" actions={[actionWithReason()]} fixture={{ data: {} }} />);
+    act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+
+    const [, confirmButton] = confirmDialogButtons();
+    expect(confirmButton.disabled).toBe(true);
+
+    const textarea = document.body.querySelector('textarea');
+    act(() => {
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+      setter.call(textarea, 'short');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    expect(confirmDialogButtons()[1].disabled).toBe(true); // still too short
+
+    act(() => {
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+      setter.call(textarea, 'a genuinely long enough reason');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    expect(confirmDialogButtons()[1].disabled).toBe(false);
+    act(() => root.unmount());
+  });
+
+  it('runs with the typed reason once valid', async () => {
+    const mutations = await import('@/services/actionStoriesMutations');
+    const spy = vi.spyOn(mutations, 'dispatchAction');
+    const { container, root } = mount(<StageActionBar code="S9.201" stageKey="decide" actions={[actionWithReason()]} fixture={{ data: {} }} />);
+    act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+
+    const textarea = document.body.querySelector('textarea');
+    act(() => {
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+      setter.call(textarea, 'a genuinely long enough reason');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    act(() => confirmDialogButtons()[1].dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    await flush();
+
+    expect(spy).toHaveBeenCalledWith(expect.objectContaining({ reason: 'a genuinely long enough reason' }));
+    spy.mockRestore();
+    act(() => root.unmount());
+  });
+
+  it('an optional reason (required: false) never blocks Confirm', () => {
+    const actions = [{ id: 'dismiss', label: 'Dismiss', confirm: { required: true }, reason: { required: false } }];
+    const { container, root } = mount(<StageActionBar code="S9.202" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
+    act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    expect(confirmDialogButtons()[1].disabled).toBe(false);
+    act(() => root.unmount());
+  });
+});
+
+describe('StageActionBar — concurrency and unknown actions', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  it('while one action is running, its siblings disable too (never two consequential actions at once)', async () => {
+    const actions = [
+      { id: 'approve', label: 'Approve' },
+      { id: 'decline', label: 'Decline' },
+    ];
+    const { container, root } = mount(<StageActionBar code="S9.300" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
+    const [approveButton, declineButton] = buttonsIn(container);
+    act(() => approveButton.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+
+    expect(declineButton.disabled).toBe(true);
+    await flush();
+    expect(declineButton.disabled).toBe(false); // free again once Approve settled
+    act(() => root.unmount());
+  });
+
+  it('an unrecognized backend action type never crashes and never silently becomes a different action — it dispatches its own declared id/label as-is', async () => {
+    const actions = [{ id: 'escalate', label: 'Escalate', action: 'some_future_backend_action' }];
+    const { container, root } = mount(<StageActionBar code="S9.301" stageKey="decide" actions={actions} fixture={{ data: {} }} />);
+    act(() => container.querySelector('button').dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    await flush();
+    expect(container.querySelector('button').textContent).toBe('Done');
+    act(() => root.unmount());
   });
 });

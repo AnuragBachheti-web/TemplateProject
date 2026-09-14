@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { resolveBinding } from '@/features/action-stories/manifests/resolveBinding';
+import { evaluateCondition } from '@/features/action-stories/manifests/actionCondition';
 import { validateBlockData } from '@/features/action-stories/manifests/blockTypes';
 import { BLOCK_REGISTRY } from '@/features/action-stories/blocks';
 import { humanizeSlotName } from '@/features/action-stories/blocks/humanizeSlotName';
@@ -95,7 +96,16 @@ function computeCompactSlots({ main, rail }) {
  * the reference corpus (S9.11/S9.2/S9.12's own Decide-stage controls), so dragging one now actually
  * recomputes its real dependent blocks.
  *
- * Every manifest block renders here, in place — including a `role: "hero"` block (see
+ * Conditional rendering: a block whose manifest entry declares a `when` condition (validateManifest.js's
+ * `blocks[].when`, the same small `{path,op,value}`/`{all,any}` predicate language actions use —
+ * see manifests/actionCondition.js) is filtered out BEFORE this component's own pipeline (bind ->
+ * validate -> registry -> layout) ever sees it, the moment `when` evaluates false against this
+ * stage's real fixture. This is a true omission, not a placeholder/empty-state — a block that isn't
+ * currently relevant to this data doesn't occupy a slot, doesn't get a section/row assigned to it,
+ * and never reaches composeSections at all. A block with no `when` behaves exactly as it always
+ * has — always included — so this is purely additive over every existing manifest.
+ *
+ * Every remaining manifest block renders here, in place — including a `role: "hero"` block (see
  * layout/heroSlot.js's HERO_SLOT_NAMES, and classifyBlocks.js's `planSections`), which is no longer
  * plucked out of the body and duplicated into the page header as a stand-in subtitle. That old
  * mechanism conflated two different problems — "this stage's own headline deserves prominent
@@ -120,8 +130,15 @@ export default function StageRenderer({ manifest, fixture }) {
     }
   }
 
-  // Pass 1 — resolve + validate every block; no JSX yet, just enough metadata for composeSections.
-  const resolvedBlocks = manifest.blocks.map((block) => {
+  // Conditional rendering: a block whose `when` evaluates false against this stage's real fixture
+  // never enters the pipeline below at all — no binding, no validation, no layout slot, no
+  // placeholder. Runs once, ahead of everything else, precisely because "should this block exist on
+  // this screen" is a different question from "is the data this block got valid" (the concern pass
+  // 1 below actually owns).
+  const visibleBlocks = manifest.blocks.filter((block) => block.when === undefined || evaluateCondition(block.when, fixture));
+
+  // Pass 1 — resolve + validate every visible block; no JSX yet, just enough metadata for composeSections.
+  const resolvedBlocks = visibleBlocks.map((block) => {
     const rawResolved = resolveBinding(block.binding, fixture);
     const override = overrides[rawKeyOf(block.binding)];
     let value = override !== undefined ? override : rawResolved;

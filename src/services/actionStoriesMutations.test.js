@@ -17,27 +17,33 @@ if (typeof window !== 'undefined' && !window.localStorage) {
   });
 }
 
-const { confirmStageMutation, readConfirmedStages, clearConfirmedStage } = await import('./actionStoriesMutations.js');
+const { dispatchAction, readCompletedActions, clearCompletedAction } = await import('./actionStoriesMutations.js');
 
-describe('confirmStageMutation — real persistence (regression: refresh used to revert every stage)', () => {
+describe('dispatchAction — generic mutation lifecycle, real persistence, keyed by actionId', () => {
   beforeEach(() => {
     window.localStorage.clear();
   });
 
-  it('persists a confirmation that survives being re-read (simulating a refresh)', async () => {
-    expect(readConfirmedStages()['S9.1/decide']).toBeUndefined();
-    await confirmStageMutation('S9.1', 'decide');
-    expect(readConfirmedStages()['S9.1/decide']).toBeTruthy();
+  it('persists completion keyed by code/stageKey/actionId, surviving being re-read (simulating a refresh)', async () => {
+    expect(readCompletedActions()['S9.1/decide/approve']).toBeUndefined();
+    await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'approve', action: 'confirm' });
+    expect(readCompletedActions()['S9.1/decide/approve']).toBeTruthy();
   });
 
-  it('resolves with a real ISO confirmedAt timestamp', async () => {
-    const result = await confirmStageMutation('S9.1', 'decide');
-    expect(result.confirmed).toBe(true);
-    expect(() => new Date(result.confirmedAt).toISOString()).not.toThrow();
+  it('resolves with a real ISO completedAt timestamp and echoes the actionId', async () => {
+    const result = await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'approve' });
+    expect(result.success).toBe(true);
+    expect(result.actionId).toBe('approve');
+    expect(() => new Date(result.completedAt).toISOString()).not.toThrow();
+  });
+
+  it('carries an optional reason through to the result', async () => {
+    const result = await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'decline', reason: 'Budget exceeded' });
+    expect(result.reason).toBe('Budget exceeded');
   });
 
   it('rejects with an ActionStoriesError, not a bare Error, when required args are missing', async () => {
-    await expect(confirmStageMutation(null, 'decide')).rejects.toMatchObject({
+    await expect(dispatchAction({ stageKey: 'decide', actionId: 'approve' })).rejects.toMatchObject({
       code: ERROR_CODES.CLIENT_ERROR,
       retryable: false,
     });
@@ -45,31 +51,44 @@ describe('confirmStageMutation — real persistence (regression: refresh used to
 
   it('rejects with ABORTED and does not persist anything when cancelled before completing', async () => {
     const controller = new AbortController();
-    const promise = confirmStageMutation('S9.1', 'decide', { signal: controller.signal });
+    const promise = dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'approve', signal: controller.signal });
     controller.abort();
     await expect(promise).rejects.toMatchObject({ code: ERROR_CODES.ABORTED });
-    expect(readConfirmedStages()['S9.1/decide']).toBeUndefined();
+    expect(readCompletedActions()['S9.1/decide/approve']).toBeUndefined();
   });
 
-  it('clearConfirmedStage removes a persisted confirmation', async () => {
-    await confirmStageMutation('S9.1', 'decide');
-    expect(readConfirmedStages()['S9.1/decide']).toBeTruthy();
-    clearConfirmedStage('S9.1', 'decide');
-    expect(readConfirmedStages()['S9.1/decide']).toBeUndefined();
+  it('clearCompletedAction removes a persisted completion', async () => {
+    await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'approve' });
+    expect(readCompletedActions()['S9.1/decide/approve']).toBeTruthy();
+    clearCompletedAction('S9.1', 'decide', 'approve');
+    expect(readCompletedActions()['S9.1/decide/approve']).toBeUndefined();
   });
 
-  it('keeps confirmations for different stages independent', async () => {
-    await confirmStageMutation('S9.1', 'decide');
-    await confirmStageMutation('S9.2', 'execute');
-    const all = readConfirmedStages();
-    expect(all['S9.1/decide']).toBeTruthy();
-    expect(all['S9.2/execute']).toBeTruthy();
-    expect(all['S9.1/execute']).toBeUndefined();
+  it('keeps different actions on the same stage fully independent (multi-action support)', async () => {
+    await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'approve' });
+    await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'decline' });
+    const all = readCompletedActions();
+    expect(all['S9.1/decide/approve']).toBeTruthy();
+    expect(all['S9.1/decide/decline']).toBeTruthy();
   });
 
-  it('readConfirmedStages degrades to empty (not a throw) for malformed stored JSON', () => {
-    window.localStorage.setItem('rf-action-stories-confirmed-stages', 'not valid json{{{');
-    expect(() => readConfirmedStages()).not.toThrow();
-    expect(readConfirmedStages()).toEqual({});
+  it('keeps completions for different stages/workflows independent', async () => {
+    await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'approve' });
+    await dispatchAction({ code: 'S9.2', stageKey: 'execute', actionId: 'approve' });
+    const all = readCompletedActions();
+    expect(all['S9.1/decide/approve']).toBeTruthy();
+    expect(all['S9.2/execute/approve']).toBeTruthy();
+    expect(all['S9.1/execute/approve']).toBeUndefined();
+  });
+
+  it('readCompletedActions degrades to empty (not a throw) for malformed stored JSON', () => {
+    window.localStorage.setItem('rf-action-stories-completed-actions', 'not valid json{{{');
+    expect(() => readCompletedActions()).not.toThrow();
+    expect(readCompletedActions()).toEqual({});
+  });
+
+  it('an unrecognized backend "action" type still runs (via the generic default handler), never throws "unsupported"', async () => {
+    const result = await dispatchAction({ code: 'S9.1', stageKey: 'decide', actionId: 'escalate', action: 'some_future_backend_action' });
+    expect(result.success).toBe(true);
   });
 });

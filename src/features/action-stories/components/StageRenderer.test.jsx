@@ -124,3 +124,44 @@ describe('StageRenderer — unknown/invalid blocks render a visible placeholder,
     expect(container.textContent.toLowerCase()).toContain('resolved to nothing');
   });
 });
+
+describe('StageRenderer — conditional rendering (blocks[].when)', () => {
+  it('omits a block entirely — not even a placeholder — when its "when" evaluates false', () => {
+    const m = manifest([
+      { slotName: 'hasEscalations', blockType: 'flag', binding: 'data.hasEscalations', when: { path: 'data.hasEscalations', op: 'eq', value: true } },
+      { slotName: 'other', blockType: 'text', binding: 'data.other' },
+    ]);
+    const container = mount(<StageRenderer manifest={m} fixture={{ data: { hasEscalations: false, other: 'always here' } }} />);
+    expect(container.textContent).not.toContain('Has Escalations');
+    expect(container.textContent).not.toContain('No'); // FlagBlock's own "No" pill never rendered
+    expect(container.textContent).toContain('always here');
+  });
+
+  it('renders the same block normally once its "when" evaluates true, with the exact same manifest', () => {
+    const m = manifest([{ slotName: 'hasEscalations', blockType: 'flag', binding: 'data.hasEscalations', when: { path: 'data.hasEscalations', op: 'eq', value: true } }]);
+    const container = mount(<StageRenderer manifest={m} fixture={{ data: { hasEscalations: true } }} />);
+    expect(container.textContent).toContain('Has Escalations');
+    expect(container.textContent).toContain('Yes');
+  });
+
+  it('a block with no "when" at all always renders — fully backward compatible', () => {
+    const m = manifest([{ slotName: 'plain', blockType: 'text', binding: 'data.plain' }]);
+    const container = mount(<StageRenderer manifest={m} fixture={{ data: { plain: 'hello' } }} />);
+    expect(container.textContent).toContain('hello');
+  });
+
+  it('an omitted block never occupies a layout slot (composition reflows around it, no empty gap)', () => {
+    const m = manifest([
+      { slotName: 'gone', blockType: 'text', binding: 'data.gone', when: { path: 'data.flag', op: 'eq', value: true } },
+      { slotName: 'stays', blockType: 'text', binding: 'data.stays' },
+    ]);
+    const container = mount(<StageRenderer manifest={m} fixture={{ data: { flag: false, gone: 'should never appear', stays: 'visible' } }} />);
+    expect(container.textContent).not.toContain('should never appear');
+    expect(container.textContent).toContain('visible');
+  });
+
+  it('never throws on a malformed/unrecognized "when" — fails safe (block hidden), not a crash', () => {
+    const m = manifest([{ slotName: 'weird', blockType: 'text', binding: 'data.weird', when: { path: 'data.x', op: 'not_a_real_op' } }]);
+    expect(() => mount(<StageRenderer manifest={m} fixture={{ data: { weird: 'text', x: 1 } }} />)).not.toThrow();
+  });
+});

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { actionStoriesIndexPath } from '@/constants/actionStoriesRoutes';
 import { getWorkflowIndex, getStageData } from '@/services/actionStoriesService';
-import { resolveStageActionEligibility } from '@/features/action-stories/components/stageActionEligibility';
 import StepTracker from '@/features/action-stories/components/StepTracker';
 import StageRenderer from '@/features/action-stories/components/StageRenderer';
 import StageActionBar from '@/features/action-stories/components/StageActionBar';
@@ -47,14 +46,6 @@ function StagePageContent({ code, stageKey, onRetry }) {
 
   const { workflow, manifest, fixture } = state;
   const stages = workflow?.stages || [stageKey];
-
-  // The one place that decides whether this stage's real action is actually allowed to run right
-  // now, and what to call it — see stageActionEligibility.js's own doc comment. Replaces this
-  // page's previous inline `guardrail_cta_label`-only lookup, which read the button's LABEL but
-  // never its `guardrail_blocked`/`guardrail_can_approve` siblings — the exact gap that let a
-  // proposal whose own data says it's blocked still show a fully clickable Approve button.
-  const actionEligibility = resolveStageActionEligibility(manifest, fixture);
-
   const stageLabel = STAGE_LABELS[stageKey] || stageKey;
 
   // The Action Story INSTANCE headline — a real, extracted field (see extraction/parseMockup.js's
@@ -113,13 +104,7 @@ function StagePageContent({ code, stageKey, onRetry }) {
         <StageRenderer manifest={manifest} fixture={fixture} />
       </div>
 
-      <StageActionBar
-        code={code}
-        stageKey={stageKey}
-        ctaLabel={actionEligibility.ctaLabel}
-        canConfirm={actionEligibility.canConfirm}
-        blockedReason={actionEligibility.blockedReason}
-      />
+      <StageActionBar code={code} stageKey={stageKey} actions={manifest.actions} fixture={fixture} />
     </div>
   );
 }

@@ -20,77 +20,91 @@ function freshStore() {
   return import('./useActionStoriesStore.js');
 }
 
-describe('useActionStoriesStore — real mutation lifecycle (regression: confirmStage used to be a synchronous local set())', () => {
-  it('goes through pending -> confirmed, not an instant synchronous flip', async () => {
+describe('useActionStoriesStore — generic action lifecycle, keyed by actionId', () => {
+  it('goes through pending -> done, not an instant synchronous flip', async () => {
     const { useActionStoriesStore } = await freshStore();
     const store = useActionStoriesStore;
 
-    expect(store.getState().isStageConfirmed('S9.1', 'decide')).toBe(false);
-    const promise = store.getState().confirmStage('S9.1', 'decide');
+    expect(store.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(false);
+    const promise = store.getState().runAction('S9.1', 'decide', 'approve', { action: 'confirm' });
 
-    // Immediately after calling, before the mutation resolves: pending, not yet confirmed.
-    expect(store.getState().isStagePending('S9.1', 'decide')).toBe(true);
-    expect(store.getState().isStageConfirmed('S9.1', 'decide')).toBe(false);
+    // Immediately after calling, before the mutation resolves: pending, not yet done.
+    expect(store.getState().isActionPending('S9.1', 'decide', 'approve')).toBe(true);
+    expect(store.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(false);
 
     await promise;
 
-    expect(store.getState().isStagePending('S9.1', 'decide')).toBe(false);
-    expect(store.getState().isStageConfirmed('S9.1', 'decide')).toBe(true);
+    expect(store.getState().isActionPending('S9.1', 'decide', 'approve')).toBe(false);
+    expect(store.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(true);
   });
 
-  it('duplicate-click protection: calling confirmStage again while pending does not start a second mutation', async () => {
+  it('duplicate-click protection: calling runAction again while pending does not start a second mutation', async () => {
     const { useActionStoriesStore } = await freshStore();
     const store = useActionStoriesStore;
 
-    const first = store.getState().confirmStage('S9.1', 'decide');
-    const second = store.getState().confirmStage('S9.1', 'decide'); // should be a no-op
+    const first = store.getState().runAction('S9.1', 'decide', 'approve');
+    const second = store.getState().runAction('S9.1', 'decide', 'approve'); // should be a no-op
     await Promise.all([first, second]);
 
-    expect(store.getState().isStageConfirmed('S9.1', 'decide')).toBe(true);
-    // Only one confirmedAt timestamp exists — no crash, no double-write corruption.
-    expect(typeof store.getState().confirmedStages['S9.1/decide']).toBe('string');
+    expect(store.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(true);
+    expect(typeof store.getState().completedActions['S9.1/decide/approve']).toBe('string');
   });
 
-  it('calling confirmStage on an already-confirmed stage is a no-op', async () => {
+  it('calling runAction on an already-done action is a no-op', async () => {
     const { useActionStoriesStore } = await freshStore();
     const store = useActionStoriesStore;
-    await store.getState().confirmStage('S9.1', 'decide');
-    const confirmedAt = store.getState().confirmedStages['S9.1/decide'];
-    await store.getState().confirmStage('S9.1', 'decide');
-    expect(store.getState().confirmedStages['S9.1/decide']).toBe(confirmedAt); // unchanged
+    await store.getState().runAction('S9.1', 'decide', 'approve');
+    const completedAt = store.getState().completedActions['S9.1/decide/approve'];
+    await store.getState().runAction('S9.1', 'decide', 'approve');
+    expect(store.getState().completedActions['S9.1/decide/approve']).toBe(completedAt); // unchanged
+  });
+
+  it('two different actions on the SAME stage run fully independently (multi-action support)', async () => {
+    const { useActionStoriesStore } = await freshStore();
+    const store = useActionStoriesStore;
+
+    const approve = store.getState().runAction('S9.1', 'decide', 'approve');
+    const decline = store.getState().runAction('S9.1', 'decide', 'decline');
+    // Both pending simultaneously — one action being in flight never blocks a sibling from starting.
+    expect(store.getState().isActionPending('S9.1', 'decide', 'approve')).toBe(true);
+    expect(store.getState().isActionPending('S9.1', 'decide', 'decline')).toBe(true);
+    await Promise.all([approve, decline]);
+
+    expect(store.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(true);
+    expect(store.getState().isActionDone('S9.1', 'decide', 'decline')).toBe(true);
   });
 
   it('records a retryable error and clears pending when the mutation fails', async () => {
     const { useActionStoriesStore } = await freshStore();
     const mutations = await import('@/services/actionStoriesMutations');
-    vi.spyOn(mutations, 'confirmStageMutation').mockRejectedValueOnce(
+    vi.spyOn(mutations, 'dispatchAction').mockRejectedValueOnce(
       Object.assign(new Error('simulated failure'), { code: 'SERVER_ERROR', retryable: true, userMessage: 'Something went wrong.' }),
     );
 
     const store = useActionStoriesStore;
-    await store.getState().confirmStage('S9.1', 'decide');
+    await store.getState().runAction('S9.1', 'decide', 'approve');
 
-    expect(store.getState().isStagePending('S9.1', 'decide')).toBe(false);
-    expect(store.getState().isStageConfirmed('S9.1', 'decide')).toBe(false);
-    expect(store.getState().getStageError('S9.1', 'decide')).toBeTruthy();
+    expect(store.getState().isActionPending('S9.1', 'decide', 'approve')).toBe(false);
+    expect(store.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(false);
+    expect(store.getState().getActionError('S9.1', 'decide', 'approve')).toBeTruthy();
   });
 
-  it('hydrates confirmedStages from localStorage at creation (regression: refresh reverted every stage)', async () => {
+  it('hydrates completedActions from localStorage at creation (a refresh keeps a completed action completed)', async () => {
     const { useActionStoriesStore: store1 } = await freshStore();
-    await store1.getState().confirmStage('S9.1', 'decide');
+    await store1.getState().runAction('S9.1', 'decide', 'approve');
 
     vi.resetModules();
     const { useActionStoriesStore: store2 } = await import('./useActionStoriesStore.js');
-    expect(store2.getState().isStageConfirmed('S9.1', 'decide')).toBe(true);
+    expect(store2.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(true);
   });
 
-  it('resetStage clears both in-memory and persisted state', async () => {
+  it('resetAction clears both in-memory and persisted state', async () => {
     const { useActionStoriesStore } = await freshStore();
-    await useActionStoriesStore.getState().confirmStage('S9.1', 'decide');
-    useActionStoriesStore.getState().resetStage('S9.1', 'decide');
-    expect(useActionStoriesStore.getState().isStageConfirmed('S9.1', 'decide')).toBe(false);
+    await useActionStoriesStore.getState().runAction('S9.1', 'decide', 'approve');
+    useActionStoriesStore.getState().resetAction('S9.1', 'decide', 'approve');
+    expect(useActionStoriesStore.getState().isActionDone('S9.1', 'decide', 'approve')).toBe(false);
 
-    const { readConfirmedStages } = await import('@/services/actionStoriesMutations');
-    expect(readConfirmedStages()['S9.1/decide']).toBeUndefined();
+    const { readCompletedActions } = await import('@/services/actionStoriesMutations');
+    expect(readCompletedActions()['S9.1/decide/approve']).toBeUndefined();
   });
 });

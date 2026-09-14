@@ -70,6 +70,24 @@ describe('ConfirmDialog — gates a real action behind an explicit "are you sure
     act(() => root.unmount());
   });
 
+  it('renders arbitrary extra content via children (e.g. a reason field) between the description and the buttons', () => {
+    const { root } = mount(
+      <ConfirmDialog open title="Decline?" description="Say why." onConfirm={() => {}} onCancel={() => {}}>
+        <textarea data-testid="reason" />
+      </ConfirmDialog>,
+    );
+    expect(document.body.querySelector('[data-testid="reason"]')).toBeTruthy();
+    act(() => root.unmount());
+  });
+
+  it('confirmDisabled disables only Confirm, never Cancel', () => {
+    const { root } = mount(<ConfirmDialog open title="Decline?" onConfirm={() => {}} onCancel={() => {}} confirmDisabled />);
+    const [cancelButton, confirmButton] = dialogButtons();
+    expect(cancelButton.disabled).toBe(false);
+    expect(confirmButton.disabled).toBe(true);
+    act(() => root.unmount());
+  });
+
   it('renders nothing when closed', () => {
     const { container } = mount(<ConfirmDialog open={false} title="Approve?" onConfirm={() => {}} onCancel={() => {}} />);
     expect(container.textContent).toBe('');

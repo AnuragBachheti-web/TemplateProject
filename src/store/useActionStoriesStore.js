@@ -1,74 +1,74 @@
 import { create } from 'zustand';
-import { confirmStageMutation, readConfirmedStages, clearConfirmedStage } from '@/services/actionStoriesMutations';
+import { dispatchAction, readCompletedActions, clearCompletedAction } from '@/services/actionStoriesMutations';
 
-const stageId = (code, stageKey) => `${code}/${stageKey}`;
+const actionKey = (code, stageKey, actionId) => `${code}/${stageKey}/${actionId}`;
 
 /**
- * UI + mutation state for Action Stories.
+ * UI + mutation state for Action Stories' generic, template-driven action system.
  *
  * Which workflow/stage is showing is NOT here — it lives in the URL (see
  * @/constants/actionStoriesRoutes) and StagePage reads it straight from useParams(), so it can
  * never drift from what the address bar says and back/forward keeps working for free.
  *
- * The Confirm/Approve/Start button on a decide/execute stage now performs a real mutation
- * lifecycle — click -> loading -> success/failure -> persisted, server-truth-once-a-backend-
- * exists state (see services/actionStoriesMutations.js's own doc comment for exactly what "real"
- * means here today vs. once a live endpoint exists). `confirmedStages` is hydrated from
- * localStorage at store creation, so a page refresh shows the correct confirmed/unconfirmed state
- * instead of reverting every stage to unconfirmed (AUDIT_REPORT.md §13: "Refresh preserves state?
- * No.").
+ * Keyed by `${code}/${stageKey}/${actionId}`, not just `${code}/${stageKey}` — a stage can expose
+ * more than one action (an "approve" and a "decline" side by side, say; see StageActionBar.jsx),
+ * each with its own independent done/pending/error lifecycle, all going through the one generic
+ * `runAction`. Nothing here knows what any given `actionId` MEANS — see services/
+ * actionStoriesMutations.js for exactly what "real" means for the mutation itself today (no live
+ * backend exists yet; genuinely persisted, genuinely async, genuinely failable, ready to point at a
+ * real endpoint later).
  */
 export const useActionStoriesStore = create((set, get) => ({
-  confirmedStages: readConfirmedStages(), // `${code}/${stageKey}` -> ISO confirmedAt timestamp
-  pendingStages: {}, // `${code}/${stageKey}` -> true while a confirm mutation is in flight
-  stageErrors: {}, // `${code}/${stageKey}` -> the ActionStoriesError from the last failed attempt
+  completedActions: readCompletedActions(), // key -> ISO completedAt timestamp
+  pendingActions: {}, // key -> true while a run is in flight
+  actionErrors: {}, // key -> the ActionStoriesError from the last failed attempt
 
-  isStageConfirmed: (code, stageKey) => Boolean(get().confirmedStages[stageId(code, stageKey)]),
-  isStagePending: (code, stageKey) => Boolean(get().pendingStages[stageId(code, stageKey)]),
-  getStageError: (code, stageKey) => get().stageErrors[stageId(code, stageKey)] ?? null,
+  isActionDone: (code, stageKey, actionId) => Boolean(get().completedActions[actionKey(code, stageKey, actionId)]),
+  isActionPending: (code, stageKey, actionId) => Boolean(get().pendingActions[actionKey(code, stageKey, actionId)]),
+  getActionError: (code, stageKey, actionId) => get().actionErrors[actionKey(code, stageKey, actionId)] ?? null,
 
   /**
-   * Real async mutation, not a local `set()`: eligibility (is this stage already confirmed or
-   * already in flight — duplicate-click protection) is checked before anything happens, then a
-   * genuine loading state is entered for the duration of confirmStageMutation, and the result
-   * (success -> persisted confirmation, failure -> a retryable error) is the only thing that
-   * updates `confirmedStages`. Calling this again after a failure is how retry works — no
-   * separate "retry" action needed, since this function is already idempotent-safe to re-invoke.
+   * Real async mutation, generic over `actionId` (and the action's own declared backend `action`
+   * type — see actionEligibility.js's `actionType`): duplicate-click / concurrent-run protection
+   * for THIS SPECIFIC action is checked before anything happens, then a genuine loading state is
+   * entered for the duration of dispatchAction(), and the result (success -> persisted completion,
+   * failure -> a retryable error) is the only thing that updates `completedActions`. Calling this
+   * again after a failure is how retry works — no separate "retry" action needed.
    */
-  confirmStage: async (code, stageKey) => {
-    const id = stageId(code, stageKey);
-    if (get().isStageConfirmed(code, stageKey) || get().isStagePending(code, stageKey)) return;
+  runAction: async (code, stageKey, actionId, { action, reason } = {}) => {
+    const id = actionKey(code, stageKey, actionId);
+    if (get().isActionDone(code, stageKey, actionId) || get().isActionPending(code, stageKey, actionId)) return;
 
     set((state) => ({
-      pendingStages: { ...state.pendingStages, [id]: true },
-      stageErrors: { ...state.stageErrors, [id]: undefined },
+      pendingActions: { ...state.pendingActions, [id]: true },
+      actionErrors: { ...state.actionErrors, [id]: undefined },
     }));
 
     try {
-      const result = await confirmStageMutation(code, stageKey);
+      const result = await dispatchAction({ code, stageKey, actionId, action, reason });
       set((state) => {
-        const nextPending = { ...state.pendingStages };
+        const nextPending = { ...state.pendingActions };
         delete nextPending[id];
         return {
-          confirmedStages: { ...state.confirmedStages, [id]: result.confirmedAt },
-          pendingStages: nextPending,
+          completedActions: { ...state.completedActions, [id]: result.completedAt },
+          pendingActions: nextPending,
         };
       });
     } catch (error) {
       set((state) => {
-        const nextPending = { ...state.pendingStages };
+        const nextPending = { ...state.pendingActions };
         delete nextPending[id];
-        return { pendingStages: nextPending, stageErrors: { ...state.stageErrors, [id]: error } };
+        return { pendingActions: nextPending, actionErrors: { ...state.actionErrors, [id]: error } };
       });
     }
   },
 
-  resetStage: (code, stageKey) => {
-    clearConfirmedStage(code, stageKey); // keep localStorage in sync — otherwise a refresh would silently restore it
+  resetAction: (code, stageKey, actionId) => {
+    clearCompletedAction(code, stageKey, actionId); // keep localStorage in sync — otherwise a refresh would silently restore it
     set((state) => {
-      const next = { ...state.confirmedStages };
-      delete next[stageId(code, stageKey)];
-      return { confirmedStages: next };
+      const next = { ...state.completedActions };
+      delete next[actionKey(code, stageKey, actionId)];
+      return { completedActions: next };
     });
   },
 }));

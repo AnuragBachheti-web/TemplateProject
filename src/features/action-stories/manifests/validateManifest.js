@@ -6,17 +6,30 @@
 // per stage — call validateManifest once per array entry.
 //
 // `headline` (Action Story instance identity, distinct from `name` — see generateManifests.js and
-// FORENSIC_AUDIT_S9.1.md §6/§17), `sections[].region`, and each block's `role`/`region`/`layout`
-// are all optional and purely additive: a manifest predating this schema (no `headline`, no
+// FORENSIC_AUDIT_S9.1.md §6/§17), `sections[].region`, and each block's `role`/`region`/`layout`/
+// `when` are all optional and purely additive: a manifest predating this schema (no `headline`, no
 // `region` anywhere) is still fully valid. When present, they're type-checked like everything
 // else here — loosely, never requiring a specific vocabulary of `role` values, so a future
 // semantic role doesn't need a validator change to be legal.
+//
+// `actions[]` (also optional/additive) is the template-driven action contract: what business
+// action(s) this stage exposes, independent of any particular blockType or slotName vocabulary —
+// see components/actionEligibility.js for how one is resolved against real data at render time.
+//
+// A block's own `when` (optional) is the CONDITIONAL RENDERING primitive: the same small, safe
+// `when` predicate language actions use (manifests/actionCondition.js — evaluated by
+// components/StageRenderer.jsx before a block ever reaches binding/validation/layout), now
+// available on any block too — a block whose `when` evaluates false is entirely OMITTED from this
+// stage's render, not shown as an empty/placeholder card. Absent `when` means "always render",
+// identical to every manifest written before this field existed.
 
 import { BLOCK_TYPES } from './blockTypes.js'
+import { validateCondition } from './actionCondition.js'
 
 const STAGE_KEYS = new Set(['reason', 'analyze', 'decide', 'execute', 'live'])
 const KNOWN_BLOCK_TYPES = new Set(BLOCK_TYPES)
 const REGIONS = new Set(['main', 'rail'])
+const ACTION_KINDS = new Set(['primary', 'secondary', 'destructive'])
 const MIN_SPAN = 1
 const MAX_SPAN = 12
 
@@ -83,6 +96,9 @@ export function validateManifest(manifest) {
     if (block.role !== undefined && !isNonEmptyString(block.role)) {
       problems.push(`${where}: "role" must be a non-empty string when present`)
     }
+    if (block.when !== undefined) {
+      problems.push(...validateCondition(block.when, `${where}.when`))
+    }
     if (block.dependencies !== undefined) {
       if (!Array.isArray(block.dependencies) || !block.dependencies.every(isNonEmptyString)) {
         problems.push(`${where}: "dependencies" must be an array of non-empty strings when present`)
@@ -138,6 +154,84 @@ export function validateManifest(manifest) {
         }
         if (section.region !== undefined && !REGIONS.has(section.region)) {
           problems.push(`${where}: "region" must be one of: ${[...REGIONS].join(', ')}`)
+        }
+      })
+    }
+  }
+
+  if (manifest.actions !== undefined) {
+    if (!Array.isArray(manifest.actions)) {
+      problems.push(`"actions" must be an array when present, got ${typeof manifest.actions}`)
+    } else {
+      const seenActionIds = new Set()
+      manifest.actions.forEach((action, i) => {
+        const where = `actions[${i}]`
+        if (action === null || typeof action !== 'object' || Array.isArray(action)) {
+          problems.push(`${where}: must be an object`)
+          return
+        }
+
+        if (!isNonEmptyString(action.id)) {
+          problems.push(`${where}: "id" must be a non-empty string`)
+        } else if (seenActionIds.has(action.id)) {
+          problems.push(`${where}: duplicate action id "${action.id}"`)
+        } else {
+          seenActionIds.add(action.id)
+        }
+
+        if (!isNonEmptyString(action.label)) {
+          problems.push(`${where}: "label" must be a non-empty string`)
+        }
+        if (action.kind !== undefined && !ACTION_KINDS.has(action.kind)) {
+          problems.push(`${where}: "kind" must be one of: ${[...ACTION_KINDS].join(', ')}`)
+        }
+        if (action.action !== undefined && !isNonEmptyString(action.action)) {
+          problems.push(`${where}: "action" must be a non-empty string when present`)
+        }
+        if (action.labelBinding !== undefined && !isNonEmptyString(action.labelBinding)) {
+          problems.push(`${where}: "labelBinding" must be a non-empty string when present`)
+        }
+        if (action.disabledReasonBinding !== undefined && !isNonEmptyString(action.disabledReasonBinding)) {
+          problems.push(`${where}: "disabledReasonBinding" must be a non-empty string when present`)
+        }
+        if (action.loadingLabel !== undefined && !isNonEmptyString(action.loadingLabel)) {
+          problems.push(`${where}: "loadingLabel" must be a non-empty string when present`)
+        }
+
+        if (action.when !== undefined) {
+          problems.push(...validateCondition(action.when, `${where}.when`))
+        }
+
+        if (action.confirm !== undefined) {
+          if (action.confirm === null || typeof action.confirm !== 'object' || Array.isArray(action.confirm)) {
+            problems.push(`${where}: "confirm" must be an object when present`)
+          } else {
+            if (action.confirm.required !== undefined && typeof action.confirm.required !== 'boolean') {
+              problems.push(`${where}.confirm: "required" must be a boolean when present`)
+            }
+            if (action.confirm.title !== undefined && !isNonEmptyString(action.confirm.title)) {
+              problems.push(`${where}.confirm: "title" must be a non-empty string when present`)
+            }
+            if (action.confirm.description !== undefined && typeof action.confirm.description !== 'string') {
+              problems.push(`${where}.confirm: "description" must be a string when present`)
+            }
+          }
+        }
+
+        if (action.reason !== undefined) {
+          if (action.reason === null || typeof action.reason !== 'object' || Array.isArray(action.reason)) {
+            problems.push(`${where}: "reason" must be an object when present`)
+          } else {
+            if (action.reason.required !== undefined && typeof action.reason.required !== 'boolean') {
+              problems.push(`${where}.reason: "required" must be a boolean when present`)
+            }
+            if (action.reason.label !== undefined && !isNonEmptyString(action.reason.label)) {
+              problems.push(`${where}.reason: "label" must be a non-empty string when present`)
+            }
+            if (action.reason.minLength !== undefined && (typeof action.reason.minLength !== 'number' || action.reason.minLength < 0)) {
+              problems.push(`${where}.reason: "minLength" must be a non-negative number when present`)
+            }
+          }
         }
       })
     }

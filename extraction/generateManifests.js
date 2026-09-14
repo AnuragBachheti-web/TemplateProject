@@ -146,14 +146,125 @@ function buildStageManifest(fixture) {
     }
   }
 
+  // Action contract (the generic `actions[]` schema — src/features/action-stories/manifests/
+  // validateManifest.js) for a decide/execute stage: the one real business action this app has
+  // ("confirm" — see components/StageActionBar.jsx), expressed as template DATA now instead of a
+  // hardcoded `stageKey === 'decide' || stageKey === 'execute'` check in a component. Derived from
+  // whichever `guardrail_*` blocks actually survived onto this manifest (most stages have none —
+  // see buildActionsForStage's own doc comment), reusing their own already-resolved `binding` paths
+  // rather than re-deriving raw fixture keys — the exact same values the old, hardcoded
+  // stageActionEligibility.js used to read, now expressed generically via a `when` condition
+  // (manifests/actionCondition.js) any action — not just this one — can use.
+  const actions = buildActionsForStage(stageKey, blocks)
+
+  // Conditional block rendering (`blocks[].when` — validateManifest.js, evaluated at render time by
+  // StageRenderer.jsx) — ONE deliberately narrow, individually-reviewed example, not a blanket
+  // heuristic applied to every boolean flag in the corpus. A 105-fixture scan found over a dozen
+  // `flag` blocks whose slotName reads like a UI-visibility switch (`hasBreakeven`, `ledgerEmpty`,
+  // `editorialEmpty`, `showScope`, `plannerNeeded`, `execNeeded`, ...) — each is a genuine candidate,
+  // but each also deserves its own product review (does "false" really mean "hide", for THIS field,
+  // in THIS workflow?) before being wired the same way; guessing across all of them here would be
+  // exactly the kind of unreviewed heuristic this project's own extraction philosophy avoids
+  // elsewhere (see EXACT_KEY_OVERRIDES/VOCAB_SLOT_NAMES above — real vocabulary is hardcoded by
+  // exact name, one field at a time, never inferred in bulk).
+  //
+  // `hasEscalations` (S10.6/decide) is the one fully reviewed case: today it renders as its own
+  // "Has Escalations — No" card even when (per this exact fixture's own `escalations: []` and
+  // `escalTitle: "0 workstream escalates..."`) there is nothing to report — a wasted slot for a
+  // field whose own name says "only interesting when true". Gating it to only render `when` it's
+  // actually true is real, live, and shipped on this workflow today (hasEscalations is currently
+  // false here, so the card is now genuinely absent — the exact block/fixture pairing this
+  // session's own conditional-rendering audit named as the reference example).
+  applyReviewedBlockConditions(blocks)
+
   // `headline` (the Action Story INSTANCE identity — see extract.js/parseMockup.js) is kept as a
   // field distinct from `name` (the workflow/category identity) all the way through — never
   // folded into it, never overloading one field with two meanings (FORENSIC_AUDIT_S9.1.md §6/§17).
   // Omitted entirely when this fixture never had one (an older/differently-shaped mockup export),
   // same "absent, not fabricated" rule extraction already applies.
   const identity = { code, name, ...(headline ? { headline } : {}), stageKey }
-  const manifest = sections ? { ...identity, sections, blocks } : { ...identity, blocks }
+  const manifest = {
+    ...identity,
+    ...(sections ? { sections } : {}),
+    ...(actions ? { actions } : {}),
+    blocks,
+  }
   return { manifest, collisions, itemLevelHints, selfCheckProblems: skippedForBadShape }
+}
+
+// Stage-key -> this app's one real action's default label, mirroring StageActionBar.jsx's own old
+// `stageKey === 'decide' ? 'Approve' : 'Start'` fallback — kept here now as generation-time DATA
+// instead of runtime component logic.
+const DEFAULT_ACTION_LABEL = { decide: 'Approve', execute: 'Start' }
+
+/** The already-generated block (if any) with this exact slotName, in THIS stage's own manifest. */
+function findBlock(blocks, slotName) {
+  return blocks.find((b) => b.slotName === slotName) || null
+}
+
+/**
+ * Builds this stage's `actions[]` — today, exactly the one real action this app has ("confirm"),
+ * only on a decide/execute stage (matching every prior behavior exactly: StageActionBar.jsx used to
+ * hardcode this same stageKey check). Absent entirely for every other stageKey, and for a
+ * decide/execute stage too if this app ever adds a second stage-shaped action later — this
+ * function, not the runtime, is the one place that decision gets made.
+ *
+ * Eligibility is expressed as a generic `when` condition over the SAME two guardrail fields
+ * stageActionEligibility.js used to hardcode (`guardrail_blocked`/`guardrail_can_approve`), read
+ * through whichever of those blocks actually survived classification onto this manifest — using
+ * `ne` (not `eq`) is what reproduces the exact old "absence of guardrail data is not itself a
+ * block" semantics for free (see manifests/actionCondition.js's own doc comment: `ne` treats a
+ * missing value as satisfying the condition). No `when` at all — not even an empty one — when
+ * neither field survived onto this stage, which is the overwhelming majority (82 of 105 real
+ * decide/execute stages): an action with no `when` is unconditionally enabled, identical to the old
+ * default.
+ */
+function buildActionsForStage(stageKey, blocks) {
+  if (stageKey !== 'decide' && stageKey !== 'execute') return null
+
+  const blockedBlock = findBlock(blocks, 'guardrail_blocked')
+  const canApproveBlock = findBlock(blocks, 'guardrail_can_approve')
+  const reasonBlock = findBlock(blocks, 'guardrail_reason')
+  const ctaBlock = findBlock(blocks, 'guardrail_cta_label')
+
+  const conditions = []
+  if (blockedBlock) conditions.push({ path: blockedBlock.binding, op: 'ne', value: true })
+  if (canApproveBlock) conditions.push({ path: canApproveBlock.binding, op: 'ne', value: false })
+
+  const label = DEFAULT_ACTION_LABEL[stageKey] || 'Confirm'
+  const action = {
+    id: 'confirm',
+    label,
+    kind: 'primary',
+    action: 'confirm',
+    confirm: {
+      required: true,
+      title: `${label} this stage?`,
+      description: `This performs a real action against this stage's ${stageKey === 'execute' ? 'execute' : 'decide'} step and can't be undone from here.`,
+    },
+  }
+  if (conditions.length === 1) action.when = conditions[0]
+  else if (conditions.length > 1) action.when = { all: conditions }
+  if (reasonBlock) action.disabledReasonBinding = reasonBlock.binding
+  if (ctaBlock) action.labelBinding = ctaBlock.binding
+
+  return [action]
+}
+
+// The one individually-reviewed `blocks[].when` example — see this function's own call site above
+// for why this is deliberately a short, explicit, by-exact-slotName list rather than a heuristic.
+// Mutates the matching block in place (adding `.when`) when found; a no-op on every other manifest.
+const REVIEWED_BLOCK_CONDITIONS = [
+  // hasEscalations (S10.6/decide): only worth a card when there's actually something to escalate —
+  // gate it on its own resolved value rather than always showing a "No" pill.
+  { slotName: 'hasEscalations', blockType: 'flag' },
+]
+
+function applyReviewedBlockConditions(blocks) {
+  for (const { slotName, blockType } of REVIEWED_BLOCK_CONDITIONS) {
+    const block = blocks.find((b) => b.slotName === slotName && b.blockType === blockType)
+    if (block) block.when = { path: block.binding, op: 'eq', value: true }
+  }
 }
 
 function main() {

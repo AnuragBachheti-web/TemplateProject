@@ -249,6 +249,20 @@
         "region": "main"
       }
     ],
+    "actions": [
+      {
+        "id": "confirm",
+        "label": "Approve",
+        "kind": "primary",
+        "action": "confirm",
+        "confirm": {
+          "required": true,
+          "title": "Approve this stage?",
+          "description": "This performs a real action against this stage's decide step and can't be undone from here."
+        },
+        "labelBinding": "data.approveLabel"
+      }
+    ],
     "blocks": [
       {
         "slotName": "display_mode",
@@ -391,6 +405,19 @@
         "id": "details",
         "title": "Details",
         "region": "main"
+      }
+    ],
+    "actions": [
+      {
+        "id": "confirm",
+        "label": "Start",
+        "kind": "primary",
+        "action": "confirm",
+        "confirm": {
+          "required": true,
+          "title": "Start this stage?",
+          "description": "This performs a real action against this stage's execute step and can't be undone from here."
+        }
       }
     ],
     "blocks": [
