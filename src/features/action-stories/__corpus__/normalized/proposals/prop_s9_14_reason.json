@@ -1,0 +1,168 @@
+{
+  "proposal_id": "prop_s9_14_reason",
+  "story_code": "S9.14",
+  "stage": "reason",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Monday · 04:00",
+        "what": "Scout ran the weekly 46-query battery across all four surfaces and logged every citation and recommendation."
+      },
+      {
+        "when": "Monday · 04:22",
+        "what": "Hero SKU citation count fell to 11 against competitor A’s 29 — a nine-point share drop in three weeks."
+      },
+      {
+        "when": "Monday · 06:10",
+        "what": "Steward traced four wrong-spec answers to a single stale attribute on the Walmart feed and pinned the card for a decision."
+      }
+    ],
+    "policy": [
+      {
+        "label": "GTIN coverage",
+        "note": "every sellable variant carries a valid GTIN",
+        "floor": "100%",
+        "actual": "94%",
+        "state": "below"
+      },
+      {
+        "label": "Required attribute completeness",
+        "note": "category-required fields populated from the PIM",
+        "floor": "95%",
+        "actual": "78%",
+        "state": "below"
+      },
+      {
+        "label": "Schema coverage on PDPs",
+        "note": "Product, Offer, rating and policy types present",
+        "floor": "100%",
+        "actual": "61%",
+        "state": "below"
+      },
+      {
+        "label": "Feed freshness",
+        "note": "time from PIM change to feed pickup",
+        "floor": "< 6h",
+        "actual": "11h p50",
+        "state": "below"
+      },
+      {
+        "label": "Price + availability accuracy",
+        "note": "what the agent reads vs what the site charges",
+        "floor": "99.5%",
+        "actual": "99.1%",
+        "state": "below"
+      },
+      {
+        "label": "Factual density per PDP",
+        "note": "machine-readable spec attributes per product page",
+        "floor": "18 attrs",
+        "actual": "12 attrs",
+        "state": "below"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Canonical product facts, single source",
+        "detail": "The PIM is the only source of truth. No channel-level attribute overrides — a fix goes in once and regenerates everywhere."
+      },
+      {
+        "label": "Machine-readable policy requirement",
+        "detail": "Returns, shipping and warranty publish as structured data. Human-readable copy is generated from the same record, never written separately."
+      },
+      {
+        "label": "No synthetic specifications",
+        "detail": "Nothing enters the catalogue that was inferred, scraped from a competitor or generated. Missing means missing."
+      },
+      {
+        "label": "Price parity with the storefront",
+        "detail": "The feed price is the site price at read time. A stale price is pulled rather than published."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "SKUs in scope",
+        "value": "1,240"
+      },
+      {
+        "label": "Query battery size",
+        "value": "46 queries"
+      },
+      {
+        "label": "Answer samples this week",
+        "value": "184"
+      },
+      {
+        "label": "PIM sync",
+        "value": "live · 2 min lag"
+      },
+      {
+        "label": "Walmart feed pickup",
+        "value": "9 days stale"
+      }
+    ],
+    "agents": [
+      {
+        "name": "Merchandiser",
+        "role": "Owns catalogue attributes, PDP content and the enrichment queue."
+      },
+      {
+        "name": "Scout",
+        "role": "Runs the query battery and tracks competitor citations per surface."
+      },
+      {
+        "name": "Steward",
+        "role": "Owns feed integrity, schema deploys and the mismatch log."
+      },
+      {
+        "name": "Agentic Readiness Score",
+        "role": "Scores structured data, factual density, policy and accuracy."
+      },
+      {
+        "name": "Answer-Surface Monitor",
+        "role": "Samples answers and diffs them against the canonical record."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

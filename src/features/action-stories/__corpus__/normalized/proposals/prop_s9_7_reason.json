@@ -1,0 +1,125 @@
+{
+  "proposal_id": "prop_s9_7_reason",
+  "story_code": "S9.7",
+  "stage": "reason",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Weekly ads sweep — $4.3K/mo waste identified",
+  "narrative": "Realify will assemble the change slate and wait. No bid, budget or negative keyword reaches a platform without your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "label": "Blended ROAS target",
+        "value": "4.0×",
+        "meta": "running at 3.8× · 30 d"
+      },
+      {
+        "label": "mROAS floor",
+        "value": "1.0×",
+        "meta": "CM per next dollar"
+      },
+      {
+        "label": "Spend envelope",
+        "value": "$52K/mo",
+        "meta": "Amazon share from story 9.4"
+      },
+      {
+        "label": "Waste found",
+        "value": "$4.3K/mo",
+        "meta": "8.3% of the envelope"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Rank defense · 4 head terms",
+        "value": "$8.4K/mo"
+      },
+      {
+        "label": "Launch support · Ridgeline mug",
+        "value": "$3.0K/mo"
+      },
+      {
+        "label": "Brand terms · defensive",
+        "value": "$2.4K/mo"
+      },
+      {
+        "label": "New-SKU seeding · 3 SKUs",
+        "value": "$0.6K/mo"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Search-term reports · 60 days",
+        "meta": "184K rows"
+      },
+      {
+        "label": "Placement and daypart data",
+        "meta": "hourly"
+      },
+      {
+        "label": "Creative performance by asset",
+        "meta": "46 assets"
+      },
+      {
+        "label": "CM after fees and returns",
+        "meta": "per SKU"
+      },
+      {
+        "label": "Cross-channel query overlap",
+        "meta": "Amazon + Google"
+      },
+      {
+        "label": "Cover by SKU",
+        "meta": "synced 06:15"
+      }
+    ],
+    "agents": [
+      {
+        "name": "mROAS Engine"
+      },
+      {
+        "name": "Search-Term Miner"
+      },
+      {
+        "name": "Creative Fatigue Detector"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

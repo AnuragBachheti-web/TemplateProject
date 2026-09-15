@@ -116,7 +116,16 @@ function computeCompactSlots({ main, rail }) {
  * Story's own real, extracted `headline` field (see StagePage.jsx) — never fixture content
  * standing in for it.
  */
-export default function StageRenderer({ manifest, fixture }) {
+/**
+ * `blockProps` (optional) is a `Record<slotName, object>` of EXTRA props merged into that one
+ * block's component. It is the whole mechanism by which a stateful capability a block cannot own
+ * itself — currently only slate row selection, which belongs to the page because the action bar
+ * needs to read it — reaches that block without this file learning anything about what the
+ * capability means. StageRenderer does not know what "selection" is, which slot is a slate, or that
+ * approval exists; it forwards whatever it is handed, keyed by slot name. Absent or `{}` leaves
+ * every render byte-identical to before.
+ */
+export default function StageRenderer({ manifest, fixture, blockProps }) {
   const [sliderPositions, setSliderPositions] = useState({}); // slotName -> current numeric value
   const [overrides, setOverrides] = useState({}); // slotName -> value to show instead of the real one
 
@@ -200,7 +209,13 @@ export default function StageRenderer({ manifest, fixture }) {
 
     nodesBySlot[block.slotName] = (
       <BlockErrorBoundary slotName={block.slotName} blockType={block.blockType}>
-        <Component slotName={block.slotName} data={value} compact={compactSlots.has(block.slotName)} role={block.role} />
+        <Component
+          slotName={block.slotName}
+          data={value}
+          compact={compactSlots.has(block.slotName)}
+          role={block.role}
+          {...(blockProps?.[block.slotName] ?? {})}
+        />
       </BlockErrorBoundary>
     );
   }

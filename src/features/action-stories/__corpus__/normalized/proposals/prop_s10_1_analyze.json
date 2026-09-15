@@ -1,0 +1,210 @@
+{
+  "proposal_id": "prop_s10_1_analyze",
+  "story_code": "S10.1",
+  "stage": "analyze",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "steward",
+  "title": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "Baseline",
+        "value": "$12,480",
+        "note": "trailing 7-day mean CM"
+      },
+      {
+        "label": "Attributed",
+        "value": "−$1,970",
+        "note": "five expected drivers plus one unexpected"
+      },
+      {
+        "label": "Residual",
+        "value": "+$130",
+        "note": "1.0% of the move · target under 5%"
+      },
+      {
+        "label": "Yesterday",
+        "value": "$10,640",
+        "note": "reconciles exactly to settlement"
+      }
+    ],
+    "bridge": [
+      {
+        "key": "baseline",
+        "label": "Baseline",
+        "sublabel": "7-day mean",
+        "value": "$12,480",
+        "anchor": true
+      },
+      {
+        "key": "fba",
+        "label": "FBA fee",
+        "sublabel": "change",
+        "value": "−$2,210",
+        "tag": "unexpected"
+      },
+      {
+        "key": "price",
+        "label": "Price effect",
+        "sublabel": "9.11 slate",
+        "value": "+$610",
+        "tag": "our action"
+      },
+      {
+        "key": "returns",
+        "label": "Returns",
+        "value": "−$240",
+        "tag": "expected"
+      },
+      {
+        "key": "mix",
+        "label": "Mix",
+        "value": "+$185",
+        "tag": "expected"
+      },
+      {
+        "key": "ads",
+        "label": "Ads",
+        "sublabel": "efficiency",
+        "value": "−$315",
+        "tag": "expected"
+      },
+      {
+        "key": "residual",
+        "label": "Residual",
+        "sublabel": "1.0%",
+        "value": "+$130",
+        "tag": "within 5%"
+      },
+      {
+        "key": "end",
+        "label": "Aug 18",
+        "sublabel": "actual",
+        "value": "$10,640"
+      }
+    ],
+    "detail_rows": [
+      {
+        "label": "FBA fee · change",
+        "value": "−$2,210",
+        "tag": "unexpected",
+        "confidence": "evidence: fee schedule diff",
+        "reason": "No Ledger action and no forecast term explains it. Amazon published revised dimensional-weight tiers effective Aug 18."
+      },
+      {
+        "label": "Price effect · 9.11 slate",
+        "value": "+$610",
+        "tag": "our action",
+        "confidence": "evidence: Ledger self-attribution",
+        "reason": "Attributed to our own price slate from the Ledger before any other driver was considered. Twelve SKUs stepped Aug 17."
+      },
+      {
+        "label": "Returns",
+        "value": "−$240",
+        "tag": "expected",
+        "confidence": "evidence: within 1.2σ of trailing",
+        "reason": "Return volume sits 0.4pp above the trailing mean, inside normal daily variation for the apparel-adjacent cohort."
+      },
+      {
+        "label": "Mix",
+        "value": "+$185",
+        "tag": "expected",
+        "confidence": "evidence: composition shift only",
+        "reason": "The basket tilted toward higher-CM cookware. Volume is flat; only what sold changed."
+      },
+      {
+        "label": "Ads · efficiency",
+        "value": "−$315",
+        "tag": "expected",
+        "confidence": "evidence: staged bid rollout, day 2",
+        "reason": "Day two of the staged bid rollout from the ads sweep. Within the projected band for the settling period."
+      },
+      {
+        "label": "Residual · 1.0%",
+        "value": "+$130",
+        "tag": "residual",
+        "confidence": "target under 5%",
+        "reason": "What the bridge could not attribute. At 1.0% of the move it is noise rather than a missing term in the contract."
+      }
+    ],
+    "entities": [
+      {
+        "time": "Aug 17 · 14:20",
+        "source": "ours",
+        "title": "9.11 slate step executed — 12 SKUs",
+        "detail": "Margin-protective repricing pushed in parity-safe order, Amazon last. Auto-revert armed at −8% velocity.",
+        "ref": "LEDGER-PR-0912",
+        "line": true
+      },
+      {
+        "time": "Aug 18 · 00:01",
+        "source": "amazon",
+        "title": "Revised dimensional-weight tiers effective",
+        "detail": "Tier boundaries moved. 31 SKUs reclassified upward with no change to the products themselves.",
+        "ref": "fee schedule 2026-08",
+        "line": true
+      },
+      {
+        "time": "Aug 18 · 06:00",
+        "source": "ours",
+        "title": "Staged bid rollout — tranche 2 of 2 deferred",
+        "detail": "Day two of the 50% tranche from the ads sweep. The remaining half waits for the 72-hour check.",
+        "ref": "LEDGER-ADS-0788",
+        "line": true
+      },
+      {
+        "time": "Aug 18 · 11:42",
+        "source": "carrier",
+        "title": "Two inbound consolidations delayed 1 day",
+        "detail": "No CM effect yesterday. Noted because it affects cover, not margin — the Inventory lens carries it.",
+        "line": true
+      },
+      {
+        "time": "Aug 19 · 06:04",
+        "source": "realify",
+        "title": "Bridge closed · 1 driver unexplained by contract",
+        "detail": "CM v3 has no term for a fee-tier reclassification, so it lands as unexpected rather than as a variance we planned for.",
+        "ref": "S10.1 · this card",
+        "line": false
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

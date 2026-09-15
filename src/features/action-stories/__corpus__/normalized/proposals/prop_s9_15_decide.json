@@ -1,0 +1,300 @@
+{
+  "proposal_id": "prop_s9_15_decide",
+  "story_code": "S9.15",
+  "stage": "decide",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Citation share dropping — 14 comparison queries cite competitors only",
+  "narrative": "",
+  "status_note": "Decide · 6 of 10 approved · 6.5 wks · +$9.9K / mo",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "No auto-publish",
+        "note": "Every approved page routes through an editor before it goes live."
+      },
+      {
+        "label": "Canonical URL structure",
+        "note": "New pages sit under /guides/{topic}. Consolidation uses 301s, not new path patterns."
+      },
+      {
+        "label": "Consolidate before publishing",
+        "note": "Cannibalisation pairs resolve before the new comparison page ships."
+      },
+      {
+        "label": "Brand voice review",
+        "note": "Every draft carries the voice checklist. A page that reads like keyword filler is rejected at review, not published and measured."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation_identity": "10 items · 10.5 weeks if everything ships",
+    "recommendation": "Fix the template, consolidate, then write one definitive page",
+    "recommendation_detail": "Two technical repairs the content depends on, three pages that carry the comparative tier, and schema on the guides we already have.",
+    "recommendation_metrics": [
+      {
+        "label": "Traffic value",
+        "value": "+$9.9K",
+        "note": "per month, de-duplicated across queries"
+      },
+      {
+        "label": "Citation share",
+        "value": "+9pp",
+        "note": "blended across the three intent tiers"
+      },
+      {
+        "label": "Effort",
+        "value": "6.5 wks",
+        "note": "2 briefs, 4 engineering items"
+      },
+      {
+        "label": "Confidence",
+        "value": "78%",
+        "note": "mean across the approved set"
+      }
+    ],
+    "item_groups": [
+      {
+        "label": "Technical fixes",
+        "meta": "3 of 4 approved",
+        "items": [
+          {
+            "name": "Fix guide-template LCP",
+            "detail": "Hero images on the guide template are unsized and unpreloaded, putting p75 LCP at 2.9s against a 2.5s threshold. Every content gain rides on this one.",
+            "owner": "Steward",
+            "value": "+$1.2K",
+            "weeks": "1 wks",
+            "conf": "78%",
+            "isContent": false,
+            "plain": true,
+            "scope": "1 template · 186 pages affected"
+          },
+          {
+            "name": "Resolve 9 redirect chains and 4 duplicate canonicals",
+            "detail": "Three chains are three hops deep and sit on guide URLs. The duplicate canonicals are why four pages are not indexed.",
+            "owner": "Steward",
+            "value": "+$0.6K",
+            "weeks": "0.5 wks",
+            "conf": "84%",
+            "isContent": false,
+            "plain": true,
+            "scope": "13 URLs · no new path patterns"
+          },
+          {
+            "name": "Surface 8 discovered-not-crawled guides",
+            "detail": "Eight guides are known and never fetched because nothing links to them. Sitemap entry plus two internal links each.",
+            "owner": "Steward",
+            "value": "+$0.8K",
+            "weeks": "0.5 wks",
+            "conf": "80%",
+            "isContent": false,
+            "plain": true,
+            "scope": "8 pages · 16 internal links"
+          },
+          {
+            "name": "Consolidate 3 cannibalisation pairs",
+            "detail": "Redirect the weaker page of each pair into the stronger one and set canonicals. Without this the new comparison page competes with our own thin pages.",
+            "owner": "Merchandiser",
+            "value": "+$2.2K",
+            "weeks": "1 wks",
+            "conf": "76%",
+            "isContent": false,
+            "plain": true,
+            "scope": "6 pages → 3 · 301s + canonical"
+          }
+        ]
+      },
+      {
+        "label": "Content briefs · drafted by Realify, published by an editor",
+        "meta": "2 of 4 approved",
+        "items": [
+          {
+            "name": "Definitive comparison page · carbon steel vs cast iron",
+            "detail": "Nine-row comparison table, weight and heat-retention figures with published sources, answer-first headings. Projected entry into 9 of the 14 competitor-only citations.",
+            "owner": "Merchandiser",
+            "url": "/guides/carbon-steel-vs-cast-iron",
+            "value": "+$4.1K",
+            "weeks": "2 wks",
+            "conf": "74%",
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only"
+              },
+              {
+                "label": "Draft + editorial review"
+              },
+              {
+                "label": "Auto-publish"
+              }
+            ],
+            "routeNote": "Realify drafts the full page; an editor reviews, edits and publishes it.",
+            "dep": "consolidation approved"
+          },
+          {
+            "name": "Rewrite lead-removal page with the certification stated",
+            "detail": "The certification number is in a PDF nobody links to. Stating it in text, with a reduction percentage per contaminant, is what the cited answers all have.",
+            "owner": "Merchandiser",
+            "url": "/guides/filtration",
+            "value": "+$2.1K",
+            "weeks": "1 wks",
+            "conf": "79%",
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only"
+              },
+              {
+                "label": "Draft + editorial review"
+              },
+              {
+                "label": "Auto-publish"
+              }
+            ],
+            "routeNote": "Realify drafts the full page; an editor reviews, edits and publishes it."
+          },
+          {
+            "name": "Cooktop compatibility explainer with material table",
+            "detail": "Replaces a hedged paragraph with a material-by-material table and a stated test method. Also fixes the listing-outranks-explainer problem.",
+            "owner": "Merchandiser",
+            "url": "/guides/cooktop-compatibility",
+            "value": "+$1.8K",
+            "weeks": "1.5 wks",
+            "conf": "71%",
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only"
+              },
+              {
+                "label": "Draft + editorial review"
+              },
+              {
+                "label": "Auto-publish"
+              }
+            ],
+            "routeNote": "Realify drafts the full page; an editor reviews, edits and publishes it."
+          },
+          {
+            "name": "Price-bounded recommendation page · pans under $120",
+            "detail": "A new page for a query with nothing behind it. Named recommendation and price in the opening, Product schema linking to the SKU.",
+            "owner": "Merchandiser",
+            "url": "/guides/best-carbon-steel-pans-under-120",
+            "value": "+$1.6K",
+            "weeks": "1.5 wks",
+            "conf": "64%",
+            "isContent": true,
+            "plain": false,
+            "routes": [
+              {
+                "label": "Brief only"
+              },
+              {
+                "label": "Draft + editorial review"
+              },
+              {
+                "label": "Auto-publish"
+              }
+            ],
+            "routeNote": "Realify writes the brief and the outline; a writer produces the copy."
+          }
+        ]
+      },
+      {
+        "label": "Structured data batches",
+        "meta": "1 of 2 approved",
+        "items": [
+          {
+            "name": "FAQ and Article schema on 40 guide pages",
+            "detail": "Generated from existing headings and body content, not written separately. Raises the structured-formatting score on every page it touches.",
+            "owner": "Steward",
+            "value": "+$1.4K",
+            "weeks": "1 wks",
+            "conf": "77%",
+            "isContent": false,
+            "plain": true,
+            "scope": "40 pages · 2 schema types"
+          },
+          {
+            "name": "Product schema on recommendation blocks",
+            "detail": "Links every named recommendation in a guide to its SKU, price and availability so the transactional tier has something to cite.",
+            "owner": "Steward",
+            "value": "+$0.9K",
+            "weeks": "0.5 wks",
+            "conf": "73%",
+            "isContent": false,
+            "plain": true,
+            "scope": "22 blocks · 18 SKUs"
+          }
+        ]
+      }
+    ],
+    "slate": [
+      {
+        "name": "carbon steel vs cast iron",
+        "state": "draft → editor review"
+      },
+      {
+        "name": "lead-removal page with the certification stated",
+        "state": "draft → editor review"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Traffic value / mo",
+        "value": "+$9.9K"
+      },
+      {
+        "label": "Sum before de-duplication",
+        "value": "$11.6K"
+      },
+      {
+        "label": "Effort",
+        "value": "6.5 wks"
+      },
+      {
+        "label": "Pages drafted by Realify",
+        "value": "2"
+      },
+      {
+        "label": "Editorial reviews needed",
+        "value": "2"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

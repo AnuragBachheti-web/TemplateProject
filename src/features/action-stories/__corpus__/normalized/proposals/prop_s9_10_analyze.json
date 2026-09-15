@@ -1,0 +1,150 @@
+{
+  "proposal_id": "prop_s9_10_analyze",
+  "story_code": "S9.10",
+  "stage": "analyze",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "controller",
+  "title": "9 SKUs negative true contribution — 3 consecutive months",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "detail_rows": [
+      {
+        "name": "Bamboo utensil crock",
+        "cm": "−$4.10",
+        "bleed": "−$1.2K/mo",
+        "class": "structural",
+        "driver": "structural"
+      },
+      {
+        "name": "Silicone spatula trio",
+        "cm": "−$2.40",
+        "bleed": "−$0.9K/mo",
+        "class": "fixable",
+        "driver": "ad-driven"
+      },
+      {
+        "name": "Enamel camp plate 10in",
+        "cm": "−$1.80",
+        "bleed": "−$0.5K/mo",
+        "class": "fixable",
+        "driver": "fee-driven"
+      },
+      {
+        "name": "Glass storage lid · 4in",
+        "cm": "−$6.20",
+        "bleed": "−$0.8K/mo",
+        "class": "structural",
+        "driver": "returns-driven"
+      },
+      {
+        "name": "Wire fruit basket",
+        "cm": "−$3.40",
+        "bleed": "−$0.6K/mo",
+        "class": "structural",
+        "driver": "structural"
+      },
+      {
+        "name": "Linen napkin 6-pk · sage",
+        "cm": "−$1.40",
+        "bleed": "−$0.4K/mo",
+        "class": "exception",
+        "driver": "structural"
+      },
+      {
+        "name": "Ridgeline bowl 12in · sand",
+        "cm": "−$2.10",
+        "bleed": "−$0.5K/mo",
+        "class": "exception",
+        "driver": "structural"
+      },
+      {
+        "name": "Copper measuring set",
+        "cm": "−$0.90",
+        "bleed": "−$0.3K/mo",
+        "class": "structural",
+        "driver": "ad-driven"
+      },
+      {
+        "name": "Acacia serving board · small",
+        "cm": "−$2.60",
+        "bleed": "−$0.3K/mo",
+        "class": "structural",
+        "driver": "fee-driven"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "name": "Silicone spatula trio",
+        "meta": "attaches to 41% of orders it appears in",
+        "own": "−$2.40",
+        "attached": "+$11.80",
+        "net": "+$9.40"
+      },
+      {
+        "name": "Ridgeline bowl 12in",
+        "meta": "buyers who see 3 sizes convert on the 10in",
+        "own": "−$2.10",
+        "attached": "+$19.00",
+        "net": "+$16.90"
+      },
+      {
+        "name": "Glass storage lid 4in",
+        "meta": "sold alone 88% of the time",
+        "own": "−$6.20",
+        "attached": "+$0.90",
+        "net": "−$5.30"
+      },
+      {
+        "name": "Bamboo utensil crock",
+        "meta": "sold alone 74% of the time",
+        "own": "−$4.10",
+        "attached": "+$1.60",
+        "net": "−$2.50"
+      },
+      {
+        "name": "Wire fruit basket",
+        "meta": "sold alone 91% of the time",
+        "own": "−$3.40",
+        "attached": "+$0.40",
+        "net": "−$3.00"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

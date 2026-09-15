@@ -1,0 +1,249 @@
+{
+  "proposal_id": "prop_s9_1_decide",
+  "story_code": "S9.1",
+  "stage": "decide",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Quarterly assortment review — 214 active SKUs",
+  "narrative": "",
+  "status_note": "Decide · 56 SKUs across 4 moves · balanced slate",
+  "confidence": {
+    "value": 0.78,
+    "calibrated": false
+  },
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "GMROI target ≥ 2.4",
+        "value": "2.31",
+        "pct": "96",
+        "note": "Short by 0.09 — the rest closes with markdown recovery in S9.9."
+      },
+      {
+        "label": "Capital ceiling $480K",
+        "value": "$440K",
+        "pct": "92",
+        "note": "$40K of headroom after this slate."
+      },
+      {
+        "label": "Exit-rate cap 8% per quarter",
+        "value": "5.6%",
+        "pct": "70",
+        "note": "12 of a permitted 17 SKUs this quarter."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation_identity": "Balanced",
+    "recommendation": "Keep 162 · grow 18 · reduce 22 · exit 12 + the top 4 gap fills",
+    "recommendation_detail": "Grow the proven, cut the depth on the tail, exit the floor breaches, range four gaps.",
+    "recommendation_metrics": [
+      {
+        "label": "90-day revenue",
+        "value": "+$41K",
+        "range": "+$17K to +$66K",
+        "note": "P10–P90 on the full slate"
+      },
+      {
+        "label": "90-day CM$",
+        "value": "+$25K",
+        "range": "+$18K to +$34K",
+        "note": "after fees, ads and returns"
+      },
+      {
+        "label": "Capital freed",
+        "value": "$28K",
+        "range": "$23K to $33K",
+        "note": "net of grow and gap-fill buys"
+      }
+    ],
+    "composition": [
+      {
+        "label": "Keep",
+        "value": 162
+      },
+      {
+        "label": "Grow",
+        "value": 18
+      },
+      {
+        "label": "Reduce",
+        "value": 22
+      },
+      {
+        "label": "Exit",
+        "value": 12
+      },
+      {
+        "label": "Gap fill",
+        "value": 4
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "Conservative",
+        "sub": "Exits only. Nothing grows, nothing new is ranged — the set shrinks to 202 SKUs.",
+        "flag": "Lowest risk",
+        "cm": "+$5K",
+        "gmroi": "2.09"
+      },
+      {
+        "name": "Balanced",
+        "sub": "Grow the proven, cut the depth on the tail, exit the floor breaches, range four gaps.",
+        "flag": "Recommended",
+        "cm": "+$25K",
+        "gmroi": "2.31"
+      },
+      {
+        "name": "Aggressive",
+        "sub": "Deeper cuts, 24 exits and 7 new lines. Clears the GMROI target but breaks the quarterly exit cap.",
+        "flag": "Over exit cap",
+        "cm": "+$38K",
+        "gmroi": "2.48"
+      }
+    ],
+    "basis": [
+      {
+        "label": "Order rows behind the role classification",
+        "value": "18,402"
+      },
+      {
+        "label": "SKUs with a full 4-quarter history",
+        "value": "187 of 214"
+      },
+      {
+        "label": "Gap-fill demand estimates from rival feed",
+        "value": "±34%"
+      },
+      {
+        "label": "Last slate accuracy against forecast",
+        "value": "±11%"
+      }
+    ],
+    "item_groups": [
+      {
+        "name": "Grow 18 SKUs with proven headroom",
+        "detail": "Hero and Traffic-Driver SKUs holding sell-through above 92% with three straight weeks of stockout hours. Deeper buys plus wider channel ranging.",
+        "tag": "grow",
+        "rev": "+$34K",
+        "cm": "+$11K",
+        "cap": "+$12K",
+        "isFocus": false
+      },
+      {
+        "name": "Reduce depth on 22 Supporting SKUs",
+        "detail": "Keep them ranged but cut buy depth to 4 weeks of cover. No channel delisting, so no revenue cliff — capital comes back as the current cover burns down.",
+        "tag": "reduce",
+        "rev": "−$6K",
+        "cm": "+$2K",
+        "cap": "−$19K",
+        "isFocus": false
+      },
+      {
+        "name": "Exit 12 Exit-Candidate SKUs",
+        "detail": "Two consecutive quarters below the GMROI floor, none carrying a brand or contract lock. Stop-buy immediately, clear remaining units through markdown.",
+        "tag": "exit",
+        "rev": "−$8K",
+        "cm": "+$5K",
+        "cap": "−$27K",
+        "isFocus": true
+      },
+      {
+        "name": "Range the top 4 whitespace gap fills",
+        "detail": "Ranged by three or more rivals, absent from your set, high demand overlap with the Hero cohort. Test quantities only — full buy after a 60-day read.",
+        "tag": "gap fill",
+        "rev": "+$21K",
+        "cm": "+$7K",
+        "cap": "+$6K",
+        "isFocus": false
+      }
+    ],
+    "focus_rows": [
+      {
+        "name": "Bamboo canister 1.2L",
+        "meta": "NW-STO-5140 · Exit Candidate ↓ · 0.4 u/d",
+        "capital": "−$4.6K",
+        "rev": "−$1.4K",
+        "gmroi": "0.9"
+      },
+      {
+        "name": "Enamel camp mug 12oz",
+        "meta": "NW-MUG-2050 · Exit Candidate ↓ · 0.3 u/d",
+        "capital": "−$3.9K",
+        "rev": "−$1.1K",
+        "gmroi": "0.8"
+      },
+      {
+        "name": "Copper cocktail set",
+        "meta": "NW-BAR-6120 · Exit Candidate ↓ · 0.2 u/d",
+        "capital": "−$3.4K",
+        "rev": "−$0.9K",
+        "gmroi": "0.6"
+      },
+      {
+        "name": "Novelty egg cups 4-pk",
+        "meta": "NW-CER-1440 · Exit Candidate · 0.3 u/d",
+        "capital": "−$2.7K",
+        "rev": "−$0.8K",
+        "gmroi": "0.7"
+      },
+      {
+        "name": "Chalkboard pantry labels",
+        "meta": "NW-STO-5480 · Exit Candidate · 0.2 u/d",
+        "capital": "−$2.1K",
+        "rev": "−$0.6K",
+        "gmroi": "0.5"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "90-day revenue",
+        "value": "+$41K"
+      },
+      {
+        "label": "90-day CM$",
+        "value": "+$25K"
+      },
+      {
+        "label": "Capital freed",
+        "value": "$28K"
+      },
+      {
+        "label": "SKUs touched",
+        "value": "56"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

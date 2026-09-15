@@ -2,6 +2,7 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { HERO_SLOT_NAMES, HERO_MIN_LENGTH } from '../layout/heroSlot';
+import { enumLabel } from './enumLabel';
 
 /**
  * @param {boolean} [compact] - true when this block is grouped with sibling scalars inside a
@@ -28,8 +29,12 @@ export default function TextBlock({ slotName, data, compact, role }) {
     return <EmptyState slotName={slotName} message="Empty." />;
   }
 
+  // A contract enum is a machine token, and the frontend owns what an operator reads — the same
+  // split formatValue.js owns for numbers. Every other slot's text passes through untouched.
+  const text = enumLabel(slotName, data);
+
   if (role === 'heroSub') {
-    return <p className="text-[13.5px] leading-snug text-rf-text-secondary">{data}</p>;
+    return <p className="text-[13.5px] leading-snug text-rf-text-secondary">{text}</p>;
   }
 
   // A manifest-declared `role: "hero"` is a semantic judgment made once, at generation time,
@@ -39,7 +44,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
   // `HERO_MIN_LENGTH` stays as a safety net ONLY for the slotName-vocabulary fallback path — a
   // bare name match with no explicit `role` behind it is a weaker signal, worth guarding against a
   // short, coincidentally-named value getting hero treatment it doesn't deserve.
-  const isHero = role === 'hero' || (HERO_SLOT_NAMES.has(slotName) && data.length >= HERO_MIN_LENGTH);
+  const isHero = role === 'hero' || (HERO_SLOT_NAMES.has(slotName) && text.length >= HERO_MIN_LENGTH);
   if (isHero) {
     const eyebrow = (
       <p className="flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-rf-text-tertiary">
@@ -49,7 +54,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
     );
     const headline = (
       <p className="mt-2 font-serif text-[19px] font-normal leading-snug text-rf-text-primary" style={{ fontVariationSettings: "'opsz' 144" }}>
-        {data}
+        {text}
       </p>
     );
     // `compact` means this hero block is already inside a shared panel (a GridPanel cell — grouped
@@ -85,7 +90,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
     return (
       <div className="flex min-w-0 items-baseline gap-3 py-[7px]">
         <span className="min-w-0 max-w-[45%] shrink truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
-        <span className="min-w-0 flex-1 truncate text-right text-[12.5px] font-medium text-rf-text-primary">{data}</span>
+        <span className="min-w-0 flex-1 truncate text-right text-[12.5px] font-medium text-rf-text-primary">{text}</span>
       </div>
     );
   }
@@ -93,7 +98,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
   return (
     <BlockCard padding="compact">
       <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
-      <p className="mt-1 text-[14px] font-medium text-rf-text-primary">{data}</p>
+      <p className="mt-1 text-[14px] font-medium text-rf-text-primary">{text}</p>
     </BlockCard>
   );
 }

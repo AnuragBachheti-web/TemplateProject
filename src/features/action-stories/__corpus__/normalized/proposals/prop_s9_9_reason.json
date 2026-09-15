@@ -1,0 +1,155 @@
+{
+  "proposal_id": "prop_s9_9_reason",
+  "story_code": "S9.9",
+  "stage": "reason",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "38 SKUs cross the 271-day FBA surcharge in 26 days",
+  "narrative": "Realify will build the ladders and schedule nothing. Every price step, promo code and outlet listing waits for your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "label": "Sell-through target",
+        "value": "80%",
+        "meta": "of the 4,180 units"
+      },
+      {
+        "label": "Deadline",
+        "value": "Sep 13",
+        "meta": "271-day FBA surcharge"
+      },
+      {
+        "label": "Margin-dilution cap",
+        "value": "1.8 pp",
+        "meta": "blended · quarter to date 33.3%"
+      },
+      {
+        "label": "Capital locked",
+        "value": "$118K",
+        "meta": "4,180 units at cost"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "MAP floors",
+        "value": "3 of 4 cohorts"
+      },
+      {
+        "label": "Channel restrictions",
+        "value": "2 brands · no marketplace clearance"
+      },
+      {
+        "label": "Cash ladder",
+        "value": "recovery lands wk 3-7 · story 9.2 reads it"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "On-hand and age by SKU",
+        "meta": "38 SKUs"
+      },
+      {
+        "label": "Elasticity from prior markdowns",
+        "meta": "14 tests"
+      },
+      {
+        "label": "FBA fee schedule and cliffs",
+        "meta": "current"
+      },
+      {
+        "label": "Outlet and liquidation quotes",
+        "meta": "2 quotes"
+      },
+      {
+        "label": "Clearance capacity per channel",
+        "meta": "4 channels"
+      },
+      {
+        "label": "Blended margin quarter to date",
+        "meta": "33.3%"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Hero lines · Ridgeline, Alder",
+        "depth": "40%",
+        "floor": "$18.40",
+        "channels": "DTC, AMZ",
+        "units": "820 u · $31K",
+        "note": "Brand-critical. Depth capped and outlet excluded."
+      },
+      {
+        "name": "Core · kitchen textiles",
+        "depth": "55%",
+        "floor": "$4.10",
+        "channels": "all + outlet",
+        "units": "1,640 u · $38K",
+        "note": "The bulk of the cohort. Elastic and easy to move."
+      },
+      {
+        "name": "Seasonal · summer serveware",
+        "depth": "65%",
+        "floor": "$6.80",
+        "channels": "all + outlet",
+        "units": "1,180 u · $34K",
+        "note": "Season is over. Holding costs a year of storage."
+      },
+      {
+        "name": "Discontinued · glass carafes",
+        "depth": "no cap",
+        "floor": "liquidate",
+        "channels": "outlet, liq.",
+        "units": "540 u · $15K",
+        "note": "No future assortment role. Speed beats recovery."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Markdown Ladder Optimizer"
+      },
+      {
+        "name": "Elasticity Engine"
+      },
+      {
+        "name": "Storage Cost Model"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

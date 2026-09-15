@@ -1,0 +1,180 @@
+{
+  "template_id": "analyze.compare.v1",
+  "stage": "analyze",
+  "sections": [
+    {
+      "id": "finding",
+      "title": null,
+      "region": "main"
+    },
+    {
+      "id": "analysis",
+      "title": "Analysis",
+      "region": "main"
+    },
+    {
+      "id": "detail",
+      "title": "Detail",
+      "region": "main"
+    },
+    {
+      "id": "context",
+      "title": "Context",
+      "region": "rail"
+    },
+    {
+      "id": "rollup",
+      "title": "Totals",
+      "region": "rail"
+    }
+  ],
+  "blocks": [
+    {
+      "slotName": "primary_insight",
+      "blockType": "text",
+      "binding": "proposal.primary_insight",
+      "section": "finding",
+      "role": "hero",
+      "when": {
+        "path": "proposal.primary_insight",
+        "op": "truthy"
+      }
+    },
+    {
+      "slotName": "narrative",
+      "blockType": "text",
+      "binding": "narrative",
+      "section": "finding",
+      "when": {
+        "path": "narrative",
+        "op": "truthy"
+      }
+    },
+    {
+      "slotName": "comparison",
+      "blockType": "barChart",
+      "binding": "proposal.comparison",
+      "section": "analysis",
+      "when": {
+        "path": "proposal.comparison",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "trend",
+      "blockType": "lineChart",
+      "binding": "proposal.trend",
+      "section": "analysis",
+      "when": {
+        "path": "proposal.trend",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "distribution",
+      "blockType": "scatterChart",
+      "binding": "proposal.distribution",
+      "section": "analysis",
+      "when": {
+        "path": "proposal.distribution",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "bridge",
+      "blockType": "waterfallChart",
+      "binding": "proposal.bridge",
+      "section": "analysis",
+      "when": {
+        "path": "proposal.bridge",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "coverage",
+      "blockType": "gauge",
+      "binding": "proposal.coverage",
+      "section": "analysis",
+      "when": {
+        "path": "proposal.coverage",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "matrix",
+      "blockType": "heatmapGrid",
+      "binding": "proposal.matrix",
+      "section": "analysis",
+      "when": {
+        "path": "proposal.matrix",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "entities",
+      "blockType": "itemQueue",
+      "binding": "proposal.entities",
+      "section": "detail",
+      "when": {
+        "path": "proposal.entities",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "detail_rows",
+      "blockType": "table",
+      "binding": "proposal.detail_rows",
+      "section": "detail",
+      "when": {
+        "path": "proposal.detail_rows",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "secondary_rows",
+      "blockType": "table",
+      "binding": "proposal.secondary_rows",
+      "section": "detail",
+      "when": {
+        "path": "proposal.secondary_rows",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "decision_mode",
+      "blockType": "text",
+      "binding": "mode",
+      "section": "context"
+    },
+    {
+      "slotName": "decision_lens",
+      "blockType": "text",
+      "binding": "lens",
+      "section": "context",
+      "when": {
+        "path": "lens",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "totals_rows",
+      "blockType": "labelValueList",
+      "binding": "totals.rows",
+      "section": "rollup",
+      "when": {
+        "path": "totals.rows",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "stage_status",
+      "blockType": "text",
+      "binding": "status_note",
+      "section": "context",
+      "when": {
+        "path": "status_note",
+        "op": "truthy"
+      }
+    }
+  ]
+}

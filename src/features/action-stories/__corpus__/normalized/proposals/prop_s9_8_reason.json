@@ -1,0 +1,120 @@
+{
+  "proposal_id": "prop_s9_8_reason",
+  "story_code": "S9.8",
+  "stage": "reason",
+  "action_type": "adjust_assortment",
+  "cardinality": "one",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Launch — Enamel Dutch Oven 5qt · date Sep 12",
+  "narrative": "Realify will build the launch plan and the checklist, then wait. Every system write — listing, PO, ads, email — needs your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "This proposal has a single item."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "label": "Day 30",
+        "date": "by Oct 12",
+        "units": "180 u",
+        "meta": "DTC 110 · Amazon 70 · $19.6K revenue"
+      },
+      {
+        "label": "Day 60",
+        "date": "by Nov 11",
+        "units": "460 u",
+        "meta": "all three channels · $50.1K revenue"
+      },
+      {
+        "label": "Day 90",
+        "date": "by Dec 11",
+        "units": "840 u",
+        "meta": "holiday peak included · $91.6K revenue"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Launch ad budget",
+        "value": "$2.5K/mo · story 9.4 envelope"
+      },
+      {
+        "label": "MAP floor",
+        "value": "$103.20 from day one"
+      },
+      {
+        "label": "Cash · initial buy",
+        "value": "wk-7 trough owns the ceiling"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "lead": true,
+        "role": "Owns the content pack, the listing build and the launch narrative."
+      },
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "lead": false,
+        "role": "Sizes the initial buy and the follow-on PO gate."
+      },
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "lead": false,
+        "role": "Builds the launch ad plan inside the $2.5K cap."
+      },
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "lead": false,
+        "role": "Owns list, launch promo and MAP posture."
+      },
+      {
+        "initials": "Po",
+        "name": "Promoter",
+        "lead": false,
+        "role": "Owns the email and SMS announcement and the review program."
+      },
+      {
+        "initials": "Ar",
+        "name": "Arbiter",
+        "lead": false,
+        "role": "Sequences the checklist and resolves conflicts between the five."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

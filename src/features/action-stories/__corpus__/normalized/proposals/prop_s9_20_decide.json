@@ -1,0 +1,257 @@
+{
+  "proposal_id": "prop_s9_20_decide",
+  "story_code": "S9.20",
+  "stage": "decide",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "prospector",
+  "title": "Weekly discovery digest — 6 candidates above affinity threshold",
+  "narrative": "",
+  "status_note": "Decide · 3 to sample · $9.4K committed · 3 parked with triggers",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "Sampling ceiling",
+        "note": "$9.4K committed, $14.6K held back for a mid-cycle find."
+      },
+      {
+        "label": "Preferred suppliers",
+        "note": "Every sampled concept is makeable by one of our four existing suppliers."
+      },
+      {
+        "label": "Fad exposure",
+        "note": "All sampled concepts clear the 55% durability floor."
+      },
+      {
+        "label": "Every park has a trigger",
+        "note": "All 3 parked concepts carry a named condition and a check cadence. Nothing dies silently."
+      },
+      {
+        "label": "No launch decided here",
+        "note": "This slate authorises samples and RFQs only. A concept that passes evaluation goes to S9.8 for the launch decision."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation": "Sample three, park three, and give every parked concept a trigger",
+    "recommendation_detail": "The three durable-trend candidates that existing suppliers can make are worth $9.4K of the $24K budget. The three fads are parked with the evidence and a named condition that would re-open them — a parked concept with no trigger is a concept nobody will ever look at again.",
+    "recommendation_metrics": [
+      {
+        "label": "To sample",
+        "value": "3",
+        "note": "ranked by affinity × economics × confidence"
+      },
+      {
+        "label": "Capital committed",
+        "value": "$9.4K",
+        "note": "of the $24K cycle ceiling"
+      },
+      {
+        "label": "Mean affinity",
+        "value": "81",
+        "note": "threshold is 70, target 80"
+      },
+      {
+        "label": "Mean CM",
+        "value": "47%",
+        "note": "target is ≥ 42%"
+      },
+      {
+        "label": "Parked",
+        "value": "3",
+        "note": "all with revisit triggers"
+      }
+    ],
+    "next_actions": [
+      {
+        "label": "Sample requests",
+        "note": "3 drafted to suppliers via Sourcer"
+      },
+      {
+        "label": "RFQs",
+        "note": "1 quote request where tooling or cost is open"
+      },
+      {
+        "label": "Evaluation cards",
+        "note": "one per sampled concept, criteria attached"
+      },
+      {
+        "label": "Parked watchlist",
+        "note": "3 concepts with triggers on a check cadence"
+      }
+    ],
+    "slate": [
+      {
+        "rank": "1",
+        "id": "C-31",
+        "name": "Carbon steel wok 12\"",
+        "affinity": "87",
+        "cm": "46%",
+        "cost": "$2.4K",
+        "classification": "durable trend",
+        "rationale": "Highest affinity in the set, best supplier fit, and the only concept that needs no tooling commitment. If one thing gets sampled this cycle it is this.",
+        "plan": [
+          {
+            "label": "Rounds",
+            "value": "2"
+          },
+          {
+            "label": "Units per round",
+            "value": "3"
+          },
+          {
+            "label": "Supplier",
+            "value": "Kessler (K)"
+          },
+          {
+            "label": "Sample cost",
+            "value": "$2.4K"
+          },
+          {
+            "label": "First sample",
+            "value": "18 days"
+          }
+        ],
+        "criteria": [
+          "Hammering finish consistent across all three units in round one.",
+          "Seasoning takes evenly at 400°F with no warping on a home range.",
+          "Quoted unit cost holds at $19.40 at MOQ 500 after sample changes.",
+          "Handle weld passes a 40 lb static load with no deflection."
+        ]
+      },
+      {
+        "rank": "2",
+        "id": "C-34",
+        "name": "Whetstone angle guide",
+        "affinity": "76",
+        "cm": "52%",
+        "cost": "$0.9K",
+        "classification": "durable trend",
+        "rationale": "Cheapest and fastest concept on the list with the highest margin. Small ceiling at $34K a year, but it captures demand our own whetstone buyers are currently taking elsewhere.",
+        "plan": [
+          {
+            "label": "Rounds",
+            "value": "1"
+          },
+          {
+            "label": "Units per round",
+            "value": "5"
+          },
+          {
+            "label": "Supplier",
+            "value": "Tsuyo (T)"
+          },
+          {
+            "label": "Sample cost",
+            "value": "$0.9K"
+          },
+          {
+            "label": "First sample",
+            "value": "11 days"
+          }
+        ],
+        "criteria": [
+          "Holds 15° and 20° within 0.5° across five units.",
+          "Fits our existing 1000/6000 stone without a shim.",
+          "Survives 200 sharpening passes with no visible wear."
+        ]
+      },
+      {
+        "rank": "3",
+        "id": "C-27",
+        "name": "Enamel roasting dish set",
+        "affinity": "81",
+        "cm": "43%",
+        "cost": "$6.1K",
+        "classification": "durable trend",
+        "rfq": "RFQ · mould quote",
+        "rationale": "Strong durability read and Arcadia is our best supplier on every standard. The $4.2K mould deposit is the whole argument — it goes before the first sample exists.",
+        "plan": [
+          {
+            "label": "Rounds",
+            "value": "2"
+          },
+          {
+            "label": "Units per round",
+            "value": "2 sets"
+          },
+          {
+            "label": "Supplier",
+            "value": "Arcadia (A)"
+          },
+          {
+            "label": "Tooling deposit",
+            "value": "$4.2K"
+          },
+          {
+            "label": "First sample",
+            "value": "46 days"
+          }
+        ],
+        "criteria": [
+          "Enamel matches the existing colourway within ΔE 2.0.",
+          "No chipping after 20 thermal cycles between 40°F and 500°F.",
+          "Nesting works in the existing carton footprint — no new box size.",
+          "Second RFQ confirms unit cost at $26.80 or better at MOQ 300."
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Concepts to sample",
+        "value": "3"
+      },
+      {
+        "label": "Sample and testing",
+        "value": "$5.2K"
+      },
+      {
+        "label": "Tooling deposits",
+        "value": "$4.2K"
+      },
+      {
+        "label": "Total committed",
+        "value": "$9.4K"
+      },
+      {
+        "label": "Unspent",
+        "value": "$14.6K"
+      },
+      {
+        "label": "RFQs required",
+        "value": "1"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

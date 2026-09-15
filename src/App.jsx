@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/" element={<Navigate to={ACTION_STORIES_ROUTES.index} replace />} />
           <Route path={ACTION_STORIES_ROUTES.index} element={<Shell />}>
             <Route index element={<ActionStoriesHome />} />
-            <Route path=":code/:stageKey" element={<StagePage />} />
+            <Route path=":storyCode/:stageKey" element={<StagePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

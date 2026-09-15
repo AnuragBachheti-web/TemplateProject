@@ -57,4 +57,19 @@ export default defineConfig([
       react: { version: 'detect' },
     },
   },
+  {
+    // Test files. Two rules that are correct for application code are wrong for tests:
+    // `react-refresh/only-export-components` (a test file exports nothing to Fast Refresh at all),
+    // and `react-hooks/globals` (capturing a hook's value into an outer `let` from a throwaway
+    // probe component is the standard way to assert on a context hook — see ui/Toast.test.jsx).
+    // Vitest's globals are declared here rather than in every file's own header.
+    files: ['**/*.test.{js,jsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+      'react-hooks/globals': 'off',
+    },
+    languageOptions: {
+      globals: { ...globals.node, ...globals.browser },
+    },
+  },
 ])

@@ -1,0 +1,114 @@
+{
+  "proposal_id": "prop_s9_5_reason",
+  "story_code": "S9.5",
+  "stage": "reason",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "scout",
+  "title": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
+  "narrative": "Realify will rank the responses and wait for you. No price reaches a channel without your approval, even inside the SLA.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "sev": "S1",
+        "sla": "4 h",
+        "def": "Hero undercut or Buy Box lost. Wakes the queue immediately."
+      },
+      {
+        "sev": "S2",
+        "sla": "24 h",
+        "def": "Core SKU undercut, or a new entrant on a Hero listing."
+      },
+      {
+        "sev": "S3",
+        "sla": "3 d",
+        "def": "Content or review-velocity moves, ad-position shifts."
+      },
+      {
+        "sev": "S4",
+        "sla": "next cycle",
+        "def": "Competitor stock-outs and other openings, not threats."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Competitor scrapes · 9 sellers",
+        "meta": "every 4h"
+      },
+      {
+        "label": "Buy Box win history",
+        "meta": "90 days"
+      },
+      {
+        "label": "Elasticity by SKU",
+        "meta": "14 price tests"
+      },
+      {
+        "label": "CM after fees and returns",
+        "meta": "per unit"
+      },
+      {
+        "label": "MAP contracts",
+        "meta": "3 brands"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Sc",
+        "name": "Scout",
+        "role": "Watches the 9 sellers, tags severity, opens the event."
+      },
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "role": "Owns the price answer inside the band and the floors."
+      },
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns content, imagery and bundle counters."
+      },
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "role": "Owns the ad answer when price is held."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -455,7 +455,7 @@ const SVG_LINE_PATH_RE = /^M\s*-?[\d.]+\s+-?[\d.]+(?:\s+L\s*-?[\d.]+\s+-?[\d.]+)
  * vocabulary uses that key for anything but a real SVG path.
  */
 function isMultiSeriesLineShaped(value) {
-  return value.every((item) => typeof item.path === 'string' && item.path.trim().length > 0)
+  return value.every((item) => typeof item.path === 'string' && SVG_LINE_PATH_RE.test(item.path.trim()))
 }
 
 /**

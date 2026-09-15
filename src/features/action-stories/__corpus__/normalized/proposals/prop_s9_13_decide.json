@@ -1,0 +1,401 @@
+{
+  "proposal_id": "prop_s9_13_decide",
+  "story_code": "S9.13",
+  "stage": "decide",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "promoter",
+  "title": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
+  "narrative": "",
+  "status_note": "Decide · 9 of 9 approved · margin-safe offers · cap 4 / week",
+  "confidence": {
+    "value": 0.74,
+    "calibrated": false
+  },
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "Holdout on every measurable flow",
+        "note": "All measurable flows carry 10% or more."
+      },
+      {
+        "label": "Offer depth inside segment ceilings",
+        "note": "Deepest offer is 10% on lapsed, against a 15% ceiling."
+      },
+      {
+        "label": "Weekly frequency cap",
+        "note": "Cap 4 with the two removals nets 10,550 fewer sends a month."
+      },
+      {
+        "label": "Consent boundaries",
+        "note": "SMS flow enrols only express opt-ins. Suppression and unsubscribe rules are untouched by this slate."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation_identity": "4 new · 3 modified · 2 retired",
+    "recommendation": "Cover the 42-day window, retire what the holdouts cannot justify",
+    "recommendation_metrics": [
+      {
+        "label": "Incremental revenue",
+        "value": "+$10.5K",
+        "note": "per month, measured against holdouts"
+      },
+      {
+        "label": "Net contribution",
+        "value": "+$4.1K",
+        "note": "after offer and shipping cost"
+      },
+      {
+        "label": "Sends per month",
+        "value": "−10,550",
+        "note": "fewer sends, more revenue"
+      },
+      {
+        "label": "Held back",
+        "value": "$1.1K",
+        "note": "revenue withheld to keep claims valid"
+      }
+    ],
+    "alternatives": [
+      {
+        "label": "Margin-safe"
+      },
+      {
+        "label": "Growth"
+      }
+    ],
+    "item_groups": [
+      {
+        "label": "New flows",
+        "meta": "4 of 4 approved",
+        "items": [
+          {
+            "name": "Consumable replenishment · per-SKU interval",
+            "detail": "One send timed to each SKU’s own median cycle, between day 31 and day 58. Covers the twelve consumables and the 4,180 profiles who buy them.",
+            "channel": "email",
+            "offer": "free shipping",
+            "rev": "+$6.1K",
+            "reach": "4,180",
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "418 held back · reads in 6 weeks",
+            "test": "2 tests → S10.7"
+          },
+          {
+            "name": "Post-first-delivery care · day 3–5",
+            "detail": "Care and use content on the item just delivered. Takes the slot the unmeasured thank-you email currently occupies, which is why that flow is being modified below.",
+            "channel": "email",
+            "offer": "content only",
+            "rev": "+$2.4K",
+            "reach": "7,540",
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "754 held back · reads in 8 weeks"
+          },
+          {
+            "name": "Win-back at 90–120 days idle",
+            "detail": "Fires while return rates are still readable rather than at 180 days. Replaces the existing win-back on the kill list below.",
+            "channel": "email",
+            "offer": "up to 10% off",
+            "rev": "+$1.8K",
+            "reach": "3,860",
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "386 held back · reads in 10 weeks",
+            "test": "1 test → S10.7"
+          },
+          {
+            "name": "Refill reminder over SMS · day 40–45",
+            "detail": "Only the 6,240 profiles with a recorded express opt-in, one message inside sending hours. Additive to the email flow, not a replacement — reach is 1,850 a month.",
+            "channel": "sms",
+            "offer": "no offer",
+            "rev": "+$0.9K",
+            "reach": "1,850",
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "93 held back · reads in 16 weeks"
+          }
+        ]
+      },
+      {
+        "label": "Modifications",
+        "meta": "3 of 3 approved",
+        "items": [
+          {
+            "name": "Post-purchase thank-you · attach holdout, move trigger",
+            "detail": "Trigger moves from order-shipped to order-confirmed so it stops colliding with the day 3–5 slot, and a holdout is attached so its revenue becomes claimable.",
+            "channel": "email",
+            "offer": "content only",
+            "rev": "claim only",
+            "reach": "7,540",
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "754 held back · reads in 8 weeks"
+          },
+          {
+            "name": "Browse abandon · one email, bottom decile suppressed",
+            "detail": "Cuts the second and third email, where the measured lift was indistinguishable from zero, and drops the bottom pLTV decile from the audience. 11,400 fewer sends a month.",
+            "channel": "email",
+            "offer": "content only",
+            "rev": "−$0.3K",
+            "reach": "6,100",
+            "needsHoldout": false,
+            "noHoldout": true,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "keeps its existing 10% holdout"
+          },
+          {
+            "name": "VIP early access · attach holdout at next launch",
+            "detail": "The flow marketing reports as best-performing has no control group. A holdout at the next launch turns the number into a claim — or shows the audience buys anyway.",
+            "channel": "email",
+            "offer": "early access",
+            "rev": "claim only",
+            "reach": "1,180",
+            "needsHoldout": true,
+            "noHoldout": false,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "118 held back · reads in 12 weeks"
+          }
+        ]
+      },
+      {
+        "label": "Kill list",
+        "meta": "2 of 2 approved",
+        "items": [
+          {
+            "name": "Retire win-back · 180 day",
+            "detail": "Ten weeks of measurement put the lift at $0.04 per recipient, p=0.41. Removing it saves $1.1K a month of offer cost and 3,220 sends, with no significant revenue loss.",
+            "channel": "email",
+            "offer": "was 15% off",
+            "rev": "−$0.2K",
+            "reach": "—",
+            "needsHoldout": false,
+            "noHoldout": true,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "removal · nothing to measure"
+          },
+          {
+            "name": "Sunset the bottom-decile weekly promo",
+            "detail": "3,340 profiles at $27 pLTV and a 4% repeat rate. Cutting them to monthly slows consent decay by roughly 40% and protects deliverability for everything else.",
+            "channel": "email",
+            "offer": "none",
+            "rev": "−$0.2K",
+            "reach": "—",
+            "needsHoldout": false,
+            "noHoldout": true,
+            "holdoutOptions": [
+              {
+                "label": "0%"
+              },
+              {
+                "label": "5%"
+              },
+              {
+                "label": "10%"
+              },
+              {
+                "label": "20%"
+              }
+            ],
+            "holdoutNote": "removal · nothing to measure"
+          }
+        ]
+      }
+    ],
+    "slate": [
+      {
+        "segment": "New · first 30 days",
+        "size": "6,240 profiles",
+        "treatment": "Content only",
+        "cm": "—"
+      },
+      {
+        "segment": "Repeat · 2–4 orders",
+        "size": "14,180 profiles",
+        "treatment": "Free shipping",
+        "cm": "−1.8pp"
+      },
+      {
+        "segment": "VIP · top pLTV decile",
+        "size": "3,860 profiles",
+        "treatment": "Early access, no discount",
+        "cm": "0.0pp"
+      },
+      {
+        "segment": "Lapsed · 90–180 days",
+        "size": "3,860 profiles",
+        "treatment": "10% off",
+        "cm": "−3.9pp"
+      },
+      {
+        "segment": "Bottom 30%",
+        "size": "7,850 profiles",
+        "treatment": "Suppressed from offers",
+        "cm": "0.0pp"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Incremental revenue / mo",
+        "value": "+$10.5K"
+      },
+      {
+        "label": "Offer + shipping cost / mo",
+        "value": "$0.3K"
+      },
+      {
+        "label": "Net contribution / mo",
+        "value": "+$4.1K"
+      },
+      {
+        "label": "Revenue held in holdouts",
+        "value": "$1.1K"
+      },
+      {
+        "label": "Sends per month",
+        "value": "−10,550"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

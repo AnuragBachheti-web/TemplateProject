@@ -1,0 +1,162 @@
+{
+  "proposal_id": "prop_s10_4_decide",
+  "story_code": "S10.4",
+  "stage": "decide",
+  "action_type": "file_claim",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "controller",
+  "title": "$4,120 recoverable — $890 expires in 21 days",
+  "narrative": "Approval files cases and nothing else. No price changes, no inventory moves, no customer contact — the whole downside of this decision is a marketplace saying no.",
+  "status_note": "Decide · 9 in batch · $3,480 face value · $84 written off and logged · floor $25",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "recommendation": "Filing 9 claims worth $3,480 returns $3,080 at our own historic win rates. 2 more sit staged on missing documents and file themselves when the evidence lands. $84 is written off — recorded as leakage, which is the number that argues for fixing the cause.",
+    "item_groups": [
+      {
+        "label": "Auto-claimable",
+        "badge": "first to graduate to Act",
+        "blurb": "Deterministic test, evidence complete, and the downside of being wrong is a polite denial. This is the batch path.",
+        "value": "$3,480",
+        "count": "9 of 9 selected",
+        "toggleLabel": "Clear all",
+        "rows": [
+          {
+            "name": "Refund without return · 2 orders",
+            "detail": "Return window closed Jul 26 with no inbound scan on either unit.",
+            "value": "$400",
+            "due": "9 days",
+            "win": "88%",
+            "state": "in batch",
+            "flag": "expiring"
+          },
+          {
+            "name": "Dimension tier · Knife Block 6pc",
+            "detail": "41 units billed Large Standard against a measured Standard envelope.",
+            "value": "$310",
+            "due": "16 days",
+            "win": "91%",
+            "state": "in batch",
+            "flag": "expiring"
+          },
+          {
+            "name": "Lost inventory · 2 units unmatched",
+            "detail": "Adjustment Jul 12, no reimbursement in 38 days.",
+            "value": "$180",
+            "due": "21 days",
+            "win": "76%",
+            "state": "in batch",
+            "flag": "expiring"
+          },
+          {
+            "name": "Lost inventory · 3 units at East node",
+            "detail": "Adjustment Jun 28, claimed at $173 landed cost per unit.",
+            "value": "$520",
+            "due": "29 days",
+            "win": "78%",
+            "state": "in batch"
+          },
+          {
+            "name": "Dimension tier · Dutch Oven 5qt",
+            "detail": "88 units at $7.27 over — carton shrank in May, the tier never followed.",
+            "value": "$640",
+            "due": "34 days",
+            "win": "94%",
+            "state": "in batch"
+          },
+          {
+            "name": "Dimension tier · Sauté Pan 12in",
+            "detail": "62 units at $8.39 over — billed length crosses a limit the measurement does not.",
+            "value": "$520",
+            "due": "41 days",
+            "win": "94%",
+            "state": "in batch"
+          },
+          {
+            "name": "Dimension tier · Enamel Casserole 3qt",
+            "detail": "54 units at $7.96 over — same packaging programme as the Dutch Oven.",
+            "value": "$430",
+            "due": "47 days",
+            "win": "91%",
+            "state": "in batch"
+          },
+          {
+            "name": "Dimension tier · Cast-iron Skillet 10in",
+            "detail": "39 units — a weight crossing rather than a dimension one, so a harder argument.",
+            "value": "$310",
+            "due": "52 days",
+            "win": "89%",
+            "state": "in batch"
+          },
+          {
+            "name": "Dimension tier · Filtration Pitcher",
+            "detail": "28 units at $6.07 over — rides the same batch at no extra assembly cost.",
+            "value": "$170",
+            "due": "58 days",
+            "win": "86%",
+            "state": "in batch"
+          }
+        ],
+        "foot": "Every row here files against a published window with the documents policy names. Nothing in this group requires a human to form an opinion — which is precisely why it is the first flow that could run itself."
+      },
+      {
+        "label": "Evidence needed",
+        "blurb": "Sound claims with a document gap. Each files itself the moment the last item lands — never partially, never late.",
+        "value": "$640",
+        "count": "2 staged",
+        "toggleLabel": "Request documents",
+        "rows": [
+          {
+            "name": "Damaged in warehouse · 4 units",
+            "detail": "Attribution is in their record; condition photographs sit in the 3PL portal. Needs condition photographs · 4 units.",
+            "value": "$410",
+            "due": "36 days",
+            "win": "74%",
+            "state": "staged",
+            "flag": "evidence needed"
+          },
+          {
+            "name": "Inbound shortage · Walmart WFS",
+            "detail": "6 units short on PO-4488; needs carrier proof of delivery and the bill of lading. Needs carrier POD + bill of lading.",
+            "value": "$230",
+            "due": "44 days",
+            "win": "61%",
+            "state": "staged",
+            "flag": "evidence needed"
+          }
+        ],
+        "foot": "A claim filed without its named evidence spends the window and returns a denial, which then costs an appeal. Staging is not delay; it is the only path that pays."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

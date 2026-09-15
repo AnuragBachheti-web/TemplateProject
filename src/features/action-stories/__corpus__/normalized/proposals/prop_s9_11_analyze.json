@@ -1,0 +1,184 @@
+{
+  "proposal_id": "prop_s9_11_analyze",
+  "story_code": "S9.11",
+  "stage": "analyze",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "primary_insight": "sorted by headroom per unit",
+    "comparison": [
+      {
+        "label": "11 Buy Box sensitive SKUs",
+        "value": "$4.9K/mo",
+        "pct": "50%"
+      },
+      {
+        "label": "18 low-sensitivity rolls",
+        "value": "$3.7K/mo",
+        "pct": "38%"
+      },
+      {
+        "label": "9 prior-only tests",
+        "value": "$1.1K/mo",
+        "pct": "11%"
+      },
+      {
+        "label": "3 MAP-capped",
+        "value": "$0.4K/mo",
+        "pct": "4%"
+      }
+    ],
+    "detail_rows": [
+      {
+        "name": "Alder chef knife 8in",
+        "sku": "NW-KNF-0480",
+        "cohort": "tested · Buy Box sensitive",
+        "elast": "−1.24",
+        "conf": "88% ± 5",
+        "headroom": "$1.86",
+        "bb": "0.82 high",
+        "source": "tested",
+        "bandLabel": "$68.00 → $71.99 · band $69–82"
+      },
+      {
+        "name": "Ridgeline stoneware bowl",
+        "sku": "NW-CER-1120",
+        "cohort": "tested · low sensitivity",
+        "elast": "−0.91",
+        "conf": "84% ± 6",
+        "headroom": "$1.62",
+        "bb": "0.31 low",
+        "source": "tested",
+        "bandLabel": "$24.00 → $26.99 · band $26–32"
+      },
+      {
+        "name": "Carbon steel pan 10in",
+        "sku": "NW-PAN-2210",
+        "cohort": "tested · Buy Box sensitive",
+        "elast": "−1.41",
+        "conf": "81% ± 7",
+        "headroom": "$1.54",
+        "bb": "0.91 high",
+        "source": "tested",
+        "bandLabel": "$54.00 → $57.99 · band $55–68"
+      },
+      {
+        "name": "Cut-glass tumbler set of 4",
+        "sku": "NW-GLS-3390",
+        "cohort": "prior only",
+        "elast": "−1.10",
+        "conf": "64% ± 14",
+        "headroom": "$1.42",
+        "bb": "0.44 mid",
+        "source": "prior",
+        "bandLabel": "$38.00 → $40.99 · band $39–49"
+      },
+      {
+        "name": "Quilted oven mitt pair",
+        "sku": "NW-TEX-5180",
+        "cohort": "tested · low sensitivity",
+        "elast": "−0.78",
+        "conf": "86% ± 5",
+        "headroom": "$1.34",
+        "bb": "0.22 low",
+        "source": "tested",
+        "bandLabel": "$19.00 → $20.99 · band $20–25"
+      },
+      {
+        "name": "Ridgeline mug 14oz",
+        "sku": "NW-CER-1210",
+        "cohort": "tested · low sensitivity",
+        "elast": "−0.86",
+        "conf": "85% ± 6",
+        "headroom": "$1.24",
+        "bb": "0.28 low",
+        "source": "tested",
+        "bandLabel": "$16.00 → $17.99 · band $17–22"
+      },
+      {
+        "name": "Linen apron · natural",
+        "sku": "NW-TEX-6040",
+        "cohort": "contract-constrained",
+        "elast": "−1.02",
+        "conf": "79% ± 8",
+        "headroom": "$1.16",
+        "bb": "0.38 mid",
+        "source": "tested",
+        "bandLabel": "$42.00 → $43.99 · band $44–52"
+      },
+      {
+        "name": "Walnut cutting board L",
+        "sku": "NW-WOD-7710",
+        "cohort": "prior only",
+        "elast": "−1.33",
+        "conf": "61% ± 15",
+        "headroom": "$1.10",
+        "bb": "0.56 mid",
+        "source": "prior",
+        "bandLabel": "$78.00 → $80.99 · band $79–94"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "SKUs in the slate",
+        "value": "41 of 214"
+      },
+      {
+        "label": "Median raise",
+        "value": "+5.4%"
+      },
+      {
+        "label": "Predicted volume loss",
+        "value": "−3.1%"
+      },
+      {
+        "label": "Revenue effect",
+        "value": "+$14.6K/mo"
+      },
+      {
+        "label": "Rolls · tests",
+        "value": "32 · 9"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

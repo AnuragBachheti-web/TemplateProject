@@ -1,0 +1,126 @@
+{
+  "proposal_id": "prop_s9_3_reason",
+  "story_code": "S9.3",
+  "stage": "reason",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "planner",
+  "title": "Rebalance — 6 channel stock-outs with sister-channel excess",
+  "narrative": "Realify will size the transfer slate and wait. No pick wave, FBA shipment or listing quantity changes without your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "label": "Protect DTC margin",
+        "value": "first claim on scarce units"
+      },
+      {
+        "label": "Defend Buy Box eligibility",
+        "value": "never let FBA go zero"
+      },
+      {
+        "label": "Safety stock per channel",
+        "value": "2 wk minimum cover"
+      },
+      {
+        "label": "Transfers pay for themselves",
+        "value": "CM gain > 1.5× cost"
+      },
+      {
+        "label": "One lane per SKU per cycle",
+        "value": "no ping-pong"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "FBA inbound window",
+        "value": "6 d receipt · West · story 9.2 reads it"
+      },
+      {
+        "label": "Min-stock commitments",
+        "value": "2 channels · contractual"
+      },
+      {
+        "label": "Pick capacity",
+        "value": "1,200 u/day · WMS owns it"
+      },
+      {
+        "label": "Open POs in flight",
+        "value": "9 POs · story 9.2"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "On-hand by channel and node",
+        "meta": "5 nodes"
+      },
+      {
+        "label": "Velocity by channel · 30 d",
+        "meta": "per SKU"
+      },
+      {
+        "label": "CM per unit by channel",
+        "meta": "after fees"
+      },
+      {
+        "label": "Lane cost and transit times",
+        "meta": "5 lanes"
+      },
+      {
+        "label": "Inbound receipt windows",
+        "meta": "FBA + WFS"
+      },
+      {
+        "label": "Open POs and in-transit",
+        "meta": "story 9.2"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "role": "Decides which channel gets the next unit and how many move."
+      },
+      {
+        "initials": "Sh",
+        "name": "Shipper",
+        "role": "Owns lane choice, pick waves, labels and inbound plans."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

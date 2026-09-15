@@ -57,3 +57,28 @@ export function parseMagnitude(value) {
   if (sign === '-' || sign === '−') n = -n;
   return n;
 }
+
+/**
+ * Turns bridge rows into stacked-bar coordinates. An anchor row stands on the floor at its own full
+ * magnitude; a step row floats, starting at the running cumulative and moving by its own signed
+ * value. Pure and total — a row whose value will not parse contributes no bar rather than NaN.
+ *
+ * @param {Array<{label?: string, value?: *, anchor?: boolean}>} rows
+ * @returns {Array<{base: number, delta: number}>} one entry per input row, index-aligned.
+ */
+export function bridgeGeometry(rows) {
+  let running = 0;
+  return rows.map((row) => {
+    const magnitude = parseMagnitude(row.display);
+    if (!Number.isFinite(magnitude)) return { base: 0, delta: 0 };
+    if (row.anchor) {
+      running = magnitude;
+      return { base: 0, delta: magnitude };
+    }
+    const start = running;
+    running += magnitude;
+    // A negative step is drawn from where it ends up to where it started, so the bar hangs down
+    // from the previous level rather than reaching below the axis.
+    return magnitude >= 0 ? { base: start, delta: magnitude } : { base: running, delta: -magnitude };
+  });
+}

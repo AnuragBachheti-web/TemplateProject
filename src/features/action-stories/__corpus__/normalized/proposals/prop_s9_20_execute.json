@@ -1,0 +1,232 @@
+{
+  "proposal_id": "prop_s9_20_execute",
+  "story_code": "S9.20",
+  "stage": "execute",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "prospector",
+  "title": "Weekly discovery digest — 6 candidates above affinity threshold",
+  "narrative": "Requests draft here and a person sends them. The Arcadia mould deposit waits behind its RFQ — no non-recoverable money moves before the quote comes back.",
+  "status_note": "Execute · 0 of 4 stages · 12 items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages run",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12"
+      },
+      {
+        "label": "Sample requests",
+        "value": "0"
+      },
+      {
+        "label": "Evaluation cards",
+        "value": "0"
+      },
+      {
+        "label": "Capital committed",
+        "value": "$0"
+      }
+    ],
+    "rollback": [
+      {
+        "name": "C-31 and C-34 samples",
+        "note": "cancellable free before production starts",
+        "btnLabel": "not sent"
+      },
+      {
+        "name": "C-27 mould deposit",
+        "note": "not recoverable once cutting starts",
+        "btnLabel": "not sent"
+      },
+      {
+        "name": "Evaluation cards",
+        "note": "close with reason, criteria retained",
+        "btnLabel": "not sent"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a decaying trend re-opens this card and waits for you.",
+    "plan": [
+      {
+        "name": "RFQ and sample requests",
+        "meta": "3 sample requests · 1 RFQ · drafted, held for review",
+        "human": "Sourcer sends",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "C-31 · carbon steel wok — sample request",
+            "detail": "Three units, existing tooling, hammered finish specified with a tolerance note on consistency. Asks them to quote at MOQ 500 in the same reply so the economics land with the sample.",
+            "value": "$2.4K · 18 days",
+            "tag": "Kessler (K)",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "C-34 · angle guide — sample request",
+            "detail": "Five units at 15° and 20°, with the tolerance requirement written into the request rather than checked afterwards. Fits the existing stone without a shim.",
+            "value": "$0.9K · 11 days",
+            "tag": "Tsuyo (T)",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "C-27 · roasting set — RFQ before tooling",
+            "detail": "Quote request first, deposit second. Confirms the $4.2K mould cost and the $26.80 unit price at MOQ 300 before any non-recoverable money moves.",
+            "value": "RFQ · 6 days",
+            "tag": "mould quote",
+            "lineage": false,
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Evaluation cards",
+        "meta": "3 cards · criteria fixed at creation, not after the sample arrives",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "One card per sampled concept",
+            "detail": "Each card opens with its pass criteria already written from Decide, the supplier quote attached, and a named owner. The card closes as pass or fail with the evidence, never as \"promising\".",
+            "value": "3 cards",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Criteria locked at creation",
+            "detail": "Twelve criteria across the three concepts. Changing one after a sample has arrived requires a logged reason — that is the difference between evaluating and rationalising.",
+            "value": "12 criteria",
+            "tag": "no drift",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Photography scheduled per concept",
+            "detail": "Concept shots for evaluation only, booked to land two days after each sample. Not listing photography — that belongs to launch.",
+            "value": "$0.9K",
+            "lineage": false,
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Parked watchlist",
+        "meta": "3 concepts · triggers armed with check cadence",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Triggers armed",
+            "detail": "C-40 checked monthly against two scheduled metro mandates, C-42 quarterly against incumbent delistings, C-38 closed with its decay evidence and no scheduled check.",
+            "value": "3 armed",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Evidence attached to each park",
+            "detail": "Every parked concept keeps the curve, the classifier output and the reason it was parked. When a trigger fires the card re-opens with its original analysis rather than starting again.",
+            "value": "3 records",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Trend-decay auto-park armed",
+            "detail": "A sampled concept whose durability falls below 55% mid-cycle parks itself with the decay evidence, rather than spending the second sample round on a category that is closing.",
+            "value": "watch on 3",
+            "tag": "dial-gated",
+            "lineage": false,
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Launch handoff · lineage",
+        "meta": "passes flow to the launch flow with full provenance",
+        "doorLabel": "S9.8 Launch",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Lineage chips travel with the concept",
+            "detail": "The launch decision in S9.8 opens with the signal that found the concept, the affinity read, the supplier quote and the sample results — so nobody has to reconstruct why it is on the list.",
+            "value": "5 chips",
+            "lineage": true,
+            "lineageChips": [
+              {
+                "label": "DISC-2026-34"
+              },
+              {
+                "label": "affinity 87"
+              },
+              {
+                "label": "durability 74% ± 11"
+              },
+              {
+                "label": "Kessler quote $19.40"
+              },
+              {
+                "label": "sample R1 + R2"
+              }
+            ],
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Research pack filed to Ledger",
+            "detail": "Full pack per concept including the parked ones: signals, affinity working, economics model, risk flags and the decision. LEDGER-DISC-0341.",
+            "value": "6 concepts",
+            "lineage": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Cycle summary posted",
+            "detail": "One line back to the innovation goal: what this cycle spent, what it sampled, and what it parked. The 11%-of-revenue gap gets a running record rather than a quarterly surprise.",
+            "value": "$9.4K spent",
+            "lineage": false,
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

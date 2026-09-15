@@ -4,11 +4,11 @@
 // pinned dependency that had zero imports anywhere in this codebase until now (AUDIT_REPORT.md §2 /
 // §24 P3 #19).
 //
-// Not currently imported by actionStoriesService.js — there is no live `/v1/action-stories` endpoint
-// in this environment to point it at yet (that file still reads local fixtures, per its own SAMPLE
-// DATA header). This exists so that swap is genuinely mechanical: point `baseURL` at the real API,
-// replace the two `import.meta.glob` bodies with `httpClient.get(...)` calls, done — every
-// timeout/retry/error-classification concern below already works and is already tested.
+// Now genuinely in use: services/decisionApi.js routes every Decision Object call through this
+// client whenever `VITE_API_BASE_URL` is configured, and through an in-memory test double when it
+// is not. This module was built and tested long before that endpoint existed and needed no changes
+// to be adopted — only the addition of `post` below, whose retry policy differs from `get`'s for
+// reasons that matter (see its own doc comment).
 
 import axios from 'axios';
 import { ActionStoriesError, ERROR_CODES, classifyHttpStatus, isTransient } from './actionStoriesErrors';
@@ -76,4 +76,40 @@ async function get(url, { signal, timeout } = {}) {
   });
 }
 
-export default { get };
+/**
+ * POST — for MUTATIONS, so the retry policy is deliberately different from `get`'s.
+ *
+ * A GET may be retried freely because it changes nothing. A POST may not: retrying an approval that
+ * actually succeeded but whose response was lost would approve twice. This method therefore retries
+ * ONLY when the caller supplies an `Idempotency-Key`, which is what makes a replay safe — the
+ * server recognises the key and returns the original result instead of performing the action again.
+ * Without a key, a transient failure surfaces to the caller untouched and the operator decides.
+ *
+ * @param {string} url
+ * @param {any} body
+ * @param {{ signal?: AbortSignal, timeout?: number, idempotencyKey?: string }} [options]
+ * @returns {Promise<{ data: any, status: number }>}
+ */
+async function post(url, body, { signal, timeout, idempotencyKey } = {}) {
+  const config = {
+    signal,
+    timeout: timeout ?? DEFAULT_TIMEOUT_MS,
+    headers: idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : undefined,
+  };
+
+  const send = async () => {
+    try {
+      const response = await instance.post(url, body, config);
+      if (response.data === null || response.data === undefined) {
+        throw new ActionStoriesError(`Empty response body from ${url}`, { code: ERROR_CODES.MALFORMED });
+      }
+      return response;
+    } catch (err) {
+      throw err instanceof ActionStoriesError ? err : classifyAxiosError(err);
+    }
+  };
+
+  return idempotencyKey ? withRetryOnce(send) : send();
+}
+
+export default { get, post };

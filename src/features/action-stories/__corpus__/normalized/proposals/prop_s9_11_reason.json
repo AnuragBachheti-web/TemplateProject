@@ -1,0 +1,177 @@
+{
+  "proposal_id": "prop_s9_11_reason",
+  "story_code": "S9.11",
+  "stage": "reason",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+  "narrative": "Realify proposes the slate and waits. Nothing is written to a channel, and the auto-revert guardrail cannot arm until you approve.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "label": "Safe CM opportunity",
+        "value": "+$9.7K/mo",
+        "pct": "100%",
+        "meta": "41 of 214 catalogue SKUs"
+      },
+      {
+        "label": "Headroom left on the table",
+        "value": "$4.2K/mo",
+        "pct": "43%",
+        "meta": "above the 4% loss tolerance"
+      },
+      {
+        "label": "Blocked by MAP",
+        "value": "$1.8K/mo",
+        "pct": "19%",
+        "meta": "9 SKUs · contractual"
+      },
+      {
+        "label": "Needs a test first",
+        "value": "$1.1K/mo",
+        "pct": "11%",
+        "meta": "9 SKUs · prior only"
+      }
+    ],
+    "policy": [
+      {
+        "label": "Target CM uplift",
+        "value": "+$9.0K",
+        "note": "Per month, portfolio-wide. The slate as proposed clears it by $0.7K."
+      },
+      {
+        "label": "Max volume loss",
+        "value": "4.0%",
+        "note": "Predicted units, per SKU. Adjustable on Decide — it is the lever that sizes the slate."
+      },
+      {
+        "label": "Confidence floor",
+        "value": "70%",
+        "note": "Below this a SKU may only go out as a test, never as a roll."
+      }
+    ],
+    "constraints": [
+      {
+        "label": "MAP ceilings",
+        "value": "3 brands · 9 SKUs"
+      },
+      {
+        "label": "x.99 rounding",
+        "value": "all channels"
+      },
+      {
+        "label": "Cross-channel parity",
+        "value": "±2% band"
+      },
+      {
+        "label": "Amazon fair-pricing",
+        "value": "raise Amazon last"
+      },
+      {
+        "label": "Promo overlaps",
+        "value": "4 SKUs · excluded"
+      },
+      {
+        "label": "Wholesale price list",
+        "value": "unaffected"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Tested elasticity",
+        "value": "32 SKUs"
+      },
+      {
+        "label": "Category prior",
+        "value": "9 SKUs"
+      },
+      {
+        "label": "Live experiment running",
+        "value": "2 SKUs"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Tested · low sensitivity",
+        "skus": "18",
+        "evidence": "tested",
+        "maxLoss": "5.0%",
+        "pref": "Roll",
+        "note": "Measured elasticity, no Buy Box exposure. Roll straight out."
+      },
+      {
+        "name": "Tested · Buy Box sensitive",
+        "skus": "11",
+        "evidence": "tested",
+        "maxLoss": "3.0%",
+        "pref": "Roll · micro-step",
+        "note": "Raise in two or three steps so Buy Box share can be read between them."
+      },
+      {
+        "name": "Prior only · thin history",
+        "skus": "9",
+        "evidence": "prior",
+        "maxLoss": "2.5%",
+        "pref": "Test first",
+        "note": "Category prior, not a measured curve. Realify wants a read before a roll."
+      },
+      {
+        "name": "Contract-constrained",
+        "skus": "3",
+        "evidence": "tested",
+        "maxLoss": "4.0%",
+        "pref": "Roll · MAP-capped",
+        "note": "Headroom exists but MAP ceilings take most of it. Small moves only."
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "role": "Sizes the move per SKU and writes each channel in parity-safe order."
+      },
+      {
+        "initials": "Co",
+        "name": "Controller",
+        "role": "Governs. Holds the loss tolerance, the MAP ceilings and the revert guardrail."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

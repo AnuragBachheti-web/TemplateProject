@@ -1,0 +1,155 @@
+{
+  "proposal_id": "prop_s9_17_execute",
+  "story_code": "S9.17",
+  "stage": "execute",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "sourcer",
+  "title": "Supplier K +8% cost notice — should-cost says +2.9%",
+  "narrative": "Briefs and messages generate here; nothing reaches a supplier without a person sending it. The buy-plan change and the qualification tasks go out to Planner and Sourcer.",
+  "status_note": "Execute · 0 of 4 generated",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Artefacts ready",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Briefs generated",
+        "value": "0"
+      },
+      {
+        "label": "Messages in review",
+        "value": "0"
+      },
+      {
+        "label": "Safety stock added",
+        "value": "$0"
+      },
+      {
+        "label": "Qualification tasks",
+        "value": "0"
+      }
+    ],
+    "verification": [
+      {
+        "label": "Kessler settlement",
+        "note": "final agreed increase vs anchors",
+        "target": "+3.0%",
+        "walk": "+5.0%",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Kessler terms",
+        "note": "Net 60 ask, cash value $31K",
+        "target": "Net 60",
+        "walk": "Net 45",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Tsuyo terms",
+        "note": "Net 45 ask, cash value $19K",
+        "target": "Net 45",
+        "walk": "Net 30",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Post-change OTD · Aquatek",
+        "note": "90-day scorecard from first shipment",
+        "target": "≥ 93%",
+        "walk": "< 90%",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Post-change PPM · Alder",
+        "note": "defect rate and return rate on 3 lots",
+        "target": "≤ 2,500",
+        "walk": "> 3,000",
+        "actual": "awaiting",
+        "read": "not armed"
+      }
+    ],
+    "rollback": [
+      {
+        "name": "Supplier drafts",
+        "note": "3 messages · withdraw from review",
+        "btnLabel": "not sent"
+      },
+      {
+        "name": "Buy-plan change",
+        "note": "$52K safety stock · restore v11",
+        "btnLabel": "not sent"
+      },
+      {
+        "name": "Qualification tasks",
+        "note": "7 tasks · unassign both programmes",
+        "btnLabel": "not sent"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a missed deadline re-opens this card and waits for you.",
+    "plan": [
+      {
+        "to": "Kessler Metalworks",
+        "subject": "Your Jan 1 price notice — our response and a proposal",
+        "body": "Acknowledges the notice inside the clause window, sets out the index build-up we used, and proposes +3.0% for 18 months against committed volume and Net 60 terms. Raises OTD in the same letter, not a separate one.",
+        "reviewer": "D. Halloran · Sourcer",
+        "attach": "should-cost pack attached"
+      },
+      {
+        "to": "Meridian Filtration",
+        "subject": "Delivery performance and a second source for cartridges",
+        "body": "States plainly that 50% of cartridge volume is moving to a second source because of four quarters below the OTD floor, and that the remaining half is theirs to keep on a 93% commitment.",
+        "reviewer": "D. Halloran · Sourcer",
+        "attach": "scorecard attached"
+      },
+      {
+        "to": "Verdant Woodcraft",
+        "subject": "Ending our supply agreement — transition and open POs",
+        "body": "Confirms the six-week wind-down, that all $14K of open POs will be honoured in full, and the defect history that led here. No blame, no negotiation — the decision is made.",
+        "reviewer": "A. Castellanos · Head of Ops",
+        "attach": "PPM history attached"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

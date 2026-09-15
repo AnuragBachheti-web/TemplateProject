@@ -1,0 +1,250 @@
+{
+  "proposal_id": "prop_s10_2_execute",
+  "story_code": "S10.2",
+  "stage": "execute",
+  "action_type": "reorder",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "navigator",
+  "title": "Week-7 trough projects $31K below buffer",
+  "narrative": "The PO delay is a request, not a fact, until the suppliers confirm. The terms ask is a conversation Sourcer runs. Nothing here moves money by itself.",
+  "status_note": "Execute · 0 of 4 stages · 12 items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages dispatched",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12"
+      },
+      {
+        "label": "Relief secured",
+        "value": "$0K"
+      },
+      {
+        "label": "Cash cost",
+        "value": "$0"
+      },
+      {
+        "label": "Levers held in reserve",
+        "value": "2"
+      }
+    ],
+    "verification": [
+      {
+        "label": "Week-7 trough",
+        "note": "reprojected from live settlement data",
+        "plan": "$89K",
+        "tol": "≥ $120K",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Weekly net cash vs plan",
+        "note": "each Monday, all four channels",
+        "plan": "±$8K",
+        "tol": "±$15K",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Kessler terms answer",
+        "note": "Net 60 ask · 64% projected",
+        "plan": "Net 60",
+        "tol": "by Oct 4",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "PO confirmations",
+        "note": "2 suppliers, new dates",
+        "plan": "2 of 2",
+        "tol": "by Aug 27",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Amazon reserve rate",
+        "note": "assumed 7% of the Oct 12 payout",
+        "plan": "7%",
+        "tol": "≤ 9%",
+        "actual": "awaiting",
+        "read": "not armed"
+      }
+    ],
+    "rollback": [
+      {
+        "name": "PO date changes",
+        "note": "reversible until supplier confirms",
+        "btnLabel": "not sent"
+      },
+      {
+        "name": "Terms ask",
+        "note": "cannot be unasked once sent",
+        "btnLabel": "not sent"
+      },
+      {
+        "name": "Anomaly watches",
+        "note": "disarm at any time",
+        "btnLabel": "not sent"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a breach re-opens this card with the draw pre-selected and waits for you.",
+    "plan": [
+      {
+        "name": "PO timing to Planner",
+        "meta": "2 POs moved week 7 → week 8 · cover recalculated · service level 96.1%",
+        "doorLabel": "S9.2 replenishment",
+        "relief": "+$26K",
+        "statusLabel": "staged",
+        "btnLabel": "Send",
+        "items": [
+          {
+            "name": "PO-4612 · Core cookware",
+            "detail": "Confirmed date moves to Oct 13, four days after Amazon settles. Cover on three SKUs dips to 24 days at the crossover — inside the Core floor.",
+            "value": "$14K",
+            "tag": "week 8",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "PO-4618 · filtration",
+            "detail": "Meridian is already on an OTD watch, so the delay is requested with a firm confirm-by date rather than assumed.",
+            "value": "$12K",
+            "tag": "week 8",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Reorder points recalculated",
+            "detail": "Planner re-runs cover for the affected SKUs at the new dates. If any drops under 21 days the request is withdrawn automatically.",
+            "value": "7 SKUs",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Terms brief to Sourcer",
+        "meta": "Net 45 → Net 60 ask added to the Kessler brief · answer by Oct 4",
+        "doorLabel": "S9.17 supplier",
+        "human": "Sourcer sends",
+        "relief": "+$31K",
+        "statusLabel": "staged",
+        "btnLabel": "Send",
+        "items": [
+          {
+            "name": "Terms ask added to the existing brief",
+            "detail": "Kessler is already mid-negotiation on their price notice. The terms ask goes into the same letter rather than arriving as a second request a week later.",
+            "value": "15 days",
+            "tag": "one conversation",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Cash value stated in the brief",
+            "detail": "The brief now carries what the terms are worth to us — $31K of working capital per cycle — so the trade against price is visible to whoever runs the call.",
+            "value": "$31K",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Contingency if declined",
+            "detail": "A no on Oct 4 leaves three days before the PO is due. The credit draw stays costed and ready as the fallback, and the card re-opens automatically.",
+            "value": "Oct 4",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Settlement anomaly watches",
+        "meta": "4 watches armed across the channels the plan depends on",
+        "relief": "guardrail",
+        "statusLabel": "staged",
+        "btnLabel": "Send",
+        "items": [
+          {
+            "name": "Amazon reserve rate",
+            "detail": "The plan assumes 7% held as rolling reserve. Every extra point costs about $1.4K of the Oct 12 payout, and the reserve is theirs to change.",
+            "value": "7% assumed",
+            "tag": "critical",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Payout date drift",
+            "detail": "A settlement landing two days late moves it past the week boundary and the trough deepens by the full payout. Watched daily from Oct 8.",
+            "value": "±2 days",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Wholesale receivable ageing",
+            "detail": "Two Faire invoices in week 8 are load-bearing. Anything past 35 days triggers a chase before it becomes a cash problem.",
+            "value": "2 invoices",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Plan of record and reprojection",
+        "meta": "CASH-Q4-0071 · weekly Monday reprojection · Ledger entry",
+        "relief": "logged",
+        "statusLabel": "staged",
+        "btnLabel": "Send",
+        "items": [
+          {
+            "name": "Plan filed to the Ledger",
+            "detail": "Both levers, their costs, the two levers not used and why, and the buffer left unchanged at $120K. The next trough starts from this record.",
+            "value": "CASH-Q4-0071",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Weekly reprojection scheduled",
+            "detail": "Actual against plan every Monday, with the 13-week ladder rebuilt from live settlement data rather than from last week’s assumptions.",
+            "value": "13 weeks",
+            "tag": "Mondays",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Unused levers kept costed",
+            "detail": "Clearance acceleration and the credit draw stay priced and one click from ready. A reversal does not restart the analysis.",
+            "value": "2 held",
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

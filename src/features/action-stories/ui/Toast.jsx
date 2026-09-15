@@ -112,6 +112,9 @@ export function ToastProvider({ children }) {
 }
 
 /** @returns {{ notify: (message: string, opts?: { tone?: 'success'|'critical'|'warning'|'info', duration?: number }) => number, dismiss: (id: number) => void }} */
+// A context's provider and its own accessor hook belong in one file; splitting them to satisfy
+// Fast Refresh would buy nothing but an extra import everywhere ToastProvider is used.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useToast() {
   const ctx = useContext(ToastContext);
   if (!ctx) {

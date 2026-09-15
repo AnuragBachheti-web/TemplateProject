@@ -1,0 +1,71 @@
+{
+  "proposal_id": "prop_s9_6_execute",
+  "story_code": "S9.6",
+  "stage": "execute",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Listing audit — 18 listings below CVR benchmark",
+  "narrative": "0 of 5 content elements pushed · snapshot v18 current",
+  "status_note": "Execute · 0 of 5 pushed",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "CVR · 14 d pre vs post",
+        "value": "9.8% pre",
+        "prePct": "75%",
+        "postPct": "75%",
+        "note": "Pre-period is the 14 days before the push: 9.8% on 41,200 sessions."
+      },
+      {
+        "label": "Buy Box · 14 d pre vs post",
+        "value": "62% pre",
+        "prePct": "62%",
+        "postPct": "62%",
+        "note": "Will not move until the offer change applies."
+      },
+      {
+        "label": "CM per unit",
+        "value": "$9.40",
+        "prePct": "94%",
+        "postPct": "94%",
+        "note": "Margin lens holds the 28% floor. At $24.35 we sit at 36%."
+      }
+    ],
+    "ledger_note": "On push, Realify writes one entry with the complete diff, the snapshot reference and the projected lift range to check against.",
+    "bulk_note": "Elements push together per listing so the 14-day pre and post read stays attributable to one change set."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

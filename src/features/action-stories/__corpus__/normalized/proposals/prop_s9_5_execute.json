@@ -1,0 +1,118 @@
+{
+  "proposal_id": "prop_s9_5_execute",
+  "story_code": "S9.5",
+  "stage": "execute",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "scout",
+  "title": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
+  "narrative": "",
+  "status_note": "Execute · 0 of 3 pushed · SLA 1h 52m",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Buy Box recovery",
+        "value": "52% now",
+        "pct": "52%",
+        "note": "Share sits at 52% until the price answer lands."
+      },
+      {
+        "label": "Margin at new price",
+        "value": "33%",
+        "pct": "86%",
+        "note": "Five points above the 28% Hero floor. Margin lens is watching the same number."
+      },
+      {
+        "label": "Counter-move risk · 72h",
+        "value": "—",
+        "pct": "0%",
+        "note": "Two of the nine tracked sellers have followed CompetitorA within a week before."
+      }
+    ],
+    "targets": [
+      {
+        "label": "Price writes",
+        "value": "3 queued"
+      },
+      {
+        "label": "Agent tasks",
+        "value": "0 of 2 sent"
+      },
+      {
+        "label": "Watch cadence",
+        "value": "4 h"
+      },
+      {
+        "label": "SLA remaining",
+        "value": "1h 52m"
+      }
+    ],
+    "rollback_note": "Restore becomes available as soon as the first price is live. The old prices are already recorded in the Ledger.",
+    "bulk_note": "Writes go to all three channels together so we never sit at three different prices on the same SKU.",
+    "plan": [
+      {
+        "name": "Amazon US",
+        "listing": "B08KJ2R · Ridgeline stoneware bowl",
+        "cm": "33%",
+        "cmUnit": "$7.65/u",
+        "map": "+$1.40",
+        "diff": "$24.95 → $23.20",
+        "pct": "−7.0%",
+        "status": "Queued"
+      },
+      {
+        "name": "Shopify DTC",
+        "listing": "northwind.com · ridgeline-bowl",
+        "cm": "35%",
+        "cmUnit": "$8.40/u",
+        "map": "+$2.15",
+        "diff": "$24.95 → $23.95",
+        "pct": "−4.0%",
+        "status": "Queued"
+      },
+      {
+        "name": "Walmart Marketplace",
+        "listing": "WM-4471 · Ridgeline bowl",
+        "cm": "31%",
+        "cmUnit": "$7.45/u",
+        "map": "+$2.19",
+        "diff": "$25.49 → $23.99",
+        "pct": "−5.9%",
+        "status": "Queued"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

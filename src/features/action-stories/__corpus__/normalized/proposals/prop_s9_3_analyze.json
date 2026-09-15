@@ -1,0 +1,279 @@
+{
+  "proposal_id": "prop_s9_3_analyze",
+  "story_code": "S9.3",
+  "stage": "analyze",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "planner",
+  "title": "Rebalance — 6 channel stock-outs with sister-channel excess",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "detail_rows": [
+      {
+        "lane": "DC-East → FBA-West",
+        "mode": "LTL + FBA inbound · 6 d",
+        "cost": "$2.16",
+        "transit": "6 d",
+        "ratio": "5.2×"
+      },
+      {
+        "lane": "DC-West → DC-East",
+        "mode": "ground parcel · 3 d",
+        "cost": "$0.94",
+        "transit": "3 d",
+        "ratio": "11.3×"
+      },
+      {
+        "lane": "DC-West → WFS",
+        "mode": "LTL + WFS inbound · 4 d",
+        "cost": "$1.60",
+        "transit": "4 d",
+        "ratio": "6.3×"
+      },
+      {
+        "lane": "FBA-West → FBA-East",
+        "mode": "removal + re-inbound · 9 d",
+        "cost": "$2.24",
+        "transit": "9 d",
+        "ratio": "5.0×"
+      },
+      {
+        "lane": "DC-East → WFS",
+        "mode": "LTL + WFS inbound · 5 d",
+        "cost": "$2.40",
+        "transit": "5 d",
+        "ratio": "1.3×"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "node": "DC-West · wholesale",
+        "units": "1,030 u excess",
+        "cover": "5.1 wk cover",
+        "cm": "$6.80/u",
+        "pull": "pull first"
+      },
+      {
+        "node": "DC-East · DTC fulfilment",
+        "units": "1,460 u excess",
+        "cover": "4.6 wk cover",
+        "cm": "$18.40/u",
+        "pull": "pull to FBA only"
+      },
+      {
+        "node": "FBA-West",
+        "units": "390 u excess",
+        "cover": "4.2 wk cover",
+        "cm": "$11.20/u",
+        "pull": "costly to move"
+      },
+      {
+        "node": "WFS",
+        "units": "160 u excess",
+        "cover": "2.6 wk cover",
+        "cm": "$9.60/u",
+        "pull": "at floor · do not pull"
+      }
+    ],
+    "entities": [
+      {
+        "name": "Ridgeline mug 14oz",
+        "sku": "NW-CER-1210",
+        "risk": "−$4.8K",
+        "cells": [
+          {
+            "cover": "4.9 wk",
+            "units": "1,180 u"
+          },
+          {
+            "cover": "0.0 wk",
+            "units": "0 u"
+          },
+          {
+            "cover": "1.6 wk",
+            "units": "240 u"
+          },
+          {
+            "cover": "2.8 wk",
+            "units": "190 u"
+          },
+          {
+            "cover": "5.4 wk",
+            "units": "620 u"
+          }
+        ]
+      },
+      {
+        "name": "Ridgeline stoneware bowl",
+        "sku": "NW-CER-1120",
+        "risk": "−$3.6K",
+        "cells": [
+          {
+            "cover": "4.4 wk",
+            "units": "960 u"
+          },
+          {
+            "cover": "0.0 wk",
+            "units": "0 u"
+          },
+          {
+            "cover": "2.2 wk",
+            "units": "310 u"
+          },
+          {
+            "cover": "3.1 wk",
+            "units": "210 u"
+          },
+          {
+            "cover": "4.8 wk",
+            "units": "540 u"
+          }
+        ]
+      },
+      {
+        "name": "Quilted oven mitt pair",
+        "sku": "NW-TEX-5180",
+        "risk": "−$1.9K",
+        "cells": [
+          {
+            "cover": "1.2 wk",
+            "units": "140 u"
+          },
+          {
+            "cover": "3.4 wk",
+            "units": "480 u"
+          },
+          {
+            "cover": "0.8 wk",
+            "units": "90 u"
+          },
+          {
+            "cover": "2.6 wk",
+            "units": "160 u"
+          },
+          {
+            "cover": "5.1 wk",
+            "units": "410 u"
+          }
+        ]
+      },
+      {
+        "name": "Carbon steel pan 10in",
+        "sku": "NW-PAN-2210",
+        "risk": "−$1.6K",
+        "cells": [
+          {
+            "cover": "3.8 wk",
+            "units": "420 u"
+          },
+          {
+            "cover": "1.4 wk",
+            "units": "180 u"
+          },
+          {
+            "cover": "4.1 wk",
+            "units": "460 u"
+          },
+          {
+            "cover": "0.6 wk",
+            "units": "40 u"
+          },
+          {
+            "cover": "3.2 wk",
+            "units": "280 u"
+          }
+        ]
+      },
+      {
+        "name": "Cut-glass tumbler set",
+        "sku": "NW-GLS-3390",
+        "risk": "−$1.4K",
+        "cells": [
+          {
+            "cover": "5.2 wk",
+            "units": "610 u"
+          },
+          {
+            "cover": "2.1 wk",
+            "units": "240 u"
+          },
+          {
+            "cover": "2.4 wk",
+            "units": "260 u"
+          },
+          {
+            "cover": "0.0 wk",
+            "units": "0 u"
+          },
+          {
+            "cover": "2.9 wk",
+            "units": "220 u"
+          }
+        ]
+      },
+      {
+        "name": "Alder chef knife 8in",
+        "sku": "NW-KNF-0480",
+        "risk": "−$0.9K",
+        "cells": [
+          {
+            "cover": "2.6 wk",
+            "units": "280 u"
+          },
+          {
+            "cover": "4.2 wk",
+            "units": "390 u"
+          },
+          {
+            "cover": "1.1 wk",
+            "units": "110 u"
+          },
+          {
+            "cover": "3.4 wk",
+            "units": "190 u"
+          },
+          {
+            "cover": "4.6 wk",
+            "units": "340 u"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

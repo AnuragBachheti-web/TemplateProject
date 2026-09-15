@@ -1,0 +1,106 @@
+{
+  "proposal_id": "prop_s10_1_reason",
+  "story_code": "S10.1",
+  "stage": "reason",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "steward",
+  "title": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 19 · 06:02",
+        "what": "Variance Bridge Engine closed the books on Aug 18 and measured CM at $10,640 against a $12,480 baseline."
+      },
+      {
+        "when": "Aug 19 · 06:03",
+        "what": "The −$1,840 move cleared the ±$1,200 materiality band, so the bridge ran a full decomposition rather than logging the day quietly."
+      },
+      {
+        "when": "Aug 19 · 06:04",
+        "what": "Anomaly Classifier tagged five of six drivers expected and one unexpected — an FBA fee change worth −$2,210 that nothing in the contract anticipated."
+      }
+    ],
+    "policy": [
+      {
+        "term": "Net rev",
+        "definition": "Gross revenue less discounts and cancellations, at the order date rather than the settlement date."
+      },
+      {
+        "term": "COGS",
+        "definition": "Landed cost at the moving average in force on the order date, including freight and duty."
+      },
+      {
+        "term": "Fees",
+        "definition": "Channel commission, referral and payment processing as settled, not as quoted."
+      },
+      {
+        "term": "Fulfillment",
+        "definition": "Pick, pack, postage and packaging — the same CPO components the fulfilment flow reads."
+      },
+      {
+        "term": "Returns",
+        "definition": "Actual refunds processed in the period, not a provision. Restocking recovery is netted in."
+      },
+      {
+        "term": "Ads",
+        "definition": "Platform spend attributed to the day it ran, including any deal or promotion fees."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Steward",
+        "role": "Owns the bridge, the contract and the residual target."
+      },
+      {
+        "name": "Scout",
+        "role": "Watches for external causes — fee schedules, policy changes, competitor moves."
+      },
+      {
+        "name": "Variance Bridge Engine",
+        "role": "Decomposes the daily move in the order above and computes the residual."
+      },
+      {
+        "name": "Anomaly Classifier",
+        "role": "Tags each driver expected or unexpected, with the evidence it used."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

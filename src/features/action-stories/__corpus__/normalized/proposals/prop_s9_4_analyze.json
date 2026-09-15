@@ -1,0 +1,177 @@
+{
+  "proposal_id": "prop_s9_4_analyze",
+  "story_code": "S9.4",
+  "stage": "analyze",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Budget + inventory pairing — $18K shift proposal",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "Amazon Ads · $52K plan",
+        "value": "104%",
+        "pct": "100%"
+      },
+      {
+        "label": "Google · $26K plan",
+        "value": "97%",
+        "pct": "97%"
+      },
+      {
+        "label": "Meta · $22K plan",
+        "value": "99%",
+        "pct": "99%"
+      },
+      {
+        "label": "TikTok Spark · $9K plan",
+        "value": "100%",
+        "pct": "100%"
+      },
+      {
+        "label": "Walmart DSP · $18K plan",
+        "value": "88%",
+        "pct": "88%"
+      }
+    ],
+    "distribution": [
+      {
+        "x": "827.5",
+        "y": "213.3",
+        "r": 4.5,
+        "label": "Amazon Ads · $52K · 0.95"
+      },
+      {
+        "x": "435.7",
+        "y": "196.1",
+        "r": 4.5,
+        "label": "Google · $26K · 1.26"
+      },
+      {
+        "x": "375.5",
+        "y": "193.6",
+        "r": 6,
+        "label": "Meta · $22K · 1.31"
+      },
+      {
+        "x": "179.6",
+        "y": "137.9",
+        "r": 6,
+        "label": "TikTok Spark · $9K · 2.31"
+      },
+      {
+        "x": "315.2",
+        "y": "224.8",
+        "r": 4.5,
+        "label": "Walmart DSP · $18K · 0.74"
+      }
+    ],
+    "detail_rows": [
+      {
+        "campaign": "TikTok Spark · Ridgeline launch CMP-8841 · 2 SKUs",
+        "spend": "$9.0K",
+        "mroas": "2.31×",
+        "inc": "+$9.8K",
+        "cover": "2.4 wk",
+        "verdict": "Scale + transfer"
+      },
+      {
+        "campaign": "Meta Advantage+ · Kitchen core CMP-7710 · 14 SKUs",
+        "spend": "$22.0K",
+        "mroas": "1.31×",
+        "inc": "+$5.4K",
+        "cover": "2.9 wk",
+        "verdict": "Scale + transfer"
+      },
+      {
+        "campaign": "Google PMax · Long tail CMP-6402 · 38 SKUs",
+        "spend": "$26.0K",
+        "mroas": "1.26×",
+        "inc": "+$5.1K",
+        "cover": "5.2 wk",
+        "verdict": "Hold"
+      },
+      {
+        "campaign": "TikTok Spark · Glassware test CMP-8902 · 3 SKUs",
+        "spend": "$0.0K",
+        "mroas": "2.05×",
+        "inc": "+$8.6K",
+        "cover": "3.1 wk",
+        "verdict": "Test next cycle"
+      },
+      {
+        "campaign": "Amazon SP · Defensive brand CMP-2214 · 4 head terms",
+        "spend": "$52.0K",
+        "mroas": "0.95×",
+        "inc": "+$3.9K",
+        "cover": "6.1 wk",
+        "verdict": "Hold · floor"
+      },
+      {
+        "campaign": "Walmart DSP · Prospecting CMP-5150 · 22 SKUs",
+        "spend": "$18.0K",
+        "mroas": "0.88×",
+        "inc": "+$3.4K",
+        "cover": "7.4 wk",
+        "verdict": "Cut to floor"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "name": "TikTok Spark · Ridgeline mug + bowl",
+        "mroas": "2.31× CM",
+        "cover": "2.4 wk cover",
+        "fix": "Transfer T-142 moves 1,400 u to FBA-West and lands Sep 02. Cover goes to 4.1 wk."
+      },
+      {
+        "name": "Meta Advantage+ · Quilted oven mitt",
+        "mroas": "1.31× CM",
+        "cover": "2.9 wk cover",
+        "fix": "Transfer T-149 moves 320 u to DC-East. Cover goes to 4.6 wk."
+      },
+      {
+        "name": "TikTok Spark · Cut-glass tumbler set",
+        "mroas": "2.05× CM",
+        "cover": "3.1 wk cover",
+        "fix": "Sits just above the guardrail. Verrier PO lands Sep 18 — test after receipt, not before."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -104,6 +104,11 @@ export function validateManifest(manifest) {
         problems.push(`${where}: "dependencies" must be an array of non-empty strings when present`)
       }
     }
+    // `selectable` marks the ONE block a page may attach row-selection state to (Approve-selected's
+    // slate). Optional and additive: a template that never sets it renders exactly as before.
+    if (block.selectable !== undefined && typeof block.selectable !== 'boolean') {
+      problems.push(`${where}: "selectable" must be a boolean when present`)
+    }
     if (block.region !== undefined && !REGIONS.has(block.region)) {
       problems.push(`${where}: "region" must be one of: ${[...REGIONS].join(', ')}`)
     }

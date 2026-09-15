@@ -1,0 +1,223 @@
+{
+  "proposal_id": "prop_s9_5_decide",
+  "story_code": "S9.5",
+  "stage": "decide",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "scout",
+  "title": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
+  "narrative": "",
+  "status_note": "Decide · Match within guardrail · net −$1.7K over 30 days",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "slate": [
+      {
+        "rank": "01",
+        "name": "Bundle counter",
+        "detail": "List the bowl with the 14oz mug as a $36.90 bundle. Keeps the single-unit price at $24.95 and answers on value instead of price, but the listing takes five days to build and photograph.",
+        "cm": "−$1.4K",
+        "owner": "Merchandiser",
+        "stats": [
+          {
+            "label": "Price after",
+            "value": "$24.95"
+          },
+          {
+            "label": "CM after",
+            "value": "35%"
+          },
+          {
+            "label": "Buy Box prob",
+            "value": "61%"
+          },
+          {
+            "label": "Volume band",
+            "value": "+3 to +8%"
+          },
+          {
+            "label": "Time to effect",
+            "value": "5 d"
+          }
+        ],
+        "slaNote": "5 d build · misses the 4h SLA"
+      },
+      {
+        "rank": "02",
+        "name": "Match within guardrail",
+        "detail": "Move to $23.20 across channels — the lowest compliant price on the ladder, 6% above the MAP floor. Holds the Buy Box at 86% probability and answers inside the SLA.",
+        "cm": "−$1.7K",
+        "owner": "Pricer",
+        "stats": [
+          {
+            "label": "Price after",
+            "value": "$23.20"
+          },
+          {
+            "label": "CM after",
+            "value": "33%"
+          },
+          {
+            "label": "Buy Box prob",
+            "value": "86%"
+          },
+          {
+            "label": "Volume band",
+            "value": "+4 to +9%"
+          },
+          {
+            "label": "Time to effect",
+            "value": "30 min"
+          }
+        ]
+      },
+      {
+        "rank": "03",
+        "name": "Partial close · 50% of the gap",
+        "detail": "Move to $24.10, half the distance to CompetitorA. Keeps 36% CM but the Buy Box model only gives it a 54% win rate, because price is the dominant term on this listing.",
+        "cm": "−$2.1K",
+        "owner": "Pricer",
+        "stats": [
+          {
+            "label": "Price after",
+            "value": "$24.10"
+          },
+          {
+            "label": "CM after",
+            "value": "36%"
+          },
+          {
+            "label": "Buy Box prob",
+            "value": "54%"
+          },
+          {
+            "label": "Volume band",
+            "value": "+1 to +4%"
+          },
+          {
+            "label": "Time to effect",
+            "value": "30 min"
+          }
+        ]
+      },
+      {
+        "rank": "04",
+        "name": "Hold price + boost ads",
+        "detail": "Keep $24.95 and buy back the traffic: raise defensive bids on the four head terms with a $1.9K monthly cap. Protects unit margin, replaces some of the lost Buy Box traffic with paid.",
+        "cm": "−$2.3K",
+        "owner": "Bidder",
+        "stats": [
+          {
+            "label": "Price after",
+            "value": "$24.95"
+          },
+          {
+            "label": "CM after",
+            "value": "38%"
+          },
+          {
+            "label": "Buy Box prob",
+            "value": "58%"
+          },
+          {
+            "label": "Volume band",
+            "value": "0 to +3%"
+          },
+          {
+            "label": "Time to effect",
+            "value": "2 h"
+          }
+        ]
+      },
+      {
+        "rank": "05",
+        "name": "Hold price + content upgrade",
+        "detail": "Keep $24.95 and answer on conversion: new hero image set, comparison module, and a size guide. Content is a permanent asset, but it takes three days and does not touch the Buy Box.",
+        "cm": "−$2.6K",
+        "owner": "Merchandiser",
+        "stats": [
+          {
+            "label": "Price after",
+            "value": "$24.95"
+          },
+          {
+            "label": "CM after",
+            "value": "38%"
+          },
+          {
+            "label": "Buy Box prob",
+            "value": "52%"
+          },
+          {
+            "label": "Volume band",
+            "value": "−2 to +2%"
+          },
+          {
+            "label": "Time to effect",
+            "value": "3 d"
+          }
+        ],
+        "slaNote": "3 d · misses the 4h SLA"
+      },
+      {
+        "rank": "06",
+        "name": "Ignore · accept the share loss",
+        "detail": "Do nothing and hold both price and spend. Buy Box share settles at 52%, which is 294 units and 26 points of share over 30 days. The number is here so the choice is explicit.",
+        "cm": "−$3.4K",
+        "owner": "no owner",
+        "stats": [
+          {
+            "label": "Price after",
+            "value": "$24.95"
+          },
+          {
+            "label": "CM after",
+            "value": "38%"
+          },
+          {
+            "label": "Buy Box prob",
+            "value": "52%"
+          },
+          {
+            "label": "Volume band",
+            "value": "−9 to −5%"
+          },
+          {
+            "label": "Time to effect",
+            "value": "none"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

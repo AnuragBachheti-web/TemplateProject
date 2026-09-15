@@ -1,0 +1,134 @@
+{
+  "proposal_id": "prop_s9_4_execute",
+  "story_code": "S9.4",
+  "stage": "execute",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Budget + inventory pairing — $18K shift proposal",
+  "narrative": "On apply, Realify writes one entry with the before and after split, the paired transfers, and the projected CM to check against.",
+  "status_note": "Execute · 0 of 5 changes applied",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Realized mROAS vs projection",
+        "value": "projection 2.31×",
+        "pct": "0%",
+        "note": "Realify compares realized CM per dollar against the projection daily."
+      },
+      {
+        "label": "Pacing · TikTok ramp",
+        "value": "ramp not started",
+        "pct": "0%",
+        "note": "Holds at 60% until transfer T-142 lands on Sep 02, then opens to full budget."
+      },
+      {
+        "label": "Cover on scaled SKUs",
+        "value": "2.4 wk today",
+        "pct": "48%",
+        "note": "Falls below 3 weeks and Realify throttles spend before it sells the stock out."
+      }
+    ],
+    "targets": [
+      {
+        "label": "Platform budget writes",
+        "value": "5 queued"
+      },
+      {
+        "label": "Transfer orders via 9.3",
+        "value": "2 queued"
+      },
+      {
+        "label": "Cadence",
+        "value": "weekly"
+      }
+    ],
+    "rollback_note": "Nothing has reached a platform yet. Restore becomes available the moment the first change applies.",
+    "bulk_note": "Budget writes go out together so the envelope never leaves $130K, even mid-apply.",
+    "plan": [
+      {
+        "name": "TikTok · Spark Ads",
+        "scope": "CMP-8841 · Ridgeline launch",
+        "api": "TikTok Business API",
+        "effective": "effective Aug 19 00:00",
+        "pacing": "60% ramp · 5 d",
+        "range": "$9K → $27K",
+        "delta": "+$18K",
+        "status": "Queued"
+      },
+      {
+        "name": "Walmart DSP",
+        "scope": "CMP-5150 · prospecting",
+        "api": "Walmart DSP API",
+        "effective": "effective Aug 19 00:00",
+        "pacing": "even daily",
+        "range": "$18K → $6K",
+        "delta": "−$12K",
+        "status": "Queued"
+      },
+      {
+        "name": "Google · PMax",
+        "scope": "CMP-6402 · long tail",
+        "api": "Google Ads API v17",
+        "effective": "effective Aug 19 00:00",
+        "pacing": "even daily",
+        "range": "$26K → $20K",
+        "delta": "−$6K",
+        "status": "Queued"
+      },
+      {
+        "name": "Meta · Advantage+",
+        "scope": "CMP-7710 · kitchen core",
+        "api": "Meta Marketing API",
+        "effective": "effective Aug 20 00:00",
+        "pacing": "75% ramp · 3 d",
+        "range": "$22K → $25K",
+        "delta": "+$3K",
+        "status": "Queued"
+      },
+      {
+        "name": "Amazon Ads · SP",
+        "scope": "CMP-2214 · defensive brand",
+        "api": "Amazon Ads API",
+        "effective": "effective Aug 19 00:00",
+        "pacing": "even daily",
+        "range": "$52K → $49K",
+        "delta": "−$3K",
+        "status": "Queued"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

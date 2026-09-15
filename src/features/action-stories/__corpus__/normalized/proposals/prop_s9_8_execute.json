@@ -1,0 +1,134 @@
+{
+  "proposal_id": "prop_s9_8_execute",
+  "story_code": "S9.8",
+  "stage": "execute",
+  "action_type": "adjust_assortment",
+  "cardinality": "one",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Launch — Enamel Dutch Oven 5qt · date Sep 12",
+  "narrative": "1 blocker ahead · owner pinged, it blocks step 3",
+  "status_note": "Execute · 0 of 7 steps · 1 blocker",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "This proposal has a single item."
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Units vs prior",
+        "value": "awaiting launch",
+        "pct": "0%",
+        "note": "Compared daily against the P50 prior and the 180-unit target."
+      },
+      {
+        "label": "Review pace",
+        "value": "seed armed",
+        "pct": "0%",
+        "note": "400-address seed segment fires on day 3 after first delivery."
+      },
+      {
+        "label": "Return rate",
+        "value": "screen armed",
+        "pct": "0%",
+        "note": "The 12% kill line is what the early return screen watches for."
+      }
+    ],
+    "ledger_note": "Realify opens the launch entry when the first step runs, and adds every step, gate read and decision to it as they happen.",
+    "plan": [
+      {
+        "label": "Create listings on DTC, Amazon and Walmart",
+        "system": "Shopify Admin · SP-API · Walmart Seller",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "due": "Aug 22",
+        "status": "ready",
+        "btnLabel": "Run"
+      },
+      {
+        "label": "Release the 900-unit PO and book inbound",
+        "system": "Supplier K EDI · WMS receipts",
+        "owner": "Planner",
+        "ownerInitials": "Pl",
+        "due": "Aug 22",
+        "status": "waiting",
+        "btnLabel": "Run"
+      },
+      {
+        "label": "Publish the content pack to every channel",
+        "system": "Listing APIs · A+ builder",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "due": "Sep 08",
+        "blocker": "Walmart hero set not shot · Studio pinged",
+        "status": "blocked",
+        "btnLabel": "Ping Studio"
+      },
+      {
+        "label": "Arm the review program on the seed segment",
+        "system": "Klaviyo · 400 addresses",
+        "owner": "Promoter",
+        "ownerInitials": "Po",
+        "due": "Sep 10",
+        "status": "waiting",
+        "btnLabel": "Run"
+      },
+      {
+        "label": "Switch on the four launch campaigns",
+        "system": "Google Ads · Meta · Amazon Ads",
+        "owner": "Bidder",
+        "ownerInitials": "Bd",
+        "due": "Sep 12",
+        "status": "waiting",
+        "btnLabel": "Run"
+      },
+      {
+        "label": "Send the email and SMS announcement",
+        "system": "Klaviyo · 18.4K subscribers",
+        "owner": "Promoter",
+        "ownerInitials": "Po",
+        "due": "Sep 12",
+        "status": "waiting",
+        "btnLabel": "Run"
+      },
+      {
+        "label": "Open Amazon and Walmart listings",
+        "system": "SP-API · Walmart Seller",
+        "owner": "Merchandiser",
+        "ownerInitials": "Me",
+        "due": "Oct 03",
+        "status": "waiting",
+        "btnLabel": "Run"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -1,0 +1,144 @@
+{
+  "proposal_id": "prop_s9_3_execute",
+  "story_code": "S9.3",
+  "stage": "execute",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "planner",
+  "title": "Rebalance — 6 channel stock-outs with sister-channel excess",
+  "narrative": "Nothing has been written to the WMS yet. Orders create with their pick wave and inbound plan together.",
+  "status_note": "Execute · 0 of 5 created",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Units in transit",
+        "value": "0 u",
+        "pct": "0%",
+        "note": "Tracked from pick to receipt at the destination node."
+      },
+      {
+        "label": "Receipt on time",
+        "value": "plan only",
+        "pct": "0%",
+        "note": "A receipt more than two days late reopens this cycle in the Actions queue."
+      },
+      {
+        "label": "Buy Box recovery · FBA-West",
+        "value": "blocked at zero",
+        "pct": "0%",
+        "note": "Nothing recovers until units land."
+      },
+      {
+        "label": "Source node cover",
+        "value": "4.6 wk lowest",
+        "pct": "92%",
+        "note": "DC-East after T-142 and T-153. Still above its 2.0 week floor."
+      }
+    ],
+    "targets": [
+      {
+        "label": "T-142 · FBA-West",
+        "value": "1,400 u"
+      },
+      {
+        "label": "T-149 · DTC",
+        "value": "320 u"
+      },
+      {
+        "label": "T-151 · FBA-East",
+        "value": "180 u"
+      },
+      {
+        "label": "T-152 · WFS",
+        "value": "120 u"
+      },
+      {
+        "label": "T-153 · FBA-East",
+        "value": "240 u"
+      }
+    ],
+    "rollback_note": "Cancellation applies to created orders. Nothing has reached the WMS yet, so there is nothing to reverse.",
+    "ledger_note": "On creation, Realify writes one entry per lane with the origin cover before and after, the cost and the CM it serves.",
+    "bulk_note": "Each order writes its pick wave and inbound plan together, so a half-created transfer cannot exist.",
+    "plan": [
+      {
+        "id": "T-142",
+        "name": "Ridgeline mug + bowl → FBA-West",
+        "lane": "DC-East → FBA-West · LTL + FBA inbound",
+        "wave": "Aug 27 · 06:00",
+        "units": "1,400 u",
+        "eta": "Sep 02",
+        "status": "draft"
+      },
+      {
+        "id": "T-149",
+        "name": "Quilted oven mitt → DTC",
+        "lane": "DC-West → DC-East · ground parcel",
+        "wave": "Aug 26 · 06:00",
+        "units": "320 u",
+        "eta": "Aug 29",
+        "status": "draft"
+      },
+      {
+        "id": "T-151",
+        "name": "Alder chef knife → FBA-East",
+        "lane": "FBA-West → FBA-East · removal + re-inbound",
+        "wave": "Aug 26 · removal",
+        "units": "180 u",
+        "eta": "Sep 04",
+        "status": "draft"
+      },
+      {
+        "id": "T-152",
+        "name": "Carbon steel pan → WFS",
+        "lane": "DC-West → WFS · LTL + WFS inbound",
+        "wave": "Aug 27 · 06:00",
+        "units": "120 u",
+        "eta": "Aug 30",
+        "status": "draft"
+      },
+      {
+        "id": "T-153",
+        "name": "Ridgeline mug top-up → FBA-East",
+        "lane": "DC-East → FBA-East · LTL + FBA inbound",
+        "wave": "Aug 27 · 06:00",
+        "units": "240 u",
+        "eta": "Sep 01",
+        "status": "draft"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

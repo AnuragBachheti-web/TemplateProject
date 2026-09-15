@@ -1,0 +1,188 @@
+{
+  "proposal_id": "prop_s10_5_execute",
+  "story_code": "S10.5",
+  "stage": "execute",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "steward",
+  "title": "Hero image replaced by third-party contribution — 41h ago",
+  "narrative": "Re-pushes go first: getting our own content back does not wait on a dispute. Then the pipeline fixes, so the repairs are not undone by the next cycle.",
+  "status_note": "Execute · 0 of 4 stages · re-pushes go before disputes",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages complete",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Fields restored",
+        "value": "0 of 8"
+      },
+      {
+        "label": "Daily bleed stopped",
+        "value": "$0"
+      },
+      {
+        "label": "Feed rows replayed",
+        "value": "0"
+      },
+      {
+        "label": "Blocks unstranded",
+        "value": "0 of 6"
+      }
+    ],
+    "plan": [
+      {
+        "name": "Canonical re-pushes",
+        "meta": "8 fields across 3 channels · every push carries a diff and a version snapshot",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Hero image · ASIN B0Y",
+            "detail": "Canonical asset restored first, before any dispute is filed. The $310/day stops on this push, not on the case decision.",
+            "value": "$310/day",
+            "tag": "critical",
+            "diffAfter": "hero-dutch-5qt-v4.jpg · PIM v4 · 2000px, compliant",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Price · Filtration Pitcher",
+            "detail": "Cache purged and canonical price re-pushed, with price excluded from the theme cache so a rebuild cannot serve a stale value again.",
+            "value": "$40/day",
+            "diffAfter": "$34.99 · 41.2% contribution · parity restored",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Bullets, A+ modules and image sets",
+            "detail": "Brand copy, both missing A+ modules and the full seven-image set restored from canonical, with the scale reference back in position three.",
+            "value": "$50/day",
+            "tag": "4 listings",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Pipeline fixes and replay",
+        "meta": "template patch, partial-file guard, 412 rejected rows replayed",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Feed template character limit",
+            "detail": "Template v10 corrects the Walmart title limit, then replays across all four listings. Re-pushing values without this would have been undone on the next cycle.",
+            "value": "$30/day",
+            "tag": "fixes 4 listings",
+            "diffAfter": "v10 · title limit 200 · full 118-character titles",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Partial-file guard armed",
+            "detail": "An inventory or content file that arrives incomplete is now rejected rather than applied to the rows it reached. This is what zeroed a live SKU for nine hours.",
+            "value": "3 drifts",
+            "tag": "prevents a class",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "412 rejected rows queued for replay",
+            "detail": "Country-of-origin mapped, CDN URL expiry extended past the retry window, GTIN corrected against the repack. A regression check runs on the next cycle and reports row-level results.",
+            "value": "412 rows",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Stranded resolutions",
+        "meta": "5 blocks relisted · 1 routed to the markdown ladder",
+        "doorLabel": "S9.9 ladder",
+        "statusLabel": "waits for the re-push",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Variation family rebuilt · 210 units freed",
+            "detail": "Rebuilding the Enamel family restores the parent and unstrands the largest block at the same time. The pooled reviews return with the structure.",
+            "value": "$8,200",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Four blocks relisted",
+            "detail": "Title patch lifts the suppression on the Sauté Pan, the Pitcher offer is recreated, the dimension attribute is added to the Knife Block, and the Skillet units are relabelled to the new GTIN.",
+            "value": "$9,320",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Enamel Casserole · to the 9.9 ladder",
+            "detail": "Already in the markdown cohort for the surcharge date. Relisting at list price would strand it again in six weeks, so it joins the ladder instead.",
+            "value": "$525",
+            "tag": "honest path",
+            "stateLabel": "blocked"
+          }
+        ]
+      },
+      {
+        "name": "Disputes and monitoring",
+        "meta": "3 registry disputes · locks armed · time-to-detect KPI live",
+        "statusLabel": "waits for the re-push",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Three registry disputes filed",
+            "detail": "Image contribution, variation parent rights and the restricted-claim bullet, each filed with PIM version history and the registry entitlement attached.",
+            "value": "3 cases",
+            "tag": "with evidence",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Field locks and monitor upgrade",
+            "detail": "Image lock armed on 38 entitled ASINs, price excluded from the theme cache, and 24 standard-lane listings moved to 30-minute critical checks.",
+            "value": "detect 2.1h",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Recurrence and stranded balance watches",
+            "detail": "Per-listing drift recurrence, the time-to-detect KPI against its 4-hour target, and the stranded balance tracked to zero rather than to a lower number.",
+            "value": "3 watches",
+            "stateLabel": "blocked"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

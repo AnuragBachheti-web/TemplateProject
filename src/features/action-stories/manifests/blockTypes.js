@@ -36,8 +36,20 @@ export function validateText(data) {
   return typeof data === 'string' ? [] : [`expected a string, got ${typeof data}`]
 }
 
+/**
+ * A bare number, or a TYPED business number (`{value, unit, precision?}` — see
+ * contract/decisionObject.js). The typed form is what a clean API sends; the bare form is what the
+ * corpus and every hand-written fixture still carry. Accepting both is what let typed numbers be
+ * introduced without a flag day — NumberBlock formats whichever it gets via blocks/formatValue.js.
+ */
 export function validateNumber(data) {
   if (data === undefined) return []
+  if (isPlainObject(data)) {
+    if (typeof data.value !== 'number' || !Number.isFinite(data.value)) {
+      return ['expected a typed number of shape { value: number, unit: string }']
+    }
+    return typeof data.unit === 'string' ? [] : ['a typed number must carry a string "unit"']
+  }
   if (typeof data !== 'number') return [`expected a number, got ${typeof data}`]
   return Number.isFinite(data) ? [] : ['expected a finite number']
 }
@@ -47,6 +59,24 @@ export function validateFlag(data) {
   return typeof data === 'boolean' ? [] : [`expected a boolean, got ${typeof data}`]
 }
 
+/**
+ * The three keys a row may carry its own identity under. The reference uses all three and means the
+ * same thing by each: `label` on a metric row, `name` on a rollback target or a supplier, `text` on
+ * a policy-check line that is a whole sentence with no separate value. Accepting only `label`
+ * rejected 9 of the corpus's 19 real check lists and all 8 of its real rollback lists, which is how
+ * `execution.rollback` ended up fabricated on every execute screen.
+ */
+export const ROW_LABEL_KEYS = ['label', 'name', 'text']
+
+/** @returns {string|undefined} the row's own identity, under whichever key it carries it. */
+export function rowLabelOf(item) {
+  if (!isPlainObject(item)) return undefined
+  for (const key of ROW_LABEL_KEYS) {
+    if (typeof item[key] === 'string' && item[key].trim() !== '') return item[key]
+  }
+  return undefined
+}
+
 export function validateLabelValueList(data) {
   if (data === undefined) return []
   if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
@@ -54,8 +84,8 @@ export function validateLabelValueList(data) {
   data.forEach((item, i) => {
     if (!isPlainObject(item)) {
       problems.push(`item ${i}: expected an object, got ${typeof item}`)
-    } else if (typeof item.label !== 'string') {
-      problems.push(`item ${i}: missing a string "label"`)
+    } else if (rowLabelOf(item) === undefined) {
+      problems.push(`item ${i}: missing a row label (one of ${ROW_LABEL_KEYS.join('/')})`)
     }
   })
   return problems
@@ -85,14 +115,39 @@ function isNumericLike(v) {
   return false
 }
 
+/** A typed series point: `{x, y}` with a finite numeric y. This is the shape the contract requires — the
+ * backend sends business values and the frontend derives every coordinate and path. */
+function isTypedSeriesPoint(item) {
+  return isPlainObject(item) && item.x !== undefined && isNumericLike(item.y)
+}
+
+/**
+ * Three accepted shapes, in order of what the contract prefers:
+ *   1. a TYPED series — `[{x, y}, ...]`, or `[{name, points: [{x, y}]}, ...]` for multiple series.
+ *   2. an array of `{path}` — legacy raw SVG paths from the mockup corpus.
+ *   3. a single SVG path string — the same legacy shape, unwrapped.
+ * Shapes 2 and 3 are retained only so archived corpus fixtures keep rendering; a production payload
+ * must never carry SVG path data (see contract/decisionObject.js).
+ */
 export function validateLineChart(data) {
   if (data === undefined) return []
-  if (typeof data === 'string') return [] // a single SVG path
-  if (!Array.isArray(data)) return [`expected an SVG path string or an array of {path}, got ${typeof data}`]
+  if (typeof data === 'string') return [] // legacy: a single SVG path
+  if (!Array.isArray(data)) return [`expected a typed {x,y} series or an SVG path, got ${typeof data}`]
+  if (data.length === 0) return []
+
+  if (data.every(isTypedSeriesPoint)) return []
+  if (data.every((s) => isPlainObject(s) && Array.isArray(s.points))) {
+    const problems = []
+    data.forEach((s, i) => {
+      if (!s.points.every(isTypedSeriesPoint)) problems.push(`series ${i}: every point needs an x and a numeric y`)
+    })
+    return problems
+  }
+
   const problems = []
   data.forEach((item, i) => {
     if (!isPlainObject(item) || typeof item.path !== 'string') {
-      problems.push(`item ${i}: expected an object with a string "path"`)
+      problems.push(`item ${i}: expected a typed {x,y} point or an object with a string "path"`)
     }
   })
   return problems
@@ -138,6 +193,13 @@ export function validateScatterChart(data) {
   return problems
 }
 
+/**
+ * A bridge/waterfall, as BUSINESS rows: `{label, value, anchor?}`. `top`/`height` are deliberately
+ * NOT required any more — they were the source mockup's pre-computed pixel offsets, the hygiene
+ * pass strips them as the geometry they are, and requiring them made this the one block whose
+ * contract was drawing instructions. WaterfallChartBlock derives every coordinate from `value` and
+ * `anchor` (see its own `bridgeGeometry`).
+ */
 export function validateWaterfallChart(data) {
   if (data === undefined) return []
   if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
@@ -149,12 +211,26 @@ export function validateWaterfallChart(data) {
       problems.push(`item ${i}: expected an object`)
       return
     }
-    if (!isNumericLike(item.top) || !isNumericLike(item.height)) problems.push(`item ${i}: missing numeric "top"/"height"`)
     if (item.value === undefined) problems.push(`item ${i}: missing "value"`)
+    else if (!isNumericLike(parseSignedMagnitude(item.value))) problems.push(`item ${i}: "value" is not a number`)
     if (item.anchor === true) hasAnchor = true
   })
   if (!hasAnchor) problems.push('no row marked "anchor": true (no baseline/total bar)')
   return problems
+}
+
+/**
+ * The magnitude inside a display string ("−$2,210" -> -2210). Mirrors blocks/chartGeometry.js's
+ * parseMagnitude, restated here because validation must not depend on the render layer.
+ */
+function parseSignedMagnitude(v) {
+  if (typeof v === 'number') return Number.isFinite(v) ? v : NaN
+  if (typeof v !== 'string') return NaN
+  const negative = /^[−–-]/.test(v.trim()) || /\(.*\)/.test(v)
+  const digits = v.replace(/[^\d.]/g, '')
+  if (digits === '') return NaN
+  const n = Number(digits)
+  return Number.isFinite(n) ? (negative ? -n : n) : NaN
 }
 
 export function validateHeatmapGrid(data) {

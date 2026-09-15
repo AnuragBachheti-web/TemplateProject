@@ -1,0 +1,134 @@
+{
+  "proposal_id": "prop_s9_12_reason",
+  "story_code": "S9.12",
+  "stage": "reason",
+  "action_type": "file_claim",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "keeper",
+  "title": "Apparel returns 1.6× category benchmark — 'runs small' cluster",
+  "narrative": "Realify proposes prevention work and disposition rules, and waits. No listing is edited, no supplier notice goes out and no RMA rule changes until you approve.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "name": "Apparel · tops and dresses",
+        "skus": "62 SKUs · 41% of returns",
+        "target": "12.0%",
+        "actual": "18.4%",
+        "bench": "11.5%",
+        "gap": "+6.4pp over target",
+        "pct": "100%"
+      },
+      {
+        "name": "Kitchen · ceramics and glass",
+        "skus": "48 SKUs · 22% of returns",
+        "target": "6.0%",
+        "actual": "8.1%",
+        "bench": "6.8%",
+        "gap": "+2.1pp · transit damage",
+        "pct": "48%"
+      },
+      {
+        "name": "Home textiles",
+        "skus": "34 SKUs · 19% of returns",
+        "target": "7.0%",
+        "actual": "7.4%",
+        "bench": "7.9%",
+        "gap": "+0.4pp · inside benchmark",
+        "pct": "18%"
+      },
+      {
+        "name": "Cookware and tools",
+        "skus": "70 SKUs · 18% of returns",
+        "target": "5.0%",
+        "actual": "4.2%",
+        "bench": "5.4%",
+        "gap": "−0.8pp under target",
+        "pct": "10%"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Opened personal care",
+        "value": "no restock"
+      },
+      {
+        "label": "Intimates and swimwear",
+        "value": "no restock"
+      },
+      {
+        "label": "Aerosol · lithium cell",
+        "value": "hazmat path"
+      },
+      {
+        "label": "Food contact · opened",
+        "value": "destroy"
+      },
+      {
+        "label": "Condition grade C or worse",
+        "value": "no restock"
+      },
+      {
+        "label": "Disposal record",
+        "value": "retained 7y"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Ke",
+        "name": "Keeper",
+        "role": "Owns disposition — grades condition, routes each unit and holds the value floors."
+      },
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns the page — size charts, fit copy, imagery and review surfacing."
+      },
+      {
+        "initials": "Sh",
+        "name": "Shipper",
+        "role": "Owns packaging and transit damage, and the carrier claims that follow."
+      },
+      {
+        "initials": "So",
+        "name": "Sourcer",
+        "role": "Owns supplier quality — opens CAPA, tracks the deadline, holds the chargeback."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -1,0 +1,312 @@
+{
+  "proposal_id": "prop_s9_13_execute",
+  "story_code": "S9.13",
+  "stage": "execute",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "promoter",
+  "title": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
+  "narrative": "Journeys deploy through the ESP and SMS APIs with their holdouts assigned before the first send — a flow cannot go live without one. Audiences and suppression sync last.",
+  "status_note": "Execute · 0 of 4 deployed · 14 line items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Destinations deployed",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items written",
+        "value": "0 of 14"
+      },
+      {
+        "label": "Holdouts armed",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Weekly send load",
+        "value": "unchanged"
+      }
+    ],
+    "verification": [
+      {
+        "name": "Consumable replenishment",
+        "meta": "418 held · 4,180 treated",
+        "holdout": "10%",
+        "read": "6 weeks",
+        "status": "not live"
+      },
+      {
+        "name": "Post-first-delivery care",
+        "meta": "754 held · 7,540 treated",
+        "holdout": "10%",
+        "read": "8 weeks",
+        "status": "not live"
+      },
+      {
+        "name": "Win-back 90–120 day",
+        "meta": "386 held · 3,860 treated",
+        "holdout": "10%",
+        "read": "10 weeks",
+        "status": "not live"
+      },
+      {
+        "name": "Post-purchase thank-you",
+        "meta": "holdout attached at deploy",
+        "holdout": "10%",
+        "read": "8 weeks",
+        "status": "not live"
+      },
+      {
+        "name": "Refill reminder SMS",
+        "meta": "93 held · 1,757 treated",
+        "holdout": "5%",
+        "read": "8 weeks",
+        "status": "not live"
+      }
+    ],
+    "targets": [
+      {
+        "name": "Klaviyo · email journeys",
+        "meta": "3 created · 3 modified · 2 archived · holdouts armed at creation",
+        "statusLabel": "staged",
+        "btnLabel": "Deploy",
+        "items": [
+          {
+            "name": "Consumable replenishment · per-SKU interval",
+            "detail": "Twelve entry conditions, one per SKU, each firing at that SKU’s median cycle. Free-shipping code, no percentage off, quiet hours honoured.",
+            "value": "4,180 / mo",
+            "holdout": "holdout 10% · 418 held",
+            "hasDiff": true,
+            "before": "no flow in the 42-day window",
+            "after": "live · day 31–58 by SKU",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Post-first-delivery care · day 3–5",
+            "detail": "Triggers off the carrier delivery event rather than the ship event, so the content lands after the box does.",
+            "value": "7,540 / mo",
+            "holdout": "holdout 10% · 754 held",
+            "hasDiff": true,
+            "before": "slot occupied by thank-you email",
+            "after": "live · day 3–5 post-delivery",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Win-back at 90–120 days",
+            "detail": "10% offer, capped at the segment ceiling. Enrolment excludes anyone already in the replenishment flow.",
+            "value": "3,860 / mo",
+            "holdout": "holdout 10% · 386 held",
+            "hasDiff": true,
+            "before": "win-back at 180 days",
+            "after": "live · 90–120 day trigger",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Post-purchase thank-you · modified",
+            "detail": "Trigger moves to order-confirmed and a holdout is attached, which makes its revenue claimable for the first time.",
+            "value": "7,540 / mo",
+            "holdout": "holdout 10% attached",
+            "hasDiff": true,
+            "before": "order shipped · no holdout",
+            "after": "order confirmed · 10% holdout",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Browse abandon · trimmed to one email",
+            "detail": "Emails two and three removed, bottom pLTV decile dropped from the audience. Existing 10% holdout carries over untouched.",
+            "value": "−11,400 / mo",
+            "hasDiff": true,
+            "before": "3 emails · all deciles",
+            "after": "1 email · top 9 deciles",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Win-back 180-day · archived",
+            "detail": "Archived rather than deleted so the ten weeks of holdout data stay attached to the version history.",
+            "value": "−3,220 / mo",
+            "hasDiff": true,
+            "before": "live · 15% offer",
+            "after": "archived · v6 retained",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Attentive · SMS",
+        "meta": "1 journey · express opt-ins only · 1,850 monthly reach",
+        "statusLabel": "staged",
+        "btnLabel": "Deploy",
+        "items": [
+          {
+            "name": "Refill reminder · day 40–45",
+            "detail": "Audience restricted to the 6,240 profiles with a recorded express opt-in and its timestamp. One message, no offer, inside sending hours.",
+            "value": "1,850 / mo",
+            "holdout": "holdout 5% · 93 held",
+            "hasDiff": true,
+            "before": "no SMS lifecycle journey",
+            "after": "live · day 40–45",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Quiet-hours and cap enforcement",
+            "detail": "Sends are held to the recipient’s local 8am–9pm window and counted against the shared two-per-week SMS cap.",
+            "value": "2 / wk cap",
+            "hasDiff": true,
+            "before": "cap enforced per journey",
+            "after": "cap enforced across journeys",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Suppression + segment sync",
+        "meta": "5 audiences written · consent state unchanged",
+        "statusLabel": "staged",
+        "btnLabel": "Deploy",
+        "items": [
+          {
+            "name": "Replenishment audiences · 12 SKU cohorts",
+            "detail": "One audience per consumable SKU, refreshed nightly from order history. Anyone who repurchases exits the flow the same night.",
+            "value": "4,180 profiles",
+            "hasDiff": true,
+            "before": "no per-SKU audience",
+            "after": "12 audiences · nightly refresh",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Bottom-decile monthly cohort",
+            "detail": "Moved from the weekly promo pool to a monthly cadence. Consent and channel state untouched — this is a cadence change, not a suppression.",
+            "value": "3,340 profiles",
+            "hasDiff": true,
+            "before": "weekly promo pool",
+            "after": "monthly cadence",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Suppression list refresh",
+            "detail": "Unsubscribes, hard bounces and complaint records re-synced across both platforms before the first send of any new journey.",
+            "value": "4,120 records",
+            "hasDiff": true,
+            "before": "synced 11 min ago",
+            "after": "synced at deploy",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Hypothesis Register",
+        "meta": "3 tests registered · run inside the treated groups",
+        "statusLabel": "staged",
+        "btnLabel": "Deploy",
+        "items": [
+          {
+            "name": "Replenishment subject line · product vs cycle",
+            "detail": "Two-arm split within the treated group. Sits on top of the holdout rather than replacing it, so both readings stay valid.",
+            "value": "MDE 8% · 4 wks",
+            "chip": "S10.7",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Replenishment offer · free shipping vs 10% off",
+            "detail": "Settles the margin question with evidence. Discount arm is capped at the segment ceiling from Reason.",
+            "value": "MDE 11% · 6 wks",
+            "chip": "S10.7",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Win-back timing · day 90 vs day 120",
+            "detail": "Finds the real edge of the window before anyone tunes the offer depth.",
+            "value": "MDE 14% · 10 wks",
+            "chip": "S10.7",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ],
+    "rollback": [
+      {
+        "name": "Consumable replenishment",
+        "version": "v1 · created at deploy",
+        "btnLabel": "not live"
+      },
+      {
+        "name": "Post-first-delivery care",
+        "version": "v1 · created at deploy",
+        "btnLabel": "not live"
+      },
+      {
+        "name": "Win-back 90–120 day",
+        "version": "v1 · replaces v6",
+        "btnLabel": "not live"
+      },
+      {
+        "name": "Post-purchase thank-you",
+        "version": "v4 · was v3",
+        "btnLabel": "not live"
+      },
+      {
+        "name": "Refill reminder SMS",
+        "version": "v1 · created at deploy",
+        "btnLabel": "not live"
+      }
+    ],
+    "flags": [
+      {
+        "when": "Weekly",
+        "rule": "Lift decays more than 30% over four weeks",
+        "action": "Raises a flag here for a decision."
+      },
+      {
+        "when": "Weekly",
+        "rule": "Complaint rate above 0.10% or unsub above 0.30%",
+        "action": "Holds the newest journey and notifies Keeper."
+      },
+      {
+        "when": "At first read",
+        "rule": "Measured lift below the projection’s P10",
+        "action": "Sends the flow back to Decide with the read attached."
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, decay raises a flag on this card and waits for you."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

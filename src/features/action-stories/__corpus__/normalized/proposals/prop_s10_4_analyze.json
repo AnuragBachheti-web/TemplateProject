@@ -1,0 +1,203 @@
+{
+  "proposal_id": "prop_s10_4_analyze",
+  "story_code": "S10.4",
+  "stage": "analyze",
+  "action_type": "file_claim",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "controller",
+  "title": "$4,120 recoverable — $890 expires in 21 days",
+  "narrative": "",
+  "status_note": "Analyze · 11 claims shown · $4,120 identified · sorted by deadline",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "≤ 21 days",
+        "value": "$890",
+        "pct": 22
+      },
+      {
+        "label": "22–35 days",
+        "value": "$1,570",
+        "pct": 38
+      },
+      {
+        "label": "36–48 days",
+        "value": "$1,180",
+        "pct": 29
+      },
+      {
+        "label": "49+ days",
+        "value": "$480",
+        "pct": 12
+      }
+    ],
+    "detail_rows": [
+      {
+        "name": "Refund without return · 2 orders",
+        "sub": "FEE-2207 · orders 114-8827301 and 114-8830992",
+        "value": "$400",
+        "typeShort": "refund",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "9 days",
+        "win": "88%"
+      },
+      {
+        "name": "Dimension tier · Knife Block 6pc",
+        "sub": "FEE-2203 · SKU NW-KNB-06 · 41 units billed Jul 8 – Aug 14",
+        "value": "$310",
+        "typeShort": "dimension",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "16 days",
+        "win": "91%"
+      },
+      {
+        "name": "Lost inventory · 2 units unmatched",
+        "sub": "FEE-2211 · SKU NW-FLT-01 · adjustment Jul 12",
+        "value": "$180",
+        "typeShort": "inventory",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "21 days",
+        "win": "76%"
+      },
+      {
+        "name": "Lost inventory · 3 units at East node",
+        "sub": "FEE-2210 · SKU NW-DUT-05 · adjustment Jun 28",
+        "value": "$520",
+        "typeShort": "inventory",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "29 days",
+        "win": "78%"
+      },
+      {
+        "name": "Dimension tier · Dutch Oven 5qt",
+        "sub": "FEE-2201 · SKU NW-DUT-05 · 88 units billed Jun 2 – Aug 16",
+        "value": "$640",
+        "typeShort": "dimension",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "34 days",
+        "win": "94%"
+      },
+      {
+        "name": "Damaged in warehouse · 4 units",
+        "sub": "FEE-2212 · SKU NW-SAU-12 · adjustment Jun 20",
+        "value": "$410",
+        "typeShort": "inventory",
+        "evPct": 80,
+        "evLabel": "80% · photos",
+        "due": "36 days",
+        "win": "74%"
+      },
+      {
+        "name": "Dimension tier · Sauté Pan 12in",
+        "sub": "FEE-2202 · SKU NW-SAU-12 · 62 units billed Jun 9 – Aug 12",
+        "value": "$520",
+        "typeShort": "dimension",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "41 days",
+        "win": "94%"
+      },
+      {
+        "name": "Inbound shortage · Walmart WFS",
+        "sub": "FEE-2213 · PO-4488 · 6 units short on receipt Jul 5",
+        "value": "$230",
+        "typeShort": "inventory",
+        "evPct": 45,
+        "evLabel": "45% · POD + BOL",
+        "due": "44 days",
+        "win": "61%"
+      },
+      {
+        "name": "Dimension tier · Enamel Casserole 3qt",
+        "sub": "FEE-2204 · SKU NW-ENC-03 · 54 units billed Jun 18 – Aug 15",
+        "value": "$430",
+        "typeShort": "dimension",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "47 days",
+        "win": "91%"
+      },
+      {
+        "name": "Dimension tier · Cast-iron Skillet 10in",
+        "sub": "FEE-2205 · SKU NW-CIS-10 · 39 units billed Jun 24 – Aug 9",
+        "value": "$310",
+        "typeShort": "dimension",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "52 days",
+        "win": "89%"
+      },
+      {
+        "name": "Dimension tier · Filtration Pitcher",
+        "sub": "FEE-2206 · SKU NW-FLT-01 · 28 units billed Jul 2 – Aug 11",
+        "value": "$170",
+        "typeShort": "dimension",
+        "evPct": 100,
+        "evLabel": "complete",
+        "due": "58 days",
+        "win": "86%"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "label": "Dimension audit",
+        "detail": "billed tier against their own measured dimensions, per SKU and per fee line",
+        "value": "$2,380",
+        "state": "6 claims"
+      },
+      {
+        "label": "Reimbursement gaps",
+        "detail": "inventory adjustments still unreimbursed after the 30-day auto-match",
+        "value": "$1,340",
+        "state": "4 claims"
+      },
+      {
+        "label": "Refund without return",
+        "detail": "refunds issued where the return window closed with no inbound scan",
+        "value": "$400",
+        "state": "1 claims"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

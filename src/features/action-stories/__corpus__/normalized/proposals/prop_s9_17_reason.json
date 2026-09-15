@@ -1,0 +1,142 @@
+{
+  "proposal_id": "prop_s9_17_reason",
+  "story_code": "S9.17",
+  "stage": "reason",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "sourcer",
+  "title": "Supplier K +8% cost notice — should-cost says +2.9%",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Sep 22 · 09:14",
+        "what": "Supplier K submitted a formal price notice of +8.0% across 14 SKUs, effective Jan 1 under the 90-day clause."
+      },
+      {
+        "when": "Sep 22 · 09:40",
+        "what": "Should-Cost Model reran the build-up from steel, freight and labour indices and returned +2.9% for the same basket."
+      },
+      {
+        "when": "Sep 22 · 11:02",
+        "what": "Scorecard Engine flagged two other suppliers outside tier floors and pinned all three to one card rather than three."
+      }
+    ],
+    "policy": [
+      {
+        "label": "On-time delivery",
+        "note": "against confirmed date, not requested date",
+        "t1": "≥ 96%",
+        "t2": "≥ 93%",
+        "t3": "≥ 90%"
+      },
+      {
+        "label": "Defect rate",
+        "note": "parts per million at receiving inspection",
+        "t1": "≤ 800",
+        "t2": "≤ 1,500",
+        "t3": "≤ 2,500"
+      },
+      {
+        "label": "Responsiveness SLA",
+        "note": "first substantive reply to a sourcing request",
+        "t1": "24 hrs",
+        "t2": "48 hrs",
+        "t3": "72 hrs"
+      },
+      {
+        "label": "Payment terms",
+        "note": "target we hold in every renewal",
+        "t1": "Net 60",
+        "t2": "Net 45",
+        "t3": "Net 30"
+      },
+      {
+        "label": "Price-change notice",
+        "note": "contractual minimum before a new price applies",
+        "t1": "90 days",
+        "t2": "60 days",
+        "t3": "30 days"
+      },
+      {
+        "label": "Cost transparency",
+        "note": "material, labour and freight broken out on request",
+        "t1": "required",
+        "t2": "requested",
+        "t3": "not required"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Current contract terms",
+        "detail": "Supplier K runs to Mar 31 with a 90-day price-change notice and a 500-unit MOQ. Nothing decided here overrides a signed term before it expires."
+      },
+      {
+        "label": "Strategic-supplier flags",
+        "detail": "K and A are flagged strategic: exit requires exec sign-off, and no exit is executed inside a quarter without a qualified alternate already producing."
+      },
+      {
+        "label": "Open POs",
+        "detail": "$412K across 9 POs is committed. Any transition honours them in full — no cancellation to gain negotiating position."
+      },
+      {
+        "label": "One conversation per supplier",
+        "detail": "Realify drafts the counter and the message. A person sends it. No supplier ever receives anything Realify generated without a human reading it first."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Sourcer",
+        "role": "Owns supplier relationships, scorecards and qualification."
+      },
+      {
+        "name": "Navigator",
+        "role": "Prices the cash value of payment terms and volume commitments."
+      },
+      {
+        "name": "Supplier Scorecard Engine",
+        "role": "OTD, defect PPM and responsiveness per supplier, per quarter."
+      },
+      {
+        "name": "Should-Cost Model",
+        "role": "Rebuilds each basket from material indices, freight lanes and labour."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

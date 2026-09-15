@@ -1,0 +1,190 @@
+{
+  "proposal_id": "prop_s9_6_decide",
+  "story_code": "S9.6",
+  "stage": "decide",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Listing audit — 18 listings below CVR benchmark",
+  "narrative": "",
+  "status_note": "Decide · full fix list · 7 fixes · 19.0 h",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable",
+    "checks": [
+      {
+        "text": "All copy passes the brand voice guide. No superlatives, no exclamation marks."
+      },
+      {
+        "text": "Microwave and dishwasher claims backed by certificate CE-4471 on file."
+      },
+      {
+        "text": "Offer move keeps CM at 36%, above the 28% Hero floor."
+      }
+    ]
+  },
+  "proposal": {
+    "alternatives": [
+      {
+        "label": "Approve all"
+      },
+      {
+        "label": "Quick wins only"
+      },
+      {
+        "label": "Launch as experiments"
+      }
+    ],
+    "slate": [
+      {
+        "seq": "01",
+        "name": "Offer + delivery promise",
+        "owner": "Pricer",
+        "detail": "Move price $0.60 to $24.35 and switch this SKU to the 2-day promise. Recovers about 29 points of Buy Box share, which is where most of the CVR gap lives.",
+        "lift": "+2.4 pp",
+        "conf": "78% ± 8",
+        "confPct": "78%",
+        "confNote": "31 comparable moves",
+        "effort": "30 min",
+        "effortTag": "no studio time",
+        "expLabel": "experiment",
+        "state": "ready today"
+      },
+      {
+        "seq": "02",
+        "name": "Title rewrite with ranked terms",
+        "owner": "Merchandiser",
+        "detail": "Rebuild the title to carry the two head terms we do not rank on, inside the 200-character limit and the brand voice guide.",
+        "lift": "+0.2 to +0.5 pp",
+        "conf": "64% ± 12",
+        "confPct": "64%",
+        "confNote": "22 comparable fixes",
+        "effort": "1 h",
+        "effortTag": "copy only",
+        "expLabel": "experiment",
+        "state": "ready today"
+      },
+      {
+        "seq": "03",
+        "name": "Backend keyword fill · 14 terms",
+        "owner": "Keeper",
+        "detail": "Fill the backend fields with the 14 ranked terms missing today, including the two head terms the title picks up.",
+        "lift": "+0.2 to +0.4 pp",
+        "conf": "69% ± 9",
+        "confPct": "69%",
+        "confNote": "18 comparable fixes",
+        "effort": "45 min",
+        "effortTag": "no publish risk",
+        "expLabel": "experiment",
+        "state": "ready today"
+      },
+      {
+        "seq": "04",
+        "name": "Answer 7 open Q&amp;A",
+        "owner": "Keeper",
+        "detail": "Answer the seven open questions. Three ask about oven use, which we answer with the temperature limit we can document rather than a claim we cannot.",
+        "lift": "+0.1 to +0.2 pp",
+        "conf": "52% ± 15",
+        "confPct": "52%",
+        "confNote": "9 comparable fixes",
+        "effort": "45 min",
+        "effortTag": "copy only",
+        "expLabel": "experiment",
+        "state": "ready today"
+      },
+      {
+        "seq": "05",
+        "name": "Image set upgrade · 7 shots",
+        "owner": "Merchandiser",
+        "detail": "Reshoot to the seven-shot standard: hero on white at 2400px, scale shot with a hand, two lifestyle frames, stack shot, base detail, dimension card.",
+        "lift": "+0.4 to +0.8 pp",
+        "conf": "71% ± 10",
+        "confPct": "71%",
+        "confNote": "27 comparable fixes",
+        "effort": "6 h",
+        "effortTag": "studio booking",
+        "expLabel": "experiment",
+        "state": "needs booking"
+      },
+      {
+        "seq": "06",
+        "name": "A+ comparison module",
+        "owner": "Merchandiser",
+        "detail": "Add a comparison module against the other two Ridgeline sizes and a care-and-use module. Makes our 4.6 rating and the glaze difference visible.",
+        "lift": "+0.3 to +0.6 pp",
+        "conf": "66% ± 11",
+        "confPct": "66%",
+        "confNote": "19 comparable fixes",
+        "effort": "8 h",
+        "effortTag": "design + copy",
+        "expLabel": "experiment",
+        "state": "needs booking"
+      },
+      {
+        "seq": "07",
+        "name": "Bullets to benefit-first",
+        "owner": "Merchandiser",
+        "detail": "Rewrite three feature-led bullets into five benefit-led ones, each opening with the outcome and closing with the spec.",
+        "lift": "+0.1 to +0.4 pp",
+        "conf": "58% ± 14",
+        "confPct": "58%",
+        "confNote": "24 comparable fixes",
+        "effort": "2 h",
+        "effortTag": "copy only",
+        "expLabel": "experiment",
+        "state": "ready today"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "CVR after fixes",
+        "value": "11.1–12.7%",
+        "meta": "from 9.8% · target 13.0%"
+      },
+      {
+        "label": "Buy Box after",
+        "value": "91%",
+        "meta": "offer move included"
+      },
+      {
+        "label": "CM recovered",
+        "value": "$6.1K",
+        "meta": "of $8.4K at stake · 30 d"
+      },
+      {
+        "label": "Effort",
+        "value": "19.0 h",
+        "meta": "7 fixes selected"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

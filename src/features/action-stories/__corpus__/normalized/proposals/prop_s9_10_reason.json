@@ -1,0 +1,113 @@
+{
+  "proposal_id": "prop_s9_10_reason",
+  "story_code": "S9.10",
+  "stage": "reason",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "controller",
+  "title": "9 SKUs negative true contribution — 3 consecutive months",
+  "narrative": "Realify will build the exit slate and the fix-first alternative, then wait. No SKU is discontinued and no supplier notice is sent without your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "label": "Contribution floor",
+        "value": "$0.00",
+        "meta": "true CM per unit, fully loaded"
+      },
+      {
+        "label": "Persistence threshold",
+        "value": "3 months",
+        "meta": "consecutive · at normal volume"
+      },
+      {
+        "label": "Monthly bleed",
+        "value": "−$4.9K",
+        "meta": "across the 9 candidates"
+      },
+      {
+        "label": "Capital held",
+        "value": "$41K",
+        "meta": "2,860 units at cost"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Open PO 2291 · supplier K",
+        "note": "Includes 320 units of two exit candidates. Cannot be cancelled after Aug 26.",
+        "when": "arrives Sep 23",
+        "value": "$8.4K"
+      },
+      {
+        "label": "Open PO 2295 · Ashgrove Mills",
+        "note": "Includes 180 units of one candidate. Cancellable until Aug 22 with a 12% fee.",
+        "when": "arrives Sep 09",
+        "value": "$2.1K"
+      },
+      {
+        "label": "MOQ remnant · Northline Metals",
+        "note": "140 units must be taken or paid for under the current agreement.",
+        "when": "due Oct 31",
+        "value": "$1.6K"
+      },
+      {
+        "label": "Marketplace listing commitments",
+        "note": "Two channels require 30 days notice before a listing closes.",
+        "when": "30 d notice",
+        "value": "2 channels"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Co",
+        "name": "Controller",
+        "role": "Owns the true-contribution number and the floor test."
+      },
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns assortment role, basket value and the clearance method."
+      },
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "role": "Owns stop-buy timing against open POs and MOQ remnants."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

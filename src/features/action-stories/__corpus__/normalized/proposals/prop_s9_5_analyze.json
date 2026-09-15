@@ -1,0 +1,101 @@
+{
+  "proposal_id": "prop_s9_5_analyze",
+  "story_code": "S9.5",
+  "stage": "analyze",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "scout",
+  "title": "Competitor undercut — hero SKU, −7% · Buy Box lost 2h ago",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "detail_rows": [
+      {
+        "sev": "S1",
+        "type": "Price cut",
+        "when": "2h ago",
+        "title": "CompetitorA cut the Ridgeline stoneware bowl to $23.20 and took the Buy Box",
+        "who": "CompetitorA",
+        "impact": "−$2.9K CM at risk",
+        "sla": "SLA 4h · 1h 52m left"
+      },
+      {
+        "sev": "S2",
+        "type": "New entrant",
+        "when": "5h ago",
+        "title": "Orchard &amp; Oak listed against the Ridgeline serving platter",
+        "who": "Orchard &amp; Oak",
+        "impact": "−$0.9K CM at risk",
+        "sla": "SLA 24h · 19h left"
+      },
+      {
+        "sev": "S3",
+        "type": "Content upgrade",
+        "when": "1d ago",
+        "title": "Kettle &amp; Co published A+ content on the mug listing, content score +12",
+        "who": "Kettle &amp; Co",
+        "impact": "−$0.6K CM at risk"
+      },
+      {
+        "sev": "S4",
+        "type": "Stock-out",
+        "when": "6h ago",
+        "title": "Verrand Home is out of stock on two glassware SKUs",
+        "who": "Verrand Home",
+        "impact": "+$1.4K CM opening"
+      },
+      {
+        "sev": "S3",
+        "type": "Ad position",
+        "when": "2d ago",
+        "title": "NorthPeak raised sponsored bids across four of our head terms",
+        "who": "NorthPeak",
+        "impact": "−$0.8K CM at risk"
+      },
+      {
+        "sev": "S2",
+        "type": "Price cut",
+        "when": "1d ago",
+        "title": "Hearthline cut the Alder chef knife 3% to $37.80",
+        "who": "Hearthline",
+        "impact": "−$1.1K CM at risk",
+        "sla": "SLA 24h · 6h left"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -1,0 +1,278 @@
+{
+  "proposal_id": "prop_s9_15_execute",
+  "story_code": "S9.15",
+  "stage": "execute",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Citation share dropping — 14 comparison queries cite competitors only",
+  "narrative": "Consolidation and template work ship first so the new pages land on clean ground. Drafts go to editors unpublished — Realify writes, a human decides.",
+  "status_note": "Execute · 0 of 4 pushed · 12 line items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Destinations pushed",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12"
+      },
+      {
+        "label": "LCP p75",
+        "value": "2.9s current"
+      },
+      {
+        "label": "Pages competing",
+        "value": "6"
+      },
+      {
+        "label": "Drafts with editors",
+        "value": "0"
+      }
+    ],
+    "verification": [
+      {
+        "name": "Cookware comparisons",
+        "meta": "96 queries · primary set",
+        "rank": "4.1",
+        "cite": "6%",
+        "target": "30%",
+        "read": "not armed"
+      },
+      {
+        "name": "Water filtration",
+        "meta": "68 queries · primary set",
+        "rank": "3.8",
+        "cite": "9%",
+        "target": "30%",
+        "read": "not armed"
+      },
+      {
+        "name": "Cooktop compatibility",
+        "meta": "52 queries · deferred content",
+        "rank": "5.4",
+        "cite": "4%",
+        "target": "25%",
+        "read": "not armed"
+      },
+      {
+        "name": "Knife care",
+        "meta": "74 queries · control cluster",
+        "rank": "2.9",
+        "cite": "34%",
+        "target": "40%",
+        "read": "not armed"
+      }
+    ],
+    "targets": [
+      {
+        "name": "Web · template and on-page changes",
+        "meta": "1 template · 40 pages · release r-2291",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Guide template · sized and preloaded hero",
+            "detail": "Width and height attributes on the hero image plus a preload hint. The only change to the template in this release.",
+            "value": "186 pages",
+            "tag": "CWV",
+            "hasDiff": true,
+            "before": "LCP 2.9s p75 · fails",
+            "after": "LCP 2.1s p75 projected",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "FAQ and Article schema",
+            "detail": "Generated from existing headings and body content on 40 guide pages. No new copy, no duplicated text.",
+            "value": "40 pages",
+            "url": "/guides/*",
+            "hasDiff": true,
+            "before": "schema on 61% of pages",
+            "after": "schema on 100% of guides",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Internal links to orphaned guides",
+            "detail": "Two contextual links each into the eight guides that were discovered and never crawled, from pages that already rank.",
+            "value": "16 links",
+            "hasDiff": true,
+            "before": "8 pages with no inbound links",
+            "after": "16 contextual links added",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Redirects, canonicals and sitemap",
+        "meta": "3 consolidations · 9 chains · sitemap regenerated",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Consolidate 3 cannibalisation pairs",
+            "detail": "The weaker page of each pair 301s into the stronger one, with canonicals set to match. Runs before any new page ships.",
+            "value": "6 → 3",
+            "tag": "unblocks the new page",
+            "hasDiff": true,
+            "before": "6 pages competing on 3 queries",
+            "after": "3 pages · 3 permanent redirects",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Flatten 9 redirect chains",
+            "detail": "Every chain resolves to a single hop. Three of them were three deep on guide URLs.",
+            "value": "9 URLs",
+            "hasDiff": true,
+            "before": "9 chains · up to 3 hops",
+            "after": "9 single hops",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Resolve 4 duplicate canonicals + regenerate sitemap",
+            "detail": "The four duplicates are why those pages were never indexed. The sitemap picks up the eight orphaned guides at the same time.",
+            "value": "12 pages",
+            "hasDiff": true,
+            "before": "174 of 186 indexed",
+            "after": "186 of 186 submitted",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Editorial workflow · drafts, not publishes",
+        "meta": "3 items · CMS drafts assigned · nothing goes live from here",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Carbon steel vs cast iron · full draft",
+            "detail": "Nine-row comparison table, sourced weight and heat-retention figures, answer-first headings. Enters the CMS unpublished with the brief and source list attached.",
+            "value": "1 draft",
+            "url": "/guides/carbon-steel-vs-cast-iron",
+            "tag": "draft only",
+            "hasDiff": true,
+            "before": "no page · 4 thin pages consolidated",
+            "after": "draft with J. Okafor · due Oct 4",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Lead-removal rewrite · full draft",
+            "detail": "States the certification number in text with a reduction percentage per contaminant. Legal review flagged on the draft because it is a compliance claim.",
+            "value": "1 draft",
+            "url": "/guides/filtration",
+            "tag": "draft only",
+            "hasDiff": true,
+            "before": "\"reduces heavy metals\"",
+            "after": "draft with M. Reyes · legal flag",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Brand-voice and source checklist",
+            "detail": "Attached to both drafts. An editor cannot mark a page ready until every comparison row has a source and the voice items pass.",
+            "value": "2 drafts",
+            "hasDiff": true,
+            "before": "checklist applied manually",
+            "after": "attached to every draft",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Citation Tracker · monitoring config",
+        "meta": "weekly per cluster · 3 decay watches armed",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Per-cluster rank and citation reads",
+            "detail": "Weekly pass across 412 queries, split by cluster and intent tier, with the 14 competitor-only queries marked as the primary set.",
+            "value": "6 clusters",
+            "hasDiff": true,
+            "before": "account-level weekly report",
+            "after": "per-cluster with a primary set",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Traffic quality read at 14 and 28 days",
+            "detail": "Conversion rate, assisted revenue and bounce on organic entrances to each new page, against the site baseline.",
+            "value": "3 pages",
+            "hasDiff": true,
+            "before": "not measured per page",
+            "after": "2 reads per new page",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Decay watches",
+            "detail": "Citation loss, rank slide and quality shortfall each re-open this card with the read attached rather than filing a separate report.",
+            "value": "3 watches",
+            "hasDiff": true,
+            "before": "no decay trigger",
+            "after": "3 watches armed",
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ],
+    "rollback": [
+      {
+        "name": "Template + schema release",
+        "version": "r-2291 · restore r-2287",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Redirect + canonical map",
+        "version": "3 merges · restore 6 URLs",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Editorial drafts",
+        "version": "2 drafts · withdraw from queue",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Tracker config",
+        "version": "per-cluster · restore account-level",
+        "btnLabel": "not pushed"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a decay watch re-opens this card and waits for you."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

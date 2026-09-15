@@ -1,0 +1,135 @@
+{
+  "template_id": "reason.v1",
+  "stage": "reason",
+  "sections": [
+    {
+      "id": "rationale",
+      "title": null,
+      "region": "main"
+    },
+    {
+      "id": "governance",
+      "title": "Policy",
+      "region": "main"
+    },
+    {
+      "id": "context",
+      "title": "Context",
+      "region": "rail"
+    },
+    {
+      "id": "provenance",
+      "title": "Basis",
+      "region": "rail"
+    }
+  ],
+  "blocks": [
+    {
+      "slotName": "narrative",
+      "blockType": "text",
+      "binding": "narrative",
+      "section": "rationale",
+      "role": "hero",
+      "when": {
+        "path": "narrative",
+        "op": "truthy"
+      }
+    },
+    {
+      "slotName": "trigger",
+      "blockType": "table",
+      "binding": "proposal.trigger",
+      "section": "rationale",
+      "when": {
+        "path": "proposal.trigger",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "policy",
+      "blockType": "table",
+      "binding": "proposal.policy",
+      "section": "governance",
+      "when": {
+        "path": "proposal.policy",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "constraints",
+      "blockType": "labelValueList",
+      "binding": "proposal.constraints",
+      "section": "governance",
+      "when": {
+        "path": "proposal.constraints",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "roles",
+      "blockType": "table",
+      "binding": "proposal.roles",
+      "section": "governance",
+      "when": {
+        "path": "proposal.roles",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "decision_mode",
+      "blockType": "text",
+      "binding": "mode",
+      "section": "context"
+    },
+    {
+      "slotName": "decision_lens",
+      "blockType": "text",
+      "binding": "lens",
+      "section": "context",
+      "when": {
+        "path": "lens",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "decision_persona",
+      "blockType": "text",
+      "binding": "persona",
+      "section": "context",
+      "when": {
+        "path": "persona",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "inputs",
+      "blockType": "labelValueList",
+      "binding": "proposal.inputs",
+      "section": "provenance",
+      "when": {
+        "path": "proposal.inputs",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "agents",
+      "blockType": "itemQueue",
+      "binding": "proposal.agents",
+      "section": "provenance",
+      "when": {
+        "path": "proposal.agents",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "stage_status",
+      "blockType": "text",
+      "binding": "status_note",
+      "section": "context",
+      "when": {
+        "path": "status_note",
+        "op": "truthy"
+      }
+    }
+  ]
+}

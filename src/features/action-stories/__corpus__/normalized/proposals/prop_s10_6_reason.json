@@ -1,0 +1,94 @@
+{
+  "proposal_id": "prop_s10_6_reason",
+  "story_code": "S10.6",
+  "stage": "reason",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "arbiter",
+  "title": "Prime Fall T-4 — inventory 84% · deals 100% · creative 60%",
+  "narrative": "The contract approves as one unit at the Decide step. Picking overrides individually here is drafting; signing is a single decision, because a partially-signed constitution is not one.",
+  "status_note": "Reason · T-4 · 3 channels · 4 overrides drafted · expiry Aug 27 · 06:00",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 12 · T-11",
+        "what": "The Event Forecast Model closed on a P50 of $291K across four channels, 3.4× a normal 96-hour window, and opened a readiness card at T-8 as scheduled."
+      },
+      {
+        "when": "Aug 19 · 06:00",
+        "what": "The T-4 checkpoint re-scored every desk: inventory 84%, deals 100%, creative 60%. Two Heroes are short at P50 with the FBA cutoff 31 hours out."
+      },
+      {
+        "when": "Aug 19 · 06:02",
+        "what": "Arbiter assembled the Moment Contract draft — the temporary authority each desk needs to move at event speed, with every bound and expiry stated before anyone signs."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Event Forecast Model"
+      },
+      {
+        "name": "Moment Contract"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Event window",
+        "value": "96 hours"
+      },
+      {
+        "label": "Channels participating",
+        "value": "3 of 4"
+      },
+      {
+        "label": "Combined P50 revenue",
+        "value": "$291K"
+      },
+      {
+        "label": "Overrides armed",
+        "value": "4 of 5"
+      },
+      {
+        "label": "Posture",
+        "value": "Revenue-max"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

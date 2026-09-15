@@ -1,0 +1,288 @@
+{
+  "proposal_id": "prop_s9_13_analyze",
+  "story_code": "S9.13",
+  "stage": "analyze",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "promoter",
+  "title": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "primary_insight": "The replenishment gap in one cell: 2,960 profiles, most of them consumable buyers, and nothing scheduled between day 14 and day 90.",
+    "matrix": [
+      {
+        "label": "Top pLTV decile",
+        "note": "$310 median",
+        "cells": [
+          {
+            "count": "1,940",
+            "ltv": "$318"
+          },
+          {
+            "count": "1,120",
+            "ltv": "$304"
+          },
+          {
+            "count": "520",
+            "ltv": "$288"
+          },
+          {
+            "count": "280",
+            "ltv": "$262"
+          }
+        ]
+      },
+      {
+        "label": "Next 20%",
+        "note": "$186 median",
+        "cells": [
+          {
+            "count": "2,410",
+            "ltv": "$204"
+          },
+          {
+            "count": "2,960",
+            "ltv": "$191"
+          },
+          {
+            "count": "1,780",
+            "ltv": "$174"
+          },
+          {
+            "count": "2,180",
+            "ltv": "$151"
+          }
+        ]
+      },
+      {
+        "label": "Middle 40%",
+        "note": "$104 median",
+        "cells": [
+          {
+            "count": "3,120",
+            "ltv": "$118"
+          },
+          {
+            "count": "4,060",
+            "ltv": "$109"
+          },
+          {
+            "count": "3,440",
+            "ltv": "$96"
+          },
+          {
+            "count": "5,740",
+            "ltv": "$78"
+          }
+        ]
+      },
+      {
+        "label": "Bottom 30%",
+        "note": "$41 median",
+        "cells": [
+          {
+            "count": "1,180",
+            "ltv": "$52"
+          },
+          {
+            "count": "1,640",
+            "ltv": "$46"
+          },
+          {
+            "count": "1,690",
+            "ltv": "$38"
+          },
+          {
+            "count": "3,340",
+            "ltv": "$27"
+          }
+        ]
+      }
+    ],
+    "detail_rows": [
+      {
+        "name": "Welcome · 3 emails",
+        "meta": "email · trigger: first order",
+        "reach": "4,820",
+        "cvr": "3.1%",
+        "rpr": "$0.94",
+        "lift": "+$0.41",
+        "verdict": "working"
+      },
+      {
+        "name": "Browse abandon",
+        "meta": "email · trigger: 2+ product views",
+        "reach": "9,140",
+        "cvr": "1.8%",
+        "rpr": "$0.62",
+        "lift": "+$0.11",
+        "verdict": "thin"
+      },
+      {
+        "name": "Cart abandon",
+        "meta": "email + SMS · trigger: cart idle 4h",
+        "reach": "6,310",
+        "cvr": "8.4%",
+        "rpr": "$2.84",
+        "lift": "+$0.38",
+        "verdict": "working"
+      },
+      {
+        "name": "Post-purchase thank-you",
+        "meta": "email · trigger: order shipped",
+        "reach": "7,540",
+        "cvr": "0.9%",
+        "rpr": "$0.18",
+        "lift": "no holdout",
+        "verdict": "unmeasured"
+      },
+      {
+        "name": "Win-back · 180 day",
+        "meta": "email · trigger: 180 days idle",
+        "reach": "3,220",
+        "cvr": "1.1%",
+        "rpr": "$0.31",
+        "lift": "+$0.04",
+        "verdict": "not proven"
+      },
+      {
+        "name": "VIP early access",
+        "meta": "email · trigger: top decile + launch",
+        "reach": "1,180",
+        "cvr": "6.2%",
+        "rpr": "$3.10",
+        "lift": "no holdout",
+        "verdict": "unmeasured"
+      },
+      {
+        "name": "Consumable replenishment",
+        "meta": "not built · the gap on this card",
+        "reach": "4,180",
+        "cvr": "—",
+        "rpr": "—",
+        "lift": "projected +$1.46",
+        "verdict": "missing"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "label": "Suppressed profiles",
+        "value": "4,120",
+        "pct": 62,
+        "note": "10.7% of the consented list — normal for a 26-month history."
+      },
+      {
+        "label": "Hard bounces, 30 days",
+        "value": "0.31%",
+        "pct": 26,
+        "note": "Well inside the 2% deliverability threshold."
+      },
+      {
+        "label": "Complaint rate",
+        "value": "0.04%",
+        "pct": 40,
+        "note": "Ceiling is 0.10%. Room for one more weekly touch."
+      },
+      {
+        "label": "Consent decay, 90 days",
+        "value": "−1,240",
+        "pct": 71,
+        "note": "Unsubs outpacing new opt-ins by 310 a month."
+      },
+      {
+        "label": "SMS express opt-in",
+        "value": "6,240",
+        "pct": 16,
+        "note": "16% of the list. Every SMS journey is capped by this."
+      }
+    ],
+    "entities": [
+      {
+        "name": "Per-SKU replenishment intervals",
+        "value": "$6.1K / mo",
+        "detail": "A send timed to each SKU’s own median cycle rather than one blanket 30-day reminder. Free shipping, no percentage off.",
+        "reach": "4,180 profiles",
+        "window": "day 31–58 by SKU",
+        "skus": [
+          {
+            "name": "Carbon steel pan seasoning wax",
+            "cycle": "38 days",
+            "buyers": "640"
+          },
+          {
+            "name": "Water filter cartridge 2-pk",
+            "cycle": "42 days",
+            "buyers": "1,120"
+          },
+          {
+            "name": "Knife sharpening kit refill",
+            "cycle": "51 days",
+            "buyers": "380"
+          },
+          {
+            "name": "Stone cleaning block",
+            "cycle": "58 days",
+            "buyers": "290"
+          }
+        ]
+      },
+      {
+        "name": "Post-first-delivery, day 3–5",
+        "value": "$2.4K / mo",
+        "detail": "Care and use content on the item just delivered. Currently occupied by the unmeasured thank-you email, which sends before delivery lands.",
+        "reach": "7,540 profiles",
+        "window": "day 3–5 post-delivery"
+      },
+      {
+        "name": "Win-back at 90–120 days",
+        "value": "$1.8K / mo",
+        "detail": "The live win-back fires at 180 days, well past the point where return rates collapse. Moving the trigger forward is worth more than deepening the offer.",
+        "reach": "3,860 profiles",
+        "window": "day 90–120 idle"
+      },
+      {
+        "name": "Refill reminder over SMS",
+        "value": "$0.9K / mo",
+        "detail": "Only for the 6,240 profiles with express SMS opt-in. One message, no offer, inside quiet hours — additive to the email flow, not a replacement.",
+        "reach": "6,240 opted in",
+        "window": "day 40–45"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

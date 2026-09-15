@@ -1,18 +1,29 @@
 import { ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip } from 'recharts';
 import { humanizeSlotName } from './humanizeSlotName';
-import { parseMagnitude } from './chartGeometry';
+import { bridgeGeometry, parseMagnitude } from './chartGeometry';
 import { positiveColor, negativeColor, neutralColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 
 /**
  * Recharts has no native waterfall/bridge chart — the standard technique is a stacked bar pair per
- * category: an invisible `base` segment sized to the row's own cumulative `top`, plus the visible
- * `height` segment floating on top of it. Color comes from the *sign of the row's own `value`*
- * (parsed via parseMagnitude), never from a leftover `fill`/`valueTone` the mockup happened to
- * carry — an anchor/total row (`anchor: true`) gets the neutral color regardless of its value's
- * sign, since it's a running total, not a delta.
+ * category: an invisible `base` segment that lifts the bar to where it starts, plus the visible
+ * `delta` segment floating on top of it.
+ *
+ * BOTH OF THOSE ARE DERIVED HERE, from the rows' own business values. This block used to read
+ * `top`/`height` straight off its data — pre-computed pixel offsets the source mockup happened to
+ * carry — which made it the one chart in the system whose contract was drawing instructions rather
+ * than business facts. The hygiene pass strips geometry (correctly), so the block could never
+ * render at all: 0 of 105 Decision Objects (docs/REFERENCE_TO_TEMPLATE_BLOCK_AUDIT.md §11.3).
+ *
+ * The business contract is now `{label, value, anchor?}` per row — the same shape BarChartBlock
+ * already takes, plus one flag. `anchor: true` marks a row that is an absolute LEVEL (the opening
+ * baseline, the closing actual) rather than a step; everything between them accumulates.
+ *
+ * Color comes from the sign of the row's own `value`, never from a leftover `fill`/`valueTone`;
+ * an anchor row is neutral regardless of sign, because a running total is not a delta.
  */
+
 export default function WaterfallChartBlock({ slotName, data }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
@@ -24,10 +35,8 @@ export default function WaterfallChartBlock({ slotName, data }) {
     return <EmptyState slotName={slotName} message="No data points." />;
   }
 
-  const rows = data.map((item, i) => ({
+  const parsed = data.map((item, i) => ({
     label: item?.label ?? String(i + 1),
-    base: Number(item?.top),
-    delta: Number(item?.height),
     display: item?.value,
     anchor: item?.anchor === true,
     // `tag` ("unexpected"/"our action"/"expected") and `sublabel` are real per-bar context the
@@ -38,8 +47,11 @@ export default function WaterfallChartBlock({ slotName, data }) {
     sublabel: typeof item?.sublabel === 'string' ? item.sublabel : undefined,
   }));
 
-  if (!rows.some((r) => Number.isFinite(r.base) && Number.isFinite(r.delta))) {
-    return <ErrorState slotName={slotName} message="no usable top/height numbers in this chart's data" />;
+  const geometry = bridgeGeometry(parsed);
+  const rows = parsed.map((row, i) => ({ ...row, ...geometry[i] }));
+
+  if (!rows.some((r) => r.delta !== 0)) {
+    return <ErrorState slotName={slotName} message="no usable numbers in this bridge's values" />;
   }
 
   const chartLabel = `Waterfall chart. ${rows.map((r) => `${r.label}: ${r.display ?? ''}`).join(', ')}.`;

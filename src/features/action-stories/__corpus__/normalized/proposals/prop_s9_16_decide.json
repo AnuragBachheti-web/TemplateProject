@@ -1,0 +1,267 @@
+{
+  "proposal_id": "prop_s9_16_decide",
+  "story_code": "S9.16",
+  "stage": "decide",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "prospector",
+  "title": "TikTok Shop category opened — fit evaluation",
+  "narrative": "",
+  "status_note": "Decide · pilot · 15 SKUs · breakeven M10 · exposure $92.5K",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Full-launch exposure of $92.5K breaks the $75K appetite set in Reason"
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Full-launch exposure of $92.5K breaks the $75K appetite set in Reason"
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "beyond_limits",
+    "checks": [
+      {
+        "label": "Exposure appetite",
+        "note": "$92.5K exceeds the $75K cap. A bigger budget is not one of the options."
+      },
+      {
+        "label": "Breakeven floor",
+        "note": "Breakeven M10, inside the M12 floor."
+      },
+      {
+        "label": "MAP posture",
+        "note": "No seller-funded discounts below MAP. Platform-funded promotional slots only."
+      },
+      {
+        "label": "Integration capacity",
+        "note": "Capped at $14K on the existing connector, half the Q4 allowance."
+      },
+      {
+        "label": "Reversibility",
+        "note": "The wind-down path has to be acknowledged before this can be approved."
+      }
+    ]
+  },
+  "proposal": {
+    "alternatives": [
+      {
+        "label": "Full go",
+        "body": "All 18 SKUs, $52K launch spend, no gate. The case reaches breakeven in month 13 and the exposure lands at $77K.",
+        "badge": "over appetite",
+        "aValue": "M13",
+        "aLabel": "breakeven",
+        "bValue": "$77.0K",
+        "bLabel": "exposure"
+      },
+      {
+        "label": "Limited pilot",
+        "body": "15 SKUs of heroes and traffic drivers, capped integration, a 90-day gate with the scale and kill rules agreed in advance.",
+        "badge": "recommended",
+        "aValue": "M10",
+        "aLabel": "breakeven",
+        "bValue": "$92.5K",
+        "bLabel": "exposure"
+      },
+      {
+        "label": "No-go",
+        "body": "Decline the category now, file the reasoning and the numbers, and set the conditions that would make us look again.",
+        "badge": "defensible",
+        "aValue": "$0",
+        "aLabel": "exposure",
+        "bValue": "46 hrs",
+        "bLabel": "lift avoided"
+      }
+    ],
+    "slate": [
+      {
+        "name": "Carbon steel skillet 10\"",
+        "price": "$48.00",
+        "units": "240",
+        "role": "hero",
+        "cm": "21.9%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Carbon steel skillet 12\"",
+        "price": "$62.00",
+        "units": "180",
+        "role": "hero",
+        "cm": "23.4%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Pan care kit",
+        "price": "$24.00",
+        "units": "420",
+        "role": "traffic driver",
+        "cm": "6.8%",
+        "assets": "1 planned"
+      },
+      {
+        "name": "Enamel dutch oven 5qt",
+        "price": "$96.00",
+        "units": "90",
+        "role": "hero",
+        "cm": "24.8%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Enamel braiser 3qt",
+        "price": "$78.00",
+        "units": "110",
+        "role": "hero",
+        "cm": "22.6%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Filter pitcher 10-cup",
+        "price": "$44.00",
+        "units": "260",
+        "role": "hero",
+        "cm": "19.7%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Replacement filter 3-pack",
+        "price": "$28.00",
+        "units": "520",
+        "role": "traffic driver",
+        "cm": "14.2%",
+        "assets": "1 planned"
+      },
+      {
+        "name": "Faucet filter mount",
+        "price": "$32.00",
+        "units": "180",
+        "role": "traffic driver",
+        "cm": "11.4%",
+        "assets": "none"
+      },
+      {
+        "name": "Chef knife 8\"",
+        "price": "$68.00",
+        "units": "150",
+        "role": "hero",
+        "cm": "25.1%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Paring knife 3.5\"",
+        "price": "$22.00",
+        "units": "340",
+        "role": "traffic driver",
+        "cm": "9.6%",
+        "assets": "1 planned"
+      },
+      {
+        "name": "Whetstone 1000/6000",
+        "price": "$36.00",
+        "units": "200",
+        "role": "traffic driver",
+        "cm": "17.8%",
+        "assets": "1 planned"
+      },
+      {
+        "name": "Wooden spoon set",
+        "price": "$19.00",
+        "units": "480",
+        "role": "traffic driver",
+        "cm": "8.2%",
+        "assets": "1 planned"
+      },
+      {
+        "name": "Silicone spatula pair",
+        "price": "$16.00",
+        "units": "460",
+        "role": "traffic driver",
+        "cm": "7.4%",
+        "assets": "1 planned"
+      },
+      {
+        "name": "Cast iron griddle",
+        "price": "$54.00",
+        "units": "130",
+        "role": "hero",
+        "cm": "20.3%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Pour-over kettle",
+        "price": "$72.00",
+        "units": "100",
+        "role": "hero",
+        "cm": "22.1%",
+        "assets": "3 planned"
+      },
+      {
+        "name": "Seasoning wax 4oz",
+        "price": "$14.00",
+        "units": "300",
+        "role": "traffic driver",
+        "cm": "5.1%",
+        "assets": "none"
+      },
+      {
+        "name": "Knife block 6-slot",
+        "price": "$88.00",
+        "units": "60",
+        "role": "hero",
+        "cm": "18.4%",
+        "assets": "none"
+      },
+      {
+        "name": "Kitchen shears",
+        "price": "$26.00",
+        "units": "280",
+        "role": "traffic driver",
+        "cm": "12.9%",
+        "assets": "1 planned"
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Decision",
+        "value": "Pilot"
+      },
+      {
+        "label": "SKUs live",
+        "value": "15"
+      },
+      {
+        "label": "Breakeven",
+        "value": "M10"
+      },
+      {
+        "label": "Monthly creative",
+        "value": "$3.2K"
+      },
+      {
+        "label": "Gate",
+        "value": "Dec 22"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

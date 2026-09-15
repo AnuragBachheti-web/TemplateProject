@@ -17,7 +17,7 @@ import { useId } from 'react';
  * @param {React.ReactNode} [label]
  * @param {boolean} [disabled]
  */
-export default function Checkbox({ checked = false, onChange, indeterminate = false, label, disabled = false, className = '' }) {
+export default function Checkbox({ checked = false, onChange, indeterminate = false, label, hideLabel = false, disabled = false, className = '' }) {
   const id = useId();
   const boxTone =
     checked || indeterminate
@@ -47,7 +47,9 @@ export default function Checkbox({ checked = false, onChange, indeterminate = fa
       >
         <i className={`fa-solid ${indeterminate && !checked ? 'fa-minus' : 'fa-check'} text-[10px]`} aria-hidden="true" />
       </span>
-      {label && <span>{label}</span>}
+      {/* `hideLabel` keeps the accessible name without occupying layout — a selection checkbox in a
+          table cell still needs a name for screen readers, but must not widen the column. */}
+      {label && <span className={hideLabel ? 'sr-only' : undefined}>{label}</span>}
     </label>
   );
 }

@@ -1,0 +1,188 @@
+{
+  "proposal_id": "prop_s10_3_execute",
+  "story_code": "S10.3",
+  "stage": "execute",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "keeper",
+  "title": "Late-shipment 3.4% ↑ — 0.6pp from threshold",
+  "narrative": "Operational fixes run first — the recovery curve is the strongest evidence a submission can carry. Filings go out only after the fix is live, and only by a person.",
+  "status_note": "Execute · 0 of 4 stages · submissions wait for the fix to go live",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages complete",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12"
+      },
+      {
+        "label": "Fixes live",
+        "value": "0"
+      },
+      {
+        "label": "Cases filed",
+        "value": "0"
+      },
+      {
+        "label": "Listings restored",
+        "value": "0 of 3"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a stress window raises a card and waits for you.",
+    "plan": [
+      {
+        "name": "Operational fixes",
+        "meta": "handling-time buffer and Monday roster · nothing submitted to anyone",
+        "doorLabel": "S9.18 fulfilment",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Handling-time buffer on weekend orders",
+            "detail": "One extra day on Fri–Sun orders, applied in the OMS ahead of anything being filed. The recovery curve starts from the moment this lands, which is what the submissions cite.",
+            "value": "78% of cause",
+            "tag": "live first",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Two extra Monday pickers at the East node",
+            "detail": "Requested with the 3PL for the oversize queue. Addresses the 11% that waits on a second picker without touching the promise shown at checkout.",
+            "value": "11% of cause",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Zone 7–8 routing already live",
+            "detail": "Rule set v14 moved Zone 7–8 orders to the West node last week. It is already contributing to the Walmart on-time recovery.",
+            "value": "contributing",
+            "tag": "from S9.18",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Submissions",
+        "meta": "2 filings · case IDs tracked from acknowledgement",
+        "human": "sent by a person",
+        "statusLabel": "waits for the fix",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "IP counter-notice · case 8814-2291",
+            "detail": "R. Vance read the pack and filed at 09:20. Amazon acknowledged with a 5–9 business-day review window. The listing stays suppressed until it resolves.",
+            "value": "ack 09:24",
+            "tag": "counsel filed",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Walmart content reinstatement · WM-40118",
+            "detail": "All nine listings corrected including the seven not yet flagged, then the reinstatement request filed with the diff as evidence. A. Castellanos sent it.",
+            "value": "9 listings",
+            "tag": "with diff",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Authenticity documents · case 8791-4402",
+            "detail": "Three invoices and three authorisation letters pulled with current expiry dates, read and submitted. Eleven days of window remained.",
+            "value": "6 documents",
+            "tag": "from vault",
+            "stateLabel": "blocked"
+          }
+        ]
+      },
+      {
+        "name": "Vault and expiry tracking",
+        "meta": "documents indexed · 2 certifications expiring inside 60 days",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Submitted documents indexed",
+            "detail": "Everything sent today is filed against its case with the submission timestamp, so a follow-up request is answered from the record rather than reassembled.",
+            "value": "6 filed",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Two certifications expiring",
+            "detail": "A food-contact certificate and a lab report both lapse within 60 days. Nothing depends on them today, which is exactly when to renew them.",
+            "value": "46 and 58 days",
+            "tag": "unrelated",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Renewal tasks created",
+            "detail": "Two tasks with owners and dates, timed to complete before expiry rather than after a marketplace asks.",
+            "value": "2 tasks",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Monitoring and prevention",
+        "meta": "recovery curves, case polling, recurrence watch, preventive rule",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Recovery curves armed",
+            "detail": "Late shipment and Walmart on-time both read daily against the projection. A miss of more than 0.3pp for two days re-opens this card.",
+            "value": "2 metrics",
+            "tag": "daily",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Case polling every 4 hours",
+            "detail": "Three open cases polled for status change. A response from either marketplace wakes the card with the clock recalculated.",
+            "value": "3 cases",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Event written to the pattern library",
+            "detail": "Cause, response, timings and outcome recorded. The next late-shipment drift opens with this event attached rather than as a new investigation.",
+            "value": "HLTH-0264",
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -1,0 +1,150 @@
+{
+  "proposal_id": "prop_s10_6_live",
+  "story_code": "S10.6",
+  "stage": "live",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "assist",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "arbiter",
+  "title": "Prime Fall T-4 — inventory 84% · deals 100% · creative 60%",
+  "narrative": "2 waiting on you",
+  "status_note": "Live · hour 38 of 96 · pacing 108% of P50 · 3 Assist actions · 2 awaiting a call",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "plan": [
+      {
+        "label": "Hour 38"
+      },
+      {
+        "label": "Hour 62 · peak"
+      },
+      {
+        "label": "After"
+      }
+    ],
+    "progress_rows": [
+      {
+        "label": "Late shipment rate",
+        "value": "3.5%",
+        "pct": 88,
+        "detail": "limit 4.0% · our alarm at 3.7%"
+      },
+      {
+        "label": "Order defect rate",
+        "value": "0.44%",
+        "pct": 45,
+        "detail": "limit 1.0% · comfortable throughout"
+      },
+      {
+        "label": "Cancellation rate",
+        "value": "1.1%",
+        "pct": 46,
+        "detail": "limit 2.5% · no cover-driven cancellations"
+      }
+    ],
+    "verification": [
+      {
+        "label": "Spend caps +180%",
+        "used": "currently at +96%",
+        "state": "live"
+      },
+      {
+        "label": "Repricing every 15 min",
+        "used": "148 reprices so far",
+        "state": "live"
+      },
+      {
+        "label": "Promo depth to 30%",
+        "used": "deepest used 22%",
+        "state": "live"
+      },
+      {
+        "label": "Transfers to $4K freight",
+        "used": "$0.3K used",
+        "state": "live"
+      },
+      {
+        "label": "Pacing at Assist",
+        "used": "3 actions taken",
+        "state": "live"
+      }
+    ],
+    "targets": [
+      {
+        "name": "Dutch Oven 5qt",
+        "sub": "520 units left · Hero",
+        "hours": "holds"
+      },
+      {
+        "name": "Sauté Pan 12in",
+        "sub": "392 units left · Hero",
+        "hours": "holds"
+      },
+      {
+        "name": "Knife Block 6pc",
+        "sub": "318 units left · Core",
+        "hours": "holds"
+      },
+      {
+        "name": "Cast-iron Skillet",
+        "sub": "461 units left · Core",
+        "hours": "holds"
+      }
+    ],
+    "ledger": [
+      {
+        "label": "Ad budgets never went dark",
+        "detail": "The +180% cap was reached at hour 62 and pacing throttled at the mROAS floor rather than at the budget. Last year’s ten dark hours cost $12K; this year cost nothing."
+      },
+      {
+        "label": "Air freight was correctly priced",
+        "detail": "$3.1K bought zero stockouts with 4.2 hours of margin on the closest SKU. Keep the T-4 cover-against-forecast check; it is what found the gap."
+      },
+      {
+        "label": "Creative capacity is the recurring constraint",
+        "detail": "Third event running where DTC assets arrive late. The fix is a T-14 creative gate, not a bigger rush budget — annotated for next year’s T-8 card."
+      },
+      {
+        "label": "Cover, not demand, is the P90 constraint",
+        "detail": "At hour 62 the model was tracking toward P90 and inventory could not follow. Next year’s buy should be sized against P75, not P50."
+      }
+    ],
+    "ledger_note": "Expires Aug 27 at 06:00 — 82 hours from now. No renewal path; a second event needs a second signature.",
+    "arming": "3 actions taken without asking, every one inside a bound written four days ago. 2 sit here because they are outside a bound or outside the math — cannibalisation and customer experience are not bounded quantities."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

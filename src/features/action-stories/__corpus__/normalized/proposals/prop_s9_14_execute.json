@@ -1,0 +1,301 @@
+{
+  "proposal_id": "prop_s9_14_execute",
+  "story_code": "S9.14",
+  "stage": "execute",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
+  "narrative": "Writes land in the PIM first, then feeds regenerate from the corrected record, then the policy schema deploys. Scout’s battery is rescheduled last so the first re-score reads a settled catalogue.",
+  "status_note": "Execute · 0 of 4 pushed · 13 line items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Destinations pushed",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items written",
+        "value": "0 of 13"
+      },
+      {
+        "label": "Readiness score",
+        "value": "61 · unchanged"
+      },
+      {
+        "label": "Feed freshness",
+        "value": "11h p50"
+      },
+      {
+        "label": "Mismatch rate",
+        "value": "2.2% current"
+      }
+    ],
+    "verification": [
+      {
+        "name": "ChatGPT shopping",
+        "meta": "citation share on 120 queries",
+        "baseline": "19%",
+        "target": "35%",
+        "rev": "$2.1K / mo",
+        "status": "not started"
+      },
+      {
+        "name": "Google AI Mode",
+        "meta": "schema item deferred to Q1",
+        "baseline": "12%",
+        "target": "28%",
+        "rev": "$1.4K / mo",
+        "status": "not started"
+      },
+      {
+        "name": "Perplexity",
+        "meta": "policy schema lands this wave",
+        "baseline": "24%",
+        "target": "35%",
+        "rev": "$0.9K / mo",
+        "status": "not started"
+      },
+      {
+        "name": "Amazon Rufus",
+        "meta": "add-to-cart share proxy",
+        "baseline": "8%",
+        "target": "25%",
+        "rev": "not attributable",
+        "status": "not started"
+      }
+    ],
+    "targets": [
+      {
+        "name": "PIM · canonical catalogue writes",
+        "meta": "3 batches · 341 field writes · version v41",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Walmart attribute mapping repair",
+            "detail": "Capacity, dimensions and heat rating remap to the correct Walmart field IDs. Fixed at the source, so every channel regenerates from one corrected record.",
+            "value": "3 fields",
+            "tag": "root cause",
+            "hasDiff": true,
+            "before": "capacity → wm_size (wrong field)",
+            "after": "capacity → wm_capacity_qt",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Attribute enrichment · 12 hero SKUs",
+            "detail": "26 category-required fields per SKU from supplier spec sheets. Induction compatibility, oven-safe temperature, handle material, weight, dishwasher safety.",
+            "value": "312 writes",
+            "hasDiff": true,
+            "before": "12 attributes per PDP",
+            "after": "38 attributes per PDP",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "GTIN backfill · 43 variants",
+            "detail": "Codes taken from supplier records and validated against the GS1 check digit before write. Two surfaces cannot see a variant without one.",
+            "value": "43 codes",
+            "hasDiff": true,
+            "before": "GTIN coverage 94%",
+            "after": "GTIN coverage 100%",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Heat-rating copy conflict",
+            "detail": "The PDP paragraph claiming 500°F is rewritten to cite the 450°F spec field. Copy now generates from the record rather than sitting beside it.",
+            "value": "1 template",
+            "tag": "brand rule",
+            "hasDiff": true,
+            "before": "\"up to 500 degrees\" in prose",
+            "after": "generated from max_temp = 450°F",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Feed platform · regeneration",
+        "meta": "4 channels · cadence 12h → 2h · stale-price pull armed",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Walmart feed rebuild",
+            "detail": "Full rebuild rather than a delta, because nine days of attribute drift cannot be reconciled incrementally.",
+            "value": "1,240 SKUs",
+            "hasDiff": true,
+            "before": "last pickup 9 days ago",
+            "after": "rebuilt · 2h schedule",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Regeneration cadence · all channels",
+            "detail": "Shopify stays live, the three marketplace feeds move to a two-hour schedule. Brings freshness inside the 6-hour floor from Reason.",
+            "value": "4 channels",
+            "hasDiff": true,
+            "before": "12h p50 · 14h p90",
+            "after": "2h p50 · 3h p90",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Stale-price pull rule",
+            "detail": "A price older than its validity window is withdrawn instead of published. An absent price costs a citation; a wrong one costs trust.",
+            "value": "all channels",
+            "tag": "accuracy floor",
+            "hasDiff": true,
+            "before": "stale price published",
+            "after": "stale price withdrawn",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Web · policy schema deploy",
+        "meta": "3 policy types · 1,240 PDPs · one source record",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "MerchantReturnPolicy · 45-day window",
+            "detail": "Publishes the real return window as structured policy, which is what removes the third-party 14-day answer from the surfaces.",
+            "value": "1,240 PDPs",
+            "tag": "satisfies lock",
+            "hasDiff": true,
+            "before": "help-centre prose only",
+            "after": "structured on every PDP",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "ShippingDeliveryTime · per region",
+            "detail": "Handling time, transit time and cutoff published per region rather than described in a paragraph.",
+            "value": "9 regions",
+            "hasDiff": true,
+            "before": "partial, 3 regions",
+            "after": "complete, 9 regions",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Warranty terms",
+            "detail": "Absent entirely before this deploy — the field the comparison queries look for when they rank durability.",
+            "value": "2 tiers",
+            "hasDiff": true,
+            "before": "not published",
+            "after": "structured · 2 tiers",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Scout · query battery reschedule",
+        "meta": "weekly → twice weekly · 46 → 120 queries",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Battery expansion · 120 queries",
+            "detail": "The 46 existing queries plus 74 drawn from the constraints shoppers actually used in the mismatch and missing-attribute rows.",
+            "value": "240 / wk",
+            "hasDiff": true,
+            "before": "46 queries weekly",
+            "after": "120 queries twice weekly",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Competitor set · 2 → 3",
+            "detail": "Adds the third competitor that appeared in 18 of the 46 answers and was not being tracked.",
+            "value": "3 tracked",
+            "hasDiff": true,
+            "before": "competitors A and B",
+            "after": "competitors A, B and C",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Answer diffing against the canonical record",
+            "detail": "Every sampled answer is diffed against the PIM automatically, so a mismatch surfaces the same day rather than at the weekly review.",
+            "value": "240 diffs / wk",
+            "hasDiff": true,
+            "before": "manual spot checks",
+            "after": "automatic per sample",
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ],
+    "rollback": [
+      {
+        "name": "PIM attribute writes",
+        "version": "v41 · restore v40",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Feed cadence + rebuild",
+        "version": "2h schedule · restore 12h",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Policy schema deploy",
+        "version": "3 types · restore prior template",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Battery schedule",
+        "version": "120 queries · restore 46",
+        "btnLabel": "not pushed"
+      }
+    ],
+    "flags": [
+      {
+        "when": "Per sample",
+        "rule": "An answer contradicts the canonical record",
+        "action": "Raises a mismatch flag here with the full trace."
+      },
+      {
+        "when": "Twice weekly",
+        "rule": "Citation share falls more than 3pp on any surface",
+        "action": "Re-runs the battery on that surface and notifies Scout."
+      },
+      {
+        "when": "Every 14 days",
+        "rule": "Readiness score below 75 after wave 1",
+        "action": "Sends the deferred items back to Decide with the re-score attached."
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a detected staleness raises a flag on this card and waits for you."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

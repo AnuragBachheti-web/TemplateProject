@@ -1,0 +1,216 @@
+{
+  "proposal_id": "prop_s10_6_execute",
+  "story_code": "S10.6",
+  "stage": "execute",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "arbiter",
+  "title": "Prime Fall T-4 — inventory 84% · deals 100% · creative 60%",
+  "narrative": "Inventory goes first because the FBA cutoff does not move. Everything downstream of it can wait a few hours; freight cannot.",
+  "status_note": "Execute · 0 of 5 · freight first, the cutoff does not move",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Workstreams live",
+        "value": "0 of 5"
+      },
+      {
+        "label": "Checklist items",
+        "value": "0 of 15"
+      },
+      {
+        "label": "Freight tendered",
+        "value": "pending"
+      },
+      {
+        "label": "Budgets staged",
+        "value": "$0"
+      },
+      {
+        "label": "Event cover at P50",
+        "value": "12 of 14"
+      }
+    ],
+    "plan": [
+      {
+        "name": "Inventory · air freight and transfers",
+        "meta": "tendered before the FBA cutoff · 31 hours of margin, not 31 days",
+        "doorLabel": "S9.2 replenishment",
+        "statusLabel": "staged",
+        "btnLabel": "Tender",
+        "items": [
+          {
+            "name": "Air freight tendered · 2 lanes",
+            "detail": "360 units of Dutch Oven and 180 of Sauté Pan booked on Aug 20 departures, arriving Aug 22 — one day before the window opens.",
+            "value": "−$3,100",
+            "tag": "before cutoff",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "West-node transfer created",
+            "detail": "140 units moved to the East node for $340 of freight, covering the balance of the Sauté Pan gap without air.",
+            "value": "−$340",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Event cover recalculated",
+            "detail": "All 14 event SKUs now clear P50 cover for the full 96 hours. Two clear P90 as well; the rest are a P50 plan by design.",
+            "value": "14 of 14",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Ads · budgets staged and armed",
+        "meta": "$52K across four channels · arms at T-0, not now",
+        "doorLabel": "S9.7 ads",
+        "statusLabel": "waits for freight",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Event budgets staged",
+            "detail": "Amazon $28K, Google $11K, Meta $8K, TikTok $5K — written to each platform as scheduled changes that take effect at 00:01 on Aug 23.",
+            "value": "$52,000",
+            "tag": "arms at t-0",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Pacing authority armed at Assist",
+            "detail": "Budget may move between armed campaigns while mROAS holds above 1.4×, up to the +180% daily cap. New campaigns and new creative still ask.",
+            "value": "+180% cap",
+            "tag": "within bounds",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Creative fatigue watch to hourly",
+            "detail": "Frequency and CTR decay checked hourly rather than daily. In a 96-hour window, a daily check is two data points.",
+            "value": "hourly",
+            "stateLabel": "blocked"
+          }
+        ]
+      },
+      {
+        "name": "Creative and listings",
+        "meta": "reduced DTC lineup · canonical check re-run on all 14 event listings",
+        "doorLabel": "S10.5 integrity",
+        "statusLabel": "waits for freight",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "DTC lineup reduced to what exists",
+            "detail": "Two email sends and five social variants instead of three and eight. Costs about $6K of the $48K DTC forecast, and the send calendar is rebuilt around what is real.",
+            "value": "−$6K rev",
+            "tag": "stated cost",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Event listings verified against canonical",
+            "detail": "All 14 passed the 10.5 field-level check this morning, and the fast-lane monitor cadence holds through the window — a hero image drifting during Prime Fall is a different kind of expensive.",
+            "value": "14 clean",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Deal badges and A+ scheduled",
+            "detail": "Amazon and Walmart deal imagery scheduled to publish at 00:01 and revert at expiry, so nothing advertises a price that has ended.",
+            "value": "13 assets",
+            "stateLabel": "blocked"
+          }
+        ]
+      },
+      {
+        "name": "Fulfilment and account health",
+        "meta": "handling buffer armed for the window · hourly metric polling",
+        "doorLabel": "S10.3 health",
+        "statusLabel": "waits for freight",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Handling-time buffer armed",
+            "detail": "+1 day on East-node SKUs from Aug 23 to Aug 27. Costs roughly $4.2K of revenue in conversion and keeps late shipment under 4% through the Monday that broke last BFCM.",
+            "value": "−$4.2K rev",
+            "tag": "window only",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Account metrics to hourly polling",
+            "detail": "Late shipment, ODR and cancellation checked hourly with a 0.3pp pre-alarm, which is tighter than the marketplace threshold on purpose.",
+            "value": "3 metrics",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "3PL notified with the volume forecast",
+            "detail": "P50 and P90 daily order counts sent to both nodes, with the Monday peak called out explicitly rather than left in a spreadsheet.",
+            "value": "both nodes",
+            "stateLabel": "blocked"
+          }
+        ]
+      },
+      {
+        "name": "Cash and monitoring",
+        "meta": "credit line pre-arranged · war room and post-event readout scheduled",
+        "doorLabel": "S10.2 cash",
+        "statusLabel": "waits for freight",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Credit line pre-arranged",
+            "detail": "$60K available on demand at 9.4% for the sixteen days of settlement lag. About $470 of interest, drawn only if the trough needs it.",
+            "value": "−$470",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "War room opens at T-0",
+            "detail": "Pacing tiles per lens go live at 00:01 with in-flight adjustment cards labelled by authority level, so nobody has to guess whether Realify acted or asked.",
+            "value": "Aug 23 · 00:01",
+            "tag": "live screen",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Post-event readout scheduled",
+            "detail": "Incrementality measured at +14 days against the post-event trough, not against the week before. Learnings annotate to the Ledger for next year’s T-8 card.",
+            "value": "Sep 10",
+            "tag": "trough-adjusted",
+            "stateLabel": "blocked"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

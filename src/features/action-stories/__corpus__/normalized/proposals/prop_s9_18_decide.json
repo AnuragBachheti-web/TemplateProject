@@ -1,0 +1,318 @@
+{
+  "proposal_id": "prop_s9_18_decide",
+  "story_code": "S9.18",
+  "stage": "decide",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "shipper",
+  "title": "Cost-per-order drift +$0.62 — carrier GRI ingested",
+  "narrative": "",
+  "status_note": "Decide · 6 of 8 rules · CPO $8.39 · on-time 95.6% · $39.1K / mo",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "DTC on-time floor",
+        "note": "Projected 95.6% against a 95% floor."
+      },
+      {
+        "label": "Carrier minimum",
+        "note": "Meridian at 56%, above the 55% contractual floor."
+      },
+      {
+        "label": "Split-shipment ceiling",
+        "note": "Projected 8.2% still over the 8% ceiling — repositioning is the lever that fixes it."
+      },
+      {
+        "label": "Damage ceiling",
+        "note": "Projected 2.1 per thousand against a 2.5 ceiling."
+      },
+      {
+        "label": "Marketplace SLAs",
+        "note": "No approved rule changes marketplace service selection. Amazon and Walmart routing is untouched."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation_identity": "8 rules across 4 systems · target CPO $8.60",
+    "recommendation": "Fix the routing first, then take the easy postage",
+    "recommendation_detail": "Repositioning four SKUs is what unlocks the Zone 7–8 rule; a day of promise headroom and a 56% Meridian share keep every guardrail intact.",
+    "recommendation_metrics": [
+      {
+        "label": "CPO",
+        "value": "$8.39",
+        "delta": "−$0.95",
+        "note": "target $8.60"
+      },
+      {
+        "label": "Monthly saving",
+        "value": "$39.1K",
+        "note": "at 41,200 orders"
+      },
+      {
+        "label": "On-time",
+        "value": "95.6%",
+        "delta": "+1.5pp",
+        "note": "DTC floor 95%"
+      },
+      {
+        "label": "Split rate",
+        "value": "8.2%",
+        "delta": "−3.2pp",
+        "note": "ceiling 8%"
+      },
+      {
+        "label": "One-time cost",
+        "value": "$7.6K",
+        "note": "plus $18K working capital"
+      }
+    ],
+    "alternatives": [
+      {
+        "label": "Cost-first"
+      },
+      {
+        "label": "Balanced"
+      },
+      {
+        "label": "CX-protecting"
+      }
+    ],
+    "coverage": [
+      {
+        "label": "On-time · DTC",
+        "value": "95.6%",
+        "pct": "70",
+        "limitPct": "63",
+        "note": "floor 95% · scale 90–98%"
+      },
+      {
+        "label": "Split rate",
+        "value": "8.2%",
+        "pct": "59",
+        "limitPct": "57",
+        "note": "ceiling 8% · scale 0–14%"
+      },
+      {
+        "label": "Damage per thousand",
+        "value": "2.1",
+        "pct": "60",
+        "limitPct": "71",
+        "note": "ceiling 2.5 · scale 0–3.5"
+      },
+      {
+        "label": "Meridian share",
+        "value": "56%",
+        "pct": "64",
+        "limitPct": "60",
+        "note": "minimum 55% · scale 40–65%"
+      }
+    ],
+    "next_actions": [
+      {
+        "label": "OMS routing rules",
+        "note": "3 rules, versioned to the Ledger"
+      },
+      {
+        "label": "Carrier configuration",
+        "note": "allocation 56 / 28 / 16"
+      },
+      {
+        "label": "Packaging POs",
+        "note": "1 spec changes, box POs created"
+      },
+      {
+        "label": "Planner · S9.3",
+        "note": "1 target changes and the transfer plan"
+      }
+    ],
+    "item_groups": [
+      {
+        "label": "Routing logic",
+        "meta": "3 of 3 approved · OMS rules · apply on the next release window",
+        "rules": [
+          {
+            "name": "Zone 7–8 default origin becomes West when the line has cover",
+            "detail": "Today the OMS picks the node with the deepest stock, which is almost always East. This makes proximity the first test and depth the tie-break, for Zones 7 and 8 only.",
+            "system": "OMS routing",
+            "cpo": "−$0.34",
+            "ot": "+0.8pp",
+            "split": "−1.2pp",
+            "effort": "2 days",
+            "hasOptions": false
+          },
+          {
+            "name": "Zone 5 tie-break by transit time, not unit cost",
+            "detail": "Zone 5 is genuinely split coverage and the current rule sends it wherever postage is a cent cheaper, which costs a day about a quarter of the time.",
+            "system": "OMS routing",
+            "cpo": "+$0.04",
+            "ot": "+0.4pp",
+            "split": "−0.1pp",
+            "effort": "1 day",
+            "hasOptions": false
+          },
+          {
+            "name": "Cheapest compliant service with promise headroom",
+            "detail": "Rate-shop every order but only accept a service whose committed transit clears the promise by the chosen margin. The margin is the whole argument between cost and CX.",
+            "system": "Rate shopping",
+            "cpo": "−$0.18",
+            "ot": "−0.2pp",
+            "split": "—",
+            "effort": "1 day",
+            "hasOptions": true,
+            "optionLabel": "Headroom",
+            "options": [
+              {
+                "label": "None"
+              },
+              {
+                "label": "1 day"
+              },
+              {
+                "label": "2 days"
+              }
+            ],
+            "optionNote": "One day of slack absorbs normal carrier variance without paying for air."
+          }
+        ]
+      },
+      {
+        "label": "Carrier allocation",
+        "meta": "1 of 1 approved · inside contractual minimums",
+        "rules": [
+          {
+            "name": "Carrier allocation mix",
+            "detail": "Move volume between the two nationals and the consolidators. Meridian holds a contractual 55% minimum below which the tier discount resets, so the band is narrower than the rate card suggests.",
+            "system": "3PL + carrier portal",
+            "cpo": "−$0.11",
+            "ot": "−0.1pp",
+            "split": "—",
+            "effort": "3 days",
+            "hasOptions": true,
+            "optionLabel": "Mix",
+            "options": [
+              {
+                "label": "58 / 27 / 15"
+              },
+              {
+                "label": "56 / 28 / 16"
+              },
+              {
+                "label": "48 / 30 / 22"
+              }
+            ],
+            "optionNote": "Inside the 55% minimum with 1pp of margin. Service-level matched per zone."
+          }
+        ]
+      },
+      {
+        "label": "Packaging specs",
+        "meta": "1 of 2 approved · 3PL pack instructions · box POs required",
+        "rules": [
+          {
+            "name": "Six SKUs into smaller box sizes",
+            "detail": "Care kit, filter 3-pack, whetstone, shears, spatula pair and paring knife move down one or two box sizes. Dim-weight ratios fall from 1.3–1.8× to about 1.0×.",
+            "system": "3PL pack spec",
+            "cpo": "−$0.22",
+            "ot": "+0.0pp",
+            "split": "+0.0pp",
+            "effort": "2 weeks",
+            "hasOptions": false
+          },
+          {
+            "name": "Two SKUs to poly mailers",
+            "detail": "Spatula pair and shears in mailers rather than boxes. Cheapest change on the list and the only one that moves the damage rate — 0.2 claims per thousand on those SKUs.",
+            "system": "3PL pack spec",
+            "cpo": "−$0.07",
+            "ot": "+0.0pp",
+            "split": "+0.0pp",
+            "effort": "2 weeks",
+            "hasOptions": false
+          }
+        ]
+      },
+      {
+        "label": "Node inventory targets",
+        "meta": "1 of 2 approved · hands to Planner via S9.3",
+        "rules": [
+          {
+            "name": "Reposition 4 fast movers to the West node",
+            "detail": "Skillet 10\", skillet 12\", filter pitcher and chef knife held at 21-day cover in Reno. This is what makes the Zone 7–8 routing rule actually fire instead of falling back to East.",
+            "system": "Planner · S9.3",
+            "cpo": "−$0.14",
+            "ot": "+0.6pp",
+            "split": "−1.9pp",
+            "effort": "$6.2K · 3 wks",
+            "hasOptions": false
+          },
+          {
+            "name": "Raise West cover target from 15 to 21 days on 9 SKUs",
+            "detail": "Stops the West node dropping out of cover mid-week and bouncing orders back to East. Costs working capital and does not directly reduce postage.",
+            "system": "Planner · S9.3",
+            "cpo": "−$0.05",
+            "ot": "+0.3pp",
+            "split": "−0.4pp",
+            "effort": "4 wks",
+            "hasOptions": false
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Cost per order",
+        "value": "$8.39"
+      },
+      {
+        "label": "Monthly saving",
+        "value": "$39.1K"
+      },
+      {
+        "label": "Annualised",
+        "value": "$470K"
+      },
+      {
+        "label": "One-time cost",
+        "value": "$7.6K"
+      },
+      {
+        "label": "Working capital",
+        "value": "+$18K"
+      },
+      {
+        "label": "Payback",
+        "value": "0.2 months"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

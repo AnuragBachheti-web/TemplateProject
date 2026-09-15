@@ -4,6 +4,7 @@ import { deltaTone } from './deltaTone';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey } from './decorativeKeys';
+import { ROW_LABEL_KEYS, rowLabelOf } from '../manifests/blockTypes';
 
 // The keys an explicit, well-known value concept lives under — checked in this priority order
 // first, exactly as before. Real fixture data uses many OTHER field names for the same idea
@@ -26,12 +27,12 @@ const INLINE_MAX_LENGTH = 18;
  * §3.2 — confirmed inflating `cols`, `moveBar`, `inputs`, and several rail blocks to 2–3 lines/row).
  * @returns {{ key: string|null, raw: * }}
  */
-function resolvePrimaryValue(item) {
+function resolvePrimaryValue(item, labelKey) {
   for (const key of PRIORITY_VALUE_KEYS) {
     if (item[key] !== null && item[key] !== undefined) return { key, raw: item[key] };
   }
   const fallbackKey = Object.keys(item).find(
-    (k) => k !== 'label' && !isHiddenKey(k) && item[k] !== null && item[k] !== undefined,
+    (k) => k !== labelKey && !isHiddenKey(k) && item[k] !== null && item[k] !== undefined,
   );
   return fallbackKey !== undefined ? { key: fallbackKey, raw: item[fallbackKey] } : { key: null, raw: undefined };
 }
@@ -80,14 +81,20 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
   const list = (
     <ul className="flex flex-col divide-y divide-rf-border-subtle">
       {data.map((item, i) => {
-        const primary = resolvePrimaryValue(item ?? {});
+        // The row's identity may be `label`, `name` or `text` — see blockTypes.js's ROW_LABEL_KEYS
+        // for why all three are legitimate. Whichever key carried it is the one excluded from the
+        // value/extras below, so a `{name, version}` rollback row reads "name -> version" rather
+        // than promoting its own name to its own value.
+        const labelKey = ROW_LABEL_KEYS.find((k) => typeof item?.[k] === 'string' && item[k].trim() !== '');
+        const label = rowLabelOf(item);
+        const primary = resolvePrimaryValue(item ?? {}, labelKey);
         const primaryTone = deltaTone(primary.raw);
-        const usedKeys = new Set(['label', primary.key].filter((k) => k !== null));
+        const usedKeys = new Set([labelKey, primary.key].filter((k) => k !== null && k !== undefined));
         const { inline, long } = extraEntries(item, usedKeys);
         return (
           <li key={i} className="flex flex-col gap-0.5 py-1.5 text-[12.5px]">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-rf-text-secondary">{item?.label}</span>
+              <span className="text-rf-text-secondary">{label}</span>
               <span
                 className={`flex min-w-0 items-baseline gap-1.5 truncate font-medium ${
                   primaryTone ? primaryTone.text : 'text-rf-text-primary'

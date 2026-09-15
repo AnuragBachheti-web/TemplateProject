@@ -1,0 +1,88 @@
+{
+  "proposal_id": "prop_s10_1_execute",
+  "story_code": "S10.1",
+  "stage": "execute",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "steward",
+  "title": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
+  "narrative": "",
+  "status_note": "Execute · annotation drafted · 2 cards staged · write to history to close the day",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "plan": [
+      {
+        "ref": "FUL-0148",
+        "title": "Right-size packaging for 31 reclassified SKUs",
+        "flow": "S9.18 fulfilment",
+        "detail": "Four of the 31 already sit on the dim-weight candidate list from the last fulfilment sweep. Right-sizing drops them back under the tier boundary instead of paying the new tier daily.",
+        "value": "−$1,480",
+        "owner": "Shipper · due Aug 26",
+        "state": "staged",
+        "lineage": [
+          {
+            "label": "S10.1 · Aug 18"
+          },
+          {
+            "label": "fee schedule 2026-08"
+          },
+          {
+            "label": "31 SKUs"
+          }
+        ]
+      },
+      {
+        "ref": "PRC-0231",
+        "title": "Pass-through check on the 27 non-resizable SKUs",
+        "flow": "S9.11 repricing",
+        "detail": "These cannot be re-boxed, so the fee is either absorbed or passed through. Elasticity and competitive headroom decide which — that question belongs to the repricing flow, not to a variance bridge.",
+        "value": "−$730",
+        "owner": "Pricer · due Aug 29",
+        "state": "staged",
+        "lineage": [
+          {
+            "label": "S10.1 · Aug 18"
+          },
+          {
+            "label": "fee schedule 2026-08"
+          },
+          {
+            "label": "27 SKUs"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -1,0 +1,285 @@
+{
+  "proposal_id": "prop_s9_18_execute",
+  "story_code": "S9.18",
+  "stage": "execute",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "shipper",
+  "title": "Cost-per-order drift +$0.62 — carrier GRI ingested",
+  "narrative": "Routing and carrier rules apply at the 02:00 window and are reversible in minutes. Packaging and transfers are not — those commit money, so they run last.",
+  "status_note": "Execute · 0 of 4 stages · 12 changes staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages applied",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Rule changes",
+        "value": "0 of 12"
+      },
+      {
+        "label": "Orders under v14",
+        "value": "0"
+      },
+      {
+        "label": "Meridian share",
+        "value": "58%"
+      },
+      {
+        "label": "Units in transfer",
+        "value": "0"
+      }
+    ],
+    "verification": [
+      {
+        "label": "Realized CPO",
+        "note": "all-in, weekly settlement data",
+        "before": "$9.34",
+        "proj": "$8.71",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Promise adherence · DTC",
+        "note": "against the checkout promise",
+        "before": "94.1%",
+        "proj": "95.6%",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Optimal-node rate",
+        "note": "share shipped from the nearest covered node",
+        "before": "87%",
+        "proj": "96%",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Split rate",
+        "note": "multi-line orders shipped in parts",
+        "before": "11.4%",
+        "proj": "8.3%",
+        "actual": "awaiting",
+        "read": "not armed"
+      },
+      {
+        "label": "Damage and claims",
+        "note": "per thousand shipments, per SKU",
+        "before": "2.1",
+        "proj": "2.1",
+        "actual": "awaiting",
+        "read": "not armed"
+      }
+    ],
+    "rollback": [
+      {
+        "name": "Routing rules",
+        "version": "v14 · restore v13",
+        "btnLabel": "not applied"
+      },
+      {
+        "name": "Carrier allocation",
+        "version": "56/28/16 · restore 58/27/15",
+        "btnLabel": "not applied"
+      },
+      {
+        "name": "Pack specs",
+        "version": "v14 · POs already placed",
+        "btnLabel": "not applied"
+      },
+      {
+        "name": "Node targets",
+        "version": "21-day · units in transit",
+        "btnLabel": "not applied"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, a new rate card re-opens this card and waits for you.",
+    "plan": [
+      {
+        "name": "Routing rules · OMS and 3PL",
+        "meta": "rule set v14 · versioned to the Ledger · applies at the 02:00 window",
+        "statusLabel": "staged",
+        "btnLabel": "Apply",
+        "items": [
+          {
+            "name": "Zone 7–8 origin selection",
+            "detail": "Proximity becomes the first test for Zones 7 and 8, stock depth the tie-break. Falls back to East automatically when the West line is under cover, so the rule cannot strand an order.",
+            "value": "13,190 orders / mo",
+            "tag": "v14",
+            "hasDiff": true,
+            "before": "deepest-stock node",
+            "after": "nearest node with cover",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Zone 5 tie-break",
+            "detail": "Ties resolve on committed transit time rather than a one-cent postage difference. Affects about a quarter of Zone 5 volume.",
+            "value": "1,860 orders / mo",
+            "hasDiff": true,
+            "before": "lowest unit cost",
+            "after": "shortest transit",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Rate shopping with 1-day headroom",
+            "detail": "Cheapest service whose committed transit clears the promise by a day. The Delivery Promise Model supplies the transit table, refreshed weekly.",
+            "value": "all 41,200 orders",
+            "tag": "promise-bound",
+            "hasDiff": true,
+            "before": "cheapest compliant",
+            "after": "cheapest + 1 day slack",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Carrier configuration",
+        "meta": "allocation 56 / 28 / 16 · inside the 55% Meridian minimum",
+        "statusLabel": "staged",
+        "btnLabel": "Apply",
+        "items": [
+          {
+            "name": "Allocation targets by zone band",
+            "detail": "Meridian holds Zones 6–8 and all expedited; Fairline takes Zones 3–5 ground; consolidators keep Zones 2–5 where their on-time is acceptable.",
+            "value": "3 carriers",
+            "hasDiff": true,
+            "before": "58 / 27 / 15",
+            "after": "56 / 28 / 16",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "GRI rates loaded",
+            "detail": "New base rates and residential surcharges written into the rate card so every quote from Oct 1 prices correctly rather than under-quoting and reconciling later.",
+            "value": "2 carriers",
+            "tag": "contractual",
+            "hasDiff": true,
+            "before": "pre-GRI card",
+            "after": "Oct 1 card · +5.9%",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Minimum-share monitor",
+            "detail": "Daily check that Meridian volume stays above 55%. If a week trends under, allocation reverts to the v13 mix automatically rather than losing the tier discount.",
+            "value": "guardrail",
+            "hasDiff": true,
+            "before": "monthly manual check",
+            "after": "daily with auto-revert",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Packaging specs and POs",
+        "meta": "6 SKUs right-sized · 2 box POs · glass and enamel unchanged",
+        "statusLabel": "staged",
+        "btnLabel": "Apply",
+        "items": [
+          {
+            "name": "Pack spec update at the 3PL",
+            "detail": "Care kit and filter 3-pack to B-06 and B-05; whetstone and paring knife to B-04; spatula pair and shears stay boxed pending the damage read.",
+            "value": "6 SKUs",
+            "hasDiff": true,
+            "before": "B-12 / B-10 / B-08",
+            "after": "B-06 / B-05 / B-04",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Box purchase orders",
+            "detail": "Two POs for B-04 and B-05 at 8-week cover. Existing B-12 stock runs down rather than being written off.",
+            "value": "$1.4K",
+            "tag": "Pallas Packaging",
+            "hasDiff": true,
+            "before": "no PO",
+            "after": "2 POs · $1.4K",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Damage baseline snapshot",
+            "detail": "Current 2.1 claims per thousand recorded per SKU before the change, so any deterioration is attributable rather than argued about.",
+            "value": "baseline",
+            "hasDiff": true,
+            "before": "no per-SKU baseline",
+            "after": "6 SKUs baselined",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Repositioning transfers",
+        "meta": "4 SKUs to Reno · 21-day cover · $6.2K transfer cost",
+        "doorLabel": "S9.3 Planner",
+        "statusLabel": "staged",
+        "btnLabel": "Apply",
+        "items": [
+          {
+            "name": "Transfer plan to West node",
+            "detail": "Skillet 10\", skillet 12\", filter pitcher and chef knife move on the next two inbound consolidations rather than as an expedited transfer.",
+            "value": "2,140 units",
+            "tag": "via S9.3",
+            "hasDiff": true,
+            "before": "East-only cover",
+            "after": "21-day cover at Reno",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Reorder points recalculated",
+            "detail": "West reorder points and safety stock updated for the new demand share so the node does not fall out of cover in week three and undo the routing rule.",
+            "value": "4 SKUs",
+            "hasDiff": true,
+            "before": "15-day target",
+            "after": "21-day target",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Routing rule armed on arrival",
+            "detail": "The Zone 7–8 rule stays inactive per SKU until that SKU is physically at cover in Reno. No rule fires against inventory that has not landed.",
+            "value": "sequenced",
+            "hasDiff": true,
+            "before": "rule fires immediately",
+            "after": "fires per SKU on arrival",
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

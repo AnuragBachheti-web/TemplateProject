@@ -1,0 +1,137 @@
+{
+  "proposal_id": "prop_s9_18_reason",
+  "story_code": "S9.18",
+  "stage": "reason",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "shipper",
+  "title": "Cost-per-order drift +$0.62 — carrier GRI ingested",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Sep 19",
+        "what": "Rate Card Engine ingested the Meridian GRI: 5.9% on ground, 7.1% on residential surcharges, effective Oct 1."
+      },
+      {
+        "when": "Sep 20",
+        "what": "Realized CPO moved from $8.72 to $9.34 in the weekly read — 62¢ of which is the GRI and 12¢ was already drifting."
+      },
+      {
+        "when": "Sep 21",
+        "what": "Node Optimizer found 31% of Zone 7–8 orders shipping from the East node while the West held cover, and pinned the card."
+      }
+    ],
+    "policy": [
+      {
+        "label": "Pick and pack",
+        "note": "3PL per-order labour and handling",
+        "target": "$2.40",
+        "actual": "$2.38",
+        "ceiling": "$2.60",
+        "owner": "Shipper · 3PL",
+        "size": "12px"
+      },
+      {
+        "label": "Postage",
+        "note": "zone × weight tier, after the GRI",
+        "target": "$5.10",
+        "actual": "$5.79",
+        "ceiling": "$5.40",
+        "owner": "Shipper",
+        "size": "12px"
+      },
+      {
+        "label": "Packaging",
+        "note": "box, void fill, label, tape",
+        "target": "$0.86",
+        "actual": "$0.83",
+        "ceiling": "$0.95",
+        "owner": "Shipper",
+        "size": "12px"
+      },
+      {
+        "label": "Surcharges and claims",
+        "note": "residential, fuel, damage claims",
+        "target": "$0.24",
+        "actual": "$0.34",
+        "ceiling": "$0.35",
+        "owner": "Shipper",
+        "size": "12px"
+      },
+      {
+        "label": "Cost per order",
+        "target": "$8.60",
+        "actual": "$9.34",
+        "ceiling": "$9.30",
+        "owner": "Shipper",
+        "size": "13px"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Carrier volume minimums",
+        "detail": "Meridian Express holds a 55% minimum share with a tiered discount that resets below it. Allocation can move within the band, not through it."
+      },
+      {
+        "label": "Rate card commitments",
+        "detail": "Both national carriers are inside multi-year agreements to July. The GRI is contractual, so absorbing it is the only option — the question is what we stop paying elsewhere."
+      },
+      {
+        "label": "Marketplace SLAs",
+        "detail": "Amazon and Walmart transit promises are platform terms. No routing rule may put them at risk to save postage."
+      },
+      {
+        "label": "Packaging safety spec",
+        "detail": "Glass and enamel keep the current void-fill spec regardless of dim-weight savings. The damage ceiling is a floor on box choice, not a variable."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Node Optimizer"
+      },
+      {
+        "name": "Rate Card Engine"
+      },
+      {
+        "name": "Delivery Promise Model"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

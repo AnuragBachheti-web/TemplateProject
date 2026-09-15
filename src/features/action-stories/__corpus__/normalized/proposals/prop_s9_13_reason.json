@@ -1,0 +1,158 @@
+{
+  "proposal_id": "prop_s9_13_reason",
+  "story_code": "S9.13",
+  "stage": "reason",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "promoter",
+  "title": "Replenishment flow missing — 12 consumable SKUs, 42-day cycle",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Yesterday · 06:12",
+        "what": "Keeper flagged 12 consumable SKUs whose repurchase window closes with no lifecycle touch inside it."
+      },
+      {
+        "when": "Yesterday · 06:14",
+        "what": "Segment Value Model put the untouched cohort at 4,180 profiles and a 42-day median repurchase cycle."
+      },
+      {
+        "when": "Yesterday · 09:40",
+        "what": "Promoter sized the missing flow at $6.1K a month incremental and pinned it to the queue for a decision."
+      }
+    ],
+    "policy": [
+      {
+        "label": "12-month pLTV, blended",
+        "note": "modelled on cohorts with 2+ orders",
+        "actual": "$121",
+        "target": "$148",
+        "pct": 82,
+        "gap": "−$27 to close"
+      },
+      {
+        "label": "Repeat rate by month 6",
+        "note": "second order within 180 days",
+        "actual": "27.4%",
+        "target": "34%",
+        "pct": 81,
+        "gap": "−6.6pp"
+      },
+      {
+        "label": "Consumable repurchase within 60 days",
+        "note": "the 12 SKUs on this card",
+        "actual": "38%",
+        "target": "55%",
+        "pct": 69,
+        "gap": "−17pp · the gap driving this story"
+      },
+      {
+        "label": "Revenue per recipient",
+        "note": "across all lifecycle sends",
+        "actual": "$0.51",
+        "target": "$0.42 floor",
+        "pct": 100,
+        "gap": "clears the floor"
+      },
+      {
+        "label": "Unsubscribe rate",
+        "note": "rolling 30 days, email",
+        "actual": "0.19%",
+        "target": "0.30% ceiling",
+        "pct": 63,
+        "gap": "headroom for one more weekly touch"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Channel-level marketing consent",
+        "detail": "Email and SMS consent are tracked separately. Neither is inferred from a purchase."
+      },
+      {
+        "label": "Express opt-in for SMS",
+        "detail": "No SMS journey can enrol a profile without a recorded express opt-in and its timestamp."
+      },
+      {
+        "label": "Unsubscribe honoured in 4 hours",
+        "detail": "Propagates across every brand and channel in the workspace. No journey can re-enrol a profile after it."
+      },
+      {
+        "label": "No re-permission campaigns",
+        "detail": "Unsubscribed and suppressed profiles are out of reach for every flow, including win-back."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Profiles with marketing consent",
+        "value": "38,410"
+      },
+      {
+        "label": "Order history depth",
+        "value": "26 months"
+      },
+      {
+        "label": "ESP + SMS event sync",
+        "value": "live · 4 min lag"
+      },
+      {
+        "label": "Suppression list refresh",
+        "value": "11 min ago"
+      }
+    ],
+    "agents": [
+      {
+        "name": "Promoter",
+        "role": "Owns journey design, offer logic and the send calendar."
+      },
+      {
+        "name": "Keeper",
+        "role": "Owns retention, suppression health and consent state."
+      },
+      {
+        "name": "Segment Value Model (pLTV)",
+        "role": "Scores every profile on 12-month predicted value."
+      },
+      {
+        "name": "Incrementality Engine",
+        "role": "Designs and reads the holdout behind every claim."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

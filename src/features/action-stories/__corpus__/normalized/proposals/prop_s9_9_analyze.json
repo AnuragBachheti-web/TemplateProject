@@ -1,0 +1,337 @@
+{
+  "proposal_id": "prop_s9_9_analyze",
+  "story_code": "S9.9",
+  "stage": "analyze",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "38 SKUs cross the 271-day FBA surcharge in 26 days",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "distribution": [
+      {
+        "x": "96.8",
+        "y": "134.6",
+        "r": 13,
+        "op": 0.12,
+        "label": "50% single cut · $61.6K · 3.1pp"
+      },
+      {
+        "x": "156.5",
+        "y": "111.3",
+        "r": 11,
+        "op": 0.12,
+        "label": "40% single cut · $66.2K · 2.4pp"
+      },
+      {
+        "x": "305.9",
+        "y": "84.9",
+        "r": 9,
+        "op": 0.24,
+        "label": "25% → 40% two-step · $71.4K · 1.6pp"
+      },
+      {
+        "x": "440.3",
+        "y": "76.3",
+        "r": 10,
+        "op": 0.12,
+        "label": "20% → 35% → 50% · $73.1K · 1.9pp"
+      },
+      {
+        "x": "753.9",
+        "y": "100.1",
+        "r": 7,
+        "op": 0.12,
+        "label": "15% single cut · $68.4K · 0.8pp"
+      },
+      {
+        "x": "59.5",
+        "y": "219.7",
+        "r": 15,
+        "op": 0.12,
+        "label": "Liquidate whole lot · $44.8K · 4.6pp"
+      }
+    ],
+    "detail_rows": [
+      {
+        "name": "Summer serveware set",
+        "sku": "NW-SRV-7710 · seasonal",
+        "units": "640",
+        "capital": "$18.6K",
+        "age": "264 d",
+        "elast": "2.4",
+        "conf": "high · 4 tests",
+        "storage": "$412",
+        "cliff": "26 d"
+      },
+      {
+        "name": "Linen tea towel 4-pk",
+        "sku": "NW-TEX-5090 · core",
+        "units": "980",
+        "capital": "$14.2K",
+        "age": "258 d",
+        "elast": "1.9",
+        "conf": "high · 3 tests",
+        "storage": "$286",
+        "cliff": "32 d"
+      },
+      {
+        "name": "Glass carafe 1.2L",
+        "sku": "NW-GLS-3120 · discontinued",
+        "units": "540",
+        "capital": "$15.1K",
+        "age": "281 d",
+        "elast": "1.2",
+        "conf": "low · modelled",
+        "storage": "$348",
+        "cliff": "past"
+      },
+      {
+        "name": "Ridgeline platter · sand",
+        "sku": "NW-CER-1184 · hero",
+        "units": "410",
+        "capital": "$16.8K",
+        "age": "249 d",
+        "elast": "0.9",
+        "conf": "med · 2 tests",
+        "storage": "$302",
+        "cliff": "41 d"
+      },
+      {
+        "name": "Bamboo canister 1.2L",
+        "sku": "NW-STO-4410 · core",
+        "units": "620",
+        "capital": "$11.4K",
+        "age": "267 d",
+        "elast": "2.1",
+        "conf": "med · 2 tests",
+        "storage": "$248",
+        "cliff": "23 d"
+      },
+      {
+        "name": "Enamel camp mug 12oz",
+        "sku": "NW-CAM-2210 · seasonal",
+        "units": "540",
+        "capital": "$8.9K",
+        "age": "272 d",
+        "elast": "2.8",
+        "conf": "high · 5 tests",
+        "storage": "$184",
+        "cliff": "past"
+      },
+      {
+        "name": "Alder paring knife 3in",
+        "sku": "NW-KNF-0410 · hero",
+        "units": "410",
+        "capital": "$9.6K",
+        "age": "243 d",
+        "elast": "0.7",
+        "conf": "low · modelled",
+        "storage": "$146",
+        "cliff": "47 d"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "name": "DTC site-wide sale",
+        "value": "280 u/wk",
+        "pct": "100%",
+        "meta": "one 5-day window per month without training discount habits"
+      },
+      {
+        "name": "Outlet listings",
+        "value": "240 u/wk",
+        "pct": "86%",
+        "meta": "no brand exposure · takes any depth"
+      },
+      {
+        "name": "Amazon promo",
+        "value": "180 u/wk",
+        "pct": "64%",
+        "meta": "MAP binds · max 40% and 2 brands excluded"
+      },
+      {
+        "name": "Email + SMS to list",
+        "value": "80 u/wk",
+        "pct": "29%",
+        "meta": "one send per cohort · fatigue limits the rest"
+      }
+    ],
+    "entities": [
+      {
+        "name": "25% → 40% two-step",
+        "recovery": "$71.4K",
+        "rec": true,
+        "stats": [
+          {
+            "label": "weeks",
+            "value": "5.4"
+          },
+          {
+            "label": "dilution",
+            "value": "1.6 pp"
+          },
+          {
+            "label": "before cliff",
+            "value": "82%"
+          },
+          {
+            "label": "of cost",
+            "value": "61%"
+          }
+        ]
+      },
+      {
+        "name": "20% → 35% → 50%",
+        "recovery": "$73.1K",
+        "rec": false,
+        "stats": [
+          {
+            "label": "weeks",
+            "value": "7.2"
+          },
+          {
+            "label": "dilution",
+            "value": "1.9 pp"
+          },
+          {
+            "label": "before cliff",
+            "value": "54%"
+          },
+          {
+            "label": "of cost",
+            "value": "62%"
+          }
+        ]
+      },
+      {
+        "name": "40% single cut",
+        "recovery": "$66.2K",
+        "rec": false,
+        "stats": [
+          {
+            "label": "weeks",
+            "value": "3.4"
+          },
+          {
+            "label": "dilution",
+            "value": "2.4 pp"
+          },
+          {
+            "label": "before cliff",
+            "value": "96%"
+          },
+          {
+            "label": "of cost",
+            "value": "56%"
+          }
+        ]
+      },
+      {
+        "name": "50% single cut",
+        "recovery": "$61.6K",
+        "rec": false,
+        "stats": [
+          {
+            "label": "weeks",
+            "value": "2.6"
+          },
+          {
+            "label": "dilution",
+            "value": "3.1 pp"
+          },
+          {
+            "label": "before cliff",
+            "value": "100%"
+          },
+          {
+            "label": "of cost",
+            "value": "52%"
+          }
+        ]
+      },
+      {
+        "name": "15% single cut",
+        "recovery": "$68.4K",
+        "rec": false,
+        "stats": [
+          {
+            "label": "weeks",
+            "value": "11.4"
+          },
+          {
+            "label": "dilution",
+            "value": "0.8 pp"
+          },
+          {
+            "label": "before cliff",
+            "value": "31%"
+          },
+          {
+            "label": "of cost",
+            "value": "58%"
+          }
+        ]
+      },
+      {
+        "name": "Liquidate whole lot",
+        "recovery": "$44.8K",
+        "rec": false,
+        "stats": [
+          {
+            "label": "weeks",
+            "value": "2.1"
+          },
+          {
+            "label": "dilution",
+            "value": "4.6 pp"
+          },
+          {
+            "label": "before cliff",
+            "value": "100%"
+          },
+          {
+            "label": "of cost",
+            "value": "38%"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

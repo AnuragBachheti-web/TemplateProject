@@ -1,0 +1,267 @@
+{
+  "proposal_id": "prop_s9_11_decide",
+  "story_code": "S9.11",
+  "stage": "decide",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+  "narrative": "+33 further SKUs follow the same rules · 33 currently in tolerance",
+  "status_note": "Decide · 41 SKUs · +$9.7K/mo · 82% ± 7 · tolerance 4.0%",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable",
+    "checks": [
+      {
+        "text": "Every selected price clears its MAP ceiling and rounds to x.99."
+      },
+      {
+        "text": "Slate confidence 82% is above the 70% floor."
+      },
+      {
+        "text": "Cross-channel parity holds at every step · Amazon is written last."
+      },
+      {
+        "text": "2 SKUs routed to test rather than rolled — significance reads in about nine days."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation_identity": "8 of 9 shown selected · 33 of 33 more in tolerance",
+    "recommendation_detail": "41 SKUs raised a median 5.4%, trading about 3.1% of predicted units for +$9.7K of contribution margin a month. 2 of them go out as split tests rather than rolls, so their share of that total only lands if the test wins.",
+    "next_actions": [
+      {
+        "title": "Approve 41-SKU slate",
+        "note": "Writes all selected prices in parity-safe order and arms auto-revert."
+      },
+      {
+        "title": "Approve subset",
+        "note": "Take the 18 highest-confidence SKUs now, hold the rest for next week."
+      },
+      {
+        "title": "Modify prices",
+        "note": "Edit any new price by hand. Rounding, MAP and parity are re-checked on save."
+      },
+      {
+        "title": "Send back to Analyze",
+        "note": "Reject the slate with a note. Realify re-reads bands and elasticity."
+      }
+    ],
+    "slate": [
+      {
+        "sku": "NW-KNF-0480",
+        "name": "Alder chef knife 8in",
+        "prices": "$68.00 → $71.99",
+        "pct": "+5.9%",
+        "vol": "−3.4% · −1.8–5.1",
+        "cm": "+$1,240",
+        "conf": "88%",
+        "tag": "Buy Box sensitive · micro-step 2/3",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-CER-1120",
+        "name": "Ridgeline stoneware bowl",
+        "prices": "$24.00 → $26.99",
+        "pct": "+12.5%",
+        "vol": "−2.2% · −1.0–3.6",
+        "cm": "+$1,080",
+        "conf": "84%",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-PAN-2210",
+        "name": "Carbon steel pan 10in",
+        "prices": "$54.00 → $57.99",
+        "pct": "+7.4%",
+        "vol": "−3.9% · −1.9–6.2",
+        "cm": "+$980",
+        "conf": "81%",
+        "tag": "Buy Box sensitive · parity watch",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-GLS-3390",
+        "name": "Cut-glass tumbler set of 4",
+        "prices": "$38.00 → $40.99",
+        "pct": "+7.9%",
+        "vol": "−3.8% · −1.2–6.4",
+        "cm": "+$305",
+        "conf": "64%",
+        "tag": "reaches significance ~9d",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-TEX-5180",
+        "name": "Quilted oven mitt pair",
+        "prices": "$19.00 → $20.99",
+        "pct": "+10.5%",
+        "vol": "−1.8% · −0.8–2.9",
+        "cm": "+$740",
+        "conf": "86%",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-CER-1210",
+        "name": "Ridgeline mug 14oz",
+        "prices": "$16.00 → $17.99",
+        "pct": "+12.4%",
+        "vol": "−2.4% · −1.1–3.8",
+        "cm": "+$890",
+        "conf": "85%",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-TEX-6040",
+        "name": "Linen apron · natural",
+        "prices": "$42.00 → $43.99",
+        "pct": "+4.7%",
+        "vol": "−2.1% · −0.9–3.4",
+        "cm": "+$420",
+        "conf": "79%",
+        "tag": "MAP ceiling $43.99",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-WOD-7710",
+        "name": "Walnut cutting board L",
+        "prices": "$78.00 → $80.99",
+        "pct": "+3.8%",
+        "vol": "−3.6% · −1.6–6.8",
+        "cm": "+$280",
+        "conf": "61%",
+        "tag": "prior only",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      },
+      {
+        "sku": "NW-BRD-8820",
+        "name": "Sourdough proofing basket",
+        "prices": "$29.00 → $31.99",
+        "pct": "+10.3%",
+        "vol": "−6.2% · −2.1–11.4",
+        "cm": "—",
+        "conf": "72%",
+        "tag": "over tolerance at 4.0%",
+        "modes": [
+          {
+            "label": "Roll"
+          },
+          {
+            "label": "Test"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "SKUs selected",
+        "value": "41 of 41"
+      },
+      {
+        "label": "CM per month",
+        "value": "+$9.7K"
+      },
+      {
+        "label": "Rolls · tests",
+        "value": "39 · 2"
+      },
+      {
+        "label": "Median raise",
+        "value": "+5.4%"
+      },
+      {
+        "label": "Predicted volume loss",
+        "value": "−3.1%"
+      },
+      {
+        "label": "Auto-revert",
+        "value": "arms on approval"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

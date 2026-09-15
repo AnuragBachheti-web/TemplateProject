@@ -1,166 +1,117 @@
-// SAMPLE DATA — reads local fixtures; swap the body of these two functions for real API calls
-// when GET /v1/action-stories exists (see INTEGRATION.md §3 — `httpClient.js` is already built and
-// waiting), nothing else should need to change.
+// The feature's data-access layer, rewritten around the Decision Object.
 //
-// Both functions are async and return Promises on purpose, matching the shape a real
-// `httpClient.get(...)` call would have — every call site already awaits them, so the swap touches
-// only this file. Both now also accept an optional `{ signal }` in their last argument (an
-// AbortSignal) — every current call site can ignore it and keep working exactly as before; a
-// caller that wants real cancellation (not just "ignore a stale response after the fact," which
-// pages/*.jsx already did correctly) can pass one through. See actionStoriesErrors.js for the
-// taxonomy every failure below is normalized into, and httpClient.js's own withRetryOnce for the
-// retry policy this file mirrors for its own async module loads.
+// BEFORE: three `import.meta.glob` calls loaded a workflow index, a story-specific manifest and a
+// story-specific fixture off disk, and the URL's `:code/:stageKey` decided which layout rendered.
+// AFTER: one API call returns a Decision Object, and `resolveTemplate` picks a canonical template
+// from its business facts. There are no globs left in the runtime path — the 105 story manifests and
+// fixtures now live under `__corpus__/` as reference evidence and are loaded only by tests.
+//
+// Everything downstream of this file is unchanged: `getStageView` hands StageRenderer an ordinary
+// manifest and an ordinary data object, exactly the two arguments it has always taken.
 
-import { validateManifest } from '@/features/action-stories/manifests/validateManifest';
-import { ActionStoriesError, ERROR_CODES, isTransient, toActionStoriesError } from './actionStoriesErrors';
+import { getProposal, listProposals, isUsingMockTransport } from './decisionApi'
+import { resolveTemplate } from '@/features/action-stories/templates/templateRegistry'
+import { groupProposalsIntoStories, findStage } from '@/features/action-stories/actionStory'
+import { ActionStoriesError, ERROR_CODES } from './actionStoriesErrors'
 
-// Vite's import.meta.glob is how a set of local modules whose exact names aren't known until
-// runtime (a workflow `code`, a `stageKey`) gets loaded — a dynamic `import(`...${code}...`)`
-// can't be statically analyzed the same way. Not eager: each workflow's manifest and each stage's
-// fixture load lazily, on the same cadence a real per-workflow API call would.
-const indexLoaders = import.meta.glob('/src/features/action-stories/data/index.json');
-const manifestLoaders = import.meta.glob('/src/features/action-stories/manifests/*.json');
-const rawFixtureLoaders = import.meta.glob('/src/features/action-stories/data/raw/*/*.json');
+export { isUsingMockTransport }
 
-const INDEX_PATH = '/src/features/action-stories/data/index.json';
-
-function throwIfAborted(signal) {
-  if (signal?.aborted) {
-    throw new ActionStoriesError('Request aborted', { code: ERROR_CODES.ABORTED });
-  }
+/**
+ * The raw queue — `GET /v1/proposals`. One row per Decision Object, i.e. one row PER STAGE.
+ * Most callers want `getActionStories()` instead; this stays exported for anything that genuinely
+ * needs stage-level rows.
+ */
+export function getProposalQueue(params = {}) {
+  return listProposals(params)
 }
 
 /**
- * A single retry, only for a failure this taxonomy considers transient (a chunk load failing to
- * fetch over a flaky connection is the real-world analog here — Vite serves each glob entry as its
- * own dynamically-imported module, which is itself a network request in a deployed app). Never
- * retries a NOT_FOUND/MALFORMED failure — that would just fail the same way again.
+ * The Action Story listing: the queue, grouped by its parent `story_code`.
+ *
+ * This is the fix for one Action Story rendering as four independent cards. The API is unchanged —
+ * it correctly returns one row per stage, because a stage has its own status and payload — and the
+ * grouping happens here, using `story_code` and `stage`, which every row already carries. No new
+ * contract field, no grouping service, no second store.
+ *
+ * @returns {Promise<import('@/features/action-stories/actionStory').ActionStory[]>}
  */
-async function withRetryOnce(load, { signal } = {}) {
-  throwIfAborted(signal);
-  try {
-    return await load();
-  } catch (err) {
-    const classified = toActionStoriesError(err);
-    if (!isTransient(classified.code)) throw classified;
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    throwIfAborted(signal);
-    try {
-      return await load();
-    } catch (retryErr) {
-      throw toActionStoriesError(retryErr);
-    }
-  }
-}
-
-function isPlainObject(v) {
-  return v !== null && typeof v === 'object' && !Array.isArray(v);
-}
-
-/** @returns {Promise<Array<{code: string, name: string, stages: string[]}>>} every workflow. */
-export async function getWorkflowIndex({ signal } = {}) {
-  throwIfAborted(signal);
-  const load = indexLoaders[INDEX_PATH];
-  if (!load) {
-    throw new ActionStoriesError('Action Stories workflow index is missing — run `npm run extract` first.', {
-      code: ERROR_CODES.NOT_FOUND,
-      userMessage: "We couldn't find any workflows right now.",
-    });
-  }
-
-  let mod;
-  try {
-    mod = await withRetryOnce(load, { signal });
-  } catch (err) {
-    throw toActionStoriesError(err, 'Failed to load workflow index');
-  }
-  throwIfAborted(signal);
-
-  const index = mod?.default;
-  if (!Array.isArray(index) || index.some((wf) => !isPlainObject(wf) || typeof wf.code !== 'string' || !Array.isArray(wf.stages))) {
-    throw new ActionStoriesError('Workflow index response is not a valid array of {code, name, stages}', {
-      code: ERROR_CODES.MALFORMED,
-    });
-  }
-  return index;
+export async function getActionStories({ persona, limit = 200, signal } = {}) {
+  // `limit` defaults high because the caller wants WHOLE stories: a page boundary that splits a
+  // story's stages across two responses would show the same story twice, which is the exact bug
+  // being fixed. A real deployment paginates by story on the server; noted as a contract dependency.
+  const { items } = await listProposals({ persona, limit, signal })
+  return groupProposalsIntoStories(items)
 }
 
 /**
- * @param {string} code - workflow code, e.g. "S9.11".
- * @param {string} stageKey - "reason" | "analyze" | "decide" | "execute" | "live".
- * @param {{ signal?: AbortSignal }} [options]
- * @returns {Promise<{ manifest: object, fixture: object }>} the stage's manifest (blocks list)
- *   and its fixture ({ code, stageKey, name, props, state, data }) for resolveBinding to read.
+ * Resolves one Action Story + stage to the Decision Object for that stage.
+ *
+ * `story_code` is the PARENT identity and `stage` selects the child, so this is a filtered queue
+ * lookup over two fields both already in the contract. It is a separate round trip from
+ * `getProposal` only because no single endpoint takes (story_code, stage) today — see the contract
+ * dependency noted in the final report.
+ *
+ * @returns {Promise<string>} the `proposal_id` for that story's stage.
+ * @throws {ActionStoriesError} NOT_FOUND when the story has no such stage.
  */
-export async function getStageData(code, stageKey, { signal } = {}) {
-  throwIfAborted(signal);
-
-  const manifestPath = `/src/features/action-stories/manifests/${code}.json`;
-  const loadManifest = manifestLoaders[manifestPath];
-  if (!loadManifest) {
-    throw new ActionStoriesError(`No manifest found for workflow "${code}".`, {
+export async function resolveStageProposalId(storyCode, stageKey, { signal } = {}) {
+  const { items } = await listProposals({ storyCode, limit: 50, signal })
+  if (items.length === 0) {
+    throw new ActionStoriesError(`No Action Story "${storyCode}"`, {
       code: ERROR_CODES.NOT_FOUND,
-      userMessage: "We couldn't find that workflow.",
-    });
+      userMessage: "We couldn't find that Action Story.",
+      retryable: false,
+    })
   }
-
-  let manifestMod;
-  try {
-    manifestMod = await withRetryOnce(loadManifest, { signal });
-  } catch (err) {
-    throw toActionStoriesError(err, `Failed to load manifest for "${code}"`);
-  }
-  throwIfAborted(signal);
-
-  const stageManifests = manifestMod?.default;
-  if (!Array.isArray(stageManifests)) {
-    throw new ActionStoriesError(`Manifest for "${code}" is not a valid array of stage manifests.`, {
-      code: ERROR_CODES.MALFORMED,
-    });
-  }
-  const manifest = stageManifests.find((m) => m.stageKey === stageKey);
-  if (!manifest) {
-    throw new ActionStoriesError(`Workflow "${code}" has no "${stageKey}" stage.`, {
+  const [story] = groupProposalsIntoStories(items)
+  const match = findStage(story, stageKey)
+  if (!match) {
+    throw new ActionStoriesError(`Action Story "${storyCode}" has no "${stageKey}" stage`, {
       code: ERROR_CODES.NOT_FOUND,
-      userMessage: "We couldn't find that stage.",
-    });
+      userMessage: "That stage isn't part of this Action Story.",
+      retryable: false,
+    })
+  }
+  return { proposalId: match.proposal_id, story }
+}
+
+/**
+ * Everything one stage needs to render: the Action Story it belongs to, the Decision Object at that
+ * stage, the template selected from it, and the render-ready manifest.
+ *
+ * `decision` is passed to StageRenderer as the binding root, so every template binding is a path on
+ * the Decision Object itself (`proposal.slate`, `guardrails.verdict`, `mode`) rather than the old
+ * fixture envelope's `data.*`. That is the whole reason the slot vocabulary could collapse from 835
+ * names to 43: the paths now mean something across proposals.
+ *
+ * @param {string} storyCode - the PARENT Action Story identity.
+ * @param {string} stageKey - which of its stages to open.
+ * @param {{signal?: AbortSignal}} [options]
+ * @returns {Promise<{story: object, decision: object, templateId: string, manifest: object}>}
+ * @throws {ActionStoriesError} NOT_FOUND / MALFORMED / NETWORK / ... via the shared taxonomy, and
+ *   MALFORMED specifically when no canonical template covers the decision.
+ */
+export async function getStageView(storyCode, stageKey, { signal } = {}) {
+  const { proposalId, story } = await resolveStageProposalId(storyCode, stageKey, { signal })
+  const decision = await getProposal(proposalId, { signal })
+
+  const resolved = resolveTemplate(decision)
+  if (resolved === null) {
+    // A deliberate, loud failure. The selector never guesses a template, so an uncovered
+    // stage/action_type combination surfaces here rather than rendering a plausible wrong screen.
+    // `live` is the known case today: it has no canonical template and, per the architecture
+    // decision recorded in the final report, is not getting a speculative one.
+    throw new ActionStoriesError(
+      `No canonical template covers ${decision.action_type}/${decision.stage}/${decision.cardinality}`,
+      {
+        code: ERROR_CODES.MALFORMED,
+        userMessage: "This proposal can't be displayed yet.",
+        retryable: false,
+      },
+    )
   }
 
-  const problems = validateManifest(manifest);
-  if (problems.length > 0) {
-    // Still surfaced to the UI — not just console.warn'd — as a MALFORMED failure: a
-    // structurally-invalid manifest rendering "whatever that produces" was exactly
-    // AUDIT_REPORT.md §12's callout ("the malformed manifest still renders"). The full problem
-    // list stays in the console for a developer; the user gets the safe, generic message.
-    console.warn(`[actionStoriesService] manifest problems for ${code}/${stageKey}:`, problems);
-    throw new ActionStoriesError(`Manifest for "${code}/${stageKey}" failed validation: ${problems.join('; ')}`, {
-      code: ERROR_CODES.MALFORMED,
-    });
-  }
-
-  const rawPath = `/src/features/action-stories/data/raw/${code}/${stageKey}.json`;
-  const loadFixture = rawFixtureLoaders[rawPath];
-  if (!loadFixture) {
-    throw new ActionStoriesError(`No fixture data found for "${code}/${stageKey}".`, {
-      code: ERROR_CODES.NOT_FOUND,
-      userMessage: "We couldn't find that stage's data.",
-    });
-  }
-
-  let fixtureMod;
-  try {
-    fixtureMod = await withRetryOnce(loadFixture, { signal });
-  } catch (err) {
-    throw toActionStoriesError(err, `Failed to load fixture for "${code}/${stageKey}"`);
-  }
-  throwIfAborted(signal);
-
-  const fixture = fixtureMod?.default;
-  if (!isPlainObject(fixture)) {
-    throw new ActionStoriesError(`Fixture for "${code}/${stageKey}" is not a valid object.`, {
-      code: ERROR_CODES.MALFORMED,
-    });
-  }
-
-  return { manifest, fixture };
+  // `story` travels with the view so StagePage can render StepTracker without a second fetch — the
+  // parent identity and its sibling stages are already in hand from the lookup above.
+  return { story, decision, templateId: resolved.templateId, manifest: resolved.manifest }
 }

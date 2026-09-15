@@ -1,0 +1,268 @@
+{
+  "proposal_id": "prop_s9_14_analyze",
+  "story_code": "S9.14",
+  "stage": "analyze",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Agent share-of-voice drop — hero SKU cited 11 vs competitor's 29",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "Competitor A",
+        "value": "29 citations",
+        "pct": 100
+      },
+      {
+        "label": "Us",
+        "value": "11 citations",
+        "pct": 38
+      },
+      {
+        "label": "Competitor B",
+        "value": "18 citations",
+        "pct": 62
+      },
+      {
+        "label": "Everyone else",
+        "value": "12 citations",
+        "pct": 41
+      }
+    ],
+    "detail_rows": [
+      {
+        "text": "best carbon steel pan for induction under $120",
+        "surface": "ChatGPT",
+        "us": 1,
+        "a": 4,
+        "b": 2,
+        "reason": "missing attr"
+      },
+      {
+        "text": "dishwasher safe knife block with sharpener",
+        "surface": "Google AI",
+        "us": 0,
+        "a": 3,
+        "b": 3,
+        "reason": "no schema"
+      },
+      {
+        "text": "water filter pitcher that removes lead",
+        "surface": "Perplexity",
+        "us": 2,
+        "a": 2,
+        "b": 1,
+        "reason": "even"
+      },
+      {
+        "text": "nonstick pan safe above 500°F",
+        "surface": "ChatGPT",
+        "us": 0,
+        "a": 3,
+        "b": 1,
+        "reason": "wrong spec"
+      },
+      {
+        "text": "kitchen scale accurate to 1 gram",
+        "surface": "Google AI",
+        "us": 1,
+        "a": 2,
+        "b": 2,
+        "reason": "missing attr"
+      },
+      {
+        "text": "stock pot 12 quart with strainer lid",
+        "surface": "Rufus",
+        "us": 0,
+        "a": 4,
+        "b": 2,
+        "reason": "stale feed"
+      },
+      {
+        "text": "return policy on cookware sets",
+        "surface": "Perplexity",
+        "us": 1,
+        "a": 3,
+        "b": 2,
+        "reason": "policy text"
+      },
+      {
+        "text": "oven safe skillet with lid for two people",
+        "surface": "ChatGPT",
+        "us": 2,
+        "a": 3,
+        "b": 1,
+        "reason": "missing attr"
+      },
+      {
+        "text": "cutting board that will not warp",
+        "surface": "Google AI",
+        "us": 0,
+        "a": 3,
+        "b": 4,
+        "reason": "no schema"
+      },
+      {
+        "text": "pan set compatible with glass cooktop",
+        "surface": "Rufus",
+        "us": 1,
+        "a": 2,
+        "b": 2,
+        "reason": "missing attr"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "surface": "ChatGPT",
+        "claim": "Quoted the 12-quart stock pot as 10 quarts on a capacity query",
+        "said": "10 qt",
+        "truth": "12 qt"
+      },
+      {
+        "surface": "Google AI",
+        "claim": "Said the nonstick line is rated to 500°F",
+        "said": "500°F",
+        "truth": "450°F"
+      },
+      {
+        "surface": "Perplexity",
+        "claim": "Told a shopper cookware returns close after 14 days",
+        "said": "14 days",
+        "truth": "45 days"
+      },
+      {
+        "surface": "Rufus",
+        "claim": "Quoted a price $8 below the storefront on the hero SKU",
+        "said": "$91.00",
+        "truth": "$99.00"
+      }
+    ],
+    "entities": [
+      {
+        "name": "Structured data",
+        "score": 58,
+        "rows": [
+          {
+            "label": "GTIN coverage",
+            "value": "94%"
+          },
+          {
+            "label": "Required attrs",
+            "value": "78%"
+          },
+          {
+            "label": "Schema types",
+            "value": "61%"
+          },
+          {
+            "label": "Feed freshness",
+            "value": "11h"
+          }
+        ]
+      },
+      {
+        "name": "Factual density",
+        "score": 66,
+        "rows": [
+          {
+            "label": "Attributes / PDP",
+            "value": "12"
+          },
+          {
+            "label": "Spec Q&A coverage",
+            "value": "34%"
+          },
+          {
+            "label": "Sourced claims",
+            "value": "81%"
+          },
+          {
+            "label": "Comparison tables",
+            "value": "18 SKUs"
+          }
+        ]
+      },
+      {
+        "name": "Policy readability",
+        "score": 44,
+        "rows": [
+          {
+            "label": "Returns",
+            "value": "prose only"
+          },
+          {
+            "label": "Shipping",
+            "value": "partial"
+          },
+          {
+            "label": "Warranty",
+            "value": "absent"
+          },
+          {
+            "label": "Price validity",
+            "value": "present"
+          }
+        ]
+      },
+      {
+        "name": "Real-time accuracy",
+        "score": 79,
+        "rows": [
+          {
+            "label": "Price match",
+            "value": "99.1%"
+          },
+          {
+            "label": "Availability match",
+            "value": "96.4%"
+          },
+          {
+            "label": "Staleness p90",
+            "value": "14h"
+          },
+          {
+            "label": "Mismatch rate",
+            "value": "2.2%"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

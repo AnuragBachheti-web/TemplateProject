@@ -22,15 +22,28 @@ export default function LineChartBlock({ slotName, data }) {
     return <EmptyState slotName={slotName} message="No data points." />;
   }
 
-  const series = typeof data === 'string' ? [{ name: null, path: data }] : data;
-  const invalid = series.some((s) => typeof s?.path !== 'string');
-  if (invalid) {
-    return <ErrorState slotName={slotName} message={'expected each series to have a string "path"'} />;
+  // Three accepted shapes (see blockTypes.js's validateLineChart). The TYPED forms are the contract;
+  // the SVG-path forms exist only so archived corpus fixtures keep rendering. Normalising all three
+  // to `{name, points}` here means everything below this line is shape-agnostic.
+  const isPoint = (p) => p !== null && typeof p === 'object' && p.x !== undefined && p.y !== undefined;
+  let series;
+  if (typeof data === 'string') {
+    series = [{ name: null, points: parseSvgPathPoints(data) }];
+  } else if (data.every(isPoint)) {
+    // A bare typed series — the single-series contract shape.
+    series = [{ name: null, points: data.map((p) => ({ x: p.x, y: Number(p.y) })) }];
+  } else if (data.every((s) => s !== null && typeof s === 'object' && Array.isArray(s.points))) {
+    // Multiple typed series.
+    series = data.map((s) => ({ name: s.name ?? s.label ?? null, points: s.points.map((p) => ({ x: p.x, y: Number(p.y) })) }));
+  } else if (data.every((s) => typeof s?.path === 'string')) {
+    series = data.map((s) => ({ name: s.name ?? s.label ?? null, points: parseSvgPathPoints(s.path) }));
+  } else {
+    return <ErrorState slotName={slotName} message={'expected a typed {x,y} series or an SVG path'} />;
   }
 
   // Every series is re-indexed onto the same x (point index) so Recharts can overlay them on one
   // shared axis — points across series aren't assumed to already share x-values.
-  const seriesPoints = series.map((s) => parseSvgPathPoints(s.path));
+  const seriesPoints = series.map((s) => s.points);
   if (seriesPoints.every((pts) => pts.length === 0)) {
     return <ErrorState slotName={slotName} message="couldn't read this chart's path data" />;
   }

@@ -1,0 +1,196 @@
+{
+  "proposal_id": "prop_s10_5_decide",
+  "story_code": "S10.5",
+  "stage": "decide",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "steward",
+  "title": "Hero image replaced by third-party contribution — 41h ago",
+  "narrative": "Every repair is a canonical re-push with a diff. Nothing is edited by hand in a marketplace console, because a hand edit is the next drift.",
+  "status_note": "Decide · 8 repairs · 6 fix the cause · $18,045 unstranded · detection 7.7h against a 4h target",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "recommendation": "Eight repairs stop $640 a day of quiet loss and return $18,045 of stranded stock to sale. Every one of them fixes the cause as well as the value, which is what stops this card reappearing next month. 1 block goes to the 9.9 ladder instead of back on sale.",
+    "slate": [
+      {
+        "name": "Hero image · ASIN B0Y",
+        "channel": "Amazon",
+        "severity": "critical",
+        "chosenNote": "Asset restored immediately, then a brand-registry dispute filed with the PIM version history and entitlement. Three to five days to lock the field.",
+        "cost": "$310/day",
+        "recurState": "cause fixed",
+        "options": [
+          {
+            "label": "Re-push only"
+          },
+          {
+            "label": "Re-push + registry dispute"
+          }
+        ]
+      },
+      {
+        "name": "Variation family · Enamel set",
+        "channel": "Amazon",
+        "severity": "critical",
+        "chosenNote": "Family rebuilt, then a registry dispute over parent-edit rights. This is the drift most likely to recur without it.",
+        "cost": "$150/day",
+        "recurState": "cause fixed",
+        "options": [
+          {
+            "label": "Rebuild family"
+          },
+          {
+            "label": "Rebuild + dispute"
+          }
+        ]
+      },
+      {
+        "name": "Quantity zeroed · Cast-iron Skillet",
+        "channel": "Walmart",
+        "severity": "high",
+        "chosenNote": "Replay now, plus a guard that refuses to apply a partial inventory file. Kills the whole class, not this instance.",
+        "cost": "$60/day",
+        "recurState": "cause fixed",
+        "options": [
+          {
+            "label": "Replay feed"
+          },
+          {
+            "label": "Replay + partial-file guard"
+          }
+        ]
+      },
+      {
+        "name": "Price drift · Filtration Pitcher",
+        "channel": "Shopify",
+        "severity": "critical",
+        "chosenNote": "Price served live rather than from the theme cache. Slightly slower page, no stale prices.",
+        "cost": "$40/day",
+        "recurState": "cause fixed",
+        "options": [
+          {
+            "label": "Purge cache + re-push"
+          },
+          {
+            "label": "Re-push + exclude price from cache"
+          }
+        ]
+      },
+      {
+        "name": "Titles truncated · 4 Walmart listings",
+        "channel": "Walmart",
+        "severity": "high",
+        "chosenNote": "Character limit corrected in the feed template, then replayed across all four. One fix, four listings, no recurrence.",
+        "cost": "$30/day",
+        "recurState": "cause fixed",
+        "options": [
+          {
+            "label": "Re-push values"
+          },
+          {
+            "label": "Patch template + replay"
+          }
+        ]
+      },
+      {
+        "name": "Bullet 3 replaced · Knife Block",
+        "channel": "Amazon",
+        "severity": "high",
+        "chosenNote": "Copy restored and disputed on the restricted-claim grounds, which is the stronger argument than voice.",
+        "cost": "$20/day",
+        "recurState": "cause fixed",
+        "options": [
+          {
+            "label": "Re-push copy"
+          },
+          {
+            "label": "Re-push + dispute"
+          }
+        ]
+      },
+      {
+        "name": "A+ modules missing · Enamel Casserole",
+        "channel": "Amazon",
+        "severity": "medium",
+        "chosenNote": "Both modules restored on the daily cycle. Re-index drops are a platform behaviour, so recurrence is possible and cheap to fix again.",
+        "cost": "$20/day",
+        "recurState": "may recur",
+        "options": [
+          {
+            "label": "Re-push modules"
+          }
+        ]
+      },
+      {
+        "name": "Secondary images · 2 listings",
+        "channel": "Amazon",
+        "severity": "medium",
+        "chosenNote": "Full set and order restored on the daily cycle.",
+        "cost": "$10/day",
+        "recurState": "may recur",
+        "options": [
+          {
+            "label": "Re-push image set"
+          },
+          {
+            "label": "Re-push + image lock"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Daily bleed stopped",
+        "value": "$640"
+      },
+      {
+        "label": "Stranded capital recovered",
+        "value": "$18,045"
+      },
+      {
+        "label": "Feed rows unblocked",
+        "value": "412"
+      },
+      {
+        "label": "Prevention measures armed",
+        "value": "3 of 4"
+      },
+      {
+        "label": "Disputes filed",
+        "value": "3"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

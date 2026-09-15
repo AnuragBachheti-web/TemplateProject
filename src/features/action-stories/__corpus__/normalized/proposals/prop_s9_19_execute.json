@@ -1,0 +1,236 @@
+{
+  "proposal_id": "prop_s9_19_execute",
+  "story_code": "S9.19",
+  "stage": "execute",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "promoter",
+  "title": "Q4 calendar build — Prime Fall deadline Aug 21",
+  "narrative": "Deal submissions run first — the Prime window closes in two days and a missed deadline is a lost quarter of Amazon share. Everything else is scheduled, not live.",
+  "status_note": "Execute · 0 of 5 stages · 15 items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages pushed",
+        "value": "0 of 5"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 15"
+      },
+      {
+        "label": "Deal submissions filed",
+        "value": "0"
+      },
+      {
+        "label": "Events scheduled",
+        "value": "0"
+      },
+      {
+        "label": "Units reserved",
+        "value": "0"
+      }
+    ],
+    "rollback": [
+      {
+        "name": "Scheduled events",
+        "note": "5 not yet live · cancel cleanly",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Deal submissions",
+        "note": "withdrawable until platform acceptance",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Unit reservations",
+        "note": "releases back to channel plans",
+        "btnLabel": "not pushed"
+      },
+      {
+        "name": "Media and sends",
+        "note": "flights unbook, sends unschedule",
+        "btnLabel": "not pushed"
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, every in-flight adjustment waits for you — including the media top-up.",
+    "plan": [
+      {
+        "name": "Marketplace deal submissions",
+        "meta": "2 submissions as deadline tasks · Prime Fall closes in 2 days",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Prime Fall submission",
+            "detail": "22 SKUs at 20% off the 30-day median with 500 units committed each. Three SKUs flagged short of the commitment — the inbound pull-forward is on Planner.",
+            "value": "22 SKUs",
+            "tag": "due Aug 21",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Walmart Deal Days submission",
+            "detail": "18 SKUs at 15% with a clean 30-day price history verified. No pre-event price movement on any SKU in the set.",
+            "value": "18 SKUs",
+            "tag": "due Sep 30",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Price-history audit",
+            "detail": "Both platforms audit the 30-day median. Realify checks it before submission so a rejection does not cost us the window.",
+            "value": "40 SKUs clean",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Promo configs and codes",
+        "meta": "6 events across 4 channel platforms · codes generated, not published",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Channel promo configs",
+            "detail": "Depth, SKU list, window and channel written into each platform. Scheduled — nothing goes live before its start date.",
+            "value": "6 events",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Discount codes",
+            "detail": "Unique codes per event and per segment for the DTC events, single-use for the email and SMS sends, with caps matching the reserved units.",
+            "value": "11 codes",
+            "tag": "generated",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Amazon coupon suppression",
+            "detail": "The 6 stacking coupons are suppressed for the BFCM window so effective depth stays at the deal price rather than reaching 34%.",
+            "value": "6 SKUs",
+            "tag": "BFCM",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Inventory reservations",
+        "meta": "unit reservations per event · 3 SKUs need an inbound pull-forward",
+        "doorLabel": "S9.3 Planner",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Prime Fall unit commitment",
+            "detail": "11,000 units reserved and held out of other channels for the window. Three SKUs are 40–120 units short and need the inbound 11 days early.",
+            "value": "11,000 units",
+            "tag": "via S9.3",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "BFCM cover check",
+            "detail": "Cover verified across 48 SKUs at the projected sell-through, with a 12% buffer for the upside case rather than the plan case.",
+            "value": "48 SKUs",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Clearance cohort lock",
+            "detail": "Four aged cohorts fenced so nothing in them is sold at full price in the four weeks before the clearance window.",
+            "value": "4 cohorts",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Media plan and lifecycle",
+        "meta": "$40K to Bidder · 14 sends to lifecycle",
+        "doorLabel": "S9.13 Lifecycle",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Bidder media plan",
+            "detail": "$8K on the Prime window and $32K on BFCM, both flighted to the event dates with the bid floors raised for the duration.",
+            "value": "$40K",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Email and SMS calendar",
+            "detail": "13 emails and 1 SMS across the three DTC events, with segments and suppression rules already set on the lifecycle side.",
+            "value": "14 sends",
+            "tag": "to S9.13",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Creative deadlines",
+            "detail": "Asset due dates set back from each event start, so a missing hero image is a task with a date rather than a surprise on launch morning.",
+            "value": "9 deadlines",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Pacing and readouts",
+        "meta": "live pacing per event · +14-day incrementality readouts booked",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Live pacing tiles",
+            "detail": "Units, revenue, CM%, promo spend and inventory burn against plan, refreshed every 15 minutes while an event is running.",
+            "value": "5 tiles",
+            "tag": "active",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Incrementality readouts",
+            "detail": "One per event at +14 days, measured against the matched baseline with the trough netted out, then written into the history library.",
+            "value": "6 booked",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Early-exit rules armed",
+            "detail": "Three stop conditions per event, agreed at approval. A live event can be halted on them without reopening the argument.",
+            "value": "18 rules",
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

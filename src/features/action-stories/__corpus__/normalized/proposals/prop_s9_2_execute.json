@@ -1,0 +1,263 @@
+{
+  "proposal_id": "prop_s9_2_execute",
+  "story_code": "S9.2",
+  "stage": "execute",
+  "action_type": "reorder",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "planner",
+  "title": "Weekly PO cycle — 12 POs · $88K · cash check ✓",
+  "narrative": "",
+  "status_note": "Execute · 12 POs drafted · nothing transmitted",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "PO confirmation SLA",
+        "value": "24 h",
+        "note": "Suppliers acknowledge within 24 h, Northline within 12 h."
+      },
+      {
+        "label": "ETA drift alerts",
+        "value": "> 3 d",
+        "note": "Any ship date or ETA that slips more than three days pings this cycle and the Inventory lens."
+      },
+      {
+        "label": "Return to queue",
+        "value": "> 20%",
+        "note": "If demand deviates more than 20% from P50 before arrival, Realify reopens the cycle with a resized book."
+      }
+    ],
+    "targets": [
+      {
+        "id": "k",
+        "name": "Supplier K · stoneware",
+        "terms": "Net 30 · ships Aug 22 · sea · arrives Sep 23 · order closes Thu 17:00 CST",
+        "channel": "EDI 850",
+        "value": "$37.2K",
+        "units": "5,100 u · 3 lines",
+        "pos": [
+          {
+            "label": "PO-2301 · DC-East"
+          },
+          {
+            "label": "PO-2302 · DC-East"
+          },
+          {
+            "label": "PO-2303 · FBA-West"
+          },
+          {
+            "label": "PO-2304 · FBA-East"
+          }
+        ],
+        "status": "Draft",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$11,174",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$26,074",
+            "meta": "net 30"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "5,100 u",
+            "meta": "4 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "24 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeLabel": "Approval chain · above $25.0K",
+        "chain": [
+          {
+            "initials": "AC",
+            "name": "Alex Carter",
+            "state": "approved 09:38"
+          },
+          {
+            "initials": "DR",
+            "name": "Dana Reyes",
+            "state": "next in chain"
+          },
+          {
+            "initials": "PM",
+            "name": "Priya Malhotra",
+            "state": "queued"
+          }
+        ],
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · EDI 850"
+      },
+      {
+        "id": "vg",
+        "name": "Verrier Glass",
+        "terms": "Net 45 · ships Aug 25 · sea · arrives Sep 18",
+        "channel": "Email PDF + portal ack",
+        "value": "$22.9K",
+        "units": "1,260 u · 2 lines",
+        "pos": [
+          {
+            "label": "PO-2305 · DC-East"
+          },
+          {
+            "label": "PO-2306 · DC-East"
+          },
+          {
+            "label": "PO-2307 · DC-East"
+          }
+        ],
+        "status": "Draft",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$6,874",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$16,040",
+            "meta": "net 45"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "1,260 u",
+            "meta": "3 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "24 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeLabel": "Approval",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · Email PDF + portal ack"
+      },
+      {
+        "id": "nl",
+        "name": "Northline Metals",
+        "terms": "Net 30 · ships Aug 21 · sea · arrives Sep 02",
+        "channel": "EDI 850",
+        "value": "$16.5K",
+        "units": "1,360 u · 3 lines",
+        "pos": [
+          {
+            "label": "PO-2308 · DC-West"
+          },
+          {
+            "label": "PO-2309 · FBA-West"
+          }
+        ],
+        "status": "Draft",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$4,946",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$11,542",
+            "meta": "net 30"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "1,360 u",
+            "meta": "2 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "12 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeLabel": "Approval",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · EDI 850"
+      },
+      {
+        "id": "ag",
+        "name": "Ashgrove Mills · textiles",
+        "terms": "Net 45 · ships Aug 22 · sea · arrives Sep 09",
+        "channel": "Supplier portal task",
+        "value": "$11.1K",
+        "units": "2,400 u · 3 lines",
+        "pos": [
+          {
+            "label": "PO-2310 · FBA-West"
+          },
+          {
+            "label": "PO-2311 · FBA-East"
+          },
+          {
+            "label": "PO-2312 · DC-East"
+          }
+        ],
+        "status": "Draft",
+        "facts": [
+          {
+            "label": "Deposit on transmit",
+            "value": "$3,344",
+            "meta": "30% at signing"
+          },
+          {
+            "label": "Balance due",
+            "value": "$7,804",
+            "meta": "net 45"
+          },
+          {
+            "label": "Receipts staged",
+            "value": "2,400 u",
+            "meta": "3 destinations"
+          },
+          {
+            "label": "Confirmation SLA",
+            "value": "24 h",
+            "meta": "starts on transmit"
+          }
+        ],
+        "routeLabel": "Approval",
+        "amendLabel": "Cancel PO",
+        "sendLabel": "Transmit · Supplier portal task"
+      }
+    ],
+    "bulk_note": "One PO ($37.2K) routes for approval instead of going out. Everything else leaves immediately."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

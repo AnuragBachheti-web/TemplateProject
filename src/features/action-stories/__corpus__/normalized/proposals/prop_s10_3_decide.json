@@ -1,0 +1,226 @@
+{
+  "proposal_id": "prop_s10_3_decide",
+  "story_code": "S10.3",
+  "stage": "decide",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "keeper",
+  "title": "Late-shipment 3.4% ↑ — 0.6pp from threshold",
+  "narrative": "",
+  "status_note": "Decide · 4 responses · 2 submissions for review · soonest deadline 4 days",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "Legal review on IP",
+        "note": "Counter-notice routed to counsel with the evidence pack. Realify does not file it."
+      },
+      {
+        "label": "No metric gaming",
+        "note": "Every fix here is operational or a genuine content correction. No cancellations, no pre-dispatch tracking."
+      },
+      {
+        "label": "Cause addressed, not symptom",
+        "note": "The handling-time buffer fixes 78% of the cause and clears the limit before day 14."
+      },
+      {
+        "label": "All submissions human-reviewed",
+        "note": "Every draft is named to a reviewer. There is no dial setting that sends these automatically."
+      },
+      {
+        "label": "Fix precedes the submission",
+        "note": "The recovery curve is evidence. A plan of action that cites a running fix is answered differently."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation": "Fix the cause first; only two of the five need a submission",
+    "recommendation_detail": "Two operational fixes address 89% of the late-shipment cause and never reach a marketplace inbox. The IP counter-notice and the listing correction do need submissions, both human-reviewed, and the IP matter goes through counsel.",
+    "recommendation_metrics": [
+      {
+        "label": "Selected",
+        "value": "4",
+        "note": "of five available responses"
+      },
+      {
+        "label": "Revenue protected",
+        "value": "$16.8K/day",
+        "note": "sum of exposures addressed"
+      },
+      {
+        "label": "Submissions",
+        "value": "2",
+        "note": "each read and sent by a person"
+      },
+      {
+        "label": "Soonest deadline",
+        "value": "4 days",
+        "note": "IP counter-notice"
+      }
+    ],
+    "next_actions": [
+      {
+        "kind": "legal",
+        "title": "Counter-notice on the IP complaint",
+        "body": "Validity is weak on the claimant’s side: no registered mark in our category and our listing predates the cited design by 16 months. The pack is assembled; counsel reads it and files.",
+        "chip": "legal review",
+        "gate": "counsel files",
+        "deadline": "4 days",
+        "protects": "$1.8K/day",
+        "effort": "30 min",
+        "hasCurve": false,
+        "hasDraft": true,
+        "draftTitle": "Counter-notice draft · for counsel",
+        "reviewer": "R. Vance · counsel",
+        "draft": "We dispute complaint 8814-2291 in full. The complainant’s registration (filed Mar 2025) covers cookware handle geometry and does not extend to pan bodies. Our listing for the carbon steel skillet 10\" first published 14 Nov 2023, sixteen months prior, with the original image set attached. The product is manufactured on our supplier’s standard tooling under the authorisation letter enclosed. We request immediate reinstatement and note that the complainant has filed nine comparable complaints in twelve months, four subsequently withdrawn.",
+        "attachments": [
+          {
+            "label": "listing record Nov 2023"
+          },
+          {
+            "label": "Kessler authorisation"
+          },
+          {
+            "label": "original image set"
+          },
+          {
+            "label": "claimant filing history"
+          }
+        ]
+      },
+      {
+        "kind": "listing fix",
+        "title": "Correct the condition phrase on nine listings",
+        "body": "Two are suppressed; seven carry the same 2024 template phrase and have not been flagged yet. Fixing only the suppressed pair leaves seven waiting to happen.",
+        "chip": "S9.6 listings",
+        "deadline": "6 days",
+        "protects": "$2.1K/day",
+        "effort": "20 min",
+        "hasCurve": false,
+        "hasDraft": true,
+        "draftTitle": "Reinstatement request · with diff",
+        "reviewer": "A. Castellanos",
+        "draft": "The phrase \"like new performance\" has been removed from all nine affected listings and from the source template, replaced with \"filtration performance\". No condition claim remains in any listing. Diff attached for both suppressed items. We request reinstatement of the two suppressed listings and confirm the remaining seven were corrected proactively.",
+        "attachments": [
+          {
+            "label": "copy diff · 9 listings"
+          },
+          {
+            "label": "template v3"
+          }
+        ]
+      },
+      {
+        "kind": "operational",
+        "title": "Handling-time buffer on weekend orders",
+        "body": "One extra day of handling on Fri–Sun orders. Fixes 78% of the late-shipment cause and the shared 71% of the Walmart on-time cause with one change — and nothing is submitted to anyone.",
+        "chip": "S9.18 fulfilment",
+        "deadline": "9 days",
+        "protects": "$11.5K/day",
+        "effort": "1 day",
+        "hasCurve": true,
+        "curveNote": "3.4% → 1.9% within 14 days",
+        "changes": [
+          {
+            "label": "Late shipment · day 14",
+            "value": "1.9%"
+          },
+          {
+            "label": "Walmart on-time · day 14",
+            "value": "96.9%"
+          },
+          {
+            "label": "Promise shown at checkout",
+            "value": "+1 day"
+          },
+          {
+            "label": "Conversion effect",
+            "value": "−0.3pp"
+          },
+          {
+            "label": "Plan of action needed",
+            "value": "none"
+          }
+        ],
+        "hasDraft": false,
+        "limitY": "21.0",
+        "floorY": "39.8",
+        "startY": "32.3",
+        "endY": "60.5"
+      },
+      {
+        "kind": "operational",
+        "title": "Two extra Monday pickers at the East node",
+        "body": "Addresses the 11% of late orders caused by oversize items waiting on a second picker. Costs 3PL labour and does not touch the promise shown at checkout.",
+        "chip": "S9.18 fulfilment",
+        "deadline": "9 days",
+        "protects": "$1.4K/day",
+        "effort": "3 days",
+        "hasCurve": false,
+        "hasDraft": false
+      },
+      {
+        "kind": "documents",
+        "title": "Answer the authenticity request from the vault",
+        "body": "Three invoices and three authorisation letters, all current. Fifteen minutes of assembly and a human read. No revenue at risk today, and $4.2K a day if it goes unanswered.",
+        "deadline": "11 days",
+        "protects": "$4.2K/day",
+        "effort": "15 min",
+        "hasCurve": false,
+        "hasDraft": false
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Responses selected",
+        "value": "4 of 5"
+      },
+      {
+        "label": "Operational fixes",
+        "value": "2"
+      },
+      {
+        "label": "Submissions to review",
+        "value": "2"
+      },
+      {
+        "label": "Legal escalations",
+        "value": "1"
+      },
+      {
+        "label": "Deadlines covered",
+        "value": "4 of 5"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

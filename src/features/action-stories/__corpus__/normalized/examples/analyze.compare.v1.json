@@ -1,0 +1,204 @@
+{
+  "proposal_id": "prop_s9_1_analyze",
+  "story_code": "S9.1",
+  "stage": "analyze",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Quarterly assortment review — 214 active SKUs",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "Promoted to Hero",
+        "value": "+3"
+      },
+      {
+        "label": "Fell to Supporting",
+        "value": "−7"
+      },
+      {
+        "label": "New Exit Candidates",
+        "value": "+5"
+      },
+      {
+        "label": "Held their role",
+        "value": "199"
+      }
+    ],
+    "detail_rows": [
+      {
+        "product": "Ridgeline stoneware bowl NW-CER-1120",
+        "role": "Hero ↑",
+        "vel": "6.4/d",
+        "cm": "$12.80",
+        "turns": "5.2",
+        "gmroi": "3.6",
+        "cpw": "$1.94"
+      },
+      {
+        "product": "Alder chef knife 8\" NW-KNF-0480",
+        "role": "Core →",
+        "vel": "4.1/d",
+        "cm": "$9.20",
+        "turns": "4.1",
+        "gmroi": "2.7",
+        "cpw": "$1.12"
+      },
+      {
+        "product": "Carbon steel pan 10\" NW-PAN-2210",
+        "role": "Traffic Driver ↑",
+        "vel": "9.2/d",
+        "cm": "$3.40",
+        "turns": "6.8",
+        "gmroi": "2.5",
+        "cpw": "$0.86"
+      },
+      {
+        "product": "Cut-glass tumbler set NW-GLS-3390",
+        "role": "Margin Driver →",
+        "vel": "1.8/d",
+        "cm": "$16.10",
+        "turns": "2.4",
+        "gmroi": "3.1",
+        "cpw": "$1.41"
+      },
+      {
+        "product": "Linen tea towel 4-pk NW-TEX-0770",
+        "role": "Supporting ↓",
+        "vel": "1.1/d",
+        "cm": "$4.60",
+        "turns": "1.6",
+        "gmroi": "1.2",
+        "cpw": "$0.31"
+      },
+      {
+        "product": "Bamboo canister 1.2L NW-STO-5140",
+        "role": "Exit Candidate ↓",
+        "vel": "0.4/d",
+        "cm": "$2.10",
+        "turns": "0.7",
+        "gmroi": "0.9",
+        "cpw": "$0.08"
+      },
+      {
+        "product": "Sourdough proofing box NW-BRD-1980",
+        "role": "Core →",
+        "vel": "3.6/d",
+        "cm": "$7.90",
+        "turns": "3.8",
+        "gmroi": "2.6",
+        "cpw": "$0.98"
+      },
+      {
+        "product": "Silicone spatula trio NW-UTL-4420",
+        "role": "Supporting →",
+        "vel": "0.9/d",
+        "cm": "$5.30",
+        "turns": "1.4",
+        "gmroi": "1.1",
+        "cpw": "$0.27"
+      },
+      {
+        "product": "Ridgeline serving platter NW-CER-1180",
+        "role": "Hero →",
+        "vel": "5.8/d",
+        "cm": "$11.40",
+        "turns": "4.9",
+        "gmroi": "3.4",
+        "cpw": "$1.77"
+      },
+      {
+        "product": "Enamel camp mug 12oz NW-MUG-2050",
+        "role": "Exit Candidate ↓",
+        "vel": "0.3/d",
+        "cm": "$1.80",
+        "turns": "0.6",
+        "gmroi": "0.8",
+        "cpw": "$0.06"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "name": "Enamel Dutch ovens · 5.5qt",
+        "cover": "4 of 5 rivals",
+        "demand": "est. 42 u/mo",
+        "status": "Strong overlap"
+      },
+      {
+        "name": "Glass storage · 12-pc sets",
+        "cover": "5 of 5 rivals",
+        "demand": "est. 61 u/mo",
+        "status": "Strong overlap"
+      },
+      {
+        "name": "Ceramic knife blocks",
+        "cover": "3 of 5 rivals",
+        "demand": "est. 28 u/mo",
+        "status": "Worth testing"
+      },
+      {
+        "name": "Silicone bakeware sets",
+        "cover": "3 of 5 rivals",
+        "demand": "est. 19 u/mo",
+        "status": "Thin margin"
+      }
+    ],
+    "entities": [
+      {
+        "name": "Hero"
+      },
+      {
+        "name": "Core"
+      },
+      {
+        "name": "Margin Driver"
+      },
+      {
+        "name": "Traffic Driver"
+      },
+      {
+        "name": "Supporting"
+      },
+      {
+        "name": "Exit Candidate"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

@@ -1,0 +1,222 @@
+{
+  "proposal_id": "prop_s9_1_execute",
+  "story_code": "S9.1",
+  "stage": "execute",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Quarterly assortment review — 214 active SKUs",
+  "narrative": "Grouped by destination so each system gets one write. Markdown and sourcing hand off as cards; Planner and the channels take direct pushes with a diff on every line.",
+  "status_note": "Execute · 0 of 4 destinations pushed · 14 line items staged",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Destinations pushed",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items written",
+        "value": "0 of 14"
+      },
+      {
+        "label": "Channel edits",
+        "value": "114 staged"
+      },
+      {
+        "label": "Capital release started",
+        "value": "waiting on Planner"
+      }
+    ],
+    "targets": [
+      {
+        "name": "Markdown & recovery",
+        "meta": "12 exit SKUs · $27K at cost · 3 recovery cards",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Markdown card MD-3312",
+            "detail": "Ladder-eligible exits with more than 8 weeks of cover. Opens as a clearance cohort in the markdown story with the storage-cost clock already running.",
+            "value": "6 SKUs",
+            "chip": "Open S9.9",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Liquidation quote request",
+            "detail": "Below the ladder recovery floor at current velocity. Two quotes already on file at 22% and 27% of cost.",
+            "value": "4 SKUs",
+            "chip": "Open S9.9",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Donation routing",
+            "detail": "Novelty egg cups and chalkboard labels — recovery value under the $8.40 handling floor, tax value beats liquidation.",
+            "value": "2 SKUs",
+            "chip": "Open S9.9",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Planner",
+        "meta": "34 SKUs · stop-buy and depth flags · 3 open POs",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Stop-buy flags",
+            "detail": "No further replenishment on the exit set. Flags sit ahead of the next planning run so nothing re-enters the buy sheet.",
+            "value": "12 SKUs",
+            "hasDiff": true,
+            "before": "replenish · auto",
+            "after": "stop-buy · locked",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Depth reduction to 4 weeks cover",
+            "detail": "Buy depth cut on the Supporting tail. Ranging is untouched, so no channel goes dark.",
+            "value": "22 SKUs",
+            "hasDiff": true,
+            "before": "cover 10–14 wks",
+            "after": "cover 4 wks",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Open PO cancellations",
+            "detail": "PO-88412, PO-88437 and PO-88501 carry exit SKUs inside their cancel window (closes in 6, 9 and 11 days). Cancel requests go with the flags.",
+            "value": "3 POs",
+            "hasDiff": true,
+            "before": "$6.4K inbound",
+            "after": "cancel requested",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Channel ranging updates",
+        "meta": "4 channels · every change diffed before push",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Shopify · collections and nav",
+            "detail": "Exit SKUs leave 4 collections, gap fills land as drafts in Cookware and Storage, two nav facets recount.",
+            "value": "30 edits",
+            "hasDiff": true,
+            "before": "4 collections · 214 live",
+            "after": "4 collections · 206 live, 4 drafts",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Amazon · listing status",
+            "detail": "Exits move to Inactive with the ASIN kept so review history survives. Grow SKUs get max-order-quantity raised.",
+            "value": "32 edits",
+            "hasDiff": true,
+            "before": "214 active · 12 at MOQ 3",
+            "after": "202 active · 12 inactive",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Walmart · item flags",
+            "detail": "Exits unpublish, reduce set flags to limited-depth, gap fills open as setup-pending until the sourcing brief lands.",
+            "value": "34 edits",
+            "hasDiff": true,
+            "before": "214 published",
+            "after": "202 published · 4 pending",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Faire · wholesale sheet",
+            "detail": "Exit lines drop off the wholesale assortment sheet at the next catalogue refresh, 3 grow SKUs move to the front page.",
+            "value": "18 edits",
+            "hasDiff": true,
+            "before": "sheet rev 14",
+            "after": "sheet rev 15",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Gap fills → sourcing",
+        "meta": "4 new lines · $6K test buy · sourcing brief per line",
+        "statusLabel": "staged",
+        "btnLabel": "Push",
+        "items": [
+          {
+            "name": "Enamel Dutch oven 5.5qt",
+            "detail": "Ranged by 4 of 5 rivals. Brief carries the demand estimate, target landed cost and the two suppliers Prospector already shortlisted.",
+            "value": "est. 42 u/mo",
+            "chip": "Hand to S9.20",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Glass storage 12-pc set",
+            "detail": "Ranged by all 5 rivals and the largest single gap in the set. Needs a packaging spec before the first buy.",
+            "value": "est. 61 u/mo",
+            "chip": "Hand to S9.20",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Ceramic knife block",
+            "detail": "Bundles with the existing Alder knife line. Test quantity only until the 60-day read.",
+            "value": "est. 28 u/mo",
+            "chip": "Hand to S9.20",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Silicone bakeware set",
+            "detail": "Thinnest margin of the four — the brief asks sourcing to hold unless landed cost comes in under $9.20.",
+            "value": "est. 19 u/mo",
+            "chip": "Hand to S9.20",
+            "hasDiff": false,
+            "stateLabel": "staged"
+          }
+        ]
+      }
+    ],
+    "arming": "Available from the Approve dial upward. At Suggest, every quarter comes back through this four-step flow."
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

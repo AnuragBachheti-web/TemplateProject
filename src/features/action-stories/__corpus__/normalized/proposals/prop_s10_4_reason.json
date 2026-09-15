@@ -1,0 +1,112 @@
+{
+  "proposal_id": "prop_s10_4_reason",
+  "story_code": "S10.4",
+  "stage": "reason",
+  "action_type": "file_claim",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "controller",
+  "title": "$4,120 recoverable — $890 expires in 21 days",
+  "narrative": "",
+  "status_note": "Reason · 11 claims above floor · $890 expiring · windows locked to published policy",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 19 · 02:10",
+        "what": "The Fee Reconciliation Engine finished the monthly pass over 41,880 fee lines and found 17 discrepancies against the marketplace’s own measurements and adjustment logs."
+      },
+      {
+        "when": "Aug 19 · 02:14",
+        "what": "Eleven cleared the $25 floor at $4,120 total. The remaining six, $84 together, were logged as measured leakage without being promoted to claims."
+      },
+      {
+        "when": "Aug 19 · 02:16",
+        "what": "The Claim Evidence Assembler scored completeness per claim and sorted by deadline rather than value — $890 of the total closes within 21 days."
+      }
+    ],
+    "policy": [
+      {
+        "rule": "Recovery floor per claim",
+        "setting": "$25",
+        "why": "Below this, evidence assembly costs more than the claim returns. Sub-floor items are logged so leakage is still a number."
+      },
+      {
+        "rule": "Evidence standard",
+        "setting": "complete",
+        "why": "A claim files only when every document policy names for that type is attached. Partial submissions burn the window and the goodwill."
+      },
+      {
+        "rule": "Batch minimum",
+        "setting": "3 claims",
+        "why": "Filing is batched to keep case volume legible to the marketplace and to keep the analyst cost per claim near $8."
+      },
+      {
+        "rule": "Denied claims",
+        "setting": "1 appeal",
+        "why": "One appeal with new evidence. After that it is written off and recorded — a second appeal on the same facts is noise."
+      },
+      {
+        "rule": "Speculative claims",
+        "setting": "never",
+        "why": "No claim is filed on a fee we cannot tie to the marketplace’s own record. Volume is not the metric; recovery rate is."
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Filing windows are policy, not preference",
+        "detail": "Each window is read from the marketplace’s published claim policy and versioned. When a policy changes, the ledger re-sorts the same day."
+      },
+      {
+        "label": "Evidence standards per claim type",
+        "detail": "Dimension claims need a measured-dimension record; lost-inventory claims need the shipment reconciliation; shortage claims need carrier proof of delivery."
+      },
+      {
+        "label": "Recovered cash is attributed, not absorbed",
+        "detail": "Every recovery posts to the Cash lens with the claim reference attached, so the period total is auditable line by line."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Fee Reconciliation Engine"
+      },
+      {
+        "name": "Claim Evidence Assembler"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

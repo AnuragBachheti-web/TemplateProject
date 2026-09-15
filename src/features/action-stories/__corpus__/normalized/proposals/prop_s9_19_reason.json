@@ -1,0 +1,89 @@
+{
+  "proposal_id": "prop_s9_19_reason",
+  "story_code": "S9.19",
+  "stage": "reason",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "promoter",
+  "title": "Q4 calendar build — Prime Fall deadline Aug 21",
+  "narrative": "",
+  "status_note": "Reason · 6 events · 2 volume · 1 margin · 2 share · 1 clearance · $240K budget · 2.4pp dilution cap",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 15",
+        "what": "Amazon opened Prime Fall submissions with a 20% minimum discount and a hard Aug 21 close."
+      },
+      {
+        "when": "Aug 17",
+        "what": "Incrementality Engine finished re-scoring last Q4: the headline 20%-off event measured 31% incremental after trough accounting, not the 58% gross lift reported at the time."
+      },
+      {
+        "when": "Aug 18",
+        "what": "Conflict Detector found 14 SKUs proposed in both the DTC early-BF window and the Walmart deal window, and pinned the card."
+      }
+    ],
+    "constraints": [
+      {
+        "label": "MAP",
+        "detail": "No price below MAP on any channel, in any event, including clearance. Platform-funded discounts are fine; ours stop at the floor."
+      },
+      {
+        "label": "Marketplace deal requirements",
+        "detail": "Prime Fall needs a 20% minimum discount off the 30-day median and 500 units committed per SKU. Walmart Deal Days needs 15% and a clean 30-day price history."
+      },
+      {
+        "label": "Inventory commitments",
+        "detail": "Units pledged to a marketplace deal are reserved and cannot be sold through another channel during the window. Planner holds the reservation."
+      },
+      {
+        "label": "Price-history integrity",
+        "detail": "No pre-event price raise to manufacture a deeper discount. The 30-day median is the reference and it is audited by both platforms."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Incrementality Engine"
+      },
+      {
+        "name": "Promo Conflict Detector"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

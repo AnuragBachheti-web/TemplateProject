@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
 import { actionStoryPath } from '@/constants/actionStoriesRoutes';
-import { getWorkflowIndex } from '@/services/actionStoriesService';
+import { getActionStories } from '@/services/actionStoriesService';
+import { defaultStageOf } from '@/features/action-stories/actionStory';
 import { useThemeStore } from '@/store/useThemeStore';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 
@@ -84,18 +85,26 @@ function TopBar({ onOpenNav }) {
   );
 }
 
-function WorkflowNav({ activeCode, onRetry }) {
+/**
+ * The sidebar lists ACTION STORIES — one row each, never one row per stage.
+ *
+ * It briefly listed raw queue rows, which put the same story in the sidebar four times with four
+ * identical titles. The queue is right to return one row per stage; the sidebar is wrong to render
+ * them ungrouped. Clicking a story opens it at its default stage; the stage tracker in the page
+ * header moves between that story's stages.
+ */
+function WorkflowNav({ activeStoryCode, onRetry }) {
   const [status, setStatus] = useState('loading'); // 'loading' | 'ready' | 'error'
-  const [workflows, setWorkflows] = useState([]);
+  const [stories, setStories] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
-    getWorkflowIndex({ signal: controller.signal })
-      .then((index) => {
+    getActionStories({ signal: controller.signal })
+      .then((grouped) => {
         if (cancelled) return;
-        setWorkflows(index);
+        setStories(grouped);
         setStatus('ready');
       })
       .catch((err) => {
@@ -113,17 +122,17 @@ function WorkflowNav({ activeCode, onRetry }) {
     <>
       {/* Previously the sidebar rendered an empty <ul> with no indication anything was loading —
           a slow network showed nothing with no explanation (AUDIT_REPORT.md §14). */}
-      {status === 'loading' && <LoadingState label="Loading workflows…" compact />}
+      {status === 'loading' && <LoadingState label="Loading Action Stories…" compact />}
       {status === 'error' && <AsyncErrorState error={error} onRetry={onRetry} compact />}
 
       <ul className="flex flex-col gap-px p-2">
         {status === 'ready' &&
-          workflows.map((wf) => {
-            const isActive = activeCode === wf.code;
+          stories.map((story) => {
+            const isActive = activeStoryCode === story.story_code;
             return (
-              <li key={wf.code}>
+              <li key={story.story_code}>
                 <NavLink
-                  to={actionStoryPath(wf.code, wf.stages[0])}
+                  to={actionStoryPath(story.story_code, defaultStageOf(story))}
                   aria-current={isActive ? 'page' : undefined}
                   className={`relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 text-[12.5px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
                     isActive
@@ -134,8 +143,10 @@ function WorkflowNav({ activeCode, onRetry }) {
                   {isActive && (
                     <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-[2.5px] rounded-full bg-rf-brand-indicator" />
                   )}
-                  <span className="shrink-0 font-mono text-[9.5px] tracking-[0.04em] text-rf-text-tertiary">{wf.code}</span>
-                  <span className="truncate">{wf.name}</span>
+                  <span className="shrink-0 font-mono text-[9.5px] tracking-[0.04em] text-rf-text-tertiary">{story.story_code}</span>
+                  <span className="min-w-0 flex-1 truncate">{story.title}</span>
+                  {/* Stage COUNT, not a stage name — one row is the whole story. */}
+                  <span className="shrink-0 font-mono text-[9px] text-rf-text-tertiary">{story.stages.length}</span>
                 </NavLink>
               </li>
             );
@@ -164,7 +175,7 @@ function WorkflowNav({ activeCode, onRetry }) {
  * (AUDIT_REPORT.md §15).
  */
 export default function Shell() {
-  const { code: activeCode } = useParams();
+  const { storyCode: activeStoryCode } = useParams();
   const { pathname } = useLocation();
   const [retryToken, setRetryToken] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
@@ -210,7 +221,7 @@ export default function Shell() {
         <div className="px-4 pt-3.5 pb-1">
           <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-tertiary">Action Stories</p>
         </div>
-        <WorkflowNav key={retryToken} activeCode={activeCode} onRetry={() => setRetryToken((n) => n + 1)} />
+        <WorkflowNav key={retryToken} activeStoryCode={activeStoryCode} onRetry={() => setRetryToken((n) => n + 1)} />
 
         <div className="mt-auto flex flex-col border-t border-rf-border-subtle px-2 py-2">
           <a

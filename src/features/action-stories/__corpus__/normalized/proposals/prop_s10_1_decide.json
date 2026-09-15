@@ -1,0 +1,156 @@
+{
+  "proposal_id": "prop_s10_1_decide",
+  "story_code": "S10.1",
+  "stage": "decide",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "steward",
+  "title": "Yesterday −$1,840 explained — 1 unexpected · residual 1.0%",
+  "narrative": "",
+  "status_note": "Decide · 2 actions · 2 card spawning · annotating to history",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "Contract untouched",
+        "note": "CM v3 and its ±$1,200 band are unchanged. Nothing here re-bases history."
+      },
+      {
+        "label": "Investigated once",
+        "note": "The annotation lands in metric history with the bridge attached, so this day never gets re-opened cold."
+      },
+      {
+        "label": "Ownership",
+        "note": "2 cards created in the flows that own the fix, linked back to this bridge."
+      },
+      {
+        "label": "Nothing auto-executes",
+        "note": "This step spawns and annotates. Any actual price or packaging change is decided in its own flow with its own guardrails."
+      }
+    ]
+  },
+  "proposal": {
+    "slate": [
+      {
+        "title": "Spawn remediation cards",
+        "badge": "recommended",
+        "body": "The fee change is not a variance to accept — it is a cost with two possible fixes, each owned by a different flow. Spawning links this bridge to them bidirectionally, so the card that fixes it knows why it exists.",
+        "metric": "−$2,210 / day",
+        "metricLabel": "if unaddressed",
+        "hasCards": true,
+        "cards": [
+          {
+            "title": "Packaging right-size for the 31 reclassified SKUs",
+            "chip": "S9.18 fulfilment",
+            "detail": "Four of the 31 already appear on the dim-weight candidate list. Right-sizing those boxes drops them back under the tier boundary rather than paying the new tier forever.",
+            "value": "−$1,480",
+            "valueLabel": "of the $2,210"
+          },
+          {
+            "title": "Pass-through check on the residual SKUs",
+            "chip": "S9.11 repricing",
+            "detail": "The 27 SKUs that cannot be right-sized need the fee absorbed or passed through. Elasticity and competitive headroom decide which — that is the repricing flow’s question, not this one.",
+            "value": "−$730",
+            "valueLabel": "of the $2,210"
+          }
+        ]
+      },
+      {
+        "title": "Annotate and archive",
+        "badge": "writes to metric history",
+        "body": "Records what yesterday was, so the same shape next month opens with the answer attached instead of starting a fresh investigation.",
+        "hasNote": true,
+        "note": "Aug 18 CM fell $1,840 (14.7%) against the trailing 7-day mean. Amazon revised dimensional-weight tiers effective that day, reclassifying 31 SKUs upward at −$2,210. The 9.11 price slate offset +$610 on its first full day; returns, mix and staged ad bids account for the rest within normal variation. Residual +$130 · 1.0%. Two remediation cards spawned — packaging right-size and pass-through check. This is a recurring daily cost until one of them lands."
+      },
+      {
+        "title": "Adjust the contract band",
+        "body": "The band decides which days raise a card at all. Tightening it surfaces smaller moves and more of them; widening it means days like yesterday pass unremarked.",
+        "metricLabel": "new band",
+        "hasBand": false,
+        "bandOptions": [
+          {
+            "label": "±$800"
+          },
+          {
+            "label": "±$1,200"
+          },
+          {
+            "label": "±$1,800"
+          }
+        ],
+        "bandNote": "unchanged · current contract"
+      },
+      {
+        "title": "Escalate with the bridge attached",
+        "body": "For when the fix needs someone outside this flow. The recipient gets the waterfall, the classifier output and the drill rows — not a summary of them.",
+        "hasEscalate": false,
+        "people": [
+          {
+            "name": "A. Castellanos · Ops",
+            "initials": "AC"
+          },
+          {
+            "name": "R. Vance · Controller",
+            "initials": "RV"
+          },
+          {
+            "name": "L. Duarte · Fulfilment",
+            "initials": "LD"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Actions selected",
+        "value": "2"
+      },
+      {
+        "label": "Cards spawning",
+        "value": "2"
+      },
+      {
+        "label": "Annotation",
+        "value": "yes"
+      },
+      {
+        "label": "Band",
+        "value": "±$1,200"
+      },
+      {
+        "label": "Escalation",
+        "value": "none"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

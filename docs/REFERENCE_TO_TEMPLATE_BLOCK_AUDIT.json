@@ -1,0 +1,2630 @@
+{
+  "audit": {
+    "title": "Reference -> Template/Block Gap Audit + Resolution",
+    "status": "GAPS FIXED",
+    "companion_document": "docs/REFERENCE_TO_TEMPLATE_BLOCK_AUDIT.md",
+    "date": "2026-09-15",
+    "projects": {
+      "reference": "/Users/rohit/Downloads/Realify Workspace Dashboard Build (1)",
+      "current": "/Volumes/D/TemplateProject",
+      "reference_mirror_in_current": "source-mockups/"
+    },
+    "architecture_changes": {
+      "templates_added": 0,
+      "templates_removed": 0,
+      "renderers_added": 0,
+      "block_components_added": 0,
+      "backends_added": 0,
+      "note": "The five canonical templates, the single renderer and the block registry membership are unchanged. One block-level presentation helper (blocks/enumLabel.js) and one shared chart helper (bridgeGeometry, in the existing chartGeometry.js) were added."
+    }
+  },
+  "before_after": {
+    "reference_business_fields": {
+      "before": 1558,
+      "after": 1558
+    },
+    "carried_into_normalized": {
+      "before": 430,
+      "after": 610,
+      "pct_before": 27.6,
+      "pct_after": 39.2
+    },
+    "dropped_at_normalization": {
+      "before": 1128,
+      "after": 948
+    },
+    "rendered_slot_instances": {
+      "before": 712,
+      "after": 764
+    },
+    "rendered_content_slots": {
+      "before": 391,
+      "after": 555
+    },
+    "rendered_axis_echo_slots": {
+      "before": 321,
+      "after": 209
+    },
+    "content_share_pct": {
+      "before": 54.9,
+      "after": 72.6
+    },
+    "wrong_source_content_renders": {
+      "before": 122,
+      "after": 0
+    },
+    "duplicate_content_incidents": {
+      "before": 41,
+      "after": 0
+    },
+    "missing_slots": {
+      "before": 20,
+      "after": 0,
+      "note": "17 added; 3 deferred with stated reasons (see unresolved)"
+    },
+    "canonical_slots": {
+      "before": 34,
+      "after": 51
+    },
+    "slot_instances_across_templates": {
+      "before": 44,
+      "after": 63
+    },
+    "blocks_registered": {
+      "before": 14,
+      "after": 14
+    },
+    "blocks_reachable": {
+      "before": 9,
+      "after": 11
+    },
+    "blocks_unreachable": {
+      "before": [
+        "waterfallChart",
+        "heatmapGrid",
+        "object",
+        "slider",
+        "gauge"
+      ],
+      "after": [
+        "flag",
+        "object",
+        "slider"
+      ]
+    },
+    "new_block_components_built": {
+      "before": "audit proposed 1 (stackedBar, arguable)",
+      "after": 0,
+      "note": "moveBar normalised to {label,value}; the existing barChart carries the composition"
+    },
+    "permanently_empty_sections": {
+      "before": [
+        "analyze.compare.v1#rollup",
+        "decide.slate.v1#provenance"
+      ],
+      "after": []
+    },
+    "rendering_bugs": {
+      "before": 7,
+      "after": 0
+    },
+    "records_locked_to_teaser": {
+      "before": 20,
+      "after": 0
+    },
+    "records_with_no_template": {
+      "before": 1,
+      "after": 0
+    },
+    "unresolved_bindings": {
+      "before": 0,
+      "after": 0
+    },
+    "shape_violations": {
+      "before": 0,
+      "after": 0
+    },
+    "tests": {
+      "before": {
+        "files": 51,
+        "tests": 1053,
+        "failures": 0
+      },
+      "after": {
+        "files": 55,
+        "tests": 1153,
+        "failures": 0
+      }
+    },
+    "lint": {
+      "before": {
+        "errors": 0,
+        "warnings": 1
+      },
+      "after": {
+        "errors": 0,
+        "warnings": 1
+      }
+    },
+    "build": {
+      "before": "pass",
+      "after": "pass"
+    }
+  },
+  "carry_through_by_stage": {
+    "reason": {
+      "before_pct": 30.3,
+      "after_pct": 50.5
+    },
+    "analyze": {
+      "before_pct": 17.5,
+      "after_pct": 29.6
+    },
+    "decide": {
+      "before_pct": 33.3,
+      "after_pct": 44.1
+    },
+    "execute": {
+      "before_pct": 27.6,
+      "after_pct": 35.3
+    },
+    "live": {
+      "before_pct": 16.7,
+      "after_pct": 43.3
+    }
+  },
+  "mappings_corrected": [
+    {
+      "field": "proposal.recommendation",
+      "before": {
+        "approveLabel": 11,
+        "heroTitle": 7,
+        "synthesised": 3
+      },
+      "after": {
+        "heroTitle": 8,
+        "heroLine": 3
+      },
+      "defect": "a CTA button label rendered as the hero recommendation"
+    },
+    {
+      "field": "proposal.slate",
+      "before": {
+        "totals": 3,
+        "slate": 2,
+        "heroMetrics": 2,
+        "slateTabs": 2,
+        "ticks": 1,
+        "impact": 1,
+        "notches": 1,
+        "other": 9
+      },
+      "after_sources": [
+        "cohorts",
+        "editorial",
+        "events",
+        "exits",
+        "fixes",
+        "gates",
+        "items",
+        "lanes",
+        "levers",
+        "offerRows",
+        "options",
+        "repairs",
+        "sampled",
+        "skus",
+        "slate",
+        "suppliers"
+      ],
+      "defect": "tab strips, tick arrays and totals lists rendered as the selectable decision slate",
+      "severity": "integrity hazard - approve_selected acts on this slot"
+    },
+    {
+      "field": "execution.targets",
+      "before": {
+        "monitors": 14
+      },
+      "after_sources": [
+        "coverRows",
+        "dests",
+        "orders",
+        "tray"
+      ],
+      "defect": "the verification monitors rendered a second time as the write targets"
+    },
+    {
+      "field": "execution.rollback",
+      "before": {
+        "synthesised": 21
+      },
+      "after_sources": [
+        "rollback"
+      ],
+      "defect": "a fabricated rollback line on every execute screen while all 8 real ones were rejected"
+    },
+    {
+      "field": "proposal.policy",
+      "before": {
+        "targets": 7,
+        "policy": 3,
+        "headline": 1,
+        "metrics": 1,
+        "other": 9
+      },
+      "after_sources": [
+        "policy",
+        "rules",
+        "slas",
+        "standards",
+        "targets",
+        "terms",
+        "thresholds"
+      ],
+      "defect": "a headline and a metrics strip rendered as the governing policy"
+    },
+    {
+      "field": "proposal.roles",
+      "before": {
+        "agents": 10,
+        "roles": 3,
+        "cohorts": 1
+      },
+      "after_sources": [
+        "clusters",
+        "cohorts",
+        "roles"
+      ],
+      "defect": "the AI agent roster rendered as the entity taxonomy; both concepts lost"
+    },
+    {
+      "field": "proposal.primary_insight",
+      "before": {
+        "synthesised": 13,
+        "pinnedSub": 3,
+        "other": 5
+      },
+      "after_sources": [
+        "gridMeta",
+        "segNote",
+        "sortNote"
+      ],
+      "defect": "the shell's pinned identity strip rendered as the analysis finding"
+    },
+    {
+      "field": "execution.verification",
+      "before": {
+        "monitors": 12,
+        "progressRows": 5,
+        "other": 4
+      },
+      "after_sources": [
+        "clauseRows",
+        "monitors",
+        "reads"
+      ],
+      "defect": "progress rows rendered a second time as verification"
+    },
+    {
+      "field": "guardrails.checks",
+      "before": {
+        "checks": 10
+      },
+      "after_sources": [
+        "checks",
+        "guardParts"
+      ],
+      "defect": "9 of 19 real check lists discarded for identifying their rows by `text` rather than `label`"
+    }
+  ],
+  "provenance_allow_lists": {
+    "narrative": [
+      "adjustSummary",
+      "approvalNote",
+      "dialNote",
+      "headMeta",
+      "ledgerCopy",
+      "planLine",
+      "restNote",
+      "summaryNote",
+      "trendNote"
+    ],
+    "proposal.policy": [
+      "policy",
+      "rules",
+      "slas",
+      "standards",
+      "targets",
+      "terms",
+      "thresholds"
+    ],
+    "proposal.inputs": [
+      "evidence",
+      "inputs",
+      "sources"
+    ],
+    "proposal.roles": [
+      "clusters",
+      "cohorts",
+      "roles"
+    ],
+    "proposal.agents": [
+      "(reference pinned strip)",
+      "agents"
+    ],
+    "lens": [
+      "(reference live KPI tiles)",
+      "(reference pinned strip)"
+    ],
+    "persona": [
+      "(reference pinned strip)"
+    ],
+    "mode": [
+      "execLabel"
+    ],
+    "cardinality": [
+      "(derived from the decide-stage item count)"
+    ],
+    "proposal.comparison": [
+      "bars",
+      "cccTrend",
+      "concentration",
+      "detectBars",
+      "expiryBars",
+      "launchCosts",
+      "movement",
+      "pacing",
+      "recon",
+      "sizes",
+      "sovBars",
+      "timeline",
+      "wasteMix"
+    ],
+    "proposal.detail_rows": [
+      "classifier",
+      "conflicts",
+      "desks",
+      "disposition",
+      "feed",
+      "fit",
+      "flows",
+      "gaps",
+      "lanes",
+      "list",
+      "queries",
+      "rows",
+      "sorts",
+      "splits",
+      "weeks"
+    ],
+    "proposal.secondary_rows": [
+      "audit",
+      "basket",
+      "buckets",
+      "cannibal",
+      "capacity",
+      "ccc",
+      "clusters",
+      "conflicts",
+      "dim",
+      "gaps",
+      "library",
+      "mismatches",
+      "pools",
+      "selRows",
+      "stranded",
+      "suppression",
+      "waste"
+    ],
+    "proposal.entities": [
+      "analogs",
+      "attribution",
+      "candidates",
+      "cards",
+      "carriers",
+      "dedupe",
+      "dims",
+      "lanes",
+      "matrix",
+      "moments",
+      "roles",
+      "timeline"
+    ],
+    "status_note": [
+      "footStatus",
+      "footerStatus"
+    ],
+    "guardrails.checks": [
+      "checks",
+      "guardParts"
+    ],
+    "guardrails.verdict": [
+      "blocked"
+    ],
+    "totals.rows": [
+      "liveStats",
+      "rollup",
+      "summary",
+      "totals"
+    ],
+    "proposal.recommendation_identity": [
+      "slateMeta",
+      "slateName"
+    ],
+    "proposal.recommendation": [
+      "heroLine",
+      "heroTitle"
+    ],
+    "proposal.recommendation_detail": [
+      "heroBody",
+      "heroSub",
+      "tradeoff"
+    ],
+    "proposal.recommendation_metrics": [
+      "heroMetrics"
+    ],
+    "proposal.composition": [
+      "moveBar"
+    ],
+    "proposal.alternatives": [
+      "caps",
+      "modes",
+      "offerModes",
+      "slateTabs",
+      "slates"
+    ],
+    "proposal.basis": [
+      "basis",
+      "ladder"
+    ],
+    "proposal.item_groups": [
+      "groups"
+    ],
+    "proposal.focus_rows": [
+      "focusRows"
+    ],
+    "confidence": [
+      "confLabel"
+    ],
+    "execution.progress_pct": [
+      "progressPct"
+    ],
+    "execution.progress_rows": [
+      "healthRows",
+      "progressRows"
+    ],
+    "execution.targets": [
+      "coverRows",
+      "dests",
+      "orders",
+      "tray"
+    ],
+    "execution.arming": [
+      "adjustFoot",
+      "armCopy"
+    ],
+    "proposal.slate": [
+      "cohorts",
+      "editorial",
+      "events",
+      "exits",
+      "fixes",
+      "gates",
+      "items",
+      "lanes",
+      "levers",
+      "offerRows",
+      "options",
+      "repairs",
+      "sampled",
+      "skus",
+      "slate",
+      "suppliers"
+    ],
+    "execution.verification": [
+      "clauseRows",
+      "monitors",
+      "reads"
+    ],
+    "execution.bulk_note": [
+      "allNote"
+    ],
+    "proposal.constraints": [
+      "locked",
+      "protected"
+    ],
+    "execution.rollback_note": [
+      "rbCopy",
+      "rbHint"
+    ],
+    "execution.ledger_note": [
+      "expiryCopy",
+      "ledgerCopy"
+    ],
+    "execution.plan": [
+      "changes",
+      "comms",
+      "orders",
+      "phases",
+      "pushes",
+      "spawned",
+      "stages",
+      "steps"
+    ],
+    "proposal.distribution": [
+      "ladders",
+      "points"
+    ],
+    "proposal.primary_insight": [
+      "gridMeta",
+      "segNote",
+      "sortNote"
+    ],
+    "proposal.trigger": [
+      "opportunity",
+      "trigger"
+    ],
+    "proposal.next_actions": [
+      "actions",
+      "routes"
+    ],
+    "execution.ledger": [
+      "annotations",
+      "ledger"
+    ],
+    "proposal.matrix": [
+      "rfmGrid"
+    ],
+    "execution.rollback": [
+      "rollback"
+    ],
+    "execution.flags": [
+      "flags"
+    ],
+    "proposal.coverage": [
+      "bars"
+    ],
+    "proposal.bridge": [
+      "bars"
+    ]
+  },
+  "slots_added": [
+    {
+      "slot": "trigger",
+      "template": "reason.v1",
+      "section": "rationale",
+      "block": "table",
+      "renders_on": 15
+    },
+    {
+      "slot": "constraints",
+      "template": "reason.v1",
+      "section": "governance",
+      "block": "labelValueList",
+      "renders_on": 20,
+      "note": "the most frequent reason-stage reference concept; previously dropped whole"
+    },
+    {
+      "slot": "agents",
+      "template": "reason.v1",
+      "section": "provenance",
+      "block": "itemQueue",
+      "renders_on": 26
+    },
+    {
+      "slot": "bridge",
+      "template": "analyze.compare.v1",
+      "section": "analysis",
+      "block": "waterfallChart",
+      "renders_on": 1,
+      "note": "wires a previously unreachable block"
+    },
+    {
+      "slot": "coverage",
+      "template": "analyze.compare.v1 + decide.slate.v1",
+      "section": "analysis / guardrails",
+      "block": "gauge",
+      "renders_on": 2,
+      "note": "wires a previously unreachable block"
+    },
+    {
+      "slot": "matrix",
+      "template": "analyze.compare.v1",
+      "section": "analysis",
+      "block": "heatmapGrid",
+      "renders_on": 1,
+      "note": "wires a previously unreachable block"
+    },
+    {
+      "slot": "entities",
+      "template": "analyze.compare.v1",
+      "section": "detail",
+      "block": "itemQueue",
+      "renders_on": 13
+    },
+    {
+      "slot": "secondary_rows",
+      "template": "analyze.compare.v1",
+      "section": "detail",
+      "block": "table",
+      "renders_on": 18,
+      "note": "a reference analyze screen routinely carries more than one evidence board"
+    },
+    {
+      "slot": "totals_rows",
+      "template": "analyze.compare.v1",
+      "section": "rollup",
+      "block": "labelValueList",
+      "renders_on": 1,
+      "note": "fills a previously empty declared section"
+    },
+    {
+      "slot": "recommendation_identity",
+      "template": "decide.slate.v1",
+      "section": "recommendation",
+      "block": "text",
+      "renders_on": 8
+    },
+    {
+      "slot": "recommendation_detail",
+      "template": "decide.slate.v1",
+      "section": "recommendation",
+      "block": "text",
+      "renders_on": 9
+    },
+    {
+      "slot": "composition",
+      "template": "decide.slate.v1",
+      "section": "recommendation",
+      "block": "barChart",
+      "renders_on": 1,
+      "note": "the existing barChart, not a new stackedBar"
+    },
+    {
+      "slot": "basis",
+      "template": "decide.slate.v1",
+      "section": "provenance",
+      "block": "labelValueList",
+      "renders_on": 2,
+      "note": "fills a previously empty declared section"
+    },
+    {
+      "slot": "alternatives",
+      "template": "decide.slate.v1",
+      "section": "slate",
+      "block": "table",
+      "renders_on": 8
+    },
+    {
+      "slot": "item_groups",
+      "template": "decide.slate.v1",
+      "section": "slate",
+      "block": "itemQueue",
+      "renders_on": 6
+    },
+    {
+      "slot": "focus_rows",
+      "template": "decide.slate.v1",
+      "section": "slate",
+      "block": "table",
+      "renders_on": 1
+    },
+    {
+      "slot": "next_actions",
+      "template": "decide.slate.v1",
+      "section": "slate",
+      "block": "itemQueue",
+      "renders_on": 8
+    },
+    {
+      "slot": "flags",
+      "template": "execute.bridge.v1",
+      "section": "execution",
+      "block": "table",
+      "renders_on": 2
+    },
+    {
+      "slot": "ledger_note",
+      "template": "execute.bridge.v1",
+      "section": "execution",
+      "block": "text",
+      "renders_on": 8
+    },
+    {
+      "slot": "bulk_note",
+      "template": "execute.bridge.v1",
+      "section": "execution",
+      "block": "text",
+      "renders_on": 10
+    },
+    {
+      "slot": "rollback_note",
+      "template": "execute.bridge.v1",
+      "section": "assurance",
+      "block": "text",
+      "renders_on": 7
+    },
+    {
+      "slot": "arming",
+      "template": "execute.bridge.v1",
+      "section": "assurance",
+      "block": "text",
+      "renders_on": 13
+    },
+    {
+      "slot": "stage_status",
+      "template": "all four stage templates",
+      "section": "context",
+      "block": "text",
+      "renders_on": 61
+    }
+  ],
+  "slots_removed": [
+    {
+      "slot": "deadline",
+      "reason": "duplicate of ProposalHeader, which renders a relative \"Due in 2d\" instead of the raw ISO instant (RB-1)"
+    },
+    {
+      "slot": "confidence",
+      "reason": "duplicate of ProposalHeader, which renders 78% instead of 0.78 (RB-2)"
+    },
+    {
+      "slot": "confidence_calibrated",
+      "reason": "duplicate of ProposalHeader"
+    },
+    {
+      "slot": "impact",
+      "reason": "duplicate of ProposalHeader; the scalar is also now omitted upstream (see unresolved)"
+    },
+    {
+      "slot": "slate_summary",
+      "reason": "the same concept as totals_rows and composition; it was one of the three slots involved in the recommendation_metrics == slate_summary == totals_rows collision"
+    }
+  ],
+  "rendering_bugs_fixed": [
+    {
+      "id": "RB-1",
+      "fix": "deleted the duplicate deadline slot; ProposalHeader is the single renderer and formats it relatively"
+    },
+    {
+      "id": "RB-2",
+      "fix": "deleted the duplicate confidence slots; ProposalHeader formats 0..1 as a percentage"
+    },
+    {
+      "id": "RB-3",
+      "fix": "new blocks/enumLabel.js, applied by TextBlock — contract token in, operator copy out"
+    },
+    {
+      "id": "RB-4",
+      "fix": "headline removed from narrative candidates; primary_insight dropped when it would equal narrative"
+    },
+    {
+      "id": "RB-5",
+      "fix": "analyze#rollup <- totals_rows, decide#provenance <- basis; a test now fails on any unfillable section"
+    },
+    {
+      "id": "RB-6",
+      "fix": "groupProposalsIntoStories drops a repeated (story, stage)"
+    },
+    {
+      "id": "RB-7",
+      "fix": "live maps to execute.bridge.v1 — the execute stage still running. No sixth template."
+    }
+  ],
+  "synthetic_values_removed": [
+    {
+      "axis": "lens",
+      "before": "LENSES[hash % 5]",
+      "after": "the reference's own pinned 'Lens:' line, 26/26 stories"
+    },
+    {
+      "axis": "persona",
+      "before": "PERSONAS[hash % 7]",
+      "after": "the reference's own persona pill, 26/26 stories; the contract enum extended 7 -> 14 from that evidence"
+    },
+    {
+      "axis": "mode",
+      "before": "MODES[hash % 3]",
+      "after": "the execution dial's own execLabel, 105/105 records"
+    },
+    {
+      "axis": "cardinality",
+      "before": "hard-coded: `isObjArray(...) ? 'many' : 'many'`",
+      "after": "derived from the proposal's real item count; both values now occur"
+    },
+    {
+      "axis": "entitlement",
+      "before": "ENTITLEMENTS[hash % 5], blanking 20 of 105 records to a 3-line teaser",
+      "after": "'full' — what all 105 reference screens actually depict"
+    },
+    {
+      "field": "confidence",
+      "before": "0.6 + (hash % 35)/100",
+      "after": "parsed from the reference's own confLabel (\"Med-high · 78%\"); omitted where the reference states none"
+    },
+    {
+      "field": "impact",
+      "before": "1000 + (hash % 90) * 400",
+      "after": "omitted — the reference designates no single impact figure"
+    },
+    {
+      "field": "execution.rollback",
+      "before": "hard-coded [{label:'Rollback', value:'Available for 24 hours'}] on 21 of 21",
+      "after": "real rollback rows only, on the 8 screens that carry them"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U1",
+      "item": "typed chart series",
+      "state": "trend renders 0, distribution renders 2",
+      "why": "the reference stores trends as SVG paths and scatter points as pixel coordinates; the backend must send typed {x,y}. Un-stripping the paths would be inventing data."
+    },
+    {
+      "id": "U2",
+      "item": "contract_class",
+      "state": "'standard' on all 105",
+      "why": "the reference draws no distinction; flagged PROVISIONAL in the contract since it was written"
+    },
+    {
+      "id": "U3",
+      "item": "entitlement",
+      "state": "'full' on all 105",
+      "why": "every reference screen shows its whole slate; locked.v1 stays registered and tested with no corpus instance"
+    },
+    {
+      "id": "U4",
+      "item": "on_clock / deadline",
+      "state": "false / omitted",
+      "why": "the reference shows only relative deadline copy; the contract requires an ISO instant. Consequence: snooze is never eligible."
+    },
+    {
+      "id": "U5",
+      "item": "impact",
+      "state": "omitted",
+      "why": "no reference field is designated as THE impact; the money rows are carried as totals/metrics"
+    },
+    {
+      "id": "U6",
+      "item": "S10.6's lens",
+      "state": "'sales', from its own lead KPI tile",
+      "why": "its pinned strip reads \"Lens: all five\"; the single-valued axis cannot express it"
+    },
+    {
+      "id": "U7",
+      "item": "selected-entity inspector",
+      "state": "not built",
+      "why": "an interaction (click a point -> inspect) on 11 analyze screens, not a static slot"
+    },
+    {
+      "id": "U8",
+      "item": "filters / sorts",
+      "state": "not built",
+      "why": "table controls, not business content"
+    },
+    {
+      "id": "U9",
+      "item": "held-out / exclusions",
+      "state": "not built",
+      "why": "real business content, but authored as literal per-screen markup rather than data"
+    },
+    {
+      "id": "U10",
+      "item": "per-proposal CTA copy",
+      "state": "not built",
+      "why": "generic operator-action labels are used; the reference's explanatory route cards ARE carried, as next_actions"
+    },
+    {
+      "id": "U11",
+      "item": "slider / object / flag blocks",
+      "state": "registered, unused, documented",
+      "why": "no reference concept requires them; slider would mean shipping precomputed answers as business data"
+    },
+    {
+      "id": "U12",
+      "item": "updated_at",
+      "state": "one fixed generation instant",
+      "why": "generation metadata, not a business fact the reference states"
+    }
+  ],
+  "regression_fences": {
+    "files": [
+      "src/features/action-stories/__corpus__/referenceFidelity.test.js",
+      "src/features/action-stories/__corpus__/referenceContentRender.test.jsx",
+      "src/features/action-stories/blocks/enumLabel.test.js",
+      "src/features/action-stories/blocks/bridgeGeometry.test.js"
+    ],
+    "guarantees": [
+      "no fallbackScan in the normalizer",
+      "every canonical field has deterministic, recorded provenance",
+      "every field resolves only from its declared reference sources (48 per-field assertions)",
+      "the six audit-named wrong mappings, pinned individually",
+      "one raw key never supplies two canonical fields",
+      "no value renders into two slots of the same screen",
+      "no hashed axis; cardinality not hard-coded; lens/persona/mode read from the reference",
+      "rollback never fabricated; impact/deadline omitted rather than invented",
+      "no presentation/geometry/CSS/mockup metadata in business data",
+      "every slot maps to a registered block; no section is unfillable",
+      "all 105 select a template and render with 0 unresolved bindings and 0 shape violations",
+      "exactly one block is selectable, it is the slate, and every slate row carries an item identity",
+      "approve_selected offered only where cardinality is many",
+      "Recommendation's six units are six slots from six distinct sources",
+      "all 105 mount in jsdom with no placeholder, no error boundary and no empty page",
+      "per-stage DOM traces assert the reference's own sentences reach the page"
+    ]
+  },
+  "coverage_honesty": "Reference-field carry-through is 39.2%, not 100%. Of the 948 fields still dropped, the large majority are per-screen presentation the hygiene pass is supposed to remove. The guarantee is narrower and stronger than a coverage percentage: every field that renders comes from the reference field that means it, and the ones that do not render are omitted rather than substituted.",
+  "original_audit": {
+    "audit": {
+      "title": "Reference -> Template/Block Gap Audit",
+      "generated_for": "docs/REFERENCE_TO_TEMPLATE_BLOCK_AUDIT.md",
+      "date": "2026-09-15",
+      "read_only": true,
+      "projects": {
+        "reference": "/Users/rohit/Downloads/Realify Workspace Dashboard Build (1)",
+        "current": "/Volumes/D/TemplateProject",
+        "reference_mirror_in_current": "source-mockups/"
+      }
+    },
+    "validation": {
+      "reference_files_inspected": 114,
+      "reference_stage_screens": 105,
+      "current_files_inspected_approx": 60,
+      "reference_rendering_units_discovered": 71,
+      "reference_units_business": 62,
+      "reference_units_presentation_only": 9,
+      "current_templates": 5,
+      "current_canonical_slots": 34,
+      "current_slot_instances": 44,
+      "current_registered_block_types": 14,
+      "current_reachable_block_types": 9,
+      "normalized_decision_objects_audited": 105,
+      "slot_evaluations_audited": 921,
+      "tests": {
+        "command": "vitest run",
+        "files": 51,
+        "tests": 1053,
+        "failures": 0,
+        "status": "pass"
+      },
+      "build": {
+        "command": "vite build",
+        "status": "pass"
+      },
+      "lint": {
+        "command": "eslint .",
+        "errors": 0,
+        "warnings": 1
+      },
+      "files_modified": 0
+    },
+    "reference_inventory": {
+      "dc_html_files": 114,
+      "stage_screens": 105,
+      "workspace_shell_screens": 7,
+      "action_stories": 26,
+      "design_system_components_declared": 24,
+      "design_system_components_used_by_stage_screens": 6,
+      "raw_data_fields": 2498,
+      "business_fields_post_hygiene": 1558,
+      "presentation_only_fields_stripped": 940,
+      "distinct_business_keys_by_stage": {
+        "reason": 101,
+        "analyze": 224,
+        "decide": 271,
+        "execute": 237,
+        "live": 30
+      },
+      "rendering_units_by_stage": {
+        "shell": 8,
+        "reason": 9,
+        "analyze": 13,
+        "decide": 16,
+        "execute": 14,
+        "live": 11
+      }
+    },
+    "carry_through": {
+      "business_fields": 1558,
+      "carried_into_normalized": 430,
+      "dropped_at_normalization": 1128,
+      "percent_carried": 27.6,
+      "by_stage": {
+        "reason": {
+          "business": 208,
+          "carried": 63,
+          "pct": 30.3
+        },
+        "analyze": {
+          "business": 297,
+          "carried": 52,
+          "pct": 17.5
+        },
+        "decide": {
+          "business": 487,
+          "carried": 162,
+          "pct": 33.3
+        },
+        "execute": {
+          "business": 536,
+          "carried": 148,
+          "pct": 27.6
+        },
+        "live": {
+          "business": 30,
+          "carried": 5,
+          "pct": 16.7
+        }
+      },
+      "top_dropped_fields": [
+        {
+          "key": "reason::locked",
+          "occurrences": 19
+        },
+        {
+          "key": "decide::footStatus",
+          "occurrences": 15
+        },
+        {
+          "key": "execute::pushedCount",
+          "occurrences": 15
+        },
+        {
+          "key": "execute::closeLabel",
+          "occurrences": 15
+        },
+        {
+          "key": "execute::footStatus",
+          "occurrences": 15
+        },
+        {
+          "key": "reason::trigger",
+          "occurrences": 14
+        },
+        {
+          "key": "decide::ctaLabel",
+          "occurrences": 12
+        },
+        {
+          "key": "execute::armCopy",
+          "occurrences": 12
+        },
+        {
+          "key": "execute::armBtnLabel",
+          "occurrences": 12
+        },
+        {
+          "key": "decide::policyStatus",
+          "occurrences": 11
+        },
+        {
+          "key": "execute::monState",
+          "occurrences": 11
+        },
+        {
+          "key": "execute::footerStatus",
+          "occurrences": 11
+        },
+        {
+          "key": "analyze::sel",
+          "occurrences": 11
+        },
+        {
+          "key": "execute::allLabel",
+          "occurrences": 10
+        },
+        {
+          "key": "decide::pinnedSub",
+          "occurrences": 10
+        },
+        {
+          "key": "reason::chips",
+          "occurrences": 10
+        },
+        {
+          "key": "execute::runAllLabel",
+          "occurrences": 10
+        },
+        {
+          "key": "execute::allNote",
+          "occurrences": 9
+        },
+        {
+          "key": "decide::footerStatus",
+          "occurrences": 8
+        },
+        {
+          "key": "execute::ledgerCopy",
+          "occurrences": 8
+        },
+        {
+          "key": "execute::rollback",
+          "occurrences": 8
+        },
+        {
+          "key": "decide::checks",
+          "occurrences": 7
+        },
+        {
+          "key": "execute::headMeta",
+          "occurrences": 7
+        },
+        {
+          "key": "decide::groups",
+          "occurrences": 6
+        },
+        {
+          "key": "execute::rbState",
+          "occurrences": 6
+        },
+        {
+          "key": "execute::rbCopy",
+          "occurrences": 6
+        },
+        {
+          "key": "execute::tray",
+          "occurrences": 6
+        },
+        {
+          "key": "decide::slateMeta",
+          "occurrences": 6
+        },
+        {
+          "key": "decide::heroBody",
+          "occurrences": 6
+        },
+        {
+          "key": "execute::watchStatus",
+          "occurrences": 5
+        },
+        {
+          "key": "decide::onApprove",
+          "occurrences": 5
+        },
+        {
+          "key": "execute::footerDoneShow",
+          "occurrences": 5
+        },
+        {
+          "key": "execute::footerPushLabel",
+          "occurrences": 5
+        },
+        {
+          "key": "decide::blockReason",
+          "occurrences": 5
+        },
+        {
+          "key": "decide::routes",
+          "occurrences": 5
+        },
+        {
+          "key": "analyze::cols",
+          "occurrences": 4
+        },
+        {
+          "key": "execute::pushAllLabel",
+          "occurrences": 4
+        },
+        {
+          "key": "analyze::legend",
+          "occurrences": 4
+        },
+        {
+          "key": "reason::agents",
+          "occurrences": 4
+        },
+        {
+          "key": "analyze::yTicks",
+          "occurrences": 4
+        }
+      ]
+    },
+    "current_system": {
+      "templates": [
+        "reason.v1",
+        "analyze.compare.v1",
+        "decide.slate.v1",
+        "execute.bridge.v1",
+        "locked.v1"
+      ],
+      "template_selection_across_corpus": {
+        "reason.v1": 21,
+        "analyze.compare.v1": 21,
+        "decide.slate.v1": 21,
+        "execute.bridge.v1": 21,
+        "locked.v1": 20,
+        "NULL": 1
+      },
+      "axis_distributions": {
+        "stage": {
+          "reason": 26,
+          "analyze": 26,
+          "decide": 26,
+          "execute": 26,
+          "live": 1
+        },
+        "action_type": {
+          "adjust_assortment": 16,
+          "reorder": 8,
+          "reallocate": 13,
+          "reprice": 12,
+          "fix_listing": 12,
+          "adjust_spend": 8,
+          "file_claim": 8,
+          "review": 28
+        },
+        "cardinality": {
+          "many": 105
+        },
+        "contract_class": {
+          "strategic": 37,
+          "regulated": 36,
+          "standard": 32
+        },
+        "on_clock": {
+          "true": 73,
+          "false": 32
+        },
+        "mode": {
+          "assist": 37,
+          "auto": 36,
+          "suggest": 32
+        },
+        "entitlement": {
+          "full": 65,
+          "limited": 20,
+          "locked": 20
+        },
+        "lens": {
+          "ads": 25,
+          "cash": 20,
+          "inventory": 20,
+          "margin": 20,
+          "sales": 20
+        },
+        "persona": {
+          "keeper": 16,
+          "merchandiser": 20,
+          "navigator": 16,
+          "planner": 17,
+          "promoter": 12,
+          "controller": 12,
+          "bidder": 12
+        },
+        "status": {
+          "pending": 105
+        }
+      },
+      "registered_block_types": 14,
+      "unreachable_block_types": [
+        "waterfallChart",
+        "heatmapGrid",
+        "object",
+        "slider",
+        "gauge"
+      ],
+      "vocabulary_slots_unused_by_templates": [],
+      "declared_but_permanently_empty_sections": [
+        {
+          "template": "analyze.compare.v1",
+          "section": "rollup",
+          "title": "Totals"
+        },
+        {
+          "template": "decide.slate.v1",
+          "section": "provenance",
+          "title": "Basis"
+        }
+      ],
+      "slot_outcomes": [
+        {
+          "template": "reason.v1",
+          "slot": "narrative",
+          "block_type": "text",
+          "binding": "narrative",
+          "section": "rationale",
+          "rendered": 13,
+          "omitted_by_when": 8,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "policy",
+          "block_type": "table",
+          "binding": "proposal.policy",
+          "section": "governance",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "roles",
+          "block_type": "table",
+          "binding": "proposal.roles",
+          "section": "governance",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "decision_mode",
+          "block_type": "text",
+          "binding": "mode",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "decision_lens",
+          "block_type": "text",
+          "binding": "lens",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "decision_persona",
+          "block_type": "text",
+          "binding": "persona",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "deadline",
+          "block_type": "text",
+          "binding": "deadline",
+          "section": "context",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "reason.v1",
+          "slot": "inputs",
+          "block_type": "labelValueList",
+          "binding": "proposal.inputs",
+          "section": "provenance",
+          "rendered": 10,
+          "omitted_by_when": 11,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "primary_insight",
+          "block_type": "text",
+          "binding": "proposal.primary_insight",
+          "section": "finding",
+          "rendered": 9,
+          "omitted_by_when": 12,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "narrative",
+          "block_type": "text",
+          "binding": "narrative",
+          "section": "finding",
+          "rendered": 9,
+          "omitted_by_when": 12,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "comparison",
+          "block_type": "barChart",
+          "binding": "proposal.comparison",
+          "section": "analysis",
+          "rendered": 10,
+          "omitted_by_when": 11,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "trend",
+          "block_type": "lineChart",
+          "binding": "proposal.trend",
+          "section": "analysis",
+          "rendered": 0,
+          "omitted_by_when": 21,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "distribution",
+          "block_type": "scatterChart",
+          "binding": "proposal.distribution",
+          "section": "analysis",
+          "rendered": 2,
+          "omitted_by_when": 19,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "detail_rows",
+          "block_type": "table",
+          "binding": "proposal.detail_rows",
+          "section": "detail",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "decision_mode",
+          "block_type": "text",
+          "binding": "mode",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "decision_lens",
+          "block_type": "text",
+          "binding": "lens",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "analyze.compare.v1",
+          "slot": "deadline",
+          "block_type": "text",
+          "binding": "deadline",
+          "section": "context",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "recommendation",
+          "block_type": "text",
+          "binding": "proposal.recommendation",
+          "section": "recommendation",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "recommendation_metrics",
+          "block_type": "table",
+          "binding": "proposal.recommendation_metrics",
+          "section": "recommendation",
+          "rendered": 15,
+          "omitted_by_when": 6,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "slate",
+          "block_type": "table",
+          "binding": "proposal.slate",
+          "section": "slate",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "slate_summary",
+          "block_type": "labelValueList",
+          "binding": "proposal.slate_summary",
+          "section": "slate",
+          "rendered": 7,
+          "omitted_by_when": 14,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "guardrail_verdict",
+          "block_type": "text",
+          "binding": "guardrails.verdict",
+          "section": "guardrails",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "guardrail_checks",
+          "block_type": "labelValueList",
+          "binding": "guardrails.checks",
+          "section": "guardrails",
+          "rendered": 10,
+          "omitted_by_when": 11,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "totals_rows",
+          "block_type": "labelValueList",
+          "binding": "totals.rows",
+          "section": "rollup",
+          "rendered": 16,
+          "omitted_by_when": 5,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "impact",
+          "block_type": "number",
+          "binding": "impact",
+          "section": "rollup",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "confidence",
+          "block_type": "number",
+          "binding": "confidence.value",
+          "section": "rollup",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "confidence_calibrated",
+          "block_type": "flag",
+          "binding": "confidence.calibrated",
+          "section": "rollup",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "decision_mode",
+          "block_type": "text",
+          "binding": "mode",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "decision_contract_class",
+          "block_type": "text",
+          "binding": "contract_class",
+          "section": "context",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "decision_lens",
+          "block_type": "text",
+          "binding": "lens",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "decide.slate.v1",
+          "slot": "deadline",
+          "block_type": "text",
+          "binding": "deadline",
+          "section": "context",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "narrative",
+          "block_type": "text",
+          "binding": "narrative",
+          "section": "plan",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "plan",
+          "block_type": "table",
+          "binding": "execution.plan",
+          "section": "plan",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "progress",
+          "block_type": "number",
+          "binding": "execution.progress_pct",
+          "section": "execution",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "progress_rows",
+          "block_type": "table",
+          "binding": "execution.progress_rows",
+          "section": "execution",
+          "rendered": 11,
+          "omitted_by_when": 10,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "execution_targets",
+          "block_type": "itemQueue",
+          "binding": "execution.targets",
+          "section": "execution",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "ledger",
+          "block_type": "table",
+          "binding": "execution.ledger",
+          "section": "execution",
+          "rendered": 1,
+          "omitted_by_when": 20,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "verification",
+          "block_type": "labelValueList",
+          "binding": "execution.verification",
+          "section": "assurance",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "rollback",
+          "block_type": "labelValueList",
+          "binding": "execution.rollback",
+          "section": "assurance",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "decision_mode",
+          "block_type": "text",
+          "binding": "mode",
+          "section": "context",
+          "rendered": 21,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "execute.bridge.v1",
+          "slot": "deadline",
+          "block_type": "text",
+          "binding": "deadline",
+          "section": "context",
+          "rendered": 14,
+          "omitted_by_when": 7,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "locked.v1",
+          "slot": "locked_title",
+          "block_type": "text",
+          "binding": "title",
+          "section": "teaser",
+          "rendered": 20,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "locked.v1",
+          "slot": "teaser_summary",
+          "block_type": "text",
+          "binding": "proposal.teaser_summary",
+          "section": "teaser",
+          "rendered": 20,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        },
+        {
+          "template": "locked.v1",
+          "slot": "upgrade_cta",
+          "block_type": "text",
+          "binding": "proposal.upgrade_cta",
+          "section": "teaser",
+          "rendered": 20,
+          "omitted_by_when": 0,
+          "missing_data": 0,
+          "wrong_shape": 0
+        }
+      ],
+      "render_totals": {
+        "slot_evaluations": 921,
+        "rendered": 712,
+        "omitted_by_when": 209,
+        "missing_data": 0,
+        "wrong_data_shape": 0,
+        "rendered_content": 391,
+        "rendered_axis_echo": 321
+      }
+    },
+    "provenance_wrong_mappings": [
+      {
+        "field": "proposal.policy",
+        "n": 21,
+        "correct": 10,
+        "wrong": 11,
+        "sources": {
+          "targets": 7,
+          "policy": 3,
+          "rules": 1,
+          "envelope": 1,
+          "roles": 1,
+          "surfaces": 1,
+          "clusters": 1,
+          "standards": 1,
+          "events": 1,
+          "setup": 1,
+          "headline": 1,
+          "metrics": 1,
+          "postures": 1
+        }
+      },
+      {
+        "field": "proposal.roles",
+        "n": 14,
+        "correct": 4,
+        "wrong": 10,
+        "sources": {
+          "agents": 10,
+          "roles": 3,
+          "cohorts": 1
+        }
+      },
+      {
+        "field": "proposal.inputs",
+        "n": 10,
+        "correct": 10,
+        "wrong": 0,
+        "sources": {
+          "inputs": 7,
+          "sources": 3
+        }
+      },
+      {
+        "field": "proposal.primary_insight",
+        "n": 21,
+        "correct": 5,
+        "wrong": 16,
+        "sources": {
+          "synthesised": 13,
+          "pinnedSub": 3,
+          "gridMeta": 1,
+          "segNote": 1,
+          "batteryMeta": 1,
+          "trendNote": 1,
+          "ledgerFoot": 1
+        }
+      },
+      {
+        "field": "proposal.detail_rows",
+        "n": 21,
+        "correct": 18,
+        "wrong": 3,
+        "note": "bars/heat/zoneBars are charts rendered as tables"
+      },
+      {
+        "field": "proposal.recommendation",
+        "n": 21,
+        "correct": 7,
+        "wrong": 14,
+        "sources": {
+          "approveLabel": 11,
+          "heroTitle": 7,
+          "synthesised": 3
+        }
+      },
+      {
+        "field": "proposal.slate",
+        "n": 21,
+        "correct": 5,
+        "wrong": 16,
+        "severity": "critical",
+        "note": "slot is selectable:true and feeds approve_selected",
+        "sources": {
+          "totals": 3,
+          "slate": 2,
+          "heroMetrics": 2,
+          "slateTabs": 2,
+          "slates": 1,
+          "ticks": 1,
+          "modes": 1,
+          "parts": 1,
+          "tabs": 1,
+          "items": 1,
+          "sprintTabs": 1,
+          "impact": 1,
+          "options": 1,
+          "modeTabs": 1,
+          "notches": 1,
+          "gates": 1
+        }
+      },
+      {
+        "field": "execution.plan",
+        "n": 21,
+        "correct": 13,
+        "wrong": 8,
+        "sources": {
+          "stages": 7,
+          "progressRows": 5,
+          "steps": 3,
+          "orders": 2,
+          "changes": 1,
+          "tabs": 1,
+          "filters": 1,
+          "entryChips": 1
+        }
+      },
+      {
+        "field": "execution.verification",
+        "n": 21,
+        "correct": 12,
+        "wrong": 9,
+        "sources": {
+          "monitors": 12,
+          "progressRows": 5,
+          "filters": 1,
+          "entryChips": 1,
+          "recoveryMetrics": 1,
+          "clauses": 1
+        }
+      },
+      {
+        "field": "execution.targets",
+        "n": 14,
+        "correct": 0,
+        "wrong": 14,
+        "sources": {
+          "monitors": 14
+        }
+      },
+      {
+        "field": "execution.rollback",
+        "n": 21,
+        "correct": 0,
+        "wrong": 21,
+        "sources": {
+          "synthesised": 21
+        }
+      }
+    ],
+    "duplicate_content_incidents": {
+      "total": 41,
+      "screens_checked": 84,
+      "detail": [
+        {
+          "count": 12,
+          "stage": "execute",
+          "slots": [
+            "execution_targets",
+            "verification"
+          ]
+        },
+        {
+          "count": 9,
+          "stage": "analyze",
+          "slots": [
+            "narrative",
+            "primary_insight"
+          ]
+        },
+        {
+          "count": 4,
+          "stage": "execute",
+          "slots": [
+            "plan",
+            "progress_rows",
+            "verification"
+          ]
+        },
+        {
+          "count": 3,
+          "stage": "decide",
+          "slots": [
+            "slate",
+            "totals_rows"
+          ]
+        },
+        {
+          "count": 3,
+          "stage": "decide",
+          "slots": [
+            "recommendation_metrics",
+            "slate_summary"
+          ]
+        },
+        {
+          "count": 3,
+          "stage": "decide",
+          "slots": [
+            "recommendation_metrics",
+            "slate_summary",
+            "totals_rows"
+          ]
+        },
+        {
+          "count": 2,
+          "stage": "execute",
+          "slots": [
+            "plan",
+            "verification"
+          ]
+        },
+        {
+          "count": 2,
+          "stage": "decide",
+          "slots": [
+            "recommendation_metrics",
+            "slate"
+          ]
+        },
+        {
+          "count": 1,
+          "stage": "reason",
+          "slots": [
+            "policy",
+            "roles"
+          ]
+        },
+        {
+          "count": 1,
+          "stage": "execute",
+          "slots": [
+            "plan",
+            "progress_rows"
+          ]
+        },
+        {
+          "count": 1,
+          "stage": "execute",
+          "slots": [
+            "progress_rows",
+            "verification"
+          ]
+        }
+      ]
+    },
+    "orphaned_normalized_fields": [
+      {
+        "path": "proposal.trigger",
+        "stage": "reason",
+        "note": "produced by normalizeCorpus.js:211, no slot"
+      },
+      {
+        "path": "proposal.scope",
+        "stage": "reason",
+        "note": "produced, no slot"
+      },
+      {
+        "path": "proposal.bridge",
+        "stage": "analyze",
+        "count": 1,
+        "note": "waterfallChart block exists but unreachable"
+      },
+      {
+        "path": "proposal.coverage",
+        "stage": "analyze",
+        "note": "gauge block exists but unreachable"
+      },
+      {
+        "path": "proposal.recommendation_detail",
+        "stage": "decide",
+        "count": 2
+      },
+      {
+        "path": "proposal.basis",
+        "stage": "decide",
+        "count": 2,
+        "note": "section decide.slate.v1#provenance declared and empty"
+      },
+      {
+        "path": "proposal.alternatives",
+        "stage": "decide",
+        "count": 1
+      },
+      {
+        "path": "proposal.recommendation",
+        "stage": "execute",
+        "count": 21,
+        "note": "normalizeCorpus.js:338 builds execute proposal with decideProposal"
+      },
+      {
+        "path": "proposal.slate",
+        "stage": "execute",
+        "count": 21,
+        "note": "same cause"
+      },
+      {
+        "path": "totals.rows",
+        "stage": "reason",
+        "count": 1
+      }
+    ],
+    "missing_slots": [
+      {
+        "id": "constraints",
+        "template": "reason.v1",
+        "reference_key": "locked",
+        "screens": 19,
+        "data_today": "none",
+        "block": "labelValueList",
+        "tier": "B"
+      },
+      {
+        "id": "trigger",
+        "template": "reason.v1",
+        "reference_key": "trigger",
+        "screens": 14,
+        "data_today": "proposal.trigger (orphan)",
+        "block": "labelValueList",
+        "tier": "A"
+      },
+      {
+        "id": "agents",
+        "template": "reason.v1",
+        "reference_key": "agents",
+        "screens": 14,
+        "data_today": "folded wrongly into proposal.roles",
+        "block": "itemQueue",
+        "tier": "B"
+      },
+      {
+        "id": "recommendation_detail",
+        "template": "decide.slate.v1",
+        "reference_key": "heroSub/heroBody",
+        "screens": 12,
+        "data_today": "proposal.recommendation_detail (orphan)",
+        "block": "text (role heroSub)",
+        "tier": "A"
+      },
+      {
+        "id": "recommendation_identity",
+        "template": "decide.slate.v1",
+        "reference_key": "slateName/slateMeta/confLabel",
+        "screens": 8,
+        "data_today": "none",
+        "block": "text",
+        "tier": "B"
+      },
+      {
+        "id": "basis",
+        "template": "decide.slate.v1",
+        "reference_key": "basis/ladder",
+        "screens": 2,
+        "data_today": "proposal.basis (orphan)",
+        "block": "labelValueList",
+        "tier": "A",
+        "note": "target section already declared and empty"
+      },
+      {
+        "id": "alternatives",
+        "template": "decide.slate.v1",
+        "reference_key": "slates/modes/slateTabs/caps",
+        "screens": 8,
+        "data_today": "proposal.alternatives (orphan)",
+        "block": "table|itemQueue",
+        "tier": "A"
+      },
+      {
+        "id": "item_groups",
+        "template": "decide.slate.v1",
+        "reference_key": "groups",
+        "screens": 6,
+        "data_today": "none",
+        "block": "itemQueue",
+        "tier": "B"
+      },
+      {
+        "id": "focus_rows",
+        "template": "decide.slate.v1",
+        "reference_key": "focusRows/focusTitle/focusMeta/focusFooter",
+        "screens": 6,
+        "data_today": "none",
+        "block": "table",
+        "tier": "B"
+      },
+      {
+        "id": "next_actions",
+        "template": "decide.slate.v1",
+        "reference_key": "actions/routes",
+        "screens": 8,
+        "data_today": "none",
+        "block": "itemQueue",
+        "tier": "B"
+      },
+      {
+        "id": "bridge",
+        "template": "analyze.compare.v1",
+        "reference_key": "bars{top,height,anchor}",
+        "screens": 1,
+        "data_today": "proposal.bridge (orphan)",
+        "block": "waterfallChart (unreachable)",
+        "tier": "A"
+      },
+      {
+        "id": "coverage",
+        "template": "analyze.compare.v1",
+        "reference_key": "capacity/lanes",
+        "screens": 4,
+        "data_today": "proposal.coverage (orphan)",
+        "block": "gauge (unreachable)",
+        "tier": "A"
+      },
+      {
+        "id": "totals_rows@analyze",
+        "template": "analyze.compare.v1",
+        "reference_key": "totals",
+        "data_today": "totals.rows exists",
+        "block": "labelValueList",
+        "tier": "A",
+        "note": "target section analyze.compare.v1#rollup already declared and empty"
+      },
+      {
+        "id": "rollback_detail",
+        "template": "execute.bridge.v1",
+        "reference_key": "rbCopy/rbState",
+        "screens": 12,
+        "data_today": "none",
+        "block": "text",
+        "tier": "B"
+      },
+      {
+        "id": "ledger_copy",
+        "template": "execute.bridge.v1",
+        "reference_key": "ledgerCopy",
+        "screens": 8,
+        "data_today": "none",
+        "block": "text",
+        "tier": "B"
+      },
+      {
+        "id": "arming",
+        "template": "execute.bridge.v1",
+        "reference_key": "armCopy/armBtnLabel",
+        "screens": 12,
+        "data_today": "none",
+        "block": "text + action",
+        "tier": "B"
+      },
+      {
+        "id": "bulk_note",
+        "template": "execute.bridge.v1",
+        "reference_key": "allNote/runAllLabel",
+        "screens": 10,
+        "data_today": "none",
+        "block": "text",
+        "tier": "B"
+      },
+      {
+        "id": "auto_flags",
+        "template": "execute.bridge.v1",
+        "reference_key": "flags",
+        "screens": 2,
+        "data_today": "none",
+        "block": "table",
+        "tier": "C"
+      },
+      {
+        "id": "item_diff",
+        "template": "execute.bridge.v1",
+        "reference_key": "dests[].items[].before/.after",
+        "screens": 4,
+        "data_today": "none",
+        "block": "table",
+        "tier": "C"
+      },
+      {
+        "id": "disclosure_note",
+        "template": "analyze.compare.v1 + decide.slate.v1",
+        "reference_key": "focusFooter / table footers",
+        "data_today": "none",
+        "block": "text",
+        "tier": "C"
+      },
+      {
+        "id": "heatmap",
+        "template": "analyze.compare.v1",
+        "reference_key": "heat/zoneBars",
+        "data_today": "none",
+        "block": "heatmapGrid (unreachable)",
+        "tier": "C"
+      },
+      {
+        "id": "entity_inspector",
+        "template": "analyze.compare.v1",
+        "reference_key": "sel/selName/selMeta/selNote",
+        "screens": 11,
+        "data_today": "none",
+        "block": "object|labelValueList",
+        "tier": "C"
+      }
+    ],
+    "unnecessary_slots": [
+      {
+        "slot": "impact",
+        "template": "decide.slate.v1",
+        "reason": "already rendered by ProposalHeader (StagePage.jsx:63-67)"
+      },
+      {
+        "slot": "confidence",
+        "template": "decide.slate.v1",
+        "reason": "duplicates header AND renders wrong (0.75 not 75%)"
+      },
+      {
+        "slot": "confidence_calibrated",
+        "template": "decide.slate.v1",
+        "reason": "header already prints \"· calibrated\""
+      },
+      {
+        "slot": "decision_mode",
+        "template": "all 4 stage templates",
+        "reason": "header already prints \"Mode <mode>\""
+      },
+      {
+        "slot": "deadline",
+        "template": "all 4 stage templates",
+        "reason": "header already prints a humanised \"Due in 2d\"; slot prints raw ISO"
+      }
+    ],
+    "missing_blocks": {
+      "genuinely_missing": [
+        {
+          "id": "stackedBar",
+          "reference_key": "moveBar",
+          "why": "one whole partitioned into proportional segments; barChart draws N separate bars, labelValueList draws text rows",
+          "confidence": "arguable"
+        }
+      ],
+      "exist_but_unreachable": [
+        {
+          "block": "waterfallChart",
+          "fix": "add a slot, not a component"
+        },
+        {
+          "block": "heatmapGrid",
+          "fix": "add a slot, not a component"
+        },
+        {
+          "block": "object",
+          "fix": "add a slot, not a component"
+        },
+        {
+          "block": "slider",
+          "fix": "add a slot, not a component"
+        },
+        {
+          "block": "gauge",
+          "fix": "add a slot, not a component"
+        }
+      ],
+      "explicitly_do_not_build": [
+        "RecommendationBlock",
+        "SlateBlock",
+        "PolicyCheckBlock",
+        "MoveSetBlock",
+        "RollbackBlock",
+        "AgentsBlock",
+        "MetricCardBlock"
+      ]
+    },
+    "rendering_bugs": [
+      {
+        "id": "RB-1",
+        "summary": "deadline renders a raw ISO-8601 timestamp",
+        "location": "slot deadline -> TextBlock (all 4 stage templates)",
+        "evidence": "blocks/TextBlock.jsx:96; unused formatter at pages/StagePage.jsx:21-28",
+        "affected": "14 of 21 per stage"
+      },
+      {
+        "id": "RB-2",
+        "summary": "confidence renders 0.75 instead of 75%",
+        "location": "slot confidence -> NumberBlock, decide.slate.v1#rollup",
+        "evidence": "binding confidence.value is a bare 0..1 number; NumberBlock.jsx:24 defaults unit=count; contrast StagePage.jsx:72",
+        "affected": "21 of 21 decide"
+      },
+      {
+        "id": "RB-3",
+        "summary": "axis enums render as raw lowercase tokens (assist, ads, keeper, strategic)",
+        "location": "decision_mode / decision_lens / decision_persona / decision_contract_class -> TextBlock",
+        "affected": "321 instances"
+      },
+      {
+        "id": "RB-4",
+        "summary": "narrative and primary_insight resolve to the same string, rendered twice in the same section",
+        "location": "analyze.compare.v1#finding",
+        "affected": "9 of 21 analyze"
+      },
+      {
+        "id": "RB-5",
+        "summary": "two declared sections can never render",
+        "location": "analyze.compare.v1#rollup (\"Totals\"), decide.slate.v1#provenance (\"Basis\")",
+        "affected": "all"
+      },
+      {
+        "id": "RB-6",
+        "summary": "React duplicate-key warning",
+        "location": "StepTracker / route-level rendering",
+        "evidence": "vitest stderr during routeLevel.test.jsx",
+        "affected": "pre-existing, tests pass"
+      },
+      {
+        "id": "RB-7",
+        "summary": "live stage renders an error page (no template)",
+        "location": "selectTemplate.js:209-214 + actionStoriesService.js:99-112",
+        "affected": "prop_s10_6_live (1 of 105)"
+      }
+    ],
+    "synthesised_axes": {
+      "note": "mock values with no reference basis; drive 321 of 712 rendered slot instances (45%)",
+      "cardinality": {
+        "distribution": {
+          "many": 105
+        },
+        "reference_basis": "none",
+        "evidence": "normalizeCorpus.js:330 is `? 'many' : 'many'` - Axis 1 is degenerate"
+      },
+      "entitlement": {
+        "distribution": {
+          "full": 65,
+          "limited": 20,
+          "locked": 20
+        },
+        "reference_basis": "none",
+        "evidence": "normalizeCorpus.js:184 ENTITLEMENTS indexed h%5; blanks 20 of 105 screens to 3 text lines"
+      },
+      "contract_class": {
+        "distribution": {
+          "strategic": 37,
+          "regulated": 36,
+          "standard": 32
+        },
+        "reference_basis": "none - declared PROVISIONAL in decisionObject.js:27-33"
+      },
+      "mode": {
+        "distribution": {
+          "assist": 37,
+          "auto": 36,
+          "suggest": 32
+        },
+        "reference_basis": "partial - reference execLabel is 'Suggest' x104, 'Assist' x1"
+      },
+      "on_clock": {
+        "distribution": {
+          "true": 73,
+          "false": 32
+        },
+        "reference_basis": "none"
+      },
+      "lens": {
+        "distribution": {
+          "ads": 25,
+          "cash": 20,
+          "inventory": 20,
+          "margin": 20,
+          "sales": 20
+        },
+        "reference_basis": "partial (data.lens)"
+      },
+      "persona": {
+        "distribution": {
+          "keeper": 16,
+          "merchandiser": 20,
+          "navigator": 16,
+          "planner": 17,
+          "promoter": 12,
+          "controller": 12,
+          "bidder": 12
+        },
+        "reference_basis": "partial (data.owner)"
+      },
+      "impact": {
+        "reference_basis": "none",
+        "formula": "1000 + (h%90)*400"
+      },
+      "confidence": {
+        "reference_basis": "none",
+        "formula": "0.6 + (h%35)/100",
+        "note": "reference's real confLabel ('Med-high · 78%') is dropped"
+      },
+      "status": {
+        "distribution": {
+          "pending": 105
+        },
+        "reference_basis": "none"
+      }
+    },
+    "gap_summary": {
+      "reference_meaningful_components": 71,
+      "reference_business_components": 62,
+      "current_canonical_slots": 34,
+      "current_blocks_registered": 14,
+      "current_blocks_reachable": 9,
+      "correctly_mapped_concepts": 9,
+      "rendered_content_slot_instances": 391,
+      "rendered_content_semantically_correct": 269,
+      "rendered_content_wrong_source": 122,
+      "rendered_axis_echo_instances": 321,
+      "missing_blocks": 1,
+      "blocks_existing_but_unreachable": 5,
+      "missing_slots": 22,
+      "wrong_mappings_content_renders": 122,
+      "duplicate_content_incidents": 41,
+      "missing_normalized_data_fields": 1128,
+      "wrong_data_shape_classes": 6,
+      "rendering_bugs": 7,
+      "reference_only_presentation_fields": 940,
+      "unresolved_product_decisions": 6
+    },
+    "top_root_causes": [
+      {
+        "rank": 1,
+        "cause": "normalizeCorpus.js drops 72.4% of reference business content because it maps only a fixed ~7-field-per-proposal target",
+        "cost": "1128 business fields",
+        "evidence": "extraction/normalizeCorpus.js:209-269"
+      },
+      {
+        "rank": 2,
+        "cause": "pick(..., {fallbackScan:true}) fills canonical slots with whatever key happens to match the SHAPE, with no semantic check",
+        "cost": "122 wrong content renders (31%), 41 duplicate incidents, approve_selected acting on wrong rows on 16 of 21 decide screens",
+        "evidence": "normalizeCorpus.js:148-160, 245-268"
+      },
+      {
+        "rank": 3,
+        "cause": "three of seven contract axes are synthesised; entitlement blanks 19% of the corpus and cardinality is hard-coded",
+        "cost": "20 screens reduced to 3 lines; 321 of 712 renders are mock-axis echoes",
+        "evidence": "normalizeCorpus.js:184, 330"
+      },
+      {
+        "rank": 4,
+        "cause": "7 normalized fields and 5 block components exist with no slot connecting them; 2 sections declared permanently empty",
+        "cost": "7 business concepts + 5 working components one binding line away from rendering",
+        "evidence": "orphan scan; blocks/index.js vs template blockTypes"
+      },
+      {
+        "rank": 5,
+        "cause": "nothing measures reference fidelity - 1053 tests pass, 0 renderer warnings, because the tests assert structure not content",
+        "cost": "causes 1-4 accumulated with no red signal",
+        "evidence": "vitest run; 0 missing-data and 0 wrong-shape outcomes across 921 slot evaluations"
+      }
+    ],
+    "fix_plan": [
+      {
+        "step": 0,
+        "title": "instrument before changing anything",
+        "actions": [
+          "provenance assertion per normalized field",
+          "duplicate-content test (41 failures today)",
+          "reference-field coverage metric (27.6% today)"
+        ]
+      },
+      {
+        "step": 1,
+        "title": "fix data mapping",
+        "actions": [
+          "delete fallbackScan:true",
+          "repair candidate lists (slate, recommendation, targets, rollback, policy, roles, verification, primary_insight)",
+          "stop building execute proposal with decideProposal (:338)",
+          "relax the checks predicate",
+          "carry currently-dropped fields that have or will have slots"
+        ],
+        "expected": "coverage 27.6% -> ~55-65%; wrong-source renders 122 -> ~0"
+      },
+      {
+        "step": 2,
+        "title": "fix existing block contracts and bindings",
+        "actions": [
+          "RB-2 typed confidence",
+          "RB-1 humanised deadline",
+          "RB-3 enum display mapping",
+          "RB-4 drop duplicate narrative on analyze",
+          "re-bind slate_summary off labelValueList"
+        ]
+      },
+      {
+        "step": 3,
+        "title": "add slots only where the reference proves a missing concept",
+        "tiers": {
+          "A": "data already exists and is orphaned - pure template edits",
+          "B": "high-frequency concepts needing slot + step 1 data",
+          "C": "defer pending contract decisions"
+        }
+      },
+      {
+        "step": 4,
+        "title": "add a block only where no existing block can render the concept",
+        "actions": [
+          "stackedBar for moveBar - and nothing else"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "resolve contract questions (product/backend, not code)",
+        "actions": [
+          "typed {x,y} chart series (do NOT un-strip SVG paths)",
+          "replace or remove the synthesised axes",
+          "decide whether live.v1 exists"
+        ]
+      }
+    ],
+    "out_of_scope": [
+      "redesign StageRenderer/composeSections (both correct)",
+      "build a backend or cloud sandbox",
+      "modify the 5-template architecture - this audit found it sufficient"
+    ]
+  }
+}

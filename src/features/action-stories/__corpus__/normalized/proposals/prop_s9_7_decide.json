@@ -1,0 +1,419 @@
+{
+  "proposal_id": "prop_s9_7_decide",
+  "story_code": "S9.7",
+  "stage": "decide",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Weekly ads sweep — $4.3K/mo waste identified",
+  "narrative": "",
+  "status_note": "Decide · 5 of 5 groups · 170 changes · CM +$12.3K/mo",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable",
+    "checks": [
+      {
+        "text": "No change touches a protected campaign. Brand defense stays funded at $8.4K."
+      },
+      {
+        "text": "Net spend change of +$2.4K needs an envelope check with story 9.4."
+      },
+      {
+        "text": "Two capped winners held back — their SKUs are under three weeks of cover."
+      },
+      {
+        "text": "4 bid changes exceed ±40% and are flagged for your eyes on Execute."
+      }
+    ]
+  },
+  "proposal": {
+    "item_groups": [
+      {
+        "name": "Pauses",
+        "detail": "Every term that produced no contribution over 60 days with at least 40 clicks, plus the two ad groups where every target failed the floor.",
+        "count": "61 search terms · 2 ad groups",
+        "owner": "Bidder",
+        "effect": "+$4.3K",
+        "effectLabel": "Monthly saving",
+        "rows": [
+          {
+            "label": "Glassware broad · tumbler set ad group",
+            "detail": "$4.3K/mo spend",
+            "value": "pause"
+          },
+          {
+            "label": "61 zero-CM search terms",
+            "detail": "median $41/mo bleed",
+            "value": "pause"
+          },
+          {
+            "label": "Rest of search after 22:00 · 6 campaigns",
+            "detail": "0.34× mROAS",
+            "value": "exclude"
+          }
+        ],
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px"
+          }
+        ]
+      },
+      {
+        "name": "Bid changes",
+        "detail": "Down on everything between 0.6× and 1.0× mROAS, up on the targets that are converting under their cap. Nothing moves more than 45%.",
+        "count": "61 changes",
+        "owner": "Bidder",
+        "effect": "+$1.8K",
+        "effectLabel": "CM effect",
+        "rows": [
+          {
+            "label": "38 bids down · 0.6× to 1.0× mROAS",
+            "detail": "median −18%",
+            "value": "−$1.1K spend"
+          },
+          {
+            "label": "19 bids up · above 1.3× mROAS",
+            "detail": "median +14%",
+            "value": "+$2.0K spend"
+          },
+          {
+            "label": "4 changes over ±40%",
+            "detail": "flagged for review",
+            "value": "needs eyes"
+          }
+        ],
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px"
+          }
+        ]
+      },
+      {
+        "name": "Negative keywords",
+        "detail": "Terms that will keep matching after the pause: bulk, commercial, kids and plastic modifiers that pull traffic with no intent to buy our range.",
+        "count": "28 negatives",
+        "owner": "Bidder",
+        "effect": "+$1.2K",
+        "effectLabel": "Monthly saving",
+        "rows": [
+          {
+            "label": "18 exact negatives · zero orders",
+            "detail": "$0.7K/mo",
+            "value": "add"
+          },
+          {
+            "label": "10 phrase negatives · bulk and commercial",
+            "detail": "$0.5K/mo",
+            "value": "add"
+          }
+        ],
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px"
+          }
+        ]
+      },
+      {
+        "name": "Budget shifts",
+        "detail": "Release the caps on 12 of the 14 winners, funded by the pauses. Two stay capped because their SKUs are under three weeks of cover.",
+        "count": "14 campaigns",
+        "owner": "Bidder",
+        "effect": "+$6.1K",
+        "effectLabel": "CM effect",
+        "rows": [
+          {
+            "label": "12 caps released",
+            "detail": "+$5.9K spend",
+            "value": "+$6.1K CM"
+          },
+          {
+            "label": "2 held for inventory cover",
+            "detail": "$1.4K headroom parked",
+            "value": "blocked"
+          },
+          {
+            "label": "Net spend change after pauses",
+            "detail": "inside the $52K envelope",
+            "value": "+$0.4K"
+          }
+        ],
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px"
+          }
+        ]
+      },
+      {
+        "name": "New tests",
+        "detail": "Two search terms promoted to their own exact-match ad groups, one creative refresh against the fatigued ceramics asset, one daypart test. Each registers as a hypothesis with a pre-declared read.",
+        "count": "4 tests",
+        "owner": "Bidder + Merchandiser",
+        "effect": "−$1.1K",
+        "effectLabel": "Cost to run",
+        "rows": [
+          {
+            "label": "heavy base drinking glasses → exact",
+            "detail": "1.48× mROAS at broad",
+            "value": "$0.3K"
+          },
+          {
+            "label": "drinking glasses dishwasher safe → exact",
+            "detail": "1.31× mROAS at broad",
+            "value": "$0.2K"
+          },
+          {
+            "label": "Ceramics lifestyle v4 vs v3",
+            "detail": "CTR −38% on v3",
+            "value": "$0.4K"
+          },
+          {
+            "label": "Daypart · reinstate 22:00-24:00 at −60% bid",
+            "detail": "was 0.34× mROAS",
+            "value": "$0.2K"
+          }
+        ],
+        "hist": [
+          {
+            "label": "−45%",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "−30%",
+            "n": 9,
+            "h": "31px"
+          },
+          {
+            "label": "−20%",
+            "n": 14,
+            "h": "49px"
+          },
+          {
+            "label": "−10%",
+            "n": 11,
+            "h": "38px"
+          },
+          {
+            "label": "0",
+            "n": 4,
+            "h": "14px"
+          },
+          {
+            "label": "+10%",
+            "n": 8,
+            "h": "28px"
+          },
+          {
+            "label": "+25%",
+            "n": 7,
+            "h": "24px"
+          },
+          {
+            "label": "+40%",
+            "n": 4,
+            "h": "14px"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Changes in slate",
+        "value": "170",
+        "meta": "5 of 5 groups"
+      },
+      {
+        "label": "Waste removed",
+        "value": "$5.5K",
+        "meta": "per month, recurring"
+      },
+      {
+        "label": "Net spend change",
+        "value": "+$2.4K",
+        "meta": "inside the $52K envelope"
+      },
+      {
+        "label": "CM after ads",
+        "value": "+$12.3K",
+        "meta": "per month at P50"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

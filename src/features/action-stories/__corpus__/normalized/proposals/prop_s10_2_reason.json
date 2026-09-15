@@ -1,0 +1,130 @@
+{
+  "proposal_id": "prop_s10_2_reason",
+  "story_code": "S10.2",
+  "stage": "reason",
+  "action_type": "reorder",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "navigator",
+  "title": "Week-7 trough projects $31K below buffer",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 19 · 06:10",
+        "what": "Cash Ladder Engine reprojected the 13 weeks after the weekly PO cycle was approved, adding Supplier K’s $88K net-30 to week 7."
+      },
+      {
+        "when": "Aug 19 · 06:11",
+        "what": "The Prime Fall ad invoice for $34K falls in the same week, and Amazon’s biweekly settlement lands the week after rather than during it."
+      },
+      {
+        "when": "Aug 19 · 06:12",
+        "what": "Net cash bottoms at $89K against a $120K buffer — a $31K gap, seven weeks out, with four levers still open."
+      }
+    ],
+    "policy": [
+      {
+        "label": "Supplier terms · Tier 1",
+        "note": "Kessler Net 45, Arcadia Net 60",
+        "value": "Net 45–60",
+        "state": "target 60"
+      },
+      {
+        "label": "Supplier terms · Tier 2–3",
+        "note": "Meridian, Tsuyo, Verdant, Pallas",
+        "value": "Net 30–45",
+        "state": "target 45"
+      },
+      {
+        "label": "Days payable outstanding",
+        "note": "blended across all suppliers",
+        "value": "38 days",
+        "state": "target 48"
+      },
+      {
+        "label": "Days sales outstanding",
+        "note": "settlement lag across channels",
+        "value": "11 days",
+        "state": "good"
+      },
+      {
+        "label": "Wholesale receivables",
+        "note": "Faire, net 30 from ship date",
+        "value": "Net 30",
+        "state": "on time"
+      },
+      {
+        "label": "Early-pay discounts",
+        "note": "policy: never take below 2/10",
+        "value": "2/10 min",
+        "state": "policy"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Payroll",
+        "amount": "$118K",
+        "detail": "Biweekly, 26th and 12th. Six runs inside the 13 weeks. Not a lever at any price."
+      },
+      {
+        "label": "Rent, insurance and software",
+        "amount": "$44K",
+        "detail": "Fixed monthly on the 1st. Predictable to the dollar and unmovable."
+      },
+      {
+        "label": "Loan servicing",
+        "amount": "$24K",
+        "detail": "Existing facility amortisation. Missing one is a covenant event, not a timing choice."
+      },
+      {
+        "label": "Sales tax remittance",
+        "amount": "quarterly",
+        "detail": "Oct 20, inside the ladder. Statutory — the date is not ours to pick."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Cash Ladder Engine"
+      },
+      {
+        "name": "Settlement Calendar Model"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

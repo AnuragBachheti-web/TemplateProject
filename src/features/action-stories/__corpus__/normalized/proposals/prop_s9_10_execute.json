@@ -1,0 +1,156 @@
+{
+  "proposal_id": "prop_s9_10_execute",
+  "story_code": "S9.10",
+  "stage": "execute",
+  "action_type": "adjust_assortment",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "controller",
+  "title": "9 SKUs negative true contribution — 3 consecutive months",
+  "narrative": "Nothing has been written yet. Steps run in order and each one is reversible until clearance starts.",
+  "status_note": "Execute · 0 of 6 steps · reinstatement available",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Units cleared",
+        "value": "target 2,300 u",
+        "planPct": "100%",
+        "realPct": "0%",
+        "note": "Ladder step 1 is live on four SKUs. Grey is the plan."
+      },
+      {
+        "label": "Capital recovered",
+        "value": "projected $26K",
+        "planPct": "100%",
+        "realPct": "0%",
+        "note": "Posts to the Cash lens ladder as it lands."
+      },
+      {
+        "label": "CM run-rate",
+        "value": "projected +$3.8K/mo",
+        "planPct": "100%",
+        "realPct": "0%",
+        "note": "Improves as ads pause and units clear. Net of attached CM lost."
+      },
+      {
+        "label": "Reorder attempts blocked",
+        "value": "0",
+        "planPct": "100%",
+        "realPct": "0%",
+        "note": "The guard arms when stop-buy flags are set."
+      }
+    ],
+    "targets": [
+      {
+        "label": "Set stop-buy flags",
+        "value": "6 SKUs"
+      },
+      {
+        "label": "Spawn clearance workflows",
+        "value": "4 SKUs · 1,490 u"
+      },
+      {
+        "label": "Pause ads across",
+        "value": "$2.4K/mo freed"
+      },
+      {
+        "label": "Schedule listing closure",
+        "value": "11 listings"
+      },
+      {
+        "label": "Draft supplier notices",
+        "value": "4 suppliers"
+      },
+      {
+        "label": "Update role records",
+        "value": "6 SKUs"
+      }
+    ],
+    "rollback_note": "Until clearance begins, every step here is reversible in one action: flags clear, listings reopen, ads resume and role records revert.",
+    "ledger_note": "On the first step, Realify writes one entry with the exit decision, the true-contribution number behind it, and every sponsor and review date.",
+    "bulk_note": "Steps run in order because each one depends on the last — stop-buy before clearance, clearance before listing closure.",
+    "plan": [
+      {
+        "label": "Set stop-buy flags on all six SKUs",
+        "system": "Realify planning · supplier records",
+        "owner": "Planner",
+        "initials": "Pl",
+        "scope": "6 SKUs",
+        "status": "ready"
+      },
+      {
+        "label": "Spawn clearance workflows for the ladder cohort",
+        "system": "Story 9.9 · markdown ladders",
+        "owner": "Pricer",
+        "initials": "Pr",
+        "scope": "4 SKUs · 1,490 u",
+        "linkLabel": "Open in 9.9",
+        "status": "waiting"
+      },
+      {
+        "label": "Pause ads across the exit cohort",
+        "system": "Amazon Ads · Google Ads · Meta",
+        "owner": "Bidder",
+        "initials": "Bd",
+        "scope": "$2.4K/mo freed",
+        "status": "waiting"
+      },
+      {
+        "label": "Schedule listing closure after sell-out",
+        "system": "Shopify · SP-API · Walmart Seller",
+        "owner": "Keeper",
+        "initials": "Ke",
+        "scope": "11 listings",
+        "status": "waiting"
+      },
+      {
+        "label": "Draft supplier notices for Sourcer review",
+        "system": "Supplier portal · email",
+        "owner": "Sourcer",
+        "initials": "So",
+        "scope": "4 suppliers",
+        "status": "waiting"
+      },
+      {
+        "label": "Update role records to Exited",
+        "system": "Catalogue master · assortment roles",
+        "owner": "Controller",
+        "initials": "Co",
+        "scope": "6 SKUs",
+        "status": "waiting"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

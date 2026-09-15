@@ -1,0 +1,85 @@
+{
+  "proposal_id": "prop_s10_5_reason",
+  "story_code": "S10.5",
+  "stage": "reason",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "steward",
+  "title": "Hero image replaced by third-party contribution — 41h ago",
+  "narrative": "",
+  "status_note": "Reason · 14 open drifts · $640/day bleeding · critical detection at 9.4h against a 4h target",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 19 · 06:12",
+        "what": "The Sync Integrity Monitor compared 214 listings field by field against the PIM and found 14 live values that no owning system had written."
+      },
+      {
+        "when": "Aug 19 · 06:13",
+        "what": "One was the hero image on ASIN B0Y, replaced 41 hours ago by a marketplace catalogue contribution. Conversion on that listing is down 18% over the same window."
+      },
+      {
+        "when": "Aug 19 · 06:15",
+        "what": "The Stranded Inventory Scanner added $18.4K across six blocks with no sellable listing behind them, and the two problems were pinned to one card because both are the catalogue failing quietly."
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Canonical means one system, per field, per channel",
+        "detail": "Where two systems could write a field, one is named owner and the other is a reader. Ambiguity is what produces silent drift in the first place."
+      },
+      {
+        "label": "Disputes go through brand registry with evidence",
+        "detail": "A contribution dispute is filed with the canonical asset, its PIM version history and the registry entitlement — never as a complaint about a change we noticed."
+      },
+      {
+        "label": "Repairs are re-pushes, not edits",
+        "detail": "Nothing is fixed by hand in a marketplace console. The canonical record is corrected if it is wrong, then pushed — otherwise the next sync reintroduces the drift."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Sync Integrity Monitor"
+      },
+      {
+        "name": "Stranded Inventory Scanner"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

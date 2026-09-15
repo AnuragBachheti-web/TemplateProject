@@ -1,0 +1,88 @@
+{
+  "proposal_id": "prop_s9_20_reason",
+  "story_code": "S9.20",
+  "stage": "reason",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "prospector",
+  "title": "Weekly discovery digest — 6 candidates above affinity threshold",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 18",
+        "what": "Prospector’s weekly sweep found 41 candidates; 6 cleared the 70-point affinity threshold, the most in a single week this year."
+      },
+      {
+        "when": "Aug 18",
+        "what": "Fad-vs-Trend Classifier flagged three of the six as fads with 12–18 month evidence windows — worth showing rather than filtering out silently."
+      },
+      {
+        "when": "Aug 19",
+        "what": "Sourcer matched four candidates to existing supplier capability, two of them at tooling we already own."
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Preferred-supplier constraint",
+        "detail": "A candidate must be makeable by one of our four existing suppliers, or it needs a documented exception. New supplier onboarding is a separate decision with its own cost."
+      },
+      {
+        "label": "Brand fit",
+        "detail": "Durable, repairable, plainly built. Nothing single-use, nothing that reads as novelty, nothing whose main appeal is that it is currently on a feed."
+      },
+      {
+        "label": "Sampling capital",
+        "detail": "$24K this cycle. Sample spend on a parked concept is not recoverable, so parking early is cheaper than sampling hopefully."
+      },
+      {
+        "label": "No launch decision here",
+        "detail": "This flow ends at \"worth sampling\" or \"parked with a trigger\". The launch itself is a different decision with a different gate — S9.8."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Trend Affinity Engine"
+      },
+      {
+        "name": "Fad-vs-Trend Classifier"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

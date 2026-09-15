@@ -779,3 +779,81 @@ describe('findMetadataDescriptorSlots — suppress column/row metadata that desc
     expect(() => findMetadataDescriptorSlots([block('cols', 'labelValueList')], { cols: null })).not.toThrow()
   })
 })
+
+// A business field happening to be named `path` used to be sufficient evidence of SVG path
+// geometry, because isMultiSeriesLineShaped only required a non-empty string under that key. Two
+// real fixtures carry an ordinary `path` — S10.4/execute.cases routes a fee case (`"API"`),
+// S9.12/analyze.disposition names a recovery route (`"Restock as new"`) — so both were claimed as
+// lineChart, reached LineChartBlock, and rendered its "couldn't read this chart's path data"
+// ErrorState, since parseSvgPathPoints finds no points in "API". validateBlockData accepts them
+// (it only requires a string `path`), so only a real render caught it — see
+// src/features/action-stories/renderSweep.test.jsx. The rule now requires the string to actually
+// match SVG_LINE_PATH_RE, the same test the top-level string branch already applies.
+describe('classifyBlockType — a business field named `path` is not chart geometry', () => {
+  it('does not classify item-queue rows carrying a business `path` as lineChart', () => {
+    const cases = [
+      { name: 'Dimension tier · Dutch Oven 5qt', sub: 'FEE-2201 · 88 units', value: '$640', path: 'API', status: 'queued', tone: 'var(--ink-500)' },
+      { name: 'Dimension tier · Sauté Pan 12in', sub: 'FEE-2202 · 62 units', value: '$520', path: 'API', status: 'queued', tone: 'var(--ink-500)' },
+    ]
+    expect(classifyBlockType(cases)).not.toBe('lineChart')
+  })
+
+  it('does not classify table rows carrying a business `path` as lineChart', () => {
+    const disposition = [
+      { path: 'Restock as new', grade: 'grade A', note: 'Tags on, unworn.', gross: '$38.00', net: '$34.60', recovery: '91%' },
+      { path: 'Refurbish and relist', grade: 'grade B', note: 'Steam, re-tag.', gross: '$29.60', net: '$20.70', recovery: '70%' },
+    ]
+    expect(classifyBlockType(disposition)).not.toBe('lineChart')
+  })
+
+  it('still classifies real multi-series SVG paths as lineChart (the rule must not simply drop `path`)', () => {
+    // S9.3/analyze.curves' own shape — the case isMultiSeriesLineShaped exists for.
+    const curves = [
+      { path: 'M38.0 24.8 L63.5 35.5 L89.0 44.5', label: 'DTC · $18.40' },
+      { path: 'M38.0 44.6 L63.5 61.5 L89.0 73.6', label: 'FBA-West · next unit $13.60' },
+    ]
+    expect(classifyBlockType(curves)).toBe('lineChart')
+  })
+
+  it('rejects a series whose `path` is only partly real geometry, rather than accepting the whole set', () => {
+    const mixed = [
+      { path: 'M38.0 24.8 L63.5 35.5 L89.0 44.5', label: 'real' },
+      { path: 'Restock as new', label: 'not a path' },
+    ]
+    expect(classifyBlockType(mixed)).not.toBe('lineChart')
+  })
+})
+
+// Once `path` no longer claims them for lineChart, both fixtures reach the identity-keyed record
+// rule and classify as `table` on shape alone — `cases` via its `name` identity, `disposition` via
+// findIdentityKey's fully-unique-string fallback on its own `path` column. No raw-key exemption
+// list is needed: the staged draft of this suite assumed they would fall through to the label-less
+// bar rule and proposed a `RECORD_TABLE_RAW_KEYS` exemption for them, but that assumption does not
+// hold once the `path` rule above is correct. Both assertions are kept (they are the real, intended
+// outcome and now guard it); the exemption constant is deliberately NOT introduced, because there
+// is nothing left for it to do.
+describe('classifyBlockType — record-shaped keys classify as table, not a bar chart', () => {
+  it('classifies `cases`-shaped records as a table, not a bar chart', () => {
+    const cases = [
+      { name: 'Dimension tier · Dutch Oven 5qt', sub: 'FEE-2201 · 88 units', value: '$640', path: 'API', caseId: 'not filed', status: 'queued' },
+      { name: 'Dimension tier · Sauté Pan 12in', sub: 'FEE-2202 · 62 units', value: '$520', path: 'API', caseId: 'not filed', status: 'queued' },
+    ]
+    expect(classifyBlockType(cases, 'cases')).toBe('table')
+  })
+
+  it('classifies `disposition`-shaped records as a table, not a bar chart', () => {
+    const disposition = [
+      { path: 'Restock as new', grade: 'grade A', note: 'Tags on, unworn.', gross: '$38.00', net: '$34.60', pct: '91%' },
+      { path: 'Refurbish and relist', grade: 'grade B', note: 'Steam, re-tag.', gross: '$29.60', net: '$20.70', pct: '70%' },
+    ]
+    expect(classifyBlockType(disposition, 'disposition')).toBe('table')
+  })
+
+  // The staged draft also asserted that S9.9/analyze.capacity's `{name, value, pct, meta}` shape
+  // stays `barChart`. It does not, and should not: it is a uniform, generalized-identity record with
+  // exactly 4 business scalar columns, which is precisely what the committed regression guard
+  // "classifies a uniform >=4-scalar-column, generalized-identity record as table" (above) requires
+  // to be a table. Honouring the draft's expectation would mean raising that threshold to >=5, which
+  // was measured against the full suite and regresses five committed tests. The draft expectation
+  // was stale; the committed threshold wins.
+})

@@ -1,0 +1,113 @@
+{
+  "proposal_id": "prop_s9_7_execute",
+  "story_code": "S9.7",
+  "stage": "execute",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Weekly ads sweep — $4.3K/mo waste identified",
+  "narrative": "0 of 168 changes live",
+  "status_note": "Execute · 0 of 168 changes live",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Account mROAS",
+        "value": "projected 1.31×",
+        "projPct": "80%",
+        "realPct": "0%",
+        "note": "Compared daily against the projection filed with the slate."
+      },
+      {
+        "label": "Spend pacing",
+        "value": "$52.0K plan",
+        "projPct": "100%",
+        "realPct": "0%",
+        "note": "Pauses removed spend before the cap releases added it back."
+      },
+      {
+        "label": "CM after ads",
+        "value": "projected +$7.9K",
+        "projPct": "100%",
+        "realPct": "0%",
+        "note": "Tracking to the P50 projection at day 1 of 30."
+      },
+      {
+        "label": "ACOS vs ceilings",
+        "value": "2 over today",
+        "projPct": "100%",
+        "realPct": "20%",
+        "note": "Glassware and Textiles are over. Arming the guardrail would catch a third day."
+      }
+    ],
+    "targets": [
+      {
+        "label": "Amazon Ads",
+        "value": "134"
+      },
+      {
+        "label": "Google Ads",
+        "value": "22"
+      },
+      {
+        "label": "Meta Marketing",
+        "value": "12"
+      },
+      {
+        "label": "Rollout",
+        "value": "staged 50%"
+      },
+      {
+        "label": "Guardrail",
+        "value": "off"
+      }
+    ],
+    "rollback_note": "Restore becomes available as soon as the first platform push lands. Prior bids and budgets are already recorded.",
+    "ledger_note": "On push, Realify writes one entry with all 168 changes, the prior values, and the projection band to check against.",
+    "bulk_note": "Pauses and negatives write first so the bleed stops before any bid moves.",
+    "plan": [
+      {
+        "label": "Staged rollout",
+        "detail": "Pauses and negatives go in full now. Half the bid changes apply immediately, the rest after a 72-hour check on realized mROAS.",
+        "meta": "recommended · slower to reach full effect"
+      },
+      {
+        "label": "Full push",
+        "detail": "Every change applies now. Faster to the projected CM, but a bad read on the bid changes costs three days of spend before it shows.",
+        "meta": "all 168 changes in one write"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

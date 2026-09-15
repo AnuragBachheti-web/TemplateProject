@@ -1,0 +1,208 @@
+{
+  "proposal_id": "prop_s9_15_reason",
+  "story_code": "S9.15",
+  "stage": "reason",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Citation share dropping — 14 comparison queries cite competitors only",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Sunday · 02:00",
+        "what": "Citation Tracker completed its weekly pass across 412 tracked queries and 3 answer surfaces."
+      },
+      {
+        "when": "Sunday · 02:18",
+        "what": "Fourteen comparison queries returned competitor-only citations — up from six four weeks ago."
+      },
+      {
+        "when": "Monday · 08:05",
+        "what": "Visibility Gap Engine sized the competitor-only set at $11.4K of monthly traffic value and pinned the card."
+      }
+    ],
+    "policy": [
+      {
+        "label": "Factual density",
+        "note": "sourced numbers per 500 words",
+        "floor": "≥ 6",
+        "state": "below"
+      },
+      {
+        "label": "Structured formatting",
+        "note": "tables, definition lists, answer-first headings",
+        "floor": "required",
+        "state": "partial"
+      },
+      {
+        "label": "Sourced claims",
+        "note": "every comparison cites a published figure",
+        "floor": "100%",
+        "state": "below"
+      },
+      {
+        "label": "Schema on content pages",
+        "note": "Article, FAQ, Product where applicable",
+        "floor": "required",
+        "state": "partial"
+      },
+      {
+        "label": "Core Web Vitals",
+        "note": "LCP, INP, CLS at p75",
+        "floor": "all green",
+        "state": "1 failing"
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Brand voice",
+        "detail": "Plain, specific, no superlatives. A draft that reads like SEO filler does not ship, whatever it ranks for."
+      },
+      {
+        "label": "Canonical URL structure",
+        "detail": "/guides/{topic} for content, /products/{sku} for PDPs. No new path patterns, no parameterised duplicates."
+      },
+      {
+        "label": "No auto-publish",
+        "detail": "Realify drafts briefs and copy. A human editor approves and publishes every page, always."
+      },
+      {
+        "label": "No competitor scraping",
+        "detail": "Comparisons cite the competitor’s own published figures or say nothing. Nothing inferred from their pages."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Tracked queries",
+        "value": "412"
+      },
+      {
+        "label": "Content pages in scope",
+        "value": "186"
+      },
+      {
+        "label": "Search Console sync",
+        "value": "6h lag"
+      },
+      {
+        "label": "Crawl completed",
+        "value": "2 days ago"
+      },
+      {
+        "label": "Citation samples this week",
+        "value": "1,236"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Cookware comparisons",
+        "note": "carbon steel vs cast iron, pan buying guides · 96 queries",
+        "tier": "comparative",
+        "rank": "4.1",
+        "citeNow": "6%",
+        "citeTarget": "30%",
+        "value": "$14.2K"
+      },
+      {
+        "name": "Water filtration",
+        "note": "lead removal, filter life, pitcher vs faucet · 68 queries",
+        "tier": "comparative",
+        "rank": "3.8",
+        "citeNow": "9%",
+        "citeTarget": "30%",
+        "value": "$9.6K"
+      },
+      {
+        "name": "Knife care and sharpening",
+        "note": "how-to, angle guides, maintenance · 74 queries",
+        "tier": "informational",
+        "rank": "2.9",
+        "citeNow": "34%",
+        "citeTarget": "40%",
+        "value": "$6.1K"
+      },
+      {
+        "name": "Cooktop compatibility",
+        "note": "induction, glass, gas — what works with what · 52 queries",
+        "tier": "comparative",
+        "rank": "5.4",
+        "citeNow": "4%",
+        "citeTarget": "25%",
+        "value": "$7.8K"
+      },
+      {
+        "name": "Buy-intent product terms",
+        "note": "\"buy 12 quart stock pot\", model numbers · 78 queries",
+        "tier": "transactional",
+        "rank": "2.2",
+        "citeNow": "18%",
+        "citeTarget": "25%",
+        "value": "$18.4K"
+      },
+      {
+        "name": "Care and warranty questions",
+        "note": "seasoning, dishwasher safety, replacement · 44 queries",
+        "tier": "informational",
+        "rank": "3.1",
+        "citeNow": "28%",
+        "citeTarget": "40%",
+        "value": "$3.2K"
+      }
+    ],
+    "agents": [
+      {
+        "name": "Merchandiser",
+        "role": "Owns content briefs, PDP copy and the editorial queue."
+      },
+      {
+        "name": "Scout",
+        "role": "Tracks rank, citations and competitor coverage per cluster."
+      },
+      {
+        "name": "Visibility Gap Engine",
+        "role": "Finds queries where competitors are cited and we are absent."
+      },
+      {
+        "name": "Citation Tracker",
+        "role": "Samples AI answers and snippets weekly, per cluster."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

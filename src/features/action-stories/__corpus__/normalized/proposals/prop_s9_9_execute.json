@@ -1,0 +1,221 @@
+{
+  "proposal_id": "prop_s9_9_execute",
+  "story_code": "S9.9",
+  "stage": "execute",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "38 SKUs cross the 271-day FBA surcharge in 26 days",
+  "narrative": "Steps push at 00:01 local on their date · nothing is live until then",
+  "status_note": "Execute · 0 of 9 scheduled · 0 of 4 handoffs sent",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Sell-through vs ladder",
+        "value": "plan 44% by Sep 01",
+        "planPct": "44%",
+        "realPct": "0%",
+        "note": "Read at every step boundary against the approved ladder."
+      },
+      {
+        "label": "Recovery to date",
+        "value": "projected $71.4K",
+        "planPct": "100%",
+        "realPct": "0%",
+        "note": "Posts to the Cash lens ladder as it lands."
+      },
+      {
+        "label": "Margin dilution",
+        "value": "projected 1.9 pp",
+        "planPct": "95%",
+        "realPct": "0%",
+        "note": "Cap is 1.8 pp. Realify stops the ladder rather than crossing it."
+      },
+      {
+        "label": "Units before the cliff",
+        "value": "target 3,344 u",
+        "planPct": "100%",
+        "realPct": "0%",
+        "note": "Everything cleared by Sep 13 avoids the aged surcharge."
+      }
+    ],
+    "targets": [
+      {
+        "label": "Price steps",
+        "value": "0 of 9"
+      },
+      {
+        "label": "Handoffs",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Promo codes",
+        "value": "6 codes"
+      },
+      {
+        "label": "Outlet listings",
+        "value": "14 SKUs"
+      },
+      {
+        "label": "Auto-advance",
+        "value": "off"
+      }
+    ],
+    "rollback_note": "Both controls become available once a step is scheduled. The Ledger already holds the pre-markdown price for all 38 SKUs.",
+    "ledger_note": "On scheduling, Realify writes one entry with every step, the cohort routes and the pre-markdown price for each SKU.",
+    "arming": "This is an Assist-level arm: Realify advances a step without asking. The dial is at Suggest, so it is disabled — move to Approve or Auto first.",
+    "bulk_note": "Steps schedule as future-dated pushes — nothing changes price today.",
+    "plan": [
+      {
+        "date": "Aug 20",
+        "rel": "in 2 days",
+        "label": "Seasonal · step 1",
+        "units": "520 u · 11 SKUs",
+        "channels": "DTC, AMZ, email",
+        "depth": "30%",
+        "skus": "11",
+        "st": "—",
+        "stMeta": "plan 44%",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Aug 20",
+        "rel": "in 2 days",
+        "label": "Discontinued · liquidation pickup",
+        "units": "540 u · 4 SKUs",
+        "channels": "liquidator",
+        "depth": "quote",
+        "skus": "4",
+        "st": "—",
+        "stMeta": "whole lot",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Aug 22",
+        "rel": "in 4 days",
+        "label": "Core · step 1",
+        "units": "680 u · 14 SKUs",
+        "channels": "DTC, AMZ, email",
+        "depth": "25%",
+        "skus": "14",
+        "st": "—",
+        "stMeta": "plan 41%",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Aug 22",
+        "rel": "in 4 days",
+        "label": "Hero · step 1",
+        "units": "260 u · 9 SKUs",
+        "channels": "DTC, AMZ promo",
+        "depth": "20%",
+        "skus": "9",
+        "st": "—",
+        "stMeta": "plan 32%",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Sep 01",
+        "rel": "in 14 days",
+        "label": "Seasonal · step 2",
+        "units": "480 u · 11 SKUs",
+        "channels": "all + outlet",
+        "depth": "50%",
+        "skus": "11",
+        "st": "—",
+        "stMeta": "checkpoint",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Sep 03",
+        "rel": "in 16 days",
+        "label": "Core · step 2",
+        "units": "740 u · 14 SKUs",
+        "channels": "all + outlet",
+        "depth": "45%",
+        "skus": "14",
+        "st": "—",
+        "stMeta": "checkpoint",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Sep 05",
+        "rel": "in 18 days",
+        "label": "Hero · step 2",
+        "units": "340 u · 9 SKUs",
+        "channels": "DTC, AMZ promo",
+        "depth": "35%",
+        "skus": "9",
+        "st": "—",
+        "stMeta": "checkpoint",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Sep 14",
+        "rel": "in 27 days",
+        "label": "Seasonal · step 3 · outlet",
+        "units": "180 u · 6 SKUs",
+        "channels": "outlet only",
+        "depth": "65%",
+        "skus": "6",
+        "st": "—",
+        "stMeta": "tail",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      },
+      {
+        "date": "Sep 26",
+        "rel": "in 39 days",
+        "label": "Hero · step 3 · email",
+        "units": "150 u · 5 SKUs",
+        "channels": "DTC, email",
+        "depth": "40%",
+        "skus": "5",
+        "st": "—",
+        "stMeta": "tail",
+        "status": "draft",
+        "btnLabel": "Schedule"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

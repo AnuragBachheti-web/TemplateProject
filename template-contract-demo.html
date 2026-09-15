@@ -1,0 +1,3363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Realify Dynamic Template System — Frontend ↔ Backend Contract</title>
+<style>
+  :root {
+    --ink-0:#ffffff; --ink-25:#fcfcfd; --ink-50:#f7f8fa; --ink-100:#eef0f4; --ink-200:#e1e4ea;
+    --ink-300:#c9ced8; --ink-400:#98a0ae; --ink-500:#6b7382; --ink-600:#4d5461; --ink-700:#353b45;
+    --ink-800:#22262e; --ink-900:#12151a;
+    --blue:#2563eb; --blue-soft:#eff5ff; --blue-line:#bfd4fb;
+    --green:#15803d; --green-soft:#effaf2; --green-line:#bfe6cd;
+    --amber:#b45309; --amber-soft:#fff8ec; --amber-line:#f3ddb4;
+    --rose:#be123c; --rose-soft:#fff1f4; --rose-line:#f7c9d4;
+    --violet:#6d28d9; --violet-soft:#f5f1ff; --violet-line:#ddd0fb;
+
+    --bg:var(--ink-50); --surface:var(--ink-0); --sunken:var(--ink-50); --line:var(--ink-200);
+    --line-strong:var(--ink-300); --text:var(--ink-900); --text-2:var(--ink-600); --text-3:var(--ink-500);
+    --code-bg:#0f1218; --code-text:#e3e7ee;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    --serif:ui-serif,Georgia,"Times New Roman",serif;
+    --shadow:0 1px 2px rgba(16,20,28,.05),0 1px 1px rgba(16,20,28,.04);
+    --shadow-md:0 4px 16px rgba(16,20,28,.08);
+  }
+  html[data-theme="dark"] {
+    --bg:#0b0d11; --surface:#14171d; --sunken:#1a1e25; --line:#252a33; --line-strong:#343a45;
+    --text:#e8ebf0; --text-2:#a8b0bd; --text-3:#7c8595;
+    --blue:#7aa5fb; --blue-soft:#141c2c; --blue-line:#27354f;
+    --green:#6ddb9a; --green-soft:#111f18; --green-line:#1f3a2a;
+    --amber:#e3ae62; --amber-soft:#211a10; --amber-line:#3d301b;
+    --rose:#f4859f; --rose-soft:#23131a; --rose-line:#43222e;
+    --violet:#b79bfa; --violet-soft:#1a1526; --violet-line:#2f2646;
+    --code-bg:#0a0c10; --code-text:#dbe1ea;
+    --shadow:0 1px 2px rgba(0,0,0,.4); --shadow-md:0 6px 22px rgba(0,0,0,.45);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); font-size:14px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a { color:var(--blue); }
+
+  /* ---------- chrome ---------- */
+  .topbar { position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .topbar-inner { max-width:1180px; margin:0 auto; padding:9px 24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .brand { font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-2); font-weight:600; white-space:nowrap; }
+  .navlinks { display:flex; gap:2px; flex-wrap:wrap; flex:1; }
+  .navlinks a { font-size:11.5px; color:var(--text-3); text-decoration:none; padding:3px 7px; border-radius:6px; white-space:nowrap; }
+  .navlinks a:hover { background:var(--sunken); color:var(--text); }
+  .btn { font:inherit; font-size:12px; font-weight:600; padding:5px 11px; border-radius:8px; border:1px solid var(--line-strong); background:var(--surface); color:var(--text); cursor:pointer; transition:background .12s,border-color .12s; }
+  .btn:hover:not(:disabled) { background:var(--sunken); }
+  .btn:disabled { opacity:.45; cursor:not-allowed; }
+  .btn.primary { background:var(--blue); border-color:var(--blue); color:#fff; }
+  html[data-theme="dark"] .btn.primary { color:#0b0d11; }
+  .btn.primary:hover:not(:disabled) { filter:brightness(1.07); }
+  .btn.danger { background:var(--rose); border-color:var(--rose); color:#fff; }
+  .btn.on { background:var(--text); border-color:var(--text); color:var(--surface); }
+
+  main { max-width:1180px; margin:0 auto; padding:0 24px 96px; }
+  section { padding-top:52px; scroll-margin-top:60px; }
+  h1 { font-family:var(--serif); font-weight:400; font-size:42px; line-height:1.08; letter-spacing:-.02em; margin:0 0 10px; }
+  h2 { font-family:var(--serif); font-weight:400; font-size:27px; line-height:1.2; letter-spacing:-.015em; margin:0 0 6px; }
+  h3 { font-size:14px; font-weight:650; margin:22px 0 7px; }
+  .eyebrow { font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-3); font-weight:600; margin:0 0 6px; display:flex; align-items:center; gap:8px; }
+  .eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--blue); flex:none; }
+  .lede { color:var(--text-2); font-size:14.5px; max-width:74ch; margin:0 0 4px; }
+  p { max-width:80ch; }
+  .muted { color:var(--text-3); }
+  hr.sep { border:0; border-top:1px solid var(--line); margin:0; }
+
+  /* ---------- cards ---------- */
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); }
+  .card-pad { padding:16px 18px; }
+  .grid { display:grid; gap:14px; }
+  .g2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .g3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:900px) { .g2,.g3 { grid-template-columns:1fr; } }
+
+  /* ---------- tags ---------- */
+  .tag { display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 7px; border-radius:5px; border:1px solid; white-space:nowrap; }
+  .tag.current { background:var(--green-soft); border-color:var(--green-line); color:var(--green); }
+  .tag.target  { background:var(--violet-soft); border-color:var(--violet-line); color:var(--violet); }
+  .tag.mocked  { background:var(--amber-soft); border-color:var(--amber-line); color:var(--amber); }
+  .tag.simple  { background:var(--blue-soft); border-color:var(--blue-line); color:var(--blue); }
+  .tag.fe { background:var(--blue-soft); border-color:var(--blue-line); color:var(--blue); }
+  .tag.be { background:var(--violet-soft); border-color:var(--violet-line); color:var(--violet); }
+  .pill { display:inline-block; font-family:var(--mono); font-size:11px; padding:1px 6px; border-radius:5px; background:var(--sunken); border:1px solid var(--line); color:var(--text-2); white-space:nowrap; }
+  .pill.b { color:var(--blue); background:var(--blue-soft); border-color:var(--blue-line); }
+  .pill.v { color:var(--violet); background:var(--violet-soft); border-color:var(--violet-line); }
+
+  .callout { border:1px solid var(--line); border-left-width:3px; border-radius:10px; padding:12px 15px; font-size:13.2px; color:var(--text-2); background:var(--surface); }
+  .callout.warn { border-left-color:var(--amber); background:var(--amber-soft); }
+  .callout.info { border-left-color:var(--blue); background:var(--blue-soft); }
+  .callout.tgt  { border-left-color:var(--violet); background:var(--violet-soft); }
+  .callout strong { color:var(--text); }
+
+  /* ---------- tables ---------- */
+  table.dt { width:100%; border-collapse:collapse; font-size:12.6px; }
+  table.dt caption { text-align:left; font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); padding:0 0 8px; }
+  table.dt th { text-align:left; font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); border-bottom:1px solid var(--line); padding:7px 10px; background:var(--sunken); white-space:nowrap; }
+  table.dt td { border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top; }
+  table.dt tr:last-child td { border-bottom:0; }
+  table.dt code { font-family:var(--mono); font-size:11.5px; }
+  .scrollx { overflow-x:auto; }
+
+  /* ---------- code ---------- */
+  .codewrap { position:relative; background:var(--code-bg); border-radius:12px; border:1px solid var(--line); overflow:hidden; }
+  .codebar { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:7px 12px; border-bottom:1px solid rgba(255,255,255,.07); }
+  .codebar .path { font-family:var(--mono); font-size:10.5px; color:#8c94a3; letter-spacing:.04em; }
+  pre.code { margin:0; padding:14px 16px; overflow:auto; max-height:460px; font-family:var(--mono); font-size:11.8px; line-height:1.62; color:var(--code-text); }
+  pre.code.short { max-height:250px; }
+  .tk-key { color:#8ab4f8; } .tk-str { color:#a5d6a7; } .tk-num { color:#f7b267; }
+  .tk-bool { color:#c792ea; } .tk-null { color:#c792ea; } .tk-punc { color:#6e7787; }
+  .tk-hl { background:rgba(122,165,251,.18); border-radius:3px; outline:1px solid rgba(122,165,251,.35); }
+
+  .tabs { display:flex; gap:4px; flex-wrap:wrap; }
+  .tab { font:inherit; font-size:11.5px; font-weight:600; padding:5px 11px; border-radius:8px 8px 0 0; border:1px solid transparent; border-bottom:0; background:transparent; color:var(--text-3); cursor:pointer; }
+  .tab[aria-selected="true"] { background:var(--surface); border-color:var(--line); color:var(--text); }
+
+  /* ---------- flow diagram ---------- */
+  .flow { display:flex; flex-direction:column; align-items:center; gap:0; }
+  .fnode { width:100%; max-width:430px; border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:11px 15px; box-shadow:var(--shadow); }
+  .fnode .ft { font-size:13.2px; font-weight:650; }
+  .fnode .fs { font-size:11.5px; color:var(--text-3); font-family:var(--mono); margin-top:2px; word-break:break-word; }
+  .fnode.be { border-color:var(--violet-line); background:var(--violet-soft); }
+  .fnode.fe { border-color:var(--blue-line); background:var(--blue-soft); }
+  .farrow { width:1px; height:20px; background:var(--line-strong); position:relative; }
+  .farrow::after { content:""; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%); border-left:4px solid transparent; border-right:4px solid transparent; border-top:6px solid var(--line-strong); }
+  .flabel { font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); padding:4px 0; }
+
+  /* ---------- binding trace ---------- */
+  .trace { border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface); }
+  .trace + .trace { margin-top:12px; }
+  .trace-head { display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:9px 13px; background:var(--sunken); border-bottom:1px solid var(--line); font-family:var(--mono); font-size:11px; }
+  .trace-body { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:center; gap:10px; padding:13px; }
+  @media (max-width:860px) { .trace-body { grid-template-columns:1fr; } .trace-body .arrow { transform:rotate(90deg); justify-self:center; } }
+  .trace-cell .lbl { font-family:var(--mono); font-size:8.8px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-3); margin-bottom:4px; }
+  .trace-cell .val { font-family:var(--mono); font-size:11.4px; word-break:break-word; background:var(--sunken); border:1px solid var(--line); border-radius:8px; padding:7px 9px; max-height:130px; overflow:auto; }
+  .trace-cell .rendered { font-family:var(--sans); font-size:12.6px; }
+  .arrow { color:var(--text-3); font-size:16px; }
+
+  /* ---------- preview ---------- */
+  .lab { border:1px solid var(--line-strong); border-radius:16px; overflow:hidden; background:var(--surface); box-shadow:var(--shadow-md); }
+  .lab-bar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:10px 14px; background:var(--sunken); border-bottom:1px solid var(--line); }
+  .lab-bar .grow { flex:1; }
+  .stage-head { padding:16px 18px 12px; border-bottom:1px solid var(--line); }
+  .crumb { font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); }
+  .stage-title { font-family:var(--serif); font-size:27px; font-weight:400; letter-spacing:-.015em; margin:6px 0 0; }
+  .stage-headline { font-size:14px; font-weight:600; margin:4px 0 0; }
+  .stage-body { display:grid; grid-template-columns:minmax(0,1fr) 296px; gap:16px; padding:16px 18px; background:var(--bg); align-items:start; }
+  @media (max-width:980px) { .stage-body { grid-template-columns:1fr; } }
+  .region { display:flex; flex-direction:column; gap:12px; min-width:0; }
+  .sec-title { font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); margin:0 0 7px; }
+  .blk { background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:13px 15px; min-width:0; }
+  .blk-title { font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-2); margin:0 0 7px; }
+  .blk .txt { font-size:14px; font-weight:600; }
+  .blk.hero { border-left:3px solid var(--blue); }
+  .blk.hero .hv { font-family:var(--serif); font-size:19px; margin-top:6px; }
+  .lv { list-style:none; margin:0; padding:0; }
+  .lv li { display:flex; justify-content:space-between; gap:12px; padding:5px 0; border-top:1px solid var(--line); font-size:12.4px; }
+  .lv li:first-child { border-top:0; }
+  .lv .k { color:var(--text-2); min-width:0; }
+  .lv .v { font-weight:600; text-align:right; min-width:0; }
+  .lv .extra { font-size:10.5px; color:var(--text-3); font-weight:400; margin-left:6px; }
+  .blk table { width:100%; border-collapse:collapse; font-size:11.8px; }
+  .blk table th { font-family:var(--mono); font-size:8.6px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); text-align:left; padding:6px 9px; background:var(--sunken); border-bottom:1px solid var(--line); white-space:nowrap; }
+  .blk table td { padding:6px 9px; border-bottom:1px solid var(--line); white-space:nowrap; max-width:220px; overflow:hidden; text-overflow:ellipsis; }
+  .blk table tr:last-child td { border-bottom:0; }
+  .blk table td.num { text-align:right; font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .bars { display:flex; flex-direction:column; gap:7px; }
+  .bar-row { font-size:11.6px; }
+  .bar-top { display:flex; justify-content:space-between; gap:10px; }
+  .bar-track { height:7px; border-radius:99px; background:var(--sunken); border:1px solid var(--line); margin-top:3px; overflow:hidden; }
+  .bar-fill { height:100%; background:var(--blue); border-radius:99px; }
+  .bar-fill.over { background:var(--rose); }
+  .flagchip { display:inline-flex; align-items:center; gap:6px; font-size:12.4px; font-weight:600; }
+  .dotmark { width:8px; height:8px; border-radius:50%; flex:none; }
+  .ph { border:1px dashed var(--amber-line); background:var(--amber-soft); color:var(--amber); border-radius:12px; padding:9px 12px; font-size:11.8px; }
+  .ph b { font-weight:700; }
+  .queue { display:flex; flex-direction:column; gap:6px; }
+  .queue-item { border:1px solid var(--line); border-radius:9px; padding:7px 10px; font-size:11.8px; background:var(--sunken); }
+  .queue-item .qk { color:var(--text-3); font-family:var(--mono); font-size:10px; }
+  .actionbar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:12px 18px; border-top:1px solid var(--line); background:var(--surface); }
+  .alert { display:inline-flex; align-items:center; gap:6px; font-size:11.8px; border-radius:8px; padding:4px 9px; border:1px solid; }
+  .alert.ok { background:var(--green-soft); border-color:var(--green-line); color:var(--green); }
+  .alert.warn { background:var(--amber-soft); border-color:var(--amber-line); color:var(--amber); }
+  .alert.err { background:var(--rose-soft); border-color:var(--rose-line); color:var(--rose); }
+  .demomode { font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber); border:1px dashed var(--amber-line); background:var(--amber-soft); padding:3px 8px; border-radius:6px; }
+  .toggle { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:11px; background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:4px 9px; }
+  .toggle input { margin:0; }
+  .log { font-family:var(--mono); font-size:11px; background:var(--code-bg); color:var(--code-text); border-radius:10px; padding:11px 13px; max-height:180px; overflow:auto; border:1px solid var(--line); }
+  .log div { padding:1px 0; }
+  .log .t { color:#6e7787; }
+  .log .ok { color:#a5d6a7; } .log .warn2 { color:#f7b267; } .log .info2 { color:#8ab4f8; }
+  .diffrow { display:flex; gap:10px; align-items:baseline; font-size:12.4px; padding:6px 0; border-top:1px solid var(--line); }
+  .diffrow:first-child { border-top:0; }
+  .diffrow .dk { font-family:var(--mono); font-size:11px; min-width:150px; color:var(--text-2); }
+  .ok-x { color:var(--green); font-weight:700; }
+  .no-x { color:var(--rose); font-weight:700; }
+  ul.tight { margin:6px 0; padding-left:20px; }
+  ul.tight li { margin:3px 0; max-width:80ch; }
+  .kbd { font-family:var(--mono); font-size:11px; border:1px solid var(--line-strong); border-bottom-width:2px; border-radius:5px; padding:0 5px; background:var(--surface); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">Realify · Template Contract</span>
+    <nav class="navlinks">
+      <a href="#arch">Architecture</a>
+      <a href="#registry">Registry</a>
+      <a href="#template">Template</a>
+      <a href="#runtime">Runtime data</a>
+      <a href="#binding">Binding</a>
+      <a href="#reuse">Same template</a>
+      <a href="#actions">Actions</a>
+      <a href="#actionflow">Action flow</a>
+      <a href="#ownership">Ownership</a>
+      <a href="#api">API</a>
+      <a href="#preview">Preview</a>
+      <a href="#currenttarget">Current vs target</a>
+      <a href="#notes">Notes</a>
+    </nav>
+    <button class="btn" id="themeBtn" type="button">Dark</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ============================ 1. TITLE ============================ -->
+<section id="top" style="padding-top:40px">
+  <p class="eyebrow">Engineering artifact · derived from the live repository</p>
+  <h1>Realify Dynamic Template System</h1>
+  <p class="lede">
+    How one JSON <em>template</em> plus one JSON <em>runtime payload</em> become a rendered workflow stage —
+    and exactly which half of that the backend owns. Everything below is extracted from the
+    <code class="pill">action-stories</code> feature in this repository: real manifests, real fixtures, real
+    component names, real binding paths, real action definitions.
+  </p>
+
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card card-pad">
+      <div class="eyebrow">Corpus today</div>
+      <div style="font-family:var(--serif);font-size:30px;line-height:1.1">26 workflows</div>
+      <p class="muted" style="font-size:12.5px;margin:4px 0 0">
+        105 stage manifests, 105 runtime fixtures, rendered by <b>14</b> reusable block components
+        and <b>one</b> renderer.
+      </p>
+    </div>
+    <div class="card card-pad">
+      <div class="eyebrow">What is real</div>
+      <p style="font-size:12.8px;margin:0;color:var(--text-2)">
+        The template schema, the binding resolver, the validators, the block registry, the renderer,
+        the action schema and the action bar are all <b>shipped code</b> with tests.
+      </p>
+    </div>
+    <div class="card card-pad" style="border-color:var(--amber-line);background:var(--amber-soft)">
+      <div class="eyebrow" style="color:var(--amber)">What is not</div>
+      <p style="font-size:12.8px;margin:0;color:var(--text-2)">
+        There is <b>no live backend</b>. Runtime data is read from local JSON files; actions persist to
+        <code>localStorage</code>. Every such spot below is tagged
+        <span class="tag mocked">currently mocked</span>.
+      </p>
+    </div>
+  </div>
+
+  <div class="callout info" style="margin-top:16px">
+    <strong>How to read the tags.</strong>
+    <span class="tag current">current</span> shipped and running in the app today ·
+    <span class="tag mocked">currently mocked</span> real code path, no real backend behind it ·
+    <span class="tag target">target contract</span> schema exists but nothing uses it yet, or proposed for the backend ·
+    <span class="tag simple">simplified for demonstration</span> this standalone page approximates something the React app does more fully.
+  </div>
+
+  <div class="callout warn" style="margin-top:12px">
+    <strong>This page is a standalone re-implementation.</strong> The React app renders these exact
+    manifests and fixtures through React components. This file has no React and no network access, so
+    the renderer below is a faithful but <span class="tag simple">simplified</span> vanilla-JS port:
+    <code>resolveBinding</code>, <code>evaluateCondition</code>, the 14 block-type validators and
+    <code>resolveActionState</code> are ported <b>logic-for-logic</b>; the visual output of each block and the
+    section/row layout heuristics are approximations. The <em>contract</em> is exact; the pixels are not.
+  </div>
+</section>
+
+<!-- ============================ 2. ARCHITECTURE ============================ -->
+<section id="arch">
+  <p class="eyebrow">Section 2</p>
+  <h2>Architecture Overview</h2>
+  <p class="lede">Two independent JSON inputs meet in one renderer. Neither knows about the other until render time.</p>
+
+  <div class="grid g2" style="margin-top:18px;align-items:start">
+    <div class="card card-pad">
+      <div class="flow">
+        <div class="fnode fe">
+          <div class="ft">Template / Manifest JSON <span class="tag fe">frontend</span></div>
+          <div class="fs">manifests/&lt;code&gt;.json — one entry per stage</div>
+        </div>
+        <div class="flabel">declares blockType + binding + actions</div>
+        <div class="farrow"></div>
+        <div class="fnode be">
+          <div class="ft">Runtime Business Data JSON <span class="tag be">backend</span></div>
+          <div class="fs">{ code, stageKey, name, headline, props, state, data }</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">StageRenderer</div>
+          <div class="fs">resolveBinding → validateBlockData → registry lookup → error boundary</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">composeSections + StageSections</div>
+          <div class="fs">region (main | rail), rows, spans — pure layout, no data</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">BLOCK_REGISTRY</div>
+          <div class="fs">blocks/index.js — blockType → React component</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">14 reusable block components</div>
+          <div class="fs">TextBlock, TableBlock, BarChartBlock, …</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">Rendered stage UI</div>
+          <div class="fs">pages/StagePage.jsx</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="flow">
+        <div class="fnode">
+          <div class="ft">Rendered stage UI</div>
+          <div class="fs">+ manifest.actions[]</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode fe">
+          <div class="ft">StageActionBar <span class="tag fe">generic</span></div>
+          <div class="fs">knows no action id; renders whatever actions[] declares</div>
+        </div>
+        <div class="flabel">resolveActionState(action, fixture)</div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">actionEligibility.js</div>
+          <div class="fs">evaluateCondition(action.when, fixture) → enabled / disabledReason</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">useActionStoriesStore.runAction</div>
+          <div class="fs">pending / done / error, keyed code/stageKey/actionId</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode">
+          <div class="ft">dispatchAction — ACTION_HANDLERS registry</div>
+          <div class="fs">services/actionStoriesMutations.js</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode" style="border-color:var(--amber-line);background:var(--amber-soft)">
+          <div class="ft">genericActionHandler <span class="tag mocked">mocked</span></div>
+          <div class="fs">220ms delay → localStorage write. No HTTP call exists.</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode be" style="opacity:.75;border-style:dashed">
+          <div class="ft">POST /v1/action-stories/:code/:stageKey/actions <span class="tag target">target</span></div>
+          <div class="fs">not implemented anywhere — proposed</div>
+        </div>
+        <div class="farrow"></div>
+        <div class="fnode be" style="opacity:.75;border-style:dashed">
+          <div class="ft">Updated runtime state → re-render <span class="tag target">target</span></div>
+          <div class="fs">today the UI only marks the action done locally</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>The one sentence that matters</h3>
+  <div class="callout info">
+    The renderer contains <strong>zero business vocabulary</strong>. It does not know what "repricing",
+    "guardrail" or "approve" mean. A stage looks the way it looks because a manifest said
+    <code>blockType</code> + <code>binding</code>, and it behaves the way it behaves because a manifest said
+    <code>actions[]</code> + <code>when</code>. Both are data. Adding a 27th workflow requires no renderer change.
+  </div>
+</section>
+
+<!-- ============================ 3. REGISTRY ============================ -->
+<section id="registry">
+  <p class="eyebrow">Section 3</p>
+  <h2>Component Registry</h2>
+  <p class="lede">
+    <code class="pill">src/features/action-stories/blocks/index.js</code> — the complete
+    <code>BLOCK_REGISTRY</code>. A manifest's <code>blockType</code> is looked up here and nowhere else.
+    Every type has a matching validator in
+    <code class="pill">manifests/blockTypes.js</code> that checks the resolved value <em>before</em> it reaches
+    the component.
+  </p>
+  <div class="card card-pad scrollx" style="margin-top:16px">
+    <table class="dt" id="registryTable">
+      <caption>BLOCK_REGISTRY · 14 block types · verbatim from blocks/index.js</caption>
+      <thead>
+        <tr><th>blockType</th><th>Component</th><th>Purpose</th><th>Expected runtime data</th><th>Validator</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="callout info" style="margin-top:12px">
+    <strong>Shared props.</strong> Every block receives exactly
+    <code>{ slotName, data, compact, role }</code> — plus <code>onChange</code> for <code>slider</code>, the only
+    interactive block. <code>data</code> is whatever <code>resolveBinding(block.binding, fixture)</code> returned,
+    unchanged: the renderer never reshapes, parses or formats a backend value.
+  </div>
+  <h3>Supporting components (not block types)</h3>
+  <div class="scrollx card card-pad">
+    <table class="dt">
+      <thead><tr><th>Component</th><th>Path</th><th>Role in the pipeline</th></tr></thead>
+      <tbody>
+        <tr><td><code>StageRenderer</code></td><td><code>components/StageRenderer.jsx</code></td><td>The data pipeline: filter <code>blocks[].when</code> → resolve → validate → registry → error boundary. Owns slider cross-block state.</td></tr>
+        <tr><td><code>StageSections</code></td><td><code>components/StageSections.jsx</code></td><td>Turns composed sections/rows into DOM (main column + rail).</td></tr>
+        <tr><td><code>composeSections</code></td><td><code>layout/composeSections.js</code></td><td>Pure function: region resolution, row grouping, column spans.</td></tr>
+        <tr><td><code>StageActionBar</code></td><td><code>components/StageActionBar.jsx</code></td><td>Generic action bar — renders <code>manifest.actions[]</code>, nothing hardcoded.</td></tr>
+        <tr><td><code>BlockErrorBoundary</code></td><td><code>blocks/BlockErrorBoundary.jsx</code></td><td>One bad block renders an inline error instead of white-screening the stage.</td></tr>
+        <tr><td><code>BlockCard</code> / <code>BlockTitle</code> / <code>CompactEyebrow</code></td><td><code>blocks/BlockCard.jsx</code></td><td>Shared card shell every block renders inside.</td></tr>
+        <tr><td><code>StepTracker</code></td><td><code>components/StepTracker.jsx</code></td><td>Reason → Analyze → Decide → Execute (→ Live) stage navigation.</td></tr>
+        <tr><td><code>Button</code>, <code>Modal</code>, <code>ConfirmDialog</code>, <code>Toast</code>, <code>Alert</code>, <code>Tooltip</code>, <code>Checkbox</code></td><td><code>ui/*.jsx</code></td><td>Primitives used by the action bar and dialogs — not part of the block vocabulary.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ 4. TEMPLATE ============================ -->
+<section id="template">
+  <p class="eyebrow">Section 4</p>
+  <h2>Template / Manifest Contract</h2>
+  <p class="lede">
+    A manifest file is an <b>array of stage manifests</b>, one per stage of a workflow. Below is
+    <code class="pill">S9.11</code> / <code class="pill">analyze</code>, verbatim and unedited — 8 blocks, the whole thing.
+    <span class="tag current">current</span>
+  </p>
+
+  <div class="grid g2" style="margin-top:16px;align-items:start">
+    <div>
+      <div class="codewrap">
+        <div class="codebar"><span class="path">src/features/action-stories/manifests/S9.11.json → stageKey "analyze"</span><span class="tag current">real file</span></div>
+        <pre class="code" id="tplJson"></pre>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Schema — enforced by <code>validateManifest.js</code></h3>
+      <div class="scrollx card card-pad">
+        <table class="dt">
+          <thead><tr><th>Field</th><th>Required</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td><code>code</code></td><td>yes</td><td>non-empty string · workflow id (<code>"S9.11"</code>)</td></tr>
+            <tr><td><code>name</code></td><td>yes</td><td>non-empty string · workflow/category name (<code>"Repricing"</code>)</td></tr>
+            <tr><td><code>stageKey</code></td><td>yes</td><td>one of <code>reason</code> · <code>analyze</code> · <code>decide</code> · <code>execute</code> · <code>live</code></td></tr>
+            <tr><td><code>headline</code></td><td>no</td><td>non-empty string · the <em>instance</em> identity, deliberately distinct from <code>name</code></td></tr>
+            <tr><td><code>sections[]</code></td><td>no</td><td><code>{ id, title?: string|null, region?: "main"|"rail" }</code></td></tr>
+            <tr><td><code>actions[]</code></td><td>no</td><td>see §8 — absent or <code>[]</code> renders no action bar at all</td></tr>
+            <tr><td><code>blocks[]</code></td><td>yes</td><td>array; each entry below</td></tr>
+            <tr><td><code>blocks[].slotName</code></td><td>yes</td><td>non-empty, <b>unique within the stage</b> · also the humanised UI label</td></tr>
+            <tr><td><code>blocks[].blockType</code></td><td>yes</td><td>must exist in <code>BLOCK_TYPES</code> (§3)</td></tr>
+            <tr><td><code>blocks[].binding</code></td><td>yes</td><td>non-empty dot path into the runtime payload</td></tr>
+            <tr><td><code>blocks[].section</code></td><td>no</td><td>id of a declared section</td></tr>
+            <tr><td><code>blocks[].region</code></td><td>no</td><td><code>"main"</code> | <code>"rail"</code> — overrides its section</td></tr>
+            <tr><td><code>blocks[].role</code></td><td>no</td><td>free string; <code>"hero"</code>/<code>"heroSub"</code> get special typography</td></tr>
+            <tr><td><code>blocks[].layout</code></td><td>no</td><td><code>{ group?: string, span?: 1..12 }</code></td></tr>
+            <tr><td><code>blocks[].when</code></td><td>no</td><td>condition (§8) — false ⇒ block is <b>omitted entirely</b>, not emptied</td></tr>
+            <tr><td><code>blocks[].dependencies</code></td><td>no</td><td>slotNames in this same manifest; a stale reference fails validation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:12px">
+        Validation is <b>fail-loud</b>: <code>getStageData</code> runs <code>validateManifest</code> on every load and
+        throws a <code>MALFORMED</code> error rather than rendering a structurally invalid manifest.
+      </div>
+    </div>
+  </div>
+
+  <h3>A second, richer manifest — <code>S9.1 / decide</code> (23 blocks, 6 sections, 1 gated action)</h3>
+  <div class="codewrap">
+    <div class="codebar"><span class="path">src/features/action-stories/manifests/S9.1.json → stageKey "decide"</span><span class="tag current">real file</span></div>
+    <pre class="code short" id="tplJson2"></pre>
+  </div>
+</section>
+
+<!-- ============================ 5. RUNTIME DATA ============================ -->
+<section id="runtime">
+  <p class="eyebrow">Section 5</p>
+  <h2>Runtime Data Contract</h2>
+  <p class="lede">
+    A completely separate document. The template above never contains a business value; this payload never
+    contains a component name. <span class="tag mocked">currently mocked</span> — today these are files under
+    <code class="pill">data/raw/&lt;code&gt;/&lt;stageKey&gt;.json</code>; the target is one backend response with this shape.
+  </p>
+
+  <div class="grid g2" style="margin-top:16px;align-items:start">
+    <div>
+      <div class="codewrap">
+        <div class="codebar"><span class="path">src/features/action-stories/data/raw/S9.11/analyze.json</span><span class="tag current">real file</span></div>
+        <pre class="code" id="fixJson"></pre>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Envelope</h3>
+      <div class="scrollx card card-pad">
+        <table class="dt">
+          <thead><tr><th>Field</th><th>Owner</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>code</code></td><td><span class="tag be">backend</span></td><td>Workflow id — must match the manifest being rendered.</td></tr>
+            <tr><td><code>stageKey</code></td><td><span class="tag be">backend</span></td><td>Which stage this payload is for.</td></tr>
+            <tr><td><code>name</code></td><td><span class="tag be">backend</span></td><td>Workflow/category name.</td></tr>
+            <tr><td><code>headline</code></td><td><span class="tag be">backend</span></td><td>This instance's own headline, rendered in the page header.</td></tr>
+            <tr><td><code>props</code></td><td><span class="tag mocked">mocked</span></td><td>Mockup export metadata (<code>$preview</code> width/height). <b>Not read by any component.</b></td></tr>
+            <tr><td><code>state</code></td><td><span class="tag mocked">mocked</span></td><td>The mockup's own initial UI state. <b>Not read by any component.</b></td></tr>
+            <tr><td><code><b>data</b></code></td><td><span class="tag be">backend</span></td><td><b>The only object bindings resolve into.</b> Verified: all <b>1,719</b> block bindings across all 105 manifests start with <code>data.</code> — so in practice the contract is "return this object".</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn" style="margin-top:14px">
+        <strong>Important honesty note for the backend.</strong> These fixtures were machine-extracted from
+        static HTML mockups (<code>extraction/*.js</code>), so <code>data</code> currently carries three kinds of
+        field a real API should <b>not</b> send:
+        <ul class="tight">
+          <li><b>Presentation fields</b> — <code>bg</code>, <code>tone</code>, <code>tint</code>, <code>border</code>, <code>hue</code>, <code>edge</code>, <code>srcTint</code>… usually holding CSS like <code>var(--green-700)</code>.</li>
+          <li><b>Geometry fields</b> — <code>bandLeft</code>, <code>dotLeft</code>, <code>newLeft</code>, <code>x</code>, <code>cy</code>, <code>top</code>, <code>height</code> — pixel/percentage positions from the mockup.</li>
+          <li><b>Internal companions</b> — <code>__raw</code>, extraction's copy of a row's unformatted numbers.</li>
+        </ul>
+        The renderer already strips all three (<code>blocks/decorativeKeys.js</code> — <code>isHiddenKey</code>), so they
+        are invisible in the UI. <b>The target contract is: send business values only.</b> Colour is derived
+        client-side from a value's own sign/wording (<code>blocks/deltaTone.js</code>), never from an API-sent colour.
+      </div>
+
+      <div class="callout tgt" style="margin-top:12px">
+        <strong>Also worth knowing.</strong> Most numbers arrive today as <b>pre-formatted display strings</b>
+        (<code>"$1.86"</code>, <code>"−1.24"</code>, <code>"88% ± 5"</code>) because a mockup had no other form. The blocks
+        accept both strings and numbers. <code>INTEGRATION.md</code> already records that the real proposal API returns
+        typed numeric fields (e.g. <code>impact_minor</code> in minor units) — mapping those to display strings is an
+        open design question, not a solved one. <span class="tag target">needs a decision</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 6. BINDING ============================ -->
+<section id="binding">
+  <p class="eyebrow">Section 6</p>
+  <h2>Data Binding — template path → runtime value → rendered UI</h2>
+  <p class="lede">
+    Live traces, computed in this page by the ported <code>resolveBinding</code> against the real
+    <code>S9.11/analyze</code> fixture. Each row is one real block from the real manifest.
+  </p>
+
+  <div class="grid g2" style="margin-top:12px;margin-bottom:16px;align-items:start">
+    <div class="codewrap">
+      <div class="codebar"><span class="path">manifests/resolveBinding.js — the whole resolver</span><span class="tag current">real code</span></div>
+      <pre class="code short"><span class="tk-punc">export function</span> resolveBinding(binding, data) {
+  <span class="tk-punc">if</span> (<span class="tk-punc">typeof</span> binding !== <span class="tk-str">'string'</span> || binding.length === <span class="tk-num">0</span>) <span class="tk-punc">return</span> data
+
+  <span class="tk-punc">const</span> path = binding
+    .replace(<span class="tk-str">/\[(\d+)\]/g</span>, <span class="tk-str">'.$1'</span>) <span class="tk-punc">// "rows[0]" -&gt; "rows.0"</span>
+    .split(<span class="tk-str">'.'</span>)
+    .filter((segment) =&gt; segment.length &gt; <span class="tk-num">0</span>)
+
+  <span class="tk-punc">let</span> current = data
+  <span class="tk-punc">for</span> (<span class="tk-punc">const</span> key <span class="tk-punc">of</span> path) {
+    <span class="tk-punc">if</span> (current === <span class="tk-null">null</span> || current === <span class="tk-null">undefined</span>) <span class="tk-punc">return</span> <span class="tk-null">undefined</span>
+    <span class="tk-punc">if</span> (<span class="tk-punc">typeof</span> current !== <span class="tk-str">'object'</span>) <span class="tk-punc">return</span> <span class="tk-null">undefined</span>
+    current = current[key]
+  }
+  <span class="tk-punc">return</span> current
+}</pre>
+    </div>
+    <div>
+      <div class="callout info">
+        <strong>Guarantees the backend can rely on.</strong>
+        <ul class="tight">
+          <li>Resolution <b>never throws</b>. A missing key, a <code>null</code> mid-path or an out-of-range index all resolve to <code>undefined</code>.</li>
+          <li><code>undefined</code> ⇒ that one block renders a visible placeholder and logs a warning. <b>The rest of the stage renders normally.</b></li>
+          <li>The resolved value is passed to the component <b>byte-identical</b> — no coercion, no formatting, no default.</li>
+          <li>Bracket indices are supported: <code>data.rows[2].name</code>.</li>
+          <li>A <b>present but wrong-shaped</b> value is what fails validation — absence alone never is.</li>
+        </ul>
+      </div>
+      <div class="callout warn" style="margin-top:12px">
+        <strong>Optional fields are a first-class case.</strong> If your endpoint legitimately omits a field,
+        nothing breaks. Dataset B in §7 omits <code>data.excluded</code> entirely and the other 7 blocks render
+        untouched — that behaviour is asserted by a committed test
+        (<code>manifests/templateReuse.e2e.test.jsx</code>).
+      </div>
+    </div>
+  </div>
+
+  <div id="traceHost"></div>
+</section>
+
+<!-- ============================ 7. SAME TEMPLATE, DIFFERENT DATA ============================ -->
+<section id="reuse">
+  <p class="eyebrow">Section 7</p>
+  <h2>Same Template + Different Data</h2>
+  <p class="lede">
+    The proof that this is genuinely template-driven. One unmodified manifest — <code class="pill">S9.11/analyze</code> —
+    rendered against two unrelated payloads. <b>Switch the dataset; the template JSON on the left never changes.</b>
+  </p>
+
+  <div class="callout info" style="margin:14px 0">
+    <strong>Both datasets are real repository artifacts.</strong>
+    <b>Dataset A</b> is <code>data/raw/S9.11/analyze.json</code>, the extracted fixture.
+    <b>Dataset B</b> is the hand-authored <code>secondInstanceFixture</code> from
+    <code>manifests/templateReuse.e2e.test.jsx</code> — a committed test payload the manifest has never been
+    generated from, deliberately built to diverge. Neither was invented for this page.
+  </div>
+
+  <div class="lab" style="margin-top:14px">
+    <div class="lab-bar">
+      <span class="brand">S9.11 · analyze · 8 blocks</span>
+      <span class="grow"></span>
+      <button class="btn on" type="button" data-ds="A" id="dsA">Load Dataset A</button>
+      <button class="btn" type="button" data-ds="B" id="dsB">Load Dataset B</button>
+    </div>
+    <div class="grid g2" style="gap:0;border-bottom:1px solid var(--line)">
+      <div style="border-right:1px solid var(--line);min-width:0">
+        <div style="padding:9px 14px;background:var(--sunken);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="crumb">Template — frozen</span>
+          <span class="tag fe" id="tplFingerprint">unchanged</span>
+        </div>
+        <pre class="code short" id="reuseTpl" style="border-radius:0;max-height:300px"></pre>
+      </div>
+      <div style="min-width:0">
+        <div style="padding:9px 14px;background:var(--sunken);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="crumb">Runtime data — swapped</span>
+          <span class="tag be" id="dsLabel">Dataset A</span>
+        </div>
+        <pre class="code short" id="reuseFix" style="border-radius:0;max-height:300px"></pre>
+      </div>
+    </div>
+    <div id="reuseStage"></div>
+  </div>
+
+  <div class="callout warn" style="margin-top:14px">
+    <strong>Spotted the <code>Band Left</code> / <code>Band Width</code> / <code>New Left</code> columns in that table?</strong>
+    That is not a bug in this demo — the React <code>TableBlock</code> renders them too. They are mockup geometry
+    that survived extraction into <code>data.rows[]</code> and are <b>not</b> filtered by
+    <code>decorativeKeys.js</code> (which catches <code>bg</code>, <code>tone</code>, <code>dotLeft</code>, <code>__raw</code>…
+    but has no rule for <code>bandLeft</code>). This is exactly the class of field §5 asks the backend not to send:
+    it is live, visible evidence of why "business values only" matters.
+  </div>
+
+  <h3>What actually differs between A and B</h3>
+  <div class="card card-pad" id="diffHost"></div>
+</section>
+
+<!-- ============================ 8. ACTIONS ============================ -->
+<section id="actions">
+  <p class="eyebrow">Section 8</p>
+  <h2>Generic Action Contract</h2>
+  <p class="lede">
+    Actions are template data, not buttons in a component. <code>StageActionBar.jsx</code> contains no action id,
+    no <code>if (stageKey === 'decide')</code>, and no knowledge of what "approve" means. It renders whatever
+    <code>manifest.actions[]</code> declares, resolved against the runtime payload by
+    <code>actionEligibility.js</code>.
+  </p>
+
+  <div class="grid g2" style="margin-top:16px;align-items:start">
+    <div>
+      <div class="codewrap">
+        <div class="codebar"><span class="path">S9.1.json → decide → actions[] (verbatim)</span><span class="tag current">real file</span></div>
+        <pre class="code" id="actionJson"></pre>
+      </div>
+      <div class="callout warn" style="margin-top:12px">
+        <strong>What the corpus actually contains today.</strong> Across all 105 stage manifests there are
+        <b>52 declared actions</b>, and every single one is <code>{ id: "confirm", kind: "primary", action: "confirm" }</code>
+        — one per <code>decide</code>/<code>execute</code> stage, generated by
+        <code>extraction/generateManifests.js</code>. Of those 52: all 52 declare <code>confirm</code>,
+        <b>26</b> declare <code>labelBinding</code>, <b>12</b> declare <code>when</code>, <b>8</b> declare
+        <code>disabledReasonBinding</code>, and <b>0</b> declare <code>reason</code> or <code>loadingLabel</code>.
+        The multi-action, multi-kind, reason-capture machinery below is <b>implemented and tested but not yet
+        exercised by real data.</b> <span class="tag target">target contract</span>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Action schema — <code>validateManifest.js</code></h3>
+      <div class="scrollx card card-pad">
+        <table class="dt">
+          <thead><tr><th>Field</th><th>Status</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>id</code> <span class="muted">req</span></td><td><span class="tag current">used</span></td><td>Unique within the stage. Keys the pending/done/error state as <code>${code}/${stageKey}/${id}</code>.</td></tr>
+            <tr><td><code>label</code> <span class="muted">req</span></td><td><span class="tag current">used</span></td><td>Button text.</td></tr>
+            <tr><td><code>kind</code></td><td><span class="tag current">primary only</span></td><td><code>primary</code> | <code>secondary</code> | <code>destructive</code>. Only <code>primary</code> appears in real data.</td></tr>
+            <tr><td><code>action</code></td><td><span class="tag current">used</span></td><td>Backend <em>operation type</em>, distinct from <code>id</code>. Selects the handler in <code>ACTION_HANDLERS</code>. Defaults to <code>id</code>.</td></tr>
+            <tr><td><code>when</code></td><td><span class="tag current">used</span></td><td>Eligibility condition over the runtime payload. Absent ⇒ always enabled.</td></tr>
+            <tr><td><code>labelBinding</code></td><td><span class="tag current">used</span></td><td>Binding whose string value overrides <code>label</code> (e.g. <code>"Approve 4 moves &amp; continue"</code>).</td></tr>
+            <tr><td><code>disabledReasonBinding</code></td><td><span class="tag current">used</span></td><td>Binding read <b>only when <code>when</code> fails</b> — the backend supplies the human explanation.</td></tr>
+            <tr><td><code>confirm</code></td><td><span class="tag current">used</span></td><td><code>{ required?, title?, description? }</code> → modal before dispatch.</td></tr>
+            <tr><td><code>reason</code></td><td><span class="tag target">unused</span></td><td><code>{ required?, label?, minLength? }</code> → free-text capture in the modal, validated client-side, sent as <code>reason</code>.</td></tr>
+            <tr><td><code>loadingLabel</code></td><td><span class="tag target">unused</span></td><td>Button text while pending; defaults to <code>"&lt;label&gt;…"</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>The <code>when</code> condition language — <code>manifests/actionCondition.js</code></h3>
+  <p>Deliberately not a general expression language: no arithmetic, no string ops, no user code, nothing that can loop or throw. The same language gates <code>blocks[].when</code>.</p>
+  <div class="grid g2" style="align-items:start">
+    <div class="card card-pad scrollx">
+      <table class="dt">
+        <caption>Operators</caption>
+        <thead><tr><th>op</th><th>needs <code>value</code></th><th>when the path resolves to <code>undefined</code></th></tr></thead>
+        <tbody>
+          <tr><td><code>eq</code> <code>gt</code> <code>gte</code> <code>lt</code> <code>lte</code> <code>in</code></td><td>yes</td><td><b>fails</b> — you cannot claim a value you don't have</td></tr>
+          <tr><td><code>ne</code> <code>notIn</code></td><td>yes</td><td><b>passes</b> — absence is not itself a block (fail-open)</td></tr>
+          <tr><td><code>exists</code></td><td>no</td><td>fails — the explicit opt-in to fail-closed</td></tr>
+          <tr><td><code>notExists</code></td><td>no</td><td>passes</td></tr>
+          <tr><td><code>truthy</code> / <code>falsy</code></td><td>no</td><td><code>Boolean(undefined)</code> ⇒ falsy</td></tr>
+          <tr><td><code>{ all: [...] }</code> / <code>{ any: [...] }</code></td><td>—</td><td>recursive AND / OR</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="callout info">
+        <strong>Why <code>ne</code> and not <code>eq</code> in the real manifests.</strong> The generated guardrail gate is
+        <code>{ all: [ {path:"data.blocked", op:"ne", value:true}, {path:"data.canApprove", op:"ne", value:false} ] }</code>.
+        Because <code>ne</code> treats a missing value as satisfying the condition, a backend that simply
+        <b>doesn't send</b> <code>blocked</code>/<code>canApprove</code> leaves the action <b>enabled</b>. That is deliberate:
+        it reproduces the pre-existing rule "absence of guardrail data is not itself a block". If you want a
+        field's presence to be <em>required</em>, the manifest must say <code>exists</code> explicitly.
+      </div>
+      <div class="callout tgt" style="margin-top:12px">
+        <strong>What this means for you.</strong> Eligibility is a <b>backend-owned business rule expressed as
+        frontend-readable data</b>. You decide <code>blocked</code>/<code>canApprove</code>; the manifest decides how to
+        read them; the renderer decides nothing. Server-side authorisation must still be enforced on the
+        action endpoint — <code>when</code> is a UI affordance, never a security boundary.
+      </div>
+    </div>
+  </div>
+
+  <h3>Target shape for a richer action set <span class="tag target">target contract</span></h3>
+  <p class="muted" style="font-size:13px">
+    Nothing in the renderer needs to change to support this — it already validates and renders it. No real
+    manifest declares it yet.
+  </p>
+  <div class="codewrap">
+    <div class="codebar"><span class="path">illustrative — schema-valid today, not present in any current manifest</span><span class="tag target">target</span></div>
+    <pre class="code short" id="targetActionJson"></pre>
+  </div>
+</section>
+
+<!-- ============================ 9. ACTION FLOW ============================ -->
+<section id="actionflow">
+  <p class="eyebrow">Section 9</p>
+  <h2>Action Execution Flow</h2>
+  <p class="lede">What happens between the click and the backend — and exactly where the line currently stops.</p>
+  <div class="card card-pad scrollx" style="margin-top:14px">
+    <table class="dt">
+      <caption>One click, step by step</caption>
+      <thead><tr><th style="width:34px">#</th><th>Step</th><th>Where</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>resolveActionState(action, fixture)</code> → <code>{ label, enabled, disabledReason, confirmRequired, reasonRequired, actionType }</code></td><td><code>components/actionEligibility.js</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>2</td><td>Button renders: <code>Done</code> / <code>Unavailable</code> / <code>&lt;label&gt;</code> / <code>&lt;loadingLabel&gt;</code> / <code>Retry &lt;label&gt;</code>. While any action on the bar is pending, every other action disables.</td><td><code>StageActionBar.jsx</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>3</td><td>Click → if <code>confirm.required</code> or <code>reason</code> present, open <code>ConfirmDialog</code>; reason validated against <code>minLength</code> client-side.</td><td><code>ui/ConfirmDialog.jsx</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>4</td><td><code>runAction(code, stageKey, actionId, { action, reason })</code> — duplicate/concurrent-click guard, then pending state.</td><td><code>store/useActionStoriesStore.js</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>5</td><td><code>dispatchAction(...)</code> → <code>ACTION_HANDLERS[action]</code> lookup, falling back to <code>genericActionHandler</code>.</td><td><code>services/actionStoriesMutations.js</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>6</td><td><b>The handler.</b> Today: <code>setTimeout(220ms)</code>, abort-aware, then a <code>localStorage</code> write keyed <code>${code}/${stageKey}/${actionId}</code>. <b>No HTTP request is made.</b> <code>ACTION_HANDLERS</code> is an <b>empty object</b> — every action type falls through to the generic mock.</td><td><code>genericActionHandler</code></td><td><span class="tag mocked">currently mocked</span></td></tr>
+        <tr><td>7</td><td>Failure → normalised into <code>ActionStoriesError</code> (<code>NETWORK</code>, <code>TIMEOUT</code>, <code>NOT_FOUND</code>, <code>CLIENT_ERROR</code>, <code>SERVER_ERROR</code>, <code>MALFORMED</code>, <code>ABORTED</code>, <code>UNKNOWN</code>) with a safe <code>userMessage</code>; the button becomes <code>Retry</code>.</td><td><code>services/actionStoriesErrors.js</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>8</td><td>Success → completion persisted; toast; button locks to <code>Done</code> and survives a refresh.</td><td>store + <code>ui/Toast.jsx</code></td><td><span class="tag current">current</span></td></tr>
+        <tr><td>9</td><td><b>Re-fetch the stage and re-render from the mutation's returned state.</b></td><td>—</td><td><span class="tag target">not implemented</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn" style="margin-top:12px">
+    <strong>Step 9 is the real integration gap.</strong> Today a completed action only flips local UI state; it does
+    not change the runtime payload, so nothing else on the stage updates. Once a real endpoint exists, the
+    decision to make is: does the action response return the <b>new stage payload</b>, or just an ack that
+    triggers a re-fetch? <span class="tag target">needs a decision</span>
+  </div>
+</section>
+
+<!-- ============================ 10. OWNERSHIP ============================ -->
+<section id="ownership">
+  <p class="eyebrow">Section 10</p>
+  <h2>Frontend vs Backend Responsibilities</h2>
+  <div class="grid g2" style="margin-top:16px;align-items:start">
+    <div class="card card-pad" style="border-color:var(--blue-line)">
+      <div class="eyebrow" style="color:var(--blue)">Frontend owns</div>
+      <ul class="tight" style="font-size:13.2px">
+        <li><b>The template / manifest</b> — <code>manifests/*.json</code>, versioned in the frontend repo, not served by any API. <span class="tag current">current</span></li>
+        <li><b>The block vocabulary</b> — which 14 <code>blockType</code>s exist and what each expects.</li>
+        <li><b>Binding declarations</b> — which path feeds which block.</li>
+        <li><b>Layout</b> — sections, <code>main</code>/<code>rail</code> regions, row grouping, spans, compact vs card.</li>
+        <li><b>Action presentation</b> — labels, ordering, confirmation copy, reason capture, loading/retry/done states.</li>
+        <li><b>Shape validation</b> — <code>validateManifest</code> + the 14 <code>validate&lt;Type&gt;</code> functions.</li>
+        <li><b>Client UI state</b> — sort, pagination, slider position, dialog open, toasts, theme.</li>
+        <li><b>Error presentation</b> — every raw error becomes a safe <code>userMessage</code>.</li>
+      </ul>
+    </div>
+    <div class="card card-pad" style="border-color:var(--violet-line)">
+      <div class="eyebrow" style="color:var(--violet)">Backend owns</div>
+      <ul class="tight" style="font-size:13.2px">
+        <li><b>The whole <code>data</code> object</b> — every business value, row, metric, status and label in it. <span class="tag mocked">today: local files</span></li>
+        <li><b>Collection contents and lengths</b> — how many rows, how many checks, which SKUs.</li>
+        <li><b>Resource state</b> — what stage this workflow is in, what has been approved.</li>
+        <li><b>Eligibility facts</b> — the values <code>when</code> reads (<code>data.blocked</code>, <code>data.canApprove</code>).</li>
+        <li><b>Human explanations</b> — the string behind <code>disabledReasonBinding</code>, and the CTA behind <code>labelBinding</code>.</li>
+        <li><b>Authorisation</b> — enforced on the action endpoint. <span class="tag target">no endpoint yet</span></li>
+        <li><b>Action execution and its result</b> — the real mutation. <span class="tag mocked">currently localStorage</span></li>
+        <li><b>Post-action state</b> — what the stage looks like afterwards. <span class="tag target">not implemented</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Grey zone — decide together</h3>
+  <div class="card card-pad scrollx">
+    <table class="dt">
+      <thead><tr><th>Concern</th><th>Today</th><th>Question for this meeting</th></tr></thead>
+      <tbody>
+        <tr><td>Who authors the manifest?</td><td>Generated from mockups by <code>extraction/generateManifests.js</code>, committed to the frontend repo.</td><td>Does it stay frontend-owned, or does the backend eventually serve manifests so a workflow can change without a frontend deploy?</td></tr>
+        <tr><td>Number formatting</td><td>Backend/fixture sends <code>"$1.86"</code>; the frontend prints it as-is.</td><td>Send typed numbers + a unit/currency, and format client-side? <code>INTEGRATION.md</code> notes the real proposal API is already typed.</td></tr>
+        <tr><td>Colour / severity</td><td>Fixtures carry CSS; the renderer <b>ignores</b> it and derives tone from the value's own sign/wording.</td><td>Send a semantic severity enum instead (<code>ok</code>/<code>warn</code>/<code>critical</code>)? Never send CSS.</td></tr>
+        <tr><td>Guardrails</td><td>Booleans <code>blocked</code>/<code>canApprove</code> + a <code>checks</code> checklist.</td><td><code>INTEGRATION.md</code> records the real API instead has a 4-value enum <code>within_limits</code> / <code>beyond_limits</code> / <code>not_applicable</code> / <code>undetermined</code>. These don't map 1:1 — needs a decision.</td></tr>
+        <tr><td>Pagination</td><td>Whole arrays arrive at once; <code>TableBlock</code> paginates client-side past 12 rows.</td><td>At what size does this need server-side paging, and how would a manifest express it?</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ 11. API ============================ -->
+<section id="api">
+  <p class="eyebrow">Section 11</p>
+  <h2>API Contract</h2>
+  <div class="callout warn" style="margin:12px 0">
+    <strong>None of these endpoints exist.</strong> They are the proposed shape, written to match what the
+    frontend already calls internally. <code>services/httpClient.js</code> (axios, 10s timeout, one retry on
+    transient failures, full error classification) is built and tested but has <b>zero importers</b> — it is
+    waiting for these endpoints. <span class="tag target">proposed frontend ↔ backend contract</span>
+  </div>
+
+  <div class="grid g2" style="align-items:start">
+    <div>
+      <h3 style="margin-top:0">1 · Workflow index</h3>
+      <div class="codewrap">
+        <div class="codebar"><span class="path">replaces getWorkflowIndex() reading data/index.json</span><span class="tag target">proposed</span></div>
+        <pre class="code short" id="apiIndex"></pre>
+      </div>
+
+      <h3>2 · Stage data</h3>
+      <div class="codewrap">
+        <div class="codebar"><span class="path">replaces getStageData() reading manifests/ + data/raw/</span><span class="tag target">proposed</span></div>
+        <pre class="code short" id="apiStage"></pre>
+      </div>
+      <p class="muted" style="font-size:12.6px">
+        <code>INTEGRATION.md §3</code> already names this endpoint. If manifests stay frontend-owned, this becomes
+        <code>GET …/data</code> returning only the runtime payload, and <code>getStageData</code> becomes a
+        <code>Promise.all</code> of a local manifest import and one HTTP call.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="margin-top:0">3 · Run an action</h3>
+      <div class="codewrap">
+        <div class="codebar"><span class="path">replaces genericActionHandler's localStorage write</span><span class="tag target">proposed</span></div>
+        <pre class="code" id="apiAction"></pre>
+      </div>
+      <h3>Error contract the client already implements</h3>
+      <div class="card card-pad scrollx">
+        <table class="dt">
+          <thead><tr><th>HTTP</th><th>Client code</th><th>Retried once?</th></tr></thead>
+          <tbody>
+            <tr><td>no response / DNS / offline</td><td><code>NETWORK</code></td><td class="ok-x">yes</td></tr>
+            <tr><td>client timeout (10s)</td><td><code>TIMEOUT</code></td><td class="ok-x">yes</td></tr>
+            <tr><td>5xx</td><td><code>SERVER_ERROR</code></td><td class="ok-x">yes</td></tr>
+            <tr><td>404</td><td><code>NOT_FOUND</code></td><td class="no-x">no</td></tr>
+            <tr><td>other 4xx</td><td><code>CLIENT_ERROR</code></td><td class="no-x">no</td></tr>
+            <tr><td>200 with an unexpected body</td><td><code>MALFORMED</code></td><td class="no-x">no</td></tr>
+            <tr><td>cancelled by the client</td><td><code>ABORTED</code></td><td class="no-x">n/a</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout info" style="margin-top:12px">
+        <strong>Two things the client needs from a failed action.</strong> A stable machine-readable
+        <code>code</code>, and a message safe to show a user. Raw backend messages are never rendered —
+        the client substitutes its own per-code copy unless an explicit <code>userMessage</code> is supplied.
+        Every request carries an <code>AbortSignal</code>; cancellation is not an error.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 12. PREVIEW ============================ -->
+<section id="preview">
+  <p class="eyebrow">Section 12</p>
+  <h2>Interactive UI Preview</h2>
+  <p class="lede">
+    The real <code class="pill">S9.1 / decide</code> manifest and fixture — 23 blocks, 6 sections, one
+    <code>when</code>-gated action. <b>The two switches below edit only the runtime payload</b>, exactly the way a
+    backend response would, and you can watch the action gate respond.
+  </p>
+
+  <div class="lab" style="margin-top:16px">
+    <div class="lab-bar">
+      <span class="brand">S9.1 · decide</span>
+      <span class="grow"></span>
+      <span class="crumb" style="margin-right:4px">backend-owned eligibility fields:</span>
+      <label class="toggle"><input type="checkbox" id="tgBlocked"> <code>data.blocked</code> = <b id="vBlocked">false</b></label>
+      <label class="toggle"><input type="checkbox" id="tgCanApprove" checked> <code>data.canApprove</code> = <b id="vCanApprove">true</b></label>
+      <button class="btn" type="button" id="resetAction">Reset action state</button>
+    </div>
+
+    <div class="lab-bar" style="border-top:0">
+      <span class="crumb">Inspect:</span>
+      <div class="tabs" id="jsonTabs">
+        <button class="tab" role="tab" aria-selected="true" data-json="template">Template JSON</button>
+        <button class="tab" role="tab" aria-selected="false" data-json="runtime">Runtime Data JSON</button>
+        <button class="tab" role="tab" aria-selected="false" data-json="action">Action JSON</button>
+        <button class="tab" role="tab" aria-selected="false" data-json="resolved">Resolved action state</button>
+        <button class="tab" role="tab" aria-selected="false" data-json="map">Block → component map</button>
+      </div>
+    </div>
+    <pre class="code short" id="previewJson" style="border-radius:0;border-top:1px solid var(--line)"></pre>
+
+    <div id="previewStage"></div>
+    <div class="actionbar" id="previewActions"></div>
+    <div style="padding:0 18px 16px">
+      <div class="crumb" style="margin-bottom:6px">Dispatch log</div>
+      <div class="log" id="actionLog"></div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:14px">
+    <strong>Demo mode — no real API call.</strong> Clicking an action here runs the same lifecycle the app runs
+    (eligibility → confirm dialog → pending → settle → done/retry) against an in-page mock that mirrors
+    <code>genericActionHandler</code>'s 220 ms delay. Nothing is sent anywhere, and nothing is persisted. The
+    "simulate failure" switch in the dialog exercises the error path, which is real code in the app.
+  </div>
+</section>
+
+<!-- ============================ 13. CURRENT VS TARGET ============================ -->
+<section id="currenttarget">
+  <p class="eyebrow">Section 13</p>
+  <h2>Current vs Target Architecture</h2>
+  <div class="card card-pad scrollx" style="margin-top:14px">
+    <table class="dt">
+      <thead><tr><th>Capability</th><th>Today</th><th>Target</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Template definition</td><td>105 committed JSON manifests, generated from mockups</td><td>Same, or served by an API if workflows must change without a deploy</td><td><span class="tag current">current</span></td></tr>
+        <tr><td>Manifest validation</td><td><code>validateManifest</code> on every load; invalid ⇒ <code>MALFORMED</code>, no render</td><td>Unchanged</td><td><span class="tag current">current</span></td></tr>
+        <tr><td>Runtime data source</td><td><code>import.meta.glob</code> over local JSON, lazy, with one retry</td><td><code>GET /v1/action-stories/:code/:stageKey</code> via <code>httpClient</code></td><td><span class="tag mocked">mocked</span></td></tr>
+        <tr><td>Binding + validation</td><td>Full, never throws, per-block placeholders</td><td>Unchanged</td><td><span class="tag current">current</span></td></tr>
+        <tr><td>Block vocabulary</td><td>14 types, 14 components, one registry</td><td>Additive: new type = 1 registry entry + 1 component + 1 validator</td><td><span class="tag current">current</span></td></tr>
+        <tr><td>Conditional blocks (<code>blocks[].when</code>)</td><td>Implemented; <b>1</b> reviewed use in the whole corpus (<code>S10.6/decide.hasEscalations</code>)</td><td>Used wherever the product genuinely wants a block omitted</td><td><span class="tag current">current</span></td></tr>
+        <tr><td>Actions per stage</td><td>0 or 1; always <code>{id:"confirm", kind:"primary"}</code>; only <code>decide</code>/<code>execute</code></td><td>N actions, mixed kinds, per-action eligibility</td><td><span class="tag target">target</span></td></tr>
+        <tr><td>Action eligibility</td><td>Generic <code>when</code>; <b>12 of 52</b> actions carry one (the guardrail fields survived classification onto those stages); the other 40 are unconditional</td><td>Unchanged mechanism, richer conditions</td><td><span class="tag current">current</span></td></tr>
+        <tr><td>Reason capture</td><td>Schema + dialog + <code>minLength</code> validation implemented; <b>0</b> manifests declare it</td><td>Used by decline/override-style actions</td><td><span class="tag target">target</span></td></tr>
+        <tr><td>Action dispatch</td><td><code>ACTION_HANDLERS</code> registry, currently empty ⇒ everything hits the generic mock</td><td>One handler per real operation type, or one endpoint for all</td><td><span class="tag mocked">mocked</span></td></tr>
+        <tr><td>Action persistence</td><td><code>localStorage</code>, survives refresh, per browser</td><td>Server-side, authorised, auditable</td><td><span class="tag mocked">mocked</span></td></tr>
+        <tr><td>Post-action refresh</td><td>Nothing re-fetches</td><td>Response returns new state, or triggers a re-fetch</td><td><span class="tag target">not implemented</span></td></tr>
+        <tr><td>HTTP layer</td><td><code>httpClient.js</code> built + tested, <b>0 importers</b></td><td>The single swap point for all of the above</td><td><span class="tag target">waiting</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ 14. NOTES ============================ -->
+<section id="notes">
+  <p class="eyebrow">Section 14</p>
+  <h2>Backend Integration Notes</h2>
+
+  <h3>The minimum to make this real</h3>
+  <ol class="tight" style="font-size:13.4px">
+    <li><b>Serve the <code>data</code> object.</b> Everything else already works. One endpoint returning
+      <code>{ code, stageKey, name, headline, data }</code> for a given workflow+stage replaces the entire fixture
+      layer. <code>props</code> and <code>state</code> can be dropped — nothing reads them.</li>
+    <li><b>Keep the field names.</b> Bindings are literal paths. <code>data.rows</code> must be called
+      <code>rows</code>. Renaming a field silently degrades that one block to a placeholder — loudly in the
+      console, invisibly to the user. If names must change, the manifests change with them, in the same PR.</li>
+    <li><b>Send business values only</b> — no CSS, no coordinates, no <code>__raw</code>. See §5.</li>
+    <li><b>Send the eligibility facts</b> the manifests already read. Verified across all 105 manifests:
+      every one of the 12 gated actions reads exactly <code>data.blocked</code> (boolean) and
+      <code>data.canApprove</code> (boolean); the only <code>disabledReasonBinding</code> in the corpus is
+      <code>data.blockReason</code> (string, 8 actions); <code>labelBinding</code> points at a CTA string such as
+      <code>data.ctaLabel</code> (26 actions). Omitting <code>blocked</code>/<code>canApprove</code> leaves the action
+      <b>enabled</b> — see §8.</li>
+    <li><b>Implement the action endpoint</b> and decide what it returns (§9 step 9).</li>
+  </ol>
+
+  <h3>Contract rules the frontend guarantees</h3>
+  <ul class="tight" style="font-size:13.4px">
+    <li><b>Extra fields are free.</b> Unknown keys in <code>data</code> are ignored — no block binds to them.</li>
+    <li><b>Missing optional fields are safe.</b> One placeholder, zero collateral damage.</li>
+    <li><b>Wrong-shaped fields are contained.</b> A validator failure degrades that block only.</li>
+    <li><b>Exceptions are contained.</b> A crash inside one block is caught by <code>BlockErrorBoundary</code>.</li>
+    <li><b>Array length is entirely yours.</b> 0 rows renders an empty state; 500 rows paginates.</li>
+    <li><b>The UI never trusts <code>when</code> for security.</b> Enforce authorisation server-side.</li>
+  </ul>
+
+  <h3>Where to look in the repo</h3>
+  <div class="card card-pad scrollx">
+    <table class="dt">
+      <thead><tr><th>Concern</th><th>File</th></tr></thead>
+      <tbody>
+        <tr><td>Block vocabulary + all 14 validators</td><td><code>src/features/action-stories/manifests/blockTypes.js</code></td></tr>
+        <tr><td>Manifest schema</td><td><code>src/features/action-stories/manifests/validateManifest.js</code></td></tr>
+        <tr><td>Binding resolver</td><td><code>src/features/action-stories/manifests/resolveBinding.js</code></td></tr>
+        <tr><td>Condition language</td><td><code>src/features/action-stories/manifests/actionCondition.js</code></td></tr>
+        <tr><td>Component registry</td><td><code>src/features/action-stories/blocks/index.js</code></td></tr>
+        <tr><td>Render pipeline</td><td><code>src/features/action-stories/components/StageRenderer.jsx</code></td></tr>
+        <tr><td>Layout composition</td><td><code>src/features/action-stories/layout/composeSections.js</code></td></tr>
+        <tr><td>Action resolution</td><td><code>src/features/action-stories/components/actionEligibility.js</code></td></tr>
+        <tr><td>Generic action bar</td><td><code>src/features/action-stories/components/StageActionBar.jsx</code></td></tr>
+        <tr><td>Data access (to be swapped)</td><td><code>src/services/actionStoriesService.js</code></td></tr>
+        <tr><td>Mutation dispatch (to be swapped)</td><td><code>src/services/actionStoriesMutations.js</code></td></tr>
+        <tr><td>HTTP client (waiting)</td><td><code>src/services/httpClient.js</code></td></tr>
+        <tr><td>Error taxonomy</td><td><code>src/services/actionStoriesErrors.js</code></td></tr>
+        <tr><td>Manifest generation</td><td><code>extraction/generateManifests.js</code>, <code>extraction/classifyBlocks.js</code></td></tr>
+        <tr><td>Template-reuse proof</td><td><code>src/features/action-stories/manifests/templateReuse.e2e.test.jsx</code></td></tr>
+        <tr><td>Known integration gaps</td><td><code>INTEGRATION.md</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="muted" style="font-size:12.4px;margin-top:26px">
+    Generated from the repository at <code>/Volumes/D/TemplateProject</code>. Standalone: no network, no build
+    step, no dependencies. Every JSON payload on this page is embedded verbatim from the files named above.
+  </p>
+</section>
+
+</main>
+
+<script id="payload" type="application/json">{
+  "generatedFrom": {
+    "manifests": [
+      "src/features/action-stories/manifests/S9.11.json",
+      "src/features/action-stories/manifests/S9.1.json"
+    ],
+    "fixtures": [
+      "src/features/action-stories/data/raw/S9.11/analyze.json",
+      "src/features/action-stories/data/raw/S9.1/decide.json"
+    ],
+    "datasetB": "src/features/action-stories/manifests/templateReuse.e2e.test.jsx (secondInstanceFixture)",
+    "index": "src/features/action-stories/data/index.json"
+  },
+  "workflowIndexSample": [
+    {
+      "code": "S9.1",
+      "name": "Assortment",
+      "headline": "Quarterly assortment review — 214 active SKUs",
+      "stages": [
+        "reason",
+        "analyze",
+        "decide",
+        "execute"
+      ]
+    },
+    {
+      "code": "S9.11",
+      "name": "Repricing",
+      "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+      "stages": [
+        "reason",
+        "analyze",
+        "decide",
+        "execute"
+      ]
+    }
+  ],
+  "templates": {
+    "S9.11/analyze": {
+      "code": "S9.11",
+      "name": "Repricing",
+      "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+      "stageKey": "analyze",
+      "blocks": [
+        {
+          "slotName": "display_mode",
+          "blockType": "text",
+          "binding": "data.execLabel"
+        },
+        {
+          "slotName": "sorts",
+          "blockType": "labelValueList",
+          "binding": "data.sorts"
+        },
+        {
+          "slotName": "sortNote",
+          "blockType": "text",
+          "binding": "data.sortNote"
+        },
+        {
+          "slotName": "rows",
+          "blockType": "table",
+          "binding": "data.rows"
+        },
+        {
+          "slotName": "sel",
+          "blockType": "object",
+          "binding": "data.sel"
+        },
+        {
+          "slotName": "rollup",
+          "blockType": "labelValueList",
+          "binding": "data.rollup"
+        },
+        {
+          "slotName": "concentration",
+          "blockType": "barChart",
+          "binding": "data.concentration"
+        },
+        {
+          "slotName": "excluded",
+          "blockType": "labelValueList",
+          "binding": "data.excluded"
+        }
+      ]
+    },
+    "S9.1/decide": {
+      "code": "S9.1",
+      "name": "Assortment",
+      "headline": "Quarterly assortment review — 214 active SKUs",
+      "stageKey": "decide",
+      "sections": [
+        {
+          "id": "guardrails",
+          "title": "Guardrails",
+          "region": "rail"
+        },
+        {
+          "id": "recommendation",
+          "title": null,
+          "region": "main"
+        },
+        {
+          "id": "summary",
+          "title": "Summary",
+          "region": "rail"
+        },
+        {
+          "id": "rollup",
+          "title": "Totals",
+          "region": "rail"
+        },
+        {
+          "id": "provenance",
+          "title": "Basis",
+          "region": "rail"
+        },
+        {
+          "id": "details",
+          "title": "Details",
+          "region": "main"
+        }
+      ],
+      "actions": [
+        {
+          "id": "confirm",
+          "label": "Approve",
+          "kind": "primary",
+          "action": "confirm",
+          "confirm": {
+            "required": true,
+            "title": "Approve this stage?",
+            "description": "This performs a real action against this stage's decide step and can't be undone from here."
+          },
+          "when": {
+            "all": [
+              {
+                "path": "data.blocked",
+                "op": "ne",
+                "value": true
+              },
+              {
+                "path": "data.canApprove",
+                "op": "ne",
+                "value": false
+              }
+            ]
+          },
+          "labelBinding": "data.ctaLabel"
+        }
+      ],
+      "blocks": [
+        {
+          "slotName": "heroTitle",
+          "blockType": "text",
+          "binding": "data.heroTitle",
+          "section": "recommendation",
+          "role": "hero",
+          "layout": {
+            "group": "recommendation",
+            "span": 12
+          }
+        },
+        {
+          "slotName": "heroSub",
+          "blockType": "text",
+          "binding": "data.heroSub",
+          "section": "recommendation",
+          "role": "heroSub",
+          "layout": {
+            "group": "recommendation",
+            "span": 12
+          }
+        },
+        {
+          "slotName": "heroMetrics",
+          "blockType": "table",
+          "binding": "data.heroMetrics",
+          "section": "recommendation",
+          "layout": {
+            "group": "recommendation",
+            "span": 12
+          }
+        },
+        {
+          "slotName": "moveBar",
+          "blockType": "labelValueList",
+          "binding": "data.moveBar",
+          "section": "recommendation",
+          "layout": {
+            "group": "recommendation",
+            "span": 12
+          }
+        },
+        {
+          "slotName": "display_mode",
+          "blockType": "text",
+          "binding": "data.execLabel",
+          "section": "summary"
+        },
+        {
+          "slotName": "guardrail_checks",
+          "blockType": "labelValueList",
+          "binding": "data.checks",
+          "section": "guardrails"
+        },
+        {
+          "slotName": "guardrail_blocked",
+          "blockType": "flag",
+          "binding": "data.blocked",
+          "section": "guardrails"
+        },
+        {
+          "slotName": "guardrail_can_approve",
+          "blockType": "flag",
+          "binding": "data.canApprove",
+          "section": "guardrails"
+        },
+        {
+          "slotName": "guardrail_cta_label",
+          "blockType": "text",
+          "binding": "data.ctaLabel",
+          "section": "guardrails"
+        },
+        {
+          "slotName": "slateName",
+          "blockType": "text",
+          "binding": "data.slateName",
+          "section": "summary"
+        },
+        {
+          "slotName": "confLabel",
+          "blockType": "text",
+          "binding": "data.confLabel",
+          "section": "summary"
+        },
+        {
+          "slotName": "slates",
+          "blockType": "table",
+          "binding": "data.slates",
+          "section": "details"
+        },
+        {
+          "slotName": "approvedCount",
+          "blockType": "text",
+          "binding": "data.approvedCount",
+          "section": "summary"
+        },
+        {
+          "slotName": "toggleAllLabel",
+          "blockType": "text",
+          "binding": "data.toggleAllLabel",
+          "section": "summary"
+        },
+        {
+          "slotName": "groups",
+          "blockType": "table",
+          "binding": "data.groups",
+          "section": "details"
+        },
+        {
+          "slotName": "focusTitle",
+          "blockType": "text",
+          "binding": "data.focusTitle",
+          "section": "summary"
+        },
+        {
+          "slotName": "focusMeta",
+          "blockType": "text",
+          "binding": "data.focusMeta",
+          "section": "summary"
+        },
+        {
+          "slotName": "focusRows",
+          "blockType": "table",
+          "binding": "data.focusRows",
+          "section": "details"
+        },
+        {
+          "slotName": "focusFooter",
+          "blockType": "text",
+          "binding": "data.focusFooter",
+          "section": "summary"
+        },
+        {
+          "slotName": "totals",
+          "blockType": "labelValueList",
+          "binding": "data.totals",
+          "section": "rollup"
+        },
+        {
+          "slotName": "policyStatus",
+          "blockType": "text",
+          "binding": "data.policyStatus",
+          "section": "summary"
+        },
+        {
+          "slotName": "basis",
+          "blockType": "labelValueList",
+          "binding": "data.basis",
+          "section": "provenance"
+        },
+        {
+          "slotName": "footStatus",
+          "blockType": "text",
+          "binding": "data.footStatus",
+          "section": "summary"
+        }
+      ]
+    }
+  },
+  "fixtures": {
+    "S9.11/analyze@A": {
+      "code": "S9.11",
+      "stageKey": "analyze",
+      "name": "Repricing",
+      "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+      "props": {
+        "$preview": {
+          "width": 1440,
+          "height": 1024
+        },
+        "executionMode": "Suggest"
+      },
+      "state": {
+        "sku": "k1",
+        "sort": "headroom"
+      },
+      "data": {
+        "execLabel": "Suggest",
+        "execSegs": [
+          {
+            "bg": "var(--ink-400)"
+          },
+          {
+            "bg": "var(--ink-200)"
+          },
+          {
+            "bg": "var(--ink-200)"
+          }
+        ],
+        "sorts": [
+          {
+            "label": "headroom",
+            "bg": "color-mix(in oklab, var(--mod-margin) 12%, white)",
+            "border": "color-mix(in oklab, var(--mod-margin) 34%, white)",
+            "tone": "var(--mod-margin)"
+          },
+          {
+            "label": "Buy Box risk",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "tone": "var(--ink-500)"
+          },
+          {
+            "label": "confidence",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "tone": "var(--ink-500)"
+          }
+        ],
+        "sortNote": "sorted by headroom per unit",
+        "rows": [
+          {
+            "name": "Alder chef knife 8in",
+            "sku": "NW-KNF-0480",
+            "cohort": "tested · Buy Box sensitive",
+            "elast": "−1.24",
+            "conf": "88% ± 5",
+            "headroom": "$1.86",
+            "bb": "0.82 high",
+            "source": "tested",
+            "srcTint": "var(--green-50)",
+            "srcTone": "var(--green-700)",
+            "bbTint": "var(--rose-50)",
+            "bbTone": "var(--rose-700)",
+            "parityIcon": "fa-solid fa-circle-check",
+            "parityTone": "var(--green-700)",
+            "bandLeft": "34.4%",
+            "bandWidth": "40.6%",
+            "dotLeft": "31.3%",
+            "newLeft": "43.7%",
+            "bandLabel": "$68.00 → $71.99 · band $69–82",
+            "bg": "color-mix(in oklab, var(--mod-margin) 5%, white)",
+            "edge": "var(--mod-margin)",
+            "__raw": {
+              "id": "k1",
+              "name": "Alder chef knife 8in",
+              "sku": "NW-KNF-0480",
+              "cohort": "tested · Buy Box sensitive",
+              "price": 68,
+              "nu": 71.99,
+              "lo": 69,
+              "hi": 82,
+              "floor": 58,
+              "ceil": 90,
+              "elast": "−1.24",
+              "conf": "88% ± 5",
+              "source": "tested",
+              "headroom": "$1.86",
+              "bb": "0.82 high",
+              "parity": "ok"
+            }
+          },
+          {
+            "name": "Ridgeline stoneware bowl",
+            "sku": "NW-CER-1120",
+            "cohort": "tested · low sensitivity",
+            "elast": "−0.91",
+            "conf": "84% ± 6",
+            "headroom": "$1.62",
+            "bb": "0.31 low",
+            "source": "tested",
+            "srcTint": "var(--green-50)",
+            "srcTone": "var(--green-700)",
+            "bbTint": "var(--ink-50)",
+            "bbTone": "var(--ink-600)",
+            "parityIcon": "fa-solid fa-circle-check",
+            "parityTone": "var(--green-700)",
+            "bandLeft": "34.4%",
+            "bandWidth": "40.6%",
+            "dotLeft": "25.0%",
+            "newLeft": "43.7%",
+            "bandLabel": "$24.00 → $26.99 · band $26–32",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k2",
+              "name": "Ridgeline stoneware bowl",
+              "sku": "NW-CER-1120",
+              "cohort": "tested · low sensitivity",
+              "price": 24,
+              "nu": 26.99,
+              "lo": 25.5,
+              "hi": 32,
+              "floor": 20,
+              "ceil": 36,
+              "elast": "−0.91",
+              "conf": "84% ± 6",
+              "source": "tested",
+              "headroom": "$1.62",
+              "bb": "0.31 low",
+              "parity": "ok"
+            }
+          },
+          {
+            "name": "Carbon steel pan 10in",
+            "sku": "NW-PAN-2210",
+            "cohort": "tested · Buy Box sensitive",
+            "elast": "−1.41",
+            "conf": "81% ± 7",
+            "headroom": "$1.54",
+            "bb": "0.91 high",
+            "source": "tested",
+            "srcTint": "var(--green-50)",
+            "srcTone": "var(--green-700)",
+            "bbTint": "var(--rose-50)",
+            "bbTone": "var(--rose-700)",
+            "parityIcon": "fa-solid fa-triangle-exclamation",
+            "parityTone": "var(--amber-700)",
+            "bandLeft": "32.1%",
+            "bandWidth": "46.4%",
+            "dotLeft": "28.6%",
+            "newLeft": "42.8%",
+            "bandLabel": "$54.00 → $57.99 · band $55–68",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k3",
+              "name": "Carbon steel pan 10in",
+              "sku": "NW-PAN-2210",
+              "cohort": "tested · Buy Box sensitive",
+              "price": 54,
+              "nu": 57.99,
+              "lo": 55,
+              "hi": 68,
+              "floor": 46,
+              "ceil": 74,
+              "elast": "−1.41",
+              "conf": "81% ± 7",
+              "source": "tested",
+              "headroom": "$1.54",
+              "bb": "0.91 high",
+              "parity": "watch"
+            }
+          },
+          {
+            "name": "Cut-glass tumbler set of 4",
+            "sku": "NW-GLS-3390",
+            "cohort": "prior only",
+            "elast": "−1.10",
+            "conf": "64% ± 14",
+            "headroom": "$1.42",
+            "bb": "0.44 mid",
+            "source": "prior",
+            "srcTint": "var(--amber-50)",
+            "srcTone": "var(--amber-700)",
+            "bbTint": "var(--amber-50)",
+            "bbTone": "var(--amber-700)",
+            "parityIcon": "fa-solid fa-circle-check",
+            "parityTone": "var(--green-700)",
+            "bandLeft": "31.8%",
+            "bandWidth": "45.5%",
+            "dotLeft": "27.3%",
+            "newLeft": "40.9%",
+            "bandLabel": "$38.00 → $40.99 · band $39–49",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k4",
+              "name": "Cut-glass tumbler set of 4",
+              "sku": "NW-GLS-3390",
+              "cohort": "prior only",
+              "price": 38,
+              "nu": 40.99,
+              "lo": 39,
+              "hi": 49,
+              "floor": 32,
+              "ceil": 54,
+              "elast": "−1.10",
+              "conf": "64% ± 14",
+              "source": "prior",
+              "headroom": "$1.42",
+              "bb": "0.44 mid",
+              "parity": "ok"
+            }
+          },
+          {
+            "name": "Quilted oven mitt pair",
+            "sku": "NW-TEX-5180",
+            "cohort": "tested · low sensitivity",
+            "elast": "−0.78",
+            "conf": "86% ± 5",
+            "headroom": "$1.34",
+            "bb": "0.22 low",
+            "source": "tested",
+            "srcTint": "var(--green-50)",
+            "srcTone": "var(--green-700)",
+            "bbTint": "var(--ink-50)",
+            "bbTone": "var(--ink-600)",
+            "parityIcon": "fa-solid fa-circle-check",
+            "parityTone": "var(--green-700)",
+            "bandLeft": "33.3%",
+            "bandWidth": "41.7%",
+            "dotLeft": "25.0%",
+            "newLeft": "41.6%",
+            "bandLabel": "$19.00 → $20.99 · band $20–25",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k5",
+              "name": "Quilted oven mitt pair",
+              "sku": "NW-TEX-5180",
+              "cohort": "tested · low sensitivity",
+              "price": 19,
+              "nu": 20.99,
+              "lo": 20,
+              "hi": 25,
+              "floor": 16,
+              "ceil": 28,
+              "elast": "−0.78",
+              "conf": "86% ± 5",
+              "source": "tested",
+              "headroom": "$1.34",
+              "bb": "0.22 low",
+              "parity": "ok"
+            }
+          },
+          {
+            "name": "Ridgeline mug 14oz",
+            "sku": "NW-CER-1210",
+            "cohort": "tested · low sensitivity",
+            "elast": "−0.86",
+            "conf": "85% ± 6",
+            "headroom": "$1.24",
+            "bb": "0.28 low",
+            "source": "tested",
+            "srcTint": "var(--green-50)",
+            "srcTone": "var(--green-700)",
+            "bbTint": "var(--ink-50)",
+            "bbTone": "var(--ink-600)",
+            "parityIcon": "fa-solid fa-circle-check",
+            "parityTone": "var(--green-700)",
+            "bandLeft": "33.3%",
+            "bandWidth": "41.7%",
+            "dotLeft": "25.0%",
+            "newLeft": "41.6%",
+            "bandLabel": "$16.00 → $17.99 · band $17–22",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k6",
+              "name": "Ridgeline mug 14oz",
+              "sku": "NW-CER-1210",
+              "cohort": "tested · low sensitivity",
+              "price": 16,
+              "nu": 17.99,
+              "lo": 17,
+              "hi": 22,
+              "floor": 13,
+              "ceil": 25,
+              "elast": "−0.86",
+              "conf": "85% ± 6",
+              "source": "tested",
+              "headroom": "$1.24",
+              "bb": "0.28 low",
+              "parity": "ok"
+            }
+          },
+          {
+            "name": "Linen apron · natural",
+            "sku": "NW-TEX-6040",
+            "cohort": "contract-constrained",
+            "elast": "−1.02",
+            "conf": "79% ± 8",
+            "headroom": "$1.16",
+            "bb": "0.38 mid",
+            "source": "tested",
+            "srcTint": "var(--green-50)",
+            "srcTone": "var(--green-700)",
+            "bbTint": "var(--ink-50)",
+            "bbTone": "var(--ink-600)",
+            "parityIcon": "fa-solid fa-lock",
+            "parityTone": "var(--rose-700)",
+            "bandLeft": "40.0%",
+            "bandWidth": "40.0%",
+            "dotLeft": "30.0%",
+            "newLeft": "40.0%",
+            "bandLabel": "$42.00 → $43.99 · band $44–52",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k7",
+              "name": "Linen apron · natural",
+              "sku": "NW-TEX-6040",
+              "cohort": "contract-constrained",
+              "price": 42,
+              "nu": 43.99,
+              "lo": 44,
+              "hi": 52,
+              "floor": 36,
+              "ceil": 56,
+              "elast": "−1.02",
+              "conf": "79% ± 8",
+              "source": "tested",
+              "headroom": "$1.16",
+              "bb": "0.38 mid",
+              "parity": "map"
+            }
+          },
+          {
+            "name": "Walnut cutting board L",
+            "sku": "NW-WOD-7710",
+            "cohort": "prior only",
+            "elast": "−1.33",
+            "conf": "61% ± 15",
+            "headroom": "$1.10",
+            "bb": "0.56 mid",
+            "source": "prior",
+            "srcTint": "var(--amber-50)",
+            "srcTone": "var(--amber-700)",
+            "bbTint": "var(--amber-50)",
+            "bbTone": "var(--amber-700)",
+            "parityIcon": "fa-solid fa-triangle-exclamation",
+            "parityTone": "var(--amber-700)",
+            "bandLeft": "36.1%",
+            "bandWidth": "41.7%",
+            "dotLeft": "33.3%",
+            "newLeft": "41.6%",
+            "bandLabel": "$78.00 → $80.99 · band $79–94",
+            "bg": "var(--ink-0)",
+            "edge": "transparent",
+            "__raw": {
+              "id": "k8",
+              "name": "Walnut cutting board L",
+              "sku": "NW-WOD-7710",
+              "cohort": "prior only",
+              "price": 78,
+              "nu": 80.99,
+              "lo": 79,
+              "hi": 94,
+              "floor": 66,
+              "ceil": 102,
+              "elast": "−1.33",
+              "conf": "61% ± 15",
+              "source": "prior",
+              "headroom": "$1.10",
+              "bb": "0.56 mid",
+              "parity": "watch"
+            }
+          }
+        ],
+        "sel": {
+          "name": "Alder chef knife 8in",
+          "hue": "var(--amber-500)",
+          "tag": "Buy Box sensitive · micro-step 2/3",
+          "meta": "tested Apr 14 · n=1,840 units",
+          "copy": "The measured curve says a 5.9% raise costs 3.4% of units — inside tolerance and worth $1.86 of CM each. Buy Box sensitivity is 0.82, so Realify proposes the raise in three steps of $1.33 with a five-day read between them, rather than one move that could cost the box outright.",
+          "stats": [
+            {
+              "label": "Now → proposed",
+              "value": "$68.00 → $71.99",
+              "meta": "+5.9% · x.99 rounded",
+              "tone": "var(--ink-900)"
+            },
+            {
+              "label": "Volume Δ",
+              "value": "−3.4%",
+              "meta": "P10 −5.1% · P90 −1.8%",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "CM / month",
+              "value": "+$1,240",
+              "meta": "largest single contributor",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Confidence",
+              "value": "88% ± 5",
+              "meta": "tested · n=1,840",
+              "tone": "var(--green-700)"
+            },
+            {
+              "label": "Buy Box",
+              "value": "0.82",
+              "meta": "high · micro-step",
+              "tone": "var(--amber-700)"
+            }
+          ],
+          "parity": [
+            {
+              "channel": "DTC",
+              "price": "$71.99",
+              "note": "Written first. Sets the parity reference.",
+              "icon": "fa-solid fa-circle-check",
+              "tone": "var(--green-700)"
+            },
+            {
+              "channel": "Walmart",
+              "price": "$71.99",
+              "note": "Written second, within the ±2% band.",
+              "icon": "fa-solid fa-circle-check",
+              "tone": "var(--green-700)"
+            },
+            {
+              "channel": "Amazon",
+              "price": "$71.99",
+              "note": "Written last, after the crawl re-reads DTC.",
+              "icon": "fa-solid fa-clock",
+              "tone": "var(--amber-700)"
+            }
+          ],
+          "tagTint": "var(--amber-50)",
+          "tagTone": "var(--amber-700)"
+        },
+        "rollup": [
+          {
+            "label": "SKUs in the slate",
+            "value": "41 of 214",
+            "tone": "var(--ink-900)"
+          },
+          {
+            "label": "Median raise",
+            "value": "+5.4%",
+            "tone": "var(--ink-900)"
+          },
+          {
+            "label": "Predicted volume loss",
+            "value": "−3.1%",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "Revenue effect",
+            "value": "+$14.6K/mo",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Rolls · tests",
+            "value": "32 · 9",
+            "tone": "var(--ink-900)"
+          }
+        ],
+        "concentration": [
+          {
+            "label": "11 Buy Box sensitive SKUs",
+            "value": "$4.9K/mo",
+            "pct": "50%",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "18 low-sensitivity rolls",
+            "value": "$3.7K/mo",
+            "pct": "38%",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "9 prior-only tests",
+            "value": "$1.1K/mo",
+            "pct": "11%",
+            "tone": "var(--r-blue-600)"
+          },
+          {
+            "label": "3 MAP-capped",
+            "value": "$0.4K/mo",
+            "pct": "4%",
+            "tone": "var(--rose-700)"
+          }
+        ],
+        "excluded": [
+          {
+            "label": "Already at band ceiling",
+            "value": "46 SKUs",
+            "icon": "fa-solid fa-circle-check",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Headroom under $1.10",
+            "value": "88 SKUs",
+            "icon": "fa-solid fa-minus",
+            "tone": "var(--ink-400)"
+          },
+          {
+            "label": "In an active promotion",
+            "value": "4 SKUs",
+            "icon": "fa-solid fa-tag",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "Predicted loss over 4%",
+            "value": "35 SKUs",
+            "icon": "fa-solid fa-triangle-exclamation",
+            "tone": "var(--rose-700)"
+          }
+        ]
+      }
+    },
+    "S9.11/analyze@B": {
+      "code": "S9.11",
+      "stageKey": "analyze",
+      "name": "Repricing",
+      "headline": "A second, unrelated repricing run — 12 SKUs · +$2.1K/mo",
+      "data": {
+        "execLabel": "Hold",
+        "sorts": [
+          {
+            "label": "volume",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "tone": "var(--ink-500)"
+          },
+          {
+            "label": "headroom",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "tone": "var(--ink-500)"
+          },
+          {
+            "label": "Buy Box risk",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "tone": "var(--ink-500)"
+          },
+          {
+            "label": "confidence",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "tone": "var(--ink-500)"
+          }
+        ],
+        "sortNote": "sorted by volume — a second, unrelated instance of this exact template",
+        "rows": [
+          {
+            "name": "Forged spatula set",
+            "sku": "ZZ-UTN-9001",
+            "cohort": "tested",
+            "elast": "−0.55",
+            "conf": "90% ± 3",
+            "headroom": "$0.80",
+            "bb": "0.10 low",
+            "source": "tested"
+          },
+          {
+            "name": "Bamboo cutting board",
+            "sku": "ZZ-WOD-9002",
+            "cohort": "prior only",
+            "elast": "−0.70",
+            "conf": "70% ± 10",
+            "headroom": "$0.95",
+            "bb": "0.20 low",
+            "source": "prior"
+          },
+          {
+            "name": "Enamel dutch oven",
+            "sku": "ZZ-CER-9003",
+            "cohort": "tested · Buy Box sensitive",
+            "elast": "−1.60",
+            "conf": "92% ± 2",
+            "headroom": "$2.40",
+            "bb": "0.88 high",
+            "source": "tested"
+          },
+          {
+            "name": "Silicone trivet pair",
+            "sku": "ZZ-TEX-9004",
+            "cohort": "tested · low sensitivity",
+            "elast": "−0.40",
+            "conf": "95% ± 1",
+            "headroom": "$0.55",
+            "bb": "0.05 low",
+            "source": "tested"
+          },
+          {
+            "name": "Copper measuring cups",
+            "sku": "ZZ-MTL-9005",
+            "cohort": "contract-constrained",
+            "elast": "−1.05",
+            "conf": "77% ± 9",
+            "headroom": "$1.05",
+            "bb": "0.45 mid",
+            "source": "tested"
+          }
+        ],
+        "sel": {
+          "name": "Enamel dutch oven",
+          "hue": "var(--amber-500)",
+          "tag": "Buy Box sensitive",
+          "copy": "A materially different narrative for a materially different selected row, proving the same \"object\" block renders a differently-shaped payload.",
+          "stats": [
+            {
+              "label": "Now → proposed",
+              "value": "$54.00 → $58.99",
+              "meta": "+9.2%",
+              "tone": "var(--ink-900)"
+            },
+            {
+              "label": "Volume Δ",
+              "value": "−5.1%",
+              "meta": "wider swing than the original fixture",
+              "tone": "var(--amber-700)"
+            },
+            {
+              "label": "CM / month",
+              "value": "+$610",
+              "meta": "a smaller contributor than the original",
+              "tone": "var(--green-700)"
+            }
+          ]
+        },
+        "rollup": [
+          {
+            "label": "SKUs in the slate",
+            "value": "12 of 214",
+            "tone": "var(--ink-900)"
+          },
+          {
+            "label": "Median raise",
+            "value": "+7.1%",
+            "tone": "var(--ink-900)"
+          },
+          {
+            "label": "Revenue effect",
+            "value": "+$2.1K/mo",
+            "tone": "var(--green-700)"
+          }
+        ],
+        "concentration": [
+          {
+            "label": "2 Buy Box sensitive SKUs",
+            "value": "$1.2K/mo",
+            "pct": "57%",
+            "tone": "var(--amber-700)"
+          },
+          {
+            "label": "3 low-sensitivity rolls",
+            "value": "$0.9K/mo",
+            "pct": "43%",
+            "tone": "var(--green-700)"
+          }
+        ]
+      }
+    },
+    "S9.1/decide": {
+      "code": "S9.1",
+      "stageKey": "decide",
+      "name": "Assortment",
+      "headline": "Quarterly assortment review — 214 active SKUs",
+      "props": {
+        "$preview": {
+          "width": 1440,
+          "height": 1024
+        },
+        "executionMode": "Suggest"
+      },
+      "state": {
+        "slate": "balanced",
+        "off": {},
+        "focus": "exit"
+      },
+      "data": {
+        "execLabel": "Suggest",
+        "execSegs": [
+          {
+            "bg": "var(--ink-400)"
+          },
+          {
+            "bg": "var(--ink-200)"
+          },
+          {
+            "bg": "var(--ink-200)"
+          }
+        ],
+        "slateName": "Balanced",
+        "confLabel": "Med-high · 78%",
+        "confTint": "var(--green-50)",
+        "confTone": "var(--green-700)",
+        "heroTitle": "Keep 162 · grow 18 · reduce 22 · exit 12 + the top 4 gap fills",
+        "heroSub": "Grow the proven, cut the depth on the tail, exit the floor breaches, range four gaps.",
+        "heroMetrics": [
+          {
+            "label": "90-day revenue",
+            "value": "+$41K",
+            "range": "+$17K to +$66K",
+            "note": "P10–P90 on the full slate",
+            "tone": "var(--ink-900)"
+          },
+          {
+            "label": "90-day CM$",
+            "value": "+$25K",
+            "range": "+$18K to +$34K",
+            "note": "after fees, ads and returns",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Capital freed",
+            "value": "$28K",
+            "range": "$23K to $33K",
+            "note": "net of grow and gap-fill buys",
+            "tone": "var(--ink-900)"
+          }
+        ],
+        "moveBar": [
+          {
+            "label": "Keep",
+            "n": 162,
+            "hue": "var(--ink-200)",
+            "w": "74.3"
+          },
+          {
+            "label": "Grow",
+            "n": 18,
+            "hue": "var(--mod-discover)",
+            "w": "8.3"
+          },
+          {
+            "label": "Reduce",
+            "n": 22,
+            "hue": "var(--ink-400)",
+            "w": "10.1"
+          },
+          {
+            "label": "Exit",
+            "n": 12,
+            "hue": "var(--rose-500)",
+            "w": "5.5"
+          },
+          {
+            "label": "Gap fill",
+            "n": 4,
+            "hue": "var(--r-blue-500)",
+            "w": "1.8"
+          }
+        ],
+        "slates": [
+          {
+            "name": "Conservative",
+            "sub": "Exits only. Nothing grows, nothing new is ranged — the set shrinks to 202 SKUs.",
+            "flag": "Lowest risk",
+            "flagTone": "var(--ink-400)",
+            "cm": "+$5K",
+            "gmroi": "2.09",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "dotBorder": "var(--ink-300)",
+            "dotBg": "var(--ink-0)",
+            "dotInner": "transparent"
+          },
+          {
+            "name": "Balanced",
+            "sub": "Grow the proven, cut the depth on the tail, exit the floor breaches, range four gaps.",
+            "flag": "Recommended",
+            "flagTone": "var(--mod-discover)",
+            "cm": "+$25K",
+            "gmroi": "2.31",
+            "bg": "color-mix(in oklab, var(--mod-discover) 7%, white)",
+            "border": "color-mix(in oklab, var(--mod-discover) 40%, white)",
+            "dotBorder": "var(--mod-discover)",
+            "dotBg": "var(--ink-0)",
+            "dotInner": "var(--mod-discover)"
+          },
+          {
+            "name": "Aggressive",
+            "sub": "Deeper cuts, 24 exits and 7 new lines. Clears the GMROI target but breaks the quarterly exit cap.",
+            "flag": "Over exit cap",
+            "flagTone": "var(--amber-700)",
+            "cm": "+$38K",
+            "gmroi": "2.48",
+            "bg": "var(--ink-0)",
+            "border": "var(--ink-200)",
+            "dotBorder": "var(--ink-300)",
+            "dotBg": "var(--ink-0)",
+            "dotInner": "transparent"
+          }
+        ],
+        "approvedCount": "4 of 4",
+        "toggleAllLabel": "Clear all",
+        "groups": [
+          {
+            "name": "Grow 18 SKUs with proven headroom",
+            "detail": "Hero and Traffic-Driver SKUs holding sell-through above 92% with three straight weeks of stockout hours. Deeper buys plus wider channel ranging.",
+            "tag": "grow",
+            "hue": "var(--mod-discover)",
+            "tint": "color-mix(in oklab, var(--mod-discover) 12%, white)",
+            "border": "var(--ink-200)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "rev": "+$34K",
+            "revTone": "var(--green-700)",
+            "cm": "+$11K",
+            "cap": "+$12K",
+            "capTone": "var(--ink-700)",
+            "isFocus": false
+          },
+          {
+            "name": "Reduce depth on 22 Supporting SKUs",
+            "detail": "Keep them ranged but cut buy depth to 4 weeks of cover. No channel delisting, so no revenue cliff — capital comes back as the current cover burns down.",
+            "tag": "reduce",
+            "hue": "var(--ink-400)",
+            "tint": "color-mix(in oklab, var(--ink-400) 12%, white)",
+            "border": "var(--ink-200)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "rev": "−$6K",
+            "revTone": "var(--rose-700)",
+            "cm": "+$2K",
+            "cap": "−$19K",
+            "capTone": "var(--green-700)",
+            "isFocus": false
+          },
+          {
+            "name": "Exit 12 Exit-Candidate SKUs",
+            "detail": "Two consecutive quarters below the GMROI floor, none carrying a brand or contract lock. Stop-buy immediately, clear remaining units through markdown.",
+            "tag": "exit",
+            "hue": "var(--rose-500)",
+            "tint": "color-mix(in oklab, var(--rose-500) 12%, white)",
+            "border": "var(--ink-200)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "rev": "−$8K",
+            "revTone": "var(--rose-700)",
+            "cm": "+$5K",
+            "cap": "−$27K",
+            "capTone": "var(--green-700)",
+            "isFocus": true
+          },
+          {
+            "name": "Range the top 4 whitespace gap fills",
+            "detail": "Ranged by three or more rivals, absent from your set, high demand overlap with the Hero cohort. Test quantities only — full buy after a 60-day read.",
+            "tag": "gap fill",
+            "hue": "var(--r-blue-500)",
+            "tint": "color-mix(in oklab, var(--r-blue-500) 12%, white)",
+            "border": "var(--ink-200)",
+            "boxBorder": "var(--ink-900)",
+            "boxBg": "var(--ink-900)",
+            "checkOpacity": 1,
+            "rev": "+$21K",
+            "revTone": "var(--green-700)",
+            "cm": "+$7K",
+            "cap": "+$6K",
+            "capTone": "var(--ink-700)",
+            "isFocus": false
+          }
+        ],
+        "focusTitle": "Exit 12 Exit-Candidate SKUs",
+        "focusMeta": "12 SKUs · $27K at cost · exit rate 5.6% of active set",
+        "focusRows": [
+          {
+            "name": "Bamboo canister 1.2L",
+            "meta": "NW-STO-5140 · Exit Candidate ↓ · 0.4 u/d",
+            "capital": "−$4.6K",
+            "rev": "−$1.4K",
+            "gmroi": "0.9",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "name": "Enamel camp mug 12oz",
+            "meta": "NW-MUG-2050 · Exit Candidate ↓ · 0.3 u/d",
+            "capital": "−$3.9K",
+            "rev": "−$1.1K",
+            "gmroi": "0.8",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "name": "Copper cocktail set",
+            "meta": "NW-BAR-6120 · Exit Candidate ↓ · 0.2 u/d",
+            "capital": "−$3.4K",
+            "rev": "−$0.9K",
+            "gmroi": "0.6",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "name": "Novelty egg cups 4-pk",
+            "meta": "NW-CER-1440 · Exit Candidate · 0.3 u/d",
+            "capital": "−$2.7K",
+            "rev": "−$0.8K",
+            "gmroi": "0.7",
+            "tone": "var(--rose-700)"
+          },
+          {
+            "name": "Chalkboard pantry labels",
+            "meta": "NW-STO-5480 · Exit Candidate · 0.2 u/d",
+            "capital": "−$2.1K",
+            "rev": "−$0.6K",
+            "gmroi": "0.5",
+            "tone": "var(--rose-700)"
+          }
+        ],
+        "focusFooter": "Showing 5 of 12 · ranked by capital tied up",
+        "totals": [
+          {
+            "label": "90-day revenue",
+            "value": "+$41K",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "90-day CM$",
+            "value": "+$25K",
+            "tone": "var(--green-700)"
+          },
+          {
+            "label": "Capital freed",
+            "value": "$28K",
+            "tone": "var(--ink-900)"
+          },
+          {
+            "label": "SKUs touched",
+            "value": "56",
+            "tone": "var(--ink-900)"
+          }
+        ],
+        "policyStatus": "in band",
+        "policyTone": "var(--green-700)",
+        "checks": [
+          {
+            "label": "GMROI target ≥ 2.4",
+            "value": "2.31",
+            "pct": "96",
+            "tone": "var(--amber-500)",
+            "note": "Short by 0.09 — the rest closes with markdown recovery in S9.9."
+          },
+          {
+            "label": "Capital ceiling $480K",
+            "value": "$440K",
+            "pct": "92",
+            "tone": "var(--green-700)",
+            "note": "$40K of headroom after this slate."
+          },
+          {
+            "label": "Exit-rate cap 8% per quarter",
+            "value": "5.6%",
+            "pct": "70",
+            "tone": "var(--green-700)",
+            "note": "12 of a permitted 17 SKUs this quarter."
+          }
+        ],
+        "basis": [
+          {
+            "label": "Order rows behind the role classification",
+            "value": "18,402"
+          },
+          {
+            "label": "SKUs with a full 4-quarter history",
+            "value": "187 of 214"
+          },
+          {
+            "label": "Gap-fill demand estimates from rival feed",
+            "value": "±34%"
+          },
+          {
+            "label": "Last slate accuracy against forecast",
+            "value": "±11%"
+          }
+        ],
+        "blocked": false,
+        "canApprove": true,
+        "ctaLabel": "Approve 4 moves & continue",
+        "footStatus": "Decide · 56 SKUs across 4 moves · balanced slate",
+        "footTone": "var(--ink-500)"
+      }
+    }
+  }
+}</script>
+<script>
+/* =========================================================================================
+   Ported logic. resolveBinding / evaluateCondition / validate<Type> / resolveActionState are
+   line-for-line ports of the real modules named in each comment. The block RENDERERS below are
+   simplified stand-ins for the React components.
+   ========================================================================================= */
+const P = JSON.parse(document.getElementById('payload').textContent);
+
+/* ---- manifests/resolveBinding.js (exact port) ---- */
+function resolveBinding(binding, data) {
+  if (typeof binding !== 'string' || binding.length === 0) return data;
+  const path = binding.replace(/\[(\d+)\]/g, '.$1').split('.').filter((s) => s.length > 0);
+  let current = data;
+  for (const key of path) {
+    if (current === null || current === undefined) return undefined;
+    if (typeof current !== 'object') return undefined;
+    current = current[key];
+  }
+  return current;
+}
+
+/* ---- manifests/actionCondition.js (exact port) ---- */
+function isFiniteNumber(v) { return typeof v === 'number' && Number.isFinite(v); }
+function evaluateLeaf(leaf, fixture) {
+  const r = resolveBinding(leaf.path, fixture);
+  switch (leaf.op) {
+    case 'exists': return r !== undefined && r !== null;
+    case 'notExists': return r === undefined || r === null;
+    case 'truthy': return Boolean(r);
+    case 'falsy': return !r;
+    case 'eq': return r === leaf.value;
+    case 'ne': return r !== leaf.value;
+    case 'gt': return isFiniteNumber(r) && r > leaf.value;
+    case 'gte': return isFiniteNumber(r) && r >= leaf.value;
+    case 'lt': return isFiniteNumber(r) && r < leaf.value;
+    case 'lte': return isFiniteNumber(r) && r <= leaf.value;
+    case 'in': return Array.isArray(leaf.value) && leaf.value.includes(r);
+    case 'notIn': return !(Array.isArray(leaf.value) && leaf.value.includes(r));
+    default: return false;
+  }
+}
+function evaluateCondition(condition, fixture) {
+  if (condition === undefined || condition === null) return true;
+  if (Array.isArray(condition.all)) return condition.all.every((c) => evaluateCondition(c, fixture));
+  if (Array.isArray(condition.any)) return condition.any.some((c) => evaluateCondition(c, fixture));
+  return evaluateLeaf(condition, fixture);
+}
+
+/* ---- manifests/blockTypes.js (exact port of all 14 validators) ---- */
+function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+function isNumericLike(v) {
+  if (typeof v === 'number') return Number.isFinite(v);
+  if (typeof v === 'string' && v.trim() !== '') return Number.isFinite(Number(v));
+  return false;
+}
+const CHART_MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
+const THRESHOLD_KEYS = ['threshold', 'limit', 'limitPct', 'ceiling', 'floor', 'target', 'cap'];
+const VALIDATORS = {
+  text: (d) => d === undefined ? [] : (typeof d === 'string' ? [] : ['expected a string, got ' + typeof d]),
+  number: (d) => {
+    if (d === undefined) return [];
+    if (typeof d !== 'number') return ['expected a number, got ' + typeof d];
+    return Number.isFinite(d) ? [] : ['expected a finite number'];
+  },
+  flag: (d) => d === undefined ? [] : (typeof d === 'boolean' ? [] : ['expected a boolean, got ' + typeof d]),
+  labelValueList: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    const p = [];
+    d.forEach((item, i) => {
+      if (!isPlainObject(item)) p.push('item ' + i + ': expected an object, got ' + typeof item);
+      else if (typeof item.label !== 'string') p.push('item ' + i + ': missing a string "label"');
+    });
+    return p;
+  },
+  table: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    const p = [];
+    d.forEach((item, i) => { if (!isPlainObject(item)) p.push('item ' + i + ': expected an object, got ' + typeof item); });
+    return p;
+  },
+  itemQueue: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    return [];
+  },
+  lineChart: (d) => {
+    if (d === undefined) return [];
+    if (typeof d === 'string') return [];
+    if (!Array.isArray(d)) return ['expected an SVG path string or an array of {path}, got ' + typeof d];
+    const p = [];
+    d.forEach((item, i) => { if (!isPlainObject(item) || typeof item.path !== 'string') p.push('item ' + i + ': expected an object with a string "path"'); });
+    return p;
+  },
+  barChart: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    if (d.every((item) => !isPlainObject(item))) {
+      const p = [];
+      d.forEach((item, i) => { if (!isNumericLike(item)) p.push('item ' + i + ': expected a number, got ' + typeof item); });
+      return p;
+    }
+    const p = [];
+    d.forEach((item, i) => {
+      if (!isPlainObject(item)) { p.push('item ' + i + ': expected an object'); return; }
+      if (!CHART_MAGNITUDE_KEYS.some((k) => item[k] !== undefined)) p.push('item ' + i + ': missing a magnitude (one of ' + CHART_MAGNITUDE_KEYS.join('/') + ')');
+    });
+    return p;
+  },
+  scatterChart: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    const p = [];
+    d.forEach((item, i) => {
+      const hasX = isPlainObject(item) && (item.x !== undefined || item.cx !== undefined);
+      const hasY = isPlainObject(item) && (item.y !== undefined || item.cy !== undefined);
+      if (!hasX || !hasY) p.push('item ' + i + ': expected numeric x/cx and y/cy');
+    });
+    return p;
+  },
+  waterfallChart: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    if (d.length < 2) return ['expected at least 2 rows'];
+    const p = []; let hasAnchor = false;
+    d.forEach((item, i) => {
+      if (!isPlainObject(item)) { p.push('item ' + i + ': expected an object'); return; }
+      if (!isNumericLike(item.top) || !isNumericLike(item.height)) p.push('item ' + i + ': missing numeric "top"/"height"');
+      if (item.value === undefined) p.push('item ' + i + ': missing "value"');
+      if (item.anchor === true) hasAnchor = true;
+    });
+    if (!hasAnchor) p.push('no row marked "anchor": true (no baseline/total bar)');
+    return p;
+  },
+  heatmapGrid: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    const p = [];
+    d.forEach((row, i) => {
+      if (!isPlainObject(row) || typeof row.label !== 'string') p.push('row ' + i + ': missing a string "label"');
+      const cells = (row && (row.cells !== undefined ? row.cells : row.grid));
+      if (!Array.isArray(cells) || cells.length === 0) p.push('row ' + i + ': missing a non-empty "cells" array');
+    });
+    return p;
+  },
+  object: (d) => d === undefined ? [] : (isPlainObject(d) ? [] : ['expected a plain object, got ' + (Array.isArray(d) ? 'array' : typeof d)]),
+  slider: (d) => {
+    if (d === undefined) return [];
+    if (!isPlainObject(d)) return ['expected an object, got ' + (Array.isArray(d) ? 'array' : typeof d)];
+    const p = []; const { min, max, value } = d;
+    const fin = (v) => typeof v === 'number' && Number.isFinite(v);
+    if (!fin(min)) p.push('"min" must be a finite number');
+    if (!fin(max)) p.push('"max" must be a finite number');
+    if (!fin(value)) p.push('"value" must be a finite number');
+    if (fin(min) && fin(max)) {
+      if (min >= max) p.push('"min" must be less than "max"');
+      else if (fin(value) && (value < min || value > max)) p.push('"value" must be between "min" and "max"');
+    }
+    if (d.steps !== undefined) {
+      if (!Array.isArray(d.steps)) p.push('"steps" must be an array when present');
+      else d.steps.forEach((s, i) => { if (!isPlainObject(s) || !fin(s.at)) p.push('steps[' + i + '] must be an object with a numeric "at"'); });
+    }
+    return p;
+  },
+  gauge: (d) => {
+    if (d === undefined) return [];
+    if (!Array.isArray(d)) return ['expected an array, got ' + typeof d];
+    const p = [];
+    d.forEach((item, i) => {
+      if (!isPlainObject(item)) { p.push('item ' + i + ': expected an object'); return; }
+      if (!CHART_MAGNITUDE_KEYS.some((k) => item[k] !== undefined)) p.push('item ' + i + ': missing a magnitude (one of ' + CHART_MAGNITUDE_KEYS.join('/') + ')');
+      if (!THRESHOLD_KEYS.some((k) => item[k] !== undefined)) p.push('item ' + i + ': missing a threshold (one of ' + THRESHOLD_KEYS.join('/') + ')');
+    });
+    return p;
+  },
+};
+function validateBlockData(blockType, data) {
+  const v = VALIDATORS[blockType];
+  if (!v) return ['unknown block type "' + blockType + '"'];
+  return v(data);
+}
+
+/* ---- blocks/humanizeSlotName.js (exact port) ---- */
+function humanizeSlotName(slotName) {
+  return String(slotName).replace(/_/g, ' ').replace(/([a-z0-9])([A-Z])/g, '$1 $2').trim()
+    .split(' ').filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+
+/* ---- blocks/decorativeKeys.js (exact port) ---- */
+const DECORATIVE_WORDS = new Set([
+  'bg','fg','tone','tint','border','cursor','icon','glow','edge','dot','shadow',
+  'opacity','mark','hue','fill','stroke','weight','divider','radius','dash','anchor',
+  'x','y','cx','cy','r','tx','ty','lx','ly','nx','op',
+]);
+const CAMEL_WORD_RE = /[A-Z]?[a-z0-9]+|[A-Z]+(?![a-z])/g;
+function isDecorativeKey(key) {
+  const words = String(key).match(CAMEL_WORD_RE) || [];
+  return words.some((w) => DECORATIVE_WORDS.has(w.toLowerCase()));
+}
+function isInternalKey(key) { return String(key).startsWith('__'); }
+function isHiddenKey(key) { return isInternalKey(key) || isDecorativeKey(key); }
+
+/* ---- components/actionEligibility.js (exact port) ---- */
+function isNonEmptyString(v) { return typeof v === 'string' && v.trim() !== ''; }
+function resolveOptionalBinding(binding, fixture) {
+  if (!isNonEmptyString(binding)) return undefined;
+  const value = resolveBinding(binding, fixture);
+  return isNonEmptyString(value) ? value : undefined;
+}
+function resolveActionState(action, fixture) {
+  const enabled = !action || action.when === undefined || evaluateCondition(action.when, fixture);
+  const lb = resolveOptionalBinding(action && action.labelBinding, fixture);
+  const label = lb !== undefined ? lb : ((action && action.label) || 'Action');
+  const dr = resolveOptionalBinding(action && action.disabledReasonBinding, fixture);
+  const disabledReason = enabled ? null : (dr !== undefined ? dr : null);
+  return {
+    id: action && action.id,
+    label,
+    kind: (action && action.kind) || 'secondary',
+    enabled,
+    disabledReason,
+    loadingLabel: isNonEmptyString(action && action.loadingLabel) ? action.loadingLabel : null,
+    confirmRequired: Boolean(action && action.confirm && action.confirm.required),
+    confirmTitle: isNonEmptyString(action && action.confirm && action.confirm.title) ? action.confirm.title : label + '?',
+    confirmDescription: typeof (action && action.confirm && action.confirm.description) === 'string' ? action.confirm.description : null,
+    reasonEnabled: Boolean(action && action.reason),
+    reasonRequired: Boolean(action && action.reason && action.reason.required),
+    reasonLabel: isNonEmptyString(action && action.reason && action.reason.label) ? action.reason.label : 'Reason',
+    reasonMinLength: typeof (action && action.reason && action.reason.minLength) === 'number' && action.reason.minLength > 0 ? action.reason.minLength : 0,
+    actionType: isNonEmptyString(action && action.action) ? action.action : (action && action.id),
+  };
+}
+
+/* =========================================================================================
+   JSON syntax highlighting
+   ========================================================================================= */
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function highlightJson(value) {
+  const json = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+  return esc(json)
+    .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*")(\s*:)?/g,
+      (m, str, _g, colon) => colon ? '<span class="tk-key">' + str + '</span>' + colon : '<span class="tk-str">' + str + '</span>')
+    .replace(/\b(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\b(?![^<]*<\/span>)/g, '<span class="tk-num">$1</span>')
+    .replace(/\b(true|false)\b/g, '<span class="tk-bool">$1</span>')
+    .replace(/\bnull\b/g, '<span class="tk-null">null</span>');
+}
+function setCode(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = highlightJson(value);
+}
+
+/* =========================================================================================
+   Block renderers — SIMPLIFIED stand-ins for the React components
+   ========================================================================================= */
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined && text !== null) n.textContent = String(text);
+  return n;
+}
+function flattenDisplayValue(v) {
+  if (v === null || v === undefined) return '';
+  if (typeof v === 'string' || typeof v === 'number') return String(v);
+  if (typeof v === 'boolean') return v ? 'Yes' : 'No';
+  if (Array.isArray(v)) return v.map(flattenDisplayValue).filter(Boolean).join(' ');
+  if (isPlainObject(v) && 'type' in v && isPlainObject(v.props)) return flattenDisplayValue(v.props.children);
+  if (isPlainObject(v)) {
+    return Object.entries(v).filter(([k, vv]) => !isHiddenKey(k) && vv !== null && vv !== undefined)
+      .map(([, vv]) => flattenDisplayValue(vv)).filter(Boolean).join(' · ');
+  }
+  return '';
+}
+function isNumericValue(v) { return typeof v === 'number' || (typeof v === 'string' && v.trim() !== '' && Number.isFinite(Number(v))); }
+function magnitudeOf(item) {
+  for (const k of CHART_MAGNITUDE_KEYS) if (item && item[k] !== undefined) return Number(String(item[k]).replace(/[^0-9.\-]/g, '')) || 0;
+  return 0;
+}
+function titleEl(slotName) { return el('p', 'blk-title', humanizeSlotName(slotName)); }
+
+const RENDERERS = {
+  text(slotName, data, role) {
+    const box = el('div', 'blk' + (role === 'hero' ? ' hero' : ''));
+    if (role === 'hero') {
+      box.appendChild(el('p', 'blk-title', 'Realify signal · ' + humanizeSlotName(slotName)));
+      box.appendChild(el('p', 'hv', data));
+    } else {
+      box.appendChild(titleEl(slotName));
+      box.appendChild(el('p', 'txt', data));
+    }
+    return box;
+  },
+  number(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    box.appendChild(el('p', 'txt', String(data))); return box;
+  },
+  flag(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const chip = el('span', 'flagchip');
+    const dot = el('span', 'dotmark');
+    dot.style.background = data ? 'var(--green)' : 'var(--ink-400)';
+    chip.appendChild(dot); chip.appendChild(el('span', null, data ? 'Yes' : 'No'));
+    box.appendChild(chip); return box;
+  },
+  labelValueList(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    if (data.length === 0) { box.appendChild(el('p', 'muted', 'No rows.')); return box; }
+    const ul = el('ul', 'lv');
+    for (const item of data) {
+      const li = el('li');
+      li.appendChild(el('span', 'k', item && item.label));
+      const used = new Set(['label']);
+      let primary = '';
+      for (const k of ['value', 'note', 'detail', 'amount', 'pct']) {
+        if (item && item[k] !== null && item[k] !== undefined) { primary = flattenDisplayValue(item[k]); used.add(k); break; }
+      }
+      if (primary === '') {
+        const fk = Object.keys(item || {}).find((k) => k !== 'label' && !isHiddenKey(k) && item[k] !== null && item[k] !== undefined);
+        if (fk) { primary = flattenDisplayValue(item[fk]); used.add(fk); }
+      }
+      const v = el('span', 'v', primary);
+      for (const [k, vv] of Object.entries(item || {})) {
+        if (used.has(k) || isHiddenKey(k) || vv === null || vv === undefined) continue;
+        const t = flattenDisplayValue(vv);
+        if (t) v.appendChild(el('span', 'extra', '· ' + t));
+      }
+      li.appendChild(v); ul.appendChild(li);
+    }
+    box.appendChild(ul); return box;
+  },
+  table(slotName, data) {
+    const box = el('div', 'blk'); box.style.padding = '0'; box.style.overflow = 'hidden';
+    const cap = el('p', 'blk-title', humanizeSlotName(slotName) + ' · ' + data.length);
+    cap.style.padding = '10px 13px 8px'; cap.style.margin = '0'; cap.style.borderBottom = '1px solid var(--line)';
+    box.appendChild(cap);
+    const rows = data.filter(isPlainObject);
+    const cols = []; const seen = new Set();
+    for (const r of rows) for (const k of Object.keys(r)) { if (!seen.has(k) && !isHiddenKey(k)) { seen.add(k); cols.push(k); } }
+    const wrap = el('div'); wrap.style.overflowX = 'auto';
+    const t = el('table');
+    const thead = el('thead'); const trh = el('tr');
+    for (const c of cols) trh.appendChild(el('th', null, humanizeSlotName(c)));
+    thead.appendChild(trh); t.appendChild(thead);
+    const tb = el('tbody');
+    for (const r of rows.slice(0, 12)) {
+      const tr = el('tr');
+      for (const c of cols) {
+        const raw = r[c]; const text = flattenDisplayValue(raw);
+        const td = el('td', isNumericValue(raw) ? 'num' : null, text === '' ? '—' : text);
+        if (text === '') td.style.color = 'var(--text-3)';
+        tr.appendChild(td);
+      }
+      tb.appendChild(tr);
+    }
+    t.appendChild(tb); wrap.appendChild(t); box.appendChild(wrap);
+    if (rows.length > 12) {
+      const f = el('p', 'muted', rows.length + ' rows · showing 12 (the React TableBlock paginates at 25/page past 12 rows)');
+      f.style.cssText = 'font-size:11px;padding:7px 13px;margin:0;border-top:1px solid var(--line)';
+      box.appendChild(f);
+    }
+    return box;
+  },
+  itemQueue(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const q = el('div', 'queue');
+    for (const item of data.slice(0, 8)) {
+      const row = el('div', 'queue-item');
+      if (isPlainObject(item)) {
+        const parts = Object.entries(item).filter(([k, v]) => !isHiddenKey(k) && v !== null && v !== undefined && flattenDisplayValue(v) !== '');
+        parts.slice(0, 5).forEach(([k, v], i) => {
+          if (i) row.appendChild(el('span', 'qk', '  ·  '));
+          row.appendChild(el('span', 'qk', humanizeSlotName(k) + ' '));
+          row.appendChild(el('span', null, flattenDisplayValue(v)));
+        });
+      } else row.textContent = flattenDisplayValue(item);
+      q.appendChild(row);
+    }
+    if (data.length > 8) q.appendChild(el('p', 'muted', '+ ' + (data.length - 8) + ' more'));
+    box.appendChild(q); return box;
+  },
+  object(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const STYLE_RE = /^(var\(--|#[0-9a-f]{3,8}$|rgba?\(|color-mix\(|linear-gradient\()/i;
+    const ul = el('ul', 'lv');
+    for (const [k, v] of Object.entries(data)) {
+      if (isHiddenKey(k)) continue;
+      if (typeof v === 'string' && STYLE_RE.test(v)) continue;
+      const text = flattenDisplayValue(v);
+      if (!text) continue;
+      const li = el('li');
+      li.appendChild(el('span', 'k', humanizeSlotName(k)));
+      li.appendChild(el('span', 'v', text));
+      ul.appendChild(li);
+    }
+    if (!ul.children.length) { box.appendChild(el('p', 'muted', 'No details.')); return box; }
+    box.appendChild(ul); return box;
+  },
+  barChart(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const bars = el('div', 'bars');
+    const vals = data.map((d) => isPlainObject(d) ? magnitudeOf(d) : Number(d) || 0);
+    const max = Math.max(1, ...vals.map(Math.abs));
+    data.forEach((d, i) => {
+      const row = el('div', 'bar-row');
+      const top = el('div', 'bar-top');
+      top.appendChild(el('span', null, (isPlainObject(d) && d.label) ? d.label : '#' + (i + 1)));
+      const rawVal = isPlainObject(d)
+        ? (CHART_MAGNITUDE_KEYS.map((k) => d[k]).find((v) => v !== undefined))
+        : d;
+      top.appendChild(el('span', null, flattenDisplayValue(rawVal)));
+      row.appendChild(top);
+      const track = el('div', 'bar-track'); const fill = el('div', 'bar-fill');
+      fill.style.width = Math.min(100, (Math.abs(vals[i]) / max) * 100) + '%';
+      track.appendChild(fill); row.appendChild(track); bars.appendChild(row);
+    });
+    box.appendChild(bars); return box;
+  },
+  gauge(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const bars = el('div', 'bars');
+    data.forEach((d, i) => {
+      const val = magnitudeOf(d);
+      const thKey = THRESHOLD_KEYS.find((k) => d[k] !== undefined);
+      const th = thKey ? Number(String(d[thKey]).replace(/[^0-9.\-]/g, '')) || 0 : 0;
+      const row = el('div', 'bar-row');
+      const top = el('div', 'bar-top');
+      top.appendChild(el('span', null, d.label || '#' + (i + 1)));
+      top.appendChild(el('span', null, flattenDisplayValue(val) + ' / ' + flattenDisplayValue(th)));
+      row.appendChild(top);
+      const track = el('div', 'bar-track'); const fill = el('div', 'bar-fill' + (th && val > th ? ' over' : ''));
+      fill.style.width = Math.min(100, th ? (val / th) * 100 : 0) + '%';
+      track.appendChild(fill); row.appendChild(track); bars.appendChild(row);
+    });
+    box.appendChild(bars); return box;
+  },
+  slider(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const row = el('div'); row.style.cssText = 'display:flex;align-items:center;gap:10px';
+    const input = document.createElement('input');
+    input.type = 'range'; input.min = data.min; input.max = data.max; input.value = data.value; input.style.flex = '1';
+    const out = el('span', 'pill', String(data.value));
+    input.addEventListener('input', () => { out.textContent = input.value; });
+    row.appendChild(input); row.appendChild(out); box.appendChild(row);
+    box.appendChild(el('p', 'muted', 'In the app, dragging this recomputes dependent blocks from precomputed `steps`.')).style.fontSize = '11px';
+    return box;
+  },
+  lineChart(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const paths = typeof data === 'string' ? [data] : data.map((d) => d.path);
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 320 90'); svg.setAttribute('width', '100%'); svg.setAttribute('height', '90');
+    paths.forEach((p) => {
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute('d', p); path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'var(--blue)'); path.setAttribute('stroke-width', '1.6');
+      svg.appendChild(path);
+    });
+    box.appendChild(svg);
+    box.appendChild(el('p', 'muted', 'Raw SVG path from the payload, drawn as-is.')).style.fontSize = '11px';
+    return box;
+  },
+  scatterChart(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 320 120'); svg.setAttribute('width', '100%'); svg.setAttribute('height', '120');
+    data.forEach((d) => {
+      const c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', d.x !== undefined ? d.x : d.cx);
+      c.setAttribute('cy', d.y !== undefined ? d.y : d.cy);
+      c.setAttribute('r', d.r !== undefined ? d.r : 3);
+      c.setAttribute('fill', 'var(--blue)'); c.setAttribute('opacity', '.65');
+      svg.appendChild(c);
+    });
+    box.appendChild(svg); return box;
+  },
+  waterfallChart(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    const bars = el('div', 'bars');
+    data.forEach((d) => {
+      const row = el('div', 'bar-row');
+      const top = el('div', 'bar-top');
+      top.appendChild(el('span', null, d.label || ''));
+      top.appendChild(el('span', null, flattenDisplayValue(d.value)));
+      row.appendChild(top);
+      const track = el('div', 'bar-track'); const fill = el('div', 'bar-fill' + (d.anchor ? '' : ''));
+      fill.style.width = Math.min(100, Math.abs(Number(d.height) || 0)) + '%';
+      if (d.anchor) fill.style.background = 'var(--text-2)';
+      track.appendChild(fill); row.appendChild(track); bars.appendChild(row);
+    });
+    box.appendChild(bars); return box;
+  },
+  heatmapGrid(slotName, data) {
+    const box = el('div', 'blk'); box.appendChild(titleEl(slotName));
+    data.forEach((r) => {
+      const row = el('div'); row.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:11.5px';
+      row.appendChild(el('span', null, r.label)).style.cssText = 'min-width:110px;color:var(--text-2)';
+      const cells = r.cells || r.grid || [];
+      const nums = cells.map((c) => isPlainObject(c) ? (Object.values(c).map(Number).find((n) => Number.isFinite(n)) || 0) : Number(c) || 0);
+      const max = Math.max(1, ...nums.map(Math.abs));
+      nums.forEach((n) => {
+        const cell = el('span'); cell.style.cssText = 'width:20px;height:16px;border-radius:3px;background:var(--blue);opacity:' + (0.15 + 0.85 * Math.abs(n) / max);
+        row.appendChild(cell);
+      });
+      box.appendChild(row);
+    });
+    return box;
+  },
+};
+
+/* =========================================================================================
+   The stage renderer — mirrors StageRenderer.jsx's pipeline order, simplified layout.
+   ========================================================================================= */
+function renderStage(manifest, fixture, host) {
+  host.innerHTML = '';
+  const trace = [];
+
+  const head = el('div', 'stage-head');
+  const crumb = el('div', 'crumb', 'Action Stories  ›  ' + manifest.code + '  ›  ' + humanizeSlotName(manifest.stageKey));
+  head.appendChild(crumb);
+  head.appendChild(el('h3', 'stage-title', fixture.name || manifest.name));
+  const hl = manifest.headline || fixture.headline;
+  if (hl) head.appendChild(el('p', 'stage-headline', hl));
+  host.appendChild(head);
+
+  /* 1 — blocks[].when filter (StageRenderer.jsx) */
+  const visible = manifest.blocks.filter((b) => b.when === undefined || evaluateCondition(b.when, fixture));
+  const omitted = manifest.blocks.length - visible.length;
+
+  /* 2 — resolve + validate */
+  const resolved = visible.map((block) => {
+    const value = resolveBinding(block.binding, fixture);
+    let placeholder = null;
+    if (!RENDERERS[block.blockType]) placeholder = 'unknown block type "' + block.blockType + '"';
+    else if (value === undefined) placeholder = 'binding "' + block.binding + '" resolved to nothing';
+    else {
+      const problems = validateBlockData(block.blockType, value);
+      if (problems.length) placeholder = problems.join('; ');
+    }
+    trace.push({ block, value, placeholder });
+    return { block, value, placeholder };
+  });
+
+  /* 3 — region split: blocks[].region, else section's region, else main (composeSections rules 1,2,4) */
+  const sectionById = {};
+  for (const s of (manifest.sections || [])) sectionById[s.id] = s;
+  const regions = { main: [], rail: [] };
+  const order = [];
+  for (const r of resolved) {
+    const sec = sectionById[r.block.section];
+    const region = r.block.region || (sec && sec.region) || 'main';
+    const secId = r.block.section || '__none__';
+    let bucket = order.find((o) => o.region === region && o.id === secId);
+    if (!bucket) { bucket = { region, id: secId, title: sec ? sec.title : null, items: [] }; order.push(bucket); }
+    bucket.items.push(r);
+  }
+
+  const body = el('div', 'stage-body');
+  for (const regionName of ['main', 'rail']) {
+    const col = el('div', 'region');
+    for (const bucket of order.filter((o) => o.region === regionName)) {
+      const wrap = el('div');
+      if (bucket.title) wrap.appendChild(el('p', 'sec-title', bucket.title));
+      for (const r of bucket.items) {
+        const node = r.placeholder ? placeholderNode(r.block.slotName, r.placeholder)
+          : RENDERERS[r.block.blockType](r.block.slotName, r.value, r.block.role);
+        node.style.marginBottom = '12px';
+        wrap.appendChild(node);
+      }
+      col.appendChild(wrap);
+    }
+    body.appendChild(col);
+  }
+  host.appendChild(body);
+
+  const foot = el('div');
+  foot.style.cssText = 'padding:9px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--text-3);display:flex;gap:14px;flex-wrap:wrap';
+  foot.appendChild(el('span', null, manifest.blocks.length + ' declared blocks'));
+  if (omitted) foot.appendChild(el('span', null, omitted + ' omitted by blocks[].when'));
+  foot.appendChild(el('span', null, resolved.filter((r) => !r.placeholder).length + ' rendered'));
+  const bad = resolved.filter((r) => r.placeholder).length;
+  if (bad) foot.appendChild(el('span', null, bad + ' placeholder' + (bad > 1 ? 's' : '')));
+  host.appendChild(foot);
+
+  return trace;
+}
+function placeholderNode(slotName, reason) {
+  const n = el('div', 'ph');
+  n.appendChild(el('b', null, humanizeSlotName(slotName)));
+  n.appendChild(el('span', null, ' — ' + reason));
+  return n;
+}
+
+/* =========================================================================================
+   Section 3 — registry table
+   ========================================================================================= */
+const REGISTRY = [
+  ['text','TextBlock','A single display string.','<code>string</code>','validateText'],
+  ['number','NumberBlock','A single finite number.','<code>number</code> (finite)','validateNumber'],
+  ['flag','FlagBlock','A single boolean.','<code>boolean</code>','validateFlag'],
+  ['labelValueList','LabelValueListBlock','Light rows: checklists, chip rows, metric rows.','<code>[{ label: string, value?|note?|detail?|amount?|pct?, … }]</code>','validateLabelValueList'],
+  ['table','TableBlock','Real tabular data — sortable, paginates past 12 rows.','<code>[{ …uniform scalar columns }]</code>','validateTable'],
+  ['itemQueue','ItemQueueBlock','Richer, variable-shape per-item objects: rows, feeds, slates, cards, steps.','<code>any[]</code> — items may be objects or plain values','validateItemQueue'],
+  ['lineChart','LineChartBlock','A trend line.','<code>string</code> (SVG path) or <code>[{ path: string }]</code>','validateLineChart'],
+  ['barChart','BarChartBlock','Magnitude rows.','<code>[{ label?, value|h|height|pct|amount }]</code> or a bare <code>number[]</code>','validateBarChart'],
+  ['scatterChart','ScatterChartBlock','Plotted points; <code>r</code> sizes a bubble.','<code>[{ x|cx, y|cy, r? }]</code>','validateScatterChart'],
+  ['waterfallChart','WaterfallChartBlock','A bridge/waterfall; one row must be the anchor.','<code>[{ label, value, top, height, anchor? }]</code> · ≥2 rows · ≥1 <code>anchor:true</code>','validateWaterfallChart'],
+  ['heatmapGrid','HeatmapGridBlock','A 2D matrix.','<code>[{ label: string, cells: [{…numeric}] }]</code>','validateHeatmapGrid'],
+  ['object','ObjectBlock','A single nested descriptor object that is none of the above.','<code>{ … }</code> plain object','validateObject'],
+  ['slider','SliderBlock','The one interactive control; <code>steps</code> drives dependent blocks.','<code>{ min, max, value, steps?: [{ at, …}] }</code>','validateSlider'],
+  ['gauge','GaugeBlock','Rows measured against a threshold.','<code>[{ label?, value|h|height|pct|amount, threshold|limit|limitPct|ceiling|floor|target|cap }]</code>','validateGauge'],
+];
+(function buildRegistry() {
+  const tb = document.querySelector('#registryTable tbody');
+  for (const [type, comp, purpose, expects, validator] of REGISTRY) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td><code class="pill b">' + type + '</code></td>'
+      + '<td><code>' + comp + '</code></td>'
+      + '<td>' + purpose + '</td>'
+      + '<td>' + expects + '</td>'
+      + '<td><code>' + validator + '</code></td>';
+    tb.appendChild(tr);
+  }
+})();
+
+/* =========================================================================================
+   Sections 4, 5 — static JSON
+   ========================================================================================= */
+const TPL_A = P.templates['S9.11/analyze'];
+const TPL_D = P.templates['S9.1/decide'];
+const FIX_A = P.fixtures['S9.11/analyze@A'];
+const FIX_B = P.fixtures['S9.11/analyze@B'];
+const FIX_D = P.fixtures['S9.1/decide'];
+
+setCode('tplJson', TPL_A);
+setCode('tplJson2', TPL_D);
+setCode('fixJson', FIX_A);
+setCode('actionJson', TPL_D.actions);
+setCode('targetActionJson', [
+  { id: 'approve', label: 'Approve', kind: 'primary', action: 'confirm',
+    when: { all: [ { path: 'data.blocked', op: 'ne', value: true }, { path: 'data.canApprove', op: 'ne', value: false } ] },
+    labelBinding: 'data.ctaLabel', disabledReasonBinding: 'data.blockReason',
+    confirm: { required: true, title: 'Approve this stage?', description: "This can't be undone from here." },
+    loadingLabel: 'Approving…' },
+  { id: 'decline', label: 'Decline', kind: 'destructive', action: 'reject',
+    reason: { required: true, label: 'Why are you declining?', minLength: 12 },
+    confirm: { required: true, title: 'Decline this proposal?' } },
+  { id: 'snooze', label: 'Snooze 7 days', kind: 'secondary', action: 'defer',
+    when: { path: 'data.canSnooze', op: 'ne', value: false } },
+]);
+
+setCode('apiIndex',
+`GET /v1/action-stories
+→ 200
+[
+  ${JSON.stringify(P.workflowIndexSample[0])},
+  …
+]
+
+// getWorkflowIndex() rejects the response as MALFORMED unless it is an array
+// whose every entry is an object with a string "code" and an array "stages".
+// "name" and "headline" are consumed by the UI but are not type-checked there.`);
+
+setCode('apiStage',
+`GET /v1/action-stories/:code/:stageKey        e.g. /v1/action-stories/S9.11/analyze
+→ 200
+{
+  "manifest": { …the template of §4… },      // or keep this frontend-owned
+  "fixture": {                                // the runtime payload of §5
+    "code": "S9.11",
+    "stageKey": "analyze",
+    "name": "Repricing",
+    "headline": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+    "data": { … }
+  }
+}
+
+404 → NOT_FOUND (not retried)   5xx → SERVER_ERROR (retried once)`);
+
+setCode('apiAction',
+`POST /v1/action-stories/:code/:stageKey/actions
+{
+  "actionId": "confirm",     // manifest actions[].id  — keys client state
+  "action":   "confirm",     // manifest actions[].action — the operation type
+  "reason":   "…"            // present only when actions[].reason is declared
+}
+
+→ 200
+{
+  "code": "S9.1",
+  "stageKey": "decide",
+  "actionId": "confirm",
+  "success": true,
+  "completedAt": "2026-03-04T10:12:44.081Z",
+  "reason": null
+}
+
+→ 4xx / 5xx
+{
+  "code": "GUARDRAIL_BLOCKED",        // stable, machine-readable
+  "userMessage": "This proposal is outside policy limits."   // safe to display
+}
+
+// OPEN QUESTION (§9 step 9): should the 200 body also carry the NEW runtime
+// payload for this stage, so the UI can re-render without a second round trip?`);
+
+/* =========================================================================================
+   Section 6 — binding traces
+   ========================================================================================= */
+function jsonSnippet(value, maxLen) {
+  const s = JSON.stringify(value, null, 2);
+  if (s === undefined) return 'undefined';
+  return s.length > maxLen ? s.slice(0, maxLen) + '\n…' : s;
+}
+function describeRendered(blockType, value) {
+  if (value === undefined) return 'placeholder — "resolved to nothing"';
+  switch (blockType) {
+    case 'text': case 'number': return String(value);
+    case 'flag': return value ? 'Yes' : 'No';
+    case 'labelValueList': return value.length + ' rows · ' + value.map((r) => r.label).slice(0, 4).join(', ') + (value.length > 4 ? ', …' : '');
+    case 'table': {
+      const cols = Object.keys(value[0] || {}).filter((k) => !isHiddenKey(k));
+      return value.length + ' rows × ' + cols.length + ' visible columns (' + cols.slice(0, 4).join(', ') + (cols.length > 4 ? ', …' : '') + ')';
+    }
+    case 'object': {
+      const keys = Object.keys(value).filter((k) => !isHiddenKey(k));
+      return keys.length + ' detail rows (' + keys.slice(0, 4).join(', ') + (keys.length > 4 ? ', …' : '') + ')';
+    }
+    case 'barChart': return value.length + ' bars · ' + value.map((b) => b.label).slice(0, 3).join(', ');
+    default: return Array.isArray(value) ? value.length + ' items' : typeof value;
+  }
+}
+(function buildTraces() {
+  const host = document.getElementById('traceHost');
+  const picks = [
+    { slot: 'sortNote', fixture: FIX_A, ds: 'Dataset A' },
+    { slot: 'rollup',   fixture: FIX_A, ds: 'Dataset A' },
+    { slot: 'rows',     fixture: FIX_A, ds: 'Dataset A' },
+    { slot: 'sel',      fixture: FIX_A, ds: 'Dataset A' },
+    { slot: 'excluded', fixture: FIX_A, ds: 'Dataset A' },
+    // The same block, against the payload that omits the field entirely.
+    { slot: 'excluded', fixture: FIX_B, ds: 'Dataset B — field omitted' },
+  ];
+  for (const pick of picks) {
+    const block = TPL_A.blocks.find((b) => b.slotName === pick.slot);
+    if (!block) continue;
+    const value = resolveBinding(block.binding, pick.fixture);
+    const problems = value === undefined ? [] : validateBlockData(block.blockType, value);
+
+    const card = el('div', 'trace');
+    const head = el('div', 'trace-head');
+    head.innerHTML = '<span class="pill b">' + block.blockType + '</span>'
+      + '<span class="pill">slotName: ' + block.slotName + '</span>'
+      + '<span class="pill">binding: ' + block.binding + '</span>'
+      + '<span class="pill v">' + esc(pick.ds) + '</span>'
+      + (value === undefined
+        ? '<span class="tag mocked">resolved to undefined</span>'
+        : (problems.length ? '<span class="tag mocked">invalid: ' + esc(problems[0]) + '</span>'
+                           : '<span class="tag current">validates</span>'));
+    card.appendChild(head);
+
+    const body = el('div', 'trace-body');
+    const c1 = el('div', 'trace-cell');
+    c1.appendChild(el('div', 'lbl', '1 · template says'));
+    c1.appendChild(el('div', 'val', JSON.stringify({ slotName: block.slotName, blockType: block.blockType, binding: block.binding }, null, 2)));
+    body.appendChild(c1);
+    body.appendChild(el('div', 'arrow', '→'));
+
+    const c2 = el('div', 'trace-cell');
+    c2.appendChild(el('div', 'lbl', '2 · runtime data at that path'));
+    c2.appendChild(el('div', 'val', value === undefined ? '// no such path in this payload' : jsonSnippet(value, 380)));
+    body.appendChild(c2);
+    body.appendChild(el('div', 'arrow', '→'));
+
+    const c3 = el('div', 'trace-cell');
+    c3.appendChild(el('div', 'lbl', '3 · ' + (value === undefined ? 'placeholder' : 'rendered by ' + REGISTRY.find((r) => r[0] === block.blockType)[1])));
+    c3.appendChild(el('div', 'val rendered', describeRendered(block.blockType, value)));
+    body.appendChild(c3);
+
+    card.appendChild(body);
+    host.appendChild(card);
+  }
+})();
+
+/* =========================================================================================
+   Section 7 — same template, different data
+   ========================================================================================= */
+setCode('reuseTpl', TPL_A);
+function loadDataset(which) {
+  const fixture = which === 'A' ? FIX_A : FIX_B;
+  setCode('reuseFix', fixture);
+  document.getElementById('dsLabel').textContent = 'Dataset ' + which;
+  document.getElementById('dsA').classList.toggle('on', which === 'A');
+  document.getElementById('dsB').classList.toggle('on', which === 'B');
+  renderStage(TPL_A, fixture, document.getElementById('reuseStage'));
+}
+document.getElementById('dsA').addEventListener('click', () => loadDataset('A'));
+document.getElementById('dsB').addEventListener('click', () => loadDataset('B'));
+
+(function buildDiff() {
+  const host = document.getElementById('diffHost');
+  const rows = [];
+  for (const block of TPL_A.blocks) {
+    const a = resolveBinding(block.binding, FIX_A);
+    const b = resolveBinding(block.binding, FIX_B);
+    const d = (v) => v === undefined ? 'absent'
+      : Array.isArray(v) ? v.length + ' items'
+      : isPlainObject(v) ? Object.keys(v).length + ' keys'
+      : JSON.stringify(v).length > 44 ? JSON.stringify(v).slice(0, 44) + '…' : JSON.stringify(v);
+    const same = JSON.stringify(a) === JSON.stringify(b);
+    rows.push({ binding: block.binding, type: block.blockType, a: d(a), b: d(b), same });
+  }
+  const header = el('div', 'diffrow');
+  header.innerHTML = '<span class="dk" style="color:var(--text-3)">binding</span>'
+    + '<span style="flex:1"><b>Dataset A</b></span><span style="flex:1"><b>Dataset B</b></span>';
+  host.appendChild(header);
+  for (const r of rows) {
+    const row = el('div', 'diffrow');
+    row.innerHTML = '<span class="dk">' + r.binding + ' <span class="muted">(' + r.type + ')</span></span>'
+      + '<span style="flex:1">' + esc(r.a) + '</span>'
+      + '<span style="flex:1">' + esc(r.b) + (r.same ? ' <span class="muted">— identical</span>' : '') + '</span>';
+    host.appendChild(row);
+  }
+  const note = el('div', 'callout info');
+  note.style.marginTop = '12px';
+  note.innerHTML = '<strong>The template JSON is byte-identical across both renders.</strong> Only the payload changed: '
+    + 'different scalars, different array lengths in three separate array-typed blocks, a differently-shaped '
+    + '<code>sel</code> object, and <code>data.excluded</code> omitted entirely — which degrades that one block to a '
+    + 'placeholder and leaves the other seven untouched.';
+  host.appendChild(note);
+})();
+
+/* =========================================================================================
+   Section 12 — interactive preview with the live action gate
+   ========================================================================================= */
+const previewFixture = JSON.parse(JSON.stringify(FIX_D));
+const actionState = {}; // actionId -> { pending, done, error }
+let currentJsonTab = 'template';
+
+function logLine(kind, text) {
+  const log = document.getElementById('actionLog');
+  const line = el('div');
+  line.innerHTML = '<span class="t">' + new Date().toLocaleTimeString() + '</span> <span class="' + kind + '">' + esc(text) + '</span>';
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+function refreshPreview() {
+  previewFixture.data.blocked = document.getElementById('tgBlocked').checked;
+  previewFixture.data.canApprove = document.getElementById('tgCanApprove').checked;
+  document.getElementById('vBlocked').textContent = String(previewFixture.data.blocked);
+  document.getElementById('vCanApprove').textContent = String(previewFixture.data.canApprove);
+  renderStage(TPL_D, previewFixture, document.getElementById('previewStage'));
+  renderActionBar();
+  renderJsonTab();
+}
+
+function renderJsonTab() {
+  const map = {
+    template: () => TPL_D,
+    runtime: () => previewFixture,
+    action: () => TPL_D.actions,
+    resolved: () => (TPL_D.actions || []).map((a) => resolveActionState(a, previewFixture)),
+    map: () => TPL_D.blocks.map((b) => ({
+      slotName: b.slotName,
+      blockType: b.blockType,
+      component: (REGISTRY.find((r) => r[0] === b.blockType) || [null, '?'])[1],
+      binding: b.binding,
+      resolves: resolveBinding(b.binding, previewFixture) !== undefined,
+    })),
+  };
+  setCode('previewJson', map[currentJsonTab]());
+}
+document.getElementById('jsonTabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('[data-json]');
+  if (!tab) return;
+  currentJsonTab = tab.dataset.json;
+  for (const t of document.querySelectorAll('#jsonTabs .tab')) t.setAttribute('aria-selected', String(t === tab));
+  renderJsonTab();
+});
+
+function renderActionBar() {
+  const host = document.getElementById('previewActions');
+  host.innerHTML = '';
+  const actions = TPL_D.actions || [];
+  if (!actions.length) {
+    host.appendChild(el('span', 'muted', 'This stage declares no actions[] — StageActionBar renders nothing at all.'));
+    return;
+  }
+  const anyPending = actions.some((a) => actionState[a.id] && actionState[a.id].pending);
+  for (const def of actions) {
+    const s = resolveActionState(def, previewFixture);
+    const st = actionState[def.id] || {};
+    const blocked = !s.enabled && !st.done;
+
+    const group = el('div'); group.style.cssText = 'display:flex;align-items:center;gap:8px';
+    if (st.done) group.appendChild(el('span', 'alert ok', s.label + ' confirmed'));
+    if (st.error && !st.done) group.appendChild(el('span', 'alert err', st.error));
+    if (blocked && !st.error) group.appendChild(el('span', 'alert warn', s.disabledReason || (s.label + " isn't available for this proposal yet.")));
+
+    const btn = el('button', 'btn' + (st.done || blocked ? '' : s.kind === 'destructive' ? ' danger' : s.kind === 'primary' ? ' primary' : ''));
+    btn.type = 'button';
+    btn.textContent = st.done ? 'Done' : blocked ? 'Unavailable' : st.pending ? (s.loadingLabel || s.label + '…') : st.error ? 'Retry ' + s.label : s.label;
+    btn.disabled = Boolean(st.done || st.pending || blocked || (anyPending && !st.pending));
+    btn.addEventListener('click', () => onActionClick(def, s));
+    group.appendChild(btn);
+    host.appendChild(group);
+  }
+  const mode = el('span', 'demomode', 'Demo mode — no real API call');
+  mode.style.marginLeft = 'auto';
+  host.appendChild(mode);
+}
+
+function onActionClick(def, s) {
+  if (s.confirmRequired || s.reasonEnabled) openDialog(def, s);
+  else dispatch(def, s, undefined, false);
+}
+
+function openDialog(def, s) {
+  const overlay = el('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(10,12,16,.55);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px';
+  const dlg = el('div', 'card card-pad');
+  dlg.style.cssText = 'max-width:460px;width:100%;padding:20px 22px';
+  dlg.appendChild(el('h3', null, s.confirmTitle)).style.margin = '0 0 6px';
+  if (s.confirmDescription) dlg.appendChild(el('p', 'muted', s.confirmDescription)).style.cssText = 'font-size:13px;margin:0 0 12px';
+
+  let textarea = null, err = null;
+  if (s.reasonEnabled) {
+    const lab = el('label', null, s.reasonLabel + (s.reasonRequired ? ' (required)' : ' (optional)'));
+    lab.style.cssText = 'display:block;font-size:12.5px;font-weight:600;margin-bottom:5px';
+    dlg.appendChild(lab);
+    textarea = document.createElement('textarea');
+    textarea.rows = 3;
+    textarea.style.cssText = 'width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;font-size:13px;background:var(--surface);color:var(--text)';
+    dlg.appendChild(textarea);
+    err = el('p', null, 'At least ' + s.reasonMinLength + ' characters required.');
+    err.style.cssText = 'color:var(--rose);font-size:11.5px;margin:4px 0 0;display:none';
+    dlg.appendChild(err);
+  }
+
+  const failLab = el('label', 'toggle');
+  failLab.style.marginTop = '14px';
+  const failCb = document.createElement('input'); failCb.type = 'checkbox';
+  failLab.appendChild(failCb); failLab.appendChild(el('span', null, 'simulate a backend failure'));
+  dlg.appendChild(failLab);
+
+  const row = el('div');
+  row.style.cssText = 'display:flex;gap:8px;justify-content:flex-end;margin-top:16px';
+  const cancel = el('button', 'btn', 'Cancel'); cancel.type = 'button';
+  const ok = el('button', 'btn ' + (s.kind === 'destructive' ? 'danger' : 'primary'), s.label); ok.type = 'button';
+  row.appendChild(cancel); row.appendChild(ok); dlg.appendChild(row);
+
+  function validate() {
+    if (!s.reasonRequired) return true;
+    const good = textarea.value.trim().length >= s.reasonMinLength;
+    err.style.display = good ? 'none' : 'block';
+    ok.disabled = !good;
+    return good;
+  }
+  if (textarea) { textarea.addEventListener('input', validate); validate(); }
+
+  cancel.addEventListener('click', () => { overlay.remove(); logLine('warn2', 'dialog cancelled — nothing dispatched'); });
+  ok.addEventListener('click', () => {
+    if (!validate()) return;
+    overlay.remove();
+    dispatch(def, s, textarea ? textarea.value.trim() : undefined, failCb.checked);
+  });
+  overlay.appendChild(dlg);
+  document.body.appendChild(overlay);
+  logLine('info2', 'confirm dialog opened — actions[].confirm.required = true');
+}
+
+/* Mirrors genericActionHandler: 220ms, genuinely failable. No network. */
+function dispatch(def, s, reason, shouldFail) {
+  actionState[def.id] = { pending: true };
+  logLine('info2', 'runAction("' + TPL_D.code + '", "' + TPL_D.stageKey + '", "' + def.id + '", { action: "' + s.actionType + '"'
+    + (reason ? ', reason: "' + reason + '"' : '') + ' })');
+  logLine('info2', 'dispatchAction → ACTION_HANDLERS["' + s.actionType + '"] not registered → genericActionHandler (mock, 220ms)');
+  renderActionBar();
+  setTimeout(() => {
+    if (shouldFail) {
+      actionState[def.id] = { error: "Something went wrong on our end. We're on it — please try again shortly." };
+      logLine('warn2', 'ActionStoriesError { code: "SERVER_ERROR", retryable: true } → button becomes "Retry"');
+    } else {
+      actionState[def.id] = { done: true, completedAt: new Date().toISOString() };
+      logLine('ok', 'success { success: true, completedAt: "' + actionState[def.id].completedAt + '" } — in the app this writes localStorage["rf-action-stories-completed-actions"]');
+      logLine('warn2', 'NOT IMPLEMENTED: no re-fetch of stage data — the runtime payload is unchanged (§9 step 9)');
+    }
+    renderActionBar();
+    renderJsonTab();
+  }, 220);
+}
+
+document.getElementById('tgBlocked').addEventListener('change', () => {
+  refreshPreview();
+  logLine('info2', 'runtime payload edited: data.blocked = ' + previewFixture.data.blocked + ' → actions[].when re-evaluated');
+});
+document.getElementById('tgCanApprove').addEventListener('change', () => {
+  refreshPreview();
+  logLine('info2', 'runtime payload edited: data.canApprove = ' + previewFixture.data.canApprove + ' → actions[].when re-evaluated');
+});
+document.getElementById('resetAction').addEventListener('click', () => {
+  for (const k of Object.keys(actionState)) delete actionState[k];
+  renderActionBar();
+  logLine('info2', 'local action state cleared (the app also clears the localStorage record)');
+});
+
+/* =========================================================================================
+   Theme
+   ========================================================================================= */
+(function theme() {
+  const btn = document.getElementById('themeBtn');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  function set(mode) {
+    document.documentElement.setAttribute('data-theme', mode);
+    btn.textContent = mode === 'dark' ? 'Light' : 'Dark';
+  }
+  set(prefersDark ? 'dark' : 'light');
+  btn.addEventListener('click', () => set(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+})();
+
+/* ---- boot ---- */
+loadDataset('A');
+refreshPreview();
+logLine('info2', 'ready — S9.1/decide loaded from the real manifest + fixture. Demo mode: no API calls.');
+</script>
+</body>
+</html>

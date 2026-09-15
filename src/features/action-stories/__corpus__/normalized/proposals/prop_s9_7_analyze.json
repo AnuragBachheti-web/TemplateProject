@@ -1,0 +1,222 @@
+{
+  "proposal_id": "prop_s9_7_analyze",
+  "story_code": "S9.7",
+  "stage": "analyze",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Weekly ads sweep — $4.3K/mo waste identified",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "Broad match on Glassware",
+        "value": "$1.9K",
+        "pct": "100%"
+      },
+      {
+        "label": "Automatic campaigns",
+        "value": "$1.1K",
+        "pct": "58%"
+      },
+      {
+        "label": "Rest of search after 22:00",
+        "value": "$0.8K",
+        "pct": "42%"
+      },
+      {
+        "label": "Off-Amazon display",
+        "value": "$0.5K",
+        "pct": "26%"
+      }
+    ],
+    "detail_rows": [
+      {
+        "name": "SP · Ridgeline ceramics",
+        "meta": "sponsored product · 6 ad groups",
+        "roas": "4.6×",
+        "acos": "21.8%",
+        "spend": "$14,200",
+        "mroas": "1.42×",
+        "cm": "$3,180",
+        "verdict": "Scale"
+      },
+      {
+        "name": "SP · Glassware broad",
+        "meta": "sponsored product · 4 ad groups",
+        "roas": "3.1×",
+        "acos": "26.1%",
+        "spend": "$9,800",
+        "mroas": "0.78×",
+        "cm": "−$640",
+        "verdict": "Trim hard"
+      },
+      {
+        "name": "SB · Brand defense",
+        "meta": "sponsored brand · protected",
+        "roas": "2.9×",
+        "acos": "23.4%",
+        "spend": "$8,400",
+        "mroas": "0.71×",
+        "cm": "−$210",
+        "verdict": "Protected",
+        "tag": "protected"
+      },
+      {
+        "name": "SP · Cookware exact",
+        "meta": "sponsored product · 5 ad groups",
+        "roas": "5.2×",
+        "acos": "15.2%",
+        "spend": "$7,600",
+        "mroas": "1.61×",
+        "cm": "$2,240",
+        "verdict": "Capped",
+        "tag": "at cap"
+      },
+      {
+        "name": "SP · Textiles auto",
+        "meta": "sponsored product · 3 ad groups",
+        "roas": "3.4×",
+        "acos": "20.8%",
+        "spend": "$6,100",
+        "mroas": "0.94×",
+        "cm": "$180",
+        "verdict": "Restructure"
+      },
+      {
+        "name": "SD · Retargeting",
+        "meta": "sponsored display · 5 ad groups",
+        "roas": "4.1×",
+        "acos": "18.6%",
+        "spend": "$5,900",
+        "mroas": "1.18×",
+        "cm": "$1,120",
+        "verdict": "Hold"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "term": "plastic drinking glasses",
+        "bleed": "$340/mo",
+        "pct": "100%",
+        "meta": "Glassware broad · 412 clicks · 3 orders · ACOS 164%",
+        "neg": true
+      },
+      {
+        "term": "drinking glasses for kids",
+        "bleed": "$240/mo",
+        "pct": "71%",
+        "meta": "Glassware broad · 286 clicks · 1 order · ACOS 248%",
+        "neg": true
+      },
+      {
+        "term": "cheap plates bulk",
+        "bleed": "$186/mo",
+        "pct": "55%",
+        "meta": "Ceramics auto · 214 clicks · 0 orders",
+        "neg": true
+      },
+      {
+        "term": "ceramic bowl set of 12",
+        "bleed": "$164/mo",
+        "pct": "48%",
+        "meta": "Ceramics broad · 178 clicks · 1 order · returns 40%",
+        "neg": true
+      },
+      {
+        "term": "restaurant supply plates",
+        "bleed": "$142/mo",
+        "pct": "42%",
+        "meta": "Ceramics auto · 156 clicks · 0 orders",
+        "neg": true
+      },
+      {
+        "term": "oven mitt commercial grade",
+        "bleed": "$118/mo",
+        "pct": "35%",
+        "meta": "Textiles auto · 132 clicks · 1 order · ACOS 186%",
+        "neg": false
+      }
+    ],
+    "entities": [
+      {
+        "query": "speckled stoneware bowl",
+        "verdict": "Cut the Google path · save $780/mo",
+        "paths": [
+          {
+            "label": "Amazon SP · exact",
+            "cpa": "$6.20 CPA"
+          },
+          {
+            "label": "Google PMax",
+            "cpa": "$11.40 CPA"
+          }
+        ]
+      },
+      {
+        "query": "carbon steel pan 10 inch",
+        "verdict": "Cut the Amazon path · save $410/mo",
+        "paths": [
+          {
+            "label": "Google Search · exact",
+            "cpa": "$7.10 CPA"
+          },
+          {
+            "label": "Amazon SP · phrase",
+            "cpa": "$12.80 CPA"
+          }
+        ]
+      },
+      {
+        "query": "linen dish towel set",
+        "verdict": "Keep both · incrementality holds at 71%",
+        "paths": [
+          {
+            "label": "Amazon SP · exact",
+            "cpa": "$5.40 CPA"
+          },
+          {
+            "label": "Meta Advantage+",
+            "cpa": "$6.10 CPA"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

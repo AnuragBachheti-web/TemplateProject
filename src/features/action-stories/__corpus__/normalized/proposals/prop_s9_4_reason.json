@@ -1,0 +1,87 @@
+{
+  "proposal_id": "prop_s9_4_reason",
+  "story_code": "S9.4",
+  "stage": "reason",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "bidder",
+  "title": "Budget + inventory pairing — $18K shift proposal",
+  "narrative": "Realify will pair the budget shift with its inventory move and wait. Nothing reaches an ad platform without your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "inputs": [
+      {
+        "label": "Spend + revenue · 90 days",
+        "meta": "5 platforms"
+      },
+      {
+        "label": "CM after fees and returns",
+        "meta": "11,806 orders"
+      },
+      {
+        "label": "Marginal curves per campaign",
+        "meta": "23 campaigns"
+      },
+      {
+        "label": "Cover by SKU and channel",
+        "meta": "synced 06:15"
+      },
+      {
+        "label": "Open transfers + POs",
+        "meta": "9 in flight"
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Bd",
+        "name": "Bidder",
+        "stance": "Wants +$25K into TikTok Spark. Reads marginal CM only."
+      },
+      {
+        "initials": "Pl",
+        "name": "Planner",
+        "stance": "Caps the shift at +$18K until transfer T-142 lands. Reads cover."
+      },
+      {
+        "initials": "Ar",
+        "name": "Arbiter",
+        "stance": "Holds the guardrail, prices the disagreement, and writes the paired slate."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

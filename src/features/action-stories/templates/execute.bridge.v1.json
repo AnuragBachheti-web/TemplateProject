@@ -1,0 +1,263 @@
+{
+  "template_id": "execute.bridge.v1",
+  "stage": "execute",
+  "sections": [
+    {
+      "id": "plan",
+      "title": null,
+      "region": "main"
+    },
+    {
+      "id": "execution",
+      "title": "Execution",
+      "region": "main"
+    },
+    {
+      "id": "assurance",
+      "title": "Assurance",
+      "region": "rail"
+    },
+    {
+      "id": "context",
+      "title": "Context",
+      "region": "rail"
+    }
+  ],
+  "blocks": [
+    {
+      "slotName": "narrative",
+      "blockType": "text",
+      "binding": "narrative",
+      "section": "plan",
+      "role": "hero",
+      "when": {
+        "path": "narrative",
+        "op": "truthy"
+      }
+    },
+    {
+      "slotName": "plan",
+      "blockType": "table",
+      "binding": "execution.plan",
+      "section": "plan",
+      "when": {
+        "path": "execution.plan",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "progress",
+      "blockType": "number",
+      "binding": "execution.progress_pct",
+      "section": "execution",
+      "when": {
+        "path": "execution.progress_pct",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "progress_rows",
+      "blockType": "table",
+      "binding": "execution.progress_rows",
+      "section": "execution",
+      "when": {
+        "path": "execution.progress_rows",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "execution_targets",
+      "blockType": "itemQueue",
+      "binding": "execution.targets",
+      "section": "execution",
+      "when": {
+        "path": "execution.targets",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "flags",
+      "blockType": "table",
+      "binding": "execution.flags",
+      "section": "execution",
+      "when": {
+        "path": "execution.flags",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "ledger",
+      "blockType": "table",
+      "binding": "execution.ledger",
+      "section": "execution",
+      "when": {
+        "path": "execution.ledger",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "ledger_note",
+      "blockType": "text",
+      "binding": "execution.ledger_note",
+      "section": "execution",
+      "when": {
+        "path": "execution.ledger_note",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "bulk_note",
+      "blockType": "text",
+      "binding": "execution.bulk_note",
+      "section": "execution",
+      "when": {
+        "path": "execution.bulk_note",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "verification",
+      "blockType": "labelValueList",
+      "binding": "execution.verification",
+      "section": "assurance",
+      "when": {
+        "path": "execution.verification",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "rollback",
+      "blockType": "labelValueList",
+      "binding": "execution.rollback",
+      "section": "assurance",
+      "when": {
+        "path": "execution.rollback",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "rollback_note",
+      "blockType": "text",
+      "binding": "execution.rollback_note",
+      "section": "assurance",
+      "when": {
+        "path": "execution.rollback_note",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "arming",
+      "blockType": "text",
+      "binding": "execution.arming",
+      "section": "assurance",
+      "when": {
+        "path": "execution.arming",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "decision_mode",
+      "blockType": "text",
+      "binding": "mode",
+      "section": "context"
+    },
+    {
+      "slotName": "stage_status",
+      "blockType": "text",
+      "binding": "status_note",
+      "section": "context",
+      "when": {
+        "path": "status_note",
+        "op": "truthy"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "approve",
+      "label": "Start execution",
+      "kind": "primary",
+      "action": "approve",
+      "loadingLabel": "Starting…",
+      "confirm": {
+        "required": true,
+        "title": "Start execution?",
+        "description": "This begins writing the planned changes to the connected systems."
+      },
+      "disabledReasonBinding": "eligibility.approve.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.approve.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.approve.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "send_back",
+      "label": "Send back",
+      "kind": "secondary",
+      "action": "send_back",
+      "confirm": {
+        "required": true,
+        "title": "Send this back before executing?",
+        "description": "Execution does not start. The proposal returns to its owner with your note."
+      },
+      "reason": {
+        "required": true,
+        "label": "Why are you sending this back?",
+        "minLength": 10
+      },
+      "disabledReasonBinding": "eligibility.send_back.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.send_back.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.send_back.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "dismiss",
+      "label": "Dismiss",
+      "kind": "destructive",
+      "action": "dismiss",
+      "confirm": {
+        "required": true,
+        "title": "Dismiss this proposal?",
+        "description": "Dismissing is final. Nothing is executed and the proposal will not come back."
+      },
+      "reason": {
+        "required": true,
+        "label": "Why are you dismissing this?",
+        "minLength": 10
+      },
+      "disabledReasonBinding": "eligibility.dismiss.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.dismiss.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.dismiss.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    }
+  ]
+}

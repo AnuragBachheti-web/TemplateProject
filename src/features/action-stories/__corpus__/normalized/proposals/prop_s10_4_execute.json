@@ -1,0 +1,202 @@
+{
+  "proposal_id": "prop_s10_4_execute",
+  "story_code": "S10.4",
+  "stage": "execute",
+  "action_type": "file_claim",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "controller",
+  "title": "$4,120 recoverable — $890 expires in 21 days",
+  "narrative": "The expiring claim files first, then the batches. Nothing here changes a price or moves a unit — the whole downside of this stage is a marketplace saying no.",
+  "status_note": "Execute · 0 of 4 stages · expiring claim files first",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "progress_pct": {
+      "value": 0,
+      "unit": "pct"
+    },
+    "progress_rows": [
+      {
+        "label": "Stages complete",
+        "value": "0 of 4"
+      },
+      {
+        "label": "Line items",
+        "value": "0 of 12"
+      },
+      {
+        "label": "Cases with IDs",
+        "value": "0"
+      },
+      {
+        "label": "Staged on documents",
+        "value": "0"
+      },
+      {
+        "label": "Expected recovery",
+        "value": "—"
+      }
+    ],
+    "verification": [
+      {
+        "label": "Case outcomes",
+        "state": "off",
+        "detail": "Approvals post to the Cash lens; denials get one appeal with new evidence, then a write-off entry."
+      },
+      {
+        "label": "Recovery rate by type",
+        "state": "off",
+        "detail": "Outcomes rewrite the win rates the ledger sorts by. Past 25% denials in a type, the batch path pauses."
+      },
+      {
+        "label": "Window alarms",
+        "state": "off",
+        "detail": "Any staged claim inside seven days of its deadline escalates rather than expiring quietly."
+      }
+    ],
+    "plan": [
+      {
+        "name": "Batch filing via API",
+        "meta": "9 claims · one batch per type, one evidence shape each, case IDs captured on acknowledgement",
+        "statusLabel": "staged",
+        "btnLabel": "File",
+        "items": [
+          {
+            "name": "Dimension-tier batch · 6 claims",
+            "detail": "Filed together with the measured-dimension records and itemised fee lines attached. Batching keeps case volume legible to a reviewer who sees the same argument six times.",
+            "value": "$2,380",
+            "tag": "one submission",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Unreimbursed inventory · 2 claims",
+            "detail": "Both claimed at landed cost from the originating PO rather than at retail — the cost basis history says gets approved.",
+            "value": "$700",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Refund without return · 2 orders",
+            "detail": "Filed first in the batch because it has the least window left. Refund events, elapsed return window and the empty inbound-scan search all attached.",
+            "value": "$400",
+            "tag": "expires in 9 days",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Portal tasks and document requests",
+        "meta": "where no API path exists, or the evidence is with someone else",
+        "statusLabel": "staged",
+        "btnLabel": "Run",
+        "items": [
+          {
+            "name": "Walmart shortage · portal task",
+            "detail": "WFS shortage claims file through the seller portal by hand. A task with the assembled pack attached goes to the Controller, dated against the 44-day window.",
+            "value": "$230 · 44 days",
+            "tag": "no api path",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Condition photographs · 3PL portal",
+            "detail": "Request to the 3PL for the four damaged units. The claim is assembled and waiting; it files itself the moment the images land.",
+            "value": "$410 · staged",
+            "stateLabel": "staged"
+          },
+          {
+            "name": "Carrier POD and bill of lading",
+            "detail": "Request to the freight broker on PO-4488. Without both documents the shortage claim wins about a fifth of the time, so it does not go early.",
+            "value": "requested",
+            "stateLabel": "staged"
+          }
+        ]
+      },
+      {
+        "name": "Cash lens posting",
+        "meta": "expected recovery scheduled, realised recovery attributed on approval",
+        "doorLabel": "Cash lens",
+        "statusLabel": "waits for filing",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Expected recovery on the ladder",
+            "detail": "Placed at the historic decision lag per type — 9 days for dimension claims, 18 for inventory — so the forecast is not optimistic about timing.",
+            "value": "$3,080 expected",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Attribution tile updated",
+            "detail": "Recovered dollars stay attributed to this flow with their claim references, so the period figure is auditable line by line rather than asserted.",
+            "value": "$11.7K YTD",
+            "tag": "persistent",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Write-off log posted",
+            "detail": "$84 of sub-floor leakage recorded against the period. Not chased, still counted — the number that argues for fixing the cause.",
+            "value": "$84 logged",
+            "stateLabel": "blocked"
+          }
+        ]
+      },
+      {
+        "name": "Monitoring",
+        "meta": "case outcomes, recovery rate by type, discrepancy inflow",
+        "statusLabel": "waits for filing",
+        "btnLabel": "Blocked",
+        "items": [
+          {
+            "name": "Case outcomes polled daily",
+            "detail": "Every case ID is polled for a decision. An approval posts to the Cash lens; a denial gets one appeal with new evidence and then a write-off entry.",
+            "value": "9 cases",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Recovery rate by type",
+            "detail": "Outcomes update the win rates this ledger sorts by. A type that starts losing gets a lower priority and, past 25% denials, loses the batch path.",
+            "value": "3 types",
+            "tag": "feeds the engine",
+            "stateLabel": "blocked"
+          },
+          {
+            "name": "Discrepancy inflow watch",
+            "detail": "Seventeen this month against eleven in May. A fourth consecutive rise opens a 10.1 investigation into why fees are drifting rather than filing another batch.",
+            "value": "17 / month",
+            "tag": "rising",
+            "stateLabel": "blocked"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

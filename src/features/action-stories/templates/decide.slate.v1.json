@@ -1,0 +1,415 @@
+{
+  "template_id": "decide.slate.v1",
+  "stage": "decide",
+  "sections": [
+    {
+      "id": "recommendation",
+      "title": null,
+      "region": "main"
+    },
+    {
+      "id": "slate",
+      "title": "Slate",
+      "region": "main"
+    },
+    {
+      "id": "guardrails",
+      "title": "Guardrails",
+      "region": "rail"
+    },
+    {
+      "id": "rollup",
+      "title": "Totals",
+      "region": "rail"
+    },
+    {
+      "id": "context",
+      "title": "Context",
+      "region": "rail"
+    },
+    {
+      "id": "provenance",
+      "title": "Basis",
+      "region": "rail"
+    }
+  ],
+  "blocks": [
+    {
+      "slotName": "recommendation_identity",
+      "blockType": "text",
+      "binding": "proposal.recommendation_identity",
+      "section": "recommendation",
+      "layout": {
+        "group": "recommendation",
+        "span": 12
+      },
+      "when": {
+        "path": "proposal.recommendation_identity",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "recommendation",
+      "blockType": "text",
+      "binding": "proposal.recommendation",
+      "section": "recommendation",
+      "role": "hero",
+      "layout": {
+        "group": "recommendation",
+        "span": 12
+      },
+      "when": {
+        "path": "proposal.recommendation",
+        "op": "truthy"
+      }
+    },
+    {
+      "slotName": "recommendation_detail",
+      "blockType": "text",
+      "binding": "proposal.recommendation_detail",
+      "section": "recommendation",
+      "role": "heroSub",
+      "layout": {
+        "group": "recommendation",
+        "span": 12
+      },
+      "when": {
+        "path": "proposal.recommendation_detail",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "recommendation_metrics",
+      "blockType": "table",
+      "binding": "proposal.recommendation_metrics",
+      "section": "recommendation",
+      "layout": {
+        "group": "recommendation",
+        "span": 12
+      },
+      "when": {
+        "path": "proposal.recommendation_metrics",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "composition",
+      "blockType": "barChart",
+      "binding": "proposal.composition",
+      "section": "recommendation",
+      "when": {
+        "path": "proposal.composition",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "alternatives",
+      "blockType": "table",
+      "binding": "proposal.alternatives",
+      "section": "slate",
+      "when": {
+        "path": "proposal.alternatives",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "item_groups",
+      "blockType": "itemQueue",
+      "binding": "proposal.item_groups",
+      "section": "slate",
+      "when": {
+        "path": "proposal.item_groups",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "focus_rows",
+      "blockType": "table",
+      "binding": "proposal.focus_rows",
+      "section": "slate",
+      "when": {
+        "path": "proposal.focus_rows",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "slate",
+      "blockType": "table",
+      "binding": "proposal.slate",
+      "section": "slate",
+      "selectable": true,
+      "when": {
+        "path": "proposal.slate",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "next_actions",
+      "blockType": "itemQueue",
+      "binding": "proposal.next_actions",
+      "section": "slate",
+      "when": {
+        "path": "proposal.next_actions",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "guardrail_verdict",
+      "blockType": "text",
+      "binding": "guardrails.verdict",
+      "section": "guardrails"
+    },
+    {
+      "slotName": "guardrail_checks",
+      "blockType": "labelValueList",
+      "binding": "guardrails.checks",
+      "section": "guardrails",
+      "when": {
+        "path": "guardrails.checks",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "coverage",
+      "blockType": "gauge",
+      "binding": "proposal.coverage",
+      "section": "guardrails",
+      "when": {
+        "path": "proposal.coverage",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "totals_rows",
+      "blockType": "labelValueList",
+      "binding": "totals.rows",
+      "section": "rollup",
+      "when": {
+        "path": "totals.rows",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "decision_mode",
+      "blockType": "text",
+      "binding": "mode",
+      "section": "context"
+    },
+    {
+      "slotName": "decision_contract_class",
+      "blockType": "text",
+      "binding": "contract_class",
+      "section": "context",
+      "when": {
+        "path": "contract_class",
+        "op": "in",
+        "value": [
+          "strategic",
+          "regulated"
+        ]
+      }
+    },
+    {
+      "slotName": "decision_lens",
+      "blockType": "text",
+      "binding": "lens",
+      "section": "context",
+      "when": {
+        "path": "lens",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "basis",
+      "blockType": "labelValueList",
+      "binding": "proposal.basis",
+      "section": "provenance",
+      "when": {
+        "path": "proposal.basis",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "stage_status",
+      "blockType": "text",
+      "binding": "status_note",
+      "section": "context",
+      "when": {
+        "path": "status_note",
+        "op": "truthy"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "approve",
+      "label": "Approve",
+      "kind": "primary",
+      "action": "approve",
+      "confirm": {
+        "required": true,
+        "title": "Approve this proposal?",
+        "description": "This approves every item on the slate and cannot be undone from here."
+      },
+      "disabledReasonBinding": "eligibility.approve.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.approve.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.approve.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "approve_selected",
+      "label": "Approve selected",
+      "kind": "primary",
+      "action": "approve_selected",
+      "confirm": {
+        "required": true,
+        "title": "Approve the selected items?",
+        "description": "Only the items you selected are approved. The rest stay on the slate."
+      },
+      "disabledReasonBinding": "eligibility.approve_selected.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.approve_selected.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.approve_selected.allowed",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "path": "cardinality",
+            "op": "eq",
+            "value": "many"
+          }
+        ]
+      }
+    },
+    {
+      "id": "modify",
+      "label": "Modify",
+      "kind": "secondary",
+      "action": "modify",
+      "confirm": {
+        "required": true,
+        "title": "Modify this proposal?",
+        "description": "The proposal returns for a fresh decision once your changes are re-checked against policy."
+      },
+      "reason": {
+        "required": true,
+        "label": "What should change?",
+        "minLength": 10
+      },
+      "disabledReasonBinding": "eligibility.modify.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.modify.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.modify.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "send_back",
+      "label": "Send back",
+      "kind": "secondary",
+      "action": "send_back",
+      "confirm": {
+        "required": true,
+        "title": "Send this proposal back?",
+        "description": "It returns to the originating owner with your note."
+      },
+      "reason": {
+        "required": true,
+        "label": "Why are you sending this back?",
+        "minLength": 10
+      },
+      "disabledReasonBinding": "eligibility.send_back.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.send_back.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.send_back.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "snooze",
+      "label": "Snooze",
+      "kind": "secondary",
+      "action": "snooze",
+      "disabledReasonBinding": "eligibility.snooze.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.snooze.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.snooze.allowed",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "path": "on_clock",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "dismiss",
+      "label": "Dismiss",
+      "kind": "destructive",
+      "action": "dismiss",
+      "confirm": {
+        "required": true,
+        "title": "Dismiss this proposal?",
+        "description": "Dismissing is final. The proposal will not come back."
+      },
+      "reason": {
+        "required": true,
+        "label": "Why are you dismissing this?",
+        "minLength": 10
+      },
+      "disabledReasonBinding": "eligibility.dismiss.blocked_reason",
+      "when": {
+        "all": [
+          {
+            "path": "eligibility.dismiss.allowed",
+            "op": "exists"
+          },
+          {
+            "path": "eligibility.dismiss.allowed",
+            "op": "eq",
+            "value": true
+          }
+        ]
+      }
+    }
+  ]
+}

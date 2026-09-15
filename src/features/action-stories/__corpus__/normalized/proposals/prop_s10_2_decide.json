@@ -1,0 +1,281 @@
+{
+  "proposal_id": "prop_s10_2_decide",
+  "story_code": "S10.2",
+  "stage": "decide",
+  "action_type": "reorder",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "cash",
+  "persona": "navigator",
+  "title": "Week-7 trough projects $31K below buffer",
+  "narrative": "",
+  "status_note": "Decide · 2 levers · $57K relief · cost $0.9K · trough $146K",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "within_limits",
+    "checks": [
+      {
+        "label": "Buffer cleared · P50",
+        "note": "Week 7 lands at $146K against a $120K floor."
+      },
+      {
+        "label": "Buffer cleared · P10",
+        "note": "The downside case clears too — the plan does not depend on the quarter going well."
+      },
+      {
+        "label": "Service-level floor",
+        "note": "No PO delay drops Core service level below the 95% floor, and no Hero SKU is touched."
+      },
+      {
+        "label": "Fixed obligations untouched",
+        "note": "Payroll, rent, loan servicing and the Oct 20 tax remittance are outside every lever. $186K across the 13 weeks."
+      },
+      {
+        "label": "Buffer policy",
+        "note": "Buffer unchanged at $120K. The gap is being closed with cash, not with arithmetic."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation": "The plan clears the buffer in both the P50 and P10 cases",
+    "recommendation_detail": "Four levers, ranked by cost per dollar of relief. The terms negotiation is free and permanent but uncertain; the PO delay is free and certain but borrows cover; clearance and credit both cost real money. Every number here is computed by the story that owns the consequence.",
+    "recommendation_metrics": [
+      {
+        "label": "Relief chosen",
+        "value": "$57K",
+        "note": "against a $31K P50 gap"
+      },
+      {
+        "label": "Total cost",
+        "value": "$0.9K",
+        "note": "interest plus margin given up"
+      },
+      {
+        "label": "Week-7 trough",
+        "value": "$146K",
+        "note": "buffer is $120K"
+      },
+      {
+        "label": "P10 trough",
+        "value": "$123K",
+        "note": "the case that has to survive"
+      },
+      {
+        "label": "Levers",
+        "value": "2",
+        "note": "4 available, 1 needs 12 days"
+      }
+    ],
+    "next_actions": [
+      {
+        "label": "PO timing to Planner",
+        "note": "2 POs moved to week 8, cover recalculated"
+      },
+      {
+        "label": "Terms brief to Sourcer",
+        "note": "Net 60 ask added to the Kessler brief, answer by Oct 4"
+      },
+      {
+        "label": "Clearance acceleration",
+        "note": "not selected"
+      },
+      {
+        "label": "Credit drawdown task",
+        "note": "not selected"
+      }
+    ],
+    "slate": [
+      {
+        "rank": "1",
+        "title": "Delay two POs by one week",
+        "body": "Two of the six week-7 POs are for Core SKUs at 31 and 34 days of cover. Moving them into week 8 puts the outflow after the Amazon settlement lands.",
+        "chip": "S9.2 replenishment",
+        "badge": "recommended",
+        "relief": "+$26K",
+        "cost": "$0.9K",
+        "lead": "0 days",
+        "consequence": "Cover on four SKUs drops to 24 days at the point of the delay, which is inside the Core service-level floor of 95% but not comfortable. Priced through the replenishment engine: 96.1% projected service level, no Hero SKU affected, no stock-out risk inside the window.",
+        "hasSize": true,
+        "sizeLabel": "POs delayed",
+        "sizes": [
+          {
+            "label": "1 PO"
+          },
+          {
+            "label": "2 POs"
+          },
+          {
+            "label": "3 POs"
+          }
+        ],
+        "sizeNote": "Cover 24 days on four SKUs. Service level 96.1%, above the 95% floor.",
+        "priced": [
+          {
+            "label": "Projected service level",
+            "value": "96.1%"
+          },
+          {
+            "label": "Hero SKUs affected",
+            "value": "0"
+          },
+          {
+            "label": "Cost of the delay",
+            "value": "$0.9K"
+          }
+        ]
+      },
+      {
+        "rank": "2",
+        "title": "Negotiate Kessler to Net 60",
+        "body": "Kessler is mid-negotiation on their price notice and the terms ask is already on the brief. Net 45 to Net 60 moves the $88K PO out of week 7 entirely.",
+        "chip": "S9.17 supplier brief",
+        "badge": "brief already drafted",
+        "relief": "+$31K",
+        "cost": "free",
+        "lead": "12 days",
+        "consequence": "This is the only lever that costs nothing and improves DPO permanently — 15 days of terms is worth $31K of working capital every cycle, not just this one. The risk is that it is a negotiation, not a decision: Kessler can say no, and the answer will not be known until Oct 4.",
+        "hasSize": false,
+        "priced": [
+          {
+            "label": "Cash value of 15 days",
+            "value": "$31K"
+          },
+          {
+            "label": "Interest or margin cost",
+            "value": "$0"
+          },
+          {
+            "label": "Probability of success",
+            "value": "64%"
+          }
+        ]
+      },
+      {
+        "rank": "3",
+        "title": "Accelerate the clearance ladder",
+        "body": "Pull the first two ladder steps forward from week 9 to week 6, bringing recovery cash in ahead of the trough rather than after it.",
+        "chip": "S9.9 markdown",
+        "relief": "+$18K",
+        "cost": "$2.4K",
+        "lead": "5 days",
+        "consequence": "Deeper discounts earlier means lower total recovery: the same units clear at 61% of landed cost instead of 68%. That is real margin given up to buy timing — and it is only worth it if the timing is what actually matters.",
+        "hasSize": true,
+        "sizeLabel": "Steps pulled forward",
+        "sizes": [
+          {
+            "label": "1 step"
+          },
+          {
+            "label": "2 steps"
+          }
+        ],
+        "sizeNote": "Recovery 65% instead of 68%. Modest, and the cohort still clears before the fee cliff.",
+        "priced": [
+          {
+            "label": "Recovery rate",
+            "value": "65%"
+          },
+          {
+            "label": "Margin given up",
+            "value": "$2.4K"
+          },
+          {
+            "label": "Cash arrives",
+            "value": "week 6"
+          }
+        ]
+      },
+      {
+        "rank": "4",
+        "title": "Draw the revolving line",
+        "body": "The cheapest facility, three business days to draw, no covenant tested below 60% utilisation. Available at any size in $25K increments.",
+        "chip": "Meridian Bank · 9.4%",
+        "relief": "+$25K",
+        "cost": "$0.4K",
+        "lead": "3 days",
+        "consequence": "Straightforward and priced to the dollar — but it treats a timing problem as a funding problem. Drawn for 21 days it costs interest and nothing else; drawn as a habit it becomes the reason the conversion cycle never gets fixed.",
+        "hasSize": true,
+        "sizeLabel": "Draw",
+        "sizes": [
+          {
+            "label": "$25K"
+          },
+          {
+            "label": "$50K"
+          },
+          {
+            "label": "$75K"
+          }
+        ],
+        "sizeNote": "21 days outstanding at 9.4% — $410 of interest. Closes most of the P50 gap alone.",
+        "priced": [
+          {
+            "label": "Interest for 21 days",
+            "value": "$410"
+          },
+          {
+            "label": "Utilisation after draw",
+            "value": "17%"
+          },
+          {
+            "label": "Covenant tested",
+            "value": "no"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Levers chosen",
+        "value": "2"
+      },
+      {
+        "label": "Relief",
+        "value": "$57K"
+      },
+      {
+        "label": "Interest cost",
+        "value": "$0"
+      },
+      {
+        "label": "Margin given up",
+        "value": "$0"
+      },
+      {
+        "label": "Service-level cost",
+        "value": "$0.9K"
+      },
+      {
+        "label": "Permanent DPO gain",
+        "value": "+15 days"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

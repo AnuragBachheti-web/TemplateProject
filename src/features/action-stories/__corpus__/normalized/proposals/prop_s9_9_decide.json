@@ -1,0 +1,438 @@
+{
+  "proposal_id": "prop_s9_9_decide",
+  "story_code": "S9.9",
+  "stage": "decide",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "38 SKUs cross the 271-day FBA surcharge in 26 days",
+  "narrative": "",
+  "status_note": "Decide · 0 of 4 cohorts · recovery $70.1K · dilution 2.1 pp",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable",
+    "checks": [
+      {
+        "text": "Sell-through 100% clears the 80% target."
+      },
+      {
+        "text": "Margin dilution 2.1 pp exceeds the 1.8 pp cap."
+      },
+      {
+        "text": "No step exceeds its cohort depth cap. Hero lines stay at 40% and off outlet."
+      },
+      {
+        "text": "Every step above MAP or routed to outlet where MAP does not apply."
+      }
+    ]
+  },
+  "proposal": {
+    "slate": [
+      {
+        "name": "Hero lines · Ridgeline, Alder",
+        "meta": "820 u · $31K",
+        "cap": "max 40% · no outlet",
+        "cliffNote": "Cliff Sep 20-Oct 04 · elasticity 0.7-0.9 · least responsive cohort",
+        "recovery": "$19.4K",
+        "appLabel": "Approve cohort",
+        "options": [
+          {
+            "name": "Three-step ladder",
+            "note": "Depth capped at 40% by brand rule. Slow but keeps the lines credible at full price next season.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$19.4K"
+              },
+              {
+                "label": "of cost",
+                "value": "63%"
+              },
+              {
+                "label": "weeks",
+                "value": "7.1"
+              }
+            ]
+          },
+          {
+            "name": "Liquidate now",
+            "note": "Quote covers the lot at 38%. Resale channel is uncontrolled — these lines could surface on a discount marketplace next month.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$11.8K"
+              },
+              {
+                "label": "of cost",
+                "value": "38%"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1"
+              }
+            ]
+          },
+          {
+            "name": "Hold to next season",
+            "note": "These are evergreen lines, so holding is defensible — but storage accrues $302 a month per SKU and the surcharge starts Sep 20.",
+            "stats": [
+              {
+                "label": "storage cost",
+                "value": "−$3.6K"
+              },
+              {
+                "label": "fee at cliff",
+                "value": "−$1.2K"
+              },
+              {
+                "label": "capital held",
+                "value": "$31K"
+              }
+            ]
+          }
+        ],
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 22",
+            "channels": "DTC + Amazon promo",
+            "depth": "20%",
+            "price": "$34.40 avg",
+            "units": "260 u",
+            "band": "Sep 02 ± 4 d"
+          },
+          {
+            "n": "2",
+            "day": "Sep 05",
+            "channels": "DTC + Amazon promo",
+            "depth": "35%",
+            "price": "$27.95 avg",
+            "units": "340 u",
+            "band": "Sep 24 ± 6 d"
+          },
+          {
+            "n": "3",
+            "day": "Sep 26",
+            "channels": "DTC only · email",
+            "depth": "40%",
+            "price": "$25.80 avg",
+            "units": "150 u",
+            "band": "Oct 10 ± 8 d"
+          }
+        ]
+      },
+      {
+        "name": "Core · kitchen textiles",
+        "meta": "1,640 u · $38K",
+        "cap": "max 55% · outlet ok",
+        "cliffNote": "Cliff Sep 13-19 · elasticity 1.9-2.1 · moves easily on depth",
+        "recovery": "$24.6K",
+        "appLabel": "Approve cohort",
+        "options": [
+          {
+            "name": "Two-step ladder",
+            "note": "The whole cohort clears before the cliff at 25% then 45%. This is the shape the frontier picked.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$24.6K"
+              },
+              {
+                "label": "of cost",
+                "value": "65%"
+              },
+              {
+                "label": "weeks",
+                "value": "4.2"
+              }
+            ]
+          },
+          {
+            "name": "Liquidate now",
+            "note": "Fast and clean, but textiles are the most elastic cohort — markdown recovers 27 points more than the quote.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$14.4K"
+              },
+              {
+                "label": "of cost",
+                "value": "38%"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1"
+              }
+            ]
+          },
+          {
+            "name": "Donate",
+            "note": "Deduction at cost basis plus fee avoidance. Reasonable for the 240 units with print defects, wasteful for the rest.",
+            "stats": [
+              {
+                "label": "tax value",
+                "value": "$11.8K"
+              },
+              {
+                "label": "of cost",
+                "value": "31%"
+              },
+              {
+                "label": "weeks",
+                "value": "1.4"
+              }
+            ]
+          }
+        ],
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 22",
+            "channels": "DTC + Amazon + email",
+            "depth": "25%",
+            "price": "$14.20 avg",
+            "units": "680 u",
+            "band": "Sep 01 ± 3 d"
+          },
+          {
+            "n": "2",
+            "day": "Sep 03",
+            "channels": "all + outlet",
+            "depth": "45%",
+            "price": "$10.40 avg",
+            "units": "740 u",
+            "band": "Sep 18 ± 4 d"
+          }
+        ]
+      },
+      {
+        "name": "Seasonal · summer serveware",
+        "meta": "1,180 u · $34K",
+        "cap": "max 65% · outlet ok",
+        "cliffNote": "Cliff Sep 13-16 · elasticity 2.4-2.8 · season ends in 3 weeks",
+        "recovery": "$20.4K",
+        "appLabel": "Approve cohort",
+        "options": [
+          {
+            "name": "Three-step ladder",
+            "note": "Front-loaded because the season is the real deadline, not the fee. Step three catches the tail in outlet.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$20.4K"
+              },
+              {
+                "label": "of cost",
+                "value": "60%"
+              },
+              {
+                "label": "weeks",
+                "value": "5.4"
+              }
+            ]
+          },
+          {
+            "name": "Liquidate now",
+            "note": "A defensible call if capacity is the binding constraint — outlet can only take 240 units a week.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$12.9K"
+              },
+              {
+                "label": "of cost",
+                "value": "38%"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1"
+              }
+            ]
+          },
+          {
+            "name": "Hold to next summer",
+            "note": "Eleven months of storage, two more fee cliffs, and a design refresh due in spring. Realify does not recommend it.",
+            "stats": [
+              {
+                "label": "storage cost",
+                "value": "−$11.4K"
+              },
+              {
+                "label": "fee at cliffs",
+                "value": "−$4.1K"
+              },
+              {
+                "label": "capital held",
+                "value": "$34K"
+              }
+            ]
+          }
+        ],
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 20",
+            "channels": "DTC + Amazon + email",
+            "depth": "30%",
+            "price": "$20.30 avg",
+            "units": "520 u",
+            "band": "Aug 30 ± 3 d"
+          },
+          {
+            "n": "2",
+            "day": "Sep 01",
+            "channels": "all + outlet",
+            "depth": "50%",
+            "price": "$14.50 avg",
+            "units": "480 u",
+            "band": "Sep 12 ± 3 d"
+          },
+          {
+            "n": "3",
+            "day": "Sep 14",
+            "channels": "outlet only",
+            "depth": "65%",
+            "price": "$10.15 avg",
+            "units": "180 u",
+            "band": "Sep 28 ± 6 d"
+          }
+        ]
+      },
+      {
+        "name": "Discontinued · glass carafes",
+        "meta": "540 u · $15K",
+        "cap": "no depth cap",
+        "cliffNote": "Already past 271 days · surcharge accruing now",
+        "recovery": "$5.7K",
+        "appLabel": "Approve cohort",
+        "options": [
+          {
+            "name": "Liquidate now",
+            "note": "No future assortment role and the surcharge is already running. Speed beats recovery here, and brand exposure is limited — the line is discontinued.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$5.7K"
+              },
+              {
+                "label": "of cost",
+                "value": "38%"
+              },
+              {
+                "label": "weeks",
+                "value": "2.1"
+              }
+            ]
+          },
+          {
+            "name": "Two-step ladder",
+            "note": "Recovers a little more but takes six weeks of surcharge on units that are already over the cliff.",
+            "stats": [
+              {
+                "label": "recovery",
+                "value": "$6.4K"
+              },
+              {
+                "label": "of cost",
+                "value": "43%"
+              },
+              {
+                "label": "weeks",
+                "value": "5.6"
+              }
+            ]
+          },
+          {
+            "name": "Donate",
+            "note": "Clears in ten days and takes the write-off. Worth it if the liquidation quote lapses before you sign it.",
+            "stats": [
+              {
+                "label": "tax value",
+                "value": "$4.7K"
+              },
+              {
+                "label": "of cost",
+                "value": "31%"
+              },
+              {
+                "label": "weeks",
+                "value": "1.4"
+              }
+            ]
+          }
+        ],
+        "ladder": [
+          {
+            "n": "1",
+            "day": "Aug 20",
+            "channels": "outlet only",
+            "depth": "55%",
+            "price": "$12.60 avg",
+            "units": "260 u",
+            "band": "Sep 06 ± 5 d"
+          },
+          {
+            "n": "2",
+            "day": "Sep 08",
+            "channels": "outlet + liquidation",
+            "depth": "70%",
+            "price": "$8.40 avg",
+            "units": "280 u",
+            "band": "Sep 26 ± 9 d"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Recovery",
+        "value": "$70.1K",
+        "meta": "of $118K locked · 59% of cost"
+      },
+      {
+        "label": "Sell-through",
+        "value": "100%",
+        "meta": "clears the 80% target"
+      },
+      {
+        "label": "Margin dilution",
+        "value": "2.1 pp",
+        "meta": "0.3 pp over the cap"
+      },
+      {
+        "label": "Cohorts approved",
+        "value": "0 of 4",
+        "meta": "nothing held"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

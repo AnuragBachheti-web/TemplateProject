@@ -1,0 +1,169 @@
+{
+  "proposal_id": "prop_s10_6_analyze",
+  "story_code": "S10.6",
+  "stage": "analyze",
+  "action_type": "reallocate",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "arbiter",
+  "title": "Prime Fall T-4 — inventory 84% · deals 100% · creative 60%",
+  "narrative": "",
+  "status_note": "Analyze · readiness 83% · 3 desks behind · FBA cutoff 31h · air freight $3.1K against $9.4K exposure",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "FBA\ncutoff",
+        "when": "Aug 20 · 23:59",
+        "pct": 6
+      },
+      {
+        "label": "WFS\ncutoff",
+        "when": "Aug 21 · 18:00",
+        "pct": 26
+      },
+      {
+        "label": "Creative\ndue",
+        "when": "Aug 21 · 18:00",
+        "pct": 48
+      },
+      {
+        "label": "Event\nopens",
+        "when": "Aug 23 · 00:01",
+        "pct": 70
+      },
+      {
+        "label": "Contract\nexpires",
+        "when": "Aug 27 · 06:00",
+        "pct": 94
+      }
+    ],
+    "detail_rows": [
+      {
+        "name": "Inventory",
+        "lens": "Planner · Inventory lens",
+        "score": 84,
+        "scoreLabel": "84%",
+        "gap": "2 Heroes short at P50 · FBA cutoff in 31 hours",
+        "owner": "Planner",
+        "clock": "31h"
+      },
+      {
+        "name": "Deals and promos",
+        "lens": "Promoter · Margin lens",
+        "score": 100,
+        "scoreLabel": "100%",
+        "gap": "Lineup locked and confirmed across 14 SKUs",
+        "owner": "Promoter",
+        "clock": "locked"
+      },
+      {
+        "name": "Creative and content",
+        "lens": "Merchandiser · Sales lens",
+        "score": 60,
+        "scoreLabel": "60%",
+        "gap": "6 of 15 DTC assets outstanding · studio has 2 days",
+        "owner": "Merchandiser",
+        "clock": "2 days"
+      },
+      {
+        "name": "Ad readiness",
+        "lens": "Bidder · Ads lens",
+        "score": 92,
+        "scoreLabel": "92%",
+        "gap": "Budgets staged; 3 campaigns need creative before they can launch",
+        "owner": "Bidder",
+        "clock": "2 days"
+      },
+      {
+        "name": "Account health",
+        "lens": "Keeper · Sales lens",
+        "score": 74,
+        "scoreLabel": "74%",
+        "gap": "Late-shipment headroom is 0.6pp with volume about to triple",
+        "owner": "Keeper",
+        "clock": "pre-arm"
+      },
+      {
+        "name": "Cash plan",
+        "lens": "Navigator · Cash lens",
+        "score": 88,
+        "scoreLabel": "88%",
+        "gap": "Spike funded; settlement lag pushes the Week-7 trough deeper",
+        "owner": "Navigator",
+        "clock": "wk-7"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "name": "Dutch Oven 5qt",
+        "sub": "Hero · 41% of event revenue",
+        "a": "820",
+        "b": "1,140",
+        "c": "−320"
+      },
+      {
+        "name": "Sauté Pan 12in",
+        "sub": "Hero · 18% of event revenue",
+        "a": "410",
+        "b": "590",
+        "c": "−180"
+      },
+      {
+        "name": "Knife Block 6pc",
+        "sub": "Core",
+        "a": "360",
+        "b": "300",
+        "c": "+60"
+      },
+      {
+        "name": "Cast-iron Skillet 10in",
+        "sub": "Core",
+        "a": "520",
+        "b": "440",
+        "c": "+80"
+      },
+      {
+        "name": "Remaining 10 SKUs",
+        "sub": "Core and Margin Driver",
+        "a": "2,940",
+        "b": "2,510",
+        "c": "+430"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

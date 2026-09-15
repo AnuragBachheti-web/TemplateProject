@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import Checkbox from '../ui/Checkbox';
 import { humanizeSlotName } from './humanizeSlotName';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { deltaTone } from './deltaTone';
@@ -109,7 +110,13 @@ function compareForSort(a, b) {
  *   without BlockCard's own border/shadow, so it doesn't nest a second card inside the panel
  *   that's already providing one (the same rule every other block type follows).
  */
-export default function TableBlock({ slotName, data, compact }) {
+/**
+ * Optional row selection (`selectable`/`selectedIds`/`onToggleRow`/`rowIdOf`) is the ONE addition
+ * this block needed for Approve-selected. It is inert unless a caller opts in, so every existing
+ * render is byte-identical: no extra column, no extra DOM, no behaviour change. TableBlock knows
+ * nothing about approval — it renders a checkbox column and reports which row ids are ticked.
+ */
+export default function TableBlock({ slotName, data, compact, selectable = false, selectedIds, onToggleRow, rowIdOf }) {
   const [sort, setSort] = useState(null); // { key, direction: 'asc'|'desc' } | null
   const [page, setPage] = useState(0);
 
@@ -191,6 +198,12 @@ export default function TableBlock({ slotName, data, compact }) {
     setPage(0);
   }
 
+  // Row identity for selection. A caller supplies `rowIdOf` when the slate carries a real business
+  // id; the positional fallback is all a mockup-derived slate can offer, and matches what the API
+  // layer's own slateItemId does so both sides agree on what "item_3" means.
+  const idOf = (row, i) => rowIdOf?.(row, i) ?? row?.id ?? row?.item_id ?? row?.sku ?? row?.code ?? `item_${i}`;
+  const selectedSet = new Set(Array.isArray(selectedIds) ? selectedIds : []);
+
   const table = (
     <>
       <div className="relative">
@@ -205,6 +218,14 @@ export default function TableBlock({ slotName, data, compact }) {
           </caption>
           <thead>
             <tr className="bg-rf-surface-sunken">
+              {selectable && (
+                <th
+                  scope="col"
+                  className={`w-10 border-b border-rf-border-subtle px-3 py-2 ${isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''}`}
+                >
+                  <span className="sr-only">Select</span>
+                </th>
+              )}
               {columns.map((col) => {
                 const isSorted = sort?.key === col;
                 return (
@@ -238,6 +259,16 @@ export default function TableBlock({ slotName, data, compact }) {
           <tbody>
             {rows.map((row, i) => (
               <tr key={i} className="border-b border-rf-border-subtle last:border-0 hover:bg-rf-surface-sunken">
+                {selectable && (
+                  <td className="px-3 py-2 align-middle">
+                    <Checkbox
+                      checked={selectedSet.has(idOf(row, i))}
+                      onChange={() => onToggleRow?.(idOf(row, i))}
+                      label={`Select row ${i + 1}`}
+                      hideLabel
+                    />
+                  </td>
+                )}
                 {columns.map((col) => {
                   const value = row[col];
                   if (controlColumns.has(col)) {

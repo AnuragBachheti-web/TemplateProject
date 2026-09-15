@@ -1,0 +1,401 @@
+{
+  "proposal_id": "prop_s9_17_decide",
+  "story_code": "S9.17",
+  "stage": "decide",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "inventory",
+  "persona": "sourcer",
+  "title": "Supplier K +8% cost notice — should-cost says +2.9%",
+  "narrative": "",
+  "status_note": "Decide · 2 negotiate, 1 dual-source, 1 exit, 0 accept · +$20.9K / yr",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Planner has to accept the $18K safety-stock impact first"
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Planner has to accept the $18K safety-stock impact first"
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "beyond_limits",
+    "checks": [
+      {
+        "label": "Open POs honoured",
+        "note": "Every transition honours the $412K in flight. No cancellation is used as leverage."
+      },
+      {
+        "label": "Strategic-supplier exit",
+        "note": "No strategic supplier is being exited."
+      },
+      {
+        "label": "Safety-stock impact accepted",
+        "note": "$18K of safety stock has to reach Planner before approval."
+      },
+      {
+        "label": "Nothing sent automatically",
+        "note": "Briefs and messages are drafted in Execute. A person sends them, at every dial setting."
+      },
+      {
+        "label": "Rationale logged",
+        "note": "Every decision files to LEDGER-SUP-0184 with its should-cost basis."
+      }
+    ]
+  },
+  "proposal": {
+    "next_actions": [
+      {
+        "label": "Negotiation briefs",
+        "note": "2 drafted for Sourcer, with anchors and trade currency"
+      },
+      {
+        "label": "Supplier messages",
+        "note": "drafted, held for human review — never auto-sent"
+      },
+      {
+        "label": "Buy-plan changes",
+        "note": "safety stock and lead times to Planner via S9.3"
+      },
+      {
+        "label": "Qualification tasks",
+        "note": "2 programmes with sample runs and sign-off gates"
+      }
+    ],
+    "slate": [
+      {
+        "name": "Kessler Metalworks",
+        "tier": "Tier 1",
+        "spend": "$880K",
+        "share": "31% of spend",
+        "strategic": true,
+        "issue": "+8% notice · OTD 94.1%",
+        "context": "Asked for 8% against a 2.9% should-cost move, while sitting two quarters below the Tier 1 OTD floor. Four SKUs are single-source and $374K of their POs are in flight.",
+        "options": [
+          {
+            "label": "Negotiate"
+          },
+          {
+            "label": "Dual-source"
+          },
+          {
+            "label": "Exit"
+          },
+          {
+            "label": "Accept"
+          }
+        ],
+        "planTitle": "Counter at +3.0% with an 18-month volume commitment",
+        "planBody": "Open with the should-cost build-up, not with a number. Anchor at +2.9% index-linked, settle at +3.0% in exchange for volume they have not had committed before, and put the OTD recovery plan in the same letter so the two conversations cannot be separated.",
+        "planBadge": "recommended",
+        "paramTitle": "Targets",
+        "params": [
+          {
+            "label": "Opening anchor",
+            "value": "+2.9%"
+          },
+          {
+            "label": "Target",
+            "value": "+3.0%"
+          },
+          {
+            "label": "Walk-away",
+            "value": "+5.0%"
+          },
+          {
+            "label": "Terms value if won",
+            "value": "$31K cash"
+          },
+          {
+            "label": "Response due",
+            "value": "Oct 4"
+          }
+        ],
+        "hasTrade": true,
+        "trade": [
+          {
+            "label": "18-month volume commitment"
+          },
+          {
+            "label": "Net 45 → Net 60 terms"
+          },
+          {
+            "label": "Rolling 12-week forecast"
+          },
+          {
+            "label": "Index-linked clause at renewal"
+          }
+        ],
+        "hasCandidates": false,
+        "candidates": [
+          {
+            "name": "Nanjing Ironworks",
+            "note": "same lane, 4 SKUs matched",
+            "price": "−1.8%",
+            "lead": "38 days",
+            "qual": "14 wks"
+          },
+          {
+            "name": "Hoyt Forge (US)",
+            "note": "domestic, 2 SKUs matched",
+            "price": "+4.2%",
+            "lead": "21 days",
+            "qual": "8 wks"
+          },
+          {
+            "name": "Brantome SA",
+            "note": "EU, premium finish",
+            "price": "+11.0%",
+            "lead": "30 days",
+            "qual": "10 wks"
+          }
+        ]
+      },
+      {
+        "name": "Meridian Filtration",
+        "tier": "Tier 2",
+        "spend": "$511K",
+        "share": "18% of spend",
+        "strategic": false,
+        "issue": "OTD 89.2% · 4 quarters down",
+        "context": "No price issue — they run below should-cost. Delivery is the problem: 89.2% OTD against a 93% floor, a 61-hour response time, and two stockouts on the filter 3-pack traced to late inbound.",
+        "options": [
+          {
+            "label": "Negotiate"
+          },
+          {
+            "label": "Dual-source"
+          },
+          {
+            "label": "Exit"
+          },
+          {
+            "label": "Accept"
+          }
+        ],
+        "planTitle": "Dual-source 50% to Aquatek",
+        "planBody": "Split the volume rather than replace it. Aquatek quotes +0.9% at a shorter lead time and holds the same certifications, so 50% of the cartridge volume stops depending on a supplier that has missed four quarters running. Meridian keeps the rest and a reason to fix it.",
+        "planBadge": "recommended",
+        "paramTitle": "Qualification plan",
+        "params": [
+          {
+            "label": "Volume shifted",
+            "value": "50%"
+          },
+          {
+            "label": "Qualification",
+            "value": "11 wks"
+          },
+          {
+            "label": "Certification transfer",
+            "value": "$16K"
+          },
+          {
+            "label": "Blended price",
+            "value": "+0.5%"
+          },
+          {
+            "label": "Lead time",
+            "value": "−4 days"
+          }
+        ],
+        "hasTrade": false,
+        "hasCandidates": true,
+        "candidates": [
+          {
+            "name": "Aquatek OEM",
+            "note": "same certifications",
+            "price": "+0.9%",
+            "lead": "24 days",
+            "qual": "11 wks"
+          },
+          {
+            "name": "Clearspring Filtration",
+            "note": "certified, 3 SKUs matched",
+            "price": "+2.4%",
+            "lead": "18 days",
+            "qual": "9 wks"
+          }
+        ]
+      },
+      {
+        "name": "Verdant Woodcraft",
+        "tier": "Tier 3",
+        "spend": "$227K",
+        "share": "8% of spend",
+        "strategic": false,
+        "issue": "3,140 PPM · returns 9.2%",
+        "context": "Defect rate 640 PPM above the Tier 3 ceiling and rising for six quarters. Returns on the affected SKUs run 9.2% against a 4% norm — the unit-price discount is smaller than what the defects cost us.",
+        "options": [
+          {
+            "label": "Negotiate"
+          },
+          {
+            "label": "Dual-source"
+          },
+          {
+            "label": "Exit"
+          },
+          {
+            "label": "Accept"
+          }
+        ],
+        "planTitle": "Replace with Alder & Co in 6 weeks",
+        "planBody": "No tooling, no certification, six weeks to qualify. Unit price rises 5.8% and the returns saving is $21K a year, so the switch pays for itself twice over. This is the cheapest supplier in the base to replace and the one with the clearest reason to.",
+        "planBadge": "recommended",
+        "paramTitle": "Transition",
+        "params": [
+          {
+            "label": "Open POs honoured",
+            "value": "$14K"
+          },
+          {
+            "label": "Transition window",
+            "value": "6 wks"
+          },
+          {
+            "label": "Unit price change",
+            "value": "+5.8%"
+          },
+          {
+            "label": "Returns saving",
+            "value": "−$21K / yr"
+          },
+          {
+            "label": "Net effect",
+            "value": "−$7.8K / yr"
+          }
+        ],
+        "hasTrade": false,
+        "hasCandidates": true,
+        "candidates": [
+          {
+            "name": "Alder & Co",
+            "note": "FSC certified, better finish",
+            "price": "+5.8%",
+            "lead": "26 days",
+            "qual": "6 wks"
+          },
+          {
+            "name": "Lindmark Woodworks",
+            "note": "higher grade, EU",
+            "price": "+9.2%",
+            "lead": "32 days",
+            "qual": "7 wks"
+          }
+        ]
+      },
+      {
+        "name": "Tsuyo Blades",
+        "tier": "Tier 2",
+        "spend": "$398K",
+        "share": "14% of spend",
+        "strategic": false,
+        "issue": "Net 30 vs Net 45 target",
+        "context": "Performance is fine and pricing tracks should-cost almost exactly. The only thing on the table is terms — Net 30 against a Net 45 target, worth $19K of working capital a year at current spend.",
+        "options": [
+          {
+            "label": "Negotiate"
+          },
+          {
+            "label": "Dual-source"
+          },
+          {
+            "label": "Exit"
+          },
+          {
+            "label": "Accept"
+          }
+        ],
+        "planTitle": "Terms-only ask: Net 30 → Net 45",
+        "planBody": "No price conversation at all. Ask for 15 days of terms in exchange for a two-year renewal and consolidated monthly ordering, which reduces their admin as much as it helps our cash. Walk-away is simply staying where we are.",
+        "planBadge": "recommended",
+        "paramTitle": "Targets",
+        "params": [
+          {
+            "label": "Target terms",
+            "value": "Net 45"
+          },
+          {
+            "label": "Cash released",
+            "value": "$19K"
+          },
+          {
+            "label": "Price change",
+            "value": "none"
+          },
+          {
+            "label": "Walk-away",
+            "value": "stay Net 30"
+          }
+        ],
+        "hasTrade": true,
+        "trade": [
+          {
+            "label": "Two-year renewal"
+          },
+          {
+            "label": "Consolidated monthly POs"
+          },
+          {
+            "label": "Volume +16% forecast shared"
+          }
+        ],
+        "hasCandidates": false,
+        "candidates": [
+          {
+            "name": "Seki Cutlery Co",
+            "note": "comparable steel grade",
+            "price": "+3.1%",
+            "lead": "34 days",
+            "qual": "12 wks"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Negotiate",
+        "value": "2"
+      },
+      {
+        "label": "Dual-source",
+        "value": "1"
+      },
+      {
+        "label": "Exit",
+        "value": "1"
+      },
+      {
+        "label": "Accept with rationale",
+        "value": "0"
+      },
+      {
+        "label": "Qualification programmes",
+        "value": "2"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

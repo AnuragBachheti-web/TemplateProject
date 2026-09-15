@@ -1,0 +1,217 @@
+{
+  "proposal_id": "prop_s10_5_analyze",
+  "story_code": "S10.5",
+  "stage": "analyze",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "steward",
+  "title": "Hero image replaced by third-party contribution — 41h ago",
+  "narrative": "",
+  "status_note": "Analyze · 8 drifts shown · $640/day open · $18.4K stranded · 412 feed rows rejected",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "comparison": [
+      {
+        "label": "under 4h",
+        "count": "4",
+        "pct": 29
+      },
+      {
+        "label": "4–12h",
+        "count": "6",
+        "pct": 43
+      },
+      {
+        "label": "12–48h",
+        "count": "2",
+        "pct": 14
+      },
+      {
+        "label": "over 48h",
+        "count": "2",
+        "pct": 14
+      }
+    ],
+    "detail_rows": [
+      {
+        "field": "Hero image",
+        "listing": "ASIN B0Y · Dutch Oven 5qt",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "age": "41 hours",
+        "at": "Aug 17 · 13:10",
+        "severity": "critical",
+        "cost": "$310"
+      },
+      {
+        "field": "Variation family break",
+        "listing": "Enamel set · 5 children",
+        "channel": "Amazon",
+        "source": "another seller’s edit",
+        "age": "3 days",
+        "at": "Aug 16 · 09:40",
+        "severity": "critical",
+        "cost": "$150"
+      },
+      {
+        "field": "Available quantity",
+        "listing": "Cast-iron Skillet 10in",
+        "channel": "Walmart",
+        "source": "our own failed feed",
+        "age": "9 hours",
+        "at": "Aug 19 · 21:20",
+        "severity": "high",
+        "cost": "$60"
+      },
+      {
+        "field": "Price",
+        "listing": "Filtration Pitcher",
+        "channel": "Shopify",
+        "source": "our own failed feed",
+        "age": "6 hours",
+        "at": "Aug 20 · 00:15",
+        "severity": "critical",
+        "cost": "$40"
+      },
+      {
+        "field": "Title",
+        "listing": "4 Walmart listings",
+        "channel": "Walmart",
+        "source": "our own failed feed",
+        "age": "2 days",
+        "at": "Aug 18 · 04:30",
+        "severity": "high",
+        "cost": "$30"
+      },
+      {
+        "field": "Bullet 3",
+        "listing": "Knife Block 6pc",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "age": "18 hours",
+        "at": "Aug 19 · 12:00",
+        "severity": "high",
+        "cost": "$20"
+      },
+      {
+        "field": "A+ modules",
+        "listing": "Enamel Casserole 3qt",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "age": "5 days",
+        "at": "Aug 14 · 10:20",
+        "severity": "medium",
+        "cost": "$20"
+      },
+      {
+        "field": "Secondary images",
+        "listing": "2 Amazon listings",
+        "channel": "Amazon",
+        "source": "marketplace contribution",
+        "age": "6 days",
+        "at": "Aug 13 · 16:45",
+        "severity": "medium",
+        "cost": "$10"
+      }
+    ],
+    "secondary_rows": [
+      {
+        "name": "Dutch Oven 5qt",
+        "units": "210 units · East node",
+        "capital": "$8,200",
+        "cause": "Variation orphan — no sellable parent since the family broke. Clears with the rebuild.",
+        "age": "3 days",
+        "storage": "$41/mo"
+      },
+      {
+        "name": "Sauté Pan 12in",
+        "units": "96 units · West node",
+        "capital": "$3,400",
+        "cause": "Listing suppressed on a content policy flag; the flag is the truncated title.",
+        "age": "2 days",
+        "storage": "$28/mo"
+      },
+      {
+        "name": "Filtration Pitcher",
+        "units": "140 units · East node",
+        "capital": "$2,600",
+        "cause": "Offer closed by a bulk edit in June and never reopened. Nothing points at this stock.",
+        "age": "61 days",
+        "storage": "$52/mo"
+      },
+      {
+        "name": "Knife Block 6pc",
+        "units": "48 units · East node",
+        "capital": "$1,900",
+        "cause": "FBA stranded: missing dimension attribute after the packaging change.",
+        "age": "18 days",
+        "storage": "$22/mo"
+      },
+      {
+        "name": "Cast-iron Skillet 10in",
+        "units": "60 units · West node",
+        "capital": "$1,600",
+        "cause": "Feed rejected on a GTIN mismatch — the repack changed the barcode.",
+        "age": "9 days",
+        "storage": "$19/mo"
+      },
+      {
+        "name": "Enamel Casserole 3qt",
+        "units": "36 units · East node",
+        "capital": "$700",
+        "cause": "Removed by seller error during a bulk edit; the listing exists, the offer does not.",
+        "age": "14 days",
+        "storage": "$8/mo"
+      }
+    ],
+    "entities": [
+      {
+        "when": "Aug 17 · 13:10",
+        "what": "Catalogue accepted an image contribution against the ASIN. No notification was sent to the brand owner, which is normal for contributions."
+      },
+      {
+        "when": "Aug 17 · 18:00",
+        "what": "Conversion on the listing began separating from its 30-day trend. Sessions held; conversion fell."
+      },
+      {
+        "when": "Aug 19 · 06:12",
+        "what": "Sync Integrity Monitor compared the live asset hash against the PIM canonical and flagged the mismatch. Detection lag: 41 hours."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

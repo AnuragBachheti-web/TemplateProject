@@ -40,10 +40,24 @@
 // (deliberately narrow so chart-shape DETECTION still reads these values), no runtime code needs to
 // see them once a block has already been classified as itemQueue/labelValueList/table/object —
 // chart-type detection is generation-time only, so hiding them here carries none of that risk.
+// `left`/`right`/`width` — CSS offsets and extents from the source mockups' own hand-positioned
+// bars and bands, which reached users as real table columns. TEMPLATE_ARCHITECTURE_AUDIT.md names
+// `bandLeft`/`dotLeft`/`newLeft` specifically; `dotLeft` was already covered (`dot` matches), but
+// `bandLeft`/`bandWidth`/`newLeft` had no rule and rendered as visible "Band Left: 30%" columns in
+// TableBlock. Checked corpus-wide before adding: every one of the 15 `bandLeft`, 15 `bandWidth`,
+// 8 `newLeft`, 12 `colLeft`/`colRight`, 5 `barLeft`/`barWidth`, 4 `footLeft`, 16 `footRight`, and
+// the bare `left`/`width`/`right` occurrences holds a percentage or pixel offset — none is a
+// business figure.
+//
+// `top`/`bottom` are deliberately NOT here despite being the same CSS family: `top` is a REQUIRED
+// input to waterfallChart's own row shape ({label, value, top, height, anchor}), and "top" carries
+// real business meaning in this domain ("top SKUs"). The confirmed leak is the horizontal family;
+// widening it further would trade a real leak for a real false positive.
 const DECORATIVE_WORDS = new Set([
   'bg', 'fg', 'tone', 'tint', 'border', 'cursor', 'icon', 'glow', 'edge', 'dot', 'shadow',
   'opacity', 'mark', 'hue', 'fill', 'stroke', 'weight', 'divider', 'radius', 'dash', 'anchor',
   'x', 'y', 'cx', 'cy', 'r', 'tx', 'ty', 'lx', 'ly', 'nx', 'op',
+  'left', 'right', 'width',
 ]);
 const CAMEL_WORD_RE = /[A-Z]?[a-z0-9]+|[A-Z]+(?![a-z])/g;
 

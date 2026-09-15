@@ -1,0 +1,114 @@
+{
+  "proposal_id": "prop_s10_3_reason",
+  "story_code": "S10.3",
+  "stage": "reason",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "keeper",
+  "title": "Late-shipment 3.4% ↑ — 0.6pp from threshold",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "trigger": [
+      {
+        "when": "Aug 19 · 05:40",
+        "what": "Health Score Monitor read late shipment at 3.4%, past our 3.0% floor for the sixth consecutive day and still climbing."
+      },
+      {
+        "when": "Aug 19 · 05:41",
+        "what": "Revenue-at-Risk Model priced the exposure at $9.1K a day for listing-level action and $6.8K an hour if the account is reviewed."
+      },
+      {
+        "when": "Aug 19 · 05:44",
+        "what": "Scout found an IP complaint filed Aug 16 with a counter-notice window closing in four days, and pinned both to one card."
+      }
+    ],
+    "policy": [
+      {
+        "level": "critical",
+        "label": "Account-level threat",
+        "sla": "2 hrs",
+        "detail": "Suspension notice, account review, or any metric past a marketplace limit. War-room state: pinned to every queue."
+      },
+      {
+        "level": "high",
+        "label": "Listing suppression or IP complaint",
+        "sla": "8 hrs",
+        "detail": "Revenue stops on the affected listing immediately. IP matters route to legal before anything is submitted."
+      },
+      {
+        "level": "medium",
+        "label": "Metric past our own floor",
+        "sla": "24 hrs",
+        "detail": "The marketplace has not acted. This is the window where an operational fix still works — like today."
+      },
+      {
+        "level": "low",
+        "label": "Policy notice or documentation request",
+        "sla": "72 hrs",
+        "detail": "No revenue at risk yet. Answered from the document vault rather than assembled from scratch."
+      }
+    ],
+    "constraints": [
+      {
+        "label": "Legal review on IP matters",
+        "detail": "Any response to an intellectual-property complaint goes through counsel before submission. Realify assembles the evidence; it never files the answer."
+      },
+      {
+        "label": "Submissions are human-reviewed",
+        "detail": "Every plan of action, appeal and document response is read and sent by a person, at every dial setting. There is no Auto for talking to a marketplace."
+      },
+      {
+        "label": "No metric gaming",
+        "detail": "Cancellation to avoid a late shipment, or tracking uploaded before dispatch, are both policy violations. The fix is operational or it is nothing."
+      },
+      {
+        "label": "Document vault is the source",
+        "detail": "Invoices, certifications and authorisation letters answer from the vault with current expiry dates — never reconstructed under deadline pressure."
+      }
+    ],
+    "agents": [
+      {
+        "name": "Health Score Monitor"
+      },
+      {
+        "name": "Revenue-at-Risk Model"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

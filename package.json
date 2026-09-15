@@ -10,10 +10,14 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:render": "vitest run src/features/action-stories/__corpus__/renderSweep.test.jsx",
     "extract": "node extraction/extract.js",
     "generate-manifests": "node extraction/generateManifests.js",
     "validate-manifests": "node extraction/validateAllStages.js",
-    "audit": "node extraction/audit.js"
+    "audit": "node extraction/audit.js",
+    "test:conformance": "vitest run src/features/action-stories/__corpus__/templateConformance.test.jsx",
+    "audit:data": "node extraction/auditDecisionObjectData.js",
+    "normalize": "node extraction/normalizeCorpus.js"
   },
   "dependencies": {
     "axios": "^1.17.0",

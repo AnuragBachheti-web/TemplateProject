@@ -1,0 +1,242 @@
+{
+  "proposal_id": "prop_s9_11_execute",
+  "story_code": "S9.11",
+  "stage": "execute",
+  "action_type": "reprice",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "margin",
+  "persona": "pricer",
+  "title": "Margin-protective repricing — 41 SKUs · +$9.7K/mo",
+  "narrative": "Approved on Decide. Realify writes DTC first and Amazon last so parity is never inverted.",
+  "status_note": "Execute · 0 of 3 channels written",
+  "eligibility": {
+    "approve": {
+      "allowed": true
+    },
+    "approve_selected": {
+      "allowed": true
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable",
+    "checks": [
+      {
+        "label": "Watches",
+        "value": "units / day",
+        "note": "Per SKU, per channel, against the 14-day pre-change baseline."
+      },
+      {
+        "label": "Trigger",
+        "value": "−8% velocity",
+        "note": "Sustained over three days, not a single bad day."
+      },
+      {
+        "label": "Window",
+        "value": "14 days",
+        "note": "After that the price is treated as the new normal."
+      },
+      {
+        "label": "Action",
+        "value": "restore prior",
+        "note": "Writes the old price back in the same parity-safe order."
+      }
+    ]
+  },
+  "proposal": {},
+  "totals": {},
+  "execution": {
+    "verification": [
+      {
+        "label": "Realized elasticity",
+        "value": "no read yet",
+        "predPct": "82%",
+        "pct": "0%",
+        "note": "Grey shows the predicted curve; the colour fills in as units accumulate."
+      },
+      {
+        "label": "CM per month",
+        "value": "predicted +$9.7K",
+        "predPct": "90%",
+        "pct": "0%",
+        "note": "Read against the pre-change baseline, not against last month."
+      },
+      {
+        "label": "Velocity vs baseline",
+        "value": "baseline pending",
+        "predPct": "38%",
+        "pct": "0%",
+        "note": "The −8% trigger is measured from this baseline."
+      },
+      {
+        "label": "Buy Box share",
+        "value": "pre-write 94%",
+        "predPct": "94%",
+        "pct": "0%",
+        "note": "Read 15 minutes after each Amazon write."
+      }
+    ],
+    "rollback_note": "Available once a price has been written",
+    "ledger_note": "On the first push, Realify opens a chain: approval hash, then one hash per channel write, then any revert.",
+    "bulk_note": "Realify holds the crawl window between Walmart and Amazon whether you run the stages one by one or all at once.",
+    "plan": [
+      {
+        "n": "1",
+        "channel": "DTC · northwind.com",
+        "note": "Written first. Sets the parity reference every other channel is checked against.",
+        "when": "immediate",
+        "count": "41 SKUs",
+        "status": "ready",
+        "btnLabel": "Push stage",
+        "diffLabel": "view diff",
+        "diffFoot": "+37 more SKUs in this stage · full diff exports to CSV from the Ledger",
+        "diff": [
+          {
+            "sku": "NW-KNF-0480",
+            "old": "$68.00",
+            "nu": "$71.99",
+            "delta": "+5.9%",
+            "revert": "$68.00",
+            "tag": "micro-step 2/3",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-CER-1120",
+            "old": "$24.00",
+            "nu": "$26.99",
+            "delta": "+12.5%",
+            "revert": "$24.00",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-PAN-2210",
+            "old": "$54.00",
+            "nu": "$57.99",
+            "delta": "+7.4%",
+            "revert": "$54.00",
+            "tag": "parity watch",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-GLS-3390",
+            "old": "$38.00",
+            "nu": "$40.99",
+            "delta": "+7.9%",
+            "revert": "$38.00",
+            "tag": "test · 50/50",
+            "hash": "pending"
+          }
+        ]
+      },
+      {
+        "n": "2",
+        "channel": "Walmart · WFS",
+        "note": "Same prices, checked against the ±2% parity band before each write.",
+        "when": "+2 min",
+        "count": "38 SKUs",
+        "gate": "after DTC",
+        "status": "queued",
+        "btnLabel": "Push stage",
+        "diffLabel": "view diff",
+        "diffFoot": "3 SKUs not listed on Walmart · skipped rather than failed",
+        "diff": [
+          {
+            "sku": "NW-KNF-0480",
+            "old": "$68.00",
+            "nu": "$71.99",
+            "delta": "+5.9%",
+            "revert": "$68.00",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-CER-1120",
+            "old": "$24.00",
+            "nu": "$26.99",
+            "delta": "+12.5%",
+            "revert": "$24.00",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-TEX-6040",
+            "old": "$42.00",
+            "nu": "$43.99",
+            "delta": "+4.7%",
+            "revert": "$42.00",
+            "tag": "MAP ceiling",
+            "hash": "pending"
+          }
+        ]
+      },
+      {
+        "n": "3",
+        "channel": "Crawl re-read window",
+        "note": "Realify waits for the Amazon crawl to re-read our DTC price so fair-pricing sees the new reference, not the old one.",
+        "when": "+45 min",
+        "count": "—",
+        "gate": "fair-pricing hold",
+        "status": "queued",
+        "btnLabel": "Wait out window",
+        "diffLabel": "view diff",
+        "diffFoot": "No writes in this stage. The wait is the guardrail."
+      },
+      {
+        "n": "4",
+        "channel": "Amazon · FBA",
+        "note": "Written last so Amazon is never above our lowest advertised price, even briefly.",
+        "when": "+45 min",
+        "count": "41 SKUs",
+        "gate": "Amazon last",
+        "status": "queued",
+        "btnLabel": "Push stage",
+        "diffLabel": "view diff",
+        "diffFoot": "Buy Box share is read 15 minutes after each write · a loss pauses the remaining micro-steps",
+        "diff": [
+          {
+            "sku": "NW-KNF-0480",
+            "old": "$68.00",
+            "nu": "$71.99",
+            "delta": "+5.9%",
+            "revert": "$68.00",
+            "tag": "Buy Box 0.82",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-PAN-2210",
+            "old": "$54.00",
+            "nu": "$57.99",
+            "delta": "+7.4%",
+            "revert": "$54.00",
+            "tag": "3P at $56.40",
+            "hash": "pending"
+          },
+          {
+            "sku": "NW-CER-1210",
+            "old": "$16.00",
+            "nu": "$17.99",
+            "delta": "+12.4%",
+            "revert": "$16.00",
+            "hash": "pending"
+          }
+        ]
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

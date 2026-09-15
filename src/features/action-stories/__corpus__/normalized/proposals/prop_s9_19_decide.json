@@ -1,0 +1,368 @@
+{
+  "proposal_id": "prop_s9_19_decide",
+  "story_code": "S9.19",
+  "stage": "decide",
+  "action_type": "adjust_spend",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "ads",
+  "persona": "promoter",
+  "title": "Q4 calendar build — Prime Fall deadline Aug 21",
+  "narrative": "",
+  "status_note": "Decide · 6 events · $455K incremental CM · $363K spend · 5.20pp dilution",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "BFCM at 25% on four channels needs a second confirmation"
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "BFCM at 25% on four channels needs a second confirmation"
+    },
+    "modify": {
+      "allowed": true
+    },
+    "send_back": {
+      "allowed": true
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "beyond_limits",
+    "checks": [
+      {
+        "label": "Conflicts resolved",
+        "note": "Overlap and parity fixed by moving the DTC window; protection fixed by moving the gift guide. Both without cutting an event."
+      },
+      {
+        "label": "Cross-channel depth",
+        "note": "25% on four channels at once needs a second confirmation before approval."
+      },
+      {
+        "label": "Deal-stacking suppressed",
+        "note": "The 6 stacked Amazon coupons are suppressed for the BFCM window, keeping effective depth at the deal price."
+      },
+      {
+        "label": "MAP and deal minimums",
+        "note": "Every depth is MAP-compliant and clears each platform minimum. No pre-event price raises anywhere in the set."
+      },
+      {
+        "label": "Inventory commitments",
+        "note": "3 Prime SKUs are 40–120 units short of the 500 commitment. Planner has 11 days to pull the inbound forward."
+      }
+    ]
+  },
+  "proposal": {
+    "recommendation": "Six events, two conflicts fixed by moving windows rather than cutting depth",
+    "recommendation_detail": "Early BF shifts to Nov 3–10 and the gift guide to Dec 12–19; both conflicts disappear without giving up a single event. BFCM stays at 25% on all four channels, which is the one decision that needs a second confirmation.",
+    "recommendation_metrics": [
+      {
+        "label": "Incremental CM",
+        "value": "$455K",
+        "note": "after trough accounting, Q4"
+      },
+      {
+        "label": "Promo spend",
+        "value": "$363K",
+        "note": "of the $240K ceiling"
+      },
+      {
+        "label": "Dilution",
+        "value": "5.20pp",
+        "note": "cap is 2.4pp"
+      },
+      {
+        "label": "Events",
+        "value": "6",
+        "note": "189 SKU slots across the quarter"
+      },
+      {
+        "label": "Mean confidence",
+        "value": "69%",
+        "note": "from the incrementality model"
+      }
+    ],
+    "alternatives": [
+      {
+        "label": "Full calendar"
+      },
+      {
+        "label": "Trimmed"
+      },
+      {
+        "label": "Margin-protected"
+      }
+    ],
+    "coverage": [
+      {
+        "label": "Promo budget",
+        "value": "$363K",
+        "pct": "100",
+        "limitPct": "86",
+        "note": "ceiling $240K · scale 0–280K"
+      },
+      {
+        "label": "Margin dilution",
+        "value": "5.20pp",
+        "pct": "100",
+        "limitPct": "75",
+        "note": "cap 2.4pp · scale 0–3.2pp"
+      },
+      {
+        "label": "Promo revenue share",
+        "value": "35%",
+        "pct": "78",
+        "limitPct": "84",
+        "note": "ceiling 38% · scale 0–45%"
+      }
+    ],
+    "next_actions": [
+      {
+        "label": "Deal submissions",
+        "note": "2 marketplace submissions as deadline tasks"
+      },
+      {
+        "label": "Promo configs + codes",
+        "note": "6 events across the channel platforms"
+      },
+      {
+        "label": "Planner · S9.3",
+        "note": "unit reservations and cover checks per event"
+      },
+      {
+        "label": "Bidder",
+        "note": "media plan for the Prime and BFCM windows"
+      },
+      {
+        "label": "Lifecycle · S9.13",
+        "note": "email and SMS entries with segments"
+      }
+    ],
+    "slate": [
+      {
+        "name": "Prime Fall Deal Event",
+        "detail": "22 SKUs at the platform minimum with 500 units committed each. Rank held five weeks after last year’s event, which is the whole case for running it at near-zero contribution.",
+        "window": "Oct 8–9",
+        "objective": "share",
+        "warn": "3 SKUs under cover",
+        "cm": "$37K",
+        "cost": "$27K",
+        "confidence": "64%",
+        "support": "media $8K",
+        "inventory": "11,000 units reserved",
+        "depths": [
+          {
+            "label": "20%"
+          },
+          {
+            "label": "25%"
+          }
+        ],
+        "channels": [
+          {
+            "label": "Amazon"
+          }
+        ]
+      },
+      {
+        "name": "Early Black Friday",
+        "detail": "Window moved back four days to clear the Walmart overlap, and the 14 shared SKUs now run at matched depth. 34 SKUs on DTC with four email sends behind it.",
+        "window": "Nov 3–10",
+        "objective": "volume",
+        "cm": "$107K",
+        "cost": "$78K",
+        "confidence": "71%",
+        "support": "4 sends",
+        "inventory": "cover confirmed",
+        "depths": [
+          {
+            "label": "15%"
+          },
+          {
+            "label": "20%"
+          },
+          {
+            "label": "25%"
+          }
+        ],
+        "channels": [
+          {
+            "label": "Shopify DTC"
+          },
+          {
+            "label": "Email"
+          }
+        ]
+      },
+      {
+        "name": "Walmart Deal Days",
+        "detail": "18 SKUs at the 15% platform minimum with a clean 30-day price history. Buy Box target +3.1pp, held four weeks after — the persistence test is part of the contract.",
+        "window": "Nov 12–18",
+        "objective": "share",
+        "cm": "$25K",
+        "cost": "$17K",
+        "confidence": "61%",
+        "support": "none",
+        "inventory": "cover confirmed",
+        "depths": [
+          {
+            "label": "15%"
+          },
+          {
+            "label": "20%"
+          }
+        ],
+        "channels": [
+          {
+            "label": "Walmart"
+          }
+        ]
+      },
+      {
+        "name": "Black Friday / Cyber Monday",
+        "detail": "All four channels at once, 48 SKUs, $32K of media behind it. Six SKUs need their Amazon coupons suppressed or the effective depth reaches 34%.",
+        "window": "Nov 28 – Dec 1",
+        "objective": "volume",
+        "warn": "confirm required",
+        "cm": "$205K",
+        "cost": "$148K",
+        "confidence": "76%",
+        "support": "media $32K · 6 sends",
+        "inventory": "cover confirmed",
+        "depths": [
+          {
+            "label": "15%"
+          },
+          {
+            "label": "20%"
+          },
+          {
+            "label": "25%"
+          }
+        ],
+        "channels": [
+          {
+            "label": "Shopify DTC"
+          },
+          {
+            "label": "Amazon"
+          },
+          {
+            "label": "Walmart"
+          },
+          {
+            "label": "Faire"
+          },
+          {
+            "label": "Email"
+          }
+        ]
+      },
+      {
+        "name": "Gift guide push",
+        "detail": "Shifted a week later so no SKU is promoted inside the 14-day protection window. Shallow depth carried by bundles — best incrementality per margin dollar in the library.",
+        "window": "Dec 12–19",
+        "objective": "margin",
+        "cm": "$62K",
+        "cost": "$24K",
+        "confidence": "78%",
+        "support": "3 sends",
+        "inventory": "cover confirmed",
+        "depths": [
+          {
+            "label": "10%"
+          },
+          {
+            "label": "12%"
+          },
+          {
+            "label": "15%"
+          }
+        ],
+        "channels": [
+          {
+            "label": "Shopify DTC"
+          },
+          {
+            "label": "Email"
+          },
+          {
+            "label": "SMS"
+          }
+        ]
+      },
+      {
+        "name": "Year-end clearance",
+        "detail": "Four aged cohorts across all channels. Recovery projected at 68% of landed cost against a 62% floor, and the units are not going to sell at full price in January.",
+        "window": "Dec 26–31",
+        "objective": "clearance",
+        "cm": "$19K",
+        "cost": "$28K",
+        "confidence": "66%",
+        "support": "1 send",
+        "inventory": "aged 180+ days",
+        "depths": [
+          {
+            "label": "35%"
+          },
+          {
+            "label": "40%"
+          },
+          {
+            "label": "45%"
+          }
+        ],
+        "channels": [
+          {
+            "label": "Shopify DTC"
+          },
+          {
+            "label": "Amazon"
+          },
+          {
+            "label": "Walmart"
+          }
+        ]
+      }
+    ]
+  },
+  "totals": {
+    "rows": [
+      {
+        "label": "Incremental CM",
+        "value": "$455K"
+      },
+      {
+        "label": "Discount cost",
+        "value": "$321K"
+      },
+      {
+        "label": "Media + sends",
+        "value": "$42K"
+      },
+      {
+        "label": "Total promo spend",
+        "value": "$363K"
+      },
+      {
+        "label": "Net contribution",
+        "value": "$413K"
+      },
+      {
+        "label": "Promo revenue share",
+        "value": "35%"
+      }
+    ]
+  },
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

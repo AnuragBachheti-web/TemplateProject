@@ -1,0 +1,95 @@
+{
+  "proposal_id": "prop_s10_3_analyze",
+  "story_code": "S10.3",
+  "stage": "analyze",
+  "action_type": "review",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "keeper",
+  "title": "Late-shipment 3.4% ↑ — 0.6pp from threshold",
+  "narrative": "",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "detail_rows": [
+      {
+        "severity": "medium",
+        "market": "Amazon",
+        "title": "Late-shipment rate 3.4%, past our 3.0% floor",
+        "summary": "Six consecutive days above our own floor and still climbing. The marketplace has not acted, which is exactly the window an operational fix works in.",
+        "caseId": "internal · no case open",
+        "deadline": "9 days to 4.0%",
+        "risk": "$9.1K/day"
+      },
+      {
+        "severity": "high",
+        "market": "Amazon",
+        "title": "IP complaint — hero SKU listing suppressed",
+        "summary": "Filed Aug 16 by a claimant with no registered mark in our category. Counter-notice window closes in four days and the listing has been dark since filing.",
+        "caseId": "case 8814-2291",
+        "deadline": "4 days",
+        "risk": "$1.8K/day"
+      },
+      {
+        "severity": "high",
+        "market": "Walmart",
+        "title": "Two listings suppressed — condition description",
+        "summary": "Automated content check flagged the phrase \"like new\" in refurbished-adjacent copy. A content fix, not a compliance failure — but revenue stops either way.",
+        "caseId": "case WM-40118",
+        "deadline": "6 days",
+        "risk": "$0.6K/day"
+      },
+      {
+        "severity": "medium",
+        "market": "Walmart",
+        "title": "On-time delivery 95.2%, floor is 96.5%",
+        "summary": "Inside Walmart’s 95% requirement and outside ours. Same East node cause as the Amazon metric — one fix moves both.",
+        "caseId": "internal · no case open",
+        "deadline": "no deadline",
+        "risk": "$2.4K/day"
+      },
+      {
+        "severity": "low",
+        "market": "Amazon",
+        "title": "Documentation request — supplier invoices",
+        "summary": "Routine authenticity check on three SKUs. Answerable entirely from the document vault with current invoices and authorisation letters.",
+        "caseId": "case 8791-4402",
+        "deadline": "11 days",
+        "risk": "none yet"
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}

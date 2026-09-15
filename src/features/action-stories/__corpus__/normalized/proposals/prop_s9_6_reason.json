@@ -1,0 +1,168 @@
+{
+  "proposal_id": "prop_s9_6_reason",
+  "story_code": "S9.6",
+  "stage": "reason",
+  "action_type": "fix_listing",
+  "cardinality": "many",
+  "contract_class": "standard",
+  "on_clock": false,
+  "mode": "suggest",
+  "entitlement": "full",
+  "lens": "sales",
+  "persona": "merchandiser",
+  "title": "Listing audit — 18 listings below CVR benchmark",
+  "narrative": "Realify will draft every edit and show the before and after. Nothing reaches a listing without your approval.",
+  "eligibility": {
+    "approve": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "approve_selected": {
+      "allowed": false,
+      "blocked_reason": "Approval happens at the decide stage."
+    },
+    "modify": {
+      "allowed": false,
+      "blocked_reason": "Modification is not available at this stage."
+    },
+    "send_back": {
+      "allowed": false,
+      "blocked_reason": "Sending back is not available at this stage."
+    },
+    "dismiss": {
+      "allowed": true
+    },
+    "snooze": {
+      "allowed": false,
+      "blocked_reason": "This proposal has no deadline to defer."
+    }
+  },
+  "guardrails": {
+    "verdict": "not_applicable"
+  },
+  "proposal": {
+    "policy": [
+      {
+        "label": "Attribution before edits",
+        "def": "A Buy Box loss caused by delivery promise does not get fixed with a new title. The waterfall decides the lever."
+      },
+      {
+        "label": "Lift ranges, not point estimates",
+        "def": "Every fix carries a range and a confidence from prior fixes on comparable listings."
+      },
+      {
+        "label": "One listing, one push",
+        "def": "Edits batch per listing so the 14-day pre and post read is attributable."
+      },
+      {
+        "label": "Snapshot before publish",
+        "def": "The current version is saved so a restore is one click, not a rewrite."
+      }
+    ],
+    "constraints": [
+      {
+        "name": "Brand voice guide",
+        "owner": "Marketing owns · v4.2",
+        "rule": "Sentence case, no exclamation marks, no superlatives without a source. Realify drafts inside the guide and flags anything that needs a human line."
+      },
+      {
+        "name": "Image standards",
+        "owner": "Studio owns",
+        "rule": "Seven-shot set, white background on the hero, 2400px minimum, props only in lifestyle frames. Realify can reorder and request shots but never generates imagery."
+      },
+      {
+        "name": "Restricted claims per category",
+        "owner": "Legal owns",
+        "rule": "Stoneware may not carry food-safety or oven-temperature claims without the test document on file. Dishwasher-safe requires the current certificate reference."
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Listing content · 214 SKUs",
+        "meta": "3 channels"
+      },
+      {
+        "label": "Sessions and CVR · 30 days",
+        "meta": "412K sessions"
+      },
+      {
+        "label": "Buy Box win/loss log",
+        "meta": "hourly · 90 d"
+      },
+      {
+        "label": "Competitor listings",
+        "meta": "9 sellers"
+      },
+      {
+        "label": "Review and Q&amp;A feeds",
+        "meta": "daily"
+      },
+      {
+        "label": "Ranked search terms",
+        "meta": "1,840 terms"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Heroes",
+        "cvr": "13.0%",
+        "bb": "95%",
+        "content": "7 img · 3 A+",
+        "below": "4 of 12",
+        "why": "Traffic is expensive here. A point of CVR is worth more than anywhere else in the catalogue."
+      },
+      {
+        "name": "Core",
+        "cvr": "10.0%",
+        "bb": "90%",
+        "content": "6 img · 2 A+",
+        "below": "7 of 68",
+        "why": "The base of the range. Content completeness matters more than polish."
+      },
+      {
+        "name": "Margin Drivers",
+        "cvr": "9.0%",
+        "bb": "85%",
+        "content": "6 img · 2 A+",
+        "below": "3 of 24",
+        "why": "High CM per unit, so a small CVR gain pays for a lot of studio time."
+      },
+      {
+        "name": "Traffic Drivers",
+        "cvr": "8.0%",
+        "bb": "80%",
+        "content": "5 img · 1 A+",
+        "below": "3 of 41",
+        "why": "Thin CM. Fixes have to be cheap or they do not clear the bar."
+      },
+      {
+        "name": "Supporting",
+        "cvr": "6.0%",
+        "bb": "none",
+        "content": "4 img",
+        "below": "1 of 69",
+        "why": "No Buy Box target. Realify will not spend studio hours here."
+      }
+    ],
+    "agents": [
+      {
+        "initials": "Me",
+        "name": "Merchandiser",
+        "role": "Owns titles, bullets, images and A+ modules."
+      },
+      {
+        "initials": "Pr",
+        "name": "Pricer",
+        "role": "Owns any price or offer change the attribution calls for."
+      },
+      {
+        "initials": "Ke",
+        "name": "Keeper",
+        "role": "Owns backend keywords, category data and compliance checks."
+      }
+    ]
+  },
+  "totals": {},
+  "status": "pending",
+  "updated_at": "2026-09-15T09:00:00.000Z"
+}
