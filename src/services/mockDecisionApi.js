@@ -49,12 +49,27 @@ export function __seedProposal(decision) {
   store.set(decision.proposal_id, structuredClone(decision))
 }
 
+function aborted() {
+  return new ActionStoriesError('Request aborted', { code: ERROR_CODES.ABORTED })
+}
+
 function delay(signal) {
+  // An ALREADY-aborted signal must reject immediately. Listening for the `abort` event alone misses
+  // it, because the event has already fired and will not fire again — the caller would then wait out
+  // the full latency and succeed on a request it had cancelled.
+  //
+  // This used to be masked: decisionApi.js imported this module statically, so `delay` was reached
+  // in the same microtask as the call and always beat a synchronous `controller.abort()`. The module
+  // is now loaded through a dynamic `import()` (so the production HTTP build can drop it), which
+  // interposes a tick and exposed the gap. axios, on the HTTP path, has always handled this
+  // correctly; now both transports do.
+  if (signal?.aborted) return Promise.reject(aborted())
+
   return new Promise((resolve, reject) => {
     const timer = setTimeout(resolve, LATENCY_MS)
     signal?.addEventListener('abort', () => {
       clearTimeout(timer)
-      reject(new ActionStoriesError('Request aborted', { code: ERROR_CODES.ABORTED }))
+      reject(aborted())
     })
   })
 }

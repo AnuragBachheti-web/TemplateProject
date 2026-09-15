@@ -20,13 +20,40 @@
 import httpClient from './httpClient'
 import { ActionStoriesError, ERROR_CODES, toActionStoriesError } from './actionStoriesErrors'
 import { validateDecisionObject, validateDecisionObjectSummary } from '@/features/action-stories/contract/decisionObject'
-import { mockListProposals, mockGetProposal, mockRunProposalAction } from './mockDecisionApi'
 
-const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL ?? ''
+/**
+ * Vite statically replaces `import.meta.env.VITE_API_BASE_URL` with a string literal at build time.
+ * That is the whole mechanism behind the two constants below: they are not runtime lookups in a
+ * production build, they are folded to `"https://…"` and `false`, which is what lets the bundler
+ * prove the mock branch in every function below is unreachable and drop `./mockDecisionApi` — and
+ * the 627 KB of Decision Objects it imports — out of the build entirely.
+ *
+ * Read once, at module scope, for exactly that reason. Reading it inside each function would leave
+ * the branch condition opaque to the bundler and ship the corpus to every user.
+ *
+ * `globalThis.import_meta_env`-style guards are deliberately absent: `import.meta.env` is defined by
+ * Vite in dev, in the production build and under Vitest (which reads this same config), so there is
+ * no environment this module runs in where it is missing.
+ */
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? ''
+const USE_MOCK_TRANSPORT = API_BASE_URL === ''
+
+/**
+ * The test double, loaded on demand.
+ *
+ * Dynamic, not static, so that the import lives INSIDE the dead branch a production HTTP build
+ * eliminates. The promise is cached so concurrent callers share one module instance — the double
+ * holds mutable state (its store and idempotency ledger), and two instances would be two stores.
+ */
+let mockTransport
+function loadMockTransport() {
+  mockTransport ??= import('./mockDecisionApi')
+  return mockTransport
+}
 
 /** True when no real API is configured and the in-memory test double is serving requests. */
 export function isUsingMockTransport() {
-  return API_BASE_URL === ''
+  return USE_MOCK_TRANSPORT
 }
 
 /**
@@ -66,7 +93,8 @@ function malformed(problems, what) {
 export async function listProposals({ stage, persona, storyCode, limit = 25, cursor, signal } = {}) {
   let body
   try {
-    if (isUsingMockTransport()) {
+    if (USE_MOCK_TRANSPORT) {
+      const { mockListProposals } = await loadMockTransport()
       body = await mockListProposals({ stage, persona, storyCode, limit, cursor, signal })
     } else {
       const query = new URLSearchParams()
@@ -109,9 +137,12 @@ export async function getProposal(proposalId, { signal } = {}) {
 
   let body
   try {
-    body = isUsingMockTransport()
-      ? await mockGetProposal(proposalId, { signal })
-      : (await httpClient.get(`${API_BASE_URL}/v1/proposals/${encodeURIComponent(proposalId)}`, { signal })).data
+    if (USE_MOCK_TRANSPORT) {
+      const { mockGetProposal } = await loadMockTransport()
+      body = await mockGetProposal(proposalId, { signal })
+    } else {
+      body = (await httpClient.get(`${API_BASE_URL}/v1/proposals/${encodeURIComponent(proposalId)}`, { signal })).data
+    }
   } catch (err) {
     throw normalise(err, `Failed to load proposal "${proposalId}"`)
   }
@@ -148,15 +179,18 @@ export async function runProposalAction(proposalId, payload, { signal } = {}) {
 
   let body
   try {
-    body = isUsingMockTransport()
-      ? await mockRunProposalAction(proposalId, payload, { signal, idempotencyKey })
-      : (
-          await httpClient.post(
-            `${API_BASE_URL}/v1/proposals/${encodeURIComponent(proposalId)}/actions`,
-            payload,
-            { signal, idempotencyKey },
-          )
-        ).data
+    if (USE_MOCK_TRANSPORT) {
+      const { mockRunProposalAction } = await loadMockTransport()
+      body = await mockRunProposalAction(proposalId, payload, { signal, idempotencyKey })
+    } else {
+      body = (
+        await httpClient.post(
+          `${API_BASE_URL}/v1/proposals/${encodeURIComponent(proposalId)}/actions`,
+          payload,
+          { signal, idempotencyKey },
+        )
+      ).data
+    }
   } catch (err) {
     throw normalise(err, `Failed to run "${payload?.action_type}" on "${proposalId}"`)
   }
