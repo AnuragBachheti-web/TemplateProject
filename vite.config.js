@@ -32,7 +32,9 @@ export default defineConfig({
     globals: true,
     // extraction/**/*.test.js covers generation-only tooling (extraction/classifyBlocks.js etc.),
     // which has no JSX and isn't shipped with the app — still worth running under the same runner.
-    include: ['src/**/*.test.{js,jsx}', 'extraction/**/*.test.js'],
+    // mock-server/**: the standalone HTTP API's own tests. They bind a real socket on port 0 and
+    // call it with fetch — never a deployed URL, so the suite stays runnable offline and in CI.
+    include: ['src/**/*.test.{js,jsx}', 'extraction/**/*.test.js', 'mock-server/**/*.test.js'],
     passWithNoTests: true,
   },
 

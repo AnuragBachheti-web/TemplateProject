@@ -19,9 +19,11 @@
 // archived RAW fixtures next to it are reference evidence and are never loaded at runtime.
 
 import { ActionStoriesError, ERROR_CODES } from './actionStoriesErrors'
-import { checkOperatorAction, getOperatorAction } from '@/features/action-stories/contract/actionTypes'
-import { isLegalTransition } from '@/features/action-stories/contract/statusLifecycle'
-import { slateItemId } from '@/features/action-stories/contract/slateItem'
+import {
+  authorizeOperatorAction,
+  applyOperatorAction,
+  pageProposals,
+} from '@/features/action-stories/contract/operatorActionExecution'
 import seed from '@/features/action-stories/__corpus__/normalized/dataset.json'
 
 const LATENCY_MS = 180 // a real round trip has latency; a mutation that settles in the same microtask hides every loading state
@@ -68,33 +70,9 @@ function httpError(status, message, userMessage) {
 
 export async function mockListProposals({ stage, persona, storyCode, limit = 25, cursor, signal } = {}) {
   await delay(signal)
-
-  let rows = [...store.values()]
-  if (stage) rows = rows.filter((d) => d.stage === stage)
-  if (persona) rows = rows.filter((d) => d.persona === persona)
-  // `story_code` filter — the parent Action Story identity. Already on every Decision Object, so
-  // this adds a query parameter, not a contract field.
-  if (storyCode) rows = rows.filter((d) => d.story_code === storyCode)
-  rows.sort((a, b) => a.proposal_id.localeCompare(b.proposal_id))
-
-  const start = cursor ? rows.findIndex((d) => d.proposal_id === cursor) + 1 : 0
-  const page = rows.slice(start, start + limit)
-  const next = start + limit < rows.length ? page[page.length - 1]?.proposal_id ?? null : null
-
-  return {
-    items: page.map((d) => ({
-      proposal_id: d.proposal_id,
-      story_code: d.story_code,
-      title: d.title,
-      impact: d.impact,
-      confidence: d.confidence,
-      stage: d.stage,
-      on_clock: d.on_clock,
-      deadline: d.deadline ?? null,
-      status: d.status,
-    })),
-    next_cursor: next,
-  }
+  // Filtering, ordering, projection and cursor paging all live in the contract module, so this
+  // double and the standalone HTTP server cannot drift into serving different queue shapes.
+  return pageProposals([...store.values()], { stage, persona, storyCode, limit, cursor })
 }
 
 // ---- GET /v1/proposals/:proposal_id --------------------------------------------------------------
@@ -113,14 +91,10 @@ export async function mockGetProposal(proposalId, { signal } = {}) {
 /**
  * ===== SERVER-SIDE LOGIC — the part a real backend owns =====
  *
- * The order of checks matters and is part of the contract: authentication and authorization first
- * (a caller who may not act must not learn whether the action would have been eligible), then
- * existence, then optimistic-concurrency, then business eligibility.
- *
- * Nothing here trusts the client. The frontend's own eligibility check (checkOperatorAction, run in
- * the action bar AND at the store's dispatch boundary) is a UI affordance; this is the gate. They
- * deliberately call the SAME pure function, because two implementations of one security rule
- * become one implementation plus one hole.
+ * The checks themselves, their ORDER, and what an action does to a Decision Object all live in
+ * contract/operatorActionExecution.js, because mock-server/ implements this same endpoint over real
+ * HTTP and the two must be one set of rules, not two. What stays here is the only part that
+ * genuinely differs between an in-memory double and a deployed server: idempotency and storage.
  */
 export async function mockRunProposalAction(proposalId, body = {}, { signal, idempotencyKey } = {}) {
   await delay(signal)
@@ -142,93 +116,22 @@ export async function mockRunProposalAction(proposalId, body = {}, { signal, ide
     return structuredClone(replayed.result)
   }
 
-  // 2. Authorization. Simulated: a real backend resolves the caller's identity and entitlements from
-  //    the session, never from the request body or the Decision Object it is about to return.
+  // 2. Existence. Storage is this module's own concern, so the lookup stays here.
   const proposal = store.get(proposalId)
   if (!proposal) {
     throw httpError(404, `No proposal "${proposalId}"`, 'This proposal is no longer available.')
   }
-  if (proposal.entitlement === 'locked') {
-    throw httpError(403, 'Caller entitlement does not permit actions on this proposal', 'You are not authorized to perform this action.')
+
+  // 3-6. Entitlement, action validity, optimistic concurrency, business eligibility and the status
+  //      transition — the shared gate.
+  const verdict = authorizeOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, expectedUpdatedAt })
+  if (!verdict.ok) {
+    throw httpError(verdict.status, verdict.message, verdict.userMessage)
   }
 
-  const spec = getOperatorAction(actionType)
-  if (!spec) {
-    throw httpError(422, `Unknown action_type "${actionType}"`, 'This action is no longer available for this proposal.')
-  }
-
-  // 3. Optimistic concurrency. The client sends the `updated_at` it rendered; if the proposal moved
-  //    underneath it, the operator acted on a stale view and must see the current one first.
-  if (expectedUpdatedAt && expectedUpdatedAt !== proposal.updated_at) {
-    throw httpError(409, 'Proposal changed since it was read', 'This proposal changed before your action was completed. Refresh and try again.')
-  }
-
-  // 4. Business eligibility — re-derived server-side, never taken from the client.
-  const verdict = checkOperatorAction(actionType, proposal, { reason, selection, snooze_until: snoozeUntil })
-  if (!verdict.allowed) {
-    throw httpError(422, `Action "${actionType}" rejected: ${verdict.reason}`, verdict.reason)
-  }
-
-  // 5. Status transition.
-  const nextStatus = spec.resultingStatus
-  if (!isLegalTransition(proposal.status, nextStatus)) {
-    throw httpError(409, `Illegal transition ${proposal.status} -> ${nextStatus}`, 'This proposal changed before your action was completed. Refresh and try again.')
-  }
-
-  const updated = applyAction(proposal, actionType, { reason, selection, snoozeUntil, nextStatus })
+  const updated = applyOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, nextStatus: verdict.nextStatus })
   store.set(proposalId, updated)
   idempotencyLedger.set(idempotencyKey, { proposalId, actionType, result: updated })
 
   return structuredClone(updated)
-}
-
-/**
- * Produces the NEW Decision Object an action results in. This is what the endpoint returns, and it
- * is why the frontend never has to guess what changed — no optimistic patching, no local mirror of
- * server state, no localStorage record of "what was approved".
- */
-function applyAction(proposal, actionType, { reason, selection, snoozeUntil, nextStatus }) {
-  const next = structuredClone(proposal)
-  next.status = nextStatus
-  next.updated_at = new Date(Date.parse(proposal.updated_at) + 1000).toISOString()
-
-  // Once a proposal reaches a terminal status nothing further is eligible. Re-deriving eligibility
-  // here (rather than leaving the old values in place) is what makes the returned object
-  // self-consistent — the action bar renders straight off it with no extra rules.
-  const denyAll = (why) =>
-    Object.fromEntries(Object.keys(next.eligibility).map((k) => [k, { allowed: false, blocked_reason: why }]))
-
-  switch (actionType) {
-    case 'approve':
-      next.eligibility = denyAll('This proposal has already been approved.')
-      break
-    case 'approve_selected':
-      // Partial approval is represented IN the Decision Object: the approved items leave the slate
-      // and are recorded, so the returned object is a complete description of the new state.
-      next.proposal = { ...next.proposal }
-      if (Array.isArray(next.proposal.slate)) {
-        const chosen = new Set(selection)
-        next.proposal.approved_items = next.proposal.slate.filter((_, i) => chosen.has(slateItemId(next.proposal.slate, i)))
-        next.proposal.slate = next.proposal.slate.filter((_, i) => !chosen.has(slateItemId(next.proposal.slate, i)))
-      }
-      next.eligibility = denyAll('The selected items on this proposal have been approved.')
-      break
-    case 'modify':
-      next.proposal = { ...next.proposal, modification_note: reason }
-      break
-    case 'send_back':
-      next.proposal = { ...next.proposal, send_back_note: reason }
-      next.eligibility = { ...next.eligibility, send_back: { allowed: false, blocked_reason: 'Already sent back to its owner.' } }
-      break
-    case 'dismiss':
-      next.eligibility = denyAll('This proposal has been dismissed.')
-      break
-    case 'snooze':
-      next.snoozed_until = snoozeUntil
-      break
-    default:
-      break
-  }
-
-  return next
 }

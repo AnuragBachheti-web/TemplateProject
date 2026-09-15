@@ -8,10 +8,11 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores(['dist', 'node_modules']),
   {
-    // Node-context scripts: the extraction pipeline and the project's own build config files.
+    // Node-context code: the extraction pipeline, the standalone mock API server, and the project's
+    // own build config files.
     // Plain recommended JS rules + Node globals (process, __dirname's absence covered by import.meta
     // in these files, etc.) — none of the React-specific setup below applies here.
-    files: ['extraction/**/*.js', '*.config.js'],
+    files: ['extraction/**/*.js', 'mock-server/**/*.js', '*.config.js'],
     extends: [js.configs.recommended],
     languageOptions: {
       ecmaVersion: 2022,
