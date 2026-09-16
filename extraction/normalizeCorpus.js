@@ -324,6 +324,12 @@ function reasonProposal(data, ctx, rec) {
     // model, a role is a cohort of SKUs, and collapsing them lost both (audit §7.1 R4/R5).
     roles: pick(data, ['roles', 'cohorts', 'clusters'], isObjArray, rec, 'proposal.roles'),
     agents: agentsOf(data, ctx, rec),
+    // The reference's own per-channel breakdown table — named `channels` verbatim on all three
+    // screens that carry one (S9.3, S9.4, S10.6). Kept below the 20% frequency floor deliberately:
+    // this is real, named business content the reference states under this exact key, not a shape
+    // guess, and it was previously dropped whole (S9.4's own $18K/5-channel floor-cap-current table
+    // never reached the proposal at all).
+    channels: pick(data, ['channels'], isTabular, rec, 'proposal.channels'),
   })
 }
 

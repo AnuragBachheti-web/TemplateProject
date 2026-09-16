@@ -96,6 +96,7 @@ describe('2. every canonical field resolves from a real reference source for tha
     'proposal.inputs': ['evidence', 'inputs', 'sources'],
     'proposal.roles': ['clusters', 'cohorts', 'roles'],
     'proposal.agents': ['agents', '(reference pinned strip)'],
+    'proposal.channels': ['channels'],
 
     'proposal.primary_insight': ['gridMeta', 'segNote', 'sortNote'],
     'proposal.comparison': ['bars', 'cccTrend', 'concentration', 'detectBars', 'expiryBars', 'launchCosts', 'movement', 'pacing', 'recon', 'sizes', 'sovBars', 'timeline', 'wasteMix'],

@@ -52,6 +52,7 @@ export const SLOT_VOCABULARY = Object.freeze({
   inputs: { binding: 'proposal.inputs', blockType: 'labelValueList', tier: 'conditional', note: 'Data the recommendation was computed from. Reference `inputs`/`sources`/`evidence`.' },
   roles: { binding: 'proposal.roles', blockType: 'table', tier: 'conditional', note: 'The entity taxonomy this proposal reasons over. Reference `roles`/`cohorts`/`clusters` — never `agents`, which is a different concept (see `agents`).' },
   agents: { binding: 'proposal.agents', blockType: 'itemQueue', tier: 'core', note: 'The named MODELS credited on this proposal ("Role Classifier", "GMROI Engine"). Every reference story names them; a persona is a human, an agent is a model.' },
+  channels: { binding: 'proposal.channels', blockType: 'table', tier: 'conditional', note: 'The reference\'s own per-channel breakdown table. Reference `channels` verbatim (S9.3, S9.4, S10.6). Kept below the 20% frequency floor deliberately: named business content the reference states under this exact key, not a shape guess.' },
 
   // ---- analyze.compare.v1 --------------------------------------------------------------------
   primary_insight: { binding: 'proposal.primary_insight', blockType: 'text', tier: 'conditional', note: 'The single finding the analysis exists to deliver. Only from a real insight field — never `pinnedSub` (the shell\'s identity strip) and never the same sentence as `narrative`.' },
