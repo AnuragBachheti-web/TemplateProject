@@ -241,6 +241,24 @@ describe('T6 — every guardrails.checks row carries a status from the enum', ()
     expect(seen.size).toBeGreaterThanOrEqual(2)
   })
 
+  it('R11 — guardrails is REQUIRED, not optional-when-present', () => {
+    // Phase 2 left this optional and Phase 2.1's ruling R11 closed it. `deriveEligibility` reads
+    // `guardrails.verdict` and fails closed without it, so a validator that ACCEPTED an object the
+    // producer must then block was the same latent shape as the Phase 1 bug — two layers disagreeing
+    // about whether a field matters, invisible until a live API sends the combination.
+    const absent = structuredClone(dataset[0])
+    delete absent.guardrails
+    expect(validateDecisionObject(absent).join(' ')).toContain('"guardrails" is required')
+
+    for (const notAnObject of [null, 'within_limits', 42, []]) {
+      const bad = { ...structuredClone(dataset[0]), guardrails: notAnObject }
+      expect(validateDecisionObject(bad).join(' '), JSON.stringify(notAnObject)).toContain('"guardrails"')
+    }
+
+    // Assertion-only: all 105 already carry it, which is precisely when a hole is safe to close.
+    expect(dataset.filter((d) => !d.guardrails)).toEqual([])
+  })
+
   it('the contract REJECTS a row with a missing or unknown status (closing decisionObject.js:254-256)', () => {
     const base = structuredClone(dataset.find((d) => Array.isArray(d.guardrails?.checks)))
     const noStatus = structuredClone(base)

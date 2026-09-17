@@ -399,21 +399,26 @@ export function validateDecisionObject(decision, { operatorActions = OPERATOR_AC
       }
     }
   }
-  if (decision.guardrails !== undefined) {
-    if (!isPlainObject(decision.guardrails)) {
-      problems.push('"guardrails" must be an object')
-    } else {
-      checkEnum(problems, decision.guardrails.verdict, GUARDRAIL_VERDICTS, 'guardrails.verdict')
-      if (decision.guardrails.checks !== undefined) {
-        if (!Array.isArray(decision.guardrails.checks)) {
-          problems.push('"guardrails.checks" must be an array when present')
-        } else {
-          // Every ROW validated, not just the array. A checklist whose rows were unvalidated is how
-          // 85 rows shipped with no field saying whether the check passed.
-          decision.guardrails.checks.forEach((row, i) => {
-            problems.push(...validateGuardrailCheck(row, `guardrails.checks[${i}]`))
-          })
-        }
+  // GUARDRAILS ARE REQUIRED (ruling R11), not optional-when-present.
+  //
+  // contract/deriveEligibility.js reads `guardrails.verdict` to decide whether approval is allowed,
+  // and fails closed when it is missing. A validator that ACCEPTED an object the producer must then
+  // block is the same latent shape as the Phase 1 bug: two layers disagreeing about whether a field
+  // matters, with the disagreement invisible until a live API sends the combination. All 105 shipped
+  // objects carry it, so closing this is assertion-only — which is exactly when to close it.
+  if (!isPlainObject(decision.guardrails)) {
+    problems.push('"guardrails" is required and must be an object of shape { verdict, checks? }')
+  } else {
+    checkEnum(problems, decision.guardrails.verdict, GUARDRAIL_VERDICTS, 'guardrails.verdict')
+    if (decision.guardrails.checks !== undefined) {
+      if (!Array.isArray(decision.guardrails.checks)) {
+        problems.push('"guardrails.checks" must be an array when present')
+      } else {
+        // Every ROW validated, not just the array. A checklist whose rows were unvalidated is how
+        // 85 rows shipped with no field saying whether the check passed.
+        decision.guardrails.checks.forEach((row, i) => {
+          problems.push(...validateGuardrailCheck(row, `guardrails.checks[${i}]`))
+        })
       }
     }
   }
