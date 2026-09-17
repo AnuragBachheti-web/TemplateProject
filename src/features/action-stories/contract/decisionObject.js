@@ -212,6 +212,17 @@ export function validateTypedNumber(value, field) {
       problems.push(`"${field}.precision" must be an integer between 0 and 6 when present`)
     }
   }
+  // `signed` states whether the magnitude has a DIRECTION, and it is a first-class state rather than
+  // a formatting hint (Phase 4, R38). `signed: true` renders a leading + or −; `signed: false` is an
+  // amount in play — a PO cycle's $88K, a launch's initial buy — which is neither a gain nor a loss,
+  // so it must not carry a sign and must not be negative. Omitted means the value's own sign speaks.
+  if (value.signed !== undefined) {
+    if (typeof value.signed !== 'boolean') {
+      problems.push(`"${field}.signed" must be a boolean when present`)
+    } else if (value.signed === false && typeof value.value === 'number' && value.value < 0) {
+      problems.push(`"${field}" is marked unsigned but carries a negative value`)
+    }
+  }
   return problems
 }
 

@@ -279,12 +279,14 @@ describe('4. no synthesised axis silently overrides reference evidence', () => {
     // reference's own `due`/`deadline` strings, so what this now protects is the honest version of
     // the same rule — nothing is invented, and nothing is flattened to a constant either.
     for (const d of dataset) {
-      // Phase 2 made `impact` required-and-nullable: it is now always PRESENT and always `null`,
-      // which says "the reference states no figure" out loud instead of by omission. The rule this
-      // test protects is unchanged and is asserted more strictly than before — not merely absent,
-      // but explicitly null, and never a value invented from a display string (ruling R2).
+      // Phase 2 made `impact` required-and-nullable and left it `null` on 105/105, which said "the
+      // reference states no figure" out loud instead of by omission. Phase 4 Part 1 (R37) fills all
+      // 105 on the product owner's decision, so nullness can no longer carry the guarantee — and the
+      // guarantee itself is unchanged, because it was never about the value. It was about the CLAIM.
+      // The marker carries it now: this file's subject is fidelity, and a field whose provenance says
+      // '(placeholder)' overrides no reference evidence, because it claims none.
       expect(d, `${d.proposal_id}.impact`).toHaveProperty('impact')
-      expect(d.impact, `${d.proposal_id}.impact`).toBeNull()
+      expect(provenance[d.proposal_id].impact, `${d.proposal_id}.impact provenance`).toBe('(placeholder)')
       // Phase 2 populates `deadline` from the reference's own `due`/`deadline` strings (ruling R3),
       // so "never invented" no longer means "never present". The rule that still holds, and is
       // asserted instead: a deadline exists if and only if the story states one, and it is an ISO

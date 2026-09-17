@@ -898,6 +898,132 @@ function agentOf(proposal) {
   return typeof first?.name === 'string' && first.name.trim() !== '' ? first.name : null
 }
 
+
+// ---- PROTOTYPE PLACEHOLDERS (Phase 4, Part 1) --------------------------------------------------
+//
+// WHAT THIS IS, AND WHAT IT IS NOT. Phase 2 (R1/R2) made the five header fields required-but-nullable
+// and refused invention outright. That was right for a corpus claiming to be reference-derived, and
+// it is reversed here for one bounded purpose on the product owner's decision: this repository is a
+// prototype with no backend, the 105 Decision Objects were themselves authored from design mockups,
+// and the header is the one surface where emptiness misrepresents the design. `impact` was 0 of 105
+// — the number an operator looks for first rendered nowhere.
+//
+// THE CONDITION THAT MAKES IT ACCEPTABLE: every value below is marked `(placeholder)` in
+// provenance.json, so it is distinguishable from reference-derived data BY MACHINE, forever. Mixing
+// the two without a marker is how a prototype's scaffolding becomes an undocumented production
+// assumption. A future real API deletes these five functions and their `rec.record` calls; the
+// fields revert to null and nothing else changes, because nothing at runtime reads the marker.
+//
+// THE DISCIPLINE: no NAME and no MAGNITUDE is minted. brand, category and channel reuse vocabularies
+// the corpus already evidences; agent propagates a real name from the story's own reason stage;
+// impact reads a real number out of the story's own prose. The only invention is the assignment.
+// `confidence` is deliberately NOT here (R39) — it is the one field that would mint a number with no
+// textual basis, and a fabricated 0.74 reads as measured where a missing one honestly reads as absent.
+
+const PLACEHOLDER = '(placeholder)'
+
+/**
+ * A stable, dependency-free hash. Deterministic by construction: the same story code yields the same
+ * index on every run and on every machine, which is what keeps `npm run normalize` idempotent.
+ * (Math.random and Date.now are unavailable to this file for exactly that reason.)
+ */
+function stableIndex(seed, modulo) {
+  let h = 2166136261
+  for (let i = 0; i < seed.length; i += 1) {
+    h ^= seed.charCodeAt(i)
+    h = Math.imul(h, 16777619)
+  }
+  return Math.abs(h) % modulo
+}
+
+/** The two sub-brands the corpus names ("Ridgeline" x204, "Alder" x84). No new names. */
+const PLACEHOLDER_BRANDS = ['ridgeline', 'alder']
+/** The four categories S9.20 names ("Cookware · pan adjacency", "Bakeware · …"). No new names. */
+const PLACEHOLDER_CATEGORIES = ['cookware', 'bakeware', 'kitchen tools', 'storage']
+/** Drawn from the contract's own CHANNELS enum, as I4 requires. No new names. */
+const PLACEHOLDER_CHANNELS = ['amazon', 'walmart', 'shopify', 'dtc', 'google', 'faire', 'wholesale']
+
+/** Assigned per STORY so a story never shows two brands, two categories or two channels (I4). */
+function placeholderBrandFor(storyCode) {
+  return PLACEHOLDER_BRANDS[stableIndex(`brand:${storyCode}`, PLACEHOLDER_BRANDS.length)]
+}
+function placeholderCategoryFor(storyCode) {
+  return PLACEHOLDER_CATEGORIES[stableIndex(`category:${storyCode}`, PLACEHOLDER_CATEGORIES.length)]
+}
+function placeholderChannelFor(storyCode) {
+  return PLACEHOLDER_CHANNELS[stableIndex(`channel:${storyCode}`, PLACEHOLDER_CHANNELS.length)]
+}
+
+// ---- impact ------------------------------------------------------------------------------------
+//
+// Magnitude and unit are READ from the story's own words — title first, then narrative and status
+// note, then its `totals.rows` values. A story's title is identical across its stages, so all its
+// objects agree, which is right: they are one proposal seen at four moments.
+//
+// SIGN, in precedence order (R37):
+//   1. an explicit + or − on the figure itself always wins;
+//   2. else a gain verb in the title makes it positive;
+//   3. else a loss verb makes it negative;
+//   4. else it is UNSIGNED — an amount in play, not a gain or a loss (R38).
+//
+// The fourth case is a first-class state, not a default plus. Seven stories are amounts under
+// management ("12 POs · $88K · cash check"), and forcing a direction onto them asserts something
+// the story does not claim. S10.5 is the proof: a brand-integrity incident rendered as +$640 tells
+// the operator the opposite of the truth.
+
+const IMPACT_MONEY = /([−–+-])?\$\s?([\d.,]+)\s*([KMB])?/
+const IMPACT_PCT = /([−–+-])?([\d.]+)\s*(?:pp|%)/
+/** A count needs its own noun, and "21 days"/"41h" is a duration rather than a quantity. */
+const IMPACT_COUNT = /\b([\d,]{2,})\s+(?!days?\b|h\b|hours?\b)([A-Za-z-]+)\b/
+/** "Sep 12" is a date. A date is never a magnitude. */
+const IMPACT_DATE = /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}\b/g
+const IMPACT_MULTIPLIER = { K: 1e3, M: 1e6, B: 1e9 }
+const IMPACT_GAIN = /recover|uplift|opportunity|freed|saving|upside|headroom|gain|protect|improve|clears/i
+const IMPACT_LOSS = /below|short|breach|loss|waste|undercut|drift|late|defect|stock-?out|trough|exceed|surcharge|leak|decay|drop|blocked|exposure|negative|cross(es)?\b/i
+
+/**
+ * @param {string} title  the story's own title — the sign verbs are read from this alone.
+ * @param {string[]} prose  every distinct title/narrative/status_note across the story's stages.
+ * @param {string[]} totalsValues  the story's `totals.rows` values, the fallback when prose has none.
+ * @returns {{value: number, unit: string, signed?: false}|undefined}
+ */
+function placeholderImpactFor(title, prose, totalsValues) {
+  const search = [prose.join(' · '), totalsValues.join(' · ')]
+  for (const raw of search) {
+    const text = raw.replace(IMPACT_DATE, ' ')
+    const money = IMPACT_MONEY.exec(text)
+    const pct = IMPACT_PCT.exec(text)
+    const count = IMPACT_COUNT.exec(text)
+
+    let magnitude
+    let unit
+    let lead
+    if (money) {
+      magnitude = Number(money[2].replace(/,/g, '')) * (IMPACT_MULTIPLIER[money[3]] ?? 1)
+      unit = 'USD'
+      lead = money[1]
+    } else if (pct) {
+      magnitude = Number(pct[2])
+      unit = 'pct'
+      lead = pct[1]
+    } else if (count) {
+      magnitude = Number(count[1].replace(/,/g, ''))
+      unit = 'count'
+    } else {
+      continue
+    }
+    if (!Number.isFinite(magnitude)) continue
+
+    if (lead === '-' || lead === '−' || lead === '–') return { value: -magnitude, unit, signed: true }
+    if (lead === '+') return { value: magnitude, unit, signed: true }
+    if (unit === 'count') return { value: magnitude, unit, signed: false }
+    if (IMPACT_GAIN.test(title)) return { value: magnitude, unit, signed: true }
+    if (IMPACT_LOSS.test(title)) return { value: -magnitude, unit, signed: true }
+    return { value: magnitude, unit, signed: false }
+  }
+  return undefined
+}
+
 // ---- the unresolved axes -----------------------------------------------------------------------
 //
 // These four the reference states nowhere. They are NOT synthesised from a hash any more; each
@@ -1013,6 +1139,44 @@ function main() {
       .map((s) => firstRawString(readFixture(wf.code, s) ?? {}, (k) => k === 'due' || k === 'deadline'))
       .find((t) => typeof t === 'string' && !NO_CLOCK_PHRASES.test(t))
     const storyDeadline = storyDeadlineText ? deadlineInstant(storyDeadlineText, GENERATED_AT) : undefined
+
+    // ---- PROTOTYPE PLACEHOLDERS, resolved per STORY so its stages can never disagree (I4) -------
+    // Every one of these is marked `(placeholder)` in provenance below. See the generator's own
+    // header for why this reverses R1/R2 and what a real API deletes to undo it.
+    // WHERE THE REFERENCE NAMES ONE, THAT IS THE STORY'S VALUE — for all three of the fields that
+    // I4 requires to be stable per story. Hash-assigning independently satisfies I3 (never overwrite)
+    // and breaks I4: S9.5's reference names `alder` on two of its four stages, so the other two would
+    // carry `ridgeline` and one story would show two brands. Seeding the story from its OWN reference
+    // value satisfies both — the named objects keep theirs, and their siblings inherit it.
+    //
+    // `channelOf`/`categoryOf` read the raw fixture, which is available here, so they resolve now.
+    // `brandOf` reads the ASSEMBLED decision, which does not exist yet, so brand is reconciled in a
+    // second pass below — against the same function on the same input the per-object path uses,
+    // rather than an approximation of it that would silently disagree.
+    const storyRef = (pick) => wf.stages
+      .map((stage) => { const d = readFixture(wf.code, stage); return d ? pick(d) : null })
+      .find((v) => v !== null && v !== undefined)
+    const storyCategory = storyRef(categoryOf) ?? placeholderCategoryFor(wf.code)
+    const storyChannel = storyRef(channelOf) ?? placeholderChannelFor(wf.code)
+    /** The story's objects, for the brand reconciliation that can only run once all four are built. */
+    const storyObjects = []
+    // The story's own lead agent, propagated to the stages the reference does not credit. No name is
+    // minted: this is the value the reason stage already carries.
+    const storyAgentRows = wf.stages
+      .map((stage) => clean(readFixture(wf.code, stage)?.agents))
+      .find((rows) => isObjArray(rows) && isStr(rows[0]?.name))
+    const storyAgent = storyAgentRows?.[0]?.name ?? ctx.agents[0]
+    // The story's impact, read from its own words. `title` alone decides the sign verbs; the prose
+    // and then the totals supply the magnitude.
+    const storyProse = [...new Set(wf.stages.flatMap((stage) => {
+      const d = readFixture(wf.code, stage) ?? {}
+      return [wf.headline ?? wf.name, narrativeOf(d, stage, makeRecorder()), d.footStatus, d.footerStatus]
+    }).filter(isStr))]
+    const storyTotals = wf.stages.flatMap((stage) => {
+      const rows = pick(readFixture(wf.code, stage) ?? {}, ['totals', 'rollup', 'summary', 'liveStats'], isLabelled, makeRecorder(), 'x')
+      return isObjArray(rows) ? rows.map((r) => `${r.label ?? ''} ${r.value ?? ''}`) : []
+    })
+    const storyImpact = placeholderImpactFor(wf.headline ?? wf.name, storyProse, storyTotals)
     // The reference orders its lens line primary-first ("Sales · Margin"). S10.6 declares
     // "all five" and names no primary, so its own lead KPI tile supplies one; that single case is
     // recorded as an open contract item rather than hidden.
@@ -1106,24 +1270,32 @@ function main() {
       // be present and dropUndefined would not distinguish it from an omission. Each is `null`
       // wherever the reference does not state it; none is inferred from a title or a hash.
       //
-      // `impact` is null on all 105, and that is a measurement rather than a shortfall (ruling R2):
-      // no reference fixture carries a top-level numeric magnitude at all. Every figure is either a
-      // pre-formatted display string ("+$41K" in `totals.rows`) or a row-level metric inside a
-      // table. Parsing the former would make blocks/formatValue.js's own output an input, which is
-      // exactly the round trip the typed-number contract exists to end.
-      decision.impact = null
-      decision.brand = brandOf(decision)
-      decision.channel = channelOf(data)
-      decision.category = categoryOf(data)
-      decision.agent = agentOf(proposal)
-      rec.record('impact', null)
-      rec.record('brand', decision.brand === null ? null : '(reference sub-brand)')
-      rec.record('channel', decision.channel === null ? null : 'channel')
-      rec.record('category', decision.category === null ? null : 'category')
-      // NOT `'agents'`: that raw key is already claimed by `proposal.agents`, and naming it twice
-      // would be the exact double-claim referenceFidelity.test.js exists to catch. `agent` is derived
-      // FROM the canonical field, so its provenance says so.
-      rec.record('agent', decision.agent === null ? null : '(proposal.agents lead)')
+      // REFERENCE VALUE WINS, ALWAYS (I3). The placeholder fills the gap and never overwrites — the
+      // 54 reference-derived values are asserted byte-identical before and after by
+      // __corpus__/placeholders.test.js's T42, against a committed pre-phase snapshot.
+      const refBrand = brandOf(decision)
+      const refChannel = channelOf(data)
+      const refCategory = categoryOf(data)
+      const refAgent = agentOf(proposal)
+
+      decision.impact = storyImpact ?? null
+      decision.brand = refBrand // reconciled across the story below
+      decision.channel = refChannel ?? storyChannel
+      decision.category = refCategory ?? storyCategory
+      decision.agent = refAgent ?? storyAgent
+
+      // THE MARKER (R35). provenance.json already answers "where did this field come from", per
+      // object per field, with null meaning the reference is silent. A placeholder is a third answer
+      // to that same question, so it is a third value — not a flag inside the Decision Object, which
+      // would ship prototype scaffolding in a payload a real API would never send.
+      rec.record('impact', decision.impact === null ? null : PLACEHOLDER)
+      rec.record('brand', refBrand ? '(reference sub-brand)' : null) // rewritten by the reconciliation
+      rec.record('channel', refChannel ? 'channel' : PLACEHOLDER)
+      rec.record('category', refCategory ? 'category' : PLACEHOLDER)
+      // NOT `'agents'` for the reference case: that raw key is already claimed by `proposal.agents`,
+      // and naming it twice would be the exact double-claim referenceFidelity.test.js exists to
+      // catch. `agent` is derived FROM the canonical field, so its provenance says so.
+      rec.record('agent', refAgent ? '(proposal.agents lead)' : PLACEHOLDER)
 
       // `approve` is stamped from the SINGLE PRODUCER, not generated here. The field has to be
       // present because the Decision Object contract requires it, but the value is
@@ -1152,7 +1324,21 @@ function main() {
       rec.record('cardinality', '(derived from the decide-stage item count)')
 
       provenance[proposalId] = rec.sources
+      storyObjects.push({ decision, rec })
       out.push(decision)
+    }
+
+    // THE BRAND RECONCILIATION (I3 + I4). One value for the whole story: the one its own reference
+    // names if any stage names one, else the hash-assigned placeholder. Objects whose reference named
+    // it keep it byte-identical — this only fills the nulls left above, and re-records their
+    // provenance as a placeholder so the marker stays exact per object rather than per story.
+    const storyBrand = storyObjects.map(({ decision }) => decision.brand).find(Boolean)
+      ?? placeholderBrandFor(wf.code)
+    for (const { decision, rec } of storyObjects) {
+      if (decision.brand === null || decision.brand === undefined) {
+        decision.brand = storyBrand
+        rec.record('brand', PLACEHOLDER)
+      }
     }
   }
 

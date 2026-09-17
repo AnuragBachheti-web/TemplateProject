@@ -21,6 +21,7 @@ import {
   VALUE_UNITS,
 } from './decisionObject'
 import dataset from '@/features/action-stories/__corpus__/normalized/dataset.json'
+import provenance from '@/features/action-stories/__corpus__/normalized/provenance.json'
 
 /**
  * MINIMUM NON-NULL POPULATION PER FIELD, measured off the corpus — not chosen (R1).
@@ -39,11 +40,20 @@ const POPULATION_FLOORS = {
   category: { min: 1, distinct: 1 },
   // The lead model credited on the proposal, from `proposal.agents[0]`. Reason stage only, by design.
   agent: { min: 26, distinct: 20 },
+  // THESE ARE NOW REFERENCE-DERIVED FLOORS, not population floors. Phase 4 Part 1 fills all five
+  // fields on 105/105 with marked placeholders, so counting non-null values would assert 105 five
+  // times over and guarantee nothing. Counted through provenance instead — a field counts only where
+  // its source is a named reference key rather than '(placeholder)' — these same numbers go on saying
+  // exactly what Phase 2 measured, and say it EXACTLY rather than as a lower bound. If a placeholder
+  // ever displaced a reference value, this is where it shows up.
+  //
   // ZERO, and deliberately. Per R2, impact may only be populated from a value that is ALREADY a
   // number. The corpus has no top-level numeric key on any fixture: every magnitude is either a
   // pre-formatted display string ("+$41K" in `totals.rows`) or a row-level metric inside a table,
   // and neither is this proposal's headline impact. Parsing the former would ship a formatter
-  // round-trip as a data source. So impact is typed, required-present, and null on 105/105.
+  // round-trip as a data source. So no impact is REFERENCE-DERIVED — it stays zero here. Phase 4
+  // (R37) derives all 105 from the story's own prose and totals, and every one of them is marked
+  // '(placeholder)' in provenance. That is the reversal, kept visible rather than absorbed.
   impact: { min: 0, distinct: 0 },
 }
 
@@ -76,14 +86,22 @@ describe('T2 — impact is present and typed on 105/105', () => {
     }
   })
 
-  it('is never populated from a pre-formatted display string (R2)', () => {
-    // The guard that makes R2 checkable: if impact ever becomes non-null, its value must not be a
-    // string and must not have come from `totals.rows[].value`, which is display text.
+  it('is never CLAIMED from a pre-formatted display string (R2 as Phase 4 leaves it)', () => {
+    // R2 forbade populating impact from display text. Phase 4 (R37) derives a magnitude from exactly
+    // that text — so what R2 protected has to be restated rather than deleted, and the part that
+    // still holds is the part that mattered: no display string is ever CLAIMED as a reference source.
+    //
+    //   the value is a number, never the string it was read out of  — unchanged;
+    //   provenance names no raw key for it, only '(placeholder)'    — the claim ledger stays honest,
+    //     which is what stopped a formatter round-trip from becoming a data source in the first place.
     for (const d of dataset) {
       if (d.impact === null) continue
-      expect(typeof d.impact.value).not.toBe('string')
+      expect(typeof d.impact.value, `${d.proposal_id}.impact.value`).toBe('number')
+      expect(provenance[d.proposal_id].impact, `${d.proposal_id} claims a raw key for impact`)
+        .toBe('(placeholder)')
     }
-    expect(dataset.filter((d) => d.impact !== null)).toHaveLength(POPULATION_FLOORS.impact.min)
+    const derived = dataset.filter((d) => provenance[d.proposal_id].impact !== '(placeholder)')
+    expect(derived, 'no impact may be reference-derived').toHaveLength(POPULATION_FLOORS.impact.min)
   })
 
   it('the contract REJECTS an impact that is absent, or present with the wrong shape', () => {
@@ -120,9 +138,14 @@ describe('T3 — brand, channel, category and agent are present and typed on 105
     }
   })
 
-  it.each(Object.entries(POPULATION_FLOORS))('%s meets its evidence-derived population floor', (field, { min }) => {
-    const populated = dataset.filter((d) => d[field] !== null && d[field] !== undefined)
-    expect(populated.length, `${field} non-null count regressed below the measured evidence`).toBeGreaterThanOrEqual(min)
+  it.each(Object.entries(POPULATION_FLOORS))('%s still has exactly its measured reference evidence', (field, { min }) => {
+    const derived = dataset.filter((d) => {
+      const source = provenance[d.proposal_id][field]
+      return source !== null && source !== undefined && source !== '(placeholder)'
+    })
+    // EXACT, not a floor. A placeholder that displaced a reference value drives this DOWN, and a
+    // placeholder mis-recorded as reference-derived drives it UP; a lower bound would catch neither.
+    expect(derived.length, `${field}: reference-derived count moved off the Phase 2 measurement`).toBe(min)
   })
 
   it('the contract REJECTS each field absent, and rejects a wrong-typed non-null value', () => {
