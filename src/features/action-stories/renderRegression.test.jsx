@@ -29,6 +29,39 @@ if (!globalThis.ResizeObserver) {
   }
 }
 
+// PHASE 4 PART 2 — WHY ALL FOUR BASELINES MOVED (C3).
+//
+// "Snapshot updated" is not an explanation. Every baseline below was regenerated, and the complete
+// set of differences from the Phase 3C renders is TWO changes, each traced to the defect it closes.
+// Nothing else in any of the four panes moved by a character.
+//
+//   reason.v1            "Decision Mode / Suggest" deleted from the rail.
+//   analyze.compare.v1   "Decision Mode / Suggest" deleted from the rail.
+//   decide.slate.v1      "Decision Mode / Suggest" deleted from the rail.
+//   execute.bridge.v1    "Decision Mode / Suggest" deleted from the rail, AND
+//                        "Progress 0.0%" -> "Progress 0%".
+//
+// 1. THE MODE BLOCK (defect a). Mode rendered twice on every pane — the header's fact row and the
+//    rail's `decision_mode` block — so one screen said "Mode suggest" and "Suggest" about the same
+//    proposal. The header keeps it; the block is gone from all four manifests and the now-orphaned
+//    slot is gone from slotVocabulary.js. This is a DELETION from the pane with no compensating
+//    addition, which is the shape a duplicate-removal should have: the fact still renders, once.
+//
+// 2. "0.0%" -> "0%" (defect c). formatValue defaulted percent to one decimal place, so every
+//    percentage in the app claimed a tenth of a point of precision the reference never stated. The
+//    default is now zero and a caller that genuinely has tenths asks for them. Only execute.bridge
+//    shows it here because it is the only specimen rendering a bare percentage below the header;
+//    the same change is asserted directly, thirty-seven ways, by T49.
+//
+// WHAT DID NOT MOVE, and was expected to. Routing nine blocks onto formatValue (defect c) changed
+// no character of any baseline. The corpus's row-level figures are still pre-formatted display
+// STRINGS, which formatValue passes through untouched by design — so the unification is proved by
+// T48 and T49 rather than by these panes. One regression was caught here and nowhere else: rows
+// with no value began rendering a bare "—", because formatValue's absent-value em dash is right for
+// a NumberBlock showing you a missing figure and wrong for a StatList row that omits the line. Four
+// call sites now check for absence before formatting. That defect reached the baseline diff and was
+// fixed before these files were written, which is the entire reason this net exists.
+
 /** One representative object per canonical template, pinned by id so the sample cannot drift. */
 const SPECIMENS = [
   ['reason.v1', 'prop_s9_1_reason'],
@@ -167,24 +200,35 @@ describe('T13 — one object per template renders unchanged below the header', (
       'labelValueList', 'lineChart', 'number', 'object', 'roster', 'scatterChart', 'slider',
       'statList', 'table', 'text', 'timeline', 'waterfallChart',
     ])
-    // The SLOT count is unchanged: this phase re-points slots, it does not add them.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
+    // 51 in Phase 3C, 50 now. Phase 4 Part 2 REMOVED `decision_mode`: the header states the mode,
+    // and the slot existed only so a rail block could state it a second time. The registry itself is
+    // untouched — no block type was added or dropped to achieve that, which is the thing this test
+    // is really guarding. A slot leaving is a vocabulary shrinking; a block type arriving unnoticed
+    // is the failure.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    expect(Object.keys(SLOT_VOCABULARY)).not.toContain('decision_mode')
   })
 
-  it('no template gained or lost a block slot this phase', async () => {
-    // The `actions[]` arrays DO change (approve_selected loses its `when`, per I7), so this counts
-    // `blocks[]` only — the thing C1 puts out of bounds.
+  it('every template lost EXACTLY the mode block, and nothing else', async () => {
+    // WAS "no template gained or lost a block slot this phase", which was Phase 2's constraint and
+    // is not Phase 4 Part 2's: defect (a) is a block removal. Restated as the tighter claim — each
+    // of the four stage templates is down exactly one, locked.v1 is untouched, and the count is
+    // pinned so a second removal cannot ride along behind the first.
     const counts = {}
     for (const id of ['reason.v1', 'analyze.compare.v1', 'decide.slate.v1', 'execute.bridge.v1', 'locked.v1']) {
       const template = (await import(`./templates/${id}.json`)).default
       counts[id] = template.blocks.length
     }
     expect(counts).toEqual({
-      'reason.v1': 11,
-      'analyze.compare.v1': 15,
-      'decide.slate.v1': 19,
-      'execute.bridge.v1': 15,
-      'locked.v1': 3,
+      'reason.v1': 10,            // was 11
+      'analyze.compare.v1': 14,   // was 15
+      'decide.slate.v1': 18,      // was 19
+      'execute.bridge.v1': 14,    // was 15
+      'locked.v1': 3,             // unchanged — it declares no rail at all
     })
+    for (const id of ['reason.v1', 'analyze.compare.v1', 'decide.slate.v1', 'execute.bridge.v1']) {
+      const template = (await import(`./templates/${id}.json`)).default
+      expect(template.blocks.map((b) => b.slotName), id).not.toContain('decision_mode')
+    }
   })
 })

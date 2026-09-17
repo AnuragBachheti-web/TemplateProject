@@ -3,6 +3,7 @@ import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
+import { formatValue } from './formatValue';
 
 /**
  * A GOVERNANCE CHECKLIST: did this check pass, and why.
@@ -67,12 +68,12 @@ export default function ChecklistBlock({ slotName, data, compact = false }) {
                 <span className="min-w-0 text-[12.5px] leading-snug text-rf-text-primary">{identity}</span>
                 {hasValue && (
                   <span className="shrink-0 font-mono text-[12px] tabular-nums text-rf-text-primary">
-                    {row.value}
+                    {formatValue(row.value)}
                     {/* `pct` is the check's position against its own ceiling — a real number Phase 3A
                         typed (3 rows carry it). The first draft dropped it, which the T13 baseline
                         caught as content loss rather than as the intended badge change. */}
                     {typeof row.pct === 'number' && (
-                      <span className="ml-1 text-[10.5px] text-rf-text-tertiary">{row.pct}%</span>
+                      <span className="ml-1 text-[10.5px] text-rf-text-tertiary">{formatValue({ value: row.pct, unit: 'pct' })}</span>
                     )}
                   </span>
                 )}

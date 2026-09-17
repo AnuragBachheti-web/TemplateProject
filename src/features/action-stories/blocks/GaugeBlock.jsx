@@ -3,6 +3,7 @@ import { parseMagnitude } from './chartGeometry';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import Tooltip from '../ui/Tooltip';
+import { formatValue } from './formatValue';
 
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
 const THRESHOLD_KEYS = ['threshold', 'limit', 'limitPct', 'ceiling', 'floor', 'target', 'cap'];
@@ -65,7 +66,7 @@ export default function GaugeBlock({ slotName, data, compact }) {
             <div className="mb-1 flex items-baseline justify-between gap-2 text-[11.5px]">
               <span className="min-w-0 truncate text-rf-text-secondary">{row.label}</span>
               <span className={`shrink-0 font-mono font-semibold tabular-nums ${over ? 'text-rf-status-critical' : 'text-rf-text-primary'}`}>
-                {row.magnitude.display}
+                {row.magnitude.display === undefined ? null : formatValue(row.magnitude.display)}
               </span>
             </div>
             <div className="relative h-1.5 w-full rounded-full bg-rf-surface-sunken">
@@ -82,7 +83,7 @@ export default function GaugeBlock({ slotName, data, compact }) {
                   for its popup bubble, and must never become the containing block a percentage
                   offset resolves against, or the tick collapses to the bar's left edge. */}
               <span className="absolute top-1/2 -translate-y-1/2" style={{ left: `${thresholdPct}%` }}>
-                <Tooltip content={`Threshold: ${row.threshold.display}`}>
+                <Tooltip content={`Threshold: ${formatValue(row.threshold.display)}`}>
                   <span className="block h-3 w-px bg-rf-text-tertiary" />
                 </Tooltip>
               </span>

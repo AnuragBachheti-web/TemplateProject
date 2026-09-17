@@ -70,7 +70,7 @@ function GridPanel({ row, nodesBySlot }) {
       className={`grid grid-cols-1 divide-y divide-rf-border-subtle overflow-hidden rounded-2xl border border-rf-border-subtle bg-rf-surface-raised px-4 shadow-xs sm:grid-cols-2 sm:divide-y-0 sm:divide-x sm:px-0 ${wideColsClass}`}
     >
       {row.items.map(({ slotName }) => (
-        <div key={slotName} className="min-w-0 sm:px-4 sm:py-3">
+        <div key={slotName} data-block-slot={slotName} className="min-w-0 sm:px-4 sm:py-3">
           {nodesBySlot[slotName]}
         </div>
       ))}
@@ -92,7 +92,7 @@ function ComposedPanel({ row, nodesBySlot }) {
     <div data-composed-panel className="rounded-2xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-xs">
       <div className="grid grid-cols-12 gap-x-4 gap-y-2">
         {row.items.map(({ slotName, span }) => (
-          <div key={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
+          <div key={slotName} data-block-slot={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
             {nodesBySlot[slotName]}
           </div>
         ))}
@@ -115,7 +115,7 @@ function LoneScalarStrip({ slotName, nodesBySlot }) {
   // The SECONDARY surface tier, same reasoning as GridPanel above — `rf-surface-sunken` (the page
   // canvas's own background) would make this strip visually disappear into the page around it,
   // exactly the opposite of "real visual presence" this component exists for.
-  return <div className="rounded-lg bg-rf-surface-raised px-3 py-1">{nodesBySlot[slotName]}</div>;
+  return <div data-block-slot={slotName} className="rounded-lg bg-rf-surface-raised px-3 py-1">{nodesBySlot[slotName]}</div>;
 }
 
 /**
@@ -134,7 +134,7 @@ function FlowRow({ row, nodesBySlot }) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-12">
       {row.items.map(({ slotName, span }) => (
-        <div key={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
+        <div key={slotName} data-block-slot={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
           {nodesBySlot[slotName]}
         </div>
       ))}
@@ -143,7 +143,7 @@ function FlowRow({ row, nodesBySlot }) {
 }
 
 function Row({ row, nodesBySlot }) {
-  if (row.type === 'single') return <div>{nodesBySlot[row.slotName]}</div>;
+  if (row.type === 'single') return <div data-block-slot={row.slotName}>{nodesBySlot[row.slotName]}</div>;
   if (row.type === 'flow') return <FlowRow row={row} nodesBySlot={nodesBySlot} />;
   if (row.type === 'grid' && !row.explicit && row.items.length === 1) {
     return <LoneScalarStrip slotName={row.items[0].slotName} nodesBySlot={nodesBySlot} />;
@@ -167,6 +167,14 @@ function MainRows({ rows, nodesBySlot }) {
  * supporting information, never this stage's primary content, and now visually reads that way
  * against the main column's white, stronger-surfaced panels.
  */
+/**
+ * `data-block-slot` is emitted on every slot's own wrapper, in both regions.
+ *
+ * Which BLOCK TYPE rendered was already observable (`data-block-type`); which SLOT it rendered for
+ * was not, and that is the thing the density budgets and the no-duplicate-fact rule are about. A
+ * rail holding four panels made of nine blocks and a rail holding four blocks are different screens,
+ * and without this they look identical from the DOM.
+ */
 function RailPanel({ section, nodesBySlot }) {
   const slots = section.rows.flatMap((row) => (row.type === 'grid' ? row.items.map((i) => i.slotName) : [row.slotName]));
   return (
@@ -182,7 +190,7 @@ function RailPanel({ section, nodesBySlot }) {
       )}
       <div className="flex flex-col divide-y divide-rf-border-subtle">
         {slots.map((slotName) => (
-          <div key={slotName}>{nodesBySlot[slotName]}</div>
+          <div key={slotName} data-block-slot={slotName}>{nodesBySlot[slotName]}</div>
         ))}
       </div>
     </section>

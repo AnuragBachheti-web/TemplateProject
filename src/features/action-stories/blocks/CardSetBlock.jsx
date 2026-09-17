@@ -5,6 +5,7 @@ import SubRowList from './children/SubRowList';
 import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
+import { formatValue } from './formatValue';
 
 /**
  * A NAMED CHOICE OR GROUP, with its supporting figures — the richest row-level composition in the
@@ -115,7 +116,7 @@ export default function CardSetBlock({ slotName, data, compact = false }) {
                 {figures.map(([key, value]) => (
                   // The reference's key IS the figure's name (`cm`, `gmroi`, `rev`); humanized for
                   // display by the same helper every other block uses, never renamed in the payload.
-                  <Metric key={key} label={humanizeSlotName(key)} value={String(value)} />
+                  <Metric key={key} label={humanizeSlotName(key)} value={formatValue(value)} />
                 ))}
               </div>
             )}

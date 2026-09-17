@@ -3,7 +3,9 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { svgYToPlotY, toNumber } from './chartGeometry';
 import { categoricalColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
-import { EmptyState, ErrorState } from './BlockStates';
+import { EmptyState, ErrorState, ThinEvidenceState } from './BlockStates';
+import { countPoints, hasEnoughEvidence } from './chartEvidence';
+import { formatValue } from './formatValue';
 
 export default function ScatterChartBlock({ slotName, data }) {
   if (data === null || data === undefined) {
@@ -14,6 +16,12 @@ export default function ScatterChartBlock({ slotName, data }) {
   }
   if (data.length === 0) {
     return <EmptyState slotName={slotName} message="No data points." />;
+  }
+  // The 4-point admission rule (blocks/chartEvidence.js), applied identically by all four chart
+  // types. Placed AFTER the empty guard so "no data at all" keeps saying that, and before any
+  // geometry, so a thin chart is never drawn and then explained.
+  if (!hasEnoughEvidence(data)) {
+    return <ThinEvidenceState slotName={slotName} points={countPoints(data)} />;
   }
 
   // Every point in this data source is a raw SVG/screen-space pixel position lifted straight from
@@ -75,7 +83,7 @@ export default function ScatterChartBlock({ slotName, data }) {
                 if (name === 'y') return [null, null];
                 const p = item?.payload;
                 if (p?.label) return [p.label, ''];
-                return [`(${p?.x?.toLocaleString?.() ?? p?.x}, ${p?.y?.toLocaleString?.() ?? p?.y})`, ''];
+                return [`(${formatValue(p?.x)}, ${formatValue(p?.y)})`, ''];
               }}
               labelFormatter={() => ''}
             />

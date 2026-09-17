@@ -371,8 +371,12 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     }
   })
 
-  it('the slot vocabulary still has 51 slots — this phase re-points, it does not add (C3)', () => {
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
+  it('the slot vocabulary has 50 slots — 3C re-pointed, Phase 4 removed one (C3)', () => {
+    // 51 through Phase 3C. Phase 4 Part 2 removed `decision_mode` when the duplicate rail render of
+    // the mode axis was deleted; the slot had no other consumer. Still nothing ADDED, which is what
+    // this guard is for — the vocabulary may shrink when a concept turns out to be redundant, and
+    // must not grow quietly.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
     expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(16)
   })

@@ -3,7 +3,9 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { parseMagnitude } from './chartGeometry';
 import { categoricalColor, positiveColor, negativeColor } from './chartPalette';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
-import { EmptyState, ErrorState } from './BlockStates';
+import { EmptyState, ErrorState, ThinEvidenceState } from './BlockStates';
+import { countPoints, hasEnoughEvidence } from './chartEvidence';
+import { formatValue } from './formatValue';
 
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
 
@@ -23,6 +25,12 @@ export default function BarChartBlock({ slotName, data, compact }) {
   }
   if (data.length === 0) {
     return <EmptyState slotName={slotName} message="No data points." />;
+  }
+  // The 4-point admission rule (blocks/chartEvidence.js), applied identically by all four chart
+  // types. Placed AFTER the empty guard so "no data at all" keeps saying that, and before any
+  // geometry, so a thin chart is never drawn and then explained.
+  if (!hasEnoughEvidence(data)) {
+    return <ThinEvidenceState slotName={slotName} points={countPoints(data)} />;
   }
 
   // Two shapes: a bare array of numbers/numeric strings (unlabeled — a bare index per bar), or an
@@ -69,7 +77,7 @@ export default function BarChartBlock({ slotName, data, compact }) {
   const chartLabel =
     points.length <= 8
       ? `Bar chart. ${points.map((p) => `${p.label}: ${p.display ?? p.magnitude}`).join(', ')}.`
-      : `Bar chart with ${points.length} bars, ranging from ${Math.min(...points.map((p) => p.magnitude)).toLocaleString()} to ${Math.max(...points.map((p) => p.magnitude)).toLocaleString()}.`;
+      : `Bar chart with ${points.length} bars, ranging from ${formatValue(Math.min(...points.map((p) => p.magnitude)))} to ${formatValue(Math.max(...points.map((p) => p.magnitude)))}.`;
 
   // Content-driven height tier, not one fixed size for every context: a chart already sharing a
   // composed panel with a headline/metrics (`compact`) reads at a glance — it doesn't need the

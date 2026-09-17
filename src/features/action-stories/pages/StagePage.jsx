@@ -55,19 +55,27 @@ function ProposalHeader({ decision, story, storyProblem }) {
         {decision.title}
       </h1>
 
-      {/* One row, each fact once. Impact/confidence/mode used to be scattered across a pill, an
-          <h1> and a rail block; they appear here and nowhere else. */}
+      {/* ONE ROW, EACH FACT ONCE — and now true rather than intended. `mode` was rendering twice on
+          every pane: here, and again as the rail's `decision_mode` block, so an operator read
+          "Mode suggest" in the header and "Suggest" in the rail of the same screen. The rail block
+          is gone from all four manifests; the header is the single site.
+
+          Each fact carries `data-fact` so "exactly once" is countable. Counting words in the pane's
+          flattened text is not an instrument that works here — textContent concatenates adjacent
+          nodes with no separator, so "Mode suggest" abutting the next element defeats a word
+          boundary, and a bare count magnitude like 214 matches body prose that has nothing to do
+          with the impact. A marked node is the fact; a matching substring is a coincidence. */}
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12px] text-rf-text-secondary">
         <span className={`inline-flex items-center rounded-full px-2.5 py-[3px] text-[11px] font-medium capitalize ${STATUS_TONE[decision.status] ?? STATUS_TONE.pending}`}>
           {decision.status}
         </span>
         {decision.impact && (
-          <span>
+          <span data-fact="impact">
             Impact <strong className="font-mono tabular-nums text-rf-text-primary">{formatValue(decision.impact)}</strong>
           </span>
         )}
         {decision.confidence && (
-          <span>
+          <span data-fact="confidence">
             Confidence{' '}
             <strong className="font-mono tabular-nums text-rf-text-primary">
               {formatValue({ value: decision.confidence.value * 100, unit: 'pct', precision: 0 })}
@@ -75,7 +83,7 @@ function ProposalHeader({ decision, story, storyProblem }) {
             {decision.confidence.calibrated ? ' · calibrated' : ''}
           </span>
         )}
-        <span className="capitalize">Mode {decision.mode}</span>
+        <span data-fact="mode" className="capitalize">Mode {decision.mode}</span>
         {due && <span className="font-medium text-amber-700 dark:text-amber-400">{due}</span>}
       </div>
 

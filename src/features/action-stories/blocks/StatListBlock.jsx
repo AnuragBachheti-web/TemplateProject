@@ -3,6 +3,7 @@ import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
+import { formatValue } from './formatValue';
 
 /**
  * A MEASURED FIGURE AGAINST ITS LABEL — a rollup, a set of inputs, a provenance count, a progress
@@ -67,13 +68,16 @@ export default function StatListBlock({ slotName, data, compact = false }) {
         <Metric
           key={i}
           label={row.label}
-          value={row.value}
+          // formatValue renders an absent value as an em dash — correct for NumberBlock, which is
+          // showing you a figure that is missing, and wrong here, where Metric omits the figure line
+          // entirely. Calling it unconditionally turned every value-less row into a bare "—".
+          value={row.value === undefined || row.value === null ? undefined : formatValue(row.value)}
           // `meta`, `detail` and `note` are the same concept under three names across the five
           // slots; the percentage is appended as its own suffix rather than becoming a second
           // unlabelled line. `note` joined in Phase 3C for `recommendation_metrics`, where all 39
           // rows carry one and the chain would otherwise have dropped it (R30) — additive, because
           // no other statList slot carries `note`.
-          meta={row.meta ?? row.detail ?? row.note ?? (row.pct !== undefined && row.pct !== null ? `${row.pct}%` : undefined)}
+          meta={row.meta ?? row.detail ?? row.note ?? (row.pct !== undefined && row.pct !== null ? formatValue({ value: row.pct, unit: 'pct' }) : undefined)}
         />
       ))}
     </div>

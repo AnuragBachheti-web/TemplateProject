@@ -32,7 +32,12 @@
 export const SLOT_VOCABULARY = Object.freeze({
   // ---- shared identity and context (every template) ------------------------------------------
   narrative: { binding: 'narrative', blockType: 'text', tier: 'core', note: 'The proposal\'s own sentence. Absorbs the corpus\'s rationale/dialNote/primaryInsight/restNote copy fields.' },
-  decision_mode: { binding: 'mode', blockType: 'text', tier: 'core', note: 'Axis 4. Replaces the corpus\'s execLabel, which was 104x "Suggest" and 1x "Assist".' },
+  // decision_mode WAS HERE. Removed in Phase 4 Part 2: the header states the mode (StagePage.jsx's
+  // `data-fact="mode"`), and a slot existed only so a rail block could state it a second time. Every
+  // pane rendered "Mode suggest" above and "Suggest" beside it. The axis is unchanged and still
+  // required by the contract — what is gone is the second place it was rendered, and the slot that
+  // existed to render it there. enumLabel.js keeps its `decision_mode` entry: that map is keyed by
+  // concept, and the mode enum still needs a display label wherever it is shown.
   decision_lens: { binding: 'lens', blockType: 'text', tier: 'core', note: 'Axis 6.' },
   decision_persona: { binding: 'persona', blockType: 'text', tier: 'core', note: 'Axis 7. Consolidates the corpus\'s free-text `owner`.' },
   decision_contract_class: { binding: 'contract_class', blockType: 'text', tier: 'conditional', note: 'Axis 2. Rendered only for strategic/regulated.' },

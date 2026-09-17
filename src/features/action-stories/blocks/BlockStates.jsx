@@ -23,6 +23,29 @@ export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
   );
 }
 
+/**
+ * A chart that does not have enough points to be a chart yet (blocks/chartEvidence.js).
+ *
+ * DISTINCT FROM EmptyState ON PURPOSE. "Nothing here yet." is a claim about the DATA — the queue is
+ * empty, come back later. This is a claim about the EVIDENCE: the points exist, there are just too
+ * few of them to draw a shape an operator should read anything into. Collapsing the two would tell
+ * someone their three data points don't exist.
+ *
+ * Says the count, because "not enough" without a number is not actionable.
+ */
+export function ThinEvidenceState({ slotName, points }) {
+  return (
+    <div className="rounded-2xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
+      <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
+        {humanizeSlotName(slotName)}
+      </p>
+      <p className="mt-1 text-[12.5px] text-rf-text-tertiary">
+        Not enough evidence to chart — {points} {points === 1 ? 'point' : 'points'}.
+      </p>
+    </div>
+  );
+}
+
 export function ErrorState({ slotName, message }) {
   return (
     <div className="rounded-2xl border border-dashed border-rose-300 bg-rose-50 px-4 py-3 dark:border-rose-500/40 dark:bg-rose-500/10">

@@ -1,6 +1,7 @@
 import { humanizeSlotName } from './humanizeSlotName';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { formatValue } from './formatValue';
 
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -43,7 +44,7 @@ export default function SliderBlock({ slotName, data, onChange }) {
       <BlockTitle>{label}</BlockTitle>
       <p className="mt-1 flex items-baseline gap-2">
         <span className="text-[24px] font-bold text-emerald-600">
-          {data.value}
+          {data.value === undefined || data.value === null ? null : formatValue(data.value)}
           {unit}
         </span>
         {data.note && <span className="text-[11.5px] text-rf-text-tertiary">{data.note}</span>}
@@ -57,7 +58,7 @@ export default function SliderBlock({ slotName, data, onChange }) {
         value={data.value}
         onChange={(event) => onChange?.(Number(event.target.value))}
         aria-label={label}
-        aria-valuetext={`${data.value}${unit}`}
+        aria-valuetext={`${formatValue(data.value)}${unit}`}
         className="mt-3 w-full accent-emerald-600"
       />
 

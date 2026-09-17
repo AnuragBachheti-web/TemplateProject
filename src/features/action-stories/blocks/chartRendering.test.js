@@ -48,12 +48,19 @@ describe('chartGeometry — canonical y convention', () => {
   });
 });
 
+// FIXTURES PADDED TO FOUR POINTS. blocks/chartEvidence.js's admission rule refuses to draw a chart
+// built on fewer than four points, so a two-bar fixture now renders the thin-evidence notice and the
+// chart internals these tests reach for are never constructed. Each fixture below gained points and
+// changed nothing else: every assertion still names the same indices and the same expected values.
+
 describe('ScatterChartBlock — y-inversion fix (regression: S9.1/analyze.points upside-down bug)', () => {
   it('flips cy the same direction parseSvgPathPoints flips a line path y', () => {
     // Two points where the SVG source has point A higher on the canvas (smaller cy) than point B.
     const data = [
       { cx: 10, cy: 20 }, // near the top of the original artwork
       { cx: 10, cy: 200 }, // near the bottom of the original artwork
+      { cx: 20, cy: 80 },
+      { cx: 30, cy: 140 },
     ];
     const el = ScatterChartBlock({ slotName: 'points', data });
     const scatter = findByType(el, Scatter);
@@ -69,20 +76,21 @@ describe('ScatterChartBlock — y-inversion fix (regression: S9.1/analyze.points
       { cx: 1, cy: 1, hue: 'var(--a)' },
       { cx: 2, cy: 2, hue: 'var(--b)' },
       { cx: 3, cy: 3, hue: 'var(--a)' },
+      { cx: 4, cy: 4, hue: 'var(--b)' },
     ];
     const el = ScatterChartBlock({ slotName: 'points', data });
     // With >1 distinct hue present, per-point <Cell> fills must be rendered (not the single fixed
     // fill every point used to share regardless of `hue`).
     const scatter = findByType(el, Scatter);
     const cells = scatter?.props?.children;
-    expect(Array.isArray(cells) && cells.length).toBe(3);
+    expect(Array.isArray(cells) && cells.length).toBe(4);
     // Same hue -> same color; different hue -> different color.
     expect(cells[0].props.fill).toBe(cells[2].props.fill);
     expect(cells[0].props.fill).not.toBe(cells[1].props.fill);
   });
 
   it('does not crash and renders no Cells when no point carries a hue', () => {
-    const data = [{ cx: 1, cy: 1 }, { cx: 2, cy: 2 }];
+    const data = [{ cx: 1, cy: 1 }, { cx: 2, cy: 2 }, { cx: 3, cy: 3 }, { cx: 4, cy: 4 }];
     const el = ScatterChartBlock({ slotName: 'points', data });
     const scatter = findByType(el, Scatter);
     expect(scatter?.props?.children).toBeFalsy();
@@ -91,7 +99,10 @@ describe('ScatterChartBlock — y-inversion fix (regression: S9.1/analyze.points
 
 describe('BarChartBlock — negative-value domain fix (regression: all-negative series clipped to 0)', () => {
   it('domain functions extend below zero for an all-negative series', () => {
-    const data = [{ label: 'Daily', value: '−$2,210' }, { label: 'Weekly', value: '−$26.5K' }];
+    const data = [
+      { label: 'Daily', value: '−$2,210' }, { label: 'Weekly', value: '−$26.5K' },
+      { label: 'Monthly', value: '−$41.0K' }, { label: 'Quarterly', value: '−$88.2K' },
+    ];
     const el = BarChartBlock({ slotName: 'x', data });
     const yAxis = findByType(el, YAxis);
     const [minFn, maxFn] = yAxis.props.domain;
@@ -102,7 +113,10 @@ describe('BarChartBlock — negative-value domain fix (regression: all-negative 
   });
 
   it('colors bars by sign only when the series genuinely mixes signs', () => {
-    const mixed = [{ label: 'A', value: '+3' }, { label: 'B', value: '−7' }];
+    const mixed = [
+      { label: 'A', value: '+3' }, { label: 'B', value: '−7' },
+      { label: 'C', value: '+5' }, { label: 'D', value: '−2' },
+    ];
     const el = BarChartBlock({ slotName: 'x', data: mixed });
     const bar = findByType(el, Bar);
     const cells = bar.props.children;
@@ -112,7 +126,12 @@ describe('BarChartBlock — negative-value domain fix (regression: all-negative 
   it('prefers a parseable magnitude key over a merely-defined-but-unparseable one', () => {
     // regression: S9.8/reason.readiness-style — "value" is a ratio string ("18 / 25") that never
     // parses; "pct" is the real usable magnitude. The bar must plot pct's number, not NaN.
-    const data = [{ label: 'Content pack', value: '18 / 25', pct: '72%' }];
+    const data = [
+      { label: 'Content pack', value: '18 / 25', pct: '72%' },
+      { label: 'Imagery', value: '9 / 25', pct: '36%' },
+      { label: 'Copy', value: '20 / 25', pct: '80%' },
+      { label: 'Video', value: '4 / 25', pct: '16%' },
+    ];
     const el = BarChartBlock({ slotName: 'x', data });
     const bar = findByType(el, Bar);
     const barChart = findByType(el, BarChart);
@@ -123,7 +142,10 @@ describe('BarChartBlock — negative-value domain fix (regression: all-negative 
 });
 
 describe('BarChartBlock — content-driven height tier (density fix: a chart sharing a composed panel needs less height than a standalone one)', () => {
-  const data = [{ label: 'A', value: '$5' }, { label: 'B', value: '$8' }];
+  const data = [
+    { label: 'A', value: '$5' }, { label: 'B', value: '$8' },
+    { label: 'C', value: '$3' }, { label: 'D', value: '$9' },
+  ];
 
   it('uses a shorter height when compact (already inside a shared panel)', () => {
     const el = BarChartBlock({ slotName: 'x', data, compact: true });
@@ -159,6 +181,8 @@ describe('WaterfallChartBlock — tag/sublabel preservation (regression: S10.1/a
     const data = [
       { label: 'Baseline', value: '$12,480', top: 19.5, height: 80.5, anchor: true },
       { label: 'FBA fee', sublabel: 'change', tag: 'unexpected', value: '−$2,210', top: 19.5, height: 59.7 },
+      { label: 'Storage', sublabel: 'change', value: '−$410', top: 19.5, height: 56.2 },
+      { label: 'Net', value: '$9,860', top: 19.5, height: 56.2, anchor: true },
     ];
     const el = WaterfallChartBlock({ slotName: 'bars', data });
     const tooltip = findByType(el, Tooltip);
@@ -199,8 +223,8 @@ describe('HeatmapGridBlock — deterministic metric selection (regression: posit
 describe('LineChartBlock — series naming fallback (regression: S9.3/analyze.curves losing descriptive labels)', () => {
   it('falls back to a per-series `label` when `name` is absent', () => {
     const data = [
-      { path: 'M0 0 L10 10', label: 'DTC · $18.40' },
-      { path: 'M0 0 L10 5', label: 'FBA-West · next unit $13.60' },
+      { path: 'M0 0 L5 5 L10 10 L15 12', label: 'DTC · $18.40' },
+      { path: 'M0 0 L5 3 L10 5 L15 4', label: 'FBA-West · next unit $13.60' },
     ];
     const el = LineChartBlock({ slotName: 'curves', data });
     const lines = findAllByType(el, Line);

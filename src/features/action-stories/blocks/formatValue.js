@@ -17,6 +17,18 @@
 const COMPACT_THRESHOLD = 10_000 // below this, full digits read better than "9.4K"
 
 /**
+ * U+2212 MINUS SIGN, not the ASCII hyphen Intl emits. The reference writes "−$1,840" with a real
+ * minus; a hyphen is a different glyph at a different width and breaks the tabular-nums alignment
+ * every figure in this app is set in.
+ */
+const MINUS = '\u2212'
+
+/** `signed: true` means the direction is part of the fact, so a gain must show its plus. */
+function signOptions(signed) {
+  return signed === true ? { signDisplay: 'exceptZero' } : {}
+}
+
+/**
  * @param {{value: number, unit: string, precision?: number}|number|string|null|undefined} typed
  *   A typed business number. A bare number is accepted and treated as a unitless count. A STRING is
  *   accepted and returned unchanged — the corpus still carries pre-formatted strings, and this
@@ -32,44 +44,56 @@ export function formatValue(typed, { locale = 'en-US', compact } = {}) {
   if (typeof typed === 'number') return formatNumber(typed, { locale, compact })
 
   if (typeof typed !== 'object') return '—'
-  const { value, unit, precision } = typed
+  const { value, unit, precision, signed } = typed
   if (typeof value !== 'number' || !Number.isFinite(value)) return '—'
+  const opts = { locale, compact, precision, signed }
 
   switch (unit) {
     case 'USD':
     case 'EUR':
     case 'GBP':
-      return formatCurrency(value, unit, { locale, compact, precision })
+      return formatCurrency(value, unit, opts)
     case 'pct':
-      return `${formatNumber(value, { locale, compact: false, precision: precision ?? 1 })}%`
+      // Precision 0 by default, NOT 1. "78.0%" claims a tenth of a point of precision the reference
+      // never stated; a caller that genuinely has tenths asks for them with `precision`.
+      return `${formatNumber(value, { ...opts, compact: false, precision: precision ?? 0 })}%`
     case 'days':
-      return `${formatNumber(value, { locale, compact: false, precision: precision ?? 0 })} ${Math.abs(value) === 1 ? 'day' : 'days'}`
+      return `${formatNumber(value, { ...opts, compact: false, precision: precision ?? 0 })} ${Math.abs(value) === 1 ? 'day' : 'days'}`
     case 'count':
+      // A COUNT IS NEVER COMPACTED. 18,402 SKUs compacted to "18.4K" loses 402 of them, and a count
+      // is the one unit where every digit is a real thing being counted. Money compacts because
+      // nobody acts on the last $47 of $92,547; nobody rounds a SKU.
+      return formatNumber(value, { ...opts, compact: false })
     default:
-      return formatNumber(value, { locale, compact, precision })
+      return formatNumber(value, opts)
   }
 }
 
-function formatCurrency(value, currency, { locale, compact, precision }) {
+function formatCurrency(value, currency, { locale, compact, precision, signed }) {
   const useCompact = compact ?? Math.abs(value) >= COMPACT_THRESHOLD
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
     notation: useCompact ? 'compact' : 'standard',
-    // A compact currency figure with two decimals ("$18.40K") reads worse than "$18.4K"; a standard
-    // one without them loses real cents. Hence the split rather than one fixed precision.
+    // A compact currency figure with two decimals ("$18.40K") reads worse than "$18.4K", so compact
+    // keeps one. Standard allows up to two and FORCES none: $9,400 had been rendering as "$9,400.00"
+    // because minimumFractionDigits was pinned at 2, which shows an operator two zeros of precision
+    // that no price in the corpus actually carries. Real cents ($0.62) still survive, because the
+    // maximum is what admits them and the minimum is what was inventing them.
     maximumFractionDigits: precision ?? (useCompact ? 1 : 2),
-    minimumFractionDigits: useCompact ? 0 : (precision ?? 2),
-  }).format(value)
+    minimumFractionDigits: precision ?? 0,
+    ...signOptions(signed),
+  }).format(value).replace('-', MINUS)
 }
 
-function formatNumber(value, { locale, compact, precision }) {
+function formatNumber(value, { locale, compact, precision, signed }) {
   const useCompact = compact ?? Math.abs(value) >= COMPACT_THRESHOLD
   return new Intl.NumberFormat(locale, {
     notation: useCompact ? 'compact' : 'standard',
     maximumFractionDigits: precision ?? (useCompact ? 1 : 2),
     ...(precision !== undefined ? { minimumFractionDigits: precision } : {}),
-  }).format(value)
+    ...signOptions(signed),
+  }).format(value).replace('-', MINUS)
 }
 
 /**

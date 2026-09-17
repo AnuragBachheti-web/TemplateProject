@@ -3,7 +3,9 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { parseSvgPathPoints } from './chartGeometry';
 import { categoricalColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
-import { EmptyState, ErrorState } from './BlockStates';
+import { EmptyState, ErrorState, ThinEvidenceState } from './BlockStates';
+import { countPoints, hasEnoughEvidence } from './chartEvidence';
+import { formatValue } from './formatValue';
 
 /**
  * A single path draws one line, no legend (the block's own title already names it — see the
@@ -20,6 +22,12 @@ export default function LineChartBlock({ slotName, data }) {
   }
   if (Array.isArray(data) && data.length === 0) {
     return <EmptyState slotName={slotName} message="No data points." />;
+  }
+  // The 4-point admission rule (blocks/chartEvidence.js), applied identically by all four chart
+  // types. Placed AFTER the empty guard so "no data at all" keeps saying that, and before any
+  // geometry, so a thin chart is never drawn and then explained.
+  if (!hasEnoughEvidence(data)) {
+    return <ThinEvidenceState slotName={slotName} points={countPoints(data)} />;
   }
 
   // Three accepted shapes (see blockTypes.js's validateLineChart). The TYPED forms are the contract;
@@ -81,7 +89,7 @@ export default function LineChartBlock({ slotName, data }) {
             <YAxis hide domain={['dataMin', 'dataMax']} />
             <Tooltip
               labelFormatter={() => ''}
-              formatter={(v) => [Number(v).toFixed(1), '']}
+              formatter={(v) => [formatValue(Number(v)), '']}
               contentStyle={{ fontSize: 11, borderRadius: 6 }}
             />
             {showLegend && <Legend wrapperStyle={{ fontSize: 10.5 }} />}

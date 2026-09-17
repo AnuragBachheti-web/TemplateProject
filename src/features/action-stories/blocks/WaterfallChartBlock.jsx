@@ -3,7 +3,9 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { bridgeGeometry, parseMagnitude } from './chartGeometry';
 import { positiveColor, negativeColor, neutralColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
-import { EmptyState, ErrorState } from './BlockStates';
+import { EmptyState, ErrorState, ThinEvidenceState } from './BlockStates';
+import { countPoints, hasEnoughEvidence } from './chartEvidence';
+import { formatValue } from './formatValue';
 
 /**
  * Recharts has no native waterfall/bridge chart — the standard technique is a stacked bar pair per
@@ -34,6 +36,12 @@ export default function WaterfallChartBlock({ slotName, data }) {
   if (data.length === 0) {
     return <EmptyState slotName={slotName} message="No data points." />;
   }
+  // The 4-point admission rule (blocks/chartEvidence.js), applied identically by all four chart
+  // types. Placed AFTER the empty guard so "no data at all" keeps saying that, and before any
+  // geometry, so a thin chart is never drawn and then explained.
+  if (!hasEnoughEvidence(data)) {
+    return <ThinEvidenceState slotName={slotName} points={countPoints(data)} />;
+  }
 
   const parsed = data.map((item, i) => ({
     label: item?.label ?? String(i + 1),
@@ -54,7 +62,7 @@ export default function WaterfallChartBlock({ slotName, data }) {
     return <ErrorState slotName={slotName} message="no usable numbers in this bridge's values" />;
   }
 
-  const chartLabel = `Waterfall chart. ${rows.map((r) => `${r.label}: ${r.display ?? ''}`).join(', ')}.`;
+  const chartLabel = `Waterfall chart. ${rows.map((r) => `${r.label}: ${r.display === undefined ? '' : formatValue(r.display)}`).join(', ')}.`;
 
   return (
     <BlockCard>
@@ -69,7 +77,8 @@ export default function WaterfallChartBlock({ slotName, data }) {
                 const p = item?.payload;
                 if (!p) return [null, null];
                 const context = [p.sublabel, p.tag].filter(Boolean).join(' · ');
-                return [context ? `${p.display} — ${context}` : p.display, ''];
+                const shown = formatValue(p.display);
+                return [context ? `${shown} — ${context}` : shown, ''];
               }}
               labelFormatter={(label) => label}
               contentStyle={{ fontSize: 11, borderRadius: 6 }}
