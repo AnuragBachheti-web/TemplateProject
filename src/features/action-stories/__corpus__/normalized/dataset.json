@@ -14627,107 +14627,7 @@
       "verdict": "not_applicable"
     },
     "proposal": {
-      "detail_rows": [
-        {
-          "title": "Same SKU in overlapping promos",
-          "detail": "14 SKUs appear in both the DTC early-BF window (Nov 7–14) and Walmart Deal Days (Nov 12–18), overlapping for three days.",
-          "fix": "Fix: shift the DTC window to Nov 3–10, or drop the 14 from one of the two.",
-          "severity": "blocking"
-        },
-        {
-          "title": "Marketplace parity violation",
-          "detail": "Those same 14 SKUs would show 25% off on DTC and 15% off on Walmart in the same week. Walmart parity terms require our lowest advertised price.",
-          "fix": "Fix: match depth at 15%, or exclude the shared SKUs from the DTC event.",
-          "severity": "blocking"
-        },
-        {
-          "title": "Deal-stacking risk",
-          "detail": "6 BFCM SKUs carry an active Amazon coupon that stacks on top of the deal price, taking the effective discount to 34% — past both the depth ceiling and the CM floor.",
-          "fix": "Fix: suppress the coupons for the window, or reduce deal depth on those 6.",
-          "severity": "blocking"
-        },
-        {
-          "title": "Full-price protection window",
-          "detail": "11 gift-guide SKUs were promoted 8 days earlier in BFCM, inside the 14-day minimum gap set in Reason.",
-          "fix": "Fix: start the gift guide Dec 12, or swap those 11 for full-price alternates.",
-          "severity": "warning"
-        },
-        {
-          "title": "Unit commitment above cover",
-          "detail": "Prime Fall requires 500 units per SKU. Three SKUs have 380–460 units of cover before the event, so the commitment cannot be met without an expedited inbound.",
-          "fix": "Fix: drop the 3 SKUs, or pull the inbound forward — Planner has 11 days.",
-          "severity": "warning"
-        }
-      ],
-      "secondary_rows": [
-        {
-          "name": "Early BF 20% off · last year",
-          "meta": "Nov 8–15 · DTC · 31 SKUs",
-          "depth": "20%",
-          "gross": "+58%",
-          "incremental": "31%",
-          "incPct": 31,
-          "margin": "$71K",
-          "halo": "+6%",
-          "cannibalised": "−27%"
-        },
-        {
-          "name": "BFCM 25% off · last year",
-          "meta": "Nov 29 – Dec 2 · all channels · 44 SKUs",
-          "depth": "25%",
-          "gross": "+141%",
-          "incremental": "68%",
-          "incPct": 68,
-          "margin": "$164K",
-          "halo": "+11%",
-          "cannibalised": "−18%"
-        },
-        {
-          "name": "Gift guide 10% + bundles",
-          "meta": "Dec 6–13 · DTC · 22 SKUs",
-          "depth": "10%",
-          "gross": "+34%",
-          "incremental": "29%",
-          "incPct": 29,
-          "margin": "$21K",
-          "halo": "+9%",
-          "cannibalised": "−5%"
-        },
-        {
-          "name": "Prime Fall 20% off",
-          "meta": "Oct 10–11 · Amazon · 19 SKUs",
-          "depth": "20%",
-          "gross": "+96%",
-          "incremental": "52%",
-          "incPct": 52,
-          "margin": "$48K",
-          "halo": "+4%",
-          "cannibalised": "−19%"
-        },
-        {
-          "name": "Walmart Deal Days 15%",
-          "meta": "Nov 14–20 · Walmart · 15 SKUs",
-          "depth": "15%",
-          "gross": "+63%",
-          "incremental": "44%",
-          "incPct": 44,
-          "margin": "$26K",
-          "halo": "+2%",
-          "cannibalised": "−14%"
-        },
-        {
-          "name": "Year-end clearance 40%",
-          "meta": "Dec 27 – Jan 2 · all channels · aged",
-          "depth": "40%",
-          "gross": "+88%",
-          "incremental": "81%",
-          "incPct": 81,
-          "margin": "$34K",
-          "halo": "+1%",
-          "cannibalised": "−6%"
-        }
-      ],
-      "entities": [
+      "calendar": [
         {
           "name": "Shopify DTC",
           "note": "41% of GMV",
@@ -14856,6 +14756,106 @@
               "conflicts": 2
             }
           ]
+        }
+      ],
+      "detail_rows": [
+        {
+          "title": "Same SKU in overlapping promos",
+          "detail": "14 SKUs appear in both the DTC early-BF window (Nov 7–14) and Walmart Deal Days (Nov 12–18), overlapping for three days.",
+          "fix": "Fix: shift the DTC window to Nov 3–10, or drop the 14 from one of the two.",
+          "severity": "blocking"
+        },
+        {
+          "title": "Marketplace parity violation",
+          "detail": "Those same 14 SKUs would show 25% off on DTC and 15% off on Walmart in the same week. Walmart parity terms require our lowest advertised price.",
+          "fix": "Fix: match depth at 15%, or exclude the shared SKUs from the DTC event.",
+          "severity": "blocking"
+        },
+        {
+          "title": "Deal-stacking risk",
+          "detail": "6 BFCM SKUs carry an active Amazon coupon that stacks on top of the deal price, taking the effective discount to 34% — past both the depth ceiling and the CM floor.",
+          "fix": "Fix: suppress the coupons for the window, or reduce deal depth on those 6.",
+          "severity": "blocking"
+        },
+        {
+          "title": "Full-price protection window",
+          "detail": "11 gift-guide SKUs were promoted 8 days earlier in BFCM, inside the 14-day minimum gap set in Reason.",
+          "fix": "Fix: start the gift guide Dec 12, or swap those 11 for full-price alternates.",
+          "severity": "warning"
+        },
+        {
+          "title": "Unit commitment above cover",
+          "detail": "Prime Fall requires 500 units per SKU. Three SKUs have 380–460 units of cover before the event, so the commitment cannot be met without an expedited inbound.",
+          "fix": "Fix: drop the 3 SKUs, or pull the inbound forward — Planner has 11 days.",
+          "severity": "warning"
+        }
+      ],
+      "secondary_rows": [
+        {
+          "name": "Early BF 20% off · last year",
+          "meta": "Nov 8–15 · DTC · 31 SKUs",
+          "depth": "20%",
+          "gross": "+58%",
+          "incremental": "31%",
+          "incPct": 31,
+          "margin": "$71K",
+          "halo": "+6%",
+          "cannibalised": "−27%"
+        },
+        {
+          "name": "BFCM 25% off · last year",
+          "meta": "Nov 29 – Dec 2 · all channels · 44 SKUs",
+          "depth": "25%",
+          "gross": "+141%",
+          "incremental": "68%",
+          "incPct": 68,
+          "margin": "$164K",
+          "halo": "+11%",
+          "cannibalised": "−18%"
+        },
+        {
+          "name": "Gift guide 10% + bundles",
+          "meta": "Dec 6–13 · DTC · 22 SKUs",
+          "depth": "10%",
+          "gross": "+34%",
+          "incremental": "29%",
+          "incPct": 29,
+          "margin": "$21K",
+          "halo": "+9%",
+          "cannibalised": "−5%"
+        },
+        {
+          "name": "Prime Fall 20% off",
+          "meta": "Oct 10–11 · Amazon · 19 SKUs",
+          "depth": "20%",
+          "gross": "+96%",
+          "incremental": "52%",
+          "incPct": 52,
+          "margin": "$48K",
+          "halo": "+4%",
+          "cannibalised": "−19%"
+        },
+        {
+          "name": "Walmart Deal Days 15%",
+          "meta": "Nov 14–20 · Walmart · 15 SKUs",
+          "depth": "15%",
+          "gross": "+63%",
+          "incremental": "44%",
+          "incPct": 44,
+          "margin": "$26K",
+          "halo": "+2%",
+          "cannibalised": "−14%"
+        },
+        {
+          "name": "Year-end clearance 40%",
+          "meta": "Dec 27 – Jan 2 · all channels · aged",
+          "depth": "40%",
+          "gross": "+88%",
+          "incremental": "81%",
+          "incPct": 81,
+          "margin": "$34K",
+          "halo": "+1%",
+          "cannibalised": "−6%"
         }
       ]
     },

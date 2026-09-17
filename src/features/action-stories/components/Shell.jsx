@@ -4,7 +4,9 @@ import { actionStoryPath } from '@/constants/actionStoriesRoutes';
 import { getActionStories } from '@/services/actionStoriesService';
 import { defaultStageOf } from '@/features/action-stories/actionStory';
 import { useThemeStore } from '@/store/useThemeStore';
+import { useLedgerStore } from '@/store/useLedgerStore';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
+import LedgerOverlay from '@/features/action-stories/components/LedgerOverlay';
 
 const THEME_CYCLE = ['light', 'dark', 'system'];
 const THEME_ICON = { light: 'fa-sun', dark: 'fa-moon', system: 'fa-circle-half-stroke' };
@@ -24,6 +26,38 @@ function ThemeToggle() {
       title={`Theme: ${THEME_LABEL[preference]}`}
     >
       <i className={`fa-solid ${THEME_ICON[preference]} text-[12px]`} aria-hidden="true" />
+    </button>
+  );
+}
+
+/**
+ * The reference's "LedgerTrigger" masthead icon — opens LedgerOverlay.jsx via useLedgerStore, the
+ * same store the overlay itself reads from, so no prop drilling is needed between this button (in
+ * the app shell) and the overlay (mounted once, also here) despite Outlet sitting between them. The
+ * count badge reflects the REAL number of actions recorded this session — never a placeholder
+ * number — and is simply absent at zero rather than showing a "0".
+ */
+function LedgerTrigger() {
+  const count = useLedgerStore((s) => s.entries.length);
+  const open = useLedgerStore((s) => s.open);
+
+  return (
+    <button
+      type="button"
+      onClick={open}
+      title="Ledger"
+      aria-label={count > 0 ? `Ledger — ${count} action${count === 1 ? '' : 's'} this session` : 'Ledger'}
+      className="relative grid h-8 w-8 place-items-center rounded-full text-rf-text-tertiary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+    >
+      <i className="fa-solid fa-clock-rotate-left text-[13px]" aria-hidden="true" />
+      {count > 0 && (
+        <span
+          aria-hidden="true"
+          className="absolute -right-0.5 -top-0.5 grid h-[15px] min-w-[15px] place-items-center rounded-full bg-rf-brand-blue-500 px-[3px] font-mono text-[8.5px] font-semibold text-white"
+        >
+          {count > 99 ? '99+' : count}
+        </span>
+      )}
     </button>
   );
 }
@@ -67,6 +101,7 @@ function TopBar({ onOpenNav }) {
 
       <span className="ml-auto flex items-center gap-1.5">
         <ThemeToggle />
+        <LedgerTrigger />
         <button
           type="button"
           aria-label="Notifications"
@@ -251,6 +286,10 @@ export default function Shell() {
           <Outlet />
         </main>
       </div>
+
+      {/* Mounted once here, not per-page — "on every Actions screen" per the reference, and reads
+          entirely from useLedgerStore, so it doesn't matter which route is currently in the Outlet. */}
+      <LedgerOverlay />
     </div>
   );
 }

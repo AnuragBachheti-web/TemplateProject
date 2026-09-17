@@ -25,6 +25,7 @@ export const BLOCK_TYPES = [
   'object', // a single nested object that isn't any of the above (a lone badge/descriptor)
   'slider', // an interactive { min, max, value } control, optionally with precomputed `steps`
   'gauge', // rows measured against a threshold: an array of { label?, value|pct, threshold|limit|ceiling|floor|target|cap }
+  'calendarGantt', // named lanes, each an array of { label, col: "<line> / span <count>" } blocks positioned on a shared column grid
 ]
 
 function isPlainObject(v) {
@@ -317,6 +318,34 @@ export function validateGauge(data) {
   return problems
 }
 
+const GRID_COLUMN_RE = /^\d+\s*\/\s*span\s*\d+$/
+
+/**
+ * A calendar/Gantt lane row set — see extraction/classifyBlocks.js's isCalendarGanttShaped for the
+ * exact detection rule this mirrors. Every row needs a non-empty `blocks` array, and every block
+ * needs a string `label` and a CSS-grid `col` placement in the literal "<line> / span <count>" form.
+ */
+export function validateCalendarGantt(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((row, i) => {
+    if (!isPlainObject(row) || !Array.isArray(row.blocks) || row.blocks.length === 0) {
+      problems.push(`row ${i}: missing a non-empty "blocks" array`)
+      return
+    }
+    row.blocks.forEach((block, j) => {
+      if (!isPlainObject(block) || typeof block.label !== 'string' || block.label.trim() === '') {
+        problems.push(`row ${i} block ${j}: missing a string "label"`)
+      }
+      if (!isPlainObject(block) || typeof block.col !== 'string' || !GRID_COLUMN_RE.test(block.col.trim())) {
+        problems.push(`row ${i} block ${j}: "col" must be a CSS grid placement ("<line> / span <count>")`)
+      }
+    })
+  })
+  return problems
+}
+
 const VALIDATORS = {
   text: validateText,
   number: validateNumber,
@@ -332,6 +361,7 @@ const VALIDATORS = {
   object: validateObject,
   slider: validateSlider,
   gauge: validateGauge,
+  calendarGantt: validateCalendarGantt,
 }
 
 /**

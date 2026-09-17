@@ -324,6 +324,31 @@ function isHeatmapGridShaped(value) {
   })
 }
 
+/**
+ * Calendar/Gantt-lane-shaped: every row is a named channel/lane carrying a `blocks` array of ≥1
+ * plain objects, where every block has a string `label` *and* a CSS-grid `col` placement in the
+ * literal "<line> / span <count>" form (e.g. "5 / span 2") — a promo/event positioned directly on a
+ * shared week grid, ready to hand straight to a CSS `grid-column` with no parsing needed beyond
+ * finding the grid's own total width. The shape found in S9.19/analyze.lanes (the reference's own
+ * 13-week promo calendar across channels), and nowhere else in the corpus: this exact `col` form
+ * (checked corpus-wide) occurs in no other fixture.
+ */
+const GRID_COLUMN_RE = /^\d+\s*\/\s*span\s*\d+$/
+
+function isCalendarGanttShaped(value) {
+  return value.every((row) => {
+    if (!isPlainObject(row) || !Array.isArray(row.blocks) || row.blocks.length === 0) return false
+    return row.blocks.every(
+      (block) =>
+        isPlainObject(block) &&
+        typeof block.label === 'string' &&
+        block.label.trim() !== '' &&
+        typeof block.col === 'string' &&
+        GRID_COLUMN_RE.test(block.col.trim()),
+    )
+  })
+}
+
 // ---- identity-field generalization (P0 fix: DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §3/§7/§8) ------
 //
 // Every bar/scatter/table-promotion rule below used to gate on a literal `label` key. The S9.11
@@ -513,13 +538,14 @@ export function classifyBlockType(value, rawKey) {
       // lose to the more generic chart type first.
       if (isGaugeShaped(value)) return 'gauge'
 
-      // These three chart signatures all overlap with "every item has an identity field"
-      // (waterfall and bar rows carry one too; a heatmap's outer rows do as well) — checked in
-      // most-specific-first order, and all three *before* the identity-keyed record checks below,
-      // or those would win first and hide every one of them inside labelValueList/table (exactly
-      // what happened to S9.2/decide.weeks and friends before this was added).
+      // These four chart signatures all overlap with "every item has an identity field" (waterfall
+      // and bar rows carry one too; a heatmap's and a calendar's outer rows do as well) — checked in
+      // most-specific-first order, and all four *before* the identity-keyed record checks below, or
+      // those would win first and hide every one of them inside labelValueList/table (exactly what
+      // happened to S9.2/decide.weeks and friends before this was added).
       if (isWaterfallShaped(value)) return 'waterfallChart'
       if (isHeatmapGridShaped(value)) return 'heatmapGrid'
+      if (isCalendarGanttShaped(value)) return 'calendarGantt'
 
       // An identity-keyed row set that's actually a RICH, uniform, multi-column record (e.g.
       // {label, value, current, why} — S9.1/reason.policy; or {sku, name, prices, cm, conf, tag,

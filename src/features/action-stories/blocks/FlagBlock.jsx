@@ -1,17 +1,10 @@
 import { humanizeSlotName } from './humanizeSlotName';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import Badge from '../ui/Badge';
 
 function Pill({ data }) {
-  return (
-    <span
-      className={`rounded-full px-2 py-0.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.06em] ${
-        data ? 'bg-rf-status-success/10 text-rf-status-success' : 'bg-rf-surface-sunken text-rf-text-tertiary'
-      }`}
-    >
-      {data ? 'Yes' : 'No'}
-    </span>
-  );
+  return <Badge tone={data ? 'success' : 'neutral'}>{data ? 'Yes' : 'No'}</Badge>;
 }
 
 /** @param {boolean} [compact] - see TextBlock.jsx's own doc comment for what this means and why. */

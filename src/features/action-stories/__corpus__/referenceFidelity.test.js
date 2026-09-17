@@ -104,12 +104,17 @@ describe('2. every canonical field resolves from a real reference source for tha
     'proposal.bridge': ['bars'],
     'proposal.coverage': ['bars'],
     'proposal.matrix': ['rfmGrid'],
+    // The named-lane promo calendar (S9.19), positioned on a shared week grid via each block's own
+    // `col`. Pinned to its single real source for the same reason `matrix`/`bridge` are.
+    'proposal.calendar': ['lanes'],
     'proposal.detail_rows': ['classifier', 'conflicts', 'desks', 'disposition', 'feed', 'fit', 'flows', 'gaps', 'lanes', 'list', 'queries', 'rows', 'sorts', 'splits', 'weeks'],
     // The second evidence board and the entity list: one-off key names on every screen (the 835-name
     // sprawl), resolved from the ORIGINAL classifier's own table/itemQueue verdict on whatever the
     // claim ledger leaves. Pinned here so the set can only widen by review.
     'proposal.secondary_rows': ['audit', 'basket', 'buckets', 'cannibal', 'capacity', 'ccc', 'clusters', 'conflicts', 'dim', 'gaps', 'library', 'mismatches', 'pools', 'selRows', 'stranded', 'suppression', 'waste'],
-    'proposal.entities': ['analogs', 'attribution', 'candidates', 'cards', 'carriers', 'dedupe', 'dims', 'lanes', 'matrix', 'moments', 'roles', 'timeline'],
+    // `lanes` (S9.19) moved to `proposal.calendar` above — it is now calendarGantt-classified, not
+    // itemQueue, so it can no longer supply this field.
+    'proposal.entities': ['analogs', 'attribution', 'candidates', 'cards', 'carriers', 'dedupe', 'dims', 'matrix', 'moments', 'roles', 'timeline'],
 
     'proposal.recommendation_identity': ['slateMeta', 'slateName'],
     'proposal.recommendation': ['heroLine', 'heroTitle'],

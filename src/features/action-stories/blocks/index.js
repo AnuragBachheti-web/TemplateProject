@@ -12,6 +12,7 @@ import HeatmapGridBlock from './HeatmapGridBlock';
 import ObjectBlock from './ObjectBlock';
 import SliderBlock from './SliderBlock';
 import GaugeBlock from './GaugeBlock';
+import CalendarGanttBlock from './CalendarGanttBlock';
 
 /**
  * blockType -> component. Adding a new block type later is one entry here plus one component
@@ -32,4 +33,5 @@ export const BLOCK_REGISTRY = {
   object: ObjectBlock,
   slider: SliderBlock,
   gauge: GaugeBlock,
+  calendarGantt: CalendarGanttBlock,
 };

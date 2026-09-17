@@ -186,6 +186,52 @@ describe('classifyBlockType — heatmapGrid', () => {
   })
 })
 
+describe('classifyBlockType — calendarGantt (regression: S9.19/analyze.lanes)', () => {
+  const lanes = [
+    {
+      name: 'Shopify DTC',
+      note: '41% of GMV',
+      blocks: [
+        { col: '5 / span 2', label: 'Early Black Friday', sub: '25% off · 34 SKUs', conflicts: 2 },
+        { col: '13 / span 1', label: 'Clearance', sub: '40% · aged' },
+      ],
+    },
+    {
+      name: 'Amazon',
+      note: '45% of GMV',
+      blocks: [{ col: '1 / span 1', label: 'Prime Fall', sub: '20% · 22 SKUs', conflicts: 1 }],
+    },
+  ]
+
+  it('classifies named lanes carrying grid-positioned blocks as calendarGantt', () => {
+    expect(classifyBlockType(lanes)).toBe('calendarGantt')
+  })
+
+  it('is checked before the identity-keyed itemQueue fallback — a lane never flattens to a generic list', () => {
+    expect(classifyBlockType(lanes)).not.toBe('itemQueue')
+  })
+
+  it('requires every block to carry a real CSS-grid "<line> / span <count>" placement, not just any string', () => {
+    const badCol = [{ name: 'Lane', blocks: [{ col: 'week 5', label: 'Promo' }] }]
+    expect(classifyBlockType(badCol)).not.toBe('calendarGantt')
+  })
+
+  it('requires every block to carry a label', () => {
+    const noLabel = [{ name: 'Lane', blocks: [{ col: '5 / span 2' }] }]
+    expect(classifyBlockType(noLabel)).not.toBe('calendarGantt')
+  })
+
+  it('requires a non-empty "blocks" array on every row', () => {
+    const emptyBlocks = [{ name: 'Lane', blocks: [] }]
+    expect(classifyBlockType(emptyBlocks)).not.toBe('calendarGantt')
+  })
+
+  it('does not misclassify an unrelated identity-keyed itemQueue as calendarGantt', () => {
+    const agents = [{ name: 'Forecaster', role: 'Projects demand' }, { name: 'Scout', role: 'Watches for risk' }]
+    expect(classifyBlockType(agents)).not.toBe('calendarGantt')
+  })
+})
+
 describe('classifyBlockType — barChart', () => {
   it('classifies labeled rows with a magnitude, even formatted ("$26.3K", "74px")', () => {
     const weeks = [

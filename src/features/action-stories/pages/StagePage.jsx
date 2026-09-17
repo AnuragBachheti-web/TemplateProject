@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { actionStoriesIndexPath } from '@/constants/actionStoriesRoutes';
 import { getStageView, isUsingMockTransport } from '@/services/actionStoriesService';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
 import { formatValue } from '@/features/action-stories/blocks/formatValue';
 import { slateItemId } from '@/features/action-stories/contract/slateItem';
 import StepTracker from '@/features/action-stories/components/StepTracker';
+import LensBar from '@/features/action-stories/components/LensBar';
 import StageRenderer from '@/features/action-stories/components/StageRenderer';
 import StageActionBar from '@/features/action-stories/components/StageActionBar';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
+import Breadcrumb from '@/features/action-stories/ui/Breadcrumb';
 
 const STATUS_TONE = {
   pending: 'bg-rf-surface-sunken text-rf-text-secondary',
@@ -37,15 +39,13 @@ function ProposalHeader({ decision, story }) {
 
   return (
     <header className="sticky top-0 z-20 border-b border-rf-border-subtle bg-rf-surface-canvas px-6 pt-4 pb-3">
-      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
-        <Link to={actionStoriesIndexPath()} className="transition-colors hover:text-rf-text-primary">
-          Action Stories
-        </Link>
-        <i className="fa-solid fa-chevron-right text-[7px]" aria-hidden="true" />
-        <span className="text-rf-text-secondary">{decision.story_code}</span>
-        <i className="fa-solid fa-chevron-right text-[7px]" aria-hidden="true" />
-        <span className="text-rf-text-secondary capitalize">{decision.stage}</span>
-      </nav>
+      <Breadcrumb
+        items={[
+          { label: 'Action Stories', to: actionStoriesIndexPath() },
+          { label: decision.story_code },
+          { label: decision.stage },
+        ]}
+      />
 
       <h1
         className="mt-2 font-serif text-[28px] font-normal leading-[1.15] tracking-[-0.02em] text-rf-text-primary"
@@ -54,8 +54,11 @@ function ProposalHeader({ decision, story }) {
         {decision.title}
       </h1>
 
-      {/* One row, each fact once. Impact/confidence/mode used to be scattered across a pill, an
-          <h1> and a rail block; they appear here and nowhere else. */}
+      {/* One row, each fact once. Impact/confidence used to be scattered across a pill, an <h1> and
+          a rail block; they appear here and nowhere else. `mode` is NOT repeated here — LensBar
+          below is the one place it's shown, as "Dial: {mode}" (previously this row ALSO printed a
+          bare "Mode suggest", the same "same fact twice" bug this header's own doc comment already
+          fixed once for the title). */}
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12px] text-rf-text-secondary">
         <span className={`inline-flex items-center rounded-full px-2.5 py-[3px] text-[11px] font-medium capitalize ${STATUS_TONE[decision.status] ?? STATUS_TONE.pending}`}>
           {decision.status}
@@ -74,8 +77,11 @@ function ProposalHeader({ decision, story }) {
             {decision.confidence.calibrated ? ' · calibrated' : ''}
           </span>
         )}
-        <span className="capitalize">Mode {decision.mode}</span>
         {due && <span className="font-medium text-amber-700 dark:text-amber-400">{due}</span>}
+      </div>
+
+      <div className="mt-2.5">
+        <LensBar decision={decision} />
       </div>
 
       {/* The parent/child relationship, made navigable. StepTracker already existed and already took

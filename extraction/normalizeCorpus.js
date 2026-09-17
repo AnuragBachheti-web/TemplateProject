@@ -374,6 +374,11 @@ function analyzeProposal(data, stageId, narrative, rec) {
     bridge: bridgeOf(data, stageId, rec),
     coverage: pickByBlockType(data, stageId, 'gauge', isObjArray, rec, 'proposal.coverage'),
     matrix: pickByBlockType(data, stageId, 'heatmapGrid', isObjArray, rec, 'proposal.matrix'),
+    // Named lanes with events positioned on a shared week grid (S9.19's own promo calendar) — comes
+    // from the classifier's `calendarGantt` verdict for the same reason `matrix`/`bridge` do: the
+    // corpus names this concept differently on every screen it appears on (`lanes` here), so a
+    // named-key candidate list could never enumerate it honestly.
+    calendar: pickByBlockType(data, stageId, 'calendarGantt', isObjArray, rec, 'proposal.calendar'),
     // Row-level evidence. Named sources first; the classifier's own table verdict second, guarded
     // so a chart-named key (`bars`, `heat`, `zoneBars`) can never become "the evidence table".
     detail_rows: pickThenClassify(

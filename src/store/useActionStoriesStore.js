@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { dispatchAction, newIdempotencyKey } from '@/services/actionStoriesMutations';
-import { checkOperatorAction } from '@/features/action-stories/contract/actionTypes';
+import { checkOperatorAction, getOperatorAction } from '@/features/action-stories/contract/actionTypes';
+import { useLedgerStore } from './useLedgerStore';
 
 /**
  * Operator-action state for the currently-rendered proposal.
@@ -123,6 +124,18 @@ export const useActionStoriesStore = create((set, get) => ({
           idempotencyKeys: nextKeys,
         };
       });
+      // A REAL event, recorded once the backend has actually confirmed it — never before the
+      // request settles, which would log an action that might still fail. See ledgerEntry.js for
+      // why this is deliberately the only place an entry is ever created.
+      useLedgerStore.getState().record({
+        actionId,
+        label: getOperatorAction(actionId)?.label ?? actionId,
+        storyCode: decision.story_code,
+        stage: decision.stage,
+        proposalId: decision.proposal_id,
+        outcome: 'success',
+        detail: updated.status,
+      });
       return updated;
     } catch (error) {
       set((state) => {
@@ -131,6 +144,15 @@ export const useActionStoriesStore = create((set, get) => ({
         // The idempotency key is deliberately KEPT on failure — retrying is how this action is
         // retried, and it must reuse the key.
         return { pendingActions: nextPending, actionErrors: { ...state.actionErrors, [actionId]: error } };
+      });
+      useLedgerStore.getState().record({
+        actionId,
+        label: getOperatorAction(actionId)?.label ?? actionId,
+        storyCode: decision.story_code,
+        stage: decision.stage,
+        proposalId: decision.proposal_id,
+        outcome: 'error',
+        detail: error?.userMessage ?? error?.message ?? null,
       });
       return undefined;
     }

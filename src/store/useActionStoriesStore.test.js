@@ -5,6 +5,7 @@
 // so anything that called the store directly bypassed it entirely.
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { useActionStoriesStore } from './useActionStoriesStore'
+import { useLedgerStore } from './useLedgerStore'
 import { __resetMockApi, __seedProposal } from '@/services/mockDecisionApi'
 import { OPERATOR_ACTION_IDS } from '@/features/action-stories/contract/actionTypes'
 import seed from '@/features/action-stories/__corpus__/normalized/dataset.json'
@@ -39,6 +40,7 @@ function load(decision) {
 beforeEach(() => {
   __resetMockApi()
   useActionStoriesStore.getState().clearDecision()
+  useLedgerStore.setState({ entries: [], isOpen: false })
 })
 
 describe('dispatch boundary — eligibility is enforced where the request happens', () => {
@@ -151,6 +153,42 @@ describe('the six operator actions — dispatch, transition, updated Decision Ob
     const result = await useActionStoriesStore.getState().runAction('snooze', { snoozeUntil: FUTURE })
     expect(result.status).toBe('pending')
     expect(result.snoozed_until).toBe(FUTURE)
+  })
+})
+
+describe('the ledger — a real record of what actually settled, never a client-side rejection', () => {
+  it('records a success entry once the API confirms it, with the real story/stage/proposal identity', async () => {
+    const decision = load(openProposal())
+    await useActionStoriesStore.getState().runAction('approve')
+
+    const [entry] = useLedgerStore.getState().entries
+    expect(entry).toMatchObject({
+      who: 'You',
+      actionId: 'approve',
+      label: 'Approve',
+      storyCode: decision.story_code,
+      stage: decision.stage,
+      proposalId: decision.proposal_id,
+      outcome: 'success',
+      detail: 'approved',
+    })
+  })
+
+  it('records an error entry for a REAL dispatch failure (a 404 from the API), not just a client rejection', async () => {
+    // Same technique as "reuses the SAME idempotency key" above: the store knows a proposal the API
+    // does not, so the POST genuinely fails for a transport reason, past the client-side gate.
+    useActionStoriesStore.getState().setDecision({ ...openProposal(), proposal_id: 'prop_not_in_api' })
+    await useActionStoriesStore.getState().runAction('approve')
+
+    const [entry] = useLedgerStore.getState().entries
+    expect(entry.outcome).toBe('error')
+    expect(entry.detail).toBeTruthy()
+  })
+
+  it('never records anything for a client-side rejection (the dispatch never happened)', async () => {
+    load(openProposal({ eligibility: { ...Object.fromEntries(OPERATOR_ACTION_IDS.map((id) => [id, { allowed: true }])), approve: { allowed: false, blocked_reason: 'Guardrail breach.' } } }))
+    await useActionStoriesStore.getState().runAction('approve')
+    expect(useLedgerStore.getState().entries).toEqual([])
   })
 })
 

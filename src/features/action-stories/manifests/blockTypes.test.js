@@ -6,7 +6,7 @@ describe('validateBlockData', () => {
     const types = [
       'text', 'number', 'flag', 'labelValueList', 'table', 'itemQueue',
       'lineChart', 'barChart', 'scatterChart', 'waterfallChart', 'heatmapGrid',
-      'object', 'slider',
+      'object', 'slider', 'calendarGantt',
     ]
     for (const type of types) {
       expect(validateBlockData(type, undefined)).toEqual([])
@@ -106,5 +106,15 @@ describe('validateBlockData', () => {
     expect(validateBlockData('gauge', [{ label: 'A', value: '62%' }]).length).toBeGreaterThan(0) // no threshold
     expect(validateBlockData('gauge', [{ label: 'A', threshold: 80 }]).length).toBeGreaterThan(0) // no magnitude
     expect(validateBlockData('gauge', 'not an array').length).toBeGreaterThan(0)
+  })
+
+  it('validates calendarGantt requires a non-empty "blocks" array of {label, col} on every row', () => {
+    const lanes = [{ name: 'Shopify DTC', blocks: [{ col: '5 / span 2', label: 'Early Black Friday' }] }]
+    expect(validateBlockData('calendarGantt', lanes)).toEqual([])
+    expect(validateBlockData('calendarGantt', [{ name: 'Lane', blocks: [] }]).length).toBeGreaterThan(0)
+    expect(validateBlockData('calendarGantt', [{ name: 'Lane', blocks: [{ col: '5 / span 2' }] }]).length).toBeGreaterThan(0) // no label
+    expect(validateBlockData('calendarGantt', [{ name: 'Lane', blocks: [{ label: 'Promo' }] }]).length).toBeGreaterThan(0) // no col
+    expect(validateBlockData('calendarGantt', [{ name: 'Lane', blocks: [{ col: 'week 5', label: 'Promo' }] }]).length).toBeGreaterThan(0) // malformed col
+    expect(validateBlockData('calendarGantt', 'not an array').length).toBeGreaterThan(0)
   })
 })
