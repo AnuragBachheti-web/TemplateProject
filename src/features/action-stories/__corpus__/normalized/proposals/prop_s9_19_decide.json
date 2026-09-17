@@ -5,11 +5,12 @@
   "action_type": "adjust_spend",
   "cardinality": "many",
   "contract_class": "standard",
-  "on_clock": false,
+  "on_clock": true,
   "mode": "suggest",
   "entitlement": "full",
   "lens": "ads",
   "persona": "promoter",
+  "deadline": "2026-09-17T09:00:00.000Z",
   "title": "Q4 calendar build — Prime Fall deadline Aug 21",
   "narrative": "",
   "status_note": "Decide · 6 events · $455K incremental CM · $363K spend · 5.20pp dilution",
@@ -32,30 +33,34 @@
       "allowed": true
     },
     "snooze": {
-      "allowed": false,
-      "blocked_reason": "This proposal has no deadline to defer."
+      "allowed": true
     }
   },
   "guardrails": {
     "verdict": "beyond_limits",
     "checks": [
       {
+        "status": "pass",
         "label": "Conflicts resolved",
         "note": "Overlap and parity fixed by moving the DTC window; protection fixed by moving the gift guide. Both without cutting an event."
       },
       {
+        "status": "fail",
         "label": "Cross-channel depth",
         "note": "25% on four channels at once needs a second confirmation before approval."
       },
       {
+        "status": "pass",
         "label": "Deal-stacking suppressed",
         "note": "The 6 stacked Amazon coupons are suppressed for the BFCM window, keeping effective depth at the deal price."
       },
       {
+        "status": "blocked",
         "label": "MAP and deal minimums",
         "note": "Every depth is MAP-compliant and clears each platform minimum. No pre-event price raises anywhere in the set."
       },
       {
+        "status": "warn",
         "label": "Inventory commitments",
         "note": "3 Prime SKUs are 40–120 units short of the 500 commitment. Planner has 11 days to pull the inbound forward."
       }
@@ -106,21 +111,21 @@
       {
         "label": "Promo budget",
         "value": "$363K",
-        "pct": "100",
+        "pct": 100,
         "limitPct": "86",
         "note": "ceiling $240K · scale 0–280K"
       },
       {
         "label": "Margin dilution",
         "value": "5.20pp",
-        "pct": "100",
+        "pct": 100,
         "limitPct": "75",
         "note": "cap 2.4pp · scale 0–3.2pp"
       },
       {
         "label": "Promo revenue share",
         "value": "35%",
-        "pct": "78",
+        "pct": 78,
         "limitPct": "84",
         "note": "ceiling 38% · scale 0–45%"
       }
@@ -364,5 +369,10 @@
     ]
   },
   "status": "pending",
-  "updated_at": "2026-09-15T09:00:00.000Z"
+  "updated_at": "2026-09-15T09:00:00.000Z",
+  "impact": null,
+  "brand": null,
+  "channel": null,
+  "category": null,
+  "agent": null
 }

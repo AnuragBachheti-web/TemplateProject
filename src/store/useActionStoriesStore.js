@@ -67,13 +67,14 @@ export const useActionStoriesStore = create((set, get) => ({
    * Fails closed: no Decision Object, an unknown action, a missing `eligibility` entry, or
    * `allowed` that is anything other than the boolean `true` all refuse without a network call.
    */
-  runAction: async (actionId, { reason, selection, snoozeUntil } = {}) => {
+  runAction: async (actionId, { reason, reasonCode, selection, snoozeUntil } = {}) => {
     const { decision, pendingActions } = get();
     if (pendingActions[actionId]) return; // duplicate-click guard
 
     const effectiveSelection = selection ?? get().selection;
     const verdict = checkOperatorAction(actionId, decision, {
       reason,
+      reason_code: reasonCode,
       selection: effectiveSelection,
       snooze_until: snoozeUntil,
     });
@@ -104,6 +105,7 @@ export const useActionStoriesStore = create((set, get) => ({
         decision,
         actionType: actionId,
         reason,
+        reasonCode,
         selection: effectiveSelection,
         snoozeUntil,
         idempotencyKey,

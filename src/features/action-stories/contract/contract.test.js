@@ -11,6 +11,7 @@ import {
   ENTITLEMENTS,
   LENSES,
   PERSONAS,
+  DISMISS_REASONS,
 } from './decisionObject'
 import { checkOperatorAction, OPERATOR_ACTION_IDS, isFutureTimestamp } from './actionTypes'
 import { isLegalTransition, isTerminal, STATUSES } from './statusLifecycle'
@@ -43,6 +44,14 @@ function decision(overrides = {}) {
     // derived from the Decision Object (contract/deriveEligibility.js) — so a fixture without this
     // field would make every approve assertion below pass for the wrong reason.
     guardrails: { verdict: 'within_limits' },
+    // The Phase 2 required-and-nullable fields. Present and typed on every object; `null` states
+    // that the reference does not say. Absence is a contract violation, which is why a fixture that
+    // omitted them started failing the moment the contract closed — the intended behaviour.
+    impact: null,
+    brand: null,
+    channel: null,
+    category: null,
+    agent: null,
     proposal: {},
     status: 'pending',
     updated_at: '2026-09-15T10:00:00.000Z',
@@ -136,12 +145,13 @@ describe('the seven axes change slots/behaviour without creating a new page', ()
 // ---- fail-closed eligibility ---------------------------------------------------------------------
 
 describe('eligibility fails CLOSED', () => {
-  // `approve` is DERIVED and is deliberately absent from these three. Its eligibility is not data
-  // the payload asserts, so "absence is not permission" no longer describes it — the equivalent
-  // rules (absent/null/unrecognised guardrail verdict all block) are pinned in
-  // contract/deriveEligibility.test.js's T2 and T3, against the function that actually decides.
-  // Deriving the other five is Phase 2's call, not something to do halfway.
-  const PAYLOAD_DRIVEN_ACTION_IDS = OPERATOR_ACTION_IDS.filter((id) => id !== 'approve')
+  // `approve` (Phase 1) and `approve_selected` (Phase 2) are DERIVED and are deliberately absent
+  // from these: their eligibility is not data the payload asserts, so "absence is not permission" no
+  // longer describes them. Their equivalent fail-closed rules are pinned against the function that
+  // actually decides — contract/deriveEligibility.test.js's T2/T3 and
+  // contract/dismissAndApproveSelected.test.js's T12.
+  const DERIVED_ACTION_IDS = ['approve', 'approve_selected']
+  const PAYLOAD_DRIVEN_ACTION_IDS = OPERATOR_ACTION_IDS.filter((id) => !DERIVED_ACTION_IDS.includes(id))
 
   it.each(PAYLOAD_DRIVEN_ACTION_IDS)('denies %s when its eligibility entry is missing entirely', (actionId) => {
     const eligibility = allowAll()
@@ -225,9 +235,12 @@ describe('payload rules are enforced by the same function the UI and server use'
   })
 
   it.each(['modify', 'send_back', 'dismiss'])('requires a 10-character reason for %s', (actionId) => {
-    expect(checkOperatorAction(actionId, decision(), { reason: '' }).allowed).toBe(false)
-    expect(checkOperatorAction(actionId, decision(), { reason: 'too short' }).allowed).toBe(false)
-    expect(checkOperatorAction(actionId, decision(), { reason: '   padded out with spaces only   ' }).allowed).toBe(true)
+    // `dismiss` additionally requires a coded reason (Phase 2, ruling R7), supplied here so this
+    // test still isolates the LENGTH rule rather than passing/failing on the code.
+    const extra = actionId === 'dismiss' ? { reason_code: DISMISS_REASONS[0] } : {}
+    expect(checkOperatorAction(actionId, decision(), { reason: '', ...extra }).allowed).toBe(false)
+    expect(checkOperatorAction(actionId, decision(), { reason: 'too short', ...extra }).allowed).toBe(false)
+    expect(checkOperatorAction(actionId, decision(), { reason: '   padded out with spaces only   ', ...extra }).allowed).toBe(true)
   })
 
   it('requires a FUTURE snooze time', () => {

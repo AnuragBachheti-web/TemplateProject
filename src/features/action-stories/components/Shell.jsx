@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
 import { actionStoryPath } from '@/constants/actionStoriesRoutes';
+import { findStage } from '@/features/action-stories/actionStory';
 import { getActionStories } from '@/services/actionStoriesService';
 import { defaultStageOf } from '@/features/action-stories/actionStory';
 import { useThemeStore } from '@/store/useThemeStore';
@@ -129,10 +130,14 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
         {status === 'ready' &&
           stories.map((story) => {
             const isActive = activeStoryCode === story.story_code;
+            // The sidebar has the whole story in hand, so it addresses the proposal directly rather
+            // than handing (code, stage) to StageRedirect to look up what it already knows.
+            const openAt = defaultStageOf(story);
+            const openId = findStage(story, openAt)?.proposal_id;
             return (
               <li key={story.story_code}>
                 <NavLink
-                  to={actionStoryPath(story.story_code, defaultStageOf(story))}
+                  to={actionStoryPath(story.story_code, openAt, openId)}
                   aria-current={isActive ? 'page' : undefined}
                   className={`relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 text-[12.5px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
                     isActive

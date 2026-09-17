@@ -261,14 +261,36 @@ describe('4. no synthesised axis silently overrides reference evidence', () => {
     expect(dataset.filter((d) => d.execution?.rollback).length).toBeGreaterThan(0)
   })
 
-  it('omits impact and deadline rather than inventing them', () => {
-    // The reference states neither an absolute deadline nor a single designated impact figure.
-    // Omission is the honest outcome; both are recorded as open contract items in the audit.
+  it('states impact as null and derives deadline from the reference, inventing neither', () => {
+    // WAS "omits impact and deadline rather than inventing them", and its last line asserted
+    // `on_clock === false` on all 105 — which pinned the degenerate clock axis in place. That
+    // assertion was the defect, not the guard: a declared axis that is constant is the `execLabel`
+    // failure the contract's own header warns about. Phase 2 (ruling R3) derives the clock from the
+    // reference's own `due`/`deadline` strings, so what this now protects is the honest version of
+    // the same rule — nothing is invented, and nothing is flattened to a constant either.
     for (const d of dataset) {
-      expect(d.impact, `${d.proposal_id}.impact`).toBeUndefined()
-      expect(d.deadline, `${d.proposal_id}.deadline`).toBeUndefined()
-      expect(d.on_clock).toBe(false)
+      // Phase 2 made `impact` required-and-nullable: it is now always PRESENT and always `null`,
+      // which says "the reference states no figure" out loud instead of by omission. The rule this
+      // test protects is unchanged and is asserted more strictly than before — not merely absent,
+      // but explicitly null, and never a value invented from a display string (ruling R2).
+      expect(d, `${d.proposal_id}.impact`).toHaveProperty('impact')
+      expect(d.impact, `${d.proposal_id}.impact`).toBeNull()
+      // Phase 2 populates `deadline` from the reference's own `due`/`deadline` strings (ruling R3),
+      // so "never invented" no longer means "never present". The rule that still holds, and is
+      // asserted instead: a deadline exists if and only if the story states one, and it is an ISO
+      // instant rather than the reference's relative copy.
+      if (d.on_clock === true) {
+        expect(typeof d.deadline, `${d.proposal_id}.deadline`).toBe('string')
+        expect(Number.isNaN(Date.parse(d.deadline)), `${d.proposal_id}.deadline`).toBe(false)
+      } else {
+        expect(d.deadline, `${d.proposal_id}.deadline`).toBeUndefined()
+      }
     }
+
+    // The axis is real in both directions: 28 objects on a clock, and the two that state "not
+    // booked" / "not sent" still say so.
+    expect(dataset.filter((d) => d.on_clock === true).length).toBeGreaterThanOrEqual(10)
+    expect(dataset.filter((d) => d.on_clock === false).length).toBeGreaterThanOrEqual(1)
   })
 })
 

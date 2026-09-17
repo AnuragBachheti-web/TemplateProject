@@ -10,7 +10,8 @@
 // the dispatch guard and the API layer all agree without any of them restating the rules.
 
 import { isLegalTransition } from './statusLifecycle.js'
-import { deriveApproveEligibility, warnOnApproveEligibilityDrift } from './deriveEligibility.js'
+import { DERIVED_ELIGIBILITY, warnOnEligibilityDrift } from './deriveEligibility.js'
+import { DISMISS_REASONS } from './decisionObject.js'
 
 /**
  * @typedef {object} OperatorAction
@@ -19,6 +20,8 @@ import { deriveApproveEligibility, warnOnApproveEligibilityDrift } from './deriv
  * @property {'primary'|'secondary'|'destructive'} kind
  * @property {boolean} reasonRequired     - whether free-text justification is mandatory.
  * @property {number} reasonMinLength     - enforced client-side AND re-checked at dispatch.
+ * @property {boolean} requiresReasonCode - whether a DISMISS_REASONS code is mandatory alongside
+ *                                          the prose, so the outcome is filterable.
  * @property {boolean} requiresSelection  - whether a non-empty `selection[]` is mandatory.
  * @property {boolean} requiresSnoozeUntil- whether a future `snooze_until` is mandatory.
  * @property {'many'|null} requiresCardinality - the cardinality this action only exists for.
@@ -34,6 +37,7 @@ export const OPERATOR_ACTIONS = [
     kind: 'primary',
     reasonRequired: false,
     reasonMinLength: 0,
+    requiresReasonCode: false,
     requiresSelection: false,
     requiresSnoozeUntil: false,
     requiresCardinality: null,
@@ -49,6 +53,7 @@ export const OPERATOR_ACTIONS = [
     // The two rules that make this action different from plain Approve, both enforced at dispatch
     // and both re-enforced server-side: there must be something selected, and a one-item decision
     // has nothing to select FROM.
+    requiresReasonCode: false,
     requiresSelection: true,
     requiresSnoozeUntil: false,
     requiresCardinality: 'many',
@@ -61,6 +66,7 @@ export const OPERATOR_ACTIONS = [
     kind: 'secondary',
     reasonRequired: true,
     reasonMinLength: 10,
+    requiresReasonCode: false,
     requiresSelection: false,
     requiresSnoozeUntil: false,
     requiresCardinality: null,
@@ -76,6 +82,7 @@ export const OPERATOR_ACTIONS = [
     kind: 'secondary',
     reasonRequired: true,
     reasonMinLength: 10,
+    requiresReasonCode: false,
     requiresSelection: false,
     requiresSnoozeUntil: false,
     requiresCardinality: null,
@@ -90,6 +97,10 @@ export const OPERATOR_ACTIONS = [
     kind: 'destructive',
     reasonRequired: true,
     reasonMinLength: 10,
+    // The only action that also needs a CODED reason. Dismissal is the one terminal outcome an
+    // operator chooses for a reason the system did not predict, so it is the one a queue has to be
+    // able to filter and count — and free text cannot be filtered.
+    requiresReasonCode: true,
     requiresSelection: false,
     requiresSnoozeUntil: false,
     requiresCardinality: null,
@@ -102,6 +113,7 @@ export const OPERATOR_ACTIONS = [
     kind: 'secondary',
     reasonRequired: false,
     reasonMinLength: 0,
+    requiresReasonCode: false,
     requiresSelection: false,
     requiresSnoozeUntil: true,
     requiresCardinality: null,
@@ -149,13 +161,17 @@ export function checkOperatorAction(actionId, decision, payload = {}) {
   if (!spec) return deny(`"${actionId}" is not a known operator action.`)
   if (decision === null || typeof decision !== 'object') return deny('This proposal is unavailable.')
 
-  // Approve, derived. FIRST, before the transition check below, so that every approve answer — the
-  // lifecycle one included — comes from the one producer and any payload disagreement is reported
-  // once, here, with this module named. The derivation runs its own lifecycle check, so nothing is
-  // skipped by taking this branch early.
-  if (actionId === 'approve') {
-    const derived = deriveApproveEligibility(decision)
-    warnOnApproveEligibilityDrift(decision, derived, 'actionTypes')
+  // The DERIVED actions, first — before the transition check below, so that every one of their
+  // answers (the lifecycle one included) comes from the one producer and any payload disagreement is
+  // reported here with this module named. Each derivation runs its own lifecycle check, so nothing
+  // is skipped by taking this branch early.
+  //
+  // Keyed off the producer map rather than an `if (actionId === ...)` chain: `approve_selected`
+  // joined `approve` this phase, and the next one should be a map entry, not another branch here.
+  const derive = DERIVED_ELIGIBILITY[actionId]
+  if (derive) {
+    const derived = derive(decision)
+    warnOnEligibilityDrift(decision, derived, 'actionTypes', actionId)
     if (!derived.allowed) return deny(derived.reason)
   }
 
@@ -165,7 +181,7 @@ export function checkOperatorAction(actionId, decision, payload = {}) {
     return deny(`This proposal is ${decision.status} and can no longer be changed.`)
   }
 
-  if (actionId !== 'approve') {
+  if (!derive) {
     const entry = decision.eligibility?.[actionId]
     if (entry === undefined || entry === null) {
       // The fail-closed rule, stated once: absence is not permission.
@@ -190,6 +206,13 @@ export function checkOperatorAction(actionId, decision, payload = {}) {
     if (reason.length < spec.reasonMinLength) {
       return deny(`A reason of at least ${spec.reasonMinLength} characters is required.`)
     }
+  }
+  // A CODED reason as well as the prose, for the one action that needs to be filterable. Free text
+  // cannot answer "show me everything dismissed as incorrect data", which is the query a dismissal
+  // vocabulary exists to serve. Fail-closed like every other required payload field: a missing code
+  // is a denial, not a default.
+  if (spec.requiresReasonCode && !DISMISS_REASONS.includes(payload.reason_code)) {
+    return deny(`Choose why you are dismissing this: ${DISMISS_REASONS.join(', ')}.`)
   }
   if (spec.requiresSnoozeUntil && !isFutureTimestamp(payload.snooze_until)) {
     return deny('Choose a snooze time in the future.')

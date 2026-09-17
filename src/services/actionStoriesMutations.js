@@ -22,6 +22,7 @@ import { checkOperatorAction } from '@/features/action-stories/contract/actionTy
  *   and the optimistic-concurrency token both come from it.
  * @param {string} params.actionType - one of the six operator actions.
  * @param {string} [params.reason]
+ * @param {string} [params.reasonCode] - a DISMISS_REASONS code; required by `dismiss`, unused elsewhere.
  * @param {string[]} [params.selection]
  * @param {string} [params.snoozeUntil]
  * @param {string} [params.idempotencyKey] - supplied by the caller so a RETRY reuses the SAME key
@@ -35,6 +36,7 @@ export async function dispatchAction({
   decision,
   actionType,
   reason,
+  reasonCode,
   selection,
   snoozeUntil,
   idempotencyKey,
@@ -55,7 +57,7 @@ export async function dispatchAction({
   //
   // This is NOT the security boundary. The server runs the same rules against its own state; a
   // browser-side check can always be edited out by whoever is running the browser.
-  const verdict = checkOperatorAction(actionType, decision, { reason, selection, snooze_until: snoozeUntil })
+  const verdict = checkOperatorAction(actionType, decision, { reason, reason_code: reasonCode, selection, snooze_until: snoozeUntil })
   if (!verdict.allowed) {
     throw new ActionStoriesError(`Action "${actionType}" is not eligible: ${verdict.reason}`, {
       code: ERROR_CODES.CLIENT_ERROR,
@@ -70,6 +72,7 @@ export async function dispatchAction({
     {
       action_type: actionType,
       reason: reason ?? null,
+      reason_code: reasonCode ?? null,
       selection: selection ?? null,
       snooze_until: snoozeUntil ?? null,
       idempotency_key: idempotencyKey ?? newIdempotencyKey(),

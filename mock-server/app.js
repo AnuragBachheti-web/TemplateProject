@@ -181,6 +181,7 @@ function runAction(res, store, proposalId, body, headerKey) {
   const {
     action_type: actionType,
     reason,
+    reason_code: reasonCode,
     selection,
     snooze_until: snoozeUntil,
     expected_updated_at: expectedUpdatedAt,
@@ -213,12 +214,12 @@ function runAction(res, store, proposalId, body, headerKey) {
 
   // 3-6. Entitlement, action validity, optimistic concurrency, business eligibility and the legal
   //      status transition — all from the shared contract module.
-  const verdict = authorizeOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, expectedUpdatedAt })
+  const verdict = authorizeOperatorAction(proposal, actionType, { reason, reasonCode, selection, snoozeUntil, expectedUpdatedAt })
   if (!verdict.ok) {
     return sendError(res, verdict.status, verdict.message)
   }
 
-  const updated = applyOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, nextStatus: verdict.nextStatus })
+  const updated = applyOperatorAction(proposal, actionType, { reason, reasonCode, selection, snoozeUntil, nextStatus: verdict.nextStatus })
   store.proposals.set(proposalId, updated)
   store.idempotencyLedger.set(idempotencyKey, { proposalId, actionType, result: updated })
 

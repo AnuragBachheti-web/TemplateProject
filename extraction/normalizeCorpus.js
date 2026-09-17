@@ -42,7 +42,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { isDecorativeKey } from './classifyBlocks.js'
 import { referenceContextFor } from './referenceContext.js'
-import { deriveApproveEligibility } from '../src/features/action-stories/contract/deriveEligibility.js'
+import { deriveApproveEligibility, deriveApproveSelectedEligibility } from '../src/features/action-stories/contract/deriveEligibility.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -96,7 +96,31 @@ function isGeometryKey(key) {
   return (String(key).match(CAMEL) ?? []).some((w) => GEOMETRY_WORDS.has(w.toLowerCase()))
 }
 
-function isBannedKey(key) {
+/**
+ * NUMERIC FIELDS THE NAME-BASED RULES WRONGLY CLAIM. Measured, not guessed: across all 105 raw
+ * fixtures exactly four pct/threshold-ish keys with numeric values are stripped by name, and only
+ * two of them are data.
+ *
+ *   widthPct  x7  caught by isGeometryKey on the word "width". It is a PERCENTAGE — how full a bar
+ *                 is — and the percentage is the measurement the bar depicts, not its layout.
+ *   markPct   x4  caught by isDecorativeKey on the word "mark". It is where a threshold marker sits
+ *                 on a scale, which is a number the reader needs; "mark" is doing double duty in
+ *                 DECORATIVE_WORDS, where it means a chart glyph.
+ *
+ * targetLx / targetLy are deliberately NOT here. They are SVG label coordinates and the geometry
+ * rule is right about them.
+ *
+ * SCOPE NOTE. This fixes the 11 values lost to the STRIP rule. It does not, and cannot, fix the far
+ * larger set lost to the CLAIM LEDGER — `limit` x21, `pctFrom` x21, `pctTo` x21, `bbTarget` x17,
+ * `targetPct` x10, `floorPct` x8, `nowPct` x8, `cvrTarget` x8, `mapFloor` x7 and ~40 more, none of
+ * which any canonical field's candidate list names, so `clean` never sees them. Claiming those is a
+ * data-modelling change and belongs with the block that needs them; the full inventory is in this
+ * phase's report as a Phase 3 input.
+ */
+const NUMERIC_DESPITE_NAME = new Set(['widthPct', 'markPct'])
+
+function isBannedKey(key, value) {
+  if (NUMERIC_DESPITE_NAME.has(key) && typeof value === 'number') return false
   return (
     BANNED_KEYS.has(key)
     || String(key).startsWith('__')
@@ -121,8 +145,18 @@ function clean(value) {
   if (value !== null && typeof value === 'object') {
     const out = {}
     for (const [k, v] of Object.entries(value)) {
-      if (isBannedKey(k)) continue
+      if (isBannedKey(k, v)) continue
       if (OPACITY_KEYS.has(k) && typeof v === 'number') continue
+      // A `pct` is always a percentage MAGNITUDE, and the reference quotes several of them ("96").
+      // Typed here so no consumer has to decide whether this particular percentage arrived as text
+      // — see bareNumber for why this is not the display-string parsing ruling R2 forbids.
+      if (k === 'pct') {
+        const asNumber = bareNumber(v)
+        if (asNumber !== undefined) {
+          out[k] = asNumber
+          continue
+        }
+      }
       const cleaned = clean(v)
       if (cleaned !== undefined) out[k] = cleaned
     }
@@ -560,10 +594,87 @@ function dropUndefined(obj) {
 
 // ---- eligibility + guardrails ------------------------------------------------------------------
 
+/**
+ * The PER-ROW guardrail status, read from the three signals the reference carries and emitted as the
+ * contract's semantic enum (decisionObject.js's GUARDRAIL_CHECK_STATUSES).
+ *
+ * `ok` FIRST, always — 18 of the 85 rows carry it (12 true, 6 false) and it is the reference stating
+ * the answer rather than implying it through styling. Only when it is absent do the icon and the
+ * tone decide, and they are read HERE, at generation time, and then discarded: the icon and the tone
+ * never reach a payload, and __corpus__/boundary.test.js fails if they ever do. What crosses the
+ * boundary is the word `pass`, and the component owns what colour that is (I4).
+ *
+ * `blocked` is separate from `fail` because the reference itself separates them: fa-lock (x9) and
+ * fa-circle-stop (x3) mark a check that CANNOT proceed — a legal hold, a contract lock — where
+ * fa-circle-xmark (x4) marks one that ran and did not pass. The operator's next step differs, so
+ * collapsing them would lose a real distinction.
+ */
+function checkStatusOf(row) {
+  if (row.ok === true) return 'pass'
+  if (row.ok === false) return 'fail'
+
+  const icon = typeof row.icon === 'string' ? row.icon : ''
+  if (/fa-circle-check/.test(icon)) return 'pass'
+  if (/fa-lock|fa-circle-stop/.test(icon)) return 'blocked'
+  if (/fa-triangle-exclamation|fa-circle-exclamation/.test(icon)) return 'warn'
+  if (/fa-circle-xmark/.test(icon)) return 'fail'
+  if (/fa-clock|fa-eye|fa-bolt|fa-rotate-left|fa-circle-info/.test(icon)) return 'info'
+
+  const tone = typeof row.tone === 'string' ? row.tone : ''
+  if (/green/.test(tone)) return 'pass'
+  if (/rose|red/.test(tone)) return 'fail'
+  if (/amber|yellow/.test(tone)) return 'warn'
+
+  // Fail-closed in spirit: a row whose status the reference does not state is reported as `info`,
+  // never as `pass`. Claiming a check passed on no evidence is the one wrong answer here.
+  return 'info'
+}
+
+/**
+ * A bare numeric literal that the mockup happens to quote — `"96"`, `"2.31"` — as a number.
+ *
+ * This is NOT the display-string parsing ruling R2 forbids. R2 is about recovering `41000` from
+ * `"+$41K"`, which means undoing a currency symbol, a sign convention and a compaction, i.e. making
+ * blocks/formatValue.js's own OUTPUT an input. `"96"` is a magnitude with quotes around it: nothing
+ * has been formatted, nothing is being reversed, and no information is recovered that was not
+ * already there. Leaving it a string would put a display string in a typed field, which is the very
+ * thing the contract's typed numbers exist to end.
+ */
+function bareNumber(v) {
+  if (typeof v === 'number') return Number.isFinite(v) ? v : undefined
+  if (typeof v !== 'string' || !/^-?\d+(\.\d+)?$/.test(v.trim())) return undefined
+  const n = Number(v.trim())
+  return Number.isFinite(n) ? n : undefined
+}
+
+/** The check rows, each carrying its derived status. Presentation is read and left behind. */
+function checksWithStatus(rawChecks, cleanedChecks) {
+  if (!Array.isArray(cleanedChecks)) return undefined
+  return cleanedChecks.map((row, i) => {
+    const withStatus = {
+      status: checkStatusOf(Array.isArray(rawChecks) ? rawChecks[i] ?? {} : {}),
+      ...row,
+    }
+    // `pct` is the one numeric field on a check row, and the reference quotes it. Typed, not text.
+    if ('pct' in withStatus) {
+      const n = bareNumber(withStatus.pct)
+      if (n === undefined) delete withStatus.pct
+      else withStatus.pct = n
+    }
+    return withStatus
+  })
+}
+
 function guardrailsOf(data, rec) {
   // A check row needs only its own identity; `value` is optional, because the reference writes many
   // of them as `{icon, label, note}` — 9 of 19 were being discarded for lacking a `value`.
   const checks = pick(data, ['checks', 'guardParts'], isLabelled, rec, 'guardrails.checks')
+  // The RAW rows, for their status signals only. `clean` has already stripped `ok`, `icon` and
+  // `tone` off the rows above — correctly, for the last two — so the status is read here from the
+  // pre-clean source and the presentation is left behind. `ok` is a real boolean the corpus carries
+  // on 18 rows and is the only one of the three that would have been worth keeping; it is now
+  // represented by `status`, which says the same thing without a second vocabulary.
+  const rawChecks = Array.isArray(data.checks) ? data.checks : Array.isArray(data.guardParts) ? data.guardParts : undefined
   const blocked = data.blocked === true
   const canApprove = data.canApprove !== false
   let verdict = 'undetermined'
@@ -571,7 +682,7 @@ function guardrailsOf(data, rec) {
   else if (blocked || !canApprove) verdict = 'beyond_limits'
   else verdict = 'within_limits'
   rec.record('guardrails.verdict', data.blocked !== undefined ? 'blocked' : data.canApprove !== undefined ? 'canApprove' : null)
-  return dropUndefined({ verdict, checks })
+  return dropUndefined({ verdict, checks: checksWithStatus(rawChecks, checks) })
 }
 
 /**
@@ -579,16 +690,16 @@ function guardrailsOf(data, rec) {
  * an omitted entry meaning "probably allowed". Where the corpus carried a real block signal
  * (`blocked`/`canApprove`/`blockReason`), it is honoured; otherwise the mock allows the action.
  *
- * `approve` IS NOT HERE. It used to be, and it was the only place in the system where
- * `guardrails.verdict` and `eligibility.approve.allowed` were coupled — offline, at generation time,
- * while nothing at runtime coupled them at all. That coupling is now
+ * `approve` AND `approve_selected` ARE NOT HERE. They used to be, and this was the only place in the
+ * system where `guardrails.verdict` and `eligibility.*.allowed` were coupled — offline, at
+ * generation time, while nothing at runtime coupled them at all. That coupling is now
  * contract/deriveEligibility.js's, evaluated at request time against whatever the API actually
  * serves, so computing it here as well would be a second producer of the one value that must have
  * exactly one. See the stamp at this function's call site.
  */
-function eligibilityOf(data, { stage, cardinality, onClock, entitlement }) {
-  const blocked = data.blocked === true || data.canApprove === false
-  const reason = isStr(data.blockReason) ? data.blockReason : 'Blocked by a guardrail on this proposal.'
+function eligibilityOf(data, { stage, onClock, entitlement }) {
+  // `blocked` / `blockReason` / `cardinality` left with the two approve entries: they were the raw
+  // guardrail signals, and reading them here is now the single-producer violation this phase closed.
   const entry = (allowed, why) => (allowed ? { allowed: true } : { allowed: false, blocked_reason: why })
 
   const locked = entitlement === 'locked'
@@ -596,12 +707,107 @@ function eligibilityOf(data, { stage, cardinality, onClock, entitlement }) {
   const decidable = (stage === 'decide' || stage === 'execute') && !locked
 
   return {
-    approve_selected: entry(decidable && !blocked && !limited && cardinality === 'many', cardinality !== 'many' ? 'This proposal has a single item.' : limited ? 'Your plan does not include approving proposals.' : !decidable ? 'Approval happens at the decide stage.' : reason),
     modify: entry(decidable && !limited && !locked, limited || locked ? 'Your plan does not include modifying proposals.' : 'Modification is not available at this stage.'),
     send_back: entry(decidable && !locked, 'Sending back is not available at this stage.'),
     dismiss: entry(!locked, 'Your plan does not include dismissing proposals.'),
     snooze: entry(onClock && !locked, onClock ? 'Your plan does not include snoozing proposals.' : 'This proposal has no deadline to defer.'),
   }
+}
+
+// ---- the required-and-nullable business fields (ruling R1) -------------------------------------
+//
+// Each of these is REQUIRED on every object and may be `null`, which states "the reference does not
+// state this". That is deliberately not the same as optional: an optional field is one a producer
+// may forget, a required nullable field is one a producer must decide about. Every population count
+// below is what the corpus actually supports — none is padded, and none is invented.
+
+/**
+ * The sub-brands the reference names: "Ridgeline" (x204) and "Alder" (x84), both used as ranges
+ * ("Brand story · Ridgeline range", SKUs "NW-CER-1120 Ridgeline stoneware bowl").
+ *
+ * "Northwind" is the TENANT, not a brand choice — every SKU in the corpus is NW-prefixed — so it is
+ * not a value here; a field that is the same on all 105 objects is decoration.
+ *
+ * Assigned only when the object's own payload names EXACTLY ONE of them. 12 objects name both and
+ * are therefore about neither, and get `null`: picking the first would be a coin toss dressed as
+ * data. Populates 13 of 105.
+ */
+const SUB_BRANDS = ['Ridgeline', 'Alder']
+
+function brandOf(decision) {
+  const text = JSON.stringify(decision)
+  const named = SUB_BRANDS.filter((b) => new RegExp(b, 'i').test(text))
+  return named.length === 1 ? named[0].toLowerCase() : null
+}
+
+/**
+ * The channel, mapped from the reference's own `channel`/`channels` strings to the contract enum.
+ *
+ * Present on 7 of 26 stories. Deliberately unmapped: "all four" (x7) and "mixed" (x3) describe a
+ * SPAN across channels rather than one, and "Crawl re-read window" (x2) is a crawler window that
+ * happens to be filed under the same key. All three yield `null` — the honest answer for a field
+ * that names one channel. Populates 14 of 105.
+ */
+const CHANNEL_PATTERNS = [
+  [/amazon/i, 'amazon'],
+  [/walmart/i, 'walmart'],
+  [/shopify/i, 'shopify'],
+  [/\bdtc\b|northwind\.com/i, 'dtc'],
+  [/google/i, 'google'],
+  [/faire/i, 'faire'],
+  [/\bedi\b|email|portal/i, 'wholesale'],
+]
+
+function firstRawString(data, keyTest) {
+  let found = null
+  const visit = (v) => {
+    if (found !== null) return
+    if (Array.isArray(v)) return v.forEach(visit)
+    if (v !== null && typeof v === 'object') {
+      for (const [k, sub] of Object.entries(v)) {
+        if (found === null && keyTest(k) && typeof sub === 'string' && sub.trim() !== '') {
+          found = sub
+          return
+        }
+        visit(sub)
+      }
+    }
+  }
+  visit(data)
+  return found
+}
+
+function channelOf(data) {
+  const raw = firstRawString(data, (k) => /^channels?$/.test(k))
+  if (raw === null) return null
+  return CHANNEL_PATTERNS.find(([re]) => re.test(raw))?.[1] ?? null
+}
+
+/**
+ * The merchandising category. The reference names one on exactly ONE stage screen
+ * (S9.20/analyze, as row-level candidate categories: "Cookware · pan adjacency", "Bakeware ·
+ * enamel adjacency", ...), so this populates 1 of 105 and is `null` everywhere else.
+ *
+ * NOT propagated to S9.20's sibling stages the way a deadline is, and not inferred from a story
+ * title. Those 12 occurrences describe the CANDIDATES the proposal evaluates, across four different
+ * categories — so "the proposal's category" is a question the reference does not answer, and a
+ * category assigned from a title would be a guess wearing a field name. See deliverable F.
+ */
+function categoryOf(data) {
+  const raw = firstRawString(data, (k) => k === 'category')
+  if (raw === null) return null
+  const head = raw.split('·')[0].trim().toLowerCase()
+  return head === '' ? null : head
+}
+
+/**
+ * The LEAD model credited on the proposal — `proposal.agents[0].name`, which the reference prints in
+ * its pinned identity strip on every reason-stage screen. Populates 26 of 105 (one per story),
+ * because that is where the reference states it; a persona is a human and lives on `persona`.
+ */
+function agentOf(proposal) {
+  const first = Array.isArray(proposal?.agents) ? proposal.agents[0] : null
+  return typeof first?.name === 'string' && first.name.trim() !== '' ? first.name : null
 }
 
 // ---- the unresolved axes -----------------------------------------------------------------------
@@ -627,7 +833,46 @@ function eligibilityOf(data, { stage, cardinality, onClock, entitlement }) {
 //                                 the scalar is left absent rather than picked arbitrarily.
 const UNRESOLVED_CONTRACT_CLASS = 'standard'
 const UNRESOLVED_ENTITLEMENT = 'full'
-const UNRESOLVED_ON_CLOCK = false
+// `on_clock` is NO LONGER unresolved. It was `false` on 105 of 105 — the exact shape of the
+// `execLabel` defect the contract's own header warns about — which made Snooze dead on every object
+// and the deadline chip unreachable. It is now derived from the reference's own `due`/`deadline`
+// strings; see clockForStory below.
+
+/**
+ * The reference's own deadline strings, per story. A deadline is a STORY-level business fact — a
+ * proposal does not acquire and lose a clock as an operator walks its stages, and S9.19's title
+ * literally is "Q4 calendar build — Prime Fall deadline Aug 21" — so a deadline found on any one of
+ * a story's stage screens applies to all of them.
+ *
+ * `eta` is DELIBERATELY NOT a clock signal. "Receiving today", "arrives Sep 02" are arrival
+ * estimates, not operator deadlines; treating them as the same thing would put a false clock on four
+ * proposals and is exactly the kind of plausible-looking invention this pipeline must not make.
+ *
+ * The explicit NEGATIVES are preserved and matter: S9.19/execute says "not booked" and
+ * S9.20/execute says "not sent". Those are the reference stating there is no clock, which is what
+ * keeps this axis genuinely non-degenerate rather than newly-constant-true.
+ */
+const NO_CLOCK_PHRASES = /not booked|not sent|\bnone\b|n\/a/i
+
+/** A relative ("9 days") or absolute ("Aug 22", "Aug 21 · 18:00") reference deadline -> an instant. */
+function deadlineInstant(text, anchorIso) {
+  const anchor = Date.parse(anchorIso)
+  const relative = /^(\d+)\s*days?\b/i.exec(text)
+  if (relative) return new Date(anchor + Number(relative[1]) * 86_400_000).toISOString()
+
+  const absolute = /\b([A-Z][a-z]{2})\s+(\d{1,2})\b/.exec(text)
+  if (absolute) {
+    const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].indexOf(absolute[1])
+    if (month >= 0) {
+      const hhmm = /(\d{1,2}):(\d{2})/.exec(text)
+      const year = new Date(anchor).getUTCFullYear()
+      const at = Date.UTC(year, month, Number(absolute[2]), hhmm ? Number(hhmm[1]) : 17, hhmm ? Number(hhmm[2]) : 0)
+      // A month earlier than the anchor's belongs to the next year, not the past.
+      return new Date(at >= anchor ? at : Date.UTC(year + 1, month, Number(absolute[2]), 17, 0)).toISOString()
+    }
+  }
+  return undefined
+}
 
 const CATEGORY_TO_ACTION_TYPE = {
   Repricing: 'reprice', Markdown: 'reprice', Competitive: 'reprice',
@@ -672,6 +917,14 @@ function main() {
   for (const wf of index) {
     const ctx = referenceContextFor(wf.code)
     const cardinality = cardinalityFor(wf.code, readFixture(wf.code, 'decide'))
+
+    // The story's clock, resolved ONCE across its stages (see NO_CLOCK_PHRASES above for why this is
+    // story-level and why `eta` is excluded). A stage that states an explicit negative — "not
+    // booked", "not sent" — is honoured as a negative for ITSELF even when the story has a deadline.
+    const storyDeadlineText = wf.stages
+      .map((s) => firstRawString(readFixture(wf.code, s) ?? {}, (k) => k === 'due' || k === 'deadline'))
+      .find((t) => typeof t === 'string' && !NO_CLOCK_PHRASES.test(t))
+    const storyDeadline = storyDeadlineText ? deadlineInstant(storyDeadlineText, GENERATED_AT) : undefined
     // The reference orders its lens line primary-first ("Sales · Margin"). S10.6 declares
     // "all five" and names no primary, so its own lead KPI tile supplies one; that single case is
     // recorded as an open contract item rather than hidden.
@@ -710,6 +963,17 @@ function main() {
       const confidence = confidenceFrom(data)
       rec.record('confidence', confidence === undefined ? null : 'confLabel')
 
+      // This stage's own clock. The story's deadline applies unless THIS screen states an explicit
+      // negative ("not booked", "not sent"), which is the reference saying there is nothing booked
+      // to be late for. Those two survive as `false` and are what keep the axis honest.
+      const ownDeadlineText = firstRawString(data, (k) => k === 'due' || k === 'deadline')
+      const statesNoClock = typeof ownDeadlineText === 'string' && NO_CLOCK_PHRASES.test(ownDeadlineText)
+      const onClock = Boolean(storyDeadline) && !statesNoClock
+      // `deadline` CLAIMS the raw key; `on_clock` is derived from whether that produced a value, so
+      // its provenance must not name the key a second time — one raw key, one canonical field.
+      rec.record('deadline', onClock ? 'due/deadline' : null)
+      rec.record('on_clock', onClock ? '(derived from deadline)' : null)
+
       const decision = dropUndefined({
         proposal_id: proposalId,
         story_code: wf.code,
@@ -718,11 +982,13 @@ function main() {
 
         cardinality,
         contract_class: UNRESOLVED_CONTRACT_CLASS,
-        on_clock: UNRESOLVED_ON_CLOCK,
+        on_clock: onClock,
         mode: modeFrom(data),
         entitlement: UNRESOLVED_ENTITLEMENT,
         lens,
         persona,
+
+        deadline: onClock ? storyDeadline : undefined,
 
         title: wf.headline ?? wf.name,
         narrative,
@@ -730,7 +996,7 @@ function main() {
 
         confidence,
 
-        eligibility: eligibilityOf(data, { stage, cardinality, onClock: UNRESOLVED_ON_CLOCK, entitlement: UNRESOLVED_ENTITLEMENT }),
+        eligibility: eligibilityOf(data, { stage, onClock, entitlement: UNRESOLVED_ENTITLEMENT }),
         guardrails,
 
         proposal,
@@ -740,6 +1006,31 @@ function main() {
         status: 'pending',
         updated_at: GENERATED_AT,
       })
+
+      // ---- the required-and-nullable fields (R1) --------------------------------------------------
+      //
+      // Assigned AFTER `dropUndefined`, because `null` here is a real value the contract requires to
+      // be present and dropUndefined would not distinguish it from an omission. Each is `null`
+      // wherever the reference does not state it; none is inferred from a title or a hash.
+      //
+      // `impact` is null on all 105, and that is a measurement rather than a shortfall (ruling R2):
+      // no reference fixture carries a top-level numeric magnitude at all. Every figure is either a
+      // pre-formatted display string ("+$41K" in `totals.rows`) or a row-level metric inside a
+      // table. Parsing the former would make blocks/formatValue.js's own output an input, which is
+      // exactly the round trip the typed-number contract exists to end.
+      decision.impact = null
+      decision.brand = brandOf(decision)
+      decision.channel = channelOf(data)
+      decision.category = categoryOf(data)
+      decision.agent = agentOf(proposal)
+      rec.record('impact', null)
+      rec.record('brand', decision.brand === null ? null : '(reference sub-brand)')
+      rec.record('channel', decision.channel === null ? null : 'channel')
+      rec.record('category', decision.category === null ? null : 'category')
+      // NOT `'agents'`: that raw key is already claimed by `proposal.agents`, and naming it twice
+      // would be the exact double-claim referenceFidelity.test.js exists to catch. `agent` is derived
+      // FROM the canonical field, so its provenance says so.
+      rec.record('agent', decision.agent === null ? null : '(proposal.agents lead)')
 
       // `approve` is stamped from the SINGLE PRODUCER, not generated here. The field has to be
       // present because the Decision Object contract requires it, but the value is
@@ -751,10 +1042,14 @@ function main() {
       // exposure of $92.5K breaks the $75K appetite set in Reason" is business prose off the
       // mockup, and it never influences whether approval is blocked — only how that is explained.
       const derivedApprove = deriveApproveEligibility(decision)
-      decision.eligibility = {
-        approve: derivedApprove.allowed
+      const derivedApproveSelected = deriveApproveSelectedEligibility(decision)
+      const copy = (derived) =>
+        derived.allowed
           ? { allowed: true }
-          : { allowed: false, blocked_reason: isStr(data.blockReason) ? data.blockReason : derivedApprove.reason },
+          : { allowed: false, blocked_reason: isStr(data.blockReason) ? data.blockReason : derived.reason }
+      decision.eligibility = {
+        approve: copy(derivedApprove),
+        approve_selected: copy(derivedApproveSelected),
         ...decision.eligibility,
       }
 

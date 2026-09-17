@@ -162,7 +162,7 @@ describe('the six operator actions — dispatch, transition, updated Decision Ob
 
   it('dismiss: pending -> dismissed, terminal', async () => {
     load(openProposal())
-    const result = await useActionStoriesStore.getState().runAction('dismiss', { reason: 'Superseded by S9.9' })
+    const result = await useActionStoriesStore.getState().runAction('dismiss', { reason: 'Superseded by S9.9', reasonCode: 'not_actionable' })
     expect(result.status).toBe('dismissed')
     expect(Object.values(result.eligibility).every((e) => e.allowed === false)).toBe(true)
   })

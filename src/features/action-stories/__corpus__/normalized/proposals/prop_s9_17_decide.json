@@ -5,11 +5,12 @@
   "action_type": "review",
   "cardinality": "many",
   "contract_class": "standard",
-  "on_clock": false,
+  "on_clock": true,
   "mode": "suggest",
   "entitlement": "full",
   "lens": "inventory",
   "persona": "sourcer",
+  "deadline": "2026-09-30T17:00:00.000Z",
   "title": "Supplier K +8% cost notice — should-cost says +2.9%",
   "narrative": "",
   "status_note": "Decide · 2 negotiate, 1 dual-source, 1 exit, 0 accept · +$20.9K / yr",
@@ -32,30 +33,34 @@
       "allowed": true
     },
     "snooze": {
-      "allowed": false,
-      "blocked_reason": "This proposal has no deadline to defer."
+      "allowed": true
     }
   },
   "guardrails": {
     "verdict": "beyond_limits",
     "checks": [
       {
+        "status": "pass",
         "label": "Open POs honoured",
         "note": "Every transition honours the $412K in flight. No cancellation is used as leverage."
       },
       {
+        "status": "pass",
         "label": "Strategic-supplier exit",
         "note": "No strategic supplier is being exited."
       },
       {
+        "status": "fail",
         "label": "Safety-stock impact accepted",
         "note": "$18K of safety stock has to reach Planner before approval."
       },
       {
+        "status": "blocked",
         "label": "Nothing sent automatically",
         "note": "Briefs and messages are drafted in Execute. A person sends them, at every dial setting."
       },
       {
+        "status": "pass",
         "label": "Rationale logged",
         "note": "Every decision files to LEDGER-SUP-0184 with its should-cost basis."
       }
@@ -397,5 +402,10 @@
     ]
   },
   "status": "pending",
-  "updated_at": "2026-09-15T09:00:00.000Z"
+  "updated_at": "2026-09-15T09:00:00.000Z",
+  "impact": null,
+  "brand": "alder",
+  "channel": null,
+  "category": null,
+  "agent": null
 }

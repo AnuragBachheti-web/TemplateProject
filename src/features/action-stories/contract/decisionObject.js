@@ -36,8 +36,17 @@ export const CONTRACT_CLASSES = ['standard', 'strategic', 'regulated']
 /** Axis 4. Evidenced by the corpus's own `execLabel` ("Suggest"/"Assist"), extended with "auto". */
 export const MODES = ['suggest', 'assist', 'auto']
 
-/** Axis 5. `locked` is the one axis value that participates in template selection (see selectTemplate). */
-export const ENTITLEMENTS = ['full', 'limited', 'locked']
+/**
+ * Axis 5. `locked` is the one axis value that participates in template selection (see selectTemplate).
+ *
+ * `observe` and `not_hired` are the two product states the enum was missing. They are NOT populated
+ * on any shipped object and deliberately so (ruling R5): assigning a non-`full` entitlement to a
+ * real proposal has no basis in the corpus, and inventing one is refused outright. So this axis is
+ * KNOWINGLY DEGENERATE at the end of Phase 2 — 'full' x105 — and is named in
+ * contractExtension.test.js's EXEMPT_BY_RULING_R5 list rather than quietly skipped, because an
+ * unexplained exemption is how a constant axis survives and a named one is a ticket.
+ */
+export const ENTITLEMENTS = ['full', 'limited', 'locked', 'observe', 'not_hired']
 
 /**
  * Axis 6. Derived from the corpus, not invented: `data.lens` carries "Ads", "Cash", "Inventory",
@@ -93,6 +102,69 @@ export const ACTION_TYPES = [
 /** Guardrail verdict — the real 4-value enum, per services/proposalFieldMapping.js. Never a boolean. */
 export const GUARDRAIL_VERDICTS = ['within_limits', 'beyond_limits', 'not_applicable', 'undetermined']
 
+/**
+ * PER-ROW guardrail status — the field whose absence meant a governance checklist could show its
+ * label and note but never whether the check actually passed.
+ *
+ * DERIVED FROM EVIDENCE, at extraction time, from three signals the reference already carries on
+ * its 85 check rows (extraction/normalizeCorpus.js's `checkStatusOf`):
+ *
+ *   `ok`    an explicit boolean on 18 rows — 12 true, 6 false. Preferred whenever present, because
+ *           it is the reference stating the answer rather than implying it.
+ *   `icon`  fa-circle-check x111, fa-lock x9, fa-triangle-exclamation x5, fa-circle-xmark x4,
+ *           fa-circle-stop x3, fa-circle-exclamation x2, fa-clock/eye/bolt/rotate-left/circle-info x1.
+ *   `tone`  var(--green-700) x113, var(--rose-700) x11, var(--amber-700) x3, var(--amber-500) x1,
+ *           var(--ink-400/600) x14.
+ *
+ * `blocked` is distinct from `fail` because the reference draws the distinction itself: fa-lock and
+ * fa-circle-stop mark a check that CANNOT proceed (legal hold, contract lock), where
+ * fa-circle-xmark marks one that ran and did not pass. An operator's next step differs.
+ *
+ * THE ICON AND THE TONE DO NOT CROSS THE BOUNDARY. They are read while the corpus is generated and
+ * discarded; only this enum is serialized. The status -> colour map lives in exactly one place in
+ * frontend code (I4), and __corpus__/boundary.test.js fails if a tone or an icon ever reappears in
+ * a payload.
+ */
+export const GUARDRAIL_CHECK_STATUSES = ['pass', 'warn', 'fail', 'blocked', 'info']
+
+/**
+ * Sales channel the proposal acts on.
+ *
+ * Evidence: a raw `channel`/`channels` string on 7 of the 26 reference stories, 101 occurrences —
+ * "Amazon" x36 (plus "Amazon FBA" x3, "Amazon · FBA" x2), "Walmart" x12 (plus "Walmart · WFS" x2,
+ * "Walmart WFS · portal only" x1), "Shopify" x5, "DTC · northwind.com" x2 / "DTC" x1, "Google" x1,
+ * "Faire" x1.
+ *
+ * `wholesale` is PROVISIONAL and is the one value here that is a grouping rather than a name: it
+ * covers the supplier-side transports the reference names instead of a marketplace — "EDI 850" x4,
+ * "Email PDF + portal ack" x2, "Supplier portal task" x2, "email" x8. Listed in deliverable F.
+ *
+ * Deliberately NOT included: "all four" x7, "mixed" x3 and "Crawl re-read window" x2, which are not
+ * channels — the first two describe a span across channels and the third is a crawler window.
+ */
+export const CHANNELS = ['amazon', 'walmart', 'shopify', 'dtc', 'google', 'faire', 'wholesale']
+
+/**
+ * Why an operator dismissed a proposal.
+ *
+ * PROVISIONAL — the repository has NO evidence for this vocabulary. The dismiss action collects
+ * free text today (actionTypes.js's `reasonRequired`/`reasonMinLength`), and the reference never
+ * shows a dismissal at all. Kept as small as the concept allows: five outcomes that lead an
+ * operator somewhere different, rather than one value per workflow. Must be confirmed by Product;
+ * listed in deliverable F.
+ *
+ * The free-text reason is NOT replaced by this. A code makes a queue filterable; the prose is what
+ * the next person reads. Both are required, and both are persisted — see
+ * operatorActionExecution.js's `dismissal_reason` / `dismissal_note`.
+ */
+export const DISMISS_REASONS = [
+  'not_actionable', // nothing to do — the situation resolved itself or never applied
+  'already_handled', // done outside Realify, so the proposal is redundant
+  'incorrect_data', // the analysis is wrong; the proposal should not have been raised
+  'policy', // correct, but disallowed by a rule the system does not model
+  'other', // present so an operator is never forced into a wrong code; prose carries it
+]
+
 /** Units a typed business number may carry. Presentation (symbol, precision, compaction) is frontend-owned. */
 export const VALUE_UNITS = ['USD', 'EUR', 'GBP', 'pct', 'count', 'days']
 
@@ -139,6 +211,60 @@ export function validateTypedNumber(value, field) {
     if (!Number.isInteger(value.precision) || value.precision < 0 || value.precision > 6) {
       problems.push(`"${field}.precision" must be an integer between 0 and 6 when present`)
     }
+  }
+  return problems
+}
+
+/**
+ * REQUIRED AND NULLABLE — the shape ruling R1 adopted for the five fields the UI needs and the
+ * reference does not always state.
+ *
+ * The field must be PRESENT and correctly typed on every object. `null` is a legal typed value and
+ * means one specific thing: "the reference does not state this". Absence, a wrong type, or a
+ * non-null value of the wrong shape all remain contract violations, so I1's "no optional additions"
+ * stands — what is relaxed is the claim that the corpus knows the answer, never the requirement
+ * that the backend answer.
+ *
+ * This is deliberately NOT the same as optional. An optional field is one a producer may forget; a
+ * required nullable field is one a producer must decide about. That difference is the whole reason
+ * `execLabel` became decoration and this will not.
+ */
+function validateRequiredNullable(problems, decision, field, check, expected) {
+  if (!(field in decision)) {
+    problems.push(`"${field}" is required — use null to state that it is unknown, never omit it`)
+    return
+  }
+  const value = decision[field]
+  if (value === null) return
+  if (!check(value)) {
+    problems.push(`"${field}" must be ${expected}, or null (got ${JSON.stringify(value)})`)
+  }
+}
+
+/**
+ * ONE ROW of the governance checklist. Previously validated only as "an array when present"
+ * (the whole of the old `guardrails.checks` rule), which is why a row could carry a label, a note
+ * and nothing that said whether the check passed.
+ *
+ * A row identifies itself EITHER by `label` or by `text` — both are legitimate and both occur:
+ * `label` + `value`/`note` is a metric row (58 rows), `text` is a whole policy sentence with no
+ * separate value (102 rows). Requiring `label` alone discarded the second kind entirely.
+ */
+function validateGuardrailCheck(row, field) {
+  const problems = []
+  if (!isPlainObject(row)) {
+    return [`"${field}" must be an object of shape { status, label|text, ... }`]
+  }
+  if (!GUARDRAIL_CHECK_STATUSES.includes(row.status)) {
+    problems.push(
+      `"${field}.status" must be one of: ${GUARDRAIL_CHECK_STATUSES.join(', ')} (got ${JSON.stringify(row.status)})`,
+    )
+  }
+  if (!isNonEmptyString(row.label) && !isNonEmptyString(row.text)) {
+    problems.push(`"${field}" must carry a non-empty "label" or "text"`)
+  }
+  if (row.pct !== undefined && (typeof row.pct !== 'number' || !Number.isFinite(row.pct))) {
+    problems.push(`"${field}.pct" must be a finite number when present`)
   }
   return problems
 }
@@ -232,8 +358,35 @@ export function validateDecisionObject(decision, { operatorActions = OPERATOR_AC
   // the decision payload
   if (!isPlainObject(decision.proposal)) problems.push('"proposal" must be an object')
 
+  // ---- required-and-nullable business fields (R1) ------------------------------------------------
+  //
+  // Each of these is a field the UI already reads. Before this phase they were absent from the
+  // contract entirely, so the UI read `undefined` and rendered nothing — which is indistinguishable
+  // from "the backend has no opinion" and is exactly how a needed field stays missing for a year.
+  //
+  // `impact` is required-nullable rather than populated because of a measurement, not a preference:
+  // no reference fixture carries a top-level numeric magnitude anywhere. Every figure in the corpus
+  // is either a pre-formatted display string ("+$41K" in `totals.rows`) or a row-level metric inside
+  // a table. Per R2, parsing the former back into a typed number would ship a formatter round-trip
+  // as a data source and invert the purpose of validateTypedNumber, so impact is null on 105/105 and
+  // the count itself is the evidence Product needs.
+  if (!('impact' in decision)) {
+    problems.push('"impact" is required — use null to state that it is unknown, never omit it')
+  } else if (decision.impact !== null) {
+    problems.push(...validateTypedNumber(decision.impact, 'impact'))
+  }
+  validateRequiredNullable(problems, decision, 'brand', isNonEmptyString, 'a non-empty string')
+  validateRequiredNullable(problems, decision, 'category', isNonEmptyString, 'a non-empty string')
+  validateRequiredNullable(problems, decision, 'agent', isNonEmptyString, 'a non-empty string')
+  validateRequiredNullable(
+    problems,
+    decision,
+    'channel',
+    (v) => CHANNELS.includes(v),
+    `one of: ${CHANNELS.join(', ')}`,
+  )
+
   // optional business fields
-  if (decision.impact !== undefined) problems.push(...validateTypedNumber(decision.impact, 'impact'))
   if (decision.confidence !== undefined) {
     if (!isPlainObject(decision.confidence)) {
       problems.push('"confidence" must be an object of shape { value, calibrated }')
@@ -251,8 +404,16 @@ export function validateDecisionObject(decision, { operatorActions = OPERATOR_AC
       problems.push('"guardrails" must be an object')
     } else {
       checkEnum(problems, decision.guardrails.verdict, GUARDRAIL_VERDICTS, 'guardrails.verdict')
-      if (decision.guardrails.checks !== undefined && !Array.isArray(decision.guardrails.checks)) {
-        problems.push('"guardrails.checks" must be an array when present')
+      if (decision.guardrails.checks !== undefined) {
+        if (!Array.isArray(decision.guardrails.checks)) {
+          problems.push('"guardrails.checks" must be an array when present')
+        } else {
+          // Every ROW validated, not just the array. A checklist whose rows were unvalidated is how
+          // 85 rows shipped with no field saying whether the check passed.
+          decision.guardrails.checks.forEach((row, i) => {
+            problems.push(...validateGuardrailCheck(row, `guardrails.checks[${i}]`))
+          })
+        }
       }
     }
   }
@@ -278,6 +439,11 @@ export function validateDecisionObjectSummary(summary) {
   checkEnum(problems, summary.stage, STAGES, 'stage')
   checkEnum(problems, summary.status, STATUSES, 'status')
   if (typeof summary.on_clock !== 'boolean') problems.push('"on_clock" must be a boolean')
-  if (summary.impact !== undefined) problems.push(...validateTypedNumber(summary.impact, 'impact'))
+  // `null` is a legal typed value on the full object (see validateRequiredNullable), so it has to be
+  // legal on the row copied FROM it. A queue summary that rejected what the proposal legitimately
+  // says would make every list request fail on a field the list does not even render.
+  if (summary.impact !== undefined && summary.impact !== null) {
+    problems.push(...validateTypedNumber(summary.impact, 'impact'))
+  }
   return problems
 }

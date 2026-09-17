@@ -114,7 +114,7 @@ export async function mockGetProposal(proposalId, { signal } = {}) {
 export async function mockRunProposalAction(proposalId, body = {}, { signal, idempotencyKey } = {}) {
   await delay(signal)
 
-  const { action_type: actionType, reason, selection, snooze_until: snoozeUntil, expected_updated_at: expectedUpdatedAt } = body
+  const { action_type: actionType, reason, reason_code: reasonCode, selection, snooze_until: snoozeUntil, expected_updated_at: expectedUpdatedAt } = body
 
   // 1. Idempotency. Checked before anything else: a replayed request must return the ORIGINAL
   //    result without re-running the action, which is the entire point of the key.
@@ -139,12 +139,12 @@ export async function mockRunProposalAction(proposalId, body = {}, { signal, ide
 
   // 3-6. Entitlement, action validity, optimistic concurrency, business eligibility and the status
   //      transition — the shared gate.
-  const verdict = authorizeOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, expectedUpdatedAt })
+  const verdict = authorizeOperatorAction(proposal, actionType, { reason, reasonCode, selection, snoozeUntil, expectedUpdatedAt })
   if (!verdict.ok) {
     throw httpError(verdict.status, verdict.message, verdict.userMessage)
   }
 
-  const updated = applyOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, nextStatus: verdict.nextStatus })
+  const updated = applyOperatorAction(proposal, actionType, { reason, reasonCode, selection, snoozeUntil, nextStatus: verdict.nextStatus })
   store.set(proposalId, updated)
   idempotencyLedger.set(idempotencyKey, { proposalId, actionType, result: updated })
 

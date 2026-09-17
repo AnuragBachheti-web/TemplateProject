@@ -44,7 +44,7 @@ function ActionStoryCard({ story }) {
         {story.stages.map((stage) => (
           <li key={stage.stage}>
             <Link
-              to={actionStoryPath(story.story_code, stage.stage)}
+              to={actionStoryPath(story.story_code, stage.stage, stage.proposal_id)}
               className="inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-[11.5px] font-medium text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
             >
               {STAGE_LABELS[stage.stage] ?? stage.stage}

@@ -276,15 +276,19 @@ describe('Action Story ↔ stage navigation (C, D, E, H, I)', () => {
     const tracker = container.querySelector('nav[aria-label="Stage progress"]')
     expect(tracker, 'StepTracker must render for a multi-stage story').toBeTruthy()
 
-    // C: all four stages link to the SAME story at a different stage.
+    // C: all four stages link to the SAME story at a different stage — and each at its OWN proposal
+    // id since Phase 2, so a tracker click no longer routes through StageRedirect to re-resolve
+    // something the tracker already had.
     const hrefs = [...tracker.querySelectorAll('a')].map((a) => a.getAttribute('href'))
-    for (const stage of STAGES) expect(hrefs).toContain(`/action-stories/S9.99/${stage}`)
+    for (const stage of STAGES) {
+      expect(hrefs.some((h) => h.startsWith(`/action-stories/S9.99/${stage}/`)), `no link for ${stage}`).toBe(true)
+    }
     // Not one of them points at a different story.
     expect(hrefs.every((h) => h.startsWith('/action-stories/S9.99/'))).toBe(true)
 
     // E: the current stage is the one marked aria-current.
     const current = tracker.querySelector('[aria-current="step"]')
-    expect(current.getAttribute('href')).toBe('/action-stories/S9.99/decide')
+    expect(current.getAttribute('href')).toBe('/action-stories/S9.99/decide/prop_route_test')
     expect(tracker.textContent).toContain('Step 3 of 4')
   })
 
@@ -304,9 +308,10 @@ describe('Action Story ↔ stage navigation (C, D, E, H, I)', () => {
   it('I. the sidebar lists each Action Story ONCE, never once per stage', async () => {
     await renderAt('/action-stories/S9.99/decide', proposal())
     const nav = container.querySelector('aside, nav[aria-label], ul')
+    // Five segments since Phase 2: /action-stories/:story/:stage/:proposalId.
     const links = [...container.querySelectorAll('a[href^="/action-stories/"]')]
       .map((a) => a.getAttribute('href'))
-      .filter((h) => h.split('/').length === 4)
+      .filter((h) => h.split('/').length === 5)
     const storyCodes = links.map((h) => h.split('/')[2])
     const sidebarCodes = storyCodes.filter((c) => c !== 'S9.99') // exclude the tracker's own links
     expect(nav).toBeTruthy()

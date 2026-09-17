@@ -263,25 +263,7 @@
         "title": "Approve the selected items?",
         "description": "Only the items you selected are approved. The rest stay on the slate."
       },
-      "disabledReasonBinding": "eligibility.approve_selected.blocked_reason",
-      "when": {
-        "all": [
-          {
-            "path": "eligibility.approve_selected.allowed",
-            "op": "exists"
-          },
-          {
-            "path": "eligibility.approve_selected.allowed",
-            "op": "eq",
-            "value": true
-          },
-          {
-            "path": "cardinality",
-            "op": "eq",
-            "value": "many"
-          }
-        ]
-      }
+      "disabledReasonBinding": "eligibility.approve_selected.blocked_reason"
     },
     {
       "id": "modify",

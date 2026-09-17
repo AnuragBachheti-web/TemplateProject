@@ -5,11 +5,12 @@
   "action_type": "review",
   "cardinality": "many",
   "contract_class": "standard",
-  "on_clock": false,
+  "on_clock": true,
   "mode": "suggest",
   "entitlement": "full",
   "lens": "sales",
   "persona": "keeper",
+  "deadline": "2026-09-24T09:00:00.000Z",
   "title": "Late-shipment 3.4% ↑ — 0.6pp from threshold",
   "narrative": "",
   "status_note": "Decide · 4 responses · 2 submissions for review · soonest deadline 4 days",
@@ -30,30 +31,34 @@
       "allowed": true
     },
     "snooze": {
-      "allowed": false,
-      "blocked_reason": "This proposal has no deadline to defer."
+      "allowed": true
     }
   },
   "guardrails": {
     "verdict": "within_limits",
     "checks": [
       {
+        "status": "pass",
         "label": "Legal review on IP",
         "note": "Counter-notice routed to counsel with the evidence pack. Realify does not file it."
       },
       {
+        "status": "pass",
         "label": "No metric gaming",
         "note": "Every fix here is operational or a genuine content correction. No cancellations, no pre-dispatch tracking."
       },
       {
+        "status": "pass",
         "label": "Cause addressed, not symptom",
         "note": "The handling-time buffer fixes 78% of the cause and clears the limit before day 14."
       },
       {
+        "status": "blocked",
         "label": "All submissions human-reviewed",
         "note": "Every draft is named to a reviewer. There is no dial setting that sends these automatically."
       },
       {
+        "status": "pass",
         "label": "Fix precedes the submission",
         "note": "The recovery curve is evidence. A plan of action that cites a running fix is answered differently."
       }
@@ -222,5 +227,10 @@
     ]
   },
   "status": "pending",
-  "updated_at": "2026-09-15T09:00:00.000Z"
+  "updated_at": "2026-09-15T09:00:00.000Z",
+  "impact": null,
+  "brand": null,
+  "channel": null,
+  "category": null,
+  "agent": null
 }

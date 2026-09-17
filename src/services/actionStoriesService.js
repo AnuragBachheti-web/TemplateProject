@@ -103,11 +103,18 @@ export async function resolveStageProposalId(storyCode, stageKey, { signal } = {
 async function loadStoryOutline(storyCode, { signal } = {}) {
   const { items } = await listProposals({ storyCode, limit: 50, signal })
   try {
-    return groupProposalsIntoStories(items)[0] ?? null
+    return { story: groupProposalsIntoStories(items)[0] ?? null, storyProblem: null }
   } catch (error) {
     if (!(error instanceof AmbiguousStageError)) throw error
+    // Phase 1 logged this to the console and dropped the tracker, which was its own weakest seam:
+    // an operator saw a missing navigation strip and no reason for it. The full ambiguity (both
+    // proposal ids) still goes to the console for whoever is debugging; what the page renders is
+    // copy that says what happened, with no identifiers the operator did not ask for.
     console.error(`[actionStoriesService] stage tracker unavailable — ${error.message}`)
-    return null
+    return {
+      story: null,
+      storyProblem: 'This stage has more than one proposal, so stage progress is unavailable. Open the one you want from the Action Story list.',
+    }
   }
 }
 
@@ -125,8 +132,9 @@ async function loadStoryOutline(storyCode, { signal } = {}) {
  * @param {string} proposalId - WHICH Decision Object. Explicit, from the URL; never inferred from
  *   (storyCode, stageKey), because that pair is not a unique address.
  * @param {{signal?: AbortSignal}} [options]
- * @returns {Promise<{story: object|null, decision: object, templateId: string, manifest: object}>}
- *   `story` is null when the outline could not be built; the page renders regardless.
+ * @returns {Promise<{story: object|null, storyProblem: string|null, decision: object,
+ *   templateId: string, manifest: object}>} `story` is null when the outline could not be built,
+ *   and `storyProblem` then carries the reason as operator-facing copy; the page renders regardless.
  * @throws {ActionStoriesError} NOT_FOUND / MALFORMED / NETWORK / ... via the shared taxonomy, and
  *   MALFORMED specifically when no canonical template covers the decision.
  */
@@ -134,7 +142,7 @@ export async function getStageView(storyCode, stageKey, proposalId, { signal } =
   // The proposal is fetched by ID, first and directly. No queue lookup decides what renders, so a
   // second proposal at this (story, stage) is reachable and the first is never substituted for it.
   const decision = await getProposal(proposalId, { signal })
-  const story = await loadStoryOutline(storyCode, { signal })
+  const { story, storyProblem } = await loadStoryOutline(storyCode, { signal })
 
   const resolved = resolveTemplate(decision)
   if (resolved === null) {
@@ -154,5 +162,8 @@ export async function getStageView(storyCode, stageKey, proposalId, { signal } =
 
   // `story` travels with the view so StagePage can render StepTracker without a second fetch — the
   // parent identity and its sibling stages are already in hand from the lookup above.
-  return { story, decision, templateId: resolved.templateId, manifest: resolved.manifest }
+  // `storyProblem` is operator-facing copy for a story whose outline could not be built. It travels
+  // with the view rather than being thrown, because the PROPOSAL rendered fine — only the
+  // navigation aid is missing, and the page must say so rather than quietly omit it.
+  return { story, storyProblem, decision, templateId: resolved.templateId, manifest: resolved.manifest }
 }

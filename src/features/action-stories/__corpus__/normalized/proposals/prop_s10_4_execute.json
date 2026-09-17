@@ -5,11 +5,12 @@
   "action_type": "file_claim",
   "cardinality": "many",
   "contract_class": "standard",
-  "on_clock": false,
+  "on_clock": true,
   "mode": "suggest",
   "entitlement": "full",
   "lens": "cash",
   "persona": "controller",
+  "deadline": "2026-09-24T09:00:00.000Z",
   "title": "$4,120 recoverable — $890 expires in 21 days",
   "narrative": "The expiring claim files first, then the batches. Nothing here changes a price or moves a unit — the whole downside of this stage is a marketplace saying no.",
   "status_note": "Execute · 0 of 4 stages · expiring claim files first",
@@ -30,8 +31,7 @@
       "allowed": true
     },
     "snooze": {
-      "allowed": false,
-      "blocked_reason": "This proposal has no deadline to defer."
+      "allowed": true
     }
   },
   "guardrails": {
@@ -198,5 +198,10 @@
     ]
   },
   "status": "pending",
-  "updated_at": "2026-09-15T09:00:00.000Z"
+  "updated_at": "2026-09-15T09:00:00.000Z",
+  "impact": null,
+  "brand": null,
+  "channel": null,
+  "category": null,
+  "agent": null
 }

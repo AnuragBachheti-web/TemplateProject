@@ -19,7 +19,7 @@
 import { checkOperatorAction, getOperatorAction } from './actionTypes.js'
 import { isLegalTransition } from './statusLifecycle.js'
 import { slateItemId } from './slateItem.js'
-import { deriveApproveEligibilityEntry } from './deriveEligibility.js'
+import { deriveApproveEligibilityEntry, deriveApproveSelectedEligibilityEntry } from './deriveEligibility.js'
 
 /**
  * Every check a backend must run before performing an action, in the order the contract requires.
@@ -34,13 +34,13 @@ import { deriveApproveEligibilityEntry } from './deriveEligibility.js'
  *
  * @param {object} proposal - the CURRENT stored Decision Object, never one supplied by the caller.
  * @param {string} actionType
- * @param {{reason?: string, selection?: string[], snoozeUntil?: string|null,
+ * @param {{reason?: string, reasonCode?: string, selection?: string[], snoozeUntil?: string|null,
  *          expectedUpdatedAt?: string}} [payload]
  * @returns {{ok: true, nextStatus: string} | {ok: false, status: number, message: string, userMessage: string}}
  *   `status` is the HTTP status the failure must produce, so both transports report it identically.
  */
 export function authorizeOperatorAction(proposal, actionType, payload = {}) {
-  const { reason, selection, snoozeUntil, expectedUpdatedAt } = payload
+  const { reason, reasonCode, selection, snoozeUntil, expectedUpdatedAt } = payload
 
   // 1. Authorization. A real backend resolves the caller's identity and entitlements from the
   //    session, never from the request body or the Decision Object it is about to return.
@@ -60,7 +60,7 @@ export function authorizeOperatorAction(proposal, actionType, payload = {}) {
   }
 
   // 3. Business eligibility — re-derived server-side, never taken from the client.
-  const verdict = checkOperatorAction(actionType, proposal, { reason, selection, snooze_until: snoozeUntil })
+  const verdict = checkOperatorAction(actionType, proposal, { reason, reason_code: reasonCode, selection, snooze_until: snoozeUntil })
   if (!verdict.allowed) {
     return reject(422, `Action "${actionType}" rejected: ${verdict.reason}`, verdict.reason)
   }
@@ -92,12 +92,13 @@ function reject(status, message, userMessage) {
  *
  * @param {object} proposal
  * @param {string} actionType
- * @param {{reason?: string, selection?: string[], snoozeUntil?: string|null, nextStatus?: string}} [payload]
+ * @param {{reason?: string, reasonCode?: string, selection?: string[], snoozeUntil?: string|null,
+ *          nextStatus?: string}} [payload]
  *   `nextStatus` may be passed through from the authorize result; it is otherwise re-derived from
  *   the action's own spec, which is where it came from in the first place.
  * @returns {object} a deep copy — the input is never mutated.
  */
-export function applyOperatorAction(proposal, actionType, { reason, selection, snoozeUntil, nextStatus } = {}) {
+export function applyOperatorAction(proposal, actionType, { reason, reasonCode, selection, snoozeUntil, nextStatus } = {}) {
   const next = structuredClone(proposal)
   next.status = nextStatus ?? getOperatorAction(actionType)?.resultingStatus ?? proposal.status
   next.updated_at = new Date(Date.parse(proposal.updated_at) + 1000).toISOString()
@@ -131,6 +132,12 @@ export function applyOperatorAction(proposal, actionType, { reason, selection, s
       next.eligibility = { ...next.eligibility, send_back: { allowed: false, blocked_reason: 'Already sent back to its owner.' } }
       break
     case 'dismiss':
+      // The dismissal is RECORDED, matching the note pattern `modify` and `send_back` already
+      // follow. Before this phase the reason was validated and then dropped on the floor, so no
+      // queue could ever answer "show me everything dismissed as incorrect data" — which is the
+      // only question a dismissal vocabulary exists to serve. The code is the filterable fact; the
+      // prose is what the next person reads, and both are kept.
+      next.proposal = { ...next.proposal, dismissal_reason: reasonCode, dismissal_note: reason }
       next.eligibility = denyAll('This proposal has been dismissed.')
       break
     case 'snooze':
@@ -147,7 +154,11 @@ export function applyOperatorAction(proposal, actionType, { reason, selection, s
   //
   // This is also what keeps the returned object contract-valid: the entry carries `blocked_reason`
   // whenever `allowed` is false, which is what decisionObject.js requires.
-  next.eligibility = { ...next.eligibility, approve: deriveApproveEligibilityEntry(next) }
+  next.eligibility = {
+    ...next.eligibility,
+    approve: deriveApproveEligibilityEntry(next),
+    approve_selected: deriveApproveSelectedEligibilityEntry(next),
+  }
 
   return next
 }

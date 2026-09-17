@@ -17,26 +17,30 @@ const STAGE_LABELS = {
  * Visual pattern taken directly from the reference mockups (every `S*-*.dc.html` stage screen):
  * a numbered-circle pill per step (checkmark once past, filled with the accent while current,
  * a bare number while upcoming), a short connector between them, "Step N of M" right-aligned.
+ *
+ * `stages` is the story's stage RECORDS — `{stage, proposal_id}` — not bare stage keys. Each step
+ * links to its OWN proposal, so moving between stages no longer routes through StageRedirect to
+ * re-resolve an id the tracker already had in hand.
  */
 export default function StepTracker({ code, stages, activeStageKey }) {
-  const activeIndex = stages.indexOf(activeStageKey);
+  const activeIndex = stages.findIndex((s) => s.stage === activeStageKey);
   // Pure stage-to-stage navigation (Reason -> Analyze -> ...), never a business action — that's
   // StageActionBar's job on decide/execute only. Every stage gets this, matching the reference's
   // own inline "Next" affordance next to "Step N of M"; the last stage has nothing to advance to,
   // so the button is simply absent there rather than disabled.
-  const nextStageKey = stages[activeIndex + 1];
+  const next = stages[activeIndex + 1];
 
   return (
     <nav aria-label="Stage progress" className="flex items-center gap-0">
       <ol className="flex flex-wrap items-center gap-0">
-        {stages.map((stageKey, i) => {
+        {stages.map(({ stage: stageKey, proposal_id: proposalId }, i) => {
           const isActive = stageKey === activeStageKey;
           const isPast = activeIndex > i;
 
           return (
             <li key={stageKey} className="flex items-center">
               <NavLink
-                to={actionStoryPath(code, stageKey)}
+                to={actionStoryPath(code, stageKey, proposalId)}
                 aria-current={isActive ? 'step' : undefined}
                 className={`flex h-[30px] items-center gap-2 rounded-full border pl-[3px] pr-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
                   isActive
@@ -68,9 +72,9 @@ export default function StepTracker({ code, stages, activeStageKey }) {
       <span className="ml-auto mr-3 font-mono text-[10px] uppercase tracking-[0.12em] text-rf-text-tertiary">
         Step {activeIndex + 1} of {stages.length}
       </span>
-      {nextStageKey && (
+      {next && (
         <Link
-          to={actionStoryPath(code, nextStageKey)}
+          to={actionStoryPath(code, next.stage, next.proposal_id)}
           className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-[12px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
         >
           Next

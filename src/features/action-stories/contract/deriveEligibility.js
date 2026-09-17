@@ -108,6 +108,37 @@ export function deriveApproveEligibility(decision) {
   return { allowed: true, reason: null }
 }
 
+/**
+ * Whether this Decision Object may have a SUBSET of its slate approved, and if not, why.
+ *
+ * Every guardrail, entitlement, stage and lifecycle rule that governs `approve` governs this too —
+ * partial approval is still approval — so it composes with the function above rather than restating
+ * it. Restating it is how the two would drift, and a partial approve that outlived a blocked full
+ * approve would be a hole with a smaller blast radius, not a smaller bug.
+ *
+ * The one rule that is its own: a single-item proposal has nothing to select FROM. `cardinality` is
+ * a real derived axis (see templates/selectTemplate.js) and 4 of the 105 shipped objects are `one`.
+ *
+ * Deliberately NOT here: whether anything is currently selected. That is payload state, it changes
+ * as the operator ticks rows, and it is checked by `checkOperatorAction`'s `requiresSelection` rule
+ * against the request. This function answers "may this action exist for this proposal", which is a
+ * property of the proposal alone — keeping it pure of the payload is what lets the action bar, the
+ * store and the server all call it and agree.
+ *
+ * @param {object} decision
+ * @returns {{ allowed: boolean, reason: string|null }}
+ */
+export function deriveApproveSelectedEligibility(decision) {
+  const approve = deriveApproveEligibility(decision)
+  if (!approve.allowed) return approve
+
+  if (decision.cardinality !== 'many') {
+    return blocked('Approve selected applies only to multi-item proposals.')
+  }
+
+  return { allowed: true, reason: null }
+}
+
 function blocked(reason) {
   return { allowed: false, reason }
 }
@@ -133,16 +164,38 @@ function describeStatus(status) {
  * @param {{allowed: boolean}} derived - what `deriveApproveEligibility` returned for `decision`.
  * @param {string} moduleName - the module whose gate is reporting, so the log names a call site.
  */
-export function warnOnApproveEligibilityDrift(decision, derived, moduleName) {
-  const claimed = decision?.eligibility?.approve?.allowed
+/**
+ * Already-reported drift, so one contract violation produces one log line rather than one per
+ * render. Phase 1 shipped the warning un-deduplicated and recorded the consequence: StageActionBar
+ * calls the gate once per action per render, so a violating payload on a live screen wrote to the
+ * console continuously. A warning nobody can read is a warning nobody reads.
+ *
+ * Keyed on everything that makes a violation distinct — module, proposal, action, and both values —
+ * so a DIFFERENT drift still reports, and the same drift reports once. Module-level state lives
+ * here rather than in `deriveApproveEligibility`, which stays pure (I2).
+ */
+const reportedDrift = new Set()
+
+/** Test-only. Clears the reported-drift memo so one test's warning cannot silence another's. */
+export function __resetEligibilityDriftLog() {
+  reportedDrift.clear()
+}
+
+export function warnOnEligibilityDrift(decision, derived, moduleName, actionId) {
+  const claimed = decision?.eligibility?.[actionId]?.allowed
   // Nothing to disagree with. A Decision Object is required to carry the field
   // (contract/decisionObject.js), so this is the shape a validator would already have rejected.
   if (claimed === undefined) return
   if (claimed === derived.allowed) return
 
+  const proposalId = decision?.proposal_id ?? 'unknown'
+  const key = `${moduleName}|${proposalId}|${actionId}|${JSON.stringify(claimed)}|${JSON.stringify(derived.allowed)}`
+  if (reportedDrift.has(key)) return
+  reportedDrift.add(key)
+
   console.warn(
-    `[${moduleName}] contract violation: eligibility.approve.allowed disagrees with the derived ` +
-      `value — proposal_id=${decision?.proposal_id ?? 'unknown'}, ` +
+    `[${moduleName}] contract violation: eligibility.${actionId}.allowed disagrees with the derived ` +
+      `value — proposal_id=${proposalId}, ` +
       `payload=${JSON.stringify(claimed)}, derived=${JSON.stringify(derived.allowed)}. ` +
       'Proceeding with the derived value.',
   )
@@ -158,6 +211,24 @@ export function warnOnApproveEligibilityDrift(decision, derived, moduleName) {
  * returns instead of hand-writing a value that could drift from this module's answer.
  */
 export function deriveApproveEligibilityEntry(decision) {
-  const derived = deriveApproveEligibility(decision)
+  return toEntry(deriveApproveEligibility(decision))
+}
+
+/** As above, for `approve_selected`. */
+export function deriveApproveSelectedEligibilityEntry(decision) {
+  return toEntry(deriveApproveSelectedEligibility(decision))
+}
+
+function toEntry(derived) {
   return derived.allowed ? { allowed: true } : { allowed: false, blocked_reason: derived.reason }
+}
+
+/**
+ * The derived actions, and their producers, in one place — so a consumer routes through the map
+ * rather than naming the functions, and adding a third derived action does not mean finding every
+ * `if (actionId === 'approve')` in the codebase.
+ */
+export const DERIVED_ELIGIBILITY = {
+  approve: deriveApproveEligibility,
+  approve_selected: deriveApproveSelectedEligibility,
 }

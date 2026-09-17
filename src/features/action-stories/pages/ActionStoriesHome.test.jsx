@@ -74,11 +74,13 @@ describe('B + C. each card exposes its stages as links into the SAME story', () 
     await render()
     const card = storyCards().find((li) => li.textContent.includes('S10.1'))
     const hrefs = [...card.querySelectorAll('a')].map((a) => a.getAttribute('href'))
+    // Proposal-addressed since Phase 2 — the listing already has each stage's id in hand, so it
+    // links straight to it rather than through StageRedirect.
     expect(hrefs).toEqual([
-      '/action-stories/S10.1/reason',
-      '/action-stories/S10.1/analyze',
-      '/action-stories/S10.1/decide',
-      '/action-stories/S10.1/execute',
+      '/action-stories/S10.1/reason/prop_s10_1_reason',
+      '/action-stories/S10.1/analyze/prop_s10_1_analyze',
+      '/action-stories/S10.1/decide/prop_s10_1_decide',
+      '/action-stories/S10.1/execute/prop_s10_1_execute',
     ])
   })
 

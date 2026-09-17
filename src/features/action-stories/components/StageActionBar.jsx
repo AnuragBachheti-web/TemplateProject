@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
 import { resolveActionState, resolveClickIntent } from './actionEligibility';
 import { checkOperatorAction, getOperatorAction } from '@/features/action-stories/contract/actionTypes';
+import { DISMISS_REASONS } from '@/features/action-stories/contract/decisionObject';
+import { DERIVED_ELIGIBILITY } from '@/features/action-stories/contract/deriveEligibility';
 import { isTerminal } from '@/features/action-stories/contract/statusLifecycle';
 import ConfirmDialog from '../ui/ConfirmDialog';
 import Button from '../ui/Button';
@@ -50,6 +52,9 @@ export default function StageActionBar({ actions }) {
   const [openActionId, setOpenActionId] = useState(null);
   const [reasonDraft, setReasonDraft] = useState('');
   const [snoozeDraft, setSnoozeDraft] = useState('');
+  // The coded dismissal reason. Empty until chosen, and the contract denies on empty — so the
+  // operator picks rather than the UI defaulting them into a code they did not mean.
+  const [reasonCodeDraft, setReasonCodeDraft] = useState('');
 
   const isPending = (id) => Boolean(pendingActions[id]);
   const getError = (id) => actionErrors[id] ?? null;
@@ -66,6 +71,7 @@ export default function StageActionBar({ actions }) {
   const openVerdict = openDef
     ? checkOperatorAction(openDef.id, decision, {
         reason: reasonDraft,
+        reason_code: reasonCodeDraft,
         selection,
         snooze_until: snoozeIso,
       })
@@ -83,6 +89,7 @@ export default function StageActionBar({ actions }) {
       setOpenActionId(actionDef.id);
       setReasonDraft('');
       setSnoozeDraft('');
+      setReasonCodeDraft('');
     } else {
       settle(actionDef.id, { selection }, state.label);
     }
@@ -101,6 +108,7 @@ export default function StageActionBar({ actions }) {
       setOpenActionId(null);
       setReasonDraft('');
       setSnoozeDraft('');
+      setReasonCodeDraft('');
       notify(`${label} completed.`, { tone: 'success' });
     } else {
       const err = getError(actionId);
@@ -112,7 +120,12 @@ export default function StageActionBar({ actions }) {
     if (!openDef || !openVerdict?.allowed) return;
     settle(
       openDef.id,
-      { reason: reasonDraft.trim() || undefined, selection, snoozeUntil: snoozeIso ?? undefined },
+      {
+        reason: reasonDraft.trim() || undefined,
+        reasonCode: reasonCodeDraft || undefined,
+        selection,
+        snoozeUntil: snoozeIso ?? undefined,
+      },
       openState.label,
     );
   }
@@ -121,6 +134,7 @@ export default function StageActionBar({ actions }) {
     setOpenActionId(null);
     setReasonDraft('');
     setSnoozeDraft('');
+    setReasonCodeDraft('');
   }
 
   return (
@@ -135,7 +149,14 @@ export default function StageActionBar({ actions }) {
         //  - `blocked`: the backend says this operator may not do this (eligibility) — show why.
         //  - payload-incomplete: the operator simply has not selected/typed anything yet — let them
         //    click through to the dialog that collects it.
-        const blocked = !state.enabled;
+        // For a DERIVED action the proposal-level answer is available on its own, without a payload
+        // — that is what makes the producer pure. Asking it separately is what distinguishes "this
+        // action does not apply to this proposal" from "the operator has not ticked anything yet".
+        // Without it, `approve_selected` on a one-item proposal looked like the latter and rendered a
+        // live button, because the template condition that used to hide it is gone.
+        const derive = DERIVED_ELIGIBILITY[actionDef.id];
+        const proposalLevel = derive ? derive(decision) : null;
+        const blocked = !state.enabled || (proposalLevel !== null && !proposalLevel.allowed);
         const verdict = checkOperatorAction(actionDef.id, decision, { reason: reasonDraft, selection });
         const needsPayload = !blocked && !verdict.allowed && Boolean(spec?.requiresSelection || spec?.reasonRequired || spec?.requiresSnoozeUntil);
         const hardBlocked = !blocked && !verdict.allowed && !needsPayload;
@@ -155,7 +176,7 @@ export default function StageActionBar({ actions }) {
             {error && <Alert tone="critical" compact>{error.userMessage}</Alert>}
             {unusable && !error && (
               <Alert tone="warning" compact>
-                {state.disabledReason || verdict.reason || `${state.label} isn't available for this proposal.`}
+                {state.disabledReason || proposalLevel?.reason || verdict.reason || `${state.label} isn't available for this proposal.`}
               </Alert>
             )}
             <Button
@@ -189,6 +210,27 @@ export default function StageActionBar({ actions }) {
           loading={openPendingNow}
           confirmDisabled={!openVerdict?.allowed}
         >
+          {/* The coded reason, for the one action that has to be filterable afterwards. Rendered
+              from the action's own contract spec, so this component still knows nothing about what
+              "dismiss" means — it renders a picker because the spec says a code is required. */}
+          {openSpec?.requiresReasonCode && (
+            <label className="mt-4 block text-[12.5px] font-medium text-rf-text-secondary">
+              Reason code (required)
+              <select
+                value={reasonCodeDraft}
+                onChange={(event) => setReasonCodeDraft(event.target.value)}
+                className="mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-[13px] text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+              >
+                <option value="">Choose one…</option>
+                {DISMISS_REASONS.map((code) => (
+                  <option key={code} value={code}>
+                    {code.replace(/_/g, ' ')}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+
           {openState.reasonEnabled && (
             <label className="mt-4 block text-[12.5px] font-medium text-rf-text-secondary">
               {openState.reasonLabel}

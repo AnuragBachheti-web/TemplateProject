@@ -5,11 +5,12 @@
   "action_type": "review",
   "cardinality": "many",
   "contract_class": "standard",
-  "on_clock": false,
+  "on_clock": true,
   "mode": "suggest",
   "entitlement": "full",
   "lens": "sales",
   "persona": "prospector",
+  "deadline": "2026-09-24T17:00:00.000Z",
   "title": "TikTok Shop category opened — fit evaluation",
   "narrative": "",
   "status_note": "Decide · pilot · 15 SKUs · breakeven M10 · exposure $92.5K",
@@ -32,30 +33,34 @@
       "allowed": true
     },
     "snooze": {
-      "allowed": false,
-      "blocked_reason": "This proposal has no deadline to defer."
+      "allowed": true
     }
   },
   "guardrails": {
     "verdict": "beyond_limits",
     "checks": [
       {
+        "status": "fail",
         "label": "Exposure appetite",
         "note": "$92.5K exceeds the $75K cap. A bigger budget is not one of the options."
       },
       {
+        "status": "pass",
         "label": "Breakeven floor",
         "note": "Breakeven M10, inside the M12 floor."
       },
       {
+        "status": "pass",
         "label": "MAP posture",
         "note": "No seller-funded discounts below MAP. Platform-funded promotional slots only."
       },
       {
+        "status": "pass",
         "label": "Integration capacity",
         "note": "Capped at $14K on the existing connector, half the Q4 allowance."
       },
       {
+        "status": "fail",
         "label": "Reversibility",
         "note": "The wind-down path has to be acknowledged before this can be approved."
       }
@@ -263,5 +268,10 @@
     ]
   },
   "status": "pending",
-  "updated_at": "2026-09-15T09:00:00.000Z"
+  "updated_at": "2026-09-15T09:00:00.000Z",
+  "impact": null,
+  "brand": null,
+  "channel": null,
+  "category": null,
+  "agent": null
 }

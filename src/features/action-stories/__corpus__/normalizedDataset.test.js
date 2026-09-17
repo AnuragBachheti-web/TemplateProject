@@ -190,7 +190,9 @@ function walk(value, visit) {
 describe('6. numeric values are typed correctly', () => {
   it('types impact as {value, unit} on every record that has one', () => {
     for (const d of dataset) {
-      if (d.impact === undefined) continue
+      // `null` is a legal typed value since Phase 2 (required-and-nullable, ruling R1): the field
+      // is always present, and null states that the reference gives no figure.
+      if (d.impact === undefined || d.impact === null) continue
       expect(typeof d.impact.value, d.proposal_id).toBe('number')
       expect(VALUE_UNITS, d.proposal_id).toContain(d.impact.unit)
     }

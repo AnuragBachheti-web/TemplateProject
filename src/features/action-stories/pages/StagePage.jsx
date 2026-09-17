@@ -9,6 +9,7 @@ import StepTracker from '@/features/action-stories/components/StepTracker';
 import StageRenderer from '@/features/action-stories/components/StageRenderer';
 import StageActionBar from '@/features/action-stories/components/StageActionBar';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
+import Alert from '@/features/action-stories/ui/Alert';
 
 const STATUS_TONE = {
   pending: 'bg-rf-surface-sunken text-rf-text-secondary',
@@ -32,7 +33,7 @@ function deadlineLabel(deadline, now = Date.now()) {
  * `workflow.name` twice, as a pill and again as the `<h1>` — plus impact, confidence, mode and
  * deadline, each exactly once, formatted here from typed values.
  */
-function ProposalHeader({ decision, story }) {
+function ProposalHeader({ decision, story, storyProblem }) {
   const due = decision.on_clock && decision.deadline ? deadlineLabel(decision.deadline) : null;
 
   return (
@@ -81,9 +82,18 @@ function ProposalHeader({ decision, story }) {
       {/* The parent/child relationship, made navigable. StepTracker already existed and already took
           (code, stages, activeStageKey) — restoring the two-segment route restored it verbatim; it
           was orphaned, not obsolete. Every step links to the SAME Action Story at another stage. */}
-      {story && story.stageKeys.length > 1 && (
+      {story && story.stages.length > 1 && (
         <div className="mt-3 border-t border-rf-border-subtle pt-2.5">
-          <StepTracker code={story.story_code} stages={story.stageKeys} activeStageKey={decision.stage} />
+          <StepTracker code={story.story_code} stages={story.stages} activeStageKey={decision.stage} />
+        </div>
+      )}
+
+      {/* A story whose outline could not be built says so. The proposal above renders fine — it was
+          addressed by id — but an operator seeing no stage strip deserves the reason rather than a
+          silently shorter header. */}
+      {storyProblem && (
+        <div className="mt-3 border-t border-rf-border-subtle pt-2.5">
+          <Alert tone="warning" compact>{storyProblem}</Alert>
         </div>
       )}
     </header>
@@ -138,7 +148,7 @@ function StagePageContent({ storyCode, stageKey, proposalId, onRetry }) {
   // than from the fetch result is what makes the whole page update after an action with no
   // re-fetch, no optimistic patch and no local mirror of server state.
   const current = decision ?? state.view.decision;
-  const { manifest, story } = state.view;
+  const { manifest, story, storyProblem } = state.view;
 
   // The one generic hook into the renderer: whichever block the template marked `selectable` gets
   // selection props. Nothing here or in StageRenderer knows that block is a slate, or that selection
@@ -157,7 +167,7 @@ function StagePageContent({ storyCode, stageKey, proposalId, onRetry }) {
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-page flex-col">
-      <ProposalHeader decision={current} story={story} />
+      <ProposalHeader decision={current} story={story} storyProblem={storyProblem} />
       <MockTransportNotice />
 
       {/* The narrative is deliberately NOT rendered here. It is a template slot (`narrative`, see

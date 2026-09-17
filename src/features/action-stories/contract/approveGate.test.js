@@ -11,7 +11,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
 import { checkOperatorAction } from './actionTypes'
-import { deriveApproveEligibility } from './deriveEligibility'
+import { deriveApproveEligibility, __resetEligibilityDriftLog } from './deriveEligibility'
 import { useActionStoriesStore } from '@/store/useActionStoriesStore'
 import { dispatchAction } from '@/services/actionStoriesMutations'
 import { __resetMockApi, __seedProposal } from '@/services/mockDecisionApi'
@@ -36,6 +36,10 @@ function t1Payload(overrides = {}) {
 let warnSpy
 
 beforeEach(() => {
+  // The drift warning is de-duplicated per (module, proposal, action, values) since Phase 2, so one
+  // test's warning would otherwise silence another's. Cleared here rather than the memo being
+  // dropped, because "one log line per real violation" is the behaviour that was asked for.
+  __resetEligibilityDriftLog()
   __resetMockApi()
   useActionStoriesStore.getState().clearDecision()
   warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
@@ -121,9 +125,11 @@ describe('T7 — exactly one contract-violation warning per gate call', () => {
     expect(warnSpy).toHaveBeenCalledTimes(1)
   })
 
-  it('does not warn for the other five operator actions, which Phase 1 does not derive', () => {
+  it('does not warn for the operator actions that are NOT derived', () => {
+    // `approve_selected` left this list in Phase 2 — it is derived now, so a payload disagreement on
+    // it warns too, and its own coverage is in dismissAndApproveSelected.test.js's T12.
     __seedProposal(t1Payload())
-    for (const id of ['approve_selected', 'modify', 'send_back', 'dismiss', 'snooze']) {
+    for (const id of ['modify', 'send_back', 'dismiss', 'snooze']) {
       checkOperatorAction(id, t1Payload(), { reason: 'a sufficiently long reason' })
     }
     expect(warnSpy).not.toHaveBeenCalled()

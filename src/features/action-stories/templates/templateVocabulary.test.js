@@ -107,9 +107,14 @@ describe('density budgets — templates must not become the new dumping ground',
     expect(TEMPLATE_REGISTRY['locked.v1'].actions).toEqual([])
   })
 
+  // Derived at runtime by contract/deriveEligibility.js — `approve` since Phase 1, `approve_selected`
+  // since Phase 2. A template `when` on either would be a second producer of a value that must have
+  // exactly one.
+  const DERIVED_ACTIONS = ['approve', 'approve_selected']
+
   it('every PAYLOAD-DRIVEN action gates on explicit eligibility, fail-closed', () => {
     for (const [id, template] of templates) {
-      for (const action of (template.actions ?? []).filter((a) => a.id !== 'approve')) {
+      for (const action of (template.actions ?? []).filter((a) => !DERIVED_ACTIONS.includes(a.id))) {
         const json = JSON.stringify(action.when)
         expect(action.when, `${id}.${action.id} has no when gate`).toBeTruthy()
         // `exists` + `eq true`, never `ne` — `ne` is satisfied by a MISSING value, which is exactly
@@ -121,14 +126,14 @@ describe('density budgets — templates must not become the new dumping ground',
     }
   })
 
-  it('approve declares NO eligibility condition — a template condition would be a second producer', () => {
+  it('the derived actions declare NO eligibility condition — that would be a second producer', () => {
     // `approve` is derived at runtime by contract/deriveEligibility.js. A `when` reading
     // `eligibility.approve.allowed` would be exactly the payload-trusting read this phase deleted:
     // it passed a payload whose guardrail verdict said beyond_limits but whose eligibility claimed
     // allowed. There must be no path back to that, in any template.
     for (const [id, template] of templates) {
-      for (const action of (template.actions ?? []).filter((a) => a.id === 'approve')) {
-        expect(action.when, `${id}.approve must not gate on a template condition`).toBeUndefined()
+      for (const action of (template.actions ?? []).filter((a) => DERIVED_ACTIONS.includes(a.id))) {
+        expect(action.when, `${id}.${action.id} must not gate on a template condition`).toBeUndefined()
       }
     }
   })
@@ -140,6 +145,9 @@ describe('density budgets — templates must not become the new dumping ground',
       expect(JSON.stringify(template), `${id} reads the payload's own approve eligibility`).not.toContain(
         'eligibility.approve.allowed',
       )
+      expect(JSON.stringify(template), `${id} reads the payload's own approve_selected eligibility`).not.toContain(
+        'eligibility.approve_selected.allowed',
+      )
     }
   })
 
@@ -148,9 +156,9 @@ describe('density budgets — templates must not become the new dumping ground',
     // `eligibility.approve.blocked_reason`. The DECISION is derived; the MESSAGE is still the
     // corpus's, which is why an operator reads why rather than generic derived text.
     for (const [id, template] of templates) {
-      for (const action of (template.actions ?? []).filter((a) => a.id === 'approve')) {
-        expect(action.disabledReasonBinding, `${id}.approve lost its reason copy`).toBe(
-          'eligibility.approve.blocked_reason',
+      for (const action of (template.actions ?? []).filter((a) => DERIVED_ACTIONS.includes(a.id))) {
+        expect(action.disabledReasonBinding, `${id}.${action.id} lost its reason copy`).toBe(
+          `eligibility.${action.id}.blocked_reason`,
         )
       }
     }
