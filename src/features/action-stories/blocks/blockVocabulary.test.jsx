@@ -148,11 +148,13 @@ describe('T24 — each new blockType renders real shipped data on the counts F s
     expect(broken, `${broken.length} object(s) failed`).toEqual([])
   })
 
-  it('adds exactly four blockTypes and no more (I6)', () => {
-    // 14 were declared before this phase, 11 of them slot-targeted. Four new concepts, not parity.
-    expect(BLOCK_TYPES).toHaveLength(18)
+  it('the vocabulary grew by concepts, not toward parity (I6)', () => {
+    // 14 were declared before Phase 3B, 11 of them slot-targeted. 3B added four concepts and 3C
+    // added `timeline`, so 19 declared and 16 slot-targeted — against 51 slots. The gap between 16
+    // and 51 is the point: slots share blocks when they share a concept.
+    expect(BLOCK_TYPES).toHaveLength(19)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
-    expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(15)
+    expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(16)
   })
 })
 

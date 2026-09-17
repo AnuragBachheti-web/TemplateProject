@@ -8,10 +8,17 @@ import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
  * A MEASURED FIGURE AGAINST ITS LABEL — a rollup, a set of inputs, a provenance count, a progress
  * tally. One concept, four slots (I6):
  *
- *   totals_rows    23 objects   the stage's rollup ("90-day revenue  +$41K")
- *   progress_rows  15 objects   the execution tally ("Stages complete  0 of 4")
- *   inputs         12 objects   what the analysis read ("Orders · 90 days  18,402 rows")
- *   basis           2 objects   provenance for the confidence figure
+ *   totals_rows             23 objects  the stage's rollup ("90-day revenue  +$41K")
+ *   progress_rows           15 objects  the execution tally ("Stages complete  0 of 4")
+ *   inputs                  12 objects  what the analysis read ("Orders · 90 days  18,402 rows")
+ *   basis                    2 objects  provenance for the confidence figure
+ *   recommendation_metrics   9 objects  the figures behind the recommendation (Phase 3C)
+ *
+ * `recommendation_metrics` joined in Phase 3C: the reference renders `heroMetrics` as an eyebrow, a
+ * 20px value and a prose note (S10.2-3-decide:209-213) — byte-for-byte the same pattern as `recon`
+ * (S10.1-2-analyze:286-288), which is the metric grid the visual comparison was actually asking for.
+ * It adds a fifth SLOT but no new objects: all 9 are decide-stage and already rendered a statList
+ * via `totals_rows` or `basis`.
  *
  * `basis` at 2 objects does NOT get its own block. It is the same concept as the other three, and a
  * blockType per slot is the 835-slotName accident arriving through the data door — which is exactly
@@ -61,9 +68,12 @@ export default function StatListBlock({ slotName, data, compact = false }) {
           key={i}
           label={row.label}
           value={row.value}
-          // `meta` and `detail` are the same concept under two names across the four slots; the
-          // percentage is appended as its own suffix rather than becoming a second unlabelled line.
-          meta={row.meta ?? row.detail ?? (row.pct !== undefined && row.pct !== null ? `${row.pct}%` : undefined)}
+          // `meta`, `detail` and `note` are the same concept under three names across the five
+          // slots; the percentage is appended as its own suffix rather than becoming a second
+          // unlabelled line. `note` joined in Phase 3C for `recommendation_metrics`, where all 39
+          // rows carry one and the chain would otherwise have dropped it (R30) — additive, because
+          // no other statList slot carries `note`.
+          meta={row.meta ?? row.detail ?? row.note ?? (row.pct !== undefined && row.pct !== null ? `${row.pct}%` : undefined)}
         />
       ))}
     </div>

@@ -153,18 +153,19 @@ describe('T13 — one object per template renders unchanged below the header', (
     }
   })
 
-  it('the block registry is exactly the 14 pre-3B types plus the four 3B concepts', async () => {
+  it('the block registry is exactly the 14 pre-3B types plus the five 3B/3C concepts', async () => {
     // Was "no registry entry changed this phase" — true of Phase 2, and the thing Phase 3B exists to
-    // change. Pinned by NAME rather than by count so a fifth block cannot arrive unnoticed: I6's
+    // change. Pinned by NAME rather than by count so a sixth block cannot arrive unnoticed: I6's
     // whole point is that 51 slots are served by adding the few missing concepts, not by approaching
-    // parity. The four are checklist, statList, cardSet and roster.
+    // parity. Four arrived in 3B — checklist, statList, cardSet, roster — and `timeline` in 3C, for
+    // the chronology a two-column table was asserting wrongly.
     const { BLOCK_REGISTRY } = await import('./blocks/index.js')
     const { SLOT_VOCABULARY } = await import('./templates/slotVocabulary.js')
 
     expect(Object.keys(BLOCK_REGISTRY).sort()).toEqual([
       'barChart', 'cardSet', 'checklist', 'flag', 'gauge', 'heatmapGrid', 'itemQueue',
       'labelValueList', 'lineChart', 'number', 'object', 'roster', 'scatterChart', 'slider',
-      'statList', 'table', 'text', 'waterfallChart',
+      'statList', 'table', 'text', 'timeline', 'waterfallChart',
     ])
     // The SLOT count is unchanged: this phase re-points slots, it does not add them.
     expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)

@@ -46,7 +46,7 @@ export const SLOT_VOCABULARY = Object.freeze({
   // date-formatting block for a value the header already formats would have been the wrong one.
 
   // ---- reason.v1 -----------------------------------------------------------------------------
-  trigger: { binding: 'proposal.trigger', blockType: 'table', tier: 'conditional', note: '"What raised this" — the events that queued the proposal. Reference `trigger` (14 of 26 stories).' },
+  trigger: { binding: 'proposal.trigger', blockType: 'timeline', tier: 'conditional', note: '"What raised this" — the events that queued the proposal. Reference `trigger` (14 of 26 stories).' },
   policy: { binding: 'proposal.policy', blockType: 'table', tier: 'core', note: 'The governing targets/limits. Reference `policy`/`targets`/`rules`/`standards`/`thresholds`/`slas`.' },
   constraints: { binding: 'proposal.constraints', blockType: 'labelValueList', tier: 'core', note: '"Locked — owned by another lens": what is NOT negotiable in Decide. Reference `locked` (19 of 26) — the single most frequent reason-stage concept, previously dropped whole.' },
   inputs: { binding: 'proposal.inputs', blockType: 'statList', tier: 'conditional', note: 'Data the recommendation was computed from. Reference `inputs`/`sources`/`evidence`.' },
@@ -71,7 +71,7 @@ export const SLOT_VOCABULARY = Object.freeze({
   recommendation_identity: { binding: 'proposal.recommendation_identity', blockType: 'text', tier: 'conditional', note: '1/6. WHICH recommendation this is ("Balanced"). Reference `slateName`/`slateMeta`.' },
   recommendation: { binding: 'proposal.recommendation', blockType: 'text', tier: 'core', note: '2/6. The recommended decision, stated once. Reference `heroTitle`/`heroLine` — NEVER `approveLabel`, which is the CTA button\'s text.' },
   recommendation_detail: { binding: 'proposal.recommendation_detail', blockType: 'text', tier: 'conditional', note: '3/6. The reasoning sentence under the statement. Reference `heroSub`/`heroBody`/`tradeoff`.' },
-  recommendation_metrics: { binding: 'proposal.recommendation_metrics', blockType: 'table', tier: 'conditional', note: '4/6. The figures behind the recommendation, each with its P10-P90 `range` and its caveat `note`. Reference `heroMetrics`.' },
+  recommendation_metrics: { binding: 'proposal.recommendation_metrics', blockType: 'statList', tier: 'conditional', note: '4/6. The figures behind the recommendation, each with its P10-P90 `range` and its caveat `note`. Reference `heroMetrics`.' },
   composition: { binding: 'proposal.composition', blockType: 'barChart', tier: 'conditional', note: '5/6. How the recommendation splits across its categories. Reference `moveBar`, normalised to {label, value} so the EXISTING BarChartBlock carries it — a bar per category is the composition, so no new block type was added.' },
   basis: { binding: 'proposal.basis', blockType: 'statList', tier: 'conditional', note: '6/6. The provenance figures behind the confidence. Fills the `provenance` section, which the audit found declared and permanently empty.' },
 
@@ -94,7 +94,7 @@ export const SLOT_VOCABULARY = Object.freeze({
   ledger_note: { binding: 'execution.ledger_note', blockType: 'text', tier: 'conditional', note: 'What the ledger entry will record. Reference `ledgerCopy` (8 of 26).' },
   execution_targets: { binding: 'execution.targets', blockType: 'itemQueue', tier: 'conditional', note: 'Systems/channels being WRITTEN TO. Reference `dests`/`tray`/`orders` — never `monitors`, which is `verification`; sourcing both from the same key rendered the same list twice on 12 of 21 execute screens.' },
   rollback_note: { binding: 'execution.rollback_note', blockType: 'text', tier: 'conditional', note: 'Whether rollback is available yet, and from when. Reference `rbCopy`/`rbHint`.' },
-  flags: { binding: 'execution.flags', blockType: 'table', tier: 'conditional', note: 'Thresholds that raise an exception on this execution. Reference `flags` ({when, rule, action}).' },
+  flags: { binding: 'execution.flags', blockType: 'timeline', tier: 'conditional', note: 'Thresholds that raise an exception on this execution. Reference `flags` ({when, rule, action}).' },
   arming: { binding: 'execution.arming', blockType: 'text', tier: 'conditional', note: 'The armed safety on this execution ("Auto-pause on decay"). Reference `armCopy` (12 of 26).' },
   bulk_note: { binding: 'execution.bulk_note', blockType: 'text', tier: 'conditional', note: 'Why the bulk writes go out together — the envelope the batch protects. Reference `allNote` (10 of 26).' },
 

@@ -130,8 +130,17 @@ describe('representative screens show the reference\'s own business content', ()
     expect(text).toContain('Balanced') // 1. identity
     expect(text).toContain('Keep 162 · grow 18 · reduce 22 · exit 12') // 2. statement
     expect(text).toContain('Grow the proven, cut the depth on the tail') // 3. rationale
-    expect(text).toContain('+$17K to +$66K') // 4. metrics keep their P10–P90 range
-    expect(text).toContain('P10–P90 on the full slate') // …and their caveat note
+    // 4. The metrics keep their caveat note. Their P10–P90 `range` does NOT render any more, and
+    //    that is a ruled trade rather than an oversight: Phase 3C re-pointed
+    //    `recommendation_metrics` from `table` to `statList`, because the reference renders
+    //    heroMetrics as an eyebrow + a 20px value + a prose note (S10.2-3-decide:209-213) rather
+    //    than as columns. `statList` shows label/value/meta, so `range` (3 of 39 rows) and `delta`
+    //    (3 of 39) have nowhere to go. Ruling R30 accepted that explicitly — do not fold them into
+    //    `note` and do not invent a slot — and Phase 3C's deliverable H records the counts.
+    expect(s91.proposal.recommendation_metrics.some((r) => r.range === '+$17K to +$66K'),
+      'the corpus still carries the range; only its rendering was dropped').toBe(true)
+    expect(text, 'range must not be quietly folded into another field (R30)').not.toContain('+$17K to +$66K')
+    expect(text).toContain('P10–P90 on the full slate') // …and their caveat note DOES render
     expect(text).toContain('Order rows behind the role classification') // 6. basis, in the Basis section
     // 5. the composition bar is a chart, so its own labels are asserted on the data it receives —
     // jsdom gives Recharts no layout box to render into.

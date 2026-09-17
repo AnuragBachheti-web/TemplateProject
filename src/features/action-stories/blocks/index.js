@@ -18,6 +18,9 @@ import ChecklistBlock from './ChecklistBlock';
 import StatListBlock from './StatListBlock';
 import CardSetBlock from './CardSetBlock';
 import RosterBlock from './RosterBlock';
+// Phase 3C: a chronology. Found by comparing the rendered app against the reference build — the
+// reference renders `trigger` as a stacked eyebrow + prose, never as a two-column table.
+import TimelineBlock from './TimelineBlock';
 
 /**
  * blockType -> component. Adding a new block type later is one entry here plus one component
@@ -42,4 +45,5 @@ export const BLOCK_REGISTRY = {
   statList: StatListBlock,
   cardSet: CardSetBlock,
   roster: RosterBlock,
+  timeline: TimelineBlock,
 };

@@ -30,6 +30,8 @@ export const BLOCK_TYPES = [
   'statList', // measured figures: an array of { label, value?, meta?, pct?, detail? }
   'cardSet', // named choices/groups: an array of { name|title|label, sub|detail|note?, figures..., rows? }
   'roster', // credited identities: an array of { name, initials?, role?, lead? }
+  // ---- Phase 3C: the concept a two-column table was asserting wrongly.
+  'timeline', // a chronology: an array of { when?, what|rule, action? } — a time label FOR a description
 ]
 
 function isPlainObject(v) {
@@ -381,6 +383,33 @@ export function validateCardSet(data) {
   return problems
 }
 
+/**
+ * A CHRONOLOGY. Every row must carry its own identity — via `what`/`rule`, or failing that one of
+ * ROW_LABEL_KEYS — because a timeline entry with a timestamp and nothing under it is a date, not an
+ * event. `when` is NOT required: `proposal.trigger` on prop_s9_11_reason is sourced from
+ * `opportunity` and has none, which is a claim-ledger misclassification the corpus freeze leaves in
+ * place, and rejecting it here would fail a shipped object rather than surface the real defect.
+ */
+export function validateTimeline(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((item, i) => {
+    if (!isPlainObject(item)) {
+      problems.push(`item ${i}: expected an object, got ${typeof item}`)
+      return
+    }
+    const hasBody = ['what', 'rule'].some((k) => typeof item[k] === 'string' && item[k].trim() !== '')
+    if (!hasBody && rowLabelOf(item) === undefined) {
+      problems.push(`item ${i}: needs a "what"/"rule" or a row label — a timestamp alone is not an event`)
+    }
+    if (item.when !== undefined && typeof item.when !== 'string') {
+      problems.push(`item ${i}: "when" must be a string when present`)
+    }
+  })
+  return problems
+}
+
 /** Credited identities. `name` is required: a roster row with no name is not an identity. */
 export function validateRoster(data) {
   if (data === undefined) return []
@@ -412,6 +441,7 @@ const VALIDATORS = {
   statList: validateStatList,
   cardSet: validateCardSet,
   roster: validateRoster,
+  timeline: validateTimeline,
 }
 
 /**
