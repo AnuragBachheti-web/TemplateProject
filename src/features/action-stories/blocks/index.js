@@ -12,6 +12,12 @@ import HeatmapGridBlock from './HeatmapGridBlock';
 import ObjectBlock from './ObjectBlock';
 import SliderBlock from './SliderBlock';
 import GaugeBlock from './GaugeBlock';
+// Phase 3B: four new CONCEPTS, not parity with the 51 slots (I6). Each owns a group of slots that
+// were previously rendering through a block that meant something else — see each component's header.
+import ChecklistBlock from './ChecklistBlock';
+import StatListBlock from './StatListBlock';
+import CardSetBlock from './CardSetBlock';
+import RosterBlock from './RosterBlock';
 
 /**
  * blockType -> component. Adding a new block type later is one entry here plus one component
@@ -32,4 +38,8 @@ export const BLOCK_REGISTRY = {
   object: ObjectBlock,
   slider: SliderBlock,
   gauge: GaugeBlock,
+  checklist: ChecklistBlock,
+  statList: StatListBlock,
+  cardSet: CardSetBlock,
+  roster: RosterBlock,
 };

@@ -7,6 +7,7 @@ import { humanizeSlotName } from '@/features/action-stories/blocks/humanizeSlotN
 import { findNearestStep } from '@/features/action-stories/blocks/sliderSteps';
 import BlockErrorBoundary from '@/features/action-stories/blocks/BlockErrorBoundary';
 import { composeSections } from '@/features/action-stories/layout/composeSections';
+import { DEPTH_PANE, depthAttrs } from '@/features/action-stories/blocks/renderDepth';
 import StageSections from '@/features/action-stories/components/StageSections';
 
 /** A block's binding is always `data.<rawKey>` — this is the fixture's own field name, independent
@@ -220,5 +221,12 @@ export default function StageRenderer({ manifest, fixture, blockProps }) {
     );
   }
 
-  return <StageSections sections={sections} nodesBySlot={nodesBySlot} />;
+  // `data-block-depth` is emitted at each of the four levels (renderDepth.js) so the render tree's
+  // real depth is observable from the DOM rather than asserted from a constant. A cap that holds
+  // because nothing reaches it proves nothing, which is why T26 also requires depth 4 to be REACHED.
+  return (
+    <div {...depthAttrs(DEPTH_PANE)}>
+      <StageSections sections={sections} nodesBySlot={nodesBySlot} />
+    </div>
+  );
 }

@@ -96,32 +96,52 @@ describe('T13 — one object per template renders unchanged below the header', (
     expect(actual, `${templateId} render changed`).toBe(fs.readFileSync(file, 'utf8'))
   })
 
-  it('decide.slate.v1 changed by EXACTLY the guardrail statuses, and nothing else', () => {
-    // THE ONE REVIEWED RENDER DIFF IN THIS PHASE, recorded rather than absorbed.
+  it('decide.slate.v1 vs the PHASE 1 render: content preserved, the enum token gone', () => {
+    // WHAT THIS ASSERTION USED TO BE, and why it changed.
     //
-    // Ruling R4 put `status` on every guardrails.checks row. LabelValueListBlock renders a row's
-    // keys generically, so the new key renders — the pane gains "· warn" / "· pass" on S9.1's three
-    // check rows. That is a change below the header, which I6 forbids, and the conflict is real:
-    // R4 is the later and more specific instruction, and the alternatives were worse. Hiding the
-    // field in the shared decorative-key list would mean the pass/fail still could not render and
-    // would mislabel a semantic field as presentation; not populating it would leave R4's contract
-    // field empty. Neither is better than one reviewed line of new, correct information.
+    // Phase 2 put a `status` enum on every guardrails.checks row, and LabelValueListBlock rendered a
+    // row's keys generically — so the pane gained "· warn". There was no block that could render a
+    // status, so Phase 2 pinned that one-line delta rather than fix it, and this test asserted the
+    // ONLY difference from Phase 1 was the inserted status tokens.
     //
-    // So the Phase 1 render is kept alongside the new one, and this test pins the delta: every
-    // difference must be an inserted status token. If anything ELSE moves, the two files stop
-    // differing by only that and this fails — which is the guarantee I6 was actually asking for.
+    // Phase 3B built the block. The tokens are gone, replaced by a StatusBadge carrying the semantic
+    // word, so "exactly the inserted tokens" is no longer a true description of the delta and
+    // keeping it would mean asserting a state the phase deliberately ended.
+    //
+    // What replaces it is the guarantee that actually matters across both phases: every piece of
+    // CONTENT the Phase 1 pane showed is still shown, and the raw enum never renders as text. The
+    // Phase 1 render stays committed as the reference for that comparison — the delta is still
+    // pinned, just against a richer end state.
     const decision = dataset.find((d) => d.proposal_id === 'prop_s9_1_decide')
     const { text } = renderPane(decision)
     const now = normalise(text)
-    const before = fs.readFileSync(path.join(SNAPSHOT_DIR, 'decide.slate.v1.phase1.txt'), 'utf8')
+    const phase1 = fs.readFileSync(path.join(SNAPSHOT_DIR, 'decide.slate.v1.phase1.txt'), 'utf8')
 
-    const statuses = decision.guardrails.checks.map((r) => r.status)
-    expect(statuses).toEqual(['warn', 'pass', 'pass'])
+    // Every check's identity and note survived the move from labelValueList to checklist.
+    for (const row of decision.guardrails.checks) {
+      if (row.label) expect(now, `lost check label: ${row.label}`).toContain(row.label)
+      if (row.note) expect(now, `lost check note`).toContain(row.note)
+    }
 
-    // Removing the inserted tokens must reproduce the Phase 1 render byte for byte.
-    let stripped = now
-    for (const status of statuses) stripped = stripped.replace(`· ${status}`, '')
-    expect(stripped, 'decide.slate.v1 changed by more than the guardrail statuses').toBe(before)
+    // The figures the Phase 1 pane showed are all still present.
+    for (const figure of ['+$41K', '+$25K', '$28K', '2.31', '$440K', '5.6%', '18,402', '187 of 214']) {
+      expect(now, `lost figure ${figure}`).toContain(figure)
+      expect(phase1).toContain(figure)
+    }
+
+    // The Phase 1 reference PREDATES the status field — Phase 2 is what added it — so it never
+    // contained the token either. What it does contain is the bare `· 96` percentage, which is the
+    // same check row rendered before any status existed. Phase 3B keeps that number and adds the
+    // badge, so all three states are accounted for:
+    //
+    //   Phase 1   "GMROI target ≥ 2.42.31· 96Note…"        no status at all
+    //   Phase 2   "GMROI target ≥ 2.42.31· warn· 96Note…"  status leaked as a text token
+    //   Phase 3B  "Warning GMROI target ≥ 2.42.3196% …"    status is a badge, pct is a percentage
+    expect(phase1, 'the Phase 1 reference predates the status field').not.toContain('· warn')
+    expect(phase1, 'the Phase 1 reference should carry the bare pct').toContain('· 96')
+    expect(now, 'the raw enum is still rendering as text').not.toContain('· warn')
+    expect(now, 'the badge should carry the human label').toContain('Warning')
+    expect(now, 'the pct should render as a percentage').toContain('96%')
   })
 
   it('the panes are substantial, so an empty render cannot pass as "unchanged"', () => {
@@ -133,18 +153,20 @@ describe('T13 — one object per template renders unchanged below the header', (
     }
   })
 
-  it('no block component, registry entry or template slot changed this phase (C1/I6)', async () => {
-    // Asserted structurally rather than by render: the slot vocabulary and the block registry are
-    // Phase 3's, and a snapshot alone would not catch a slot ADDED to a template that happens to
-    // resolve to nothing on these four specimens.
+  it('the block registry is exactly the 14 pre-3B types plus the four 3B concepts', async () => {
+    // Was "no registry entry changed this phase" — true of Phase 2, and the thing Phase 3B exists to
+    // change. Pinned by NAME rather than by count so a fifth block cannot arrive unnoticed: I6's
+    // whole point is that 51 slots are served by adding the few missing concepts, not by approaching
+    // parity. The four are checklist, statList, cardSet and roster.
     const { BLOCK_REGISTRY } = await import('./blocks/index.js')
     const { SLOT_VOCABULARY } = await import('./templates/slotVocabulary.js')
 
-    // The 14 registered block types, pinned by name. Phase 3 adds to this list; Phase 2 must not.
     expect(Object.keys(BLOCK_REGISTRY).sort()).toEqual([
-      'barChart', 'flag', 'gauge', 'heatmapGrid', 'itemQueue', 'labelValueList', 'lineChart',
-      'number', 'object', 'scatterChart', 'slider', 'table', 'text', 'waterfallChart',
+      'barChart', 'cardSet', 'checklist', 'flag', 'gauge', 'heatmapGrid', 'itemQueue',
+      'labelValueList', 'lineChart', 'number', 'object', 'roster', 'scatterChart', 'slider',
+      'statList', 'table', 'text', 'waterfallChart',
     ])
+    // The SLOT count is unchanged: this phase re-points slots, it does not add them.
     expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
   })
 

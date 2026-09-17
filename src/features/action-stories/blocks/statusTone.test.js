@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { severityTone } from './severityTone';
+import { severityTone } from './statusTone';
 
 describe('severityTone — uses rf-status-* design tokens (regression: was hardcoded Tailwind literals)', () => {
   it('maps every recognized severity word to an rf-status-* or rf-* token class, never a raw palette literal', () => {

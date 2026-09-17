@@ -38,6 +38,8 @@
  * whatever full-width node the block itself produced (its own BlockCard, unless it's a rail member,
  * which already rendered `compact`).
  */
+
+import { DEPTH_SECTION, depthAttrs } from '@/features/action-stories/blocks/renderDepth';
 function SectionHeading({ title, className }) {
   if (!title) return null;
   return (
@@ -210,7 +212,9 @@ export default function StageSections({ sections, nodesBySlot }) {
       {hasRail && (
         <aside aria-label="Context" className="flex min-w-0 flex-col gap-3 lg:order-2">
           {rail.map((section, i) => (
-            <RailPanel key={section.id ?? `rail-${i}`} section={section} nodesBySlot={nodesBySlot} />
+            <div key={section.id ?? `rail-${i}`} {...depthAttrs(DEPTH_SECTION)}>
+              <RailPanel section={section} nodesBySlot={nodesBySlot} />
+            </div>
           ))}
         </aside>
       )}
@@ -218,12 +222,19 @@ export default function StageSections({ sections, nodesBySlot }) {
       <div className="flex min-w-0 flex-col gap-4 lg:order-1">
         {main.map((section, i) =>
           section.title ? (
-            <section key={section.id ?? `main-${i}`} aria-label={section.title} className="flex flex-col gap-2">
+            <section
+              key={section.id ?? `main-${i}`}
+              aria-label={section.title}
+              className="flex flex-col gap-2"
+              {...depthAttrs(DEPTH_SECTION)}
+            >
               <SectionHeading title={section.title} />
               <MainRows rows={section.rows} nodesBySlot={nodesBySlot} />
             </section>
           ) : (
-            <MainRows key={`unsectioned-${section.id ?? i}`} rows={section.rows} nodesBySlot={nodesBySlot} />
+            <div key={`unsectioned-${section.id ?? i}`} {...depthAttrs(DEPTH_SECTION)}>
+              <MainRows rows={section.rows} nodesBySlot={nodesBySlot} />
+            </div>
           ),
         )}
       </div>

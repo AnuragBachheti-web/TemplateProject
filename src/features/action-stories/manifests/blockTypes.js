@@ -25,6 +25,11 @@ export const BLOCK_TYPES = [
   'object', // a single nested object that isn't any of the above (a lone badge/descriptor)
   'slider', // an interactive { min, max, value } control, optionally with precomputed `steps`
   'gauge', // rows measured against a threshold: an array of { label?, value|pct, threshold|limit|ceiling|floor|target|cap }
+  // ---- Phase 3B: four concepts the slot vocabulary already had and the block vocabulary did not.
+  'checklist', // governance checks: an array of { status, label|text, value?, note? } — status is an enum
+  'statList', // measured figures: an array of { label, value?, meta?, pct?, detail? }
+  'cardSet', // named choices/groups: an array of { name|title|label, sub|detail|note?, figures..., rows? }
+  'roster', // credited identities: an array of { name, initials?, role?, lead? }
 ]
 
 function isPlainObject(v) {
@@ -317,6 +322,77 @@ export function validateGauge(data) {
   return problems
 }
 
+/**
+ * A GOVERNANCE CHECKLIST row set. `status` is REQUIRED and must be one of the contract's five —
+ * the enum is the whole reason this block exists, so a row without one is a contract violation here
+ * rather than a row that renders without a badge. Identity comes from `label` OR `text` (58 and 27
+ * rows respectively), which is why this reuses rowLabelOf rather than requiring `label`.
+ *
+ * The enum is restated here rather than imported from contract/decisionObject.js on purpose: the
+ * manifest layer validates SHAPE and must not depend on the runtime business contract, the same
+ * separation validateWaterfallChart's own comment keeps. contractExtension.test.js pins the two
+ * lists against each other.
+ */
+const CHECK_STATUSES = ['pass', 'warn', 'fail', 'blocked', 'info']
+
+export function validateChecklist(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((item, i) => {
+    if (!isPlainObject(item)) {
+      problems.push(`item ${i}: expected an object, got ${typeof item}`)
+      return
+    }
+    if (!CHECK_STATUSES.includes(item.status)) {
+      problems.push(`item ${i}: "status" must be one of ${CHECK_STATUSES.join('/')}`)
+    }
+    if (rowLabelOf(item) === undefined) {
+      problems.push(`item ${i}: missing a row label (one of ${ROW_LABEL_KEYS.join('/')})`)
+    }
+  })
+  return problems
+}
+
+/** Measured figures. Every row needs its own identity; a value-less row is a label with a gap. */
+export function validateStatList(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((item, i) => {
+    if (!isPlainObject(item)) problems.push(`item ${i}: expected an object, got ${typeof item}`)
+    else if (rowLabelOf(item) === undefined) problems.push(`item ${i}: missing a row label`)
+  })
+  return problems
+}
+
+/**
+ * Named choices or groups. Deliberately as permissive as validateTable about the rest of the row:
+ * the three slots that share this block name their parts differently, and CardSetBlock declares
+ * that mapping itself. What is required is that a card can be NAMED — an unnamed card is a box.
+ */
+export function validateCardSet(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((item, i) => {
+    if (!isPlainObject(item)) problems.push(`item ${i}: expected an object, got ${typeof item}`)
+  })
+  return problems
+}
+
+/** Credited identities. `name` is required: a roster row with no name is not an identity. */
+export function validateRoster(data) {
+  if (data === undefined) return []
+  if (!Array.isArray(data)) return [`expected an array, got ${typeof data}`]
+  const problems = []
+  data.forEach((item, i) => {
+    if (!isPlainObject(item)) problems.push(`item ${i}: expected an object, got ${typeof item}`)
+    else if (typeof item.name !== 'string' || item.name.trim() === '') problems.push(`item ${i}: missing a string "name"`)
+  })
+  return problems
+}
+
 const VALIDATORS = {
   text: validateText,
   number: validateNumber,
@@ -332,6 +408,10 @@ const VALIDATORS = {
   object: validateObject,
   slider: validateSlider,
   gauge: validateGauge,
+  checklist: validateChecklist,
+  statList: validateStatList,
+  cardSet: validateCardSet,
+  roster: validateRoster,
 }
 
 /**
