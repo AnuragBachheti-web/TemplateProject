@@ -293,6 +293,101 @@ function validateEligibilityEntry(entry, field) {
   return problems
 }
 
+/**
+ * THE CONSTRAINT / THRESHOLD SHAPES Phase 3A claims. Validated when present and omitted when the
+ * reference does not state them, which is the `proposal.*` convention throughout — `proposal.policy`
+ * has always been absent rather than null on the objects without it, and two conventions for one
+ * idea is how a contract starts needing a decoder ring.
+ *
+ * `proposal.policy`           labelled governing constraints. Rows identify themselves, but NOT
+ *                             necessarily by `label`: three reason screens use `{sev, sla, def}`,
+ *                             `{term, definition}` and `{rule, setting, why}`. So the rule is "an
+ *                             object with at least one own key", not "has a label".
+ * `proposal.matrix`           a grid of `{label, cells[]}`. A cell's `share`, when present, must be
+ *                             a finite NUMBER, and a row whose cells ALL carry one must sum to 100 —
+ *                             that is what makes it a split rather than two independent bar widths,
+ *                             and it is the one numeric threshold-family claim in this phase.
+ * `proposal.threshold_control` a real numeric range: max > min, step > 0, min <= value <= max. A
+ *                             control whose bounds are inverted or whose value sits outside them is
+ *                             decoration, and fail-closed here means rejecting it rather than
+ *                             rendering a slider that cannot mean anything.
+ */
+function validateProposalConstraints(proposal) {
+  const problems = []
+
+  if (proposal.policy !== undefined) {
+    if (!Array.isArray(proposal.policy) || proposal.policy.length === 0) {
+      problems.push('"proposal.policy" must be a non-empty array when present')
+    } else {
+      proposal.policy.forEach((row, i) => {
+        if (!isPlainObject(row) || Object.keys(row).length === 0) {
+          problems.push(`"proposal.policy[${i}]" must be a non-empty object`)
+        }
+      })
+    }
+  }
+
+  if (proposal.matrix !== undefined) {
+    if (!Array.isArray(proposal.matrix) || proposal.matrix.length === 0) {
+      problems.push('"proposal.matrix" must be a non-empty array when present')
+    } else {
+      proposal.matrix.forEach((row, i) => {
+        if (!isPlainObject(row)) {
+          problems.push(`"proposal.matrix[${i}]" must be an object`)
+          return
+        }
+        if (row.cells !== undefined && !Array.isArray(row.cells)) {
+          problems.push(`"proposal.matrix[${i}].cells" must be an array when present`)
+        } else if (Array.isArray(row.cells)) {
+          const shares = []
+          row.cells.forEach((cell, c) => {
+            if (!isPlainObject(cell)) {
+              problems.push(`"proposal.matrix[${i}].cells[${c}]" must be an object`)
+              return
+            }
+            if (cell.share !== undefined) {
+              if (typeof cell.share === 'number' && Number.isFinite(cell.share)) shares.push(cell.share)
+              else problems.push(`"proposal.matrix[${i}].cells[${c}].share" must be a finite number when present`)
+            }
+          })
+          // A split that does not sum to 100 is not a split. Only checked when EVERY cell carries a
+          // share, so the other matrix shape (rfmGrid's count/ltv cells) is unaffected.
+          if (shares.length > 1 && shares.length === row.cells.length) {
+            const total = shares.reduce((a, b) => a + b, 0)
+            if (total !== 100) {
+              problems.push(`"proposal.matrix[${i}]" cell shares must sum to 100 (a two-way split), got ${total}`)
+            }
+          }
+        }
+      })
+    }
+  }
+
+  if (proposal.threshold_control !== undefined) {
+    const c = proposal.threshold_control
+    if (!isPlainObject(c)) {
+      problems.push('"proposal.threshold_control" must be an object of shape { min, max, step, value }')
+    } else {
+      for (const key of ['min', 'max', 'step', 'value']) {
+        if (typeof c[key] !== 'number' || !Number.isFinite(c[key])) {
+          problems.push(`"proposal.threshold_control.${key}" must be a finite number`)
+        }
+      }
+      if (typeof c.min === 'number' && typeof c.max === 'number' && !(c.max > c.min)) {
+        problems.push('"proposal.threshold_control" must have max greater than min')
+      }
+      if (typeof c.step === 'number' && !(c.step > 0)) {
+        problems.push('"proposal.threshold_control.step" must be greater than zero')
+      }
+      if (typeof c.value === 'number' && typeof c.min === 'number' && typeof c.max === 'number' && (c.value < c.min || c.value > c.max)) {
+        problems.push('"proposal.threshold_control.value" must lie within min..max')
+      }
+    }
+  }
+
+  return problems
+}
+
 // ---- the validator ----------------------------------------------------------------------------
 
 /**
@@ -357,6 +452,7 @@ export function validateDecisionObject(decision, { operatorActions = OPERATOR_AC
 
   // the decision payload
   if (!isPlainObject(decision.proposal)) problems.push('"proposal" must be an object')
+  else problems.push(...validateProposalConstraints(decision.proposal))
 
   // ---- required-and-nullable business fields (R1) ------------------------------------------------
   //
@@ -425,6 +521,16 @@ export function validateDecisionObject(decision, { operatorActions = OPERATOR_AC
   for (const key of ['totals', 'execution', 'context']) {
     if (decision[key] !== undefined && !isPlainObject(decision[key])) {
       problems.push(`"${key}" must be an object when present`)
+    }
+  }
+
+  // R16. `totals` is ABSENT or it has rows — never `{}`. It was an empty object on 82 of 105,
+  // because `dropUndefined({rows: undefined})` returns `{}` and `{}` is not `undefined`, so any
+  // "populated on 105/105" claim about it was technically true and substantively false. A hollow key
+  // is worse than an absent one: it answers the question wrongly instead of admitting it cannot.
+  if (decision.totals !== undefined && isPlainObject(decision.totals)) {
+    if (!Array.isArray(decision.totals.rows) || decision.totals.rows.length === 0) {
+      problems.push('"totals" must carry a non-empty "rows" array when present, or be omitted entirely')
     }
   }
 

@@ -91,7 +91,15 @@ describe('2. every canonical field resolves from a real reference source for tha
     mode: ['execLabel'],
 
     'proposal.trigger': ['opportunity', 'trigger'],
-    'proposal.policy': ['policy', 'rules', 'slas', 'standards', 'targets', 'terms', 'thresholds'],
+    // Phase 3A folded four more names for the SAME concept into this path (ruling R14): `limits`
+    // (S10.6/decide), `capa` (S9.12/decide), `capEffects` (S9.13/decide) and `capacity`
+    // (S9.3/analyze). The slot's own note already described them — "the governing targets/limits" —
+    // and `policy` was previously picked in reasonProposal only, so decide/analyze screens carrying
+    // the concept under a different name lost the rows entirely.
+    'proposal.policy': [
+      'policy', 'rules', 'slas', 'standards', 'targets', 'terms', 'thresholds',
+      'limits', 'capa', 'capEffects', 'capacity', 'floors', 'offerLimits',
+    ],
     'proposal.constraints': ['locked', 'protected'],
     'proposal.inputs': ['evidence', 'inputs', 'sources'],
     'proposal.roles': ['clusters', 'cohorts', 'roles'],
@@ -102,7 +110,9 @@ describe('2. every canonical field resolves from a real reference source for tha
     'proposal.distribution': ['ladders', 'points'],
     'proposal.bridge': ['bars'],
     'proposal.coverage': ['bars'],
-    'proposal.matrix': ['rfmGrid'],
+    // `heatRows` joined in Phase 3A: the classifier never typed it as a heatmapGrid, so the one
+    // object in the corpus with a heat grid resolved this path to null.
+    'proposal.matrix': ['rfmGrid', 'heatRows'],
     'proposal.detail_rows': ['classifier', 'conflicts', 'desks', 'disposition', 'feed', 'fit', 'flows', 'gaps', 'lanes', 'list', 'queries', 'rows', 'sorts', 'splits', 'weeks'],
     // The second evidence board and the entity list: one-off key names on every screen (the 835-name
     // sprawl), resolved from the ORIGINAL classifier's own table/itemQueue verdict on whatever the

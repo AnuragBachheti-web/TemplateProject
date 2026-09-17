@@ -96,31 +96,25 @@ function isGeometryKey(key) {
   return (String(key).match(CAMEL) ?? []).some((w) => GEOMETRY_WORDS.has(w.toLowerCase()))
 }
 
-/**
- * NUMERIC FIELDS THE NAME-BASED RULES WRONGLY CLAIM. Measured, not guessed: across all 105 raw
- * fixtures exactly four pct/threshold-ish keys with numeric values are stripped by name, and only
- * two of them are data.
- *
- *   widthPct  x7  caught by isGeometryKey on the word "width". It is a PERCENTAGE — how full a bar
- *                 is — and the percentage is the measurement the bar depicts, not its layout.
- *   markPct   x4  caught by isDecorativeKey on the word "mark". It is where a threshold marker sits
- *                 on a scale, which is a number the reader needs; "mark" is doing double duty in
- *                 DECORATIVE_WORDS, where it means a chart glyph.
- *
- * targetLx / targetLy are deliberately NOT here. They are SVG label coordinates and the geometry
- * rule is right about them.
- *
- * SCOPE NOTE. This fixes the 11 values lost to the STRIP rule. It does not, and cannot, fix the far
- * larger set lost to the CLAIM LEDGER — `limit` x21, `pctFrom` x21, `pctTo` x21, `bbTarget` x17,
- * `targetPct` x10, `floorPct` x8, `nowPct` x8, `cvrTarget` x8, `mapFloor` x7 and ~40 more, none of
- * which any canonical field's candidate list names, so `clean` never sees them. Claiming those is a
- * data-modelling change and belongs with the block that needs them; the full inventory is in this
- * phase's report as a Phase 3 input.
- */
-const NUMERIC_DESPITE_NAME = new Set(['widthPct', 'markPct'])
-
-function isBannedKey(key, value) {
-  if (NUMERIC_DESPITE_NAME.has(key) && typeof value === 'number') return false
+// WHY THERE IS NO "NUMERIC DESPITE ITS NAME" EXEMPTION HERE.
+//
+// Phase 2 added one, for `widthPct` and `markPct`, on the argument that a numeric percentage IS the
+// measurement a bar depicts rather than its layout. Phase 3A disproved that and ruling R15 removed
+// it. The disproof is arithmetic, not opinion:
+//
+//   metrics[0]   limit "4.0%" floor "3.0%" today "3.4%"  ->  pct 68, floorPct 60, limitPct 80
+//                today 3.4 / 5.0 * 100 = 68        the axis maximum, 5.0%, is a design choice
+//   surfaceProj  now "19%" proj "26%"               ->  nowPct 42, projPct 58, targetPct 78
+//                now 19 / 45 * 100 = 42            `now` is 19 and `nowPct` is 42
+//   sel.band     low "$44" high "$92" our "$68"     ->  lowPct 18, widthPct 62, ourPct 52
+//                reconstructs on an axis window of roughly $30-$107
+//
+// `now` cannot be both 19 and 42, so these are `value / chosenAxisMax * 100` — a layout decision
+// wearing a number's clothes. 546 occurrences of the family are geometry and stay stripped; the
+// semantic values they were computed from exist only as formatted display strings, which R2 forbids
+// recovering by parsing. __corpus__/claimedThresholds.test.js's T20 asserts their absence so the
+// exemption cannot return without a ruling.
+function isBannedKey(key) {
   return (
     BANNED_KEYS.has(key)
     || String(key).startsWith('__')
@@ -145,7 +139,7 @@ function clean(value) {
   if (value !== null && typeof value === 'object') {
     const out = {}
     for (const [k, v] of Object.entries(value)) {
-      if (isBannedKey(k, v)) continue
+      if (isBannedKey(k)) continue
       if (OPACITY_KEYS.has(k) && typeof v === 'number') continue
       // A `pct` is always a percentage MAGNITUDE, and the reference quotes several of them ("96").
       // Typed here so no consumer has to decide whether this particular percentage arrived as text
@@ -350,7 +344,7 @@ function reasonProposal(data, ctx, rec) {
     trigger: pick(data, ['trigger', 'opportunity'], isObjArray, rec, 'proposal.trigger'),
     // "What Realify holds itself to". NEVER `headline`/`metrics`/`setup`, which the old shape scan
     // reached for on 11 of 21 screens.
-    policy: pick(data, ['policy', 'targets', 'rules', 'standards', 'thresholds', 'slas', 'terms'], isObjArray, rec, 'proposal.policy'),
+    policy: pick(data, CONSTRAINT_KEYS, isObjArray, rec, 'proposal.policy'),
     // "Locked — owned by another lens": constraints that are not negotiable in Decide. The single
     // most frequent reason-stage concept in the reference (19 of 26) and previously dropped whole.
     constraints: pick(data, ['locked', 'protected', 'exceptions'], isLabelled, rec, 'proposal.constraints'),
@@ -402,7 +396,7 @@ function analyzeProposal(data, stageId, narrative, rec) {
     distribution: pickByBlockType(data, stageId, 'scatterChart', isTypedSeries, rec, 'proposal.distribution'),
     bridge: bridgeOf(data, stageId, rec),
     coverage: pickByBlockType(data, stageId, 'gauge', isObjArray, rec, 'proposal.coverage'),
-    matrix: pickByBlockType(data, stageId, 'heatmapGrid', isObjArray, rec, 'proposal.matrix'),
+    matrix: matrixOf(data, stageId, rec),
     // Row-level evidence. Named sources first; the classifier's own table verdict second, guarded
     // so a chart-named key (`bars`, `heat`, `zoneBars`) can never become "the evidence table".
     detail_rows: pickThenClassify(
@@ -422,8 +416,38 @@ function analyzeProposal(data, stageId, narrative, rec) {
     // name differs on every screen, so it comes from the original classifier's `itemQueue` verdict
     // (its own name for "richer, variable-shape per-item objects") on what the claim ledger leaves.
     entities: pickByBlockType(data, stageId, 'itemQueue', isObjArray, rec, 'proposal.entities', { excludeChartNamed: true, excludeFurniture: true }),
+    // The governing constraints, resolved LAST on purpose. `secondary_rows` above is a broad
+    // classifier fallback that already owns `capacity` on S9.9/analyze, and taking it would move
+    // rendered content off a slot that displays it — additive only, so policy sees what is left.
+    policy: pick(data, CONSTRAINT_KEYS, isObjArray, rec, 'proposal.policy'),
   })
 }
+
+/**
+ * THE GOVERNING CONSTRAINTS a proposal operates under, by every name the reference gives them.
+ *
+ * `proposal.policy`'s own slot note already described this concept — "The governing targets/limits.
+ * Reference `policy`/`targets`/`rules`/`standards`/`thresholds`/`slas`" — but it was only ever
+ * picked in `reasonProposal`, so the decide- and analyze-stage screens carrying the same concept
+ * under a different name had nowhere to put it and the rows vanished entirely.
+ *
+ * Folded here rather than given a field each (I6): `limits` (S10.6/decide), `capa` (S9.12/decide),
+ * `capEffects` (S9.13/decide) and `capacity` (S9.3/analyze) are four names for one idea — a labelled
+ * constraint the decision is measured against. A canonical path per raw key is the 835-slotName
+ * accident returning through the data door.
+ *
+ * `caps` is deliberately NOT here: `{n: "3", tag: "tighter", bg, border, fg}` has no label and is a
+ * styled chip set, not a constraint row. `proposal.alternatives` already claims it where it means a
+ * scenario switcher.
+ */
+// Picked with `isObjArray`, deliberately NOT `isLabelled`: three reason screens state their
+// constraints with a domain-specific identity key rather than `label` — S9.5 `{sev, sla, def}`,
+// S10.1 `{term, definition}`, S10.4 `{rule, setting, why}`. Requiring `label`/`name`/`text` dropped
+// all three, which would have been a content regression on a slot that renders.
+const CONSTRAINT_KEYS = [
+  'policy', 'targets', 'rules', 'standards', 'thresholds', 'slas', 'terms',
+  'limits', 'capa', 'capEffects', 'capacity', 'floors', 'offerLimits',
+]
 
 /**
  * The names the reference gives its DECISION ITEM COLLECTION, one per screen. Every entry here was
@@ -506,6 +530,11 @@ function decideProposal(data, stageId, rec) {
     // The selectable groups of items, and the drill-down of whichever is focused.
     item_groups: pick(data, ['groups'], isObjArray, rec, 'proposal.item_groups'),
     focus_rows: pick(data, ['focusRows'], isTabular, rec, 'proposal.focus_rows'),
+    // The governing constraints this decision is measured against — `limits` (S10.6),
+    // `capa` (S9.12), `capEffects` (S9.13). Same canonical path the reason stage has always used.
+    policy: pick(data, CONSTRAINT_KEYS, isObjArray, rec, 'proposal.policy'),
+    // The one place the reference states a threshold as NUMBERS rather than a formatted string.
+    threshold_control: thresholdControlOf(data, rec),
     // THE DECISION SLATE, resolved last so every more specific concept has already claimed its key.
     slate: slateOf(data, stageId, rec),
   })
@@ -518,6 +547,65 @@ function decideProposal(data, stageId, rec) {
  * the composition, and the audit's own rule is to reuse an existing block wherever it can carry the
  * semantics.
  */
+/**
+ * The heat grid. `eastPct`/`westPct` are a two-way split of the same orders — they sum to 100 on
+ * every row — so unlike the rest of the `*Pct` family they ARE a measurement rather than a bar
+ * width, and they are the one numeric claim this phase makes.
+ *
+ * `heatRows` is added as a NAMED candidate because the classifier never typed it as a heatmapGrid,
+ * which is why `proposal.matrix` resolved to null on the only object in the corpus with a heat grid.
+ * The classifier fallback is kept behind it, unchanged.
+ *
+ * WHY THE SHARES BECOME CELLS RATHER THAN TWO ROW-LEVEL FIELDS. `proposal.matrix` is bound to the
+ * heatmapGrid block, whose row contract is `{label, cells[]}` — and the other object that already
+ * has a matrix (`prop_s9_13_analyze`, from `rfmGrid`) is exactly that shape. Emitting flat
+ * `east_share`/`west_share` keys would render a placeholder on a live slot AND make one canonical
+ * path mean two different shapes on two objects, which is the drift I6 exists to prevent. A
+ * per-zone split across two directions IS a two-column grid, so that is what it becomes.
+ *
+ * `direction` is the raw key name (`eastPct` -> east), not a business term invented here.
+ */
+function matrixOf(data, stageId, rec) {
+  const rows = pickThenClassify(data, ['heatRows'], isObjArray, stageId, 'heatmapGrid', rec, 'proposal.matrix')
+  if (!isObjArray(rows)) return undefined
+  return rows.map((row) => {
+    const { eastPct, westPct, ...rest } = row
+    const split = [
+      typeof eastPct === 'number' ? { direction: 'east', share: eastPct } : undefined,
+      typeof westPct === 'number' ? { direction: 'west', share: westPct } : undefined,
+    ].filter((c) => c !== undefined)
+    if (split.length === 0) return row
+    return dropUndefined({ ...rest, cells: split })
+  })
+}
+
+/**
+ * A threshold stated as NUMBERS — the only instance in the corpus (`rlThreshold` on S9.12/decide,
+ * `{min: 6, max: 24, step: 1, value: 14}`).
+ *
+ * Read straight off the raw object rather than through `clean`, because `rlThreshold` also carries a
+ * `steps` array of whole pre-computed screen states and a `dependencies` list of key names; neither
+ * is a threshold, and neither belongs in a payload. Only the four numbers cross.
+ *
+ * All four are required together: a control with a bound missing is not a narrower control, it is an
+ * unusable one, so a partial `rlThreshold` yields nothing rather than a half-specified range.
+ */
+function thresholdControlOf(data, rec) {
+  const raw = data.rlThreshold
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) {
+    rec.record('proposal.threshold_control', null)
+    return undefined
+  }
+  const { min, max, step, value } = raw
+  const allNumbers = [min, max, step, value].every((n) => typeof n === 'number' && Number.isFinite(n))
+  if (!allNumbers || !(max > min) || !(step > 0) || value < min || value > max) {
+    rec.record('proposal.threshold_control', null)
+    return undefined
+  }
+  rec.record('proposal.threshold_control', 'rlThreshold')
+  return { min, max, step, value }
+}
+
 function compositionOf(data, rec) {
   const rows = clean(data.moveBar)
   if (!isObjArray(rows) || !rows.every((r) => isStr(r.label) && Number.isFinite(Number(r.n)))) {
@@ -947,7 +1035,12 @@ function main() {
       // previously dropped in full.
       const statusNote = pick(data, ['footStatus', 'footerStatus'], isStr, rec, 'status_note')
       const guardrails = guardrailsOf(data, rec)
-      const totals = dropUndefined({ rows: pick(data, ['totals', 'rollup', 'summary', 'liveStats'], isLabelled, rec, 'totals.rows') })
+      // R16. `dropUndefined({rows: undefined})` returns `{}`, which is not `undefined`, so the outer
+      // dropUndefined kept it and `totals` was an empty object on 82 of 105 — a key that made a
+      // 105/105 population claim technically true and substantively false. Emitted only when it has
+      // content; absent otherwise, which is what the other 82 objects actually mean.
+      const totalsRows = pick(data, ['totals', 'rollup', 'summary', 'liveStats'], isLabelled, rec, 'totals.rows')
+      const totals = totalsRows === undefined ? undefined : { rows: totalsRows }
 
       const proposal =
         stage === 'reason' ? reasonProposal(data, ctx, rec)
