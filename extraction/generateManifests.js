@@ -219,6 +219,10 @@ function findBlock(blocks, slotName) {
  * decide/execute stages): an action with no `when` is unconditionally enabled, identical to the old
  * default.
  */
+// KNOWN FAIL-OPEN SECOND PRODUCER, REFERENCE-ONLY — NOT TO BE REVIVED. The `ne` conditions below
+// treat absence as permission, the opposite of the runtime rule; output goes to __corpus__/manifests
+// and is read by tests alone, never by the app. Logged for Phase 4; the runtime answer is
+// contract/deriveEligibility.js's.
 function buildActionsForStage(stageKey, blocks) {
   if (stageKey !== 'decide' && stageKey !== 'execute') return null
 

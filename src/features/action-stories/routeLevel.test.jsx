@@ -79,10 +79,16 @@ async function renderAt(path, decision, { stages } = {}) {
   await act(async () => {
     root.render(<App />)
   })
-  // Let the fetch + the mock transport's own latency settle.
-  await act(async () => {
-    await new Promise((r) => setTimeout(r, 400))
-  })
+  // Let the fetch + the mock transport's own latency settle. TWO settles, because these URLs are
+  // the two-segment shape: StageRedirect resolves the proposal id on the first, StagePage fetches
+  // the proposal on the second. The route still renders exactly what it always did — it now arrives
+  // via the compatibility redirect (C4), which is the point of keeping this file pointed at the old
+  // URLs rather than rewriting every path in it.
+  for (let hop = 0; hop < 2; hop += 1) {
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 400))
+    })
+  }
 }
 
 function clickByText(text) {
@@ -313,6 +319,11 @@ describe('Action Story ↔ stage navigation (C, D, E, H, I)', () => {
   it('F. the same story renders a DIFFERENT canonical template per stage', async () => {
     const seen = {}
     for (const stage of STAGES) {
+      // Reset the transport each pass. `seedStory` moves `prop_route_test` onto whichever stage is
+      // under test and gives the others generated ids, so seeding four times without a reset leaves
+      // S9.99 holding TWO proposals at one stage — which the grouping now (correctly) refuses to
+      // resolve. The accumulation was always wrong; it used to be papered over by first-match.
+      __resetMockApi()
       await renderAt(`/action-stories/S9.99/${stage}`, proposal({ stage }))
       seen[stage] = useActionStoriesStore.getState().decision.stage
       act(() => root.unmount())

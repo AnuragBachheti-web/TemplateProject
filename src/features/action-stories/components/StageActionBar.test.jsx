@@ -3,7 +3,7 @@
 // Suite 5, at the component level: the action bar must stay GENERIC. It renders whatever the
 // template declares, gates on the Decision Object, and contains no knowledge of what any action id
 // means — this file's job is to keep that true as the six real actions were added.
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 
@@ -115,22 +115,53 @@ describe('eligibility drives what an operator can reach', () => {
       proposal({
         eligibility: {
           ...proposal().eligibility,
+          modify: { allowed: false, blocked_reason: 'Capital ceiling exceeded.' },
+        },
+      }),
+    )
+    render()
+    expect(container.textContent).toContain('Capital ceiling exceeded.')
+    expect(labels()).not.toContain('Modify')
+    expect(labels()).toContain('Unavailable')
+  })
+
+  it('disables an action whose eligibility entry is MISSING (fail-closed at the UI too)', () => {
+    const eligibility = { ...proposal().eligibility }
+    delete eligibility.modify
+    useActionStoriesStore.getState().setDecision(proposal({ eligibility }))
+    render()
+    expect(labels()).not.toContain('Modify')
+  })
+
+  it('disables Approve from the DERIVED verdict, not from the payload that claims it is allowed', () => {
+    // The latent bug, at the UI: guardrails beyond limits, `eligibility.approve.allowed: true`.
+    // Before approve was derived, this rendered a live Approve button.
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    useActionStoriesStore.getState().setDecision(
+      proposal({
+        guardrails: { verdict: 'beyond_limits' },
+        eligibility: { ...proposal().eligibility, approve: { allowed: true } },
+      }),
+    )
+    render()
+    expect(labels()).not.toContain('Approve')
+    expect(labels()).toContain('Unavailable')
+    warn.mockRestore()
+  })
+
+  it('still shows the payload\'s blocked_reason as the Approve copy when the derivation blocks', () => {
+    // Copy is not a gate. The decision is derived; the explanation is still the corpus's own prose.
+    useActionStoriesStore.getState().setDecision(
+      proposal({
+        guardrails: { verdict: 'beyond_limits' },
+        eligibility: {
+          ...proposal().eligibility,
           approve: { allowed: false, blocked_reason: 'Capital ceiling exceeded.' },
         },
       }),
     )
     render()
     expect(container.textContent).toContain('Capital ceiling exceeded.')
-    expect(labels()).not.toContain('Approve')
-    expect(labels()).toContain('Unavailable')
-  })
-
-  it('disables an action whose eligibility entry is MISSING (fail-closed at the UI too)', () => {
-    const eligibility = { ...proposal().eligibility }
-    delete eligibility.approve
-    useActionStoriesStore.getState().setDecision(proposal({ eligibility }))
-    render()
-    expect(labels()).not.toContain('Approve')
   })
 
   it('hides Approve-selected entirely for a single-item proposal', () => {

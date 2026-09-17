@@ -100,7 +100,7 @@ function MockTransportNotice() {
   );
 }
 
-function StagePageContent({ storyCode, stageKey, onRetry }) {
+function StagePageContent({ storyCode, stageKey, proposalId, onRetry }) {
   const [state, setState] = useState({ status: 'loading', view: null, error: null });
   const decision = useActionStoriesStore((s) => s.decision);
   const setDecision = useActionStoriesStore((s) => s.setDecision);
@@ -112,7 +112,7 @@ function StagePageContent({ storyCode, stageKey, onRetry }) {
     let cancelled = false;
     const controller = new AbortController();
 
-    getStageView(storyCode, stageKey, { signal: controller.signal })
+    getStageView(storyCode, stageKey, proposalId, { signal: controller.signal })
       .then((view) => {
         if (cancelled) return;
         setDecision(view.decision);
@@ -128,7 +128,7 @@ function StagePageContent({ storyCode, stageKey, onRetry }) {
       controller.abort();
       clearDecision();
     };
-  }, [storyCode, stageKey, setDecision, clearDecision]);
+  }, [storyCode, stageKey, proposalId, setDecision, clearDecision]);
 
   if (state.status === 'loading') return <LoadingState label={`Loading ${storyCode} · ${stageKey}…`} />;
   if (state.status === 'error') return <AsyncErrorState error={state.error} onRetry={onRetry} />;
@@ -176,18 +176,22 @@ function StagePageContent({ storyCode, stageKey, onRetry }) {
 }
 
 /**
- * `key={storyCode/stageKey/retryToken}` forces a clean remount per story+stage, so navigating starts this
- * component's state at "loading" again rather than needing an effect to reset it mid-lifecycle.
+ * `key={storyCode/stageKey/proposalId/retryToken}` forces a clean remount per addressed proposal, so
+ * navigating starts this component's state at "loading" again rather than needing an effect to reset
+ * it mid-lifecycle. `proposalId` is in the key as well as the path because two proposals can share
+ * one (storyCode, stageKey) — without it, moving between them would reuse the mounted state and
+ * render the previous proposal's data under the new URL.
  * `retryToken` reuses the same mechanism for "Try again".
  */
 export default function StagePage() {
-  const { storyCode, stageKey } = useParams();
+  const { storyCode, stageKey, proposalId } = useParams();
   const [retryToken, setRetryToken] = useState(0);
   return (
     <StagePageContent
-      key={`${storyCode}/${stageKey}/${retryToken}`}
+      key={`${storyCode}/${stageKey}/${proposalId}/${retryToken}`}
       storyCode={storyCode}
       stageKey={stageKey}
+      proposalId={proposalId}
       onRetry={() => setRetryToken((n) => n + 1)}
     />
   );

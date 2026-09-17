@@ -44,27 +44,48 @@ beforeEach(() => {
 describe('dispatch boundary — eligibility is enforced where the request happens', () => {
   it('rejects an action whose eligibility entry is MISSING, without any network call', async () => {
     const eligibility = Object.fromEntries(OPERATOR_ACTION_IDS.map((id) => [id, { allowed: true }]))
-    delete eligibility.approve
+    delete eligibility.modify
     load(openProposal({ eligibility }))
 
-    await useActionStoriesStore.getState().runAction('approve')
+    await useActionStoriesStore.getState().runAction('modify', { reason: LONG_REASON })
 
     const state = useActionStoriesStore.getState()
     expect(state.decision.status).toBe('pending') // nothing happened
-    expect(state.getActionError('approve')).toBeTruthy()
+    expect(state.getActionError('modify')).toBeTruthy()
   })
 
   it('rejects an action whose eligibility is false', async () => {
     load(openProposal({
       eligibility: {
         ...Object.fromEntries(OPERATOR_ACTION_IDS.map((id) => [id, { allowed: true }])),
-        approve: { allowed: false, blocked_reason: 'Guardrail breach.' },
+        modify: { allowed: false, blocked_reason: 'Guardrail breach.' },
+      },
+    }))
+
+    await useActionStoriesStore.getState().runAction('modify', { reason: LONG_REASON })
+    expect(useActionStoriesStore.getState().getActionError('modify').userMessage).toBe('Guardrail breach.')
+    expect(useActionStoriesStore.getState().decision.status).toBe('pending')
+  })
+
+  it('rejects approve from the DERIVED verdict, even though the payload claims it is allowed', async () => {
+    // The dispatch boundary must reach the same answer as the single producer. `approve.allowed` is
+    // `true` here and the guardrail verdict is `beyond_limits`; before this phase, the request went.
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    load(openProposal({
+      guardrails: { verdict: 'beyond_limits' },
+      eligibility: {
+        ...Object.fromEntries(OPERATOR_ACTION_IDS.map((id) => [id, { allowed: true }])),
+        approve: { allowed: true },
       },
     }))
 
     await useActionStoriesStore.getState().runAction('approve')
-    expect(useActionStoriesStore.getState().getActionError('approve').userMessage).toBe('Guardrail breach.')
-    expect(useActionStoriesStore.getState().decision.status).toBe('pending')
+
+    const state = useActionStoriesStore.getState()
+    expect(state.decision.status).toBe('pending') // no request was sent
+    expect(state.getActionError('approve')).toBeTruthy()
+    expect(state.getActionError('approve').code).toBe('CLIENT_ERROR')
+    warn.mockRestore()
   })
 
   it('rejects a UI bypass — calling runAction directly, exactly as a console or a stale closure would', async () => {

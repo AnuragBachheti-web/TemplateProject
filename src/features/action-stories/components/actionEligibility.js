@@ -6,7 +6,7 @@ import { evaluateCondition } from '@/features/action-stories/manifests/actionCon
  * against this stage's real data into everything the generic ActionBar needs to render and
  * dispatch it — a pure function, no React, no store, no knowledge of what the action's `id` means.
  *
- * This is the sole place business-eligibility rules get evaluated, and it knows nothing
+ * This evaluates whatever business-eligibility rules a template DECLARES, and it knows nothing
  * business-specific itself: an action either carries a `when` condition (evaluated generically by
  * actionCondition.js's evaluateCondition) or it doesn't (always enabled). The exact rule this
  * replaces — "a decide/execute stage's Approve is blocked when `guardrail_blocked` is true or
@@ -16,6 +16,14 @@ import { evaluateCondition } from '@/features/action-stories/manifests/actionCon
  * every real decide/execute stage using `ne` — the operator whose own "a missing value satisfies
  * `ne`" semantics is what makes the fail-open-when-absent behavior fall out for free, without this
  * file (or any other generic code) knowing "guardrail" is a business concept).
+ *
+ * `approve` no longer carries a `when` at all: its eligibility is derived at runtime by
+ * contract/deriveEligibility.js, the single producer, and a template condition would be a second
+ * one. What approve still declares here is its `disabledReasonBinding` — that is display COPY, not
+ * a gate, and it is why an operator still reads "Full-launch exposure of $92.5K breaks the $75K
+ * appetite set in Reason" rather than generic derived prose. `disabledReason` is therefore resolved
+ * whether or not the declared condition disabled the action, because for approve there is no
+ * declared condition to disable it.
  *
  * @param {object} action - one entry from `manifest.actions`.
  * @param {object} fixture - this stage's raw fixture, resolved through exactly like a block binding.
@@ -31,7 +39,7 @@ import { evaluateCondition } from '@/features/action-stories/manifests/actionCon
 export function resolveActionState(action, fixture) {
   const enabled = action?.when === undefined || evaluateCondition(action.when, fixture);
   const label = resolveOptionalBinding(action?.labelBinding, fixture) ?? action?.label ?? 'Action';
-  const disabledReason = enabled ? null : resolveOptionalBinding(action?.disabledReasonBinding, fixture) ?? null;
+  const disabledReason = resolveOptionalBinding(action?.disabledReasonBinding, fixture) ?? null;
 
   return {
     id: action?.id,
@@ -65,3 +73,34 @@ function resolveOptionalBinding(binding, fixture) {
   const value = resolveBinding(binding, fixture);
   return isNonEmptyString(value) ? value : undefined;
 }
+
+/**
+ * What a click on one action MEANS, as a value rather than as control flow inside a handler.
+ *
+ * Extracted because the branch it replaces only looked like a gate. It read
+ * `!state.enabled || !verdict.allowed || anyPending` and then re-tested the narrower
+ * `!state.enabled || anyPending` inside, so `!verdict.allowed` on its own fell straight through to
+ * dispatch. Nothing shipped through that hole — the button was also `disabled` — but "the DOM
+ * happened to disable it" is a rendering accident, not a barrier, and this is the same class of
+ * defect as an eligibility check that never ran.
+ *
+ *   'ignore'   nothing to do: another action is in flight, the template disabled this one, or the
+ *              verdict denies it and there is no payload for the operator to supply.
+ *   'dialog'   open the dialog: it needs confirmation, or a reason/snooze/selection to be collected.
+ *   'dispatch' run it now.
+ *
+ * @param {{state: object, verdict: {allowed: boolean}, spec: object|null, anyPending: boolean}} args
+ * @returns {'ignore'|'dialog'|'dispatch'}
+ */
+export function resolveClickIntent({ state, verdict, spec, anyPending }) {
+  if (anyPending || !state?.enabled) return 'ignore';
+
+  // The one thing the verdict does NOT veto: opening a dialog whose whole purpose is to collect the
+  // payload the verdict is complaining about. A required reason, a snooze time or a selection is
+  // something the operator is about to provide, and a dead button gives them no way to.
+  const needsPayload = Boolean(spec?.requiresSelection || spec?.reasonRequired || spec?.requiresSnoozeUntil);
+  if (!verdict?.allowed && !needsPayload) return 'ignore';
+
+  return state.confirmRequired || state.reasonEnabled || needsPayload ? 'dialog' : 'dispatch';
+}
+

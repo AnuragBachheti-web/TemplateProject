@@ -147,12 +147,31 @@ describe('POST /v1/proposals/:id/actions — the full status matrix', () => {
     seedOpen({
       eligibility: {
         ...Object.fromEntries(OPERATOR_ACTION_IDS.map((id) => [id, { allowed: true }])),
-        approve: { allowed: false, blocked_reason: 'Guardrail breach.' },
+        modify: { allowed: false, blocked_reason: 'Guardrail breach.' },
+      },
+    })
+    await expect(
+      runProposalAction('prop_test', {
+        action_type: 'modify',
+        reason: 'a sufficiently long reason',
+        idempotency_key: newIdempotencyKey(),
+      }),
+    ).rejects.toMatchObject({ status: 422, userMessage: 'Guardrail breach.' })
+  })
+
+  it('422: the server refuses approve on its DERIVED verdict, not on what the payload claims', async () => {
+    // `approve` is derived server-side from the stored Decision Object. A caller that hand-rolls the
+    // request, or a payload whose `approve.allowed` is stale or wrong, gets the same 422.
+    seedOpen({
+      guardrails: { verdict: 'beyond_limits' },
+      eligibility: {
+        ...Object.fromEntries(OPERATOR_ACTION_IDS.map((id) => [id, { allowed: true }])),
+        approve: { allowed: true },
       },
     })
     await expect(
       runProposalAction('prop_test', { action_type: 'approve', idempotency_key: newIdempotencyKey() }),
-    ).rejects.toMatchObject({ status: 422, userMessage: 'Guardrail breach.' })
+    ).rejects.toMatchObject({ status: 422 })
   })
 
   it('422: an unknown action_type', async () => {

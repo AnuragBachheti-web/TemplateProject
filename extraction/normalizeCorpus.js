@@ -42,6 +42,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { isDecorativeKey } from './classifyBlocks.js'
 import { referenceContextFor } from './referenceContext.js'
+import { deriveApproveEligibility } from '../src/features/action-stories/contract/deriveEligibility.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -577,6 +578,13 @@ function guardrailsOf(data, rec) {
  * Eligibility is EXPLICIT for every one of the six operator actions — the contract has no notion of
  * an omitted entry meaning "probably allowed". Where the corpus carried a real block signal
  * (`blocked`/`canApprove`/`blockReason`), it is honoured; otherwise the mock allows the action.
+ *
+ * `approve` IS NOT HERE. It used to be, and it was the only place in the system where
+ * `guardrails.verdict` and `eligibility.approve.allowed` were coupled — offline, at generation time,
+ * while nothing at runtime coupled them at all. That coupling is now
+ * contract/deriveEligibility.js's, evaluated at request time against whatever the API actually
+ * serves, so computing it here as well would be a second producer of the one value that must have
+ * exactly one. See the stamp at this function's call site.
  */
 function eligibilityOf(data, { stage, cardinality, onClock, entitlement }) {
   const blocked = data.blocked === true || data.canApprove === false
@@ -588,7 +596,6 @@ function eligibilityOf(data, { stage, cardinality, onClock, entitlement }) {
   const decidable = (stage === 'decide' || stage === 'execute') && !locked
 
   return {
-    approve: entry(decidable && !blocked && !limited, locked || limited ? 'Your plan does not include approving proposals.' : !decidable ? 'Approval happens at the decide stage.' : reason),
     approve_selected: entry(decidable && !blocked && !limited && cardinality === 'many', cardinality !== 'many' ? 'This proposal has a single item.' : limited ? 'Your plan does not include approving proposals.' : !decidable ? 'Approval happens at the decide stage.' : reason),
     modify: entry(decidable && !limited && !locked, limited || locked ? 'Your plan does not include modifying proposals.' : 'Modification is not available at this stage.'),
     send_back: entry(decidable && !locked, 'Sending back is not available at this stage.'),
@@ -733,6 +740,23 @@ function main() {
         status: 'pending',
         updated_at: GENERATED_AT,
       })
+
+      // `approve` is stamped from the SINGLE PRODUCER, not generated here. The field has to be
+      // present because the Decision Object contract requires it, but the value is
+      // contract/deriveEligibility.js's answer about the object as assembled above — so this
+      // pipeline can no longer imply a guarantee it does not make.
+      //
+      // `blocked_reason` still prefers the reference corpus's own `blockReason` when the derivation
+      // has already decided to block. That string is extracted CONTENT, not a rule: "Full-launch
+      // exposure of $92.5K breaks the $75K appetite set in Reason" is business prose off the
+      // mockup, and it never influences whether approval is blocked — only how that is explained.
+      const derivedApprove = deriveApproveEligibility(decision)
+      decision.eligibility = {
+        approve: derivedApprove.allowed
+          ? { allowed: true }
+          : { allowed: false, blocked_reason: isStr(data.blockReason) ? data.blockReason : derivedApprove.reason },
+        ...decision.eligibility,
+      }
 
       rec.record('lens', ctx.lenses.length > 0 ? '(reference pinned strip)' : '(reference live KPI tiles)')
       rec.record('persona', ctx.persona ? '(reference pinned strip)' : null)

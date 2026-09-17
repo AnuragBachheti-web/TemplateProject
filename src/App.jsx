@@ -4,6 +4,7 @@ import { ToastProvider } from '@/features/action-stories/ui/Toast'
 import Shell from '@/features/action-stories/components/Shell'
 import ActionStoriesHome from '@/features/action-stories/pages/ActionStoriesHome'
 import StagePage from '@/features/action-stories/pages/StagePage'
+import StageRedirect from '@/features/action-stories/pages/StageRedirect'
 
 export default function App() {
   return (
@@ -20,7 +21,11 @@ export default function App() {
           <Route path="/" element={<Navigate to={ACTION_STORIES_ROUTES.index} replace />} />
           <Route path={ACTION_STORIES_ROUTES.index} element={<Shell />}>
             <Route index element={<ActionStoriesHome />} />
-            <Route path=":storyCode/:stageKey" element={<StagePage />} />
+            {/* The canonical route carries the proposal id; the two-segment shape below it resolves
+                that id once and redirects (C4), so every screen that renders is addressed
+                explicitly and nothing renders from a (storyCode, stageKey) guess. */}
+            <Route path=":storyCode/:stageKey/:proposalId" element={<StagePage />} />
+            <Route path=":storyCode/:stageKey" element={<StageRedirect />} />
           </Route>
         </Routes>
       </BrowserRouter>

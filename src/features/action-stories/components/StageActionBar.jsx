@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
-import { resolveActionState } from './actionEligibility';
+import { resolveActionState, resolveClickIntent } from './actionEligibility';
 import { checkOperatorAction, getOperatorAction } from '@/features/action-stories/contract/actionTypes';
 import { isTerminal } from '@/features/action-stories/contract/statusLifecycle';
 import ConfirmDialog from '../ui/ConfirmDialog';
@@ -17,10 +17,14 @@ import Alert from '../ui/Alert';
  * means: it renders whatever `manifest.actions[]` declares, resolved against the Decision Object by
  * the existing `resolveActionState`. What changed:
  *
- *   - Eligibility now reads `eligibility.<action>.allowed` through the template's own `when`
- *     conditions, which use `exists` + `eq true` so a MISSING entry disables rather than enables.
- *     The old corpus expressed the opposite (`ne`, where absence satisfied the condition), which is
- *     why 40 of 52 actions were unconditionally enabled.
+ *   - Eligibility for five of the six actions reads `eligibility.<action>.allowed` through the
+ *     template's own `when` conditions, which use `exists` + `eq true` so a MISSING entry disables
+ *     rather than enables. The old corpus expressed the opposite (`ne`, where absence satisfied the
+ *     condition), which is why 40 of 52 actions were unconditionally enabled.
+ *   - `approve` is the sixth and reads no template condition at all: it is DERIVED by
+ *     contract/deriveEligibility.js and reaches this component through `checkOperatorAction` below,
+ *     like every other payload-level rule. Its template entry keeps only `disabledReasonBinding`,
+ *     which is the operator-facing copy, not the gate.
  *   - Every action is additionally run through `checkOperatorAction` — the same pure function the
  *     store's dispatch boundary and the server both use — so payload-level rules (a non-empty
  *     selection, a future snooze time, a legal status transition) gate the button too, rather than
@@ -72,14 +76,10 @@ export default function StageActionBar({ actions }) {
   if (!hasActions) return null;
 
   function handleClick(actionDef, state, verdict) {
-    if (!state.enabled || !verdict.allowed || anyPending) {
-      // A dialog still opens for an action whose only obstacle is unsupplied payload — a required
-      // reason, a snooze time, a selection. Those are things the operator is about to provide; a
-      // disabled button would give them no way to.
-      if (!state.enabled || anyPending) return;
-    }
     const spec = getOperatorAction(actionDef.id);
-    if (state.confirmRequired || state.reasonEnabled || spec?.requiresSnoozeUntil) {
+    const intent = resolveClickIntent({ state, verdict, spec, anyPending });
+    if (intent === 'ignore') return;
+    if (intent === 'dialog') {
       setOpenActionId(actionDef.id);
       setReasonDraft('');
       setSnoozeDraft('');

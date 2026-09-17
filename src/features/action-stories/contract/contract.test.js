@@ -1,7 +1,7 @@
 // Suites 3, 4 and 8: the Decision Object contract, the seven axes, fail-closed eligibility, and the
 // status lifecycle. These are the rules everything else in the architecture leans on, so they are
 // tested against the contract functions directly rather than through a component.
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import {
   validateDecisionObject,
   validateTypedNumber,
@@ -39,6 +39,10 @@ function decision(overrides = {}) {
     title: 'Reprice selected products',
     narrative: 'Recommended price changes improve margin within policy limits.',
     eligibility: allowAll(),
+    // A real guardrail verdict. `approve` is no longer read from `eligibility` at all — it is
+    // derived from the Decision Object (contract/deriveEligibility.js) — so a fixture without this
+    // field would make every approve assertion below pass for the wrong reason.
+    guardrails: { verdict: 'within_limits' },
     proposal: {},
     status: 'pending',
     updated_at: '2026-09-15T10:00:00.000Z',
@@ -132,7 +136,14 @@ describe('the seven axes change slots/behaviour without creating a new page', ()
 // ---- fail-closed eligibility ---------------------------------------------------------------------
 
 describe('eligibility fails CLOSED', () => {
-  it.each(OPERATOR_ACTION_IDS)('denies %s when its eligibility entry is missing entirely', (actionId) => {
+  // `approve` is DERIVED and is deliberately absent from these three. Its eligibility is not data
+  // the payload asserts, so "absence is not permission" no longer describes it — the equivalent
+  // rules (absent/null/unrecognised guardrail verdict all block) are pinned in
+  // contract/deriveEligibility.test.js's T2 and T3, against the function that actually decides.
+  // Deriving the other five is Phase 2's call, not something to do halfway.
+  const PAYLOAD_DRIVEN_ACTION_IDS = OPERATOR_ACTION_IDS.filter((id) => id !== 'approve')
+
+  it.each(PAYLOAD_DRIVEN_ACTION_IDS)('denies %s when its eligibility entry is missing entirely', (actionId) => {
     const eligibility = allowAll()
     delete eligibility[actionId]
     const verdict = checkOperatorAction(actionId, decision({ eligibility }), {
@@ -143,7 +154,7 @@ describe('eligibility fails CLOSED', () => {
     expect(verdict.allowed, `${actionId} was allowed with NO eligibility entry`).toBe(false)
   })
 
-  it.each(OPERATOR_ACTION_IDS)('denies %s when allowed is false', (actionId) => {
+  it.each(PAYLOAD_DRIVEN_ACTION_IDS)('denies %s when allowed is false', (actionId) => {
     const eligibility = { ...allowAll(), [actionId]: { allowed: false, blocked_reason: 'Nope.' } }
     const verdict = checkOperatorAction(actionId, decision({ eligibility }), {
       selection: ['a'],
@@ -155,14 +166,34 @@ describe('eligibility fails CLOSED', () => {
   })
 
   it.each([undefined, null, 'true', 1, {}, []])('denies when allowed is %s rather than the boolean true', (value) => {
-    const eligibility = { ...allowAll(), approve: { allowed: value } }
-    expect(checkOperatorAction('approve', decision({ eligibility }), {}).allowed).toBe(false)
+    const eligibility = { ...allowAll(), modify: { allowed: value } }
+    expect(checkOperatorAction('modify', decision({ eligibility }), { reason: 'a sufficiently long reason' }).allowed).toBe(false)
   })
 
-  it('denies everything when the whole eligibility object is missing', () => {
-    for (const id of OPERATOR_ACTION_IDS) {
+  it('denies every payload-driven action when the whole eligibility object is missing', () => {
+    for (const id of PAYLOAD_DRIVEN_ACTION_IDS) {
       expect(checkOperatorAction(id, decision({ eligibility: undefined }), {}).allowed).toBe(false)
     }
+  })
+
+  it('IGNORES the payload for approve, in both directions, and says so out loud', () => {
+    // I5. The derived value wins whichever way the payload disagrees, and the disagreement is logged
+    // rather than thrown — a backend's contract bug must not take the operator's screen away.
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    // Claims blocked, derivation allows: the operator can still approve.
+    const claimsBlocked = decision({ eligibility: { ...allowAll(), approve: { allowed: false, blocked_reason: 'Nope.' } } })
+    expect(checkOperatorAction('approve', claimsBlocked, {}).allowed).toBe(true)
+
+    // Claims allowed, guardrail says otherwise: the operator cannot. This is the latent bug.
+    const claimsAllowed = decision({
+      guardrails: { verdict: 'beyond_limits' },
+      eligibility: { ...allowAll(), approve: { allowed: true } },
+    })
+    expect(checkOperatorAction('approve', claimsAllowed, {}).allowed).toBe(false)
+
+    expect(warn).toHaveBeenCalledTimes(2)
+    warn.mockRestore()
   })
 
   it('denies an unknown action id', () => {

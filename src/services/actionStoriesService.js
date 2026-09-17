@@ -11,7 +11,7 @@
 
 import { getProposal, listProposals, isUsingMockTransport } from './decisionApi'
 import { resolveTemplate } from '@/features/action-stories/templates/templateRegistry'
-import { groupProposalsIntoStories, findStage } from '@/features/action-stories/actionStory'
+import { groupProposalsIntoStories, findStage, AmbiguousStageError } from '@/features/action-stories/actionStory'
 import { ActionStoriesError, ERROR_CODES } from './actionStoriesErrors'
 
 export { isUsingMockTransport }
@@ -46,13 +46,16 @@ export async function getActionStories({ persona, limit = 200, signal } = {}) {
 /**
  * Resolves one Action Story + stage to the Decision Object for that stage.
  *
- * `story_code` is the PARENT identity and `stage` selects the child, so this is a filtered queue
- * lookup over two fields both already in the contract. It is a separate round trip from
- * `getProposal` only because no single endpoint takes (story_code, stage) today — see the contract
- * dependency noted in the final report.
+ * THE COMPATIBILITY PATH ONLY. (storyCode, stageKey) is not a unique address — nothing in the
+ * contract makes it one, and two proposals at one stage make it genuinely ambiguous. So this now
+ * exists to serve StageRedirect: the old two-segment URL resolves through here ONCE and is replaced
+ * by the explicit `/:storyCode/:stageKey/:proposalId` route. Everything that renders goes to
+ * `getStageView` with an id in hand and never guesses.
  *
- * @returns {Promise<string>} the `proposal_id` for that story's stage.
- * @throws {ActionStoriesError} NOT_FOUND when the story has no such stage.
+ * @returns {Promise<{proposalId: string, story: object}>}
+ * @throws {ActionStoriesError} NOT_FOUND when the story has no such stage; MALFORMED when the stage
+ *   has more than one proposal, because there is no right answer to return and inventing one is the
+ *   bug this phase closes.
  */
 export async function resolveStageProposalId(storyCode, stageKey, { signal } = {}) {
   const { items } = await listProposals({ storyCode, limit: 50, signal })
@@ -63,16 +66,49 @@ export async function resolveStageProposalId(storyCode, stageKey, { signal } = {
       retryable: false,
     })
   }
-  const [story] = groupProposalsIntoStories(items)
-  const match = findStage(story, stageKey)
-  if (!match) {
-    throw new ActionStoriesError(`Action Story "${storyCode}" has no "${stageKey}" stage`, {
-      code: ERROR_CODES.NOT_FOUND,
-      userMessage: "That stage isn't part of this Action Story.",
+
+  let match
+  try {
+    const [story] = groupProposalsIntoStories(items)
+    match = findStage(story, stageKey)
+    if (!match) {
+      throw new ActionStoriesError(`Action Story "${storyCode}" has no "${stageKey}" stage`, {
+        code: ERROR_CODES.NOT_FOUND,
+        userMessage: "That stage isn't part of this Action Story.",
+        retryable: false,
+      })
+    }
+    return { proposalId: match.proposal_id, story }
+  } catch (error) {
+    if (!(error instanceof AmbiguousStageError)) throw error
+    // The full ambiguity — both proposal ids — goes in the developer message. The operator gets copy
+    // that tells them what to do instead, and no proposal identifiers they did not ask for.
+    throw new ActionStoriesError(error.message, {
+      code: ERROR_CODES.MALFORMED,
+      userMessage: 'This stage has more than one proposal. Open the one you want from the Action Story list.',
       retryable: false,
     })
   }
-  return { proposalId: match.proposal_id, story }
+}
+
+/**
+ * The sibling-stage outline StepTracker renders from — a NAVIGATION AID, never the render source.
+ *
+ * Separate from the lookup above because it answers a different question ("what else is in this
+ * story") and must not be able to decide which proposal renders. When the story is ambiguous the
+ * outline is reported and dropped rather than guessed: the page still renders, because `decision`
+ * was addressed by id and never depended on this. A tracker silently pointing at the wrong sibling
+ * would be the same defect in a smaller place.
+ */
+async function loadStoryOutline(storyCode, { signal } = {}) {
+  const { items } = await listProposals({ storyCode, limit: 50, signal })
+  try {
+    return groupProposalsIntoStories(items)[0] ?? null
+  } catch (error) {
+    if (!(error instanceof AmbiguousStageError)) throw error
+    console.error(`[actionStoriesService] stage tracker unavailable — ${error.message}`)
+    return null
+  }
 }
 
 /**
@@ -85,15 +121,20 @@ export async function resolveStageProposalId(storyCode, stageKey, { signal } = {
  * names to 43: the paths now mean something across proposals.
  *
  * @param {string} storyCode - the PARENT Action Story identity.
- * @param {string} stageKey - which of its stages to open.
+ * @param {string} stageKey - which of its stages is being shown.
+ * @param {string} proposalId - WHICH Decision Object. Explicit, from the URL; never inferred from
+ *   (storyCode, stageKey), because that pair is not a unique address.
  * @param {{signal?: AbortSignal}} [options]
- * @returns {Promise<{story: object, decision: object, templateId: string, manifest: object}>}
+ * @returns {Promise<{story: object|null, decision: object, templateId: string, manifest: object}>}
+ *   `story` is null when the outline could not be built; the page renders regardless.
  * @throws {ActionStoriesError} NOT_FOUND / MALFORMED / NETWORK / ... via the shared taxonomy, and
  *   MALFORMED specifically when no canonical template covers the decision.
  */
-export async function getStageView(storyCode, stageKey, { signal } = {}) {
-  const { proposalId, story } = await resolveStageProposalId(storyCode, stageKey, { signal })
+export async function getStageView(storyCode, stageKey, proposalId, { signal } = {}) {
+  // The proposal is fetched by ID, first and directly. No queue lookup decides what renders, so a
+  // second proposal at this (story, stage) is reachable and the first is never substituted for it.
   const decision = await getProposal(proposalId, { signal })
+  const story = await loadStoryOutline(storyCode, { signal })
 
   const resolved = resolveTemplate(decision)
   if (resolved === null) {

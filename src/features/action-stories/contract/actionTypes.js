@@ -10,6 +10,7 @@
 // the dispatch guard and the API layer all agree without any of them restating the rules.
 
 import { isLegalTransition } from './statusLifecycle.js'
+import { deriveApproveEligibility, warnOnApproveEligibilityDrift } from './deriveEligibility.js'
 
 /**
  * @typedef {object} OperatorAction
@@ -132,6 +133,12 @@ export function getOperatorAction(id) {
  * FAIL-CLOSED throughout: an unknown action, a missing Decision Object, a missing `eligibility`
  * entry, or an `allowed` that is anything other than the boolean `true` all deny.
  *
+ * APPROVE IS THE ONE EXCEPTION, and deliberately so. Its eligibility is not read from the payload
+ * at all — it is DERIVED by contract/deriveEligibility.js, the single producer, because
+ * `guardrails.verdict` and `eligibility.approve.allowed` are independent fields and nothing at
+ * runtime used to couple them. The other five actions still read their payload entry; deriving them
+ * is Phase 2's decision, not something to do halfway.
+ *
  * @param {string} actionId
  * @param {object} decision - the current Decision Object.
  * @param {{ reason?: string, selection?: string[], snooze_until?: string }} [payload]
@@ -142,19 +149,31 @@ export function checkOperatorAction(actionId, decision, payload = {}) {
   if (!spec) return deny(`"${actionId}" is not a known operator action.`)
   if (decision === null || typeof decision !== 'object') return deny('This proposal is unavailable.')
 
+  // Approve, derived. FIRST, before the transition check below, so that every approve answer — the
+  // lifecycle one included — comes from the one producer and any payload disagreement is reported
+  // once, here, with this module named. The derivation runs its own lifecycle check, so nothing is
+  // skipped by taking this branch early.
+  if (actionId === 'approve') {
+    const derived = deriveApproveEligibility(decision)
+    warnOnApproveEligibilityDrift(decision, derived, 'actionTypes')
+    if (!derived.allowed) return deny(derived.reason)
+  }
+
   // Terminal proposals accept nothing further, regardless of what eligibility says — a stale
   // payload that still claims `approve.allowed` must not resurrect an already-dismissed proposal.
   if (!isLegalTransition(decision.status, spec.resultingStatus)) {
     return deny(`This proposal is ${decision.status} and can no longer be changed.`)
   }
 
-  const entry = decision.eligibility?.[actionId]
-  if (entry === undefined || entry === null) {
-    // The fail-closed rule, stated once: absence is not permission.
-    return deny('This action is not available for this proposal.')
-  }
-  if (entry.allowed !== true) {
-    return deny(entry.blocked_reason || 'This action is not available for this proposal.')
+  if (actionId !== 'approve') {
+    const entry = decision.eligibility?.[actionId]
+    if (entry === undefined || entry === null) {
+      // The fail-closed rule, stated once: absence is not permission.
+      return deny('This action is not available for this proposal.')
+    }
+    if (entry.allowed !== true) {
+      return deny(entry.blocked_reason || 'This action is not available for this proposal.')
+    }
   }
 
   if (spec.requiresCardinality !== null && decision.cardinality !== spec.requiresCardinality) {

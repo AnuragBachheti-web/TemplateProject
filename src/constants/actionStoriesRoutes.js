@@ -15,15 +15,24 @@ export const ACTION_STORIES_ROOT = '/action-stories';
 export const actionStoriesIndexPath = () => ACTION_STORIES_ROOT;
 
 /**
- * One Action Story, opened AT a stage. Two segments, not one: `storyCode` is the PARENT identity
- * and `stageKey` selects which of that story's Decision Objects to render. All four of
- * `/action-stories/S10.1/{reason,analyze,decide,execute}` are the same Action Story.
+ * One Action Story, opened AT a stage, AT a proposal. `storyCode` is the PARENT identity, `stageKey`
+ * names the step, and `proposalId` says WHICH Decision Object — all four of
+ * `/action-stories/S10.1/{reason,analyze,decide,execute}/...` are still the same Action Story, so
+ * the story survives as an identity while the proposal becomes explicitly addressable.
  *
- * The proposal id is deliberately NOT in the URL. It identifies one stage's Decision Object, so a
- * proposal-keyed route made every stage a top-level entity and dissolved the story as an identity —
- * which is exactly how one Action Story came to render as four independent listing cards.
+ * WHY THE ID IS NOW HERE. It was left out on the reasoning that a proposal-keyed route made every
+ * stage a top-level entity and dissolved the story — which is what turned one Action Story into four
+ * independent listing cards. The story is what the FIRST TWO segments carry, and keeping them is
+ * what preserves it; the third only disambiguates. Without it, lookup was (storyCode, stageKey) ->
+ * first match, and a second proposal at one (story, stage) was permanently unreachable.
+ *
+ * `proposalId` is optional: omitting it builds the old two-segment path, which still resolves
+ * through StageRedirect. That is what keeps every existing link and bookmark working (C4).
  */
-export const actionStoryPath = (storyCode, stageKey) => `${ACTION_STORIES_ROOT}/${storyCode}/${stageKey}`;
+export const actionStoryPath = (storyCode, stageKey, proposalId) =>
+  proposalId
+    ? `${ACTION_STORIES_ROOT}/${storyCode}/${stageKey}/${proposalId}`
+    : `${ACTION_STORIES_ROOT}/${storyCode}/${stageKey}`;
 
 /** True when `pathname` is any Action Stories screen (the index or a workflow/stage). */
 export const isActionStoriesPath = (pathname) =>
@@ -32,5 +41,8 @@ export const isActionStoriesPath = (pathname) =>
 /** Route path patterns for the react-router-dom <Route> definitions in App.jsx. */
 export const ACTION_STORIES_ROUTES = {
   index: ACTION_STORIES_ROOT,
-  stage: `${ACTION_STORIES_ROOT}/:storyCode/:stageKey`,
+  /** The canonical route. Every rendered stage screen is at this shape. */
+  stage: `${ACTION_STORIES_ROOT}/:storyCode/:stageKey/:proposalId`,
+  /** The pre-proposalId shape. Resolves the id once, then redirects to `stage`. */
+  stageLegacy: `${ACTION_STORIES_ROOT}/:storyCode/:stageKey`,
 };

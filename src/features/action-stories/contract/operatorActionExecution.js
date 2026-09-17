@@ -19,6 +19,7 @@
 import { checkOperatorAction, getOperatorAction } from './actionTypes.js'
 import { isLegalTransition } from './statusLifecycle.js'
 import { slateItemId } from './slateItem.js'
+import { deriveApproveEligibilityEntry } from './deriveEligibility.js'
 
 /**
  * Every check a backend must run before performing an action, in the order the contract requires.
@@ -138,6 +139,15 @@ export function applyOperatorAction(proposal, actionType, { reason, selection, s
     default:
       break
   }
+
+  // `approve` is never hand-written. Every branch above may have changed `status` — which is one of
+  // the facts the derivation reads — so the entry is stamped from the single producer, evaluated
+  // against the POST-action object. A just-approved proposal therefore blocks because the derivation
+  // says so, not because each `case` above remembered to say so.
+  //
+  // This is also what keeps the returned object contract-valid: the entry carries `blocked_reason`
+  // whenever `allowed` is false, which is what decisionObject.js requires.
+  next.eligibility = { ...next.eligibility, approve: deriveApproveEligibilityEntry(next) }
 
   return next
 }
