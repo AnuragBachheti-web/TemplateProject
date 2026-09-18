@@ -36,10 +36,27 @@ describe('GaugeBlock — the threshold tick is now hover/focus-discoverable, not
     expect(container.querySelector('[role="tooltip"]').textContent).toBe('Threshold: 4.0%');
   });
 
-  it('flags a value over its threshold with the critical status color, not a hardcoded palette literal', () => {
+  it('shows the value against its threshold WITHOUT judging which side is good', () => {
+    // REPLACED IN PHASE 5B. This asserted that a value over its threshold renders
+    // `bg-rf-status-critical` — and that premise did not survive looking at the result. On
+    // S9.18/decide the coverage rows are two floors and two ceilings:
+    //
+    //     On-time · DTC   95.6%  pct 70  limitPct 63  note "floor 95% · scale 90-98%"
+    //     Split rate       8.2%  pct 59  limitPct 57  note "ceiling 8% · scale 0-14%"
+    //
+    // Past a ceiling is a breach; past a floor is comfort. The screenshot showed "On-time · DTC
+    // 95.6%" painted critical red while its own note called 95% a floor. The direction exists ONLY
+    // in that prose, and reading it out would be a classifier on text deciding what is good news —
+    // the move ruling R72 declined for `tag`/`flag`/`badge`/`kind`/`optimal`, and R2 forbids for
+    // recovering numbers from display strings.
+    //
+    // So the block draws the bar, the tick and the note, and the operator judges. What this test
+    // still protects — and what it was really written for (R25) — is that no palette literal
+    // reaches the DOM: the tone, whatever it is, comes from statusTone and nowhere else.
     const container = mount(<GaugeBlock slotName="tolerance" data={[{ label: 'Over', value: '9%', threshold: '4%' }]} />);
     const html = container.innerHTML;
-    expect(html).toContain('bg-rf-status-critical');
-    expect(html).not.toMatch(/bg-rose-|text-rose-/);
+    expect(html).not.toMatch(/bg-rose-|text-rose-|bg-emerald-|text-emerald-/);
+    expect(html, 'the gauge must not colour a verdict it cannot derive').not.toContain('rf-status-');
+    expect(html, 'the value still renders').toContain('9%');
   });
 });

@@ -5,6 +5,7 @@ import { EmptyState, ErrorState } from './BlockStates';
 import Tooltip from '../ui/Tooltip';
 import { formatValue } from './formatValue';
 import { limitTone } from './statusTone';
+import { assertVariant } from './variants';
 import { cellText } from './cellText';
 
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
@@ -31,7 +32,24 @@ function firstParseable(item, keys) {
  *   member of an explicitly-authored or heuristic shared panel, so it renders without its own
  *   nested BlockCard.
  */
-export default function GaugeBlock({ slotName, data, compact }) {
+/**
+ * `meteredRow` (Phase 5B) — the reference's own gauge row: label and value on one line, a bar
+ * filled from `pct` with a tick at `limitPct`, and `note` on a mono line beneath
+ * (S9.18-3-decide.dc.html:311-323).
+ *
+ * IT ALSO CORRECTS A MIS-SCALING 5A RECORDED AND COULD NOT FIX. The default plots the row's
+ * `value` (95.6, a percentage) against `limitPct` (63, a position on a chosen axis) — two numbers
+ * on different scales, drawn as if comparable. The reference pairs `pct` with `limitPct`, which ARE
+ * the same scale, and prints `value` as the figure beside them. That is what this does.
+ *
+ * `pct` and `limitPct` are bar GEOMETRY, and using them to draw a bar is the one correct use of
+ * them — the defect Phase 3A's R15 named was treating such a value as a MEASUREMENT. The
+ * measurement here is `value`, and the limit it is measured against exists only as prose inside
+ * `note` ("floor 95% · scale 90-98%"), which R2 forbids parsing into a number. So the note is
+ * rendered, verbatim, rather than mined.
+ */
+export default function GaugeBlock({ slotName, data, compact, variant }) {
+  assertVariant('gauge', variant);
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -47,6 +65,10 @@ export default function GaugeBlock({ slotName, data, compact }) {
       label: typeof item?.label === 'string' ? item.label : String(i + 1),
       magnitude: firstParseable(item, MAGNITUDE_KEYS),
       threshold: firstParseable(item, THRESHOLD_KEYS),
+      // The variant's own three fields, read because the variant declares them — never sniffed.
+      bar: firstParseable(item, ['pct']),
+      limit: firstParseable(item, ['limitPct']),
+      note: typeof item?.note === 'string' ? item.note : undefined,
     }))
     .filter((row) => row.magnitude && row.threshold);
 
@@ -60,12 +82,19 @@ export default function GaugeBlock({ slotName, data, compact }) {
         // A generous headroom above whichever of value/threshold is larger, so the fill and the
         // threshold tick both stay legible instead of one pinned at the very edge.
         const scaleMax = Math.max(row.magnitude.value, row.threshold.value, 1) * 1.15;
-        const fillPct = Math.min(100, Math.max(0, (row.magnitude.value / scaleMax) * 100));
-        const thresholdPct = Math.min(100, Math.max(0, (row.threshold.value / scaleMax) * 100));
-        const over = row.magnitude.value > row.threshold.value;
-        // The tone comes from statusTone, not from here (R73). "Over its limit" is a semantic word,
-        // and this block used to turn it into `rf-status-*` itself with two inline ternaries.
-        const tone = limitTone(over);
+        // THE VARIANT PAIRS pct WITH limitPct — same scale, as the reference does. The default
+        // pairs `value` with `limitPct`, which are not, and 5A recorded that as this phase's to fix.
+        const metered = variant === 'meteredRow' && row.bar && row.limit;
+        const fillPct = metered
+          ? Math.min(100, Math.max(0, row.bar.value))
+          : Math.min(100, Math.max(0, (row.magnitude.value / scaleMax) * 100));
+        const thresholdPct = metered
+          ? Math.min(100, Math.max(0, row.limit.value))
+          : Math.min(100, Math.max(0, (row.threshold.value / scaleMax) * 100));
+        // NO DIRECTIONAL TONE. See limitTone's own comment: whether being past the tick is good or
+        // bad depends on the limit being a floor or a ceiling, and that word exists only inside the
+        // prose `note`. The bar, the tick and the note are rendered; the verdict is the operator's.
+        const tone = limitTone();
         return (
           <div key={i} className="min-w-0">
             <div className="mb-1 flex items-baseline justify-between gap-2 text-[11.5px]">
@@ -93,6 +122,11 @@ export default function GaugeBlock({ slotName, data, compact }) {
                 </Tooltip>
               </span>
             </div>
+            {/* The limit in the reference's own words. It exists nowhere as a typed number, and R2
+                forbids parsing one out of this string, so it is shown rather than mined. */}
+            {variant === 'meteredRow' && row.note !== undefined && (
+              <div {...cellText('prose', row.note, 'mt-1 font-mono text-[9.5px] text-rf-text-tertiary')}>{row.note}</div>
+            )}
           </div>
         );
       })}

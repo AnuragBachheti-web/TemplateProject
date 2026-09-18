@@ -130,16 +130,28 @@ describe('representative screens show the reference\'s own business content', ()
     expect(text).toContain('Balanced') // 1. identity
     expect(text).toContain('Keep 162 · grow 18 · reduce 22 · exit 12') // 2. statement
     expect(text).toContain('Grow the proven, cut the depth on the tail') // 3. rationale
-    // 4. The metrics keep their caveat note. Their P10–P90 `range` does NOT render any more, and
-    //    that is a ruled trade rather than an oversight: Phase 3C re-pointed
-    //    `recommendation_metrics` from `table` to `statList`, because the reference renders
-    //    heroMetrics as an eyebrow + a 20px value + a prose note (S10.2-3-decide:209-213) rather
-    //    than as columns. `statList` shows label/value/meta, so `range` (3 of 39 rows) and `delta`
-    //    (3 of 39) have nowhere to go. Ruling R30 accepted that explicitly — do not fold them into
-    //    `note` and do not invent a slot — and Phase 3C's deliverable H records the counts.
+    // 4. R30 IS DISCHARGED — the P10-P90 `range` now renders, and this assertion inverts.
+    //
+    //    WHAT R30 SAID, and why it was right. Phase 3C re-pointed `recommendation_metrics` from
+    //    `table` to `statList`, because the reference renders heroMetrics as an eyebrow + a 20px
+    //    value + a prose note rather than as columns. `statList` shows label/value/ONE meta line,
+    //    so `range` had nowhere to go. R30 accepted that explicitly — do not fold it into `note`,
+    //    do not invent a slot — and this assertion held the line by requiring the loss to stay
+    //    VISIBLE rather than be quietly absorbed.
+    //
+    //    That is the fourth pin in this project to be right for its phase and wrong afterwards, and
+    //    the only one that was discharged by the gap being CLOSED rather than by the pin being
+    //    mistaken: 5A's R31 (opportunity-in-trigger), 3B's T31 and 3C's T37 (corpus freezes), and
+    //    5D's T62 (a CSS property standing in for a behaviour). It also cost three phases: 5A's T61
+    //    exists because a passing data test guarded this exact field while nothing drew it.
+    //
+    //    Phase 5B's `metricGrid` variant (blocks/variants.js) gives statList the reference's own
+    //    four-line metric — label / value / range / note (S9.1-3-decide.dc.html:220-227). The range
+    //    is NOT folded into the note: it renders on its own mono line, which is what R30 forbade
+    //    the alternative to.
     expect(s91.proposal.recommendation_metrics.some((r) => r.range === '+$17K to +$66K'),
-      'the corpus still carries the range; only its rendering was dropped').toBe(true)
-    expect(text, 'range must not be quietly folded into another field (R30)').not.toContain('+$17K to +$66K')
+      'the corpus still carries the range').toBe(true)
+    expect(text, 'the range renders on its own line now (R30 discharged by 5B metricGrid)').toContain('+$17K to +$66K')
     expect(text).toContain('P10–P90 on the full slate') // …and their caveat note DOES render
     expect(text).toContain('Order rows behind the role classification') // 6. basis, in the Basis section
     // 5. the composition bar is a chart, so its own labels are asserted on the data it receives —

@@ -3,6 +3,7 @@ import { resolveBinding } from '@/features/action-stories/manifests/resolveBindi
 import { evaluateCondition } from '@/features/action-stories/manifests/actionCondition';
 import { validateBlockData } from '@/features/action-stories/manifests/blockTypes';
 import { BLOCK_REGISTRY } from '@/features/action-stories/blocks';
+import { variantOf } from '@/features/action-stories/blocks/variants';
 import { humanizeSlotName } from '@/features/action-stories/blocks/humanizeSlotName';
 import { findNearestStep } from '@/features/action-stories/blocks/sliderSteps';
 import BlockErrorBoundary from '@/features/action-stories/blocks/BlockErrorBoundary';
@@ -208,6 +209,9 @@ export default function StageRenderer({ manifest, fixture, blockProps }) {
       continue;
     }
 
+    // PHASE 5B. The variant is resolved HERE, from the slot, and handed down — a block never asks
+    // for its own. `variantOf` takes a slot name and has no access to the value, so there is nothing
+    // for a block to infer one from even if it wanted to (I1).
     nodesBySlot[block.slotName] = (
       <BlockErrorBoundary slotName={block.slotName} blockType={block.blockType}>
         <Component
@@ -215,6 +219,7 @@ export default function StageRenderer({ manifest, fixture, blockProps }) {
           data={value}
           compact={compactSlots.has(block.slotName)}
           role={block.role}
+          variant={variantOf(block.slotName)}
           {...(blockProps?.[block.slotName] ?? {})}
         />
       </BlockErrorBoundary>

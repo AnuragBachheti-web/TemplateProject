@@ -4,6 +4,7 @@ import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 import { formatValue } from './formatValue';
+import { assertVariant } from './variants';
 
 /**
  * A MEASURED FIGURE AGAINST ITS LABEL — a rollup, a set of inputs, a provenance count, a progress
@@ -58,7 +59,23 @@ function Framed({ slotName, compact, children }) {
   );
 }
 
-export default function StatListBlock({ slotName, data, compact = false }) {
+/**
+ * `metricGrid` (Phase 5B) — the reference's four-line metric: label, value, the P10-P90 `range` on
+ * its own mono line, then the caveat `note` (S9.1-3-decide.dc.html:220-227).
+ *
+ * WHY IT IS A VARIANT AND NOT THE DEFAULT. The other four statList slots — totals_rows,
+ * progress_rows, inputs, basis — carry no `range`, and a fourth line on a two-field row is dead
+ * space. The reference draws those as three lines and this one as four.
+ *
+ * `range` is the field 5A found a passing data test guarding while nothing drew it:
+ * referenceFidelity.test.js has asserted "+$17K to +$66K" is present since Phase 2, and the block
+ * dropped it because `Metric` takes one meta line and `range` loses the `?? ` chain to `note`. That
+ * is the whole reason T61 exists.
+ */
+const EXTRA_FIGURE_KEYS = ['range', 'delta'];
+
+export default function StatListBlock({ slotName, data, compact = false, variant }) {
+  assertVariant('statList', variant);
   const rows = Array.isArray(data) ? data.filter((r) => r !== null && typeof r === 'object') : [];
   if (rows.length === 0) return <EmptyState slotName={slotName} message="No figures recorded." />;
 
@@ -78,6 +95,9 @@ export default function StatListBlock({ slotName, data, compact = false }) {
           // rows carry one and the chain would otherwise have dropped it (R30) — additive, because
           // no other statList slot carries `note`.
           meta={row.meta ?? row.detail ?? row.note ?? (row.pct !== undefined && row.pct !== null ? formatValue({ value: row.pct, unit: 'pct' }) : undefined)}
+          // The variant, and only the variant, adds the second figure line. The default is
+          // byte-identical to what shipped before this phase.
+          extra={variant === 'metricGrid' ? EXTRA_FIGURE_KEYS.map((k) => row[k]) : undefined}
         />
       ))}
     </div>

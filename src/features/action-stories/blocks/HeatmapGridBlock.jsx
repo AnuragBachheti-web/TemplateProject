@@ -4,6 +4,8 @@ import { parseMagnitude } from './chartGeometry';
 import { sequentialColor, sequentialTextColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { assertVariant } from './variants';
+import { cellText } from './cellText';
 
 // Same rule extraction/classifyBlocks.js uses to decide a key is styling, not content — kept as
 // its own local copy (this is a runtime component; that module is generation-only tooling, never
@@ -30,7 +32,22 @@ function cellFields(cell) {
  * whichever field is the first numeric one found anywhere in the data (the "primary" metric) — the
  * full set of a cell's fields is always available on hover via its `title`.
  */
-export default function HeatmapGridBlock({ slotName, data }) {
+/**
+ * `zoneRow` (Phase 5B) — the reference's own heat row: the label with its `volume` stacked beneath
+ * it, then the split bar, then `optimal` right-aligned (S9.18-2-analyze.dc.html:305-317, a
+ * `grid-template-columns:52px 1fr 62px`). S9.13's `rfmGrid` carries `note` in the same position.
+ *
+ * The default renders the label and the cells and drops the row's own figures — 11 of them across
+ * the two objects that have a matrix, which is every matrix in the corpus.
+ *
+ * NO COLOUR ON `optimal`. The reference tints it by band (`h.optTone`), and the payload states no
+ * band anywhere — inferring one from the percentage would be this component deciding what counts as
+ * good. Ruling R72: render it without colour rather than invent the field.
+ */
+const ROW_FIGURE_KEYS = ['volume', 'optimal', 'note'];
+
+export default function HeatmapGridBlock({ slotName, data, variant }) {
+  assertVariant('heatmapGrid', variant);
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -41,7 +58,12 @@ export default function HeatmapGridBlock({ slotName, data }) {
     return <EmptyState slotName={slotName} message="No rows." />;
   }
 
-  const rows = data.map((row) => ({ label: row?.label, cells: Array.isArray(row?.cells) ? row.cells : row?.grid ?? [] }));
+  const rows = data.map((row) => ({
+    label: row?.label,
+    cells: Array.isArray(row?.cells) ? row.cells : row?.grid ?? [],
+    // Read because the variant DECLARES these three keys, never discovered from the row's shape.
+    figures: ROW_FIGURE_KEYS.map((k) => row?.[k]).filter((v) => typeof v === 'string' && v.trim() !== ''),
+  }));
   const colCount = Math.max(0, ...rows.map((r) => r.cells.length));
   if (colCount === 0) {
     return <ErrorState slotName={slotName} message="no cells to plot" />;
@@ -84,8 +106,11 @@ export default function HeatmapGridBlock({ slotName, data }) {
   const gridItems = [];
   rows.forEach((row, ri) => {
     gridItems.push(
-      <div key={`label-${ri}`} className="flex items-center pr-2 text-[11px] text-rf-text-secondary">
-        {row.label}
+      <div key={`label-${ri}`} className="flex min-w-0 flex-col justify-center pr-2">
+        <span {...cellText('identifier', row.label, 'text-[11px] text-rf-text-secondary')}>{row.label}</span>
+        {variant === 'zoneRow' && row.figures.map((figure) => (
+          <span key={figure} {...cellText('figure', figure, 'font-mono text-[9px] text-rf-text-tertiary tabular-nums')}>{figure}</span>
+        ))}
       </div>,
     );
     for (let ci = 0; ci < colCount; ci++) {

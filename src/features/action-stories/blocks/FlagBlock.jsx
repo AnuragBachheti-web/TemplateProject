@@ -2,15 +2,15 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { cellText } from './cellText';
+import { flagTone } from './statusTone';
 
 function Pill({ data }) {
+  // The tone and the word both come from statusTone (R73's rule, applied to the second instance of
+  // the same defect — see flagTone's own comment). This block used to decide both inline.
+  const tone = flagTone(data);
   return (
-    <span
-      className={`rounded-full px-2 py-0.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.06em] ${
-        data ? 'bg-rf-status-success/10 text-rf-status-success' : 'bg-rf-surface-sunken text-rf-text-tertiary'
-      }`}
-    >
-      {data ? 'Yes' : 'No'}
+    <span className={`rounded-full px-2 py-0.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.06em] ${tone.chip}`}>
+      {tone.label}
     </span>
   );
 }

@@ -271,7 +271,7 @@ async function layoutSession(fn) {
       }
       await new Promise((r) => setTimeout(r, 150)) // let fonts and final layout settle
     }
-    return await fn({ goto, evaluate, setViewport })
+    return await fn({ goto, evaluate, setViewport, send })
   } finally {
     try { ws?.close() } catch { /* ignore */ }
     killChrome(child, profile)
@@ -398,6 +398,82 @@ async function runLayoutGate(base) {
   return { failures, checked }
 }
 
+
+// ---- THE VARIANT SCREENSHOT PASS (Phase 5B: T92) ------------------------------------------------
+//
+// WHY AN ARTEFACT AND NOT ANOTHER MEASUREMENT. Phase 5D found BOTH of its visual regressions by
+// opening a screenshot after its measurement gate was already green: a `<th>` clamp that collapsed
+// a table header into one stacked column, and an overflow-wrap rule that broke "Label" into
+// "Labe/l". Every height and width was in tolerance for both; the tables were simply the wrong
+// shape, and no probe asked about shape. A phase that is entirely visual cannot be gated by
+// measurement alone (I8), so this captures one PNG per variant per supported width and fails the
+// run if any is missing. The image is for a human; the failure is for the build.
+
+const SHOT_DIR = path.resolve('artifacts/variant-screenshots')
+
+/** One object per variant, chosen because it carries that variant's distinguishing feature. */
+const VARIANT_SHOTS = [
+  { variant: 'metricGrid', slot: 'recommendation_metrics', path: '/action-stories/S9.1/decide/prop_s9_1_decide' },
+  { variant: 'meteredRow', slot: 'coverage', path: '/action-stories/S9.18/decide/prop_s9_18_decide' },
+  { variant: 'zoneRow', slot: 'matrix', path: '/action-stories/S9.18/analyze/prop_s9_18_analyze' },
+  { variant: 'groupCard', slot: 'item_groups', path: '/action-stories/S9.7/decide/prop_s9_7_decide' },
+  { variant: 'routeCard', slot: 'next_actions', path: '/action-stories/S10.3/decide/prop_s10_3_decide' },
+  { variant: 'scenarioCard', slot: 'alternatives', path: '/action-stories/S9.14/decide/prop_s9_14_decide' },
+]
+
+async function captureVariantScreenshots(base) {
+  fs.rmSync(SHOT_DIR, { recursive: true, force: true })
+  fs.mkdirSync(SHOT_DIR, { recursive: true })
+  const failures = []
+  const written = []
+
+  await layoutSession(async ({ goto, setViewport, send, evaluate }) => {
+    for (const width of LAYOUT_WIDTHS) {
+      await setViewport(width, LAYOUT_HEIGHT)
+      for (const shot of VARIANT_SHOTS) {
+        await goto(base + shot.path)
+        // SCROLL THE VARIANT INTO FRAME FIRST. The first version of this pass captured the fold,
+        // and for `routeCard` and `scenarioCard` the block sits below it — so the artefact existed,
+        // T92 passed, and the picture did not contain the thing it was evidence for. A screenshot
+        // that does not show its variant proves exactly as much as no screenshot.
+        const inFrame = await evaluate(`
+          (() => {
+            const el = document.querySelector('[data-block-slot="${shot.slot}"]');
+            if (!el) return false;
+            el.scrollIntoView({ block: 'center' });
+            const r = el.getBoundingClientRect();
+            return r.top < innerHeight && r.bottom > 0 && r.height > 0;
+          })()
+        `).catch(() => false)
+        if (!inFrame) {
+          failures.push(`T92 ${shot.variant} @${width}: "${shot.slot}" could not be brought into frame`)
+        }
+        await new Promise((r) => setTimeout(r, 120))
+        const file = path.join(SHOT_DIR, `${shot.variant}-${width}.png`)
+        try {
+          const { data } = await send('Page.captureScreenshot', { format: 'png' })
+          fs.writeFileSync(file, Buffer.from(data, 'base64'))
+          written.push(file)
+        } catch (e) {
+          failures.push(`T92 ${shot.variant} @${width}: screenshot failed — ${e.message}`)
+        }
+      }
+    }
+  })
+
+  // A missing or empty file is a FAILURE, never a warning (R65's rule, applied to the artefact):
+  // a screenshot pass that reports without failing is how the review quietly stops happening.
+  for (const width of LAYOUT_WIDTHS) {
+    for (const shot of VARIANT_SHOTS) {
+      const file = path.join(SHOT_DIR, `${shot.variant}-${width}.png`)
+      if (!fs.existsSync(file) || fs.statSync(file).size < 1000) {
+        failures.push(`T92 ${shot.variant} @${width}: no screenshot at ${path.relative(process.cwd(), file)}`)
+      }
+    }
+  }
+  return { failures, written: written.length }
+}
+
 async function main() {
   if (!fs.existsSync(CHROME)) {
     console.error(`  Chrome not found at ${CHROME}. Set CHROME_PATH to run the smoke test.`)
@@ -475,7 +551,14 @@ async function main() {
       console.log(`  ok  layout gate — ${checked} page loads, no clipped text, both regions scroll`)
     }
 
-    if (!process.exitCode) console.log(`\n  SMOKE PASSED (${MODE}) — ${URLS.length} URLs, no error copy, layout gate clean.\n`)
+    const shots = await captureVariantScreenshots(base)
+    if (shots.failures.length > 0) {
+      fail(`variant screenshots: ${shots.failures.length} missing\n` + shots.failures.map((f) => `    ${f}`).join('\n'))
+    } else {
+      console.log(`  ok  variant screenshots — ${shots.written} captured in ${path.relative(process.cwd(), SHOT_DIR)}`)
+    }
+
+    if (!process.exitCode) console.log(`\n  SMOKE PASSED (${MODE}) — ${URLS.length} URLs, no error copy, layout gate clean, ${shots.written} screenshots.\n`)
   } finally {
     process.off('SIGINT', onSignal)
     process.off('SIGTERM', onSignal)

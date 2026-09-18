@@ -79,28 +79,60 @@ export function checkStatusTone(status) {
 }
 
 /**
- * A MEASURED VALUE AGAINST ITS OWN LIMIT — over, or within.
+ * A MEASURED VALUE AGAINST ITS OWN LIMIT — and why it gets NO directional colour.
  *
- * MOVED HERE IN PHASE 5B (ruling R73), from inside GaugeBlock, and the move is a correctness fix
- * rather than tidying. "Over its limit" is a semantic word, and GaugeBlock was turning it into
- * `rf-status-critical` / `rf-status-success` with two inline ternaries — a semantic word becoming a
- * token outside this module, which is exactly what I3 forbids and what T32 exists to catch. It was
- * already shipping; T32 did not see it because it looks for PALETTE literals, and these were
- * correctly-named design tokens sitting in the wrong file.
+ * MOVED HERE IN PHASE 5B (ruling R73) from inside GaugeBlock, which was turning "over its limit"
+ * into `rf-status-critical` / `rf-status-success` with two inline ternaries — a semantic word
+ * becoming a token outside this module, which I3 forbids. T32 never saw it because T32 looks for
+ * raw PALETTE literals and these were correctly-named design tokens in the wrong file.
  *
- * `over` is critical because a value past its own ceiling is what stops a decision. Within-limit is
- * deliberately NOT `success`-coloured on the figure — a figure inside its bounds is unremarkable,
- * and colouring every compliant number green makes the one that is not compliant harder to find.
- * Only the bar carries the positive tone, because a bar is a magnitude and needs a fill.
+ * AND THEN THE SCREENSHOT SHOWED THE DECISION ITSELF WAS WRONG. S9.18/decide renders "On-time · DTC
+ * 95.6%" in critical red, because its bar (70) sits past its limit tick (63) — and its note reads
+ * "floor 95%", so 95.6% is comfortably GOOD. Being over a floor is success; being over a ceiling is
+ * failure; and that object carries two of each:
  *
- * @param {boolean} isOver
+ *     On-time · DTC        95.6%   pct 70  limitPct 63   note "floor 95% · scale 90-98%"
+ *     Split rate            8.2%   pct 59  limitPct 57   note "ceiling 8% · scale 0-14%"
+ *     Damage per thousand   2.1    pct 60  limitPct 71   note "ceiling 2.5 · scale 0-3.5"
+ *     Meridian share        56%    pct 64  limitPct 60   note "minimum 55% · scale 40-65%"
+ *
+ * THE DIRECTION EXISTS ONLY IN THE PROSE. There is no `direction` field, no `kind`, nothing typed —
+ * just the words floor / ceiling / minimum / cap inside `note`. Reading it out would be a
+ * classifier on prose, inside a component, deciding which way is good news: the same move ruling
+ * R72 declined for `tag`, `flag`, `badge`, `kind` and `optimal`, and the same move R2 forbids for
+ * recovering numbers from display strings.
+ *
+ * So the gauge renders the bar, the tick and the note, and lets the operator read them. The
+ * position is information the payload genuinely carries; the verdict is not. A red bar that is
+ * wrong half the time is worse than a neutral one — this is a surface people approve from.
+ *
+ * The function stays, with no argument, because the DECISION still belongs here rather than in a
+ * block: on the day a payload states its limit direction, this is the one place that changes.
+ *
  * @returns {{text: string, fill: string, label: string}}
  */
-const LIMIT_TONE = {
-  over: { text: 'text-rf-status-critical', fill: 'bg-rf-status-critical', label: 'Over limit' },
-  within: { text: 'text-rf-text-primary', fill: 'bg-rf-status-success', label: 'Within limit' },
+export function limitTone() {
+  return { text: 'text-rf-text-primary', fill: 'bg-rf-border-strong', label: 'Against its limit' }
 }
 
-export function limitTone(isOver) {
-  return isOver ? LIMIT_TONE.over : LIMIT_TONE.within
+/**
+ * A BOOLEAN FLAG -> tone. Yes reads as affirmed, no as neutral.
+ *
+ * FOUND BY THIS PHASE'S OWN T86, not by inspection, and it is the second instance of exactly the
+ * defect R73 moved out of GaugeBlock: FlagBlock was turning `true` into
+ * `bg-rf-status-success/10 text-rf-status-success` with an inline ternary. Both survived Phase 3B's
+ * T32 for the same reason — that test looks for raw PALETTE literals, and these were correctly
+ * named design tokens sitting in the wrong file. A rule enforced only against the sloppy version of
+ * a mistake does not catch the tidy version.
+ *
+ * `false` is NOT critical. A flag that is off is a fact, not a failure; colouring it red would make
+ * the block editorialise about data it only reports.
+ */
+const FLAG_TONE = {
+  yes: { chip: 'bg-rf-status-success/10 text-rf-status-success', label: 'Yes' },
+  no: { chip: 'bg-rf-surface-sunken text-rf-text-tertiary', label: 'No' },
+}
+
+export function flagTone(isTrue) {
+  return isTrue ? FLAG_TONE.yes : FLAG_TONE.no
 }

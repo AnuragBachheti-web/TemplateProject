@@ -31,6 +31,10 @@
  *   content — the shape-guessing defect removed from the renderer in 3B and from the claim ledger
  *   in 5A, found alive in the layout layer. A span is declared here, per slot, with the reference
  *   evidence for it in the note; layout/packRows.js is the only reader.
+ * @property {string} [variant] - which of its blockType's declared variants this slot renders, from
+ *   blocks/variants.js. Absent means the block's default shape. Phase 5B: this is the ONLY source of
+ *   a variant — a block never chooses one, exactly as it never chooses its own width (5C) or its own
+ *   block type (3B). Every variant cites the reference markup that earned it.
  * @property {string} note      - what the slot means, and which corpus concepts it consolidates.
  */
 
@@ -77,8 +81,8 @@ export const SLOT_VOCABULARY = Object.freeze({
   distribution: { binding: 'proposal.distribution', blockType: 'scatterChart', tier: 'conditional', note: 'Spread/position across two typed dimensions. Corpus `points`.' },
   trend: { binding: 'proposal.trend', blockType: 'lineChart', tier: 'conditional', note: 'Typed {x,y} series. Replaces the corpus\'s raw SVG path strings. Kept below the 20% corpus floor deliberately: most corpus trends were raw SVG paths that the hygiene pass correctly strips, and a typed time series is an explicit contract requirement.' },
   bridge: { binding: 'proposal.bridge', blockType: 'waterfallChart', tier: 'conditional', note: 'The plan-to-actual variance bridge (S10.1). Wires the already-registered WaterfallChartBlock, which the audit found unreachable.' },
-  coverage: { binding: 'proposal.coverage', blockType: 'gauge', tier: 'conditional', note: 'Values measured against their own limit/ceiling. Wires the already-registered GaugeBlock.' },
-  matrix: { binding: 'proposal.matrix', blockType: 'heatmapGrid', tier: 'conditional', note: 'A 2-D business matrix (the RFM grid). Wires the already-registered HeatmapGridBlock.' },
+  coverage: { binding: 'proposal.coverage', blockType: 'gauge', tier: 'conditional', variant: 'meteredRow', note: 'Values measured against their own limit/ceiling. Wires the already-registered GaugeBlock.' },
+  matrix: { binding: 'proposal.matrix', blockType: 'heatmapGrid', tier: 'conditional', variant: 'zoneRow', note: 'A 2-D business matrix (the RFM grid). Wires the already-registered HeatmapGridBlock.' },
   detail_rows: { binding: 'proposal.detail_rows', blockType: 'table', tier: 'core', note: 'The row-level evidence board. Consolidates the reference\'s rows/gaps/cases/disposition.' },
   entities: { binding: 'proposal.entities', blockType: 'itemQueue', tier: 'conditional', span: 'half', note: 'The entities the analysis is about — supplier scorecards, carrier lanes, candidate SKUs, role cohorts. 15 of 26 reference analyze screens carry one.' },
   secondary_rows: { binding: 'proposal.secondary_rows', blockType: 'table', tier: 'conditional', span: 'half', note: 'The SECOND evidence board. A reference analyze screen routinely carries more than one (S9.2: stock-out risk, overstock, open POs); 23 of 26 carry a second board the single detail_rows slot had nowhere to put.' },
@@ -89,15 +93,15 @@ export const SLOT_VOCABULARY = Object.freeze({
   recommendation_identity: { binding: 'proposal.recommendation_identity', blockType: 'text', tier: 'conditional', note: '1/6. WHICH recommendation this is ("Balanced"). Reference `slateName`/`slateMeta`.' },
   recommendation: { binding: 'proposal.recommendation', blockType: 'text', tier: 'core', note: '2/6. The recommended decision, stated once. Reference `heroTitle`/`heroLine` — NEVER `approveLabel`, which is the CTA button\'s text.' },
   recommendation_detail: { binding: 'proposal.recommendation_detail', blockType: 'text', tier: 'conditional', note: '3/6. The reasoning sentence under the statement. Reference `heroSub`/`heroBody`/`tradeoff`.' },
-  recommendation_metrics: { binding: 'proposal.recommendation_metrics', blockType: 'statList', tier: 'conditional', note: '4/6. The figures behind the recommendation, each with its P10-P90 `range` and its caveat `note`. Reference `heroMetrics`.' },
+  recommendation_metrics: { binding: 'proposal.recommendation_metrics', blockType: 'statList', tier: 'conditional', variant: 'metricGrid', note: '4/6. The figures behind the recommendation, each with its P10-P90 `range` and its caveat `note`. Reference `heroMetrics`.' },
   composition: { binding: 'proposal.composition', blockType: 'barChart', tier: 'conditional', note: '5/6. How the recommendation splits across its categories. Reference `moveBar`, normalised to {label, value} so the EXISTING BarChartBlock carries it — a bar per category is the composition, so no new block type was added.' },
   basis: { binding: 'proposal.basis', blockType: 'statList', tier: 'conditional', note: '6/6. The provenance figures behind the confidence. Fills the `provenance` section, which the audit found declared and permanently empty.' },
 
-  alternatives: { binding: 'proposal.alternatives', blockType: 'cardSet', tier: 'conditional', note: 'The scenarios the operator may switch between ("Conservative / Balanced / Aggressive"). Reference `slates`/`modes`/`offerModes`/`slateTabs`/`caps`.' },
-  item_groups: { binding: 'proposal.item_groups', blockType: 'cardSet', tier: 'conditional', note: 'The selectable GROUPS of items, each with its own revenue/margin/capital effect. Reference `groups`.' },
+  alternatives: { binding: 'proposal.alternatives', blockType: 'cardSet', tier: 'conditional', variant: 'scenarioCard', note: 'The scenarios the operator may switch between ("Conservative / Balanced / Aggressive"). Reference `slates`/`modes`/`offerModes`/`slateTabs`/`caps`.' },
+  item_groups: { binding: 'proposal.item_groups', blockType: 'cardSet', tier: 'conditional', variant: 'groupCard', note: 'The selectable GROUPS of items, each with its own revenue/margin/capital effect. Reference `groups`.' },
   focus_rows: { binding: 'proposal.focus_rows', blockType: 'table', tier: 'conditional', note: 'The focused group drilled down to its individual items (SKU / capital / 90d revenue / GMROI). Reference `focusRows`.' },
   slate: { binding: 'proposal.slate', blockType: 'table', tier: 'conditional', note: 'The decision slate — the items being decided on. ONLY from the reference\'s own item vocabulary; this is the slot `approve_selected` acts on, so a shape-matched stand-in here is an integrity hazard, not a cosmetic one.' },
-  next_actions: { binding: 'proposal.next_actions', blockType: 'cardSet', tier: 'conditional', note: 'The routes out of this decision, each with the reference\'s own explanation of what it does. Reference `actions`/`routes`.' },
+  next_actions: { binding: 'proposal.next_actions', blockType: 'cardSet', tier: 'conditional', variant: 'routeCard', note: 'The routes out of this decision, each with the reference\'s own explanation of what it does. Reference `actions`/`routes`.' },
   totals_rows: { binding: 'totals.rows', blockType: 'statList', tier: 'conditional', note: 'The decision\'s roll-up totals. Reference `totals`/`rollup`/`summary`/`liveStats`.' },
   // Phase 5A, ruling R50. `proposal.threshold_control` was claimed in Phase 3A under R14 — the ONE
   // place in the whole corpus where the reference states a threshold as numbers rather than as a
