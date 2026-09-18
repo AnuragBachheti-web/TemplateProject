@@ -60,7 +60,6 @@ export default function ConfirmDialog({
       <h2
         id={titleId}
         {...typeRole('display', 'text-rf-text-primary')}
-        style={{ fontVariationSettings: "'opsz' 144" }}
       >
         {title}
       </h2>

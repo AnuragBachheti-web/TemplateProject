@@ -8,7 +8,7 @@ import { typeRole } from './typeRole';
  * a real reuse win rather than a second abstraction blocks have to fight.
  *
  * Radius/shadow match the reference design system directly (`_ds/.../tokens/{spacing,elevation}.css`:
- * cards are `--r-lg` (16px), resting at `shadow-xs` — "cards rest at xs and lift to md on hover").
+ * cards are `--r-lg` (16px), resting at `shadow-card` — "cards rest at xs and lift to md on hover").
  *
  * `padding` lets a block choose its own established rhythm (`"compact"` = `px-4 py-3`, used by the
  * single-value blocks; `"normal"` = `p-3`, used by list/table/chart blocks) rather than forcing one
@@ -18,7 +18,7 @@ export function BlockCard({ children, padding = 'normal', className = '' }) {
   const paddingClass = padding === 'compact' ? 'px-4 py-3' : padding === 'none' ? '' : 'p-3.5';
   return (
     <div
-      className={`rounded-2xl border border-rf-border-subtle bg-rf-surface-canvas shadow-xs transition-shadow duration-200 hover:shadow-sm ${paddingClass} ${className}`.trim()}
+      className={`rounded-xl border border-rf-border-subtle bg-rf-surface-canvas shadow-card ${paddingClass} ${className}`.trim()}
     >
       {children}
     </div>

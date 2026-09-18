@@ -69,7 +69,7 @@ export default function Modal({ open, onClose, labelledBy, describedBy, initialF
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         tabIndex={-1}
-        className="relative w-full max-w-md rounded-2xl border border-rf-border-subtle bg-rf-surface-raised p-6 shadow-xl outline-none"
+        className="relative w-full max-w-md rounded-xl border border-rf-border-subtle bg-rf-surface-raised p-6 shadow-overlay outline-none"
       >
         {children}
       </div>

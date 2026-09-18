@@ -108,7 +108,7 @@ export default function HeatmapGridBlock({ slotName, data, variant }) {
   rows.forEach((row, ri) => {
     gridItems.push(
       <div key={`label-${ri}`} className="flex min-w-0 flex-col justify-center pr-2">
-        <span {...cellText('identifier', row.label, typeRole('body', 'text-rf-text-secondary').className)}>{row.label}</span>
+        <span {...cellText('identifier', row.label, typeRole('small', 'text-rf-text-secondary').className)}>{row.label}</span>
         {variant === 'zoneRow' && row.figures.map((figure) => (
           <span key={figure} {...cellText('figure', figure, typeRole('micro', 'text-rf-text-tertiary').className)}>{figure}</span>
         ))}
@@ -126,7 +126,7 @@ export default function HeatmapGridBlock({ slotName, data, variant }) {
       gridItems.push(
         <div
           key={`cell-${ri}-${ci}`}
-          className="flex flex-col items-center justify-center gap-0 rounded px-1 py-1.5 text-center leading-tight"
+          className="flex flex-col items-center justify-center gap-0 rounded px-1 py-1.5 text-center"
           style={{ background: sequentialColor(t), color: sequentialTextColor(t) }}
           title={fields.map(([k, v]) => `${humanizeSlotName(k)}: ${flattenDisplayValue(v)}`).join(' · ')}
         >

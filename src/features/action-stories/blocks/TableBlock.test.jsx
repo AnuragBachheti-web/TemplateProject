@@ -162,13 +162,21 @@ describe('TableBlock — columns are the fields the records SHARE (Phase 5E, R74
 });
 
 describe('TableBlock — compact mode (no nested card when already inside a shared panel)', () => {
-  it('renders the table without BlockCard\'s own rounded-2xl/shadow-xs wrapper when compact', () => {
+  it('renders the table without BlockCard\'s own card wrapper when compact', () => {
+    // PHASE 6 (R99). This used to test for `.rounded-2xl` — BlockCard's radius — which worked only
+    // because the card and the compact table happened to round differently. One card treatment
+    // means they no longer do, and a radius stopped identifying a card.
+    //
+    // THE SHADOW IS WHAT MAKES A CARD A CARD: it is what lifts a surface off the page, and it is
+    // the one thing a compact table inside a shared panel must not draw. What this guards is
+    // unchanged — a table already in a panel may round its own border, but it may not become a
+    // second card.
     const data = [{ a: 1, b: 2, c: 3, d: 4 }];
     const compact = mount(<TableBlock slotName="x" data={data} compact />);
     const full = mount(<TableBlock slotName="x" data={data} />);
-    expect(compact.querySelector('.rounded-2xl')).toBeFalsy();
-    expect(compact.querySelector('.shadow-xs')).toBeFalsy();
-    expect(full.querySelector('.rounded-2xl')).toBeTruthy();
+    expect(compact.querySelector('.shadow-card'), 'compact drew a card').toBeFalsy();
+    expect(full.querySelector('.shadow-card'), 'standalone drew no card').toBeTruthy();
+    expect(full.querySelector('.rounded-xl')).toBeTruthy();
     // Same table content either way — compact changes the wrapper, never the data.
     expect(compact.querySelector('table')).toBeTruthy();
     expect(compact.textContent).toContain('1');

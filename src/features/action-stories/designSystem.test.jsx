@@ -105,10 +105,15 @@ describe('T97 — TEXT USES THE -700 STEP, WHICH IS AN ACCESSIBILITY FIX (R83)',
   it('the -700 text tokens exist and hold the DS\'s own values', () => {
     // From 05-color.html's contrast matrix: green-700 #046c46 is AAA 7.4:1 on white and is what the
     // DS calls "success message body text"; amber-700 #a15c07 is AA 5.1:1; rose-700 #9f1239.
+    // PHASE 6 DELTA (R93/R94). These were the OLD design source's -700 steps (#046C46 / #A15C07 /
+    // #9F1239). That source is historical; the values are the product's own success/warning/error
+    // with a derived darker step for text, because the product's #16A34A is 3.30:1 and its #F59E0B
+    // is 2.15:1 and neither is a text colour. WHAT THIS TEST PROTECTS IS UNCHANGED and is the whole
+    // reason it survives a palette swap: text takes a step that clears AA, icons keep the hue.
     for (const [token, value] of [
-      ['--rf-status-success-text', '#046C46'],
-      ['--rf-status-warning-text', '#A15C07'],
-      ['--rf-status-critical-text', '#9F1239'],
+      ['--rf-status-success-text', '#15803D'],
+      ['--rf-status-warning-text', '#B45309'],
+      ['--rf-status-critical-text', '#B91C1C'],
     ]) {
       expect(TOKENS, `${token} is missing`).toContain(`${token}:`)
       expect(TOKENS.toUpperCase(), `${token} does not hold the DS value`).toContain(value)
@@ -133,11 +138,11 @@ describe('T97 — TEXT USES THE -700 STEP, WHICH IS AN ACCESSIBILITY FIX (R83)',
       const L = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
       return (1.0 + 0.05) / (L + 0.05)
     }
-    expect(contrast('#10A36D')).toBeLessThan(4.5) // green-500: the defect
-    expect(contrast('#F59E0B')).toBeLessThan(4.5) // amber-500: the worse defect
-    expect(contrast('#046C46'), 'green-700 must clear AA for body text').toBeGreaterThanOrEqual(4.5)
-    expect(contrast('#A15C07'), 'amber-700 must clear AA for body text').toBeGreaterThanOrEqual(4.5)
-    expect(contrast('#9F1239'), 'rose-700 must clear AA for body text').toBeGreaterThanOrEqual(4.5)
+    expect(contrast('#16A34A')).toBeLessThan(4.5) // the product's success: 3.30:1
+    expect(contrast('#F59E0B')).toBeLessThan(4.5) // the product's warning: 2.15:1
+    expect(contrast('#15803D'), 'the success text step must clear AA').toBeGreaterThanOrEqual(4.5)
+    expect(contrast('#B45309'), 'the warning text step must clear AA').toBeGreaterThanOrEqual(4.5)
+    expect(contrast('#B91C1C'), 'the error text step must clear AA').toBeGreaterThanOrEqual(4.5)
   })
 
   it('no call site colours TEXT with a -500 status token', () => {

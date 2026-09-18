@@ -1,119 +1,151 @@
-// THE TYPE SYSTEM. Six roles, one module, every size and face declared here and nowhere else.
+// THE TYPE SYSTEM. Every size, face, weight and tracking in this feature is declared here.
 //
 // ============================================================================================
-// WHAT THIS REPLACES (Phase 5E Part 2)
+// PHASE 6 — THE SOURCE CHANGED, SO THE VALUES CHANGED. HOW ROLES WORK DID NOT.
 // ============================================================================================
 //
-// 157 hardcoded pixel sizes across 18 distinct values in 38 files, including half-pixel steps
-// (12.5, 11.5, 10.5, 9.5, 8.5) that exist for no stated reason, plus 27 hand-picked `tracking-[…]`
-// values. Meanwhile `src/styles/realify-tokens.css` has carried a `--text-*` scale the whole time
-// and Action Stories consumed none of it.
+// Phase 5E resolved these roles against docs/design-system/06-typography.html: Fraunces at 28 for
+// titles, JetBrains Mono for every label, figure and annotation, sizes taken from that document's
+// scale. The application was faithful. THE SOURCE WAS NOT THIS PRODUCT — it describes a serif,
+// mono-dominant system this application does not ship — and the result read, in the operator's
+// words, zoomed in. The shipping product is Inter throughout at a tighter scale.
 //
-// The clearest symptom was the EYEBROW — one role, spelled 26 different ways: five sizes
-// (9/9.5/10/10.5/11px), five tracking values (0.06/0.08/0.1/0.12/0.14em), three weights, three
-// colours, and several of them not even mono. Nobody chose that. It is what happens when the
-// decision is made 26 times instead of once.
-//
-// ============================================================================================
-// THE FACES, AND WHY MONO IS BOUNDED (ruling R84)
-// ============================================================================================
-//
-// The design system gives mono two rows (Label, Data/M). The REFERENCE uses it for almost
-// everything: across the 114 mockups in source-mockups/, `var(--font-mono)` appears 5,399 times
-// against 578 sans and 179 display. That is not a stylistic lean, it is the product's voice, and
-// this template was already closer to the reference (41 `font-mono`) than to the DS.
-//
-// R84 follows the reference AND bounds it, because "mono is the voice" with no boundary is how a
-// codebase ends up with mono paragraphs. MONO IS THE FACE FOR label, figure AND micro. Prose and
-// headings are Inter. Titles are Fraunces. A component may not reach for mono outside those roles,
-// and T94 asserts the two lists agree, so the rule cannot drift into a convention.
-//
-// Recorded as a DELIBERATE DIVERGENCE from the DS, with the counts, so the next reader sees it was
-// decided rather than drifted into.
+// So this is a re-point, not a rebuild. `typeRole(role, extra)` is unchanged, every call site is
+// unchanged, and what changes is what a role RESOLVES TO.
 //
 // ============================================================================================
-// WHAT THIS MODULE DOES NOT OWN
+// MONO IS FIGURES ONLY — THIS REVERSES R84, DELIBERATELY (invariant I3)
 // ============================================================================================
 //
-// COLOUR. A role says how big a thing is and what face it wears; what it MEANS is the call site's
-// business, and semantic colour still comes from statusTone/deltaTone (I3). Pass it through `extra`.
+// Ruling R84 made mono the face for `label`, `figure` and `micro`, on the evidence that the 114
+// reference mockups use var(--font-mono) 5,399 times against 578 sans. That evidence was real and
+// the reading was reasonable — OF THE OLD SOURCE. Those mockups belong to the same superseded
+// system as the Fraunces display. Carrying R84 forward would mean keeping the strongest visual
+// signature of a design system this product does not use.
 //
-// WRAPPING. That is cellText.js's (Phase 5D). The two compose: cellText decides whether a string
-// may be cut, typeRole decides what it looks like. Neither answers the other's question.
+// MONO NOW MEANS EXACTLY ONE THING: THIS IS A QUANTITY. A number, an identifier, a timestamp. When
+// every label was mono, mono said nothing — 59 of 135 call sites wore it. Six do now.
+//
+// R84's other half STANDS, and it is why this reversal is safe to state so plainly: a face is
+// chosen by a ROLE and never by a component, so reversing the decision is one edit in one file
+// rather than a sweep anyone could get partly wrong.
+//
+// ============================================================================================
+// TWO SIZES FOR TEXT, BECAUSE THIS APP IS TWO KINDS OF SURFACE (ruling R95)
+// ============================================================================================
+//
+// The product's hierarchy has a body row at 15-16 and a small row at 13-14. Both belong here, for
+// a reason particular to this application: a narrative is READ and a fifteen-column slate is
+// SCANNED, and Phase 5E Part 1 exists because that slate once ran fifteen columns into 834px.
+// Taking the reading size to every table cell would cost density on the surfaces with least to
+// spare, and the product's own data-dense screens use the small row.
+//
+// R95 binds the choice to the SLOT'S NATURE rather than to a component's taste, the way `span` and
+// `variant` already are:
+//
+//     body   the reading size, 15px — a narrative, a card's prose, a dialog's description
+//     small  the scanning size, 13px — table cells, list rows, grid labels, chrome
+//
+// A COMPONENT MAY NOT CHOOSE BETWEEN THEM. phase6.test.jsx's T103 asserts it per file: a scanning
+// surface may not use `body`, a reading surface may not use `small`. That is what makes this a
+// boundary rather than a rule a component interprets — it is checked, not trusted.
+//
+// THAT MAKES SEVEN ROLES, NOT SIX, AND IT IS THE ONE STRUCTURAL ADDITION THIS PHASE MAKES. The
+// brief asked for six; R95's split needs a seventh, because `micro` stays an 11px extension and
+// cannot double as the 13px scanning size without losing the dense annotation surfaces Phase 5B
+// built. Said here rather than absorbed quietly.
 
 /**
  * @typedef {object} TypeRoleSpec
- * @property {'serif'|'sans'|'mono'} face - Fraunces / Inter / JetBrains Mono.
- * @property {string} className          - the utilities that implement the role.
- * @property {string|null} dsRow         - the design-system row it implements, or null if it is an
- *   extension (in which case `extension` must say why).
- * @property {string} [extension]        - stated reason this role is outside the DS.
- * @property {string} rule               - the rule in words, so a reader never infers it from classes.
+ * @property {'sans'|'mono'} face     - Inter, or JetBrains Mono for figures.
+ * @property {number} px              - the rendered size, so a test can reason about it.
+ * @property {string} className       - the utilities that implement the role.
+ * @property {string|null} productRow - the product hierarchy row this implements, or null.
+ * @property {string} [extension]     - stated reason this role has no product row.
+ * @property {string} rule            - the rule in words, so a reader never infers it from classes.
  */
 
-/** @type {Record<'display'|'heading'|'body'|'label'|'figure'|'micro', TypeRoleSpec>} */
+/** @type {Record<'display'|'heading'|'body'|'small'|'label'|'figure'|'micro', TypeRoleSpec>} */
 export const TYPE_ROLES = Object.freeze({
   display: {
-    face: 'serif',
-    dsRow: 'Heading / 2 — Fraunces 28 / 32, -1.5%',
-    className: 'font-serif text-[28px] font-normal leading-[1.15] tracking-[-0.02em]',
-    rule: 'The one editorial voice on the screen: a pane title, a story title, a dialog title. '
-      + 'Fraunces at optical size 144. Never used for a value, however large that value is.',
+    face: 'sans',
+    px: 24,
+    productRow: 'H3 20-24 semibold — the top of the range',
+    className: 'text-[24px] font-semibold leading-[1.25] tracking-[-0.02em]',
+    rule: 'The one title on a screen: a pane title, a story title, a dialog title. It sits at the '
+      + 'top of the product H3 range rather than above it, so a pane title and a section heading '
+      + 'differ in SIZE and not only in weight — weight alone is a hierarchy readers miss (R96).',
   },
   heading: {
     face: 'sans',
-    dsRow: 'Heading / 3 — Inter 600, 20 / 28',
+    px: 20,
+    productRow: 'H3 20-24 semibold',
     className: 'text-[20px] font-semibold leading-7',
-    rule: 'A section subhead inside a pane. Inter, because a heading is interface rather than '
-      + 'editorial — the reference reserves Fraunces for the top of a screen, not its parts.',
+    rule: 'A section heading inside a pane. Four points below the pane title, which is the whole '
+      + 'difference between "this screen is about X" and "this part of it is about Y".',
   },
   body: {
     face: 'sans',
-    dsRow: 'Body / S — Inter 400, 13 / 20',
+    px: 15,
+    productRow: 'body 15-16 regular',
+    className: 'text-[15px] font-normal leading-6',
+    rule: 'THE READING SIZE. Sentences an operator reads through: a narrative, a card\'s prose, a '
+      + 'dialog description, an alert message. Never for anything laid out in a grid.',
+  },
+  small: {
+    face: 'sans',
+    px: 13,
+    productRow: 'small 13-14',
     className: 'text-[13px] font-normal leading-5',
-    rule: 'Every sentence an operator reads. The default; if a string is prose, it is this.',
+    rule: 'THE SCANNING SIZE. Everything laid out to be compared rather than read: table cells, '
+      + 'list rows, grid labels, and the application chrome around them.',
   },
   label: {
-    face: 'mono',
-    dsRow: 'Label — JB Mono 500, 11, +14%',
-    className: 'font-mono text-[11px] font-medium uppercase tracking-[0.14em]',
-    rule: 'THE EYEBROW. The small uppercase mono line naming what sits beneath it — a block '
-      + 'caption, a breadcrumb, a section name, a panel title. One spec, so it is one thing.',
+    face: 'sans',
+    px: 12,
+    productRow: 'labels / metadata 12-13 medium-semibold',
+    className: 'text-[12px] font-semibold uppercase tracking-[0.04em]',
+    rule: 'The small line naming what sits beneath it — a block caption, a breadcrumb, a section '
+      + 'name, a column header. Inter now rather than mono, and the tracking is under a third of '
+      + 'what the old source asked for: it is a label, not an announcement.',
   },
   figure: {
     face: 'mono',
-    dsRow: 'Data / M — JB Mono 500, 14 / 22',
-    className: 'font-mono text-[14px] font-medium leading-[22px] tabular-nums',
-    rule: 'A quantity an operator reads or compares: a delta, a price, a count, a percentage. '
-      + 'Tabular alignment, so a column of them lines up. What IS a figure is figureShape.js.',
+    px: 13,
+    productRow: 'small 13-14, set in the data face',
+    className: 'font-mono text-[13px] font-medium leading-5 tabular-nums',
+    rule: 'THE ONLY MONO ROLE (I3). A quantity an operator reads or compares: a delta, a price, a '
+      + 'count, a percentage, an identifier, a timestamp. Tabular, so a column of them lines up. '
+      + 'What counts as a figure is figureShape.js; its colour is deltaTone\'s, never a caller\'s.',
   },
   micro: {
-    face: 'mono',
-    dsRow: null,
-    extension: 'OUTSIDE THE DS, DELIBERATELY AND ON THE RECORD (ruling R81). The DS scale stops at '
-      + '11px and 45 usages in this template sit below it — bar labels, grid cell figures, sub-row '
-      + 'annotations, almost all of them the dense surfaces Phase 5B built. Raising them to the 11px '
-      + 'label step would change layout in a phase whose I6 says 5C and 5D hold, on the densest '
-      + 'surfaces in the app, so it would be a layout change dressed as compliance. An honest '
-      + 'documented extension is the better of the two. Raise it with the DS owner; do not wait.',
-    className: 'font-mono text-[10px] leading-[14px] tabular-nums',
-    rule: 'Dense annotation that is read by scanning rather than by reading: a bar label, a grid '
-      + 'figure, a caption under a chart. If an operator must READ it, it is not this.',
+    face: 'sans',
+    px: 11,
+    productRow: null,
+    extension: 'OUTSIDE THE PRODUCT SCALE, DELIBERATELY AND ON THE RECORD — the standing ruling R81 '
+      + 'gave it in Phase 5E, renewed by R95 here. The product\'s smallest row is 12. Around thirty '
+      + 'sites sit below it: bar labels, grid cell figures, sub-row annotations, almost all of them '
+      + 'the dense surfaces Phase 5B built. Raising them would change layout on the densest '
+      + 'surfaces in the app, which invariant I8 forbids dressing up as compliance. Raise it with '
+      + 'whoever owns the product scale; do not wait for them.',
+    className: 'text-[11px] font-normal leading-4',
+    rule: 'Dense annotation read by scanning rather than reading: a bar label, a grid figure, a '
+      + 'caption under a chart. If an operator must READ it, it is not this.',
   },
 })
 
 export const TYPE_ROLE_NAMES = Object.freeze(Object.keys(TYPE_ROLES))
 
-/** The three roles that wear mono, per R84. T94 asserts this agrees with every spec's `face`. */
-export const MONO_ROLES = Object.freeze(['label', 'figure', 'micro'])
+/** The roles that wear mono. One of them (I3). T103 asserts this agrees with every spec's `face`. */
+export const MONO_ROLES = Object.freeze(['figure'])
 
 /**
  * The props an element of this role needs.
  *
- * @param {'display'|'heading'|'body'|'label'|'figure'|'micro'} role
- * @param {string} [extra] - classes that are NOT type: colour, spacing, alignment, layout. Those
- *   stay the call site's business. A size, a face or a tracking value passed here is the defect
- *   this module exists to remove, and T95 fails the build on one.
+ * @param {'display'|'heading'|'body'|'small'|'label'|'figure'|'micro'} role
+ * @param {string} [extra] - classes that are NOT type: colour, spacing, alignment, layout. A size,
+ *   a face, a weight or a tracking value passed here is the defect this module exists to remove,
+ *   and T103 fails the build on one.
  * @returns {{className: string}}
  */
 export function typeRole(role, extra = '') {

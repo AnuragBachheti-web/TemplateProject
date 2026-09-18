@@ -25,7 +25,7 @@ function ActionStoryCard({ story }) {
   const headline = story.stages.find((s) => s.impact)?.impact ?? null;
 
   return (
-    <li className="rounded-2xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-xs">
+    <li className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-card">
       <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
         <span {...typeRole('label', 'text-rf-text-tertiary')}>
           {story.story_code}
@@ -46,7 +46,7 @@ function ActionStoryCard({ story }) {
           <li key={stage.stage}>
             <Link
               to={actionStoryPath(story.story_code, stage.stage, stage.proposal_id)}
-              {...typeRole('body', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+              {...typeRole('small', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
             >
               {STAGE_LABELS[stage.stage] ?? stage.stage}
               <span className={`${typeRole('micro').className} rounded-full px-1.5 capitalize ${STATUS_TONE[stage.status] ?? STATUS_TONE.pending}`}>
@@ -84,7 +84,7 @@ function ActionStoriesHomeContent({ onRetry }) {
   if (state.status === 'loading') return <LoadingState label="Loading Action Stories…" />;
   if (state.status === 'error') return <AsyncErrorState error={state.error} onRetry={onRetry} />;
   if (state.stories.length === 0) {
-    return <div {...typeRole('body', 'p-6 text-rf-text-secondary')}>No Action Stories found.</div>;
+    return <div {...typeRole('small', 'p-6 text-rf-text-secondary')}>No Action Stories found.</div>;
   }
 
   return (
@@ -94,11 +94,10 @@ function ActionStoriesHomeContent({ onRetry }) {
     <div className="mx-auto min-h-0 w-full max-w-page flex-1 overflow-y-auto px-6 py-5">
       <h1
         {...typeRole('display', 'text-rf-text-primary')}
-        style={{ fontVariationSettings: "'opsz' 144" }}
       >
         Action Stories
       </h1>
-      <p {...typeRole('body', 'mt-1 text-rf-text-secondary')}>
+      <p {...typeRole('small', 'mt-1 text-rf-text-secondary')}>
         {state.stories.length} stories ·{' '}
         {state.stories.reduce((n, s) => n + s.stages.length, 0)} stages
       </p>

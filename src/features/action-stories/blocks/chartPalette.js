@@ -44,10 +44,21 @@ const SEQUENTIAL_STEPS = [
   'var(--rf-chart-seq-5)',
 ];
 
-// The same 5 steps' resolved hex, kept by hand in lockstep with chart-tokens.css — needed only to
-// pick a legible text color per cell (a `var()` reference can't be inspected for luminance without
-// a DOM round-trip, and every cell needs its color decided the instant it's rendered).
-const SEQUENTIAL_STEP_HEX = ['#b7d3f6', '#6da7ec', '#2a78d6', '#1c5cab', '#104281'];
+// PHASE 6. This used to be the same 5 steps' resolved hex, "kept by hand in lockstep with
+// chart-tokens.css", so that a cell's text colour could be chosen by luminance at render time. Two
+// things were wrong with that. It duplicated the scale in a module that had to mirror it, which is
+// the sort of copy that drifts — and it HAD drifted out of contrast: Phase 5E's T100 measured 60
+// elements below AA, every one a white figure on a middle heat step, worst 2.50:1.
+//
+// The choice now lives beside the scale it depends on, as a `-on` token per step, measured and
+// documented there. Nothing here computes a luminance and nothing here holds a colour.
+const SEQUENTIAL_STEP_ON = [
+  'var(--rf-chart-seq-1-on)',
+  'var(--rf-chart-seq-2-on)',
+  'var(--rf-chart-seq-3-on)',
+  'var(--rf-chart-seq-4-on)',
+  'var(--rf-chart-seq-5-on)',
+];
 
 function bucketIndex(t) {
   const clamped = Math.max(0, Math.min(1, t));
@@ -59,17 +70,13 @@ export function sequentialColor(t) {
   return SEQUENTIAL_STEPS[bucketIndex(t)];
 }
 
-function relativeLuminance(hex) {
-  const n = hex.replace('#', '');
-  const [r, g, b] = [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16) / 255);
-  const lin = (c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
-  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-}
+// `relativeLuminance` WAS HERE. It existed only to pick a cell's text colour from the duplicated
+// hex above, and both went together when that decision moved into chart-tokens.css beside the scale
+// it depends on. Nothing in this module computes a colour any more; it names them.
 
 /** Legible text color (near-black or near-white) for a cell painted with `sequentialColor(t)`. */
 export function sequentialTextColor(t) {
-  const hex = SEQUENTIAL_STEP_HEX[bucketIndex(t)];
-  return relativeLuminance(hex) > 0.45 ? '#0B1117' : '#FFFFFF';
+  return SEQUENTIAL_STEP_ON[bucketIndex(t)];
 }
 
 // ---- Status (state) — reserved, never reused for plain series identity -------------------------

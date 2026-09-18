@@ -88,7 +88,7 @@ export function ToastProvider({ children }) {
                 key={t.id}
                 role={assertive ? 'alert' : 'status'}
                 aria-live={assertive ? 'assertive' : 'polite'}
-                className={`${typeRole('body').className} pointer-events-auto flex w-full max-w-sm items-start gap-2.5 rounded-lg border bg-rf-surface-raised px-3.5 py-3 text-rf-text-primary shadow-lg ${TONE_BORDER_CLASS[t.tone] ?? TONE_BORDER_CLASS.info}`}
+                className={`${typeRole('body').className} pointer-events-auto flex w-full max-w-sm items-start gap-2.5 rounded-lg border bg-rf-surface-raised px-3.5 py-3 text-rf-text-primary shadow-raised ${TONE_BORDER_CLASS[t.tone] ?? TONE_BORDER_CLASS.info}`}
               >
                 <i
                   className={`${glyph(13)} mt-[1px] ${TONE_ICON[t.tone] ?? TONE_ICON.info} ${TONE_ICON_CLASS[t.tone] ?? TONE_ICON_CLASS.info}`}

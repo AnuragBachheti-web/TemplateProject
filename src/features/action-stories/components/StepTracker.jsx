@@ -56,7 +56,7 @@ export default function StepTracker({ code, stages, activeStageKey }) {
                 >
                   {isPast ? <i className={`fa-solid fa-check ${glyph(9)}`} /> : i + 1}
                 </span>
-                <span className={`${typeRole('body').className} ${isActive ? ' text-rf-text-primary' : isPast ? ' text-rf-text-secondary' : ' text-rf-text-tertiary'}`}>
+                <span className={`${typeRole('small').className} ${isActive ? ' text-rf-text-primary' : isPast ? ' text-rf-text-secondary' : ' text-rf-text-tertiary'}`}>
                   {STAGE_LABELS[stageKey] || stageKey}
                 </span>
               </NavLink>
@@ -71,7 +71,7 @@ export default function StepTracker({ code, stages, activeStageKey }) {
       {next && (
         <Link
           to={actionStoryPath(code, next.stage, next.proposal_id)}
-          {...typeRole('body', 'inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', 'inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Next
           <i className={`fa-solid fa-arrow-right ${glyph(10)}`} aria-hidden="true" />

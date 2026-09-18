@@ -29,7 +29,7 @@ export default function Checkbox({ checked = false, onChange, indeterminate = fa
   return (
     <label
       htmlFor={id}
-      className={`${typeRole('body').className} inline-flex items-center gap-2 text-rf-text-primary ${disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${className}`}
+      className={`${typeRole('small').className} inline-flex items-center gap-2 text-rf-text-primary ${disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${className}`}
     >
       <input
         id={id}

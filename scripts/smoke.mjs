@@ -599,6 +599,55 @@ async function runLayoutGate(base) {
 
 const SHOT_DIR = path.resolve('artifacts/variant-screenshots')
 
+// ---- T110: THE PANE SCREENSHOT PASS (Phase 6, invariant I9) --------------------------------------
+//
+// Every one of the four stage templates, at both supported widths, on four DIFFERENT stories — so
+// the set cannot be satisfied by photographing one screen twice. Phase 5B found three defects this
+// way that every measurement gate had passed, and Phase 5E found more; this phase changes every
+// pixel on every surface, which is the worst possible time to stop looking.
+//
+// The run FAILS on a missing file. A screenshot pass that quietly writes nothing is worth less than
+// no pass at all, because it reads like evidence.
+const PANE_SHOT_DIR = path.resolve('artifacts/phase-6/panes')
+const PANE_SHOTS = [
+  { template: 'reason.v1', path: '/action-stories/S9.1/reason/prop_s9_1_reason' },
+  { template: 'analyze.compare.v1', path: '/action-stories/S9.18/analyze/prop_s9_18_analyze' },
+  { template: 'decide.slate.v1', path: '/action-stories/S10.1/decide/prop_s10_1_decide' },
+  { template: 'execute.bridge.v1', path: '/action-stories/S9.11/execute/prop_s9_11_execute' },
+]
+
+async function capturePaneScreenshots(base) {
+  fs.rmSync(PANE_SHOT_DIR, { recursive: true, force: true })
+  fs.mkdirSync(PANE_SHOT_DIR, { recursive: true })
+  const failures = []
+  let written = 0
+
+  await layoutSession(async ({ goto, setViewport, send }) => {
+    for (const width of LAYOUT_WIDTHS) {
+      await setViewport(width, 950)
+      for (const shot of PANE_SHOTS) {
+        await goto(base + shot.path)
+        const file = path.join(PANE_SHOT_DIR, `${shot.template}-${width}.png`)
+        try {
+          const { data } = await send('Page.captureScreenshot', { format: 'png' })
+          fs.writeFileSync(file, Buffer.from(data, 'base64'))
+        } catch (e) {
+          failures.push(`T110 ${shot.template} @${width}: capture failed — ${e.message}`)
+          continue
+        }
+        if (!fs.existsSync(file) || fs.statSync(file).size < 5000) {
+          failures.push(`T110 ${shot.template} @${width}: no usable screenshot at ${path.relative(process.cwd(), file)}`)
+        } else {
+          written += 1
+        }
+      }
+    }
+  })
+  const expected = PANE_SHOTS.length * LAYOUT_WIDTHS.length
+  if (written < expected) failures.push(`T110: ${written} of ${expected} pane screenshots captured`)
+  return { failures, written, expected }
+}
+
 /** One object per variant, chosen because it carries that variant's distinguishing feature. */
 const VARIANT_SHOTS = [
   { variant: 'metricGrid', slot: 'recommendation_metrics', path: '/action-stories/S9.1/decide/prop_s9_1_decide' },
@@ -738,14 +787,16 @@ async function main() {
     // moving the whole text ramp down one step of the DS's own ink scale (see tokens.css), which
     // took the count from 4,164 to 60 without touching a single call site.
     //
-    // THE 60 THAT REMAIN are white figures inside HeatmapGridBlock's cells, sitting on the mid
-    // steps of the sequential blue chart scale — worst measured 2.5:1 on prop_s9_13_analyze at
-    // 1280. R90 ruled they be reported, not restyled: fixing them means changing the chart scale
-    // itself, which is a different decision on a different surface.
+    // PHASE 6 TOOK IT TO ZERO. The last 60 were white figures on HeatmapGridBlock's mid heat
+    // steps, worst 2.50:1 — and Phase 6 is the phase that replaces the visual system, so the chart
+    // scale was in scope at last. The per-step text colour moved into chart-tokens.css beside the
+    // scale it depends on (it had been a hand-maintained copy of the hex in chartPalette.js, which
+    // is how it drifted), and seq-3 moved from #2a78d6 to #2570CE because at its old value NEITHER
+    // white nor ink cleared AA on it — white 4.42, ink 4.02 — so no choice of text colour could
+    // have been legible and the step itself had to move.
     //
-    // Pinned, so the run goes red the moment the number grows. Lower it when the chart scale is
-    // ruled on. Do not raise it.
-    const NEUTRAL_LOW_CONTRAST_BASELINE = 60
+    // PINNED AT ZERO. The run goes red on the first element that falls below AA. Do not raise it.
+    const NEUTRAL_LOW_CONTRAST_BASELINE = 0
     if (neutralLowContrast.length > NEUTRAL_LOW_CONTRAST_BASELINE) {
       const byHex = {}
       for (const h of neutralLowContrast) byHex[h] = (byHex[h] ?? 0) + 1
@@ -765,6 +816,14 @@ async function main() {
         (failures.length > shown.length ? `\n    … and ${failures.length - shown.length} more` : ''))
     } else {
       console.log(`  ok  layout gate — ${checked} page loads, no clipped text, both regions scroll`)
+    }
+
+    const panes = await capturePaneScreenshots(base)
+    if (panes.failures.length > 0) {
+      fail(`pane screenshots: ${panes.failures.length} problem(s)\n` + panes.failures.map((f) => `    ${f}`).join('\n'))
+    } else {
+      console.log(`  ok  T110 pane screenshots — ${panes.written}/${panes.expected} ` +
+        `(4 templates x ${LAYOUT_WIDTHS.length} widths) in ${path.relative(process.cwd(), PANE_SHOT_DIR)}`)
     }
 
     const shots = await captureVariantScreenshots(base)

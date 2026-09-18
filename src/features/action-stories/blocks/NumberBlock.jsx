@@ -28,7 +28,7 @@ export default function NumberBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-baseline justify-between gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('body', 'text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('small', 'text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
         <span {...typeRole('figure', 'shrink-0 text-rf-text-primary')}>{display}</span>
       </div>
     );

@@ -93,7 +93,7 @@ function findExtraFields(item, usedKeys) {
 function Item({ item, index }) {
   if (item === null || typeof item !== 'object') {
     return (
-      <li {...typeRole('body', 'rounded-xl border border-rf-border-subtle px-3 py-2 text-rf-text-primary')}>
+      <li {...typeRole('small', 'rounded-xl border border-rf-border-subtle px-3 py-2 text-rf-text-primary')}>
         {flattenDisplayValue(item)}
       </li>
     );
@@ -120,14 +120,14 @@ function Item({ item, index }) {
     <li className="relative overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised py-2 pl-4 pr-3">
       {tone && <span className={`absolute inset-y-0 left-0 w-1 ${tone.dot}`} />}
       <div className="flex items-center justify-between gap-2">
-        <p {...cellText('identifier', headline, typeRole('body', 'text-rf-text-primary').className)}>{headline}</p>
+        <p {...cellText('identifier', headline, typeRole('small', 'text-rf-text-primary').className)}>{headline}</p>
         {state !== undefined && (
           <span {...typeRole('label', 'flex-shrink-0 rounded-full bg-rf-surface-sunken px-2 py-0.5 text-rf-text-secondary')}>
             {String(state)}
           </span>
         )}
       </div>
-      {detail && <p {...cellText('prose', detail, typeRole('body', 'mt-0.5 text-rf-text-secondary').className)}>{detail}</p>}
+      {detail && <p {...cellText('prose', detail, typeRole('small', 'mt-0.5 text-rf-text-secondary').className)}>{detail}</p>}
       {identifier !== undefined && (
         <p {...typeRole('micro', 'mt-0.5 text-rf-text-tertiary')}>{String(identifier)}</p>
       )}
@@ -153,7 +153,7 @@ function Item({ item, index }) {
           </p>
           <ul className="mt-0.5 flex flex-col gap-0.5">
             {entries.map((entry, i) => (
-              <li key={i} {...typeRole('body', 'text-rf-text-secondary')}>
+              <li key={i} {...typeRole('small', 'text-rf-text-secondary')}>
                 {entry}
               </li>
             ))}
@@ -247,7 +247,7 @@ function SimpleChipList({ data }) {
         return (
           <span
             key={i}
-            {...typeRole('body', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-canvas px-2.5 py-1 text-rf-text-primary')}
+            {...typeRole('small', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-canvas px-2.5 py-1 text-rf-text-primary')}
           >
             {color && <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full" style={{ backgroundColor: color }} />}
             {label}

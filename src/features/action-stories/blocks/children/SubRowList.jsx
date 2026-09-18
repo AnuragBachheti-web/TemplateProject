@@ -29,7 +29,7 @@ export default function SubRowList({ rows, max = 4 }) {
         const text = typeof row === 'object' ? Object.values(row).map(flattenDisplayValue).filter(Boolean).join(' · ') : flattenDisplayValue(row);
         if (!text) return null;
         return (
-          <li key={i} {...cellText('prose', text, typeRole('body', 'text-rf-text-tertiary').className)}>
+          <li key={i} {...cellText('prose', text, typeRole('small', 'text-rf-text-tertiary').className)}>
             {text}
           </li>
         );

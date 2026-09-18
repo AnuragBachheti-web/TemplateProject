@@ -53,7 +53,7 @@ export default function Alert({ tone = 'info', title, children, onDismiss, compa
     <div role={role} className={`${typeRole('body').className} flex items-start gap-2.5 rounded-lg border px-3.5 py-3 ${t.border} ${t.bg} ${className}`}>
       <i className={`${glyph(13)} ${t.icon} mt-[1px] ${t.iconTone}`} aria-hidden="true" />
       <div className="flex-1">
-        {title && <p className="font-semibold text-rf-text-primary">{title}</p>}
+        {title && <p className="text-rf-text-primary"><strong>{title}</strong></p>}
         <div className={title ? 'mt-0.5 text-rf-text-secondary' : 'text-rf-text-primary'}>{children}</div>
       </div>
       {onDismiss && (

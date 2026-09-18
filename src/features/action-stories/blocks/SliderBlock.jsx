@@ -55,7 +55,7 @@ export default function SliderBlock({ slotName, data, onChange }) {
           {data.value === undefined || data.value === null ? null : formatValue(data.value)}
           {unit}
         </span>
-        {data.note && <span {...typeRole('body', 'text-rf-text-tertiary')}>{data.note}</span>}
+        {data.note && <span {...typeRole('small', 'text-rf-text-tertiary')}>{data.note}</span>}
       </p>
 
       <input

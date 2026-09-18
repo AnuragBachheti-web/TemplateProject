@@ -50,12 +50,16 @@ export default function TextBlock({ slotName, data, compact, role }) {
   if (isHero) {
     const eyebrow = (
       <p {...typeRole('label', 'flex items-center gap-2 text-rf-text-tertiary')}>
-        <span aria-hidden="true" className="h-[6px] w-[6px] rounded-full bg-rf-brand-blue-500" />
+        {/* THE SIGNAL MARK IS NOT BLUE (invariant I4). Blue means interactive or current, and this dot
+            is neither — it identifies the block as a Realify signal, which is an AI/intelligence
+            marker. The product reserves violet for exactly that, so the mark takes the purple
+            accent and leaves blue to mean the one thing it now means. */}
+        <span aria-hidden="true" className="h-[6px] w-[6px] rounded-full bg-rf-brand-purple-500" />
         Realify signal · {humanizeSlotName(slotName)}
       </p>
     );
     const headline = (
-      <p {...typeRole('display', 'mt-2 text-rf-text-primary')} style={{ fontVariationSettings: "'opsz' 144" }}>
+      <p {...typeRole('display', 'mt-2 text-rf-text-primary')}>
         {text}
       </p>
     );
@@ -73,7 +77,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
       );
     }
     return (
-      <div className="rounded-2xl border border-rf-border-subtle border-l-[3px] border-l-rf-brand-blue-500 bg-rf-surface-canvas px-5 py-4 shadow-xs">
+      <div className="rounded-xl border border-rf-border-subtle border-l-[3px] border-l-rf-brand-purple-500 bg-rf-surface-canvas px-5 py-4 shadow-card">
         {eyebrow}
         {headline}
       </div>

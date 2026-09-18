@@ -57,7 +57,7 @@ export default function RosterBlock({ slotName, data, compact = false }) {
           <Initials name={row.name} initials={row.initials} />
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline gap-2">
-              <span {...cellText('identifier', row.name, typeRole('body', 'text-rf-text-primary').className)}>{row.name}</span>
+              <span {...cellText('identifier', row.name, typeRole('small', 'text-rf-text-primary').className)}>{row.name}</span>
               {/* `lead` is the reference's own flag for the agent that drove the proposal. */}
               {row.lead === true && (
                 <span {...typeRole('label', 'shrink-0 text-rf-text-tertiary')}>
@@ -66,7 +66,7 @@ export default function RosterBlock({ slotName, data, compact = false }) {
               )}
             </div>
             {(row.role ?? row.stance) && (
-              <div {...cellText('prose', row.role ?? row.stance, typeRole('body', 'text-rf-text-tertiary').className)}>{row.role ?? row.stance}</div>
+              <div {...cellText('prose', row.role ?? row.stance, typeRole('small', 'text-rf-text-tertiary').className)}>{row.role ?? row.stance}</div>
             )}
           </div>
         </li>

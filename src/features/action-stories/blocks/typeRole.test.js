@@ -12,89 +12,65 @@ import { describe, it, expect } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { TYPE_ROLES, TYPE_ROLE_NAMES, MONO_ROLES, typeRole } from './typeRole'
+import { TYPE_ROLES, TYPE_ROLE_NAMES, typeRole } from './typeRole'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
+const src = fs.readFileSync(path.join(HERE, 'typeRole.js'), 'utf8')
 
-describe('T94 — six type roles, declared in one module', () => {
-  it('is exactly the six the ruling named, and no more', () => {
-    // A seventh role added quietly is how eleven DS rows became 82 pixel literals the first time.
-    expect(TYPE_ROLE_NAMES).toEqual(['display', 'heading', 'body', 'label', 'figure', 'micro'])
-  })
+// ============================================================================================
+// T94 AND T99 ARE RETIRED HERE — PHASE 6 REPLACED THEM, IT DID NOT DELETE THEM.
+// ============================================================================================
+//
+// Both asserted this module's Phase 5E resolution against docs/design-system/06-typography.html:
+// six roles, mono on label/figure/micro (R84), the eyebrow at JB Mono 11px with +0.14em tracking.
+// Every one of those assertions was correct for its source and is wrong for this one. The design
+// source changed — the shipping product is Inter throughout — so:
+//
+//     T94's "exactly six roles"        -> seven. R95 split reading (15px) from scanning (13px),
+//                                        because this app is both kinds of surface.
+//     T94's MONO_ROLES == 3            -> one. I3 confines mono to figures; R84 is reversed, and
+//                                        typeRole.js says so where R84 is recorded.
+//     T94's `dsRow` on every role      -> `productRow`. A role now cites the product hierarchy row
+//                                        it implements, not a row of the old document.
+//     T99's mono/11px/+0.14em eyebrow  -> Inter 12 semibold, +0.04em. The label is a label.
+//
+// THEIR SUCCESSOR IS phase6.test.jsx's T103, which asserts the same three things this file was
+// written to protect — one type system, every role declared in one place, no component choosing a
+// face or a size — against the source that is now authoritative. What survives unchanged is below:
+// the parts that are about how roles WORK rather than what they resolve to, which is exactly the
+// half of R84 that made reversing the other half a one-file edit.
 
-  it('every role states its face, its DS row and its rule in words', () => {
+describe('T94/T103 — the type system is one module, whatever the source says', () => {
+  it('every role is declared with a face, a size, a rule and a product row', () => {
     for (const name of TYPE_ROLE_NAMES) {
       const spec = TYPE_ROLES[name]
-      expect(['serif', 'sans', 'mono'], `${name} has no declared face`).toContain(spec.face)
+      expect(['sans', 'mono'], `${name} has no declared face`).toContain(spec.face)
       expect(spec.className, `${name} renders nothing`).toBeTruthy()
+      expect(typeof spec.px, `${name} has no size a test can reason about`).toBe('number')
       expect(spec.rule.length, `${name} has no rule a reader can check against`).toBeGreaterThan(40)
-      expect(spec, `${name} does not say which DS row it implements`).toHaveProperty('dsRow')
+      expect(spec, `${name} does not say which product row it implements`).toHaveProperty('productRow')
     }
   })
 
-  it('MICRO IS A DECLARED LOCAL EXTENSION, NOT A SILENT DS VIOLATION (R81)', () => {
-    // The DS scale stops at 11px. 21 usages in this template sit below it (10/9/7px), almost all of
-    // them the dense grid annotations Phase 5B built. Raising them to 11px would change layout in a
-    // phase whose I6 says 5C and 5D hold, on the densest surfaces in the app. So `micro` is an
-    // extension, and it says so out loud with its reason attached — R81's "an honest documented
-    // extension beats a silent DS violation and beats a layout change dressed as compliance".
-    expect(TYPE_ROLES.micro.dsRow, 'micro claims a DS row it does not have').toBeNull()
+  it('an extension states its reason, and nothing else claims to be one', () => {
+    // Unchanged in substance from Phase 5E's R81 assertion: a role outside the scale must say so
+    // out loud and say why, so `productRow: null` cannot become the easy way out. Only the name of
+    // the field changed with the source.
+    expect(TYPE_ROLES.micro.productRow, 'micro claims a product row it does not have').toBeNull()
     expect(TYPE_ROLES.micro.extension, 'micro is an extension with no stated reason').toBeTruthy()
-    expect(TYPE_ROLES.micro.extension).toMatch(/DS/)
-
-    // Every OTHER role must name a real row, so `dsRow: null` cannot become the easy way out.
     for (const name of TYPE_ROLE_NAMES.filter((n) => n !== 'micro')) {
-      expect(TYPE_ROLES[name].dsRow, `${name} implements no DS row`).toBeTruthy()
-      expect(TYPE_ROLES[name].extension ?? null, `${name} is not an extension and must not claim to be`).toBeNull()
+      expect(TYPE_ROLES[name].productRow, `${name} implements no product row`).toBeTruthy()
+      expect(TYPE_ROLES[name].extension ?? null, `${name} must not claim to be an extension`).toBeNull()
     }
-  })
-
-  it('MONO IS BOUNDED TO THREE ROLES (R84) — it is the product\'s voice, not a free choice', () => {
-    // The reference is mono-dominant: 5,399 var(--font-mono) against 578 sans and 179 display
-    // across the 114 mockups, and this template is already closer to the reference than to the DS's
-    // two mono rows. R84 follows the reference AND bounds it so it cannot drift: mono is the face
-    // for label, figure and micro. Prose and headings are Inter. Titles are Fraunces. A block may
-    // not reach for mono outside those roles, and that is checkable rather than a convention.
-    expect(MONO_ROLES).toEqual(['label', 'figure', 'micro'])
-    for (const name of TYPE_ROLE_NAMES) {
-      const isMono = TYPE_ROLES[name].face === 'mono'
-      expect(isMono, `${name}'s face disagrees with MONO_ROLES`).toBe(MONO_ROLES.includes(name))
-    }
-    expect(TYPE_ROLES.display.face, 'the title is Fraunces').toBe('serif')
-    expect(TYPE_ROLES.heading.face).toBe('sans')
-    expect(TYPE_ROLES.body.face, 'prose is Inter').toBe('sans')
   })
 
   it('returns props, and refuses a role it does not have', () => {
     expect(typeRole('body')).toHaveProperty('className')
-    expect(typeRole('label').className).toContain('font-mono')
     expect(typeRole('body', 'text-rf-text-secondary').className).toContain('text-rf-text-secondary')
     expect(() => typeRole('subtitle')).toThrow(/unknown role/)
   })
-})
-
-describe('T99 — THE EYEBROW IS ONE THING (non-negotiable)', () => {
-  const src = fs.readFileSync(path.join(HERE, 'typeRole.js'), 'utf8')
-
-  it('the label role carries the DS Label spec: mono, 11px, uppercase, +0.14em', () => {
-    // DS row "Label": JB Mono 500 · 11 · +14%. The 26 spellings in the survey averaged to roughly
-    // this and agreed on none of it.
-    const { className } = typeRole('label')
-    expect(className).toContain('font-mono')
-    expect(className).toContain('uppercase')
-    expect(className).toMatch(/tracking-\[0\.14em\]/)
-    expect(className).toMatch(/text-\[11px\]/)
-  })
-
-  it('the figure role is mono with tabular alignment, so columns of numbers line up', () => {
-    const { className } = typeRole('figure')
-    expect(className).toContain('font-mono')
-    expect(className).toContain('tabular-nums')
-  })
 
   it('the sizes live here and only here', () => {
-    // Every px size in the app must be traceable to one of these six declarations. This asserts the
-    // module actually carries them rather than delegating back out to call sites.
     const sizes = [...src.matchAll(/text-\[([0-9.]+)px\]/g)].map((m) => m[1])
     expect(new Set(sizes).size, 'the roles do not declare distinct sizes').toBeGreaterThanOrEqual(5)
   })

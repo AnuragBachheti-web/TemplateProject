@@ -78,10 +78,10 @@ export default function TimelineBlock({ slotName, data, compact = false }) {
               </span>
             )}
             {body !== undefined && (
-              <span {...typeRole('body', 'text-rf-text-secondary')}>{body}</span>
+              <span {...typeRole('small', 'text-rf-text-secondary')}>{body}</span>
             )}
             {follow !== undefined && (
-              <span {...typeRole('body', 'text-rf-text-tertiary')}>{follow}</span>
+              <span {...typeRole('small', 'text-rf-text-tertiary')}>{follow}</span>
             )}
           </li>
         );

@@ -271,7 +271,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
         <Link
           data-stage-forward
           to={actionStoryPath(storyCode, next, nextProposalId)}
-          {...typeRole('heading', 'ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-text-primary px-4 text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', 'ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-text-primary px-4 text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Continue to <span className="capitalize">{next}</span>
           <i className={`fa-solid fa-arrow-right ${glyph(11)}`} aria-hidden="true" />
@@ -295,12 +295,12 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
               from the action's own contract spec, so this component still knows nothing about what
               "dismiss" means — it renders a picker because the spec says a code is required. */}
           {openSpec?.requiresReasonCode && (
-            <label {...typeRole('body', 'mt-4 block text-rf-text-secondary')}>
+            <label {...typeRole('small', 'mt-4 block text-rf-text-secondary')}>
               Reason code (required)
               <select
                 value={reasonCodeDraft}
                 onChange={(event) => setReasonCodeDraft(event.target.value)}
-                {...typeRole('body', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+                {...typeRole('small', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
               >
                 <option value="">Choose one…</option>
                 {DISMISS_REASONS.map((code) => (
@@ -313,14 +313,14 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           )}
 
           {openState.reasonEnabled && (
-            <label {...typeRole('body', 'mt-4 block text-rf-text-secondary')}>
+            <label {...typeRole('small', 'mt-4 block text-rf-text-secondary')}>
               {openState.reasonLabel}
               {openState.reasonRequired ? ' (required)' : ' (optional)'}
               <textarea
                 value={reasonDraft}
                 onChange={(event) => setReasonDraft(event.target.value)}
                 rows={3}
-                {...typeRole('body', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+                {...typeRole('small', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
               />
             </label>
           )}
@@ -330,7 +330,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           )}
 
           {openSpec?.requiresSelection && (
-            <p {...typeRole('body', 'mt-4 text-rf-text-secondary')}>
+            <p {...typeRole('small', 'mt-4 text-rf-text-secondary')}>
               {selection.length} item{selection.length === 1 ? '' : 's'} selected.
             </p>
           )}
@@ -338,7 +338,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           {/* One message, sourced from the one contract function — never a second, differently-worded
               copy of the same rule written inline for the dialog. */}
           {!openVerdict?.allowed && openVerdict?.reason && (
-            <p {...typeRole('body', 'mt-2 text-rf-status-critical-text')}>{openVerdict.reason}</p>
+            <p {...typeRole('small', 'mt-2 text-rf-status-critical-text')}>{openVerdict.reason}</p>
           )}
         </ConfirmDialog>
       )}

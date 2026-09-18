@@ -22,7 +22,7 @@ const HERO_TEXT = 'Realify will propose the move set and wait for you. Nothing r
 describe('TextBlock — hero role respects `compact` (no nested card inside a shared panel)', () => {
   it('draws its own bordered card when a standalone hero block (not compact)', () => {
     const el = TextBlock({ slotName: 'rationale', data: HERO_TEXT, role: 'hero' });
-    expect(classNames(el).some((c) => c.includes('border') && c.includes('rounded-2xl'))).toBe(true);
+    expect(classNames(el).some((c) => c.includes('border') && c.includes('rounded-xl'))).toBe(true);
   });
 
   it('renders bare (no border/background) when the same hero block is compact', () => {
@@ -33,12 +33,12 @@ describe('TextBlock — hero role respects `compact` (no nested card inside a sh
 
   it('a manifest-declared role="hero" is sufficient on its own, independent of slotName vocabulary', () => {
     const el = TextBlock({ slotName: 'notInTheVocabList', data: HERO_TEXT, role: 'hero' });
-    expect(classNames(el).some((c) => c.includes('rounded-2xl'))).toBe(true);
+    expect(classNames(el).some((c) => c.includes('rounded-xl'))).toBe(true);
   });
 
   it('the slotName vocabulary (heroTitle/rationale/...) still works without an explicit role (backward compatibility)', () => {
     const el = TextBlock({ slotName: 'heroTitle', data: HERO_TEXT });
-    expect(classNames(el).some((c) => c.includes('rounded-2xl'))).toBe(true);
+    expect(classNames(el).some((c) => c.includes('rounded-xl'))).toBe(true);
   });
 });
 
@@ -48,7 +48,7 @@ describe('TextBlock — role="heroSub" (a headline\'s own paired subheadline)', 
     const notCompact = TextBlock({ slotName: 'heroSub', data: sub, role: 'heroSub' });
     const compact = TextBlock({ slotName: 'heroSub', data: sub, role: 'heroSub', compact: true });
     for (const el of [notCompact, compact]) {
-      expect(classNames(el).some((c) => c.includes('rounded-2xl'))).toBe(false);
+      expect(classNames(el).some((c) => c.includes('rounded-xl'))).toBe(false);
       expect(classNames(el).some((c) => c.includes('Realify signal'))).toBe(false);
     }
   });
@@ -74,13 +74,13 @@ describe('TextBlock — hero eligibility: semantic role first, length only a saf
   it('role="hero" gets hero treatment even for a short (< HERO_MIN_LENGTH) value', () => {
     const short = 'breakeven M10 · exposure $92.5K of $75K'; // 40 chars — confirmed real case (S9.16/Decide)
     const el = TextBlock({ slotName: 'rationale', data: short, role: 'hero' });
-    expect(classNames(el).some((c) => c.includes('rounded-2xl'))).toBe(true);
+    expect(classNames(el).some((c) => c.includes('rounded-xl'))).toBe(true);
   });
 
   it('the slotName-vocabulary fallback (no explicit role) still requires HERO_MIN_LENGTH — a short value gets ordinary treatment', () => {
     const short = 'breakeven M10 · exposure $92.5K of $75K';
     const el = TextBlock({ slotName: 'rationale', data: short });
-    expect(classNames(el).some((c) => c.includes('rounded-2xl'))).toBe(false);
+    expect(classNames(el).some((c) => c.includes('rounded-xl'))).toBe(false);
   });
 });
 

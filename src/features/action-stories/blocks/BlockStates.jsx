@@ -15,7 +15,7 @@ import { typeRole } from './typeRole';
  */
 export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
   return (
-    <div className="rounded-2xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
+    <div className="rounded-xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
       <p {...typeRole('label', 'text-rf-text-tertiary')}>
         {humanizeSlotName(slotName)}
       </p>
@@ -36,7 +36,7 @@ export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
  */
 export function ThinEvidenceState({ slotName, points }) {
   return (
-    <div className="rounded-2xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
+    <div className="rounded-xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
       <p {...typeRole('label', 'text-rf-text-tertiary')}>
         {humanizeSlotName(slotName)}
       </p>
@@ -49,7 +49,7 @@ export function ThinEvidenceState({ slotName, points }) {
 
 export function ErrorState({ slotName, message }) {
   return (
-    <div className="rounded-2xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3">
+    <div className="rounded-xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3">
       <p {...typeRole('label', 'text-rf-status-critical-text')}>
         {humanizeSlotName(slotName)}
       </p>

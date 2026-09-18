@@ -94,11 +94,11 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
         const usedKeys = new Set([labelKey, primary.key].filter((k) => k !== null && k !== undefined));
         const { inline, long } = extraEntries(item, usedKeys);
         return (
-          <li key={i} {...typeRole('body', 'flex flex-col gap-0.5 py-1.5')}>
+          <li key={i} {...typeRole('small', 'flex flex-col gap-0.5 py-1.5')}>
             <div className="flex items-center justify-between gap-3">
               <span {...cellText('identifier', label, 'text-rf-text-secondary')}>{label}</span>
               <span
-                {...cellText('prose', undefined, `flex items-baseline gap-1.5 font-medium ${
+                {...cellText('prose', undefined, `flex items-baseline gap-1.5 ${
                   primaryTone ? primaryTone.text : 'text-rf-text-primary'
                 }`)}
               >

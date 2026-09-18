@@ -66,7 +66,7 @@ export default function ChecklistBlock({ slotName, data, compact = false }) {
             <StatusBadge status={row.status} />
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline justify-between gap-3">
-                <span {...typeRole('body', 'min-w-0 text-rf-text-primary')}>{identity}</span>
+                <span {...typeRole('small', 'min-w-0 text-rf-text-primary')}>{identity}</span>
                 {hasValue && (
                   <span {...typeRole('figure', 'shrink-0 text-rf-text-primary')}>
                     {formatValue(row.value)}
@@ -80,7 +80,7 @@ export default function ChecklistBlock({ slotName, data, compact = false }) {
                 )}
               </div>
               {row.note !== undefined && row.note !== null && row.note !== '' && (
-                <p {...typeRole('body', 'mt-[2px] text-rf-text-tertiary')}>{row.note}</p>
+                <p {...typeRole('small', 'mt-[2px] text-rf-text-tertiary')}>{row.note}</p>
               )}
             </div>
           </li>

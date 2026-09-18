@@ -45,7 +45,7 @@ export default function Tooltip({ content, placement = 'top', children }) {
         <span
           id={id}
           role="tooltip"
-          className={`${typeRole('body').className} pointer-events-none absolute z-50 w-max max-w-[240px] rounded-md bg-rf-text-primary px-2.5 py-1.5 text-rf-surface-canvas shadow-lg ${ placement === 'bottom' ? 'left-1/2 top-full mt-1.5 -translate-x-1/2' : 'bottom-full left-1/2 mb-1.5 -translate-x-1/2' }`}
+          className={`${typeRole('small').className} pointer-events-none absolute z-50 w-max max-w-[240px] rounded-md bg-rf-text-primary px-2.5 py-1.5 text-rf-surface-canvas shadow-raised ${ placement === 'bottom' ? 'left-1/2 top-full mt-1.5 -translate-x-1/2' : 'bottom-full left-1/2 mb-1.5 -translate-x-1/2' }`}
         >
           {content}
         </span>

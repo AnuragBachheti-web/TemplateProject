@@ -29,14 +29,14 @@ export default function SnoozeUntilField({ value, onChange, error, now = new Dat
 
   return (
     <div className="mt-4">
-      <label {...typeRole('body', 'block text-rf-text-secondary')}>
+      <label {...typeRole('small', 'block text-rf-text-secondary')}>
         Snooze until
         <input
           type="datetime-local"
           value={value}
           min={min}
           onChange={(event) => onChange(event.target.value)}
-          {...typeRole('body', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         />
       </label>
 
@@ -46,14 +46,14 @@ export default function SnoozeUntilField({ value, onChange, error, now = new Dat
             key={preset.label}
             type="button"
             onClick={() => onChange(toLocalInputValue(new Date(now.getTime() + preset.hours * 3_600_000)))}
-            {...typeRole('body', 'rounded-full border border-rf-border-subtle px-2.5 py-1 text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+            {...typeRole('small', 'rounded-full border border-rf-border-subtle px-2.5 py-1 text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
           >
             {preset.label}
           </button>
         ))}
       </div>
 
-      {error && <span {...typeRole('body', 'mt-1 block text-rf-status-critical-text')}>{error}</span>}
+      {error && <span {...typeRole('small', 'mt-1 block text-rf-status-critical-text')}>{error}</span>}
     </div>
   );
 }

@@ -25,7 +25,13 @@ export default function PaneEyebrow({ lens, storyCode, stage }) {
       />
       {/* A colour says nothing to anyone who cannot see it. */}
       <span className="sr-only">{lens} lens</span>
-      <Link to={actionStoriesIndexPath()} className="transition-colors hover:text-rf-text-primary">
+      {/* A LINK IS INTERACTIVE, SO IT GETS THE BLUE — on hover and focus rather than at rest, because
+          a breadcrumb sitting permanently blue would compete with the pane's actual actions and I4's
+          whole point is that blue spent everywhere is blue spent nowhere. */}
+      <Link
+        to={actionStoriesIndexPath()}
+        className="rounded-sm transition-colors duration-fast ease-standard hover:text-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+      >
         Action Stories
       </Link>
       {/* A TYPE ROLE MUST NEVER REACH AN ICON. `typeRole('micro')` carries `font-mono`, which wins

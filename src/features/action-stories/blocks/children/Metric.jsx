@@ -28,7 +28,7 @@ export default function Metric({ label, value, meta, extra }) {
   return (
     <div {...depthAttrs(DEPTH_CHILD)} data-metric className="min-w-0">
       {label !== undefined && label !== null && label !== '' && (
-        <div {...cellText('identifier', label, typeRole('body', 'text-rf-text-tertiary').className)}>{label}</div>
+        <div {...cellText('identifier', label, typeRole('small', 'text-rf-text-tertiary').className)}>{label}</div>
       )}
       {/* PHASE 5E PART 2. The role comes from the VALUE'S SHAPE, not from the field's name. This
           was `prose` while being drawn as a figure (mono, tabular-nums) — a styling that disagreed
@@ -41,7 +41,7 @@ export default function Metric({ label, value, meta, extra }) {
       {value !== undefined && value !== null && value !== '' && (
         isFigureText(value)
           ? <div {...cellText('figure', value, typeRole('figure', tone ?? 'text-rf-text-primary').className)}>{value}</div>
-          : <div {...cellText('prose', value, typeRole('body', tone ?? 'text-rf-text-primary').className)}>{value}</div>
+          : <div {...cellText('prose', value, typeRole('small', tone ?? 'text-rf-text-primary').className)}>{value}</div>
       )}
       {/* PHASE 5B. `extra` is the metricGrid variant's second figure line — the reference stacks
           label / value / range / note (S9.1-3-decide:220-227) where this renders three. It is a

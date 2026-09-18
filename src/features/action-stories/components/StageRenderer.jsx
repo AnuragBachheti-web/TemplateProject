@@ -20,8 +20,8 @@ function rawKeyOf(binding) {
 
 function BlockPlaceholder({ slotName, reason }) {
   return (
-    <div {...typeRole('body', 'rounded-xl border border-dashed border-rf-status-warning/40 bg-rf-status-warning/10 px-3 py-2 text-rf-status-warning-text dark:border-rf-status-warning/40 dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text')}>
-      <span className="font-semibold">{humanizeSlotName(slotName)}</span> — {reason}
+    <div {...typeRole('small', 'rounded-xl border border-dashed border-rf-status-warning/40 bg-rf-status-warning/10 px-3 py-2 text-rf-status-warning-text dark:border-rf-status-warning/40 dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text')}>
+      <strong>{humanizeSlotName(slotName)}</strong> — {reason}
     </div>
   );
 }

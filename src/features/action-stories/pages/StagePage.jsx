@@ -49,7 +49,6 @@ function ProposalHeader({ decision, story, storyProblem }) {
 
       <h1
         {...typeRole('display', 'mt-2 text-rf-text-primary')}
-        style={{ fontVariationSettings: "'opsz' 144" }}
       >
         {decision.title}
       </h1>
@@ -64,26 +63,26 @@ function ProposalHeader({ decision, story, storyProblem }) {
           nodes with no separator, so "Mode suggest" abutting the next element defeats a word
           boundary, and a bare count magnitude like 214 matches body prose that has nothing to do
           with the impact. A marked node is the fact; a matching substring is a coincidence. */}
-      <div {...typeRole('body', 'mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-rf-text-secondary')}>
-        <span className={`${typeRole('body').className} inline-flex items-center rounded-full px-2.5 py-[3px] capitalize ${STATUS_TONE[decision.status] ?? STATUS_TONE.pending}`}>
+      <div {...typeRole('small', 'mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-rf-text-secondary')}>
+        <span className={`${typeRole('small').className} inline-flex items-center rounded-full px-2.5 py-[3px] capitalize ${STATUS_TONE[decision.status] ?? STATUS_TONE.pending}`}>
           {decision.status}
         </span>
         {decision.impact && (
           <span data-fact="impact">
-            Impact <strong className="font-mono tabular-nums text-rf-text-primary">{formatValue(decision.impact)}</strong>
+            Impact <strong {...typeRole('figure', 'text-rf-text-primary')}>{formatValue(decision.impact)}</strong>
           </span>
         )}
         {decision.confidence && (
           <span data-fact="confidence">
             Confidence{' '}
-            <strong className="font-mono tabular-nums text-rf-text-primary">
+            <strong {...typeRole('figure', 'text-rf-text-primary')}>
               {formatValue({ value: decision.confidence.value * 100, unit: 'pct', precision: 0 })}
             </strong>
             {decision.confidence.calibrated ? ' · calibrated' : ''}
           </span>
         )}
         <span data-fact="mode" className="capitalize">Mode {decision.mode}</span>
-        {due && <span className="font-medium text-rf-status-warning-text">{due}</span>}
+        {due && <span className="text-rf-status-warning-text">{due}</span>}
       </div>
 
       {/* The parent/child relationship, made navigable. StepTracker already existed and already took
@@ -111,7 +110,7 @@ function ProposalHeader({ decision, story, storyProblem }) {
 function MockTransportNotice() {
   if (!isUsingMockTransport()) return null;
   return (
-    <p {...typeRole('body', 'mx-6 mt-3 rounded-lg border border-dashed border-rf-status-warning/40 bg-rf-status-warning/10 px-3 py-1.5 text-rf-status-warning-text dark:border-rf-status-warning/40 dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text')}>
+    <p {...typeRole('small', 'mx-6 mt-3 rounded-lg border border-dashed border-rf-status-warning/40 bg-rf-status-warning/10 px-3 py-1.5 text-rf-status-warning-text dark:border-rf-status-warning/40 dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text')}>
       No API configured — served by the in-memory test double. Set <code>VITE_API_BASE_URL</code> to use a real backend.
     </p>
   );

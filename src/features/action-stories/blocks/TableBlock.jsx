@@ -60,7 +60,7 @@ function RowControl({ options }) {
           type="button"
           onClick={() => setSelected(i)}
           aria-pressed={selected === i}
-          className={`px-2 py-0.5 font-medium transition-colors ${
+          className={`px-2 py-0.5 transition-colors ${
             selected === i
               ? 'bg-rf-text-primary text-rf-surface-canvas'
               : 'bg-transparent text-rf-text-tertiary hover:bg-rf-surface-sunken'
@@ -202,7 +202,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
           onScroll={updateScrollShadow}
           className={isLarge ? 'max-h-[420px] overflow-auto' : 'overflow-x-auto'}
         >
-        <table {...typeRole('body', 'w-full border-collapse')}>
+        <table {...typeRole('small', 'w-full border-collapse')}>
           <caption {...typeRole('label', 'border-b border-rf-border-subtle px-4 py-2.5 text-left text-rf-text-secondary')}>
             {humanizeSlotName(slotName)} · {allRows.length}
           </caption>
@@ -284,7 +284,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       const value = row[col];
                       if (controlColumns.has(col)) {
                         return (
-                          <td key={col} {...typeRole('body', 'px-4 py-2')}>
+                          <td key={col} {...typeRole('small', 'px-4 py-2')}>
                             <RowControl options={value} />
                           </td>
                         );
@@ -324,7 +324,12 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                         <div className="flex flex-wrap gap-x-4 gap-y-1">
                           {detail.map(([key, text, numeric, tone]) => (
                             <span key={key} className="text-rf-text-secondary">
-                              <span {...typeRole('label', 'text-rf-text-tertiary')}>{humanizeSlotName(key)}:</span>{' '}
+                              {/* PHASE 6. `micro`, not `label`. A detail line's key is dense inline
+                                  annotation — micro's own stated job — and not a section eyebrow,
+                                  which is what `label` is for and why it is uppercase with
+                                  tracking. Reading "BADGE: recommended METRIC: ..." inline was the
+                                  eyebrow treatment applied to something that is not one. */}
+                              <span {...typeRole('micro', 'text-rf-text-tertiary')}>{humanizeSlotName(key)}:</span>{' '}
                               {/* A FIGURE KEEPS THE COLOUR ITS OWN SIGN GIVES IT wherever it lands.
                                   This line changes a value's POSITION, not its meaning, and S10.1's
                                   "−$2,210 / day" reading neutral grey purely because it moved would
@@ -357,15 +362,15 @@ export default function TableBlock({ slotName, data, compact, selectable = false
             (opacity-0) the instant that edge is reached, so they never look like a permanent border. */}
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-rf-surface-canvas to-transparent transition-opacity duration-150 ${scrollShadow.left ? 'opacity-100' : 'opacity-0'}`}
+          className={`pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-rf-surface-canvas to-transparent transition-opacity duration-fast ${scrollShadow.left ? 'opacity-100' : 'opacity-0'}`}
         />
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-rf-surface-canvas to-transparent transition-opacity duration-150 ${scrollShadow.right ? 'opacity-100' : 'opacity-0'}`}
+          className={`pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-rf-surface-canvas to-transparent transition-opacity duration-fast ${scrollShadow.right ? 'opacity-100' : 'opacity-0'}`}
         />
       </div>
       {isLarge && pageCount > 1 && (
-        <div {...typeRole('body', 'flex items-center justify-between border-t border-rf-border-subtle px-3 py-1.5 text-rf-text-secondary')}>
+        <div {...typeRole('small', 'flex items-center justify-between border-t border-rf-border-subtle px-3 py-1.5 text-rf-text-secondary')}>
           <span>
             Page {clampedPage + 1} of {pageCount}
           </span>
@@ -374,7 +379,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
               type="button"
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={clampedPage === 0}
-              className="rounded px-2 py-0.5 font-semibold text-rf-text-secondary hover:bg-rf-surface-sunken disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded px-2 py-0.5 text-rf-text-secondary hover:bg-rf-surface-sunken disabled:cursor-not-allowed disabled:opacity-40"
             >
               Previous
             </button>
@@ -382,7 +387,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
               type="button"
               onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
               disabled={clampedPage >= pageCount - 1}
-              className="rounded px-2 py-0.5 font-semibold text-rf-text-secondary hover:bg-rf-surface-sunken disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded px-2 py-0.5 text-rf-text-secondary hover:bg-rf-surface-sunken disabled:cursor-not-allowed disabled:opacity-40"
             >
               Next
             </button>

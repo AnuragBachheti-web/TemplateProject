@@ -44,7 +44,7 @@ export default class BlockErrorBoundary extends Component {
       return (
         <div
           role="alert"
-          className="rounded-2xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3"
+          className="rounded-xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3"
         >
           <p {...typeRole('label', 'text-rf-status-critical-text')}>
             {humanizeSlotName(this.props.slotName)}

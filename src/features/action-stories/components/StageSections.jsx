@@ -68,7 +68,7 @@ function GridPanel({ row, nodesBySlot }) {
   return (
     <div
       data-grid-panel
-      className={`grid grid-cols-1 divide-y divide-rf-border-subtle overflow-hidden rounded-2xl border border-rf-border-subtle bg-rf-surface-raised px-4 shadow-xs sm:grid-cols-2 sm:divide-y-0 sm:divide-x sm:px-0 ${wideColsClass}`}
+      className={`grid grid-cols-1 divide-y divide-rf-border-subtle overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised px-4 shadow-card sm:grid-cols-2 sm:divide-y-0 sm:divide-x sm:px-0 ${wideColsClass}`}
     >
       {row.items.map(({ slotName }) => (
         <div key={slotName} data-block-slot={slotName} className="min-w-0 sm:px-4 sm:py-3">
@@ -90,7 +90,7 @@ function GridPanel({ row, nodesBySlot }) {
  */
 function ComposedPanel({ row, nodesBySlot }) {
   return (
-    <div data-composed-panel className="rounded-2xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-xs">
+    <div data-composed-panel className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-card">
       <div className="grid grid-cols-12 gap-x-4 gap-y-2">
         {row.items.map(({ slotName, span }) => (
           <div key={slotName} data-block-slot={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
@@ -194,8 +194,12 @@ function MainRows({ rows, nodesBySlot }) {
  */
 function RailPanel({ section, nodesBySlot }) {
   const slots = section.rows.flatMap((row) => (row.type === 'grid' ? row.items.map((i) => i.slotName) : [row.slotName]));
+  // ONE CARD TREATMENT (Phase 6, R99). A rail panel is a card, so it is drawn like every other
+  // card: white on the page ground, one hairline border, one shadow. It used to sit on the
+  // secondary surface, which on the previous palette read as "lighter" and on this one read as
+  // nothing at all — the page ground and that fill were two units apart.
   return (
-    <section aria-label={section.title ?? undefined} className="rounded-2xl border border-rf-border-subtle bg-rf-surface-raised p-4 shadow-xs">
+    <section aria-label={section.title ?? undefined} className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-card">
       {/* Same semantic level as a main-column section (<h2>, under the page's own <h1>) even though
           it's styled lighter here — a rail panel is structurally a section too, not a lesser thing
           a screen-reader user navigating by heading should have to guess at. */}

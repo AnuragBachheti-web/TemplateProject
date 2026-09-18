@@ -16,7 +16,7 @@ export function LoadingState({ label = 'Loading…', compact = false }) {
       <span className="inline-flex items-center gap-2">
         <span
           aria-hidden="true"
-          className="h-3 w-3 animate-spin rounded-full border-2 border-rf-border-strong border-t-rf-brand-blue-500"
+          className="h-3 w-3 animate-spin rounded-full border-2 border-rf-border-strong border-t-rf-text-tertiary"
         />
         {label}
       </span>

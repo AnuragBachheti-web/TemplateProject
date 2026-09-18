@@ -70,9 +70,9 @@ export default function ObjectBlock({ slotName, data, compact }) {
         // own doc comment for why this is the one signal that survives a real API swap.
         const tone = deltaTone(raw);
         return (
-          <div key={key} {...typeRole('body', 'flex items-center justify-between gap-3')}>
+          <div key={key} {...typeRole('small', 'flex items-center justify-between gap-3')}>
             <dt {...cellText('identifier', humanizeSlotName(key), 'text-rf-text-secondary')}>{humanizeSlotName(key)}</dt>
-            <dd {...cellText('prose', value, `font-medium ${tone ? tone.text : 'text-rf-text-primary'}`)}>{value}</dd>
+            <dd {...cellText('prose', value, typeRole('small', tone ? tone.text : 'text-rf-text-primary').className)}>{value}</dd>
           </div>
         );
       })}

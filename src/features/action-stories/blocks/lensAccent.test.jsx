@@ -19,6 +19,11 @@ import { resolveTemplate } from '../templates/templateRegistry'
 import dataset from '@/features/action-stories/__corpus__/normalized/dataset.json'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
+// HISTORICAL REFERENCE, READ ON PURPOSE (Phase 6). docs/design-system/05-color.html is no longer
+// this product's design system — the shipping product is, and where the two disagree the product
+// wins. It is still the document that DECLARED the --mod-* module hues, which is the one thing this
+// test needs from it: that a lens accent is a real module hue and not a colour someone liked. The
+// file is not deleted and nothing else reads it.
 const DS_COLOR = fs.readFileSync(path.resolve(HERE, '../../../../docs/design-system/05-color.html'), 'utf8')
 const CORPUS_LENSES = [...new Set(dataset.map((d) => d.lens))].sort()
 

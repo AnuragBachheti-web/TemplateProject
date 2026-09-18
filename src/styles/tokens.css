@@ -1,116 +1,138 @@
-/* Realify design tokens — values sourced directly from the reference design system
- * (`Realify Workspace Dashboard Build/_ds/.../tokens/colors.css`, the same bundle the original
- * `source-mockups/*.dc.html` screens load), not invented. Every existing `--rf-*` NAME below is
- * unchanged on purpose — nothing that already consumes `bg-rf-brand-blue-500` etc. needs to
- * change — only the underlying VALUES were wrong (a generic blue-accent SaaS palette that was
- * never actually Realify's own system). `--rf-brand-blue-*` now holds the reference's real
- * "Realify blue" — which is in fact a graphite scale anchored on the brand mark (#383838), not a
- * literal blue; kept under its original name to avoid a sweeping rename across every block file.
+/* THE DESIGN TOKENS. Sourced from the SHIPPING REALIFY PRODUCT (staging.realifyai.app), which is
+ * the authoritative design system as of Phase 6.
  *
- * Reference scales this maps from (see the _ds bundle's own colors.css for the full ramp):
- *   ink-0/25/50/100/200/300/400/500/900  → surfaces, borders, text
- *   r-blue-300..600 (graphite)           → brand-blue-* (the accent)
- *   rose-500 / amber-500 / green-500     → status critical / warning / success
- *   violet-500                            → status purple (AI/Simulate accent)
+ * WHAT CHANGED AND WHY. Phase 5E applied docs/design-system/05-color.html and 06-typography.html
+ * faithfully. That application was correct; the SOURCE was not this product. Those files describe a
+ * different system — Fraunces serif display, mono-dominant type, a monochrome ink ramp and no brand
+ * accent — so applying them produced a grey, serif, oversized surface with nothing on it that read
+ * as actionable. Those two files are now HISTORICAL REFERENCE. They are not deleted and they are
+ * not read again; where they and the product disagree, the product wins.
  *
- * Dark-mode counterparts are NOT in the reference (the source DLS is light-mode only) — derived
- * here following the same warm-neutral-graphite character, inverted, so the existing dark-mode
- * activation path (useThemeStore.js) keeps working with a real, reference-consistent palette
- * instead of reverting to the old generic-blue one.
+ * WHERE THE BRIEF AND THE PRODUCT'S OWN CSS DISAGREE, THE BRIEF WINS (ruling R94), because the
+ * brief states the APPLICATION palette and staging.realifyai.app/web is the marketing surface
+ * serving a different page. Two disagreements, recorded so the question can be settled upstream:
+ *
+ *     light blue ground   brief #EFF6FF          product CSS --color-blue-50: #e6eefd
+ *     success / error     brief #16A34A/#DC2626  product CSS --color-green-500: #10a36d,
+ *                                                            --color-rose-500: #e11d48
+ *
+ * The product's RADIUS SCALE and FONT DECLARATIONS are taken directly — those are structure rather
+ * than marketing colour, and taking them keeps this app inside the same system without a new font.
+ *
+ * Tailwind reads the `-rgb` companions (see tailwind.config.js): `--rf-x` carries the value every
+ * other consumer expects, `--rf-x-rgb` carries space-separated components so the opacity modifier
+ * `rgb(var(--x) / <alpha-value>)` has something legal to read. Both must exist for a colour to have
+ * a utility class.
  */
 
 :root {
-  --rf-border-default: #D4DAE4;
-  --rf-border-default-rgb: 212 218 228;
-  --rf-border-strong: #B4BCCA;
-  --rf-border-strong-rgb: 180 188 202;
-  --rf-border-subtle: #E8ECF3;
-  --rf-border-subtle-rgb: 232 236 243;
-  --rf-brand-blue-400: #797979;
-  --rf-brand-blue-400-rgb: 121 121 121;
-  --rf-brand-blue-500: #383838;
-  --rf-brand-blue-500-rgb: 56 56 56;
-  --rf-brand-blue-600: #2E2E2E;
-  --rf-brand-blue-600-rgb: 46 46 46;
-  --rf-brand-focus-ring: #383838;
-  --rf-brand-focus-ring-rgb: 56 56 56;
-  --rf-brand-indicator: #383838;
-  --rf-brand-indicator-rgb: 56 56 56;
+
+  /* ---------------------------------------------------------------------------------------
+   * BRAND — blue is the interactive colour. Its absence was the loudest thing wrong with the app:
+   * every surface was neutral and nothing read as actionable. `rf-brand-blue-500` used to hold
+   * #383838, a graphite under a blue name, which is why 16 interactive surfaces were already
+   * pointing at the right token and rendering the wrong colour.
+   * --------------------------------------------------------------------------------------- */
+  --rf-brand-blue-400: #3B76F6;
+  --rf-brand-blue-400-rgb: 59 118 246;
+  --rf-brand-blue-500: #0052EB;
+  --rf-brand-blue-500-rgb: 0 82 235;
+  --rf-brand-blue-600: #00369D;
+  --rf-brand-blue-600-rgb: 0 54 157;
+  --rf-brand-blue-tint: #EFF6FF;
+  --rf-brand-blue-tint-rgb: 239 246 255;
+  --rf-brand-focus-ring: #0052EB;
+  --rf-brand-focus-ring-rgb: 0 82 235;
+  --rf-brand-indicator: #0052EB;
+  --rf-brand-indicator-rgb: 0 82 235;
   --rf-brand-purple-500: #7C3AED;
   --rf-brand-purple-500-rgb: 124 58 237;
   --rf-brand-purple-600: #5B21B6;
   --rf-brand-purple-600-rgb: 91 33 182;
-  --rf-brand-tint-08: rgba(56, 56, 56, 0.06);
-  --rf-brand-tint-08-rgb: 56 56 56;
-  --rf-brand-tint-16: rgba(56, 56, 56, 0.12);
-  --rf-brand-tint-16-rgb: 56 56 56;
-  --rf-status-critical: #E11D48;
-  --rf-status-critical-rgb: 225 29 72;
-  --rf-status-purple: #7C3AED;
-  --rf-status-purple-rgb: 124 58 237;
-  --rf-status-success: #10A36D;
-  --rf-status-success-rgb: 16 163 109;
-  --rf-status-warning: #F59E0B;
-  --rf-status-warning-rgb: 245 158 11;
+
+  /* ---------------------------------------------------------------------------------------
+   * TEXT — re-derived against the product's own colours rather than carrying Phase 5E's shift
+   * forward. The product names three: #111827 primary, #667085 secondary, #98A2B3 muted. MEASURED,
+   * #98A2B3 IS 2.58:1 ON WHITE — it is not a text colour, and routing "muted text" to it would
+   * reinstate the exact defect ruling R90 removed, worse. Ruling R93: it becomes the disabled and
+   * placeholder value, where WCAG does not ask for contrast, and the three live text levels are
+   * primary / a derived #475467 / the product's #667085 as the lightest that still clears AA.
+   * --------------------------------------------------------------------------------------- */
+  --rf-text-primary: #111827;
+  --rf-text-primary-rgb: 17 24 39;
+  --rf-text-secondary: #475467;
+  --rf-text-secondary-rgb: 71 84 103;
+  --rf-text-tertiary: #667085;
+  --rf-text-tertiary-rgb: 102 112 133;
+  --rf-text-disabled: #98A2B3;
+  --rf-text-disabled-rgb: 152 162 179;
+
+  /* ---------------------------------------------------------------------------------------
+   * SURFACES — white card on a #FAFBFD page is the product's own ground.
+   * --------------------------------------------------------------------------------------- */
   --rf-surface-canvas: #FFFFFF;
   --rf-surface-canvas-rgb: 255 255 255;
   --rf-surface-overlay: #FFFFFF;
   --rf-surface-overlay-rgb: 255 255 255;
-  --rf-surface-raised: #F4F6FA;
-  --rf-surface-raised-rgb: 244 246 250;
-  /* The page CANVAS (Shell.jsx's own outer background) vs. a white CARD surface used to differ by
-   * only 2-5 RGB units (#FAFBFD vs #FFFFFF) — visually indistinguishable at real screen brightness,
-   * reading as one flat white page (RENDERED_UI_FORENSIC_AUDIT.md-successor task's "the current UI
-   * looks too plain white" finding). This is a value-only change — the token NAME and every existing
-   * `bg-rf-surface-sunken` consumer (Shell.jsx's page background, table row hover, this same file's
-   * dark-mode counterpart) are untouched; only the shade itself now gives the page canvas genuine,
-   * if still restrained, tonal separation from the white panels sitting on it. */
-  --rf-surface-sunken: #F1F3F8;
-  --rf-surface-sunken-rgb: 241 243 248;
+  /* A WELL INSIDE A CARD, not a card. Phase 6's first pass set this to #F9FAFB, one or two units
+   * off the #FAFBFD page ground, and the rail panels dissolved into the page — defect 3's exact
+   * mechanism arriving from the token layer. It has to be darker than the white card it sits in to
+   * be a tier at all. */
+  --rf-surface-raised: #F2F4F7;
+  --rf-surface-raised-rgb: 242 244 247;
+  --rf-surface-sunken: #FAFBFD;
+  --rf-surface-sunken-rgb: 250 251 253;
+
   /* ---------------------------------------------------------------------------------------
-   * TEXT STEPS FOR THE SEMANTIC ACCENTS (Phase 5E Part 2, ruling R83).
-   *
-   * THE -500 STEPS ABOVE FAIL THE DESIGN SYSTEM'S OWN CONTRAST MATRIX AS TEXT ON WHITE.
-   * 05-color.html measures amber-500 at 2.3:1 and green-500 at 3.1:1 and marks both "large only",
-   * saying amber-500 is for "icons and large UI only" and that green-700 is the colour for
-   * "success message body text". This template was painting 11-13px text with the -500 steps.
-   *
-   * The reference has always agreed: as a TEXT colour across the 114 mockups in source-mockups/,
-   * green-700 appears 95 times and green-500 zero; rose-700 148 times and rose-500 zero; amber-700
-   * 56 times against amber-500 twice.
-   *
-   * So text uses these, and the -500 steps keep doing what the DS says they are for — icons, dots,
-   * bars, borders and large UI. Values are the DS's own green-700/amber-700/rose-700.
+   * BORDERS — one subtle hairline is the product's card treatment.
    * --------------------------------------------------------------------------------------- */
-  /* An ICON alias for the -500 steps. Same value, different NAME, and the name is the point: at a
-   * call site `text-rf-status-critical-icon` says "this is a glyph" and `-text` says "this is
-   * something to read". Without it the two are the same utility class and the contrast rule can
-   * only be enforced by guessing from context, which is how the -500 steps ended up on 11px text
-   * in the first place. */
-  --rf-status-critical-icon: #E11D48;
-  --rf-status-critical-icon-rgb: 225 29 72;
-  --rf-status-success-icon: #10A36D;
-  --rf-status-success-icon-rgb: 16 163 109;
+  --rf-border-subtle: #E5E7EB;
+  --rf-border-subtle-rgb: 229 231 235;
+  --rf-border-default: #D0D5DD;
+  --rf-border-default-rgb: 208 213 221;
+  --rf-border-strong: #98A2B3;
+  --rf-border-strong-rgb: 152 162 179;
+
+  /* ---------------------------------------------------------------------------------------
+   * STATUS — the -icon step is the product hue (dots, bars, badges, the "pair with icon" pattern);
+   * the -text step is a derived darker one, because the product's success #16A34A is 3.30:1 and
+   * its warning #F59E0B is 2.15:1 and neither is a text colour (ruling R93). Error clears AA at
+   * #DC2626 and still takes a -text step, so all four read the same way at a call site.
+   * --------------------------------------------------------------------------------------- */
+  --rf-status-critical: #DC2626;
+  --rf-status-critical-rgb: 220 38 38;
+  --rf-status-critical-icon: #DC2626;
+  --rf-status-critical-icon-rgb: 220 38 38;
+  --rf-status-critical-text: #B91C1C;
+  --rf-status-critical-text-rgb: 185 28 28;
+  --rf-status-success: #16A34A;
+  --rf-status-success-rgb: 22 163 74;
+  --rf-status-success-icon: #16A34A;
+  --rf-status-success-icon-rgb: 22 163 74;
+  --rf-status-success-text: #15803D;
+  --rf-status-success-text-rgb: 21 128 61;
+  --rf-status-warning: #F59E0B;
+  --rf-status-warning-rgb: 245 158 11;
   --rf-status-warning-icon: #F59E0B;
   --rf-status-warning-icon-rgb: 245 158 11;
+  --rf-status-warning-text: #B45309;
+  --rf-status-warning-text-rgb: 180 83 9;
+  --rf-status-purple: #7C3AED;
+  --rf-status-purple-rgb: 124 58 237;
   --rf-status-purple-icon: #7C3AED;
   --rf-status-purple-icon-rgb: 124 58 237;
-  --rf-status-critical-text: #9F1239;
-  --rf-status-critical-text-rgb: 159 18 57;
-  --rf-status-success-text: #046C46;
-  --rf-status-success-text-rgb: 4 108 70;
-  --rf-status-warning-text: #A15C07;
-  --rf-status-warning-text-rgb: 161 92 7;
-  --rf-status-purple-text: #5B21B6;
-  --rf-status-purple-text-rgb: 91 33 182;
+  --rf-status-purple-text: #6D28D9;
+  --rf-status-purple-text-rgb: 109 40 217;
+
   /* ---------------------------------------------------------------------------------------
-   * LENS ACCENTS (ruling R86). The design system's own Module Hues, one per Decision Object lens.
-   * `sales` has no module hue in the DS and takes --mod-intel, the brand graphite: the largest
-   * lens wears the quietest colour. See blocks/lensAccent.js for the two value collisions
-   * (cash == rose-500, inventory == violet-500) and the rule that keeps them safe.
+   * LENS ACCENTS (5E, R86). `rf-lens-sales` was #383838 — the same graphite the brand token held,
+   * so once blue arrived it would have followed and a wayfinding hint would have started reading
+   * as "current" (ruling R97). It is a neutral now, and T104 asserts no lens resolves to the brand
+   * blue. A side effect worth recording: cash and critical are no longer the same value, so one of
+   * the two collisions 5E had to guard against has simply gone away.
    * --------------------------------------------------------------------------------------- */
-  --rf-lens-sales: #383838;
-  --rf-lens-sales-rgb: 56 56 56;
+  --rf-lens-sales: #667085;
+  --rf-lens-sales-rgb: 102 112 133;
   --rf-lens-inventory: #7C3AED;
   --rf-lens-inventory-rgb: 124 58 237;
   --rf-lens-ads: #EA580C;
@@ -119,102 +141,109 @@
   --rf-lens-margin-rgb: 14 165 122;
   --rf-lens-cash: #E11D48;
   --rf-lens-cash-rgb: 225 29 72;
-  --rf-text-disabled: #B4BCCA;
-  --rf-text-disabled-rgb: 180 188 202;
-  --rf-text-primary: #0A0F1A;
-  --rf-text-primary-rgb: 10 15 26;
+
   /* ---------------------------------------------------------------------------------------
-   * THE TEXT RAMP MOVED DOWN ONE DS STEP (Phase 5E Part 2, ruling R90).
-   *
-   * `--rf-text-tertiary` was ink-400 (#8891A3), which is 3.17:1 on white. T100 measured it on
-   * 4,104 rendered elements — 10-13px body text, labels, captions, table detail lines. The design
-   * system's own contrast matrix lists ink-400 for "placeholders, disabled text, labels 16px+",
-   * so the DS never claimed it was body text; this template used it as though it were.
-   *
-   * THE FIX IS HERE AND NOT AT 57 CALL SITES, which is the point of having tokens. But moving
-   * tertiary to ink-500 alone would have made it identical to secondary and collapsed a
-   * three-level hierarchy into two — labels and their values are drawn in exactly that pair, so
-   * the distinction is load-bearing. So the whole ramp shifts down one step of the DS's own ink
-   * scale, and all three levels clear AA on white and on the sunken surface:
-   *
-   *     primary    ink-900  #0A0F1A   18.9:1   (unchanged)
-   *     secondary  ink-600  #3F4858    9.2:1   (was ink-500, 5.6:1)
-   *     tertiary   ink-500  #5E6878    5.6:1   (was ink-400, 3.17:1 — the defect)
-   *
-   * `--rf-text-disabled` stays at ink-300: disabled text is inactive by definition and WCAG
-   * exempts it, and darkening it would make a disabled control look enabled.
-   *
-   * The DS's "labels 16px+" allowance for ink-400 is moot here — the only roles at or above 16px
-   * are `heading` and `display`, and both are primary text.
+   * BRAND TINTS. Alpha differs per theme, which Tailwind's <alpha-value> cannot express, so
+   * these reference the rgba() property directly (see tailwind.config.js's exception list).
    * --------------------------------------------------------------------------------------- */
-  --rf-text-secondary: #3F4858;
-  --rf-text-secondary-rgb: 63 72 88;
-  --rf-text-tertiary: #5E6878;
-  --rf-text-tertiary-rgb: 94 104 120;
+  --rf-brand-tint-08: rgba(0, 82, 235, 0.06);
+  --rf-brand-tint-08-rgb: 0 82 235;
+  --rf-brand-tint-16: rgba(0, 82, 235, 0.12);
+  --rf-brand-tint-16-rgb: 0 82 235;
+
+  /* ---------------------------------------------------------------------------------------
+   * RADIUS — the product's own scale (--radius-sm/md/lg/xl), taken verbatim (R94).
+   * --------------------------------------------------------------------------------------- */
+  --rf-radius-sm: 8px;
+  --rf-radius-md: 10px;
+  --rf-radius-lg: 14px;
+  --rf-radius-xl: 16px;
+  --rf-radius-full: 9999px;
+
+  /* ---------------------------------------------------------------------------------------
+   * ELEVATION. Three, because the product uses three: a card at rest, something lifted off the
+   * page, and something floating over it. R99: 13 hand-picked Tailwind shadows across the
+   * components were half of why a pane read as a stack of undifferentiated boxes.
+   * --------------------------------------------------------------------------------------- */
+  --rf-shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+  --rf-shadow-raised: 0 2px 4px rgba(16, 24, 40, 0.04), 0 4px 12px rgba(16, 24, 40, 0.08);
+  --rf-shadow-overlay: 0 8px 16px rgba(16, 24, 40, 0.06), 0 20px 40px rgba(16, 24, 40, 0.12);
+
+  /* ---------------------------------------------------------------------------------------
+   * MOTION.
+   * --------------------------------------------------------------------------------------- */
+  --rf-duration-fast: 120ms;
+  --rf-duration-base: 200ms;
+  --rf-ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 
+/* DARK IS DERIVED, NOT SOURCED (Phase 5E, R85). The product's design system is specified for
+ * light; this set keeps the app legible in dark and is not a second source of truth. */
 [data-theme="dark"] {
-  --rf-border-default: #3F4858;
-  --rf-border-default-rgb: 63 72 88;
-  --rf-border-strong: #5E6878;
-  --rf-border-strong-rgb: 94 104 120;
-  --rf-border-subtle: #262E3D;
-  --rf-border-subtle-rgb: 38 46 61;
-  --rf-brand-blue-400: #C4C3C3;
-  --rf-brand-blue-400-rgb: 196 195 195;
-  --rf-brand-blue-500: #A8A8A8;
-  --rf-brand-blue-500-rgb: 168 168 168;
-  --rf-brand-blue-600: #797979;
-  --rf-brand-blue-600-rgb: 121 121 121;
-  --rf-brand-focus-ring: #C4C3C3;
-  --rf-brand-focus-ring-rgb: 196 195 195;
-  --rf-brand-indicator: #C4C3C3;
-  --rf-brand-indicator-rgb: 196 195 195;
+  --rf-brand-blue-400: #7FA6FF;
+  --rf-brand-blue-400-rgb: 127 166 255;
+  --rf-brand-blue-500: #4C82FF;
+  --rf-brand-blue-500-rgb: 76 130 255;
+  --rf-brand-blue-600: #2E6BFF;
+  --rf-brand-blue-600-rgb: 46 107 255;
+  --rf-brand-blue-tint: #16233D;
+  --rf-brand-blue-tint-rgb: 22 35 61;
+  --rf-brand-focus-ring: #7FA6FF;
+  --rf-brand-focus-ring-rgb: 127 166 255;
+  --rf-brand-indicator: #7FA6FF;
+  --rf-brand-indicator-rgb: 127 166 255;
   --rf-brand-purple-500: #9B82FF;
   --rf-brand-purple-500-rgb: 155 130 255;
   --rf-brand-purple-600: #7C3AED;
   --rf-brand-purple-600-rgb: 124 58 237;
-  --rf-brand-tint-08: rgba(196, 195, 195, 0.1);
-  --rf-brand-tint-08-rgb: 196 195 195;
-  --rf-brand-tint-16: rgba(196, 195, 195, 0.18);
-  --rf-brand-tint-16-rgb: 196 195 195;
+  --rf-text-primary: #F2F5FA;
+  --rf-text-primary-rgb: 242 245 250;
+  --rf-text-secondary: #C3CBD9;
+  --rf-text-secondary-rgb: 195 203 217;
+  --rf-text-tertiary: #9AA5B8;
+  --rf-text-tertiary-rgb: 154 165 184;
+  --rf-text-disabled: #5E6878;
+  --rf-text-disabled-rgb: 94 104 120;
+  --rf-surface-canvas: #111826;
+  --rf-surface-canvas-rgb: 17 24 38;
+  --rf-surface-overlay: #182236;
+  --rf-surface-overlay-rgb: 24 34 54;
+  --rf-surface-raised: #1B2436;
+  --rf-surface-raised-rgb: 27 36 54;
+  --rf-surface-sunken: #0A0E16;
+  --rf-surface-sunken-rgb: 10 14 22;
+  --rf-border-subtle: #1B2436;
+  --rf-border-subtle-rgb: 27 36 54;
+  --rf-border-default: #263149;
+  --rf-border-default-rgb: 38 49 73;
+  --rf-border-strong: #35405C;
+  --rf-border-strong-rgb: 53 64 92;
   --rf-status-critical: #F2555C;
   --rf-status-critical-rgb: 242 85 92;
-  --rf-status-purple: #9B82FF;
-  --rf-status-purple-rgb: 155 130 255;
-  --rf-status-success: #33C88A;
-  --rf-status-success-rgb: 51 200 138;
-  --rf-status-warning: #F5A524;
-  --rf-status-warning-rgb: 245 165 36;
-  --rf-surface-canvas: #161C2A;
-  --rf-surface-canvas-rgb: 22 28 42;
-  --rf-surface-overlay: #1E2634;
-  --rf-surface-overlay-rgb: 30 38 52;
-  --rf-surface-raised: #262E3D;
-  --rf-surface-raised-rgb: 38 46 61;
-  --rf-surface-sunken: #0A0F1A;
-  --rf-surface-sunken-rgb: 10 15 26;
-  /* Dark is DERIVED, not sourced — the DS is light-only (ruling R85). The -700 steps are far too
-   * dark to read on ink-900, so dark keeps lighter counterparts of its own. Phase 5E verified in
-   * LIGHT and checked dark only for legibility; see H. */
   --rf-status-critical-icon: #F2555C;
   --rf-status-critical-icon-rgb: 242 85 92;
+  --rf-status-critical-text: #FF9BA0;
+  --rf-status-critical-text-rgb: 255 155 160;
+  --rf-status-success: #33C88A;
+  --rf-status-success-rgb: 51 200 138;
   --rf-status-success-icon: #33C88A;
   --rf-status-success-icon-rgb: 51 200 138;
+  --rf-status-success-text: #6FE0AE;
+  --rf-status-success-text-rgb: 111 224 174;
+  --rf-status-warning: #F5A524;
+  --rf-status-warning-rgb: 245 165 36;
   --rf-status-warning-icon: #F5A524;
   --rf-status-warning-icon-rgb: 245 165 36;
-  --rf-status-purple-icon: #9B82FF;
-  --rf-status-purple-icon-rgb: 155 130 255;
-  --rf-status-critical-text: #FF8A8F;
-  --rf-status-critical-text-rgb: 255 138 143;
-  --rf-status-success-text: #5FDCA6;
-  --rf-status-success-text-rgb: 95 220 166;
   --rf-status-warning-text: #FFC66B;
   --rf-status-warning-text-rgb: 255 198 107;
+  --rf-status-purple: #9B82FF;
+  --rf-status-purple-rgb: 155 130 255;
+  --rf-status-purple-icon: #9B82FF;
+  --rf-status-purple-icon-rgb: 155 130 255;
   --rf-status-purple-text: #C4B0FF;
   --rf-status-purple-text-rgb: 196 176 255;
-  --rf-lens-sales: #A8A8A8;
-  --rf-lens-sales-rgb: 168 168 168;
+  --rf-lens-sales: #9AA5B8;
+  --rf-lens-sales-rgb: 154 165 184;
   --rf-lens-inventory: #9B82FF;
   --rf-lens-inventory-rgb: 155 130 255;
   --rf-lens-ads: #FB923C;
@@ -223,12 +252,11 @@
   --rf-lens-margin-rgb: 51 200 138;
   --rf-lens-cash: #F2555C;
   --rf-lens-cash-rgb: 242 85 92;
-  --rf-text-disabled: #5E6878;
-  --rf-text-disabled-rgb: 94 104 120;
-  --rf-text-primary: #FAFBFD;
-  --rf-text-primary-rgb: 250 251 253;
-  --rf-text-secondary: #B4BCCA;
-  --rf-text-secondary-rgb: 180 188 202;
-  --rf-text-tertiary: #8891A3;
-  --rf-text-tertiary-rgb: 136 145 163;
+  --rf-brand-tint-08: rgba(127, 166, 255, 0.10);
+  --rf-brand-tint-08-rgb: 127 166 255;
+  --rf-brand-tint-16: rgba(127, 166, 255, 0.18);
+  --rf-brand-tint-16-rgb: 127 166 255;
+  --rf-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.32), 0 1px 3px rgba(0, 0, 0, 0.24);
+  --rf-shadow-raised: 0 2px 4px rgba(0, 0, 0, 0.32), 0 4px 12px rgba(0, 0, 0, 0.36);
+  --rf-shadow-overlay: 0 8px 16px rgba(0, 0, 0, 0.36), 0 20px 40px rgba(0, 0, 0, 0.48);
 }

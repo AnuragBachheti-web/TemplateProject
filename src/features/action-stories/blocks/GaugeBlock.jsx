@@ -98,15 +98,15 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
         const tone = limitTone();
         return (
           <div key={i} className="min-w-0">
-            <div {...typeRole('body', 'mb-1 flex items-baseline justify-between gap-2')}>
+            <div {...typeRole('small', 'mb-1 flex items-baseline justify-between gap-2')}>
               <span {...cellText('identifier', row.label, 'text-rf-text-secondary')}>{row.label}</span>
-              <span className={`shrink-0 font-mono font-semibold tabular-nums ${tone.text}`}>
+              <span {...typeRole('figure', `shrink-0 ${tone.text}`)}>
                 {row.magnitude.display === undefined ? null : formatValue(row.magnitude.display)}
               </span>
             </div>
             <div className="relative h-1.5 w-full rounded-full bg-rf-surface-sunken">
               <div
-                className={`h-full rounded-full transition-[width] duration-200 ${tone.fill}`}
+                className={`h-full rounded-full transition-[width] duration-base ${tone.fill}`}
                 style={{ width: `${fillPct}%` }}
               />
               {/* Previously an `aria-hidden` tick with the actual threshold value stashed in a

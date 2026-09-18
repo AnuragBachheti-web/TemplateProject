@@ -33,7 +33,7 @@
    * either theme's chart surface; this subset stays legible on both. */
   --rf-chart-seq-1: #b7d3f6; /* step 150 */
   --rf-chart-seq-2: #6da7ec; /* step 300 */
-  --rf-chart-seq-3: #2a78d6; /* step 450 */
+  --rf-chart-seq-3: #2570CE; /* step 450 — nudged in Phase 6, see the -on block below */
   --rf-chart-seq-4: #1c5cab; /* step 550 */
   --rf-chart-seq-5: #104281; /* step 650 */
 
@@ -56,9 +56,40 @@
    * light and dark chart surfaces to stay legible in either). */
   --rf-chart-seq-1: #b7d3f6;
   --rf-chart-seq-2: #6da7ec;
-  --rf-chart-seq-3: #2a78d6;
+  --rf-chart-seq-3: #2570CE;
   --rf-chart-seq-4: #1c5cab;
   --rf-chart-seq-5: #104281;
 
   --rf-chart-neutral: #75809A; /* = --rf-text-tertiary (dark) */
+}
+
+/* ------------------------------------------------------------------------------------------
+ * THE LEGIBLE TEXT COLOUR FOR EACH HEAT STEP (Phase 6).
+ *
+ * A heatmap cell paints a figure on a coloured ground, so the figure's colour depends on the
+ * step beneath it. That decision used to live in chartPalette.js as a hand-maintained copy of
+ * these five hex values, "kept in lockstep" with this file — and it had drifted out of contrast:
+ * Phase 5E's T100 measured 60 elements below AA, all of them white figures on the middle steps,
+ * worst 2.50:1. The decision belongs beside the scale it depends on, not in a module that has to
+ * mirror it.
+ *
+ * Measured against each step (WCAG, on the step itself):
+ *
+ *     seq-1  #b7d3f6   ink 11.54   white  1.54   ->  ink
+ *     seq-2  #6da7ec   ink  7.09   white  2.50   ->  ink   (was white: the defect)
+ *     seq-3  #2570CE   ink  3.16   white  4.90   ->  white
+ *     seq-4  #1c5cab   ink  2.68   white  6.63   ->  white
+ *     seq-5  #104281   ink  1.79   white  9.91   ->  white
+ *
+ * seq-3 IS A CHANGED VALUE, and the only one. At its previous #2a78d6 the step cleared AA in
+ * NEITHER direction — white 4.42, ink 4.02 — so no choice of text colour could have been legible
+ * and the scale itself had to move. #2570CE is the smallest darkening that clears 4.5 with white
+ * while keeping the ramp's spacing even.
+ * ------------------------------------------------------------------------------------------ */
+:root {
+  --rf-chart-seq-1-on: #111827;
+  --rf-chart-seq-2-on: #111827;
+  --rf-chart-seq-3-on: #FFFFFF;
+  --rf-chart-seq-4-on: #FFFFFF;
+  --rf-chart-seq-5-on: #FFFFFF;
 }

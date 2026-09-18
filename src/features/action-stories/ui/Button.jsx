@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { typeRole } from '../blocks/typeRole';
 
 // The one shared button — before this, StageActionBar's CTA, TableBlock's pagination controls, and
 // TableBlock's own column-sort header button each hand-rolled their own independent `<button
@@ -43,7 +44,10 @@ const Button = forwardRef(function Button(
       type="button"
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={`inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring disabled:cursor-not-allowed disabled:opacity-60 ${SIZE[size] ?? SIZE.md} ${VARIANT[variant] ?? VARIANT.primary} ${className}`}
+      // A BUTTON'S LABEL NEEDS A ROLE. It had none — the size was whatever the surrounding text
+      // happened to be, which is how the pane's forward action ended up rendering at heading size.
+      // `small` is the chrome size: a button is scanned, not read.
+      className={`${typeRole('small').className} inline-flex items-center justify-center rounded-lg transition-colors duration-fast ease-standard focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring disabled:cursor-not-allowed disabled:opacity-60 ${SIZE[size] ?? SIZE.md} ${VARIANT[variant] ?? VARIANT.primary} ${className}`}
       {...rest}
     >
       {loading ? (

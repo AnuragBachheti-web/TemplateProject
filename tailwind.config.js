@@ -61,16 +61,39 @@ export default {
       // reference's Fraunces-display/Inter-UI/JetBrains-Mono-data hierarchy could never show up no
       // matter what markup used `font-serif`/`font-mono`) — see src/styles/realify-tokens.css for
       // the same fonts as CSS custom properties, used where a Tailwind utility isn't the natural fit.
+      // PHASE 6. Two families, which is all the product has and all C2 permits: Inter for
+      // everything a person reads, and JetBrains Mono for figures only (I3). FRAUNCES IS REMOVED
+      // (C3) — it belonged to the previous design source, and `font-serif` now resolves to Inter
+      // so that any stray reference degrades to the right face rather than to Times New Roman.
+      // The stacks are the product's own declarations (--font-inter / --font-jetbrains-mono),
+      // which is why no new font is loaded.
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Fraunces', 'Times New Roman', 'serif'],
-        mono: ['"JetBrains Mono"', 'Menlo', 'monospace'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        serif: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', '"SF Mono"', 'Menlo', 'monospace'],
+      },
+      // PHASE 6, R99. Radius, elevation and motion are TOKENS now. They were 80 `rounded-*`, 13
+      // `shadow-*` and 5 duration classes chosen per component from Tailwind's defaults, which is
+      // defect 3's mechanism: a card read as an undifferentiated box because its border, radius and
+      // shadow were each decided locally instead of being one card treatment applied everywhere.
+      borderRadius: {
+        sm: 'var(--rf-radius-sm)',
+        md: 'var(--rf-radius-md)',
+        lg: 'var(--rf-radius-lg)',
+        xl: 'var(--rf-radius-xl)',
+        full: 'var(--rf-radius-full)',
       },
       boxShadow: {
-        card: '0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.03)',
-        xs: '0 1px 2px rgba(10,15,26,0.04)',
-        sm: '0 1px 3px rgba(10,15,26,0.06), 0 1px 2px rgba(10,15,26,0.04)',
-        md: '0 4px 12px rgba(10,15,26,0.06), 0 2px 4px rgba(10,15,26,0.04)',
+        card: 'var(--rf-shadow-card)',
+        raised: 'var(--rf-shadow-raised)',
+        overlay: 'var(--rf-shadow-overlay)',
+      },
+      transitionDuration: {
+        fast: 'var(--rf-duration-fast)',
+        base: 'var(--rf-duration-base)',
+      },
+      transitionTimingFunction: {
+        standard: 'var(--rf-ease-standard)',
       },
       // One real utility (`max-w-page`) for the stage page's own content cap, backed by
       // `--page-max` in realify-tokens.css — FORENSIC_AUDIT_S9.1.md §12/§19/§25 found this same

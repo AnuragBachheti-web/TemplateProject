@@ -61,7 +61,7 @@ function TopBar({ onOpenNav }) {
         <input
           type="search"
           placeholder="Search workflows, SKUs, or insights…"
-          {...typeRole('body', 'w-full rounded-full border border-rf-border-subtle bg-rf-surface-sunken py-[7px] pl-8 pr-3 text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', 'w-full rounded-full border border-rf-border-subtle bg-rf-surface-sunken py-[7px] pl-8 pr-3 text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         />
         <kbd {...typeRole('micro', 'pointer-events-none absolute right-2.5 hidden rounded border border-rf-border-subtle bg-rf-surface-canvas px-1.5 py-[1px] text-rf-text-tertiary sm:inline-block')}>
           ⌘K
@@ -141,7 +141,7 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
                 <NavLink
                   to={actionStoryPath(story.story_code, openAt, openId)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`${typeRole('body').className} relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${ isActive ? 'bg-rf-brand-tint-08 text-rf-text-primary' : 'text-rf-text-secondary hover:bg-rf-surface-sunken hover:text-rf-text-primary' }`}
+                  className={`${typeRole('small').className} relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${ isActive ? 'bg-rf-brand-tint-08 text-rf-text-primary' : 'text-rf-text-secondary hover:bg-rf-surface-sunken hover:text-rf-text-primary' }`}
                 >
                   {isActive && (
                     <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-[2.5px] rounded-full bg-rf-brand-indicator" />
@@ -194,7 +194,7 @@ export default function Shell() {
   }
 
   return (
-    <div data-shell-part="frame" className="flex h-screen bg-rf-surface-sunken font-sans text-rf-text-primary">
+    <div data-shell-part="frame" className="flex h-screen bg-rf-surface-sunken text-rf-text-primary">
       {navOpen && (
         <button
           type="button"
@@ -206,18 +206,18 @@ export default function Shell() {
 
       <nav
         aria-label="Workflows"
-        className={`fixed inset-y-0 left-0 z-20 flex w-60 flex-shrink-0 flex-col overflow-y-auto border-r border-rf-border-subtle bg-rf-surface-canvas transition-transform duration-200 lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-20 flex w-60 flex-shrink-0 flex-col overflow-y-auto border-r border-rf-border-subtle bg-rf-surface-canvas transition-transform duration-base lg:static lg:translate-x-0 ${
           navOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex items-center gap-2 border-b border-rf-border-subtle px-4 py-3.5">
           <span
             aria-hidden="true"
-            {...typeRole('micro', 'grid h-6 w-6 flex-shrink-0 place-items-center rounded-[7px] bg-rf-brand-blue-500 text-white')}
+            {...typeRole('micro', 'grid h-6 w-6 flex-shrink-0 place-items-center rounded-sm bg-rf-brand-blue-500 text-white')}
           >
             R
           </span>
-          <span {...typeRole('display', 'text-rf-text-primary')} style={{ fontVariationSettings: "'opsz' 144" }}>
+          <span {...typeRole('display', 'text-rf-text-primary')}>
             Realify
           </span>
         </div>
@@ -229,14 +229,14 @@ export default function Shell() {
         <div className="mt-auto flex flex-col border-t border-rf-border-subtle px-2 py-2">
           <a
             href="#settings"
-            {...typeRole('body', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
+            {...typeRole('small', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
           >
             <i className={`fa-solid fa-gear w-3.5 text-center ${glyph(11)} text-rf-text-tertiary`} aria-hidden="true" />
             Settings
           </a>
           <a
             href="#help"
-            {...typeRole('body', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
+            {...typeRole('small', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
           >
             <i className={`fa-regular fa-circle-question w-3.5 text-center ${glyph(11)} text-rf-text-tertiary`} aria-hidden="true" />
             Help &amp; Support
