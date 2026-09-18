@@ -5,6 +5,7 @@ import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey } from './decorativeKeys';
 import { ROW_LABEL_KEYS, rowLabelOf } from '../manifests/blockTypes';
+import { cellText } from './cellText';
 
 // The keys an explicit, well-known value concept lives under — checked in this priority order
 // first, exactly as before. Real fixture data uses many OTHER field names for the same idea
@@ -94,11 +95,11 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
         return (
           <li key={i} className="flex flex-col gap-0.5 py-1.5 text-[12.5px]">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-rf-text-secondary">{label}</span>
+              <span {...cellText('identifier', label, 'text-rf-text-secondary')}>{label}</span>
               <span
-                className={`flex min-w-0 items-baseline gap-1.5 truncate font-medium ${
+                {...cellText('prose', undefined, `flex items-baseline gap-1.5 font-medium ${
                   primaryTone ? primaryTone.text : 'text-rf-text-primary'
-                }`}
+                }`)}
               >
                 {flattenNestedEntry(primary.raw)}
                 {inline.map(([key, text]) => {
@@ -119,7 +120,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
               return (
                 <div key={key} className="flex items-center justify-between gap-3 text-[10.5px] text-rf-text-tertiary">
                   <span>{humanizeSlotName(key)}</span>
-                  <span className={`truncate ${tone ? tone.text : ''}`}>{text}</span>
+                  <span {...cellText('prose', text, tone ? tone.text : '')}>{text}</span>
                 </div>
               );
             })}

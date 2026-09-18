@@ -141,6 +141,107 @@ function mainSectionsOf(decision) {
 
 // ---- T62 -----------------------------------------------------------------------------------------
 
+describe('T79 — REPLACES T62, which passed while scrolling did not work', () => {
+  // ============================================================================================
+  // THE THIRD TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asks this comment to name all
+  // three, because the shape differs every time and the cause never does.
+  //
+  //   heroMetrics.range (Phase 5A)  referenceFidelity.test.js asserted the P10-P90 interval was
+  //                                 present in the DATA. It was. StatListBlock never rendered it,
+  //                                 on any of the objects that carry it. The test guarded a field
+  //                                 no operator could see, and had done since Phase 2.
+  //
+  //   T31 / T37 (Phases 3B, 3C)     `git diff --name-only` assertions that the corpus was
+  //                                 untouched. True — and unfalsifiable after the commit landed,
+  //                                 because a committed tree has no diff. They went quiet at
+  //                                 exactly the moment they were supposed to start guarding.
+  //
+  //   T62 (Phase 5C, this one)      asserted each region's className CONTAINS `overflow-y-auto`
+  //                                 and matches `min-h-0`. Both were true. Scrolling was broken:
+  //                                 `lg:items-start` on the parent grid made the region size to its
+  //                                 own content, and `overflow-y: auto` on an element with an
+  //                                 unconstrained height never scrolls — it grows. Measured in
+  //                                 Chrome at 1440x700: clientHeight 500, scrollHeight 500,
+  //                                 nothing to scroll, 155px overflowing the track and clipped by
+  //                                 `main`'s `overflow:hidden`. 86px of content unreachable.
+  //
+  // THE RULE THEY SHARE: a test must assert what the OPERATOR EXPERIENCES, not what the code
+  // declares. A CSS property is a declaration. A committed file is a declaration. A field on a
+  // JSON object is a declaration. Each of those three tests asserted something ADJACENT to the
+  // thing that mattered, and adjacency is invisible in a green run.
+  //
+  // WHERE THAT LEAVES THIS FILE. jsdom has no layout engine, so the behavioural half of scrolling
+  // CANNOT be asserted here — every clientHeight is 0. It lives in scripts/smoke.mjs (T73), in real
+  // Chrome, and `npm run smoke` fails the build on a regression. What stays here is the STRUCTURAL
+  // PRECONDITION (T74): the height chain that makes scrolling possible. Structure here, behaviour
+  // there, and neither pretending to be the other.
+  // ============================================================================================
+
+  it('records that the behavioural assertion lives in the smoke run, and that it can fail', () => {
+    const smoke = fs.readFileSync(path.join(REPO_ROOT, 'scripts/smoke.mjs'), 'utf8')
+    for (const t of ['T73', 'T75', 'T76']) {
+      expect(smoke, `${t} is not in the smoke run`).toContain(t)
+    }
+    // R65: a browser check that reports without failing is the vacuous pass in a new costume.
+    // The gate's findings must reach `fail()`, which is what sets a non-zero exit code.
+    expect(smoke, 'the layout gate does not fail the run').toMatch(/failures\.length > 0[\s\S]{0,200}fail\(/)
+  })
+
+  it('no test in this file asserts a scroll behaviour it cannot observe', () => {
+    // The specific trap T62 fell into: asserting a CSS property as though it were the behaviour.
+    // A className check is legitimate ONLY as a named precondition (T74), never as the scroll test.
+    const self = fs.readFileSync(fileURLToPath(import.meta.url), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
+    expect(self, 'this file claims to measure scrolling, which jsdom cannot do')
+      // Matched as a PROPERTY ACCESS (`.scrollHeight`), not as a bare word — the first draft used
+      // the bare word and matched its own regex literal, which is a small, funny instance of the
+      // exact thing this file is about: asserting on something adjacent to the target.
+      .not.toMatch(/\.(scrollHeight|scrollTop|clientHeight)\b/)
+  })
+})
+
+describe('T74 — the height chain from the viewport to each region is unbroken (II2)', () => {
+  // Every ancestor between the viewport and a scroll region must constrain height. One link with
+  // an implicit `min-height: auto` is where the next regression hides — and Shell.jsx's own
+  // `flex-1 flex-col` column was exactly that when this phase started: it measured correctly and
+  // constrained nothing.
+  const CHAIN = [
+    ['frame', /h-screen/, 'the fixed viewport-height frame'],
+    ['column', /min-h-0/, 'the column between the frame and main'],
+    ['main', /min-h-0/, 'the non-scrolling page frame'],
+    ['regions', /min-h-0/, 'the band the two regions share'],
+  ]
+
+  it.each(SPECIMENS)('%s: every named link constrains height', async (id) => {
+    const d = byId(id)
+    const c = await renderApp(`/action-stories/${d.story_code}/${d.stage}/${d.proposal_id}`)
+    for (const [part, rule, what] of CHAIN) {
+      const node = c.querySelector(`[data-shell-part="${part}"]`)
+      expect(node, `${id}: no [data-shell-part="${part}"] — ${what}`).toBeTruthy()
+      expect(node.className, `${id}: ${part} does not constrain height`).toMatch(rule)
+    }
+    unmount()
+  })
+
+  it.each(SPECIMENS)('%s: nothing between a region and the frame sizes to its content', async (id) => {
+    const d = byId(id)
+    const c = await renderApp(`/action-stories/${d.story_code}/${d.stage}/${d.proposal_id}`)
+    const region = c.querySelector('[data-scroll-region="main"]')
+    expect(region).toBeTruthy()
+    // `items-start` / `items-center` on an ancestor grid or flex makes the region size to content
+    // rather than to its track, which is the precise 5C defect. It must appear nowhere on the path.
+    const offenders = []
+    for (let n = region.parentElement; n && n !== document.body; n = n.parentElement) {
+      const cls = (n.className ?? '').toString()
+      if (/\bitems-start\b|\bitems-center\b|\bitems-baseline\b/.test(cls)) {
+        offenders.push(`${n.getAttribute('data-shell-part') ?? n.tagName.toLowerCase()}: ${cls.match(/\bitems-\w+/)[0]}`)
+      }
+    }
+    expect(offenders, `${id}: an ancestor lets the region size to its own content`).toEqual([])
+    unmount()
+  })
+})
+
 describe('T62 — the document body does not scroll; each region owns its own overflow (I6)', () => {
   it.each(SPECIMENS)('%s: the pane declares exactly two independent scroll regions', async (id) => {
     const d = byId(id)
@@ -616,16 +717,28 @@ describe('T71 — no data changed (I4) and no block changed (C1)', () => {
     expect(diff, `frozen files changed: ${diff}`).toBe('')
   })
 
-  it('no block component changed — a block does not know its own width (I3/C1)', () => {
-    // COMPONENTS, not the whole directory: `blocks/` also holds this phase's re-baselined test
-    // files (slotCorrections.test.jsx, blockVocabulary.test.jsx), whose slot counts moved when R60
-    // removed `stage_status`. C1 is about a block learning its own width, and a test file updating
-    // a count is not that. The first draft of this assertion diffed the directory and failed on
-    // exactly those two files.
-    const diff = changed('src/features/action-stories/blocks/')
-      .split('\n')
-      .filter((f) => f !== '' && !f.includes('.test.'))
-    expect(diff, `block component(s) changed: ${diff.join(', ')}`).toEqual([])
+  it('no block component learns its own WIDTH — the part of C1 that still stands', () => {
+    // NARROWED IN PHASE 5D, not deleted. 5C's version asserted that no block component changed at
+    // all. Ruling R63 lifted that for TEXT ONLY, on measured evidence: 1001 clipped elements across
+    // 87 of 105 objects, four of the five owners offering no affordance, and every one of them
+    // produced by a `truncate` written inside a block. The file boundary was drawn before that
+    // measurement existed.
+    //
+    // What C1 was protecting is unchanged and is asserted here: a block still does not know how
+    // WIDE it is or that it shares a row. Width comes from the slot (packRows.js), the packed cell
+    // stretches its child from the layout side, and no block mentions either. The text half of the
+    // scope line is T81's `every changed block file changed ONLY its text behaviour`.
+    // NOT `\bspan\b` — that matches the `<span>` tag and flagged eight blocks that merely render
+    // one. The concepts a block must stay ignorant of are the WIDTH ones, named exactly.
+    const GEOMETRY = /packRow|spanOf|CELL_SPAN|data-pack-row|col-span|grid-cols-12|layout\.span|['"](half|full)['"]/
+    const offenders = []
+    for (const file of changed('src/features/action-stories/blocks/').split('\n')) {
+      if (file === '' || file.includes('.test.')) continue
+      const code = fs.readFileSync(path.join(REPO_ROOT, file), 'utf8')
+        .replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
+      if (GEOMETRY.test(code)) offenders.push(file)
+    }
+    expect(offenders, 'a block component now knows its own width').toEqual([])
   })
 })
 
@@ -673,5 +786,235 @@ describe('T72 — the live path stays green across all 105', () => {
       expect(Array.isArray(sections.main), d.proposal_id).toBe(true)
       expect(Array.isArray(sections.rail), d.proposal_id).toBe(true)
     }
+  })
+})
+
+// ---- Phase 5D -------------------------------------------------------------------------------
+
+describe('T77 — text behaviour is declared once, per column role, never per block (I3)', () => {
+  // THE DEFECT THIS CLOSES. Phase 5D measured 1001 clipped text elements across 87 of the 105
+  // objects, at 1440 and at 1280. Every one of them came from a `truncate` written inside a block
+  // component — nine files, each having independently decided how its own text behaves. Four of
+  // the five owners offered no affordance at all, so a cut value was simply gone.
+  //
+  // Ruling R63 lifted I5 for text only, on the condition that the rules live in ONE module. That
+  // condition is what makes it a lift rather than a retreat: without it, nine files would still
+  // each be deciding, and the per-screen accident this project has removed three times would just
+  // have been renamed.
+  const BLOCKS_DIR = path.join(REPO_ROOT, 'src/features/action-stories/blocks')
+  const blockFiles = []
+  ;(function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, e.name)
+      if (e.isDirectory()) walk(full)
+      else if (/\.jsx?$/.test(e.name) && !e.name.includes('.test.')) blockFiles.push(full)
+    }
+  })(BLOCKS_DIR)
+
+  /** Utility classes that DECIDE how text behaves. Only cellText.js may name them. */
+  const TEXT_BEHAVIOUR = /\btruncate\b|\bline-clamp-\d\b|\bwhitespace-(nowrap|normal|pre)\b|\bbreak-words\b|\bmax-w-xs\b|overflow-wrap/
+
+  it('finds the block files it is policing', () => {
+    expect(blockFiles.length).toBeGreaterThan(15)
+  })
+
+  it('exactly one module declares text behaviour, and it is the shared one', () => {
+    const offenders = []
+    for (const file of blockFiles) {
+      if (path.basename(file) === 'cellText.js') continue
+      const code = fs.readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
+      const hits = [...new Set((code.match(TEXT_BEHAVIOUR) ?? []))]
+      if (hits.length) offenders.push(`${path.relative(REPO_ROOT, file)}: ${hits.join(', ')}`)
+    }
+    expect(offenders, 'a block still decides its own text behaviour').toEqual([])
+  })
+
+  it('the shared module declares exactly three roles, each with a stated rule', async () => {
+    const { CELL_ROLES, cellText } = await import('./blocks/cellText.js')
+    expect(Object.keys(CELL_ROLES).sort()).toEqual(['figure', 'identifier', 'prose'])
+    for (const [role, spec] of Object.entries(CELL_ROLES)) {
+      expect(typeof spec.className, `${role} has no class`).toBe('string')
+      expect(spec.className.length, `${role} class is empty`).toBeGreaterThan(0)
+      expect(spec.rule?.length ?? 0, `${role} states no rule`).toBeGreaterThan(30)
+      expect(typeof spec.truncates, `${role} does not say whether it truncates`).toBe('boolean')
+    }
+    // I4: the only role permitted to cut text must say so, and must carry an affordance.
+    expect(CELL_ROLES.figure.truncates, 'a figure may never be cut — a cut number is a wrong number').toBe(false)
+    expect(CELL_ROLES.prose.truncates, 'prose wraps rather than truncating').toBe(false)
+    expect(typeof cellText, 'cellText is not callable').toBe('function')
+  })
+
+  it('every block that renders text imports the shared module', () => {
+    // A block with no text utility class could be passing vacuously — by rendering no text at all,
+    // or by having had its class silently deleted. The ones that render cells must USE the module.
+    const MUST_USE = [
+      'TableBlock.jsx', 'LabelValueListBlock.jsx', 'RosterBlock.jsx', 'GaugeBlock.jsx',
+      'ObjectBlock.jsx', 'TextBlock.jsx', 'ItemQueueBlock.jsx',
+      path.join('children', 'Metric.jsx'), path.join('children', 'SubRowList.jsx'),
+    ]
+    const missing = MUST_USE.filter((rel) => !fs.readFileSync(path.join(BLOCKS_DIR, rel), 'utf8').includes('cellText'))
+    expect(missing, 'block(s) rendering cells without the shared text contract').toEqual([])
+  })
+})
+
+describe('T78 — a packed row obeys the ruled vertical contract', () => {
+  // THE CONTRACT (R66): paired cells stretch to equal height and the block's card FILLS its cell;
+  // the shorter cell's content stays top-aligned and the difference becomes card padding rather
+  // than a gap between cards. Justified against the reference, whose own `1fr 1fr` row
+  // (S10.1-1-reason.dc.html:248) uses default stretch with equal-height cards.
+  //
+  // MEASURED IN THE SMOKE RUN, not here. Before the fix, Chrome reported the cells already equal
+  // (277/277 on S10.2 reason) while the CARDS inside them were 277 and 235 — 42px of dead space
+  // that no className reveals and that jsdom, with every height at 0, cannot see. Asserting it
+  // here would be T62's mistake with different words.
+  it('the measurement lives in the smoke run, where heights are real', () => {
+    const smoke = fs.readFileSync(path.join(REPO_ROOT, 'scripts/smoke.mjs'), 'utf8')
+    expect(smoke, 'T78 is not in the smoke run').toContain('T78')
+  })
+
+  it('the layout layer, not a block, is what makes the card fill its cell', () => {
+    // I5 still holds for geometry: a block does not know it is in a packed row. The cell makes its
+    // child fill it, from the layout side, which is the same place the span is declared.
+    const sections = fs.readFileSync(path.join(REPO_ROOT, 'src/features/action-stories/components/StageSections.jsx'), 'utf8')
+    expect(sections, 'the packed cell does not stretch its child').toMatch(/data-pack-row[\s\S]{0,600}h-full/)
+  })
+})
+
+describe('T80 — everything Phase 5C established still holds (I7)', () => {
+  it('the declared spans are unchanged', async () => {
+    const { SLOT_VOCABULARY } = await import('./templates/slotVocabulary.js')
+    const halves = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.span === 'half').map(([n]) => n).sort()
+    expect(halves).toEqual(['constraints', 'entities', 'plan', 'policy', 'roles', 'secondary_rows'])
+  })
+
+  it('the packer is still pure and still never reorders', () => {
+    const input = ['policy', 'constraints', 'roles', 'narrative']
+    const first = packRow(input)
+    for (let i = 0; i < 10; i += 1) expect(packRow(input)).toEqual(first)
+    expect(packRow(input).flatMap((r) => r.slots)).toEqual(input)
+  })
+
+  it('the pinned action bar is still a non-overlapping sibling', async () => {
+    const d = byId('prop_s9_1_decide')
+    const c = await renderApp(`/action-stories/${d.story_code}/${d.stage}/${d.proposal_id}`)
+    const bar = c.querySelector('[data-shell-part="actionbar"]')
+    expect(bar).toBeTruthy()
+    expect(bar.className).not.toMatch(/\bfixed\b|\babsolute\b/)
+    expect(bar.parentElement).toBe(c.querySelector('[data-shell-part="regions"]').parentElement)
+    unmount()
+  })
+
+  it('the block set per object is identical, and the rail budget is unchanged', () => {
+    const differences = []
+    const cards = {}
+    for (const d of dataset) {
+      const pane = renderPaneIsolated(d)
+      if (!pane) continue
+      const rendered = [...pane.container.querySelectorAll('[data-block-slot]')].map((n) => n.getAttribute('data-block-slot'))
+      const resolved = resolveTemplate(d)
+      const expected = resolved.manifest.blocks
+        .filter((b) => b.when === undefined || evaluateCondition(b.when, d))
+        .filter((b) => resolveBinding(b.binding, d) !== undefined)
+        .map((b) => b.slotName)
+      if (rendered.length !== expected.length || expected.some((s) => !rendered.includes(s))) {
+        differences.push(`${d.proposal_id}: ${rendered.length} rendered vs ${expected.length} expected`)
+      }
+      const aside = pane.container.querySelector('aside')
+      cards[resolved.templateId] = Math.max(cards[resolved.templateId] ?? 0, aside ? aside.querySelectorAll('section').length : 0)
+      pane.done()
+    }
+    expect(differences, 'the text fix changed which blocks render').toEqual([])
+    expect(Math.max(...Object.values(cards)), 'the 4-card rail budget moved').toBeLessThanOrEqual(4)
+  })
+})
+
+describe('T81 — no data changed, and no block changed beyond the lifted text scope', () => {
+  const changed = (paths) => execSync(`git diff --name-only HEAD -- ${paths}`, { encoding: 'utf8' }).trim()
+
+  it('the normalized corpus is byte-identical (I6)', () => {
+    const diff = changed('src/features/action-stories/__corpus__/normalized/')
+    expect(diff, `corpus changed: ${diff}`).toBe('')
+  })
+
+  it('the generator, the contract validator and the shape ledger are untouched', () => {
+    const diff = changed(
+      'extraction/normalizeCorpus.js'
+      + ' src/features/action-stories/contract/decisionObject.js'
+      + ' src/features/action-stories/blocks/consumedFields.js'
+      + ' src/features/action-stories/__corpus__/shapeLedger.js',
+    )
+    expect(diff, `frozen files changed: ${diff}`).toBe('')
+  })
+
+  it('every changed block file changed ONLY its text behaviour (R63 scope)', () => {
+    // WHAT "TEXT ONLY" MEANS, made checkable. A text edit rewrites a cell's className and title; it
+    // does not add, remove or rename an ELEMENT, and it does not touch the block's logic. So this
+    // compares the JSX TAG SKELETON of the removed lines against the added ones: same tags, same
+    // count, same order. Attributes may change freely — that is the lift — and the structure may not.
+    //
+    // Two earlier drafts of this assertion were wrong in opposite directions. The first accepted a
+    // line only if it contained `className`/`cellText`/`title=`, and flagged six continuation lines
+    // of multi-line class template literals. The second rejected any line containing a JSX tag, and
+    // flagged every edit, because rewriting a `<span>`'s attributes necessarily mentions `<span>`.
+    // Neither was measuring what R63 actually scoped.
+    const files = changed('src/features/action-stories/blocks/').split('\n').filter((f) => f && !f.includes('.test.'))
+    const offenders = []
+    const tagsOf = (lines) => lines.join('\n').match(/<\/?[A-Za-z][\w.]*/g)?.sort() ?? []
+
+    for (const file of files) {
+      if (path.basename(file) === 'cellText.js') continue
+      const diff = execSync(`git diff -U0 HEAD -- ${file}`, { encoding: 'utf8' })
+      const added = []
+      const removed = []
+      for (const line of diff.split('\n')) {
+        if (!/^[+-]/.test(line) || /^[+-]{3}/.test(line)) continue
+        const body = line.slice(1).trim()
+        if (body === '' || body.startsWith('//') || body.startsWith('*') || body.startsWith('/*')) continue
+        ;(line[0] === '+' ? added : removed).push(body)
+      }
+      if (added.length === 0 && removed.length === 0) continue
+
+      // The block's own logic must be untouched.
+      const LOGIC = /\b(const|let|var|function|return|if|else|for|while|switch|use[A-Z]\w+)\b/
+      for (const body of [...added, ...removed]) {
+        // The one permitted statement is the import of the shared module.
+        if (/^import \{ cellText \}/.test(body)) continue
+        if (LOGIC.test(body)) offenders.push(`${file}: logic changed — ${body.slice(0, 80)}`)
+      }
+
+      // …and the element structure must be identical on both sides of the diff.
+      const before = tagsOf(removed)
+      const after = tagsOf(added.filter((b) => !/^import \{ cellText \}/.test(b)))
+      if (JSON.stringify(before) !== JSON.stringify(after)) {
+        offenders.push(`${file}: element structure changed — was [${before.join(' ')}], now [${after.join(' ')}]`)
+      }
+    }
+    expect(offenders, 'a block changed something other than its text behaviour').toEqual([])
+  })
+})
+
+describe('T82 — the live path stays green across all 105', () => {
+  it('every object still renders with no error copy and real content', async () => {
+    const { getStageView } = await import('@/services/actionStoriesService')
+    const { __resetMockApi } = await import('@/services/mockDecisionApi')
+    __resetMockApi()
+    const views = await Promise.all(dataset.map((d) => getStageView(d.story_code, d.stage, d.proposal_id)))
+    expect(views).toHaveLength(105)
+
+    const broken = []
+    for (const view of views) {
+      const own = document.createElement('div')
+      document.body.appendChild(own)
+      const ownRoot = createRoot(own)
+      act(() => { ownRoot.render(<StageRenderer manifest={view.manifest} fixture={view.decision} />) })
+      const text = (own.textContent ?? '').replace(/\s+/g, ' ').trim()
+      if (/can't be displayed yet|unexpected response|Something went wrong/i.test(text)) {
+        broken.push(`${view.decision.proposal_id}: error copy`)
+      }
+      if (text.length < 50) broken.push(`${view.decision.proposal_id}: rendered almost nothing`)
+      act(() => ownRoot.unmount())
+      own.remove()
+    }
+    expect(broken, `${broken.length} of 105 broke`).toEqual([])
   })
 })

@@ -4,6 +4,7 @@ import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import Tooltip from '../ui/Tooltip';
 import { formatValue } from './formatValue';
+import { cellText } from './cellText';
 
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
 const THRESHOLD_KEYS = ['threshold', 'limit', 'limitPct', 'ceiling', 'floor', 'target', 'cap'];
@@ -64,7 +65,7 @@ export default function GaugeBlock({ slotName, data, compact }) {
         return (
           <div key={i} className="min-w-0">
             <div className="mb-1 flex items-baseline justify-between gap-2 text-[11.5px]">
-              <span className="min-w-0 truncate text-rf-text-secondary">{row.label}</span>
+              <span {...cellText('identifier', row.label, 'text-rf-text-secondary')}>{row.label}</span>
               <span className={`shrink-0 font-mono font-semibold tabular-nums ${over ? 'text-rf-status-critical' : 'text-rf-text-primary'}`}>
                 {row.magnitude.display === undefined ? null : formatValue(row.magnitude.display)}
               </span>

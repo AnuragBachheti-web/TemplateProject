@@ -3,6 +3,7 @@ import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
+import { cellText } from './cellText';
 
 /**
  * WHO OR WHAT IS CREDITED — the named models on a proposal.
@@ -55,7 +56,7 @@ export default function RosterBlock({ slotName, data, compact = false }) {
           <Initials name={row.name} initials={row.initials} />
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline gap-2">
-              <span className="truncate text-[12.5px] text-rf-text-primary">{row.name}</span>
+              <span {...cellText('identifier', row.name, 'text-[12.5px] text-rf-text-primary')}>{row.name}</span>
               {/* `lead` is the reference's own flag for the agent that drove the proposal. */}
               {row.lead === true && (
                 <span className="shrink-0 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
@@ -64,7 +65,7 @@ export default function RosterBlock({ slotName, data, compact = false }) {
               )}
             </div>
             {(row.role ?? row.stance) && (
-              <div className="truncate text-[11px] text-rf-text-tertiary">{row.role ?? row.stance}</div>
+              <div {...cellText('prose', row.role ?? row.stance, 'text-[11px] text-rf-text-tertiary')}>{row.role ?? row.stance}</div>
             )}
           </div>
         </li>

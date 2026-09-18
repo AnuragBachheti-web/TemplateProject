@@ -2,6 +2,7 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { formatValue, isTypedNumber } from './formatValue';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { cellText } from './cellText';
 
 /**
  * Renders a bare number OR a typed business number (`{value, unit, precision?}`).
@@ -26,7 +27,7 @@ export default function NumberBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-baseline justify-between gap-3 py-[7px]">
-        <span className="min-w-0 truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), 'text-[12px] text-rf-text-secondary')}>{humanizeSlotName(slotName)}</span>
         <span className="shrink-0 font-mono text-[13px] font-semibold tabular-nums text-rf-text-primary">{display}</span>
       </div>
     );

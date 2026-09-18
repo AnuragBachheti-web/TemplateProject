@@ -6,6 +6,7 @@ import { deltaTone } from './deltaTone';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey } from './decorativeKeys';
+import { cellText } from './cellText';
 
 // Candidate field names an item might carry each concept under — kept in sync with (but
 // independently of) extraction/classifyBlocks.js's ITEM_LEVEL_CANDIDATES; that module is
@@ -118,14 +119,14 @@ function Item({ item, index }) {
     <li className="relative overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised py-2 pl-4 pr-3">
       {tone && <span className={`absolute inset-y-0 left-0 w-1 ${tone.dot}`} />}
       <div className="flex items-center justify-between gap-2">
-        <p className="truncate text-[12.5px] font-semibold text-rf-text-primary">{headline}</p>
+        <p {...cellText('identifier', headline, 'text-[12.5px] font-semibold text-rf-text-primary')}>{headline}</p>
         {state !== undefined && (
           <span className="flex-shrink-0 rounded-full bg-rf-surface-sunken px-2 py-0.5 text-[10px] font-semibold uppercase text-rf-text-secondary">
             {String(state)}
           </span>
         )}
       </div>
-      {detail && <p className="mt-0.5 line-clamp-2 text-[11.5px] text-rf-text-secondary">{detail}</p>}
+      {detail && <p {...cellText('prose', detail, 'mt-0.5 text-[11.5px] text-rf-text-secondary')}>{detail}</p>}
       {identifier !== undefined && (
         <p className="mt-0.5 font-mono text-[10.5px] text-rf-text-tertiary">{String(identifier)}</p>
       )}

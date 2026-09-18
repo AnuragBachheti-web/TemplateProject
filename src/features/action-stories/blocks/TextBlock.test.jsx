@@ -85,14 +85,20 @@ describe('TextBlock — hero eligibility: semantic role first, length only a saf
 });
 
 describe('TextBlock — compact row overflow fix (RENDERED_UI_FORENSIC_AUDIT.md §3.3/§3.4)', () => {
-  it('the value span can shrink (no `shrink-0`) so `truncate` actually has something to do', () => {
+  it('the value span can shrink (no `shrink-0`) so it wraps rather than overflowing its row', () => {
+    // PHASE 5D. This asserted `truncate` on the value span. The value span no longer truncates —
+    // ruling R63 gave every cell a column ROLE from blocks/cellText.js, and a value is `prose`,
+    // which wraps freely and never cuts. What the test was really protecting is unchanged and is
+    // still asserted: the span must be able to SHRINK (no `shrink-0`, and `min-w-0`), because a
+    // flex child that refuses to shrink below its content overflows the row whatever its
+    // wrap/clip rule says. That precondition is what the original audit finding was about.
     const el = TextBlock({ slotName: 'guardrail_cta_label', data: 'Approve 4 moves & continue', compact: true });
     const classes = classNames(el);
     const valueSpanClasses = classes.find((c) => c.includes('flex-1'));
     expect(valueSpanClasses).toBeTruthy();
     expect(valueSpanClasses).not.toContain('shrink-0');
-    expect(valueSpanClasses).toContain('truncate');
     expect(valueSpanClasses).toContain('min-w-0');
+    expect(valueSpanClasses, 'a value must wrap, never truncate').toContain('whitespace-normal');
   });
 
   it('the label span is bounded (max-w) instead of absorbing unlimited shrink pressure', () => {

@@ -135,9 +135,22 @@ function FlowRow({ row, nodesBySlot }) {
     // `data-pack-row` marks a row the packer PAIRED, so a test can assert the 1d rule against the
     // DOM rather than only against the packer's return value. One column below `lg:` — ruling C4's
     // "below 1280 every span collapses to full", expressed as the grid simply not splitting.
+    // THE VERTICAL CONTRACT (Phase 5D, ruling R66): the two cells stretch to equal height — which a
+    // grid already does — AND the block's card fills the cell it was given, which it did not. Before
+    // this, S10.2/reason's paired row had two 277px cells holding a 277px card and a 235px card:
+    // 42px of dead space inside the shorter one, with the next row starting past both.
+    //
+    // `[&>*]:h-full` is the layout layer telling the cell's child to fill it, and it stays on THIS
+    // side of the boundary deliberately — a block still does not know it is in a packed row, exactly
+    // as it does not know its own span. Content inside the card stays top-aligned, so the extra
+    // height reads as card padding rather than as a gap between two cards.
+    //
+    // The reference justifies stretch over content-sizing: its own two-column row
+    // (S10.1-1-reason.dc.html:248, `grid-template-columns:1fr 1fr`) uses the default stretch and
+    // renders two equal-height cards.
     <div data-pack-row className="grid grid-cols-1 gap-4 lg:grid-cols-12">
       {row.items.map(({ slotName, span }) => (
-        <div key={slotName} data-block-slot={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
+        <div key={slotName} data-block-slot={slotName} className="min-w-0 lg:h-full lg:[&>*]:h-full" style={{ gridColumn: `span ${span} / span ${span}` }}>
           {nodesBySlot[slotName]}
         </div>
       ))}
@@ -229,7 +242,15 @@ export default function StageSections({ sections, nodesBySlot }) {
     // Below `lg:` the two columns collapse to one and this becomes a single ordinary column — the
     // regions stack and the page-level container scrolls them together, which is the honest
     // behaviour at a width that cannot show a rail beside the main content at all.
-    <div className={`grid h-full min-h-0 grid-cols-1 gap-4 px-6 py-4 lg:items-start lg:grid-rows-[minmax(0,1fr)] ${hasRail ? 'lg:grid-cols-[minmax(0,1fr)_300px]' : ''}`}>
+    //
+    // PHASE 5D: `lg:items-start` WAS HERE, and it negated the line it shared. `align-items: start`
+    // makes a grid item size to its own CONTENT instead of being stretched to its track — so each
+    // region became as tall as everything inside it, `overflow-y: auto` had nothing to scroll (an
+    // auto-height box grows rather than scrolling), and the region overflowed the track to be
+    // clipped by `main`'s `overflow: hidden`. Measured in Chrome at 1440x700 on S10.2/reason:
+    // clientHeight 500, scrollHeight 500, 155px past the track, 86px of content unreachable.
+    // Removing it restores the stretch that `minmax(0,1fr)` was written for.
+    <div className={`grid h-full min-h-0 grid-cols-1 gap-4 px-6 py-4 lg:grid-rows-[minmax(0,1fr)] ${hasRail ? 'lg:grid-cols-[minmax(0,1fr)_300px]' : ''}`}>
       {/* Rail sections come FIRST in source order — a screen-reader/keyboard user reading linearly
           hits decision-critical context (can I approve? what's blocking?) before the supporting
           analysis, even though `lg:order-2` visually places this column on the right. Source order

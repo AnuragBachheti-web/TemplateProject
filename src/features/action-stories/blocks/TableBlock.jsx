@@ -6,6 +6,7 @@ import { deltaTone } from './deltaTone';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey as isHiddenColumn } from './decorativeKeys';
+import { cellText } from './cellText';
 
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -233,9 +234,22 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                     key={col}
                     scope="col"
                     aria-sort={isSorted ? (sort.direction === 'asc' ? 'ascending' : 'descending') : 'none'}
-                    className={`whitespace-nowrap border-b border-rf-border-subtle px-4 py-2 text-left font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-rf-text-tertiary ${
+                    // PROSE, not `identifier`, for two reasons and both matter.
+                    //
+                    // The principled one: a column header must never be clamped. Clamping "Days
+                    // payable outstanding" to two lines can hide WHICH COLUMN this is, and a
+                    // reader who cannot name the column cannot read the figures under it. A taller
+                    // header row is a cheap price for that.
+                    //
+                    // The mechanical one, found by looking at a screenshot rather than at a
+                    // measurement: `identifier` clamps via `display:-webkit-box`, which overrides a
+                    // `th`'s own `display: table-cell` and collapses the whole header row into a
+                    // single stacked column. Every height and width the layout gate measured was
+                    // still within tolerance — the table was simply the wrong shape, and no probe
+                    // asked about shape.
+                    {...cellText('prose', humanizeSlotName(col), `border-b border-rf-border-subtle px-4 py-2 text-left font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-rf-text-tertiary ${
                       isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''
-                    }`}
+                    }`)}
                   >
                     {controlColumns.has(col) ? (
                       <span>{humanizeSlotName(col)}</span>
@@ -285,13 +299,17 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                   // reason to send a column-level color, but it will keep sending signed deltas
                   // ("+3%", "−$450") the same way these fixtures already do. See deltaTone.js.
                   const tone = !isMissing ? deltaTone(value) : null;
+                  // A numeric cell is a FIGURE and a textual one is PROSE — the column's role, not
+                  // this block's opinion, and the two rules come from the one module (cellText.js).
+                  // `max-w-xs truncate` used to sit on the textual branch: it cut 538 cells across
+                  // 52 objects, some by nearly 300px, with a `title` only past an arbitrary 24
+                  // characters. Prose wraps now, so there is nothing left to reach for.
                   return (
                     <td
                       key={col}
-                      title={!numeric && text.length > 24 ? text : undefined}
-                      className={`px-4 py-2 text-[12px] ${
+                      {...cellText(numeric ? 'figure' : 'prose', text, `px-4 py-2 text-[12px] ${
                         isMissing ? 'text-rf-text-disabled' : tone ? tone.text : 'text-rf-text-primary'
-                      } ${numeric ? 'whitespace-nowrap text-right font-mono tabular-nums' : 'max-w-xs truncate text-left'}`}
+                      } ${numeric ? 'text-right font-mono tabular-nums' : 'text-left'}`)}
                     >
                       {isMissing ? <span aria-hidden="true">—</span> : text}
                       {isMissing && <span className="sr-only">No value</span>}

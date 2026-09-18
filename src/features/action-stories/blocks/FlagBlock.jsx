@@ -1,6 +1,7 @@
 import { humanizeSlotName } from './humanizeSlotName';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
+import { cellText } from './cellText';
 
 function Pill({ data }) {
   return (
@@ -26,7 +27,7 @@ export default function FlagBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-center justify-between gap-3 py-[7px]">
-        <span className="min-w-0 truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), 'text-[12px] text-rf-text-secondary')}>{humanizeSlotName(slotName)}</span>
         <Pill data={data} />
       </div>
     );

@@ -4,6 +4,7 @@ import { deltaTone } from './deltaTone';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey } from './decorativeKeys';
+import { cellText } from './cellText';
 
 // A style-only string carries no information worth a row of its own — a lone descriptor object
 // like `sel` mixes real content (a title, a case id) with the same *Bg/*Tone/*Border siblings the
@@ -69,8 +70,8 @@ export default function ObjectBlock({ slotName, data, compact }) {
         const tone = deltaTone(raw);
         return (
           <div key={key} className="flex items-center justify-between gap-3 text-[12.5px]">
-            <dt className="text-rf-text-secondary">{humanizeSlotName(key)}</dt>
-            <dd className={`truncate font-medium ${tone ? tone.text : 'text-rf-text-primary'}`}>{value}</dd>
+            <dt {...cellText('identifier', humanizeSlotName(key), 'text-rf-text-secondary')}>{humanizeSlotName(key)}</dt>
+            <dd {...cellText('prose', value, `font-medium ${tone ? tone.text : 'text-rf-text-primary'}`)}>{value}</dd>
           </div>
         );
       })}

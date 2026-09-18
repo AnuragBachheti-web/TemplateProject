@@ -250,7 +250,12 @@ export default function Shell() {
         </div>
       </nav>
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      {/* `min-h-0` added in Phase 5D (II2). This column measured correctly without it — it is a
+          flex child of a `h-screen` row, so it inherited the right height by accident — but its
+          `min-height` computed to `auto`, which means it would refuse to shrink below its content
+          the moment anything inside grew. An unconstrained link in the height chain is where the
+          next scroll regression hides, so it is closed even though nothing is currently wrong. */}
+      <div data-shell-part="column" className="flex min-h-0 min-w-0 flex-1 flex-col">
         <TopBar onOpenNav={() => setNavOpen(true)} />
         {/* PHASE 5C. This element used to be the page's ONE scroll container, wrapping the whole of
             StagePage — so the proposal header, the stage tracker and the action bar all scrolled
@@ -267,7 +272,7 @@ export default function Shell() {
             The route's own page is now responsible for its scrolling: ActionStoriesHome declares
             its own `overflow-y-auto`, because a list page and a stage pane want different
             behaviour and this element can no longer decide for both. */}
-        <main id="main-content" className="flex min-h-0 flex-1 flex-col overflow-hidden bg-rf-surface-sunken">
+        <main data-shell-part="main" id="main-content" className="flex min-h-0 flex-1 flex-col overflow-hidden bg-rf-surface-sunken">
           <Outlet />
         </main>
       </div>

@@ -3,6 +3,7 @@ import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { HERO_SLOT_NAMES, HERO_MIN_LENGTH } from '../layout/heroSlot';
 import { enumLabel } from './enumLabel';
+import { cellText } from './cellText';
 
 /**
  * @param {boolean} [compact] - true when this block is grouped with sibling scalars inside a
@@ -80,17 +81,18 @@ export default function TextBlock({ slotName, data, compact, role }) {
 
   if (compact) {
     // RENDERED_UI_FORENSIC_AUDIT.md §3.3/§3.4: `shrink-0` on the value span refused to let it
-    // shrink — the exact precondition `truncate` needs to ever fire — so a long value simply
+    // shrink — the precondition a wrap or a clip rule both need — so a long value simply
     // overflowed the rail column instead of ellipsizing. All of the resulting shrink pressure then
     // fell on the label alone, over-truncating it too. Both spans now genuinely participate in
     // flex sizing: the label gets a bounded `max-w-[45%]` (enough for a real humanized slot name,
     // never the whole row) and the value gets the rest via `flex-1`, each independently
-    // `min-w-0 truncate` so either one — a long label OR a long value — ellipsizes on its own
+    // `min-w-0` plus its column role (blocks/cellText.js) so either one — a long label OR a long
+    // value — resolves on its own
     // side without pushing the other off the row or past the container's own edge.
     return (
       <div className="flex min-w-0 items-baseline gap-3 py-[7px]">
-        <span className="min-w-0 max-w-[45%] shrink truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
-        <span className="min-w-0 flex-1 truncate text-right text-[12.5px] font-medium text-rf-text-primary">{text}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), 'max-w-[45%] shrink text-[12px] text-rf-text-secondary')}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('prose', text, 'flex-1 text-right text-[12.5px] font-medium text-rf-text-primary')}>{text}</span>
       </div>
     );
   }
