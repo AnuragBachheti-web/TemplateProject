@@ -5,6 +5,7 @@ import { HERO_SLOT_NAMES, HERO_MIN_LENGTH } from '../layout/heroSlot';
 import { enumLabel } from './enumLabel';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 /**
  * @param {boolean} [compact] - true when this block is grouped with sibling scalars inside a
  *   shared panel (see StageSections.jsx) — renders as a bare label/value row instead of its own
@@ -35,7 +36,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
   const text = enumLabel(slotName, data);
 
   if (role === 'heroSub') {
-    return <p className="text-[13.5px] leading-snug text-rf-text-secondary">{text}</p>;
+    return <p {...typeRole('body', 'text-rf-text-secondary')}>{text}</p>;
   }
 
   // A manifest-declared `role: "hero"` is a semantic judgment made once, at generation time,
@@ -48,13 +49,13 @@ export default function TextBlock({ slotName, data, compact, role }) {
   const isHero = role === 'hero' || (HERO_SLOT_NAMES.has(slotName) && text.length >= HERO_MIN_LENGTH);
   if (isHero) {
     const eyebrow = (
-      <p className="flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-rf-text-tertiary">
+      <p {...typeRole('label', 'flex items-center gap-2 text-rf-text-tertiary')}>
         <span aria-hidden="true" className="h-[6px] w-[6px] rounded-full bg-rf-brand-blue-500" />
         Realify signal · {humanizeSlotName(slotName)}
       </p>
     );
     const headline = (
-      <p className="mt-2 font-serif text-[19px] font-normal leading-snug text-rf-text-primary" style={{ fontVariationSettings: "'opsz' 144" }}>
+      <p {...typeRole('display', 'mt-2 text-rf-text-primary')} style={{ fontVariationSettings: "'opsz' 144" }}>
         {text}
       </p>
     );
@@ -91,8 +92,8 @@ export default function TextBlock({ slotName, data, compact, role }) {
     // side without pushing the other off the row or past the container's own edge.
     return (
       <div className="flex min-w-0 items-baseline gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), 'max-w-[45%] shrink text-[12px] text-rf-text-secondary')}>{humanizeSlotName(slotName)}</span>
-        <span {...cellText('prose', text, 'flex-1 text-right text-[12.5px] font-medium text-rf-text-primary')}>{text}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('body', 'max-w-[45%] shrink text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('prose', text, typeRole('body', 'flex-1 text-right text-rf-text-primary').className)}>{text}</span>
       </div>
     );
   }
@@ -100,7 +101,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
   return (
     <BlockCard padding="compact">
       <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
-      <p className="mt-1 text-[14px] font-medium text-rf-text-primary">{text}</p>
+      <p {...typeRole('heading', 'mt-1 text-rf-text-primary')}>{text}</p>
     </BlockCard>
   );
 }

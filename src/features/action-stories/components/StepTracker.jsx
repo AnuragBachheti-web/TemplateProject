@@ -1,6 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import { actionStoryPath } from '@/constants/actionStoriesRoutes';
 
+import { typeRole } from '../blocks/typeRole';
 const STAGE_LABELS = {
   reason: 'Reason',
   analyze: 'Analyze',
@@ -50,17 +51,11 @@ export default function StepTracker({ code, stages, activeStageKey }) {
               >
                 <span
                   aria-hidden="true"
-                  className={`grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-mono text-[9.5px] font-semibold ${
-                    isActive
-                      ? 'bg-rf-brand-blue-500 text-white'
-                      : isPast
-                        ? 'bg-rf-surface-raised text-rf-text-secondary'
-                        : 'bg-rf-surface-raised text-rf-text-tertiary'
-                  }`}
+                  className={`${typeRole('micro').className} grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full ${ isActive ? 'bg-rf-brand-blue-500 text-white' : isPast ? 'bg-rf-surface-raised text-rf-text-secondary' : 'bg-rf-surface-raised text-rf-text-tertiary' }`}
                 >
                   {isPast ? <i className="fa-solid fa-check text-[9px]" /> : i + 1}
                 </span>
-                <span className={`text-[12px] ${isActive ? 'font-semibold text-rf-text-primary' : isPast ? 'font-medium text-rf-text-secondary' : 'font-medium text-rf-text-tertiary'}`}>
+                <span className={`${typeRole('body').className} ${isActive ? ' text-rf-text-primary' : isPast ? ' text-rf-text-secondary' : ' text-rf-text-tertiary'}`}>
                   {STAGE_LABELS[stageKey] || stageKey}
                 </span>
               </NavLink>
@@ -69,13 +64,13 @@ export default function StepTracker({ code, stages, activeStageKey }) {
           );
         })}
       </ol>
-      <span className="ml-auto mr-3 font-mono text-[10px] uppercase tracking-[0.12em] text-rf-text-tertiary">
+      <span {...typeRole('label', 'ml-auto mr-3 text-rf-text-tertiary')}>
         Step {activeIndex + 1} of {stages.length}
       </span>
       {next && (
         <Link
           to={actionStoryPath(code, next.stage, next.proposal_id)}
-          className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-[12px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+          {...typeRole('body', 'inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Next
           <i className="fa-solid fa-arrow-right text-[10px]" aria-hidden="true" />

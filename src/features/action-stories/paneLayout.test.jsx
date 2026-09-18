@@ -143,8 +143,9 @@ function mainSectionsOf(decision) {
 
 describe('T79 — REPLACES T62, which passed while scrolling did not work', () => {
   // ============================================================================================
-  // THE FOURTH TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asked this comment to name the
-  // first three; R77 adds the fourth, which is the one that changes what the list means.
+  // THE FIFTH TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asked this comment to name the
+  // first three; R77 added the fourth, which changed what the list means; R80 added the fifth,
+  // which is the one that says who this happens to.
   //
   //   heroMetrics.range (Phase 5A)  referenceFidelity.test.js asserted the P10-P90 interval was
   //                                 present in the DATA. It was. StatListBlock never rendered it,
@@ -186,6 +187,31 @@ describe('T79 — REPLACES T62, which passed while scrolling did not work', () =
   // declares. A CSS property is a declaration. A committed file is a declaration. A field on a
   // JSON object is a declaration. Each of those three tests asserted something ADJACENT to the
   // thing that mattered, and adjacency is invisible in a green run.
+  //
+  //   T93 (Phase 5E, R80)          THE FIFTH, AND I WROTE IT. Phase 5E existed to fix a table whose
+  //                                 two gates had both been blind to it, and this comment is where
+  //                                 that lesson is kept. The first version of 5E's own column rule
+  //                                 asked THE DATA whether a field had a value — undefined, null,
+  //                                 empty string, empty array — and ten unit tests agreed it was
+  //                                 right. Then the rule ran in a browser and 22 tables were still
+  //                                 spending a column on a field that sat on every single row and
+  //                                 drew "—" in every single cell, because its value was an array
+  //                                 of objects the renderer cannot display. "Has a value" and
+  //                                 "shows a value" are different questions. I asked the adjacent
+  //                                 one, in the phase whose entire subject is asking the adjacent
+  //                                 one, with this comment open in front of me.
+  //
+  //                                 So: THIS IS NOT A LAPSE, IT IS THE DEFAULT. The data is what
+  //                                 you have in your hand when you write the rule; the render is
+  //                                 downstream and out of sight. Every instance above was written
+  //                                 by someone who had just been thinking hard about the thing they
+  //                                 then failed to assert. Knowing the pattern does not protect you
+  //                                 from it — only running the thing in front of the instrument
+  //                                 that can see it does. That is the whole argument for R65's
+  //                                 browser gate, and it is why the fix here was not "be more
+  //                                 careful" but moving the predicate into the rule so the two
+  //                                 CANNOT be asked separately (tableColumns.js's rendersValue is
+  //                                 TableBlock's own isMissing test, inverted).
   //
   // WHAT THE FOURTH ONE ADDS. The first three are each a single test that measured the wrong thing.
   // The fourth is two tests that each measured the RIGHT thing and still left a screen broken,

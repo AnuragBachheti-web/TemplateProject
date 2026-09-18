@@ -7,6 +7,7 @@ import { EmptyState, ErrorState } from './BlockStates';
 import { assertVariant } from './variants';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 // Same rule extraction/classifyBlocks.js uses to decide a key is styling, not content — kept as
 // its own local copy (this is a runtime component; that module is generation-only tooling, never
 // imported here).
@@ -107,9 +108,9 @@ export default function HeatmapGridBlock({ slotName, data, variant }) {
   rows.forEach((row, ri) => {
     gridItems.push(
       <div key={`label-${ri}`} className="flex min-w-0 flex-col justify-center pr-2">
-        <span {...cellText('identifier', row.label, 'text-[11px] text-rf-text-secondary')}>{row.label}</span>
+        <span {...cellText('identifier', row.label, typeRole('body', 'text-rf-text-secondary').className)}>{row.label}</span>
         {variant === 'zoneRow' && row.figures.map((figure) => (
-          <span key={figure} {...cellText('figure', figure, 'font-mono text-[9px] text-rf-text-tertiary tabular-nums')}>{figure}</span>
+          <span key={figure} {...cellText('figure', figure, typeRole('micro', 'text-rf-text-tertiary').className)}>{figure}</span>
         ))}
       </div>,
     );
@@ -130,7 +131,7 @@ export default function HeatmapGridBlock({ slotName, data, variant }) {
           title={fields.map(([k, v]) => `${humanizeSlotName(k)}: ${flattenDisplayValue(v)}`).join(' · ')}
         >
           {fields.slice(0, 2).map(([k, v]) => (
-            <span key={k} className="text-[10px]">
+            <span key={k} {...typeRole('micro')}>
               {flattenDisplayValue(v)}
             </span>
           ))}

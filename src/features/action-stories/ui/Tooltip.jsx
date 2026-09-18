@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 
+import { typeRole } from '../blocks/typeRole';
 // "Recognition rather than recall" — Nielsen Norman's own heuristic, and the one this app's own
 // jargon (confidence intervals, elasticity, GMROI, MAP, Buy Box parity — see manifests/REPORT.md's
 // own vocabulary table) genuinely needs: a value or label can stay short and precise on the page
@@ -44,9 +45,7 @@ export default function Tooltip({ content, placement = 'top', children }) {
         <span
           id={id}
           role="tooltip"
-          className={`pointer-events-none absolute z-50 w-max max-w-[240px] rounded-md bg-rf-text-primary px-2.5 py-1.5 text-[11px] font-medium leading-snug text-rf-surface-canvas shadow-lg ${
-            placement === 'bottom' ? 'left-1/2 top-full mt-1.5 -translate-x-1/2' : 'bottom-full left-1/2 mb-1.5 -translate-x-1/2'
-          }`}
+          className={`${typeRole('body').className} pointer-events-none absolute z-50 w-max max-w-[240px] rounded-md bg-rf-text-primary px-2.5 py-1.5 text-rf-surface-canvas shadow-lg ${ placement === 'bottom' ? 'left-1/2 top-full mt-1.5 -translate-x-1/2' : 'bottom-full left-1/2 mb-1.5 -translate-x-1/2' }`}
         >
           {content}
         </span>

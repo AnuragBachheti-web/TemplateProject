@@ -7,6 +7,7 @@ import { isHiddenKey } from './decorativeKeys';
 import { ROW_LABEL_KEYS, rowLabelOf } from '../manifests/blockTypes';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 // The keys an explicit, well-known value concept lives under — checked in this priority order
 // first, exactly as before. Real fixture data uses many OTHER field names for the same idea
 // (`meta`, `n`, `w`, `key`, `numeric`, ...) that can never be enumerated exhaustively — see
@@ -93,7 +94,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
         const usedKeys = new Set([labelKey, primary.key].filter((k) => k !== null && k !== undefined));
         const { inline, long } = extraEntries(item, usedKeys);
         return (
-          <li key={i} className="flex flex-col gap-0.5 py-1.5 text-[12.5px]">
+          <li key={i} {...typeRole('body', 'flex flex-col gap-0.5 py-1.5')}>
             <div className="flex items-center justify-between gap-3">
               <span {...cellText('identifier', label, 'text-rf-text-secondary')}>{label}</span>
               <span
@@ -107,7 +108,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
                   return (
                     <span
                       key={key}
-                      className={`shrink-0 text-[10.5px] font-normal ${tone ? tone.text : 'text-rf-text-tertiary'}`}
+                      className={`${typeRole('micro').className} shrink-0 ${tone ? tone.text : 'text-rf-text-tertiary'}`}
                     >
                       · {text}
                     </span>
@@ -118,7 +119,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
             {long.map(([key, text]) => {
               const tone = deltaTone(text);
               return (
-                <div key={key} className="flex items-center justify-between gap-3 text-[10.5px] text-rf-text-tertiary">
+                <div key={key} {...typeRole('micro', 'flex items-center justify-between gap-3 text-rf-text-tertiary')}>
                   <span>{humanizeSlotName(key)}</span>
                   <span {...cellText('prose', text, tone ? tone.text : '')}>{text}</span>
                 </div>

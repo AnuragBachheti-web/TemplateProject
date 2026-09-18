@@ -1,3 +1,4 @@
+import { typeRole } from './typeRole';
 /**
  * The card shell every block renders inside — previously the exact literal string
  * `"rounded-lg border border-rf-border-subtle bg-rf-surface-canvas"` (or its `px-4 py-3` variant)
@@ -38,7 +39,7 @@ export function BlockCard({ children, padding = 'normal', className = '' }) {
  */
 export function BlockTitle({ children, className = '' }) {
   return (
-    <h3 className={`font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-secondary ${className}`.trim()}>
+    <h3 {...typeRole('label', `text-rf-text-secondary ${className}`.trim())}>
       {children}
     </h3>
   );
@@ -56,5 +57,5 @@ export function BlockTitle({ children, className = '' }) {
  * full card's heading; not merged into BlockTitle itself; not a lesser/generic wrapper.
  */
 export function CompactEyebrow({ children }) {
-  return <p className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">{children}</p>;
+  return <p {...typeRole('label', 'mb-1 text-rf-text-tertiary')}>{children}</p>;
 }

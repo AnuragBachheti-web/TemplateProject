@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { typeRole } from '../blocks/typeRole';
 // Transient, app-wide feedback for the MOMENT an action settles — complements, never replaces, a
 // persistent inline status (StageActionBar's own "Confirmed"/error indicator stays exactly where it
 // was; this is what a user sees even if they've already scrolled away from the button they clicked).
@@ -21,9 +22,9 @@ const TONE_ICON = {
 // reads worse the longer the message gets; every rf-status-* dashboard indicator elsewhere in this
 // app (severityTone.js, deltaTone.js, StageActionBar's own badges) keeps body text neutral too.
 const TONE_ICON_CLASS = {
-  success: 'text-rf-status-success',
-  critical: 'text-rf-status-critical',
-  warning: 'text-rf-status-warning',
+  success: 'text-rf-status-success-icon',
+  critical: 'text-rf-status-critical-icon',
+  warning: 'text-rf-status-warning-icon',
   info: 'text-rf-brand-blue-500',
 };
 const TONE_BORDER_CLASS = {
@@ -86,10 +87,10 @@ export function ToastProvider({ children }) {
                 key={t.id}
                 role={assertive ? 'alert' : 'status'}
                 aria-live={assertive ? 'assertive' : 'polite'}
-                className={`pointer-events-auto flex w-full max-w-sm items-start gap-2.5 rounded-lg border bg-rf-surface-raised px-3.5 py-3 text-[12.5px] font-medium text-rf-text-primary shadow-lg ${TONE_BORDER_CLASS[t.tone] ?? TONE_BORDER_CLASS.info}`}
+                className={`${typeRole('body').className} pointer-events-auto flex w-full max-w-sm items-start gap-2.5 rounded-lg border bg-rf-surface-raised px-3.5 py-3 text-rf-text-primary shadow-lg ${TONE_BORDER_CLASS[t.tone] ?? TONE_BORDER_CLASS.info}`}
               >
                 <i
-                  className={`mt-[1px] text-[12px] ${TONE_ICON[t.tone] ?? TONE_ICON.info} ${TONE_ICON_CLASS[t.tone] ?? TONE_ICON_CLASS.info}`}
+                  className={`${typeRole('body').className} mt-[1px] ${TONE_ICON[t.tone] ?? TONE_ICON.info} ${TONE_ICON_CLASS[t.tone] ?? TONE_ICON_CLASS.info}`}
                   aria-hidden="true"
                 />
                 <span className="flex-1 text-rf-text-primary">{t.message}</span>

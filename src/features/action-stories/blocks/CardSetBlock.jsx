@@ -9,6 +9,7 @@ import { formatValue } from './formatValue';
 import { assertVariant } from './variants';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 /**
  * A NAMED CHOICE OR GROUP, with its supporting figures — the richest row-level composition in the
  * vocabulary, and the reason the child mechanism exists at all.
@@ -155,12 +156,12 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
             className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas px-3 py-2.5"
           >
             <div className="flex items-baseline justify-between gap-3">
-              <h4 className="min-w-0 text-[12.5px] font-medium leading-snug text-rf-text-primary">{headline}</h4>
+              <h4 {...typeRole('body', 'min-w-0 text-rf-text-primary')}>{headline}</h4>
               <ChipRow chips={chips} />
             </div>
 
             {body !== undefined && (
-              <p className="mt-1 text-[11.5px] leading-snug text-rf-text-secondary">{body}</p>
+              <p {...typeRole('body', 'mt-1 text-rf-text-secondary')}>{body}</p>
             )}
 
             {figures.length > 0 && (
@@ -181,7 +182,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
                   return (
                     <span
                       key={`${label}-${ci}`}
-                      {...cellText('identifier', label, 'inline-flex items-center rounded-full border border-rf-border-subtle px-2.5 py-[3px] text-[10.5px] text-rf-text-secondary')}
+                      {...cellText('identifier', label, typeRole('micro', 'inline-flex items-center rounded-full border border-rf-border-subtle px-2.5 py-[3px] text-rf-text-secondary').className)}
                     >
                       {label}
                     </span>
@@ -192,7 +193,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
 
             {gate !== undefined && (
               <p className="mt-2">
-                <span {...cellText('identifier', gate, 'inline-flex items-center rounded-full bg-rf-surface-sunken px-2.5 py-[3px] font-mono text-[10px] uppercase tracking-[0.08em] text-rf-text-secondary')}>
+                <span {...cellText('identifier', gate, typeRole('label', 'inline-flex items-center rounded-full bg-rf-surface-sunken px-2.5 py-[3px] text-rf-text-secondary').className)}>
                   {gate}
                 </span>
               </p>
@@ -216,7 +217,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
                     // layout gate passed it — no clipped text, regions scrolling, cards equal
                     // height, all true — and only the screenshot showed the chart was missing.
                     <span key={`${bar?.label ?? bi}`} className="flex h-full min-w-0 flex-1 flex-col items-center gap-1">
-                      <span {...cellText('figure', String(bar?.n ?? ''), 'font-mono text-[9px] text-rf-text-tertiary tabular-nums')}>{bar?.n}</span>
+                      <span {...cellText('figure', String(bar?.n ?? ''), typeRole('micro', 'text-rf-text-tertiary').className)}>{bar?.n}</span>
                       {/* THE BAR NEEDS ITS OWN TRACK. A percentage height resolves against the
                           parent's height, so with the bar as a direct sibling of the count and the
                           label its 100% meant "the whole column including that text" — every bar
@@ -226,7 +227,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
                       <span className="flex w-full flex-1 items-end">
                         <span className="w-full rounded-t-sm bg-rf-border-strong" style={{ height: `${height}%` }} />
                       </span>
-                      <span {...cellText('figure', String(bar?.label ?? ''), 'font-mono text-[8.5px] text-rf-text-tertiary')}>{bar?.label}</span>
+                      <span {...cellText('figure', String(bar?.label ?? ''), typeRole('micro', 'text-rf-text-tertiary').className)}>{bar?.label}</span>
                     </span>
                   );
                 })}
@@ -236,7 +237,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
             {nested !== undefined && <SubRowList rows={nested} />}
 
             {foot !== undefined && (
-              <p {...cellText('prose', foot, 'mt-2 border-t border-rf-border-subtle pt-2 text-[11.5px] leading-snug text-rf-text-secondary')}>{foot}</p>
+              <p {...cellText('prose', foot, typeRole('body', 'mt-2 border-t border-rf-border-subtle pt-2 text-rf-text-secondary').className)}>{foot}</p>
             )}
           </article>
         );

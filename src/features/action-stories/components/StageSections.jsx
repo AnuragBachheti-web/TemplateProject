@@ -40,10 +40,11 @@
  */
 
 import { DEPTH_SECTION, depthAttrs } from '@/features/action-stories/blocks/renderDepth';
+import { typeRole } from '../blocks/typeRole';
 function SectionHeading({ title, className }) {
   if (!title) return null;
   return (
-    <h2 className={className ?? 'font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-rf-text-secondary'}>
+    <h2 className={className ?? typeRole('label', 'text-rf-text-secondary').className}>
       {title}
     </h2>
   );
@@ -201,7 +202,7 @@ function RailPanel({ section, nodesBySlot }) {
       {section.title && (
         <SectionHeading
           title={section.title}
-          className="mb-1 font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-secondary"
+          {...typeRole('label', 'mb-1 text-rf-text-secondary')}
         />
       )}
       <div className="flex flex-col divide-y divide-rf-border-subtle">

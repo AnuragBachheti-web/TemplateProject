@@ -1,5 +1,6 @@
 import { DEPTH_CHILD, depthAttrs } from '../renderDepth';
 
+import { typeRole } from '../typeRole';
 /**
  * The identity chip on a roster row.
  *
@@ -22,7 +23,7 @@ export default function Initials({ name, initials }) {
       {...depthAttrs(DEPTH_CHILD)}
       data-initials
       aria-hidden="true"
-      className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-rf-border-subtle bg-rf-surface-sunken font-mono text-[9.5px] font-semibold uppercase text-rf-text-secondary"
+      {...typeRole('label', 'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-rf-border-subtle bg-rf-surface-sunken text-rf-text-secondary')}
     >
       {initialsFor(name, initials)}
     </span>

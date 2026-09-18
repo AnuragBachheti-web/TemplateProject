@@ -8,6 +8,7 @@ import { limitTone } from './statusTone';
 import { assertVariant } from './variants';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
 const THRESHOLD_KEYS = ['threshold', 'limit', 'limitPct', 'ceiling', 'floor', 'target', 'cap'];
 
@@ -97,7 +98,7 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
         const tone = limitTone();
         return (
           <div key={i} className="min-w-0">
-            <div className="mb-1 flex items-baseline justify-between gap-2 text-[11.5px]">
+            <div {...typeRole('body', 'mb-1 flex items-baseline justify-between gap-2')}>
               <span {...cellText('identifier', row.label, 'text-rf-text-secondary')}>{row.label}</span>
               <span className={`shrink-0 font-mono font-semibold tabular-nums ${tone.text}`}>
                 {row.magnitude.display === undefined ? null : formatValue(row.magnitude.display)}
@@ -125,7 +126,7 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
             {/* The limit in the reference's own words. It exists nowhere as a typed number, and R2
                 forbids parsing one out of this string, so it is shown rather than mined. */}
             {variant === 'meteredRow' && row.note !== undefined && (
-              <div {...cellText('prose', row.note, 'mt-1 font-mono text-[9.5px] text-rf-text-tertiary')}>{row.note}</div>
+              <div {...cellText('prose', row.note, typeRole('micro', 'mt-1 text-rf-text-tertiary').className)}>{row.note}</div>
             )}
           </div>
         );

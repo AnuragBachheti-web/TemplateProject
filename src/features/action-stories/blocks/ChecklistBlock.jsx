@@ -5,6 +5,7 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 import { formatValue } from './formatValue';
 
+import { typeRole } from './typeRole';
 /**
  * A GOVERNANCE CHECKLIST: did this check pass, and why.
  *
@@ -65,21 +66,21 @@ export default function ChecklistBlock({ slotName, data, compact = false }) {
             <StatusBadge status={row.status} />
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline justify-between gap-3">
-                <span className="min-w-0 text-[12.5px] leading-snug text-rf-text-primary">{identity}</span>
+                <span {...typeRole('body', 'min-w-0 text-rf-text-primary')}>{identity}</span>
                 {hasValue && (
-                  <span className="shrink-0 font-mono text-[12px] tabular-nums text-rf-text-primary">
+                  <span {...typeRole('figure', 'shrink-0 text-rf-text-primary')}>
                     {formatValue(row.value)}
                     {/* `pct` is the check's position against its own ceiling — a real number Phase 3A
                         typed (3 rows carry it). The first draft dropped it, which the T13 baseline
                         caught as content loss rather than as the intended badge change. */}
                     {typeof row.pct === 'number' && (
-                      <span className="ml-1 text-[10.5px] text-rf-text-tertiary">{formatValue({ value: row.pct, unit: 'pct' })}</span>
+                      <span {...typeRole('micro', 'ml-1 text-rf-text-tertiary')}>{formatValue({ value: row.pct, unit: 'pct' })}</span>
                     )}
                   </span>
                 )}
               </div>
               {row.note !== undefined && row.note !== null && row.note !== '' && (
-                <p className="mt-[2px] text-[11px] leading-snug text-rf-text-tertiary">{row.note}</p>
+                <p {...typeRole('body', 'mt-[2px] text-rf-text-tertiary')}>{row.note}</p>
               )}
             </div>
           </li>

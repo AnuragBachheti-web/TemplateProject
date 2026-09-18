@@ -1,5 +1,6 @@
 import { useId } from 'react';
 
+import { typeRole } from '../blocks/typeRole';
 // A REAL `<input type="checkbox">` under the hood (visually hidden via `sr-only`, never
 // `display:none` — a screen reader and the keyboard still need it), not a hand-rolled
 // `<div onClick>` — that gets you tabIndex, Space-to-toggle, and a screen reader announcing
@@ -27,7 +28,7 @@ export default function Checkbox({ checked = false, onChange, indeterminate = fa
   return (
     <label
       htmlFor={id}
-      className={`inline-flex items-center gap-2 text-[13px] text-rf-text-primary ${disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${className}`}
+      className={`${typeRole('body').className} inline-flex items-center gap-2 text-rf-text-primary ${disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${className}`}
     >
       <input
         id={id}

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { humanizeSlotName } from './humanizeSlotName';
 
+import { typeRole } from './typeRole';
 /**
  * Catches a genuine JS exception thrown *inside* one block's own render (a Recharts internal
  * error on a pathological input, a null-deref the defensive checks in that block didn't
@@ -43,12 +44,12 @@ export default class BlockErrorBoundary extends Component {
       return (
         <div
           role="alert"
-          className="rounded-2xl border border-dashed border-rose-300 bg-rose-50 px-4 py-3 dark:border-rose-500/40 dark:bg-rose-500/10"
+          className="rounded-2xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3"
         >
-          <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rose-700 dark:text-rose-400">
+          <p {...typeRole('label', 'text-rf-status-critical-text')}>
             {humanizeSlotName(this.props.slotName)}
           </p>
-          <p className="mt-1 text-[12.5px] text-rose-700 dark:text-rose-400">
+          <p {...typeRole('body', 'mt-1 text-rf-status-critical-text')}>
             This card couldn&rsquo;t be displayed. The rest of this screen is unaffected.
           </p>
         </div>

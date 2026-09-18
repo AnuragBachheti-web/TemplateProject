@@ -6,6 +6,11 @@
 // ONE place, so this is it, and blockVocabulary.test.jsx's T32 asserts no other module in blocks/
 // maps a status word to an `rf-status-*` token.
 //
+// PHASE 5E PART 2 (R83): every `text:` here is now the -700 TEXT step. The -500 steps fail the
+// design system's own contrast matrix as text on white (green 3.1:1, amber 2.3:1) and the DS marks
+// them "large only". The `dot:` values are unchanged — a dot is an icon, and pairing the accent
+// with one is exactly what the DS asks for.
+//
 // The payload never carries a colour. `guardrails.checks[].status` is the semantic word `pass` /
 // `warn` / `fail` / `blocked` / `info`; what that looks like is decided here and applied by the
 // component. That is the whole trade Phase 2's boundary test enforces.
@@ -30,14 +35,14 @@
  * from the same border/text-tertiary tokens every other neutral UI element already uses.
  */
 const SEVERITY_TONE = {
-  crit: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
-  critical: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
-  blocking: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
-  high: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical' },
-  act: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning' },
-  medium: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning' },
-  opp: { dot: 'bg-rf-status-success', text: 'text-rf-status-success' },
-  low: { dot: 'bg-rf-status-success', text: 'text-rf-status-success' },
+  crit: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical-text' },
+  critical: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical-text' },
+  blocking: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical-text' },
+  high: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical-text' },
+  act: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning-text' },
+  medium: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning-text' },
+  opp: { dot: 'bg-rf-status-success', text: 'text-rf-status-success-text' },
+  low: { dot: 'bg-rf-status-success', text: 'text-rf-status-success-text' },
   watch: { dot: 'bg-rf-border-strong', text: 'text-rf-text-tertiary' },
 };
 
@@ -63,10 +68,10 @@ export function severityTone(value) {
  * reasoning contract/deriveEligibility.js applies to the verdict itself.
  */
 const CHECK_STATUS_TONE = {
-  pass: { dot: 'bg-rf-status-success', text: 'text-rf-status-success', label: 'Pass' },
-  warn: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning', label: 'Warning' },
-  fail: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical', label: 'Fail' },
-  blocked: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical', label: 'Blocked' },
+  pass: { dot: 'bg-rf-status-success', text: 'text-rf-status-success-text', label: 'Pass' },
+  warn: { dot: 'bg-rf-status-warning', text: 'text-rf-status-warning-text', label: 'Warning' },
+  fail: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical-text', label: 'Fail' },
+  blocked: { dot: 'bg-rf-status-critical', text: 'text-rf-status-critical-text', label: 'Blocked' },
   info: { dot: 'bg-rf-border-strong', text: 'text-rf-text-tertiary', label: 'Info' },
 }
 
@@ -129,7 +134,7 @@ export function limitTone() {
  * the block editorialise about data it only reports.
  */
 const FLAG_TONE = {
-  yes: { chip: 'bg-rf-status-success/10 text-rf-status-success', label: 'Yes' },
+  yes: { chip: 'bg-rf-status-success/10 text-rf-status-success-text', label: 'Yes' },
   no: { chip: 'bg-rf-surface-sunken text-rf-text-tertiary', label: 'No' },
 }
 

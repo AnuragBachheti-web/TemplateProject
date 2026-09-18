@@ -7,6 +7,7 @@ import { EmptyState, ErrorState, ThinEvidenceState } from './BlockStates';
 import { countPoints, hasEnoughEvidence } from './chartEvidence';
 import { formatValue } from './formatValue';
 
+import { typeRole } from './typeRole';
 export default function ScatterChartBlock({ slotName, data }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
@@ -96,7 +97,7 @@ export default function ScatterChartBlock({ slotName, data }) {
       {hasHue && (
         <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 border-t border-rf-border-subtle pt-2">
           {hueValues.map((hue, i) => (
-            <span key={hue} className="flex items-center gap-1.5 text-[10.5px] text-rf-text-secondary">
+            <span key={hue} {...typeRole('micro', 'flex items-center gap-1.5 text-rf-text-secondary')}>
               <span className="h-2 w-2 rounded-full" style={{ background: categoricalColor(i) }} />
               Segment {i + 1}
             </span>
@@ -104,7 +105,7 @@ export default function ScatterChartBlock({ slotName, data }) {
         </div>
       )}
       {!hasHue && hasLabel && (
-        <p className="mt-1 text-[10px] text-rf-text-tertiary">Hover a point for its label.</p>
+        <p {...typeRole('micro', 'mt-1 text-rf-text-tertiary')}>Hover a point for its label.</p>
       )}
     </BlockCard>
   );

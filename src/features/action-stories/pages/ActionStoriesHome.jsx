@@ -5,13 +5,14 @@ import { actionStoryPath } from '@/constants/actionStoriesRoutes';
 import { formatValue } from '@/features/action-stories/blocks/formatValue';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 
+import { typeRole } from '../blocks/typeRole';
 const STAGE_LABELS = { reason: 'Reason', analyze: 'Analyze', decide: 'Decide', execute: 'Execute', live: 'Live' };
 
 const STATUS_TONE = {
   pending: 'bg-rf-surface-sunken text-rf-text-secondary',
-  approved: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300',
-  modified: 'bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300',
-  dismissed: 'bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300',
+  approved: 'bg-rf-status-success/10 text-rf-status-success-text dark:bg-rf-status-success/10 dark:text-rf-status-success-text',
+  modified: 'bg-rf-status-warning/10 text-rf-status-warning-text dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text',
+  dismissed: 'bg-rf-status-critical/10 text-rf-status-critical-text dark:bg-rf-status-critical/10 dark:text-rf-status-critical-text',
 };
 
 /**
@@ -26,14 +27,14 @@ function ActionStoryCard({ story }) {
   return (
     <li className="rounded-2xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-xs">
       <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-rf-text-tertiary">
+        <span {...typeRole('label', 'text-rf-text-tertiary')}>
           {story.story_code}
         </span>
-        <h2 className="min-w-0 flex-1 text-[14.5px] font-semibold leading-snug text-rf-text-primary">
+        <h2 {...typeRole('heading', 'min-w-0 flex-1 text-rf-text-primary')}>
           {story.title}
         </h2>
         {headline && (
-          <span className="shrink-0 font-mono text-[12px] tabular-nums text-rf-text-secondary">
+          <span {...typeRole('figure', 'shrink-0 text-rf-text-secondary')}>
             {formatValue(headline)}
           </span>
         )}
@@ -45,10 +46,10 @@ function ActionStoryCard({ story }) {
           <li key={stage.stage}>
             <Link
               to={actionStoryPath(story.story_code, stage.stage, stage.proposal_id)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-[11.5px] font-medium text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+              {...typeRole('body', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
             >
               {STAGE_LABELS[stage.stage] ?? stage.stage}
-              <span className={`rounded-full px-1.5 text-[9.5px] font-medium capitalize ${STATUS_TONE[stage.status] ?? STATUS_TONE.pending}`}>
+              <span className={`${typeRole('micro').className} rounded-full px-1.5 capitalize ${STATUS_TONE[stage.status] ?? STATUS_TONE.pending}`}>
                 {stage.status}
               </span>
             </Link>
@@ -83,7 +84,7 @@ function ActionStoriesHomeContent({ onRetry }) {
   if (state.status === 'loading') return <LoadingState label="Loading Action Stories…" />;
   if (state.status === 'error') return <AsyncErrorState error={state.error} onRetry={onRetry} />;
   if (state.stories.length === 0) {
-    return <div className="p-6 text-[13px] text-rf-text-secondary">No Action Stories found.</div>;
+    return <div {...typeRole('body', 'p-6 text-rf-text-secondary')}>No Action Stories found.</div>;
   }
 
   return (
@@ -92,12 +93,12 @@ function ActionStoriesHomeContent({ onRetry }) {
     // wants the plain single-column scroll it always had.
     <div className="mx-auto min-h-0 w-full max-w-page flex-1 overflow-y-auto px-6 py-5">
       <h1
-        className="font-serif text-[28px] font-normal leading-[1.15] tracking-[-0.02em] text-rf-text-primary"
+        {...typeRole('display', 'text-rf-text-primary')}
         style={{ fontVariationSettings: "'opsz' 144" }}
       >
         Action Stories
       </h1>
-      <p className="mt-1 text-[12.5px] text-rf-text-secondary">
+      <p {...typeRole('body', 'mt-1 text-rf-text-secondary')}>
         {state.stories.length} stories ·{' '}
         {state.stories.reduce((n, s) => n + s.stages.length, 0)} stages
       </p>

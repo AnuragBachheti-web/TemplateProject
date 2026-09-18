@@ -4,12 +4,13 @@ import { EmptyState, ErrorState } from './BlockStates';
 import { cellText } from './cellText';
 import { flagTone } from './statusTone';
 
+import { typeRole } from './typeRole';
 function Pill({ data }) {
   // The tone and the word both come from statusTone (R73's rule, applied to the second instance of
   // the same defect — see flagTone's own comment). This block used to decide both inline.
   const tone = flagTone(data);
   return (
-    <span className={`rounded-full px-2 py-0.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.06em] ${tone.chip}`}>
+    <span className={`${typeRole('label').className} rounded-full px-2 py-0.5 ${tone.chip}`}>
       {tone.label}
     </span>
   );
@@ -27,7 +28,7 @@ export default function FlagBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-center justify-between gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), 'text-[12px] text-rf-text-secondary')}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('body', 'text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
         <Pill data={data} />
       </div>
     );
@@ -35,7 +36,7 @@ export default function FlagBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard padding="compact" className="flex items-center justify-between">
-      <h3 className="text-[12.5px] font-medium text-rf-text-secondary">{humanizeSlotName(slotName)}</h3>
+      <h3 {...typeRole('body', 'text-rf-text-secondary')}>{humanizeSlotName(slotName)}</h3>
       <Pill data={data} />
     </BlockCard>
   );

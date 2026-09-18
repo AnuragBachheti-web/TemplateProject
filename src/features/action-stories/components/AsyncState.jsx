@@ -1,3 +1,4 @@
+import { typeRole } from '../blocks/typeRole';
 /**
  * Shared page-level loading/error presentation — previously every fetching page/component
  * (`StagePage`, `ActionStoriesHome`, `Shell`) had its own bare "Loading…" string and its own raw
@@ -10,7 +11,7 @@ export function LoadingState({ label = 'Loading…', compact = false }) {
     <div
       role="status"
       aria-live="polite"
-      className={compact ? 'px-4 py-3 text-[12px] text-rf-text-tertiary' : 'flex flex-col gap-2 p-6 text-[13px] text-rf-text-secondary'}
+      {...typeRole('body', compact ? 'px-4 py-3 text-rf-text-tertiary' : 'flex flex-col gap-2 p-6 text-rf-text-secondary')}
     >
       <span className="inline-flex items-center gap-2">
         <span
@@ -36,18 +37,16 @@ export function AsyncErrorState({ error, onRetry, compact = false }) {
   return (
     <div
       role="alert"
-      className={
-        compact
-          ? 'px-4 py-3 text-[12px] text-rose-600 dark:text-rose-400'
-          : 'flex flex-col items-start gap-3 p-6 text-[13px] text-rose-600 dark:text-rose-400'
-      }
+      {...typeRole('body', compact
+        ? 'px-4 py-3 text-rf-status-critical-text'
+        : 'flex flex-col items-start gap-3 p-6 text-rf-status-critical-text')}
     >
       <span>{message}</span>
       {canRetry && (
         <button
           type="button"
           onClick={onRetry}
-          className="rounded-lg border border-rose-300 bg-white px-3 py-1.5 text-[12px] font-semibold text-rose-700 hover:bg-rose-50 dark:border-rose-500/40 dark:bg-transparent dark:text-rose-400 dark:hover:bg-rose-500/10"
+          {...typeRole('body', 'rounded-lg border border-rf-status-critical/40 bg-white px-3 py-1.5 text-rf-status-critical-text hover:bg-rf-status-critical/10 dark:border-rf-status-critical/40 dark:bg-transparent dark:text-rf-status-critical-text dark:hover:bg-rf-status-critical/10')}
         >
           Try again
         </button>

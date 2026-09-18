@@ -1,5 +1,6 @@
 import { humanizeSlotName } from './humanizeSlotName';
 
+import { typeRole } from './typeRole';
 /**
  * Shared empty/error presentation for every block type.
  *
@@ -15,10 +16,10 @@ import { humanizeSlotName } from './humanizeSlotName';
 export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
   return (
     <div className="rounded-2xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
-      <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
+      <p {...typeRole('label', 'text-rf-text-tertiary')}>
         {humanizeSlotName(slotName)}
       </p>
-      <p className="mt-1 text-[12.5px] text-rf-text-tertiary">{message}</p>
+      <p {...typeRole('body', 'mt-1 text-rf-text-tertiary')}>{message}</p>
     </div>
   );
 }
@@ -36,10 +37,10 @@ export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
 export function ThinEvidenceState({ slotName, points }) {
   return (
     <div className="rounded-2xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
-      <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rf-text-tertiary">
+      <p {...typeRole('label', 'text-rf-text-tertiary')}>
         {humanizeSlotName(slotName)}
       </p>
-      <p className="mt-1 text-[12.5px] text-rf-text-tertiary">
+      <p {...typeRole('body', 'mt-1 text-rf-text-tertiary')}>
         Not enough evidence to chart — {points} {points === 1 ? 'point' : 'points'}.
       </p>
     </div>
@@ -48,11 +49,11 @@ export function ThinEvidenceState({ slotName, points }) {
 
 export function ErrorState({ slotName, message }) {
   return (
-    <div className="rounded-2xl border border-dashed border-rose-300 bg-rose-50 px-4 py-3 dark:border-rose-500/40 dark:bg-rose-500/10">
-      <p className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-rose-700 dark:text-rose-400">
+    <div className="rounded-2xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3">
+      <p {...typeRole('label', 'text-rf-status-critical-text')}>
         {humanizeSlotName(slotName)}
       </p>
-      <p className="mt-1 text-[12.5px] text-rose-700 dark:text-rose-400">{message}</p>
+      <p {...typeRole('body', 'mt-1 text-rf-status-critical-text')}>{message}</p>
     </div>
   );
 }

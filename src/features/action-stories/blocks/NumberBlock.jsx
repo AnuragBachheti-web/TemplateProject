@@ -4,6 +4,7 @@ import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 /**
  * Renders a bare number OR a typed business number (`{value, unit, precision?}`).
  *
@@ -27,8 +28,8 @@ export default function NumberBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-baseline justify-between gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), 'text-[12px] text-rf-text-secondary')}>{humanizeSlotName(slotName)}</span>
-        <span className="shrink-0 font-mono text-[13px] font-semibold tabular-nums text-rf-text-primary">{display}</span>
+        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('body', 'text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
+        <span {...typeRole('figure', 'shrink-0 text-rf-text-primary')}>{display}</span>
       </div>
     );
   }
@@ -36,7 +37,7 @@ export default function NumberBlock({ slotName, data, compact }) {
   return (
     <BlockCard padding="compact">
       <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
-      <p className="mt-1 font-mono text-[14px] font-semibold text-rf-text-primary">{display}</p>
+      <p {...typeRole('figure', 'mt-1 text-rf-text-primary')}>{display}</p>
     </BlockCard>
   );
 }

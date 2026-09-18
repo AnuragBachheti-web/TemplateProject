@@ -67,6 +67,58 @@
    * if still restrained, tonal separation from the white panels sitting on it. */
   --rf-surface-sunken: #F1F3F8;
   --rf-surface-sunken-rgb: 241 243 248;
+  /* ---------------------------------------------------------------------------------------
+   * TEXT STEPS FOR THE SEMANTIC ACCENTS (Phase 5E Part 2, ruling R83).
+   *
+   * THE -500 STEPS ABOVE FAIL THE DESIGN SYSTEM'S OWN CONTRAST MATRIX AS TEXT ON WHITE.
+   * 05-color.html measures amber-500 at 2.3:1 and green-500 at 3.1:1 and marks both "large only",
+   * saying amber-500 is for "icons and large UI only" and that green-700 is the colour for
+   * "success message body text". This template was painting 11-13px text with the -500 steps.
+   *
+   * The reference has always agreed: as a TEXT colour across the 114 mockups in source-mockups/,
+   * green-700 appears 95 times and green-500 zero; rose-700 148 times and rose-500 zero; amber-700
+   * 56 times against amber-500 twice.
+   *
+   * So text uses these, and the -500 steps keep doing what the DS says they are for — icons, dots,
+   * bars, borders and large UI. Values are the DS's own green-700/amber-700/rose-700.
+   * --------------------------------------------------------------------------------------- */
+  /* An ICON alias for the -500 steps. Same value, different NAME, and the name is the point: at a
+   * call site `text-rf-status-critical-icon` says "this is a glyph" and `-text` says "this is
+   * something to read". Without it the two are the same utility class and the contrast rule can
+   * only be enforced by guessing from context, which is how the -500 steps ended up on 11px text
+   * in the first place. */
+  --rf-status-critical-icon: #E11D48;
+  --rf-status-critical-icon-rgb: 225 29 72;
+  --rf-status-success-icon: #10A36D;
+  --rf-status-success-icon-rgb: 16 163 109;
+  --rf-status-warning-icon: #F59E0B;
+  --rf-status-warning-icon-rgb: 245 158 11;
+  --rf-status-purple-icon: #7C3AED;
+  --rf-status-purple-icon-rgb: 124 58 237;
+  --rf-status-critical-text: #9F1239;
+  --rf-status-critical-text-rgb: 159 18 57;
+  --rf-status-success-text: #046C46;
+  --rf-status-success-text-rgb: 4 108 70;
+  --rf-status-warning-text: #A15C07;
+  --rf-status-warning-text-rgb: 161 92 7;
+  --rf-status-purple-text: #5B21B6;
+  --rf-status-purple-text-rgb: 91 33 182;
+  /* ---------------------------------------------------------------------------------------
+   * LENS ACCENTS (ruling R86). The design system's own Module Hues, one per Decision Object lens.
+   * `sales` has no module hue in the DS and takes --mod-intel, the brand graphite: the largest
+   * lens wears the quietest colour. See blocks/lensAccent.js for the two value collisions
+   * (cash == rose-500, inventory == violet-500) and the rule that keeps them safe.
+   * --------------------------------------------------------------------------------------- */
+  --rf-lens-sales: #383838;
+  --rf-lens-sales-rgb: 56 56 56;
+  --rf-lens-inventory: #7C3AED;
+  --rf-lens-inventory-rgb: 124 58 237;
+  --rf-lens-ads: #EA580C;
+  --rf-lens-ads-rgb: 234 88 12;
+  --rf-lens-margin: #0EA57A;
+  --rf-lens-margin-rgb: 14 165 122;
+  --rf-lens-cash: #E11D48;
+  --rf-lens-cash-rgb: 225 29 72;
   --rf-text-disabled: #B4BCCA;
   --rf-text-disabled-rgb: 180 188 202;
   --rf-text-primary: #0A0F1A;
@@ -118,6 +170,35 @@
   --rf-surface-raised-rgb: 38 46 61;
   --rf-surface-sunken: #0A0F1A;
   --rf-surface-sunken-rgb: 10 15 26;
+  /* Dark is DERIVED, not sourced — the DS is light-only (ruling R85). The -700 steps are far too
+   * dark to read on ink-900, so dark keeps lighter counterparts of its own. Phase 5E verified in
+   * LIGHT and checked dark only for legibility; see H. */
+  --rf-status-critical-icon: #F2555C;
+  --rf-status-critical-icon-rgb: 242 85 92;
+  --rf-status-success-icon: #33C88A;
+  --rf-status-success-icon-rgb: 51 200 138;
+  --rf-status-warning-icon: #F5A524;
+  --rf-status-warning-icon-rgb: 245 165 36;
+  --rf-status-purple-icon: #9B82FF;
+  --rf-status-purple-icon-rgb: 155 130 255;
+  --rf-status-critical-text: #FF8A8F;
+  --rf-status-critical-text-rgb: 255 138 143;
+  --rf-status-success-text: #5FDCA6;
+  --rf-status-success-text-rgb: 95 220 166;
+  --rf-status-warning-text: #FFC66B;
+  --rf-status-warning-text-rgb: 255 198 107;
+  --rf-status-purple-text: #C4B0FF;
+  --rf-status-purple-text-rgb: 196 176 255;
+  --rf-lens-sales: #A8A8A8;
+  --rf-lens-sales-rgb: 168 168 168;
+  --rf-lens-inventory: #9B82FF;
+  --rf-lens-inventory-rgb: 155 130 255;
+  --rf-lens-ads: #FB923C;
+  --rf-lens-ads-rgb: 251 146 60;
+  --rf-lens-margin: #33C88A;
+  --rf-lens-margin-rgb: 51 200 138;
+  --rf-lens-cash: #F2555C;
+  --rf-lens-cash-rgb: 242 85 92;
   --rf-text-disabled: #5E6878;
   --rf-text-disabled-rgb: 94 104 120;
   --rf-text-primary: #FAFBFD;

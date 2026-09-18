@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { actionStoriesIndexPath } from '@/constants/actionStoriesRoutes';
+import { useParams } from 'react-router-dom';
+import PaneEyebrow from '../components/PaneEyebrow';
 import { getStageView, isUsingMockTransport } from '@/services/actionStoriesService';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
 import { formatValue } from '@/features/action-stories/blocks/formatValue';
@@ -11,11 +11,12 @@ import StageActionBar from '@/features/action-stories/components/StageActionBar'
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 import Alert from '@/features/action-stories/ui/Alert';
 
+import { typeRole } from '../blocks/typeRole';
 const STATUS_TONE = {
   pending: 'bg-rf-surface-sunken text-rf-text-secondary',
-  approved: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300',
-  modified: 'bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300',
-  dismissed: 'bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300',
+  approved: 'bg-rf-status-success/10 text-rf-status-success-text dark:bg-rf-status-success/10 dark:text-rf-status-success-text',
+  modified: 'bg-rf-status-warning/10 text-rf-status-warning-text dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text',
+  dismissed: 'bg-rf-status-critical/10 text-rf-status-critical-text dark:bg-rf-status-critical/10 dark:text-rf-status-critical-text',
 };
 
 /** Relative deadline copy. Derived from the instant the backend sent — never sent pre-formatted. */
@@ -44,18 +45,10 @@ function ProposalHeader({ decision, story, storyProblem }) {
     // A sticky element inside a non-scrolling parent is inert, and leaving it would have implied a
     // scroll relationship that no longer exists.
     <header data-shell-part="header" className="z-20 shrink-0 border-b border-rf-border-subtle bg-rf-surface-canvas px-6 pt-4 pb-3">
-      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
-        <Link to={actionStoriesIndexPath()} className="transition-colors hover:text-rf-text-primary">
-          Action Stories
-        </Link>
-        <i className="fa-solid fa-chevron-right text-[7px]" aria-hidden="true" />
-        <span className="text-rf-text-secondary">{decision.story_code}</span>
-        <i className="fa-solid fa-chevron-right text-[7px]" aria-hidden="true" />
-        <span className="text-rf-text-secondary capitalize">{decision.stage}</span>
-      </nav>
+      <PaneEyebrow lens={decision.lens} storyCode={decision.story_code} stage={decision.stage} />
 
       <h1
-        className="mt-2 font-serif text-[28px] font-normal leading-[1.15] tracking-[-0.02em] text-rf-text-primary"
+        {...typeRole('display', 'mt-2 text-rf-text-primary')}
         style={{ fontVariationSettings: "'opsz' 144" }}
       >
         {decision.title}
@@ -71,8 +64,8 @@ function ProposalHeader({ decision, story, storyProblem }) {
           nodes with no separator, so "Mode suggest" abutting the next element defeats a word
           boundary, and a bare count magnitude like 214 matches body prose that has nothing to do
           with the impact. A marked node is the fact; a matching substring is a coincidence. */}
-      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12px] text-rf-text-secondary">
-        <span className={`inline-flex items-center rounded-full px-2.5 py-[3px] text-[11px] font-medium capitalize ${STATUS_TONE[decision.status] ?? STATUS_TONE.pending}`}>
+      <div {...typeRole('body', 'mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-rf-text-secondary')}>
+        <span className={`${typeRole('body').className} inline-flex items-center rounded-full px-2.5 py-[3px] capitalize ${STATUS_TONE[decision.status] ?? STATUS_TONE.pending}`}>
           {decision.status}
         </span>
         {decision.impact && (
@@ -90,7 +83,7 @@ function ProposalHeader({ decision, story, storyProblem }) {
           </span>
         )}
         <span data-fact="mode" className="capitalize">Mode {decision.mode}</span>
-        {due && <span className="font-medium text-amber-700 dark:text-amber-400">{due}</span>}
+        {due && <span className="font-medium text-rf-status-warning-text">{due}</span>}
       </div>
 
       {/* The parent/child relationship, made navigable. StepTracker already existed and already took
@@ -118,7 +111,7 @@ function ProposalHeader({ decision, story, storyProblem }) {
 function MockTransportNotice() {
   if (!isUsingMockTransport()) return null;
   return (
-    <p className="mx-6 mt-3 rounded-lg border border-dashed border-amber-300 bg-amber-50 px-3 py-1.5 text-[11.5px] text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">
+    <p {...typeRole('body', 'mx-6 mt-3 rounded-lg border border-dashed border-rf-status-warning/40 bg-rf-status-warning/10 px-3 py-1.5 text-rf-status-warning-text dark:border-rf-status-warning/40 dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text')}>
       No API configured — served by the in-memory test double. Set <code>VITE_API_BASE_URL</code> to use a real backend.
     </p>
   );

@@ -207,7 +207,7 @@ function renderInChrome(url) {
 }
 
 
-// ---- THE LAYOUT GATE (Phase 5D: T73, T75, T76, T78 · Phase 5E: T93) -----------------------------
+// ---- THE LAYOUT GATE (Phase 5D: T73, T75, T76, T78 · Phase 5E: T93, T100) -----------------------
 //
 // A real browser, driven over the DevTools Protocol, at both supported widths. No dependency is
 // added: Chrome is already spawned above, and Node has a global WebSocket.
@@ -269,6 +269,16 @@ async function layoutSession(fn) {
         if (ready) break
         await new Promise((r) => setTimeout(r, 100))
       }
+      // LIGHT MODE, EXPLICITLY (ruling R85). The design system is sourced for light only; the dark
+      // token set is derived, and truing up against a derived set would be truing up against an
+      // inference. useThemeStore defaults to 'system', so without this the gate measures whatever
+      // the machine running it happens to prefer — a gate whose subject changes with the CI host is
+      // not measuring the thing it claims to.
+      await evaluate(`(() => {
+        try { localStorage.setItem('rf-theme', 'light') } catch { /* ignore */ }
+        document.documentElement.setAttribute('data-theme', 'light')
+        return true
+      })()`)
       await new Promise((r) => setTimeout(r, 150)) // let fonts and final layout settle
     }
     return await fn({ goto, evaluate, setViewport, send })
@@ -284,10 +294,11 @@ async function layoutSession(fn) {
  * T76 — any remaining truncation carries a reachable affordance.
  * T78 — a packed row's two cards are equal height (the ruled vertical contract).
  * T93 — a table's columns are attributes its records SHARE, measured in the rendered DOM.
+ * T100 — no small text is painted in a colour that fails AA against the surface behind it.
  */
 const LAYOUT_PROBE = `
 (() => {
-  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null };
+  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null, contrast: [] };
 
   // --- T73: a region either fits, or it scrolls. It must never overflow its own track silently.
   const grid = document.querySelector('[data-scroll-region="main"]')?.parentElement;
@@ -386,6 +397,64 @@ const LAYOUT_PROBE = `
     });
     report.packed.push(cards);
   }
+  // --- T100: CONTRAST, MEASURED ON THE RENDERED PIXELS (Phase 5E Part 2, ruling R83).
+  // The defect this closes was invisible to every other gate: 11-13px text painted green-500
+  // (3.1:1 on white) and amber-500 (2.3:1). Nothing clipped, nothing overflowed, nothing was the
+  // wrong shape — it was simply hard to read, and no probe asked. So this one reads the computed
+  // colour of every text leaf and the background actually behind it, and computes the real ratio.
+  //
+  // It checks what the operator sees rather than which token was named, which is the whole lesson
+  // of T79: a token name is a declaration, a contrast ratio is an experience.
+  const toRgb = (s) => (s.match(/\\d+(\\.\\d+)?/g) || []).slice(0, 3).map(Number);
+  const lum = (rgb) => {
+    const c = rgb.map((v) => {
+      const x = v / 255;
+      return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const behind = (el) => {
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      const rgb = toRgb(bg);
+      const alpha = bg.startsWith('rgba') ? Number(bg.split(',')[3]) : 1;
+      if (rgb.length === 3 && alpha > 0.9) return rgb;
+      node = node.parentElement;
+    }
+    return [255, 255, 255];
+  };
+  for (const el of document.querySelectorAll('[data-scroll-region] *, header *')) {
+    if (el.children.length > 0) continue;
+    const text = (el.textContent || '').trim();
+    if (text === '') continue;
+    const cs = getComputedStyle(el);
+    if (el.clientWidth <= 1 || cs.clip === 'rect(0px, 0px, 0px, 0px)') continue;
+    const size = parseFloat(cs.fontSize);
+    const weight = Number(cs.fontWeight) || 400;
+    // WCAG's own definition of large text: 18.66px+ bold, or 24px+.
+    const isLarge = size >= 24 || (size >= 18.66 && weight >= 700);
+    const need = isLarge ? 3 : 4.5;
+    const fg = toRgb(cs.color);
+    if (fg.length !== 3) continue;
+    const a = lum(fg);
+    const b = lum(behind(el));
+    const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    if (ratio < need) {
+      const slot = el.closest('[data-block-slot]');
+      // WHOSE COLOUR IS IT? A status or lens token failing is this phase's subject (R83). A NEUTRAL
+      // token failing is a bigger, older defect that no ruling has scoped — counted, not failed.
+      const hex = '#' + fg.map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+      const SEMANTIC = ['#9F1239','#046C46','#A15C07','#5B21B6','#E11D48','#10A36D','#F59E0B','#7C3AED',
+                        '#383838','#EA580C','#0EA57A'];
+      report.contrast.push({
+        slot: slot ? slot.getAttribute('data-block-slot') : '(chrome)',
+        ratio: Math.round(ratio * 100) / 100, need, size: Math.round(size * 10) / 10,
+        color: cs.color, hex, semantic: SEMANTIC.includes(hex), text: text.slice(0, 44),
+      });
+    }
+  }
+
   return report;
 })()
 `
@@ -395,6 +464,7 @@ async function runLayoutGate(base) {
   const dataset = JSON.parse(fs.readFileSync(
     path.resolve('src/features/action-stories/__corpus__/normalized/dataset.json'), 'utf8'))
   const failures = []
+  const neutralLowContrast = []
   let checked = 0
 
   await layoutSession(async ({ goto, evaluate, setViewport }) => {
@@ -435,6 +505,15 @@ async function runLayoutGate(base) {
           failures.push(`T93 ${where}: "${h.slot}" spends a column on "${h.head}", which is empty on ` +
             `${h.blank} of ${h.rows} rows — a union artefact, not a shared attribute`)
         }
+        // T100
+        for (const c of r.contrast) {
+          if (c.semantic) {
+            failures.push(`T100 ${where}: "${c.slot}" paints ${c.size}px text at ${c.ratio}:1 ` +
+              `(needs ${c.need}:1) in ${c.hex} — ${JSON.stringify(c.text)}`)
+          } else {
+            neutralLowContrast.push(c.hex)
+          }
+        }
         // T78
         for (const row of r.packed) {
           if (row.length !== 2) continue
@@ -448,7 +527,7 @@ async function runLayoutGate(base) {
       console.log(`  layout gate: ${width}px checked`)
     }
   })
-  return { failures, checked }
+  return { failures, checked, neutralLowContrast }
 }
 
 
@@ -594,7 +673,41 @@ async function main() {
 
     // THE LAYOUT GATE. Runs after the error-copy pass, over every object, at both widths. Its
     // failures are FAILURES (R65) — the run goes red, it does not warn.
-    const { failures, checked } = await runLayoutGate(base)
+    const { failures, checked, neutralLowContrast } = await runLayoutGate(base)
+
+    // ---- THE NEUTRAL-TEXT CONTRAST RATCHET (Phase 5E Part 2) --------------------------------
+    // T100 was built to catch R83's defect: small text painted in a -500 status step. It caught
+    // that — and then it caught something an order of magnitude larger that NO RULING HAS SCOPED,
+    // which is recorded here rather than absorbed.
+    //
+    //   4,104  #8891A3 — `rf-text-tertiary`, which is the DS's ink-400. It is 3.17:1 on white and
+    //          this app paints 10-13px text with it on almost every surface. The design system's
+    //          own contrast matrix agrees it should not: it lists ink-400 for "placeholders,
+    //          disabled text, labels 16px+".
+    //      60  #FFFFFF — white figures inside HeatmapGridBlock's cells, sitting on the mid-blue
+    //          steps of the sequential chart scale. Worst measured 2.5:1 (prop_s9_13_analyze at
+    //          1280). A chart-palette problem rather than a text-token one.
+    //
+    // NOT SILENTLY EXEMPTED, AND NOT FIXED HERE. Repainting every secondary label in the app is a
+    // colour decision across every surface, and this phase was ruled to fix the status steps. So
+    // the number is PINNED: the run goes red the moment it grows, which makes the debt visible at
+    // every commit and stops it being added to. A gate that quietly skipped these would be the
+    // vacuous pass R65 named, wearing this phase's own colours.
+    //
+    // Lower this number when the finding is ruled on. Do not raise it.
+    const NEUTRAL_LOW_CONTRAST_BASELINE = 4164
+    if (neutralLowContrast.length > NEUTRAL_LOW_CONTRAST_BASELINE) {
+      const byHex = {}
+      for (const h of neutralLowContrast) byHex[h] = (byHex[h] ?? 0) + 1
+      const summary = Object.entries(byHex).sort((a, b) => b[1] - a[1])
+        .map(([h, n]) => `${h} x${n}`).join(', ')
+      fail(`T100 neutral-text contrast GREW: ${neutralLowContrast.length} elements below AA ` +
+        `(pinned at ${NEUTRAL_LOW_CONTRAST_BASELINE}) — ${summary}`)
+    } else {
+      console.log(`  ok  T100 contrast — no status colour below AA; ` +
+        `${neutralLowContrast.length} neutral-token elements pinned as known debt`)
+    }
+
     if (failures.length > 0) {
       const shown = failures.slice(0, 25)
       fail(`layout gate: ${failures.length} failure(s) across ${checked} page loads\n` +

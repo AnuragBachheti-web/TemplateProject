@@ -11,9 +11,11 @@ import { forwardRef } from 'react';
 // hard-to-reverse consequence (see ConfirmDialog.jsx); every other action-bar/CTA button is
 // `primary`.
 
+// A button's LABEL is body text; only its box changes with size. The two sizes used to differ in
+// font-size as well (12px / 13.5px), which made `sm` a seventh type role in disguise.
 const SIZE = {
-  sm: 'h-8 px-3 text-[12px] gap-1.5',
-  md: 'h-10 px-[18px] text-[13.5px] gap-2',
+  sm: 'h-8 px-3 gap-1.5',
+  md: 'h-10 px-[18px] gap-2',
 };
 
 const VARIANT = {

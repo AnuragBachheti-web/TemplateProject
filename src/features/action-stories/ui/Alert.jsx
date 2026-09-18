@@ -1,3 +1,4 @@
+import { typeRole } from '../blocks/typeRole';
 // A PERSISTENT, in-place notice — distinct from Toast.jsx's transient, auto-dismissing one.
 // StageActionBar's own error indicator was already exactly this (a hand-rolled
 // `role="alert"` pill with an icon + message), just never pulled out into something a second
@@ -9,10 +10,10 @@
 // the reference mockups' own persistent-warning pattern, not yet backed by a real manifest field to
 // bind one automatically, but ready for the day one exists).
 const TONE = {
-  info: { icon: 'fa-solid fa-circle-info', text: 'text-rf-brand-blue-500', border: 'border-rf-brand-blue-500/30', bg: 'bg-rf-brand-blue-500/10' },
-  success: { icon: 'fa-solid fa-circle-check', text: 'text-rf-status-success', border: 'border-rf-status-success/30', bg: 'bg-rf-status-success/10' },
-  warning: { icon: 'fa-solid fa-triangle-exclamation', text: 'text-rf-status-warning', border: 'border-rf-status-warning/30', bg: 'bg-rf-status-warning/10' },
-  critical: { icon: 'fa-solid fa-triangle-exclamation', text: 'text-rf-status-critical', border: 'border-rf-status-critical/30', bg: 'bg-rf-status-critical/10' },
+  info: { icon: 'fa-solid fa-circle-info', text: 'text-rf-brand-blue-500', iconTone: 'text-rf-brand-blue-500', border: 'border-rf-brand-blue-500/30', bg: 'bg-rf-brand-blue-500/10' },
+  success: { icon: 'fa-solid fa-circle-check', text: 'text-rf-status-success-text', iconTone: 'text-rf-status-success-icon', border: 'border-rf-status-success/30', bg: 'bg-rf-status-success/10' },
+  warning: { icon: 'fa-solid fa-triangle-exclamation', text: 'text-rf-status-warning-text', iconTone: 'text-rf-status-warning-icon', border: 'border-rf-status-warning/30', bg: 'bg-rf-status-warning/10' },
+  critical: { icon: 'fa-solid fa-triangle-exclamation', text: 'text-rf-status-critical-text', iconTone: 'text-rf-status-critical-icon', border: 'border-rf-status-critical/30', bg: 'bg-rf-status-critical/10' },
 };
 
 /**
@@ -31,9 +32,9 @@ export default function Alert({ tone = 'info', title, children, onDismiss, compa
     return (
       <span
         role={role}
-        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11.5px] font-medium ${t.bg} ${t.text} ${className}`}
+        className={`${typeRole('body').className} inline-flex items-center gap-2 rounded-full px-3 py-1 ${t.bg} ${t.text} ${className}`}
       >
-        <i className={`${t.icon} text-[10px]`} aria-hidden="true" />
+        <i className={`${typeRole('micro').className} ${t.icon}`} aria-hidden="true" />
         {children}
         {onDismiss && (
           <button type="button" onClick={onDismiss} aria-label="Dismiss" className="ml-0.5 opacity-70 hover:opacity-100">
@@ -45,8 +46,8 @@ export default function Alert({ tone = 'info', title, children, onDismiss, compa
   }
 
   return (
-    <div role={role} className={`flex items-start gap-2.5 rounded-lg border px-3.5 py-3 text-[12.5px] ${t.border} ${t.bg} ${className}`}>
-      <i className={`${t.icon} mt-[1px] text-[12px] ${t.text}`} aria-hidden="true" />
+    <div role={role} className={`${typeRole('body').className} flex items-start gap-2.5 rounded-lg border px-3.5 py-3 ${t.border} ${t.bg} ${className}`}>
+      <i className={`${typeRole('body').className} ${t.icon} mt-[1px] ${t.iconTone}`} aria-hidden="true" />
       <div className="flex-1">
         {title && <p className="font-semibold text-rf-text-primary">{title}</p>}
         <div className={title ? 'mt-0.5 text-rf-text-secondary' : 'text-rf-text-primary'}>{children}</div>

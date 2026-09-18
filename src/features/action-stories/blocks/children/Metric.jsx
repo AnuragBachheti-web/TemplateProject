@@ -1,7 +1,9 @@
 import { deltaTone } from '../deltaTone';
 import { DEPTH_CHILD, depthAttrs } from '../renderDepth';
 import { cellText } from '../cellText';
+import { isFigureText } from '../figureShape';
 
+import { typeRole } from '../typeRole';
 /**
  * One measured figure and its label — the atom `statList` is built from, and the atom `cardSet`
  * reuses for the figures on a card.
@@ -26,20 +28,30 @@ export default function Metric({ label, value, meta, extra }) {
   return (
     <div {...depthAttrs(DEPTH_CHILD)} data-metric className="min-w-0">
       {label !== undefined && label !== null && label !== '' && (
-        <div {...cellText('identifier', label, 'text-[11px] text-rf-text-tertiary')}>{label}</div>
+        <div {...cellText('identifier', label, typeRole('body', 'text-rf-text-tertiary').className)}>{label}</div>
       )}
+      {/* PHASE 5E PART 2. The role comes from the VALUE'S SHAPE, not from the field's name. This
+          was `prose` while being drawn as a figure (mono, tabular-nums) — a styling that disagreed
+          with its declared role, which is the seam R78 is about. The first fix made it always
+          `figure`, and the browser gate immediately found the other half of the mistake: a metric's
+          value is not always a figure. S10.3/decide's next_actions carries a 250-character
+          sentence here, and the figure role never wraps, so it ran 4,544px wide inside a 620px
+          card. Same answer as TableBlock's cells and deltaTone's gate — one definition, asked in
+          one way, wherever the question comes up. */}
       {value !== undefined && value !== null && value !== '' && (
-        <div {...cellText('prose', value, `font-mono text-[13px] tabular-nums ${tone ?? 'text-rf-text-primary'}`)}>{value}</div>
+        isFigureText(value)
+          ? <div {...cellText('figure', value, typeRole('figure', tone ?? 'text-rf-text-primary').className)}>{value}</div>
+          : <div {...cellText('prose', value, typeRole('body', tone ?? 'text-rf-text-primary').className)}>{value}</div>
       )}
       {/* PHASE 5B. `extra` is the metricGrid variant's second figure line — the reference stacks
           label / value / range / note (S9.1-3-decide:220-227) where this renders three. It is a
           LIST supplied by the caller, not a field this child reads: Metric still knows nothing
           about which slot it serves or which variant is in play. */}
       {(extra ?? []).filter((line) => typeof line === 'string' && line.trim() !== '').map((line) => (
-        <div key={line} {...cellText('figure', line, 'mt-[1px] font-mono text-[10.5px] text-rf-text-secondary tabular-nums')}>{line}</div>
+        <div key={line} {...cellText('figure', line, typeRole('micro', 'mt-[1px] text-rf-text-secondary').className)}>{line}</div>
       ))}
       {meta !== undefined && meta !== null && meta !== '' && (
-        <div {...cellText('prose', meta, 'mt-[1px] text-[10.5px] text-rf-text-tertiary')}>{meta}</div>
+        <div {...cellText('prose', meta, typeRole('micro', 'mt-[1px] text-rf-text-tertiary').className)}>{meta}</div>
       )}
     </div>
   );

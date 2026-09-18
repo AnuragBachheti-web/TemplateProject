@@ -2,6 +2,7 @@ import { flattenDisplayValue } from '../flattenDisplayValue';
 import { DEPTH_CHILD, depthAttrs } from '../renderDepth';
 import { cellText } from '../cellText';
 
+import { typeRole } from '../typeRole';
 /**
  * The nested row set a card can carry — `item_groups[].rows`, `next_actions[].changes`.
  *
@@ -28,13 +29,13 @@ export default function SubRowList({ rows, max = 4 }) {
         const text = typeof row === 'object' ? Object.values(row).map(flattenDisplayValue).filter(Boolean).join(' · ') : flattenDisplayValue(row);
         if (!text) return null;
         return (
-          <li key={i} {...cellText('prose', text, 'text-[11px] text-rf-text-tertiary')}>
+          <li key={i} {...cellText('prose', text, typeRole('body', 'text-rf-text-tertiary').className)}>
             {text}
           </li>
         );
       })}
       {hidden > 0 && (
-        <li className="text-[10.5px] text-rf-text-tertiary">
+        <li {...typeRole('micro', 'text-rf-text-tertiary')}>
           +{hidden} more
         </li>
       )}

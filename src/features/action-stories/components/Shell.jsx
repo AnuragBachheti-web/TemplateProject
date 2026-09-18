@@ -7,6 +7,7 @@ import { defaultStageOf } from '@/features/action-stories/actionStory';
 import { useThemeStore } from '@/store/useThemeStore';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 
+import { typeRole } from '../blocks/typeRole';
 const THEME_CYCLE = ['light', 'dark', 'system'];
 const THEME_ICON = { light: 'fa-sun', dark: 'fa-moon', system: 'fa-circle-half-stroke' };
 const THEME_LABEL = { light: 'Light', dark: 'Dark', system: 'System' };
@@ -59,9 +60,9 @@ function TopBar({ onOpenNav }) {
         <input
           type="search"
           placeholder="Search workflows, SKUs, or insights…"
-          className="w-full rounded-full border border-rf-border-subtle bg-rf-surface-sunken py-[7px] pl-8 pr-3 text-[12.5px] text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+          {...typeRole('body', 'w-full rounded-full border border-rf-border-subtle bg-rf-surface-sunken py-[7px] pl-8 pr-3 text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         />
-        <kbd className="pointer-events-none absolute right-2.5 hidden rounded border border-rf-border-subtle bg-rf-surface-canvas px-1.5 py-[1px] font-mono text-[9.5px] text-rf-text-tertiary sm:inline-block">
+        <kbd {...typeRole('micro', 'pointer-events-none absolute right-2.5 hidden rounded border border-rf-border-subtle bg-rf-surface-canvas px-1.5 py-[1px] text-rf-text-tertiary sm:inline-block')}>
           ⌘K
         </kbd>
       </label>
@@ -139,19 +140,15 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
                 <NavLink
                   to={actionStoryPath(story.story_code, openAt, openId)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 text-[12.5px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
-                    isActive
-                      ? 'bg-rf-brand-tint-08 text-rf-text-primary'
-                      : 'text-rf-text-secondary hover:bg-rf-surface-sunken hover:text-rf-text-primary'
-                  }`}
+                  className={`${typeRole('body').className} relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${ isActive ? 'bg-rf-brand-tint-08 text-rf-text-primary' : 'text-rf-text-secondary hover:bg-rf-surface-sunken hover:text-rf-text-primary' }`}
                 >
                   {isActive && (
                     <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-[2.5px] rounded-full bg-rf-brand-indicator" />
                   )}
-                  <span className="shrink-0 font-mono text-[9.5px] tracking-[0.04em] text-rf-text-tertiary">{story.story_code}</span>
+                  <span {...typeRole('micro', 'shrink-0 text-rf-text-tertiary')}>{story.story_code}</span>
                   <span className="min-w-0 flex-1 truncate">{story.title}</span>
                   {/* Stage COUNT, not a stage name — one row is the whole story. */}
-                  <span className="shrink-0 font-mono text-[9px] text-rf-text-tertiary">{story.stages.length}</span>
+                  <span {...typeRole('micro', 'shrink-0 text-rf-text-tertiary')}>{story.stages.length}</span>
                 </NavLink>
               </li>
             );
@@ -215,37 +212,37 @@ export default function Shell() {
         <div className="flex items-center gap-2 border-b border-rf-border-subtle px-4 py-3.5">
           <span
             aria-hidden="true"
-            className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-[7px] bg-rf-brand-blue-500 text-[10px] font-semibold text-white"
+            {...typeRole('micro', 'grid h-6 w-6 flex-shrink-0 place-items-center rounded-[7px] bg-rf-brand-blue-500 text-white')}
           >
             R
           </span>
-          <span className="font-serif text-[16px] font-normal tracking-[-0.02em] text-rf-text-primary" style={{ fontVariationSettings: "'opsz' 144" }}>
+          <span {...typeRole('display', 'text-rf-text-primary')} style={{ fontVariationSettings: "'opsz' 144" }}>
             Realify
           </span>
         </div>
         <div className="px-4 pt-3.5 pb-1">
-          <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-tertiary">Action Stories</p>
+          <p {...typeRole('label', 'text-rf-text-tertiary')}>Action Stories</p>
         </div>
         <WorkflowNav key={retryToken} activeStoryCode={activeStoryCode} onRetry={() => setRetryToken((n) => n + 1)} />
 
         <div className="mt-auto flex flex-col border-t border-rf-border-subtle px-2 py-2">
           <a
             href="#settings"
-            className="flex items-center gap-2.5 rounded-md px-3 py-[7px] text-[12.5px] font-medium text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary"
+            {...typeRole('body', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
           >
             <i className="fa-solid fa-gear w-3.5 text-center text-[11px] text-rf-text-tertiary" aria-hidden="true" />
             Settings
           </a>
           <a
             href="#help"
-            className="flex items-center gap-2.5 rounded-md px-3 py-[7px] text-[12.5px] font-medium text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary"
+            {...typeRole('body', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
           >
             <i className="fa-regular fa-circle-question w-3.5 text-center text-[11px] text-rf-text-tertiary" aria-hidden="true" />
             Help &amp; Support
           </a>
           <div className="mt-1 flex items-center gap-2 px-3 py-1.5">
             <span aria-hidden="true" className="h-[6px] w-[6px] shrink-0 rounded-full bg-rf-status-success" />
-            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-rf-text-tertiary">All systems</span>
+            <span {...typeRole('label', 'text-rf-text-tertiary')}>All systems</span>
           </div>
         </div>
       </nav>

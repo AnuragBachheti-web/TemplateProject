@@ -8,6 +8,8 @@ import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey as isHiddenColumn } from './decorativeKeys';
 import { splitColumns, isControlColumn } from './tableColumns';
 import { cellText } from './cellText';
+import { typeRole } from './typeRole';
+import { isFigureText } from './figureShape';
 
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -51,7 +53,7 @@ function RowControl({ options }) {
   const [selected, setSelected] = useState(initialIndex);
 
   return (
-    <div className="inline-flex overflow-hidden rounded-md border border-rf-border-subtle text-[10.5px]">
+    <div {...typeRole('micro', 'inline-flex overflow-hidden rounded-md border border-rf-border-subtle')}>
       {options.map((opt, i) => (
         <button
           key={i}
@@ -200,8 +202,8 @@ export default function TableBlock({ slotName, data, compact, selectable = false
           onScroll={updateScrollShadow}
           className={isLarge ? 'max-h-[420px] overflow-auto' : 'overflow-x-auto'}
         >
-        <table className="w-full border-collapse text-[12px]">
-          <caption className="border-b border-rf-border-subtle px-4 py-2.5 text-left font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-secondary">
+        <table {...typeRole('body', 'w-full border-collapse')}>
+          <caption {...typeRole('label', 'border-b border-rf-border-subtle px-4 py-2.5 text-left text-rf-text-secondary')}>
             {humanizeSlotName(slotName)} · {allRows.length}
           </caption>
           <thead>
@@ -234,9 +236,9 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                     // single stacked column. Every height and width the layout gate measured was
                     // still within tolerance — the table was simply the wrong shape, and no probe
                     // asked about shape.
-                    {...cellText('prose', humanizeSlotName(col), `border-b border-rf-border-subtle px-4 py-2 text-left font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-rf-text-tertiary ${
+                    {...cellText('prose', humanizeSlotName(col), typeRole('label', `border-b border-rf-border-subtle px-4 py-2 text-left text-rf-text-tertiary ${
                       isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''
-                    }`)}
+                    }`).className)}
                   >
                     {controlColumns.has(col) ? (
                       <span>{humanizeSlotName(col)}</span>
@@ -263,7 +265,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
               // so every value that used to sit in a column of dashes is still on the page and
               // still attached to the row it belongs to.
               const detail = detailKeys
-                .map((key) => [key, flattenDisplayValue(row[key]), isNumericValue(row[key]), deltaTone(row[key])])
+                .map((key) => [key, flattenDisplayValue(row[key]), isFigureText(row[key]), deltaTone(row[key])])
                 .filter(([, text]) => text !== '' && text !== undefined && text !== null);
               return (
                 <Fragment key={i}>
@@ -282,12 +284,16 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       const value = row[col];
                       if (controlColumns.has(col)) {
                         return (
-                          <td key={col} className="px-4 py-2 text-[12px]">
+                          <td key={col} {...typeRole('body', 'px-4 py-2')}>
                             <RowControl options={value} />
                           </td>
                         );
                       }
-                      const numeric = isNumericValue(value);
+                      // R87/R88. WHAT COUNTS AS A FIGURE IS figureShape.js, not
+                      // `Number.isFinite(Number(v))` — that test calls "−$4.6K" prose, and this
+                      // corpus's figures are all pre-formatted display strings. Typography and tone
+                      // now ask the same question, so they cannot answer it differently.
+                      const numeric = isFigureText(value);
                       const text = flattenDisplayValue(value);
                       const isMissing = value === null || value === undefined || text === '';
                       // Colored from the cell's OWN sign/wording only (deltaTone) — a real API has no
@@ -302,9 +308,9 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       return (
                         <td
                           key={col}
-                          {...cellText(numeric ? 'figure' : 'prose', text, `px-4 py-2 text-[12px] ${
+                          {...cellText(numeric ? 'figure' : 'prose', text, typeRole(numeric ? 'figure' : 'body', `px-4 py-2 ${
                             isMissing ? 'text-rf-text-disabled' : tone ? tone.text : 'text-rf-text-primary'
-                          } ${numeric ? 'text-right font-mono tabular-nums' : 'text-left'}`)}
+                          } ${numeric ? 'text-right' : 'text-left'}`).className)}
                         >
                           {isMissing ? <span aria-hidden="true">—</span> : text}
                           {isMissing && <span className="sr-only">No value</span>}
@@ -317,8 +323,8 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       <td colSpan={columns.length + (selectable ? 1 : 0)} className="px-4 pb-2 pt-0">
                         <div className="flex flex-wrap gap-x-4 gap-y-1">
                           {detail.map(([key, text, numeric, tone]) => (
-                            <span key={key} className="text-[11px] text-rf-text-secondary">
-                              <span className="text-rf-text-tertiary">{humanizeSlotName(key)}:</span>{' '}
+                            <span key={key} className="text-rf-text-secondary">
+                              <span {...typeRole('label', 'text-rf-text-tertiary')}>{humanizeSlotName(key)}:</span>{' '}
                               {/* A FIGURE KEEPS THE COLOUR ITS OWN SIGN GIVES IT wherever it lands.
                                   This line changes a value's POSITION, not its meaning, and S10.1's
                                   "−$2,210 / day" reading neutral grey purely because it moved would
@@ -329,7 +335,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                                 {...cellText(
                                   numeric ? 'figure' : 'prose',
                                   text,
-                                  numeric ? `font-mono tabular-nums ${tone ? tone.text : ''}` : '',
+                                  typeRole(numeric ? 'figure' : 'body', tone && numeric ? tone.text : '').className,
                                 )}
                               >
                                 {text}
@@ -359,7 +365,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
         />
       </div>
       {isLarge && pageCount > 1 && (
-        <div className="flex items-center justify-between border-t border-rf-border-subtle px-3 py-1.5 text-[11px] text-rf-text-secondary">
+        <div {...typeRole('body', 'flex items-center justify-between border-t border-rf-border-subtle px-3 py-1.5 text-rf-text-secondary')}>
           <span>
             Page {clampedPage + 1} of {pageCount}
           </span>

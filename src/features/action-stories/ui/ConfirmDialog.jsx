@@ -2,6 +2,7 @@ import { useId, useRef } from 'react';
 import Modal from './Modal';
 import Button from './Button';
 
+import { typeRole } from '../blocks/typeRole';
 // Gates a real, hard-to-reverse action behind an explicit "are you sure" step — Nielsen Norman's
 // own "error prevention" heuristic. Generic and business-agnostic: StageActionBar.jsx wires this up
 // for whichever of its template-declared actions asks for confirmation (`actions[].confirm.required`
@@ -58,13 +59,13 @@ export default function ConfirmDialog({
     >
       <h2
         id={titleId}
-        className="font-serif text-[19px] font-medium leading-tight text-rf-text-primary"
+        {...typeRole('display', 'text-rf-text-primary')}
         style={{ fontVariationSettings: "'opsz' 144" }}
       >
         {title}
       </h2>
       {description && (
-        <p id={descriptionId} className="mt-2 text-[13px] leading-relaxed text-rf-text-secondary">
+        <p id={descriptionId} {...typeRole('body', 'mt-2 text-rf-text-secondary')}>
           {description}
         </p>
       )}

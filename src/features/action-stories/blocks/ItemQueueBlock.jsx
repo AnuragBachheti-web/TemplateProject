@@ -8,6 +8,7 @@ import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey } from './decorativeKeys';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 // Candidate field names an item might carry each concept under — kept in sync with (but
 // independently of) extraction/classifyBlocks.js's ITEM_LEVEL_CANDIDATES; that module is
 // generation-only tooling, never imported at runtime, so this is its own small copy.
@@ -92,7 +93,7 @@ function findExtraFields(item, usedKeys) {
 function Item({ item, index }) {
   if (item === null || typeof item !== 'object') {
     return (
-      <li className="rounded-xl border border-rf-border-subtle px-3 py-2 text-[12.5px] text-rf-text-primary">
+      <li {...typeRole('body', 'rounded-xl border border-rf-border-subtle px-3 py-2 text-rf-text-primary')}>
         {flattenDisplayValue(item)}
       </li>
     );
@@ -119,16 +120,16 @@ function Item({ item, index }) {
     <li className="relative overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised py-2 pl-4 pr-3">
       {tone && <span className={`absolute inset-y-0 left-0 w-1 ${tone.dot}`} />}
       <div className="flex items-center justify-between gap-2">
-        <p {...cellText('identifier', headline, 'text-[12.5px] font-semibold text-rf-text-primary')}>{headline}</p>
+        <p {...cellText('identifier', headline, typeRole('body', 'text-rf-text-primary').className)}>{headline}</p>
         {state !== undefined && (
-          <span className="flex-shrink-0 rounded-full bg-rf-surface-sunken px-2 py-0.5 text-[10px] font-semibold uppercase text-rf-text-secondary">
+          <span {...typeRole('label', 'flex-shrink-0 rounded-full bg-rf-surface-sunken px-2 py-0.5 text-rf-text-secondary')}>
             {String(state)}
           </span>
         )}
       </div>
-      {detail && <p {...cellText('prose', detail, 'mt-0.5 text-[11.5px] text-rf-text-secondary')}>{detail}</p>}
+      {detail && <p {...cellText('prose', detail, typeRole('body', 'mt-0.5 text-rf-text-secondary').className)}>{detail}</p>}
       {identifier !== undefined && (
-        <p className="mt-0.5 font-mono text-[10.5px] text-rf-text-tertiary">{String(identifier)}</p>
+        <p {...typeRole('micro', 'mt-0.5 text-rf-text-tertiary')}>{String(identifier)}</p>
       )}
       {extraFields.length > 0 && (
         <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
@@ -137,7 +138,7 @@ function Item({ item, index }) {
             // block now shares, not a per-block guess. See deltaTone.js's doc comment.
             const tone = deltaTone(text);
             return (
-              <span key={key} className="text-[10.5px] text-rf-text-secondary">
+              <span key={key} {...typeRole('micro', 'text-rf-text-secondary')}>
                 <span className="text-rf-text-tertiary">{humanizeSlotName(key)}:</span>{' '}
                 <span className={tone ? tone.text : undefined}>{text}</span>
               </span>
@@ -147,12 +148,12 @@ function Item({ item, index }) {
       )}
       {nestedLists.map(([key, entries]) => (
         <div key={key} className="mt-1.5 border-t border-rf-border-subtle pt-1.5">
-          <p className="text-[9.5px] font-bold uppercase tracking-[0.08em] text-rf-text-tertiary">
+          <p {...typeRole('label', 'text-rf-text-tertiary')}>
             {humanizeSlotName(key)}
           </p>
           <ul className="mt-0.5 flex flex-col gap-0.5">
             {entries.map((entry, i) => (
-              <li key={i} className="text-[11px] text-rf-text-secondary">
+              <li key={i} {...typeRole('body', 'text-rf-text-secondary')}>
                 {entry}
               </li>
             ))}
@@ -246,7 +247,7 @@ function SimpleChipList({ data }) {
         return (
           <span
             key={i}
-            className="inline-flex items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-canvas px-2.5 py-1 text-[11.5px] font-medium text-rf-text-primary"
+            {...typeRole('body', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-canvas px-2.5 py-1 text-rf-text-primary')}
           >
             {color && <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full" style={{ backgroundColor: color }} />}
             {label}

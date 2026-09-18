@@ -4,6 +4,7 @@ import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 
+import { typeRole } from './typeRole';
 /**
  * A CHRONOLOGY: a time or cadence label, and what happened or will happen under it.
  *
@@ -71,16 +72,16 @@ export default function TimelineBlock({ slotName, data, compact = false }) {
             {when !== undefined && (
               <span
                 data-timeline-when
-                className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary"
+                {...typeRole('label', 'text-rf-text-tertiary')}
               >
                 {when}
               </span>
             )}
             {body !== undefined && (
-              <span className="text-[12px] leading-relaxed text-rf-text-secondary">{body}</span>
+              <span {...typeRole('body', 'text-rf-text-secondary')}>{body}</span>
             )}
             {follow !== undefined && (
-              <span className="text-[11px] leading-snug text-rf-text-tertiary">{follow}</span>
+              <span {...typeRole('body', 'text-rf-text-tertiary')}>{follow}</span>
             )}
           </li>
         );

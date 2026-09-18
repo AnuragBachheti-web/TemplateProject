@@ -5,6 +5,7 @@ import { humanizeSlotName } from './humanizeSlotName';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 import { cellText } from './cellText';
 
+import { typeRole } from './typeRole';
 /**
  * WHO OR WHAT IS CREDITED — the named models on a proposal.
  *
@@ -56,16 +57,16 @@ export default function RosterBlock({ slotName, data, compact = false }) {
           <Initials name={row.name} initials={row.initials} />
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline gap-2">
-              <span {...cellText('identifier', row.name, 'text-[12.5px] text-rf-text-primary')}>{row.name}</span>
+              <span {...cellText('identifier', row.name, typeRole('body', 'text-rf-text-primary').className)}>{row.name}</span>
               {/* `lead` is the reference's own flag for the agent that drove the proposal. */}
               {row.lead === true && (
-                <span className="shrink-0 font-mono text-[9.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
+                <span {...typeRole('label', 'shrink-0 text-rf-text-tertiary')}>
                   lead
                 </span>
               )}
             </div>
             {(row.role ?? row.stance) && (
-              <div {...cellText('prose', row.role ?? row.stance, 'text-[11px] text-rf-text-tertiary')}>{row.role ?? row.stance}</div>
+              <div {...cellText('prose', row.role ?? row.stance, typeRole('body', 'text-rf-text-tertiary').className)}>{row.role ?? row.stance}</div>
             )}
           </div>
         </li>
