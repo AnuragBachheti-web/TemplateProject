@@ -143,8 +143,8 @@ function mainSectionsOf(decision) {
 
 describe('T79 — REPLACES T62, which passed while scrolling did not work', () => {
   // ============================================================================================
-  // THE THIRD TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asks this comment to name all
-  // three, because the shape differs every time and the cause never does.
+  // THE FOURTH TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asked this comment to name the
+  // first three; R77 adds the fourth, which is the one that changes what the list means.
   //
   //   heroMetrics.range (Phase 5A)  referenceFidelity.test.js asserted the P10-P90 interval was
   //                                 present in the DATA. It was. StatListBlock never rendered it,
@@ -165,10 +165,35 @@ describe('T79 — REPLACES T62, which passed while scrolling did not work', () =
   //                                 nothing to scroll, 155px overflowing the track and clipped by
   //                                 `main`'s `overflow:hidden`. 86px of content unreachable.
   //
+  //   T75+T78 (Phases 5D, 5E)      THE FOURTH, AND THE FIRST WHERE TWO GATES WERE BLIND TO ONE
+  //                                 CAUSE. Say it plainly: PHASE 5D TRADED A CLIPPED TABLE FOR A
+  //                                 RIBBONED ONE. Before 5D, S10.1/decide's slate ran `max-w-xs
+  //                                 truncate` — a 320px body column, two lines, most of a
+  //                                 213-character paragraph CUT OFF. 5D replaced that with the
+  //                                 `prose` rule, the clipping stopped, and the same cell became
+  //                                 106px wide wrapping over FORTY-FOUR lines: a vertical ribbon.
+  //                                 Both states were green. T75 asks "is any text cut off?" and a
+  //                                 ribbon cuts off nothing. T78 asks "are these heights equal, are
+  //                                 these widths declared?" and a wrong SHAPE is in tolerance on
+  //                                 both. Neither gate was wrong about its own question. The
+  //                                 constant neither one asked about was the real cause — FIFTEEN
+  //                                 COLUMNS IN 834px, unioned from four records carrying 4-7 fields
+  //                                 each — and 5D could not have seen it, because 5D was permitted
+  //                                 to change text rules and nothing else, so the only lever it had
+  //                                 moved the defect sideways.
+  //
   // THE RULE THEY SHARE: a test must assert what the OPERATOR EXPERIENCES, not what the code
   // declares. A CSS property is a declaration. A committed file is a declaration. A field on a
   // JSON object is a declaration. Each of those three tests asserted something ADJACENT to the
   // thing that mattered, and adjacency is invisible in a green run.
+  //
+  // WHAT THE FOURTH ONE ADDS. The first three are each a single test that measured the wrong thing.
+  // The fourth is two tests that each measured the RIGHT thing and still left a screen broken,
+  // because a defect does not have to sit inside any one gate's question. A gate suite is not a
+  // coverage sum: green on every question you thought to ask is silent about the one you did not.
+  // The only instrument that found it was LOOKING AT THE SCREEN — which is why every phase since 5B
+  // has carried a screenshot pass, and why 5E's own geometric gate (T93, in scripts/smoke.mjs)
+  // asserts the CAUSE, a mostly-empty column, rather than either symptom.
   //
   // WHERE THAT LEAVES THIS FILE. jsdom has no layout engine, so the behavioural half of scrolling
   // CANNOT be asserted here — every clientHeight is 0. It lives in scripts/smoke.mjs (T73), in real

@@ -6,6 +6,11 @@ import { describe, it, expect } from 'vitest';
 import { createRoot } from 'react-dom/client';
 import { act } from 'react';
 import TableBlock from './TableBlock';
+import { splitColumns } from './tableColumns';
+import { flattenDisplayValue } from './flattenDisplayValue';
+import { isHiddenKey } from './decorativeKeys';
+import { SLOT_VOCABULARY } from '../templates/slotVocabulary';
+import dataset from '@/features/action-stories/__corpus__/normalized/dataset.json';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -46,9 +51,18 @@ describe('TableBlock — empty/error states (real render, since it now uses hook
 
 describe('TableBlock — missing-value representation (regression: blank cell indistinguishable from N/A)', () => {
   it('renders a visible dash for null/undefined/empty cells, distinct from a real value', () => {
-    const container = mount(<TableBlock slotName="x" data={[{ a: 'real value', b: null, c: undefined, d: '' }]} />);
-    const cells = [...container.querySelectorAll('tbody td')];
-    expect(cells[0].textContent).toBe('real value');
+    // The fixture grew from one row to three under Phase 5E's column rule. A one-row table makes
+    // every field trivially "shared", so it could no longer distinguish the case this test is
+    // about — a REAL column with a blank in it, which still needs its dash — from the case the
+    // rule removes: a column that is blank on nearly every row. Three rows states which one is
+    // meant. The assertion itself is unchanged: a missing value reads as "—", never as nothing.
+    const container = mount(<TableBlock slotName="x" data={[
+      { a: 'real value', b: 'b1', c: 'c1', d: 'd1' },
+      { a: 'blank row', b: null, c: undefined, d: '' },
+      { a: 'third', b: 'b3', c: 'c3', d: 'd3' },
+    ]} />);
+    const cells = [...container.querySelectorAll('tbody tr:nth-child(2) td')];
+    expect(cells[0].textContent).toBe('blank row');
     expect(cells[1].textContent).toContain('—');
     expect(cells[2].textContent).toContain('—');
     expect(cells[3].textContent).toContain('—');
@@ -119,12 +133,31 @@ describe('TableBlock — pagination and sticky header (only past the row-count t
   });
 });
 
-describe('TableBlock — column union across rows (regression guard, unchanged behavior)', () => {
-  it('unions columns across all rows, not just row 0', () => {
+describe('TableBlock — columns are the fields the records SHARE (Phase 5E, R74)', () => {
+  // REPLACES "unions columns across all rows". That guard pinned the old behaviour and its own
+  // premise — "the classifier only types uniform arrays as `table`, so the union equals row 0" —
+  // was false for 29 of the corpus's 116 tables. prop_s10_1_decide's slate unioned four records
+  // carrying 4-7 fields into fifteen columns in an 834px region, wrapping a 213-character paragraph
+  // over nineteen lines. What the guard was protecting — a field must never silently vanish — still
+  // holds and is asserted below: a minority field MOVES to the row's detail line.
+  it('a field a minority of rows carry is not a column', () => {
     const data = [{ a: 1 }, { a: 2, b: 3 }];
     const container = mount(<TableBlock slotName="x" data={data} />);
     const headers = [...container.querySelectorAll('th')].map((th) => th.textContent.trim());
-    expect(headers).toEqual(['A', 'B']);
+    expect(headers).toEqual(['A']);
+  });
+
+  it('…and its value is still on the page, attached to its own row (R75)', () => {
+    const data = [{ a: 1 }, { a: 2, b: 'only on the second row' }];
+    const container = mount(<TableBlock slotName="x" data={data} />);
+    expect(container.textContent).toContain('only on the second row');
+    expect(container.textContent).toContain('B:');
+  });
+
+  it('a field every row carries stays a column', () => {
+    const data = [{ a: 1, b: 2 }, { a: 3, b: 4 }];
+    const container = mount(<TableBlock slotName="x" data={data} />);
+    expect([...container.querySelectorAll('th')].map((th) => th.textContent.trim())).toEqual(['A', 'B']);
   });
 });
 
@@ -173,5 +206,113 @@ describe('TableBlock — wide-table scroll affordance (RENDERED_UI_FORENSIC_AUDI
   it('never throws when the scroll container has no measurable width (jsdom has no real layout)', () => {
     const data = [{ a: 1, b: 2 }];
     expect(() => mount(<TableBlock slotName="x" data={data} />)).not.toThrow();
+  });
+});
+
+describe('T93 — a demoted field moves, it does not disappear (Phase 5E, R75)', () => {
+  // THE WHOLE CORPUS, not a fixture. The rule in tableColumns.js decides which fields stop being
+  // columns; this asserts the other half of R75 — that every one of them is still READ somewhere on
+  // the page, attached to the row it belongs to. A fixture cannot prove that, because the fields
+  // this rule demotes are exactly the irregular ones a hand-written fixture would not think to
+  // carry.
+  const at = (o, p) => p.split('.').reduce((a, k) => (a == null ? undefined : a[k]), o);
+  const TABLES = [];
+  for (const d of dataset) {
+    for (const [slot, spec] of Object.entries(SLOT_VOCABULARY)) {
+      if (spec.blockType !== 'table') continue;
+      const rows = at(d, spec.binding);
+      if (Array.isArray(rows) && rows.length > 0 && splitColumns(rows, isHiddenKey).detail.length > 0) {
+        TABLES.push({ id: d.proposal_id, slot, rows });
+      }
+    }
+  }
+
+  it('measures every table the rule actually fires on', () => {
+    expect(TABLES.length, 'the rule fires on nothing — this test would pass vacuously').toBeGreaterThan(5);
+  });
+
+  it('every demoted value that can be displayed at all is on the page, under its own label', () => {
+    const missing = [];
+    for (const t of TABLES) {
+      const { detail } = splitColumns(t.rows, isHiddenKey);
+      const text = mount(<TableBlock slotName={t.slot} data={t.rows} />).textContent;
+      for (const row of t.rows) {
+        for (const key of detail) {
+          const shown = flattenDisplayValue(row[key]);
+          if (shown === '' || shown === undefined || shown === null) continue;
+          if (!text.includes(shown)) missing.push(`${t.id} · ${t.slot}: "${key}" = ${JSON.stringify(shown.slice(0, 40))}`);
+        }
+      }
+    }
+    expect(missing, 'a value left the columns and did not arrive anywhere').toEqual([]);
+  });
+
+  it('records every field NO table can display, so they are not mistaken for this rule\'s doing', () => {
+    // R75 ACCOUNTING, measured by rendering all 105 objects before and after the change and diffing
+    // the rendered text as multisets. 450 strings left the page and NONE of them was data:
+    //
+    //   426  the missing-value marker — "—" and its sr-only "No value" — on cells that no longer
+    //        exist. Removing them is the entire point of the rule.
+    //    24  COLUMN HEADERS, listed below. Every one labelled a column that rendered "—" on EVERY
+    //        row, before this change and after it.
+    //
+    // 55 strings were gained: the detail line's own labels. Nothing else moved — T13's four pinned
+    // pane baselines did not change by a character.
+    //
+    // Their values are arrays of objects ([{sku, qty}], [{label}], [{name, initials}],
+    // [{title, chip, detail}]) and flattenDisplayValue returns '' for a plain object it does not
+    // recognise — so "A. Castellanos · Ops" and "Fix in PIM, regenerate feed" were never on the
+    // page at any point in this project's history. What was removed is a label over nothing, which
+    // is the same noise as the dashes beneath it. Nothing an operator could read has moved except
+    // into a detail line, which the test above asserts for every demoted value in the corpus.
+    //
+    // THE UNRENDERED DATA IS A REAL GAP AND IT IS NOT THIS PHASE'S. nestedEntryText.js already
+    // reads exactly these shapes, so the detail line COULD print them — and that would put text on
+    // the page that has never been there, which is a functional change. R74 lifted I5 for column
+    // selection and nothing else. Recorded here for the ledger rather than quietly fixed, and the
+    // list is pinned so it cannot grow unnoticed.
+    //
+    // A SECOND, SEPARATE FINDING, recorded for the same ledger. Three columns are hollow on screen
+    // and are NOT in this list, because their emptiness is in the data rather than in the renderer:
+    // prop_s9_9_execute's plan.st is the literal string "—" on all 9 rows, prop_s9_4_decide's
+    // coverStr on 3 of 5, prop_s9_12_execute's ledger.hash on 3 of 4. They still render as columns,
+    // deliberately. Demoting them would take a rule that reads a cell's text and decides it means
+    // nothing — a content classifier in the layout layer, which is the defect class this project
+    // has removed four times (R72). The corpus writing "no value" as a dash is the corpus's to fix.
+    const unreadable = [];
+    for (const t of TABLES) {
+      for (const key of splitColumns(t.rows, isHiddenKey).detail) {
+        const carried = t.rows.filter((r) => r?.[key] !== undefined && r?.[key] !== null && r?.[key] !== '');
+        if (carried.length > 0 && carried.every((r) => flattenDisplayValue(r[key]) === '')) {
+          unreadable.push(`${t.id} · ${t.slot}: ${key}`);
+        }
+      }
+    }
+    expect(unreadable.sort()).toEqual([
+      'prop_s10_1_decide · slate: bandOptions',
+      'prop_s10_1_decide · slate: cards',
+      'prop_s10_1_decide · slate: people',
+      'prop_s10_2_decide · slate: sizes',
+      'prop_s10_2_execute · plan: items',
+      'prop_s10_3_execute · plan: items',
+      'prop_s10_4_execute · plan: items',
+      'prop_s10_5_decide · slate: options',
+      'prop_s10_5_execute · plan: items',
+      'prop_s10_6_execute · plan: items',
+      'prop_s9_10_decide · slate: sponsors',
+      'prop_s9_11_execute · plan: diff',
+      'prop_s9_14_decide · slate: options',
+      'prop_s9_16_execute · plan: items',
+      'prop_s9_17_decide · slate: candidates',
+      'prop_s9_17_decide · slate: trade',
+      'prop_s9_18_execute · plan: items',
+      'prop_s9_19_decide · slate: channels',
+      'prop_s9_19_execute · plan: items',
+      'prop_s9_20_execute · plan: items',
+      'prop_s9_2_decide · slate: lines',
+      'prop_s9_3_decide · slate: options',
+      'prop_s9_9_decide · slate: ladder',
+      'prop_s9_9_decide · slate: options',
+    ]);
   });
 });

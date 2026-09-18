@@ -16,7 +16,7 @@
 // layout engine — every clientHeight there is 0. Phase 5C's T62 is the cautionary tale: it asserted
 // that each region's className contained `overflow-y-auto`, which was true while scrolling was
 // completely broken, because `overflow-y: auto` on an element with an unconstrained height grows
-// instead of scrolling. A property is not a behaviour. So T73/T75/T76/T78 measure, in real Chrome,
+// instead of scrolling. A property is not a behaviour. So T73/T75/T76/T78/T93 measure, in real Chrome,
 // at both supported widths, and they FAIL the run — ruling R65: a browser check that reports
 // without failing is the vacuous pass in a new costume.
 //
@@ -207,7 +207,7 @@ function renderInChrome(url) {
 }
 
 
-// ---- THE LAYOUT GATE (Phase 5D: T73, T75, T76, T78) ---------------------------------------------
+// ---- THE LAYOUT GATE (Phase 5D: T73, T75, T76, T78 · Phase 5E: T93) -----------------------------
 //
 // A real browser, driven over the DevTools Protocol, at both supported widths. No dependency is
 // added: Chrome is already spawned above, and Node has a global WebSocket.
@@ -283,10 +283,11 @@ async function layoutSession(fn) {
  * T75 — no rendered text is horizontally clipped.
  * T76 — any remaining truncation carries a reachable affordance.
  * T78 — a packed row's two cards are equal height (the ruled vertical contract).
+ * T93 — a table's columns are attributes its records SHARE, measured in the rendered DOM.
  */
 const LAYOUT_PROBE = `
 (() => {
-  const report = { scroll: [], clipped: [], unreachable: [], packed: [] };
+  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null };
 
   // --- T73: a region either fits, or it scrolls. It must never overflow its own track silently.
   const grid = document.querySelector('[data-scroll-region="main"]')?.parentElement;
@@ -326,6 +327,53 @@ const LAYOUT_PROBE = `
                     cls: (el.className || '').toString().slice(0, 60) };
     report.clipped.push(entry);
     if (!el.getAttribute('title') && !el.closest('[title]')) report.unreachable.push(entry);
+  }
+
+  // --- T93: no column is mostly empty (Phase 5E, R74).
+  // THE DEFECT'S SIGNATURE, not its symptom. S10.1/decide's slate unioned four records into fifteen
+  // columns; eight of them read "—" on nearly every row, the Body column got 106px, and a
+  // 213-character paragraph wrapped over FORTY-FOUR lines. Measured here, in Chrome, at both widths.
+  //
+  // Why this and not "no cell wraps past N lines": that threshold would have to be set above
+  // S9.17/decide, whose sixteen columns are each filled on every row and whose worst cell still
+  // wraps 25 lines. Its records genuinely carry that much, and narrowing it is Phase 6's question
+  // (the reference renders those as stacked cards). A line-count gate would either fail on work this
+  // phase is not allowed to do, or be tuned until it only fired on one screen — which is the
+  // layout-lever failure R75 names. What IS always wrong, at any width and any column count, is
+  // spending a column on a field the records mostly lack.
+  for (const table of document.querySelectorAll('[data-scroll-region] table')) {
+    const slot = table.closest('[data-block-slot]');
+    const name = slot ? slot.getAttribute('data-block-slot') : '(none)';
+    const heads = [...table.querySelectorAll('thead th')].map((th) => (th.textContent || '').trim());
+    // The detail line is a colSpan row carrying the demoted fields; it is not a record.
+    const rows = [...table.querySelectorAll('tbody tr')].filter((tr) => !tr.querySelector('td[colspan]'));
+    if (rows.length === 0) continue;
+    const host = table.parentElement;
+    const w = Math.round(table.getBoundingClientRect().width);
+    if (!report.widest || w > report.widest.w) {
+      report.widest = { slot: name, w, hostW: host.clientWidth, cols: heads.length };
+    }
+    for (let c = 0; c < heads.length; c += 1) {
+      const head = heads[c];
+      if (head === '' || head === 'Select') continue;
+      // THE MISSING-VALUE AFFORDANCE, not the em dash glyph. Three columns in this corpus carry
+      // "—" as their literal DATA (prop_s9_9_execute's plan.st on all 9 rows, prop_s9_4_decide's
+      // coverStr on 3 of 5, prop_s9_12_execute's ledger.hash on 3 of 4). A glyph check called those
+      // empty, and the only way to act on it would be a rule that reads a cell's text and decides
+      // it means nothing — a content classifier in the layout layer, which is the defect class this
+      // project has removed four times already (R72). So the probe asks what the CELL decided:
+      // TableBlock pairs its dash with an sr-only "No value", and a real value never carries one.
+      // That the corpus writes "no value" as a dash is a corpus finding, recorded, not repaired
+      // here.
+      const blank = rows.filter((tr) => {
+        const cell = tr.children[c];
+        if (!cell) return false;
+        return [...cell.querySelectorAll('span')].some((el) => (el.textContent || '').trim() === 'No value');
+      }).length;
+      if (blank / rows.length > 0.5) {
+        report.hollow.push({ slot: name, head, blank, rows: rows.length });
+      }
+    }
   }
 
   // --- T78: the packed row's two cards are the same height.
@@ -381,6 +429,11 @@ async function runLayoutGate(base) {
         // T76 (a clipped value with no title is unreachable; reported separately so the cause is clear)
         for (const c of r.unreachable) {
           failures.push(`T76 ${where}: "${c.slot}" truncates with no affordance — ${JSON.stringify(c.text)}`)
+        }
+        // T93
+        for (const h of r.hollow) {
+          failures.push(`T93 ${where}: "${h.slot}" spends a column on "${h.head}", which is empty on ` +
+            `${h.blank} of ${h.rows} rows — a union artefact, not a shared attribute`)
         }
         // T78
         for (const row of r.packed) {

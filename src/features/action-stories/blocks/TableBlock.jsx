@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { Fragment, useState, useRef, useEffect, useCallback } from 'react';
 import Checkbox from '../ui/Checkbox';
 import { humanizeSlotName } from './humanizeSlotName';
 import { flattenDisplayValue } from './flattenDisplayValue';
@@ -6,6 +6,7 @@ import { deltaTone } from './deltaTone';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey as isHiddenColumn } from './decorativeKeys';
+import { splitColumns, isControlColumn } from './tableColumns';
 import { cellText } from './cellText';
 
 function isPlainObject(v) {
@@ -23,18 +24,10 @@ function isNumericValue(v) {
 // `HIDDEN_COLUMN_KEYS = new Set(['__raw'])` — replaced with the shared, generic `isHiddenKey` so a
 // second internal field introduced later doesn't need its own new hardcoded entry in a fourth place.
 
-/** A nested small array of `{label, ...}` options — the same generic shape
- * extraction/classifyBlocks.js's isNestedControlColumn detects at classification time, re-checked
- * here at render time (no manifest field carries this — TableBlock works it out from the row data
- * it already has, the same way every other column-shape decision here already does). */
-function isNestedControlColumn(value) {
-  return (
-    Array.isArray(value) &&
-    value.length >= 2 &&
-    value.length <= 6 &&
-    value.every((opt) => isPlainObject(opt) && typeof opt.label === 'string' && opt.label.trim() !== '')
-  );
-}
+// `isNestedControlColumn` now lives in tableColumns.js — the same generic shape
+// extraction/classifyBlocks.js detects at classification time, re-checked at render time (no
+// manifest field carries this). It moved because the column RULE has to ask the same question the
+// cell asks: a column whose every cell would render "—" is not a column. Phase 5E, R74.
 
 /** A row-level segmented control (S9.11/decide.slate's own `modes`: Roll/Test) — options and their
  * labels come entirely from the row's own data, never hardcoded. Purely local UI state: which
@@ -156,26 +149,20 @@ export default function TableBlock({ slotName, data, compact, selectable = false
     return <ErrorState slotName={slotName} message="expected rows of objects" />;
   }
 
-  // Columns are the union of every row's own keys, not just row 0's — the manifest only ever
-  // classifies a uniform-shaped array as `table` in the first place (see
-  // extraction/classifyBlocks.js), so in practice every row shares the same set; unioning instead
-  // of reading row 0 alone is just a defensive guard against a row that turns out to carry an
-  // extra key none of the others do (that key would otherwise silently vanish for every row, not
-  // just its own — see extraction/audit.js's A.3 "classified-but-incomplete" check).
-  const columnOrder = [];
-  const seen = new Set();
-  for (const row of allRows) {
-    for (const key of Object.keys(row)) {
-      if (seen.has(key) || isHiddenColumn(key)) continue;
-      seen.add(key);
-      columnOrder.push(key);
-    }
-  }
-  const columns = columnOrder;
+  // COLUMNS ARE THE FIELDS THE RECORDS SHARE — see tableColumns.js for the rule and the corpus
+  // measurement behind its threshold (ruling R74/R75).
+  //
+  // This WAS the union of every row's keys, on the reasoning that the classifier only ever types a
+  // uniform-shaped array as `table` so the union would equal row 0's keys anyway. That premise was
+  // false for 29 of the corpus's 116 tables: prop_s10_1_decide's slate carries 4-7 fields per
+  // record and unioned to fifteen columns in an 834px region, wrapping a 213-character paragraph
+  // over forty-four lines. A field a minority of rows carry now moves to that row's detail line
+  // rather than becoming a column of dashes — it moves, it is never dropped (R75).
+  const { columns, detail: detailKeys } = splitColumns(allRows, isHiddenColumn);
 
   // A nested-control column (S9.11/decide.slate's own `modes`) is never sortable/flattened to text
   // like an ordinary cell — tracked separately so the header/cell rendering below can special-case it.
-  const controlColumns = new Set(columns.filter((col) => allRows.every((row) => isNestedControlColumn(row[col]))));
+  const controlColumns = new Set(columns.filter((col) => isControlColumn(allRows, col)));
 
   const isLarge = allRows.length > LARGE_TABLE_ROW_THRESHOLD;
 
@@ -271,53 +258,91 @@ export default function TableBlock({ slotName, data, compact, selectable = false
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, i) => (
-              <tr key={i} className="border-b border-rf-border-subtle last:border-0 hover:bg-rf-surface-sunken">
-                {selectable && (
-                  <td className="px-3 py-2 align-middle">
-                    <Checkbox
-                      checked={selectedSet.has(idOf(row, i))}
-                      onChange={() => onToggleRow?.(idOf(row, i))}
-                      label={`Select row ${i + 1}`}
-                      hideLabel
-                    />
-                  </td>
-                )}
-                {columns.map((col) => {
-                  const value = row[col];
-                  if (controlColumns.has(col)) {
-                    return (
-                      <td key={col} className="px-4 py-2 text-[12px]">
-                        <RowControl options={value} />
+            {rows.map((row, i) => {
+              // The fields this record carries that are not columns. Rendered beneath its own row,
+              // so every value that used to sit in a column of dashes is still on the page and
+              // still attached to the row it belongs to.
+              const detail = detailKeys
+                .map((key) => [key, flattenDisplayValue(row[key]), isNumericValue(row[key]), deltaTone(row[key])])
+                .filter(([, text]) => text !== '' && text !== undefined && text !== null);
+              return (
+                <Fragment key={i}>
+                  <tr className="border-b border-rf-border-subtle last:border-0 hover:bg-rf-surface-sunken">
+                    {selectable && (
+                      <td className="px-3 py-2 align-middle">
+                        <Checkbox
+                          checked={selectedSet.has(idOf(row, i))}
+                          onChange={() => onToggleRow?.(idOf(row, i))}
+                          label={`Select row ${i + 1}`}
+                          hideLabel
+                        />
                       </td>
-                    );
-                  }
-                  const numeric = isNumericValue(value);
-                  const text = flattenDisplayValue(value);
-                  const isMissing = value === null || value === undefined || text === '';
-                  // Colored from the cell's OWN sign/wording only (deltaTone) — a real API has no
-                  // reason to send a column-level color, but it will keep sending signed deltas
-                  // ("+3%", "−$450") the same way these fixtures already do. See deltaTone.js.
-                  const tone = !isMissing ? deltaTone(value) : null;
-                  // A numeric cell is a FIGURE and a textual one is PROSE — the column's role, not
-                  // this block's opinion, and the two rules come from the one module (cellText.js).
-                  // `max-w-xs truncate` used to sit on the textual branch: it cut 538 cells across
-                  // 52 objects, some by nearly 300px, with a `title` only past an arbitrary 24
-                  // characters. Prose wraps now, so there is nothing left to reach for.
-                  return (
-                    <td
-                      key={col}
-                      {...cellText(numeric ? 'figure' : 'prose', text, `px-4 py-2 text-[12px] ${
-                        isMissing ? 'text-rf-text-disabled' : tone ? tone.text : 'text-rf-text-primary'
-                      } ${numeric ? 'text-right font-mono tabular-nums' : 'text-left'}`)}
-                    >
-                      {isMissing ? <span aria-hidden="true">—</span> : text}
-                      {isMissing && <span className="sr-only">No value</span>}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
+                    )}
+                    {columns.map((col) => {
+                      const value = row[col];
+                      if (controlColumns.has(col)) {
+                        return (
+                          <td key={col} className="px-4 py-2 text-[12px]">
+                            <RowControl options={value} />
+                          </td>
+                        );
+                      }
+                      const numeric = isNumericValue(value);
+                      const text = flattenDisplayValue(value);
+                      const isMissing = value === null || value === undefined || text === '';
+                      // Colored from the cell's OWN sign/wording only (deltaTone) — a real API has no
+                      // reason to send a column-level color, but it will keep sending signed deltas
+                      // ("+3%", "−$450") the same way these fixtures already do. See deltaTone.js.
+                      const tone = !isMissing ? deltaTone(value) : null;
+                      // A numeric cell is a FIGURE and a textual one is PROSE — the column's role, not
+                      // this block's opinion, and the two rules come from the one module (cellText.js).
+                      // `max-w-xs truncate` used to sit on the textual branch: it cut 538 cells across
+                      // 52 objects, some by nearly 300px, with a `title` only past an arbitrary 24
+                      // characters. Prose wraps now, so there is nothing left to reach for.
+                      return (
+                        <td
+                          key={col}
+                          {...cellText(numeric ? 'figure' : 'prose', text, `px-4 py-2 text-[12px] ${
+                            isMissing ? 'text-rf-text-disabled' : tone ? tone.text : 'text-rf-text-primary'
+                          } ${numeric ? 'text-right font-mono tabular-nums' : 'text-left'}`)}
+                        >
+                          {isMissing ? <span aria-hidden="true">—</span> : text}
+                          {isMissing && <span className="sr-only">No value</span>}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                  {detail.length > 0 && (
+                    <tr className="border-b border-rf-border-subtle last:border-0">
+                      <td colSpan={columns.length + (selectable ? 1 : 0)} className="px-4 pb-2 pt-0">
+                        <div className="flex flex-wrap gap-x-4 gap-y-1">
+                          {detail.map(([key, text, numeric, tone]) => (
+                            <span key={key} className="text-[11px] text-rf-text-secondary">
+                              <span className="text-rf-text-tertiary">{humanizeSlotName(key)}:</span>{' '}
+                              {/* A FIGURE KEEPS THE COLOUR ITS OWN SIGN GIVES IT wherever it lands.
+                                  This line changes a value's POSITION, not its meaning, and S10.1's
+                                  "−$2,210 / day" reading neutral grey purely because it moved would
+                                  be the move losing information. Same module as the cell (deltaTone,
+                                  5B), and figures only — the extra classes go through cellText's own
+                                  third argument so the wrap rule and its affordance are not lost. */}
+                              <span
+                                {...cellText(
+                                  numeric ? 'figure' : 'prose',
+                                  text,
+                                  numeric ? `font-mono tabular-nums ${tone ? tone.text : ''}` : '',
+                                )}
+                              >
+                                {text}
+                              </span>
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
           </tbody>
         </table>
         </div>
