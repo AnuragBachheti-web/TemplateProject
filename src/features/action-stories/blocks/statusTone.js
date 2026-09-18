@@ -77,3 +77,30 @@ const CHECK_STATUS_TONE = {
 export function checkStatusTone(status) {
   return CHECK_STATUS_TONE[status] ?? CHECK_STATUS_TONE.info
 }
+
+/**
+ * A MEASURED VALUE AGAINST ITS OWN LIMIT — over, or within.
+ *
+ * MOVED HERE IN PHASE 5B (ruling R73), from inside GaugeBlock, and the move is a correctness fix
+ * rather than tidying. "Over its limit" is a semantic word, and GaugeBlock was turning it into
+ * `rf-status-critical` / `rf-status-success` with two inline ternaries — a semantic word becoming a
+ * token outside this module, which is exactly what I3 forbids and what T32 exists to catch. It was
+ * already shipping; T32 did not see it because it looks for PALETTE literals, and these were
+ * correctly-named design tokens sitting in the wrong file.
+ *
+ * `over` is critical because a value past its own ceiling is what stops a decision. Within-limit is
+ * deliberately NOT `success`-coloured on the figure — a figure inside its bounds is unremarkable,
+ * and colouring every compliant number green makes the one that is not compliant harder to find.
+ * Only the bar carries the positive tone, because a bar is a magnitude and needs a fill.
+ *
+ * @param {boolean} isOver
+ * @returns {{text: string, fill: string, label: string}}
+ */
+const LIMIT_TONE = {
+  over: { text: 'text-rf-status-critical', fill: 'bg-rf-status-critical', label: 'Over limit' },
+  within: { text: 'text-rf-text-primary', fill: 'bg-rf-status-success', label: 'Within limit' },
+}
+
+export function limitTone(isOver) {
+  return isOver ? LIMIT_TONE.over : LIMIT_TONE.within
+}

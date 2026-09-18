@@ -4,6 +4,7 @@ import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import Tooltip from '../ui/Tooltip';
 import { formatValue } from './formatValue';
+import { limitTone } from './statusTone';
 import { cellText } from './cellText';
 
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
@@ -62,17 +63,20 @@ export default function GaugeBlock({ slotName, data, compact }) {
         const fillPct = Math.min(100, Math.max(0, (row.magnitude.value / scaleMax) * 100));
         const thresholdPct = Math.min(100, Math.max(0, (row.threshold.value / scaleMax) * 100));
         const over = row.magnitude.value > row.threshold.value;
+        // The tone comes from statusTone, not from here (R73). "Over its limit" is a semantic word,
+        // and this block used to turn it into `rf-status-*` itself with two inline ternaries.
+        const tone = limitTone(over);
         return (
           <div key={i} className="min-w-0">
             <div className="mb-1 flex items-baseline justify-between gap-2 text-[11.5px]">
               <span {...cellText('identifier', row.label, 'text-rf-text-secondary')}>{row.label}</span>
-              <span className={`shrink-0 font-mono font-semibold tabular-nums ${over ? 'text-rf-status-critical' : 'text-rf-text-primary'}`}>
+              <span className={`shrink-0 font-mono font-semibold tabular-nums ${tone.text}`}>
                 {row.magnitude.display === undefined ? null : formatValue(row.magnitude.display)}
               </span>
             </div>
             <div className="relative h-1.5 w-full rounded-full bg-rf-surface-sunken">
               <div
-                className={`h-full rounded-full transition-[width] duration-200 ${over ? 'bg-rf-status-critical' : 'bg-rf-status-success'}`}
+                className={`h-full rounded-full transition-[width] duration-200 ${tone.fill}`}
                 style={{ width: `${fillPct}%` }}
               />
               {/* Previously an `aria-hidden` tick with the actual threshold value stashed in a

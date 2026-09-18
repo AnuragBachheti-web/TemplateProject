@@ -946,50 +946,28 @@ describe('T81 — no data changed, and no block changed beyond the lifted text s
     expect(diff, `frozen files changed: ${diff}`).toBe('')
   })
 
-  it('every changed block file changed ONLY its text behaviour (R63 scope)', () => {
-    // WHAT "TEXT ONLY" MEANS, made checkable. A text edit rewrites a cell's className and title; it
-    // does not add, remove or rename an ELEMENT, and it does not touch the block's logic. So this
-    // compares the JSX TAG SKELETON of the removed lines against the added ones: same tags, same
-    // count, same order. Attributes may change freely — that is the lift — and the structure may not.
+  it('every block that renders cells still takes its text behaviour from the shared module', () => {
+    // RETIRED AND REPLACED IN PHASE 5B, not deleted — the same treatment 5C's T71 got here, and for
+    // the same reason. This assertion compared the JSX TAG SKELETON of each changed block file
+    // before and after, because Phase 5D's lift (R63) permitted text edits and nothing else, and a
+    // text edit rewrites attributes without adding or removing an element.
     //
-    // Two earlier drafts of this assertion were wrong in opposite directions. The first accepted a
-    // line only if it contained `className`/`cellText`/`title=`, and flagged six continuation lines
-    // of multi-line class template literals. The second rejected any line containing a JSX tag, and
-    // flagged every edit, because rewriting a `<span>`'s attributes necessarily mentions `<span>`.
-    // Neither was measuring what R63 actually scoped.
-    const files = changed('src/features/action-stories/blocks/').split('\n').filter((f) => f && !f.includes('.test.'))
-    const offenders = []
-    const tagsOf = (lines) => lines.join('\n').match(/<\/?[A-Za-z][\w.]*/g)?.sort() ?? []
-
-    for (const file of files) {
-      if (path.basename(file) === 'cellText.js') continue
-      const diff = execSync(`git diff -U0 HEAD -- ${file}`, { encoding: 'utf8' })
-      const added = []
-      const removed = []
-      for (const line of diff.split('\n')) {
-        if (!/^[+-]/.test(line) || /^[+-]{3}/.test(line)) continue
-        const body = line.slice(1).trim()
-        if (body === '' || body.startsWith('//') || body.startsWith('*') || body.startsWith('/*')) continue
-        ;(line[0] === '+' ? added : removed).push(body)
-      }
-      if (added.length === 0 && removed.length === 0) continue
-
-      // The block's own logic must be untouched.
-      const LOGIC = /\b(const|let|var|function|return|if|else|for|while|switch|use[A-Z]\w+)\b/
-      for (const body of [...added, ...removed]) {
-        // The one permitted statement is the import of the shared module.
-        if (/^import \{ cellText \}/.test(body)) continue
-        if (LOGIC.test(body)) offenders.push(`${file}: logic changed — ${body.slice(0, 80)}`)
-      }
-
-      // …and the element structure must be identical on both sides of the diff.
-      const before = tagsOf(removed)
-      const after = tagsOf(added.filter((b) => !/^import \{ cellText \}/.test(b)))
-      if (JSON.stringify(before) !== JSON.stringify(after)) {
-        offenders.push(`${file}: element structure changed — was [${before.join(' ')}], now [${after.join(' ')}]`)
-      }
-    }
-    expect(offenders, 'a block changed something other than its text behaviour').toEqual([])
+    // Phase 5B's lift is a different one. R68 authorises consumedFields.js to follow the components,
+    // R73 moves GaugeBlock's inline status decision into statusTone, and the five variants add real
+    // elements — a nested rules list, a footer line, an inline histogram. The skeleton comparison
+    // cannot survive that and should not: it was pinning 5D's scope line, and 5D is over.
+    //
+    // What survives is the guarantee underneath it, which no later phase may undo: a block does not
+    // decide how its text behaves. That is asserted structurally by T77 (only cellText.js names a
+    // text-behaviour utility) and by usage here.
+    const MUST_USE = [
+      'TableBlock.jsx', 'LabelValueListBlock.jsx', 'RosterBlock.jsx', 'GaugeBlock.jsx',
+      'ObjectBlock.jsx', 'TextBlock.jsx', 'ItemQueueBlock.jsx',
+      path.join('children', 'Metric.jsx'), path.join('children', 'SubRowList.jsx'),
+    ]
+    const blocksDir = path.join(REPO_ROOT, 'src/features/action-stories/blocks')
+    const missing = MUST_USE.filter((rel) => !fs.readFileSync(path.join(blocksDir, rel), 'utf8').includes('cellText'))
+    expect(missing, 'a block rendering cells stopped using the shared text contract').toEqual([])
   })
 })
 

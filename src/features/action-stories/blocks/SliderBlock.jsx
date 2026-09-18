@@ -43,7 +43,14 @@ export default function SliderBlock({ slotName, data, onChange }) {
     <BlockCard padding="compact">
       <BlockTitle>{label}</BlockTitle>
       <p className="mt-1 flex items-baseline gap-2">
-        <span className="text-[24px] font-bold text-emerald-600">
+        {/* PHASE 5B (R70). Was `text-emerald-600`, exempted by R25 as "an UNUSED blockType; no
+            canonical slot targets it". 5A's R50 wired `threshold_control` to this block, so it
+            renders on S9.12/decide and that justification expired — an exemption whose stated
+            reason is false reads as reviewed when it is stale.
+            `rf-text-primary`, not a status token: a threshold control's current position is a
+            FIGURE, not a verdict, and green in this design system means success. This is the one
+            deliberate visual change in the tone commit, and it is reported as such. */}
+        <span className="text-[24px] font-bold text-rf-text-primary">
           {data.value === undefined || data.value === null ? null : formatValue(data.value)}
           {unit}
         </span>
@@ -59,7 +66,7 @@ export default function SliderBlock({ slotName, data, onChange }) {
         onChange={(event) => onChange?.(Number(event.target.value))}
         aria-label={label}
         aria-valuetext={`${formatValue(data.value)}${unit}`}
-        className="mt-3 w-full accent-emerald-600"
+        className="mt-3 w-full accent-rf-brand-indicator"
       />
 
       <div className="mt-1 flex items-center justify-between text-[10.5px] text-rf-text-tertiary">
