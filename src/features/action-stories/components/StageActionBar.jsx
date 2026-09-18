@@ -16,6 +16,7 @@ import { useToast } from '../ui/Toast';
 import Alert from '../ui/Alert';
 
 import { typeRole } from '../blocks/typeRole';
+import { glyph } from '../blocks/glyphSize';
 /**
  * The generic, template-driven action bar — unchanged in design, retargeted at the Decision Object.
  *
@@ -273,7 +274,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           {...typeRole('heading', 'ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-text-primary px-4 text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Continue to <span className="capitalize">{next}</span>
-          <i className="fa-solid fa-arrow-right text-[11px]" aria-hidden="true" />
+          <i className={`fa-solid fa-arrow-right ${glyph(11)}`} aria-hidden="true" />
         </Link>
       )}
 

@@ -215,13 +215,13 @@ describe('T13 — one object per template renders unchanged below the header', (
     // A slot leaving is a vocabulary shrinking, a slot arriving for an EXISTING block is a concept
     // finding its home, and a block type arriving unnoticed is the failure. Only the third would
     // change the array above.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(49)
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('decision_mode')
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('stage_status')
     expect(Object.keys(SLOT_VOCABULARY)).toContain('threshold_control')
   })
 
-  it('every template lost EXACTLY the mode block, and nothing else', async () => {
+  it('every template lost EXACTLY the blocks each phase removed, and nothing else', async () => {
     // WAS "no template gained or lost a block slot this phase", which was Phase 2's constraint and
     // is not Phase 4 Part 2's: defect (a) is a block removal. Restated as the tighter claim — each
     // of the four stage templates is down exactly one, locked.v1 is untouched, and the count is
@@ -241,16 +241,21 @@ describe('T13 — one object per template renders unchanged below the header', (
     // is a guardrail. It is `when`-gated on `proposal.threshold_control`, which exactly one object in
     // the corpus carries, so the other 25 decide screens render exactly as before. The other four
     // templates are untouched by this phase.
+    // PHASE 5E PART 2 DELTA (R91): `decision_lens` leaves reason/analyze/decide. execute never
+    // carried it, which is the part that makes this a clearer removal than the two before it — the
+    // rail row was a SECOND rendering of the lens on three stages and NO rendering of it on the
+    // fourth. The accent on the pane eyebrow is now the one place, on all four.
     expect(counts).toEqual({
-      'reason.v1': 9,             // 11 -> 10 (Phase 4) -> 9 (5C)
-      'analyze.compare.v1': 13,   // 15 -> 14 (Phase 4) -> 13 (5C)
-      'decide.slate.v1': 18,      // 19 -> 18 (Phase 4) -> 19 (5A) -> 18 (5C)
-      'execute.bridge.v1': 13,    // 15 -> 14 (Phase 4) -> 13 (5C)
+      'reason.v1': 8,             // 11 -> 10 (Phase 4) -> 9 (5C) -> 8 (5E Part 2)
+      'analyze.compare.v1': 12,   // 15 -> 14 (Phase 4) -> 13 (5C) -> 12 (5E Part 2)
+      'decide.slate.v1': 17,      // 19 -> 18 (Phase 4) -> 19 (5A) -> 18 (5C) -> 17 (5E Part 2)
+      'execute.bridge.v1': 13,    // 15 -> 14 (Phase 4) -> 13 (5C) — untouched this phase
       'locked.v1': 3,             // unchanged — it declares no rail at all
     })
     for (const id of ['reason.v1', 'analyze.compare.v1', 'decide.slate.v1', 'execute.bridge.v1']) {
       const template = (await import(`./templates/${id}.json`)).default
       expect(template.blocks.map((b) => b.slotName), id).not.toContain('decision_mode')
+      expect(template.blocks.map((b) => b.slotName), id).not.toContain('decision_lens')
     }
   })
 })

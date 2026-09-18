@@ -2,6 +2,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { actionStoryPath } from '@/constants/actionStoriesRoutes';
 
 import { typeRole } from '../blocks/typeRole';
+import { glyph } from '../blocks/glyphSize';
 const STAGE_LABELS = {
   reason: 'Reason',
   analyze: 'Analyze',
@@ -53,7 +54,7 @@ export default function StepTracker({ code, stages, activeStageKey }) {
                   aria-hidden="true"
                   className={`${typeRole('micro').className} grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full ${ isActive ? 'bg-rf-brand-blue-500 text-white' : isPast ? 'bg-rf-surface-raised text-rf-text-secondary' : 'bg-rf-surface-raised text-rf-text-tertiary' }`}
                 >
-                  {isPast ? <i className="fa-solid fa-check text-[9px]" /> : i + 1}
+                  {isPast ? <i className={`fa-solid fa-check ${glyph(9)}`} /> : i + 1}
                 </span>
                 <span className={`${typeRole('body').className} ${isActive ? ' text-rf-text-primary' : isPast ? ' text-rf-text-secondary' : ' text-rf-text-tertiary'}`}>
                   {STAGE_LABELS[stageKey] || stageKey}
@@ -73,7 +74,7 @@ export default function StepTracker({ code, stages, activeStageKey }) {
           {...typeRole('body', 'inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Next
-          <i className="fa-solid fa-arrow-right text-[10px]" aria-hidden="true" />
+          <i className={`fa-solid fa-arrow-right ${glyph(10)}`} aria-hidden="true" />
         </Link>
       )}
     </nav>

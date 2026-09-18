@@ -414,7 +414,7 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     }
   })
 
-  it('the slot vocabulary has 50 slots — Phase 4 and 5C each removed one, 5A added one (C3)', () => {
+  it('the slot vocabulary has 49 slots — three removals, one addition, nothing added quietly', () => {
     // 51 through Phase 3C. Phase 4 Part 2 removed `decision_mode` when the duplicate rail render of
     // the mode axis was deleted; the slot had no other consumer. Still nothing ADDED, which is what
     // this guard is for — the vocabulary may shrink when a concept turns out to be redundant, and
@@ -429,7 +429,11 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     // same argument as Phase 4 Part 2's `decision_mode` removal.
     // That is also why slot-targeted blockTypes moves 16 -> 17 while BLOCK_TYPES stays at 19: a
     // concept found a home in a block that was already there, which is the outcome I6 asks for.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    // PHASE 5E PART 2 DELTA: 50 -> 49. Ruling R91 removes `decision_lens` — the third slot deleted
+    // for stating a fact the pane already states elsewhere, and the clearest of the three: the rail
+    // row appeared on reason/analyze/decide and NOT on execute, so it was both a duplicate and an
+    // incomplete one. The lens is now the accent on the pane eyebrow, on every stage.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(49)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
     expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(17)
   })

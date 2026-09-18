@@ -8,6 +8,7 @@ import { useThemeStore } from '@/store/useThemeStore';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 
 import { typeRole } from '../blocks/typeRole';
+import { glyph } from '../blocks/glyphSize';
 const THEME_CYCLE = ['light', 'dark', 'system'];
 const THEME_ICON = { light: 'fa-sun', dark: 'fa-moon', system: 'fa-circle-half-stroke' };
 const THEME_LABEL = { light: 'Light', dark: 'Dark', system: 'System' };
@@ -25,7 +26,7 @@ function ThemeToggle() {
       aria-label={`Theme: ${THEME_LABEL[preference]}. Click to change.`}
       title={`Theme: ${THEME_LABEL[preference]}`}
     >
-      <i className={`fa-solid ${THEME_ICON[preference]} text-[12px]`} aria-hidden="true" />
+      <i className={`fa-solid ${THEME_ICON[preference]} ${glyph(12)}`} aria-hidden="true" />
     </button>
   );
 }
@@ -49,12 +50,12 @@ function TopBar({ onOpenNav }) {
         aria-label="Open workflow menu"
         className="rounded-md p-1.5 text-rf-text-secondary hover:bg-rf-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring lg:hidden"
       >
-        <i className="fa-solid fa-bars text-[14px]" aria-hidden="true" />
+        <i className={`fa-solid fa-bars ${glyph(14)}`} aria-hidden="true" />
       </button>
 
       <label className="relative flex min-w-0 max-w-md flex-1 items-center">
         <i
-          className="fa-solid fa-magnifying-glass pointer-events-none absolute left-3 text-[11px] text-rf-text-tertiary"
+          className={`fa-solid fa-magnifying-glass pointer-events-none absolute left-3 ${glyph(11)} text-rf-text-tertiary`}
           aria-hidden="true"
         />
         <input
@@ -74,13 +75,13 @@ function TopBar({ onOpenNav }) {
           aria-label="Notifications"
           className="grid h-8 w-8 place-items-center rounded-full text-rf-text-tertiary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
         >
-          <i className="fa-regular fa-bell text-[14px]" aria-hidden="true" />
+          <i className={`fa-regular fa-bell ${glyph(14)}`} aria-hidden="true" />
         </button>
         <span
           aria-hidden="true"
           className="grid h-8 w-8 place-items-center rounded-full bg-rf-surface-sunken text-rf-text-tertiary"
         >
-          <i className="fa-solid fa-user text-[13px]" aria-hidden="true" />
+          <i className={`fa-solid fa-user ${glyph(13)}`} aria-hidden="true" />
         </span>
       </span>
     </header>
@@ -230,14 +231,14 @@ export default function Shell() {
             href="#settings"
             {...typeRole('body', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
           >
-            <i className="fa-solid fa-gear w-3.5 text-center text-[11px] text-rf-text-tertiary" aria-hidden="true" />
+            <i className={`fa-solid fa-gear w-3.5 text-center ${glyph(11)} text-rf-text-tertiary`} aria-hidden="true" />
             Settings
           </a>
           <a
             href="#help"
             {...typeRole('body', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
           >
-            <i className="fa-regular fa-circle-question w-3.5 text-center text-[11px] text-rf-text-tertiary" aria-hidden="true" />
+            <i className={`fa-regular fa-circle-question w-3.5 text-center ${glyph(11)} text-rf-text-tertiary`} aria-hidden="true" />
             Help &amp; Support
           </a>
           <div className="mt-1 flex items-center gap-2 px-3 py-1.5">

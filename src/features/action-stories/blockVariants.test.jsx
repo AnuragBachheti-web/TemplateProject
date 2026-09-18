@@ -417,7 +417,7 @@ describe('T90 — no data changed, no new slot, no new blockType (I6/C1)', () =>
   })
 
   it('the slot vocabulary gained no slot and the registry gained no block', () => {
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(49)
     expect(BLOCK_TYPES).toHaveLength(19)
     expect(Object.keys(BLOCK_REGISTRY).sort()).toEqual(BLOCK_TYPES.slice().sort())
   })

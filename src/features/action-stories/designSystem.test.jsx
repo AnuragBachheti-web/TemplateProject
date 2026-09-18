@@ -37,11 +37,11 @@ function sourceFiles() {
   walk(AS)
   return out
 }
-// THE ONE FILE THAT MAY SPELL A SIZE, because it is the file that decides them. Exempting the
-// module that owns the scale is not a loophole in the rule — it is the rule: the sizes live in one
-// place, and this names that place.
-const OWNS_THE_SCALE = 'blocks/typeRole.js'
-const FILES = sourceFiles().filter((f) => !f.endsWith(OWNS_THE_SCALE))
+// THE TWO FILES THAT MAY SPELL A SIZE, because they are the files that decide them: typeRole.js
+// for text and glyphSize.js for icon glyphs. Exempting the modules that own the scales is not a
+// loophole in the rule — it is the rule: the sizes live in one place each, and this names them.
+const OWNS_THE_SCALE = ['blocks/typeRole.js', 'blocks/glyphSize.js']
+const FILES = sourceFiles().filter((f) => !OWNS_THE_SCALE.some((o) => f.endsWith(o)))
 const rel = (f) => path.relative(AS, f)
 
 /** Class-carrying code only — a rule quoted in a comment is documentation, not a literal. */
@@ -62,15 +62,14 @@ describe('T95 — the sizes and the palette live in the token layer, not in 38 f
     // (12.5, 11.5, 10.5, 9.5, 8.5) that exist for no stated reason. A size belongs to a ROLE; a
     // component asking for 10.5px is a component inventing a seventh role in private.
     //
-    // AN ICON IS EXEMPT, AND IT IS NOT A LOOPHOLE. `text-[7px]` on a Font Awesome glyph is setting
-    // the size of a GLYPH, not of text — the icon font just happens to be sized by font-size. The
-    // first sweep of this phase converted those sites to the `micro` role and grew a 7px chevron by
-    // 43%, which is how the exemption got noticed. The condition is narrow: the same class list must
-    // carry a real `fa-*` icon class.
+    // AN ICON GLYPH IS NOT TEXT, and it goes through glyphSize.js. This check used to exempt any
+    // LINE carrying a literal `fa-*` class — and that exemption silently failed on the two Alert
+    // and Toast icons whose class arrives through a variable (`t.icon`), which is how 58 tofu boxes
+    // reached the screen. A structural answer replaced the heuristic one: the bare form is banned
+    // everywhere, and an icon says `glyph(10)`, so nothing has to be inferred from a line's shape.
     const offenders = []
     for (const file of FILES) {
       for (const [n, line] of codeLines(fs.readFileSync(file, 'utf8'))) {
-        if (/\bfa-(?:solid|regular|brands|light)\b/.test(line)) continue
         for (const m of line.matchAll(/text-\[[0-9.]+px\]/g)) offenders.push(`${rel(file)}:${n} ${m[0]}`)
       }
     }

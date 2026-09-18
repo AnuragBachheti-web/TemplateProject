@@ -1,6 +1,7 @@
 import { useId } from 'react';
 
 import { typeRole } from '../blocks/typeRole';
+import { glyph } from '../blocks/glyphSize';
 // A REAL `<input type="checkbox">` under the hood (visually hidden via `sr-only`, never
 // `display:none` — a screen reader and the keyboard still need it), not a hand-rolled
 // `<div onClick>` — that gets you tabIndex, Space-to-toggle, and a screen reader announcing
@@ -46,7 +47,7 @@ export default function Checkbox({ checked = false, onChange, indeterminate = fa
         aria-hidden="true"
         className={`grid h-[18px] w-[18px] shrink-0 place-items-center rounded border transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-rf-brand-focus-ring ${boxTone}`}
       >
-        <i className={`fa-solid ${indeterminate && !checked ? 'fa-minus' : 'fa-check'} text-[10px]`} aria-hidden="true" />
+        <i className={`fa-solid ${indeterminate && !checked ? 'fa-minus' : 'fa-check'} ${glyph(10)}`} aria-hidden="true" />
       </span>
       {/* `hideLabel` keeps the accessible name without occupying layout — a selection checkbox in a
           table cell still needs a name for screen readers, but must not widen the column. */}

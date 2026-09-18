@@ -48,7 +48,18 @@ export const SLOT_VOCABULARY = Object.freeze({
   // required by the contract — what is gone is the second place it was rendered, and the slot that
   // existed to render it there. enumLabel.js keeps its `decision_mode` entry: that map is keyed by
   // concept, and the mode enum still needs a display label wherever it is shown.
-  decision_lens: { binding: 'lens', blockType: 'text', tier: 'core', note: 'Axis 6.' },
+  // decision_lens WAS HERE. Removed in Phase 5E Part 2 (ruling R91), for the third time and by the
+  // same argument as `decision_mode` in Phase 4 Part 2 and `stage_status` in 5C: one fact, one
+  // place. The lens is now drawn as the accent on the pane eyebrow (PaneEyebrow.jsx, blocks/
+  // lensAccent.js) on EVERY stage, including execute, which this slot never reached — so the rail
+  // row was both a second rendering and an incomplete one. Axis 6 is unchanged on the Decision
+  // Object and still required by the contract; enumLabel.js keeps its `lens` entry, because that
+  // map is keyed by concept and the enum still needs a display label wherever it is shown.
+  //
+  // THE ACCENT CARRIES IT VISUALLY, SO THE ACCENT CARRIES ITS LABEL. A colour says nothing to
+  // anyone who cannot see it, and the rail row is what used to say it in text. PaneEyebrow's
+  // sr-only "<lens> lens" is not decoration — it is the whole of the lens for a screen-reader user
+  // now, and it was already load-bearing on execute before this change.
   decision_persona: { binding: 'persona', blockType: 'text', tier: 'core', note: 'Axis 7. Consolidates the corpus\'s free-text `owner`.' },
   decision_contract_class: { binding: 'contract_class', blockType: 'text', tier: 'conditional', note: 'Axis 2. Rendered only for strategic/regulated.' },
   // stage_status WAS HERE. Removed in Phase 5C (ruling R60), for the same reason and by the same

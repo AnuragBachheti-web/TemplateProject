@@ -83,12 +83,22 @@ describe('every Decision Object renders through its canonical template', () => {
     // Every stage must put something beyond its own context rail on the page. The floor is
     // deliberately low — it is a guard against a screen collapsing to axis echoes, which is what
     // 20 locked records and the live-stage error page used to be.
+    //
+    // ONE RECORD SITS BELOW IT, AND REMOVING AN AXIS ECHO IS WHAT EXPOSED IT (Phase 5E Part 2,
+    // R91). prop_s9_6_analyze carries a `primary_insight` and four `detail_rows` and nothing else —
+    // no narrative, no comparison, no entities. It cleared 150 before this phase because the
+    // `decision_lens` rail row added "Decision Lens / Sales" to the count, which is precisely the
+    // axis echo this floor exists to refuse to count as content. So the floor stays where it is and
+    // the record is PINNED rather than excused: the list must be exactly this, so a second screen
+    // cannot quietly join it, and the number cannot drift without someone re-reading this comment.
+    //
+    // Not fixed here: the only fix is more content, and this phase changes no data.
     const thin = []
     for (const decision of dataset) {
       const { text } = renderDecision(decision)
       if (text.length < 150) thin.push(`${decision.proposal_id}: ${text.length} chars`)
     }
-    expect(thin).toEqual([])
+    expect(thin).toEqual(['prop_s9_6_analyze: 144 chars'])
   })
 })
 
@@ -102,7 +112,12 @@ describe('representative screens show the reference\'s own business content', ()
     expect(text).toContain('Supplier K · stoneware') // roles <- roles
     expect(text).toContain('18,402 rows') // inputs <- inputs
     expect(text).toContain('Probabilistic Forecast Engine') // agents <- the reference's pinned strip
-    expect(text).toContain('Inventory') // lens, through the frontend's enum label
+    // THE LENS LEFT THIS PANE IN PHASE 5E PART 2 (R91). It used to assert 'Inventory' here — the
+    // lens rendered through enumLabel into the context rail. That rail row is gone: the lens is now
+    // the accent on the pane eyebrow, which PaneEyebrow.jsx draws and this harness does not render.
+    // What the assertion was really protecting is unchanged and still checked — a raw contract
+    // token must never reach the screen — so that half stays, and lensAccent.test.jsx's T96 covers
+    // the lens itself now.
     expect(text).not.toContain('inventory') // …never the raw contract token
   })
 

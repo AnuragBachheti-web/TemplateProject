@@ -3,6 +3,7 @@ import { actionStoriesIndexPath } from '@/constants/actionStoriesRoutes';
 import { typeRole } from '../blocks/typeRole';
 import { lensAccent } from '../blocks/lensAccent';
 
+import { glyph } from '../blocks/glyphSize';
 /**
  * THE PANE EYEBROW — the breadcrumb line above a pane title, and THE ONLY PLACE A LENS IS DRAWN.
  *
@@ -27,9 +28,13 @@ export default function PaneEyebrow({ lens, storyCode, stage }) {
       <Link to={actionStoriesIndexPath()} className="transition-colors hover:text-rf-text-primary">
         Action Stories
       </Link>
-      <i {...typeRole('micro', 'fa-solid fa-chevron-right')} aria-hidden="true" />
+      {/* A TYPE ROLE MUST NEVER REACH AN ICON. `typeRole('micro')` carries `font-mono`, which wins
+          over Font Awesome's own family, so the glyph's codepoint is looked up in JetBrains Mono,
+          found missing, and drawn as .notdef — a tofu box. The size is a GLYPH size here, not a
+          type role; see T95's icon exemption and T101's gate. */}
+      <i className={`fa-solid fa-chevron-right ${glyph(7)}`} aria-hidden="true" />
       <span className="text-rf-text-secondary">{storyCode}</span>
-      <i {...typeRole('micro', 'fa-solid fa-chevron-right')} aria-hidden="true" />
+      <i className={`fa-solid fa-chevron-right ${glyph(7)}`} aria-hidden="true" />
       <span className="text-rf-text-secondary capitalize">{stage}</span>
     </nav>
   );

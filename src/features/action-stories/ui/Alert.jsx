@@ -1,4 +1,5 @@
 import { typeRole } from '../blocks/typeRole';
+import { glyph } from '../blocks/glyphSize';
 // A PERSISTENT, in-place notice — distinct from Toast.jsx's transient, auto-dismissing one.
 // StageActionBar's own error indicator was already exactly this (a hand-rolled
 // `role="alert"` pill with an icon + message), just never pulled out into something a second
@@ -34,11 +35,14 @@ export default function Alert({ tone = 'info', title, children, onDismiss, compa
         role={role}
         className={`${typeRole('body').className} inline-flex items-center gap-2 rounded-full px-3 py-1 ${t.bg} ${t.text} ${className}`}
       >
-        <i className={`${typeRole('micro').className} ${t.icon}`} aria-hidden="true" />
+        {/* AN ICON TAKES NO TYPE ROLE (R89): a role may carry a font-family, and a family that is
+            not Font Awesome turns the glyph into a tofu box — this exact line was rendering one on
+            58 panes. The size is a GLYPH size; see T95's icon exemption and T101's gate. */}
+        <i className={`${glyph(10)} ${t.icon}`} aria-hidden="true" />
         {children}
         {onDismiss && (
           <button type="button" onClick={onDismiss} aria-label="Dismiss" className="ml-0.5 opacity-70 hover:opacity-100">
-            <i className="fa-solid fa-xmark text-[9px]" aria-hidden="true" />
+            <i className={`fa-solid fa-xmark ${glyph(9)}`} aria-hidden="true" />
           </button>
         )}
       </span>
@@ -47,14 +51,14 @@ export default function Alert({ tone = 'info', title, children, onDismiss, compa
 
   return (
     <div role={role} className={`${typeRole('body').className} flex items-start gap-2.5 rounded-lg border px-3.5 py-3 ${t.border} ${t.bg} ${className}`}>
-      <i className={`${typeRole('body').className} ${t.icon} mt-[1px] ${t.iconTone}`} aria-hidden="true" />
+      <i className={`${glyph(13)} ${t.icon} mt-[1px] ${t.iconTone}`} aria-hidden="true" />
       <div className="flex-1">
         {title && <p className="font-semibold text-rf-text-primary">{title}</p>}
         <div className={title ? 'mt-0.5 text-rf-text-secondary' : 'text-rf-text-primary'}>{children}</div>
       </div>
       {onDismiss && (
         <button type="button" onClick={onDismiss} aria-label="Dismiss" className="text-rf-text-tertiary hover:text-rf-text-primary">
-          <i className="fa-solid fa-xmark text-[11px]" aria-hidden="true" />
+          <i className={`fa-solid fa-xmark ${glyph(11)}`} aria-hidden="true" />
         </button>
       )}
     </div>

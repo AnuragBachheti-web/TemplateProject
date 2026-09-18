@@ -143,9 +143,9 @@ function mainSectionsOf(decision) {
 
 describe('T79 — REPLACES T62, which passed while scrolling did not work', () => {
   // ============================================================================================
-  // THE FIFTH TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asked this comment to name the
+  // THE SIXTH TIME A GREEN TEST HAS COVERED A REAL GAP. Ruling R67 asked this comment to name the
   // first three; R77 added the fourth, which changed what the list means; R80 added the fifth,
-  // which is the one that says who this happens to.
+  // which says who this happens to; R89 added the sixth, which is about how a gate is BUILT.
   //
   //   heroMetrics.range (Phase 5A)  referenceFidelity.test.js asserted the P10-P90 interval was
   //                                 present in the DATA. It was. StatListBlock never rendered it,
@@ -182,6 +182,35 @@ describe('T79 — REPLACES T62, which passed while scrolling did not work', () =
   //                                 each — and 5D could not have seen it, because 5D was permitted
   //                                 to change text rules and nothing else, so the only lever it had
   //                                 moved the defect sideways.
+  //
+  //   T101 (Phase 5E, R89)         THE SIXTH: A TOFU BOX. The type sweep put `typeRole('micro')` on
+  //                                 Font Awesome chevrons, `font-mono` beat the icon font, and the
+  //                                 glyph rendered as .notdef — a missing-character box, 478 of
+  //                                 them. Every gate in this project passed it, and they were all
+  //                                 right to: it is not clipped, it does not overflow its track,
+  //                                 its contrast ratio is fine, it is exactly the size the layout
+  //                                 expects, and its column is properly filled. The only thing
+  //                                 wrong with a tofu box is what it LOOKS like.
+  //
+  //                                 WHAT MAKES THIS ONE DIFFERENT IS THE GATE I THEN WROTE. The
+  //                                 first T101 compared the glyph against the same character drawn
+  //                                 in a missing FONT FAMILY and passed with 478 boxes on screen,
+  //                                 because the control drew at 16px while the glyph was 10px. The
+  //                                 second matched the size and still passed, because the two fell
+  //                                 back down different chains — "JetBrains Mono", Menlo, monospace
+  //                                 lands on a monospace tofu and an unknown family on a
+  //                                 proportional one. Two green gates, one real defect, and the
+  //                                 only reason I know is that I reintroduced the bug on purpose
+  //                                 and watched the run stay green.
+  //
+  //                                 SO: A NEW GATE IS NOT EVIDENCE UNTIL IT HAS FAILED. Writing the
+  //                                 check is the easy half; proving it can see the thing is the
+  //                                 half that was skipped in five of the six cases above. The
+  //                                 working version holds the font fixed and varies the CHARACTER —
+  //                                 U+FFFF is a permanent noncharacter, so whatever this font draws
+  //                                 for it IS this font's .notdef — and it was verified in both
+  //                                 directions: the broken chevron matches, a working icon on the
+  //                                 same page does not.
   //
   // THE RULE THEY SHARE: a test must assert what the OPERATOR EXPERIENCES, not what the code
   // declares. A CSS property is a declaration. A committed file is a declaration. A field on a
@@ -230,7 +259,7 @@ describe('T79 — REPLACES T62, which passed while scrolling did not work', () =
 
   it('records that the behavioural assertion lives in the smoke run, and that it can fail', () => {
     const smoke = fs.readFileSync(path.join(REPO_ROOT, 'scripts/smoke.mjs'), 'utf8')
-    for (const t of ['T73', 'T75', 'T76']) {
+    for (const t of ['T73', 'T75', 'T76', 'T93', 'T100', 'T101']) {
       expect(smoke, `${t} is not in the smoke run`).toContain(t)
     }
     // R65: a browser check that reports without failing is the vacuous pass in a new costume.
@@ -692,8 +721,16 @@ describe('T69 — Phase 4 budgets re-derived against the packed layout (I5)', ()
     }
     expect(violators, `${violators.length} pane(s) over the 4-card rail budget`).toEqual([])
     // Stated in the test so a drift is visible as a diff, per I5.
-    expect(blocks['decide.slate.v1'], 'decide rail blocks after R60').toBe(5)
-    expect(cards['decide.slate.v1'], 'decide rail cards after R60').toBe(4)
+    // PHASE 5E PART 2 (R91): 5 -> 4. `decision_lens` leaves decide's context section, which still
+    // carries `decision_persona` and `decision_contract_class` and so survives; analyze's context
+    // section did NOT survive, because the lens was its only member.
+    expect(blocks['decide.slate.v1'], 'decide rail blocks after R60, then R91').toBe(4)
+    // AND THE CARD COUNT FALLS WITH IT: 4 -> 3. Decide's `context` section is left holding only
+    // `decision_contract_class`, which is `when`-gated to strategic/regulated objects — so the
+    // "Context" card, which used to appear on every decide pane because the lens always exists,
+    // now appears only where there is a contract class to state. The section is still fillable
+    // (referenceContentRender.test.jsx §5 checks that), it is simply no longer unconditional.
+    expect(cards['decide.slate.v1'], 'decide rail cards after R60, then R91').toBe(3)
   })
 
   it('main-region ROW counts fall by the measured amount, and only where evidence put a half', () => {

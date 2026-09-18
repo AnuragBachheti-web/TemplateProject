@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { createPortal } from 'react-dom';
 
 import { typeRole } from '../blocks/typeRole';
+import { glyph } from '../blocks/glyphSize';
 // Transient, app-wide feedback for the MOMENT an action settles — complements, never replaces, a
 // persistent inline status (StageActionBar's own "Confirmed"/error indicator stays exactly where it
 // was; this is what a user sees even if they've already scrolled away from the button they clicked).
@@ -90,7 +91,7 @@ export function ToastProvider({ children }) {
                 className={`${typeRole('body').className} pointer-events-auto flex w-full max-w-sm items-start gap-2.5 rounded-lg border bg-rf-surface-raised px-3.5 py-3 text-rf-text-primary shadow-lg ${TONE_BORDER_CLASS[t.tone] ?? TONE_BORDER_CLASS.info}`}
               >
                 <i
-                  className={`${typeRole('body').className} mt-[1px] ${TONE_ICON[t.tone] ?? TONE_ICON.info} ${TONE_ICON_CLASS[t.tone] ?? TONE_ICON_CLASS.info}`}
+                  className={`${glyph(13)} mt-[1px] ${TONE_ICON[t.tone] ?? TONE_ICON.info} ${TONE_ICON_CLASS[t.tone] ?? TONE_ICON_CLASS.info}`}
                   aria-hidden="true"
                 />
                 <span className="flex-1 text-rf-text-primary">{t.message}</span>
@@ -100,7 +101,7 @@ export function ToastProvider({ children }) {
                   aria-label="Dismiss notification"
                   className="text-rf-text-tertiary hover:text-rf-text-primary"
                 >
-                  <i className="fa-solid fa-xmark text-[11px]" aria-hidden="true" />
+                  <i className={`fa-solid fa-xmark ${glyph(11)}`} aria-hidden="true" />
                 </button>
               </div>
             );

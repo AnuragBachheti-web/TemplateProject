@@ -123,10 +123,34 @@
   --rf-text-disabled-rgb: 180 188 202;
   --rf-text-primary: #0A0F1A;
   --rf-text-primary-rgb: 10 15 26;
-  --rf-text-secondary: #5E6878;
-  --rf-text-secondary-rgb: 94 104 120;
-  --rf-text-tertiary: #8891A3;
-  --rf-text-tertiary-rgb: 136 145 163;
+  /* ---------------------------------------------------------------------------------------
+   * THE TEXT RAMP MOVED DOWN ONE DS STEP (Phase 5E Part 2, ruling R90).
+   *
+   * `--rf-text-tertiary` was ink-400 (#8891A3), which is 3.17:1 on white. T100 measured it on
+   * 4,104 rendered elements — 10-13px body text, labels, captions, table detail lines. The design
+   * system's own contrast matrix lists ink-400 for "placeholders, disabled text, labels 16px+",
+   * so the DS never claimed it was body text; this template used it as though it were.
+   *
+   * THE FIX IS HERE AND NOT AT 57 CALL SITES, which is the point of having tokens. But moving
+   * tertiary to ink-500 alone would have made it identical to secondary and collapsed a
+   * three-level hierarchy into two — labels and their values are drawn in exactly that pair, so
+   * the distinction is load-bearing. So the whole ramp shifts down one step of the DS's own ink
+   * scale, and all three levels clear AA on white and on the sunken surface:
+   *
+   *     primary    ink-900  #0A0F1A   18.9:1   (unchanged)
+   *     secondary  ink-600  #3F4858    9.2:1   (was ink-500, 5.6:1)
+   *     tertiary   ink-500  #5E6878    5.6:1   (was ink-400, 3.17:1 — the defect)
+   *
+   * `--rf-text-disabled` stays at ink-300: disabled text is inactive by definition and WCAG
+   * exempts it, and darkening it would make a disabled control look enabled.
+   *
+   * The DS's "labels 16px+" allowance for ink-400 is moot here — the only roles at or above 16px
+   * are `heading` and `display`, and both are primary text.
+   * --------------------------------------------------------------------------------------- */
+  --rf-text-secondary: #3F4858;
+  --rf-text-secondary-rgb: 63 72 88;
+  --rf-text-tertiary: #5E6878;
+  --rf-text-tertiary-rgb: 94 104 120;
 }
 
 [data-theme="dark"] {

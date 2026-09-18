@@ -16,7 +16,7 @@
 // layout engine — every clientHeight there is 0. Phase 5C's T62 is the cautionary tale: it asserted
 // that each region's className contained `overflow-y-auto`, which was true while scrolling was
 // completely broken, because `overflow-y: auto` on an element with an unconstrained height grows
-// instead of scrolling. A property is not a behaviour. So T73/T75/T76/T78/T93 measure, in real Chrome,
+// instead of scrolling. A property is not a behaviour. So T73/T75/T76/T78/T93/T100/T101 measure, in Chrome,
 // at both supported widths, and they FAIL the run — ruling R65: a browser check that reports
 // without failing is the vacuous pass in a new costume.
 //
@@ -207,7 +207,7 @@ function renderInChrome(url) {
 }
 
 
-// ---- THE LAYOUT GATE (Phase 5D: T73, T75, T76, T78 · Phase 5E: T93, T100) -----------------------
+// ---- THE LAYOUT GATE (5D: T73, T75, T76, T78 · 5E: T93, T100, T101) -----------------------------
 //
 // A real browser, driven over the DevTools Protocol, at both supported widths. No dependency is
 // added: Chrome is already spawned above, and Node has a global WebSocket.
@@ -295,10 +295,11 @@ async function layoutSession(fn) {
  * T78 — a packed row's two cards are equal height (the ruled vertical contract).
  * T93 — a table's columns are attributes its records SHARE, measured in the rendered DOM.
  * T100 — no small text is painted in a colour that fails AA against the surface behind it.
+ * T101 — no rendered glyph resolves to a missing-character box.
  */
 const LAYOUT_PROBE = `
 (() => {
-  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null, contrast: [] };
+  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null, contrast: [], tofu: [] };
 
   // --- T73: a region either fits, or it scrolls. It must never overflow its own track silently.
   const grid = document.querySelector('[data-scroll-region="main"]')?.parentElement;
@@ -455,6 +456,56 @@ const LAYOUT_PROBE = `
     }
   }
 
+  // --- T101: NO TOFU (Phase 5E Part 2, ruling R89).
+  // A missing-character box passes every other gate in this file. It is not clipped, it does not
+  // overflow, it has a perfectly good contrast ratio, and its element is exactly the size the
+  // layout expects — so T73, T75, T76, T78, T93 and T100 all wave it through. It is the sixth
+  // instance of the pattern paneLayout.test.jsx's T79 tracks, and the cheapest one to miss, because
+  // the only thing wrong with it is what it LOOKS like.
+  //
+  // MEASURED, NOT DECLARED. The obvious check — "does this icon's computed font-family say Font
+  // Awesome" — is a declaration, which is the exact mistake T79 exists to name. So the glyph is
+  // drawn twice on a canvas: once in the element's own computed font, and once in a font that
+  // certainly does not exist, which forces the browser to draw .notdef. If the two rasters are
+  // identical, what the operator sees IS the tofu box.
+  const canvas = document.createElement('canvas');
+  canvas.width = 32; canvas.height = 32;
+  const ctx = canvas.getContext('2d');
+  const raster = (ch, font) => {
+    ctx.clearRect(0, 0, 32, 32);
+    ctx.font = font;
+    ctx.fillText(ch, 2, 22);
+    return canvas.toDataURL();
+  };
+  for (const el of document.querySelectorAll('i[class*="fa-"], span[class*="fa-"]')) {
+    const before = getComputedStyle(el, '::before');
+    const raw = before.content;
+    if (!raw || raw === 'none' || raw === 'normal') continue;
+    const ch = raw.replace(/^["']|["']$/g, '');
+    if (ch === '') continue;
+    // THE CONTROL IS A CODEPOINT, NOT A FONT. Two earlier drafts compared the glyph against the
+    // same character drawn in a deliberately-missing FAMILY, and both passed with the real defect
+    // on screen: the first held the control at 16px while the glyph was 10px, and the second
+    // matched the size but not the FALLBACK CHAIN — "JetBrains Mono", Menlo, monospace falls
+    // through to a monospace tofu, while an unknown family falls through to a proportional one, so
+    // the two boxes never matched even when both were boxes.
+    //
+    // Holding the font fixed and varying the CHARACTER removes every one of those variables. U+FFFF
+    // is a permanent noncharacter, so no font will ever have a glyph for it: whatever the browser
+    // draws for it in THIS font at THIS size is, by definition, this font's .notdef. If the icon
+    // rasters identically, the icon is a tofu box.
+    //
+    // Verified in both directions before shipping — the broken chevron matches, a working gear icon
+    // in the same page does not.
+    const font = before.fontWeight + ' ' + before.fontSize + ' ' + before.fontFamily;
+    if (raster(ch, font) === raster('\uFFFF', font)) {
+      report.tofu.push({
+        cls: (el.className || '').toString().slice(0, 80),
+        family: before.fontFamily, size: before.fontSize,
+      });
+    }
+  }
+
   return report;
 })()
 `
@@ -504,6 +555,11 @@ async function runLayoutGate(base) {
         for (const h of r.hollow) {
           failures.push(`T93 ${where}: "${h.slot}" spends a column on "${h.head}", which is empty on ` +
             `${h.blank} of ${h.rows} rows — a union artefact, not a shared attribute`)
+        }
+        // T101
+        for (const t of r.tofu) {
+          failures.push(`T101 ${where}: a glyph renders as a missing-character box — ` +
+            `${t.size} ${t.family} on "${t.cls}"`)
         }
         // T100
         for (const c of r.contrast) {
@@ -677,25 +733,19 @@ async function main() {
 
     // ---- THE NEUTRAL-TEXT CONTRAST RATCHET (Phase 5E Part 2) --------------------------------
     // T100 was built to catch R83's defect: small text painted in a -500 status step. It caught
-    // that — and then it caught something an order of magnitude larger that NO RULING HAS SCOPED,
-    // which is recorded here rather than absorbed.
+    // that, and then it caught something an order of magnitude larger — 4,164 elements below AA,
+    // 4,104 of them `rf-text-tertiary` at 3.17:1 on 10-13px body text. Ruling R90 fixed it by
+    // moving the whole text ramp down one step of the DS's own ink scale (see tokens.css), which
+    // took the count from 4,164 to 60 without touching a single call site.
     //
-    //   4,104  #8891A3 — `rf-text-tertiary`, which is the DS's ink-400. It is 3.17:1 on white and
-    //          this app paints 10-13px text with it on almost every surface. The design system's
-    //          own contrast matrix agrees it should not: it lists ink-400 for "placeholders,
-    //          disabled text, labels 16px+".
-    //      60  #FFFFFF — white figures inside HeatmapGridBlock's cells, sitting on the mid-blue
-    //          steps of the sequential chart scale. Worst measured 2.5:1 (prop_s9_13_analyze at
-    //          1280). A chart-palette problem rather than a text-token one.
+    // THE 60 THAT REMAIN are white figures inside HeatmapGridBlock's cells, sitting on the mid
+    // steps of the sequential blue chart scale — worst measured 2.5:1 on prop_s9_13_analyze at
+    // 1280. R90 ruled they be reported, not restyled: fixing them means changing the chart scale
+    // itself, which is a different decision on a different surface.
     //
-    // NOT SILENTLY EXEMPTED, AND NOT FIXED HERE. Repainting every secondary label in the app is a
-    // colour decision across every surface, and this phase was ruled to fix the status steps. So
-    // the number is PINNED: the run goes red the moment it grows, which makes the debt visible at
-    // every commit and stops it being added to. A gate that quietly skipped these would be the
-    // vacuous pass R65 named, wearing this phase's own colours.
-    //
-    // Lower this number when the finding is ruled on. Do not raise it.
-    const NEUTRAL_LOW_CONTRAST_BASELINE = 4164
+    // Pinned, so the run goes red the moment the number grows. Lower it when the chart scale is
+    // ruled on. Do not raise it.
+    const NEUTRAL_LOW_CONTRAST_BASELINE = 60
     if (neutralLowContrast.length > NEUTRAL_LOW_CONTRAST_BASELINE) {
       const byHex = {}
       for (const h of neutralLowContrast) byHex[h] = (byHex[h] ?? 0) + 1
