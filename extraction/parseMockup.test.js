@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { extractControlElements } from './parseMockup.js'
+import { extractControlElements, extractSlotHeadings } from './parseMockup.js'
 
 describe('extractControlElements — P0 fix (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §2/§9)', () => {
   it('recovers a real range input\'s min/max/step and its two-way-bound state key', () => {
@@ -54,5 +54,57 @@ describe('extractControlElements — P0 fix (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.
 
   it('returns an empty list for markup with no controls at all', () => {
     expect(extractControlElements('<div><p>Hello</p></div>')).toEqual([])
+  })
+})
+
+describe('extractSlotHeadings', () => {
+  const heading = (text) =>
+    `<span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500)">${text}</span>`
+
+  it('pairs a heading with the first bare-identifier binding in its own window (list binding)', () => {
+    const html = `
+      <div>
+        ${heading('The opportunity')}
+        <div><sc-for list="{{ opportunity }}" as="o"></sc-for></div>
+      </div>
+    `
+    expect(extractSlotHeadings(html)).toEqual({ opportunity: 'The opportunity' })
+  })
+
+  it('finds multiple heading/binding pairs, each scoped up to the next heading', () => {
+    const html = `
+      ${heading('What raised this')}
+      <sc-for list="{{ trigger }}" as="t"></sc-for>
+      ${heading('Who writes the price')}
+      <sc-for list="{{ agents }}" as="a"></sc-for>
+    `
+    expect(extractSlotHeadings(html)).toEqual({
+      trigger: 'What raised this',
+      agents: 'Who writes the price',
+    })
+  })
+
+  it('omits a heading with no binding in its own window, rather than guessing one', () => {
+    const html = `
+      ${heading('Dial')}
+      <div><span>Suggest</span></div>
+      ${heading('Who writes the price')}
+      <sc-for list="{{ agents }}" as="a"></sc-for>
+    `
+    expect(extractSlotHeadings(html)).toEqual({ agents: 'Who writes the price' })
+  })
+
+  it('keeps the first heading seen when a raw key repeats', () => {
+    const html = `
+      ${heading('First caption')}
+      <sc-for list="{{ dupe }}" as="d"></sc-for>
+      ${heading('Second caption')}
+      <sc-for list="{{ dupe }}" as="d"></sc-for>
+    `
+    expect(extractSlotHeadings(html)).toEqual({ dupe: 'First caption' })
+  })
+
+  it('returns an empty object for markup with no matching headings', () => {
+    expect(extractSlotHeadings('<div><p>Hello</p></div>')).toEqual({})
   })
 })

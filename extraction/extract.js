@@ -21,6 +21,7 @@ import {
   extractBreadcrumbName,
   extractInstanceHeadline,
   extractControlElements,
+  extractSlotHeadings,
 } from './parseMockup.js'
 import { runScreenScript, attachRawRecords, computeControlPayload } from './dcLogicSandbox.js'
 
@@ -91,6 +92,12 @@ function main() {
       // (`null`) is a normal, non-fatal outcome, unlike a missing breadcrumb name.
       const headline = extractInstanceHeadline(html)
 
+      // The reference's own caption per bound panel ("What raised this", "The opportunity", ...),
+      // keyed by the SAME raw key the bound data lives under in `data` below — never a canonical
+      // slot name, since the vocabulary rename happens later, in normalizeCorpus.js. Omitted
+      // entirely when none are found, same convention as `headline`.
+      const headings = extractSlotHeadings(html)
+
       // P0 fix (DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §2/§3): recover a real interactive control's
       // own declared bounds from the TEMPLATE markup (never present in the <script data-dc-script>
       // block runScreenScript's sandbox executes), then multi-sample the screen's own real logic at
@@ -121,7 +128,16 @@ function main() {
         data = patched
       }
 
-      const fixture = { code, stageKey, name, ...(headline ? { headline } : {}), props: propsDefaults, state, data }
+      const fixture = {
+        code,
+        stageKey,
+        name,
+        ...(headline ? { headline } : {}),
+        ...(Object.keys(headings).length > 0 ? { headings } : {}),
+        props: propsDefaults,
+        state,
+        data,
+      }
 
       const outDir = path.join(RAW_OUT_DIR, code)
       fs.mkdirSync(outDir, { recursive: true })

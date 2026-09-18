@@ -27,24 +27,24 @@ import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
  * "Totals Rows", "Guardrail Checks", "Agents" and "Progress Rows" from their panes. The slot's own
  * name is information — a pane can hold two stat lists — and the T13 baseline is what caught it.
  */
-function Framed({ slotName, compact, children }) {
+function Framed({ slotName, title, compact, children }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{title ?? humanizeSlotName(slotName)}</CompactEyebrow>
         {children}
       </div>
     );
   }
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       {children}
     </BlockCard>
   );
 }
 
-export default function RosterBlock({ slotName, data, compact = false }) {
+export default function RosterBlock({ slotName, data, title, compact = false }) {
   const rows = Array.isArray(data) ? data.filter((r) => r !== null && typeof r === 'object' && r.name) : [];
   if (rows.length === 0) return <EmptyState slotName={slotName} message="No agents credited." />;
 
@@ -74,7 +74,7 @@ export default function RosterBlock({ slotName, data, compact = false }) {
 
   return (
     <div {...depthAttrs(DEPTH_BLOCK, 'roster')}>
-      <Framed slotName={slotName} compact={compact}>{list}</Framed>
+      <Framed slotName={slotName} title={title} compact={compact}>{list}</Framed>
     </div>
   );
 }

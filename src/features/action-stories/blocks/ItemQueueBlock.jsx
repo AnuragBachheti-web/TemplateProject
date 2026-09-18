@@ -260,7 +260,7 @@ function SimpleChipList({ data }) {
  * @param {boolean} [compact] - see LabelValueListBlock/TextBlock's own doc comments — bare content,
  *   no own card, when already inside a shared panel.
  */
-export default function ItemQueueBlock({ slotName, data, compact }) {
+export default function ItemQueueBlock({ slotName, data, title, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -285,7 +285,7 @@ export default function ItemQueueBlock({ slotName, data, compact }) {
     return (
       <div className="py-1.5">
         <CompactEyebrow>
-          {humanizeSlotName(slotName)} · {data.length}
+          {title ?? humanizeSlotName(slotName)} · {data.length}
         </CompactEyebrow>
         {body}
       </div>
@@ -295,7 +295,7 @@ export default function ItemQueueBlock({ slotName, data, compact }) {
   return (
     <BlockCard>
       <BlockTitle className="mb-2">
-        {humanizeSlotName(slotName)} · {data.length}
+        {title ?? humanizeSlotName(slotName)} · {data.length}
       </BlockTitle>
       {body}
     </BlockCard>

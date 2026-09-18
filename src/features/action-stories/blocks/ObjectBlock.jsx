@@ -43,7 +43,7 @@ function renderEntryValue(v) {
 // Filtered below via the same shared `isHiddenKey`, not a fourth local copy.
 
 /** @param {boolean} [compact] - see TextBlock.jsx's own doc comment for what this means and why. */
-export default function ObjectBlock({ slotName, data, compact }) {
+export default function ObjectBlock({ slotName, data, title, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -80,7 +80,7 @@ export default function ObjectBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{title ?? humanizeSlotName(slotName)}</CompactEyebrow>
         {rows}
       </div>
     );
@@ -88,7 +88,7 @@ export default function ObjectBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       {rows}
     </BlockCard>
   );

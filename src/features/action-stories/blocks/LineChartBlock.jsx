@@ -13,7 +13,7 @@ import { formatValue } from './formatValue';
  * draws one `<Line>` per entry, categorically colored in the fixed slot order (never by value/rank)
  * — a legend appears automatically once there's more than one series.
  */
-export default function LineChartBlock({ slotName, data }) {
+export default function LineChartBlock({ slotName, data, title }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -81,7 +81,7 @@ export default function LineChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       <div className={showLegend ? 'h-64 w-full' : 'h-56 w-full'} role="img" aria-label={`Line chart. ${chartLabel}`}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={merged} margin={{ top: 4, right: 6, bottom: 0, left: 6 }}>

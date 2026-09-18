@@ -29,7 +29,7 @@ function firstParseable(item, keys) {
  *   member of an explicitly-authored or heuristic shared panel, so it renders without its own
  *   nested BlockCard.
  */
-export default function GaugeBlock({ slotName, data, compact }) {
+export default function GaugeBlock({ slotName, data, title, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -97,7 +97,7 @@ export default function GaugeBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{title ?? humanizeSlotName(slotName)}</CompactEyebrow>
         {rowsNode}
       </div>
     );
@@ -105,7 +105,7 @@ export default function GaugeBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       {rowsNode}
     </BlockCard>
   );

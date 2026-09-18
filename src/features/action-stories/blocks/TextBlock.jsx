@@ -18,7 +18,7 @@ import { enumLabel } from './enumLabel';
  *   labels for one story beat would be noise, not hierarchy). A scalar block with neither signal
  *   (the common case) ignores both and falls through to its own ordinary compact/card rendering.
  */
-export default function TextBlock({ slotName, data, compact, role }) {
+export default function TextBlock({ slotName, data, title, compact, role }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -49,7 +49,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
     const eyebrow = (
       <p className="flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-rf-text-tertiary">
         <span aria-hidden="true" className="h-[6px] w-[6px] rounded-full bg-rf-brand-blue-500" />
-        Realify signal · {humanizeSlotName(slotName)}
+        Realify signal · {title ?? humanizeSlotName(slotName)}
       </p>
     );
     const headline = (
@@ -89,7 +89,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
     // side without pushing the other off the row or past the container's own edge.
     return (
       <div className="flex min-w-0 items-baseline gap-3 py-[7px]">
-        <span className="min-w-0 max-w-[45%] shrink truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
+        <span className="min-w-0 max-w-[45%] shrink truncate text-[12px] text-rf-text-secondary">{title ?? humanizeSlotName(slotName)}</span>
         <span className="min-w-0 flex-1 truncate text-right text-[12.5px] font-medium text-rf-text-primary">{text}</span>
       </div>
     );
@@ -97,7 +97,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
 
   return (
     <BlockCard padding="compact">
-      <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle>{title ?? humanizeSlotName(slotName)}</BlockTitle>
       <p className="mt-1 text-[14px] font-medium text-rf-text-primary">{text}</p>
     </BlockCard>
   );

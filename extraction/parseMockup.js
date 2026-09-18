@@ -171,6 +171,50 @@ export function extractInstanceHeadline(html) {
   return /\{\{.*\}\}/.test(text) ? null : text
 }
 
+// ---- slot heading extraction --------------------------------------------------------------------
+//
+// Every panel the reference gives its own bespoke caption ("What raised this", "The opportunity",
+// "Roll or test, by cohort", ...) writes that caption as a literal `<span>` in this exact mono
+// micro-label style, immediately ahead of the `{{ binding }}` it captions — never inside the
+// `<script data-dc-script>` block (that block holds logic/data, never this markup). Nothing upstream
+// of this ever captured that text: extraction kept the DATA under each binding and discarded the
+// heading string that named it, which is why the running app falls back to a generic
+// humanizeSlotName(slotName) label instead of the reference's own words.
+const SLOT_HEADING_RE =
+  /<span style="font-family:var\(--font-mono\);font-size:9\.5px;letter-spacing:0\.14em;text-transform:uppercase;color:var\(--ink-500\)">([^<]*)<\/span>/g
+
+const MUSTACHE_BINDING_RE = /\{\{\s*([A-Za-z_$][A-Za-z0-9_$]*)\s*\}\}/
+
+/**
+ * @param {string} html - the WHOLE mockup file's text.
+ * @returns {Record<string, string>} rawKey -> the heading text the reference itself gave that
+ *   binding's panel. Deliberately narrow: a heading only counts if a bare-identifier `{{ binding }}`
+ *   (list or scalar) is the FIRST one found between it and the next heading (or end of file) — the
+ *   same "structural, never guessed" posture as extractControlElements. A heading with no binding in
+ *   its own window (e.g. "Dial", a purely static control with no data slot) is simply omitted, never
+ *   fabricated. The FIRST heading seen for a given rawKey wins if one ever repeats.
+ */
+export function extractSlotHeadings(html) {
+  const headingMatches = [...html.matchAll(SLOT_HEADING_RE)]
+  const headings = {}
+  for (let i = 0; i < headingMatches.length; i++) {
+    const m = headingMatches[i]
+    const text = decodeHtmlEntities(m[1].trim())
+    if (!text) continue
+
+    const windowStart = m.index + m[0].length
+    const windowEnd = i + 1 < headingMatches.length ? headingMatches[i + 1].index : html.length
+    const window = html.slice(windowStart, windowEnd)
+
+    const bindingMatch = window.match(MUSTACHE_BINDING_RE)
+    if (!bindingMatch) continue
+
+    const rawKey = bindingMatch[1]
+    if (!(rawKey in headings)) headings[rawKey] = text
+  }
+  return headings
+}
+
 // ---- interactive control extraction (P0 fix: DYNAMIC_COMPOSITION_FORENSIC_AUDIT.md §2/§9) ------
 //
 // A mockup's interactive control (a range slider, today — the only control shape found anywhere in

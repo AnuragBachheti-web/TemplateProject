@@ -67,7 +67,7 @@ function extraEntries(item, usedKeys) {
  *   bar, matching the reference's "Policy check" pattern (a bare row list inside one panel), not a
  *   card-inside-a-card.
  */
-export default function LabelValueListBlock({ slotName, data, compact }) {
+export default function LabelValueListBlock({ slotName, data, title, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -132,7 +132,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{title ?? humanizeSlotName(slotName)}</CompactEyebrow>
         {list}
       </div>
     );
@@ -140,7 +140,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       {list}
     </BlockCard>
   );

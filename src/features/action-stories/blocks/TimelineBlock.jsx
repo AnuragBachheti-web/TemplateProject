@@ -40,7 +40,7 @@ import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 /** The description, in declared order. `rowLabelOf` is the last resort, not the first choice. */
 const BODY_KEYS = ['what', 'rule'];
 
-export default function TimelineBlock({ slotName, data, compact = false }) {
+export default function TimelineBlock({ slotName, data, title, compact = false }) {
   const rows = Array.isArray(data) ? data.filter((r) => r !== null && typeof r === 'object') : [];
   if (rows.length === 0) return <EmptyState slotName={slotName} message="Nothing recorded." />;
 
@@ -84,12 +84,12 @@ export default function TimelineBlock({ slotName, data, compact = false }) {
     <div {...depthAttrs(DEPTH_BLOCK, 'timeline')}>
       {compact ? (
         <div className="py-1.5">
-          <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+          <CompactEyebrow>{title ?? humanizeSlotName(slotName)}</CompactEyebrow>
           {list}
         </div>
       ) : (
         <BlockCard>
-          <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+          <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
           {list}
         </BlockCard>
       )}

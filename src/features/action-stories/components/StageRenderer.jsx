@@ -125,6 +125,14 @@ function computeCompactSlots({ main, rail }) {
  * capability means. StageRenderer does not know what "selection" is, which slot is a slate, or that
  * approval exists; it forwards whatever it is handed, keyed by slot name. Absent or `{}` leaves
  * every render byte-identical to before.
+ *
+ * `title` is looked up on the Decision Object by the block's own `binding` (`fixture.titles?.[...]`),
+ * not by slotName: `titles` (extraction/normalizeCorpus.js's `titlesFrom`) is keyed by field path
+ * because the SAME canonical slot can be fed by a different raw key — and therefore a different
+ * reference caption — on different stories (S9.11's `trigger` comes from `opportunity`, captioned
+ * "The opportunity"; S10.1's own `trigger` is captioned "What raised this"). `undefined` when this
+ * story's reference gave that field no caption, which every block falls back to its previous
+ * humanizeSlotName(slotName) label for — this is purely additive.
  */
 export default function StageRenderer({ manifest, fixture, blockProps }) {
   const [sliderPositions, setSliderPositions] = useState({}); // slotName -> current numeric value
@@ -213,6 +221,7 @@ export default function StageRenderer({ manifest, fixture, blockProps }) {
         <Component
           slotName={block.slotName}
           data={value}
+          title={fixture.titles?.[block.binding]}
           compact={compactSlots.has(block.slotName)}
           role={block.role}
           {...(blockProps?.[block.slotName] ?? {})}

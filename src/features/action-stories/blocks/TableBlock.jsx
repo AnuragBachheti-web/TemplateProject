@@ -116,7 +116,7 @@ function compareForSort(a, b) {
  * render is byte-identical: no extra column, no extra DOM, no behaviour change. TableBlock knows
  * nothing about approval — it renders a checkbox column and reports which row ids are ticked.
  */
-export default function TableBlock({ slotName, data, compact, selectable = false, selectedIds, onToggleRow, rowIdOf }) {
+export default function TableBlock({ slotName, data, title, compact, selectable = false, selectedIds, onToggleRow, rowIdOf }) {
   const [sort, setSort] = useState(null); // { key, direction: 'asc'|'desc' } | null
   const [page, setPage] = useState(0);
 
@@ -214,7 +214,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
         >
         <table className="w-full border-collapse text-[12px]">
           <caption className="border-b border-rf-border-subtle px-4 py-2.5 text-left font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-secondary">
-            {humanizeSlotName(slotName)} · {allRows.length}
+            {title ?? humanizeSlotName(slotName)} · {allRows.length}
           </caption>
           <thead>
             <tr className="bg-rf-surface-sunken">

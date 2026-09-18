@@ -7,7 +7,7 @@ import { EmptyState, ErrorState, ThinEvidenceState } from './BlockStates';
 import { countPoints, hasEnoughEvidence } from './chartEvidence';
 import { formatValue } from './formatValue';
 
-export default function ScatterChartBlock({ slotName, data }) {
+export default function ScatterChartBlock({ slotName, data, title }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -69,7 +69,7 @@ export default function ScatterChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       <div className="h-56 w-full" role="img" aria-label={chartLabel}>
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 4, right: 10, bottom: 4, left: 4 }}>

@@ -30,7 +30,7 @@ function cellFields(cell) {
  * whichever field is the first numeric one found anywhere in the data (the "primary" metric) — the
  * full set of a cell's fields is always available on hover via its `title`.
  */
-export default function HeatmapGridBlock({ slotName, data }) {
+export default function HeatmapGridBlock({ slotName, data, title }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -122,7 +122,7 @@ export default function HeatmapGridBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       <div className="overflow-x-auto" role="img" aria-label={chartLabel}>
         <div className="grid gap-1" style={{ gridTemplateColumns: `auto repeat(${colCount}, minmax(52px, 1fr))` }}>
           {gridItems}

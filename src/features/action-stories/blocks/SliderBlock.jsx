@@ -28,7 +28,7 @@ function isSliderShaped(data) {
  *
  * @param {(next: number) => void} [props.onChange] - called with the new value on every drag.
  */
-export default function SliderBlock({ slotName, data, onChange }) {
+export default function SliderBlock({ slotName, data, title, onChange }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -37,7 +37,7 @@ export default function SliderBlock({ slotName, data, onChange }) {
   }
 
   const unit = data.unit || '';
-  const label = data.label || humanizeSlotName(slotName);
+  const label = data.label || title || humanizeSlotName(slotName);
 
   return (
     <BlockCard padding="compact">

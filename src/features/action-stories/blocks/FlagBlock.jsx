@@ -15,7 +15,7 @@ function Pill({ data }) {
 }
 
 /** @param {boolean} [compact] - see TextBlock.jsx's own doc comment for what this means and why. */
-export default function FlagBlock({ slotName, data, compact }) {
+export default function FlagBlock({ slotName, data, title, compact }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -26,7 +26,7 @@ export default function FlagBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-center justify-between gap-3 py-[7px]">
-        <span className="min-w-0 truncate text-[12px] text-rf-text-secondary">{humanizeSlotName(slotName)}</span>
+        <span className="min-w-0 truncate text-[12px] text-rf-text-secondary">{title ?? humanizeSlotName(slotName)}</span>
         <Pill data={data} />
       </div>
     );
@@ -34,7 +34,7 @@ export default function FlagBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard padding="compact" className="flex items-center justify-between">
-      <h3 className="text-[12.5px] font-medium text-rf-text-secondary">{humanizeSlotName(slotName)}</h3>
+      <h3 className="text-[12.5px] font-medium text-rf-text-secondary">{title ?? humanizeSlotName(slotName)}</h3>
       <Pill data={data} />
     </BlockCard>
   );

@@ -26,7 +26,7 @@ import { formatValue } from './formatValue';
  * an anchor row is neutral regardless of sign, because a running total is not a delta.
  */
 
-export default function WaterfallChartBlock({ slotName, data }) {
+export default function WaterfallChartBlock({ slotName, data, title }) {
   if (data === null || data === undefined) {
     return <EmptyState slotName={slotName} />;
   }
@@ -66,7 +66,7 @@ export default function WaterfallChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{title ?? humanizeSlotName(slotName)}</BlockTitle>
       <div className="h-64 w-full" role="img" aria-label={chartLabel}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={rows} margin={{ top: 4, right: 10, bottom: 4, left: 6 }}>

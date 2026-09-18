@@ -206,6 +206,34 @@ function pick(data, candidates, pred, rec, field) {
   return undefined
 }
 
+/**
+ * Turns a screen's raw-key -> heading map (extraction/parseMockup.js's extractSlotHeadings, carried
+ * on the fixture as `data.headings`) into a field-path -> heading map, using `rec.sources` (built by
+ * the `pick`/`record` calls above) to learn which raw key actually filled each field on THIS object.
+ *
+ * Keyed by field path (e.g. `"proposal.trigger"`, identical to a template block's own `binding`),
+ * never by canonical slot name — this map is looked up directly by StageRenderer.jsx against a
+ * block's `binding`, so the vocabulary layer (templates/slotVocabulary.js) never needs to know a
+ * per-story caption exists. A field with no raw key (`null`/absent in `rec.sources`), or a raw key
+ * the mockup gave no heading to, is simply omitted — never fabricated.
+ */
+function titlesFrom(headings, sources) {
+  const titles = {}
+  if (!headings) return titles
+  for (const [field, rawKey] of Object.entries(sources)) {
+    if (!rawKey || typeof rawKey !== 'string') continue
+    // Every real block binding is `<namespace>.<name>` (`proposal.trigger`, `execution.plan`,
+    // `totals.rows`, `guardrails.verdict`, ...) — a bare field like `mode`/`lens`/`cardinality` is
+    // one of the axis facts the page header renders directly, never a block, so it has no `binding`
+    // for StageRenderer to look this map up by. Skipping it isn't a data loss; the heading (if any)
+    // just never denotes anything a block could show.
+    if (!field.includes('.')) continue
+    const heading = headings[rawKey]
+    if (isStr(heading)) titles[field] = heading
+  }
+  return titles
+}
+
 // ---- shape predicates --------------------------------------------------------------------------
 
 const isObjArray = (v) => Array.isArray(v) && v.length > 0 && v.every((i) => i !== null && typeof i === 'object')
@@ -1120,6 +1148,15 @@ function readFixture(code, stage) {
   return fs.existsSync(file) ? (JSON.parse(fs.readFileSync(file, 'utf8')).data ?? {}) : null
 }
 
+/** Sibling of readFixture that reads the SAME file's `headings` (raw key -> reference caption,
+ * extraction/parseMockup.js's extractSlotHeadings) instead of `data` — kept separate rather than
+ * folded into readFixture's return shape, which every existing call site already treats as the data
+ * object itself. */
+function readFixtureHeadings(code, stage) {
+  const file = path.join(CORPUS, 'fixtures/raw', code, `${stage}.json`)
+  return fs.existsSync(file) ? (JSON.parse(fs.readFileSync(file, 'utf8')).headings ?? {}) : {}
+}
+
 function main() {
   const index = JSON.parse(fs.readFileSync(path.join(CORPUS, 'fixtures/index.json'), 'utf8'))
   const out = []
@@ -1322,6 +1359,15 @@ function main() {
       rec.record('persona', ctx.persona ? '(reference pinned strip)' : null)
       rec.record('mode', typeof data.execLabel === 'string' ? 'execLabel' : null)
       rec.record('cardinality', '(derived from the decide-stage item count)')
+
+      // The reference's own caption for each field this object actually populated — see
+      // titlesFrom's own doc comment for why this has to be resolved per OBJECT (from rec.sources,
+      // which raw key each field claimed on THIS screen) rather than once per canonical slot: the
+      // same slot can be fed by different raw keys on different screens (S9.11's `trigger` comes
+      // from `opportunity`, captioned "The opportunity"; S10.1's own `trigger` is captioned "What
+      // raised this"), each with its own bespoke heading.
+      const titles = titlesFrom(readFixtureHeadings(wf.code, stage), rec.sources)
+      if (Object.keys(titles).length > 0) decision.titles = titles
 
       provenance[proposalId] = rec.sources
       storyObjects.push({ decision, rec })
