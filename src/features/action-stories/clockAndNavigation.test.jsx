@@ -125,7 +125,7 @@ describe('T5 — with on_clock true, Snooze is reachable and the deadline chip r
     }
     await renderApp('/action-stories/S9.96/decide/prop_clock_test')
 
-    const header = container.querySelector('header.sticky')
+    const header = container.querySelector('[data-shell-part="header"]')
     expect(header, 'the page must have rendered').toBeTruthy()
     expect(header.textContent, 'the deadline chip has never rendered on a shipped object').toMatch(/Due in \d+[hd]|Overdue/)
   })
@@ -195,10 +195,10 @@ describe('T15 — an ambiguous story surfaces a VISIBLE error, not a silently mi
 
     // The proposal still renders — it was addressed by id and never depended on the outline.
     expect(useActionStoriesStore.getState().decision.proposal_id).toBe('prop_amb_a')
-    expect(container.querySelector('header.sticky').textContent).toContain('Option A')
+    expect(container.querySelector('[data-shell-part="header"]').textContent).toContain('Option A')
 
     // ...and the operator is TOLD the tracker is missing, rather than left to notice.
-    const page = container.querySelector('header.sticky').parentElement
+    const page = container.querySelector('[data-shell-part="header"]').parentElement
     expect(page.textContent, 'the ambiguity must be visible on the page').toMatch(/more than one proposal|stage progress unavailable/i)
   })
 
@@ -206,13 +206,13 @@ describe('T15 — an ambiguous story surfaces a VISIBLE error, not a silently mi
     __seedProposal(twin('prop_amb_a', 'Option A'))
     __seedProposal(twin('prop_amb_b', 'Option B'))
     await renderApp(`/action-stories/${STORY}/decide/prop_amb_a`)
-    const page = container.querySelector('header.sticky').parentElement
+    const page = container.querySelector('[data-shell-part="header"]').parentElement
     expect(page.textContent).not.toContain('prop_amb_b')
   })
 
   it('an unambiguous story shows the tracker and NO notice', async () => {
     await renderApp('/action-stories/S9.1/decide/prop_s9_1_decide')
-    const page = container.querySelector('header.sticky').parentElement
+    const page = container.querySelector('[data-shell-part="header"]').parentElement
     expect(container.querySelector('nav[aria-label="Stage progress"]')).toBeTruthy()
     expect(page.textContent).not.toMatch(/more than one proposal|stage progress unavailable/i)
   })

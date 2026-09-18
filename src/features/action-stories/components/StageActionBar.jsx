@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { actionStoryPath } from '@/constants/actionStoriesRoutes';
+import { STAGE_ORDER } from '@/features/action-stories/actionStory';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
 import { resolveActionState, resolveClickIntent } from './actionEligibility';
 import { checkOperatorAction, getOperatorAction } from '@/features/action-stories/contract/actionTypes';
@@ -37,7 +40,34 @@ import Alert from '../ui/Alert';
  * running every other button disables — running two consequential mutations against one proposal at
  * once is never a sensible state.
  */
-export default function StageActionBar({ actions }) {
+/**
+ * The stage this one leads to, or null on the last stage of this story.
+ *
+ * Read from the STORY's own stage list intersected with the contract's canonical order, never from
+ * a hardcoded reason->analyze->decide->execute chain: S10.6 carries a `live` stage and several
+ * stories do not carry all four, so "the next one" is a fact about this story, not about the
+ * vocabulary. A story whose outline failed to load has no next stage, and the bar correctly offers
+ * no forward action rather than guessing one.
+ */
+function nextStageOf(story, stage) {
+  if (!story) return null;
+  const present = new Set(story.stages.map((s) => s.stage));
+  const from = STAGE_ORDER.indexOf(stage);
+  if (from < 0) return null;
+  for (let i = from + 1; i < STAGE_ORDER.length; i += 1) {
+    if (present.has(STAGE_ORDER[i])) return STAGE_ORDER[i];
+  }
+  return null;
+}
+
+/**
+ * @param {string} [stageState] - the stage's own one-line state (`status_note`). Phase 5C moved
+ *   this here from the rail's `stage_status` slot (R60): the reference prints it once, in the
+ *   footer, and a rail copy was a second rendering of one fact — the same defect Phase 4 Part 2
+ *   deleted `decision_mode` for.
+ * @param {object} [story] - this proposal's own story outline, for the forward action's target.
+ */
+export default function StageActionBar({ actions, stageState, stage, storyCode, story }) {
   const decision = useActionStoriesStore((s) => s.decision);
   const runAction = useActionStoriesStore((s) => s.runAction);
   const selection = useActionStoriesStore((s) => s.selection);
@@ -79,7 +109,20 @@ export default function StageActionBar({ actions }) {
 
   const openPendingNow = openDef ? isPending(openDef.id) : false;
 
-  if (!hasActions) return null;
+  // PHASE 5C: no longer `return null` for "this stage has no eligible actions". The bar used to
+  // disappear entirely on any such stage — which is most reason and analyze screens — taking the
+  // stage's own state line and the route forward with it. Every reference stage screen ends in this
+  // bar (S10.1-1-reason.dc.html:392), so what is conditional is the ACTION BUTTONS, not the bar.
+  //
+  // A LOCKED PROPOSAL IS THE ONE EXCEPTION, and it still renders nothing. locked.v1 is a teaser: it
+  // withholds the slate, the figures and the item count, and a footer offering "Continue to
+  // Analyze" would tell an unentitled viewer that a next stage exists and hand them the route to
+  // it. That is an entitlement decision, not a layout one, so the pre-5C guarantee is kept exactly
+  // rather than narrowed to "no buttons".
+  if (decision?.entitlement === 'locked') return null;
+
+  const next = nextStageOf(story, stage);
+  const nextProposalId = next ? story?.stages.find((s) => s.stage === next)?.proposal_id : null;
 
   function handleClick(actionDef, state, verdict) {
     const spec = getOperatorAction(actionDef.id);
@@ -138,8 +181,29 @@ export default function StageActionBar({ actions }) {
   }
 
   return (
-    <div className="sticky bottom-0 z-20 mx-auto flex w-full max-w-page flex-wrap items-center gap-3 border-t border-rf-border-subtle bg-rf-surface-canvas px-6 py-3.5">
-      {actions.map((actionDef) => {
+    // `shrink-0`, not `sticky`: the bar is a non-shrinking sibling of the scroll regions inside the
+    // fixed-height pane, so it occupies its own track and CANNOT overlap content (invariant I7). A
+    // sticky or fixed bar would float above the last block of a region and need padding to
+    // compensate; a sibling needs nothing, which is the stronger guarantee. Matches the reference's
+    // own `flex:0 0 auto` footer (S10.1-1-reason.dc.html:392).
+    <div
+      data-shell-part="actionbar"
+      className="z-20 mx-auto flex w-full max-w-page shrink-0 flex-wrap items-center gap-3 border-t border-rf-border-subtle bg-rf-surface-canvas px-6 py-3.5"
+    >
+      {/* The stage's own state, on the left, exactly as the reference prints it. Rendered even when
+          the proposal states none — an empty band would collapse the bar's left half and make the
+          forward action look unanchored — falling back to the stage's own name, which is a fact the
+          object always carries rather than invented copy. */}
+      <span
+        data-stage-state
+        className="min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.12em] text-rf-text-secondary"
+      >
+        {typeof stageState === 'string' && stageState.trim() !== '' ? stageState : stage}
+      </span>
+
+      {/* The buttons are what is conditional — a terminal proposal, or a stage the template gives
+          no actions, renders the bar with its state line and its forward action and no buttons. */}
+      {(hasActions ? actions : []).map((actionDef) => {
         const state = resolveActionState(actionDef, decision);
         const spec = getOperatorAction(actionDef.id);
         const pending = isPending(actionDef.id);
@@ -196,6 +260,21 @@ export default function StageActionBar({ actions }) {
           </div>
         );
       })}
+
+      {/* The route forward, on the right. Absent on the last stage of the story — the reference's
+          execute footer shows a completion chip there, never a "Continue to" (S10.1-4-execute:398).
+          This is navigation between stages of one proposal, not an operator ACTION: it mutates
+          nothing, so it is a link and it is never gated by eligibility. */}
+      {next !== null && (
+        <Link
+          data-stage-forward
+          to={actionStoryPath(storyCode, next, nextProposalId)}
+          className="ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-text-primary px-4 text-[14px] font-medium text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+        >
+          Continue to <span className="capitalize">{next}</span>
+          <i className="fa-solid fa-arrow-right text-[11px]" aria-hidden="true" />
+        </Link>
+      )}
 
       {openDef && openState && (
         <ConfirmDialog

@@ -225,7 +225,10 @@ export default function StageRenderer({ manifest, fixture, blockProps }) {
   // real depth is observable from the DOM rather than asserted from a constant. A cap that holds
   // because nothing reaches it proves nothing, which is why T26 also requires depth 4 to be REACHED.
   return (
-    <div {...depthAttrs(DEPTH_PANE)}>
+    // `h-full min-h-0` so the fixed height StagePage hands down reaches StageSections' grid — a
+    // wrapper that sizes to its content would leave the two regions with nothing to scroll within
+    // (Phase 5C, I6).
+    <div className="h-full min-h-0" {...depthAttrs(DEPTH_PANE)}>
       <StageSections sections={sections} nodesBySlot={nodesBySlot} />
     </div>
   );

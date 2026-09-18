@@ -97,9 +97,9 @@ describe('T9 — an old-format route redirects to the proposalId route and rende
     await renderAt(`/action-stories/${STORY}/decide`, proposal())
     // The header's own identity strip, and the proposal the store ended up holding. Both come from
     // the proposal fetched by the id the redirect resolved, not from the queue row it matched.
-    expect(container.querySelector('header.sticky').textContent).toContain('Reprice the autumn range')
+    expect(container.querySelector('[data-shell-part="header"]').textContent).toContain('Reprice the autumn range')
     expect(useActionStoriesStore.getState().decision.proposal_id).toBe('prop_redirect_decide')
-    expect(container.querySelector('div.sticky.bottom-0'), 'the action bar must render').toBeTruthy()
+    expect(container.querySelector('[data-shell-part="actionbar"]'), 'the action bar must render').toBeTruthy()
   })
 
   it('replaces rather than pushes, so the redirect does not sit in history', async () => {

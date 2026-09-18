@@ -25,6 +25,12 @@
  * @property {string} binding   - the canonical Decision Object path this slot always reads.
  * @property {string} blockType - must exist in manifests/blockTypes.js's BLOCK_TYPES.
  * @property {'core'|'conditional'} tier
+ * @property {'full'|'half'} [span] - how wide this slot's block is, out of a 12-column row. Absent
+ *   means `full`. Phase 5C: this is the ONLY source of a block's width. It replaced
+ *   layout/blockSizing.js, which inferred a width by branching on blockType and measuring the
+ *   content — the shape-guessing defect removed from the renderer in 3B and from the claim ledger
+ *   in 5A, found alive in the layout layer. A span is declared here, per slot, with the reference
+ *   evidence for it in the note; layout/packRows.js is the only reader.
  * @property {string} note      - what the slot means, and which corpus concepts it consolidates.
  */
 
@@ -41,7 +47,14 @@ export const SLOT_VOCABULARY = Object.freeze({
   decision_lens: { binding: 'lens', blockType: 'text', tier: 'core', note: 'Axis 6.' },
   decision_persona: { binding: 'persona', blockType: 'text', tier: 'core', note: 'Axis 7. Consolidates the corpus\'s free-text `owner`.' },
   decision_contract_class: { binding: 'contract_class', blockType: 'text', tier: 'conditional', note: 'Axis 2. Rendered only for strategic/regulated.' },
-  stage_status: { binding: 'status_note', blockType: 'text', tier: 'conditional', note: 'The stage\'s own one-line state ("Decide · 56 SKUs across 4 moves · balanced slate"). Every reference screen prints one in its footer; 38 carry a real value. Reference `footStatus`/`footerStatus`.' },
+  // stage_status WAS HERE. Removed in Phase 5C (ruling R60), for the same reason and by the same
+  // argument as `decision_mode` above. It bound `status_note` — the stage's own one-line state, the
+  // footer line 38 reference screens print — and rendered it as a rail block. The reference prints
+  // it in exactly one place: the pinned action bar at the foot of the pane
+  // (S10.1-1-reason.dc.html:392). Now that the bar exists on every stage and states it there, a rail
+  // copy would be a second rendering of one fact, which is the defect Phase 4 Part 2 deleted
+  // `decision_mode` for. `status_note` itself is unchanged on the Decision Object and is still
+  // claimed from `footStatus`/`footerStatus` — what is gone is the second place it was shown.
 
   // NOT SLOTS, deliberately. `deadline`, `impact`, `confidence` and `confidence.calibrated` are all
   // rendered ONCE, by the page's own ProposalHeader (pages/StagePage.jsx), which formats them
@@ -52,10 +65,10 @@ export const SLOT_VOCABULARY = Object.freeze({
 
   // ---- reason.v1 -----------------------------------------------------------------------------
   trigger: { binding: 'proposal.trigger', blockType: 'timeline', tier: 'conditional', note: '"What raised this" — the events that queued the proposal. Reference `trigger` (14 of 26 stories).' },
-  policy: { binding: 'proposal.policy', blockType: 'table', tier: 'core', note: 'The governing targets/limits. Reference `policy`/`targets`/`rules`/`standards`/`thresholds`/`slas`.' },
-  constraints: { binding: 'proposal.constraints', blockType: 'labelValueList', tier: 'core', note: '"Locked — owned by another lens": what is NOT negotiable in Decide. Reference `locked` (19 of 26) — the single most frequent reason-stage concept, previously dropped whole.' },
+  policy: { binding: 'proposal.policy', blockType: 'table', tier: 'core', span: 'half', note: 'The governing targets/limits. Reference `policy`/`targets`/`rules`/`standards`/`thresholds`/`slas`.' },
+  constraints: { binding: 'proposal.constraints', blockType: 'labelValueList', tier: 'core', span: 'half', note: '"Locked — owned by another lens": what is NOT negotiable in Decide. Reference `locked` (19 of 26) — the single most frequent reason-stage concept, previously dropped whole.' },
   inputs: { binding: 'proposal.inputs', blockType: 'statList', tier: 'conditional', note: 'Data the recommendation was computed from. Reference `inputs`/`sources`/`evidence`.' },
-  roles: { binding: 'proposal.roles', blockType: 'table', tier: 'conditional', note: 'The entity taxonomy this proposal reasons over. Reference `roles`/`cohorts`/`clusters` — never `agents`, which is a different concept (see `agents`).' },
+  roles: { binding: 'proposal.roles', blockType: 'table', tier: 'conditional', span: 'half', note: 'The entity taxonomy this proposal reasons over. Reference `roles`/`cohorts`/`clusters` — never `agents`, which is a different concept (see `agents`).' },
   agents: { binding: 'proposal.agents', blockType: 'roster', tier: 'core', note: 'The named MODELS credited on this proposal ("Role Classifier", "GMROI Engine"). Every reference story names them; a persona is a human, an agent is a model.' },
 
   // ---- analyze.compare.v1 --------------------------------------------------------------------
@@ -67,8 +80,8 @@ export const SLOT_VOCABULARY = Object.freeze({
   coverage: { binding: 'proposal.coverage', blockType: 'gauge', tier: 'conditional', note: 'Values measured against their own limit/ceiling. Wires the already-registered GaugeBlock.' },
   matrix: { binding: 'proposal.matrix', blockType: 'heatmapGrid', tier: 'conditional', note: 'A 2-D business matrix (the RFM grid). Wires the already-registered HeatmapGridBlock.' },
   detail_rows: { binding: 'proposal.detail_rows', blockType: 'table', tier: 'core', note: 'The row-level evidence board. Consolidates the reference\'s rows/gaps/cases/disposition.' },
-  entities: { binding: 'proposal.entities', blockType: 'itemQueue', tier: 'conditional', note: 'The entities the analysis is about — supplier scorecards, carrier lanes, candidate SKUs, role cohorts. 15 of 26 reference analyze screens carry one.' },
-  secondary_rows: { binding: 'proposal.secondary_rows', blockType: 'table', tier: 'conditional', note: 'The SECOND evidence board. A reference analyze screen routinely carries more than one (S9.2: stock-out risk, overstock, open POs); 23 of 26 carry a second board the single detail_rows slot had nowhere to put.' },
+  entities: { binding: 'proposal.entities', blockType: 'itemQueue', tier: 'conditional', span: 'half', note: 'The entities the analysis is about — supplier scorecards, carrier lanes, candidate SKUs, role cohorts. 15 of 26 reference analyze screens carry one.' },
+  secondary_rows: { binding: 'proposal.secondary_rows', blockType: 'table', tier: 'conditional', span: 'half', note: 'The SECOND evidence board. A reference analyze screen routinely carries more than one (S9.2: stock-out risk, overstock, open POs); 23 of 26 carry a second board the single detail_rows slot had nowhere to put.' },
 
   // ---- decide.slate.v1 -----------------------------------------------------------------------
   // The Recommendation SECTION is six independently renderable semantic units, and therefore six
@@ -99,7 +112,7 @@ export const SLOT_VOCABULARY = Object.freeze({
   guardrail_checks: { binding: 'guardrails.checks', blockType: 'checklist', tier: 'conditional', note: 'The governance checklist. Reference `checks`/`guardParts` — rows identified by `label`, `name` OR `text`.' },
 
   // ---- execute.bridge.v1 ---------------------------------------------------------------------
-  plan: { binding: 'execution.plan', blockType: 'table', tier: 'core', note: 'What will be executed, step by step. Corpus `planLine`/`stages`.' },
+  plan: { binding: 'execution.plan', blockType: 'table', tier: 'core', span: 'half', note: 'What will be executed, step by step. Corpus `planLine`/`stages`.' },
   progress: { binding: 'execution.progress_pct', blockType: 'number', tier: 'core', note: 'Typed percent complete. Corpus `progressPct` (14 uses).' },
   progress_rows: { binding: 'execution.progress_rows', blockType: 'statList', tier: 'conditional', note: 'Per-target execution state. Corpus `progressRows` (14 uses).' },
   verification: { binding: 'execution.verification', blockType: 'labelValueList', tier: 'core', note: 'What must hold true for the execution to be correct. Corpus `monitors`.' },

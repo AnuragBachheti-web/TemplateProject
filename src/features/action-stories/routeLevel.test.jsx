@@ -132,7 +132,7 @@ describe('the full runtime path, end to end at a real URL', () => {
     // Scoped to the page header. The sidebar queue also shows the title, which is correct — the
     // regression was StagePage rendering it twice within the header itself, as a pill and an <h1>.
     await renderAt('/action-stories/S9.99/decide', proposal())
-    const header = container.querySelector('header.sticky')
+    const header = container.querySelector('[data-shell-part="header"]')
     const occurrences = header.textContent.split('Reprice the autumn range').length - 1
     expect(occurrences).toBe(1)
     expect(header.querySelectorAll('h1')).toHaveLength(1)
@@ -140,8 +140,8 @@ describe('the full runtime path, end to end at a real URL', () => {
 
   it('pins the header and the action bar', async () => {
     await renderAt('/action-stories/S9.99/decide', proposal())
-    expect(container.querySelector('header.sticky')).toBeTruthy()
-    expect(container.querySelector('div.sticky.bottom-0')).toBeTruthy()
+    expect(container.querySelector('[data-shell-part="header"]')).toBeTruthy()
+    expect(container.querySelector('[data-shell-part="actionbar"]')).toBeTruthy()
   })
 
   it('renders every eligible operator action, and only those', async () => {
@@ -205,7 +205,7 @@ describe('the full runtime path, end to end at a real URL', () => {
     // Scoped to the PAGE, not the whole app: the sidebar legitimately lists all 26 Action Story
     // titles, and one of them ("Launch — Enamel Dutch Oven 5qt") contains the phrase this asserts
     // against. An unscoped assertion here fails on a coincidence rather than on a real leak.
-    const page = container.querySelector('header.sticky').parentElement
+    const page = container.querySelector('[data-shell-part="header"]').parentElement
     const text = page.textContent
     expect(text).toContain('Available on a higher plan.')
     expect(text).toContain('Contact your account team.')
@@ -214,7 +214,7 @@ describe('the full runtime path, end to end at a real URL', () => {
     // would be an entitlement bypass, not a layout choice.
     expect(text).not.toContain('Dutch Oven 5qt')
     expect(text).not.toContain('Raise 12 SKUs')
-    expect(container.querySelector('div.sticky.bottom-0')).toBeNull()
+    expect(container.querySelector('[data-shell-part="actionbar"]')).toBeNull()
   })
 
   it('omits an empty narrative instead of rendering an "Empty." card', async () => {
@@ -263,7 +263,7 @@ describe('Action Story ↔ stage navigation (C, D, E, H, I)', () => {
 
   it.each(STAGES)('D. deep-links straight into S9.99 at the %s stage', async (stage) => {
     await renderAt(`/action-stories/S9.99/${stage}`, proposal({ stage }))
-    const page = container.querySelector('header.sticky').parentElement
+    const page = container.querySelector('[data-shell-part="header"]').parentElement
     // Same parent Action Story identity at every stage — the breadcrumb names the story, not a
     // stage-specific pseudo-story.
     expect(page.textContent).toContain('S9.99')
@@ -294,14 +294,14 @@ describe('Action Story ↔ stage navigation (C, D, E, H, I)', () => {
 
   it('H. refreshing a deep-linked stage preserves the same Action Story identity', async () => {
     await renderAt('/action-stories/S9.99/analyze', proposal({ stage: 'analyze' }))
-    const first = container.querySelector('header.sticky').textContent
+    const first = container.querySelector('[data-shell-part="header"]').textContent
     act(() => root.unmount())
     container.remove()
 
     // A genuine remount at the same URL — no in-memory state carried across.
     useActionStoriesStore.getState().clearDecision()
     await renderAt('/action-stories/S9.99/analyze', proposal({ stage: 'analyze' }))
-    expect(container.querySelector('header.sticky').textContent).toBe(first)
+    expect(container.querySelector('[data-shell-part="header"]').textContent).toBe(first)
     expect(useActionStoriesStore.getState().decision.story_code).toBe('S9.99')
   })
 

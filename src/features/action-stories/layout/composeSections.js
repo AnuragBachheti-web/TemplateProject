@@ -35,7 +35,7 @@
 
 import { isGridEligible } from './gridEligibility'
 import { RAIL_SECTION_IDS as LEGACY_RAIL_SECTION_IDS } from './compactSlots'
-import { inferSpan } from './blockSizing'
+import { packRow, spanOf, SPANS } from './packRows'
 
 const MIN_SPAN = 1
 const MAX_SPAN = 12
@@ -84,49 +84,47 @@ function groupingFor(item) {
   if (isGridEligible(item.blockType, item.value)) {
     return { key: HEURISTIC_GROUP, span: MIN_SPAN, explicit: false, flowable: false }
   }
-  // Not scalar-grid-eligible and not an authored group: this is exactly the "metadata is missing,
-  // derive a conservative fallback from block semantics" case (RENDERED_UI_FORENSIC_AUDIT.md's
-  // successor task) — a table/itemQueue/chart/large-object gets a real span (explicit if the
-  // manifest declared one, inferred from its own shape otherwise) and becomes eligible for the
-  // mixed-width flow-packing pass instead of automatically claiming a full row.
-  const span = sanitizeSpan(item.layout?.span, inferSpan(item.blockType, item.value))
-  return { key: null, span, explicit: false, flowable: true }
+  // PHASE 5C. This branch used to read `inferSpan(item.blockType, item.value)` — a width chosen by
+  // branching on the block type and then measuring the content. Ruling R58 deleted that module. The
+  // width now comes from the SLOT's own declaration (templates/slotVocabulary.js), read by
+  // packRows.js, and an authored `layout.span` on the manifest block still overrides it because
+  // that is declared data rather than an inference.
+  //
+  // Every non-grid block is flowable now, not just the ones a heuristic happened to size: `packRow`
+  // decides what shares a row, and a block whose slot declares nothing is simply `full` and gets its
+  // own row — the same outcome as before, reached by declaration instead of by measurement.
+  //
+  // NO `layout.span` OVERRIDE ON THIS PATH, deliberately. An authored span belongs to an explicit
+  // `layout.group` — it is how a ComposedPanel arranges its own members — and all four templates
+  // use it only there. Honouring it here too would give a block two possible widths from two
+  // sources, and the packer would still have to decide pairing from one of them; one source is the
+  // point (I1).
+  return { key: null, span: SPANS[spanOf(item.slotName)], explicit: false, flowable: true }
 }
 
-// A flow row never claims more than this many of its 12 columns — packing stops and starts a new
-// row once the next item would exceed it (a table needing 8 doesn't squeeze in next to one that
-// already used 6). Equal to MAX_SPAN by definition (a 12-column grid), named separately here only
-// for readability at each call site.
-const FLOW_ROW_CAPACITY = MAX_SPAN
+// FLOW_ROW_CAPACITY was here — the greedy bin-packer's budget, orphaned by Phase 5C along with the
+// four inferred widths it existed to ration. With two declared spans a row is one block or two
+// halves and there is nothing left to ration.
 
 /**
- * Packs a run of adjacent "flowable" items (see groupingFor) into shared rows by simple greedy
- * left-to-right bin-packing, preserving manifest order (the declared order is always the ordering
- * authority — packing only ever decides which already-adjacent items share a row, never reorders
- * them to fill space better). A row that ends up with only ONE member — the next item's span
- * always overflowed it, or it was the last flowable item in the run — is emitted as a plain
- * `single` (full-width) row instead of a lone, oddly-narrow "shared" row with empty space beside
- * it: a span suggestion only means anything when there's an actual sibling to share the row with
- * (the same principle StageSections.jsx's `LoneScalarStrip` already applies one level up).
+ * Packs a run of adjacent "flowable" items into rows, by the declared-span rule in packRows.js:
+ * consecutive halves pair, everything else takes its own row, order is never changed.
+ *
+ * WHAT THIS USED TO BE. A greedy left-to-right bin-pack over four inferred widths (12/8/6/4), which
+ * could put a 6 beside a 4 and leave 2 columns empty, or fit three items whose widths happened to
+ * sum to 12. With two spans and a pairing rule there is nothing to bin-pack: a row is one block or
+ * two halves, and a row can never be part-empty.
+ *
+ * A row of ONE is emitted as a `single` — a full-width row — whatever that block's slot declared.
+ * That is the unpaired-half rule: a lone half renders full, never as a narrow cell with empty space
+ * beside it (the same principle StageSections.jsx's `LoneScalarStrip` applies one level up).
  */
 function packFlowables(flowItems) {
-  const rows = []
-  let current = null
-  let usedSpan = 0
-
-  for (const { slotName, span } of flowItems) {
-    if (current && usedSpan + span <= FLOW_ROW_CAPACITY) {
-      current.items.push({ slotName, span })
-      usedSpan += span
-    } else {
-      current = { items: [{ slotName, span }] }
-      rows.push(current)
-      usedSpan = span
-    }
-  }
-
-  return rows.map((row) =>
-    row.items.length === 1 ? { type: 'single', slotName: row.items[0].slotName } : { type: 'flow', items: row.items },
+  const byName = new Map(flowItems.map((item) => [item.slotName, item]))
+  return packRow(flowItems.map((item) => item.slotName)).map((row) =>
+    row.slots.length === 1
+      ? { type: 'single', slotName: row.slots[0] }
+      : { type: 'flow', items: row.slots.map((name) => ({ slotName: name, span: byName.get(name).span })) },
   )
 }
 

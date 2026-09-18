@@ -180,7 +180,7 @@ describe('T16 — the real App, at real URLs, for one object per template and ev
       const text = await renderAt(`/action-stories/${d.story_code}/${d.stage}/${d.proposal_id}`)
 
       expect(ERROR_COPY.test(text), `${d.proposal_id} rendered operator error copy`).toBe(false)
-      expect(container.querySelector('header.sticky'), `${d.proposal_id} rendered no page header`).toBeTruthy()
+      expect(container.querySelector('[data-shell-part="header"]'), `${d.proposal_id} rendered no page header`).toBeTruthy()
       expect(text, `${d.proposal_id} did not render its own title`).toContain(d.title)
       expect(useActionStoriesStore.getState().decision?.proposal_id, d.proposal_id).toBe(d.proposal_id)
     },

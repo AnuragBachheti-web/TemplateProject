@@ -132,7 +132,10 @@ function LoneScalarStrip({ slotName, nodesBySlot }) {
  */
 function FlowRow({ row, nodesBySlot }) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-12">
+    // `data-pack-row` marks a row the packer PAIRED, so a test can assert the 1d rule against the
+    // DOM rather than only against the packer's return value. One column below `lg:` — ruling C4's
+    // "below 1280 every span collapses to full", expressed as the grid simply not splitting.
+    <div data-pack-row className="grid grid-cols-1 gap-4 lg:grid-cols-12">
       {row.items.map(({ slotName, span }) => (
         <div key={slotName} data-block-slot={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
           {nodesBySlot[slotName]}
@@ -212,35 +215,53 @@ export default function StageSections({ sections, nodesBySlot }) {
   const hasRail = rail.length > 0;
 
   return (
-    <div className={`grid grid-cols-1 gap-4 px-6 py-4 lg:items-start ${hasRail ? 'lg:grid-cols-[minmax(0,1fr)_300px]' : ''}`}>
+    // TWO INDEPENDENT SCROLL REGIONS (Phase 5C, invariant I6), which is what the reference builds:
+    //   S10.1-1-reason.dc.html:196  flex:1;min-height:0;display:grid;grid-template-columns:1fr 320px;
+    //                               grid-template-rows:minmax(0,1fr)
+    //   :198 main   min-width:0;min-height:0;overflow-y:auto
+    //   :333 aside  min-width:0;min-height:0;overflow-y:auto
+    //
+    // `lg:grid-rows-[minmax(0,1fr)]` is the part that is easy to leave out and without which none
+    // of it works: a grid row defaults to `auto`, which sizes to content, so both columns would
+    // grow to their full height and the overflow would never engage no matter what the children
+    // declare. Each column then needs `min-h-0` for the same reason one level down.
+    //
+    // Below `lg:` the two columns collapse to one and this becomes a single ordinary column — the
+    // regions stack and the page-level container scrolls them together, which is the honest
+    // behaviour at a width that cannot show a rail beside the main content at all.
+    <div className={`grid h-full min-h-0 grid-cols-1 gap-4 px-6 py-4 lg:items-start lg:grid-rows-[minmax(0,1fr)] ${hasRail ? 'lg:grid-cols-[minmax(0,1fr)_300px]' : ''}`}>
       {/* Rail sections come FIRST in source order — a screen-reader/keyboard user reading linearly
           hits decision-critical context (can I approve? what's blocking?) before the supporting
           analysis, even though `lg:order-2` visually places this column on the right. Source order
           and visual order are deliberately decoupled here via CSS `order`, not the same thing. */}
       {hasRail && (
-        <aside aria-label="Context" className="flex min-w-0 flex-col gap-3 lg:order-2">
+        <aside
+          aria-label="Context"
+          data-scroll-region="rail"
+          className="flex min-h-0 min-w-0 flex-col gap-3 overflow-y-auto lg:order-2"
+        >
           {rail.map((section, i) => (
-            <div key={section.id ?? `rail-${i}`} {...depthAttrs(DEPTH_SECTION)}>
+            <div key={section.id ?? `rail-${i}`} className="shrink-0" {...depthAttrs(DEPTH_SECTION)}>
               <RailPanel section={section} nodesBySlot={nodesBySlot} />
             </div>
           ))}
         </aside>
       )}
 
-      <div className="flex min-w-0 flex-col gap-4 lg:order-1">
+      <div data-scroll-region="main" className="flex min-h-0 min-w-0 flex-col gap-4 overflow-y-auto lg:order-1">
         {main.map((section, i) =>
           section.title ? (
             <section
               key={section.id ?? `main-${i}`}
               aria-label={section.title}
-              className="flex flex-col gap-2"
+              className="flex shrink-0 flex-col gap-2"
               {...depthAttrs(DEPTH_SECTION)}
             >
               <SectionHeading title={section.title} />
               <MainRows rows={section.rows} nodesBySlot={nodesBySlot} />
             </section>
           ) : (
-            <div key={`unsectioned-${section.id ?? i}`} {...depthAttrs(DEPTH_SECTION)}>
+            <div key={`unsectioned-${section.id ?? i}`} className="shrink-0" {...depthAttrs(DEPTH_SECTION)}>
               <MainRows rows={section.rows} nodesBySlot={nodesBySlot} />
             </div>
           ),

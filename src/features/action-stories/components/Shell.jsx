@@ -196,7 +196,7 @@ export default function Shell() {
   }
 
   return (
-    <div className="flex h-screen bg-rf-surface-sunken font-sans text-rf-text-primary">
+    <div data-shell-part="frame" className="flex h-screen bg-rf-surface-sunken font-sans text-rf-text-primary">
       {navOpen && (
         <button
           type="button"
@@ -252,7 +252,22 @@ export default function Shell() {
 
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar onOpenNav={() => setNavOpen(true)} />
-        <main id="main-content" className="flex-1 overflow-y-auto bg-rf-surface-sunken">
+        {/* PHASE 5C. This element used to be the page's ONE scroll container, wrapping the whole of
+            StagePage — so the proposal header, the stage tracker and the action bar all scrolled
+            away with the content, and the two regions inside shared a single scrollbar. A long
+            slate dragged the rail's context out of view, which is the opposite of what a rail is
+            for.
+
+            It no longer scrolls anything. It is a fixed-height, non-scrolling frame (`min-h-0` so
+            it may be shorter than its content, `overflow-hidden` so nothing escapes it), and the
+            page inside owns its own vertical composition — StagePage splits it into a pinned
+            header, two independently scrolling regions and a pinned action bar, exactly as the
+            reference builds it (S10.1-1-reason.dc.html:196-198, 333, 392).
+
+            The route's own page is now responsible for its scrolling: ActionStoriesHome declares
+            its own `overflow-y-auto`, because a list page and a stage pane want different
+            behaviour and this element can no longer decide for both. */}
+        <main id="main-content" className="flex min-h-0 flex-1 flex-col overflow-hidden bg-rf-surface-sunken">
           <Outlet />
         </main>
       </div>

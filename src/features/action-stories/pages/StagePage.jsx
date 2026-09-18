@@ -37,7 +37,13 @@ function ProposalHeader({ decision, story, storyProblem }) {
   const due = decision.on_clock && decision.deadline ? deadlineLabel(decision.deadline) : null;
 
   return (
-    <header className="sticky top-0 z-20 border-b border-rf-border-subtle bg-rf-surface-canvas px-6 pt-4 pb-3">
+    // PHASE 5C: `sticky top-0` became `shrink-0`. Sticky was how this stayed put while the whole
+    // page scrolled underneath it; the page no longer scrolls, so the header is simply a
+    // non-shrinking band above the scroll regions — which is what the reference does
+    // (S10.1-1-reason.dc.html: the header sits outside the `flex:1;min-height:0` grid entirely).
+    // A sticky element inside a non-scrolling parent is inert, and leaving it would have implied a
+    // scroll relationship that no longer exists.
+    <header data-shell-part="header" className="z-20 shrink-0 border-b border-rf-border-subtle bg-rf-surface-canvas px-6 pt-4 pb-3">
       <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.1em] text-rf-text-tertiary">
         <Link to={actionStoriesIndexPath()} className="transition-colors hover:text-rf-text-primary">
           Action Stories
@@ -91,7 +97,7 @@ function ProposalHeader({ decision, story, storyProblem }) {
           (code, stages, activeStageKey) — restoring the two-segment route restored it verbatim; it
           was orphaned, not obsolete. Every step links to the SAME Action Story at another stage. */}
       {story && story.stages.length > 1 && (
-        <div className="mt-3 border-t border-rf-border-subtle pt-2.5">
+        <div data-shell-part="tracker" className="mt-3 border-t border-rf-border-subtle pt-2.5">
           <StepTracker code={story.story_code} stages={story.stages} activeStageKey={decision.stage} />
         </div>
       )}
@@ -174,7 +180,12 @@ function StagePageContent({ storyCode, stageKey, proposalId, onRetry }) {
     : undefined;
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-page flex-col">
+    // THE PANE IS A FIXED-HEIGHT SHELL (Phase 5C, invariant I6). Three bands: a header that does
+    // not shrink, a regions block that takes the remaining height and is allowed to be shorter than
+    // its content (`min-h-0` — without it a flex child refuses to shrink below its content and the
+    // scroll never engages), and an action bar that does not shrink. Nothing here scrolls; the two
+    // regions inside StageSections each own their own overflow.
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-page flex-col">
       <ProposalHeader decision={current} story={story} storyProblem={storyProblem} />
       <MockTransportNotice />
 
@@ -184,11 +195,21 @@ function StagePageContent({ storyCode, stageKey, proposalId, onRetry }) {
           figures, but a narrative printed by the page shell leaked the real business prose anyway.
           Everything a viewer sees below the header now comes through the selected template. */}
 
-      <div className="flex-1">
+      <div data-shell-part="regions" className="min-h-0 flex-1">
         <StageRenderer manifest={manifest} fixture={current} blockProps={blockProps} />
       </div>
 
-      <StageActionBar actions={manifest.actions} />
+      {/* The stage's own state and the route forward, in the one place the reference puts them
+          (S10.1-1-reason.dc.html:392). `statusNote` is the SAME value the rail used to render
+          through the `stage_status` slot — that slot is gone from all four templates (R60), so this
+          is now its only site, exactly as Phase 4 Part 2 did for the mode axis. */}
+      <StageActionBar
+        actions={manifest.actions}
+        stageState={current.status_note}
+        stage={current.stage}
+        storyCode={current.story_code}
+        story={story}
+      />
     </div>
   );
 }

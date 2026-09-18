@@ -16,11 +16,6 @@
       "id": "assurance",
       "title": "Assurance",
       "region": "rail"
-    },
-    {
-      "id": "context",
-      "title": "Context",
-      "region": "rail"
     }
   ],
   "blocks": [
@@ -154,16 +149,6 @@
         "path": "execution.arming",
         "op": "exists"
       }
-    },
-    {
-      "slotName": "stage_status",
-      "blockType": "text",
-      "binding": "status_note",
-      "section": "context",
-      "when": {
-        "path": "status_note",
-        "op": "truthy"
-      }
     }
   ],
   "actions": [
@@ -172,7 +157,7 @@
       "label": "Start execution",
       "kind": "primary",
       "action": "approve",
-      "loadingLabel": "Starting\u2026",
+      "loadingLabel": "Starting…",
       "confirm": {
         "required": true,
         "title": "Start execution?",

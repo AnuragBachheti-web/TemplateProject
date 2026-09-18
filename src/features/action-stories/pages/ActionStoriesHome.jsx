@@ -87,7 +87,10 @@ function ActionStoriesHomeContent({ onRetry }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-page px-6 py-5">
+    // Owns its own scrolling since Phase 5C: Shell's `<main>` stopped being the page's scroll
+    // container so a stage pane could split into independently scrolling regions, and a list page
+    // wants the plain single-column scroll it always had.
+    <div className="mx-auto min-h-0 w-full max-w-page flex-1 overflow-y-auto px-6 py-5">
       <h1
         className="font-serif text-[28px] font-normal leading-[1.15] tracking-[-0.02em] text-rf-text-primary"
         style={{ fontVariationSettings: "'opsz' 144" }}

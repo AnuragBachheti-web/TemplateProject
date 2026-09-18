@@ -203,14 +203,21 @@ describe('T13 — one object per template renders unchanged below the header', (
     // 51 in Phase 3C, 50 after Phase 4 Part 2 REMOVED `decision_mode` (the header states the mode,
     // and the slot existed only so a rail block could state it a second time), 51 again now.
     //
+    // PHASE 5C DELTA: 51 -> 50. Ruling R60 removes `stage_status`. The stage's own one-line state
+    // is printed once by the pinned action bar at the foot of the pane, where the reference prints
+    // it (S10.1-1-reason.dc.html:392); the rail slot was a second rendering of one fact, and Phase 4
+    // Part 2 deleted `decision_mode` on exactly that argument. The registry below is unchanged: no
+    // block type left with it, because `text` still serves nine other slots.
+    //
     // PHASE 5A DELTA: 50 -> 51. Ruling R50 adds `threshold_control`. The registry above is still
     // BYTE-IDENTICAL, which is the thing this test is really guarding: the new slot renders through
     // `slider`, a block that has been registered and unreachable since the vocabulary was written.
     // A slot leaving is a vocabulary shrinking, a slot arriving for an EXISTING block is a concept
     // finding its home, and a block type arriving unnoticed is the failure. Only the third would
     // change the array above.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('decision_mode')
+    expect(Object.keys(SLOT_VOCABULARY)).not.toContain('stage_status')
     expect(Object.keys(SLOT_VOCABULARY)).toContain('threshold_control')
   })
 
@@ -224,16 +231,21 @@ describe('T13 — one object per template renders unchanged below the header', (
       const template = (await import(`./templates/${id}.json`)).default
       counts[id] = template.blocks.length
     }
+    // PHASE 5C DELTA: every stage template is down one more — the `stage_status` block (R60).
+    // execute.bridge.v1 also loses its `context` SECTION, because `stage_status` was its only
+    // member and a declared-but-unfillable section is what referenceFidelity.test.js §5 forbids.
+    // locked.v1 is untouched again: it declares no rail and never carried the slot.
+    //
     // PHASE 5A DELTA: decide.slate.v1 18 -> 19. One block added, for `threshold_control` (R50), in
     // the `guardrails` rail section beside `coverage` — a threshold the decision is measured against
     // is a guardrail. It is `when`-gated on `proposal.threshold_control`, which exactly one object in
     // the corpus carries, so the other 25 decide screens render exactly as before. The other four
     // templates are untouched by this phase.
     expect(counts).toEqual({
-      'reason.v1': 10,            // was 11
-      'analyze.compare.v1': 14,   // was 15
-      'decide.slate.v1': 19,      // was 19, then 18 in Phase 4, then 19 again in Phase 5A
-      'execute.bridge.v1': 14,    // was 15
+      'reason.v1': 9,             // 11 -> 10 (Phase 4) -> 9 (5C)
+      'analyze.compare.v1': 13,   // 15 -> 14 (Phase 4) -> 13 (5C)
+      'decide.slate.v1': 18,      // 19 -> 18 (Phase 4) -> 19 (5A) -> 18 (5C)
+      'execute.bridge.v1': 13,    // 15 -> 14 (Phase 4) -> 13 (5C)
       'locked.v1': 3,             // unchanged — it declares no rail at all
     })
     for (const id of ['reason.v1', 'analyze.compare.v1', 'decide.slate.v1', 'execute.bridge.v1']) {

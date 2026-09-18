@@ -347,42 +347,77 @@ describe('composeSections — order is always authoritative from manifest.blocks
   });
 });
 
-describe('composeSections — mixed-width flow packing (main-region only): non-scalar blocks with an inferred or explicit span can share a row', () => {
-  it('two compact tables (span 6 each, inferred from a small column count) pack into one flow row', () => {
+describe('composeSections — flow packing from DECLARED spans (main-region only)', () => {
+  // REWRITTEN IN PHASE 5C. These cases used to exercise `blockSizing.js`'s inferSpan: a table's
+  // width came from counting its columns, and the packer greedily bin-packed four widths
+  // (12/8/6/4) into a 12-column row — so "two compact tables pack" and "8 + 4 pack" and
+  // "4 + 4 + 4 pack" were all statements about a measurement. Ruling R58 deleted that module: a
+  // width is now DECLARED on the slot (templates/slotVocabulary.js) and there are two of them.
+  //
+  // So the cases change shape. A slot pairs because its VOCABULARY ENTRY says `span: 'half'` and
+  // its neighbour's does too — never because of what its data happens to look like. The tests below
+  // use real vocabulary slots for that reason: a fabricated slot name has no declaration, which is
+  // itself the correct outcome (undeclared means full width).
+
+  it('two slots DECLARING half pack into one flow row', () => {
+    // `policy` and `constraints` both declare `span: 'half'` — 5 and 10 reference screens
+    // respectively pair them in a `grid-template-columns:1fr 1fr` row.
     const items = [
-      item('small1', 'table', { value: [{ a: 1, b: 2 }] }),
-      item('small2', 'table', { value: [{ a: 1, b: 2 }] }),
+      item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
+      item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
     ];
     const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([{ type: 'flow', items: [{ slotName: 'small1', span: 6 }, { slotName: 'small2', span: 6 }] }]);
+    expect(main[0].rows).toEqual([
+      { type: 'flow', items: [{ slotName: 'policy', span: 6 }, { slotName: 'constraints', span: 6 }] },
+    ]);
   });
 
-  it('an explicit layout.span of 8 + 4 pack into one row (the task\'s own worked example)', () => {
+  it('a half whose neighbour is full does not pair — both take their own full-width row', () => {
+    // `trigger` declares nothing, so it is full. This is the unpaired-half rule: the half widens
+    // rather than rendering as a narrow cell with empty space beside it.
     const items = [
-      item('a', 'table', { value: [{ x: 1 }], layout: { span: 8 } }),
-      item('b', 'table', { value: [{ x: 1 }], layout: { span: 4 } }),
+      item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
+      item('trigger', 'timeline', { value: [{ what: 'x' }] }),
     ];
     const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([{ type: 'flow', items: [{ slotName: 'a', span: 8 }, { slotName: 'b', span: 4 }] }]);
+    expect(main[0].rows).toEqual([
+      { type: 'single', slotName: 'policy' },
+      { type: 'single', slotName: 'trigger' },
+    ]);
   });
 
-  it('three span-4 blocks pack into one row (4+4+4=12)', () => {
-    // 'table' (not 'object') — a small object would be scalar-grid-eligible on its own and take
-    // the OLD heuristic path instead of this new flow-packing one; a table never is.
+  it('three consecutive halves pair the first two and widen the third', () => {
     const items = [
-      item('a', 'table', { value: [{ x: 1 }], layout: { span: 4 } }),
-      item('b', 'table', { value: [{ x: 1 }], layout: { span: 4 } }),
-      item('c', 'table', { value: [{ x: 1 }], layout: { span: 4 } }),
+      item('policy', 'table', { value: [{ a: 1 }] }),
+      item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
+      item('roles', 'table', { value: [{ name: 'r' }] }),
     ];
     const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([{
-      type: 'flow',
-      items: [{ slotName: 'a', span: 4 }, { slotName: 'b', span: 4 }, { slotName: 'c', span: 4 }],
-    }]);
+    expect(main[0].rows).toEqual([
+      { type: 'flow', items: [{ slotName: 'policy', span: 6 }, { slotName: 'constraints', span: 6 }] },
+      { type: 'single', slotName: 'roles' },
+    ]);
   });
 
-  it('two wide (span 12) tables never pack together — each stays its own full-width single row', () => {
-    const wideRow = [{ a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 }]; // 6 meaningful columns -> span 12
+  it('a slot with no declared span is full width, whatever its data looks like', () => {
+    // The inference this phase removed would have sized both of these from their column counts and
+    // packed them. `detail_rows` declares no span (ruling R59 held it out: one file of reference
+    // evidence against 25 objects), so a two-column table and a six-column table are now treated
+    // identically — which is the point.
+    const narrow = [{ a: 1, b: 2 }];
+    const wide = [{ a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 }];
+    const { main } = composeSections(
+      [item('detail_rows', 'table', { value: narrow }), item('ledger', 'table', { value: wide })],
+      undefined,
+    );
+    expect(main[0].rows).toEqual([
+      { type: 'single', slotName: 'detail_rows' },
+      { type: 'single', slotName: 'ledger' },
+    ]);
+  });
+
+  it('two undeclared tables never pack together — each stays its own full-width single row', () => {
+    const wideRow = [{ a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 }];
     const items = [item('t1', 'table', { value: wideRow }), item('t2', 'table', { value: wideRow })];
     const { main } = composeSections(items, undefined);
     expect(main[0].rows).toEqual([
@@ -391,28 +426,16 @@ describe('composeSections — mixed-width flow packing (main-region only): non-s
     ]);
   });
 
-  it('a lone flowable item (nothing fits beside it) renders as a full-width single row, never a 1-item flow row', () => {
-    const items = [item('solo', 'table', { value: [{ a: 1, b: 2 }] })]; // would infer span 6, but alone
+  it('a lone flowable item renders as a full-width single row, never a 1-item flow row', () => {
+    const items = [item('policy', 'table', { value: [{ a: 1, b: 2 }] })]; // declares half, but alone
     const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([{ type: 'single', slotName: 'solo' }]);
-  });
-
-  it('a span-8 item followed by a span-6 item does NOT pack (8+6=14 > 12) — each gets its own row', () => {
-    const items = [
-      item('a', 'table', { value: [{ p: 1, q: 2, r: 3, s: 4 }], layout: { span: 8 } }), // alone -> single
-      item('b', 'table', { value: [{ p: 1, q: 2 }], layout: { span: 6 } }), // alone -> single
-    ];
-    const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([
-      { type: 'single', slotName: 'a' },
-      { type: 'single', slotName: 'b' },
-    ]);
+    expect(main[0].rows).toEqual([{ type: 'single', slotName: 'policy' }]);
   });
 
   it('flow packing never applies inside the RAIL region — rail keeps its existing single-shared-panel composition', () => {
     const items = [
-      item('a', 'table', { value: [{ x: 1, y: 2 }], section: 'guardrails', region: 'rail' }),
-      item('b', 'table', { value: [{ x: 1, y: 2 }], section: 'guardrails', region: 'rail' }),
+      item('policy', 'table', { value: [{ x: 1, y: 2 }], section: 'guardrails', region: 'rail' }),
+      item('constraints', 'labelValueList', { value: [{ label: 'x' }], section: 'guardrails', region: 'rail' }),
     ];
     const { rail } = composeSections(items, [{ id: 'guardrails', title: 'Guardrails', region: 'rail' }]);
     // Both land as independent `single` rows inside the one shared rail panel — never a `flow` row.
@@ -432,13 +455,13 @@ describe('composeSections — mixed-width flow packing (main-region only): non-s
     const items = [
       item('scalar1', 'text'),
       item('scalar2', 'number'),
-      item('t1', 'table', { value: [{ a: 1, b: 2 }] }),
-      item('t2', 'table', { value: [{ a: 1, b: 2 }] }),
+      item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
+      item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
     ];
     const { main } = composeSections(items, undefined);
     expect(main[0].rows).toEqual([
       { type: 'grid', explicit: false, items: [{ slotName: 'scalar1', span: 1 }, { slotName: 'scalar2', span: 1 }] },
-      { type: 'flow', items: [{ slotName: 't1', span: 6 }, { slotName: 't2', span: 6 }] },
+      { type: 'flow', items: [{ slotName: 'policy', span: 6 }, { slotName: 'constraints', span: 6 }] },
     ]);
   });
 });

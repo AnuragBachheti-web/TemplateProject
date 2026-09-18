@@ -414,7 +414,7 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     }
   })
 
-  it('the slot vocabulary has 51 slots — 3C re-pointed, Phase 4 removed one, 5A added one (C3)', () => {
+  it('the slot vocabulary has 50 slots — Phase 4 and 5C each removed one, 5A added one (C3)', () => {
     // 51 through Phase 3C. Phase 4 Part 2 removed `decision_mode` when the duplicate rail render of
     // the mode axis was deleted; the slot had no other consumer. Still nothing ADDED, which is what
     // this guard is for — the vocabulary may shrink when a concept turns out to be redundant, and
@@ -424,9 +424,12 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     // claimedThresholds.test.js's T17/T19 ever since, which no slot bound and nothing rendered — with
     // `slider` registered and unreachable in the block registry. No new block, no variant, no CSS:
     // SliderBlock, its `steps` path in StageRenderer and its full-width layout rule already existed.
+    // PHASE 5C DELTA: 51 -> 50. Ruling R60 removes `stage_status` — the stage's own state line is
+    // now printed once, by the pinned action bar, where the reference prints it. Same treatment and
+    // same argument as Phase 4 Part 2's `decision_mode` removal.
     // That is also why slot-targeted blockTypes moves 16 -> 17 while BLOCK_TYPES stays at 19: a
     // concept found a home in a block that was already there, which is the outcome I6 asks for.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
     expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(17)
   })

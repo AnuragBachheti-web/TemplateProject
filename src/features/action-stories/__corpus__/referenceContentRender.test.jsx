@@ -151,7 +151,13 @@ describe('representative screens show the reference\'s own business content', ()
     expect(text).toContain('Bamboo canister 1.2L') // focus_rows drill-down
     expect(text).toContain('Conservative') // alternatives
     expect(text).toContain('GMROI target ≥ 2.4') // guardrail checks
-    expect(text).toContain('Decide · 56 SKUs across 4 moves') // stage status
+    // PHASE 5C (R60): `status_note` moved OUT of the pane. It was the rail's `stage_status` slot;
+    // the reference prints it once, in the pinned action bar at the foot of the pane, and that bar
+    // is rendered by StagePage rather than by StageRenderer — so it is correctly absent from the
+    // pane this test renders. It is not lost: paneLayout.test.jsx's T64 asserts it renders exactly
+    // once in the full app, and that no template declares the slot any more.
+    expect(by('prop_s9_1_decide').status_note, 'the stage state is still on the object')
+      .toContain('Decide · 56 SKUs across 4 moves')
     expect(text).toContain('Within limits') // verdict, through the enum label
   })
 
@@ -193,6 +199,8 @@ describe('representative screens show the reference\'s own business content', ()
     expect(text).toContain('Dutch Oven 5qt') // targets <- coverRows
     expect(text).toContain('Spend caps +180%') // verification <- clauseRows
     expect(text).toContain('Ad budgets never went dark') // ledger <- annotations
-    expect(text).toContain('Live · hour 38 of 96') // stage status
+    // Same as the decide case above — the stage state is in the action bar now (R60).
+    expect(by('prop_s10_6_live').status_note, 'the stage state is still on the object')
+      .toContain('Live · hour 38 of 96')
   })
 })
