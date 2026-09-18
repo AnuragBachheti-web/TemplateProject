@@ -27,7 +27,6 @@ import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 import fs from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
 
 import StageRenderer from '../components/StageRenderer'
 import { resolveTemplate } from '../templates/templateRegistry'
@@ -36,6 +35,7 @@ import { SLOT_VOCABULARY } from '../templates/slotVocabulary'
 import { BLOCK_REGISTRY } from './index'
 import { BLOCK_TYPES } from '../manifests/blockTypes'
 import dataset from '@/features/action-stories/__corpus__/normalized/dataset.json'
+import provenance from '@/features/action-stories/__corpus__/normalized/provenance.json'
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true
 if (!globalThis.ResizeObserver) {
@@ -48,9 +48,16 @@ if (!globalThis.ResizeObserver) {
 
 const BLOCKS_DIR = path.resolve(__dirname)
 
-/** The three approved re-points (R28/R29), with the object count each renders on. */
+/**
+ * The three approved re-points (R28/R29), with the object count each renders on.
+ *
+ * PHASE 5A DELTA: `trigger` 15 -> 14. prop_s9_11_reason drops out. Its trigger was claimed from
+ * `opportunity` — a metric list, never a chronology — and ruling R48 withdrew the claim rather than
+ * landing it on a block that would merely make it look resolved. See T34's R31 entry below, which
+ * this phase replaces, and __corpus__/shapeLedger.test.jsx's T55/T58.
+ */
 const REPOINTS = [
-  { slot: 'trigger', from: 'table', to: 'timeline', renders: 15 },
+  { slot: 'trigger', from: 'table', to: 'timeline', renders: 14 },
   { slot: 'flags', from: 'table', to: 'timeline', renders: 2 },
   { slot: 'recommendation_metrics', from: 'table', to: 'statList', renders: 9 },
 ]
@@ -116,9 +123,11 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
     expect(broken, `${broken.length} object(s) failed`).toEqual([])
   })
 
-  it('timeline serves BOTH its slots — 17 objects, and the two sets are disjoint', () => {
-    // 15 + 2. I6's test: a blockType earning its place serves a concept, not a slot.
-    expect(objectsRendering(['trigger', 'flags'])).toHaveLength(17)
+  it('timeline serves BOTH its slots — 16 objects, and the two sets are disjoint', () => {
+    // 14 + 2. I6's test: a blockType earning its place serves a concept, not a slot.
+    // PHASE 5A DELTA: 17 -> 16, entirely from `trigger` losing prop_s9_11_reason (see REPOINTS).
+    // `flags` is untouched. The block still serves two slots, which is what this assertion is for.
+    expect(objectsRendering(['trigger', 'flags'])).toHaveLength(16)
     const trig = new Set(objectsRendering(['trigger']).map((d) => d.proposal_id))
     const flag = objectsRendering(['flags']).map((d) => d.proposal_id)
     expect(flag.filter((id) => trig.has(id)), 'the counts double-count an object').toEqual([])
@@ -126,12 +135,16 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
 
   it('statList gains a FIFTH slot but no new objects — stated, not implied', () => {
     // All 9 recommendation_metrics objects are decide-stage and already rendered a statList via
-    // totals_rows or basis. The block's reach is unchanged at 50; what changes is that one more
-    // slot now renders as the concept it is. Asserting this stops the change being reported as
-    // growth it is not.
+    // totals_rows or basis. The block's reach was unchanged by 3C; what changed is that one more
+    // slot renders as the concept it is. Asserting this stops the change being reported as growth
+    // it is not.
+    //
+    // PHASE 5A DELTA: 50 -> 49. prop_s9_2_decide loses `basis`, whose source `ladder` carries four
+    // money figures per row against statList's one — withdrawn under R48 and carried in
+    // shapeLedger.js's DEFERRED_SHAPES. The slot list itself is unchanged at five.
     const slots = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.blockType === 'statList').map(([n]) => n)
     expect(slots.sort()).toEqual(['basis', 'inputs', 'progress_rows', 'recommendation_metrics', 'totals_rows'])
-    expect(objectsRendering(slots)).toHaveLength(50)
+    expect(objectsRendering(slots)).toHaveLength(49)
   })
 
   it('R30 — statList renders the `note` every heroMetrics row carries', () => {
@@ -149,10 +162,18 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
   it('CONTEXT withdrawn: detail_rows and comparison are NOT re-pointed', () => {
     // `classifier` lands in detail_rows and `recon` in comparison. Both renderings the reference
     // shows are correct; neither is reachable without breaking the other objects on the same slot.
+    //
+    // PHASE 5A DELTA: comparison 13 -> 12. prop_s10_5_analyze loses the slot. Its source
+    // `detectBars` is {label, count, pct}, and barChart plots the first magnitude key it finds —
+    // `pct`, the bar width — so the chart printed "under 4h: 29" where the truth is 4 (pct is
+    // share-of-count: 4/14 = 29). No other barChart-classified key survives the claim ledger on that
+    // screen, so the slot is omitted rather than filled with a second-best. The other four
+    // rejections on this slot DID find a better candidate further down the same list and are
+    // unchanged in count — see shapeLedger.js's PHASE_5A_ROUTING_CHANGES. detail_rows is untouched.
     expect(SLOT_VOCABULARY.detail_rows.blockType).toBe('table')
     expect(SLOT_VOCABULARY.comparison.blockType).toBe('barChart')
     expect(objectsRendering(['detail_rows'])).toHaveLength(25)
-    expect(objectsRendering(['comparison'])).toHaveLength(13)
+    expect(objectsRendering(['comparison'])).toHaveLength(12)
   })
 })
 
@@ -160,8 +181,9 @@ describe('T34 — trigger and flags render as timestamp-labelled descriptions', 
   const triggerObjects = objectsRendering(['trigger'])
   const flagObjects = objectsRendering(['flags'])
 
-  it('covers 15 trigger objects and 2 flags objects', () => {
-    expect(triggerObjects).toHaveLength(15)
+  it('covers 14 trigger objects and 2 flags objects', () => {
+    // PHASE 5A DELTA: 15 -> 14. See REPOINTS and the R31 entry below.
+    expect(triggerObjects).toHaveLength(14)
     expect(flagObjects).toHaveLength(2)
   })
 
@@ -211,25 +233,28 @@ describe('T34 — trigger and flags render as timestamp-labelled descriptions', 
     expect(offenders, 'a timestamp is still rendering as a table column').toEqual([])
   })
 
-  it('R31 — prop_s9_11_reason renders by LABEL with no eyebrow, and the defect is pinned', () => {
-    // This object's `trigger` rows come from `opportunity` and carry {label, value, pct, meta} —
-    // a metric shape claimed into a chronology slot. It is a claim-ledger misclassification and
-    // I7 freezes the corpus, so the block does NOT special-case it: a block that branched on row
-    // shape to cope with bad data would be I2's violation arriving through the back door.
+  it('R31 IS REPLACED — the defect it pinned is fixed, and prop_s9_11_reason has no trigger at all', () => {
+    // WHAT R31 SAID. prop_s9_11_reason's `trigger` came from `opportunity` and carried
+    // {label, value, pct, meta} — a metric shape claimed into a chronology slot. Phase 3C froze the
+    // corpus (I7), so the ruling was "render 15, report 1": TimelineBlock would NOT branch on row
+    // shape to cope with bad data (that is I2's violation arriving through the back door), the rows
+    // rendered by label with no eyebrow, and this assertion kept the defect visible rather than
+    // letting the renderer absorb it.
     //
-    // What the block does is read its declared identity fields in a fixed order, exactly as
-    // CardSetBlock reads HEADLINE_KEYS. So these rows render by label, with no eyebrow, and this
-    // assertion is what keeps the defect visible instead of silently absorbed.
+    // That was the correct pin for a phase whose subject was the renderer. Phase 5A's subject is the
+    // claim ledger itself, which is where the defect always lived, so the pin is REPLACED rather
+    // than deleted (the brief's own requirement) and it now asserts the opposite: the claim is
+    // withdrawn under ruling R48, the slot is unfilled, and no timeline renders here at all.
+    //
+    // `opportunity` is not lost — it is carried in __corpus__/shapeLedger.js's DEFERRED_SHAPES as
+    // `statList-second-figure`, with the shape it needs (label, value, a bar from `pct`, and `meta`
+    // as a sub-line). Deferred, not closed. T55 and T58 in shapeLedger.test.jsx assert both halves.
     const d = dataset.find((x) => x.proposal_id === 'prop_s9_11_reason')
-    const rows = d.proposal.trigger
-    expect(rows.every((r) => r.when === undefined), 'the fixture changed shape').toBe(true)
-    expect(rows.every((r) => typeof r.label === 'string')).toBe(true)
+    expect(d.proposal.trigger, 'the claim R31 pinned is back').toBeUndefined()
 
     const out = renderPane(d)
-    const block = out.container.querySelector('[data-block-type="timeline"]')
-    expect(block).toBeTruthy()
-    expect(block.querySelectorAll('[data-timeline-when]'), 'rendered an eyebrow with no `when`').toHaveLength(0)
-    for (const row of rows) expect(block.textContent, `lost label: ${row.label}`).toContain(row.label)
+    expect(out.container.querySelector('[data-block-type="timeline"]')).toBeNull()
+    expect(out.container.textContent, 'the misrouted rows are rendering again').not.toContain('Safe CM opportunity')
     unmount()
   })
 })
@@ -300,17 +325,35 @@ describe('T36 — the boundary still holds (I3)', () => {
   })
 })
 
-describe('T37 — zero corpus diff (I7)', () => {
-  const git = (args) => execSync(`git diff --name-only -- ${args}`, { encoding: 'utf8' }).trim()
+describe('T37 — Phase 3C changed the RENDERER, not the data (I7)', () => {
+  // RETIRED AND REPLACED in Phase 5A, not deleted — the same treatment R31 gets below.
+  //
+  // This was two `git diff --name-only` assertions: the normalized corpus and normalizeCorpus.js are
+  // untouched. That was Phase 3C's own constraint (I7 froze the corpus so the fix had to be in the
+  // renderer), and it was the right pin for that phase. It is wrong as a standing one for two
+  // reasons. It forbids every later phase from ever touching the corpus, which Phase 5A does by
+  // design and by ruling. And it could only ever fail on an uncommitted working tree — once 3C was
+  // committed the diff was empty and both assertions passed no matter what the corpus said, which
+  // is a green test guarding nothing.
+  //
+  // What 3C actually guaranteed is below, pinned by content so it survives a commit: its three
+  // corrections are slot-to-blockType re-points, and a re-point does not move which raw key feeds
+  // the slot. __corpus__/shapeLedger.test.jsx pins Phase 5A's own corpus diff the same way.
 
-  it('the normalized corpus is untouched', () => {
-    const changed = git('src/features/action-stories/__corpus__/normalized/')
-    expect(changed, `corpus files changed: ${changed}`).toBe('')
+  it('every 3C re-point changed the slot\'s BLOCK, never the reference key behind it', () => {
+    // `trigger` and `flags` moved table -> timeline, `recommendation_metrics` table -> statList.
+    // The sources are unchanged by that work and are still the reference's own keys for the concept.
+    const sourcesOf = (field) =>
+      [...new Set(Object.values(provenance).map((r) => r[field]).filter(Boolean))].sort()
+    expect(sourcesOf('proposal.trigger')).toEqual(['trigger'])
+    expect(sourcesOf('execution.flags')).toEqual(['flags'])
+    expect(sourcesOf('proposal.recommendation_metrics')).toEqual(['heroMetrics'])
   })
 
-  it('normalizeCorpus.js and the contract validator are untouched', () => {
-    const changed = git('extraction/normalizeCorpus.js src/features/action-stories/contract/decisionObject.js')
-    expect(changed, `frozen files changed: ${changed}`).toBe('')
+  it('the three re-pointed slots still declare the blockType 3C gave them', () => {
+    expect(SLOT_VOCABULARY.trigger.blockType).toBe('timeline')
+    expect(SLOT_VOCABULARY.flags.blockType).toBe('timeline')
+    expect(SLOT_VOCABULARY.recommendation_metrics.blockType).toBe('statList')
   })
 })
 
@@ -371,14 +414,21 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     }
   })
 
-  it('the slot vocabulary has 50 slots — 3C re-pointed, Phase 4 removed one (C3)', () => {
+  it('the slot vocabulary has 51 slots — 3C re-pointed, Phase 4 removed one, 5A added one (C3)', () => {
     // 51 through Phase 3C. Phase 4 Part 2 removed `decision_mode` when the duplicate rail render of
     // the mode axis was deleted; the slot had no other consumer. Still nothing ADDED, which is what
     // this guard is for — the vocabulary may shrink when a concept turns out to be redundant, and
     // must not grow quietly.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    // PHASE 5A DELTA: 50 -> 51. Ruling R50 adds `threshold_control`, the only slot this phase mints.
+    // It renders `proposal.threshold_control`, claimed in Phase 3A under R14 and asserted present by
+    // claimedThresholds.test.js's T17/T19 ever since, which no slot bound and nothing rendered — with
+    // `slider` registered and unreachable in the block registry. No new block, no variant, no CSS:
+    // SliderBlock, its `steps` path in StageRenderer and its full-width layout rule already existed.
+    // That is also why slot-targeted blockTypes moves 16 -> 17 while BLOCK_TYPES stays at 19: a
+    // concept found a home in a block that was already there, which is the outcome I6 asks for.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
-    expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(16)
+    expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(17)
   })
 
   it('table and labelValueList keep exactly the slots the survey said STAY (G)', () => {

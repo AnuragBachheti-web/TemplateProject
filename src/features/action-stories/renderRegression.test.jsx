@@ -200,13 +200,18 @@ describe('T13 — one object per template renders unchanged below the header', (
       'labelValueList', 'lineChart', 'number', 'object', 'roster', 'scatterChart', 'slider',
       'statList', 'table', 'text', 'timeline', 'waterfallChart',
     ])
-    // 51 in Phase 3C, 50 now. Phase 4 Part 2 REMOVED `decision_mode`: the header states the mode,
-    // and the slot existed only so a rail block could state it a second time. The registry itself is
-    // untouched — no block type was added or dropped to achieve that, which is the thing this test
-    // is really guarding. A slot leaving is a vocabulary shrinking; a block type arriving unnoticed
-    // is the failure.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    // 51 in Phase 3C, 50 after Phase 4 Part 2 REMOVED `decision_mode` (the header states the mode,
+    // and the slot existed only so a rail block could state it a second time), 51 again now.
+    //
+    // PHASE 5A DELTA: 50 -> 51. Ruling R50 adds `threshold_control`. The registry above is still
+    // BYTE-IDENTICAL, which is the thing this test is really guarding: the new slot renders through
+    // `slider`, a block that has been registered and unreachable since the vocabulary was written.
+    // A slot leaving is a vocabulary shrinking, a slot arriving for an EXISTING block is a concept
+    // finding its home, and a block type arriving unnoticed is the failure. Only the third would
+    // change the array above.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(51)
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('decision_mode')
+    expect(Object.keys(SLOT_VOCABULARY)).toContain('threshold_control')
   })
 
   it('every template lost EXACTLY the mode block, and nothing else', async () => {
@@ -219,10 +224,15 @@ describe('T13 — one object per template renders unchanged below the header', (
       const template = (await import(`./templates/${id}.json`)).default
       counts[id] = template.blocks.length
     }
+    // PHASE 5A DELTA: decide.slate.v1 18 -> 19. One block added, for `threshold_control` (R50), in
+    // the `guardrails` rail section beside `coverage` — a threshold the decision is measured against
+    // is a guardrail. It is `when`-gated on `proposal.threshold_control`, which exactly one object in
+    // the corpus carries, so the other 25 decide screens render exactly as before. The other four
+    // templates are untouched by this phase.
     expect(counts).toEqual({
       'reason.v1': 10,            // was 11
       'analyze.compare.v1': 14,   // was 15
-      'decide.slate.v1': 18,      // was 19
+      'decide.slate.v1': 19,      // was 19, then 18 in Phase 4, then 19 again in Phase 5A
       'execute.bridge.v1': 14,    // was 15
       'locked.v1': 3,             // unchanged — it declares no rail at all
     })

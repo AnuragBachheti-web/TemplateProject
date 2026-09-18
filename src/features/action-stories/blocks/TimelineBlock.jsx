@@ -9,7 +9,7 @@ import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
  *
  * Owns two slots (I6):
  *
- *   trigger  15 objects  "What raised this" — the events that queued the proposal
+ *   trigger  14 objects  "What raised this" — the events that queued the proposal
  *   flags     2 objects  the standing rules that will raise one later
  *
  * WHY THIS IS NOT A TABLE, which is what it was. The reference renders it as a stacked pair — a mono
@@ -50,10 +50,18 @@ export default function TimelineBlock({ slotName, data, compact = false }) {
         const when = typeof row.when === 'string' && row.when.trim() !== '' ? row.when : undefined;
         // A row that states no `what`/`rule` falls back to its own identity. That is NOT a shape
         // branch to cope with bad data: it is one component reading its declared fields in order.
-        // prop_s9_11_reason's `trigger` comes from `opportunity` and carries {label, value, pct,
-        // meta} — a metric shape claimed into a chronology slot — so it renders by label with no
-        // eyebrow. The corpus is frozen this phase (I7), and slotCorrections.test.jsx's T34 pins
-        // that outcome so the claim-ledger defect stays visible rather than being absorbed here.
+        //
+        // THIS COMMENT USED TO DESCRIBE A LIVE DEFECT, and Phase 5A fixed it (ruling R56 — a comment
+        // describing a fixed defect tells a future reader the opposite of the truth, with
+        // authority). It read: prop_s9_11_reason's `trigger` comes from `opportunity` and carries
+        // {label, value, pct, meta} — a metric shape claimed into a chronology slot — so it renders
+        // by label with no eyebrow; the corpus is frozen this phase (I7) and T34 pins that outcome
+        // so the defect stays visible. That was R31, and it was right for a renderer-subject phase.
+        //
+        // Phase 5A's subject was the claim ledger, which is where the defect lived. The claim is
+        // withdrawn (R48), that object has no `trigger` at all, and `opportunity` is carried in
+        // __corpus__/shapeLedger.js's DEFERRED_SHAPES with the shape it actually needs. The fallback
+        // below stays because it is correct on its own terms, not because bad data depends on it.
         const body = BODY_KEYS.map((k) => row[k]).find((v) => typeof v === 'string' && v.trim() !== '')
           ?? rowLabelOf(row);
         const follow = typeof row.action === 'string' && row.action.trim() !== '' ? row.action : undefined;

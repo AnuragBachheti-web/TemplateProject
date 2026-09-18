@@ -185,8 +185,17 @@ describe('T11 — numeric values lost to the STRIP RULE are restored (R8 scope o
   it('does not regress the numerics that already survived', () => {
     // Bare `pct` survives because it is nested inside claimed structures. The strip-rule correction
     // must not disturb that, and neither must the new field population.
+    //
+    // PHASE 5A DELTA: floor 127 -> 120. `pct` is nested inside CLAIMED structures, so the floor
+    // moves whenever a claim does, and this phase withdrew six. Arithmetic, not erosion:
+    //   out  opportunity 4 rows, sizes 6, detectBars 4, timeline 5 (all carried a `pct`)  = -19
+    //   in   owners 4, valueSplit 4, forecast 4 (the better-labelled keys that replaced them) = +12
+    // for a net -7, which is exactly 127 -> 120. Not one of the withdrawn `pct` values was a
+    // measurement: every one was a bar width, confirmed per key in shapeLedger.js's IGNORE_LIST
+    // (`barChart.pct`). The strip rule this test guards is untouched — no `pct` was stripped, six
+    // claims stopped being made — and the nested-survival property it asserts still holds for all 120.
     const pct = ENTRIES.filter((e) => e.key === 'pct')
-    expect(pct.length).toBeGreaterThanOrEqual(127)
+    expect(pct.length).toBeGreaterThanOrEqual(120)
   })
 
   it('every BARE-NUMERIC pct is typed as a number', () => {

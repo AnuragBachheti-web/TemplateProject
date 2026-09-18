@@ -106,7 +106,15 @@ describe('2. every canonical field resolves from a real reference source for tha
     'proposal.agents': ['agents', '(reference pinned strip)'],
 
     'proposal.primary_insight': ['gridMeta', 'segNote', 'sortNote'],
-    'proposal.comparison': ['bars', 'cccTrend', 'concentration', 'detectBars', 'expiryBars', 'launchCosts', 'movement', 'pacing', 'recon', 'sizes', 'sovBars', 'timeline', 'wasteMix'],
+    // PHASE 5A. Five sources LEAVE this list and four join it, and not one of the four was chosen
+    // by hand: the claim gate rejected the first candidate and `pickByBlockType` took the next one
+    // in the same classifier-derived list. Out: `bars` (S9.15, {x,y,h,op} — eight anonymous pixel
+    // heights), `cccTrend` (S10.2, twelve rows of {h}), `sizes` (S9.12, unlabelled, plotting the bar
+    // WIDTH while `size` and `rate` were dropped), `detectBars` (S10.5, printed 29 where the truth
+    // was 4), `timeline` (S10.6, x-positions on a date axis with `when` dropped). In: `owners`,
+    // `valueSplit`, `scenarios`, `forecast` — each already labelled, each already carrying its own
+    // money figure. See shapeLedger.js's PHASE_5A_ROUTING_CHANGES for the one-line reason per object.
+    'proposal.comparison': ['concentration', 'expiryBars', 'forecast', 'launchCosts', 'movement', 'owners', 'pacing', 'recon', 'scenarios', 'sovBars', 'valueSplit', 'wasteMix'],
     'proposal.distribution': ['ladders', 'points'],
     'proposal.bridge': ['bars'],
     'proposal.coverage': ['bars'],
@@ -457,9 +465,16 @@ describe('8. registered blocks are either reachable or documented as unused', ()
   it('leaves exactly the documented unused blocks unused', () => {
     // `flag`  — the only boolean slot was `confidence.calibrated`, now rendered by ProposalHeader.
     // `object`— no reference concept is a lone nested descriptor; every one is a list or a scalar.
-    // `slider`— the reference's interactive controls recompute figures the backend owns; wiring one
-    //           would mean shipping precomputed answers as business data. Documented, not deleted.
+    //
+    // PHASE 5A DELTA: `slider` LEAVES this list. The note here used to read "the reference's
+    // interactive controls recompute figures the backend owns; wiring one would mean shipping
+    // precomputed answers as business data" — and that is still true of the `steps` payloads, which
+    // is why `thresholdControlOf` reads only the four numbers off `rlThreshold` and leaves its
+    // `steps` and `dependencies` behind. What it was wrong about is the control itself: {min: 6,
+    // max: 24, step: 1, value: 14} is the one place in the whole corpus where the reference states
+    // a threshold as NUMBERS, Phase 3A claimed it under R14, and claimedThresholds.test.js has
+    // asserted it present ever since while nothing rendered it. Ruling R50 gives it the slot.
     const unused = Object.keys(BLOCK_REGISTRY).filter((b) => !reachable.has(b)).sort()
-    expect(unused).toEqual(['flag', 'object', 'slider'])
+    expect(unused).toEqual(['flag', 'object'])
   })
 })

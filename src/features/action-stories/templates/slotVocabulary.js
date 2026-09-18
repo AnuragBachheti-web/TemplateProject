@@ -86,6 +86,15 @@ export const SLOT_VOCABULARY = Object.freeze({
   slate: { binding: 'proposal.slate', blockType: 'table', tier: 'conditional', note: 'The decision slate — the items being decided on. ONLY from the reference\'s own item vocabulary; this is the slot `approve_selected` acts on, so a shape-matched stand-in here is an integrity hazard, not a cosmetic one.' },
   next_actions: { binding: 'proposal.next_actions', blockType: 'cardSet', tier: 'conditional', note: 'The routes out of this decision, each with the reference\'s own explanation of what it does. Reference `actions`/`routes`.' },
   totals_rows: { binding: 'totals.rows', blockType: 'statList', tier: 'conditional', note: 'The decision\'s roll-up totals. Reference `totals`/`rollup`/`summary`/`liveStats`.' },
+  // Phase 5A, ruling R50. `proposal.threshold_control` was claimed in Phase 3A under R14 — the ONE
+  // place in the whole corpus where the reference states a threshold as numbers rather than as a
+  // formatted string (S9.12's `rlThreshold`, the 6-24 week return-lag read window) — and
+  // claimedThresholds.test.js's T17/T19 have asserted it present ever since. No slot bound it, so it
+  // rendered nowhere, and `slider` sat registered and unreachable in the block registry. Claiming
+  // data deliberately and then rendering none of it makes the phase that claimed it a lie, which is
+  // why this is the one slot 5A adds. It needs no variant and no new block: SliderBlock, its
+  // `steps` override path in StageRenderer and its full-width layout rule all already exist.
+  threshold_control: { binding: 'proposal.threshold_control', blockType: 'slider', tier: 'conditional', note: 'The one threshold the reference states as NUMBERS ({min, max, step, value}) rather than as display copy. Reference `rlThreshold`.' },
   guardrail_verdict: { binding: 'guardrails.verdict', blockType: 'text', tier: 'core', note: 'The real 4-value enum, never a boolean. Replaces blocked/canApprove.' },
   guardrail_checks: { binding: 'guardrails.checks', blockType: 'checklist', tier: 'conditional', note: 'The governance checklist. Reference `checks`/`guardParts` — rows identified by `label`, `name` OR `text`.' },
 

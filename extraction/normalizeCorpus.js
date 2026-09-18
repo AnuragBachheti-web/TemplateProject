@@ -12,7 +12,7 @@
 // result is committed as one static JSON artifact the mock API imports directly.
 //
 // ============================================================================================
-// THE TWO RULES THIS FILE NOW ENFORCES (docs/REFERENCE_TO_TEMPLATE_BLOCK_AUDIT.md)
+// THE THREE RULES THIS FILE NOW ENFORCES (docs/REFERENCE_TO_TEMPLATE_BLOCK_AUDIT.md)
 // ============================================================================================
 //
 // 1. NO SHAPE-BASED GUESSING. There is no `fallbackScan` any more. A canonical field is filled
@@ -30,6 +30,28 @@
 //    from the proposal's real item count. The rest carry no reference evidence and are handled
 //    explicitly below under "unresolved axes" — never by a hash, and never silently.
 //
+// 3. NO CLAIM THE DESTINATION CANNOT RENDER (Phase 5A). Rules 1 and 2 are about NAMES, and both
+//    held: referenceFidelity.test.js pins 60 key-to-field mappings and every one of them is the
+//    right-named source. Neither rule asks the next question — whether the slot that field lands on
+//    RENDERS what the value carries — and the answer was no on 30 of 105 objects.
+//
+//    S9.11's `opportunity` is `[{label, value, pct, meta}]`, a metric list. `proposal.trigger`'s
+//    block is a chronology reading `{when, what}`. `isObjArray` is satisfied by both, so the claim
+//    was made, and the page showed four bare labels while value, pct and meta were discarded with no
+//    warning anywhere. S9.12's `sizes` — `{size, rate, pct}` — became a bar chart labelled 1 to 6
+//    plotting the bar WIDTHS while the category and the return rate were dropped. S10.2's `cccTrend`
+//    is twelve rows of `{h}` after hygiene, and it was "the magnitude comparison".
+//
+//    So a candidate is now checked against the destination blockType's CONSUMED FIELD SET before it
+//    is accepted — see `wouldRenderFaithfully` below and the declared field sets in
+//    src/features/action-stories/blocks/consumedFields.js. A candidate the destination cannot render
+//    faithfully is SKIPPED, exactly as an absent one is, and the next candidate is tried.
+//
+//    Ruling R48: a wrong rendering that passes a shape test is worse than an unrendered one, because
+//    nobody looks at it again. Six claims are withdrawn by this gate and none is re-pointed at a
+//    block that would merely mark them resolved; every withdrawn key is recorded, with the shape it
+//    needs, in __corpus__/shapeLedger.js's DEFERRED_SHAPES.
+//
 // WHAT IS REAL. The business content — narratives, policy rows, slates, checks, totals — is the
 // corpus's own, passed through the same hygiene pass the real backend must implement: CSS
 // variables, mockup geometry, SVG path data, visibility flags and extraction companions are all
@@ -43,6 +65,13 @@ import { fileURLToPath } from 'node:url'
 import { isDecorativeKey } from './classifyBlocks.js'
 import { referenceContextFor } from './referenceContext.js'
 import { deriveApproveEligibility, deriveApproveSelectedEligibility } from '../src/features/action-stories/contract/deriveEligibility.js'
+// Rule 3's dependencies. Extraction reads two RUNTIME declarations here — what each block consumes,
+// and which unrendered fields have been ruled acceptable — because the whole point of the gate is
+// that the generator and the renderer stop disagreeing about what a slot can carry. Neither module
+// imports extraction, and neither reads the corpus, so this stays a one-way dependency.
+import { droppedFieldsOfValue, anonymousRowsOf } from '../src/features/action-stories/blocks/consumedFields.js'
+import { classifyDroppedField, anonymityDeferredFor } from '../src/features/action-stories/__corpus__/shapeLedger.js'
+import { SLOT_VOCABULARY } from '../src/features/action-stories/templates/slotVocabulary.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -169,7 +198,7 @@ function clean(value) {
  * is ever sourced from a key outside its own declared candidate list, which is the specific defect
  * the audit found (a button label rendering as the recommendation, a tab strip as the slate).
  */
-function makeRecorder() {
+function makeRecorder(proposalId) {
   const sources = {}
   // ONE RAW KEY SUPPLIES AT MOST ONE CANONICAL FIELD. This ledger is what makes duplicate content
   // structurally impossible rather than merely unlikely: the audit counted 41 incidents of the same
@@ -181,6 +210,9 @@ function makeRecorder() {
   return {
     sources,
     claimed,
+    // Which object is being assembled. Only the claim gate reads it, and only to ask whether an
+    // anonymous-row deferral has already been ruled on for this exact (key, object) pair.
+    proposalId,
     record(field, key) {
       sources[field] = key ?? null // null = no semantic source on this screen; the field is omitted
       if (key !== null && key !== undefined) claimed.add(key)
@@ -188,16 +220,56 @@ function makeRecorder() {
   }
 }
 
+// ---- the claim gate (rule 3) --------------------------------------------------------------------
+
+const SLOT_BY_BINDING = new Map(Object.entries(SLOT_VOCABULARY).map(([name, spec]) => [spec.binding, { name, ...spec }]))
+
 /**
- * First candidate whose CLEANED value satisfies `pred`. Candidates are tried in declared order and
- * NOTHING ELSE IS EVER TRIED — this function is deliberately the opposite of the `fallbackScan`
- * it replaces.
+ * WOULD THE SLOT THIS FIELD FEEDS ACTUALLY RENDER THIS VALUE?
+ *
+ * The question no rule asked before Phase 5A, and the reason `opportunity` spent three phases
+ * rendering as four bare labels. Two ways a claim fails it:
+ *
+ *   1. the destination block never reads a field the value carries, and nothing has ruled that
+ *      acceptable — see shapeLedger.js's IGNORE_LIST (residue, derived geometry, rendered
+ *      elsewhere) and DEFERRED_SHAPES (real content awaiting a 5B variant).
+ *   2. the rows would render with no identity at all, because the block falls back to a bare
+ *      ordinal when its headline key is missing. S10.2's `cccTrend` is twelve rows of `{h}`; it
+ *      passed every shape predicate and drew twelve unlabelled bars of pixel heights (R55).
+ *
+ * A candidate that fails is SKIPPED, never re-pointed at a block that happens to fit: a wrong
+ * rendering that passes a shape test is worse than an unrendered one (R48). The canonical field is
+ * then omitted, the template's `when` omits the slot, and the raw key is carried in
+ * DEFERRED_SHAPES with the shape it needs.
+ *
+ * Fields with no slot bound to them — the seven contract axes and the five header fields, which
+ * pages/StagePage.jsx renders once itself — are not gated: there is no destination block to check.
  */
-function pick(data, candidates, pred, rec, field) {
+function wouldRenderFaithfully(canonicalField, value, rawKey, rec) {
+  const slot = SLOT_BY_BINDING.get(canonicalField)
+  if (slot === undefined) return true
+  const { blockType } = slot
+
+  const unaccounted = droppedFieldsOfValue(blockType, value)
+    .filter((f) => classifyDroppedField(blockType, f, value).outcome === 'MISROUTED')
+  if (unaccounted.length > 0) return false
+
+  if (anonymousRowsOf(blockType, value) > 0 && anonymityDeferredFor(rawKey, rec.proposalId) === undefined) {
+    return false
+  }
+  return true
+}
+
+/**
+ * First candidate whose CLEANED value satisfies `pred` AND survives the claim gate. Candidates are
+ * tried in declared order and NOTHING ELSE IS EVER TRIED — this function is deliberately the
+ * opposite of the `fallbackScan` it replaces.
+ */
+function pick(data, candidates, pred, rec, field, { gate = true } = {}) {
   for (const key of candidates) {
     if (rec.claimed.has(key) || isBannedKey(key)) continue
     const v = clean(data[key])
-    if (v !== undefined && pred(v)) {
+    if (v !== undefined && pred(v) && (!gate || wouldRenderFaithfully(field, v, key, rec))) {
       rec.record(field, key)
       return v
     }
@@ -270,7 +342,7 @@ const CHART_NAMED = /bar|chart|heat|spark|curve|path|point|tick|notch|grid|gauge
  */
 const FURNITURE_NAMED = /legend|^cols?$|Cols$|tab|filter|sort|crumb|label(s)?$|axis|scale/i
 
-function pickByBlockType(data, stageId, blockType, extraPredicate, rec, field, { excludeChartNamed = false, excludeFurniture = false } = {}) {
+function pickByBlockType(data, stageId, blockType, extraPredicate, rec, field, { excludeChartNamed = false, excludeFurniture = false, gate = true } = {}) {
   const byKey = BLOCK_TYPES_BY_STAGE.get(stageId)
   if (byKey) {
     for (const [rawKey, type] of byKey) {
@@ -279,7 +351,7 @@ function pickByBlockType(data, stageId, blockType, extraPredicate, rec, field, {
       if (excludeChartNamed && CHART_NAMED.test(rawKey)) continue
       if (excludeFurniture && FURNITURE_NAMED.test(rawKey)) continue
       const v = clean(data[rawKey])
-      if (v !== undefined && extraPredicate(v)) {
+      if (v !== undefined && extraPredicate(v) && (!gate || wouldRenderFaithfully(field, v, rawKey, rec))) {
         rec.record(field, rawKey)
         return v
       }
@@ -290,8 +362,8 @@ function pickByBlockType(data, stageId, blockType, extraPredicate, rec, field, {
 }
 
 /** Runs `pick` first, then the classifier fallback, keeping whichever produced a value. */
-function pickThenClassify(data, candidates, pred, stageId, blockType, rec, field, options) {
-  const named = pick(data, candidates, pred, rec, field)
+function pickThenClassify(data, candidates, pred, stageId, blockType, rec, field, options = {}) {
+  const named = pick(data, candidates, pred, rec, field, options)
   if (named !== undefined) return named
   return pickByBlockType(data, stageId, blockType, pred, rec, field, options)
 }
@@ -564,11 +636,18 @@ function decideProposal(data, stageId, rec) {
  * per-zone split across two directions IS a two-column grid, so that is what it becomes.
  *
  * `direction` is the raw key name (`eastPct` -> east), not a business term invented here.
+ *
+ * PHASE 5A, AND WHY THIS ONE PICK IS UNGATED. Every other candidate is claimed and emitted as-is, so
+ * the claim gate can check it where it is picked. This path RESHAPES afterwards — `{label, eastPct,
+ * westPct}` becomes `{label, cells: [{direction, share}]}` — so gating the raw value asks the gate
+ * about a shape that never reaches a page, and it correctly rejected `heatRows` for carrying no
+ * `cells`. The gate belongs after the transform, which is where it now runs. The rule is unchanged;
+ * only the moment it is applied is, and the principle holds: check what the slot will RECEIVE.
  */
 function matrixOf(data, stageId, rec) {
-  const rows = pickThenClassify(data, ['heatRows'], isObjArray, stageId, 'heatmapGrid', rec, 'proposal.matrix')
+  const rows = pickThenClassify(data, ['heatRows'], isObjArray, stageId, 'heatmapGrid', rec, 'proposal.matrix', { gate: false })
   if (!isObjArray(rows)) return undefined
-  return rows.map((row) => {
+  const shaped = rows.map((row) => {
     const { eastPct, westPct, ...rest } = row
     const split = [
       typeof eastPct === 'number' ? { direction: 'east', share: eastPct } : undefined,
@@ -577,6 +656,14 @@ function matrixOf(data, stageId, rec) {
     if (split.length === 0) return row
     return dropUndefined({ ...rest, cells: split })
   })
+
+  // The gate, applied to what heatmapGrid will actually receive.
+  const rawKey = rec.sources['proposal.matrix']
+  if (!wouldRenderFaithfully('proposal.matrix', shaped, rawKey, rec)) {
+    rec.record('proposal.matrix', null)
+    return undefined
+  }
+  return shaped
 }
 
 /**
@@ -1187,8 +1274,8 @@ function main() {
       const data = readFixture(wf.code, stage)
       if (data === null) continue
       const stageId = `${wf.code}/${stage}`
-      const rec = makeRecorder()
       const proposalId = `prop_${wf.code.replace('.', '_').toLowerCase()}_${stage}`
+      const rec = makeRecorder(proposalId)
 
       // RESOLUTION ORDER IS THE CONTRACT. The claim ledger gives each raw key to exactly one
       // canonical field, so the most specifically-named concepts resolve first and the broadest

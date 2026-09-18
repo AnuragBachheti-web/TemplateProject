@@ -386,9 +386,18 @@ export function validateCardSet(data) {
 /**
  * A CHRONOLOGY. Every row must carry its own identity — via `what`/`rule`, or failing that one of
  * ROW_LABEL_KEYS — because a timeline entry with a timestamp and nothing under it is a date, not an
- * event. `when` is NOT required: `proposal.trigger` on prop_s9_11_reason is sourced from
- * `opportunity` and has none, which is a claim-ledger misclassification the corpus freeze leaves in
- * place, and rejecting it here would fail a shipped object rather than surface the real defect.
+ * event.
+ *
+ * `when` is NOT required, and the reason has changed. It used to be that `proposal.trigger` on
+ * prop_s9_11_reason was sourced from `opportunity` and had none — a claim-ledger misclassification
+ * the Phase 3C corpus freeze left in place, where rejecting it here would have failed a shipped
+ * object instead of surfacing the real defect. Phase 5A withdrew that claim (rulings R48/R56), so
+ * that object no longer has a trigger at all and this validator is no longer accommodating it.
+ *
+ * It stays optional on its own merits: `execution.flags` is `{when, rule, action}` where `when` is a
+ * CONDITION rather than a timestamp, and a standing rule that has not fired yet has no time to
+ * state. Requiring one would assert that a chronology is always a past-tense log, which is not what
+ * the reference shows.
  */
 export function validateTimeline(data) {
   if (data === undefined) return []

@@ -22,7 +22,6 @@ import { createRoot } from 'react-dom/client'
 import { act } from 'react'
 import fs from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
 
 import StageRenderer from '../components/StageRenderer'
 import { resolveTemplate } from '../templates/templateRegistry'
@@ -60,12 +59,20 @@ const NEW_BLOCKS = [
   {
     blockType: 'statList',
     slots: ['totals_rows', 'progress_rows', 'inputs', 'basis'],
-    // 51 objects carry data for one of the four slots; prop_s10_6_reason has `totals.rows` but
-    // reason.v1 declares no `totals_rows` slot, so 50 is the number that actually renders. The
-    // distinction matters: a count of "objects with data" would overstate the block's reach, which
-    // is exactly the thinner claim I1 exists to reject.
-    renders: 50,
-    hasData: 51,
+    // 51 objects carried data for one of the four slots; prop_s10_6_reason has `totals.rows` but
+    // reason.v1 declares no `totals_rows` slot, so the render count was always one lower than the
+    // data count. The distinction matters: a count of "objects with data" would overstate the
+    // block's reach, which is exactly the thinner claim I1 exists to reject.
+    //
+    // PHASE 5A DELTA: 50 -> 49 renders, 51 -> 50 with data. One object, prop_s9_2_decide, loses
+    // `proposal.basis`. Its source was `ladder` — five named service-level scenarios each carrying
+    // four money figures (svc / outlay / lost / head) — and statList renders a label and ONE figure,
+    // so the pane showed five bare words: "Lean", "Trim", "Policy", "Guarded", "Max". The claim is
+    // withdrawn rather than re-pointed (R48), and `ladder` is carried in shapeLedger.js's
+    // DEFERRED_SHAPES as `scenario-ladder` with the shape it needs. The block lost an object and the
+    // screen lost five words that were never the data.
+    renders: 49,
+    hasData: 50,
   },
   { blockType: 'cardSet', slots: ['alternatives', 'next_actions', 'item_groups'], renders: 17, hasData: 17 },
   { blockType: 'roster', slots: ['agents'], renders: 26, hasData: 26 },
@@ -150,11 +157,17 @@ describe('T24 — each new blockType renders real shipped data on the counts F s
 
   it('the vocabulary grew by concepts, not toward parity (I6)', () => {
     // 14 were declared before Phase 3B, 11 of them slot-targeted. 3B added four concepts and 3C
-    // added `timeline`, so 19 declared and 16 slot-targeted — against 51 slots. The gap between 16
-    // and 51 is the point: slots share blocks when they share a concept.
+    // added `timeline`, so 19 declared — against 51 slots. The gap is the point: slots share blocks
+    // when they share a concept.
+    //
+    // PHASE 5A DELTA: slot-targeted 16 -> 17. `slider` joins, and NOT because a block was added —
+    // BLOCK_TYPES is still 19. Ruling R50 gave `proposal.threshold_control` the slot it never had,
+    // and that path binds the slider block which has been registered and unreachable since the
+    // vocabulary was written. The count moving without BLOCK_TYPES moving is exactly what I6 wants:
+    // a concept found a home in a block that already existed.
     expect(BLOCK_TYPES).toHaveLength(19)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
-    expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(16)
+    expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(17)
   })
 })
 
@@ -416,17 +429,40 @@ describe('T30 — the live path stays green for all 105 with the new blocks in p
   })
 })
 
-describe('T31 — zero corpus diff (C1)', () => {
-  const git = (args) => execSync(`git diff --name-only -- ${args}`, { encoding: 'utf8' }).trim()
+describe('T31 — Phase 3B widened the BLOCK vocabulary and claimed no new data (C1)', () => {
+  // RETIRED AND REPLACED in Phase 5A, for the reasons set out at slotCorrections.test.jsx's T37 —
+  // in short, a `git diff` freeze forbids every later phase from touching the corpus, and it goes
+  // silent the moment its own phase is committed.
+  //
+  // What C1 actually guaranteed is that the four new blocks rendered data that was ALREADY in the
+  // corpus: 3B added a way to show things, not things to show. That is pinned by content here.
 
-  it('the normalized corpus is untouched by this phase', () => {
-    const changed = git('src/features/action-stories/__corpus__/normalized/')
-    expect(changed, `corpus files changed: ${changed}`).toBe('')
+  it('every slot the four 3B blocks own reads a canonical path that predates them', () => {
+    // If 3B had claimed new data, one of these paths would have appeared with it. Each is bound by a
+    // slot whose binding is unchanged since Phase 2's contract, and the provenance map still sources
+    // every one of them from the reference's own key for that concept.
+    const OWNED = {
+      checklist: ['guardrails.checks'],
+      statList: ['totals.rows', 'execution.progress_rows', 'proposal.inputs', 'proposal.basis', 'proposal.recommendation_metrics'],
+      cardSet: ['proposal.alternatives', 'proposal.next_actions', 'proposal.item_groups'],
+      roster: ['proposal.agents'],
+    }
+    for (const [blockType, paths] of Object.entries(OWNED)) {
+      for (const path of paths) {
+        const slot = Object.values(SLOT_VOCABULARY).find((s) => s.binding === path)
+        expect(slot, `no slot binds ${path}`).toBeTruthy()
+        expect(slot.blockType, `${path} is no longer a ${blockType}`).toBe(blockType)
+      }
+    }
   })
 
-  it('normalizeCorpus.js and the contract validator are untouched', () => {
-    const changed = git('extraction/normalizeCorpus.js src/features/action-stories/contract/decisionObject.js')
-    expect(changed, `frozen files changed: ${changed}`).toBe('')
+  it('adds no canonical field of its own — the four blocks render paths the contract already had', () => {
+    // A 3B-introduced field would have to be sourced from somewhere; nothing in the provenance map
+    // names a source for a path outside the declared vocabulary, which referenceFidelity.test.js
+    // already asserts field by field. What this adds is the count: 3B's blocks serve 10 slots.
+    const served = Object.values(SLOT_VOCABULARY).filter((s) =>
+      ['checklist', 'statList', 'cardSet', 'roster'].includes(s.blockType))
+    expect(served).toHaveLength(10)
   })
 })
 
