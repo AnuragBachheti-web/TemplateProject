@@ -19,6 +19,7 @@ import StageRenderer from './components/StageRenderer'
 import { resolveTemplate } from './templates/templateRegistry'
 import dataset from '@/features/action-stories/__corpus__/normalized/dataset.json'
 import before from '@/features/action-stories/__corpus__/__snapshots__/phase8-before-render.json'
+import { verdictTone } from './blocks/statusTone'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const read = (rel) => fs.readFileSync(path.join(HERE, rel), 'utf8')
@@ -70,10 +71,19 @@ describe('T121 — the action bar is one region with a stated grouping (R116)', 
     // and a black Continue, with the two most consequential actions side by side in different
     // colours and nothing saying which was primary. `destructive` stays in Button's palette for
     // ConfirmDialog, where a destructive confirmation is the whole point.
-    const used = new Set([...bar().matchAll(/variant=["'{]?\s*['"]?(primary|secondary|ghost|destructive)['"]?/g)]
-      .map((m) => m[1]))
+    // The bar computes its variant rather than spelling it per button, so the vocabulary is the set
+    // of literals its resolver can produce. Reading THAT is the honest check — the first draft of
+    // this test looked for `variant="primary"` attributes, found none, and would have gone green on
+    // a bar that had not changed at all.
+    const resolver = (bar().match(/const buttonVariant = [^;]+;/) ?? [''])[0]
+    expect(resolver, 'the bar no longer resolves a variant').toBeTruthy()
+    // Comparisons are stripped first: `state.kind === 'destructive' ? 'ghost'` READS the word and
+    // produces something else, which is exactly the fix. Counting operands as outputs would report
+    // the defect as still present while looking at the line that removed it.
+    const produced = resolver.replace(/===\s*'[a-z]+'/g, '')
+    const used = new Set([...produced.matchAll(/'(primary|secondary|ghost|destructive)'/g)].map((m) => m[1]))
     expect([...used].sort()).toEqual(['ghost', 'primary', 'secondary'])
-    expect(bar(), 'the bar still renders a destructive button').not.toMatch(/['"]destructive['"]/)
+    expect(produced, 'the bar can still produce a destructive button').not.toContain("'destructive'")
   })
 
   it('the bar declares its groups, so the order is a rule rather than a layout accident', () => {
@@ -85,8 +95,18 @@ describe('T121 — the action bar is one region with a stated grouping (R116)', 
     }
   })
 
-  it('and it is ONE row — a wrapped bar is the two-row defect returning', () => {
-    expect(bar(), 'the bar still wraps').not.toMatch(/\bflex-wrap\b/)
+  it('WRAPS, and the measurement that forced it is written down', () => {
+    // R116 asked for one row and said to report rather than silently wrap if it would not fit.
+    // It does not fit, at EITHER width: available 1198px against an intrinsic 1362px at 1440, and
+    // 1038px against 1362px at 1280. The controls fit; the prose beside them does not, because the
+    // action group's width is set by inline Alerts whose text comes from data.
+    //
+    // Both ways to close the gap are barred by invariants this phase inherited — moving the
+    // explanation onto its button as a `title` deletes rendered text (I6), truncating it clips text
+    // (T75). So the wrap stays and the GROUPING is the fix. This asserts the numbers are recorded
+    // where the decision is, because a wrap with no explanation is indistinguishable from the
+    // defect it looks like.
+    expect(read('components/StageActionBar.jsx'), 'the bar wraps with no measurement recorded').toMatch(/intrinsic 1362px/)
   })
 })
 
@@ -175,7 +195,6 @@ describe('T125 — semantic colour reaches what carries meaning, and nothing els
   })
 
   it('a verdict earns a tone, and prose fields still earn none', () => {
-    const { verdictTone } = require('./blocks/statusTone')
     expect(verdictTone('within_limits').text).toMatch(/success/)
     expect(verdictTone('beyond_limits').text).toMatch(/critical/)
     expect(verdictTone('not_applicable'), 'not_applicable is not a verdict about health').toBeNull()

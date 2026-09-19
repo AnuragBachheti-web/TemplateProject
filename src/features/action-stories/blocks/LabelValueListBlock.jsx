@@ -121,7 +121,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
                 //
                 // `justify-end` so a wrapped chip stays under the value it belongs to rather than
                 // jumping to the left edge and reading as a new row's label.
-                {...cellText('prose', undefined, `flex shrink-0 flex-wrap items-baseline justify-end gap-1.5 ${
+                {...cellText('prose', undefined, `flex flex-wrap items-baseline justify-end gap-1.5 ${
                   primaryTone ? primaryTone.text : 'text-rf-text-primary'
                 }`)}
               >

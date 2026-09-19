@@ -225,7 +225,11 @@ export default function TableBlock({ slotName, data, compact, selectable = false
             {slotLabel(slotName)} · {allRows.length}
           </caption>
           <thead>
-            <tr className={`${surfaceTier('nested').className}`}>
+            {/* DEFECT 4. Phase 7 ruled the brand tint onto table headers and selected rows, and it
+                landed on neither: that phase's own category sweep mapped every `sunken` surface to
+                the `nested` tier, and the header was in the set — a surface rule overwriting a
+                ruling about blue. A header IS current-state chrome, which is what I3 permits. */}
+            <tr className="bg-rf-brand-blue-tint">
               {selectable && (
                 <th
                   scope="col"
@@ -262,7 +266,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                     {...cellText('prose', humanizeSlotName(col), typeRole('label', `border-b border-rf-border-subtle px-4 py-2 text-rf-text-tertiary ${
                       columnLayout.get(col)?.figure ? 'text-right' : 'text-left'
                     } ${
-                      isLarge ? `sticky top-0 z-10 ${surfaceTier('nested').className}` : ''
+                      isLarge ? 'sticky top-0 z-10 bg-rf-brand-blue-tint' : ''
                     }`).className)}
                   >
                     {controlColumns.has(col) ? (

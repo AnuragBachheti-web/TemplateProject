@@ -143,3 +143,35 @@ const FLAG_TONE = {
 export function flagTone(isTrue) {
   return isTrue ? FLAG_TONE.yes : FLAG_TONE.no
 }
+
+/**
+ * A GUARDRAIL VERDICT'S TONE (Phase 8, defect 7).
+ *
+ * `guardrails.verdict` is a real four-value enum and it rendered as plain text — the single most
+ * consequential fact on a decide pane, stated in the same grey as everything around it. It is a
+ * closed vocabulary, so reading it is a lookup and not a classifier, which is the whole difference
+ * between this and the three fields ruling R118 refused.
+ *
+ * `not_applicable` GETS NOTHING, deliberately, and it covers 93 of the 105 objects. A verdict of
+ * "this does not apply" is not good news or bad news, and colouring it would put a tone on almost
+ * every pane in the app to say nothing at all. This lands visibly on 12 objects — small, and
+ * honest about being small.
+ *
+ * Anything outside the enum returns null. The corpus carries free text in this field on a handful
+ * of objects ("Scale + transfer", "Hold"), and guessing at those would be exactly the prose
+ * classifier R72 declined and R88 deleted.
+ *
+ * @param {unknown} verdict
+ * @returns {{dot: string, text: string} | null}
+ */
+export function verdictTone(verdict) {
+  if (typeof verdict !== 'string') return null;
+  switch (verdict.trim().toLowerCase()) {
+    case 'within_limits':
+      return { dot: 'bg-rf-status-success-icon', text: 'text-rf-status-success-text' };
+    case 'beyond_limits':
+      return { dot: 'bg-rf-status-critical-icon', text: 'text-rf-status-critical-text' };
+    default:
+      return null;
+  }
+}

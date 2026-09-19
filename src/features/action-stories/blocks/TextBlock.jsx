@@ -8,6 +8,12 @@ import { cellText } from './cellText';
 import { typeRole } from './typeRole';
 import { surfaceTier } from './surfaceTier';
 import RailRow from './children/RailRow';
+import { verdictTone } from './statusTone';
+
+/** Only the verdict slot earns a verdict tone; every other pair stays neutral. */
+function verdictToneFor(slotName, value) {
+  return slotName === 'guardrail_verdict' ? verdictTone(value) : null;
+}
 /**
  * @param {boolean} [compact] - true when this block is grouped with sibling scalars inside a
  *   shared panel (see StageSections.jsx) — renders as a bare label/value row instead of its own
@@ -105,7 +111,11 @@ export default function TextBlock({ slotName, data, compact, role }) {
       <RailRow
         label={<span {...cellText('identifier', slotLabel(slotName), 'max-w-[45%] shrink text-rf-text-tertiary')}>{slotLabel(slotName)}</span>}
       >
-        <span {...cellText('prose', text, 'flex-1 text-right text-rf-text-primary')}>{text}</span>
+        {/* DEFECT 7. A guardrail verdict is a closed four-value enum and rendered in the same grey
+            as everything else — the most consequential fact on a decide pane, stated silently. The
+            tone is statusTone's (I5) and the SLOT says which field this is, so nothing is inferred
+            from the words. `not_applicable` returns null and stays neutral, which is 93 of 105. */}
+        <span {...cellText('prose', text, `flex-1 text-right ${verdictToneFor(slotName, data)?.text ?? 'text-rf-text-primary'}`)}>{text}</span>
       </RailRow>
     );
   }

@@ -191,6 +191,19 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
     // own `flex:0 0 auto` footer (S10.1-1-reason.dc.html:392).
     <div
       data-shell-part="actionbar"
+      // ONE ROW IS NOT POSSIBLE HERE, AND THE NUMBERS ARE WHY (Phase 8, R116). Removing `flex-wrap`
+      // produced an overlapping bar at both supported widths, not just the narrow one:
+      //
+      //     1440   available 1198px   intrinsic 1362px   over by 164px
+      //     1280   available 1038px   intrinsic 1362px   over by 324px
+      //
+      // The controls themselves fit. What does not is the PROSE beside them: the state line wants
+      // 419px and the action group 741px, and the group's width is set by inline Alerts explaining
+      // why a disabled action is unavailable ("This proposal has no deadline to defer"), whose
+      // length comes from data. Two ways to close 324px were available and both are barred — moving
+      // the explanation onto the button as a `title` removes rendered text (I6), and truncating it
+      // clips text the layout gate forbids (T75). So the bar wraps, deliberately, and the GROUPING
+      // is what this phase fixed: state, then every action, then the forward route last and alone.
       className={`z-20 mx-auto flex w-full max-w-page shrink-0 flex-wrap items-center gap-3 border-t border-rf-border-subtle ${surfaceTier('card').className} px-6 py-3.5`}
     >
       {/* The stage's own state, on the left, exactly as the reference prints it. Rendered even when
@@ -198,6 +211,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           forward action look unanchored — falling back to the stage's own name, which is a fact the
           object always carries rather than invented copy. */}
       <span
+        data-bar-group="state"
         data-stage-state
         {...typeRole('label', 'min-w-0 truncate text-rf-text-secondary')}
       >
@@ -206,6 +220,11 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
 
       {/* The buttons are what is conditional — a terminal proposal, or a stage the template gives
           no actions, renders the bar with its state line and its forward action and no buttons. */}
+      {/* THE ACTION GROUP. Everything the operator can do to this proposal, in one cluster, with
+          the forward action kept out of it and last — the reference's own footer is one row of
+          exactly this shape (S10.1-3-decide.dc.html:400: footStatus, blockReason, "Send back to
+          Analyze", then the CTA). */}
+      <div data-bar-group="secondary" className="flex items-center gap-2">
       {(hasActions ? actions : []).map((actionDef) => {
         const state = resolveActionState(actionDef, decision);
         const spec = getOperatorAction(actionDef.id);
@@ -229,7 +248,11 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
         const hardBlocked = !blocked && !verdict.allowed && !needsPayload;
 
         const unusable = blocked || hardBlocked;
-        const buttonVariant = unusable ? 'secondary' : state.kind === 'destructive' ? 'destructive' : state.kind === 'primary' ? 'primary' : 'secondary';
+        // R116. THREE TREATMENTS IN THE BAR, and `destructive` is not one of them. A red Dismiss sat
+        // beside a black Continue with nothing saying which was primary — the two most consequential
+        // controls on the pane, competing. Destructive is now `ghost` here and keeps its red for
+        // ConfirmDialog, where confirming a destructive act is the entire point of the surface.
+        const buttonVariant = unusable ? 'secondary' : state.kind === 'destructive' ? 'ghost' : state.kind === 'primary' ? 'primary' : 'secondary';
         const buttonLabel = unusable
           ? 'Unavailable'
           : pending
@@ -263,6 +286,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           </div>
         );
       })}
+      </div>
 
       {/* The route forward, on the right. Absent on the last stage of the story — the reference's
           execute footer shows a completion chip there, never a "Continue to" (S10.1-4-execute:398).
@@ -270,6 +294,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
           nothing, so it is a link and it is never gated by eligibility. */}
       {next !== null && (
         <Link
+          data-bar-group="primary"
           data-stage-forward
           to={actionStoryPath(storyCode, next, nextProposalId)}
           {...typeRole('small', 'ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-surface-inverse px-4 text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
