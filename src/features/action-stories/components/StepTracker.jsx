@@ -9,14 +9,22 @@ const STAGE_LABELS = {
   live: 'Live',
 };
 
+const STAGE_ICONS = {
+  reason: 'fa-lightbulb',
+  analyze: 'fa-magnifying-glass',
+  decide: 'fa-scale-balanced',
+  execute: 'fa-check',
+  live: 'fa-satellite-dish',
+};
+
 /**
  * The reason → analyze → decide → execute(→ live) progress strip. Reads its step count from the
  * workflow's own manifest (`stages`, passed in) — S10.6 has a 5th "live" stage, every other
  * workflow has 4 — nothing here assumes a fixed count.
  *
- * Visual pattern taken directly from the reference mockups (every `S*-*.dc.html` stage screen):
- * a numbered-circle pill per step (checkmark once past, filled with the accent while current,
- * a bare number while upcoming), a short connector between them, "Step N of M" right-aligned.
+ * Same position and navigation as before (each icon is still a NavLink to that stage's own
+ * proposal, "Next" still advances one stage) — only the visual is redrawn: a centered row of large
+ * icon roundels per stage, connected by a line, current stage in blue with a glow ring.
  *
  * `stages` is the story's stage RECORDS — `{stage, proposal_id}` — not bare stage keys. Each step
  * links to its OWN proposal, so moving between stages no longer routes through StageRedirect to
@@ -31,56 +39,61 @@ export default function StepTracker({ code, stages, activeStageKey }) {
   const next = stages[activeIndex + 1];
 
   return (
-    <nav aria-label="Stage progress" className="flex items-center gap-0">
-      <ol className="flex flex-wrap items-center gap-0">
+    <nav aria-label="Stage progress" className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+      <span aria-hidden="true" />
+
+      <ol className="flex items-start justify-center">
         {stages.map(({ stage: stageKey, proposal_id: proposalId }, i) => {
           const isActive = stageKey === activeStageKey;
           const isPast = activeIndex > i;
 
           return (
-            <li key={stageKey} className="flex items-center">
+            <li key={stageKey} className="flex items-start">
               <NavLink
                 to={actionStoryPath(code, stageKey, proposalId)}
                 aria-current={isActive ? 'step' : undefined}
-                className={`flex h-[30px] items-center gap-2 rounded-full border pl-[3px] pr-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
-                  isActive
-                    ? 'border-rf-brand-tint-16 bg-rf-brand-tint-08'
-                    : 'border-rf-border-default bg-rf-surface-canvas hover:bg-rf-surface-sunken'
-                }`}
+                className="flex w-14 flex-col items-center gap-1.5 rounded-lg pt-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
               >
                 <span
                   aria-hidden="true"
-                  className={`grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-mono text-[9.5px] font-semibold ${
+                  className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-colors ${
                     isActive
-                      ? 'bg-rf-brand-blue-500 text-white'
+                      ? 'bg-blue-600 text-white shadow-[0_0_0_4px_rgba(37,99,235,0.14)]'
                       : isPast
-                        ? 'bg-rf-surface-raised text-rf-text-secondary'
-                        : 'bg-rf-surface-raised text-rf-text-tertiary'
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'bg-rf-surface-sunken text-rf-text-tertiary'
                   }`}
                 >
-                  {isPast ? <i className="fa-solid fa-check text-[9px]" /> : i + 1}
+                  <i
+                    className={`fa-solid ${isPast ? 'fa-check' : STAGE_ICONS[stageKey] || 'fa-circle'} text-[11px]`}
+                    aria-hidden="true"
+                  />
                 </span>
-                <span className={`text-[12px] ${isActive ? 'font-semibold text-rf-text-primary' : isPast ? 'font-medium text-rf-text-secondary' : 'font-medium text-rf-text-tertiary'}`}>
+                <span
+                  className={`text-center text-[11px] ${
+                    isActive ? 'font-semibold text-blue-600' : isPast ? 'font-medium text-rf-text-secondary' : 'font-medium text-rf-text-tertiary'
+                  }`}
+                >
                   {STAGE_LABELS[stageKey] || stageKey}
                 </span>
               </NavLink>
-              {i < stages.length - 1 && <span aria-hidden="true" className="h-px w-4 bg-rf-border-default" />}
+              {i < stages.length - 1 && <span aria-hidden="true" className="mt-4 h-px w-16 shrink-0 bg-rf-border-default" />}
             </li>
           );
         })}
       </ol>
-      <span className="ml-auto mr-3 font-mono text-[10px] uppercase tracking-[0.12em] text-rf-text-tertiary">
-        Step {activeIndex + 1} of {stages.length}
-      </span>
-      {next && (
-        <Link
-          to={actionStoryPath(code, next.stage, next.proposal_id)}
-          className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-[12px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
-        >
-          Next
-          <i className="fa-solid fa-arrow-right text-[10px]" aria-hidden="true" />
-        </Link>
-      )}
+
+      <div className="flex justify-end">
+        {next && (
+          <Link
+            to={actionStoryPath(code, next.stage, next.proposal_id)}
+            className="inline-flex h-7 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3 text-[11.5px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+          >
+            Next
+            <i className="fa-solid fa-arrow-right text-[9px]" aria-hidden="true" />
+          </Link>
+        )}
+      </div>
     </nav>
   );
 }

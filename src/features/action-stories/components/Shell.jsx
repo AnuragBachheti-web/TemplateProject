@@ -1,89 +1,35 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { actionStoryPath } from '@/constants/actionStoriesRoutes';
 import { findStage } from '@/features/action-stories/actionStory';
 import { getActionStories } from '@/services/actionStoriesService';
 import { defaultStageOf } from '@/features/action-stories/actionStory';
-import { useThemeStore } from '@/store/useThemeStore';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 
-const THEME_CYCLE = ['light', 'dark', 'system'];
-const THEME_ICON = { light: 'fa-sun', dark: 'fa-moon', system: 'fa-circle-half-stroke' };
-const THEME_LABEL = { light: 'Light', dark: 'Dark', system: 'System' };
+const DAY_MS = 86_400_000;
 
-/** Cycles light → dark → system → light. A real activation path for the dark-mode tokens this app already ships (see useThemeStore.js). */
-function ThemeToggle() {
-  const preference = useThemeStore((s) => s.preference);
-  const setTheme = useThemeStore((s) => s.setTheme);
-
-  return (
-    <button
-      type="button"
-      onClick={() => setTheme(THEME_CYCLE[(THEME_CYCLE.indexOf(preference) + 1) % THEME_CYCLE.length])}
-      className="grid h-7 w-7 place-items-center rounded-md text-rf-text-tertiary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
-      aria-label={`Theme: ${THEME_LABEL[preference]}. Click to change.`}
-      title={`Theme: ${THEME_LABEL[preference]}`}
-    >
-      <i className={`fa-solid ${THEME_ICON[preference]} text-[12px]`} aria-hidden="true" />
-    </button>
-  );
-}
+const URGENCY_STYLES = {
+  urgent: { bar: 'bg-rf-status-critical', label: 'text-rf-status-critical' },
+  medium: { bar: 'bg-rf-status-warning', label: 'text-rf-status-warning' },
+  notable: { bar: 'bg-rf-status-purple', label: 'text-rf-status-purple' },
+  clear: { bar: 'bg-rf-status-success', label: 'text-rf-status-success' },
+};
 
 /**
- * The persistent top bar (search, notifications, theme, account) the reference always shows above
- * the content canvas — workspace-level chrome, not per-story content, so unlike everything below
- * it this deliberately carries no fabricated business data (no invented marketplace, no invented
- * person's name/role): this app has no auth/session/search backend to source that from honestly,
- * and inventing one would be exactly the "hardcode the reference's content" this task rules out.
- * The search input and avatar are real, present, and visually complete, just not wired to a
- * backend that doesn't exist yet — the same "structure now, data later" posture already used for
- * the sidebar's "Settings"/"Help & Support" links below.
+ * Urgency bucket, derived from fields the story already carries (on_clock, deadline, impact) — no
+ * invented data. An on-clock deadline inside 3 days is urgent; further out is medium; no deadline
+ * at all but a large swing is notable; anything else genuinely can wait.
  */
-function TopBar({ onOpenNav }) {
-  return (
-    <header className="flex h-14 flex-shrink-0 items-center gap-3 border-b border-rf-border-subtle bg-rf-surface-canvas px-4">
-      <button
-        type="button"
-        onClick={onOpenNav}
-        aria-label="Open workflow menu"
-        className="rounded-md p-1.5 text-rf-text-secondary hover:bg-rf-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring lg:hidden"
-      >
-        <i className="fa-solid fa-bars text-[14px]" aria-hidden="true" />
-      </button>
-
-      <label className="relative flex min-w-0 max-w-md flex-1 items-center">
-        <i
-          className="fa-solid fa-magnifying-glass pointer-events-none absolute left-3 text-[11px] text-rf-text-tertiary"
-          aria-hidden="true"
-        />
-        <input
-          type="search"
-          placeholder="Search workflows, SKUs, or insights…"
-          className="w-full rounded-full border border-rf-border-subtle bg-rf-surface-sunken py-[7px] pl-8 pr-3 text-[12.5px] text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
-        />
-        <kbd className="pointer-events-none absolute right-2.5 hidden rounded border border-rf-border-subtle bg-rf-surface-canvas px-1.5 py-[1px] font-mono text-[9.5px] text-rf-text-tertiary sm:inline-block">
-          ⌘K
-        </kbd>
-      </label>
-
-      <span className="ml-auto flex items-center gap-1.5">
-        <ThemeToggle />
-        <button
-          type="button"
-          aria-label="Notifications"
-          className="grid h-8 w-8 place-items-center rounded-full text-rf-text-tertiary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
-        >
-          <i className="fa-regular fa-bell text-[14px]" aria-hidden="true" />
-        </button>
-        <span
-          aria-hidden="true"
-          className="grid h-8 w-8 place-items-center rounded-full bg-rf-surface-sunken text-rf-text-tertiary"
-        >
-          <i className="fa-solid fa-user text-[13px]" aria-hidden="true" />
-        </span>
-      </span>
-    </header>
-  );
+function storyUrgency(story) {
+  const onClock = story.stages.filter((s) => s.on_clock && s.deadline);
+  if (onClock.length > 0) {
+    const days = Math.min(...onClock.map((s) => (Date.parse(s.deadline) - Date.now()) / DAY_MS));
+    return days <= 3
+      ? { tone: 'urgent', label: days <= 0 ? 'Overdue' : `Due in ${Math.ceil(days)}d` }
+      : { tone: 'medium', label: `Due in ${Math.ceil(days)}d` };
+  }
+  const maxImpact = Math.max(0, ...story.stages.map((s) => Math.abs(s.impact ?? 0)));
+  return maxImpact >= 5000 ? { tone: 'notable', label: null } : { tone: 'clear', label: null };
 }
 
 /**
@@ -93,6 +39,9 @@ function TopBar({ onOpenNav }) {
  * identical titles. The queue is right to return one row per stage; the sidebar is wrong to render
  * them ungrouped. Clicking a story opens it at its default stage; the stage tracker in the page
  * header moves between that story's stages.
+ *
+ * Each row is a boxed card with a left urgency bar (red/amber/violet/green — see `storyUrgency`)
+ * rather than a plain text row, following the reference design system's card-list pattern.
  */
 function WorkflowNav({ activeStoryCode, onRetry }) {
   const [status, setStatus] = useState('loading'); // 'loading' | 'ready' | 'error'
@@ -126,7 +75,7 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
       {status === 'loading' && <LoadingState label="Loading Action Stories…" compact />}
       {status === 'error' && <AsyncErrorState error={error} onRetry={onRetry} compact />}
 
-      <ul className="flex flex-col gap-px p-2">
+      <ul className="flex flex-col gap-2 p-2.5">
         {status === 'ready' &&
           stories.map((story) => {
             const isActive = activeStoryCode === story.story_code;
@@ -134,24 +83,34 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
             // than handing (code, stage) to StageRedirect to look up what it already knows.
             const openAt = defaultStageOf(story);
             const openId = findStage(story, openAt)?.proposal_id;
+            const urgency = storyUrgency(story);
             return (
               <li key={story.story_code}>
                 <NavLink
                   to={actionStoryPath(story.story_code, openAt, openId)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 text-[12.5px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
+                  className={`flex items-stretch gap-3 overflow-hidden rounded-[var(--r-md)] border bg-rf-surface-canvas pr-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
                     isActive
-                      ? 'bg-rf-brand-tint-08 text-rf-text-primary'
-                      : 'text-rf-text-secondary hover:bg-rf-surface-sunken hover:text-rf-text-primary'
+                      ? 'border-rf-border-strong shadow-[var(--shadow-xs)]'
+                      : 'border-rf-border-subtle hover:border-rf-border-strong'
                   }`}
                 >
-                  {isActive && (
-                    <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-[2.5px] rounded-full bg-rf-brand-indicator" />
-                  )}
-                  <span className="shrink-0 font-mono text-[9.5px] tracking-[0.04em] text-rf-text-tertiary">{story.story_code}</span>
-                  <span className="min-w-0 flex-1 truncate">{story.title}</span>
+                  <span aria-hidden="true" className={`w-[3px] flex-shrink-0 ${URGENCY_STYLES[urgency.tone].bar}`} />
+                  <span className="min-w-0 flex-1 py-2.5">
+                    <span className="flex items-center gap-1.5">
+                      <span className="font-mono text-[9.5px] tracking-[0.04em] text-rf-text-tertiary">{story.story_code}</span>
+                      {urgency.label && (
+                        <span className={`font-mono text-[9px] uppercase tracking-[0.06em] ${URGENCY_STYLES[urgency.tone].label}`}>
+                          {urgency.label}
+                        </span>
+                      )}
+                    </span>
+                    <span className="mt-0.5 block truncate text-[12.5px] font-medium leading-snug text-rf-text-primary">
+                      {story.title}
+                    </span>
+                  </span>
                   {/* Stage COUNT, not a stage name — one row is the whole story. */}
-                  <span className="shrink-0 font-mono text-[9px] text-rf-text-tertiary">{story.stages.length}</span>
+                  <span className="flex-shrink-0 self-center font-mono text-[9px] text-rf-text-tertiary">{story.stages.length}</span>
                 </NavLink>
               </li>
             );
@@ -175,57 +134,20 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
  * different navigational concept from "which of 26 workflow instances" — collapsing this to icons
  * would destroy real navigation, so the restraint is borrowed, not the literal icon-rail pattern).
  *
- * Below `lg:` it's an off-canvas drawer (a menu button opens it, a backdrop or picking a workflow
- * closes it); at `lg:` and above it's the same always-visible static column as before
- * (AUDIT_REPORT.md §15).
+ * The header row that used to sit above `main` (search, theme, notifications, account) moved up a
+ * level into DecisionsShell's own header — this embedded copy was redundant chrome once that outer
+ * header existed, so it's gone entirely rather than duplicated.
  */
 export default function Shell() {
   const { storyCode: activeStoryCode } = useParams();
-  const { pathname } = useLocation();
   const [retryToken, setRetryToken] = useState(0);
-  const [navOpen, setNavOpen] = useState(false);
-
-  // Closes the mobile drawer the moment a navigation completes — React's own documented pattern
-  // for "adjust state when a prop changes" (setState directly during render, comparing against a
-  // last-seen value in state), not a useEffect, which would set state one render late and trigger
-  // this project's own react-hooks/set-state-in-effect lint rule for no benefit here.
-  const [lastPathname, setLastPathname] = useState(pathname);
-  if (pathname !== lastPathname) {
-    setLastPathname(pathname);
-    setNavOpen(false);
-  }
 
   return (
-    <div className="flex h-screen bg-rf-surface-sunken font-sans text-rf-text-primary">
-      {navOpen && (
-        <button
-          type="button"
-          aria-label="Close menu"
-          onClick={() => setNavOpen(false)}
-          className="fixed inset-0 z-10 bg-black/30 lg:hidden"
-        />
-      )}
-
+    <div className="flex h-full bg-rf-surface-sunken font-sans text-rf-text-primary">
       <nav
         aria-label="Workflows"
-        className={`fixed inset-y-0 left-0 z-20 flex w-60 flex-shrink-0 flex-col overflow-y-auto border-r border-rf-border-subtle bg-rf-surface-canvas transition-transform duration-200 lg:static lg:translate-x-0 ${
-          navOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className="flex w-60 flex-shrink-0 flex-col overflow-y-auto border-r border-rf-border-subtle bg-rf-surface-canvas"
       >
-        <div className="flex items-center gap-2 border-b border-rf-border-subtle px-4 py-3.5">
-          <span
-            aria-hidden="true"
-            className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-[7px] bg-rf-brand-blue-500 text-[10px] font-semibold text-white"
-          >
-            R
-          </span>
-          <span className="font-serif text-[16px] font-normal tracking-[-0.02em] text-rf-text-primary" style={{ fontVariationSettings: "'opsz' 144" }}>
-            Realify
-          </span>
-        </div>
-        <div className="px-4 pt-3.5 pb-1">
-          <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] text-rf-text-tertiary">Action Stories</p>
-        </div>
         <WorkflowNav key={retryToken} activeStoryCode={activeStoryCode} onRetry={() => setRetryToken((n) => n + 1)} />
 
         <div className="mt-auto flex flex-col border-t border-rf-border-subtle px-2 py-2">
@@ -250,12 +172,9 @@ export default function Shell() {
         </div>
       </nav>
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <TopBar onOpenNav={() => setNavOpen(true)} />
-        <main id="main-content" className="flex-1 overflow-y-auto bg-rf-surface-sunken">
-          <Outlet />
-        </main>
-      </div>
+      <main id="main-content" className="min-w-0 flex-1 overflow-y-auto bg-rf-surface-sunken">
+        <Outlet />
+      </main>
     </div>
   );
 }

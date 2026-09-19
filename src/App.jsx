@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ACTION_STORIES_ROUTES } from '@/constants/actionStoriesRoutes'
 import { ToastProvider } from '@/features/action-stories/ui/Toast'
-import Shell from '@/features/action-stories/components/Shell'
+import DecisionsShell from '@/features/app-shell/DecisionsShell'
 import ActionStoriesHome from '@/features/action-stories/pages/ActionStoriesHome'
 import StagePage from '@/features/action-stories/pages/StagePage'
 import StageRedirect from '@/features/action-stories/pages/StageRedirect'
@@ -19,7 +19,7 @@ export default function App() {
               this whole route (and this redirect) is replaced by wherever Action Stories is
               registered in routeConfig.jsx (see INTEGRATION.md). */}
           <Route path="/" element={<Navigate to={ACTION_STORIES_ROUTES.index} replace />} />
-          <Route path={ACTION_STORIES_ROUTES.index} element={<Shell />}>
+          <Route path={ACTION_STORIES_ROUTES.index} element={<DecisionsShell />}>
             <Route index element={<ActionStoriesHome />} />
             {/* The canonical route carries the proposal id; the two-segment shape below it resolves
                 that id once and redirects (C4), so every screen that renders is addressed
