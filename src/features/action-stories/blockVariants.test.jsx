@@ -84,6 +84,14 @@ const VARIANTS = [
     ],
   },
   {
+    name: 'reconStrip', block: 'statList', slot: 'reconciliation',
+    reference: 'S10.1-2-analyze.dc.html:286-288 — the reconciliation read across one line, four terms wide',
+    cases: [
+      { id: 'prop_s10_1_analyze', shows: ['$12,480', 'reconciles exactly to settlement'] },
+      { id: 'prop_s9_16_analyze', shows: ['$22.0K', 'existing connector, catalogue mapping'] },
+    ],
+  },
+  {
     name: 'meteredRow', block: 'gauge', slot: 'coverage',
     reference: 'S9.18-3-decide.dc.html:311-323 — label+value, a bar filled from pct with a tick at limitPct, note beneath',
     cases: [
@@ -206,9 +214,12 @@ describe('T84 — no block chooses its own variant (I1)', () => {
 // ---- T85 -----------------------------------------------------------------------------------------
 
 describe('T85 — variants are capped and declared (I2)', () => {
-  it('declares five variants across four blocks, with cardSet at the cap of 3', () => {
+  it('declares six variants across four blocks, with cardSet at the cap of 3', () => {
+    // RECONCILIATION DELTA: `reconStrip` joins statList, taking it to 2 of the 3 it may declare.
+    // No new block and no new slot-to-block move — the `reconciliation` slot already rendered a
+    // statList; what the variant changes is the column count, and only for that slot.
     const all = Object.values(BLOCK_VARIANTS).flat()
-    expect(all.sort()).toEqual(['groupCard', 'meteredRow', 'metricGrid', 'routeCard', 'scenarioCard', 'zoneRow'].sort())
+    expect(all.sort()).toEqual(['groupCard', 'meteredRow', 'metricGrid', 'reconStrip', 'routeCard', 'scenarioCard', 'zoneRow'].sort())
     expect(Object.keys(BLOCK_VARIANTS).sort()).toEqual(['cardSet', 'gauge', 'heatmapGrid', 'statList'])
     expect(BLOCK_VARIANTS.cardSet).toHaveLength(MAX_VARIANTS_PER_BLOCK)
   })
@@ -366,7 +377,17 @@ describe('T87 — no colour, tone, icon name or CSS value crosses from data (I4)
 describe('T89 — 5C and 5D hold (I7)', () => {
   it('the declared spans are unchanged', () => {
     const halves = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.span === 'half').map(([n]) => n).sort()
-    expect(halves).toEqual(['constraints', 'entities', 'plan', 'policy', 'roles', 'secondary_rows'])
+    // THE LIST IS EMPTY NOW, DELIBERATELY, and it is asserted as `[]` rather than deleted — an
+    // assertion that no longer exists cannot tell the next reader that a half coming back is a
+    // decision someone has to make on purpose.
+    //
+    // All six halves went, in one rule rather than as three exemptions: `policy` overflowed a 410px
+    // cell on 12 screens and `roles` on 4, both measured in Chrome at 1440, and the other three
+    // (`entities`, `secondary_rows`, `plan`) never had an adjacent half to pair with, so their
+    // declaration had been inert since it was written. A block in the main region now gets the full
+    // column. See slotVocabulary.js's `span` note for the measurement and for why the mechanism in
+    // packRows.js is kept standing with nothing opted in.
+    expect(halves).toEqual([])
   })
 
   it('the packer is still pure and still never reorders', () => {
@@ -417,7 +438,10 @@ describe('T90 — no data changed, no new slot, no new blockType (I6/C1)', () =>
   })
 
   it('the slot vocabulary gained no slot and the registry gained no block', () => {
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(49)
+    // RECONCILIATION DELTA: 49 -> 50, and NOT by this phase — 5B still mints no slot. The number is
+    // the vocabulary's current size, which is what makes the guard useful; the registry half below
+    // is the part 5B is actually on the hook for, and it is unchanged at 19.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
     expect(BLOCK_TYPES).toHaveLength(19)
     expect(Object.keys(BLOCK_REGISTRY).sort()).toEqual(BLOCK_TYPES.slice().sort())
   })

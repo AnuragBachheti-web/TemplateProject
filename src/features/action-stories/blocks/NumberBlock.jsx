@@ -1,4 +1,4 @@
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { formatValue, isTypedNumber } from './formatValue';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
@@ -28,7 +28,7 @@ export default function NumberBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-baseline justify-between gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('small', 'text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', slotLabel(slotName), typeRole('small', 'text-rf-text-secondary').className)}>{slotLabel(slotName)}</span>
         <span {...typeRole('figure', 'shrink-0 text-rf-text-primary')}>{display}</span>
       </div>
     );
@@ -36,7 +36,7 @@ export default function NumberBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard padding="compact">
-      <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       <p {...typeRole('figure', 'mt-1 text-rf-text-primary')}>{display}</p>
     </BlockCard>
   );

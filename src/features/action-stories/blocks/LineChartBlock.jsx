@@ -1,5 +1,5 @@
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { parseSvgPathPoints } from './chartGeometry';
 import { categoricalColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
@@ -81,7 +81,7 @@ export default function LineChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       <div className={showLegend ? 'h-64 w-full' : 'h-56 w-full'} role="img" aria-label={`Line chart. ${chartLabel}`}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={merged} margin={{ top: 4, right: 6, bottom: 0, left: 6 }}>
@@ -98,7 +98,7 @@ export default function LineChartBlock({ slotName, data }) {
                 key={idx}
                 type="monotone"
                 dataKey={`y${idx}`}
-                name={s.name || s.label || humanizeSlotName(slotName)}
+                name={s.name || s.label || slotLabel(slotName)}
                 stroke={categoricalColor(idx)}
                 strokeWidth={2}
                 dot={false}

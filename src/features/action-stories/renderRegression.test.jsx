@@ -215,7 +215,10 @@ describe('T13 — one object per template renders unchanged below the header', (
     // A slot leaving is a vocabulary shrinking, a slot arriving for an EXISTING block is a concept
     // finding its home, and a block type arriving unnoticed is the failure. Only the third would
     // change the array above.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(49)
+    //
+    // RECONCILIATION DELTA: 49 -> 50. `reconciliation` arrives for statList, an EXISTING block —
+    // the middle of the three cases above, so the registry array stays byte-identical here too.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('decision_mode')
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('stage_status')
     expect(Object.keys(SLOT_VOCABULARY)).toContain('threshold_control')
@@ -245,9 +248,14 @@ describe('T13 — one object per template renders unchanged below the header', (
     // carried it, which is the part that makes this a clearer removal than the two before it — the
     // rail row was a SECOND rendering of the lens on three stages and NO rendering of it on the
     // fourth. The accent on the pane eyebrow is now the one place, on all four.
+    // RECONCILIATION DELTA: analyze.compare.v1 12 -> 13, the one template that gains. The added
+    // block is `reconciliation`, `when`-gated on its rows carrying a prose `note`, which 3 of the 12
+    // objects on `proposal.comparison` do — the other 9 keep `comparison` and render exactly as
+    // before. Same shape of change as 5A's `threshold_control`: one gated block, no other template
+    // touched.
     expect(counts).toEqual({
       'reason.v1': 8,             // 11 -> 10 (Phase 4) -> 9 (5C) -> 8 (5E Part 2)
-      'analyze.compare.v1': 12,   // 15 -> 14 (Phase 4) -> 13 (5C) -> 12 (5E Part 2)
+      'analyze.compare.v1': 13,   // 15 -> 14 (Phase 4) -> 13 (5C) -> 12 (5E Part 2) -> 13 (reconciliation)
       'decide.slate.v1': 17,      // 19 -> 18 (Phase 4) -> 19 (5A) -> 18 (5C) -> 17 (5E Part 2)
       'execute.bridge.v1': 13,    // 15 -> 14 (Phase 4) -> 13 (5C) — untouched this phase
       'locked.v1': 3,             // unchanged — it declares no rail at all

@@ -1,4 +1,4 @@
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 
 import { typeRole } from './typeRole';
 /**
@@ -17,7 +17,7 @@ export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
   return (
     <div className="rounded-xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
       <p {...typeRole('label', 'text-rf-text-tertiary')}>
-        {humanizeSlotName(slotName)}
+        {slotLabel(slotName)}
       </p>
       <p {...typeRole('body', 'mt-1 text-rf-text-tertiary')}>{message}</p>
     </div>
@@ -38,7 +38,7 @@ export function ThinEvidenceState({ slotName, points }) {
   return (
     <div className="rounded-xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
       <p {...typeRole('label', 'text-rf-text-tertiary')}>
-        {humanizeSlotName(slotName)}
+        {slotLabel(slotName)}
       </p>
       <p {...typeRole('body', 'mt-1 text-rf-text-tertiary')}>
         Not enough evidence to chart — {points} {points === 1 ? 'point' : 'points'}.
@@ -51,7 +51,7 @@ export function ErrorState({ slotName, message }) {
   return (
     <div className="rounded-xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3">
       <p {...typeRole('label', 'text-rf-status-critical-text')}>
-        {humanizeSlotName(slotName)}
+        {slotLabel(slotName)}
       </p>
       <p {...typeRole('body', 'mt-1 text-rf-status-critical-text')}>{message}</p>
     </div>

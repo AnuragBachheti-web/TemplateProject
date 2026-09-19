@@ -1,7 +1,7 @@
 import Initials from './children/Initials';
 import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 import { cellText } from './cellText';
 
@@ -33,14 +33,14 @@ function Framed({ slotName, compact, children }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {children}
       </div>
     );
   }
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {children}
     </BlockCard>
   );

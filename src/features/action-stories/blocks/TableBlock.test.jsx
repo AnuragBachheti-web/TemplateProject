@@ -10,6 +10,7 @@ import { splitColumns } from './tableColumns';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { isHiddenKey } from './decorativeKeys';
 import { SLOT_VOCABULARY } from '../templates/slotVocabulary';
+import { slateItemIdOf } from '../contract/slateItem';
 import dataset from '@/features/action-stories/__corpus__/normalized/dataset.json';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
@@ -322,5 +323,62 @@ describe('T93 — a demoted field moves, it does not disappear (Phase 5E, R75)',
       'prop_s9_9_decide · slate: ladder',
       'prop_s9_9_decide · slate: options',
     ]);
+  });
+});
+
+// THE WIRING, NOT JUST THE RULE. slateItem.test.js proves `slateItemIdOf` gives distinct ids; this
+// proves the block wired the way StagePage wires it turns them into distinct checkboxes. The bug
+// lived in neither module — it lived in the call between them, so only a test that makes the same
+// call catches it coming back.
+describe('TableBlock — row selection is per-row (regression: one tick checked every box)', () => {
+  const slate = [{ label: 'Spawn remediation cards' }, { label: 'Annotate and archive' }, { label: 'Adjust the contract band' }];
+
+  function mountSlate(selectedIds, onToggleRow) {
+    return mount(
+      <TableBlock
+        slotName="slate"
+        data={slate}
+        selectable
+        selectedIds={selectedIds}
+        onToggleRow={onToggleRow}
+        rowIdOf={slateItemIdOf}
+      />,
+    );
+  }
+
+  it('gives each id-less row its own id, so a click reports only that row', () => {
+    const toggled = [];
+    const container = mountSlate([], (id) => toggled.push(id));
+    const boxes = [...container.querySelectorAll('input[type="checkbox"]')];
+    expect(boxes).toHaveLength(slate.length);
+
+    click(boxes[1]);
+    expect(toggled).toEqual(['item_1']);
+    click(boxes[2]);
+    expect(toggled).toEqual(['item_1', 'item_2']);
+  });
+
+  it('checks ONLY the selected row, not the whole table', () => {
+    const container = mountSlate(['item_1'], () => {});
+    const boxes = [...container.querySelectorAll('input[type="checkbox"]')];
+    expect(boxes.map((b) => b.checked)).toEqual([false, true, false]);
+  });
+
+  it('a row carrying a business id keeps it, and is unaffected', () => {
+    const toggled = [];
+    const container = mount(
+      <TableBlock
+        slotName="slate"
+        data={[{ sku: 'X-1', label: 'A' }, { label: 'B' }]}
+        selectable
+        selectedIds={[]}
+        onToggleRow={(id) => toggled.push(id)}
+        rowIdOf={slateItemIdOf}
+      />,
+    );
+    const boxes = [...container.querySelectorAll('input[type="checkbox"]')];
+    click(boxes[0]);
+    click(boxes[1]);
+    expect(toggled).toEqual(['X-1', 'item_1']);
   });
 });

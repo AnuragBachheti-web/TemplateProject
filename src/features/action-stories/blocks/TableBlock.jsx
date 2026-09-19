@@ -1,12 +1,14 @@
 import { Fragment, useState, useRef, useEffect, useCallback } from 'react';
 import Checkbox from '../ui/Checkbox';
 import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { deltaTone } from './deltaTone';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { isHiddenKey as isHiddenColumn } from './decorativeKeys';
 import { splitColumns, isControlColumn } from './tableColumns';
+import { isFigureColumn, proseColumnMinCh } from './tableColumnLayout';
 import { cellText } from './cellText';
 import { typeRole } from './typeRole';
 import { isFigureText } from './figureShape';
@@ -166,6 +168,21 @@ export default function TableBlock({ slotName, data, compact, selectable = false
   // like an ordinary cell — tracked separately so the header/cell rendering below can special-case it.
   const controlColumns = new Set(columns.filter((col) => isControlColumn(allRows, col)));
 
+  // ALIGNMENT AND MINIMUM WIDTH ARE THE COLUMN'S, not the cell's — see tableColumnLayout.js for both
+  // defects that came of deciding them per cell. Computed once here, over ALL rows rather than the
+  // visible page, so paging or sorting a table never re-aligns it or changes its column widths
+  // underneath the reader.
+  const columnLayout = new Map(columns.map((col) => {
+    if (controlColumns.has(col)) return [col, { figure: false, minCh: null }];
+    const figure = isFigureColumn(allRows, col);
+    return [col, { figure, minCh: figure ? null : proseColumnMinCh(allRows, col, humanizeSlotName(col)) }];
+  }));
+  /** A prose column declares its floor; a figure column is `whitespace-nowrap` and sizes itself. */
+  const minWidthStyle = (col) => {
+    const minCh = columnLayout.get(col)?.minCh;
+    return minCh === null || minCh === undefined ? undefined : { minWidth: `${minCh}ch` };
+  };
+
   const isLarge = allRows.length > LARGE_TABLE_ROW_THRESHOLD;
 
   const sortedRows = sort
@@ -204,14 +221,18 @@ export default function TableBlock({ slotName, data, compact, selectable = false
         >
         <table {...typeRole('small', 'w-full border-collapse')}>
           <caption {...typeRole('label', 'border-b border-rf-border-subtle px-4 py-2.5 text-left text-rf-text-secondary')}>
-            {humanizeSlotName(slotName)} · {allRows.length}
+            {slotLabel(slotName)} · {allRows.length}
           </caption>
           <thead>
             <tr className="bg-rf-surface-sunken">
               {selectable && (
                 <th
                   scope="col"
-                  className={`w-10 border-b border-rf-border-subtle px-3 py-2 ${isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''}`}
+                  // `text-left` because a `th` defaults to `center` and this column's checkbox sits
+                  // left. Nothing visible sits in this header, so it was never the reported defect —
+                  // but it is the same disagreement, and leaving one behind invites the next reader
+                  // to conclude the rule is applied selectively.
+                  className={`w-10 border-b border-rf-border-subtle px-3 py-2 text-left ${isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''}`}
                 >
                   <span className="sr-only">Select</span>
                 </th>
@@ -236,7 +257,10 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                     // single stacked column. Every height and width the layout gate measured was
                     // still within tolerance — the table was simply the wrong shape, and no probe
                     // asked about shape.
-                    {...cellText('prose', humanizeSlotName(col), typeRole('label', `border-b border-rf-border-subtle px-4 py-2 text-left text-rf-text-tertiary ${
+                    style={minWidthStyle(col)}
+                    {...cellText('prose', humanizeSlotName(col), typeRole('label', `border-b border-rf-border-subtle px-4 py-2 text-rf-text-tertiary ${
+                      columnLayout.get(col)?.figure ? 'text-right' : 'text-left'
+                    } ${
                       isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''
                     }`).className)}
                   >
@@ -246,7 +270,12 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       <button
                         type="button"
                         onClick={() => toggleSort(col)}
-                        className="flex items-center gap-1 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+                        // `w-full` + `justify-end` so the header of a figure column sits over its
+                        // own figures: a button is a flex box, and `text-right` on the `th` cannot
+                        // move a shrink-to-fit child that is already hard against the left edge.
+                        className={`flex w-full items-center gap-1 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
+                          columnLayout.get(col)?.figure ? 'justify-end' : ''
+                        }`}
                       >
                         {humanizeSlotName(col)}
                         <span aria-hidden="true" className="text-rf-text-tertiary">
@@ -284,7 +313,11 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       const value = row[col];
                       if (controlColumns.has(col)) {
                         return (
-                          <td key={col} {...typeRole('small', 'px-4 py-2')}>
+                          // `text-left` stated rather than inherited from the UA default, so this
+                          // column declares its alignment the same way every other one does. A `th`
+                          // defaults to `center` and a `td` to `start`; a contract that holds only
+                          // because two different defaults happen to agree is not a contract.
+                          <td key={col} {...typeRole('small', 'px-4 py-2 text-left')}>
                             <RowControl options={value} />
                           </td>
                         );
@@ -305,12 +338,19 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                       // `max-w-xs truncate` used to sit on the textual branch: it cut 538 cells across
                       // 52 objects, some by nearly 300px, with a `title` only past an arbitrary 24
                       // characters. Prose wraps now, so there is nothing left to reach for.
+                      // ALIGNMENT IS THE COLUMN'S, and it was the cell's — which is how a header
+                      // ended up an entire column-width from the figures under it (see
+                      // tableColumnLayout.js). Typography and tone stay per-cell, exactly as R87/R88
+                      // set them: a figure is still mono and still keeps the colour of its own sign
+                      // even where it sits in a column that reads as prose.
+                      const alignRight = columnLayout.get(col)?.figure === true;
                       return (
                         <td
                           key={col}
+                          style={minWidthStyle(col)}
                           {...cellText(numeric ? 'figure' : 'prose', text, typeRole(numeric ? 'figure' : 'body', `px-4 py-2 ${
                             isMissing ? 'text-rf-text-disabled' : tone ? tone.text : 'text-rf-text-primary'
-                          } ${numeric ? 'text-right' : 'text-left'}`).className)}
+                          } ${alignRight ? 'text-right' : 'text-left'}`).className)}
                         >
                           {isMissing ? <span aria-hidden="true">—</span> : text}
                           {isMissing && <span className="sr-only">No value</span>}

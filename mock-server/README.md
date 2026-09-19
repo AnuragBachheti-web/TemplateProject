@@ -67,7 +67,34 @@ VITE_API_BASE_URL=http://localhost:3001 npm run dev
 ```
 
 The "No API configured — served by the in-memory test double" banner disappears when the app is
-talking to this server. That banner is how you tell the two apart at a glance.
+talking to a real server. That banner is how you tell the two apart at a glance.
+
+### The deployed instance
+
+This server is deployed at **https://realify-mock-api.onrender.com**, and `.env.production` points
+the production build at it:
+
+```
+VITE_API_BASE_URL=https://realify-mock-api.onrender.com
+```
+
+Vite loads `.env.production` for `mode=production` only, so:
+
+| Command | Transport |
+|---|---|
+| `npm run dev` | in-process double (unchanged) |
+| `npm test` | in-process double — the suite stays offline |
+| `npm run build` | **the deployed API over HTTPS**, and the double is dropped from the bundle |
+
+To run a dev server against the deployed API:
+
+```bash
+VITE_API_BASE_URL=https://realify-mock-api.onrender.com npm run dev
+```
+
+**Free-tier cold start.** The instance spins down after idle; the first request can take up to ~60 s
+while it wakes, and the app will sit in its loading state until then. Subsequent requests are fast.
+A spin-down also resets state to the seed corpus — see [State](#state).
 
 ---
 

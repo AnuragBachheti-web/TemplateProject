@@ -1,4 +1,4 @@
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { HERO_SLOT_NAMES, HERO_MIN_LENGTH } from '../layout/heroSlot';
@@ -55,7 +55,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
             marker. The product reserves violet for exactly that, so the mark takes the purple
             accent and leaves blue to mean the one thing it now means. */}
         <span aria-hidden="true" className="h-[6px] w-[6px] rounded-full bg-rf-brand-purple-500" />
-        Realify signal · {humanizeSlotName(slotName)}
+        Realify signal · {slotLabel(slotName)}
       </p>
     );
     const headline = (
@@ -96,7 +96,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
     // side without pushing the other off the row or past the container's own edge.
     return (
       <div className="flex min-w-0 items-baseline gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('body', 'max-w-[45%] shrink text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', slotLabel(slotName), typeRole('body', 'max-w-[45%] shrink text-rf-text-secondary').className)}>{slotLabel(slotName)}</span>
         <span {...cellText('prose', text, typeRole('body', 'flex-1 text-right text-rf-text-primary').className)}>{text}</span>
       </div>
     );
@@ -104,7 +104,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
 
   return (
     <BlockCard padding="compact">
-      <BlockTitle>{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       <p {...typeRole('heading', 'mt-1 text-rf-text-primary')}>{text}</p>
     </BlockCard>
   );

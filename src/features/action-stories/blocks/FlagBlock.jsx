@@ -1,4 +1,4 @@
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { BlockCard } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { cellText } from './cellText';
@@ -28,7 +28,7 @@ export default function FlagBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="flex min-w-0 items-center justify-between gap-3 py-[7px]">
-        <span {...cellText('identifier', humanizeSlotName(slotName), typeRole('small', 'text-rf-text-secondary').className)}>{humanizeSlotName(slotName)}</span>
+        <span {...cellText('identifier', slotLabel(slotName), typeRole('small', 'text-rf-text-secondary').className)}>{slotLabel(slotName)}</span>
         <Pill data={data} />
       </div>
     );
@@ -36,7 +36,7 @@ export default function FlagBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard padding="compact" className="flex items-center justify-between">
-      <h3 {...typeRole('small', 'text-rf-text-secondary')}>{humanizeSlotName(slotName)}</h3>
+      <h3 {...typeRole('small', 'text-rf-text-secondary')}>{slotLabel(slotName)}</h3>
       <Pill data={data} />
     </BlockCard>
   );

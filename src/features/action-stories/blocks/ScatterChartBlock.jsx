@@ -1,5 +1,5 @@
 import { ResponsiveContainer, ScatterChart, Scatter, Cell, XAxis, YAxis, ZAxis, Tooltip } from 'recharts';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { svgYToPlotY, toNumber } from './chartGeometry';
 import { categoricalColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
@@ -70,7 +70,7 @@ export default function ScatterChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       <div className="h-56 w-full" role="img" aria-label={chartLabel}>
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 4, right: 10, bottom: 4, left: 4 }}>

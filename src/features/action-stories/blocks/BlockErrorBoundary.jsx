@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 
 import { typeRole } from './typeRole';
 /**
@@ -47,7 +47,7 @@ export default class BlockErrorBoundary extends Component {
           className="rounded-xl border border-dashed border-rf-status-critical/40 bg-rf-status-critical/10 px-4 py-3"
         >
           <p {...typeRole('label', 'text-rf-status-critical-text')}>
-            {humanizeSlotName(this.props.slotName)}
+            {slotLabel(this.props.slotName)}
           </p>
           <p {...typeRole('body', 'mt-1 text-rf-status-critical-text')}>
             This card couldn&rsquo;t be displayed. The rest of this screen is unaffected.

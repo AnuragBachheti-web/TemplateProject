@@ -40,8 +40,8 @@ export default function Metric({ label, value, meta, extra }) {
           one way, wherever the question comes up. */}
       {value !== undefined && value !== null && value !== '' && (
         isFigureText(value)
-          ? <div {...cellText('figure', value, typeRole('figure', tone ?? 'text-rf-text-primary').className)}>{value}</div>
-          : <div {...cellText('prose', value, typeRole('small', tone ?? 'text-rf-text-primary').className)}>{value}</div>
+          ? <div {...cellText('figure', value, typeRole('figure', tone?.text ?? 'text-rf-text-primary').className)}>{value}</div>
+          : <div {...cellText('prose', value, typeRole('small', tone?.text ?? 'text-rf-text-primary').className)}>{value}</div>
       )}
       {/* PHASE 5B. `extra` is the metricGrid variant's second figure line — the reference stacks
           label / value / range / note (S9.1-3-decide:220-227) where this renders three. It is a
