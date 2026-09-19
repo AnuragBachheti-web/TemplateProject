@@ -503,6 +503,27 @@ const LAYOUT_PROBE = `
     }
   }
 
+  // --- T115: THE SLATE FITS (Phase 7, ruling R111). THE ACCEPTANCE TEST, NOT A TOLERANCE.
+  // Measured before this phase, at 1280: 17 of the 20 slate objects overflowed their 674px host,
+  // 14 of them by more than 400px, the widest (prop_s9_17_decide) running 3092px — four and a half
+  // screens of horizontal scroll to read one row. A span change cannot reach that (1440 is the
+  // widest this app supports) and a column rule was already tried in Phase 5E; these are its
+  // residual, where the columns really are shared. So the slot renders as cards, and this asserts
+  // the only thing that matters about the change: THE SLATE FITS. Nothing horizontal to chase.
+  {
+    const host = document.querySelector('[data-block-slot="slate"]');
+    if (host) {
+      const scroller = host.querySelector('table') ? host.querySelector('table').parentElement : host;
+      const widest = host.querySelector('table') || host.firstElementChild || host;
+      report.slate = {
+        w: Math.round(widest.getBoundingClientRect().width),
+        host: scroller.clientWidth,
+        isTable: !!host.querySelector('table'),
+        overflowX: Math.max(0, scroller.scrollWidth - scroller.clientWidth),
+      };
+    }
+  }
+
   // --- T101: NO TOFU (Phase 5E Part 2, ruling R89).
   // A missing-character box passes every other gate in this file. It is not clipped, it does not
   // overflow, it has a perfectly good contrast ratio, and its element is exactly the size the
@@ -610,6 +631,11 @@ async function runLayoutGate(base) {
         for (const h of r.hollow) {
           failures.push(`T93 ${where}: "${h.slot}" spends a column on "${h.head}", which is empty on ` +
             `${h.blank} of ${h.rows} rows — a union artefact, not a shared attribute`)
+        }
+        // T115
+        if (r.slate && r.slate.overflowX > 1) {
+          failures.push(`T115 ${where}: the slate overflows its host by ${r.slate.overflowX}px ` +
+            `(${r.slate.w} in ${r.slate.host}${r.slate.isTable ? ', still a table' : ''})`)
         }
         // T101
         for (const t of r.tofu) {

@@ -11,6 +11,7 @@
 import { toLocalInputValue } from './snoozeTime';
 
 import { typeRole } from '../blocks/typeRole';
+import { surfaceTier } from '../blocks/surfaceTier';
 const PRESETS = [
   { label: 'In 4 hours', hours: 4 },
   { label: 'Tomorrow', hours: 24 },
@@ -36,7 +37,7 @@ export default function SnoozeUntilField({ value, onChange, error, now = new Dat
           value={value}
           min={min}
           onChange={(event) => onChange(event.target.value)}
-          {...typeRole('small', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', `mt-1.5 w-full rounded-lg ${surfaceTier('card').className} p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring`)}
         />
       </label>
 
@@ -46,7 +47,7 @@ export default function SnoozeUntilField({ value, onChange, error, now = new Dat
             key={preset.label}
             type="button"
             onClick={() => onChange(toLocalInputValue(new Date(now.getTime() + preset.hours * 3_600_000)))}
-            {...typeRole('small', 'rounded-full border border-rf-border-subtle px-2.5 py-1 text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+            {...typeRole('small', 'rounded-full border border-rf-border-subtle px-2.5 py-1 text-rf-text-secondary transition-colors hover:bg-rf-brand-tint-08 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
           >
             {preset.label}
           </button>

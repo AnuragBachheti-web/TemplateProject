@@ -1,7 +1,8 @@
-import { typeRole } from './typeRole';
+import { surfaceTier } from './surfaceTier';
+import { labelLevel } from './labelLevel';
 /**
  * The card shell every block renders inside — previously the exact literal string
- * `"rounded-lg border border-rf-border-subtle bg-rf-surface-canvas"` (or its `px-4 py-3` variant)
+ * ``rounded-lg ${surfaceTier('card').className}`` (or its `px-4 py-3` variant)
  * was duplicated verbatim across all 13 block components (AUDIT_REPORT.md §17: "a future 'add a
  * subtle shadow to every card' change touches 13 files instead of 1"). One shared wrapper, kept
  * intentionally tiny — it owns only the shell, never a block's own internal layout, so this stays
@@ -18,7 +19,7 @@ export function BlockCard({ children, padding = 'normal', className = '' }) {
   const paddingClass = padding === 'compact' ? 'px-4 py-3' : padding === 'none' ? '' : 'p-3.5';
   return (
     <div
-      className={`rounded-xl border border-rf-border-subtle bg-rf-surface-canvas shadow-card ${paddingClass} ${className}`.trim()}
+      className={`rounded-xl ${surfaceTier('card').className} ${paddingClass} ${className}`.trim()}
     >
       {children}
     </div>
@@ -39,7 +40,7 @@ export function BlockCard({ children, padding = 'normal', className = '' }) {
  */
 export function BlockTitle({ children, className = '' }) {
   return (
-    <h3 {...typeRole('label', `text-rf-text-secondary ${className}`.trim())}>
+    <h3 {...labelLevel('blockTitle', className)}>
       {children}
     </h3>
   );
@@ -57,5 +58,5 @@ export function BlockTitle({ children, className = '' }) {
  * full card's heading; not merged into BlockTitle itself; not a lesser/generic wrapper.
  */
 export function CompactEyebrow({ children }) {
-  return <p {...typeRole('label', 'mb-1 text-rf-text-tertiary')}>{children}</p>;
+  return <p {...labelLevel('section', 'mb-1')}>{children}</p>;
 }

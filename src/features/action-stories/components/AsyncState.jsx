@@ -1,4 +1,5 @@
 import { typeRole } from '../blocks/typeRole';
+import { surfaceTier } from '../blocks/surfaceTier';
 /**
  * Shared page-level loading/error presentation — previously every fetching page/component
  * (`StagePage`, `ActionStoriesHome`, `Shell`) had its own bare "Loading…" string and its own raw
@@ -46,7 +47,7 @@ export function AsyncErrorState({ error, onRetry, compact = false }) {
         <button
           type="button"
           onClick={onRetry}
-          {...typeRole('body', 'rounded-lg border border-rf-status-critical/40 bg-white px-3 py-1.5 text-rf-status-critical-text hover:bg-rf-status-critical/10 dark:border-rf-status-critical/40 dark:bg-transparent dark:text-rf-status-critical-text dark:hover:bg-rf-status-critical/10')}
+          {...typeRole('body', `rounded-lg border border-rf-status-critical/40 ${surfaceTier('card').className} px-3 py-1.5 text-rf-status-critical-text hover:bg-rf-status-critical/10 dark:border-rf-status-critical/40 dark:bg-transparent dark:text-rf-status-critical-text dark:hover:bg-rf-status-critical/10`)}
         >
           Try again
         </button>

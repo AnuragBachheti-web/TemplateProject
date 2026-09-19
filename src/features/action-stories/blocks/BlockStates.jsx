@@ -1,6 +1,7 @@
 import { slotLabel } from './slotLabel';
 
 import { typeRole } from './typeRole';
+import { surfaceTier } from './surfaceTier';
 /**
  * Shared empty/error presentation for every block type.
  *
@@ -15,7 +16,7 @@ import { typeRole } from './typeRole';
  */
 export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
   return (
-    <div className="rounded-xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
+    <div className={`rounded-xl border border-dashed border-rf-border-default ${surfaceTier('card').className} px-4 py-3`}>
       <p {...typeRole('label', 'text-rf-text-tertiary')}>
         {slotLabel(slotName)}
       </p>
@@ -36,7 +37,7 @@ export function EmptyState({ slotName, message = 'Nothing here yet.' }) {
  */
 export function ThinEvidenceState({ slotName, points }) {
   return (
-    <div className="rounded-xl border border-dashed border-rf-border-default bg-rf-surface-canvas px-4 py-3">
+    <div className={`rounded-xl border border-dashed border-rf-border-default ${surfaceTier('card').className} px-4 py-3`}>
       <p {...typeRole('label', 'text-rf-text-tertiary')}>
         {slotLabel(slotName)}
       </p>

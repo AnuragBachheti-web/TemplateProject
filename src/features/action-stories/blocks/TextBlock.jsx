@@ -6,6 +6,7 @@ import { enumLabel } from './enumLabel';
 import { cellText } from './cellText';
 
 import { typeRole } from './typeRole';
+import { surfaceTier } from './surfaceTier';
 /**
  * @param {boolean} [compact] - true when this block is grouped with sibling scalars inside a
  *   shared panel (see StageSections.jsx) — renders as a bare label/value row instead of its own
@@ -77,7 +78,7 @@ export default function TextBlock({ slotName, data, compact, role }) {
       );
     }
     return (
-      <div className="rounded-xl border border-rf-border-subtle border-l-[3px] border-l-rf-brand-purple-500 bg-rf-surface-canvas px-5 py-4 shadow-card">
+      <div className={`rounded-xl border border-rf-border-subtle border-l-[3px] border-l-rf-brand-purple-500 ${surfaceTier('card').className} px-5 py-4`}>
         {eyebrow}
         {headline}
       </div>

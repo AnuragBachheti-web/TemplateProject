@@ -6,10 +6,11 @@ import { formatValue } from '@/features/action-stories/blocks/formatValue';
 import { LoadingState, AsyncErrorState } from '@/features/action-stories/components/AsyncState';
 
 import { typeRole } from '../blocks/typeRole';
+import { surfaceTier } from '../blocks/surfaceTier';
 const STAGE_LABELS = { reason: 'Reason', analyze: 'Analyze', decide: 'Decide', execute: 'Execute', live: 'Live' };
 
 const STATUS_TONE = {
-  pending: 'bg-rf-surface-sunken text-rf-text-secondary',
+  pending: `${surfaceTier('nested').className} text-rf-text-secondary`,
   approved: 'bg-rf-status-success/10 text-rf-status-success-text dark:bg-rf-status-success/10 dark:text-rf-status-success-text',
   modified: 'bg-rf-status-warning/10 text-rf-status-warning-text dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text',
   dismissed: 'bg-rf-status-critical/10 text-rf-status-critical-text dark:bg-rf-status-critical/10 dark:text-rf-status-critical-text',
@@ -25,7 +26,7 @@ function ActionStoryCard({ story }) {
   const headline = story.stages.find((s) => s.impact)?.impact ?? null;
 
   return (
-    <li className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-card">
+    <li className={`rounded-xl ${surfaceTier('card').className} p-4`}>
       <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
         <span {...typeRole('label', 'text-rf-text-tertiary')}>
           {story.story_code}
@@ -46,7 +47,7 @@ function ActionStoryCard({ story }) {
           <li key={stage.stage}>
             <Link
               to={actionStoryPath(story.story_code, stage.stage, stage.proposal_id)}
-              {...typeRole('small', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+              {...typeRole('small', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-default px-2.5 py-[3px] text-rf-text-secondary transition-colors hover:bg-rf-brand-tint-08 hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
             >
               {STAGE_LABELS[stage.stage] ?? stage.stage}
               <span className={`${typeRole('micro').className} rounded-full px-1.5 capitalize ${STATUS_TONE[stage.status] ?? STATUS_TONE.pending}`}>

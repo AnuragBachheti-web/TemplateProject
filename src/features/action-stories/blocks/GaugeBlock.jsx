@@ -9,6 +9,7 @@ import { assertVariant } from './variants';
 import { cellText } from './cellText';
 
 import { typeRole } from './typeRole';
+import { surfaceTier } from './surfaceTier';
 const MAGNITUDE_KEYS = ['value', 'h', 'height', 'pct', 'amount'];
 const THRESHOLD_KEYS = ['threshold', 'limit', 'limitPct', 'ceiling', 'floor', 'target', 'cap'];
 
@@ -104,7 +105,7 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
                 {row.magnitude.display === undefined ? null : formatValue(row.magnitude.display)}
               </span>
             </div>
-            <div className="relative h-1.5 w-full rounded-full bg-rf-surface-sunken">
+            <div className={`relative h-1.5 w-full rounded-full ${surfaceTier('nested').className}`}>
               <div
                 className={`h-full rounded-full transition-[width] duration-base ${tone.fill}`}
                 style={{ width: `${fillPct}%` }}

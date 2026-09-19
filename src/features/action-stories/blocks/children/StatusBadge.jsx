@@ -2,6 +2,7 @@ import { checkStatusTone } from '../statusTone';
 import { DEPTH_CHILD, depthAttrs } from '../renderDepth';
 
 import { typeRole } from '../typeRole';
+import { surfaceTier } from '../surfaceTier';
 /**
  * A guardrail check's pass/warn/fail/blocked/info status, as an affordance rather than a word in a
  * sentence.
@@ -26,7 +27,7 @@ export default function StatusBadge({ status }) {
     <span
       {...depthAttrs(DEPTH_CHILD)}
       data-check-status={status}
-      {...typeRole('micro', 'inline-flex shrink-0 items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-sunken px-2 py-[2px]')}
+      {...typeRole('micro', `inline-flex shrink-0 items-center gap-1.5 rounded-full border border-rf-border-subtle ${surfaceTier('nested').className} px-2 py-[2px]`)}
       title={tone.label}
     >
       <span aria-hidden="true" className={`h-[6px] w-[6px] rounded-full ${tone.dot}`} />

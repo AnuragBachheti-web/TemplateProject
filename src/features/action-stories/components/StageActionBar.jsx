@@ -17,6 +17,7 @@ import Alert from '../ui/Alert';
 
 import { typeRole } from '../blocks/typeRole';
 import { glyph } from '../blocks/glyphSize';
+import { surfaceTier } from '../blocks/surfaceTier';
 /**
  * The generic, template-driven action bar — unchanged in design, retargeted at the Decision Object.
  *
@@ -190,7 +191,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
     // own `flex:0 0 auto` footer (S10.1-1-reason.dc.html:392).
     <div
       data-shell-part="actionbar"
-      className="z-20 mx-auto flex w-full max-w-page shrink-0 flex-wrap items-center gap-3 border-t border-rf-border-subtle bg-rf-surface-canvas px-6 py-3.5"
+      className={`z-20 mx-auto flex w-full max-w-page shrink-0 flex-wrap items-center gap-3 border-t border-rf-border-subtle ${surfaceTier('card').className} px-6 py-3.5`}
     >
       {/* The stage's own state, on the left, exactly as the reference prints it. Rendered even when
           the proposal states none — an empty band would collapse the bar's left half and make the
@@ -271,7 +272,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
         <Link
           data-stage-forward
           to={actionStoryPath(storyCode, next, nextProposalId)}
-          {...typeRole('small', 'ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-text-primary px-4 text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', 'ml-auto inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-rf-surface-inverse px-4 text-rf-surface-canvas transition-colors hover:bg-rf-brand-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Continue to <span className="capitalize">{next}</span>
           <i className={`fa-solid fa-arrow-right ${glyph(11)}`} aria-hidden="true" />
@@ -300,7 +301,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
               <select
                 value={reasonCodeDraft}
                 onChange={(event) => setReasonCodeDraft(event.target.value)}
-                {...typeRole('small', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+                {...typeRole('small', `mt-1.5 w-full rounded-lg ${surfaceTier('card').className} p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring`)}
               >
                 <option value="">Choose one…</option>
                 {DISMISS_REASONS.map((code) => (
@@ -320,7 +321,7 @@ export default function StageActionBar({ actions, stageState, stage, storyCode, 
                 value={reasonDraft}
                 onChange={(event) => setReasonDraft(event.target.value)}
                 rows={3}
-                {...typeRole('small', 'mt-1.5 w-full rounded-lg border border-rf-border-subtle bg-rf-surface-canvas p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+                {...typeRole('small', `mt-1.5 w-full rounded-lg ${surfaceTier('card').className} p-2.5 text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring`)}
               />
             </label>
           )}

@@ -61,7 +61,7 @@ describe('StageRenderer — grid grouping', () => {
     expect(container.textContent).toContain('second');
     // "first" and "second" each get their own lightweight lone-scalar strip — never one shared
     // container spanning across the table in between.
-    const strips = [...container.querySelectorAll('.rounded-lg.bg-rf-surface-raised')];
+    const strips = [...container.querySelectorAll('.rounded-lg.bg-rf-surface-nested')];
     const stripContaining = (text) => strips.find((el) => el.textContent.includes(text));
     expect(stripContaining('first')).toBeTruthy();
     expect(stripContaining('second')).toBeTruthy();
@@ -82,12 +82,15 @@ describe('StageRenderer — grid grouping', () => {
     expect(grids.length).toBe(2); // [a,b] and [c,d] — two separate grid rows, not merged across the itemQueue
   });
 
+  // PHASE 7 (R101): the strip's surface is the `nested` tier now — a well inside a card — and the
+  // class name moved with it. What this guards is unchanged: a lone scalar gets a strip, not a
+  // panel.
   it('a lone grid-eligible scalar (nothing to group with) renders as a lightweight strip, not a full GridPanel', () => {
     const m = manifest([{ slotName: 'display_mode', blockType: 'text', binding: 'data.display_mode' }]);
     const fixture = { data: { display_mode: 'Suggest' } };
     const container = mount(<StageRenderer manifest={m} fixture={fixture} />);
     expect(container.querySelectorAll('[data-grid-panel]').length).toBe(0);
-    expect(container.querySelector('.rounded-lg.bg-rf-surface-raised')).toBeTruthy();
+    expect(container.querySelector('.rounded-lg.bg-rf-surface-nested')).toBeTruthy();
     expect(container.textContent).toContain('Suggest');
   });
 

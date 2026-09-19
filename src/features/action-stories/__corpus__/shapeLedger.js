@@ -52,7 +52,6 @@
 // Extensions on every import: this module is loaded by bare Node from extraction, which has no
 // bundler resolution.
 import { SLOT_VOCABULARY } from '../templates/slotVocabulary.js';
-import { resolveTemplate } from '../templates/templateRegistry.js';
 import { evaluateCondition } from '../manifests/actionCondition.js';
 import { droppedFieldsOfValue, anonymousRowsOf, CONSUMED_FIELDS } from '../blocks/consumedFields.js';
 
@@ -418,10 +417,30 @@ for (const [name, spec] of Object.entries(SLOT_VOCABULARY)) {
  * is what chooses between them, so this asks it the same question StageRenderer asks before a block
  * reaches layout — the ledger audits what renders, so it must not guess at a shared binding.
  */
-function slotFor(canonicalPath, decision) {
+/**
+ * Which slot a claim landed on. One binding usually means one slot; `proposal.comparison` means two
+ * (`comparison` and `reconciliation`, split by shape), and only then does the decision's own
+ * manifest have to be consulted to say which one rendered.
+ *
+ * THE RESOLVER IS AN ARGUMENT, NOT AN IMPORT, and that is this module's oldest rule rather than a
+ * new one — see the header: the ledger is a pure function of its inputs. Importing
+ * templateRegistry.js here broke `npm run normalize` outright, because that module loads its
+ * manifests as bare JSON imports through the `@/` alias and extraction runs under plain Node, which
+ * has neither. The header has warned about exactly this since Phase 5A ("this module is loaded by
+ * bare Node from extraction, which has no bundler resolution"). Passing the resolver in restores
+ * the stated invariant instead of working around it.
+ *
+ * @param {string} canonicalPath
+ * @param {object} decision
+ * @param {(decision: object) => {manifest?: {blocks?: object[]}} | undefined} [resolveTemplate]
+ *   supplied by callers that can reach the template registry. Without it an ambiguous binding
+ *   resolves to nothing, which is the same answer the ledger already gives for an unclaimed path.
+ */
+function slotFor(canonicalPath, decision, resolveTemplate) {
   const candidates = SLOTS_BY_BINDING.get(canonicalPath);
   if (candidates === undefined) return undefined;
   if (candidates.length === 1) return candidates[0];
+  if (typeof resolveTemplate !== 'function') return undefined;
 
   const names = new Set(candidates.map((c) => c.slotName));
   const blocks = resolveTemplate(decision)?.manifest?.blocks ?? [];
@@ -471,15 +490,17 @@ export function anonymityDeferredFor(rawKey, proposalId) {
  * @param {object[]} dataset   the generated corpus bundle (see this module's header on why it is a
  *   parameter and not an import)
  * @param {object} provenance  the generated canonical-field-to-reference-key map
+ * @param {function} [resolveTemplate]  the template resolver, for the one binding that maps to two
+ *   slots. An argument for the same reason `dataset` is — see `slotFor`.
  * @returns {Array<{proposalId, stage, rawKey, canonicalPath, slotName, blockType, fields, dropped, anonymousRows, outcome}>}
  */
-export function buildLedger(dataset, provenance) {
+export function buildLedger(dataset, provenance, resolveTemplate) {
   const entries = [];
   for (const decision of dataset) {
     const sources = provenance[decision.proposal_id] ?? {};
     for (const [canonicalPath, rawKey] of Object.entries(sources)) {
       if (rawKey === null) continue;
-      const slot = slotFor(canonicalPath, decision);
+      const slot = slotFor(canonicalPath, decision, resolveTemplate);
       if (slot === undefined) continue; // header axes; the vocabulary excludes them by design
       const value = at(decision, canonicalPath);
       if (value === undefined) continue;

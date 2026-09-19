@@ -12,8 +12,9 @@ import { LoadingState, AsyncErrorState } from '@/features/action-stories/compone
 import Alert from '@/features/action-stories/ui/Alert';
 
 import { typeRole } from '../blocks/typeRole';
+import { surfaceTier } from '../blocks/surfaceTier';
 const STATUS_TONE = {
-  pending: 'bg-rf-surface-sunken text-rf-text-secondary',
+  pending: `${surfaceTier('nested').className} text-rf-text-secondary`,
   approved: 'bg-rf-status-success/10 text-rf-status-success-text dark:bg-rf-status-success/10 dark:text-rf-status-success-text',
   modified: 'bg-rf-status-warning/10 text-rf-status-warning-text dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text',
   dismissed: 'bg-rf-status-critical/10 text-rf-status-critical-text dark:bg-rf-status-critical/10 dark:text-rf-status-critical-text',
@@ -44,7 +45,7 @@ function ProposalHeader({ decision, story, storyProblem }) {
     // (S10.1-1-reason.dc.html: the header sits outside the `flex:1;min-height:0` grid entirely).
     // A sticky element inside a non-scrolling parent is inert, and leaving it would have implied a
     // scroll relationship that no longer exists.
-    <header data-shell-part="header" className="z-20 shrink-0 border-b border-rf-border-subtle bg-rf-surface-canvas px-6 pt-4 pb-3">
+    <header data-shell-part="header" className={`z-20 shrink-0 border-b border-rf-border-subtle ${surfaceTier('card').className} px-6 pt-4 pb-3`}>
       <PaneEyebrow lens={decision.lens} storyCode={decision.story_code} stage={decision.stage} />
 
       <h1

@@ -40,11 +40,12 @@
  */
 
 import { DEPTH_SECTION, depthAttrs } from '@/features/action-stories/blocks/renderDepth';
-import { typeRole } from '../blocks/typeRole';
+import { surfaceTier } from '../blocks/surfaceTier';
+import { labelLevel } from '../blocks/labelLevel';
 function SectionHeading({ title, className }) {
   if (!title) return null;
   return (
-    <h2 className={className ?? typeRole('label', 'text-rf-text-secondary').className}>
+    <h2 className={className ?? labelLevel('section').className}>
       {title}
     </h2>
   );
@@ -68,7 +69,7 @@ function GridPanel({ row, nodesBySlot }) {
   return (
     <div
       data-grid-panel
-      className={`grid grid-cols-1 divide-y divide-rf-border-subtle overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised px-4 shadow-card sm:grid-cols-2 sm:divide-y-0 sm:divide-x sm:px-0 ${wideColsClass}`}
+      className={`grid grid-cols-1 divide-y divide-rf-border-subtle overflow-hidden rounded-xl border border-rf-border-subtle ${surfaceTier('nested').className} px-4 shadow-card sm:grid-cols-2 sm:divide-y-0 sm:divide-x sm:px-0 ${wideColsClass}`}
     >
       {row.items.map(({ slotName }) => (
         <div key={slotName} data-block-slot={slotName} className="min-w-0 sm:px-4 sm:py-3">
@@ -90,7 +91,7 @@ function GridPanel({ row, nodesBySlot }) {
  */
 function ComposedPanel({ row, nodesBySlot }) {
   return (
-    <div data-composed-panel className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-card">
+    <div data-composed-panel className={`rounded-xl ${surfaceTier('card').className} p-4`}>
       <div className="grid grid-cols-12 gap-x-4 gap-y-2">
         {row.items.map(({ slotName, span }) => (
           <div key={slotName} data-block-slot={slotName} className="min-w-0" style={{ gridColumn: `span ${span} / span ${span}` }}>
@@ -116,7 +117,7 @@ function LoneScalarStrip({ slotName, nodesBySlot }) {
   // The SECONDARY surface tier, same reasoning as GridPanel above — `rf-surface-sunken` (the page
   // canvas's own background) would make this strip visually disappear into the page around it,
   // exactly the opposite of "real visual presence" this component exists for.
-  return <div data-block-slot={slotName} className="rounded-lg bg-rf-surface-raised px-3 py-1">{nodesBySlot[slotName]}</div>;
+  return <div data-block-slot={slotName} className={`rounded-lg ${surfaceTier('nested').className} px-3 py-1`}>{nodesBySlot[slotName]}</div>;
 }
 
 /**
@@ -199,14 +200,14 @@ function RailPanel({ section, nodesBySlot }) {
   // secondary surface, which on the previous palette read as "lighter" and on this one read as
   // nothing at all — the page ground and that fill were two units apart.
   return (
-    <section aria-label={section.title ?? undefined} className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas p-4 shadow-card">
+    <section aria-label={section.title ?? undefined} className={`rounded-xl ${surfaceTier('card').className} p-4`}>
       {/* Same semantic level as a main-column section (<h2>, under the page's own <h1>) even though
           it's styled lighter here — a rail panel is structurally a section too, not a lesser thing
           a screen-reader user navigating by heading should have to guess at. */}
       {section.title && (
         <SectionHeading
           title={section.title}
-          {...typeRole('label', 'mb-1 text-rf-text-secondary')}
+          {...labelLevel('section', 'mb-1')}
         />
       )}
       <div className="flex flex-col divide-y divide-rf-border-subtle">
