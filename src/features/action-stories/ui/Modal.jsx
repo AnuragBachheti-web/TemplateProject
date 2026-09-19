@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
+import { surfaceTier } from '../blocks/surfaceTier';
 // The generic overlay shell — WAI-ARIA's own Dialog (Modal) pattern, not invented here: portaled to
 // `document.body` (so a parent's `overflow`/`transform` never clips or z-index-traps it — StagePage
 // already scrolls its own content), backdrop click + Escape both close it, focus moves into the
@@ -61,7 +62,7 @@ export default function Modal({ open, onClose, labelledBy, describedBy, initialF
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div aria-hidden="true" className="absolute inset-0 bg-black/40" onClick={onClose} />
+      <div aria-hidden="true" className="absolute inset-0 bg-rf-scrim" onClick={onClose} />
       <div
         ref={dialogRef}
         role="dialog"
@@ -69,7 +70,7 @@ export default function Modal({ open, onClose, labelledBy, describedBy, initialF
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         tabIndex={-1}
-        className="relative w-full max-w-md rounded-xl border border-rf-border-subtle bg-rf-surface-raised p-6 shadow-overlay outline-none"
+        className={`relative w-full max-w-md rounded-xl border border-rf-border-subtle ${surfaceTier('nested').className} p-6 shadow-overlay outline-none`}
       >
         {children}
       </div>

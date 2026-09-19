@@ -1,6 +1,7 @@
 import { DEPTH_CHILD, depthAttrs } from '../renderDepth';
 
 import { typeRole } from '../typeRole';
+import { surfaceTier } from '../surfaceTier';
 /**
  * The short qualifying words a card carries — a tag, a flag, a kind, a badge.
  *
@@ -22,7 +23,7 @@ export default function ChipRow({ chips }) {
       {present.map((chip) => (
         <span
           key={chip}
-          {...typeRole('micro', 'inline-flex items-center rounded-full border border-rf-border-subtle bg-rf-surface-sunken px-2 py-[1px] text-rf-text-secondary')}
+          {...typeRole('micro', `inline-flex items-center rounded-full border border-rf-border-subtle ${surfaceTier('nested').className} px-2 py-[1px] text-rf-text-secondary`)}
         >
           {chip}
         </span>

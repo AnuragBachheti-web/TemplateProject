@@ -1,6 +1,7 @@
 import { DEPTH_CHILD, depthAttrs } from '../renderDepth';
 
 import { typeRole } from '../typeRole';
+import { surfaceTier } from '../surfaceTier';
 /**
  * The identity chip on a roster row.
  *
@@ -23,7 +24,7 @@ export default function Initials({ name, initials }) {
       {...depthAttrs(DEPTH_CHILD)}
       data-initials
       aria-hidden="true"
-      {...typeRole('label', 'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-rf-border-subtle bg-rf-surface-sunken text-rf-text-secondary')}
+      {...typeRole('label', `inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-rf-border-subtle ${surfaceTier('nested').className} text-rf-text-secondary`)}
     >
       {initialsFor(name, initials)}
     </span>

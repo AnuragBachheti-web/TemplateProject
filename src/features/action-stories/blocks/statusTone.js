@@ -46,6 +46,8 @@ const SEVERITY_TONE = {
   watch: { dot: 'bg-rf-border-strong', text: 'text-rf-text-tertiary' },
 };
 
+import { surfaceTier } from './surfaceTier';
+
 const DEFAULT_TONE = SEVERITY_TONE.watch;
 
 export function severityTone(value) {
@@ -135,7 +137,7 @@ export function limitTone() {
  */
 const FLAG_TONE = {
   yes: { chip: 'bg-rf-status-success/10 text-rf-status-success-text', label: 'Yes' },
-  no: { chip: 'bg-rf-surface-sunken text-rf-text-tertiary', label: 'No' },
+  no: { chip: `${surfaceTier('nested').className} text-rf-text-tertiary`, label: 'No' },
 }
 
 export function flagTone(isTrue) {

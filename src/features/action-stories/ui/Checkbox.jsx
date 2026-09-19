@@ -2,6 +2,7 @@ import { useId } from 'react';
 
 import { typeRole } from '../blocks/typeRole';
 import { glyph } from '../blocks/glyphSize';
+import { surfaceTier } from '../blocks/surfaceTier';
 // A REAL `<input type="checkbox">` under the hood (visually hidden via `sr-only`, never
 // `display:none` — a screen reader and the keyboard still need it), not a hand-rolled
 // `<div onClick>` — that gets you tabIndex, Space-to-toggle, and a screen reader announcing
@@ -24,7 +25,7 @@ export default function Checkbox({ checked = false, onChange, indeterminate = fa
   const boxTone =
     checked || indeterminate
       ? 'border-rf-brand-blue-500 bg-rf-brand-blue-500 text-white'
-      : 'border-rf-border-strong bg-rf-surface-canvas text-transparent';
+      : `border-rf-border-strong ${surfaceTier('card').className} text-transparent`;
 
   return (
     <label

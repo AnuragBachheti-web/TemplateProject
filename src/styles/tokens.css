@@ -70,6 +70,31 @@
   /* ---------------------------------------------------------------------------------------
    * SURFACES — white card on a #FAFBFD page is the product's own ground.
    * --------------------------------------------------------------------------------------- */
+  /* THE THREE TIERS (Phase 7, ruling R101). An elevation is background, border and shadow
+   * together; blocks/surfaceTier.js is the only place that pairs them, and a component picks a
+   * tier rather than a colour.
+   *
+   * WHY THE GROUND MOVED. It was #FAFBFD against a #FFFFFF card — a 3.59% luminance step, which
+   * means the card read only because of its 1px border and the whole app looked like one sheet of
+   * paper. #F4F6FA (the product's own ink-50) puts the step at 7.95%.
+   *
+   * AND WHY NOT DARKER. #F2F4F7 would give 9.71%, but it drops tertiary text on the ground to
+   * 4.51:1 — clearing AA by a hundredth, which the next tint change quietly breaks. Ruling R108
+   * took the headroom over the extra 1.8 points. Measured on each tier, not assumed. */
+  --rf-surface-ground: #F4F6FA;
+  --rf-surface-ground-rgb: 244 246 250;
+  --rf-surface-card: #FFFFFF;
+  --rf-surface-card-rgb: 255 255 255;
+  --rf-surface-nested: #F2F4F7;
+  --rf-surface-nested-rgb: 242 244 247;
+  /* TWO NAMED FILLS THAT ARE NOT TIERS. An inverse pill is the text colour used as a ground — a
+   * dark chip with light type — and a scrim is the dimming behind a modal. Neither is an elevation,
+   * so neither belongs in surfaceTier.js; both are named here so no component reaches for a raw
+   * colour to get one. */
+  --rf-surface-inverse: #111827;
+  --rf-surface-inverse-rgb: 17 24 39;
+  --rf-scrim: rgba(16, 24, 40, 0.40);
+  --rf-scrim-rgb: 16 24 40;
   --rf-surface-canvas: #FFFFFF;
   --rf-surface-canvas-rgb: 255 255 255;
   --rf-surface-overlay: #FFFFFF;
@@ -204,6 +229,16 @@
   --rf-text-tertiary-rgb: 154 165 184;
   --rf-text-disabled: #5E6878;
   --rf-text-disabled-rgb: 94 104 120;
+  --rf-surface-ground: #0A0E16;
+  --rf-surface-ground-rgb: 10 14 22;
+  --rf-surface-card: #141C2B;
+  --rf-surface-card-rgb: 20 28 43;
+  --rf-surface-nested: #1B2436;
+  --rf-surface-nested-rgb: 27 36 54;
+  --rf-surface-inverse: #F2F5FA;
+  --rf-surface-inverse-rgb: 242 245 250;
+  --rf-scrim: rgba(0, 0, 0, 0.60);
+  --rf-scrim-rgb: 0 0 0;
   --rf-surface-canvas: #111826;
   --rf-surface-canvas-rgb: 17 24 38;
   --rf-surface-overlay: #182236;

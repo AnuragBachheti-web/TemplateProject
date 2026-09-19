@@ -51,7 +51,7 @@ if (!globalThis.ResizeObserver) {
 }
 
 const byId = (id) => dataset.find((d) => d.proposal_id === id)
-const LEDGER = buildLedger(dataset, provenance)
+const LEDGER = buildLedger(dataset, provenance, resolveTemplate)
 
 // The same real-render harness blocks/slotCorrections.test.jsx uses — createRoot + act, not a
 // testing-library import this project does not carry. Several assertions below are about PIXELS

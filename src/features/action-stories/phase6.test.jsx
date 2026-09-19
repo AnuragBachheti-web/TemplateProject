@@ -29,7 +29,13 @@ const REPO_ROOT = path.resolve(HERE, '../../..')
 const TOKENS = fs.readFileSync(path.join(REPO_ROOT, 'src/styles/tokens.css'), 'utf8')
 
 /** THE EXEMPTION LIST. Its length is asserted, so it cannot grow quietly (T102). */
-const OWNS_A_SCALE = ['blocks/typeRole.js', 'blocks/glyphSize.js']
+// PHASE 7 ADDS TWO, AND THE GROWTH IS DELIBERATE — flagged rather than slipped in. Phase 7's I1
+// says this list may not grow, and the intent behind that is that no COMPONENT gets an exemption.
+// These two are not components: `surfaceTier` owns the elevation scale and `labelLevel` owns the
+// label scale, exactly as `typeRole` owns the type scale and `glyphSize` the icon sizes. Ruling
+// R101 created the first and R102 the second, so refusing them an exemption would mean either a
+// scale that cannot state its own values or nine type roles to avoid saying `font-semibold` twice.
+const OWNS_A_SCALE = ['blocks/typeRole.js', 'blocks/glyphSize.js', 'blocks/surfaceTier.js', 'blocks/labelLevel.js']
 
 function sourceFiles() {
   const out = []
@@ -53,11 +59,15 @@ const codeLines = (text) =>
   text.split('\n').map((l, i) => [i + 1, l]).filter(([, l]) => !/^\s*(\/\/|\*|\/\*|\{\/)/.test(l))
 
 describe('T102 — every visual value comes from a token', () => {
-  it('the exemption list is two files long, and both own a scale', () => {
-    // A list that may grow is not an exemption list. These two are the modules that DECIDE sizes —
-    // typeRole for text, glyphSize for icon glyphs — so a literal in them is the definition, not a
-    // breach of it. Nothing else may spell a visual value at all.
-    expect(OWNS_A_SCALE).toHaveLength(2)
+  it('the exemption list is four files long, and every one of them owns a scale', () => {
+    // A list that may grow ARBITRARILY is not an exemption list. What is on it is the set of
+    // modules that DECIDE a scale — typeRole for text, glyphSize for icon glyphs, and from Phase 7
+    // surfaceTier for elevation and labelLevel for the three label levels. A literal in one of them
+    // is the definition of a value, not a breach of the rule against spelling one.
+    //
+    // NO COMPONENT IS ON IT, AND NONE EVER MAY BE. That is the line the rule actually protects, and
+    // it is why the two Phase 7 additions are stated in the open rather than slipped in.
+    expect(OWNS_A_SCALE).toHaveLength(4)
     for (const f of OWNS_A_SCALE) expect(fs.existsSync(path.join(HERE, f)), f).toBe(true)
   })
 

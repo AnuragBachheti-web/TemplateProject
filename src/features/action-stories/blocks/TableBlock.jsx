@@ -13,6 +13,7 @@ import { cellText } from './cellText';
 import { typeRole } from './typeRole';
 import { isFigureText } from './figureShape';
 
+import { surfaceTier } from './surfaceTier';
 function isPlainObject(v) {
   return v !== null && typeof v === 'object' && !Array.isArray(v);
 }
@@ -64,8 +65,8 @@ function RowControl({ options }) {
           aria-pressed={selected === i}
           className={`px-2 py-0.5 transition-colors ${
             selected === i
-              ? 'bg-rf-text-primary text-rf-surface-canvas'
-              : 'bg-transparent text-rf-text-tertiary hover:bg-rf-surface-sunken'
+              ? 'bg-rf-surface-inverse text-rf-surface-card'
+              : 'bg-transparent text-rf-text-tertiary hover:bg-rf-brand-tint-08'
           }`}
         >
           {opt.label}
@@ -224,7 +225,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
             {slotLabel(slotName)} · {allRows.length}
           </caption>
           <thead>
-            <tr className="bg-rf-surface-sunken">
+            <tr className={`${surfaceTier('nested').className}`}>
               {selectable && (
                 <th
                   scope="col"
@@ -232,7 +233,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                   // left. Nothing visible sits in this header, so it was never the reported defect —
                   // but it is the same disagreement, and leaving one behind invites the next reader
                   // to conclude the rule is applied selectively.
-                  className={`w-10 border-b border-rf-border-subtle px-3 py-2 text-left ${isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''}`}
+                  className={`w-10 border-b border-rf-border-subtle px-3 py-2 text-left ${isLarge ? `sticky top-0 z-10 ${surfaceTier('nested').className}` : ''}`}
                 >
                   <span className="sr-only">Select</span>
                 </th>
@@ -261,7 +262,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                     {...cellText('prose', humanizeSlotName(col), typeRole('label', `border-b border-rf-border-subtle px-4 py-2 text-rf-text-tertiary ${
                       columnLayout.get(col)?.figure ? 'text-right' : 'text-left'
                     } ${
-                      isLarge ? 'sticky top-0 z-10 bg-rf-surface-sunken' : ''
+                      isLarge ? `sticky top-0 z-10 ${surfaceTier('nested').className}` : ''
                     }`).className)}
                   >
                     {controlColumns.has(col) ? (
@@ -298,7 +299,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
                 .filter(([, text]) => text !== '' && text !== undefined && text !== null);
               return (
                 <Fragment key={i}>
-                  <tr className="border-b border-rf-border-subtle last:border-0 hover:bg-rf-surface-sunken">
+                  <tr className="border-b border-rf-border-subtle last:border-0 hover:bg-rf-brand-tint-08">
                     {selectable && (
                       <td className="px-3 py-2 align-middle">
                         <Checkbox
@@ -402,11 +403,11 @@ export default function TableBlock({ slotName, data, compact, selectable = false
             (opacity-0) the instant that edge is reached, so they never look like a permanent border. */}
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-rf-surface-canvas to-transparent transition-opacity duration-fast ${scrollShadow.left ? 'opacity-100' : 'opacity-0'}`}
+          className={`pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-rf-surface-card to-transparent transition-opacity duration-fast ${scrollShadow.left ? 'opacity-100' : 'opacity-0'}`}
         />
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-rf-surface-canvas to-transparent transition-opacity duration-fast ${scrollShadow.right ? 'opacity-100' : 'opacity-0'}`}
+          className={`pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-rf-surface-card to-transparent transition-opacity duration-fast ${scrollShadow.right ? 'opacity-100' : 'opacity-0'}`}
         />
       </div>
       {isLarge && pageCount > 1 && (
@@ -419,7 +420,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
               type="button"
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={clampedPage === 0}
-              className="rounded px-2 py-0.5 text-rf-text-secondary hover:bg-rf-surface-sunken disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded px-2 py-0.5 text-rf-text-secondary hover:bg-rf-brand-tint-08 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Previous
             </button>
@@ -427,7 +428,7 @@ export default function TableBlock({ slotName, data, compact, selectable = false
               type="button"
               onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
               disabled={clampedPage >= pageCount - 1}
-              className="rounded px-2 py-0.5 text-rf-text-secondary hover:bg-rf-surface-sunken disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded px-2 py-0.5 text-rf-text-secondary hover:bg-rf-brand-tint-08 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Next
             </button>

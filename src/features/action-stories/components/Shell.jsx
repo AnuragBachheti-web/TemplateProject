@@ -9,6 +9,7 @@ import { LoadingState, AsyncErrorState } from '@/features/action-stories/compone
 
 import { typeRole } from '../blocks/typeRole';
 import { glyph } from '../blocks/glyphSize';
+import { surfaceTier } from '../blocks/surfaceTier';
 const THEME_CYCLE = ['light', 'dark', 'system'];
 const THEME_ICON = { light: 'fa-sun', dark: 'fa-moon', system: 'fa-circle-half-stroke' };
 const THEME_LABEL = { light: 'Light', dark: 'Dark', system: 'System' };
@@ -22,7 +23,7 @@ function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(THEME_CYCLE[(THEME_CYCLE.indexOf(preference) + 1) % THEME_CYCLE.length])}
-      className="grid h-7 w-7 place-items-center rounded-md text-rf-text-tertiary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+      className="grid h-7 w-7 place-items-center rounded-md text-rf-text-tertiary transition-colors hover:bg-rf-brand-tint-08 hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
       aria-label={`Theme: ${THEME_LABEL[preference]}. Click to change.`}
       title={`Theme: ${THEME_LABEL[preference]}`}
     >
@@ -43,12 +44,12 @@ function ThemeToggle() {
  */
 function TopBar({ onOpenNav }) {
   return (
-    <header className="flex h-14 flex-shrink-0 items-center gap-3 border-b border-rf-border-subtle bg-rf-surface-canvas px-4">
+    <header className={`flex h-14 flex-shrink-0 items-center gap-3 border-b border-rf-border-subtle ${surfaceTier('card').className} px-4`}>
       <button
         type="button"
         onClick={onOpenNav}
         aria-label="Open workflow menu"
-        className="rounded-md p-1.5 text-rf-text-secondary hover:bg-rf-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring lg:hidden"
+        className="rounded-md p-1.5 text-rf-text-secondary hover:bg-rf-brand-tint-08 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring lg:hidden"
       >
         <i className={`fa-solid fa-bars ${glyph(14)}`} aria-hidden="true" />
       </button>
@@ -61,9 +62,9 @@ function TopBar({ onOpenNav }) {
         <input
           type="search"
           placeholder="Search workflows, SKUs, or insights…"
-          {...typeRole('small', 'w-full rounded-full border border-rf-border-subtle bg-rf-surface-sunken py-[7px] pl-8 pr-3 text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', `w-full rounded-full border border-rf-border-subtle ${surfaceTier('nested').className} py-[7px] pl-8 pr-3 text-rf-text-primary placeholder:text-rf-text-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring`)}
         />
-        <kbd {...typeRole('micro', 'pointer-events-none absolute right-2.5 hidden rounded border border-rf-border-subtle bg-rf-surface-canvas px-1.5 py-[1px] text-rf-text-tertiary sm:inline-block')}>
+        <kbd {...typeRole('micro', `pointer-events-none absolute right-2.5 hidden rounded ${surfaceTier('card').className} px-1.5 py-[1px] text-rf-text-tertiary sm:inline-block`)}>
           ⌘K
         </kbd>
       </label>
@@ -73,13 +74,13 @@ function TopBar({ onOpenNav }) {
         <button
           type="button"
           aria-label="Notifications"
-          className="grid h-8 w-8 place-items-center rounded-full text-rf-text-tertiary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
+          className="grid h-8 w-8 place-items-center rounded-full text-rf-text-tertiary transition-colors hover:bg-rf-brand-tint-08 hover:text-rf-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring"
         >
           <i className={`fa-regular fa-bell ${glyph(14)}`} aria-hidden="true" />
         </button>
         <span
           aria-hidden="true"
-          className="grid h-8 w-8 place-items-center rounded-full bg-rf-surface-sunken text-rf-text-tertiary"
+          className={`grid h-8 w-8 place-items-center rounded-full ${surfaceTier('nested').className} text-rf-text-tertiary`}
         >
           <i className={`fa-solid fa-user ${glyph(13)}`} aria-hidden="true" />
         </span>
@@ -141,7 +142,7 @@ function WorkflowNav({ activeStoryCode, onRetry }) {
                 <NavLink
                   to={actionStoryPath(story.story_code, openAt, openId)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`${typeRole('small').className} relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${ isActive ? 'bg-rf-brand-tint-08 text-rf-text-primary' : 'text-rf-text-secondary hover:bg-rf-surface-sunken hover:text-rf-text-primary' }`}
+                  className={`${typeRole('small').className} relative flex items-center gap-2.5 rounded-md py-[7px] pl-3 pr-2.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${ isActive ? 'bg-rf-brand-tint-08 text-rf-text-primary' : 'text-rf-text-secondary hover:bg-rf-brand-tint-08 hover:text-rf-text-primary' }`}
                 >
                   {isActive && (
                     <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-[2.5px] rounded-full bg-rf-brand-indicator" />
@@ -194,19 +195,19 @@ export default function Shell() {
   }
 
   return (
-    <div data-shell-part="frame" className="flex h-screen bg-rf-surface-sunken text-rf-text-primary">
+    <div data-shell-part="frame" className={`flex h-screen ${surfaceTier('ground').className} text-rf-text-primary`}>
       {navOpen && (
         <button
           type="button"
           aria-label="Close menu"
           onClick={() => setNavOpen(false)}
-          className="fixed inset-0 z-10 bg-black/30 lg:hidden"
+          className="fixed inset-0 z-10 bg-rf-scrim lg:hidden"
         />
       )}
 
       <nav
         aria-label="Workflows"
-        className={`fixed inset-y-0 left-0 z-20 flex w-60 flex-shrink-0 flex-col overflow-y-auto border-r border-rf-border-subtle bg-rf-surface-canvas transition-transform duration-base lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-20 flex w-60 flex-shrink-0 flex-col overflow-y-auto border-r border-rf-border-subtle ${surfaceTier('card').className} transition-transform duration-base lg:static lg:translate-x-0 ${
           navOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -229,14 +230,14 @@ export default function Shell() {
         <div className="mt-auto flex flex-col border-t border-rf-border-subtle px-2 py-2">
           <a
             href="#settings"
-            {...typeRole('small', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
+            {...typeRole('small', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-brand-tint-08 hover:text-rf-text-primary')}
           >
             <i className={`fa-solid fa-gear w-3.5 text-center ${glyph(11)} text-rf-text-tertiary`} aria-hidden="true" />
             Settings
           </a>
           <a
             href="#help"
-            {...typeRole('small', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-surface-sunken hover:text-rf-text-primary')}
+            {...typeRole('small', 'flex items-center gap-2.5 rounded-md px-3 py-[7px] text-rf-text-secondary transition-colors hover:bg-rf-brand-tint-08 hover:text-rf-text-primary')}
           >
             <i className={`fa-regular fa-circle-question w-3.5 text-center ${glyph(11)} text-rf-text-tertiary`} aria-hidden="true" />
             Help &amp; Support
@@ -270,7 +271,7 @@ export default function Shell() {
             The route's own page is now responsible for its scrolling: ActionStoriesHome declares
             its own `overflow-y-auto`, because a list page and a stage pane want different
             behaviour and this element can no longer decide for both. */}
-        <main data-shell-part="main" id="main-content" className="flex min-h-0 flex-1 flex-col overflow-hidden bg-rf-surface-sunken">
+        <main data-shell-part="main" id="main-content" className={`flex min-h-0 flex-1 flex-col overflow-hidden ${surfaceTier('ground').className}`}>
           <Outlet />
         </main>
       </div>

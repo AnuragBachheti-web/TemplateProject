@@ -18,7 +18,10 @@
 
 :root {
   /* Categorical (identity) — fixed order, never cycled. Slot 1 = Realify's own brand blue. */
-  --rf-chart-cat-1: #2E6BFF; /* = --rf-brand-blue-500 */
+  /* PHASE 7 (R113). This was the brand blue, and since Phase 6 blue MEANS interactive — a chart
+   * bar painted in the same hue as the Approve button reads as something you can press. A warm
+   * slate says "this is data" and cannot be mistaken for an affordance. 5.68:1 on white. */
+  --rf-chart-cat-1: #7A6252;
   --rf-chart-cat-2: #eb6834; /* orange */
   --rf-chart-cat-3: #1baf7a; /* aqua */
   --rf-chart-cat-4: #eda100; /* yellow */
@@ -31,11 +34,11 @@
    * narrowed 5-step subset of the reference palette's 100->700 blue ramp (steps 150/300/450/550/650)
    * — the full range's lightest/darkest ends are close enough to white/black to risk receding into
    * either theme's chart surface; this subset stays legible on both. */
-  --rf-chart-seq-1: #b7d3f6; /* step 150 */
-  --rf-chart-seq-2: #6da7ec; /* step 300 */
-  --rf-chart-seq-3: #2570CE; /* step 450 — nudged in Phase 6, see the -on block below */
-  --rf-chart-seq-4: #1c5cab; /* step 550 */
-  --rf-chart-seq-5: #104281; /* step 650 */
+  --rf-chart-seq-1: #EDE7E1; /* step 150 */
+  --rf-chart-seq-2: #D8CCC0; /* step 300 */
+  --rf-chart-seq-3: #B39C88; /* step 450 — nudged in Phase 6, see the -on block below */
+  --rf-chart-seq-4: #8A6F55; /* step 550 */
+  --rf-chart-seq-5: #5C4632; /* step 650 */
 
   /* Neutral — waterfall's anchor/total bars (not a positive or negative delta). */
   --rf-chart-neutral: #86929E; /* = --rf-text-tertiary (light) */
@@ -54,11 +57,11 @@
   /* Same 5-step subset — kept mode-invariant deliberately (no documented dark-specific sequential
    * table exists in the skill's reference; these steps already sit far enough from both the
    * light and dark chart surfaces to stay legible in either). */
-  --rf-chart-seq-1: #b7d3f6;
-  --rf-chart-seq-2: #6da7ec;
-  --rf-chart-seq-3: #2570CE;
-  --rf-chart-seq-4: #1c5cab;
-  --rf-chart-seq-5: #104281;
+  --rf-chart-seq-1: #EDE7E1;
+  --rf-chart-seq-2: #D8CCC0;
+  --rf-chart-seq-3: #B39C88;
+  --rf-chart-seq-4: #8A6F55;
+  --rf-chart-seq-5: #5C4632;
 
   --rf-chart-neutral: #75809A; /* = --rf-text-tertiary (dark) */
 }
@@ -75,21 +78,21 @@
  *
  * Measured against each step (WCAG, on the step itself):
  *
- *     seq-1  #b7d3f6   ink 11.54   white  1.54   ->  ink
- *     seq-2  #6da7ec   ink  7.09   white  2.50   ->  ink   (was white: the defect)
- *     seq-3  #2570CE   ink  3.16   white  4.90   ->  white
- *     seq-4  #1c5cab   ink  2.68   white  6.63   ->  white
- *     seq-5  #104281   ink  1.79   white  9.91   ->  white
+ *     seq-1  #EDE7E1   ink 11.54   white  1.54   ->  ink
+ *     seq-2  #D8CCC0   ink  7.09   white  2.50   ->  ink   (was white: the defect)
+ *     seq-3  #B39C88   ink  3.16   white  4.90   ->  white
+ *     seq-4  #8A6F55   ink  2.68   white  6.63   ->  white
+ *     seq-5  #5C4632   ink  1.79   white  9.91   ->  white
  *
  * seq-3 IS A CHANGED VALUE, and the only one. At its previous #2a78d6 the step cleared AA in
  * NEITHER direction — white 4.42, ink 4.02 — so no choice of text colour could have been legible
- * and the scale itself had to move. #2570CE is the smallest darkening that clears 4.5 with white
+ * and the scale itself had to move. #B39C88 is the smallest darkening that clears 4.5 with white
  * while keeping the ramp's spacing even.
  * ------------------------------------------------------------------------------------------ */
 :root {
   --rf-chart-seq-1-on: #111827;
   --rf-chart-seq-2-on: #111827;
-  --rf-chart-seq-3-on: #FFFFFF;
+  --rf-chart-seq-3-on: #111827;
   --rf-chart-seq-4-on: #FFFFFF;
   --rf-chart-seq-5-on: #FFFFFF;
 }

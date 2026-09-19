@@ -3,6 +3,7 @@ import { actionStoryPath } from '@/constants/actionStoriesRoutes';
 
 import { typeRole } from '../blocks/typeRole';
 import { glyph } from '../blocks/glyphSize';
+import { surfaceTier } from '../blocks/surfaceTier';
 const STAGE_LABELS = {
   reason: 'Reason',
   analyze: 'Analyze',
@@ -47,12 +48,12 @@ export default function StepTracker({ code, stages, activeStageKey }) {
                 className={`flex h-[30px] items-center gap-2 rounded-full border pl-[3px] pr-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring ${
                   isActive
                     ? 'border-rf-brand-tint-16 bg-rf-brand-tint-08'
-                    : 'border-rf-border-default bg-rf-surface-canvas hover:bg-rf-surface-sunken'
+                    : `border-rf-border-default ${surfaceTier('card').className} hover:bg-rf-brand-tint-08`
                 }`}
               >
                 <span
                   aria-hidden="true"
-                  className={`${typeRole('micro').className} grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full ${ isActive ? 'bg-rf-brand-blue-500 text-white' : isPast ? 'bg-rf-surface-raised text-rf-text-secondary' : 'bg-rf-surface-raised text-rf-text-tertiary' }`}
+                  className={`${typeRole('micro').className} grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full ${ isActive ? 'bg-rf-brand-blue-500 text-white' : isPast ? `${surfaceTier('nested').className} text-rf-text-secondary` : `${surfaceTier('nested').className} text-rf-text-tertiary` }`}
                 >
                   {isPast ? <i className={`fa-solid fa-check ${glyph(9)}`} /> : i + 1}
                 </span>
@@ -71,7 +72,7 @@ export default function StepTracker({ code, stages, activeStageKey }) {
       {next && (
         <Link
           to={actionStoryPath(code, next.stage, next.proposal_id)}
-          {...typeRole('small', 'inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-text-primary px-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
+          {...typeRole('small', 'inline-flex h-8 items-center gap-1.5 rounded-lg bg-rf-surface-inverse px-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-brand-focus-ring')}
         >
           Next
           <i className={`fa-solid fa-arrow-right ${glyph(10)}`} aria-hidden="true" />

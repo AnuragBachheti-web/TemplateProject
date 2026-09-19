@@ -10,6 +10,7 @@ import { isHiddenKey } from './decorativeKeys';
 import { cellText } from './cellText';
 
 import { typeRole } from './typeRole';
+import { surfaceTier } from './surfaceTier';
 // Candidate field names an item might carry each concept under — kept in sync with (but
 // independently of) extraction/classifyBlocks.js's ITEM_LEVEL_CANDIDATES; that module is
 // generation-only tooling, never imported at runtime, so this is its own small copy.
@@ -118,12 +119,12 @@ function Item({ item, index }) {
   const extraFields = findExtraFields(item, usedKeys);
 
   return (
-    <li className="relative overflow-hidden rounded-xl border border-rf-border-subtle bg-rf-surface-raised py-2 pl-4 pr-3">
+    <li className={`relative overflow-hidden rounded-xl border border-rf-border-subtle ${surfaceTier('nested').className} py-2 pl-4 pr-3`}>
       {tone && <span className={`absolute inset-y-0 left-0 w-1 ${tone.dot}`} />}
       <div className="flex items-center justify-between gap-2">
         <p {...cellText('identifier', headline, typeRole('small', 'text-rf-text-primary').className)}>{headline}</p>
         {state !== undefined && (
-          <span {...typeRole('label', 'flex-shrink-0 rounded-full bg-rf-surface-sunken px-2 py-0.5 text-rf-text-secondary')}>
+          <span {...typeRole('label', `flex-shrink-0 rounded-full ${surfaceTier('nested').className} px-2 py-0.5 text-rf-text-secondary`)}>
             {String(state)}
           </span>
         )}
@@ -248,7 +249,7 @@ function SimpleChipList({ data }) {
         return (
           <span
             key={i}
-            {...typeRole('small', 'inline-flex items-center gap-1.5 rounded-full border border-rf-border-subtle bg-rf-surface-canvas px-2.5 py-1 text-rf-text-primary')}
+            {...typeRole('small', `inline-flex items-center gap-1.5 rounded-full ${surfaceTier('card').className} px-2.5 py-1 text-rf-text-primary`)}
           >
             {color && <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full" style={{ backgroundColor: color }} />}
             {label}

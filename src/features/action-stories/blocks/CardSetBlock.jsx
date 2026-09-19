@@ -11,6 +11,8 @@ import { assertVariant } from './variants';
 import { cellText } from './cellText';
 
 import { typeRole } from './typeRole';
+import { surfaceTier } from './surfaceTier';
+import { labelLevel } from './labelLevel';
 /**
  * A NAMED CHOICE OR GROUP, with its supporting figures — the richest row-level composition in the
  * vocabulary, and the reason the child mechanism exists at all.
@@ -154,10 +156,10 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
           <article
             key={i}
             data-card
-            className="rounded-xl border border-rf-border-subtle bg-rf-surface-canvas px-3 py-2.5"
+            className={`rounded-xl ${surfaceTier('card').className} px-3 py-2.5`}
           >
             <div className="flex items-baseline justify-between gap-3">
-              <h4 {...typeRole('body', 'min-w-0 text-rf-text-primary')}>{headline}</h4>
+              <h4 {...labelLevel('cardTitle', 'min-w-0')}>{headline}</h4>
               <ChipRow chips={chips} />
             </div>
 
@@ -194,7 +196,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
 
             {gate !== undefined && (
               <p className="mt-2">
-                <span {...cellText('identifier', gate, typeRole('label', 'inline-flex items-center rounded-full bg-rf-surface-sunken px-2.5 py-[3px] text-rf-text-secondary').className)}>
+                <span {...cellText('identifier', gate, typeRole('label', `inline-flex items-center rounded-full ${surfaceTier('nested').className} px-2.5 py-[3px] text-rf-text-secondary`).className)}>
                   {gate}
                 </span>
               </p>

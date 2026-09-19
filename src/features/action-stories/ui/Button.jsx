@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { typeRole } from '../blocks/typeRole';
 
+import { surfaceTier } from '../blocks/surfaceTier';
 // The one shared button — before this, StageActionBar's CTA, TableBlock's pagination controls, and
 // TableBlock's own column-sort header button each hand-rolled their own independent `<button
 // className="...">` with three different paddings/sizes/hover treatments. A future screen that
@@ -22,8 +23,8 @@ const SIZE = {
 const VARIANT = {
   primary: 'bg-rf-brand-blue-500 text-white hover:bg-rf-brand-blue-600',
   secondary:
-    'border border-rf-border-subtle bg-rf-surface-canvas text-rf-text-primary hover:bg-rf-surface-sunken',
-  ghost: 'bg-transparent text-rf-text-secondary hover:bg-rf-surface-sunken',
+    `${surfaceTier('card').className} text-rf-text-primary hover:bg-rf-brand-tint-08`,
+  ghost: 'bg-transparent text-rf-text-secondary hover:bg-rf-brand-tint-08',
   destructive: 'bg-rf-status-critical text-white hover:opacity-90',
 };
 
