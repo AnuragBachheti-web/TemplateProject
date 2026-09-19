@@ -146,7 +146,7 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       {rowsNode}
     </BlockCard>
   );

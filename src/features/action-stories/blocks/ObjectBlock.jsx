@@ -91,7 +91,7 @@ export default function ObjectBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       {rows}
     </BlockCard>
   );

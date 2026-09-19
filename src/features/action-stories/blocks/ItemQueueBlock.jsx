@@ -249,7 +249,7 @@ function SimpleChipList({ data }) {
         return (
           <span
             key={i}
-            {...typeRole('small', `inline-flex items-center gap-1.5 rounded-full ${surfaceTier('card').className} px-2.5 py-1 text-rf-text-primary`)}
+            {...typeRole('small', `inline-flex items-center gap-1.5 rounded-full ${surfaceTier('nested').className} px-2.5 py-1 text-rf-text-primary`)}
           >
             {color && <span aria-hidden="true" className="h-[7px] w-[7px] rounded-full" style={{ backgroundColor: color }} />}
             {label}
@@ -298,7 +298,7 @@ export default function ItemQueueBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">
+      <BlockTitle>
         {slotLabel(slotName)} · {data.length}
       </BlockTitle>
       {body}

@@ -98,7 +98,7 @@ export default function TimelineBlock({ slotName, data, compact = false }) {
         </div>
       ) : (
         <BlockCard>
-          <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+          <BlockTitle>{slotLabel(slotName)}</BlockTitle>
           {list}
         </BlockCard>
       )}

@@ -81,7 +81,7 @@ export default function LineChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       <div className={showLegend ? 'h-64 w-full' : 'h-56 w-full'} role="img" aria-label={`Line chart. ${chartLabel}`}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={merged} margin={{ top: 4, right: 6, bottom: 0, left: 6 }}>

@@ -9,6 +9,7 @@ import { ROW_LABEL_KEYS, rowLabelOf } from '../manifests/blockTypes';
 import { cellText } from './cellText';
 
 import { typeRole } from './typeRole';
+import RailRow from './children/RailRow';
 // The keys an explicit, well-known value concept lives under — checked in this priority order
 // first, exactly as before. Real fixture data uses many OTHER field names for the same idea
 // (`meta`, `n`, `w`, `key`, `numeric`, ...) that can never be enumerated exhaustively — see
@@ -94,22 +95,33 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
         const primaryTone = deltaTone(primary.raw);
         const usedKeys = new Set([labelKey, primary.key].filter((k) => k !== null && k !== undefined));
         const { inline, long } = extraEntries(item, usedKeys);
+        // PHASE 8 (defect 5). The row is RailRow's now — one divider, one rhythm, one alignment
+        // rule, shared with every label/value pair in the app instead of each block choosing its
+        // own padding. The long extras hang inside the same bordered row rather than after it, so
+        // they belong to their row visually as well as structurally.
+        const longLines = long.length === 0 ? null : long.map(([key, text]) => {
+          const tone = deltaTone(text);
+          return (
+            <div key={key} {...typeRole('micro', 'mt-0.5 flex items-center justify-between gap-3 text-rf-text-tertiary')}>
+              <span>{humanizeSlotName(key)}</span>
+              <span {...cellText('prose', text, tone ? tone.text : '')}>{text}</span>
+            </div>
+          );
+        });
         return (
-          <li key={i} {...typeRole('small', 'flex flex-col gap-0.5 py-1.5')}>
-            <div className="flex items-center justify-between gap-3">
-              <span {...cellText('identifier', label, 'text-rf-text-secondary')}>{label}</span>
+          <li key={i}>
+            <RailRow label={<span {...cellText('identifier', label)}>{label}</span>} below={longLines}>
               <span
-                // `flex-wrap`, and it is load-bearing. Each inline chip below is `shrink-0` — it
-                // must be, a short figure cut in half is a wrong figure (I4) — so a non-wrapping
-                // line could neither shrink nor break, and a row carrying several of them simply
-                // ran past the card: measured in Chrome at 1440 and 1280, 70 chips painted OUTSIDE
-                // their own card across the corpus, the worst 94px beyond its right border, every
-                // one of them in this slot. Wrapping is the only outcome that loses nothing: the
-                // card grows a line instead of leaking its contents onto the page behind it.
+                // `flex-wrap`, and it is load-bearing. Each inline chip is `shrink-0` — it must be,
+                // a short figure cut in half is a wrong figure (I4) — so a non-wrapping line could
+                // neither shrink nor break, and a row carrying several of them ran past the card:
+                // measured in Chrome at 1440 and 1280, 70 chips painted OUTSIDE their own card
+                // across the corpus, the worst 94px beyond its right border, every one in this
+                // slot. Wrapping is the only outcome that loses nothing.
                 //
-                // `justify-end` so a wrapped chip stays under the value it belongs to, on the right,
-                // rather than jumping to the left edge and reading as a new row's label.
-                {...cellText('prose', undefined, `flex flex-wrap items-baseline justify-end gap-1.5 ${
+                // `justify-end` so a wrapped chip stays under the value it belongs to rather than
+                // jumping to the left edge and reading as a new row's label.
+                {...cellText('prose', undefined, `flex shrink-0 flex-wrap items-baseline justify-end gap-1.5 ${
                   primaryTone ? primaryTone.text : 'text-rf-text-primary'
                 }`)}
               >
@@ -126,16 +138,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
                   );
                 })}
               </span>
-            </div>
-            {long.map(([key, text]) => {
-              const tone = deltaTone(text);
-              return (
-                <div key={key} {...typeRole('micro', 'flex items-center justify-between gap-3 text-rf-text-tertiary')}>
-                  <span>{humanizeSlotName(key)}</span>
-                  <span {...cellText('prose', text, tone ? tone.text : '')}>{text}</span>
-                </div>
-              );
-            })}
+            </RailRow>
           </li>
         );
       })}
@@ -153,7 +156,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       {list}
     </BlockCard>
   );

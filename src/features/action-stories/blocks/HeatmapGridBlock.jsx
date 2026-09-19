@@ -149,7 +149,7 @@ export default function HeatmapGridBlock({ slotName, data, variant }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       <div className="overflow-x-auto" role="img" aria-label={chartLabel}>
         <div className="grid gap-1" style={{ gridTemplateColumns: `auto repeat(${colCount}, minmax(52px, 1fr))` }}>
           {gridItems}

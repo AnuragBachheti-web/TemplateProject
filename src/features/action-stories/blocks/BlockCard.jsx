@@ -27,22 +27,39 @@ export function BlockCard({ children, padding = 'normal', className = '' }) {
 }
 
 /**
- * A block's own title, as a real `<h3>` — every block's card title used to be a styled `<p>`
- * (AUDIT_REPORT.md §6/§16: "exactly one `<h1>` in the whole application... every block's own title
- * is a styled `<p>`, not a semantic heading"). `<h3>` because the page's real hierarchy is now
- * `<h1>` (StagePage, the workflow name) → `<h2>` (StageSections, a section title, when present) →
- * `<h3>` (this — one block's own title) — a screen-reader user navigating by heading now finds a
- * landmark for every real region of the page, not just one.
+ * A BLOCK'S HEADER ZONE — the title, an optional right-aligned meta, and the rule beneath them.
  *
- * Mono, uppercase, wide tracking — the reference's own micro-label treatment for every panel
- * header in the source mockups (`font-family:var(--font-mono);font-size:9.5px;letter-spacing:
- * 0.14em;text-transform:uppercase`), not a styled Inter paragraph.
+ * ============================================================================================
+ * WHAT THIS FIXES (Phase 8, defect 2)
+ * ============================================================================================
+ *
+ * A card's name and its contents were the same visual object. "Next Actions", "Item Groups",
+ * "Recommendation Identity" sat as bold text at the top of a body with nothing between them and it
+ * — no divider, no ground, no shared spacing — and every block chose its own margin (`mb-2` here,
+ * nothing there). One treatment now, and it lives in one component so it cannot vary.
+ *
+ * A HEADER EXISTS OR IT DOES NOT — NEVER A HEADER WITH NOTHING IN IT (ruling R120). That is the
+ * general form of a defect this project has hit repeatedly: an empty structure rendering as a
+ * visible artefact. A divider under no title is a stray line across a card, which is very close to
+ * what defect 6 reported as a white band. So a block with no title gets no header zone, no divider
+ * and no spacing, rather than an empty one.
+ *
+ * `<h3>` because the page's hierarchy is `<h1>` (StagePage, the workflow) -> `<h2>` (a section) ->
+ * `<h3>` (one block's own title), so a screen-reader user navigating by heading finds a landmark
+ * for every real region.
  */
-export function BlockTitle({ children, className = '' }) {
+export function BlockTitle({ children, meta = null, className = '' }) {
+  const empty = children === null || children === undefined || children === false
+    || (typeof children === 'string' && children.trim() === '');
+  if (empty) return null;
   return (
-    <h3 {...labelLevel('blockTitle', className)}>
-      {children}
-    </h3>
+    <div
+      data-card-header
+      className={`mb-3 flex items-baseline justify-between gap-3 border-b border-rf-border-subtle pb-2.5 ${className}`.trim()}
+    >
+      <h3 {...labelLevel('blockTitle', 'min-w-0')}>{children}</h3>
+      {meta ? <span {...labelLevel('section', 'shrink-0')}>{meta}</span> : null}
+    </div>
   );
 }
 

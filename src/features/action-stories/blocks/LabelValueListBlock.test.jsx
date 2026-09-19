@@ -78,7 +78,10 @@ describe('LabelValueListBlock — generic primary-value resolution (no growing h
     const rows = container.querySelectorAll('li');
     expect(rows).toHaveLength(1);
     // Two internal lines: the primary label/value row, and note's own secondary line (long prose).
-    expect(rows[0].querySelectorAll(':scope > div')).toHaveLength(2);
+    // PHASE 8: both now sit INSIDE the shared RailRow, so they are one level deeper than they were
+    // — the long line belongs to its row visually as well as structurally, which is the point of
+    // the row having a divider at all.
+    expect(rows[0].querySelectorAll('[data-rail-row] > div')).toHaveLength(2);
     expect(container.textContent).toContain(note);
   });
 
@@ -87,7 +90,7 @@ describe('LabelValueListBlock — generic primary-value resolution (no growing h
     const container = mount(<LabelValueListBlock slotName="checks" data={data} />);
     const rows = container.querySelectorAll('li');
     // Primary line (value) + current inlined + why on its own line = 2 internal <div>s, not 3.
-    expect(rows[0].querySelectorAll(':scope > div')).toHaveLength(2);
+    expect(rows[0].querySelectorAll('[data-rail-row] > div')).toHaveLength(2);
     expect(container.textContent).toContain('5.1%');
     expect(container.textContent).toContain('Protects channel ranking');
   });

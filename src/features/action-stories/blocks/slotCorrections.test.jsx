@@ -457,7 +457,13 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
       .filter((f) => f.endsWith('.jsx') && !f.endsWith('.test.jsx'))
       .map((f) => f.replace('.jsx', ''))
       .sort()
-    expect(children).toEqual(['ChipRow', 'Initials', 'Metric', 'StatusBadge', 'SubRowList'])
+    // PHASE 8 DELTA: five -> six. `RailRow` joins them — the label/value row primitive defect 5
+    // needed, because the rail's rows had no shared treatment at all (measured: border 0px on every
+    // one, padding 7px/7px on a single row and 0px/0px on the three beside it). It is a CHILD by
+    // the same test as the other five: composed by blocks, registered as no blockType, and it
+    // renders nothing on its own. The guard still does its job — a SIXTH blockType cannot arrive
+    // unnoticed, and this is not one.
+    expect(children).toEqual(['ChipRow', 'Initials', 'Metric', 'RailRow', 'StatusBadge', 'SubRowList'])
     for (const name of children) {
       const key = name.charAt(0).toLowerCase() + name.slice(1)
       expect(BLOCK_TYPES, `${name} is declared as a blockType`).not.toContain(key)

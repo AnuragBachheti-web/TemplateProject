@@ -53,7 +53,7 @@ function Framed({ slotName, compact, children }) {
   }
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       {children}
     </BlockCard>
   );

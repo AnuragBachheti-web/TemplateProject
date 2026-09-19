@@ -100,7 +100,7 @@ function Framed({ slotName, compact, children }) {
   }
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
+      <BlockTitle>{slotLabel(slotName)}</BlockTitle>
       {children}
     </BlockCard>
   );
@@ -156,7 +156,7 @@ export default function CardSetBlock({ slotName, data, compact = false, variant 
           <article
             key={i}
             data-card
-            className={`rounded-xl ${surfaceTier('card').className} px-3 py-2.5`}
+            className={`rounded-xl ${surfaceTier('nested').className} px-3 py-2.5`}
           >
             <div className="flex items-baseline justify-between gap-3">
               <h4 {...labelLevel('cardTitle', 'min-w-0')}>{headline}</h4>

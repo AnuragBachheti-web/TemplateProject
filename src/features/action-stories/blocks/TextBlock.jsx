@@ -7,6 +7,7 @@ import { cellText } from './cellText';
 
 import { typeRole } from './typeRole';
 import { surfaceTier } from './surfaceTier';
+import RailRow from './children/RailRow';
 /**
  * @param {boolean} [compact] - true when this block is grouped with sibling scalars inside a
  *   shared panel (see StageSections.jsx) — renders as a bare label/value row instead of its own
@@ -95,11 +96,17 @@ export default function TextBlock({ slotName, data, compact, role }) {
     // `min-w-0` plus its column role (blocks/cellText.js) so either one — a long label OR a long
     // value — resolves on its own
     // side without pushing the other off the row or past the container's own edge.
+    // PHASE 8 (defect 5). THIS IS THE RAIL ROW, and it takes RailRow's treatment now. Measured
+    // before: every one of these pairs had `border: 0px` top and bottom, and padding that was
+    // `7px/7px` here against `0px/0px` on the rows beside it — so a rail read as a list of
+    // fragments rather than a table of facts. The sizing discipline below is unchanged and still
+    // load-bearing; only the row around it is shared.
     return (
-      <div className="flex min-w-0 items-baseline gap-3 py-[7px]">
-        <span {...cellText('identifier', slotLabel(slotName), typeRole('body', 'max-w-[45%] shrink text-rf-text-secondary').className)}>{slotLabel(slotName)}</span>
-        <span {...cellText('prose', text, typeRole('body', 'flex-1 text-right text-rf-text-primary').className)}>{text}</span>
-      </div>
+      <RailRow
+        label={<span {...cellText('identifier', slotLabel(slotName), 'max-w-[45%] shrink text-rf-text-tertiary')}>{slotLabel(slotName)}</span>}
+      >
+        <span {...cellText('prose', text, 'flex-1 text-right text-rf-text-primary')}>{text}</span>
+      </RailRow>
     );
   }
 

@@ -5,6 +5,7 @@
 import { describe, it, expect } from 'vitest';
 import TextBlock from './TextBlock';
 import { BlockCard } from './BlockCard';
+import RailRow from './children/RailRow';
 
 function classNames(el, acc = []) {
   if (el === null || el === undefined || typeof el !== 'object') return acc;
@@ -57,7 +58,10 @@ describe('TextBlock — role="heroSub" (a headline\'s own paired subheadline)', 
 describe('TextBlock — ordinary scalar text (no hero signal) is unaffected', () => {
   it('renders its usual compact bare row, ignoring an absent role', () => {
     const el = TextBlock({ slotName: 'display_mode', data: 'Suggest', compact: true });
-    expect(classNames(el).some((c) => c.includes('items-baseline'))).toBe(true); // the bare label/value row
+    // PHASE 8 (defect 5): the compact row is RailRow's now — one divider, one rhythm, shared with
+    // every other label/value pair. It is still a bare row and still not a card, which is what this
+    // guards; the classes that used to be inspectable here live inside the primitive.
+    expect(el.type).toBe(RailRow);
     expect(el.type).not.toBe(BlockCard);
   });
 
@@ -103,8 +107,11 @@ describe('TextBlock — compact row overflow fix (RENDERED_UI_FORENSIC_AUDIT.md 
 
   it('the label span is bounded (max-w) instead of absorbing unlimited shrink pressure', () => {
     const el = TextBlock({ slotName: 'guardrailCtaLabel', data: 'x', compact: true });
-    const classes = classNames(el);
-    expect(classes.some((c) => c.includes('max-w-[45%]'))).toBe(true);
+    // The bound is on the label node TextBlock hands to RailRow — RailRow renders a caller's own
+    // label element untouched, deliberately, because wrapping it in a second constrained span
+    // clamped "Recommendation Identity" to "Recommen dation..." the first time this was written.
+    const labelClasses = classNames(el.props.label);
+    expect(labelClasses.some((c) => c.includes('max-w-[45%]'))).toBe(true);
   });
 
   it('renders a real long value (confirmed overflow case) without throwing, still truncatable', () => {
