@@ -16,7 +16,7 @@
 // layout engine — every clientHeight there is 0. Phase 5C's T62 is the cautionary tale: it asserted
 // that each region's className contained `overflow-y-auto`, which was true while scrolling was
 // completely broken, because `overflow-y: auto` on an element with an unconstrained height grows
-// instead of scrolling. A property is not a behaviour. So T73/T75/T76/T78/T93/T100/T101 measure, in Chrome,
+// instead of scrolling. A property is not a behaviour. So T73/T75/T76/T78/T93/T100/T101/T111 measure, in Chrome,
 // at both supported widths, and they FAIL the run — ruling R65: a browser check that reports
 // without failing is the vacuous pass in a new costume.
 //
@@ -207,7 +207,7 @@ function renderInChrome(url) {
 }
 
 
-// ---- THE LAYOUT GATE (5D: T73, T75, T76, T78 · 5E: T93, T100, T101) -----------------------------
+// ---- THE LAYOUT GATE (5D: T73, T75, T76, T78 · 5E: T93, T100, T101 · T111) ----------------------
 //
 // A real browser, driven over the DevTools Protocol, at both supported widths. No dependency is
 // added: Chrome is already spawned above, and Node has a global WebSocket.
@@ -296,10 +296,11 @@ async function layoutSession(fn) {
  * T93 — a table's columns are attributes its records SHARE, measured in the rendered DOM.
  * T100 — no small text is painted in a colour that fails AA against the surface behind it.
  * T101 — no rendered glyph resolves to a missing-character box.
+ * T111 — no text is painted outside the card that is supposed to contain it.
  */
 const LAYOUT_PROBE = `
 (() => {
-  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null, contrast: [], tofu: [] };
+  const report = { scroll: [], clipped: [], unreachable: [], packed: [], hollow: [], widest: null, contrast: [], tofu: [], outside: [] };
 
   // --- T73: a region either fits, or it scrolls. It must never overflow its own track silently.
   const grid = document.querySelector('[data-scroll-region="main"]')?.parentElement;
@@ -339,6 +340,45 @@ const LAYOUT_PROBE = `
                     cls: (el.className || '').toString().slice(0, 60) };
     report.clipped.push(entry);
     if (!el.getAttribute('title') && !el.closest('[title]')) report.unreachable.push(entry);
+  }
+
+  // --- T111: NOTHING IS PAINTED OUTSIDE ITS OWN CARD.
+  //
+  // T75 asks whether an element clips its own text. This asks the opposite question, and the two do
+  // not overlap: a run of chips that OVERFLOWS its card is not clipped anywhere — every element is
+  // exactly as wide as its content, scrollWidth equals clientWidth, and T75 waves it through while
+  // the text is painted on the page behind the card, past its rounded border. Found by scrolling the
+  // pane sideways and looking; measured here because nothing else in this file was asking.
+  //
+  // NO BACKTICKS ANYWHERE IN THIS COMMENT — it lives inside LAYOUT_PROBE, which is itself a template
+  // literal, and one backtick here ends the probe mid-string and takes the whole file with it.
+  //
+  // The verification rows carry a value plus several no-shrink inline chips on one non-wrapping flex
+  // line. The chips must not shrink (a cut figure is a wrong figure, I4), so the line could only
+  // overflow: 70 chips outside their card across the corpus at both widths, the worst 94px out.
+  //
+  // A SCROLLER IS NOT THIS DEFECT. A table wider than its container is supposed to have content
+  // beyond the viewport — it is clipped by its own overflow and reachable by scrolling, which is
+  // T73's subject. So anything inside an element that scrolls or hides its overflow is skipped, and
+  // what remains is ink with nowhere to live.
+  for (const slot of document.querySelectorAll('[data-block-slot]')) {
+    const name = slot.getAttribute('data-block-slot');
+    const box = slot.getBoundingClientRect();
+    for (const el of slot.querySelectorAll('*')) {
+      if (el.children.length > 0) continue;
+      const text = (el.textContent || '').trim();
+      if (text === '') continue;
+      const cs = getComputedStyle(el);
+      if (el.clientWidth <= 1 || cs.clip === 'rect(0px, 0px, 0px, 0px)') continue; // sr-only, as T75
+      let clipped = false;
+      for (let p = el.parentElement; p && p !== slot; p = p.parentElement) {
+        const o = getComputedStyle(p).overflowX;
+        if (o === 'auto' || o === 'scroll' || o === 'hidden') { clipped = true; break; }
+      }
+      if (clipped) continue;
+      const over = Math.round(el.getBoundingClientRect().right - box.right);
+      if (over > 1) report.outside.push({ slot: name, over, text: text.slice(0, 40) });
+    }
   }
 
   // --- T93: no column is mostly empty (Phase 5E, R74).
@@ -389,6 +429,13 @@ const LAYOUT_PROBE = `
   }
 
   // --- T78: the packed row's two cards are the same height.
+  //
+  // DORMANT, NOT BROKEN, AND SAYING SO HERE IS THE WHOLE POINT. No slot declares span half any more
+  // (see templates/slotVocabulary.js), so no packed row is emitted and this loop finds nothing on
+  // all 210 page loads. A gate that measures zero things and reports ok is the vacuous pass R65
+  // names, so the count is surfaced in the run summary instead of being inferred from silence: the
+  // line reads "0 packed rows" and a reader can see the difference between "checked and equal" and
+  // "there was nothing to check". Declare a half again and this measures it again, unchanged.
   for (const row of document.querySelectorAll('[data-pack-row]')) {
     const cards = [...row.querySelectorAll(':scope > [data-block-slot]')].map((cell) => {
       const card = cell.firstElementChild;
@@ -517,6 +564,9 @@ async function runLayoutGate(base) {
   const failures = []
   const neutralLowContrast = []
   let checked = 0
+  // Counted so the summary can distinguish "checked and equal" from "there was nothing to check" —
+  // see the T78 note in LAYOUT_PROBE. Zero is the expected value while no slot declares a half.
+  let packedRowsSeen = 0
 
   await layoutSession(async ({ goto, evaluate, setViewport }) => {
     for (const width of LAYOUT_WIDTHS) {
@@ -551,6 +601,11 @@ async function runLayoutGate(base) {
         for (const c of r.unreachable) {
           failures.push(`T76 ${where}: "${c.slot}" truncates with no affordance — ${JSON.stringify(c.text)}`)
         }
+        // T111
+        for (const o of r.outside) {
+          failures.push(`T111 ${where}: "${o.slot}" paints ${o.over}px of text outside its own card — ` +
+            `${JSON.stringify(o.text)}`)
+        }
         // T93
         for (const h of r.hollow) {
           failures.push(`T93 ${where}: "${h.slot}" spends a column on "${h.head}", which is empty on ` +
@@ -571,6 +626,7 @@ async function runLayoutGate(base) {
           }
         }
         // T78
+        packedRowsSeen += r.packed.length
         for (const row of r.packed) {
           if (row.length !== 2) continue
           const [a, b] = row
@@ -583,7 +639,7 @@ async function runLayoutGate(base) {
       console.log(`  layout gate: ${width}px checked`)
     }
   })
-  return { failures, checked, neutralLowContrast }
+  return { failures, checked, neutralLowContrast, packedRowsSeen }
 }
 
 
@@ -651,6 +707,9 @@ async function capturePaneScreenshots(base) {
 /** One object per variant, chosen because it carries that variant's distinguishing feature. */
 const VARIANT_SHOTS = [
   { variant: 'metricGrid', slot: 'recommendation_metrics', path: '/action-stories/S9.1/decide/prop_s9_1_decide' },
+  // S10.1 rather than S9.16 or S10.2: four terms is the case the variant exists for, and it is the
+  // one that wrapped to a second line on the default 3-up.
+  { variant: 'reconStrip', slot: 'reconciliation', path: '/action-stories/S10.1/analyze/prop_s10_1_analyze' },
   { variant: 'meteredRow', slot: 'coverage', path: '/action-stories/S9.18/decide/prop_s9_18_decide' },
   { variant: 'zoneRow', slot: 'matrix', path: '/action-stories/S9.18/analyze/prop_s9_18_analyze' },
   { variant: 'groupCard', slot: 'item_groups', path: '/action-stories/S9.7/decide/prop_s9_7_decide' },
@@ -778,7 +837,7 @@ async function main() {
 
     // THE LAYOUT GATE. Runs after the error-copy pass, over every object, at both widths. Its
     // failures are FAILURES (R65) — the run goes red, it does not warn.
-    const { failures, checked, neutralLowContrast } = await runLayoutGate(base)
+    const { failures, checked, neutralLowContrast, packedRowsSeen } = await runLayoutGate(base)
 
     // ---- THE NEUTRAL-TEXT CONTRAST RATCHET (Phase 5E Part 2) --------------------------------
     // T100 was built to catch R83's defect: small text painted in a -500 status step. It caught
@@ -816,6 +875,8 @@ async function main() {
         (failures.length > shown.length ? `\n    … and ${failures.length - shown.length} more` : ''))
     } else {
       console.log(`  ok  layout gate — ${checked} page loads, no clipped text, both regions scroll`)
+      console.log(`  ok  T78 packed-row heights — ${packedRowsSeen} packed rows`
+        + (packedRowsSeen === 0 ? ' (no slot declares span half; the check is dormant, not passing)' : ''))
     }
 
     const panes = await capturePaneScreenshots(base)

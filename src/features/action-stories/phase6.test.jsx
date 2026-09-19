@@ -261,6 +261,58 @@ describe('T108 — nothing functional changed (I7)', () => {
   // THE STRONGEST FORM OF THIS AVAILABLE: the whole corpus rendered before the phase started,
   // committed, and compared block-for-block and string-for-string. A re-skin that changes a word
   // is not a re-skin.
+
+  /**
+   * THE THREE OBJECTS A LATER, DELIBERATELY FUNCTIONAL CHANGE MOVED — named, not regenerated.
+   *
+   * Re-recording the snapshot would have made this guard pass by forgetting what it was guarding;
+   * 102 objects are still pinned block-for-block and character-for-character, and these three are
+   * pinned to the ONE transition they are allowed to make. A second change to any of them, or the
+   * same change reaching a fourth object, still fails here.
+   *
+   * `comparison` -> `reconciliation`: `proposal.comparison` carries `{label,value,note}` on these
+   * three and `{label,value,pct}` on the other nine. With no `pct`, barChart fell through
+   * MAGNITUDE_KEYS to `value` and drew a bar by stripping non-digits from a display string
+   * ("−$1,970" -> 1970, sign gone; R2), plotting levels against deltas on one axis, and dropped the
+   * `note` entirely. statList renders label, figure and note — the strip the reference draws
+   * (S10.1-2-analyze.dc.html:286-288). See slotVocabulary.js's `reconciliation`.
+   */
+  const ALLOWED_SLOT_MOVE = {
+    prop_s9_16_analyze: { was: ['comparison', 'detail_rows'], now: ['reconciliation', 'detail_rows'] },
+    prop_s10_1_analyze: {
+      // `reconciliation` is declared after `bridge` in the template, where the reference puts the
+      // strip: the bridge chart, then its drill, then the reconciliation. `comparison` sat before it.
+      was: ['comparison', 'bridge', 'entities', 'detail_rows'],
+      now: ['bridge', 'reconciliation', 'entities', 'detail_rows'],
+    },
+    prop_s10_2_analyze: {
+      was: ['comparison', 'detail_rows', 'secondary_rows'],
+      now: ['reconciliation', 'detail_rows', 'secondary_rows'],
+    },
+  }
+
+  /** The text delta such a move is allowed to produce: the notes gained, and nothing lost but the
+   *  slot's own title. Asserted per object rather than waved through. */
+  const notesOf = (d) => (d.proposal.comparison ?? []).map((r) => r.note).filter(Boolean)
+
+  /**
+   * THE ONE HEADING THAT CHANGED — same discipline as ALLOWED_SLOT_MOVE above: one named slot, one
+   * exact string pair, and a companion test proving it still happens, so this never decays into a
+   * standing licence to reword the product.
+   *
+   * Blocks used to title themselves `humanizeSlotName(slotName)`, which restates an internal key.
+   * On `trigger` the reference says "What raised this" — 11 of the 14 stories carrying the slot
+   * title the card exactly that (S10.2-1-reason.dc.html:324 wraps `{{ trigger }}` in it), and
+   * slotVocabulary's own note plus TimelineBlock's header had both quoted the string for three
+   * phases while the screen printed "Trigger". The heading is now declared on the slot and read by
+   * blocks/slotLabel.js.
+   *
+   * THIS IS A COPY CHANGE AND IT IS MEANT TO BE CAUGHT HERE. What makes it admissible is that the
+   * delta is exactly one string out and one string in, on exactly the objects that render the slot:
+   * no figure, label, note or sentence moves, which is what the guard is actually protecting.
+   */
+  const RENAMED_SLOT_HEADING = Object.freeze({ slot: 'trigger', was: 'Trigger', now: 'What raised this', objects: 14 })
+
   let container
   let root
 
@@ -293,11 +345,26 @@ describe('T108 — nothing functional changed (I7)', () => {
     for (const d of dataset) {
       const now = render(d)
       const was = before[d.proposal_id]
-      if (JSON.stringify(now.slots) !== JSON.stringify(was.slots)) {
-        changed.push(`${d.proposal_id}: ${was.slots.length} blocks -> ${now.slots.length}`)
-      }
+      if (JSON.stringify(now.slots) === JSON.stringify(was.slots)) continue
+
+      const allowed = ALLOWED_SLOT_MOVE[d.proposal_id]
+      if (allowed
+        && JSON.stringify(was.slots) === JSON.stringify(allowed.was)
+        && JSON.stringify(now.slots) === JSON.stringify(allowed.now)) continue
+
+      changed.push(`${d.proposal_id}: ${JSON.stringify(was.slots)} -> ${JSON.stringify(now.slots)}`)
     }
     expect(changed).toEqual([])
+  })
+
+  it('and the three allowed moves all actually happened — the allowance cannot rot', () => {
+    // An allow-list entry whose move stopped happening is a permission left lying around, the same
+    // failure shapeLedger.test.js's unused-ignore-entry guard exists for.
+    for (const [id, move] of Object.entries(ALLOWED_SLOT_MOVE)) {
+      const d = dataset.find((x) => x.proposal_id === id)
+      expect(d, `${id} is no longer in the corpus`).toBeTruthy()
+      expect(render(d).slots, `${id} no longer makes its allowed move`).toEqual(move.now)
+    }
   })
 
   it('and the same rendered TEXT, to the character', () => {
@@ -305,13 +372,59 @@ describe('T108 — nothing functional changed (I7)', () => {
     for (const d of dataset) {
       const now = render(d)
       const was = before[d.proposal_id]
-      if (JSON.stringify(now.text) !== JSON.stringify(was.text)) {
-        const gone = was.text.filter((s) => !now.text.includes(s)).slice(0, 3)
-        const added = now.text.filter((s) => !was.text.includes(s)).slice(0, 3)
-        changed.push(`${d.proposal_id}: -${JSON.stringify(gone)} +${JSON.stringify(added)}`)
+      if (JSON.stringify(now.text) === JSON.stringify(was.text)) continue
+
+      const gone = was.text.filter((s) => !now.text.includes(s))
+      const added = now.text.filter((s) => !was.text.includes(s))
+
+      // The three allowed moves change the text, and exactly how is the point. What ARRIVES is the
+      // row data — every label, every figure, every note — because on these three the barChart
+      // rendered none of it: S10.2 refused the series outright ("Not enough evidence to chart — 2
+      // points") and the other two fell to the block error boundary in this environment, which has
+      // no ResizeObserver for recharts. What LEAVES is the slot's own title and those failure
+      // strings, and nothing else: a label, figure or note going missing is the regression this
+      // guard is for, and still fails.
+      if (ALLOWED_SLOT_MOVE[d.proposal_id]) {
+        const rows = d.proposal.comparison
+        expect(rows.length, `${d.proposal_id} has no rows to render`).toBeGreaterThan(0)
+        for (const row of rows) {
+          for (const field of ['label', 'value', 'note']) {
+            expect(now.text, `${d.proposal_id} does not render ${field} "${row[field]}"`).toContain(row[field])
+          }
+        }
+        expect(notesOf(d), `${d.proposal_id} carries no notes`).toHaveLength(rows.length)
+
+        const LOST_BY_DESIGN = /^(Comparison|Not enough evidence to chart —|points|\d+|\.|This card couldn’t be displayed\.)/
+        expect(gone.filter((s) => !LOST_BY_DESIGN.test(s)), `${d.proposal_id} lost real content`).toEqual([])
+        expect(added, `${d.proposal_id} did not gain the new title`).toContain('Reconciliation')
+        continue
       }
+
+      // The renamed heading: admissible ONLY as an exact one-out/one-in swap, on an object that
+      // really renders the slot. Anything else on the same object still lands in `changed`.
+      if (now.slots.includes(RENAMED_SLOT_HEADING.slot)
+        && JSON.stringify(gone) === JSON.stringify([RENAMED_SLOT_HEADING.was])
+        && JSON.stringify(added) === JSON.stringify([RENAMED_SLOT_HEADING.now])) continue
+
+      changed.push(`${d.proposal_id}: -${JSON.stringify(gone.slice(0, 3))} +${JSON.stringify(added.slice(0, 3))}`)
     }
     expect(changed, 'a re-skin changed what the page says').toEqual([])
+  })
+
+  it('and the renamed heading reached EVERY object that renders the slot — the allowance cannot rot', () => {
+    // The permission above is scoped to objects rendering `trigger`. If the rename ever stopped
+    // reaching one of them, that object would simply stop being compared on this axis and the gap
+    // would be invisible. So the carriers are counted and checked directly.
+    const { slot, was, now: heading, objects } = RENAMED_SLOT_HEADING
+    const carriers = dataset
+      .map((d) => ({ id: d.proposal_id, ...render(d) }))
+      .filter((r) => r.slots.includes(slot))
+
+    expect(carriers).toHaveLength(objects)
+    for (const r of carriers) {
+      expect(r.text, `${r.id} does not print the reference heading`).toContain(heading)
+      expect(r.text, `${r.id} still prints the slot name as its heading`).not.toContain(was)
+    }
   })
 })
 

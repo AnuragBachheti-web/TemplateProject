@@ -1,7 +1,7 @@
 import { rowLabelOf } from '../manifests/blockTypes';
 import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 
 import { typeRole } from './typeRole';
@@ -93,12 +93,12 @@ export default function TimelineBlock({ slotName, data, compact = false }) {
     <div {...depthAttrs(DEPTH_BLOCK, 'timeline')}>
       {compact ? (
         <div className="py-1.5">
-          <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+          <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
           {list}
         </div>
       ) : (
         <BlockCard>
-          <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+          <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
           {list}
         </BlockCard>
       )}

@@ -31,6 +31,7 @@ import path from 'node:path'
 import StageRenderer from '../components/StageRenderer'
 import { resolveTemplate } from '../templates/templateRegistry'
 import { resolveBinding } from '../manifests/resolveBinding'
+import { evaluateCondition } from '../manifests/actionCondition'
 import { SLOT_VOCABULARY } from '../templates/slotVocabulary'
 import { BLOCK_REGISTRY } from './index'
 import { BLOCK_TYPES } from '../manifests/blockTypes'
@@ -84,13 +85,23 @@ function unmount() {
   container = undefined
 }
 
-/** Objects where a slot has data AND its own template declares it — what actually renders. */
+/**
+ * Objects where a slot has data AND its own template declares it — what actually renders.
+ *
+ * The `when` gate is part of that question and was missing until `comparison`/`reconciliation`
+ * proved it. Every other conditional slot gates on the presence of its OWN binding, so the gate
+ * agreed with the array check and its absence never showed; those two share one binding and are
+ * told apart only by their `when`, so without this every count on either would have been the
+ * count of BOTH. StageRenderer.jsx:150 applies the same gate before a block reaches layout —
+ * this helper claims to say what renders, so it evaluates what the renderer evaluates.
+ */
 function objectsRendering(slots) {
   return dataset.filter((d) => {
     const resolved = resolveTemplate(d)
     if (!resolved) return false
     return resolved.manifest.blocks.some((b) => {
       if (!slots.includes(b.slotName)) return false
+      if (!evaluateCondition(b.when, d)) return false
       const v = resolveBinding(b.binding, d)
       return Array.isArray(v) && v.length > 0
     })
@@ -142,9 +153,14 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
     // PHASE 5A DELTA: 50 -> 49. prop_s9_2_decide loses `basis`, whose source `ladder` carries four
     // money figures per row against statList's one — withdrawn under R48 and carried in
     // shapeLedger.js's DEFERRED_SHAPES. The slot list itself is unchanged at five.
+    //
+    // RECONCILIATION DELTA: a SIXTH slot, and this time it IS growth — 49 -> 52. The three objects
+    // are S10.1/S10.2/S9.16 analyze, which rendered a barChart before and no statList, so unlike
+    // 3C's fifth slot this one extends the block's reach. Stated here for the same reason the
+    // fifth one was: so the change is reported as what it is.
     const slots = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.blockType === 'statList').map(([n]) => n)
-    expect(slots.sort()).toEqual(['basis', 'inputs', 'progress_rows', 'recommendation_metrics', 'totals_rows'])
-    expect(objectsRendering(slots)).toHaveLength(49)
+    expect(slots.sort()).toEqual(['basis', 'inputs', 'progress_rows', 'recommendation_metrics', 'reconciliation', 'totals_rows'])
+    expect(objectsRendering(slots)).toHaveLength(52)
   })
 
   it('R30 — statList renders the `note` every heroMetrics row carries', () => {
@@ -159,9 +175,23 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
     unmount()
   })
 
-  it('CONTEXT withdrawn: detail_rows and comparison are NOT re-pointed', () => {
+  it('CONTEXT withdrawn for detail_rows; SUPERSEDED for comparison, which SPLITS', () => {
     // `classifier` lands in detail_rows and `recon` in comparison. Both renderings the reference
-    // shows are correct; neither is reachable without breaking the other objects on the same slot.
+    // shows are correct, and 3C recorded both as unreachable "at slot granularity".
+    //
+    // THAT PREMISE HELD FOR detail_rows AND NOT FOR comparison. It assumed re-pointing meant moving
+    // the WHOLE slot — 12 objects to fix 1 — and on that assumption it was right. But a slot is not
+    // the smallest unit available: a template block already carries a `when`, so one binding can be
+    // read by two slots that are told apart by a declared predicate rather than by a block sniffing
+    // its own rows. `proposal.comparison` turned out to carry two shapes, not twelve instances of
+    // one: `{label,value,pct}` on 9 objects, and `{label,value,note}` on 3 (S10.1, S10.2, S9.16)
+    // where there is NO magnitude — barChart fell through MAGNITUDE_KEYS to `value` and recovered a
+    // bar height by stripping non-digits from a display string ("−$1,970" -> 1970, sign gone; R2),
+    // then plotted levels against deltas on one axis. `reconciliation` takes those 3. The 9 keep
+    // barChart and are untouched, which is what made the split available where a move was not.
+    //
+    // detail_rows is NOT the same case and stays withdrawn: its 25 objects are one shape on one
+    // slot, so there is no predicate to split them on.
     //
     // PHASE 5A DELTA: comparison 13 -> 12. prop_s10_5_analyze loses the slot. Its source
     // `detectBars` is {label, count, pct}, and barChart plots the first magnitude key it finds —
@@ -172,8 +202,23 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
     // unchanged in count — see shapeLedger.js's PHASE_5A_ROUTING_CHANGES. detail_rows is untouched.
     expect(SLOT_VOCABULARY.detail_rows.blockType).toBe('table')
     expect(SLOT_VOCABULARY.comparison.blockType).toBe('barChart')
+    expect(SLOT_VOCABULARY.reconciliation.blockType).toBe('statList')
+    expect(SLOT_VOCABULARY.reconciliation.binding).toBe(SLOT_VOCABULARY.comparison.binding)
     expect(objectsRendering(['detail_rows'])).toHaveLength(25)
-    expect(objectsRendering(['comparison'])).toHaveLength(12)
+
+    // 9 + 3 = the 12 this slot rendered before the split, and the two sets are disjoint — a shared
+    // binding makes double-counting the way this would go wrong.
+    const bar = objectsRendering(['comparison'])
+    const stat = objectsRendering(['reconciliation'])
+    expect(bar).toHaveLength(9)
+    expect(stat.map((d) => d.proposal_id).sort())
+      .toEqual(['prop_s10_1_analyze', 'prop_s10_2_analyze', 'prop_s9_16_analyze'])
+    const barIds = new Set(bar.map((d) => d.proposal_id))
+    expect(stat.filter((d) => barIds.has(d.proposal_id)), 'an object renders both').toEqual([])
+
+    // The predicate is the row shape, not a hand-written list of proposal ids.
+    for (const d of stat) expect(typeof d.proposal.comparison[0].note).toBe('string')
+    for (const d of bar) expect(d.proposal.comparison[0].note).toBeUndefined()
   })
 })
 
@@ -404,8 +449,14 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
   it('the CHILDREN set is unchanged by this phase, and none is registered (I4)', () => {
     // timeline composes no children — an eyebrow and prose are text, not components — so it is a
     // depth-3 leaf and the child set stays at five.
+    // `.test.jsx` is excluded because this counts CHILD COMPONENTS, and a child's own test is not
+    // one. Metric.test.jsx tripped this by existing — the guard would otherwise read "a sixth child
+    // arrived" and be answered by deleting a test, which inverts what it is for.
     const childDir = path.join(BLOCKS_DIR, 'children')
-    const children = fs.readdirSync(childDir).filter((f) => f.endsWith('.jsx')).map((f) => f.replace('.jsx', '')).sort()
+    const children = fs.readdirSync(childDir)
+      .filter((f) => f.endsWith('.jsx') && !f.endsWith('.test.jsx'))
+      .map((f) => f.replace('.jsx', ''))
+      .sort()
     expect(children).toEqual(['ChipRow', 'Initials', 'Metric', 'StatusBadge', 'SubRowList'])
     for (const name of children) {
       const key = name.charAt(0).toLowerCase() + name.slice(1)
@@ -433,7 +484,11 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     // for stating a fact the pane already states elsewhere, and the clearest of the three: the rail
     // row appeared on reason/analyze/decide and NOT on execute, so it was both a duplicate and an
     // incomplete one. The lens is now the accent on the pane eyebrow, on every stage.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(49)
+    // RECONCILIATION DELTA: 49 -> 50. `reconciliation` is minted deliberately, and it is the first
+    // slot to share a binding with another — see the SPLIT test above for why the shape lives at
+    // slot granularity rather than inside the block. `slotTargeted` is unchanged at 17: statList
+    // was already a target, which is again I6's outcome and not a new block.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
     expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(17)
   })

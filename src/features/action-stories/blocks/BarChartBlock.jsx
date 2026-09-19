@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip } from 'recharts';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { parseMagnitude } from './chartGeometry';
 import { categoricalColor, positiveColor, negativeColor } from './chartPalette';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
@@ -122,7 +122,7 @@ export default function BarChartBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {chart}
       </div>
     );
@@ -130,7 +130,7 @@ export default function BarChartBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {chart}
     </BlockCard>
   );

@@ -52,6 +52,8 @@
 // Extensions on every import: this module is loaded by bare Node from extraction, which has no
 // bundler resolution.
 import { SLOT_VOCABULARY } from '../templates/slotVocabulary.js';
+import { resolveTemplate } from '../templates/templateRegistry.js';
+import { evaluateCondition } from '../manifests/actionCondition.js';
 import { droppedFieldsOfValue, anonymousRowsOf, CONSUMED_FIELDS } from '../blocks/consumedFields.js';
 
 /** The three admissible reasons a real field may be left unrendered without being a defect. */
@@ -396,9 +398,36 @@ export const DATA_TEST_ASSERTED_FIELDS = Object.freeze([
 
 // ---- the ledger ---------------------------------------------------------------------------------
 
-const SLOT_BY_BINDING = new Map(
-  Object.entries(SLOT_VOCABULARY).map(([name, spec]) => [spec.binding, { slotName: name, ...spec }]),
-);
+/**
+ * Binding -> the slots that read it. This was a one-to-one Map, which was true of the vocabulary
+ * until `reconciliation` joined `comparison` on `proposal.comparison`: a Map silently kept whichever
+ * was declared LAST and attributed all 12 objects to it, so the 9 that really render a barChart were
+ * audited as a statList and `barChart.pct` stopped being exercised at all. A binding read by two
+ * slots is now a list, resolved per object below.
+ */
+const SLOTS_BY_BINDING = new Map();
+for (const [name, spec] of Object.entries(SLOT_VOCABULARY)) {
+  const slots = SLOTS_BY_BINDING.get(spec.binding) ?? [];
+  slots.push({ slotName: name, ...spec });
+  SLOTS_BY_BINDING.set(spec.binding, slots);
+}
+
+/**
+ * Which slot actually reads `canonicalPath` on THIS object. One candidate is the overwhelming case
+ * and resolves exactly as the old Map did. Where two slots share a binding the template's own `when`
+ * is what chooses between them, so this asks it the same question StageRenderer asks before a block
+ * reaches layout — the ledger audits what renders, so it must not guess at a shared binding.
+ */
+function slotFor(canonicalPath, decision) {
+  const candidates = SLOTS_BY_BINDING.get(canonicalPath);
+  if (candidates === undefined) return undefined;
+  if (candidates.length === 1) return candidates[0];
+
+  const names = new Set(candidates.map((c) => c.slotName));
+  const blocks = resolveTemplate(decision)?.manifest?.blocks ?? [];
+  const chosen = blocks.find((b) => names.has(b.slotName) && evaluateCondition(b.when, decision));
+  return chosen === undefined ? undefined : candidates.find((c) => c.slotName === chosen.slotName);
+}
 
 const at = (obj, dottedPath) => dottedPath.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
 
@@ -450,7 +479,7 @@ export function buildLedger(dataset, provenance) {
     const sources = provenance[decision.proposal_id] ?? {};
     for (const [canonicalPath, rawKey] of Object.entries(sources)) {
       if (rawKey === null) continue;
-      const slot = SLOT_BY_BINDING.get(canonicalPath);
+      const slot = slotFor(canonicalPath, decision);
       if (slot === undefined) continue; // header axes; the vocabulary excludes them by design
       const value = at(decision, canonicalPath);
       if (value === undefined) continue;

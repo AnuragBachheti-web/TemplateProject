@@ -359,44 +359,59 @@ describe('composeSections — flow packing from DECLARED spans (main-region only
   // use real vocabulary slots for that reason: a fabricated slot name has no declaration, which is
   // itself the correct outcome (undeclared means full width).
 
-  it('two slots DECLARING half pack into one flow row', () => {
-    // `policy` and `constraints` both declare `span: 'half'` — 5 and 10 reference screens
-    // respectively pair them in a `grid-template-columns:1fr 1fr` row.
+  // THESE THREE ASKED THE VOCABULARY FOR A PAIR, AND IT NO LONGER HAS ONE.
+  //
+  // They used `policy` + `constraints` as their example of two adjacent halves. No slot declares
+  // `half` any more — a main-region block gets the full column, because a 410px cell overflowed on
+  // 16 screens once the corpus's tables were measured in it (slotVocabulary.js has the numbers).
+  //
+  // So what changed is the INPUT these tests can obtain, not the rule they were written for. They
+  // are rewritten to assert what composeSections does with today's vocabulary, and the pairing rule
+  // itself — which is still live code, still reachable the moment a slot opts back in — is asserted
+  // against `packRow` directly through its own `spanOverrides` seam, in paneLayout.test.jsx's T68.
+  // Rewriting them to "expect no pair" WITHOUT that companion would have been the vacuous pass R65
+  // names: two tests agreeing that nothing happens, and no one checking the machinery still works.
+
+  it('no vocabulary slot pairs today — every flowable takes its own full-width row', () => {
     const items = [
       item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
-      item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
-    ];
-    const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([
-      { type: 'flow', items: [{ slotName: 'policy', span: 6 }, { slotName: 'constraints', span: 6 }] },
-    ]);
-  });
-
-  it('a half whose neighbour is full does not pair — both take their own full-width row', () => {
-    // `trigger` declares nothing, so it is full. This is the unpaired-half rule: the half widens
-    // rather than rendering as a narrow cell with empty space beside it.
-    const items = [
-      item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
-      item('trigger', 'timeline', { value: [{ what: 'x' }] }),
-    ];
-    const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([
-      { type: 'single', slotName: 'policy' },
-      { type: 'single', slotName: 'trigger' },
-    ]);
-  });
-
-  it('three consecutive halves pair the first two and widen the third', () => {
-    const items = [
-      item('policy', 'table', { value: [{ a: 1 }] }),
       item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
       item('roles', 'table', { value: [{ name: 'r' }] }),
     ];
     const { main } = composeSections(items, undefined);
     expect(main[0].rows).toEqual([
-      { type: 'flow', items: [{ slotName: 'policy', span: 6 }, { slotName: 'constraints', span: 6 }] },
+      { type: 'single', slotName: 'policy' },
+      { type: 'single', slotName: 'constraints' },
       { type: 'single', slotName: 'roles' },
     ]);
+  });
+
+  it('a slot beside one that declares nothing is unaffected — both full-width rows', () => {
+    // `trigger` declares nothing and never did. This was the unpaired-half case; it is now simply
+    // the ordinary case, and it is kept because the OUTPUT it asserts is what must not regress.
+    const items = [
+      item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
+      item('trigger', 'timeline', { value: [{ what: 'x' }] }),
+    ];
+    const { main } = composeSections(items, undefined);
+    expect(main[0].rows).toEqual([
+      { type: 'single', slotName: 'constraints' },
+      { type: 'single', slotName: 'trigger' },
+    ]);
+  });
+
+  it('a long run of flowables never collapses two of them into a row', () => {
+    // The failure this guards is a packer that pairs on something OTHER than a declared span —
+    // adjacency, block type, row count. Any of those would show up here as a `flow` row.
+    const items = [
+      item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
+      item('roles', 'table', { value: [{ name: 'r' }] }),
+      item('entities', 'itemQueue', { value: [{ label: 'e' }] }),
+      item('secondary_rows', 'table', { value: [{ a: 1 }] }),
+    ];
+    const { main } = composeSections(items, undefined);
+    expect(main[0].rows.every((r) => r.type === 'single')).toBe(true);
+    expect(main[0].rows).toHaveLength(items.length);
   });
 
   it('a slot with no declared span is full width, whatever its data looks like', () => {
@@ -427,15 +442,15 @@ describe('composeSections — flow packing from DECLARED spans (main-region only
   });
 
   it('a lone flowable item renders as a full-width single row, never a 1-item flow row', () => {
-    const items = [item('policy', 'table', { value: [{ a: 1, b: 2 }] })]; // declares half, but alone
+    const items = [item('constraints', 'labelValueList', { value: [{ label: 'x' }] })]; // declares half, but alone
     const { main } = composeSections(items, undefined);
-    expect(main[0].rows).toEqual([{ type: 'single', slotName: 'policy' }]);
+    expect(main[0].rows).toEqual([{ type: 'single', slotName: 'constraints' }]);
   });
 
   it('flow packing never applies inside the RAIL region — rail keeps its existing single-shared-panel composition', () => {
     const items = [
-      item('policy', 'table', { value: [{ x: 1, y: 2 }], section: 'guardrails', region: 'rail' }),
       item('constraints', 'labelValueList', { value: [{ label: 'x' }], section: 'guardrails', region: 'rail' }),
+      item('roles', 'table', { value: [{ name: 'r' }], section: 'guardrails', region: 'rail' }),
     ];
     const { rail } = composeSections(items, [{ id: 'guardrails', title: 'Guardrails', region: 'rail' }]);
     // Both land as independent `single` rows inside the one shared rail panel — never a `flow` row.
@@ -455,13 +470,16 @@ describe('composeSections — flow packing from DECLARED spans (main-region only
     const items = [
       item('scalar1', 'text'),
       item('scalar2', 'number'),
-      item('policy', 'table', { value: [{ a: 1, b: 2 }] }),
       item('constraints', 'labelValueList', { value: [{ label: 'x' }] }),
+      item('roles', 'table', { value: [{ name: 'r' }] }),
     ];
     const { main } = composeSections(items, undefined);
+    // The scalar strip is still its own mechanism and still groups; the flowables that follow take
+    // their own rows. What must never happen is a scalar being swept into a row with a flowable.
     expect(main[0].rows).toEqual([
       { type: 'grid', explicit: false, items: [{ slotName: 'scalar1', span: 1 }, { slotName: 'scalar2', span: 1 }] },
-      { type: 'flow', items: [{ slotName: 'policy', span: 6 }, { slotName: 'constraints', span: 6 }] },
+      { type: 'single', slotName: 'constraints' },
+      { type: 'single', slotName: 'roles' },
     ]);
   });
 });

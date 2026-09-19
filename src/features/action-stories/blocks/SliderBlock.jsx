@@ -1,4 +1,4 @@
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { BlockCard, BlockTitle } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
 import { formatValue } from './formatValue';
@@ -38,7 +38,7 @@ export default function SliderBlock({ slotName, data, onChange }) {
   }
 
   const unit = data.unit || '';
-  const label = data.label || humanizeSlotName(slotName);
+  const label = data.label || slotLabel(slotName);
 
   return (
     <BlockCard padding="compact">

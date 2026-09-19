@@ -1,4 +1,5 @@
 import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { flattenNestedEntry } from './nestedEntryText';
 import { deltaTone } from './deltaTone';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
@@ -98,7 +99,17 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
             <div className="flex items-center justify-between gap-3">
               <span {...cellText('identifier', label, 'text-rf-text-secondary')}>{label}</span>
               <span
-                {...cellText('prose', undefined, `flex items-baseline gap-1.5 ${
+                // `flex-wrap`, and it is load-bearing. Each inline chip below is `shrink-0` — it
+                // must be, a short figure cut in half is a wrong figure (I4) — so a non-wrapping
+                // line could neither shrink nor break, and a row carrying several of them simply
+                // ran past the card: measured in Chrome at 1440 and 1280, 70 chips painted OUTSIDE
+                // their own card across the corpus, the worst 94px beyond its right border, every
+                // one of them in this slot. Wrapping is the only outcome that loses nothing: the
+                // card grows a line instead of leaking its contents onto the page behind it.
+                //
+                // `justify-end` so a wrapped chip stays under the value it belongs to, on the right,
+                // rather than jumping to the left edge and reading as a new row's label.
+                {...cellText('prose', undefined, `flex flex-wrap items-baseline justify-end gap-1.5 ${
                   primaryTone ? primaryTone.text : 'text-rf-text-primary'
                 }`)}
               >
@@ -134,7 +145,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {list}
       </div>
     );
@@ -142,7 +153,7 @@ export default function LabelValueListBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {list}
     </BlockCard>
   );

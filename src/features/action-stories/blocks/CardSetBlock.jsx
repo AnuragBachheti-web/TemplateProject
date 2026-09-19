@@ -1,5 +1,6 @@
 import ChipRow from './children/ChipRow';
 import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import Metric from './children/Metric';
 import SubRowList from './children/SubRowList';
 import { EmptyState } from './BlockStates';
@@ -90,14 +91,14 @@ function Framed({ slotName, compact, children }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {children}
       </div>
     );
   }
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {children}
     </BlockCard>
   );

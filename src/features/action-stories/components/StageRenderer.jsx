@@ -4,7 +4,7 @@ import { evaluateCondition } from '@/features/action-stories/manifests/actionCon
 import { validateBlockData } from '@/features/action-stories/manifests/blockTypes';
 import { BLOCK_REGISTRY } from '@/features/action-stories/blocks';
 import { variantOf } from '@/features/action-stories/blocks/variants';
-import { humanizeSlotName } from '@/features/action-stories/blocks/humanizeSlotName';
+import { slotLabel } from '@/features/action-stories/blocks/slotLabel';
 import { findNearestStep } from '@/features/action-stories/blocks/sliderSteps';
 import BlockErrorBoundary from '@/features/action-stories/blocks/BlockErrorBoundary';
 import { composeSections } from '@/features/action-stories/layout/composeSections';
@@ -21,7 +21,7 @@ function rawKeyOf(binding) {
 function BlockPlaceholder({ slotName, reason }) {
   return (
     <div {...typeRole('small', 'rounded-xl border border-dashed border-rf-status-warning/40 bg-rf-status-warning/10 px-3 py-2 text-rf-status-warning-text dark:border-rf-status-warning/40 dark:bg-rf-status-warning/10 dark:text-rf-status-warning-text')}>
-      <strong>{humanizeSlotName(slotName)}</strong> — {reason}
+      <strong>{slotLabel(slotName)}</strong> — {reason}
     </div>
   );
 }

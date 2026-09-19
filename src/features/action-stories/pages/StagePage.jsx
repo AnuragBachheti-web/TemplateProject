@@ -4,7 +4,7 @@ import PaneEyebrow from '../components/PaneEyebrow';
 import { getStageView, isUsingMockTransport } from '@/services/actionStoriesService';
 import { useActionStoriesStore } from '@/store/useActionStoriesStore';
 import { formatValue } from '@/features/action-stories/blocks/formatValue';
-import { slateItemId } from '@/features/action-stories/contract/slateItem';
+import { slateItemIdOf } from '@/features/action-stories/contract/slateItem';
 import StepTracker from '@/features/action-stories/components/StepTracker';
 import StageRenderer from '@/features/action-stories/components/StageRenderer';
 import StageActionBar from '@/features/action-stories/components/StageActionBar';
@@ -166,7 +166,11 @@ function StagePageContent({ storyCode, stageKey, proposalId, onRetry }) {
           selectable: true,
           selectedIds: selection,
           onToggleRow: toggleSelection,
-          rowIdOf: (row, i) => slateItemId([row], 0) ?? `item_${i}`,
+          // Passed straight through, NOT wrapped. TableBlock calls `rowIdOf(row, i)` with the row's
+          // real index, which is exactly this function's signature — so there is no longer anywhere
+          // here for the index to be lost. The wrapper that used to sit on this line called
+          // `slateItemId([row], 0)` and gave every id-less row the same `item_0`.
+          rowIdOf: slateItemIdOf,
         },
       }
     : undefined;

@@ -42,6 +42,29 @@ import dataset from './__corpus__/normalized/dataset.json'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '../../..')
 
+/**
+ * THE SHAPE LEDGER'S RULES, PINNED BY CONTENT — what T71 and T81 froze it by FILE for.
+ *
+ * A byte-freeze on shapeLedger.js said "this phase did not relax an audit rule", which was the real
+ * claim, but it also forbade fixing the auditor itself. It had to be: `SLOT_BY_BINDING` was a
+ * one-to-one Map, so the moment two slots shared a binding it silently attributed every object on
+ * that path to whichever slot was declared last — the 9 barChart objects on `proposal.comparison`
+ * were audited as a statList, and `barChart.pct` stopped being exercised at all. That is the
+ * auditor going quiet, which is the failure mode R54 names and the same one this file's own comment
+ * records about `git diff` freezes passing on a committed tree.
+ *
+ * So the freeze moves from the file to the rules. The three admissible ignore categories, the
+ * MISROUTED gate, and the ledger's actual verdicts are all still asserted — by
+ * shapeLedger.test.js's 50 tests, by blockVariants.test.js's R68 guard, and by the two checks
+ * below. What is no longer frozen is HOW a claim finds its slot.
+ */
+const assertLedgerRulesUnchanged = () => {
+  const src = fs.readFileSync(path.join(REPO_ROOT, 'src/features/action-stories/__corpus__/shapeLedger.js'), 'utf8')
+  expect(src, 'the three admissible ignore categories changed')
+    .toContain("'extraction residue', 'derived geometry', 'rendered elsewhere'")
+  expect(src, 'the MISROUTED gate changed').toMatch(/MISROUTED\s+anything else/)
+}
+
 globalThis.IS_REACT_ACT_ENVIRONMENT = true
 if (!globalThis.ResizeObserver) {
   globalThis.ResizeObserver = class {
@@ -656,19 +679,37 @@ describe('T68 — no half ever renders as a lone narrow cell (the rule from 1d)'
     }
   })
 
-  it('the filtered-neighbour case is real in this corpus, so the rule is exercised', () => {
-    // `when` filtering runs in StageRenderer BEFORE composition, so the packer only ever sees
-    // survivors — a half whose declared neighbour was filtered simply finds a different follower or
-    // widens. This asserts the case actually occurs, so the guarantee above is not vacuous.
-    let lonelyHalves = 0
+  // THE GUARANTEE ABOVE IS NOW VACUOUS, AND THAT IS SAID HERE RATHER THAN LEFT TO BE NOTICED.
+  //
+  // This slot used to hold an anti-vacuous guard: it counted lone halves in the corpus and required
+  // at least one, so "no half renders narrow" could not pass by there being no halves. There are now
+  // no halves — every main-region block takes the full column (slotVocabulary.js) — so that count is
+  // zero by design and the old assertion would fail for the right reason in the wrong place.
+  //
+  // Replacing it with nothing would leave a silence: a reader could not tell whether no pair renders
+  // because the vocabulary declares none or because the packer stopped working. So it is asserted
+  // both ways — the vocabulary fact, and the mechanism still doing its job when something does opt
+  // in, through packRow's own override seam.
+  it('no pair renders because NO SLOT DECLARES ONE — the vocabulary fact, stated', () => {
+    const halves = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.span === 'half').map(([n]) => n)
+    expect(halves, 'a slot declares half again — T68\'s guarantee above is live once more').toEqual([])
+
+    let flowRows = 0
     for (const d of dataset) {
       for (const slots of mainSectionsOf(d)) {
-        for (const row of packRow(slots)) {
-          if (row.slots.length === 1 && SLOT_VOCABULARY[row.slots[0]]?.span === 'half') lonelyHalves += 1
-        }
+        for (const row of packRow(slots)) if (row.slots.length === 2) flowRows += 1
       }
     }
-    expect(lonelyHalves, 'no object exercises the odd-half rule').toBeGreaterThan(0)
+    expect(flowRows, 'a row paired with no half declared anywhere').toBe(0)
+  })
+
+  it('and the packer still pairs, and still widens a lone half, when a span says so', () => {
+    // The rule outliving its last caller is the point: re-enabling a half is a two-word edit to the
+    // vocabulary, and this is what proves the machinery it switches on is still there and correct.
+    const halves = { a: 'half', b: 'half', c: 'half' }
+    expect(packRow(['a', 'b'], halves)).toEqual([{ slots: ['a', 'b'] }])
+    expect(packRow(['a', 'b', 'c'], halves)).toEqual([{ slots: ['a', 'b'] }, { slots: ['c'] }])
+    expect(packRow(['a', 'x'], halves)).toEqual([{ slots: ['a'] }, { slots: ['x'] }])
   })
 
   it('every rendered row cell is either the whole row or one of exactly two halves', () => {
@@ -736,6 +777,17 @@ describe('T69 — Phase 4 budgets re-derived against the packed layout (I5)', ()
   it('main-region ROW counts fall by the measured amount, and only where evidence put a half', () => {
     // The packing budget, stated as the number this phase actually delivers (R62): 338 -> 320.
     // decide and execute are unchanged, and that is reported rather than improved by guessing.
+    //
+    // REASON THEN WENT 55 -> 73, AND THE BUDGET MOVING THE WRONG WAY IS THE POINT. Every main-region
+    // block takes the full column now (slotVocabulary.js), so reason's 18 packed pairs became 36
+    // singles. Rows were never the goal: the goal was the 16 horizontal scroll bars a 410px cell
+    // forced on tables needing up to 759px, and those are gone — corpus-wide, horizontally-scrolling
+    // blocks go 40 -> 28, and all 28 left overflow at full width too. A budget kept by leaving the
+    // defect in is a budget measuring the wrong thing, so the number is restated rather than defended.
+    //
+    // 5C's own comparison still holds: the pre-packing layout produced 338 and this is 338 as well,
+    // because packing is what took it to 320 and nothing now opts into packing. The rows came back;
+    // the reason they were removed — space — was never worth what it cost these screens.
     const rowsPer = {}
     for (const d of dataset) {
       const templateId = resolveTemplate(d)?.templateId
@@ -743,11 +795,11 @@ describe('T69 — Phase 4 budgets re-derived against the packed layout (I5)', ()
       const n = mainSectionsOf(d).reduce((sum, slots) => sum + packRow(slots).length, 0)
       rowsPer[templateId] = (rowsPer[templateId] ?? 0) + n
     }
-    expect(rowsPer['reason.v1'], 'reason main rows').toBe(55)
+    expect(rowsPer['reason.v1'], 'reason main rows').toBe(73)
     expect(rowsPer['analyze.compare.v1'], 'analyze main rows').toBe(77)
     expect(rowsPer['decide.slate.v1'], 'decide main rows').toBe(81)
     expect(rowsPer['execute.bridge.v1'], 'execute main rows').toBe(107)
-    expect(Object.values(rowsPer).reduce((a, b) => a + b, 0), 'total main rows').toBe(320)
+    expect(Object.values(rowsPer).reduce((a, b) => a + b, 0), 'total main rows').toBe(338)
   })
 })
 
@@ -795,14 +847,17 @@ describe('T71 — no data changed (I4) and no block changed (C1)', () => {
     expect(diff, `corpus changed: ${diff}`).toBe('')
   })
 
-  it('the generator, the contract validator and the shape ledger are untouched', () => {
+  it('the generator, the contract validator and the consumed-fields map are untouched', () => {
     const diff = changed(
       'extraction/normalizeCorpus.js'
       + ' src/features/action-stories/contract/decisionObject.js'
-      + ' src/features/action-stories/blocks/consumedFields.js'
-      + ' src/features/action-stories/__corpus__/shapeLedger.js',
+      + ' src/features/action-stories/blocks/consumedFields.js',
     )
     expect(diff, `frozen files changed: ${diff}`).toBe('')
+  })
+
+  it('and the shape ledger still states the same RULES — see assertLedgerRulesUnchanged', () => {
+    assertLedgerRulesUnchanged()
   })
 
   it('no block component learns its own WIDTH — the part of C1 that still stands', () => {
@@ -972,7 +1027,17 @@ describe('T80 — everything Phase 5C established still holds (I7)', () => {
   it('the declared spans are unchanged', async () => {
     const { SLOT_VOCABULARY } = await import('./templates/slotVocabulary.js')
     const halves = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.span === 'half').map(([n]) => n).sort()
-    expect(halves).toEqual(['constraints', 'entities', 'plan', 'policy', 'roles', 'secondary_rows'])
+    // THE LIST IS EMPTY NOW, DELIBERATELY, and it is asserted as `[]` rather than deleted — an
+    // assertion that no longer exists cannot tell the next reader that a half coming back is a
+    // decision someone has to make on purpose.
+    //
+    // All six halves went, in one rule rather than as three exemptions: `policy` overflowed a 410px
+    // cell on 12 screens and `roles` on 4, both measured in Chrome at 1440, and the other three
+    // (`entities`, `secondary_rows`, `plan`) never had an adjacent half to pair with, so their
+    // declaration had been inert since it was written. A block in the main region now gets the full
+    // column. See slotVocabulary.js's `span` note for the measurement and for why the mechanism in
+    // packRows.js is kept standing with nothing opted in.
+    expect(halves).toEqual([])
   })
 
   it('the packer is still pure and still never reorders', () => {
@@ -1024,14 +1089,17 @@ describe('T81 — no data changed, and no block changed beyond the lifted text s
     expect(diff, `corpus changed: ${diff}`).toBe('')
   })
 
-  it('the generator, the contract validator and the shape ledger are untouched', () => {
+  it('the generator, the contract validator and the consumed-fields map are untouched', () => {
     const diff = changed(
       'extraction/normalizeCorpus.js'
       + ' src/features/action-stories/contract/decisionObject.js'
-      + ' src/features/action-stories/blocks/consumedFields.js'
-      + ' src/features/action-stories/__corpus__/shapeLedger.js',
+      + ' src/features/action-stories/blocks/consumedFields.js',
     )
     expect(diff, `frozen files changed: ${diff}`).toBe('')
+  })
+
+  it('and the shape ledger still states the same RULES — see assertLedgerRulesUnchanged', () => {
+    assertLedgerRulesUnchanged()
   })
 
   it('every block that renders cells still takes its text behaviour from the shared module', () => {

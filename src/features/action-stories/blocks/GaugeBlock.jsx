@@ -1,4 +1,4 @@
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { parseMagnitude } from './chartGeometry';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
 import { EmptyState, ErrorState } from './BlockStates';
@@ -137,7 +137,7 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {rowsNode}
       </div>
     );
@@ -145,7 +145,7 @@ export default function GaugeBlock({ slotName, data, compact, variant }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {rowsNode}
     </BlockCard>
   );

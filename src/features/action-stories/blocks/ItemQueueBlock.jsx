@@ -1,4 +1,5 @@
 import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { flattenDisplayValue } from './flattenDisplayValue';
 import { flattenNestedEntry } from './nestedEntryText';
 import { severityTone } from './statusTone';
@@ -287,7 +288,7 @@ export default function ItemQueueBlock({ slotName, data, compact }) {
     return (
       <div className="py-1.5">
         <CompactEyebrow>
-          {humanizeSlotName(slotName)} · {data.length}
+          {slotLabel(slotName)} · {data.length}
         </CompactEyebrow>
         {body}
       </div>
@@ -297,7 +298,7 @@ export default function ItemQueueBlock({ slotName, data, compact }) {
   return (
     <BlockCard>
       <BlockTitle className="mb-2">
-        {humanizeSlotName(slotName)} · {data.length}
+        {slotLabel(slotName)} · {data.length}
       </BlockTitle>
       {body}
     </BlockCard>

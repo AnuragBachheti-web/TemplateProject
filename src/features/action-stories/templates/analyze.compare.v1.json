@@ -51,8 +51,16 @@
       "binding": "proposal.comparison",
       "section": "analysis",
       "when": {
-        "path": "proposal.comparison",
-        "op": "exists"
+        "all": [
+          {
+            "path": "proposal.comparison",
+            "op": "exists"
+          },
+          {
+            "path": "proposal.comparison[0].note",
+            "op": "notExists"
+          }
+        ]
       }
     },
     {
@@ -83,6 +91,24 @@
       "when": {
         "path": "proposal.bridge",
         "op": "exists"
+      }
+    },
+    {
+      "slotName": "reconciliation",
+      "blockType": "statList",
+      "binding": "proposal.comparison",
+      "section": "analysis",
+      "when": {
+        "all": [
+          {
+            "path": "proposal.comparison",
+            "op": "exists"
+          },
+          {
+            "path": "proposal.comparison[0].note",
+            "op": "exists"
+          }
+        ]
       }
     },
     {

@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip } from 'recharts';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { bridgeGeometry, parseMagnitude } from './chartGeometry';
 import { positiveColor, negativeColor, neutralColor } from './chartPalette';
 import { BlockCard, BlockTitle } from './BlockCard';
@@ -66,7 +66,7 @@ export default function WaterfallChartBlock({ slotName, data }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       <div className="h-64 w-full" role="img" aria-label={chartLabel}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={rows} margin={{ top: 4, right: 10, bottom: 4, left: 6 }}>

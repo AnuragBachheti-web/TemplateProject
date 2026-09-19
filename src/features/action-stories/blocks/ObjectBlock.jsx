@@ -1,4 +1,5 @@
 import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { flattenNestedEntry } from './nestedEntryText';
 import { deltaTone } from './deltaTone';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
@@ -82,7 +83,7 @@ export default function ObjectBlock({ slotName, data, compact }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {rows}
       </div>
     );
@@ -90,7 +91,7 @@ export default function ObjectBlock({ slotName, data, compact }) {
 
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {rows}
     </BlockCard>
   );

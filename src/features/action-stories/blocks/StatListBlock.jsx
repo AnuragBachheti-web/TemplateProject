@@ -1,7 +1,7 @@
 import Metric from './children/Metric';
 import { EmptyState } from './BlockStates';
 import { BlockCard, BlockTitle, CompactEyebrow } from './BlockCard';
-import { humanizeSlotName } from './humanizeSlotName';
+import { slotLabel } from './slotLabel';
 import { DEPTH_BLOCK, depthAttrs } from './renderDepth';
 import { formatValue } from './formatValue';
 import { assertVariant } from './variants';
@@ -46,14 +46,14 @@ function Framed({ slotName, compact, children }) {
   if (compact) {
     return (
       <div className="py-1.5">
-        <CompactEyebrow>{humanizeSlotName(slotName)}</CompactEyebrow>
+        <CompactEyebrow>{slotLabel(slotName)}</CompactEyebrow>
         {children}
       </div>
     );
   }
   return (
     <BlockCard>
-      <BlockTitle className="mb-2">{humanizeSlotName(slotName)}</BlockTitle>
+      <BlockTitle className="mb-2">{slotLabel(slotName)}</BlockTitle>
       {children}
     </BlockCard>
   );
@@ -79,8 +79,16 @@ export default function StatListBlock({ slotName, data, compact = false, variant
   const rows = Array.isArray(data) ? data.filter((r) => r !== null && typeof r === 'object') : [];
   if (rows.length === 0) return <EmptyState slotName={slotName} message="No figures recorded." />;
 
+  // THE COLUMN COUNT IS THE VARIANT'S, NEVER THE DATA'S. `reconStrip` is 4-up because the reference
+  // draws a reconciliation on one line (see variants.js); the default stays 3-up because the four
+  // slots it serves are rail-width. Deriving this from `rows.length` would be the shape-guessing
+  // this project deleted three times — a block choosing its own layout by measuring content.
+  const columns = compact
+    ? 'grid-cols-2'
+    : variant === 'reconStrip' ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3';
+
   const grid = (
-    <div className={compact ? 'grid grid-cols-2 gap-x-4 gap-y-2' : 'grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-3'}>
+    <div className={`grid gap-x-4 ${compact ? 'gap-y-2' : 'gap-y-2.5'} ${columns}`}>
       {rows.map((row, i) => (
         <Metric
           key={i}

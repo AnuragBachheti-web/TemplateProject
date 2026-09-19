@@ -38,7 +38,13 @@ export const BLOCK_VARIANTS = Object.freeze({
   // S9.1-3-decide.dc.html:220-227 — label / value / range / note as FOUR stacked lines. The block's
   // default renders three, because `Metric` takes one meta line and `range` loses the `??` chain to
   // `note`. That is the field a passing data test guarded for three phases while nothing drew it.
-  statList: ['metricGrid'],
+  // S10.1-2-analyze.dc.html:286-288 — the reconciliation's terms sit on ONE line, read across as a
+  // single account (baseline, what was attributed, what was left, where it landed). The default is a
+  // 3-up sized for the rail, so a four-term reconciliation wrapped after three and the last term
+  // dropped to a second line on its own. Same three sources R69 surveyed when it dropped the
+  // `barChart row note` variant for rendering "as stacked metric grids in the reference" — this is
+  // the grid it meant, now that `reconciliation` gives those rows a slot to land on.
+  statList: ['metricGrid', 'reconStrip'],
 
   // S9.18-3-decide.dc.html:311-323 — label+value on a row, a bar filled from `pct` with a tick at
   // `limitPct`, and `note` on a mono line beneath. The default plots `value` against `limitPct`,

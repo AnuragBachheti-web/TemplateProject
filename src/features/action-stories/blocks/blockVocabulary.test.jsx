@@ -460,9 +460,12 @@ describe('T31 — Phase 3B widened the BLOCK vocabulary and claimed no new data 
     // A 3B-introduced field would have to be sourced from somewhere; nothing in the provenance map
     // names a source for a path outside the declared vocabulary, which referenceFidelity.test.js
     // already asserts field by field. What this adds is the count: 3B's blocks serve 10 slots.
+    // RECONCILIATION DELTA: 10 -> 11. `reconciliation` targets statList, and it adds no canonical
+    // field either — it binds `proposal.comparison`, the path `comparison` already bound, and the
+    // claim it reads is the same one the provenance map already names.
     const served = Object.values(SLOT_VOCABULARY).filter((s) =>
       ['checklist', 'statList', 'cardSet', 'roster'].includes(s.blockType))
-    expect(served).toHaveLength(10)
+    expect(served).toHaveLength(11)
   })
 })
 

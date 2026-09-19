@@ -10,6 +10,27 @@
 // `selection` with the same function.
 
 /**
+ * The identity of ONE row, given its own position in the slate.
+ *
+ * Split out from `slateItemId` because the two callers hold different things: the execution side
+ * has the whole slate and an index, the render side has a row and its index but never the array.
+ * StagePage bridged that gap with `slateItemId([row], 0)` — a one-element array and a literal 0 —
+ * which pinned the positional fallback to `item_0` for EVERY row. On the 16 of 20 slates whose rows
+ * carry no business id that made all ids identical: one tick checked the whole table, and an
+ * Approve-selected would have sent `["item_0"]` whatever the operator picked.
+ *
+ * @param {object} row
+ * @param {number} index  the row's position in its own slate.
+ * @returns {string}
+ */
+export function slateItemIdOf(row, index) {
+  for (const key of ['id', 'item_id', 'sku', 'code']) {
+    if (row && typeof row[key] === 'string' && row[key].trim() !== '') return row[key]
+  }
+  return `item_${index}`
+}
+
+/**
  * The item identity Approve-selected sends back. Uses the row's own business id where it has one and
  * falls back to a positional id, which is all a mockup-derived slate can offer. A real backend sends
  * a stable item id on every slate row and this heuristic disappears.
@@ -19,9 +40,5 @@
  * @returns {string}
  */
 export function slateItemId(slate, index) {
-  const row = slate[index]
-  for (const key of ['id', 'item_id', 'sku', 'code']) {
-    if (row && typeof row[key] === 'string' && row[key].trim() !== '') return row[key]
-  }
-  return `item_${index}`
+  return slateItemIdOf(slate[index], index)
 }
