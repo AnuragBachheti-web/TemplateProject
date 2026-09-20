@@ -150,6 +150,46 @@
         "name": "Incrementality Engine",
         "role": "Designs and reads the holdout behind every claim."
       }
+    ],
+    "measures": [
+      {
+        "label": "New · first 30 days",
+        "value": "content only"
+      },
+      {
+        "label": "Repeat · 2–4 orders",
+        "value": "up to 10% off"
+      },
+      {
+        "label": "VIP · top pLTV decile",
+        "value": "no discount under 90 days"
+      },
+      {
+        "label": "Lapsed · 90–180 days",
+        "value": "up to 15% off"
+      },
+      {
+        "label": "Consumable replenishment",
+        "value": "free shipping, no % off"
+      }
+    ],
+    "notes": [
+      {
+        "label": "Frequency cap",
+        "detail": "Four marketing emails and two SMS per person per week, counted across every journey and campaign together."
+      },
+      {
+        "label": "Quiet hours",
+        "detail": "No sends 9pm–8am in the recipient’s local time. Nothing before 10am on Sundays."
+      },
+      {
+        "label": "Journey collision",
+        "detail": "One lifecycle journey at a time per person. Transactional and shipping messages sit outside the cap."
+      },
+      {
+        "label": "Holdout floor",
+        "detail": "10% holdout on every flow, 5% where monthly reach is under 2,000. A flow without one cannot report revenue."
+      }
     ]
   },
   "status": "pending",

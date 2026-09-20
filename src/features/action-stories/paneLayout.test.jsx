@@ -795,11 +795,21 @@ describe('T69 — Phase 4 budgets re-derived against the packed layout (I5)', ()
       const n = mainSectionsOf(d).reduce((sum, slots) => sum + packRow(slots).length, 0)
       rowsPer[templateId] = (rowsPer[templateId] ?? 0) + n
     }
-    expect(rowsPer['reason.v1'], 'reason main rows').toBe(73)
-    expect(rowsPer['analyze.compare.v1'], 'analyze main rows').toBe(77)
-    expect(rowsPer['decide.slate.v1'], 'decide main rows').toBe(81)
-    expect(rowsPer['execute.bridge.v1'], 'execute main rows').toBe(107)
-    expect(Object.values(rowsPer).reduce((a, b) => a + b, 0), 'total main rows').toBe(338)
+    // PHASE 9: 338 -> 416, and unlike every delta above it this one is CONTENT, not packing.
+    // 78 raw keys that the reference supplied and nothing rendered now reach a block, on 59 of the
+    // 105 panes. Row for row that is one new row per claimed key, which is what a row count should
+    // do when a pane gains a block — the earlier movements in this comment were the same content
+    // being repacked, and this is not.
+    //
+    // The shape blocks sit in MAIN on every template and that placement is deliberate: the rail is
+    // capped at 4 cards (R60, asserted above) and these are supporting figures, not rail facts.
+    // It is also where the reference draws them — an eyebrow, a paragraph, and the metric cards
+    // directly beneath, in the main column.
+    expect(rowsPer['reason.v1'], 'reason main rows').toBe(97)        // 73 -> 97
+    expect(rowsPer['analyze.compare.v1'], 'analyze main rows').toBe(93)  // 77 -> 93
+    expect(rowsPer['decide.slate.v1'], 'decide main rows').toBe(104)     // 81 -> 104
+    expect(rowsPer['execute.bridge.v1'], 'execute main rows').toBe(122)  // 107 -> 122
+    expect(Object.values(rowsPer).reduce((a, b) => a + b, 0), 'total main rows').toBe(416)
   })
 })
 

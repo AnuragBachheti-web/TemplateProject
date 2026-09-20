@@ -159,8 +159,15 @@ describe('T33 — each re-pointed slot renders as its new block, on real shipped
     // 3C's fifth slot this one extends the block's reach. Stated here for the same reason the
     // fifth one was: so the change is reported as what it is.
     const slots = Object.entries(SLOT_VOCABULARY).filter(([, s]) => s.blockType === 'statList').map(([n]) => n)
-    expect(slots.sort()).toEqual(['basis', 'inputs', 'progress_rows', 'recommendation_metrics', 'reconciliation', 'totals_rows'])
-    expect(objectsRendering(slots)).toHaveLength(52)
+    // PHASE 9 DELTA: six slots -> nine, and this is growth of a third kind. `measures`,
+    // `secondary_measures` and `execution_measures` are SHAPE slots: they render the metric-list
+    // shape wherever it appears, under any of 58 reference names, rather than one named concept.
+    expect(slots.sort()).toEqual(['basis', 'execution_measures', 'inputs', 'measures', 'progress_rows',
+      'recommendation_metrics', 'reconciliation', 'secondary_measures', 'totals_rows'])
+    // PHASE 9 DELTA: 52 -> 81. THIS one is reach, and a lot of it: the shape slots put a statList
+    // on 29 more objects that never rendered one. That is the phase working rather than a
+    // regression — but it is exactly the kind of growth this assertion exists to make visible.
+    expect(objectsRendering(slots)).toHaveLength(81)
   })
 
   it('R30 — statList renders the `note` every heroMetrics row carries', () => {
@@ -494,7 +501,14 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     // slot to share a binding with another — see the SPLIT test above for why the shape lives at
     // slot granularity rather than inside the block. `slotTargeted` is unchanged at 17: statList
     // was already a target, which is again I6's outcome and not a new block.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    // PHASE 9 DELTA: 50 -> 56. The six SHAPE slots — `measures`, `secondary_measures`, `notes` on
+    // `proposal`, and `measures`, `notes`, `secondary_notes` on `execution`. Unlike every addition
+    // above them these name a SHAPE rather than a concept, so one slot reaches 58 reference key
+    // names instead of a handful; the reasoning is in templates/shapeSlots.js. No new blockType and
+    // no new variant: they render statList and labelValueList, both already slot-targeted, so
+    // `slotTargeted` stays at 17 — I6's outcome again, a concept finding a home in a block that
+    // was already there.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(56)
     const slotTargeted = new Set(Object.values(SLOT_VOCABULARY).map((s) => s.blockType))
     expect(slotTargeted.size, 'slot-targeted blockTypes').toBe(17)
   })
@@ -506,7 +520,12 @@ describe('T39 — the registry is pinned by name, so a sixth block cannot arrive
     expect(on('table')).toEqual([
       'detail_rows', 'focus_rows', 'ledger', 'plan', 'policy', 'roles', 'secondary_rows', 'slate',
     ])
-    expect(on('labelValueList')).toEqual(['constraints', 'rollback', 'verification'])
+    // PHASE 9 DELTA: three named-concept slots, plus three SHAPE slots. G's eight stay exactly as
+    // the survey left them — the three additions do not re-point anything, they reach the same
+    // shape under 20 other reference names. That distinction is the point of listing them apart.
+    expect(on('labelValueList')).toEqual([
+      'constraints', 'execution_notes', 'execution_secondary_notes', 'notes', 'rollback', 'verification',
+    ])
     expect(on('timeline')).toEqual(['flags', 'trigger'])
   })
 })

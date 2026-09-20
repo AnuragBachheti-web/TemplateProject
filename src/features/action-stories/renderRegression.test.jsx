@@ -218,7 +218,14 @@ describe('T13 — one object per template renders unchanged below the header', (
     //
     // RECONCILIATION DELTA: 49 -> 50. `reconciliation` arrives for statList, an EXISTING block —
     // the middle of the three cases above, so the registry array stays byte-identical here too.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    // PHASE 9 DELTA: 50 -> 56. The six SHAPE slots — `measures`, `secondary_measures`, `notes` on
+    // `proposal`, and `measures`, `notes`, `secondary_notes` on `execution`. Unlike every addition
+    // above them these name a SHAPE rather than a concept, so one slot reaches 58 reference key
+    // names instead of a handful; the reasoning is in templates/shapeSlots.js. No new blockType and
+    // no new variant: they render statList and labelValueList, both already slot-targeted, so
+    // `slotTargeted` stays at 17 — I6's outcome again, a concept finding a home in a block that
+    // was already there.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(56)
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('decision_mode')
     expect(Object.keys(SLOT_VOCABULARY)).not.toContain('stage_status')
     expect(Object.keys(SLOT_VOCABULARY)).toContain('threshold_control')
@@ -253,11 +260,17 @@ describe('T13 — one object per template renders unchanged below the header', (
     // objects on `proposal.comparison` do — the other 9 keep `comparison` and render exactly as
     // before. Same shape of change as 5A's `threshold_control`: one gated block, no other template
     // touched.
+    // PHASE 9 DELTA: every template gains its SHAPE blocks, and this is the first phase whose
+    // deltas are additions rather than removals — reason +3, analyze +3, decide +3, execute +3.
+    // Each is `when`-gated on its own binding, so a pane carrying none of that shape renders
+    // exactly as before; 46 of the 105 objects gain nothing at all. Every one stays inside the
+    // density budget in templateVocabulary.test.js, which is what kept the count at three per
+    // template rather than four (see shapeSlots.js on the two slots not declared).
     expect(counts).toEqual({
-      'reason.v1': 8,             // 11 -> 10 (Phase 4) -> 9 (5C) -> 8 (5E Part 2)
-      'analyze.compare.v1': 13,   // 15 -> 14 (Phase 4) -> 13 (5C) -> 12 (5E Part 2) -> 13 (reconciliation)
-      'decide.slate.v1': 17,      // 19 -> 18 (Phase 4) -> 19 (5A) -> 18 (5C) -> 17 (5E Part 2)
-      'execute.bridge.v1': 13,    // 15 -> 14 (Phase 4) -> 13 (5C) — untouched this phase
+      'reason.v1': 11,            // 11 -> 10 (Phase 4) -> 9 (5C) -> 8 (5E Part 2) -> 11 (Phase 9)
+      'analyze.compare.v1': 16,   // 15 -> 14 (Phase 4) -> 13 (5C) -> 12 (5E Part 2) -> 13 (reconciliation) -> 16 (Phase 9)
+      'decide.slate.v1': 20,      // 19 -> 18 (Phase 4) -> 19 (5A) -> 18 (5C) -> 17 (5E Part 2) -> 20 (Phase 9)
+      'execute.bridge.v1': 16,    // 15 -> 14 (Phase 4) -> 13 (5C) -> 16 (Phase 9)
       'locked.v1': 3,             // unchanged — it declares no rail at all
     })
     for (const id of ['reason.v1', 'analyze.compare.v1', 'decide.slate.v1', 'execute.bridge.v1']) {

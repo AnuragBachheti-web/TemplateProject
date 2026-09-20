@@ -441,7 +441,14 @@ describe('T90 — no data changed, no new slot, no new blockType (I6/C1)', () =>
     // RECONCILIATION DELTA: 49 -> 50, and NOT by this phase — 5B still mints no slot. The number is
     // the vocabulary's current size, which is what makes the guard useful; the registry half below
     // is the part 5B is actually on the hook for, and it is unchanged at 19.
-    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(50)
+    // PHASE 9 DELTA: 50 -> 56. The six SHAPE slots — `measures`, `secondary_measures`, `notes` on
+    // `proposal`, and `measures`, `notes`, `secondary_notes` on `execution`. Unlike every addition
+    // above them these name a SHAPE rather than a concept, so one slot reaches 58 reference key
+    // names instead of a handful; the reasoning is in templates/shapeSlots.js. No new blockType and
+    // no new variant: they render statList and labelValueList, both already slot-targeted, so
+    // `slotTargeted` stays at 17 — I6's outcome again, a concept finding a home in a block that
+    // was already there.
+    expect(Object.keys(SLOT_VOCABULARY)).toHaveLength(56)
     expect(BLOCK_TYPES).toHaveLength(19)
     expect(Object.keys(BLOCK_REGISTRY).sort()).toEqual(BLOCK_TYPES.slice().sort())
   })

@@ -61,6 +61,16 @@ const tokenValue = (name) => {
   return (root.match(new RegExp(`--${name}:\\s*(#[0-9A-Fa-f]{6})`)) ?? [])[1]?.toUpperCase()
 }
 
+const PHASE9_SHAPE_SLOTS = new Set([
+  'measures', 'secondary_measures', 'notes', 'execution_measures', 'execution_notes',
+  'execution_secondary_notes',
+])
+// PHASE 9 RE-SCOPED THE TWO ASSERTIONS BELOW, and the promise they were written to keep is intact.
+// This phase's whole purpose is to render reference content that nothing rendered before, so
+// "identical" is no longer the right question — "nothing LOST, and every addition is a shape slot"
+// is. Re-anchoring them to a Phase 9 snapshot instead would have quietly converted a statement
+// about THIS phase into a statement about a later one, which is how a guard stops guarding.
+
 describe('T111 — a surface is a TIER, never a colour a component picked (R101)', () => {
   it('there are exactly three tiers, and each carries background, border and shadow together', () => {
     // R101: a tier is all three or it is not a tier. The rail dissolving into the page in Phase 6
@@ -259,8 +269,11 @@ describe('T117 — nothing changed but presentation (I6)', () => {
     const changed = []
     for (const d of dataset) {
       const now = render(d)
-      if (JSON.stringify(now.slots) !== JSON.stringify(before[d.proposal_id].slots)) {
-        changed.push(`${d.proposal_id}: ${before[d.proposal_id].slots.length} -> ${now.slots.length}`)
+      const was = before[d.proposal_id]
+      const lost = was.slots.filter((s) => !now.slots.includes(s))
+      const added = now.slots.filter((s) => !was.slots.includes(s))
+      if (lost.length > 0 || !added.every((s) => PHASE9_SHAPE_SLOTS.has(s))) {
+        changed.push(`${d.proposal_id}: -${JSON.stringify(lost)} +${JSON.stringify(added)}`)
       }
     }
     expect(changed).toEqual([])
@@ -271,11 +284,8 @@ describe('T117 — nothing changed but presentation (I6)', () => {
     for (const d of dataset) {
       const now = render(d)
       const was = before[d.proposal_id]
-      if (JSON.stringify(now.text) !== JSON.stringify(was.text)) {
-        const gone = was.text.filter((s) => !now.text.includes(s)).slice(0, 3)
-        const added = now.text.filter((s) => !was.text.includes(s)).slice(0, 3)
-        changed.push(`${d.proposal_id}: -${JSON.stringify(gone)} +${JSON.stringify(added)}`)
-      }
+      const gone = was.text.filter((s) => !now.text.includes(s))
+      if (gone.length > 0) changed.push(`${d.proposal_id}: -${JSON.stringify(gone.slice(0, 3))}`)
     }
     expect(changed, 'a presentation change altered what the page says').toEqual([])
   })

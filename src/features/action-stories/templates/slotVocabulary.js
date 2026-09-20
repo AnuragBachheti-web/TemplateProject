@@ -184,6 +184,30 @@ export const SLOT_VOCABULARY = Object.freeze({
   locked_title: { binding: 'title', blockType: 'text', tier: 'core', note: 'The one identifying line a locked viewer may see.' },
   teaser_summary: { binding: 'proposal.teaser_summary', blockType: 'text', tier: 'core', note: 'Deliberately non-specific: never the real slate, figures or item count.' },
   upgrade_cta: { binding: 'proposal.upgrade_cta', blockType: 'text', tier: 'core', note: 'How to obtain access. Copy is backend-owned.' },
+
+  // ---- PHASE 9: THE SHAPE SLOTS ----------------------------------------------------------------
+  //
+  // Every slot above this line is a CONCEPT — `policy`, `inputs`, `guardrail_checks`. These eight
+  // are a SHAPE, and they exist because matching by name left 1852 of 2498 raw keys unreachable.
+  // The reasoning, the census and the two shapes' definitions are in templates/shapeSlots.js, which
+  // also holds the candidate lists; nothing here restates them.
+  //
+  // FOUR SHAPES, TWO NAMESPACES. `proposal` is empty on all 26 execute objects and the one live
+  // object — the convention throughout is that execution-stage data lives under `execution` — so a
+  // shape that appears on both sides needs a binding on both sides. It is the same shape and the
+  // same component; only the path differs, and shapeSlots.js asserts the candidate lists stay
+  // identical so this cannot decay into per-stage naming.
+  //
+  // `secondary_*` is not a second concept. A pane may hold two of one shape, and the second slot
+  // claims whatever the first did not. Three or more and NONE is claimed — ruling R130, because
+  // these slots are labelled "Measures" and "Notes" rather than by the reference's own pane
+  // eyebrow, which is in the mockup's HTML and not in the payload.
+  measures: { binding: 'proposal.measures', blockType: 'statList', tier: 'conditional', note: 'A labelled metric list — `{label, value}` with at most one meta line. 58 reference names arrive as this one shape; see shapeSlots.js.' },
+  secondary_measures: { binding: 'proposal.secondary_measures', blockType: 'statList', tier: 'conditional', note: 'The second metric list on a pane that carries two. Claims what `measures` did not.' },
+  notes: { binding: 'proposal.notes', blockType: 'labelValueList', tier: 'conditional', note: 'A named note — a name and a sentence, no figure. The shape `constraints` already renders, arriving under 20 other names.' },
+  execution_measures: { binding: 'execution.measures', blockType: 'statList', tier: 'conditional', note: 'The metric-list shape on an execute or live pane, where `proposal` is empty by convention.' },
+  execution_notes: { binding: 'execution.notes', blockType: 'labelValueList', tier: 'conditional', note: 'The named-note shape on an execute or live pane.' },
+  execution_secondary_notes: { binding: 'execution.secondary_notes', blockType: 'labelValueList', tier: 'conditional', note: 'The second note list on an execute or live pane.' },
 })
 
 export const CANONICAL_SLOT_NAMES = Object.freeze(Object.keys(SLOT_VOCABULARY))

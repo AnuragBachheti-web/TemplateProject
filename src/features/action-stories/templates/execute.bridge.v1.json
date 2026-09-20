@@ -149,6 +149,36 @@
         "path": "execution.arming",
         "op": "exists"
       }
+    },
+    {
+      "slotName": "execution_measures",
+      "blockType": "statList",
+      "binding": "execution.measures",
+      "section": "execution",
+      "when": {
+        "path": "execution.measures",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "execution_notes",
+      "blockType": "labelValueList",
+      "binding": "execution.notes",
+      "section": "execution",
+      "when": {
+        "path": "execution.notes",
+        "op": "exists"
+      }
+    },
+    {
+      "slotName": "execution_secondary_notes",
+      "blockType": "labelValueList",
+      "binding": "execution.secondary_notes",
+      "section": "execution",
+      "when": {
+        "path": "execution.secondary_notes",
+        "op": "exists"
+      }
     }
   ],
   "actions": [
@@ -157,7 +187,7 @@
       "label": "Start execution",
       "kind": "primary",
       "action": "approve",
-      "loadingLabel": "Starting…",
+      "loadingLabel": "Starting\u2026",
       "confirm": {
         "required": true,
         "title": "Start execution?",

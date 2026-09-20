@@ -72,6 +72,11 @@ import { deriveApproveEligibility, deriveApproveSelectedEligibility } from '../s
 import { droppedFieldsOfValue, anonymousRowsOf } from '../src/features/action-stories/blocks/consumedFields.js'
 import { classifyDroppedField, anonymityDeferredFor } from '../src/features/action-stories/__corpus__/shapeLedger.js'
 import { SLOT_VOCABULARY } from '../src/features/action-stories/templates/slotVocabulary.js'
+import {
+  SHAPE_SLOT_CANDIDATES, SHAPE_SLOT_MAX_PER_PANE, isMetricListShape, isLabelledProseShape,
+  decorativeKeysAreHonest,
+} from '../src/features/action-stories/templates/shapeSlots.js'
+import { isHiddenKey } from '../src/features/action-stories/blocks/decorativeKeys.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.resolve(__dirname, '..')
@@ -260,6 +265,84 @@ function wouldRenderFaithfully(canonicalField, value, rawKey, rec) {
   return true
 }
 
+// ---- the shape slots (Phase 9) ------------------------------------------------------------------
+//
+// Every `pick` below this point names a CONCEPT and lists the handful of raw keys that concept
+// arrives under. These four name a SHAPE and list every key that shape arrives under — 58 of them
+// for a metric list. The reasoning is in templates/shapeSlots.js; what matters here is the order.
+//
+// THESE RUN LAST IN EVERY ASSEMBLER, and that is load-bearing rather than tidy. `rec.claimed` is
+// first-come, so an established slot always wins a contested name — `sources` and `evidence` are on
+// `inputs`, `thresholds` is on `policy`, and all three are also metric-list names. Running last
+// means this phase can only ADD fields to the corpus, never move one, which is what T131 asserts.
+
+// WHICH SLOTS EXIST PER NAMESPACE, and it is deliberately not symmetric. A `secondary_*` slot is
+// declared only where the corpus actually carries two of that shape on one pane: no reason, analyze
+// or decide pane holds two note lists, and no execute pane holds two metric lists. Declaring them
+// anyway would cost a permanent block in each template — enough to break the density ratchet in
+// templateVocabulary.test.js, which exists precisely so a phase like this one cannot widen the
+// templates by habit. An unexercised slot is the same bargain as an unexercised ignore entry.
+const SHAPE_FAMILIES = {
+  proposal: [
+    { slots: ['measures', 'secondary_measures'], pred: isMetricListShape },
+    { slots: ['notes'], pred: isLabelledProseShape },
+  ],
+  execution: [
+    { slots: ['measures'], pred: isMetricListShape },
+    { slots: ['notes', 'secondary_notes'], pred: isLabelledProseShape },
+  ],
+}
+
+/**
+ * Every candidate of one shape that is unclaimed, matches, AND would render faithfully.
+ *
+ * The gate is consulted HERE rather than left to `pick` because R130 needs the count before the
+ * claim: a pane with three of one shape claims none of them, and "three" has to mean three that
+ * would actually have rendered. Counting candidates that the gate would go on to refuse would
+ * suppress a pane that only ever had two.
+ */
+function claimableOfShape(data, rec, names, pred, field) {
+  const found = []
+  for (const key of names) {
+    if (rec.claimed.has(key) || isBannedKey(key)) continue
+    const v = clean(data[key])
+    // HONESTY IS ASKED OF THE RAW VALUE. `clean` has already removed the decorative keys by this
+    // point, so a row whose `left` held "4 days" arrives here looking blameless. See shapeSlots.js.
+    if (v === undefined || !pred(v)) continue
+    if (!decorativeKeysAreHonest(data[key], isHiddenKey)) continue
+    if (wouldRenderFaithfully(field, v, key, rec)) found.push([key, v])
+  }
+  return found
+}
+
+/**
+ * The shape slots for one namespace — `proposal` on reason/analyze/decide, `execution` on
+ * execute/live, because `proposal` is empty on all 27 of those objects by convention.
+ *
+ * @param {'proposal'|'execution'} ns
+ */
+function shapeSlotsOf(data, rec, ns) {
+  const out = {}
+  for (const { slots, pred } of SHAPE_FAMILIES[ns]) {
+    const names = SHAPE_SLOT_CANDIDATES[ns === 'execution' ? `execution_${slots[0]}` : slots[0]]
+    const claimable = claimableOfShape(data, rec, names, pred, `${ns}.${slots[0]}`)
+    // RULING R130. Three or more of one shape on one pane and NONE is claimed: these slots are
+    // labelled "Measures" and "Notes" — the reference's own pane eyebrow is in the mockup's HTML
+    // and not in the payload — and four generically-named panels is noise, not an improvement.
+    //
+    // CAPACITY REFUSES TOO, for the same reason and not a different one. Where a family has one
+    // slot in this namespace, a pane carrying two would otherwise claim the first and drop the
+    // second with nothing said — which is the silent loss this whole pipeline is built to prevent.
+    // Claiming none is visible in the census; claiming one of two is not.
+    if (claimable.length > Math.min(SHAPE_SLOT_MAX_PER_PANE, slots.length)) continue
+    claimable.slice(0, slots.length).forEach(([key, value], i) => {
+      rec.record(`${ns}.${slots[i]}`, key)
+      out[slots[i]] = value
+    })
+  }
+  return out
+}
+
 /**
  * First candidate whose CLEANED value satisfies `pred` AND survives the claim gate. Candidates are
  * tried in declared order and NOTHING ELSE IS EVER TRIED — this function is deliberately the
@@ -425,6 +508,10 @@ function reasonProposal(data, ctx, rec) {
     // model, a role is a cohort of SKUs, and collapsing them lost both (audit §7.1 R4/R5).
     roles: pick(data, ['roles', 'cohorts', 'clusters'], isObjArray, rec, 'proposal.roles'),
     agents: agentsOf(data, ctx, rec),
+    // THE SHAPE SLOTS, LAST. Every concept above has already claimed its key, so these see only
+    // what nothing else wanted — which is how a phase that adds 58 candidate names cannot move an
+    // existing claim. See templates/shapeSlots.js.
+    ...shapeSlotsOf(data, rec, 'proposal'),
   })
 }
 
@@ -492,6 +579,10 @@ function analyzeProposal(data, stageId, narrative, rec) {
     // classifier fallback that already owns `capacity` on S9.9/analyze, and taking it would move
     // rendered content off a slot that displays it — additive only, so policy sees what is left.
     policy: pick(data, CONSTRAINT_KEYS, isObjArray, rec, 'proposal.policy'),
+    // THE SHAPE SLOTS, LAST. Every concept above has already claimed its key, so these see only
+    // what nothing else wanted — which is how a phase that adds 58 candidate names cannot move an
+    // existing claim. See templates/shapeSlots.js.
+    ...shapeSlotsOf(data, rec, 'proposal'),
   })
 }
 
@@ -609,6 +700,10 @@ function decideProposal(data, stageId, rec) {
     threshold_control: thresholdControlOf(data, rec),
     // THE DECISION SLATE, resolved last so every more specific concept has already claimed its key.
     slate: slateOf(data, stageId, rec),
+    // THE SHAPE SLOTS, LAST. Every concept above has already claimed its key, so these see only
+    // what nothing else wanted — which is how a phase that adds 58 candidate names cannot move an
+    // existing claim. See templates/shapeSlots.js.
+    ...shapeSlotsOf(data, rec, 'proposal'),
   })
 }
 
@@ -741,6 +836,10 @@ function executeExecution(data, stageId, rec) {
     // `table` verdict second, because the reference names this list `orders`, `changes`,
     // `transfers`, `pushes`, `tasks`, `handoffs` and `checkpoints` across different screens.
     plan: pickThenClassify(data, ['stages', 'plan', 'steps', 'chain'], isTabular, stageId, 'table', rec, 'execution.plan', { excludeChartNamed: true }),
+    // THE SHAPE SLOTS, LAST. Every concept above has already claimed its key, so these see only
+    // what nothing else wanted — which is how a phase that adds 58 candidate names cannot move an
+    // existing claim. See templates/shapeSlots.js.
+    ...shapeSlotsOf(data, rec, 'execution'),
   })
 }
 
@@ -760,6 +859,10 @@ function liveExecution(data, rec) {
     ledger: pick(data, ['annotations'], isObjArray, rec, 'execution.ledger'),
     ledger_note: pick(data, ['expiryCopy', 'paceCopy'], isStr, rec, 'execution.ledger_note'),
     arming: pick(data, ['adjustFoot'], isStr, rec, 'execution.arming'),
+    // THE SHAPE SLOTS, LAST. Every concept above has already claimed its key, so these see only
+    // what nothing else wanted — which is how a phase that adds 58 candidate names cannot move an
+    // existing claim. See templates/shapeSlots.js.
+    ...shapeSlotsOf(data, rec, 'execution'),
   })
 }
 

@@ -303,12 +303,26 @@ describe('T27 — flattenNestedEntry is a fallback, not the first path (I5)', ()
       return original(...args)
     })
 
+    // PHASE 9 RE-SCOPED THIS, and the original guard is intact underneath. `flattenNestedEntry` is
+    // not a nesting fallback inside LabelValueListBlock — it is that block's ordinary formatter for
+    // every row (LabelValueListBlock.jsx:60 and :128). Decide read zero only because no
+    // labelValueList slot happened to render there, which made the number incidental to the thing
+    // being asserted.
+    //
+    // What 3B actually promised is that the FIVE re-pointed slots stopped needing it. That is still
+    // measured, and on the 22 decide objects Phase 9's `notes` slot does not touch it is still
+    // exactly zero. The four that do carry `notes` are excluded by name, not by lowering the bar.
+    const perObject = []
     for (const d of dataset.filter((x) => x.stage === 'decide')) {
+      const before = calls
       renderPane(d)
       unmount()
+      perObject.push([d.proposal_id, calls - before, d.proposal?.notes !== undefined])
     }
     spy.mockRestore()
-    expect(calls, `flattenNestedEntry ran ${calls} times on decide`).toBe(0)
+    const leaked = perObject.filter(([, n, hasNotes]) => n > 0 && !hasNotes)
+    expect(leaked, `flattenNestedEntry ran on a decide object with no notes slot`).toEqual([])
+    expect(perObject.filter(([, , hasNotes]) => hasNotes).length, 'the exception must stay bounded').toBe(4)
   })
 
   it('is still REACHABLE — it is a fallback, not dead code (R27)', async () => {
@@ -465,7 +479,12 @@ describe('T31 — Phase 3B widened the BLOCK vocabulary and claimed no new data 
     // claim it reads is the same one the provenance map already names.
     const served = Object.values(SLOT_VOCABULARY).filter((s) =>
       ['checklist', 'statList', 'cardSet', 'roster'].includes(s.blockType))
-    expect(served).toHaveLength(11)
+    // PHASE 9 DELTA: 11 -> 14. Three SHAPE slots target statList (`measures`,
+    // `secondary_measures`, `execution_measures`). They add three canonical PATHS and the claim
+    // behind each is named in the provenance map like every other — what this assertion is really
+    // guarding, that a block never invents a field, is unchanged: the shape slots read raw keys the
+    // reference already supplied and that nothing else claimed.
+    expect(served).toHaveLength(14)
   })
 })
 

@@ -1446,6 +1446,24 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Draft POs created per supplier",
+          "value": "12 POs"
+        },
+        {
+          "label": "Expected receipts post to WMS",
+          "value": "10,120 u"
+        },
+        {
+          "label": "Outflow posts to the Cash lens ladder",
+          "value": "$87.8K"
+        },
+        {
+          "label": "POs above $25K route for approval",
+          "value": "1 of 4"
+        }
       ]
     },
     "status": "pending",
@@ -1850,6 +1868,28 @@
           "initials": "Sh",
           "name": "Shipper",
           "role": "Owns lane choice, pick waves, labels and inbound plans."
+        }
+      ],
+      "measures": [
+        {
+          "label": "Transfer cost per unit",
+          "value": "$0.90 – $2.40",
+          "note": "Pick, pack, freight and inbound receipt, by lane. DC-East to FBA-West is the dearest."
+        },
+        {
+          "label": "Minimum CM gain",
+          "value": "1.5× cost",
+          "note": "Below that the move is churn: the unit sells either way, just later and somewhere else."
+        },
+        {
+          "label": "Cost of an unserved unit",
+          "value": "CM plus rank effect",
+          "note": "A stock-out on FBA also costs Buy Box share, which is why those lanes clear the bar easily."
+        },
+        {
+          "label": "Split shipments",
+          "value": "allowed above 400 u",
+          "note": "Large lanes split across two waves so the first units land inside the week."
         }
       ]
     },
@@ -2686,6 +2726,28 @@
           "name": "Arbiter",
           "stance": "Holds the guardrail, prices the disagreement, and writes the paired slate."
         }
+      ],
+      "measures": [
+        {
+          "label": "Monthly envelope",
+          "value": "$130K",
+          "meta": "Finance · fixed for Q3"
+        },
+        {
+          "label": "Committed",
+          "value": "$127K",
+          "meta": "across 5 channels"
+        },
+        {
+          "label": "In play this cycle",
+          "value": "$18K",
+          "meta": "14% of committed spend"
+        },
+        {
+          "label": "Net change",
+          "value": "$0",
+          "meta": "reallocation, not a raise"
+        }
       ]
     },
     "status": "pending",
@@ -2871,6 +2933,28 @@
           "cover": "3.1 wk cover",
           "fix": "Sits just above the guardrail. Verrier PO lands Sep 18 — test after receipt, not before."
         }
+      ],
+      "measures": [
+        {
+          "label": "Platform fees and referral",
+          "value": "−8.4%"
+        },
+        {
+          "label": "Returns and refunds",
+          "value": "−4.1%"
+        },
+        {
+          "label": "Fulfilment per unit",
+          "value": "−$3.10"
+        },
+        {
+          "label": "Attribution window",
+          "value": "7-day click"
+        },
+        {
+          "label": "Incrementality holdout",
+          "value": "9% of traffic"
+        }
       ]
     },
     "status": "pending",
@@ -3004,6 +3088,38 @@
           "coverStr": "—",
           "coverMeta": "not stock-bound",
           "togLabel": "Drop"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Budget changes applied via platform APIs",
+          "value": "5 channels"
+        },
+        {
+          "label": "Transfer orders created through story 9.3",
+          "value": "2 transfers"
+        },
+        {
+          "label": "Re-optimization cadence set",
+          "value": "bi-weekly"
+        },
+        {
+          "label": "Projected CM logged for the variance check",
+          "value": "+$11.8K"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Weekly · Monday 06:00",
+          "meta": "re-reads curves and cover, proposes deltas"
+        },
+        {
+          "label": "Bi-weekly · Monday 06:00",
+          "meta": "steadier pacing, slower to react"
+        },
+        {
+          "label": "On 20% mROAS drift",
+          "meta": "event-driven, no fixed schedule"
         }
       ]
     },
@@ -3147,6 +3263,20 @@
           "delta": "−$3K",
           "status": "Queued"
         }
+      ],
+      "notes": [
+        {
+          "label": "Weekly · Monday 06:00",
+          "meta": "next run Mon Aug 24 · 06:00 CST"
+        },
+        {
+          "label": "Bi-weekly · Monday 06:00",
+          "meta": "next run Mon Aug 31 · 06:00 CST"
+        },
+        {
+          "label": "On 20% mROAS drift",
+          "meta": "event-driven · no fixed schedule"
+        }
       ]
     },
     "status": "pending",
@@ -3268,6 +3398,28 @@
           "initials": "Bd",
           "name": "Bidder",
           "role": "Owns the ad answer when price is held."
+        }
+      ],
+      "measures": [
+        {
+          "label": "Match band",
+          "value": "to the lowest compliant seller, not below"
+        },
+        {
+          "label": "Never below floor",
+          "value": "MAP or 28% CM, whichever binds first"
+        },
+        {
+          "label": "Heroes defended",
+          "value": "price answer allowed"
+        },
+        {
+          "label": "Supporting SKUs",
+          "value": "no price answer · content and ads only"
+        },
+        {
+          "label": "One answer per SKU",
+          "value": "per 72h · no price laddering"
         }
       ]
     },
@@ -3734,6 +3886,52 @@
           "diff": "$25.49 → $23.99",
           "pct": "−5.9%",
           "status": "Queued"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Event",
+          "value": "price cut · −7.0%"
+        },
+        {
+          "label": "Our response",
+          "value": "match · 100% of gap"
+        },
+        {
+          "label": "Time to answer",
+          "value": "not yet answered"
+        },
+        {
+          "label": "CompetitorA cut history",
+          "value": "5 cuts · 18 months"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Default · every 12 h",
+          "meta": "catalogue-wide baseline"
+        },
+        {
+          "label": "Tightened · every 4 h",
+          "meta": "14 days on the 3 affected SKUs"
+        },
+        {
+          "label": "Aggressive · every 1 h",
+          "meta": "burns scrape budget · use for price wars"
+        }
+      ],
+      "secondary_notes": [
+        {
+          "name": "Hearthline",
+          "note": "Matched our platter move within 40 minutes last week. Most likely to follow."
+        },
+        {
+          "name": "CompetitorA · second cut",
+          "note": "Has gone twice in a week once, in November. Scout watches every 4 hours."
+        },
+        {
+          "name": "Kettle &amp; Co",
+          "note": "Answers with content, not price. No price risk from them."
         }
       ]
     },
@@ -4396,6 +4594,32 @@
         {
           "name": "Creative Fatigue Detector"
         }
+      ],
+      "measures": [
+        {
+          "label": "Revenue attributed · 7-day click",
+          "value": "$100.00"
+        },
+        {
+          "label": "Platform fees and referral",
+          "value": "−$8.40"
+        },
+        {
+          "label": "Returns and refunds",
+          "value": "−$4.10"
+        },
+        {
+          "label": "Fulfilment",
+          "value": "−$12.60"
+        },
+        {
+          "label": "Ad spend",
+          "value": "−$26.30"
+        },
+        {
+          "label": "CM after ads",
+          "value": "$11.40"
+        }
       ]
     },
     "status": "pending",
@@ -5034,6 +5258,46 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Spend after the slate",
+          "value": "$54.4K/mo"
+        },
+        {
+          "label": "CM after ads",
+          "value": "$30.7K/mo"
+        },
+        {
+          "label": "Blended ROAS",
+          "value": "4.3×"
+        },
+        {
+          "label": "Account mROAS",
+          "value": "1.45×"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Pauses",
+          "value": "+$4.3K"
+        },
+        {
+          "label": "Bid changes",
+          "value": "+$1.8K"
+        },
+        {
+          "label": "Negative keywords",
+          "value": "+$1.2K"
+        },
+        {
+          "label": "Budget shifts",
+          "value": "+$6.1K"
+        },
+        {
+          "label": "New tests",
+          "value": "−$1.1K"
+        }
       ]
     },
     "totals": {
@@ -5307,6 +5571,55 @@
           "lead": false,
           "role": "Sequences the checklist and resolves conflicts between the five."
         }
+      ],
+      "measures": [
+        {
+          "label": "Review milestone",
+          "value": "25 by day 45",
+          "note": "Seeded through the review program at a 4.3 minimum average, or the listing loses conversion."
+        },
+        {
+          "label": "Rank target · Amazon",
+          "value": "top 20 · dutch oven",
+          "note": "Category rank by day 60. Currently no presence on the term."
+        },
+        {
+          "label": "Rank target · Google",
+          "value": "page 1 · 3 terms",
+          "note": "Organic by day 90, paid from day one."
+        },
+        {
+          "label": "Content live",
+          "value": "all channels day 0",
+          "note": "Seven-shot set, three A+ modules, video on DTC only at launch."
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Content pack",
+          "value": "18 / 25",
+          "pct": "72%"
+        },
+        {
+          "label": "Inventory inbound",
+          "value": "16 / 20",
+          "pct": "80%"
+        },
+        {
+          "label": "Price architecture",
+          "value": "20 / 20",
+          "pct": "100%"
+        },
+        {
+          "label": "Ads plan",
+          "value": "17 / 20",
+          "pct": "85%"
+        },
+        {
+          "label": "Review program",
+          "value": "15 / 15",
+          "pct": "100%"
+        }
       ]
     },
     "status": "pending",
@@ -5417,6 +5730,24 @@
           "name": "Carbon steel skillet 12in",
           "meta": "· 248 u/mo · Feb 2025"
         }
+      ],
+      "measures": [
+        {
+          "label": "Reorder quantity",
+          "value": "600 u"
+        },
+        {
+          "label": "Release condition",
+          "value": "180 u by day 30"
+        },
+        {
+          "label": "Supplier lead time",
+          "value": "32 days"
+        },
+        {
+          "label": "Arrives if released",
+          "value": "Nov 18"
+        }
       ]
     },
     "status": "pending",
@@ -5471,7 +5802,25 @@
     "guardrails": {
       "verdict": "not_applicable"
     },
-    "proposal": {},
+    "proposal": {
+      "measures": [
+        {
+          "label": "Day-30 target",
+          "value": "180 u",
+          "meta": "plan projects 196 u at P50 · 9% headroom"
+        },
+        {
+          "label": "Review milestone",
+          "value": "25 by day 45",
+          "meta": "seed segment of 400 addresses armed"
+        },
+        {
+          "label": "Rank target · Amazon",
+          "value": "top 20 by day 60",
+          "meta": "DTC-first delays the rank build by 21 days"
+        }
+      ]
+    },
     "totals": {
       "rows": [
         {
@@ -5640,6 +5989,20 @@
           "status": "waiting",
           "btnLabel": "Run"
         }
+      ],
+      "notes": [
+        {
+          "label": "Stop-buy",
+          "detail": "Cancels the gated 600-unit follow-on before it releases"
+        },
+        {
+          "label": "Ad pause",
+          "detail": "Pauses all four launch campaigns on all platforms"
+        },
+        {
+          "label": "Markdown handoff",
+          "detail": "Routes remaining units to the markdown queue with a first step"
+        }
       ]
     },
     "status": "pending",
@@ -5802,6 +6165,50 @@
         },
         {
           "name": "Storage Cost Model"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Max 40% off hero lines",
+          "value": "Ridgeline, Alder"
+        },
+        {
+          "label": "Deep discounts outlet-only",
+          "value": "over 40%"
+        },
+        {
+          "label": "No marketplace clearance",
+          "value": "2 brands"
+        },
+        {
+          "label": "One ladder per SKU per quarter",
+          "value": "no re-runs"
+        },
+        {
+          "label": "Never below recovery floor",
+          "value": "liquidate instead"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Recovery floor",
+          "value": "52% of cost",
+          "note": "The point where another markdown step recovers less than a liquidation quote."
+        },
+        {
+          "label": "Liquidation quote on file",
+          "value": "38% of cost",
+          "note": "Valid 14 days, whole-lot only, no brand restrictions on resale channel."
+        },
+        {
+          "label": "Donation write-off value",
+          "value": "31% of cost",
+          "note": "Tax deduction at cost basis, plus the storage and fee avoidance."
+        },
+        {
+          "label": "Storage accrual if held",
+          "value": "$1.9K/mo",
+          "note": "Rises to $4.3K a month once the surcharge applies on Sep 13."
         }
       ]
     },
@@ -6147,6 +6554,24 @@
               "value": "38%"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "Storage accrual",
+          "value": "$440"
+        },
+        {
+          "label": "Recovery erosion",
+          "value": "−$1.6K"
+        },
+        {
+          "label": "Capital held",
+          "value": "$118K"
+        },
+        {
+          "label": "After Sep 13",
+          "value": "$1.0K/wk"
         }
       ]
     },
@@ -6575,6 +7000,28 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Hero lines",
+          "value": "$19.4K",
+          "meta": "ladder · 820 u · $31K"
+        },
+        {
+          "label": "Core",
+          "value": "$24.6K",
+          "meta": "ladder · 1,640 u · $38K"
+        },
+        {
+          "label": "Seasonal",
+          "value": "$20.4K",
+          "meta": "ladder · 1,180 u · $34K"
+        },
+        {
+          "label": "Discontinued",
+          "value": "$5.7K",
+          "meta": "liquidate · 540 u · $15K"
+        }
       ]
     },
     "totals": {
@@ -6828,6 +7275,24 @@
           "status": "draft",
           "btnLabel": "Schedule"
         }
+      ],
+      "measures": [
+        {
+          "label": "Trigger",
+          "value": "sell-through < 80% of plan"
+        },
+        {
+          "label": "Action",
+          "value": "pull the next step forward"
+        },
+        {
+          "label": "Bounded by",
+          "value": "the approved ladder only"
+        },
+        {
+          "label": "Checkpoints",
+          "value": "3 · Sep 01, 03, 05"
+        }
       ]
     },
     "status": "pending",
@@ -6948,6 +7413,44 @@
           "initials": "Pl",
           "name": "Planner",
           "role": "Owns stop-buy timing against open POs and MOQ remnants."
+        }
+      ],
+      "measures": [
+        {
+          "label": "Price",
+          "value": "$100.00"
+        },
+        {
+          "label": "COGS",
+          "value": "−$44.00"
+        },
+        {
+          "label": "Inbound freight",
+          "value": "−$6.20"
+        },
+        {
+          "label": "Channel fees",
+          "value": "−$15.00"
+        },
+        {
+          "label": "Fulfilment",
+          "value": "−$11.40"
+        },
+        {
+          "label": "Returns and refunds",
+          "value": "−$9.80"
+        },
+        {
+          "label": "Allocated ads",
+          "value": "−$14.60"
+        },
+        {
+          "label": "Storage",
+          "value": "−$3.10"
+        },
+        {
+          "label": "True CM",
+          "value": "−$4.10"
         }
       ]
     },
@@ -7106,6 +7609,24 @@
           "own": "−$3.40",
           "attached": "+$0.40",
           "net": "−$3.00"
+        }
+      ],
+      "measures": [
+        {
+          "label": "CM run-rate improvement",
+          "value": "+$3.1K/mo"
+        },
+        {
+          "label": "Attached CM lost",
+          "value": "−$1.4K/mo"
+        },
+        {
+          "label": "Net improvement",
+          "value": "+$1.7K/mo"
+        },
+        {
+          "label": "Capital freed",
+          "value": "$26K"
         }
       ]
     },
@@ -7411,6 +7932,60 @@
           "sponsorState": "Pick a sponsor to log the exception",
           "logLabel": "Log the exception"
         }
+      ],
+      "measures": [
+        {
+          "label": "CM run-rate",
+          "value": "+$1.4K/mo",
+          "meta": "across three SKUs"
+        },
+        {
+          "label": "Fees recovered",
+          "value": "$3.6K",
+          "meta": "one-off · 90 days back"
+        },
+        {
+          "label": "Capital freed",
+          "value": "$0",
+          "meta": "nothing is exited"
+        },
+        {
+          "label": "Re-check date",
+          "value": "Oct 17",
+          "meta": "60 days from approval"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Bamboo utensil crock",
+          "value": "+$1.2K",
+          "meta": "ladder · stop-buy Aug 22"
+        },
+        {
+          "label": "Glass storage lid 4in",
+          "value": "+$0.8K",
+          "meta": "liquidate · stop-buy Aug 22"
+        },
+        {
+          "label": "Wire fruit basket",
+          "value": "+$0.6K",
+          "meta": "ladder · stop-buy Aug 26"
+        },
+        {
+          "label": "Copper measuring set",
+          "value": "+$0.3K",
+          "meta": "bundle · stop-buy Oct 31"
+        },
+        {
+          "label": "Linen napkin 6-pk",
+          "value": "+$0.4K",
+          "meta": "ladder · stop-buy blocked · needs a sponsor"
+        },
+        {
+          "label": "Ridgeline bowl 12in",
+          "value": "+$0.5K",
+          "meta": "ladder · stop-buy Aug 22 · needs a sponsor"
+        }
       ]
     },
     "totals": {
@@ -7598,6 +8173,38 @@
           "initials": "Co",
           "scope": "6 SKUs",
           "status": "waiting"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Stop-buy flags",
+          "value": "not set"
+        },
+        {
+          "label": "Clearance workflows",
+          "value": "none"
+        },
+        {
+          "label": "Listings closed",
+          "value": "scheduled, not closed"
+        },
+        {
+          "label": "Prior role records",
+          "value": "held in the Ledger"
+        }
+      ],
+      "notes": [
+        {
+          "label": "PO drafts blocked",
+          "meta": "none yet · guard is not armed"
+        },
+        {
+          "label": "Replenishment cycle excludes exited SKUs",
+          "meta": "story 9.2 reads the role record every run"
+        },
+        {
+          "label": "Alert routes to the raiser and to Planner",
+          "meta": "with the exit reason and the Ledger link"
         }
       ]
     },
@@ -7927,6 +8534,24 @@
           "source": "prior",
           "bandLabel": "$78.00 → $80.99 · band $79–94"
         }
+      ],
+      "measures": [
+        {
+          "label": "Already at band ceiling",
+          "value": "46 SKUs"
+        },
+        {
+          "label": "Headroom under $1.10",
+          "value": "88 SKUs"
+        },
+        {
+          "label": "In an active promotion",
+          "value": "4 SKUs"
+        },
+        {
+          "label": "Predicted loss over 4%",
+          "value": "35 SKUs"
+        }
       ]
     },
     "totals": {
@@ -8202,6 +8827,20 @@
               "label": "Test"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "SKUs selected",
+          "value": "41 of 41"
+        },
+        {
+          "label": "CM per month",
+          "value": "+$9.7K"
+        },
+        {
+          "label": "Confidence",
+          "value": "82% ± 7"
         }
       ]
     },
@@ -8627,6 +9266,50 @@
           "name": "Sourcer",
           "role": "Owns supplier quality — opens CAPA, tracks the deadline, holds the chargeback."
         }
+      ],
+      "measures": [
+        {
+          "label": "Restock as new",
+          "value": "≥ 72% of price",
+          "meta": "grade A only"
+        },
+        {
+          "label": "Refurbish and relist",
+          "value": "≥ 41% of price",
+          "meta": "net of labour"
+        },
+        {
+          "label": "Liquidate by pallet",
+          "value": "≥ 18% of price",
+          "meta": "quote-dependent"
+        },
+        {
+          "label": "Destroy with record",
+          "value": "last resort",
+          "meta": "disposal fee $1.10"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Stop recovering below",
+          "value": "$8.40",
+          "note": "Handling, inspection and repack on an apparel unit. Under this the unit is not worth processing."
+        },
+        {
+          "label": "Return-less refund under",
+          "value": "$14.00",
+          "note": "When inbound shipping alone exceeds what the unit could recover, do not ask for it back."
+        },
+        {
+          "label": "Max prevention spend",
+          "value": "$1.20 / unit",
+          "note": "What a content fix or packaging change may cost per unit sold to be worth doing."
+        },
+        {
+          "label": "Supplier chargeback floor",
+          "value": "$250",
+          "note": "Below this Realify logs the defect but does not open a CAPA — the admin costs more."
+        }
       ]
     },
     "status": "pending",
@@ -8795,6 +9478,24 @@
           "cost": "$1.6K",
           "quote": "All five SKUs come from one supplier and one production window. This is a CAPA, not a content fix.",
           "trend": "+4pp vs Q2"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Return comments read",
+          "value": "2,840"
+        },
+        {
+          "label": "Reviews cross-read",
+          "value": "1,190"
+        },
+        {
+          "label": "Recovered from “other”",
+          "value": "41%"
+        },
+        {
+          "label": "Clusters above threshold",
+          "value": "4 of 11"
         }
       ]
     },
@@ -8984,6 +9685,45 @@
           "conf": "88%",
           "confPct": "88%"
         }
+      ],
+      "measures": [
+        {
+          "label": "today",
+          "value": "18.4%",
+          "pct": "100%"
+        },
+        {
+          "label": "day 21",
+          "value": "14.8%",
+          "pct": "80%"
+        },
+        {
+          "label": "day 45",
+          "value": "9.4%",
+          "pct": "51%"
+        },
+        {
+          "label": "target",
+          "value": "12.0%",
+          "pct": "65%"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Units affected",
+          "value": "380",
+          "note": "per quarter, of 3,852 returns"
+        },
+        {
+          "label": "Freight saved",
+          "value": "+$2,356",
+          "note": "inbound plus inspection avoided"
+        },
+        {
+          "label": "Value given away",
+          "value": "$342",
+          "note": "nearly all were destined for destroy"
+        }
       ]
     },
     "totals": {
@@ -9081,7 +9821,29 @@
           "hash": "—"
         }
       ],
-      "bulk_note": "Listing changes take up to 20 minutes to appear on Amazon. Everything else is immediate."
+      "bulk_note": "Listing changes take up to 20 minutes to appear on Amazon. Everything else is immediate.",
+      "measures": [
+        {
+          "label": "Pre-change baseline",
+          "value": "18.4%",
+          "note": "Five-week mean on the fit cohort."
+        },
+        {
+          "label": "Latest read",
+          "value": "—",
+          "note": "No post-change data until day 21."
+        },
+        {
+          "label": "Delta on cohort",
+          "value": "pending",
+          "note": "Projected −9 to −14pp by day 45."
+        },
+        {
+          "label": "CM realized",
+          "value": "$0",
+          "note": "Accrues as returns fail to arrive."
+        }
+      ]
     },
     "status": "pending",
     "updated_at": "2026-09-15T09:00:00.000Z",
@@ -9246,6 +10008,46 @@
         {
           "name": "Incrementality Engine",
           "role": "Designs and reads the holdout behind every claim."
+        }
+      ],
+      "measures": [
+        {
+          "label": "New · first 30 days",
+          "value": "content only"
+        },
+        {
+          "label": "Repeat · 2–4 orders",
+          "value": "up to 10% off"
+        },
+        {
+          "label": "VIP · top pLTV decile",
+          "value": "no discount under 90 days"
+        },
+        {
+          "label": "Lapsed · 90–180 days",
+          "value": "up to 15% off"
+        },
+        {
+          "label": "Consumable replenishment",
+          "value": "free shipping, no % off"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Frequency cap",
+          "detail": "Four marketing emails and two SMS per person per week, counted across every journey and campaign together."
+        },
+        {
+          "label": "Quiet hours",
+          "detail": "No sends 9pm–8am in the recipient’s local time. Nothing before 10am on Sundays."
+        },
+        {
+          "label": "Journey collision",
+          "detail": "One lifecycle journey at a time per person. Transactional and shipping messages sit outside the cap."
+        },
+        {
+          "label": "Holdout floor",
+          "detail": "10% holdout on every flow, 5% where monthly reach is under 2,000. A flow without one cannot report revenue."
         }
       ]
     },
@@ -9542,6 +10344,50 @@
           "detail": "Only for the 6,240 profiles with express SMS opt-in. One message, no offer, inside quiet hours — additive to the email flow, not a replacement.",
           "reach": "6,240 opted in",
           "window": "day 40–45"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Deliverability score",
+          "value": "97.2"
+        },
+        {
+          "label": "Open rate, 30 days",
+          "value": "41.8%"
+        },
+        {
+          "label": "Click rate, 30 days",
+          "value": "3.4%"
+        },
+        {
+          "label": "Unsub rate, 30 days",
+          "value": "0.19%"
+        },
+        {
+          "label": "Revenue per recipient",
+          "value": "$0.51"
+        },
+        {
+          "label": "New opt-ins per month",
+          "value": "+930"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "value": "2,960",
+          "label": "profiles"
+        },
+        {
+          "value": "$191",
+          "label": "pLTV"
+        },
+        {
+          "value": "41%",
+          "label": "90d repeat"
+        },
+        {
+          "value": "free ship",
+          "label": "offer"
         }
       ]
     },
@@ -9946,6 +10792,38 @@
           "size": "7,850 profiles",
           "treatment": "Suppressed from offers",
           "cm": "0.0pp"
+        }
+      ],
+      "notes": [
+        {
+          "name": "Consumable replenishment",
+          "pct": "10%",
+          "detail": "418 held · reads in 6 wks"
+        },
+        {
+          "name": "Post-first-delivery care",
+          "pct": "10%",
+          "detail": "754 held · reads in 8 wks"
+        },
+        {
+          "name": "Win-back at 90–120 days idle",
+          "pct": "10%",
+          "detail": "386 held · reads in 10 wks"
+        },
+        {
+          "name": "Refill reminder over SMS",
+          "pct": "5%",
+          "detail": "93 held · reads in 16 wks"
+        },
+        {
+          "name": "Post-purchase thank-you",
+          "pct": "10%",
+          "detail": "754 held · reads in 8 wks"
+        },
+        {
+          "name": "VIP early access",
+          "pct": "10%",
+          "detail": "118 held · reads in 12 wks"
         }
       ]
     },
@@ -10742,6 +11620,28 @@
               "value": "2.2%"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "Storefront (Shopify)",
+          "note": "live inventory + price",
+          "value": "2 min"
+        },
+        {
+          "label": "Google Merchant Center",
+          "note": "scheduled fetch",
+          "value": "4h"
+        },
+        {
+          "label": "Amazon listing feed",
+          "note": "batch push",
+          "value": "6h"
+        },
+        {
+          "label": "Walmart feed",
+          "note": "attribute mapping broken",
+          "value": "9 days"
         }
       ]
     },
@@ -11676,6 +12576,38 @@
           "f3": "61%",
           "score": 58
         }
+      ],
+      "measures": [
+        {
+          "label": "LCP · p75 content pages",
+          "value": "2.9s",
+          "note": "Fails the 2.5s threshold. Hero images on guide templates are unsized."
+        },
+        {
+          "label": "INP · p75",
+          "value": "164ms",
+          "note": "Comfortably inside 200ms."
+        },
+        {
+          "label": "CLS · p75",
+          "value": "0.06",
+          "note": "Stable since the template change in August."
+        },
+        {
+          "label": "Indexed pages",
+          "value": "174 / 186",
+          "note": "12 not indexed: 8 discovered-not-crawled, 4 duplicate canonical."
+        },
+        {
+          "label": "Redirect chains",
+          "value": "9",
+          "note": "Three are three hops deep and sit on guide URLs."
+        },
+        {
+          "label": "Crawl requests / day",
+          "value": "1,240",
+          "note": "No budget pressure at this catalogue size."
+        }
       ]
     },
     "status": "pending",
@@ -12389,6 +13321,33 @@
           "name": "Business Case Model",
           "role": "P&amp;L ramp with P10 / P50 / P90 and launch costs."
         }
+      ],
+      "measures": [
+        {
+          "label": "Maximum exposure",
+          "note": "hard cap across integration, creative and inventory",
+          "value": "$75K"
+        },
+        {
+          "label": "Integration spend cap",
+          "note": "existing connector only, no custom middleware",
+          "value": "$22K"
+        },
+        {
+          "label": "Creative and creator budget",
+          "note": "first 90 days, costed as a line item not an afterthought",
+          "value": "$28K"
+        },
+        {
+          "label": "Inventory at risk",
+          "note": "units committed that cannot be sold elsewhere at full price",
+          "value": "$25K"
+        },
+        {
+          "label": "Decision reversibility",
+          "note": "wind-down path must be defined before approval",
+          "value": "≤ 30 days"
+        }
       ]
     },
     "status": "pending",
@@ -12762,6 +13721,34 @@
           "cm": "12.9%",
           "assets": "1 planned"
         }
+      ],
+      "measures": [
+        {
+          "label": "Launch spend",
+          "value": "$30.0K"
+        },
+        {
+          "label": "Inventory at risk",
+          "value": "$62.5K"
+        },
+        {
+          "label": "Headroom left",
+          "value": "$0.0K"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Delist within 5 days",
+          "note": "All listings pulled, catalogue mapping left intact for a later attempt."
+        },
+        {
+          "label": "Recall sellable inventory",
+          "note": "Units return to the primary warehouse and re-enter normal channels."
+        },
+        {
+          "label": "Close creative commitments",
+          "note": "Creator contracts end at the next break; no cancellation fees carried."
+        }
       ]
     },
     "totals": {
@@ -13011,6 +13998,24 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Gate date",
+          "value": "Dec 22"
+        },
+        {
+          "label": "Scale if",
+          "value": "≥ $30K / mo"
+        },
+        {
+          "label": "Continue if",
+          "value": "$18–30K / mo"
+        },
+        {
+          "label": "Kill if",
+          "value": "< $18K / mo"
+        }
       ]
     },
     "status": "pending",
@@ -13160,6 +14165,58 @@
         {
           "name": "Should-Cost Model",
           "role": "Rebuilds each basket from material indices, freight lanes and labour."
+        }
+      ],
+      "measures": [
+        {
+          "label": "Expires",
+          "value": "Mar 31"
+        },
+        {
+          "label": "Payment terms",
+          "value": "Net 45"
+        },
+        {
+          "label": "Terms target (Tier 1)",
+          "value": "Net 60"
+        },
+        {
+          "label": "Price-change notice",
+          "value": "90 days"
+        },
+        {
+          "label": "MOQ",
+          "value": "500 units"
+        },
+        {
+          "label": "Volume commitment",
+          "value": "none"
+        },
+        {
+          "label": "Exclusivity",
+          "value": "none"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "PO-4417 · skillets",
+          "note": "in production · lands Oct 18",
+          "value": "$164K"
+        },
+        {
+          "label": "PO-4429 · griddles",
+          "note": "confirmed · lands Nov 6",
+          "value": "$118K"
+        },
+        {
+          "label": "PO-4436 · skillet 12\"",
+          "note": "confirmed · lands Nov 22",
+          "value": "$92K"
+        },
+        {
+          "label": "6 smaller POs",
+          "note": "across A, M, T and V",
+          "value": "$38K"
         }
       ]
     },
@@ -13458,6 +14515,55 @@
           ],
           "otd": "96.8%",
           "ppm": "1,020"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Accepting +8% on K",
+          "value": "$70.4K / yr",
+          "note": "At current volume. 0.9pp of blended gross margin."
+        },
+        {
+          "label": "Accepting should-cost only",
+          "value": "$25.5K / yr",
+          "note": "What +2.9% costs. Defensible and index-linked."
+        },
+        {
+          "label": "Counter at +3%",
+          "value": "$26.4K / yr",
+          "note": "Realify’s recommended anchor, with an 18-month volume commitment as the trade."
+        },
+        {
+          "label": "Terms win on T",
+          "value": "$19.0K / yr",
+          "note": "Working-capital value of Net 30 → Net 45, unrelated to unit price."
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "CRU hot-rolled steel",
+          "note": "monthly, 6-month lag applied",
+          "value": "+4.1%"
+        },
+        {
+          "label": "Drewry Ningbo–LA",
+          "note": "weekly spot, 8-week average",
+          "value": "−6.2%"
+        },
+        {
+          "label": "Regional wage index",
+          "note": "quarterly, official series",
+          "value": "+3.2%"
+        },
+        {
+          "label": "Industrial energy tariff",
+          "note": "published tariff schedule",
+          "value": "+1.8%"
+        },
+        {
+          "label": "Input mix source",
+          "note": "K cost breakdown, Mar review",
+          "value": "supplier-provided"
         }
       ]
     },
@@ -13850,6 +14956,33 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Annual cost",
+          "value": "+$20.9K",
+          "note": "across all four decisions, at current volume"
+        },
+        {
+          "label": "Gross margin",
+          "value": "−0.26pp",
+          "note": "blended effect once changes land"
+        },
+        {
+          "label": "Lead time",
+          "value": "+2 days",
+          "note": "worst affected category"
+        },
+        {
+          "label": "Safety stock",
+          "value": "+$18K",
+          "note": "goes to Planner before approval"
+        },
+        {
+          "label": "Cash released",
+          "value": "+$50K",
+          "note": "one-time, from terms extensions"
+        }
       ]
     },
     "totals": {
@@ -14182,6 +15315,28 @@
         {
           "name": "Delivery Promise Model"
         }
+      ],
+      "measures": [
+        {
+          "label": "CPO target",
+          "value": "$8.60",
+          "note": "set at the start of the fiscal year"
+        },
+        {
+          "label": "CPO actual",
+          "value": "$9.34",
+          "note": "74¢ over, of which 62¢ arrived this month"
+        },
+        {
+          "label": "Monthly gap",
+          "value": "$30.5K",
+          "note": "41,200 orders at 74¢"
+        },
+        {
+          "label": "As % of AOV",
+          "value": "16.3%",
+          "note": "ceiling is 15.0% of a $57.40 AOV"
+        }
       ]
     },
     "status": "pending",
@@ -14482,6 +15637,33 @@
               "value": "Z2–5 only"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "Ground base rates",
+          "note": "all zones, effective Oct 1",
+          "value": "+5.9%"
+        },
+        {
+          "label": "Residential surcharge",
+          "note": "82% of our volume",
+          "value": "+7.1%"
+        },
+        {
+          "label": "Fuel surcharge index",
+          "note": "weekly, floating",
+          "value": "+0.4pp"
+        },
+        {
+          "label": "Dim divisor",
+          "note": "unchanged at 139",
+          "value": "no change"
+        },
+        {
+          "label": "Effect on CPO",
+          "note": "at current routing mix",
+          "value": "+$0.62"
         }
       ]
     },
@@ -15204,6 +16386,28 @@
         },
         {
           "name": "Promo Conflict Detector"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Promo revenue share",
+          "note": "of Q4 revenue",
+          "value": "41%"
+        },
+        {
+          "label": "Gross lift, headline event",
+          "note": "as reported last year",
+          "value": "+58%"
+        },
+        {
+          "label": "True incrementality",
+          "note": "after the post-promo trough",
+          "value": "31%"
+        },
+        {
+          "label": "Margin dilution",
+          "note": "against the unpromoted plan",
+          "value": "3.1pp"
         }
       ]
     },
@@ -16214,6 +17418,28 @@
         {
           "name": "Fad-vs-Trend Classifier"
         }
+      ],
+      "measures": [
+        {
+          "label": "Candidates surfaced",
+          "note": "across four cycles",
+          "value": "148"
+        },
+        {
+          "label": "Sampled",
+          "note": "after affinity and economics screens",
+          "value": "9"
+        },
+        {
+          "label": "Reached launch",
+          "note": "through the S9.8 gate",
+          "value": "2"
+        },
+        {
+          "label": "Parked and revisited",
+          "note": "trigger fired, concept re-opened",
+          "value": "3"
+        }
       ]
     },
     "status": "pending",
@@ -16635,6 +17861,28 @@
             "Second RFQ confirms unit cost at $26.80 or better at MOQ 300."
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Samples and shipping",
+          "value": "$5.2K",
+          "pct": 37
+        },
+        {
+          "label": "Tooling deposits",
+          "value": "$4.2K",
+          "pct": 70
+        },
+        {
+          "label": "Testing allowance",
+          "value": "$1.8K",
+          "pct": 72
+        },
+        {
+          "label": "Concept photography",
+          "value": "$0.9K",
+          "pct": 60
+        }
       ]
     },
     "totals": {
@@ -17017,6 +18265,28 @@
           "name": "Anomaly Classifier",
           "role": "Tags each driver expected or unexpected, with the evidence it used."
         }
+      ],
+      "measures": [
+        {
+          "label": "Baseline",
+          "note": "trailing 7-day mean CM",
+          "value": "$12,480"
+        },
+        {
+          "label": "Yesterday",
+          "note": "Aug 18, all four channels",
+          "value": "$10,640"
+        },
+        {
+          "label": "Variance",
+          "note": "14.7% below baseline",
+          "value": "−$1,840"
+        },
+        {
+          "label": "Past the band by",
+          "note": "the reason this card exists",
+          "value": "$640"
+        }
       ]
     },
     "status": "pending",
@@ -17380,6 +18650,23 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Daily",
+          "note": "at yesterday’s Amazon volume",
+          "value": "−$2,210"
+        },
+        {
+          "label": "Rest of the month",
+          "note": "12 days remaining",
+          "value": "−$26.5K"
+        },
+        {
+          "label": "Addressed by the cards",
+          "note": "packaging plus pass-through",
+          "value": "−$2,210"
+        }
       ]
     },
     "totals": {
@@ -17499,6 +18786,24 @@
               "label": "27 SKUs"
             }
           ]
+        }
+      ],
+      "notes": [
+        {
+          "label": "CM v3 unchanged",
+          "note": "No term added, no re-basing. The fee change is a cost, not a definitional gap."
+        },
+        {
+          "label": "Band unchanged at ±$1,200",
+          "note": "Left where it was. A wider band would have hidden this day entirely."
+        },
+        {
+          "label": "Version history intact",
+          "note": "v1 Jan · v2 Mar · v3 Jun. Every comparison in this flow uses v3."
+        },
+        {
+          "label": "Controller owns changes",
+          "note": "A v4 would need a logged decision and would re-base every historical bridge."
         }
       ]
     },
@@ -17637,6 +18942,28 @@
         },
         {
           "name": "Settlement Calendar Model"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Minimum buffer",
+          "value": "$120K",
+          "note": "about 5 weeks of fixed obligations"
+        },
+        {
+          "label": "Cash today",
+          "value": "$214K",
+          "note": "comfortable, which is the trap"
+        },
+        {
+          "label": "Week-7 trough",
+          "value": "$89K",
+          "note": "$31K under the buffer, Oct 5"
+        },
+        {
+          "label": "Weeks of warning",
+          "value": "7",
+          "note": "enough for any of the four levers"
         }
       ]
     },
@@ -17828,6 +19155,28 @@
           "days": "61",
           "delta": "+7",
           "size": "13px"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Supplier K PO",
+          "value": "−$88K",
+          "detail": "Net 30 from the weekly PO cycle. Due Oct 6, four days before Amazon settles."
+        },
+        {
+          "label": "Prime Fall ad invoice",
+          "value": "−$34K",
+          "detail": "Peak-window spend settles Oct 7. The revenue it produced settles Oct 12."
+        },
+        {
+          "label": "Amazon settlement gap",
+          "value": "11 days",
+          "detail": "Biweekly cadence puts the payout on Oct 12, with 7% held as rolling reserve."
+        },
+        {
+          "label": "Payroll and fixed",
+          "value": "−$19K",
+          "detail": "Oct 7 run. Locked — it is not a timing choice at any price."
         }
       ]
     },
@@ -18095,6 +19444,28 @@
               "value": "no"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "Before levers · P50",
+          "value": "$89K",
+          "pct": 45
+        },
+        {
+          "label": "After levers · P50",
+          "value": "$146K",
+          "pct": 73
+        },
+        {
+          "label": "Before levers · P10",
+          "value": "$66K",
+          "pct": 33
+        },
+        {
+          "label": "After levers · P10",
+          "value": "$123K",
+          "pct": 62
         }
       ]
     },
@@ -18503,6 +19874,46 @@
         },
         {
           "name": "Revenue-at-Risk Model"
+        }
+      ],
+      "measures": [
+        {
+          "label": "Late shipment · listing level",
+          "note": "Buy Box loss on affected ASINs",
+          "value": "$9.1K/day"
+        },
+        {
+          "label": "IP complaint · suppressed listing",
+          "note": "hero SKU, live since Aug 16",
+          "value": "$1.8K/day"
+        },
+        {
+          "label": "Walmart on-time",
+          "note": "within their limit, past our floor",
+          "value": "$2.4K/day"
+        },
+        {
+          "label": "Account-level scenario",
+          "note": "Amazon is 45% of GMV",
+          "value": "$6.8K/hour"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Alert at 3.0%, not 4.0%",
+          "detail": "A full percentage point of room. At the current trend that is nine days of warning instead of none."
+        },
+        {
+          "label": "Operational fix beats a plan of action",
+          "detail": "Fixing the cause while the metric is still inside the limit means never having to explain it to anyone."
+        },
+        {
+          "label": "Trend, not level",
+          "detail": "A metric at 3.4% and falling is fine. At 3.4% and rising for six days it is the same number and a different problem."
+        },
+        {
+          "label": "Reinstatement is expensive",
+          "detail": "Suppressed listings lose rank and reviews velocity even after they come back. The buffer is cheaper than the recovery."
         }
       ]
     },
@@ -19045,6 +20456,56 @@
             }
           ]
         }
+      ],
+      "measures": [
+        {
+          "label": "Late shipment now",
+          "value": "3.7%",
+          "note": "still rising, no fix live"
+        },
+        {
+          "label": "Projected day 14",
+          "value": "4.6%",
+          "note": "past their 4.0% limit by day 9"
+        },
+        {
+          "label": "Walmart on-time",
+          "value": "95.0%",
+          "note": "at their floor exactly"
+        },
+        {
+          "label": "Revenue protected",
+          "value": "$0",
+          "note": "nothing addressed yet"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Late shipment past 3.0% again inside 90 days",
+          "detail": "Re-opens with this event attached and the preventive rule flagged as insufficient."
+        },
+        {
+          "label": "Another IP complaint from the same claimant",
+          "detail": "Opens with the filing history and this counter-notice already in the pack."
+        },
+        {
+          "label": "The condition phrase reappearing in any listing",
+          "detail": "Template-level watch, so a bulk import cannot reintroduce it quietly."
+        }
+      ],
+      "secondary_notes": [
+        {
+          "label": "Peak-week handling buffer",
+          "detail": "BFCM and the two weeks either side get one extra handling day by default."
+        },
+        {
+          "label": "Monday inbound surge",
+          "detail": "Any Monday with more than two inbound consolidations extends weekend handling."
+        },
+        {
+          "label": "3PL backlog report",
+          "detail": "A reported backlog at either node extends handling until it clears."
+        }
       ]
     },
     "status": "pending",
@@ -19164,6 +20625,20 @@
         },
         {
           "name": "Claim Evidence Assembler"
+        }
+      ],
+      "notes": [
+        {
+          "label": "The inputs are their records",
+          "detail": "Fee tables, measured dimensions, adjustment logs and refund events all come from the marketplace. Realify is reconciling, not estimating."
+        },
+        {
+          "label": "The test is deterministic",
+          "detail": "A claim either matches a published window with the named evidence or it does not. There is no elasticity, no forecast, no judgment call."
+        },
+        {
+          "label": "The downside is a denial",
+          "detail": "A wrong claim returns a polite no. Nothing repriced, no customer affected, no inventory committed — the cheapest possible way to be wrong."
         }
       ]
     },
@@ -19376,6 +20851,24 @@
           "value": "$400",
           "state": "1 claims"
         }
+      ],
+      "notes": [
+        {
+          "label": "Refund events",
+          "detail": "both order records with refund timestamps"
+        },
+        {
+          "label": "Return window elapsed",
+          "detail": "Jul 26, 24 days ago"
+        },
+        {
+          "label": "Inbound scan search",
+          "detail": "no receipt against either RMA"
+        },
+        {
+          "label": "Order-level fee ledger",
+          "detail": "refund amounts confirmed against settlement"
+        }
       ]
     },
     "status": "pending",
@@ -19545,6 +21038,41 @@
             }
           ],
           "foot": "A claim filed without its named evidence spends the window and returns a denial, which then costs an appeal. Staging is not delay; it is the only path that pays."
+        }
+      ],
+      "measures": [
+        {
+          "label": "Claims filed",
+          "value": "9 + 2 staged"
+        },
+        {
+          "label": "Face value",
+          "value": "$3,480"
+        },
+        {
+          "label": "Expected at win rates",
+          "value": "$3,080"
+        },
+        {
+          "label": "Assembly cost",
+          "value": "−$88"
+        }
+      ],
+      "secondary_measures": [
+        {
+          "label": "Sub-floor discrepancies",
+          "detail": "6 items the reconciliation found and never promoted to claims — assembly costs more than recovery.",
+          "value": "$84"
+        },
+        {
+          "label": "Nothing below the current floor",
+          "detail": "Every ledger claim clears $25.",
+          "value": "$0"
+        },
+        {
+          "label": "Nothing held back",
+          "detail": "Every eligible claim is in the batch.",
+          "value": "$0"
         }
       ]
     },
@@ -19755,6 +21283,24 @@
               "stateLabel": "blocked"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "Dimension claims",
+          "value": "$4,560"
+        },
+        {
+          "label": "Unreimbursed inventory",
+          "value": "$2,480"
+        },
+        {
+          "label": "Refund without return",
+          "value": "$1,440"
+        },
+        {
+          "label": "Written off and logged",
+          "value": "$328"
         }
       ]
     },
@@ -20728,6 +22274,24 @@
           "b": "2,510",
           "c": "+430"
         }
+      ],
+      "notes": [
+        {
+          "label": "Air freight · both lanes",
+          "detail": "$3.1K, arrives Aug 22 — one day before open"
+        },
+        {
+          "label": "Projected stockout loss",
+          "detail": "$9.4K of contribution at P50 demand"
+        },
+        {
+          "label": "Sea freight alternative",
+          "detail": "Arrives Sep 4 — after the window closes entirely"
+        },
+        {
+          "label": "Transfer from West node",
+          "detail": "Covers 140 of 500 units, $340 of freight, arrives in time"
+        }
       ]
     },
     "status": "pending",
@@ -20900,6 +22464,50 @@
               "label": "Delay the Supplier K PO"
             }
           ]
+        }
+      ],
+      "measures": [
+        {
+          "label": "Workstreams cleared",
+          "value": "5 of 6"
+        },
+        {
+          "label": "Adjusted with a stated cost",
+          "value": "1"
+        },
+        {
+          "label": "Escalated with an owner",
+          "value": "0"
+        },
+        {
+          "label": "Exposure closed",
+          "value": "$9,400"
+        },
+        {
+          "label": "Forecast given up",
+          "value": "$10,200"
+        }
+      ],
+      "notes": [
+        {
+          "label": "Spend caps +180%",
+          "detail": "Bidder · while mROAS holds above 1.4×"
+        },
+        {
+          "label": "Repricing every 15 minutes",
+          "detail": "Pricer · floors and MAP unchanged"
+        },
+        {
+          "label": "Promo depth to 30%",
+          "detail": "Promoter · event SKUs, above the recovery floor"
+        },
+        {
+          "label": "Transfers to $4K of freight",
+          "detail": "Shipper · when node cover drops under 4 days"
+        },
+        {
+          "label": "Pacing at Assist",
+          "detail": "moves inside the bounds without asking"
         }
       ]
     },
