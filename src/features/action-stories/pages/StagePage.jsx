@@ -48,11 +48,39 @@ function ProposalHeader({ decision, story, storyProblem }) {
     <header data-shell-part="header" className={`z-20 shrink-0 border-b border-rf-border-subtle ${surfaceTier('card').className} px-6 pt-4 pb-3`}>
       <PaneEyebrow lens={decision.lens} storyCode={decision.story_code} stage={decision.stage} />
 
-      <h1
-        {...typeRole('display', 'mt-2 text-rf-text-primary')}
-      >
-        {decision.title}
-      </h1>
+      {/* THE TITLE ROW. The reference puts the strip's two mono lines to the RIGHT of the title,
+          between it and the avatar (S9.11-1-reason.dc.html:137-139), so the title and the strip
+          share a row rather than stacking. `min-w-0` on the title is what lets a long headline
+          shrink instead of pushing the strip off the edge. */}
+      <div className="mt-2 flex items-start justify-between gap-6">
+        <h1
+          {...typeRole('display', 'min-w-0 text-rf-text-primary')}
+        >
+          {decision.title}
+        </h1>
+
+        {/* RENDERED ONLY WHERE THE CORPUS SUPPLIES IT — 30 of 105 screens (ruling R131). On the
+            other 75 the reference's two lines exist only as literal text in the mockup's HTML, and
+            lifting design copy into the data layer is the thing this project has refused at every
+            turn. So this draws nothing rather than an empty box: "a header exists or it doesn't,
+            never a header with nothing in it" (R120), which matters more here than usually because
+            the absent case is the majority.
+
+            NOT A COMPOSED LINE. Each is one reference string printed whole. The header is the one
+            place in this app that states figures as a sentence, which is exactly where an invented
+            or stitched-together line would be hardest to spot — so T132 asserts both against the
+            raw fixtures character for character. */}
+        {(decision.pinned_summary || decision.pinned_detail) && (
+          <div data-fact="pinned-strip" className="hidden shrink-0 text-right sm:block">
+            {decision.pinned_summary && (
+              <div {...typeRole('figure', 'text-rf-text-secondary')}>{decision.pinned_summary}</div>
+            )}
+            {decision.pinned_detail && (
+              <div {...typeRole('figure', 'mt-0.5 text-rf-text-tertiary')}>{decision.pinned_detail}</div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* ONE ROW, EACH FACT ONCE — and now true rather than intended. `mode` was rendering twice on
           every pane: here, and again as the rail's `decision_mode` block, so an operator read

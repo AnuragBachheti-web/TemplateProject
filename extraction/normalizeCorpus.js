@@ -489,6 +489,42 @@ const NARRATIVE_KEYS = {
   live: ['adjustSummary', 'paceCopy', 'pinnedSub'],
 }
 
+/**
+ * THE PINNED STRIP'S RIGHT-HAND BLOCK — two mono lines the reference draws beside the title on all
+ * 106 stage mockups, and which this app has never rendered.
+ *
+ * READ DIRECTLY RATHER THAN THROUGH `pick`, AND THIS IS THE WHOLE REASON. `isGeometryKey` splits a
+ * key on camel case and bans it if any word is a geometry word, so `pinnedTop` bans on `top` — read
+ * as a CSS offset. It is not one: it is the TOP LINE of a two-line strip, and the values are
+ * sentences ("$468K capital committed", "Drilling FBA fee · -$2,210"). `pinnedSub` has no such
+ * collision and passes the same gate untouched, which is the tell that the rule misfired on a word
+ * rather than on a kind of value.
+ *
+ * The heuristic is NOT loosened. A word-collision exemption inside `isGeometryKey` would apply to
+ * every key in the corpus to fix two, and R15 already removed one exemption from that function for
+ * being exactly that kind of blanket. Two named fields are read here, by name, with the values
+ * asserted verbatim against the raw fixtures in phase9.header.test.jsx (T132).
+ *
+ * THE OTHER 75 SCREENS STAY BLANK, DELIBERATELY (R131). There the two lines are literal text in the
+ * mockup's HTML: of the 77 literal top lines exactly ONE appears anywhere in the raw fixtures, and
+ * none of the sub lines do. Recovering them means lifting design copy out of a mockup and into the
+ * data layer, which this project has refused at every turn — most recently leaving 546 geometry
+ * values unclaimed on the same principle. Visibly partial and honest beats complete and sourced
+ * from the wrong place.
+ */
+function pinnedStripOf(data, rec) {
+  const line = (rawKey, field) => {
+    const v = clean(data[rawKey])
+    if (!isStr(v)) { rec.record(field, null); return undefined }
+    rec.record(field, rawKey)
+    return v
+  }
+  return dropUndefined({
+    pinned_summary: line('pinnedTop', 'pinned_summary'),
+    pinned_detail: line('pinnedSub', 'pinned_detail'),
+  })
+}
+
 function narrativeOf(data, stage, rec) {
   return pick(data, NARRATIVE_KEYS[stage] ?? [], isStr, rec, 'narrative') ?? ''
 }
@@ -1440,6 +1476,9 @@ function main() {
         title: wf.headline ?? wf.name,
         narrative,
         status_note: statusNote,
+
+        // THE PINNED STRIP'S RIGHT-HAND BLOCK (Phase 9, ruling R131). See pinnedStripOf.
+        ...pinnedStripOf(data, rec),
 
         confidence,
 

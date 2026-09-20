@@ -203,11 +203,15 @@ describe('T131 — the corpus grows and nothing in it moves (I6)', () => {
     expect(moved, 'an existing value moved').toEqual([])
   })
 
-  it('and the only new paths are the eight shape bindings', () => {
+  it('and the only new paths are the six shape bindings plus the header strip', () => {
     const moved = [], added = new Set()
     for (const now of dataset) walk(byId.get(now.proposal_id), now, '', now.proposal_id, moved, added)
+    // `pinned_summary` / `pinned_detail` are the header strip (commit 2 of this phase, T132).
+    // They are top-level rather than under `proposal` because the pinned strip is the shell's, not
+    // the proposal's — StagePage renders it, no slot binds it, and no template declares it.
     expect([...added].sort()).toEqual([
       'execution.measures', 'execution.notes', 'execution.secondary_notes',
+      'pinned_detail', 'pinned_summary',
       'proposal.measures', 'proposal.notes', 'proposal.secondary_measures',
     ])
   })
